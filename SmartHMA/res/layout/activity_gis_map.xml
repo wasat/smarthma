@@ -1,0 +1,33 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content" >
+
+    <fragment
+        android:id="@+id/gis_map"
+        android:name="pl.wasat.smarthma.ui.fragments.MapFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="0dp"
+        android:layout_marginRight="0dp"
+        tools:context="pl.wasat.smarthma.ui.activities.MapActivity" />
+
+    <ImageView
+        android:id="@+id/imageView_map_legend"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_margin="3dp"
+        android:contentDescription="@string/desc_img_legend" />
+
+    <ProgressBar
+        android:id="@+id/progressBarWmsLoad"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/gis_map"
+        android:layout_alignParentTop="true"
+        style="@android:style/Widget.ProgressBar.Inverse"
+        android:visibility="invisible" />
+
+</RelativeLayout>
