@@ -5,36 +5,33 @@ import java.util.Comparator;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-public class Collection implements Parcelable, Comparator<Object> {
+public class Product implements Parcelable, Comparator<Object> {
 
-	public static Creator<Collection> CREATOR = new Creator<Collection>() {
+	public static Creator<Product> CREATOR = new Creator<Product>() {
 		@Override
-		public Collection createFromParcel(Parcel source) {
-			return new Collection(source);
+		public Product createFromParcel(Parcel source) {
+			return new Product(source);
 		}
 
 		@Override
-		public Collection[] newArray(int size) {
-			return new Collection[size];
+		public Product[] newArray(int size) {
+			return new Product[size];
 		}
 	};
 
 	private int id;
 	private String name;
 
-	public Collection() {
-	}
-
-	public Collection(Parcel source) {
+	public Product(Parcel source) {
 		this.id = source.readInt();
 		this.name = source.readString();
 	}
 
 	@Override
-	public int compare(Object collection1, Object collection2) {
-		Collection coll1 = (Collection) collection1;
-		Collection coll2 = (Collection) collection2;
-		return coll1.name.compareToIgnoreCase(coll2.name);
+	public int compare(Object product1, Object product2) {
+		Product prod1 = (Product) product1;
+		Product prod2 = (Product) product2;
+		return prod1.name.compareToIgnoreCase(prod2.name);
 	}
 
 	@Override

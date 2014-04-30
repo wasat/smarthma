@@ -4,18 +4,13 @@ import java.util.ArrayList;
 
 import org.acra.ACRA;
 
-import com.mobsandgeeks.adapters.Sectionizer;
-import com.mobsandgeeks.adapters.SimpleSectionAdapter;
-
 import pl.wasat.smarthma.R;
 import pl.wasat.smarthma.SmartHMApplication;
-import pl.wasat.smarthma.adapter.CollectionsListAdapter;
 import pl.wasat.smarthma.custom_view.CollectionsViewHolder;
 import pl.wasat.smarthma.helper.Const;
 import pl.wasat.smarthma.interfaces.OnCollectionsListSelectionListener;
-import pl.wasat.smarthma.model.Collection;
+import pl.wasat.smarthma.model.Collection_old;
 import pl.wasat.smarthma.ui.activities.MapActivity;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -26,11 +21,13 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ListView;
 
+import com.mobsandgeeks.adapters.SimpleSectionAdapter;
+
 public class CollectionListFragment extends ListFragment {
 
-	private ArrayList<Collection> workspaceLayers = new ArrayList<Collection>();
-	private CollectionsListAdapter wmsLayerArrayAdapter;
-	private SimpleSectionAdapter<Collection> sectionAdapter;
+	private ArrayList<Collection_old> workspaceLayers = new ArrayList<Collection_old>();
+	//private CollectionsListAdapter wmsLayerArrayAdapter;
+	private SimpleSectionAdapter<Collection_old> sectionAdapter;
 
 	OnCollectionsListSelectionListener mCallback;
 
@@ -59,7 +56,7 @@ public class CollectionListFragment extends ListFragment {
 
 		workspaceName = "test";
 
-		buildListAndSections();
+		//buildListAndSections();
 	}
 
 	/*
@@ -98,9 +95,10 @@ public class CollectionListFragment extends ListFragment {
 	@Override
 	public void onListItemClick(ListView l, View v, int position, long id) {
 
-		Collection chosenLayer = (Collection) sectionAdapter.getItem(position);
+		Collection_old chosenLayer = (Collection_old) sectionAdapter
+				.getItem(position);
 		int layerId = chosenLayer.getId();
-		chosenLayer = SmartHMApplication.EoCollections.get(layerId);
+		//chosenLayer = SmartHMApplication.GlobalEOData.get(layerId);
 
 		chosenLayer.toggleChecked();
 		CollectionsViewHolder viewHolder = (CollectionsViewHolder) v.getTag();
@@ -114,38 +112,37 @@ public class CollectionListFragment extends ListFragment {
 	/**
 	 * 
 	 */
-	private void buildListAndSections() {
+/*	private void buildListAndSections() {
 
-		Sectionizer<Collection> alphabetSectionizer = new Sectionizer<Collection>() {
+		Sectionizer<Collection_old> alphabetSectionizer = new Sectionizer<Collection_old>() {
 			@Override
-			public String getSectionTitleForItem(Collection wmsLayer) {
+			public String getSectionTitleForItem(Collection_old wmsLayer) {
 				return wmsLayer.getWorkspace();
 			}
 		};
 
 		if (workspaceName.equalsIgnoreCase("all")) {
 			wmsLayerArrayAdapter = new CollectionsListAdapter(getActivity(),
-					SmartHMApplication.EoCollections);
+					SmartHMApplication.GlobalEOData);
 		} else {
 			getWorkspaceLayers();
 			wmsLayerArrayAdapter = new CollectionsListAdapter(getActivity(),
 					workspaceLayers);
 		}
-		sectionAdapter = new SimpleSectionAdapter<Collection>(getActivity()
+		sectionAdapter = new SimpleSectionAdapter<Collection_old>(getActivity()
 				.getApplicationContext(), wmsLayerArrayAdapter,
 				R.layout.list_section_header, R.id.title, alphabetSectionizer);
 		setListAdapter(sectionAdapter);
-
-	}
+	}*/
 
 	private void getWorkspaceLayers() {
-		normWorkspaceName();
-		for (int i = 0; i < SmartHMApplication.EoCollections.size(); i++) {
-			String wName = SmartHMApplication.EoCollections.get(i)
-					.getWorkspace();
-			if (workspaceName.equalsIgnoreCase(wName)) {
-				workspaceLayers.add(SmartHMApplication.EoCollections.get(i));
-			}
+		//normWorkspaceName();
+		for (int i = 0; i < SmartHMApplication.GlobalEOData.size(); i++) {
+			String wName = SmartHMApplication.GlobalEOData.get(i)
+					.getGroupName();
+/*			if (workspaceName.equalsIgnoreCase(wName)) {
+				workspaceLayers.add(SmartHMApplication.GlobalEOData.get(i));
+			}*/
 		}
 	}
 
@@ -168,18 +165,18 @@ public class CollectionListFragment extends ListFragment {
 		return super.onOptionsItemSelected(item);
 	}
 
-	public void returnSpecifiedLayer(Collection chosenLayer) {
+	public void returnSpecifiedLayer(Collection_old chosenLayer) {
 		int idToAdd = chosenLayer.getId();
 		if (MapActivity.TWO_PANEL_MODE) {
 			mCallback.onCollectionSelected(idToAdd, null);
 		} else {
-			addValidLayerIds(idToAdd);
+			//addValidLayerIds(idToAdd);
 		}
 	}
 
-	/**
+/*	*//**
 	 * @param idToAdd
-	 */
+	 *//*
 	private void addValidLayerIds(int idToAdd) {
 		boolean toAdd = true;
 		for (int i = 0; i < chosenLayerIds.size(); i++) {
@@ -196,7 +193,7 @@ public class CollectionListFragment extends ListFragment {
 	private void normWorkspaceName() {
 		workspaceName = workspaceName.replace(" ", "");
 		workspaceName = workspaceName.split("Workspace")[0];
-	}
+	}*/
 
 	public void onBackPressed() {
 		Intent layerDataIntent = new Intent().putExtra(

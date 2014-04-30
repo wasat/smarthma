@@ -1,11 +1,13 @@
 package pl.wasat.smarthma.ui.activities;
 
 import pl.wasat.smarthma.R;
-import pl.wasat.smarthma.SmartHMApplication;
 import pl.wasat.smarthma.helper.Const;
 import pl.wasat.smarthma.interfaces.OnCollectionsListSelectionListener;
+import pl.wasat.smarthma.services.SmartHMAOkHttpSpiceService;
 import pl.wasat.smarthma.ui.fragments.CollectionListFragment;
 import pl.wasat.smarthma.ui.fragments.MapFragment;
+import pl.wasat.smarthma.utils.http.ExplainDocRequest;
+import pl.wasat.smarthma.utils.xml.XMLParser;
 import android.app.ProgressDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -20,21 +22,27 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
-public class MapActivity extends FragmentActivity implements
-		OnCollectionsListSelectionListener {
+import com.octo.android.robospice.SpiceManager;
+import com.octo.android.robospice.persistence.exception.SpiceException;
+import com.octo.android.robospice.request.listener.RequestListener;
 
-	//private static final String KEY_STATE_MENU_ENABLED = "pl.wasat.safecitygis.KEY_STATE_MENU_ENABLED";
-	//private static final String KEY_VISIBLE_WORKSPACE = "pl.wasat.safecitygis.KEY_VISIBLE_WORKSPACE";
+public class MapActivity extends FragmentActivity implements
+		OnCollectionsListSelectionListener, RequestListener<String> {
+
 	private ProgressDialog initSpinner;
 	private ProgressBar progressBarWmsLoad;
 	private InitialisationReceiver initReceiver;
 	private SpinnerStateReceiver spinnerStateRec;
-	//private boolean isMenuEnabled = false;
+	// private boolean isMenuEnabled = false;
 	boolean isWmsLoading = false;
-	//private String visibleWorskpace;
+	// private String visibleWorskpace;
+
+	private SpiceManager spiceManager = new SpiceManager(
+			SmartHMAOkHttpSpiceService.class);
 
 	/**
 	 * Whether or not the activity is in two-pane mode, i.e. running on a tablet
@@ -45,12 +53,15 @@ public class MapActivity extends FragmentActivity implements
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
 		setContentView(R.layout.activity_gis_map);
-		//visibleWorskpace = "all";
+		// visibleWorskpace = "all";
 
 		if (savedInstanceState != null) {
-			//isMenuEnabled = savedInstanceState.getBoolean(KEY_STATE_MENU_ENABLED);
-			//visibleWorskpace = savedInstanceState.getString(KEY_VISIBLE_WORKSPACE);
+			// isMenuEnabled =
+			// savedInstanceState.getBoolean(KEY_STATE_MENU_ENABLED);
+			// visibleWorskpace =
+			// savedInstanceState.getString(KEY_VISIBLE_WORKSPACE);
 		} else {
 			clearAllVisibleLayers();
 		}
@@ -76,7 +87,9 @@ public class MapActivity extends FragmentActivity implements
 
 			replaceListFragment();
 		}
-		//startLoadCapabilities();
+
+		performExplainDocRequest();
+		// startLoadCapabilities();
 	}
 
 	@Override
@@ -103,9 +116,21 @@ public class MapActivity extends FragmentActivity implements
 	}
 
 	@Override
+	protected void onStart() {
+		spiceManager.start(this);
+		super.onStart();
+	}
+
+	@Override
+	protected void onStop() {
+		spiceManager.shouldStop();
+		super.onStop();
+	}
+
+	@Override
 	protected void onSaveInstanceState(Bundle outState) {
-		//outState.putBoolean(KEY_STATE_MENU_ENABLED, isMenuEnabled);
-		//outState.putString(KEY_VISIBLE_WORKSPACE, visibleWorskpace);
+		// outState.putBoolean(KEY_STATE_MENU_ENABLED, isMenuEnabled);
+		// outState.putString(KEY_VISIBLE_WORKSPACE, visibleWorskpace);
 		super.onSaveInstanceState(outState);
 	}
 
@@ -119,7 +144,7 @@ public class MapActivity extends FragmentActivity implements
 
 	@Override
 	public boolean onPrepareOptionsMenu(Menu menu) {
-		//menu.setGroupEnabled(R.id.menu_group_gis, isMenuEnabled);
+		// menu.setGroupEnabled(R.id.menu_group_gis, isMenuEnabled);
 		return super.onPrepareOptionsMenu(menu);
 	}
 
@@ -133,14 +158,14 @@ public class MapActivity extends FragmentActivity implements
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
 		case R.id.action_add_threats:
-			//showThreatsDialog();
+			// showThreatsDialog();
 			break;
 		case R.id.action_add_workspace:
-			//showWorkspaceDialog();
+			// showWorkspaceDialog();
 			break;
 		case R.id.action_add_all_layers:
-			//visibleWorskpace = "all";
-			//openWMSLayerListActivity(visibleWorskpace);
+			// visibleWorskpace = "all";
+			// openWMSLayerListActivity(visibleWorskpace);
 			break;
 		case R.id.action_clear_all_layers:
 			clearAllVisibleLayers();
@@ -155,41 +180,36 @@ public class MapActivity extends FragmentActivity implements
 		return true;
 	}
 
-/*	private void startLoadCapabilities() {
-		long diff = System.currentTimeMillis() - SCGIS.DataAge;
-		if (SCGIS.ALLayers.isEmpty() || diff > 1800000) {
-			Intent intent = new Intent(this, CapabilitiesService.class);
-			startService(intent);
-			initProgressBar();
-		} else {
-			isMenuEnabled = true;
-			// disableProgressBar();
-		}
-	}*/
+	/*
+	 * private void startLoadCapabilities() { long diff =
+	 * System.currentTimeMillis() - SCGIS.DataAge; if (SCGIS.ALLayers.isEmpty()
+	 * || diff > 1800000) { Intent intent = new Intent(this,
+	 * CapabilitiesService.class); startService(intent); initProgressBar(); }
+	 * else { isMenuEnabled = true; // disableProgressBar(); } }
+	 */
 
-/*	private void showThreatsDialog() {
-		ThreatsDialogFragment threatsDialFragment = new ThreatsDialogFragment();
-		threatsDialFragment.show(getSupportFragmentManager(), THREATS_DIALOG);
-	}*/
+	/*
+	 * private void showThreatsDialog() { ThreatsDialogFragment
+	 * threatsDialFragment = new ThreatsDialogFragment();
+	 * threatsDialFragment.show(getSupportFragmentManager(), THREATS_DIALOG); }
+	 */
 
-/*	public void showWorkspaceDialog() {
-		DialogFragment wsdFragment = new WorkspaceDialogFragment();
-		wsdFragment.show(getSupportFragmentManager(), WORKSPACE_DIALOG);
-	}
-*/
-/*	private void openWMSLayerListActivity(String workspace) {
-		if (TWO_PANEL_MODE) {
-			//onDialogListClick(workspace);
-
-		} else {
-			Intent wmsLayerListActivityIntent = new Intent(GisMapActivity.this,
-					WMSLayerListActivity.class);
-			wmsLayerListActivityIntent.putExtra(
-					Const.KEY_LIST_WORKSPACE_NAME_TO_LOAD, workspace);
-			startActivityForResult(wmsLayerListActivityIntent,
-					Const.REQUEST_CODE_MAP_ADD_LAYER);
-		}
-	}*/
+	/*
+	 * public void showWorkspaceDialog() { DialogFragment wsdFragment = new
+	 * WorkspaceDialogFragment(); wsdFragment.show(getSupportFragmentManager(),
+	 * WORKSPACE_DIALOG); }
+	 */
+	/*
+	 * private void openWMSLayerListActivity(String workspace) { if
+	 * (TWO_PANEL_MODE) { //onDialogListClick(workspace);
+	 * 
+	 * } else { Intent wmsLayerListActivityIntent = new
+	 * Intent(GisMapActivity.this, WMSLayerListActivity.class);
+	 * wmsLayerListActivityIntent.putExtra(
+	 * Const.KEY_LIST_WORKSPACE_NAME_TO_LOAD, workspace);
+	 * startActivityForResult(wmsLayerListActivityIntent,
+	 * Const.REQUEST_CODE_MAP_ADD_LAYER); } }
+	 */
 
 	/**
 	 * 
@@ -197,34 +217,30 @@ public class MapActivity extends FragmentActivity implements
 	private void replaceListFragment() {
 		CollectionListFragment fragment = new CollectionListFragment();
 		Bundle args = new Bundle();
-		//args.putString(Const.KEY_LIST_WORKSPACE_NAME_TO_LOAD, visibleWorskpace);
+		// args.putString(Const.KEY_LIST_WORKSPACE_NAME_TO_LOAD,
+		// visibleWorskpace);
 		fragment.setArguments(args);
 		getSupportFragmentManager().beginTransaction()
 				.replace(R.id.my_list_container, fragment).commit();
 	}
-	
-/*	@Override
-	public void onActivityResult(int requestCode, int resultCode, Intent data) {
-		if (requestCode == Const.REQUEST_CODE_MAP_ADD_LAYER
-				&& resultCode == FragmentActivity.RESULT_OK) {
-			ArrayList<Integer> layerIds = data
-					.getIntegerArrayListExtra(Const.KEY_LIST_ID_LAYERS_TO_DISPLAY);
-			if (layerIds != null) {
-				for (int i = 0; i < layerIds.size(); i++) {
-					onCollectionSelected(layerIds.get(i), null);
-				}
-			}
-		}
-		super.onActivityResult(requestCode, resultCode, data);
-	}*/
+
+	/*
+	 * @Override public void onActivityResult(int requestCode, int resultCode,
+	 * Intent data) { if (requestCode == Const.REQUEST_CODE_MAP_ADD_LAYER &&
+	 * resultCode == FragmentActivity.RESULT_OK) { ArrayList<Integer> layerIds =
+	 * data .getIntegerArrayListExtra(Const.KEY_LIST_ID_LAYERS_TO_DISPLAY); if
+	 * (layerIds != null) { for (int i = 0; i < layerIds.size(); i++) {
+	 * onCollectionSelected(layerIds.get(i), null); } } }
+	 * super.onActivityResult(requestCode, resultCode, data); }
+	 */
 
 	private void clearAllVisibleLayers() {
-/*		MapFragment mapFrag = (MapFragment) getSupportFragmentManager()
-				.findFragmentById(R.id.gis_map);
-
-		if (mapFrag != null) {
-			mapFrag.clearAllWmsOverlay();
-		}*/
+		/*
+		 * MapFragment mapFrag = (MapFragment) getSupportFragmentManager()
+		 * .findFragmentById(R.id.gis_map);
+		 * 
+		 * if (mapFrag != null) { mapFrag.clearAllWmsOverlay(); }
+		 */
 
 		if (TWO_PANEL_MODE) {
 			replaceListFragment();
@@ -271,15 +287,16 @@ public class MapActivity extends FragmentActivity implements
 		if (gisFrag != null) {
 			// If article frag is available, we're in two-pane layout...
 			// Call a method in the ArticleFragment to update its content
-			gisFrag.toogleMapOverlay(chosenCollectionId, urlArgs);
-			//loadLegend(SCGIS.ALLayers.get(chosenLayerId).getLegendUrl());
+			//gisFrag.toogleMapOverlay(chosenCollectionId, urlArgs);
+			// loadLegend(SCGIS.ALLayers.get(chosenLayerId).getLegendUrl());
 		} else {
 			// Otherwise, we're in the one-pane layout and must swap frags...
 			// Create fragment and give it an argument for the selected article
 			MapFragment newGisFrag = new MapFragment();
 			Bundle args = new Bundle();
-			args.putString(Const.KEY_MAP_LAYER_TO_DISPLAY,
-					SmartHMApplication.EoCollections.get(chosenCollectionId).getWmsUrl() + urlArgs);
+/*			args.putString(Const.KEY_MAP_LAYER_TO_DISPLAY,
+					SmartHMApplication.GlobalEOData.get(chosenCollectionId)
+							.getWmsUrl() + urlArgs);*/
 			newGisFrag.setArguments(args);
 
 			FragmentTransaction transaction = getSupportFragmentManager()
@@ -295,37 +312,30 @@ public class MapActivity extends FragmentActivity implements
 		}
 	}
 
-/*	private void loadLegend(String legend) {
-		legend = legend + "&service=WMS";
-		Picasso.with(this).load(legend).into(imgLegend);
-	}*/
+	/*
+	 * private void loadLegend(String legend) { legend = legend +
+	 * "&service=WMS"; Picasso.with(this).load(legend).into(imgLegend); }
+	 */
 
-/*	@Override
-	public void onDialogListClick(String workspaceItem) {
-		visibleWorskpace = workspaceItem;
-		WMSLayerListFragment listFrag = new WMSLayerListFragment();
-		Bundle args = new Bundle();
-		args.putString(Const.KEY_LIST_WORKSPACE_NAME_TO_LOAD, workspaceItem);
-		listFrag.setArguments(args);
+	/*
+	 * @Override public void onDialogListClick(String workspaceItem) {
+	 * visibleWorskpace = workspaceItem; WMSLayerListFragment listFrag = new
+	 * WMSLayerListFragment(); Bundle args = new Bundle();
+	 * args.putString(Const.KEY_LIST_WORKSPACE_NAME_TO_LOAD, workspaceItem);
+	 * listFrag.setArguments(args);
+	 * 
+	 * FragmentTransaction transaction = getSupportFragmentManager()
+	 * .beginTransaction(); transaction.replace(R.id.my_list_container,
+	 * listFrag); // transaction.addToBackStack(null); transaction.commit(); }
+	 */
 
-		FragmentTransaction transaction = getSupportFragmentManager()
-				.beginTransaction();
-		transaction.replace(R.id.my_list_container, listFrag);
-		// transaction.addToBackStack(null);
-		transaction.commit();
-	}*/
-
-/*	@Override
-	public void onTimeDialogListClick(WMSLayer threatLayer, int timeItem) {
-		String timeStr = "";
-		if (threatLayer.getTimes().length == timeItem) {
-			timeStr = "current";
-		} else {
-			timeStr = threatLayer.getTimes()[timeItem];
-		}
-		threatLayer.setOverlied(true);
-		onLayerSelected(threatLayer.getId(), timeStr);
-	}*/
+	/*
+	 * @Override public void onTimeDialogListClick(WMSLayer threatLayer, int
+	 * timeItem) { String timeStr = ""; if (threatLayer.getTimes().length ==
+	 * timeItem) { timeStr = "current"; } else { timeStr =
+	 * threatLayer.getTimes()[timeItem]; } threatLayer.setOverlied(true);
+	 * onLayerSelected(threatLayer.getId(), timeStr); }
+	 */
 
 	private void initProgressBar() {
 		initSpinner = new ProgressDialog(this);
@@ -365,10 +375,10 @@ public class MapActivity extends FragmentActivity implements
 					if (TWO_PANEL_MODE) {
 						replaceListFragment();
 					}
-					//isMenuEnabled = true;
+					// isMenuEnabled = true;
 				} else {
-					Toast.makeText(MapActivity.this,
-							R.string.download_failed, Toast.LENGTH_LONG).show();
+					Toast.makeText(MapActivity.this, R.string.download_failed,
+							Toast.LENGTH_LONG).show();
 				}
 			}
 			supportInvalidateOptionsMenu();
@@ -409,6 +419,33 @@ public class MapActivity extends FragmentActivity implements
 			progressBarWmsLoad.setVisibility(View.GONE);
 			super.onPostExecute(result);
 		}
+
+	}
+
+	private void performExplainDocRequest() {
+
+		MapActivity.this.setProgressBarIndeterminateVisibility(true);
+
+		ExplainDocRequest request = new ExplainDocRequest();
+		spiceManager.execute(request, this);
+
+	}
+
+	@Override
+	public void onRequestFailure(SpiceException spiceException) {
+		Toast.makeText(MapActivity.this,
+				"Error: " + spiceException.getMessage(), Toast.LENGTH_SHORT)
+				.show();
+
+	}
+
+	@Override
+	public void onRequestSuccess(String result) {
+		MapActivity.this.setProgressBarIndeterminateVisibility(false);
+		Toast.makeText(MapActivity.this, "OK!!! ", Toast.LENGTH_SHORT).show();
+		XMLParser xmlResult = new XMLParser();
+		xmlResult.parseXml(result);
+		xmlResult.setDataGlobals();
 
 	}
 

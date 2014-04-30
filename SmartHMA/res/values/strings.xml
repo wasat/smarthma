@@ -18,5 +18,9 @@
     <string name="couldn_t_find_google_map_fragment">Couldn\'t find Google map fragment!</string>
     <string name="map_was_null">Map was null!</string>
     <string name="smarthmas_layers_visible">SmartHMA layers visible:</string>
+    <string name="loading_please_wait">Loading GitHubUsers about android &#8230; </string>
+    <string name="content_picture">User gravatar</string>
+    <string name="ok">OK</string>
+    <string name="cancel">Cancel</string>
 
 </resources>
