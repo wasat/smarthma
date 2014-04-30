@@ -3,17 +3,14 @@ package pl.wasat.smarthma.ui.fragments;
 import java.util.ArrayList;
 
 import pl.wasat.smarthma.R;
-import pl.wasat.smarthma.SmartHMApplication;
 import pl.wasat.smarthma.helper.Const;
 import pl.wasat.smarthma.utils.wms.TileProviderFactory;
-
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.BroadcastReceiver;
 import android.os.Bundle;
 import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
@@ -97,7 +94,7 @@ public class MapFragment extends SupportMapFragment {
 					mMap = getMap();
 					ArrayList<Integer> layerIds = savedInstanceState
 							.getIntegerArrayList(KEY_MAP_ID_LAYERS_ARRAY);
-					showVisibleLayers(layerIds);
+					//showVisibleLayers(layerIds);
 
 				} else {
 					// First incarnation of this activity.
@@ -122,38 +119,38 @@ public class MapFragment extends SupportMapFragment {
 	/**
 	 * @param layerIds
 	 */
-	private void showVisibleLayers(ArrayList<Integer> layerIds) {
-		if (!SmartHMApplication.EoCollections.isEmpty() && !layerIds.isEmpty()) {
+/*	private void showVisibleLayers(ArrayList<Integer> layerIds) {
+		if (!SmartHMApplication.GlobalEOData.isEmpty() && !layerIds.isEmpty()) {
 			for (int i = 0; i < layerIds.size(); i++) {
 				int layerId = layerIds.get(i);
-				TileOverlay gisOverlay = SmartHMApplication.EoCollections.get(
+				TileOverlay gisOverlay = SmartHMApplication.GlobalEOData.get(
 						layerId).getMapOverlay();
-				gisOverlay = setupWMS(SmartHMApplication.EoCollections.get(
+				gisOverlay = setupWMS(SmartHMApplication.GlobalEOData.get(
 						layerId).getWmsUrl());
-				SmartHMApplication.EoCollections.get(layerId).setMapOverlay(
+				SmartHMApplication.GlobalEOData.get(layerId).setMapOverlay(
 						gisOverlay);
 			}
 		}
-	}
+	}*/
 
 	@Override
 	public void onSaveInstanceState(Bundle outState) {
 		// outState.putBoolean(KEY_STATE_MENU_ENABLED, isMenuEnabled);
 
-		outState.putIntegerArrayList(KEY_MAP_ID_LAYERS_ARRAY,
-				findVisibleLayers());
+/*		outState.putIntegerArrayList(KEY_MAP_ID_LAYERS_ARRAY,
+				findVisibleLayers());*/
 		super.onSaveInstanceState(outState);
 	}
 
-	private ArrayList<Integer> findVisibleLayers() {
+/*	private ArrayList<Integer> findVisibleLayers() {
 		ArrayList<Integer> indexArr = new ArrayList<Integer>();
-		for (int i = 0; i < SmartHMApplication.EoCollections.size(); i++) {
-			if (SmartHMApplication.EoCollections.get(i).isChecked()) {
-				indexArr.add(SmartHMApplication.EoCollections.get(i).getId());
+		for (int i = 0; i < SmartHMApplication.GlobalEOData.size(); i++) {
+			if (SmartHMApplication.GlobalEOData.get(i).isChecked()) {
+				indexArr.add(SmartHMApplication.GlobalEOData.get(i).getId());
 			}
 		}
 		return indexArr;
-	}
+	}*/
 
 	@Override
 	public void onPause() {
@@ -199,18 +196,18 @@ public class MapFragment extends SupportMapFragment {
 		mMap.setOnMapLongClickListener(new OnMapLongClickListener() {
 			@Override
 			public void onMapLongClick(LatLng point) {
-				String info = "\n"
+/*				String info = "\n"
 						+ getActivity().getString(
 								R.string.smarthmas_layers_visible) + "\n";
-				for (int i = 0; i < SmartHMApplication.EoCollections.size(); i++) {
-					if (SmartHMApplication.EoCollections.get(i).isChecked()) {
+				for (int i = 0; i < SmartHMApplication.GlobalEOData.size(); i++) {
+					if (SmartHMApplication.GlobalEOData.get(i).isChecked()) {
 						info = info
 								+ "- "
-								+ SmartHMApplication.EoCollections.get(i)
+								+ SmartHMApplication.GlobalEOData.get(i)
 										.getTitle() + "\n";
 					}
 				}
-				Toast.makeText(getActivity(), info, Toast.LENGTH_LONG).show();
+				Toast.makeText(getActivity(), info, Toast.LENGTH_LONG).show();*/
 			}
 		});
 	}
@@ -222,24 +219,24 @@ public class MapFragment extends SupportMapFragment {
 
 	}
 
-	public void toogleMapOverlay(Integer layerId, String urlArgs) {
-		TileOverlay gisOverlay = SmartHMApplication.EoCollections.get(layerId)
+/*	public void toogleMapOverlay(Integer layerId, String urlArgs) {
+		TileOverlay gisOverlay = SmartHMApplication.GlobalEOData.get(layerId)
 				.getMapOverlay();
-		if (SmartHMApplication.EoCollections.get(layerId).isChecked()
-				&& SmartHMApplication.EoCollections.get(layerId)
+		if (SmartHMApplication.GlobalEOData.get(layerId).isChecked()
+				&& SmartHMApplication.GlobalEOData.get(layerId)
 						.getMapOverlay() == null) {
-			gisOverlay = setupWMS(SmartHMApplication.EoCollections.get(layerId)
+			gisOverlay = setupWMS(SmartHMApplication.GlobalEOData.get(layerId)
 					.getWmsUrl() + urlArgs);
-			SmartHMApplication.EoCollections.get(layerId).setMapOverlay(
+			SmartHMApplication.GlobalEOData.get(layerId).setMapOverlay(
 					gisOverlay);
 		}
-		if (!SmartHMApplication.EoCollections.get(layerId).isChecked()
-				&& SmartHMApplication.EoCollections.get(layerId)
+		if (!SmartHMApplication.GlobalEOData.get(layerId).isChecked()
+				&& SmartHMApplication.GlobalEOData.get(layerId)
 						.getMapOverlay() != null) {
 			gisOverlay.remove();
-			SmartHMApplication.EoCollections.get(layerId).setMapOverlay(null);
+			SmartHMApplication.GlobalEOData.get(layerId).setMapOverlay(null);
 		}
-	}
+	}*/
 
 	public TileOverlay setupWMS(String wmsUrl) {
 		TileOverlay wmsTileOverlay = null;
@@ -256,19 +253,19 @@ public class MapFragment extends SupportMapFragment {
 		return wmsTileOverlay;
 	}
 
-	public void clearAllWmsOverlay() {
+/*	public void clearAllWmsOverlay() {
 
-		for (int i = 0; i < SmartHMApplication.EoCollections.size(); i++) {
-			if (SmartHMApplication.EoCollections.get(i).isChecked()) {
-				SmartHMApplication.EoCollections.get(i).toggleChecked();
+		for (int i = 0; i < SmartHMApplication.GlobalEOData.size(); i++) {
+			if (SmartHMApplication.GlobalEOData.get(i).isChecked()) {
+				SmartHMApplication.GlobalEOData.get(i).toggleChecked();
 			}
-			if (SmartHMApplication.EoCollections.get(i).getMapOverlay() != null) {
-				SmartHMApplication.EoCollections.get(i).getMapOverlay()
+			if (SmartHMApplication.GlobalEOData.get(i).getMapOverlay() != null) {
+				SmartHMApplication.GlobalEOData.get(i).getMapOverlay()
 						.remove();
-				SmartHMApplication.EoCollections.get(i).setMapOverlay(null);
+				SmartHMApplication.GlobalEOData.get(i).setMapOverlay(null);
 			}
 
 		}
-	}
+	}*/
 
 }

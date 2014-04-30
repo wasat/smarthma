@@ -1,0 +1,155 @@
+package pl.wasat.smarthma.utils.xml;
+
+import java.io.IOException;
+import java.io.StringReader;
+import java.util.ArrayList;
+
+import org.acra.ACRA;
+import org.xmlpull.v1.XmlPullParser;
+import org.xmlpull.v1.XmlPullParserException;
+import org.xmlpull.v1.XmlPullParserFactory;
+
+import pl.wasat.smarthma.SmartHMApplication;
+import pl.wasat.smarthma.model.AllDataGroups;
+import pl.wasat.smarthma.model.Collection;
+import pl.wasat.smarthma.model.CollectionsGroup;
+import pl.wasat.smarthma.model.explaindoc.ConfigInfo;
+import pl.wasat.smarthma.model.explaindoc.ExplainData;
+import pl.wasat.smarthma.model.explaindoc.Index;
+import pl.wasat.smarthma.model.explaindoc.IndexInfo;
+
+public class XMLParser {
+	private AllDataGroups allDataGroups = null;
+	private ExplainData expData;
+
+	public XMLParser() {
+	}
+
+	/**
+	 * @param xmlString
+	 *            String to access to xml file
+	 */
+	public void parseXml(String xmlString) {
+
+		IndexInfo indexInfo = null;
+		Index index = null;
+		ConfigInfo configInfo = null;
+		ArrayList<String> supports = null;
+		ArrayList<Index> indexes = null;
+
+		CollectionsGroup group = null;
+		Collection collectionItem = null;
+
+		expData = new ExplainData();
+		allDataGroups = new AllDataGroups();
+
+		Boolean isAfterComment = false;
+
+		String indexTitle = null;
+
+		String text = null;
+
+		XmlPullParserFactory factory = null;
+		XmlPullParser parser = null;
+		try {
+			StringReader reader = new StringReader(xmlString);
+			factory = XmlPullParserFactory.newInstance();
+			factory.setNamespaceAware(true);
+			parser = factory.newPullParser();
+
+			parser.setInput(reader);
+
+			int eventType = parser.getEventType();
+			while (eventType != XmlPullParser.END_DOCUMENT) {
+				String tagname = parser.getName();
+				switch (eventType) {
+				case XmlPullParser.START_TAG:
+					if (tagname.equalsIgnoreCase("test")) {
+					} else if (tagname.equalsIgnoreCase("indexInfo")) {
+						indexInfo = new IndexInfo();
+						indexes = new ArrayList<Index>();
+					} else if (tagname.equalsIgnoreCase("index")) {
+						index = new Index();
+					} else if (tagname.equalsIgnoreCase("configInfo")) {
+						configInfo = new ConfigInfo();
+						supports = new ArrayList<String>();
+					} else if (tagname.equalsIgnoreCase("supports")) {
+						collectionItem = new Collection();
+					} else if (tagname.equalsIgnoreCase("test")) {
+					}
+					break;
+
+				case XmlPullParser.TEXT:
+					text = parser.getText();
+					break;
+
+				case XmlPullParser.COMMENT:
+
+					allDataGroups.addItem(group);
+
+					group = new CollectionsGroup();
+
+					String standard = parser.getText();
+					group.setStandard(standard);
+					parser.nextToken();
+					parser.nextToken();
+
+					String commString = parser.getText();
+					group.setGroupName(commString);
+					isAfterComment = true;
+					break;
+
+				case XmlPullParser.END_TAG:
+					if (tagname.equalsIgnoreCase("explain")) {
+						expData.setIndexInfo(indexInfo);
+					} else if (tagname.equalsIgnoreCase("indexInfo")) {
+						indexInfo.setIndexes(indexes);
+					} else if (tagname.equalsIgnoreCase("index")) {
+						indexes.add(index);
+					} else if (tagname.equalsIgnoreCase("title")) {
+						indexTitle = text;
+					} else if (tagname.equalsIgnoreCase("configInfo")) {
+						configInfo.setSupports(supports);
+						index.setConfigInfo(configInfo);
+						if (isAfterComment) {
+							allDataGroups.addItem(group);
+							isAfterComment = false;
+						}
+					} else if (tagname.equalsIgnoreCase("supports")
+							&& indexTitle.equalsIgnoreCase("Dataset series")) {
+						supports.add(text);
+						if (isAfterComment) {
+							collectionItem.setName(text);
+							group.addItem(collectionItem);
+						} else {
+							collectionItem.setName(text);
+							group = new CollectionsGroup();
+							group.setGroupName("Default");
+							group.setStandard("Default");
+							group.addItem(collectionItem);
+						}
+					}
+					break;
+
+				default:
+					break;
+				}
+				eventType = parser.nextToken();
+			}
+
+		} catch (XmlPullParserException e) {
+			e.printStackTrace();
+			ACRA.getErrorReporter().handleSilentException(e);
+		} catch (IOException e) {
+			e.printStackTrace();
+			ACRA.getErrorReporter().handleSilentException(e);
+		}
+
+		setDataGlobals();
+	}
+
+	public void setDataGlobals() {
+		SmartHMApplication.GlobalEOData = allDataGroups.getAllData();
+		SmartHMApplication.GlobalExplainData = expData;
+	}
+}

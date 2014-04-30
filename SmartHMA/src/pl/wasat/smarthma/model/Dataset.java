@@ -5,36 +5,33 @@ import java.util.Comparator;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-public class Collection implements Parcelable, Comparator<Object> {
+public class Dataset implements Parcelable, Comparator<Object> {
 
-	public static Creator<Collection> CREATOR = new Creator<Collection>() {
+	public static Creator<Dataset> CREATOR = new Creator<Dataset>() {
 		@Override
-		public Collection createFromParcel(Parcel source) {
-			return new Collection(source);
+		public Dataset createFromParcel(Parcel source) {
+			return new Dataset(source);
 		}
 
 		@Override
-		public Collection[] newArray(int size) {
-			return new Collection[size];
+		public Dataset[] newArray(int size) {
+			return new Dataset[size];
 		}
 	};
 
 	private int id;
 	private String name;
 
-	public Collection() {
-	}
-
-	public Collection(Parcel source) {
+	public Dataset(Parcel source) {
 		this.id = source.readInt();
 		this.name = source.readString();
 	}
 
 	@Override
-	public int compare(Object collection1, Object collection2) {
-		Collection coll1 = (Collection) collection1;
-		Collection coll2 = (Collection) collection2;
-		return coll1.name.compareToIgnoreCase(coll2.name);
+	public int compare(Object dataset1, Object dataset2) {
+		Dataset ds1 = (Dataset) dataset1;
+		Dataset ds2 = (Dataset) dataset2;
+		return ds1.name.compareToIgnoreCase(ds2.name);
 	}
 
 	@Override
