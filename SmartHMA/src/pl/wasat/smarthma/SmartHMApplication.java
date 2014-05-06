@@ -3,15 +3,12 @@
  */
 package pl.wasat.smarthma;
 
-import java.util.ArrayList;
-
 import org.acra.ACRA;
 import org.acra.annotation.ReportsCrashes;
 
-import pl.wasat.smarthma.model.Collection_old;
 import pl.wasat.smarthma.model.CollectionsGroup;
+import pl.wasat.smarthma.model.CollectionsGroup.List;
 import pl.wasat.smarthma.model.explaindoc.ExplainData;
-
 import android.app.Application;
 
 /**
@@ -30,13 +27,9 @@ import android.app.Application;
 
 public class SmartHMApplication extends Application {
 
-	public static ArrayList<CollectionsGroup> GlobalEOData = new ArrayList<CollectionsGroup>();
+	public static CollectionsGroup.List GlobalEODataList = new List();
 	public static ExplainData GlobalExplainData = new ExplainData();
 	
-	//workspaces layers
-	public static ArrayList<Collection_old> EoProducts = new ArrayList<Collection_old>(5);
-	
-	//public static long DataAge = 0;
 	
 	@Override
 	public void onCreate() {

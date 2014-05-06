@@ -6,7 +6,7 @@
 
     For more on layout aliases, see:
     http://developer.android.com/training/multiscreen/screensizes.html#TaskUseAliasFilters
-    -->
+    
     <item name="menu_gis_map" type="menu">@menu/menu_gis_map_land</item>
-
+-->
 </resources>

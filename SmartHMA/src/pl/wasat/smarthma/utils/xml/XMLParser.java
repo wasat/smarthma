@@ -10,16 +10,16 @@ import org.xmlpull.v1.XmlPullParserException;
 import org.xmlpull.v1.XmlPullParserFactory;
 
 import pl.wasat.smarthma.SmartHMApplication;
-import pl.wasat.smarthma.model.AllDataGroups;
 import pl.wasat.smarthma.model.Collection;
 import pl.wasat.smarthma.model.CollectionsGroup;
+import pl.wasat.smarthma.model.CollectionsGroup.List;
 import pl.wasat.smarthma.model.explaindoc.ConfigInfo;
 import pl.wasat.smarthma.model.explaindoc.ExplainData;
 import pl.wasat.smarthma.model.explaindoc.Index;
 import pl.wasat.smarthma.model.explaindoc.IndexInfo;
 
 public class XMLParser {
-	private AllDataGroups allDataGroups = null;
+	private CollectionsGroup.List collectionGrList;
 	private ExplainData expData;
 
 	public XMLParser() {
@@ -41,7 +41,9 @@ public class XMLParser {
 		Collection collectionItem = null;
 
 		expData = new ExplainData();
-		allDataGroups = new AllDataGroups();
+		collectionGrList = new List();
+		// ArrayList<CollectionsGroup> allDataGroups = new
+		// ArrayList<CollectionsGroup>();
 
 		Boolean isAfterComment = false;
 
@@ -85,16 +87,19 @@ public class XMLParser {
 
 				case XmlPullParser.COMMENT:
 
-					allDataGroups.addItem(group);
-
+					// allDataGroups.add(group);
+					collectionGrList.addItem(group);
+					
 					group = new CollectionsGroup();
 
 					String standard = parser.getText();
+					standard = standard.replace("/", "");
 					group.setStandard(standard);
 					parser.nextToken();
 					parser.nextToken();
 
 					String commString = parser.getText();
+					commString = commString.replace("/", "");
 					group.setGroupName(commString);
 					isAfterComment = true;
 					break;
@@ -112,7 +117,8 @@ public class XMLParser {
 						configInfo.setSupports(supports);
 						index.setConfigInfo(configInfo);
 						if (isAfterComment) {
-							allDataGroups.addItem(group);
+							//allDataGroups.add(group);
+							collectionGrList.addItem(group);
 							isAfterComment = false;
 						}
 					} else if (tagname.equalsIgnoreCase("supports")
@@ -149,7 +155,7 @@ public class XMLParser {
 	}
 
 	public void setDataGlobals() {
-		SmartHMApplication.GlobalEOData = allDataGroups.getAllData();
+		SmartHMApplication.GlobalEODataList = collectionGrList;
 		SmartHMApplication.GlobalExplainData = expData;
 	}
 }
