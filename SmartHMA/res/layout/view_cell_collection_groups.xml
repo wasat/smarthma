@@ -5,7 +5,7 @@
     android:padding="5dp" >
 
     <ImageView
-        android:id="@+id/octo_thumbnail_imageview"
+        android:id="@+id/collections_group_thumb_imageview"
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:scaleType="fitXY"
@@ -15,19 +15,19 @@
         android:src="@android:drawable/picture_frame" />
 
     <TextView
-        android:id="@+id/user_name_textview"
+        android:id="@+id/collections_group_name_textview"
         style="@android:style/TextAppearance.Medium"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toRightOf="@id/octo_thumbnail_imageview"
+        android:layout_toRightOf="@id/collections_group_thumb_imageview"
         android:layout_alignParentTop="true" />
 
     <TextView
-        android:id="@+id/github_content_textview"
+        android:id="@+id/collections_group_std_textview"
         style="@android:style/TextAppearance.Small"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@id/user_name_textview"
-        android:layout_below="@id/user_name_textview" />
+        android:layout_alignLeft="@id/collections_group_name_textview"
+        android:layout_below="@id/collections_group_name_textview" />
 
 </RelativeLayout>

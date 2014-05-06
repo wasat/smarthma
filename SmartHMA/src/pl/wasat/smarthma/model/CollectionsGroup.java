@@ -141,4 +141,35 @@ public class CollectionsGroup {
 				+ standard + ", collections=" + collections + "]";
 	}
 
+	public static class List {
+		private static final long serialVersionUID = 6836514467436078182L;
+
+		private ArrayList<CollectionsGroup> collectionsGroupList = new ArrayList<CollectionsGroup>();
+
+		/**
+		 * @return the collectionGroupList
+		 */
+		public ArrayList<CollectionsGroup> getCollectionsGroupList() {
+			return collectionsGroupList;
+		}
+
+		/**
+		 * @param collectionGroupList
+		 *            the collectionGroupList to set
+		 */
+		public void setCollectionGroupList(
+				ArrayList<CollectionsGroup> collectionsGroupList) {
+			// this.collectionsGroupList = new ArrayList<CollectionsGroup>();
+			this.collectionsGroupList = collectionsGroupList;
+		}
+
+		public void addItem(CollectionsGroup collGroup) {
+			this.collectionsGroupList.add(collGroup);
+		}
+
+		public static long getSerialversionuid() {
+			return serialVersionUID;
+		}
+	}
+
 }

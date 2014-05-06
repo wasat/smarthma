@@ -1,7 +1,5 @@
 package pl.wasat.smarthma.ui.fragments;
 
-import java.util.ArrayList;
-
 import pl.wasat.smarthma.R;
 import pl.wasat.smarthma.helper.Const;
 import pl.wasat.smarthma.utils.wms.TileProviderFactory;
@@ -32,17 +30,12 @@ import com.google.android.gms.maps.model.TileProvider;
  */
 public class MapFragment extends SupportMapFragment {
 	private final static String TAG = "MapActivity";
-	private static final String KEY_MAP_ID_LAYERS_ARRAY = "pl.wasat.smarthma.KEY_MAP_ID_LAYERS_ARRAY";
-
+	
 	/** reference to Google Maps object */
 	private GoogleMap mMap;
 
-	// private ArrayList<TileOverlay> wmsOverlaysArray;
-
 	/** broadcast receiver */
 	private BroadcastReceiver mReceiver;
-
-	// public String wmsToDisplay = "";
 
 	public MapFragment() {
 	}
@@ -52,11 +45,6 @@ public class MapFragment extends SupportMapFragment {
 	public void onAttach(Activity activity) {
 		super.onAttach(activity);
 		// Activities containing this fragment must implement its callbacks.
-		// if (!(activity instanceof Callbacks)) {
-		// throw new
-		// IllegalStateException("Activity must implement fragment's callbacks.");
-		// }
-		// mCallbacks = (Callbacks) activity;
 	}
 
 	@Override
@@ -92,9 +80,6 @@ public class MapFragment extends SupportMapFragment {
 					// However, you still have to add all your listeners to it
 					// later.
 					mMap = getMap();
-					ArrayList<Integer> layerIds = savedInstanceState
-							.getIntegerArrayList(KEY_MAP_ID_LAYERS_ARRAY);
-					//showVisibleLayers(layerIds);
 
 				} else {
 					// First incarnation of this activity.
@@ -116,41 +101,16 @@ public class MapFragment extends SupportMapFragment {
 
 	}
 
-	/**
-	 * @param layerIds
-	 */
-/*	private void showVisibleLayers(ArrayList<Integer> layerIds) {
-		if (!SmartHMApplication.GlobalEOData.isEmpty() && !layerIds.isEmpty()) {
-			for (int i = 0; i < layerIds.size(); i++) {
-				int layerId = layerIds.get(i);
-				TileOverlay gisOverlay = SmartHMApplication.GlobalEOData.get(
-						layerId).getMapOverlay();
-				gisOverlay = setupWMS(SmartHMApplication.GlobalEOData.get(
-						layerId).getWmsUrl());
-				SmartHMApplication.GlobalEOData.get(layerId).setMapOverlay(
-						gisOverlay);
-			}
-		}
-	}*/
-
 	@Override
 	public void onSaveInstanceState(Bundle outState) {
 		// outState.putBoolean(KEY_STATE_MENU_ENABLED, isMenuEnabled);
 
-/*		outState.putIntegerArrayList(KEY_MAP_ID_LAYERS_ARRAY,
-				findVisibleLayers());*/
+		/*
+		 * outState.putIntegerArrayList(KEY_MAP_ID_LAYERS_ARRAY,
+		 * findVisibleLayers());
+		 */
 		super.onSaveInstanceState(outState);
 	}
-
-/*	private ArrayList<Integer> findVisibleLayers() {
-		ArrayList<Integer> indexArr = new ArrayList<Integer>();
-		for (int i = 0; i < SmartHMApplication.GlobalEOData.size(); i++) {
-			if (SmartHMApplication.GlobalEOData.get(i).isChecked()) {
-				indexArr.add(SmartHMApplication.GlobalEOData.get(i).getId());
-			}
-		}
-		return indexArr;
-	}*/
 
 	@Override
 	public void onPause() {
@@ -196,18 +156,15 @@ public class MapFragment extends SupportMapFragment {
 		mMap.setOnMapLongClickListener(new OnMapLongClickListener() {
 			@Override
 			public void onMapLongClick(LatLng point) {
-/*				String info = "\n"
-						+ getActivity().getString(
-								R.string.smarthmas_layers_visible) + "\n";
-				for (int i = 0; i < SmartHMApplication.GlobalEOData.size(); i++) {
-					if (SmartHMApplication.GlobalEOData.get(i).isChecked()) {
-						info = info
-								+ "- "
-								+ SmartHMApplication.GlobalEOData.get(i)
-										.getTitle() + "\n";
-					}
-				}
-				Toast.makeText(getActivity(), info, Toast.LENGTH_LONG).show();*/
+				/*
+				 * String info = "\n" + getActivity().getString(
+				 * R.string.smarthmas_layers_visible) + "\n"; for (int i = 0; i
+				 * < SmartHMApplication.GlobalEOData.size(); i++) { if
+				 * (SmartHMApplication.GlobalEOData.get(i).isChecked()) { info =
+				 * info + "- " + SmartHMApplication.GlobalEOData.get(i)
+				 * .getTitle() + "\n"; } } Toast.makeText(getActivity(), info,
+				 * Toast.LENGTH_LONG).show();
+				 */
 			}
 		});
 	}
@@ -218,25 +175,6 @@ public class MapFragment extends SupportMapFragment {
 				.tileProvider(osmTileProvider));
 
 	}
-
-/*	public void toogleMapOverlay(Integer layerId, String urlArgs) {
-		TileOverlay gisOverlay = SmartHMApplication.GlobalEOData.get(layerId)
-				.getMapOverlay();
-		if (SmartHMApplication.GlobalEOData.get(layerId).isChecked()
-				&& SmartHMApplication.GlobalEOData.get(layerId)
-						.getMapOverlay() == null) {
-			gisOverlay = setupWMS(SmartHMApplication.GlobalEOData.get(layerId)
-					.getWmsUrl() + urlArgs);
-			SmartHMApplication.GlobalEOData.get(layerId).setMapOverlay(
-					gisOverlay);
-		}
-		if (!SmartHMApplication.GlobalEOData.get(layerId).isChecked()
-				&& SmartHMApplication.GlobalEOData.get(layerId)
-						.getMapOverlay() != null) {
-			gisOverlay.remove();
-			SmartHMApplication.GlobalEOData.get(layerId).setMapOverlay(null);
-		}
-	}*/
 
 	public TileOverlay setupWMS(String wmsUrl) {
 		TileOverlay wmsTileOverlay = null;
@@ -252,20 +190,5 @@ public class MapFragment extends SupportMapFragment {
 		}
 		return wmsTileOverlay;
 	}
-
-/*	public void clearAllWmsOverlay() {
-
-		for (int i = 0; i < SmartHMApplication.GlobalEOData.size(); i++) {
-			if (SmartHMApplication.GlobalEOData.get(i).isChecked()) {
-				SmartHMApplication.GlobalEOData.get(i).toggleChecked();
-			}
-			if (SmartHMApplication.GlobalEOData.get(i).getMapOverlay() != null) {
-				SmartHMApplication.GlobalEOData.get(i).getMapOverlay()
-						.remove();
-				SmartHMApplication.GlobalEOData.get(i).setMapOverlay(null);
-			}
-
-		}
-	}*/
 
 }

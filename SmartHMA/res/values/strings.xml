@@ -10,17 +10,12 @@
     <string name="action_add_workspace">Add workspace</string>
     <string name="action_add_threats">Show Threats</string>
     <string name="action_clear_all_layers">Clear Map</string>
-    <string name="dialog_title_time">Choose time</string>
     <string name="specific_layer_does_not_exist">Specific layer does not exist. Please try later.</string>
     <string name="download_capabilities_complete">Download capabilities complete.</string>
     <string name="download_failed">Download failed</string>
-    <string name="data_is_loading_please_wait">Data is loading - please wait</string>
     <string name="couldn_t_find_google_map_fragment">Couldn\'t find Google map fragment!</string>
     <string name="map_was_null">Map was null!</string>
-    <string name="smarthmas_layers_visible">SmartHMA layers visible:</string>
-    <string name="loading_please_wait">Loading GitHubUsers about android &#8230; </string>
+    <string name="loading_please_wait">Loading FedEO Explain Document. \nPlease wait &#8230; </string>
     <string name="content_picture">User gravatar</string>
-    <string name="ok">OK</string>
-    <string name="cancel">Cancel</string>
 
 </resources>

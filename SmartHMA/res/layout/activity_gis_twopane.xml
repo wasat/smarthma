@@ -31,7 +31,7 @@
         android:layout_weight="2" >
 
         <fragment
-            android:id="@+id/gis_map"
+            android:id="@+id/left_panel_map"
             android:name="pl.wasat.smarthma.ui.fragments.MapFragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
@@ -50,13 +50,13 @@
             style="@android:style/Widget.ProgressBar.Inverse"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/gis_map"
+            android:layout_alignLeft="@+id/left_panel_map"
             android:layout_alignParentTop="true"
             android:visibility="invisible" />
     </RelativeLayout>
 
     <FrameLayout
-        android:id="@+id/my_list_container"
+        android:id="@+id/right_list_container"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1" />

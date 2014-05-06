@@ -6,7 +6,7 @@ import com.octo.android.robospice.okhttp.OkHttpSpiceService;
 import com.octo.android.robospice.persistence.CacheManager;
 import com.octo.android.robospice.persistence.exception.CacheCreationException;
 
-public class SmartHMAOkHttpSpiceService extends OkHttpSpiceService {
+public class ExplainDocHttpSpiceService extends OkHttpSpiceService {
 
     @Override
     public CacheManager createCacheManager(Application application) throws CacheCreationException {
