@@ -1,4 +1,4 @@
-package pl.wasat.smarthma.custom_view;
+package pl.wasat.smarthma.customviews;
 
 import android.widget.CheckBox;
 import android.widget.TextView;

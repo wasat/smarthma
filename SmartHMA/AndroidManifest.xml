@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="pl.wasat.smarthma"
-    android:versionCode="6"
-    android:versionName="1.0.6" >
+    android:versionCode="8"
+    android:versionName="1.0.8" >
 
     <uses-sdk
-        android:minSdkVersion="9"
+        android:minSdkVersion="11"
         android:targetSdkVersion="19" />
 
     <permission
@@ -42,6 +42,19 @@
             </intent-filter>
         </activity>
 
+        <!-- Search results activity -->
+        <activity
+            android:name="pl.wasat.smarthma.ui.activities.SearchResultsActivity"
+            android:parentActivityName="pl.wasat.smarthma.ui.activities.MainSmartHMActivity" >
+            <intent-filter>
+                <action android:name="android.intent.action.SEARCH" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.app.searchable"
+                android:resource="@xml/searchable" />
+        </activity>
+
         <!-- ROBOSPICE SERVICES -->
 
         <service
@@ -57,6 +70,9 @@
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
+        <meta-data
+            android:name="android.app.default_searchable"
+            android:value="pl.wasat.smarthma.ui.activities.SearchResultsActivity" />
     </application>
 
 </manifest>
