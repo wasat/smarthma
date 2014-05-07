@@ -4,9 +4,11 @@ import pl.wasat.smarthma.R;
 import pl.wasat.smarthma.helper.Const;
 import pl.wasat.smarthma.interfaces.OnCollectionsListSelectionListener;
 import pl.wasat.smarthma.ui.fragments.CollectionsGroupListFragment;
+import pl.wasat.smarthma.ui.fragments.GalleryFragment;
 import pl.wasat.smarthma.ui.fragments.MapFragment;
 import roboguice.util.temp.Ln;
 import android.app.ProgressDialog;
+import android.app.SearchManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -23,6 +25,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.ProgressBar;
+import android.widget.SearchView;
 import android.widget.Toast;
 
 public class MainSmartHMActivity extends FragmentActivity implements
@@ -47,14 +50,13 @@ public class MainSmartHMActivity extends FragmentActivity implements
 		requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
 		setContentView(R.layout.activity_two_panel);
 
-
 		if (savedInstanceState != null) {
 			// isMenuEnabled =
 			// savedInstanceState.getBoolean(KEY_STATE_MENU_ENABLED);
 			// visibleWorskpace =
 			// savedInstanceState.getString(KEY_VISIBLE_WORKSPACE);
 		} else {
-			//clearAllVisibleLayers();
+			// clearAllVisibleLayers();
 		}
 		ViewGroup topLayout = (ViewGroup) findViewById(R.id.left_panel_map);
 		topLayout.requestTransparentRegion(topLayout);
@@ -64,10 +66,9 @@ public class MainSmartHMActivity extends FragmentActivity implements
 		if (findViewById(R.id.right_list_container) != null) {
 			TWO_PANEL_MODE = true;
 			loadRightListPanel();
+			loadGalleryPanel();
 		}
 	}
-
-
 
 	@Override
 	protected void onResume() {
@@ -112,7 +113,15 @@ public class MainSmartHMActivity extends FragmentActivity implements
 		// Inflate the menu; this adds items to the action bar if it is present.
 		MenuInflater inflater = getMenuInflater();
 		inflater.inflate(R.menu.menu_gis_map, menu);
-		return true;
+		
+        //Associate searchable configuration with the SearchView
+        SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+        SearchView searchView = (SearchView) menu.findItem(R.id.action_search)
+                .getActionView();
+        searchView.setSearchableInfo(searchManager
+               .getSearchableInfo(getComponentName()));
+ 
+        return super.onCreateOptionsMenu(menu);
 	}
 
 	@Override
@@ -130,18 +139,18 @@ public class MainSmartHMActivity extends FragmentActivity implements
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
-		case R.id.action_add_threats:
+		case R.id.action_pref1:
 			// showThreatsDialog();
 			break;
-		case R.id.action_add_workspace:
+		case R.id.action_pref2:
 			// showWorkspaceDialog();
 			break;
-		case R.id.action_add_all_layers:
+		case R.id.action_pref3:
 			// visibleWorskpace = "all";
 			// openWMSLayerListActivity(visibleWorskpace);
 			break;
-		case R.id.action_clear_all_layers:
-			//clearAllVisibleLayers();
+		case R.id.action_clear_all_settings:
+			// clearAllVisibleLayers();
 			break;
 		case R.id.action_exit:
 			moveTaskToBack(true);
@@ -153,7 +162,6 @@ public class MainSmartHMActivity extends FragmentActivity implements
 		return true;
 	}
 
-	
 	/**
 	 * 
 	 */
@@ -165,9 +173,17 @@ public class MainSmartHMActivity extends FragmentActivity implements
 		rightListFragment.setArguments(args);
 		getSupportFragmentManager().beginTransaction()
 				.replace(R.id.right_list_container, rightListFragment).commit();
-		
 	}
 
+	private void loadGalleryPanel() {
+		GalleryFragment galleryFragment = new GalleryFragment();
+		Bundle args = new Bundle();
+		// args.putString(Const.KEY_LIST_WORKSPACE_NAME_TO_LOAD,
+		// visibleWorskpace);
+		galleryFragment.setArguments(args);
+		getSupportFragmentManager().beginTransaction()
+				.replace(R.id.gallery_bottom_panel, galleryFragment).commit();
+	}
 
 	/** for fragment to find out if activity is in two-pane mode */
 	@Override
@@ -180,7 +196,7 @@ public class MainSmartHMActivity extends FragmentActivity implements
 
 		if (chosenCollectionId == -1) {
 			Toast.makeText(MainSmartHMActivity.this,
-					R.string.specific_layer_does_not_exist, Toast.LENGTH_LONG)
+					R.string.specific_collection_does_not_exist, Toast.LENGTH_LONG)
 					.show();
 			return;
 		}
@@ -202,7 +218,7 @@ public class MainSmartHMActivity extends FragmentActivity implements
 			// Create fragment and give it an argument for the selected article
 			MapFragment newGisFrag = new MapFragment();
 			Bundle args = new Bundle();
-	
+
 			newGisFrag.setArguments(args);
 
 			FragmentTransaction transaction = getSupportFragmentManager()
@@ -217,7 +233,6 @@ public class MainSmartHMActivity extends FragmentActivity implements
 			transaction.commit();
 		}
 	}
-
 
 	private void disableProgressBar() {
 		if (initSpinner != null) {
@@ -245,11 +260,11 @@ public class MainSmartHMActivity extends FragmentActivity implements
 						.getInt(Const.REQUEST_CODE_SERVICE_RESULT);
 				if (resultCode == RESULT_OK) {
 					Toast.makeText(MainSmartHMActivity.this,
-							R.string.download_capabilities_complete,
+							R.string.download_explain_doc_complete,
 							Toast.LENGTH_SHORT).show();
 				} else {
-					Toast.makeText(MainSmartHMActivity.this, R.string.download_failed,
-							Toast.LENGTH_LONG).show();
+					Toast.makeText(MainSmartHMActivity.this,
+							R.string.download_failed, Toast.LENGTH_LONG).show();
 				}
 			}
 			supportInvalidateOptionsMenu();
@@ -292,6 +307,5 @@ public class MainSmartHMActivity extends FragmentActivity implements
 		}
 
 	}
-
 
 }
