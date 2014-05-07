@@ -2,7 +2,7 @@ package pl.wasat.smarthma.adapter;
 
 import java.io.File;
 
-import pl.wasat.smarthma.custom_view.CollectionsGroupView;
+import pl.wasat.smarthma.customviews.CollectionsGroupView;
 import pl.wasat.smarthma.model.CollectionsGroup;
 
 import android.content.Context;
