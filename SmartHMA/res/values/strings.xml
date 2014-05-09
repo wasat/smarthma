@@ -17,5 +17,10 @@
     <string name="content_picture">Collection picture</string>
     <string name="search_hint">hint</string>
     <string name="action_search">Search</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="first_line_desc">First line desc</string>
+    <string name="second_line_desc">Second line desc</string>
+    <string name="right_side_desc">Right side desc</string>
+    <string name="desc">desc</string>
 
 </resources>
