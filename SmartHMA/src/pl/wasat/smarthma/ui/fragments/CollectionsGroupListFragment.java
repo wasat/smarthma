@@ -12,6 +12,8 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -34,7 +36,6 @@ public class CollectionsGroupListFragment extends Fragment implements
 	private SpiceManager spiceManager = new SpiceManager(
 			ExplainDocHttpSpiceService.class);
 
-
 	private ListView collectionsGroupListView;
 	private View loadingView;
 
@@ -49,7 +50,8 @@ public class CollectionsGroupListFragment extends Fragment implements
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		return inflater.inflate(R.layout.fragment_right_list, container, false);
+		return inflater.inflate(R.layout.fragment_collections_group_list,
+				container, false);
 	}
 
 	@Override
@@ -78,7 +80,6 @@ public class CollectionsGroupListFragment extends Fragment implements
 		super.onStop();
 	}
 
-
 	private void updateEOListViewContent(List collectGrList) {
 		collectionsGroupListAdapter = new CollectionsGroupListAdapter(
 				getActivity(), spiceManagerBinary, collectGrList);
@@ -86,8 +87,27 @@ public class CollectionsGroupListFragment extends Fragment implements
 
 		loadingView.setVisibility(View.GONE);
 		collectionsGroupListView.setVisibility(View.VISIBLE);
+
+		// Click event for single list row
+		collectionsGroupListView
+				.setOnItemClickListener(new OnItemClickListener() {
+
+					@Override
+					public void onItemClick(AdapterView<?> parent, View view,
+							int position, long id) {
+						loadCollectionsList(position);
+
+					}
+				});
 	}
 
+	private void loadCollectionsList(int listPosition) {
+		CollectionsListFragment collectionsListFragment = CollectionsListFragment
+				.newInstance(listPosition);
+		getActivity().getSupportFragmentManager().beginTransaction()
+				.replace(R.id.right_list_container, collectionsListFragment)
+				.commit();
+	}
 
 	/**
 	 * 
@@ -95,14 +115,14 @@ public class CollectionsGroupListFragment extends Fragment implements
 	private void loadListSmartHMA() {
 		getActivity().setProgressBarIndeterminateVisibility(true);
 		spiceManager.execute(new ExplainDocRequest(), this);
-		// spiceManager.execute(new ExplainDocRequest(), "smarthma_expdoc",DurationInMillis.ONE_SECOND * 1, this);
+		// spiceManager.execute(new ExplainDocRequest(),
+		// "smarthma_expdoc",DurationInMillis.ONE_SECOND * 1, this);
 
 	}
 
 	// --------------------------------------------------------------------------------------------
 	// PRIVATE
 	// --------------------------------------------------------------------------------------------
-
 
 	private void initUIList() {
 		collectionsGroupListView = (ListView) getView().findViewById(

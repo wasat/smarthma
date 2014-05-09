@@ -30,25 +30,6 @@ public class Collection implements Parcelable, Comparator<Object> {
 		this.name = source.readString();
 	}
 
-	@Override
-	public int compare(Object collection1, Object collection2) {
-		Collection coll1 = (Collection) collection1;
-		Collection coll2 = (Collection) collection2;
-		return coll1.name.compareToIgnoreCase(coll2.name);
-	}
-
-	@Override
-	public int describeContents() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public void writeToParcel(Parcel dest, int flags) {
-		dest.writeInt(id);
-		dest.writeString(name);
-	}
-
 	/**
 	 * @return the id
 	 */
@@ -77,6 +58,73 @@ public class Collection implements Parcelable, Comparator<Object> {
 	 */
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#hashCode()
+	 */
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + id;
+		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		return result;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#equals(java.lang.Object)
+	 */
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Collection other = (Collection) obj;
+		if (id != other.id)
+			return false;
+		if (name == null) {
+			if (other.name != null)
+				return false;
+		} else if (!name.equals(other.name))
+			return false;
+		return true;
+	}
+
+	@Override
+	public int compare(Object collection1, Object collection2) {
+		Collection coll1 = (Collection) collection1;
+		Collection coll2 = (Collection) collection2;
+		return coll1.name.compareToIgnoreCase(coll2.name);
+	}
+
+	@Override
+	public int describeContents() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public void writeToParcel(Parcel dest, int flags) {
+		dest.writeInt(id);
+		dest.writeString(name);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "Collection [name=" + name + "]";
 	}
 
 }

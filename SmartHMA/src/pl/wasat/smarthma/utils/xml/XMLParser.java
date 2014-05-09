@@ -51,6 +51,9 @@ public class XMLParser {
 
 		String text = null;
 
+		int collItemId = 0;
+		int groupId = 0;
+
 		XmlPullParserFactory factory = null;
 		XmlPullParser parser = null;
 		try {
@@ -89,7 +92,8 @@ public class XMLParser {
 
 					// allDataGroups.add(group);
 					collectionGrList.addItem(group);
-					
+					collItemId = 0;
+
 					group = new CollectionsGroup();
 
 					String standard = parser.getText();
@@ -98,9 +102,12 @@ public class XMLParser {
 					parser.nextToken();
 					parser.nextToken();
 
-					String commString = parser.getText();
-					commString = commString.replace("/", "");
-					group.setGroupName(commString);
+					String groupName = parser.getText();
+					groupName = groupName.replace("/", "");
+					group.setGroupName(groupName);
+					group.setId(groupId);
+					groupId = groupId + 1;
+
 					isAfterComment = true;
 					break;
 
@@ -117,21 +124,26 @@ public class XMLParser {
 						configInfo.setSupports(supports);
 						index.setConfigInfo(configInfo);
 						if (isAfterComment) {
-							//allDataGroups.add(group);
+							// allDataGroups.add(group);
 							collectionGrList.addItem(group);
 							isAfterComment = false;
 						}
 					} else if (tagname.equalsIgnoreCase("supports")
 							&& indexTitle.equalsIgnoreCase("Dataset series")) {
 						supports.add(text);
+
+						collectionItem.setName(text);
+						collectionItem.setId(collItemId);
+						collItemId = collItemId + 1;
+
 						if (isAfterComment) {
-							collectionItem.setName(text);
 							group.addItem(collectionItem);
 						} else {
-							collectionItem.setName(text);
 							group = new CollectionsGroup();
-							group.setGroupName("Default");
-							group.setStandard("Default");
+							group.setId(groupId);
+							groupId = groupId + 1;
+							group.setGroupName("FEDEO Default");
+							group.setStandard("Default Standard");
 							group.addItem(collectionItem);
 						}
 					}

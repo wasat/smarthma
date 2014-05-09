@@ -4,6 +4,7 @@ import pl.wasat.smarthma.R;
 import pl.wasat.smarthma.helper.Const;
 import pl.wasat.smarthma.interfaces.OnCollectionsListSelectionListener;
 import pl.wasat.smarthma.ui.fragments.CollectionsGroupListFragment;
+import pl.wasat.smarthma.ui.fragments.CollectionsListFragment.OnFragmentInteractionListener;
 import pl.wasat.smarthma.ui.fragments.GalleryFragment;
 import pl.wasat.smarthma.ui.fragments.MapFragment;
 import roboguice.util.temp.Ln;
@@ -13,6 +14,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
@@ -29,7 +31,7 @@ import android.widget.SearchView;
 import android.widget.Toast;
 
 public class MainSmartHMActivity extends FragmentActivity implements
-		OnCollectionsListSelectionListener {
+		OnCollectionsListSelectionListener, OnFragmentInteractionListener{
 
 	private ProgressDialog initSpinner;
 	private ProgressBar progressBarWmsLoad;
@@ -306,6 +308,15 @@ public class MainSmartHMActivity extends FragmentActivity implements
 			super.onPostExecute(result);
 		}
 
+	}
+
+	/* (non-Javadoc)
+	 * @see pl.wasat.smarthma.ui.fragments.CustomizedListViewFragment.OnFragmentInteractionListener#onFragmentInteraction(android.net.Uri)
+	 */
+	@Override
+	public void onFragmentInteraction(Uri uri) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
