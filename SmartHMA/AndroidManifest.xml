@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="pl.wasat.smarthma"
-    android:versionCode="12"
-    android:versionName="1.0.12" >
+    android:versionCode="13"
+    android:versionName="1.0.13" >
 
     <uses-sdk
         android:minSdkVersion="11"
@@ -64,13 +64,6 @@
         <activity
             android:name="pl.wasat.smarthma.ui.activities.DataSeriesListActivity"
             android:label="@string/dataseries_list_name" >
-        </activity>
-        <activity
-            android:name="pl.wasat.smarthma.ui.activities.DataSeriesDetailActivity"
-            android:label="@string/title_dataseries_detail" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="pl.wasat.smarthma.ui.activities.DataSeriesListActivity" />
         </activity>
         <activity
             android:name="pl.wasat.smarthma.preferences.SettingsActivity"

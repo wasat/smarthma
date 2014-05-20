@@ -83,10 +83,10 @@ public class DataSeriesListActivity extends FragmentActivity implements
 					.commit();
 
 		} else {
-			Intent detailIntent = new Intent(this,
-					DataSeriesDetailActivity.class);
-			detailIntent.putExtra(DataSeriesDetailFragment.ARG_ITEM_ID, id);
-			startActivity(detailIntent);
+//			Intent detailIntent = new Intent(this,
+//					DataSeriesDetailActivity.class);
+//			detailIntent.putExtra(DataSeriesDetailFragment.ARG_ITEM_ID, id);
+//			startActivity(detailIntent);
 		}
 	}
 
