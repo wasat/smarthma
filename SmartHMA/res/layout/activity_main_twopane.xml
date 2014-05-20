@@ -30,28 +30,32 @@
         android:layout_height="match_parent"
         android:layout_weight="2" >
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
             android:orientation="vertical" >
 
-            <fragment
-                android:id="@+id/left_panel_map"
-                android:name="pl.wasat.smarthma.ui.fragments.MapFragment"
-                android:layout_width="match_parent"
-                android:layout_height="520dp" />
-
             <FrameLayout
                 android:id="@+id/gallery_bottom_panel"
                 android:name="pl.wasat.smarthma.ui.fragments.GalleryFragment"
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_gravity="bottom"
-                android:layout_weight="1" />
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_gravity="bottom" >
+            </FrameLayout>
 
-        </LinearLayout>
+            <fragment
+                android:id="@+id/left_panel_map"
+                android:name="pl.wasat.smarthma.ui.fragments.MapFragment"
+                android:layout_width="match_parent"
+                android:layout_height="fill_parent"
+                android:layout_above="@+id/gallery_bottom_panel">
+            </fragment>
+            
+            
+        </RelativeLayout>
 
         <ProgressBar
             android:id="@+id/progressBarWmsLoad"

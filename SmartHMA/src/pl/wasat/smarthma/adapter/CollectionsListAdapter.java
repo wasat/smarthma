@@ -32,7 +32,8 @@ public class CollectionsListAdapter extends BaseAdapter {
 
 	// public ImageLoader imageLoader;
 
-	public CollectionsListAdapter(Activity avtiv, ArrayList<Collection> data, String grName) {
+	public CollectionsListAdapter(Activity avtiv, ArrayList<Collection> data,
+			String grName) {
 		activity = avtiv;
 		collData = data;
 		groupName = grName;
@@ -61,7 +62,8 @@ public class CollectionsListAdapter extends BaseAdapter {
 		TextView artist = (TextView) vi.findViewById(R.id.collection_desc);
 
 		TextView duration = (TextView) vi.findViewById(R.id.collection_id);
-		ImageView thumb_image = (ImageView) vi.findViewById(R.id.collection_image);
+		ImageView thumb_image = (ImageView) vi
+				.findViewById(R.id.collection_image);
 
 		Collection collection = new Collection();
 		collection = collData.get(position);
@@ -70,9 +72,16 @@ public class CollectionsListAdapter extends BaseAdapter {
 		title.setText(collection.getName());
 		artist.setText(groupName);
 		duration.setText("No: " + collection.getId());
-		String url = Const.IMG_URL + "sat" + collection.getId() % 15 + ".jpeg";
+		String url = Const.IMG_URL + "sat" + mod(collection.getId(), 15)
+				+ ".jpeg";
 		Picasso.with(activity).load(url).resize(72, 72).centerCrop()
 				.into(thumb_image);
 		return vi;
+	}
+
+	private int mod(int x, int y) {
+		int result = x % y;
+		//Log.i("MOD", x + " - res: "+ result);
+		return result < 0 ? result + y : result;
 	}
 }

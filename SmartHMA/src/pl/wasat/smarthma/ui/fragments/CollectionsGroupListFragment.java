@@ -96,7 +96,6 @@ public class CollectionsGroupListFragment extends Fragment implements
 					public void onItemClick(AdapterView<?> parent, View view,
 							int position, long id) {
 						loadCollectionsList(position);
-
 					}
 				});
 	}
@@ -105,7 +104,7 @@ public class CollectionsGroupListFragment extends Fragment implements
 		CollectionsListFragment collectionsListFragment = CollectionsListFragment
 				.newInstance(listPosition);
 		getActivity().getSupportFragmentManager().beginTransaction()
-				.replace(R.id.right_list_container, collectionsListFragment)
+				.replace(R.id.right_list_container, collectionsListFragment).addToBackStack("CollectionsListFragment")
 				.commit();
 	}
 

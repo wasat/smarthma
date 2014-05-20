@@ -34,7 +34,7 @@
         android:layout_toRightOf="@+id/collection_thumbnail"
         android:text="@string/first_line_desc"
         android:textColor="#040404"
-        android:textSize="20sp"
+        android:textSize="16sp"
         android:textStyle="bold"
         android:typeface="sans" />
 

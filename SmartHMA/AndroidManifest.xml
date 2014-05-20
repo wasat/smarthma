@@ -1,18 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="pl.wasat.smarthma"
-    android:versionCode="11"
-    android:versionName="1.0.11" >
+    android:versionCode="12"
+    android:versionName="1.0.12" >
 
     <uses-sdk
         android:minSdkVersion="11"
         android:targetSdkVersion="19" />
 
-    <permission
-        android:name="pl.wasat.smarthma.permission.MAPS_RECEIVE"
-        android:protectionLevel="signature" />
-
-    <uses-permission android:name="pl.wasat.smarthma.permission.MAPS_RECEIVE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
@@ -32,6 +27,13 @@
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+        <meta-data
+            android:name="com.google.android.maps.v2.API_KEY"
+            android:value="AIzaSyCMZWIkdMS9FlyCt0eb_cMosMTFrt7FZxY" />
+
         <activity
             android:name="pl.wasat.smarthma.ui.activities.MainSmartHMActivity"
             android:label="@string/app_name" >
@@ -40,11 +42,16 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
+            <meta-data
+                android:name="android.app.default_searchable"
+                android:value="pl.wasat.smarthma.ui.activities.SearchResultsActivity" />
         </activity>
 
         <!-- Search results activity -->
         <activity
             android:name="pl.wasat.smarthma.ui.activities.SearchResultsActivity"
+            android:launchMode="singleTop"
             android:parentActivityName="pl.wasat.smarthma.ui.activities.MainSmartHMActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH" />
@@ -53,6 +60,25 @@
             <meta-data
                 android:name="android.app.searchable"
                 android:resource="@xml/searchable" />
+        </activity>
+        <activity
+            android:name="pl.wasat.smarthma.ui.activities.DataSeriesListActivity"
+            android:label="@string/dataseries_list_name" >
+        </activity>
+        <activity
+            android:name="pl.wasat.smarthma.ui.activities.DataSeriesDetailActivity"
+            android:label="@string/title_dataseries_detail" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="pl.wasat.smarthma.ui.activities.DataSeriesListActivity" />
+        </activity>
+        <activity
+            android:name="pl.wasat.smarthma.preferences.SettingsActivity"
+            android:label="@string/title_activity_settings"
+            android:parentActivityName="pl.wasat.smarthma.ui.activities.MainSmartHMActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="pl.wasat.smarthma.ui.activities.MainSmartHMActivity" />
         </activity>
 
         <!-- ROBOSPICE SERVICES -->
@@ -63,25 +89,12 @@
         <service
             android:name="pl.wasat.smarthma.services.ExplainDocHttpSpiceService"
             android:exported="false" />
-
-        <meta-data
-            android:name="com.google.android.maps.v2.API_KEY"
-            android:value="AIzaSyBN5mOxpOXFiVbQmDyAfUCgM7SVWbxwM78" />
-        <meta-data
-            android:name="com.google.android.gms.version"
-            android:value="@integer/google_play_services_version" />
-        <meta-data
-            android:name="android.app.default_searchable"
-            android:value="pl.wasat.smarthma.ui.activities.SearchResultsActivity" />
-
-        <activity
-            android:name="pl.wasat.smarthma.preferences.SettingsActivity"
-            android:label="@string/title_activity_settings"
-            android:parentActivityName="pl.wasat.smarthma.ui.activities.MainSmartHMActivity" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="pl.wasat.smarthma.ui.activities.MainSmartHMActivity" />
-        </activity>
+        <service
+            android:name="pl.wasat.smarthma.services.DataSeriesFeedsHttpSpiceService"
+            android:exported="false" />
+        <service
+            android:name="pl.wasat.smarthma.services.SearchFeedsHttpSpiceService"
+            android:exported="false" />
     </application>
 
 </manifest>

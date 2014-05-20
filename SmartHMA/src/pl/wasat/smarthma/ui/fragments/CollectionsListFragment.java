@@ -6,7 +6,9 @@ import pl.wasat.smarthma.R;
 import pl.wasat.smarthma.SmartHMApplication;
 import pl.wasat.smarthma.adapter.CollectionsListAdapter;
 import pl.wasat.smarthma.model.Collection;
+import pl.wasat.smarthma.ui.activities.DataSeriesListActivity;
 import android.app.Activity;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -30,6 +32,7 @@ public class CollectionsListFragment extends Fragment {
 
 	private static final String KEY_COLLECTIONS_GROUP_LIST_POSITION = "pl.wasat.smarthma.KEY_COLLECTIONS_GROUP_LIST_POSITION";
 	private static final String KEY_COLLECTIONS_GROUP_NAME = "pl.wasat.smarthma.KEY_COLLECTIONS_GROUP_NAME";
+	public static final String KEY_COLLECTIONS_NAME = "pl.wasat.smarthma.KEY_COLLECTIONS_NAME";
 
 	private int parentListPos;
 	private String selectGroupName;
@@ -68,7 +71,8 @@ public class CollectionsListFragment extends Fragment {
 		if (getArguments() != null) {
 			parentListPos = getArguments().getInt(
 					KEY_COLLECTIONS_GROUP_LIST_POSITION);
-			selectGroupName = getArguments().getString(KEY_COLLECTIONS_GROUP_NAME);
+			selectGroupName = getArguments().getString(
+					KEY_COLLECTIONS_GROUP_NAME);
 		}
 	}
 
@@ -97,9 +101,10 @@ public class CollectionsListFragment extends Fragment {
 		list = (ListView) getView().findViewById(R.id.collections_list);
 
 		// Getting adapter by passing xml data ArrayList
-		ArrayList<Collection> collections = SmartHMApplication.GlobalEODataList
+		final ArrayList<Collection> collections = SmartHMApplication.GlobalEODataList
 				.getCollectionsGroupList().get(parentListPos).getCollections();
-		adapter = new CollectionsListAdapter(getActivity(), collections, selectGroupName);
+		adapter = new CollectionsListAdapter(getActivity(), collections,
+				selectGroupName);
 		list.setAdapter(adapter);
 
 		// Click event for single list row
@@ -108,7 +113,8 @@ public class CollectionsListFragment extends Fragment {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
-				// TODO Auto-generated method stub
+				String collName = collections.get(position).getName();			
+				loadDataSeriesFeedsActivity(collName);
 
 			}
 		});
@@ -136,6 +142,21 @@ public class CollectionsListFragment extends Fragment {
 	public void onDetach() {
 		super.onDetach();
 		mListener = null;
+	}
+
+/*	private void loadProductsList(int listPosition) {
+		CollectionsListFragment collectionsListFragment = CollectionsListFragment
+				.newInstance(listPosition);
+		getActivity().getSupportFragmentManager().beginTransaction()
+				.replace(R.id.right_list_container, collectionsListFragment)
+				.commit();
+	}*/
+
+	private void loadDataSeriesFeedsActivity(String collName) {
+		Intent dsFeedsIntent = new Intent(getActivity(),
+				DataSeriesListActivity.class);
+		dsFeedsIntent.putExtra(KEY_COLLECTIONS_NAME, collName);
+		startActivity(dsFeedsIntent);
 	}
 
 	/**

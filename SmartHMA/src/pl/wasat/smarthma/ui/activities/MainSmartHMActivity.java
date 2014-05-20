@@ -18,6 +18,7 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.Menu;
@@ -114,7 +115,7 @@ public class MainSmartHMActivity extends FragmentActivity implements
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		MenuInflater inflater = getMenuInflater();
-		inflater.inflate(R.menu.menu_gis_map, menu);
+		inflater.inflate(R.menu.menu_eo_map, menu);
 		
         //Associate searchable configuration with the SearchView
         SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
@@ -164,6 +165,29 @@ public class MainSmartHMActivity extends FragmentActivity implements
 		return true;
 	}
 
+	
+	
+	
+	
+	/* (non-Javadoc)
+	 * @see android.support.v4.app.FragmentActivity#onBackPressed()
+	 */
+	@Override
+	public void onBackPressed() {
+	    FragmentManager fm = getSupportFragmentManager();
+	    int bsec = fm.getBackStackEntryCount();
+	    if (bsec > 1) {
+	        Log.i("MainActivity", bsec + " - popping backstack");
+	        fm.popBackStack();
+	    } else {
+	        Log.i("MainActivity", bsec + " - nothing on backstack, calling super");
+	        finish();
+	        super.onBackPressed();  
+	    }
+	}
+
+
+
 	/**
 	 * 
 	 */
@@ -174,7 +198,7 @@ public class MainSmartHMActivity extends FragmentActivity implements
 		// visibleWorskpace);
 		rightListFragment.setArguments(args);
 		getSupportFragmentManager().beginTransaction()
-				.replace(R.id.right_list_container, rightListFragment).commit();
+				.add(R.id.right_list_container, rightListFragment).addToBackStack("CollGroupListFrag").commit();
 	}
 
 	private void loadGalleryPanel() {
@@ -213,11 +237,11 @@ public class MainSmartHMActivity extends FragmentActivity implements
 				.findFragmentById(R.id.left_panel_map);
 
 		if (gisFrag != null) {
-			// If article frag is available, we're in two-pane layout...
-			// Call a method in the ArticleFragment to update its content
+			// If frag is available, we're in two-pane layout...
+			// Call a method in the MapFragment to update its content
 		} else {
 			// Otherwise, we're in the one-pane layout and must swap frags...
-			// Create fragment and give it an argument for the selected article
+			// Create fragment and give it an argument for the selected data
 			MapFragment newGisFrag = new MapFragment();
 			Bundle args = new Bundle();
 
