@@ -1,17 +1,19 @@
 package pl.wasat.smarthma.ui.fragments;
 
 import pl.wasat.smarthma.R;
-import pl.wasat.smarthma.helper.Const;
 import pl.wasat.smarthma.utils.wms.TileProviderFactory;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.BroadcastReceiver;
+import android.location.Location;
 import android.os.Bundle;
 import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 
 import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GooglePlayServicesClient;
 import com.google.android.gms.common.GooglePlayServicesUtil;
+import com.google.android.gms.location.LocationClient;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -28,12 +30,14 @@ import com.google.android.gms.maps.model.TileProvider;
  * Activities containing this fragment MUST implement the {@link Callbacks}
  * interface.
  */
-public class MapFragment extends SupportMapFragment {
+public class MapFragment extends SupportMapFragment implements 
+GooglePlayServicesClient.ConnectionCallbacks {
 	private final static String TAG = "MapActivity";
 	
 	/** reference to Google Maps object */
 	private GoogleMap mMap;
-
+	private LocationClient mLocationClient;
+	
 	/** broadcast receiver */
 	private BroadcastReceiver mReceiver;
 
@@ -130,6 +134,17 @@ public class MapFragment extends SupportMapFragment {
 		super.onResume();
 	}
 
+
+	@Override
+	public void onConnected(Bundle dataBundle) {
+	    // Display the connection status
+	    Location location = mLocationClient.getLastLocation();
+	    LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
+	    CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(latLng, 7);
+	    mMap.animateCamera(cameraUpdate);
+	}
+	
+	
 	private void setUpMapIfNeeded() {
 		if (mMap == null) {
 			mMap = getMap();
@@ -146,12 +161,12 @@ public class MapFragment extends SupportMapFragment {
 	private void setUpMap() {
 		setupOSM();
 
-		mMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
+		mMap.setMapType(GoogleMap.MAP_TYPE_NONE);
 		mMap.setMyLocationEnabled(true);
 
-		CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(
-				Const.CENTER_LAYER, 10);
-		mMap.animateCamera(cameraUpdate);
+		//CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(Const.CENTER_LAYER, 7);
+		
+		//mMap.animateCamera(cameraUpdate);
 
 		mMap.setOnMapLongClickListener(new OnMapLongClickListener() {
 			@Override
@@ -189,6 +204,15 @@ public class MapFragment extends SupportMapFragment {
 			}
 		}
 		return wmsTileOverlay;
+	}
+
+	/* (non-Javadoc)
+	 * @see com.google.android.gms.common.GooglePlayServicesClient.ConnectionCallbacks#onDisconnected()
+	 */
+	@Override
+	public void onDisconnected() {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

@@ -15,12 +15,20 @@
     <string name="map_was_null">Map was null!</string>
     <string name="loading_please_wait">Loading FedEO Explain Document. \nPlease wait &#8230; </string>
     <string name="content_picture">Collection picture</string>
-    <string name="search_hint">hint</string>
+    <string name="search_hint">Search EO data</string>
     <string name="action_search">Search</string>
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="failure_fragment_text">Hello blank fragment</string>
     <string name="first_line_desc">First line desc</string>
     <string name="second_line_desc">Second line desc</string>
     <string name="right_side_desc">Right side desc</string>
     <string name="desc">desc</string>
+    <string name="title_dataseries_detail">Data Detail</string>
+    <string name="dataseries_list_name">Data Series Viewer</string>
+    <string name="btn_offline_reading">Save for later</string>
+    <string name="btn_mark_unread">Mark unread</string>
+    <string name="btn_refresh">Refresh</string>
+    <string name="ok_">"OK!!! "</string>
+    <string name="impossible_to_get_the_list_of_eo_data">Impossible to get the list of EO data</string>
+    <string name="nothing_to_display_please_search_again_">Nothing to display. Please search again.</string>
 
 </resources>

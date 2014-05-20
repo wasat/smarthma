@@ -8,7 +8,8 @@
     http://developer.android.com/training/multiscreen/screensizes.html#TaskUseAliasFilters
     -->
     <item name="activity_two_panel" type="layout">@layout/activity_main_twopane_vertical</item>
-    <item name="menu_gis_map" type="menu">@menu/menu_gis_map_twopane</item>
+    <item name="menu_eo_map" type="menu">@menu/menu_eo_map_twopane</item>
     <item name="menu_main_list" type="menu">@menu/menu_main_list_twopane</item>
+    <item name="activity_dataseries_list" type="layout">@layout/activity_dataseries_twopane</item>
     
 </resources>
