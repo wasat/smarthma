@@ -81,7 +81,6 @@ public class CollectionsListAdapter extends BaseAdapter {
 
 	private int mod(int x, int y) {
 		int result = x % y;
-		//Log.i("MOD", x + " - res: "+ result);
 		return result < 0 ? result + y : result;
 	}
 }

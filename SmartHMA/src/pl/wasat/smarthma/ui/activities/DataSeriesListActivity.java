@@ -2,29 +2,38 @@ package pl.wasat.smarthma.ui.activities;
 
 import pl.wasat.smarthma.R;
 import pl.wasat.smarthma.adapter.DataSeriesListAdapter;
-import pl.wasat.smarthma.database.DbAdapter;
-import pl.wasat.smarthma.model.dataseries.Entry;
-import pl.wasat.smarthma.ui.fragments.CollectionsListFragment;
-import pl.wasat.smarthma.ui.fragments.DataSeriesDetailFragment;
-import pl.wasat.smarthma.ui.fragments.DataSeriesDetailFragment.OnDataSeriesDetailFragmentInteractionListener;
-import pl.wasat.smarthma.ui.fragments.DataSeriesListFragment;
-import pl.wasat.smarthma.ui.fragments.DataSeriesListFragment.OnDataSeriesListFragmentInteractionListener;
-import pl.wasat.smarthma.ui.fragments.FailureFragment.OnFailureFragmentInteractionListener;
+import pl.wasat.smarthma.database.EoDbAdapter;
+import pl.wasat.smarthma.model.feed.Entry;
+import pl.wasat.smarthma.ui.frags.FailureFragment.OnFailureFragmentListener;
+import pl.wasat.smarthma.ui.frags.MapSearchFragment.OnMapSearchFragmentListener;
+import pl.wasat.smarthma.ui.frags.browse.CollectionItemRightFragment;
+import pl.wasat.smarthma.ui.frags.browse.CollectionItemRightFragment.OnCollectionItemRightFragmentListener;
+import pl.wasat.smarthma.ui.frags.browse.CollectionsListFragment;
+import pl.wasat.smarthma.ui.frags.browse.DataSeriesDetailFragment;
+import pl.wasat.smarthma.ui.frags.browse.DataSeriesDetailFragment.OnDataSeriesDetailFragmentInteractionListener;
+import pl.wasat.smarthma.ui.frags.browse.DataSeriesListFragment;
+import pl.wasat.smarthma.ui.frags.browse.DataSeriesListFragment.OnDataSeriesListFragmentListener;
+import pl.wasat.smarthma.ui.frags.search.SearchListFragment.OnSearchListFragmentListener;
+import pl.wasat.smarthma.ui.frags.search.SearchProductsListFragment.OnSearchProductsListFragmentListener;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
-import android.util.Log;
 import android.view.Window;
 
+import com.google.android.gms.maps.model.LatLngBounds;
+
 public class DataSeriesListActivity extends FragmentActivity implements
-		OnDataSeriesListFragmentInteractionListener,
+		OnDataSeriesListFragmentListener,
 		OnDataSeriesDetailFragmentInteractionListener,
-		OnFailureFragmentInteractionListener,
-		DataSeriesListFragment.Callbacks {
+		OnFailureFragmentListener,
+		OnMapSearchFragmentListener,
+		OnCollectionItemRightFragmentListener,
+		OnSearchListFragmentListener,
+		OnSearchProductsListFragmentListener {
 
 	private boolean mTwoPane;
-	private DbAdapter dba;
+	private EoDbAdapter dba;
 
 	public DataSeriesListActivity() {
 	}
@@ -39,7 +48,7 @@ public class DataSeriesListActivity extends FragmentActivity implements
 		String message = intent
 				.getStringExtra(CollectionsListFragment.KEY_COLLECTIONS_NAME);
 
-		dba = new DbAdapter(this);
+		dba = new EoDbAdapter(this);
 
 		if (findViewById(R.id.dataseries_detail_container) != null) {
 			mTwoPane = true;
@@ -54,9 +63,12 @@ public class DataSeriesListActivity extends FragmentActivity implements
 					.add(R.id.dataseries_list, dsListFragment).commit();
 		}
 	}
-
+	
+	/* (non-Javadoc)
+	 * @see pl.wasat.smarthma.ui.fragments.SearchListFragment.OnSearchListFragmentListener#onSearchListFragmentItemSelected(java.lang.String)
+	 */
 	@Override
-	public void onItemSelected(String id) {
+	public void onSearchListFragmentItemSelected(String id) {
 		Entry selectedEntry = (Entry) ((DataSeriesListFragment) getSupportFragmentManager()
 				.findFragmentById(R.id.dataseries_list)).getListAdapter()
 				.getItem(Integer.parseInt(id));
@@ -69,7 +81,6 @@ public class DataSeriesListActivity extends FragmentActivity implements
 		DataSeriesListAdapter adapter = (DataSeriesListAdapter) ((DataSeriesListFragment) getSupportFragmentManager()
 				.findFragmentById(R.id.dataseries_list)).getListAdapter();
 		adapter.notifyDataSetChanged();
-		Log.e("CHANGE", "Changing to read: ");
 
 		// load metadata details to main panel
 		if (mTwoPane) {
@@ -81,29 +92,74 @@ public class DataSeriesListActivity extends FragmentActivity implements
 			getSupportFragmentManager().beginTransaction()
 					.replace(R.id.dataseries_detail_container, fragment)
 					.commit();
-
-		} else {
-//			Intent detailIntent = new Intent(this,
-//					DataSeriesDetailActivity.class);
-//			detailIntent.putExtra(DataSeriesDetailFragment.ARG_ITEM_ID, id);
-//			startActivity(detailIntent);
-		}
+		} 
 	}
-
+	
 	@Override
 	public void onDataSeriesDetailFragmentInteraction(Uri uri) {
 		// TODO Auto-generated method stub
 
 	}
 
-	@Override
-	public void onDataSeriesFragmentInteraction(Uri uri) {
-		// TODO Auto-generated method stub
-
-	}
 
 	@Override
 	public void onFailureFragmentInteraction(Uri uri) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	/* (non-Javadoc)
+	 * @see pl.wasat.smarthma.ui.fragments.MapSearchFragment.OnMapSearchFragmentInteractionListener#onMapSearchFragmentInteraction(android.net.Uri)
+	 */
+	@Override
+	public void onMapSearchFragmentInteraction(Uri uri) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	/* (non-Javadoc)
+	 * @see pl.wasat.smarthma.ui.fragments.MapSearchFragment.OnMapSearchFragmentInteractionListener#onMapSearchFragmentBoundsChange(com.google.android.gms.maps.model.LatLngBounds)
+	 */
+	@Override
+	public void onMapSearchFragmentBoundsChange(LatLngBounds bounds) {
+		CollectionItemRightFragment collRightFrag = (CollectionItemRightFragment) getSupportFragmentManager()
+				.findFragmentByTag("CollectionItemRightFragment");
+
+		if (collRightFrag != null) {
+			// If article frag is available, we're in two-pane layout...
+
+			// Call a method in the ArticleFragment to update its content
+			collRightFrag.updateProductAreaBounds(bounds);
+		}
+		
+	}
+
+	/* (non-Javadoc)
+	 * @see pl.wasat.smarthma.ui.fragments.CollectionItemRightFragment.OnCollectionItemRightFragmentInteractionListener#onCollectionItemRightFragmentInteraction(android.net.Uri)
+	 */
+	@Override
+	public void onCollectionItemRightFragmentInteraction(Uri uri) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	/* (non-Javadoc)
+	 * @see pl.wasat.smarthma.ui.fragments.DataSeriesListFragment.OnDataSeriesListFragmentListener#onDataSeriesFragmentItemSelected(java.lang.String)
+	 */
+	@Override
+	public void onDataSeriesFragmentItemSelected(String id) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
+	/* (non-Javadoc)
+	 * @see pl.wasat.smarthma.ui.fragments.SearchProductsFeedsFragment.OnSearchProductsFeedFragmentListener#onSearchProductsFeedFragmentItemSelected(java.lang.String)
+	 */
+	@Override
+	public void onSearchProductsListFragmentItemSelected(String id) {
 		// TODO Auto-generated method stub
 		
 	}

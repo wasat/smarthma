@@ -42,8 +42,6 @@ public class XMLParser {
 
 		expData = new ExplainData();
 		collectionGrList = new List();
-		// ArrayList<CollectionsGroup> allDataGroups = new
-		// ArrayList<CollectionsGroup>();
 
 		Boolean isAfterComment = false;
 
@@ -124,7 +122,6 @@ public class XMLParser {
 						configInfo.setSupports(supports);
 						index.setConfigInfo(configInfo);
 						if (isAfterComment) {
-							// allDataGroups.add(group);
 							collectionGrList.addItem(group);
 							isAfterComment = false;
 						}

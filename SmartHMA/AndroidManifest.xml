@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="pl.wasat.smarthma"
-    android:versionCode="13"
-    android:versionName="1.0.13" >
+    android:versionCode="14"
+    android:versionName="1.0.14" >
 
     <uses-sdk
-        android:minSdkVersion="11"
+        android:minSdkVersion="14"
         android:targetSdkVersion="19" />
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -35,24 +35,33 @@
             android:value="AIzaSyCMZWIkdMS9FlyCt0eb_cMosMTFrt7FZxY" />
 
         <activity
-            android:name="pl.wasat.smarthma.ui.activities.MainSmartHMActivity"
-            android:label="@string/app_name" >
+            android:name="pl.wasat.smarthma.ui.activities.StartActivity"
+            android:label="@string/app_name"
+            android:theme="@style/Theme.AppCompat.Light" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
+        </activity>
+        <activity
+            android:name="pl.wasat.smarthma.ui.activities.MainSmartHMActivity"
+            android:label="@string/app_name" >
             <meta-data
                 android:name="android.app.default_searchable"
                 android:value="pl.wasat.smarthma.ui.activities.SearchResultsActivity" />
         </activity>
-
+        <activity
+            android:name="pl.wasat.smarthma.ui.activities.SearchActivity"
+            android:label="@string/app_name" >
+            <meta-data
+                android:name="android.app.default_searchable"
+                android:value="pl.wasat.smarthma.ui.activities.SearchResultsActivity" />
+        </activity>
         <!-- Search results activity -->
         <activity
             android:name="pl.wasat.smarthma.ui.activities.SearchResultsActivity"
-            android:launchMode="singleTop"
-            android:parentActivityName="pl.wasat.smarthma.ui.activities.MainSmartHMActivity" >
+            android:launchMode="singleTop" >
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH" />
             </intent-filter>
@@ -62,16 +71,23 @@
                 android:resource="@xml/searchable" />
         </activity>
         <activity
+            android:name="pl.wasat.smarthma.ui.activities.MissionsActivity"
+            android:label="@string/esa_missions" >
+        </activity>
+        <activity
             android:name="pl.wasat.smarthma.ui.activities.DataSeriesListActivity"
             android:label="@string/dataseries_list_name" >
         </activity>
         <activity
             android:name="pl.wasat.smarthma.preferences.SettingsActivity"
-            android:label="@string/title_activity_settings"
-            android:parentActivityName="pl.wasat.smarthma.ui.activities.MainSmartHMActivity" >
+            android:label="@string/title_activity_settings" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="pl.wasat.smarthma.ui.activities.MainSmartHMActivity" />
+        </activity>
+        <activity
+            android:name="pl.wasat.smarthma.ui.activities.ArticleListActivity"
+            android:label="@string/title_article_list" >
         </activity>
 
         <!-- ROBOSPICE SERVICES -->
@@ -86,8 +102,16 @@
             android:name="pl.wasat.smarthma.services.DataSeriesFeedsHttpSpiceService"
             android:exported="false" />
         <service
-            android:name="pl.wasat.smarthma.services.SearchFeedsHttpSpiceService"
+            android:name="pl.wasat.smarthma.services.SearchCollectionsHttpSpiceService"
             android:exported="false" />
+        <service
+            android:name="pl.wasat.smarthma.services.SearchProductsHttpSpiceService"
+            android:exported="false" />
+
+        <activity
+            android:name="pl.wasat.smarthma.SearchActivity"
+            android:label="@string/title_activity_search" >
+        </activity>
     </application>
 
 </manifest>

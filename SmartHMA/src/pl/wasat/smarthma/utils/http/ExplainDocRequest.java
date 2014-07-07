@@ -13,11 +13,8 @@ import com.octo.android.robospice.request.okhttp.OkHttpSpiceRequest;
 
 public class ExplainDocRequest extends OkHttpSpiceRequest<String> {
 
-	// private String word;
-
 	public ExplainDocRequest() {
 		super(String.class);
-		// this.word = word;
 	}
 
 	@Override
@@ -25,8 +22,6 @@ public class ExplainDocRequest extends OkHttpSpiceRequest<String> {
 
 		// With Uri.Builder class we can build our url is a safe manner
 		Uri.Builder uriBuilder = Uri.parse(Const.URL_EXPLAIN_DOC).buildUpon();
-		// uriBuilder.appendQueryParameter("word", word);
-
 		URI uri = new URI(uriBuilder.build().toString());
 
 		HttpURLConnection connection = getOkHttpClient().open(uri.toURL());
@@ -36,8 +31,6 @@ public class ExplainDocRequest extends OkHttpSpiceRequest<String> {
 			// Read the response.
 			in = connection.getInputStream();
 			return IOUtils.toString(in, "UTF-8");
-//		} catch (Exception e) {
-//			Log.e("EXPLAIN_DOC", e.toString());
 		} finally {
 			if (in != null) {
 				in.close();

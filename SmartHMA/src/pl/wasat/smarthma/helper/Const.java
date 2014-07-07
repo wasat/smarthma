@@ -1,12 +1,10 @@
 package pl.wasat.smarthma.helper;
 
-import com.google.android.gms.maps.model.LatLng;
-
 public class Const {
 
 	public static String IMG_URL = "http://89.250.194.14/smarthma/img/";
 	public static final String URL_EXPLAIN_DOC = "http://geo.spacebel.be/opensearch/request";
-	public static LatLng CENTER_LAYER = new LatLng(54.410139, 18.625946);
+	//public static LatLng CENTER_LAYER = new LatLng(54.410139, 18.625946);
 
 	public static final String KEY_LIST_WORKSPACE_NAME_TO_LOAD = "pl.wasat.smarthma.KEY_LIST_WORKSPACE_NAME_TO_LOAD";
 	public static final String KEY_LIST_ID_LAYERS_TO_DISPLAY = "pl.wasat.smarthma.KEY_LIST_ID_LAYERS_TO_DISPLAY";

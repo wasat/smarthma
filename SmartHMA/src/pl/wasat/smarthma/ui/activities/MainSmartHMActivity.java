@@ -3,10 +3,11 @@ package pl.wasat.smarthma.ui.activities;
 import pl.wasat.smarthma.R;
 import pl.wasat.smarthma.helper.Const;
 import pl.wasat.smarthma.interfaces.OnCollectionsListSelectionListener;
-import pl.wasat.smarthma.ui.fragments.CollectionsGroupListFragment;
-import pl.wasat.smarthma.ui.fragments.CollectionsListFragment.OnFragmentInteractionListener;
-import pl.wasat.smarthma.ui.fragments.GalleryFragment;
-import pl.wasat.smarthma.ui.fragments.MapFragment;
+import pl.wasat.smarthma.ui.frags.GalleryFragment;
+import pl.wasat.smarthma.ui.frags.MapSearchFragment;
+import pl.wasat.smarthma.ui.frags.MapSearchFragment.OnMapSearchFragmentListener;
+import pl.wasat.smarthma.ui.frags.browse.CollectionsGroupListFragment;
+import pl.wasat.smarthma.ui.frags.browse.CollectionsListFragment.OnFragmentInteractionListener;
 import roboguice.util.temp.Ln;
 import android.app.ProgressDialog;
 import android.app.SearchManager;
@@ -31,8 +32,11 @@ import android.widget.ProgressBar;
 import android.widget.SearchView;
 import android.widget.Toast;
 
+import com.google.android.gms.maps.model.LatLngBounds;
+
 public class MainSmartHMActivity extends FragmentActivity implements
-		OnCollectionsListSelectionListener, OnFragmentInteractionListener{
+		OnCollectionsListSelectionListener, OnFragmentInteractionListener,
+		OnMapSearchFragmentListener {
 
 	private ProgressDialog initSpinner;
 	private ProgressBar progressBarWmsLoad;
@@ -58,8 +62,6 @@ public class MainSmartHMActivity extends FragmentActivity implements
 			// savedInstanceState.getBoolean(KEY_STATE_MENU_ENABLED);
 			// visibleWorskpace =
 			// savedInstanceState.getString(KEY_VISIBLE_WORKSPACE);
-		} else {
-			// clearAllVisibleLayers();
 		}
 		ViewGroup topLayout = (ViewGroup) findViewById(R.id.left_panel_map);
 		topLayout.requestTransparentRegion(topLayout);
@@ -70,6 +72,7 @@ public class MainSmartHMActivity extends FragmentActivity implements
 			TWO_PANEL_MODE = true;
 			loadRightListPanel();
 			loadGalleryPanel();
+			loadMapView("", "");
 		}
 	}
 
@@ -116,15 +119,15 @@ public class MainSmartHMActivity extends FragmentActivity implements
 		// Inflate the menu; this adds items to the action bar if it is present.
 		MenuInflater inflater = getMenuInflater();
 		inflater.inflate(R.menu.menu_eo_map, menu);
-		
-        //Associate searchable configuration with the SearchView
-        SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
-        SearchView searchView = (SearchView) menu.findItem(R.id.action_search)
-                .getActionView();
-        searchView.setSearchableInfo(searchManager
-               .getSearchableInfo(getComponentName()));
- 
-        return super.onCreateOptionsMenu(menu);
+
+		// Associate searchable configuration with the SearchView
+		SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+		SearchView searchView = (SearchView) menu.findItem(R.id.action_search)
+				.getActionView();
+		searchView.setSearchableInfo(searchManager
+				.getSearchableInfo(getComponentName()));
+
+		return super.onCreateOptionsMenu(menu);
 	}
 
 	@Override
@@ -149,11 +152,8 @@ public class MainSmartHMActivity extends FragmentActivity implements
 			// showWorkspaceDialog();
 			break;
 		case R.id.action_pref3:
-			// visibleWorskpace = "all";
-			// openWMSLayerListActivity(visibleWorskpace);
 			break;
 		case R.id.action_clear_all_settings:
-			// clearAllVisibleLayers();
 			break;
 		case R.id.action_exit:
 			moveTaskToBack(true);
@@ -165,28 +165,22 @@ public class MainSmartHMActivity extends FragmentActivity implements
 		return true;
 	}
 
-	
-	
-	
-	
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see android.support.v4.app.FragmentActivity#onBackPressed()
 	 */
 	@Override
 	public void onBackPressed() {
-	    FragmentManager fm = getSupportFragmentManager();
-	    int bsec = fm.getBackStackEntryCount();
-	    if (bsec > 1) {
-	        Log.i("MainActivity", bsec + " - popping backstack");
-	        fm.popBackStack();
-	    } else {
-	        Log.i("MainActivity", bsec + " - nothing on backstack, calling super");
-	        finish();
-	        super.onBackPressed();  
-	    }
+		FragmentManager fm = getSupportFragmentManager();
+		int bsec = fm.getBackStackEntryCount();
+		if (bsec > 1) {
+			fm.popBackStack();
+		} else {
+			finish();
+			super.onBackPressed();
+		}
 	}
-
-
 
 	/**
 	 * 
@@ -194,21 +188,27 @@ public class MainSmartHMActivity extends FragmentActivity implements
 	private void loadRightListPanel() {
 		CollectionsGroupListFragment rightListFragment = new CollectionsGroupListFragment();
 		Bundle args = new Bundle();
-		// args.putString(Const.KEY_LIST_WORKSPACE_NAME_TO_LOAD,
-		// visibleWorskpace);
 		rightListFragment.setArguments(args);
 		getSupportFragmentManager().beginTransaction()
-				.add(R.id.right_list_container, rightListFragment).addToBackStack("CollGroupListFrag").commit();
+				.add(R.id.right_list_container, rightListFragment)
+				.addToBackStack("CollGroupListFrag").commit();
 	}
 
 	private void loadGalleryPanel() {
 		GalleryFragment galleryFragment = new GalleryFragment();
 		Bundle args = new Bundle();
-		// args.putString(Const.KEY_LIST_WORKSPACE_NAME_TO_LOAD,
-		// visibleWorskpace);
 		galleryFragment.setArguments(args);
 		getSupportFragmentManager().beginTransaction()
 				.replace(R.id.gallery_bottom_panel, galleryFragment).commit();
+	}
+
+	private void loadMapView(String title, String pubDate) {
+		MapSearchFragment mapSearchFragment = MapSearchFragment.newInstance("",
+				"");
+
+		getSupportFragmentManager().beginTransaction()
+				.replace(R.id.left_panel_map, mapSearchFragment)
+				.addToBackStack("MapSearchFragment").commit();
 	}
 
 	/** for fragment to find out if activity is in two-pane mode */
@@ -222,8 +222,8 @@ public class MainSmartHMActivity extends FragmentActivity implements
 
 		if (chosenCollectionId == -1) {
 			Toast.makeText(MainSmartHMActivity.this,
-					R.string.specific_collection_does_not_exist, Toast.LENGTH_LONG)
-					.show();
+					R.string.specific_collection_does_not_exist,
+					Toast.LENGTH_LONG).show();
 			return;
 		}
 
@@ -233,7 +233,7 @@ public class MainSmartHMActivity extends FragmentActivity implements
 			urlArgs = "&time=" + urlArgs;
 		}
 
-		MapFragment gisFrag = (MapFragment) getSupportFragmentManager()
+		MapSearchFragment gisFrag = (MapSearchFragment) getSupportFragmentManager()
 				.findFragmentById(R.id.left_panel_map);
 
 		if (gisFrag != null) {
@@ -242,7 +242,7 @@ public class MainSmartHMActivity extends FragmentActivity implements
 		} else {
 			// Otherwise, we're in the one-pane layout and must swap frags...
 			// Create fragment and give it an argument for the selected data
-			MapFragment newGisFrag = new MapFragment();
+			MapSearchFragment newGisFrag = new MapSearchFragment();
 			Bundle args = new Bundle();
 
 			newGisFrag.setArguments(args);
@@ -334,13 +334,35 @@ public class MainSmartHMActivity extends FragmentActivity implements
 
 	}
 
-	/* (non-Javadoc)
-	 * @see pl.wasat.smarthma.ui.fragments.CustomizedListViewFragment.OnFragmentInteractionListener#onFragmentInteraction(android.net.Uri)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see pl.wasat.smarthma.ui.fragments.CustomizedListViewFragment.
+	 * OnFragmentInteractionListener#onFragmentInteraction(android.net.Uri)
 	 */
 	@Override
 	public void onFragmentInteraction(Uri uri) {
 		// TODO Auto-generated method stub
-		
+
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see pl.wasat.smarthma.ui.fragments.MapSearchFragment.
+	 * OnMapSearchFragmentInteractionListener
+	 * #onMapSearchFragmentInteraction(android.net.Uri)
+	 */
+	@Override
+	public void onMapSearchFragmentInteraction(Uri uri) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void onMapSearchFragmentBoundsChange(LatLngBounds bounds) {
+		// TODO Auto-generated method stub
+
 	}
 
 }

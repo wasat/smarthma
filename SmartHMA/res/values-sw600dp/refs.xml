@@ -12,5 +12,5 @@
     <item name="menu_main_list" type="menu">@menu/menu_main_list_twopane</item>
     
      <item type="layout" name="activity_dataseries_list">@layout/activity_dataseries_twopane</item>
-
+<item type="layout" name="activity_article_list">@layout/activity_article_twopane</item>
 </resources>
