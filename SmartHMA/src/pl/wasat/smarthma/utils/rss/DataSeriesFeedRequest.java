@@ -15,7 +15,8 @@ import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 import org.xml.sax.XMLReader;
 
-import pl.wasat.smarthma.model.dataseries.Entry;
+import pl.wasat.smarthma.model.feed.Entry;
+import pl.wasat.smarthma.model.feed.Feed;
 import android.net.Uri;
 import android.util.Log;
 
@@ -26,14 +27,6 @@ public class DataSeriesFeedRequest extends OkHttpSpiceRequest<List<Entry>> {
 	private String urlSearchParam;
 
 	/**
-	 * @param clazz
-	 */
-	// public DataSeriesFeedRequest(Class<List<Entry>> clazz) {
-	// super(clazz);
-	// // TODO Auto-generated constructor stub
-	// }
-
-	/**
 	 * 
 	 */
 	public DataSeriesFeedRequest(String urlSearchParameter) {
@@ -42,7 +35,11 @@ public class DataSeriesFeedRequest extends OkHttpSpiceRequest<List<Entry>> {
 	}
 
 	private static final String FEDEO_DATASERIES_SEARCH_URL = "http://geo.spacebel.be/opensearch/request/?httpAccept=application/atom%2Bxml"
-			+ "&startRecord=1" + "&maximumRecords=10" + "&parentIdentifier=";
+			+ "&startRecord=1"
+			+ "&maximumRecords=10"
+			+ "&recordSchema=om"
+			+ "&startDate=2014-04-23T00:00:00Z&endDate=2014-05-22T00:00:00Z"
+			+ "&parentIdentifier=";
 
 	@Override
 	public List<Entry> loadDataFromNetwork() throws Exception {
@@ -62,7 +59,6 @@ public class DataSeriesFeedRequest extends OkHttpSpiceRequest<List<Entry>> {
 				in = connection.getInputStream();
 			} finally {
 				if (in != null) {
-					// in.close();
 				}
 			}
 
@@ -76,8 +72,9 @@ public class DataSeriesFeedRequest extends OkHttpSpiceRequest<List<Entry>> {
 			InputSource insour = new InputSource(in);
 			xr.parse(insour);
 
-			Log.i("ASYNC", "PARSING FINISHED");
-			return rh.getEntryList();
+			Feed feedTmp = rh.getFeeds();
+
+			return feedTmp.getEntries();
 
 		} catch (IOException e) {
 			Log.e("RSS Handler IO", e.getMessage() + " >> " + e.toString());

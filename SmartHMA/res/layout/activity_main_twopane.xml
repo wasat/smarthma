@@ -30,6 +30,12 @@
         android:layout_height="match_parent"
         android:layout_weight="2" >
 
+        <ImageView
+            style="@style/image_bg"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:contentDescription="@string/desc" />
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -46,15 +52,11 @@
                 android:layout_gravity="bottom" >
             </FrameLayout>
 
-            <fragment
+            <FrameLayout
                 android:id="@+id/left_panel_map"
-                android:name="pl.wasat.smarthma.ui.fragments.MapFragment"
                 android:layout_width="match_parent"
                 android:layout_height="fill_parent"
-                android:layout_above="@+id/gallery_bottom_panel">
-            </fragment>
-            
-            
+                android:layout_above="@+id/gallery_bottom_panel" />
         </RelativeLayout>
 
         <ProgressBar

@@ -23,7 +23,7 @@
             android:textColor="#38b4ea"
             android:textSize="20sp"
             android:textStyle="bold"
-            tools:context="pl.wasat.smarthma.ui.fragments.SearchDetailFragment" />
+            tools:context="pl.wasat.smarthma.ui.frags.search.SearchDetailFragment" />
 
         <TextView
             android:id="@+id/search_fragment_detail_dates"
@@ -37,7 +37,7 @@
             android:textColor="#A8A8A8"
             android:textSize="12sp"
             android:textStyle="italic"
-            tools:context="pl.wasat.smarthma.ui.fragments.SearchDetailFragment" />
+            tools:context="pl.wasat.smarthma.ui.frags.search.SearchDetailFragment" />
 
         <WebView
             android:id="@+id/search_fragment_detail_content"
@@ -46,7 +46,51 @@
             android:layout_height="wrap_content"
             android:padding="16dp"
             android:textSize="16sp"
-            tools:context="pl.wasat.smarthma.ui.fragments.SearchDetailFragment" />
+            tools:context="pl.wasat.smarthma.ui.frags.search.SearchDetailFragment" />
+
+        <LinearLayout
+            android:id="@+id/dataseries_detail_buttons"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#FFFFFF"
+            android:gravity="center"
+            android:orientation="horizontal" >
+
+            <Button
+                android:id="@+id/search_detail_button_search_product"
+                style="@style/button_details"
+                android:layout_width="140dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:enabled="false"
+                android:text="@string/search_product" />
+
+            <Button
+                android:id="@+id/search_detail_button_show_meta"
+                style="@style/button_details"
+                android:layout_width="140dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:text="@string/show_metadata" />
+
+            <Button
+                android:id="@+id/search_detail_button_show_map"
+                style="@style/button_details"
+                android:layout_width="140dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:text="@string/show_map" />
+
+            <Button
+                android:id="@+id/search_detail_button_download"
+                style="@style/button_details"
+                android:layout_width="140dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:enabled="false"
+                android:text="@string/download" />
+
+        </LinearLayout>
     </LinearLayout>
 
 </ScrollView>

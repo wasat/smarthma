@@ -32,7 +32,7 @@
 
         <fragment
             android:id="@+id/left_panel_map"
-            android:name="pl.wasat.smarthma.ui.fragments.MapFragment"
+            android:name="pl.wasat.smarthma.ui.frags.MapFragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 

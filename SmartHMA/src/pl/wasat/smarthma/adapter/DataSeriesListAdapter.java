@@ -4,7 +4,7 @@ package pl.wasat.smarthma.adapter;
 import java.util.List;
 
 import pl.wasat.smarthma.R;
-import pl.wasat.smarthma.model.dataseries.Entry;
+import pl.wasat.smarthma.model.feed.Entry;
 import android.app.Activity;
 import android.graphics.Color;
 import android.graphics.Typeface;
@@ -44,7 +44,6 @@ public class DataSeriesListAdapter extends ArrayAdapter<Entry> {
 //			pDate = df.parse(pubDate);
 //			pubDate = "published " + DateUtils.getDateDifference(pDate) + " updated " + dataSeriesItem.getUpdated();
 //		} catch (ParseException e) {
-//			//Log.e("DATE PARSING", "Error parsing date..");
 //			pubDate = "published " + dataSeriesItem.getDate() + " updated " + dataSeriesItem.getUpdated();
 //			
 //		}

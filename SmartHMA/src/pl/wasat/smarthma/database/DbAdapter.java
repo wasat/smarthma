@@ -1,6 +1,6 @@
 package pl.wasat.smarthma.database;
 
-import pl.wasat.smarthma.model.dataseries.Entry;
+import pl.wasat.smarthma.model.Article;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -75,7 +75,7 @@ public class DbAdapter{
         return sqLiteDatabase.insert(DATABASE_TABLE, null, initialValues);
     }
     
-    public Entry getBlogListing(String guid) throws SQLException {
+    public Article getBlogListing(String guid) throws SQLException {
         Cursor mCursor =
         		sqLiteDatabase.query(true, DATABASE_TABLE, new String[] {
                 		KEY_ROWID,
@@ -91,7 +91,7 @@ public class DbAdapter{
                 		null);
         if (mCursor != null && mCursor.getCount() > 0) {
         	mCursor.moveToFirst();
-        	Entry a = new Entry();
+        	Article a = new Article();
    			a.setGuid(mCursor.getString(mCursor.getColumnIndex(KEY_GUID)));
    			a.setRead(mCursor.getInt(mCursor.getColumnIndex(KEY_READ)) > 0);
    			a.setDbId(mCursor.getLong(mCursor.getColumnIndex(KEY_ROWID)));

@@ -7,7 +7,6 @@ import java.util.Locale;
 import org.acra.ACRA;
 
 import pl.wasat.smarthma.helper.Const;
-
 import android.content.Context;
 import android.content.Intent;
 
@@ -29,7 +28,6 @@ public class TileProviderFactory {
 				double[] bbox = getBoundingBox(x, y, zoom);
 				String s = String.format(Locale.US, WMS_name, bbox[MINX],
 						bbox[MINY], bbox[MAXX], bbox[MAXY]);
-				 //Log.i("WMSDEMO", "WMS fired");
 				URL url = null;
 				try {
 					url = new URL(s);
@@ -54,7 +52,6 @@ public class TileProviderFactory {
 				double[] bbox = getBoundingBox(x, y, zoom);
 				String s = String.format(Locale.US, WMS_name, bbox[MINX],
 						bbox[MINY], bbox[MAXX], bbox[MAXY]);
-				// Log.d("WMSDEMO", s);
 				URL url = null;
 				try {
 					url = new URL(s);
