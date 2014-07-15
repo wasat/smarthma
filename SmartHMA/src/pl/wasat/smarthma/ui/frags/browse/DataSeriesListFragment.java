@@ -6,22 +6,18 @@ import pl.wasat.smarthma.R;
 import pl.wasat.smarthma.adapter.DataSeriesListAdapter;
 import pl.wasat.smarthma.database.EoDbAdapter;
 import pl.wasat.smarthma.model.feed.Entry;
-import pl.wasat.smarthma.services.DataSeriesFeedsHttpSpiceService;
+import pl.wasat.smarthma.model.feed.Feed;
+import pl.wasat.smarthma.ui.frags.BaseSpiceListFragment;
 import pl.wasat.smarthma.ui.frags.FailureFragment;
 import pl.wasat.smarthma.utils.rss.DataSeriesFeedRequest;
 import android.app.Activity;
 import android.os.Bundle;
-import android.support.v4.app.ListFragment;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.Toast;
-
-import com.octo.android.robospice.SpiceManager;
-import com.octo.android.robospice.persistence.exception.SpiceException;
-import com.octo.android.robospice.request.listener.RequestListener;
 
 /**
  * A simple {@link android.support.v4.app.Fragment} subclass. Activities that
@@ -32,8 +28,8 @@ import com.octo.android.robospice.request.listener.RequestListener;
  * instance of this fragment.
  * 
  */
-public class DataSeriesListFragment extends ListFragment implements
-		RequestListener<List<Entry>> {
+public class DataSeriesListFragment extends BaseSpiceListFragment  
+{
 	// TODO: Rename parameter arguments, choose names that match
 	// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 	private static final String ARG_PARAM1 = "param1";
@@ -43,8 +39,6 @@ public class DataSeriesListFragment extends ListFragment implements
 
 	private static final String STATE_ACTIVATED_POSITION = "activated_position";
 	private int mActivatedPosition = ListView.INVALID_POSITION;
-	private SpiceManager dataSeriesFeedSpiceManager = new SpiceManager(
-			DataSeriesFeedsHttpSpiceService.class);
 
 	private OnDataSeriesListFragmentListener mListener;
 
@@ -58,7 +52,6 @@ public class DataSeriesListFragment extends ListFragment implements
 	 *            Parameter 2.
 	 * @return A new instance of fragment DataSeriesListFragment.
 	 */
-	// TODO: Rename and change types and number of parameters
 	public static DataSeriesListFragment newInstance(String param1) {
 		DataSeriesListFragment fragment = new DataSeriesListFragment();
 		Bundle args = new Bundle();
@@ -116,27 +109,20 @@ public class DataSeriesListFragment extends ListFragment implements
 	@Override
 	public void onStart() {
 		super.onStart();
-		dataSeriesFeedSpiceManager.start(getActivity());
 		// TODO: Find solution - why fragment is called twice
 		if (mParam1 != null) {
 			loadDataSeriesFeedResponse(mParam1);
 		}
-	}
-
-	@Override
-	public void onStop() {
-		if (dataSeriesFeedSpiceManager.isStarted()) {
-			dataSeriesFeedSpiceManager.shouldStop();
-		}
-		super.onStop();
-	}
-
+	}	
+	
 	@Override
 	public void onListItemClick(ListView listView, View view, int position,
 			long id) {
 		super.onListItemClick(listView, view, position, id);
 		mListener.onDataSeriesFragmentItemSelected(String.valueOf(position));
 	}
+
+
 
 	@Override
 	public void onSaveInstanceState(Bundle outState) {
@@ -221,25 +207,11 @@ public class DataSeriesListFragment extends ListFragment implements
 	private void loadDataSeriesFeedResponse(String feedSearch) {
 		if (feedSearch != null) {
 			getActivity().setProgressBarIndeterminateVisibility(true);
-			dataSeriesFeedSpiceManager.execute(new DataSeriesFeedRequest(
+			getSpiceManager().execute(new DataSeriesFeedRequest(
 					feedSearch), this);
 		}
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * com.octo.android.robospice.request.listener.RequestListener#onRequestFailure
-	 * (com.octo.android.robospice.persistence.exception.SpiceException)
-	 */
-	@Override
-	public void onRequestFailure(SpiceException arg0) {
-		getActivity().setProgressBarIndeterminateVisibility(false);
-		Toast.makeText(getActivity(), "Impossible to get the list of users",
-				Toast.LENGTH_SHORT).show();
-
-	}
 
 	/*
 	 * (non-Javadoc)
@@ -249,10 +221,10 @@ public class DataSeriesListFragment extends ListFragment implements
 	 * (java.lang.Object)
 	 */
 	@Override
-	public void onRequestSuccess(List<Entry> dataSeriesFeeds) {
+	public void onRequestSuccess(Feed dataSeriesFeeds) {
 		getActivity().setProgressBarIndeterminateVisibility(false);
 		Toast.makeText(getActivity(), "OK!!! ", Toast.LENGTH_SHORT).show();
-		updateEOListViewContent(dataSeriesFeeds);
+		updateEOListViewContent(dataSeriesFeeds.getEntries());
 
 	}
 
@@ -270,5 +242,6 @@ public class DataSeriesListFragment extends ListFragment implements
 		// TODO: Update argument type and name
 		public void onDataSeriesFragmentItemSelected(String id);
 	}
+
 	
 }

@@ -67,5 +67,12 @@
     <string name="time_set">Set time</string>
     <string name="cancel">Cancel</string>
     <string name="time">Time : </string>
+    <string name="catalogue">Catalogue</string>
+    <string name="eo_catalogue_list_title">EO Catalogues</string>
+    <string name="fedeo">FEDEO</string>
+    <string name="zero">0</string>
+    <string name="alert_dialog_cancel">Cancel</string>
+    <string name="alert_dialog_ok">OK</string>
+    <string name="alert_dialog_two_buttons_title">alert dialog two buttons title</string>
 
 </resources>

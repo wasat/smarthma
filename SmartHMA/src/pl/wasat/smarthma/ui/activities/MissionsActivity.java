@@ -2,8 +2,6 @@ package pl.wasat.smarthma.ui.activities;
 
 import pl.wasat.smarthma.R;
 import pl.wasat.smarthma.helper.Const;
-import pl.wasat.smarthma.ui.frags.GalleryFragment;
-import pl.wasat.smarthma.ui.frags.MapSearchFragment;
 import pl.wasat.smarthma.ui.frags.missions.MissionsDetailFragment;
 import pl.wasat.smarthma.ui.frags.missions.MissionsDetailFragment.OnMissionsDetailFragmentListener;
 import roboguice.util.temp.Ln;
@@ -15,7 +13,6 @@ import android.content.IntentFilter;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.util.Log;
 import android.view.Menu;
@@ -27,7 +24,7 @@ import android.view.Window;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
-public class MissionsActivity extends FragmentActivity implements
+public class MissionsActivity extends BaseSmartHMActivity implements
 		OnMissionsDetailFragmentListener {
 
 	private ProgressDialog initSpinner;
@@ -179,22 +176,22 @@ public class MissionsActivity extends FragmentActivity implements
 				.addToBackStack("MissionsDetailFragment").commit();
 	}
 
-	private void loadGalleryPanel() {
-		GalleryFragment galleryFragment = new GalleryFragment();
-		Bundle args = new Bundle();
-		galleryFragment.setArguments(args);
-		getSupportFragmentManager().beginTransaction()
-				.replace(R.id.gallery_bottom_panel, galleryFragment).commit();
-	}
-
-	private void loadSearchParameters(String title, String pubDate) {
-		MapSearchFragment mapSearchFragment = MapSearchFragment.newInstance("",
-				"");
-
-		getSupportFragmentManager().beginTransaction()
-				.replace(R.id.left_panel_map, mapSearchFragment)
-				.addToBackStack("MapSearchFragment").commit();
-	}
+//	private void loadGalleryPanel() {
+//		GalleryFragment galleryFragment = new GalleryFragment();
+//		Bundle args = new Bundle();
+//		galleryFragment.setArguments(args);
+//		getSupportFragmentManager().beginTransaction()
+//				.replace(R.id.gallery_bottom_panel, galleryFragment).commit();
+//	}
+//
+//	private void loadSearchParameters(String title, String pubDate) {
+//		MapSearchFragment mapSearchFragment = MapSearchFragment.newInstance("",
+//				"");
+//
+//		getSupportFragmentManager().beginTransaction()
+//				.replace(R.id.left_panel_map, mapSearchFragment)
+//				.addToBackStack("MapSearchFragment").commit();
+//	}
 
 	// @Override
 	// public void onCollectionSelected(Integer chosenCollectionId, String

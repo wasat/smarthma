@@ -1,4 +1,4 @@
-package pl.wasat.smarthma.utils.rss;
+package pl.wasat.smarthma.services;
 
 import java.io.IOException;
 import java.net.URL;
@@ -12,22 +12,23 @@ import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 import org.xml.sax.XMLReader;
 
-import pl.wasat.smarthma.adapter.ArticleListAdapter;
-import pl.wasat.smarthma.database.DbAdapter;
-import pl.wasat.smarthma.model.Article;
-import pl.wasat.smarthma.ui.frags.news.ArticleListFragment;
+import pl.wasat.smarthma.adapter.NewsArticleListAdapter;
+import pl.wasat.smarthma.database.NewsDbAdapter;
+import pl.wasat.smarthma.model.NewsArticle;
+import pl.wasat.smarthma.ui.frags.news.NewsListFragment;
+import pl.wasat.smarthma.utils.rss.NewsRssHandler;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.util.Log;
 
 
-public class RssServiceNoAsync  {
+public class NewsRssServiceNoAsync  {
 
 	private ProgressDialog progress;
 	private Context context;
-	private ArticleListFragment articleListFrag;
+	private NewsListFragment articleListFrag;
 
-	public RssServiceNoAsync(ArticleListFragment articleListFragment) {
+	public NewsRssServiceNoAsync(NewsListFragment articleListFragment) {
 		context = articleListFragment.getActivity();
 		articleListFrag = articleListFragment;
 		progress = new ProgressDialog(context);
@@ -39,7 +40,7 @@ public class RssServiceNoAsync  {
 	public void exec(String urls)
 	{
 		onPreExecute();
-		List<Article> art = doInBackground(urls);
+		List<NewsArticle> art = doInBackground(urls);
 		onPostExecute(art);
 	}
 
@@ -49,20 +50,20 @@ public class RssServiceNoAsync  {
 	}
 
 
-	protected  void onPostExecute(final List<Article>  articles) {
+	protected  void onPostExecute(final List<NewsArticle>  articles) {
 		Log.e("ASYNC", "POST EXECUTE");
 		articleListFrag.getActivity().runOnUiThread(new Runnable() {
 			@Override
 			public void run() {
-				for (Article a : articles){
+				for (NewsArticle a : articles){
 					Log.d("DB", "Searching DB for GUID: " + a.getGuid());
-					DbAdapter dba = new DbAdapter(articleListFrag.getActivity());
+					NewsDbAdapter dba = new NewsDbAdapter(articleListFrag.getActivity());
 		            dba.openToRead();
-		            Article fetchedArticle = dba.getBlogListing(a.getGuid());
+		            NewsArticle fetchedArticle = dba.getBlogListing(a.getGuid());
 		            dba.close();
 					if (fetchedArticle == null){
 						Log.d("DB", "Found entry for first time: " + a.getTitle());
-						dba = new DbAdapter(articleListFrag.getActivity());
+						dba = new NewsDbAdapter(articleListFrag.getActivity());
 			            dba.openToWrite();
 			            dba.insertBlogListing(a.getGuid());
 			            dba.close();
@@ -72,7 +73,7 @@ public class RssServiceNoAsync  {
 						a.setRead(fetchedArticle.isRead());
 					}
 				}
-				ArticleListAdapter adapter = new ArticleListAdapter(articleListFrag.getActivity(), articles);
+				NewsArticleListAdapter adapter = new NewsArticleListAdapter(articleListFrag.getActivity(), articles);
 				articleListFrag.setListAdapter(adapter);
 				adapter.notifyDataSetChanged();
 				
@@ -83,7 +84,7 @@ public class RssServiceNoAsync  {
 
 
 
-	protected List<Article> doInBackground(String... urls) {
+	protected List<NewsArticle> doInBackground(String... urls) {
 		String feed = urls[0];
 
 		URL url = null;
@@ -94,7 +95,7 @@ public class RssServiceNoAsync  {
 			XMLReader xr = sp.getXMLReader();
 
 			url = new URL(feed);
-			RssHandler rh = new RssHandler();
+			NewsRssHandler rh = new NewsRssHandler();
 
 			xr.setContentHandler(rh);
 			xr.parse(new InputSource(url.openStream()));

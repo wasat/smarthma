@@ -1,29 +1,32 @@
 package pl.wasat.smarthma.ui.activities;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import pl.wasat.smarthma.R;
 import pl.wasat.smarthma.adapter.DataSeriesListAdapter;
 import pl.wasat.smarthma.database.EoDbAdapter;
+import pl.wasat.smarthma.model.eo.Pos;
 import pl.wasat.smarthma.model.feed.Entry;
 import pl.wasat.smarthma.ui.frags.FailureFragment.OnFailureFragmentListener;
 import pl.wasat.smarthma.ui.frags.MapSearchFragment.OnMapSearchFragmentListener;
-import pl.wasat.smarthma.ui.frags.browse.CollectionItemRightFragment;
-import pl.wasat.smarthma.ui.frags.browse.CollectionItemRightFragment.OnCollectionItemRightFragmentListener;
 import pl.wasat.smarthma.ui.frags.browse.CollectionsListFragment;
 import pl.wasat.smarthma.ui.frags.browse.DataSeriesDetailFragment;
 import pl.wasat.smarthma.ui.frags.browse.DataSeriesDetailFragment.OnDataSeriesDetailFragmentInteractionListener;
 import pl.wasat.smarthma.ui.frags.browse.DataSeriesListFragment;
 import pl.wasat.smarthma.ui.frags.browse.DataSeriesListFragment.OnDataSeriesListFragmentListener;
+import pl.wasat.smarthma.ui.frags.search.CollectionItemRightFragment;
+import pl.wasat.smarthma.ui.frags.search.CollectionItemRightFragment.OnCollectionItemRightFragmentListener;
 import pl.wasat.smarthma.ui.frags.search.SearchListFragment.OnSearchListFragmentListener;
 import pl.wasat.smarthma.ui.frags.search.SearchProductsListFragment.OnSearchProductsListFragmentListener;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
 import android.view.Window;
 
 import com.google.android.gms.maps.model.LatLngBounds;
 
-public class DataSeriesListActivity extends FragmentActivity implements
+public class DataSeriesListActivity extends BaseSmartHMActivity implements
 		OnDataSeriesListFragmentListener,
 		OnDataSeriesDetailFragmentInteractionListener,
 		OnFailureFragmentListener,
@@ -160,6 +163,16 @@ public class DataSeriesListActivity extends FragmentActivity implements
 	 */
 	@Override
 	public void onSearchProductsListFragmentItemSelected(String id) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	/* (non-Javadoc)
+	 * @see pl.wasat.smarthma.ui.frags.search.SearchProductsListFragment.OnSearchProductsListFragmentListener#onSearchProductsListFragmentFootprintSend(java.util.ArrayList)
+	 */
+	@Override
+	public void onSearchProductsListFragmentFootprintSend(
+			ArrayList<List<Pos>> footPrints) {
 		// TODO Auto-generated method stub
 		
 	}

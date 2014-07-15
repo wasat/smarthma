@@ -7,7 +7,6 @@ import pl.wasat.smarthma.database.EoDbAdapter;
 import pl.wasat.smarthma.model.feed.Entry;
 import pl.wasat.smarthma.model.feed.Link;
 import pl.wasat.smarthma.ui.frags.MapSearchFragment;
-import pl.wasat.smarthma.ui.frags.browse.CollectionItemRightFragment;
 import android.app.Activity;
 import android.net.Uri;
 import android.os.Bundle;
@@ -199,7 +198,7 @@ public class SearchDetailFragment extends Fragment {
 		MapSearchFragment mapSearchFragment = MapSearchFragment.newInstance(
 				null, null);
 		getActivity().getSupportFragmentManager().beginTransaction()
-				.replace(R.id.search_detail_container, mapSearchFragment)
+				.replace(R.id.search_detail_container, mapSearchFragment, "MapSearchFragment")
 				.addToBackStack("MapSearchFragment").commit();
 
 		CollectionItemRightFragment collectionItemRightFragment = CollectionItemRightFragment

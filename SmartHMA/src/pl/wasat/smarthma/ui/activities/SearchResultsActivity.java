@@ -1,15 +1,21 @@
 package pl.wasat.smarthma.ui.activities;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import pl.wasat.smarthma.R;
 import pl.wasat.smarthma.adapter.ProductsListAdapter;
 import pl.wasat.smarthma.adapter.SearchListAdapter;
 import pl.wasat.smarthma.database.EoDbAdapter;
+import pl.wasat.smarthma.helper.Const;
+import pl.wasat.smarthma.model.eo.Pos;
 import pl.wasat.smarthma.model.feed.Entry;
 import pl.wasat.smarthma.ui.frags.FailureFragment.OnFailureFragmentListener;
+import pl.wasat.smarthma.ui.frags.MapSearchFragment;
 import pl.wasat.smarthma.ui.frags.MapSearchFragment.OnMapSearchFragmentListener;
 import pl.wasat.smarthma.ui.frags.MetadataFragment.OnMetadataFragmentListener;
-import pl.wasat.smarthma.ui.frags.browse.CollectionItemRightFragment;
-import pl.wasat.smarthma.ui.frags.browse.CollectionItemRightFragment.OnCollectionItemRightFragmentListener;
+import pl.wasat.smarthma.ui.frags.search.CollectionItemRightFragment;
+import pl.wasat.smarthma.ui.frags.search.CollectionItemRightFragment.OnCollectionItemRightFragmentListener;
 import pl.wasat.smarthma.ui.frags.search.ProductDetailSearchFragment;
 import pl.wasat.smarthma.ui.frags.search.ProductDetailSearchFragment.OnProductDetailSearchFragmentListener;
 import pl.wasat.smarthma.ui.frags.search.SearchDataSeriesIntroFragment.OnSearchDataSeriesIntroFragmentListener;
@@ -22,19 +28,20 @@ import pl.wasat.smarthma.ui.frags.search.SearchProductsListFragment.OnSearchProd
 import android.app.ActionBar;
 import android.app.SearchManager;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
 import android.view.Window;
 
 import com.google.android.gms.maps.model.LatLngBounds;
 
-public class SearchResultsActivity extends FragmentActivity implements
+public class SearchResultsActivity extends BaseSmartHMActivity implements
 		OnSearchListFragmentListener, OnSearchDetailFragmentListener,
 		OnSearchProductsListFragmentListener, OnFailureFragmentListener,
 		OnProductDetailSearchFragmentListener,
 		OnCollectionItemRightFragmentListener, OnMapSearchFragmentListener,
-		OnSearchDataSeriesIntroFragmentListener, OnMetadataFragmentListener {
+		OnSearchDataSeriesIntroFragmentListener, OnMetadataFragmentListener
+		 {
 
 	private EoDbAdapter dba;
 	private boolean mTwoPane;
@@ -71,14 +78,43 @@ public class SearchResultsActivity extends FragmentActivity implements
 			 * from SQLite and showing in listview 2. Making webrequest and
 			 * displaying the data For now we just display the query only
 			 */
+			String queryUrl = buildSearchUrl(query);
+
 			SearchListFragment searchListFragment = SearchListFragment
-					.newInstance(query);
+					.newInstance(queryUrl);
 			getSupportFragmentManager().beginTransaction()
 					.add(R.id.search_list_container, searchListFragment)
 					.commit();
 
 		}
 
+	}
+
+	/**
+	 * @param query
+	 * @return
+	 */
+	private String buildSearchUrl(String query) {
+
+		SharedPreferences prefs = getSharedPreferences(Const.KEY_PREF_FILE, 0);
+
+		String queryUrl = Const.HTTP_REQUEST_BASE_URL
+				+ Const.URL_PARM_HTTP_ACCEPT + Const.URL_PARM_TYPE
+				+ Const.URL_PARM_PARENT_ID
+				+ prefs.getString(Const.KEY_PREF_PARENT_ID, "EOP:ESA:FEDEO")
+				+ Const.URL_PARM_START_RECORD + "1" + Const.URL_PARM_MAX_REC
+				+ "15" + Const.URL_PARM_START_DATE
+				+ prefs.getString(Const.KEY_PREF_DATETIME_START, "0")
+				+ Const.URL_PARM_END_DATE
+				+ prefs.getString(Const.KEY_PREF_DATETIME_END, "0")
+				+ Const.URL_PARM_BBOX
+				+ prefs.getFloat(Const.KEY_PREF_BBOX_WEST, -180) + ","
+				+ prefs.getFloat(Const.KEY_PREF_BBOX_SOUTH, -90) + ","
+				+ prefs.getFloat(Const.KEY_PREF_BBOX_EAST, 180) + ","
+				+ prefs.getFloat(Const.KEY_PREF_BBOX_NORTH, 90)
+				+ Const.URL_PARM_QUERY + query;
+
+		return queryUrl;
 	}
 
 	/*
@@ -226,4 +262,27 @@ public class SearchResultsActivity extends FragmentActivity implements
 		// TODO Auto-generated method stub
 
 	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see pl.wasat.smarthma.ui.frags.search.SearchProductsListFragment.
+	 * OnSearchProductsListFragmentListener
+	 * #onSearchProductsListFragmentFootprintSend(java.util.ArrayList)
+	 */
+	@Override
+	public void onSearchProductsListFragmentFootprintSend(
+			ArrayList<List<Pos>> footPrints) {
+		MapSearchFragment mapSearchFragment = (MapSearchFragment) getSupportFragmentManager()
+				.findFragmentByTag("MapSearchFragment");
+
+		if (mapSearchFragment != null) {
+			// If article frag is available, we're in two-pane layout...
+			// Call a method in the ArticleFragment to update its content
+			mapSearchFragment.showFootPrints(footPrints);
+		}
+
+	}
+
+
 }

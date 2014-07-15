@@ -1,11 +1,6 @@
 package pl.wasat.smarthma.utils.rss;
 
-import java.io.IOException;
 import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.URI;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
@@ -15,14 +10,15 @@ import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 import org.xml.sax.XMLReader;
 
-import pl.wasat.smarthma.model.feed.Entry;
 import pl.wasat.smarthma.model.feed.Feed;
-import android.net.Uri;
 import android.util.Log;
 
-import com.octo.android.robospice.request.okhttp.OkHttpSpiceRequest;
+import com.google.api.client.http.GenericUrl;
+import com.google.api.client.http.HttpRequest;
+import com.google.api.client.http.HttpResponse;
+import com.octo.android.robospice.request.googlehttpclient.GoogleHttpClientSpiceRequest;
 
-public class DataSeriesFeedRequest extends OkHttpSpiceRequest<List<Entry>> {
+public class DataSeriesFeedRequest extends GoogleHttpClientSpiceRequest<Feed> {
 
 	private String urlSearchParam;
 
@@ -42,21 +38,20 @@ public class DataSeriesFeedRequest extends OkHttpSpiceRequest<List<Entry>> {
 			+ "&parentIdentifier=";
 
 	@Override
-	public List<Entry> loadDataFromNetwork() throws Exception {
+	public Feed loadDataFromNetwork() throws Exception {
 
-		RssEoHandler rh = null;
+		SmartHmaEoHandler rh = null;
 		try {
-			// With Uri.Builder class we can build our url is a safe manner
-			Uri.Builder uriBuilder = Uri.parse(
-					FEDEO_DATASERIES_SEARCH_URL + urlSearchParam).buildUpon();
-			URI uri = new URI(uriBuilder.build().toString());
+			HttpRequest request = getHttpRequestFactory()
+					.buildGetRequest(
+							new GenericUrl(FEDEO_DATASERIES_SEARCH_URL
+									+ urlSearchParam));
+			// request.setThrowExceptionOnExecuteError(false);
+			HttpResponse response = request.execute();
 
-			HttpURLConnection connection = getOkHttpClient().open(uri.toURL());
 			InputStream in = null;
-
 			try {
-				// Read the response.
-				in = connection.getInputStream();
+				in = response.getContent();
 			} finally {
 				if (in != null) {
 				}
@@ -66,26 +61,20 @@ public class DataSeriesFeedRequest extends OkHttpSpiceRequest<List<Entry>> {
 			SAXParser sp = spf.newSAXParser();
 			XMLReader xr = sp.getXMLReader();
 
-			rh = new RssEoHandler();
+			rh = new SmartHmaEoHandler();
 
 			xr.setContentHandler(rh);
 			InputSource insour = new InputSource(in);
 			xr.parse(insour);
+		}
 
-			Feed feedTmp = rh.getFeeds();
-
-			return feedTmp.getEntries();
-
-		} catch (IOException e) {
-			Log.e("RSS Handler IO", e.getMessage() + " >> " + e.toString());
-			return new ArrayList<Entry>();
-		} catch (SAXException e) {
+		catch (SAXException e) {
 			Log.e("RSS Handler SAX", e.toString());
 			e.printStackTrace();
 		} catch (ParserConfigurationException e) {
 			Log.e("RSS Handler Parser Config", e.toString());
 		}
-		return null;
+		return rh.getFeeds();
 
 	}
 }

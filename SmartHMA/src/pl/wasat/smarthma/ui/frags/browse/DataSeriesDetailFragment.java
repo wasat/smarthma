@@ -4,6 +4,7 @@ import pl.wasat.smarthma.R;
 import pl.wasat.smarthma.database.EoDbAdapter;
 import pl.wasat.smarthma.model.feed.Entry;
 import pl.wasat.smarthma.ui.frags.MapSearchFragment;
+import pl.wasat.smarthma.ui.frags.search.CollectionItemRightFragment;
 import android.app.Activity;
 import android.net.Uri;
 import android.os.Bundle;

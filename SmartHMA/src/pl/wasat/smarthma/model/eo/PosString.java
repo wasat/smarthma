@@ -2,7 +2,6 @@
 package pl.wasat.smarthma.model.eo;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang.builder.EqualsBuilder;
@@ -13,11 +12,10 @@ import org.apache.commons.lang.builder.ToStringStyle;
 import pl.wasat.smarthma.utils.text.SmartHMAStringStyle;
 
 
-public class LinearRing {
+public class PosString {
 
     private String __prefix;
-    private PosString posString;
-    private List<Pos> posList;
+    private String pointsString;
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
     public String get__prefix() {
@@ -28,37 +26,24 @@ public class LinearRing {
         this.__prefix = __prefix;
     }
 
-    public LinearRing with__prefix(String __prefix) {
+    public PosString with__prefix(String __prefix) {
         this.__prefix = __prefix;
         return this;
     }
 
-    public PosString getPosString() {
-        return posString;
+    public String getPointsString() {
+        return pointsString;
     }
 
-    public void setPosString(PosString posString) {
-        this.posString = posString;
+    public void setPointsString(String text) {
+        this.pointsString = text;
     }
 
-    public LinearRing withPosString(PosString posString) {
-        this.posString = posString;
+    public PosString withPointsString(String text) {
+        this.pointsString = text;
         return this;
     }
 
-    public List<Pos> getPosList() {
-        return posList;
-    }
-
-    public void setPosList(List<Pos> posList) {
-        this.posList = posList;
-    }
-
-    public LinearRing withPosList(List<Pos> posList) {
-        this.posList = posList;
-        return this;
-    }
-    
     @Override
     public String toString() {
             	 ToStringStyle style = new SmartHMAStringStyle(); ToStringBuilder.setDefaultStyle(style); return ToStringBuilder.reflectionToString(this);

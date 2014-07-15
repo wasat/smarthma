@@ -5,12 +5,17 @@ import java.util.Calendar;
 import java.util.Locale;
 
 import pl.wasat.smarthma.R;
-import pl.wasat.smarthma.customviews.MyTimePickerDialog;
+import pl.wasat.smarthma.customviews.SmHmaTimePickerDialog;
 import pl.wasat.smarthma.customviews.TimePicker;
+import pl.wasat.smarthma.helper.Const;
+import pl.wasat.smarthma.ui.frags.MapSearchFragment;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationManager;
@@ -18,13 +23,17 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.google.android.gms.maps.model.LatLngBounds;
 
 /**
  * A simple {@link android.support.v4.app.Fragment} subclass. Activities that
@@ -45,14 +54,23 @@ public class SearchBasicInfoRightFragment extends Fragment {
 	private TextView tvAreaSWLon;
 	private TextView tvAreaNELat;
 	private TextView tvAreaNELon;
-	private Calendar calStart;
-	private Calendar calEnd;
+
+	private static TextView tvCatalogName;
+
+	private static Calendar calStart;
+	private static Calendar calEnd;
 	private static Button btnFromDate;
 	private static Button btnFromTime;
 	private static Button btnToDate;
 	private static Button btnToTime;
 
 	private OnSearchBasicInfoRightFragmentListener mListener;
+
+	private static CharSequence[] cataloguesList = { "FEDEO",
+			"FEDEO:COLLECTIONS", "GPOD-EO", "EO-VIRTUAL-ARCHIVE4",
+			"REFERENCEDATA" };
+
+	final CharSequence[] items = { "Rajesh", "Mahesh", "Vijayakumar" };
 
 	/**
 	 * Use this factory method to create a new instance of this fragment using
@@ -91,6 +109,16 @@ public class SearchBasicInfoRightFragment extends Fragment {
 		final View rootView = inflater.inflate(
 				R.layout.fragment_search_right_basic, container, false);
 
+		tvCatalogName = (TextView) rootView
+				.findViewById(R.id.search_frag_right_basic_tv_catalog_name);
+
+		tvCatalogName.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				showCatalogueListDialog(rootView);
+			}
+		});
+		setParentIdPrefs(getActivity(), tvCatalogName.getText().toString());
 		((TextView) rootView.findViewById(R.id.search_frag_right_basic_tv_name))
 				.setText(paramCollName);
 		tvAreaSWLat = (TextView) rootView
@@ -101,7 +129,23 @@ public class SearchBasicInfoRightFragment extends Fragment {
 				.findViewById(R.id.search_frag_right_basic_tv_area_ne_lat);
 		tvAreaNELon = (TextView) rootView
 				.findViewById(R.id.search_frag_right_basic_tv_area_ne_lon);
-		updateSearchAreaBounds();
+
+		LinearLayout areaLayout = (LinearLayout) rootView
+				.findViewById(R.id.search_frag_right_basic_layout_area);
+		areaLayout.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				MapSearchFragment mapSearchFragment = MapSearchFragment
+						.newInstance(null, null);
+				getActivity()
+						.getSupportFragmentManager()
+						.beginTransaction()
+						.replace(R.id.search_activ_left_container,
+								mapSearchFragment)
+						.addToBackStack("MapSearchFragment").commit();
+
+			}
+		});
 
 		btnFromDate = (Button) rootView
 				.findViewById(R.id.search_frag_right_basic_buton_time_from_date);
@@ -148,7 +192,9 @@ public class SearchBasicInfoRightFragment extends Fragment {
 			}
 		});
 
+		updateSearchAreaBounds();
 		setInitDateTime();
+
 		return rootView;
 	}
 
@@ -211,51 +257,44 @@ public class SearchBasicInfoRightFragment extends Fragment {
 				.getLastKnownLocation(locationManager.getBestProvider(criteria,
 						true));
 		if (location != null) {
-			tvAreaSWLat.setText(String.valueOf(location.getLatitude() - 0.1));
-			tvAreaSWLon.setText(String.valueOf(location.getLongitude() - 0.15));
-			tvAreaNELat.setText(String.valueOf(location.getLatitude() + 0.1));
-			tvAreaNELon.setText(String.valueOf(location.getLongitude() + 0.15));
+
+			// Formatter fr = new Formatter();
+			// String tvStr = fr.format("%10f", location.getLatitude() -
+			// 0.1).toString();
+			tvAreaSWLat.setText(String.format(Locale.UK, "% 4f",
+					(float) (location.getLatitude() - 0.1)));
+			tvAreaSWLon.setText(String.format(Locale.UK, "% 4f",
+					(float) location.getLongitude() - 0.15));
+			tvAreaNELat.setText(String.format(Locale.UK, "% 4f",
+					(float) location.getLatitude() + 0.1));
+			tvAreaNELon.setText(String.format(Locale.UK, "% 4f",
+					(float) location.getLongitude() + 0.15));
 		}
+
+		setBboxPrefs();
 	}
 
 	/**
 	 * 
 	 */
 	private void setInitDateTime() {
-		int year = 0;
-		int month = 0;
-		int day = 0;
-		int hourOfDay = 0;
-		int minute = 0;
-		int second = 0;
 
 		calStart = Calendar.getInstance();
 		calStart.roll(Calendar.HOUR_OF_DAY, -6);
-		year = calStart.get(Calendar.YEAR);
-		month = calStart.get(Calendar.MONTH);
-		day = calStart.get(Calendar.DAY_OF_MONTH);
-		hourOfDay = calStart.get(Calendar.HOUR_OF_DAY);
-		minute = calStart.get(Calendar.MINUTE);
-		second = calStart.get(Calendar.SECOND);
-		btnFromDate.setText(formatDate(year, month, day));
-		btnFromTime.setText(formatTime(hourOfDay, minute, second));
+		btnFromDate.setText(formatDate(calStart));
+		btnFromTime.setText(formatTime(calStart));
 
 		calEnd = Calendar.getInstance();
-		year = calEnd.get(Calendar.YEAR);
-		month = calEnd.get(Calendar.MONTH);
-		day = calEnd.get(Calendar.DAY_OF_MONTH);
-		hourOfDay = calEnd.get(Calendar.HOUR_OF_DAY);
-		minute = calEnd.get(Calendar.MINUTE);
-		second = calEnd.get(Calendar.SECOND);
-		btnToDate.setText(formatDate(year, month, day));
-		btnToTime.setText(formatTime(hourOfDay, minute, second));
+		btnToDate.setText(formatDate(calEnd));
+		btnToTime.setText(formatTime(calEnd));
+
+		setDateTimePrefs(getActivity());
 	}
 
-	private String setDtISO(Calendar cal) {
-		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'",
-				Locale.UK);
-		String nowAsISO = df.format(cal.getTime());
-		return nowAsISO;
+	public void showCatalogueListDialog(View v) {
+		CatalogueListDialogFragment listDialFrag = new CatalogueListDialogFragment();
+		listDialFrag.show(getActivity().getSupportFragmentManager(),
+				"CatalogueListDialogFragment");
 	}
 
 	public void showDatePickerDialog(View v) {
@@ -298,16 +337,23 @@ public class SearchBasicInfoRightFragment extends Fragment {
 
 		public void onDateSet(DatePicker view, int year, int month, int day) {
 
-			String dateToSet = formatDate(year, month, day);
+			if (buttonTag.equalsIgnoreCase("btnFromDate")) {
+				calStart.set(year, month, day);
+				String dateToSet = formatDate(calStart);
+				btnFromDate.setText(dateToSet);
 
-			// String dateToSet = year + "-" + month + "-" + day;
-			setButtonDtText(dateToSet, buttonTag);
+			} else if (buttonTag.equalsIgnoreCase("btnToDate")) {
+				calEnd.set(year, month, day);
+				String dateToSet = formatDate(calEnd);
+				btnToDate.setText(dateToSet);
+			}
+			setDateTimePrefs(getActivity());
 
 		}
 	}
 
 	public static class MyTimePickerFragment extends DialogFragment implements
-			MyTimePickerDialog.OnTimeSetListener {
+			SmHmaTimePickerDialog.OnTimeSetListener {
 
 		private String buttonTag;
 
@@ -324,7 +370,7 @@ public class SearchBasicInfoRightFragment extends Fragment {
 			int second = c.get(Calendar.SECOND);
 
 			// Create a new instance of TimePickerDialog and return it
-			return new MyTimePickerDialog(getActivity(), this, hour, minute,
+			return new SmHmaTimePickerDialog(getActivity(), this, hour, minute,
 					second, true);
 
 		}
@@ -340,57 +386,118 @@ public class SearchBasicInfoRightFragment extends Fragment {
 		@Override
 		public void onTimeSet(TimePicker view, int hourOfDay, int minute,
 				int seconds) {
-			String timeToSet = formatTime(hourOfDay, minute, seconds);
 
-			// String timeToSet = hourOfDay + ":" + minute + ":" + seconds;
-			setButtonDtText(timeToSet, buttonTag);
+			if (buttonTag.equalsIgnoreCase("btnFromTime")) {
+				calStart.set(calStart.get(Calendar.YEAR),
+						calStart.get(Calendar.MONTH),
+						calStart.get(Calendar.DAY_OF_MONTH), hourOfDay, minute,
+						seconds);
+				String timeToSet = formatTime(calStart);
+				btnFromTime.setText(timeToSet);
+
+			} else if (buttonTag.equalsIgnoreCase("btnToTime")) {
+				calEnd.set(calEnd.get(Calendar.YEAR),
+						calEnd.get(Calendar.MONTH),
+						calEnd.get(Calendar.DAY_OF_MONTH), hourOfDay, minute,
+						seconds);
+				String timeToSet = formatTime(calEnd);
+				btnToTime.setText(timeToSet);
+			}
+			setDateTimePrefs(getActivity());
+		}
+	}
+
+	public static class CatalogueListDialogFragment extends DialogFragment {
+		@Override
+		public Dialog onCreateDialog(Bundle savedInstanceState) {
+			AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+			builder.setTitle(R.string.eo_catalogue_list_title).setItems(
+					cataloguesList, new DialogInterface.OnClickListener() {
+						public void onClick(DialogInterface dialog, int which) {
+							tvCatalogName.setText(cataloguesList[which]);
+							setParentIdPrefs(getActivity(),
+									cataloguesList[which].toString());
+						}
+					});
+			return builder.create();
 		}
 	}
 
 	/**
-	 * @param dateToSet2
-	 * @param buttonTag
-	 */
-	private static void setButtonDtText(String dtToSet, String buttonTag) {
-		if (buttonTag.equalsIgnoreCase("btnFromDate")) {
-			btnFromDate.setText(dtToSet);
-		} else if (buttonTag.equalsIgnoreCase("btnFromTime")) {
-			btnFromTime.setText(dtToSet);
-		} else if (buttonTag.equalsIgnoreCase("btnToDate")) {
-			btnToDate.setText(dtToSet);
-		} else if (buttonTag.equalsIgnoreCase("btnToTime")) {
-			btnToTime.setText(dtToSet);
-		}
-	}
-
-	/**
-	 * @param year
-	 * @param month
-	 * @param day
+	 * @param cal
 	 * @return
 	 */
-	private static String formatDate(int year, int month, int day) {
-		Calendar cal = Calendar.getInstance();
-		cal.set(year, month, day);
+	private static String formatDate(Calendar cal) {
 		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd", Locale.UK);
 		String dateToSet = df.format(cal.getTime());
 		return dateToSet;
 	}
 
 	/**
-	 * @param hourOfDay
-	 * @param minute
-	 * @param seconds
+	 * @param cal
 	 * @return
 	 */
-	private static String formatTime(int hourOfDay, int minute, int seconds) {
-		Calendar cal = Calendar.getInstance();
-		//String dateTextBtn = but
-		cal.set(Calendar.YEAR, Calendar.MONTH, Calendar.DAY_OF_MONTH,
-				hourOfDay, minute, seconds);
+	private static String formatTime(Calendar cal) {
 		SimpleDateFormat dfTime = new SimpleDateFormat("HH:mm:ss", Locale.UK);
 		String timeToSet = dfTime.format(cal.getTime());
 		return timeToSet;
 	}
 
+	private static String setDtISO(Calendar cal) {
+		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'",
+				Locale.UK);
+		String nowAsISO = df.format(cal.getTime());
+		return nowAsISO;
+	}
+
+	/**
+	 * 
+	 */
+	private static void setDateTimePrefs(Context context) {
+		SharedPreferences settings = context.getSharedPreferences(
+				Const.KEY_PREF_FILE, 0);
+		SharedPreferences.Editor editor = settings.edit();
+		editor.putString(Const.KEY_PREF_DATETIME_START, setDtISO(calStart));
+		editor.putString(Const.KEY_PREF_DATETIME_END, setDtISO(calEnd));
+		editor.commit();
+
+		Log.i("DT", setDtISO(calStart) + " - " + setDtISO(calEnd));
+	}
+
+	private static void setParentIdPrefs(Context context, String parentId) {
+		SharedPreferences settings = context.getSharedPreferences(
+				Const.KEY_PREF_FILE, 0);
+		SharedPreferences.Editor editor = settings.edit();
+		editor.putString(Const.KEY_PREF_PARENT_ID, "EOP:ESA:" + parentId);
+		editor.commit();
+	}
+
+	private void setBboxPrefs() {
+
+		SharedPreferences settings = getActivity().getSharedPreferences(
+				Const.KEY_PREF_FILE, 0);
+		SharedPreferences.Editor editor = settings.edit();
+		editor.putFloat(Const.KEY_PREF_BBOX_WEST,
+				Float.valueOf(tvAreaSWLon.getText().toString()));
+		editor.putFloat(Const.KEY_PREF_BBOX_SOUTH,
+				Float.valueOf(tvAreaSWLat.getText().toString()));
+		editor.putFloat(Const.KEY_PREF_BBOX_EAST,
+				Float.valueOf(tvAreaNELon.getText().toString()));
+		editor.putFloat(Const.KEY_PREF_BBOX_NORTH,
+				Float.valueOf(tvAreaNELat.getText().toString()));
+		editor.commit();
+	}
+
+	/**
+	 * @param bounds
+	 */
+	public void updateCollectionsAreaBounds(LatLngBounds bounds) {
+		tvAreaSWLat.setText(String.format(Locale.UK, "% 4f", bounds.southwest.latitude));
+		tvAreaSWLon.setText(String.format(Locale.UK, "% 4f", bounds.southwest.longitude));
+		tvAreaNELat.setText(String.format(Locale.UK, "% 4f", bounds.northeast.latitude));
+		tvAreaNELon.setText(String.format(Locale.UK, "% 4f", bounds.northeast.longitude));
+
+		setBboxPrefs();
+
+	}
 }

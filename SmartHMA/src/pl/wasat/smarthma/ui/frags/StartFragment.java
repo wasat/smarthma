@@ -1,7 +1,7 @@
 package pl.wasat.smarthma.ui.frags;
 
 import pl.wasat.smarthma.R;
-import pl.wasat.smarthma.ui.activities.ArticleListActivity;
+import pl.wasat.smarthma.ui.activities.NewsActivity;
 import pl.wasat.smarthma.ui.activities.MainSmartHMActivity;
 import pl.wasat.smarthma.ui.activities.MissionsActivity;
 import pl.wasat.smarthma.ui.activities.SearchActivity;
@@ -113,7 +113,7 @@ public class StartFragment extends Fragment {
 			@Override
 			public void onClick(View v) {
 				Intent startEsaNewsIntent = new Intent(getActivity(),
-						ArticleListActivity.class);
+						NewsActivity.class);
 				startActivity(startEsaNewsIntent);
 			}
 		});

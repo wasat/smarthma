@@ -4,7 +4,7 @@ package pl.wasat.smarthma.adapter;
 import java.util.List;
 
 import pl.wasat.smarthma.R;
-import pl.wasat.smarthma.model.Article;
+import pl.wasat.smarthma.model.NewsArticle;
 import android.app.Activity;
 import android.graphics.Color;
 import android.graphics.Typeface;
@@ -16,9 +16,9 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 
-public class ArticleListAdapter extends ArrayAdapter<Article> {
+public class NewsArticleListAdapter extends ArrayAdapter<NewsArticle> {
 
-	public ArticleListAdapter(Activity activity, List<Article> articles) {
+	public NewsArticleListAdapter(Activity activity, List<NewsArticle> articles) {
 		super(activity, 0, articles);
 	}
 
@@ -29,7 +29,7 @@ public class ArticleListAdapter extends ArrayAdapter<Article> {
 		LayoutInflater inflater = activity.getLayoutInflater();
 
 		View rowView = inflater.inflate(R.layout.fragment_article_list, null);
-		Article article = getItem(position);
+		NewsArticle article = getItem(position);
 		
 
 		TextView textView = (TextView) rowView.findViewById(R.id.article_title_text);

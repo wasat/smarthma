@@ -15,24 +15,24 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginLeft="0dp"
-        android:layout_marginRight="16dp"
+        android:layout_marginRight="0dp"
         android:baselineAligned="false"
         android:divider="?android:attr/dividerHorizontal"
         android:orientation="horizontal"
         android:showDividers="middle" >
 
-        <fragment
-            android:id="@+id/article_list"
-            android:name="pl.wasat.smarthma.ui.frags.news.ArticleListFragment"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1" />
-
         <FrameLayout
             android:id="@+id/article_detail_container"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="3" />
+            android:layout_weight="2" />
+
+        <fragment
+            android:id="@+id/article_list"
+            android:name="pl.wasat.smarthma.ui.frags.news.NewsListFragment"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1" />
     </LinearLayout>
 
 </FrameLayout>

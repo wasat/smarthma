@@ -1,9 +1,9 @@
 package pl.wasat.smarthma.ui.frags.news;
 
 import pl.wasat.smarthma.R;
-import pl.wasat.smarthma.adapter.ArticleListAdapter;
+import pl.wasat.smarthma.adapter.NewsArticleListAdapter;
 import pl.wasat.smarthma.database.EoDbAdapter;
-import pl.wasat.smarthma.model.Article;
+import pl.wasat.smarthma.model.NewsArticle;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -21,14 +21,14 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class ArticleDetailFragment extends Fragment {
+public class NewsDetailFragment extends Fragment {
 
 	public static final String ARG_ITEM_ID = "item_id";
 
-	Article displayedArticle;
+	NewsArticle displayedArticle;
 	EoDbAdapter db;
 
-	public ArticleDetailFragment() {
+	public NewsDetailFragment() {
 		setHasOptionsMenu(true); // this enables us to set actionbar from
 									// fragment
 	}
@@ -37,9 +37,9 @@ public class ArticleDetailFragment extends Fragment {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		db = new EoDbAdapter(getActivity());
-		if (getArguments().containsKey(Article.KEY)) {
-			displayedArticle = (Article) getArguments().getSerializable(
-					Article.KEY);
+		if (getArguments().containsKey(NewsArticle.KEY)) {
+			displayedArticle = (NewsArticle) getArguments().getSerializable(
+					NewsArticle.KEY);
 		}
 	}
 
@@ -107,7 +107,7 @@ public class ArticleDetailFragment extends Fragment {
 			db.markAsUnread(displayedArticle.getGuid());
 			db.close();
 			displayedArticle.setRead(false);
-			ArticleListAdapter adapter = (ArticleListAdapter) ((ArticleListFragment) getActivity()
+			NewsArticleListAdapter adapter = (NewsArticleListAdapter) ((NewsListFragment) getActivity()
 					.getSupportFragmentManager().findFragmentById(
 							R.id.article_list)).getListAdapter();
 			adapter.notifyDataSetChanged();

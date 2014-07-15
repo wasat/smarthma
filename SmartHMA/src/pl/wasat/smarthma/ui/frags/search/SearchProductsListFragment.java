@@ -3,28 +3,21 @@ package pl.wasat.smarthma.ui.frags.search;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.http.HttpStatus;
-import org.springframework.web.client.HttpClientErrorException;
-
 import pl.wasat.smarthma.R;
 import pl.wasat.smarthma.adapter.ProductsListAdapter;
 import pl.wasat.smarthma.database.EoDbAdapter;
+import pl.wasat.smarthma.model.eo.Pos;
 import pl.wasat.smarthma.model.feed.Entry;
-import pl.wasat.smarthma.services.SearchProductsHttpSpiceService;
+import pl.wasat.smarthma.model.feed.Feed;
+import pl.wasat.smarthma.ui.frags.BaseSpiceListFragment;
 import pl.wasat.smarthma.ui.frags.FailureFragment;
 import pl.wasat.smarthma.utils.rss.SearchProductsFeedRequest;
 import android.app.Activity;
 import android.os.Bundle;
-import android.support.v4.app.ListFragment;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.Toast;
-
 import com.google.android.gms.maps.model.LatLngBounds;
-import com.octo.android.robospice.SpiceManager;
-import com.octo.android.robospice.exception.RequestCancelledException;
-import com.octo.android.robospice.persistence.exception.SpiceException;
-import com.octo.android.robospice.request.listener.RequestListener;
 
 /**
  * A simple {@link android.support.v4.app.Fragment} subclass. Activities that
@@ -35,14 +28,10 @@ import com.octo.android.robospice.request.listener.RequestListener;
  * instance of this fragment.
  * 
  */
-public class SearchProductsListFragment extends ListFragment implements
-		RequestListener<List<Entry>> {
-	// TODO: Rename parameter arguments, choose names that match
-	// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+public class SearchProductsListFragment extends BaseSpiceListFragment {
 	private static final String KEY_COLL_ENTRY = "pl.wasat.samrthma.KEY_COLL_ENTRY";
 	private static final String KEY_PROD_BOUNDS = "pl.wasat.samrthma.KEY_PROD_BOUNDS";
-
-	// TODO: Rename and change types of parameters
+	
 	private LatLngBounds paramGeoBounds;
 	private Entry paramCollEntry;
 
@@ -50,8 +39,7 @@ public class SearchProductsListFragment extends ListFragment implements
 
 	private static final String STATE_ACTIVATED_POSITION = "activated_position";
 	private int mActivatedPosition = ListView.INVALID_POSITION;
-	private SpiceManager searchProductsSpiceManager = new SpiceManager(
-			SearchProductsHttpSpiceService.class);
+
 
 	/**
 	 * Use this factory method to create a new instance of this fragment using
@@ -63,7 +51,6 @@ public class SearchProductsListFragment extends ListFragment implements
 	 *            Parameter 2.
 	 * @return A new instance of fragment SearchProductsFeedsFragment.
 	 */
-	// TODO: Rename and change types and number of parameters
 	public static SearchProductsListFragment newInstance(Entry collectionEntry,
 			LatLngBounds bounds) {
 		SearchProductsListFragment fragment = new SearchProductsListFragment();
@@ -98,7 +85,6 @@ public class SearchProductsListFragment extends ListFragment implements
 		}
 	}
 
-	// TODO: Rename method, update argument and hook method into UI event
 	public void onButtonPressed(String id) {
 		if (mListener != null) {
 			mListener.onSearchProductsListFragmentItemSelected(id);
@@ -125,19 +111,10 @@ public class SearchProductsListFragment extends ListFragment implements
 	@Override
 	public void onStart() {
 		super.onStart();
-		searchProductsSpiceManager.start(getActivity());
 		// TODO: Find solution - why fragment is called twice
 		if (paramGeoBounds != null) {
 			loadSearchProductsFeedResponse(paramCollEntry, paramGeoBounds);
 		}
-	}
-
-	@Override
-	public void onStop() {
-		if (searchProductsSpiceManager.isStarted()) {
-			searchProductsSpiceManager.shouldStop();
-		}
-		super.onStop();
 	}
 
 	@Override
@@ -219,8 +196,9 @@ public class SearchProductsListFragment extends ListFragment implements
 			LatLngBounds geoBounds) {
 		if (geoBounds != null) {
 			getActivity().setProgressBarIndeterminateVisibility(true);
-			searchProductsSpiceManager.execute(new SearchProductsFeedRequest(
-					collEntry, geoBounds), this);
+
+			getSpiceManager().execute(
+					new SearchProductsFeedRequest(collEntry, geoBounds), this);
 		}
 	}
 
@@ -236,32 +214,11 @@ public class SearchProductsListFragment extends ListFragment implements
 	public interface OnSearchProductsListFragmentListener {
 		// TODO: Update argument type and name
 		public void onSearchProductsListFragmentItemSelected(String id);
+
+		public void onSearchProductsListFragmentFootprintSend(
+				ArrayList<List<Pos>> footPrints);
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * com.octo.android.robospice.request.listener.RequestListener#onRequestFailure
-	 * (com.octo.android.robospice.persistence.exception.SpiceException)
-	 */
-	@Override
-	public void onRequestFailure(SpiceException arg0) {
-		// arg0.getCause();
-		if (arg0.getCause() instanceof HttpClientErrorException) {
-			HttpClientErrorException exception = (HttpClientErrorException) arg0
-					.getCause();
-			if (exception.getStatusCode().equals(HttpStatus.SC_UNAUTHORIZED)) {
-			} else if (exception.getStatusCode().equals(
-					HttpStatus.SC_SERVICE_UNAVAILABLE)) {
-				// String response = exception.getResponseBodyAsString();
-			} else {
-			}
-		} else if (arg0 instanceof RequestCancelledException) {
-		} else {
-		}
-
-	}
 
 	/*
 	 * (non-Javadoc)
@@ -271,14 +228,33 @@ public class SearchProductsListFragment extends ListFragment implements
 	 * (java.lang.Object)
 	 */
 	@Override
-	public void onRequestSuccess(List<Entry> searchProductFeeds) {
+	public void onRequestSuccess(Feed searchProductFeeds) {
 		getActivity().setProgressBarIndeterminateVisibility(false);
 		Toast.makeText(getActivity(), R.string.ok_, Toast.LENGTH_SHORT).show();
 		if (searchProductFeeds == null) {
-			searchProductFeeds = new ArrayList<Entry>();
+			searchProductFeeds = new Feed();
 		}
-		updateSearchProductsListViewContent(searchProductFeeds);
+		updateSearchProductsListViewContent(searchProductFeeds.getEntries());
+		ArrayList<List<Pos>> footPrints = getFootprints(searchProductFeeds
+				.getEntries());
+		mListener.onSearchProductsListFragmentFootprintSend(footPrints);
 
 	}
+
+	/**
+	 * @param searchProductFeeds
+	 * @return
+	 */
+	private ArrayList<List<Pos>> getFootprints(List<Entry> searchProductFeeds) {
+		ArrayList<List<Pos>> footPrintsArr = new ArrayList<List<Pos>>();
+		for (int i = 0; i < searchProductFeeds.size(); i++) {
+			footPrintsArr.add(searchProductFeeds.get(i).getEarthObservation()
+					.getFeatureOfInterest().getFootprint().getMultiExtentOf()
+					.getMultiSurface().getSurfaceMembers().getPolygon()
+					.getExterior().getLinearRing().getPosList());
+		}
+		return footPrintsArr;
+	}
+
 
 }

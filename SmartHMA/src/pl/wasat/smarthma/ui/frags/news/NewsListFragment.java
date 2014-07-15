@@ -1,7 +1,7 @@
 package pl.wasat.smarthma.ui.frags.news;
 
 import pl.wasat.smarthma.R;
-import pl.wasat.smarthma.utils.rss.RssServiceNoAsync;
+import pl.wasat.smarthma.services.NewsRssServiceNoAsync;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
@@ -11,7 +11,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ListView;
 
-public class ArticleListFragment extends ListFragment {
+public class NewsListFragment extends ListFragment {
 
     private static final String STATE_ACTIVATED_POSITION = "activated_position";
     //private static final String BLOG_URL = "http://blog.nerdability.com/feeds/posts/default";
@@ -19,7 +19,7 @@ public class ArticleListFragment extends ListFragment {
     
     private Callbacks mCallbacks = sDummyCallbacks;
     private int mActivatedPosition = ListView.INVALID_POSITION;
-    private RssServiceNoAsync rssService;
+    private NewsRssServiceNoAsync rssService;
 
     public interface Callbacks {
         public void onItemSelected(String id);
@@ -31,7 +31,7 @@ public class ArticleListFragment extends ListFragment {
         }
     };
 
-    public ArticleListFragment() {
+    public NewsListFragment() {
     	setHasOptionsMenu(true);	//this enables us to set actionbar from fragment
     }
 
@@ -98,7 +98,7 @@ public class ArticleListFragment extends ListFragment {
     
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        inflater.inflate(R.menu.refreshmenu, menu);
+        inflater.inflate(R.menu.news_refreshmenu, menu);
     }
     
     @Override
@@ -112,7 +112,7 @@ public class ArticleListFragment extends ListFragment {
     }
     
     private void refreshList(){
-    	rssService = new RssServiceNoAsync(this);
+    	rssService = new NewsRssServiceNoAsync(this);
         rssService.exec(BLOG_URL);
     }
 }
