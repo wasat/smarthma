@@ -117,7 +117,7 @@ public class TimePicker extends FrameLayout {
 
         LayoutInflater inflater =
                 (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        inflater.inflate(R.layout.time_picker_widget,
+        inflater.inflate(R.layout.dialog_widget_time_picker,
             this, // we are the parent
             true);
 

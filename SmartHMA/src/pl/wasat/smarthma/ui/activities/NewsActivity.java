@@ -1,24 +1,22 @@
 package pl.wasat.smarthma.ui.activities;
 
 import pl.wasat.smarthma.R;
-import pl.wasat.smarthma.adapter.ArticleListAdapter;
+import pl.wasat.smarthma.adapter.NewsArticleListAdapter;
 import pl.wasat.smarthma.database.EoDbAdapter;
-import pl.wasat.smarthma.model.Article;
-import pl.wasat.smarthma.ui.frags.news.ArticleDetailFragment;
-import pl.wasat.smarthma.ui.frags.news.ArticleListFragment;
-import android.content.Intent;
+import pl.wasat.smarthma.model.NewsArticle;
+import pl.wasat.smarthma.ui.frags.news.NewsDetailFragment;
+import pl.wasat.smarthma.ui.frags.news.NewsListFragment;
 import android.os.Bundle;
 import android.os.StrictMode;
-import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 
-public class ArticleListActivity extends FragmentActivity implements
-		ArticleListFragment.Callbacks {
+public class NewsActivity extends BaseSmartHMActivity implements
+		NewsListFragment.Callbacks {
 
 	private boolean mTwoPane;
 	private EoDbAdapter dba;
 
-	public ArticleListActivity() {
+	public NewsActivity() {
 	}
 
 	@Override
@@ -37,7 +35,7 @@ public class ArticleListActivity extends FragmentActivity implements
 
 		if (findViewById(R.id.article_detail_container) != null) {
 			mTwoPane = true;
-			((ArticleListFragment) getSupportFragmentManager()
+			((NewsListFragment) getSupportFragmentManager()
 					.findFragmentById(R.id.article_list))
 					.setActivateOnItemClick(true);
 		}
@@ -45,7 +43,7 @@ public class ArticleListActivity extends FragmentActivity implements
 
 	@Override
 	public void onItemSelected(String id) {
-		Article selected = (Article) ((ArticleListFragment) getSupportFragmentManager()
+		NewsArticle selected = (NewsArticle) ((NewsListFragment) getSupportFragmentManager()
 				.findFragmentById(R.id.article_list)).getListAdapter().getItem(
 				Integer.parseInt(id));
 
@@ -54,7 +52,7 @@ public class ArticleListActivity extends FragmentActivity implements
 		dba.markAsRead(selected.getGuid());
 		dba.close();
 		selected.setRead(true);
-		ArticleListAdapter adapter = (ArticleListAdapter) ((ArticleListFragment) getSupportFragmentManager()
+		NewsArticleListAdapter adapter = (NewsArticleListAdapter) ((NewsListFragment) getSupportFragmentManager()
 				.findFragmentById(R.id.article_list)).getListAdapter();
 		adapter.notifyDataSetChanged();
 		Log.e("CHANGE", "Changing to read: ");
@@ -62,17 +60,13 @@ public class ArticleListActivity extends FragmentActivity implements
 		// load article details to main panel
 		if (mTwoPane) {
 			Bundle arguments = new Bundle();
-			arguments.putSerializable(Article.KEY, selected);
+			arguments.putSerializable(NewsArticle.KEY, selected);
 
-			ArticleDetailFragment fragment = new ArticleDetailFragment();
+			NewsDetailFragment fragment = new NewsDetailFragment();
 			fragment.setArguments(arguments);
 			getSupportFragmentManager().beginTransaction()
 					.replace(R.id.article_detail_container, fragment).commit();
 
-		} else {
-			Intent detailIntent = new Intent(this, ArticleDetailActivity.class);
-			detailIntent.putExtra(ArticleDetailFragment.ARG_ITEM_ID, id);
-			startActivity(detailIntent);
-		}
+		} 
 	}
 }

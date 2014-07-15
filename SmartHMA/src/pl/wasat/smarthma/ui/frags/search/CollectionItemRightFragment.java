@@ -1,8 +1,7 @@
-package pl.wasat.smarthma.ui.frags.browse;
+package pl.wasat.smarthma.ui.frags.search;
 
 import pl.wasat.smarthma.R;
 import pl.wasat.smarthma.model.feed.Entry;
-import pl.wasat.smarthma.ui.frags.search.SearchProductsListFragment;
 import android.app.Activity;
 import android.net.Uri;
 import android.os.Bundle;

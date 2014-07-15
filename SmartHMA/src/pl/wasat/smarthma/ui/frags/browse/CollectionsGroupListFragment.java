@@ -4,7 +4,7 @@ import pl.wasat.smarthma.R;
 import pl.wasat.smarthma.SmartHMApplication;
 import pl.wasat.smarthma.adapter.CollectionsGroupListAdapter;
 import pl.wasat.smarthma.model.CollectionsGroup.List;
-import pl.wasat.smarthma.services.ExplainDocHttpSpiceService;
+import pl.wasat.smarthma.services.SmartHmaHttpSpiceService;
 import pl.wasat.smarthma.utils.http.ExplainDocRequest;
 import pl.wasat.smarthma.utils.xml.XMLParser;
 import android.os.Bundle;
@@ -34,7 +34,7 @@ public class CollectionsGroupListFragment extends Fragment implements
 	private OkHttpBitmapSpiceManager spiceManagerBinary = new OkHttpBitmapSpiceManager();
 
 	private SpiceManager spiceManager = new SpiceManager(
-			ExplainDocHttpSpiceService.class);
+			SmartHmaHttpSpiceService.class);
 
 	private ListView collectionsGroupListView;
 	private View loadingView;

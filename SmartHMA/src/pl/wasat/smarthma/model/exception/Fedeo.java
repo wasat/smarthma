@@ -1,9 +1,8 @@
 
-package pl.wasat.smarthma.model.eo;
+package pl.wasat.smarthma.model.exception;
 
 import java.util.HashMap;
 import java.util.Map;
-
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
@@ -11,42 +10,29 @@ import org.apache.commons.lang.builder.ToStringStyle;
 
 import pl.wasat.smarthma.utils.text.SmartHMAStringStyle;
 
+public class Fedeo {
 
-public class PosList {
-
-    private String __prefix;
-    private String pointsString;
+    private ExceptionReport exceptionReport;
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
-    public String get__prefix() {
-        return __prefix;
+    public ExceptionReport getExceptionReport() {
+        return exceptionReport;
     }
 
-    public void set__prefix(String __prefix) {
-        this.__prefix = __prefix;
+    public void setExceptionReport(ExceptionReport exceptionReport) {
+        this.exceptionReport = exceptionReport;
     }
 
-    public PosList with__prefix(String __prefix) {
-        this.__prefix = __prefix;
-        return this;
-    }
-
-    public String getPointsString() {
-        return pointsString;
-    }
-
-    public void setPointsString(String text) {
-        this.pointsString = text;
-    }
-
-    public PosList withPointsString(String text) {
-        this.pointsString = text;
+    public Fedeo withExceptionReport(ExceptionReport exceptionReport) {
+        this.exceptionReport = exceptionReport;
         return this;
     }
 
     @Override
     public String toString() {
-            	 ToStringStyle style = new SmartHMAStringStyle(); ToStringBuilder.setDefaultStyle(style); return ToStringBuilder.reflectionToString(this);
+		ToStringStyle style = new SmartHMAStringStyle();
+		ToStringBuilder.setDefaultStyle(style);
+		return ToStringBuilder.reflectionToString(this);
     }
 
     @Override
@@ -65,6 +51,11 @@ public class PosList {
 
     public void setAdditionalProperty(String name, Object value) {
         this.additionalProperties.put(name, value);
+    }
+
+    public Fedeo withAdditionalProperty(String name, Object value) {
+        this.additionalProperties.put(name, value);
+        return this;
     }
 
 }

@@ -1,10 +1,6 @@
 package pl.wasat.smarthma.utils.rss;
 
-import java.io.IOException;
 import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.URI;
-import java.util.List;
 
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
@@ -14,43 +10,44 @@ import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 import org.xml.sax.XMLReader;
 
-import pl.wasat.smarthma.model.feed.Entry;
-import android.net.Uri;
+import pl.wasat.smarthma.model.feed.Feed;
 import android.util.Log;
 
-import com.octo.android.robospice.request.okhttp.OkHttpSpiceRequest;
+import com.google.api.client.http.GenericUrl;
+import com.google.api.client.http.HttpRequest;
+import com.google.api.client.http.HttpResponse;
+import com.octo.android.robospice.request.googlehttpclient.GoogleHttpClientSpiceRequest;
 
-public class SearchCollectionsFeedRequest extends OkHttpSpiceRequest<List<Entry>> {
+public class SearchCollectionsFeedRequest extends
+		GoogleHttpClientSpiceRequest<Feed> {
 
-	private String urlSearchParam;
+	private String searchUrlFinal;
 
 	/**
 	 * 
 	 */
-	public SearchCollectionsFeedRequest(String urlSearchParameter) {
-		super(null);
-		urlSearchParam = urlSearchParameter;
+	public SearchCollectionsFeedRequest(String searchUrl) {
+		super(Feed.class);
+		searchUrlFinal = searchUrl;
 	}
 
-	private static final String FEDEO_SEARCH_URL = "http://geo.spacebel.be/opensearch/request/?httpAccept=application/atom%2Bxml&type=collection&startRecord=1&maximumRecords=10&startDate=2009-01-01T00:00:00Z&endDate=2009-06-14T00:00:00Z&query=";
+	// private static final String FEDEO_SEARCH_URL =
+	// "http://geo.spacebel.be/opensearch/request/?httpAccept=application/atom%2Bxml&type=collection&startRecord=1&maximumRecords=10&startDate=2009-01-01T00:00:00Z&endDate=2009-06-14T00:00:00Z&query=";
 
 	@Override
-	public List<Entry> loadDataFromNetwork() throws Exception {
-
+	public Feed loadDataFromNetwork() throws Exception {
+		SmartHmaEoHandler rh = null;
 		try {
-			// With Uri.Builder class we can build our url is a safe manner
-			Uri.Builder uriBuilder = Uri.parse(
-					FEDEO_SEARCH_URL + urlSearchParam).buildUpon();
-			URI uri = new URI(uriBuilder.build().toString());
+			HttpRequest request = getHttpRequestFactory().buildGetRequest(
+					new GenericUrl(searchUrlFinal));
+			// request.setThrowExceptionOnExecuteError(false);
+			HttpResponse response = request.execute();
 
-			HttpURLConnection connection = getOkHttpClient().open(uri.toURL());
 			InputStream in = null;
 			try {
-				// Read the response.
-				in = connection.getInputStream();
+				in = response.getContent();
 			} finally {
 				if (in != null) {
-					// in.close();
 				}
 			}
 
@@ -58,23 +55,22 @@ public class SearchCollectionsFeedRequest extends OkHttpSpiceRequest<List<Entry>
 			SAXParser sp = spf.newSAXParser();
 			XMLReader xr = sp.getXMLReader();
 
-			RssEoHandler rh = new RssEoHandler();
+			rh = new SmartHmaEoHandler();
 
 			xr.setContentHandler(rh);
 			InputSource insour = new InputSource(in);
 			xr.parse(insour);
 
-			return rh.getFeeds().getEntries();
+			Log.i("ASYNC", "PARSING FINISHED");
 
-		} catch (IOException e) {
-			Log.e("RSS Handler IO", e.getMessage() + " >> " + e.toString());
-		} catch (SAXException e) {
+		}
+		catch (SAXException e) {
 			Log.e("RSS Handler SAX", e.toString());
 			e.printStackTrace();
 		} catch (ParserConfigurationException e) {
 			Log.e("RSS Handler Parser Config", e.toString());
 		}
-		return null;
+		return rh.getFeeds();
 
 	}
 }

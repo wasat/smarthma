@@ -3,9 +3,9 @@ package pl.wasat.smarthma.model;
 import java.io.Serializable;
 import java.net.URL;
 
-public class Article implements Serializable {
+public class NewsArticle implements Serializable {
 	
-	public static final String KEY = "ARTICLE";
+	public static final String KEY = "pl.wasat.smarthma.NEWS_ARTICLE";
 
 	private static final long serialVersionUID = 1L;
 	private String guid;

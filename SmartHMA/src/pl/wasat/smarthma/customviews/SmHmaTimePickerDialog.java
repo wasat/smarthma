@@ -35,7 +35,7 @@ import android.view.Window;
  * A dialog that prompts the user for the time of day using a {@link TimePicker}
  * .
  */
-public class MyTimePickerDialog extends AlertDialog implements OnClickListener,
+public class SmHmaTimePickerDialog extends AlertDialog implements OnClickListener,
 		OnTimeChangedListener {
 
 	/**
@@ -82,7 +82,7 @@ public class MyTimePickerDialog extends AlertDialog implements OnClickListener,
 	 * @param is24HourView
 	 *            Whether this is a 24 hour view, or AM/PM.
 	 */
-	public MyTimePickerDialog(Context context, OnTimeSetListener callBack,
+	public SmHmaTimePickerDialog(Context context, OnTimeSetListener callBack,
 			int hourOfDay, int minute, int seconds, boolean is24HourView) {
 
 		this(context, 0, callBack, hourOfDay, minute, seconds, is24HourView);
@@ -102,7 +102,7 @@ public class MyTimePickerDialog extends AlertDialog implements OnClickListener,
 	 * @param is24HourView
 	 *            Whether this is a 24 hour view, or AM/PM.
 	 */
-	public MyTimePickerDialog(Context context, int theme,
+	public SmHmaTimePickerDialog(Context context, int theme,
 			OnTimeSetListener callBack, int hourOfDay, int minute, int seconds,
 			boolean is24HourView) {
 		super(context, theme);
@@ -123,7 +123,7 @@ public class MyTimePickerDialog extends AlertDialog implements OnClickListener,
 
 		LayoutInflater inflater = (LayoutInflater) context
 				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-		View view = inflater.inflate(R.layout.time_picker_dialog, null);
+		View view = inflater.inflate(R.layout.dialog_time_picker, null);
 		setView(view);
 		mTimePicker = (TimePicker) view.findViewById(R.id.timePicker);
 

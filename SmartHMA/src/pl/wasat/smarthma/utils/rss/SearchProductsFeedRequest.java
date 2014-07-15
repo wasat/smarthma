@@ -1,10 +1,6 @@
 package pl.wasat.smarthma.utils.rss;
 
-import java.io.IOException;
 import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.URI;
-import java.util.List;
 
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
@@ -15,13 +11,16 @@ import org.xml.sax.SAXException;
 import org.xml.sax.XMLReader;
 
 import pl.wasat.smarthma.model.feed.Entry;
-import android.net.Uri;
+import pl.wasat.smarthma.model.feed.Feed;
 import android.util.Log;
 
 import com.google.android.gms.maps.model.LatLngBounds;
-import com.octo.android.robospice.request.okhttp.OkHttpSpiceRequest;
+import com.google.api.client.http.GenericUrl;
+import com.google.api.client.http.HttpRequest;
+import com.google.api.client.http.HttpResponse;
+import com.octo.android.robospice.request.googlehttpclient.GoogleHttpClientSpiceRequest;
 
-public class SearchProductsFeedRequest extends OkHttpSpiceRequest<List<Entry>> {
+public class SearchProductsFeedRequest extends GoogleHttpClientSpiceRequest<Feed> {
 
 	private LatLngBounds geoSearchParam;
 	private String parentIdParam;
@@ -54,10 +53,10 @@ public class SearchProductsFeedRequest extends OkHttpSpiceRequest<List<Entry>> {
 
 	private String buildUrl() {
 		String finalUrl = FEDEO_SEARCH_URL + "&parentIdentifier="
-				+ parentIdParam + "&box=" + geoSearchParam.southwest.latitude
-				+ "," + geoSearchParam.southwest.longitude + ","
-				+ geoSearchParam.northeast.latitude + ","
-				+ geoSearchParam.northeast.longitude + "&recordSchema=om";
+				+ parentIdParam + "&box=" + geoSearchParam.southwest.longitude
+				+ "," + geoSearchParam.southwest.latitude + ","
+				+ geoSearchParam.northeast.longitude + ","
+				+ geoSearchParam.northeast.latitude + "&recordSchema=om";
 		Log.i("URL", finalUrl);
 
 		return finalUrl;
@@ -65,19 +64,18 @@ public class SearchProductsFeedRequest extends OkHttpSpiceRequest<List<Entry>> {
 	}
 
 	@Override
-	public List<Entry> loadDataFromNetwork() throws Exception {
+	public Feed loadDataFromNetwork() throws Exception {
 
-		RssEoHandler rh = null;
+		SmartHmaEoHandler rh = null;
 		try {
-			// With Uri.Builder class we can build our url is a safe manner
-			Uri.Builder uriBuilder = Uri.parse(buildUrl()).buildUpon();
-			URI uri = new URI(uriBuilder.build().toString());
+			HttpRequest request = getHttpRequestFactory().buildGetRequest(
+					new GenericUrl(buildUrl()));
+			//request.setThrowExceptionOnExecuteError(false);
+			HttpResponse response = request.execute();
 
-			HttpURLConnection connection = getOkHttpClient().open(uri.toURL());
 			InputStream in = null;
 			try {
-				// Read the response.
-				in = connection.getInputStream();
+				in = response.getContent();
 			} finally {
 				if (in != null) {
 				}
@@ -87,23 +85,22 @@ public class SearchProductsFeedRequest extends OkHttpSpiceRequest<List<Entry>> {
 			SAXParser sp = spf.newSAXParser();
 			XMLReader xr = sp.getXMLReader();
 
-			rh = new RssEoHandler();
+			rh = new SmartHmaEoHandler();
 
 			xr.setContentHandler(rh);
 			InputSource insour = new InputSource(in);
 			xr.parse(insour);
 
 			Log.i("ASYNC", "PARSING FINISHED");
+		}
 
-		} catch (IOException e) {
-			Log.e("RSS Handler IO", e.toString());
-		} catch (SAXException e) {
+		catch (SAXException e) {
 			Log.e("RSS Handler SAX", e.toString());
 			e.printStackTrace();
 		} catch (ParserConfigurationException e) {
 			Log.e("RSS Handler Parser Config", e.toString());
 		}
-		return rh.getFeeds().getEntries();
+		return rh.getFeeds();
 
 	}
 }

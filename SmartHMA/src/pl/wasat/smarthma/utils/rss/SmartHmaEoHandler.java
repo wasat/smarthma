@@ -16,7 +16,7 @@ import pl.wasat.smarthma.model.feed.StartIndex;
 import pl.wasat.smarthma.model.feed.TotalResults;
 import pl.wasat.smarthma.model.feed.Where;
 
-public class RssEoHandler extends DefaultHandler {
+public class SmartHmaEoHandler extends DefaultHandler {
 
 	// Feed and EO data objects to use for temporary storage
 
@@ -50,7 +50,8 @@ public class RssEoHandler extends DefaultHandler {
 	private Polygon polygon;
 	private Exterior exterior;
 	private LinearRing linearRing;
-	private PosList posList;
+	private PosString posString;
+	private List<Pos> posList;
 
 	private EarthObservation earthObservation;
 	private PhenomenonTime phenomenonTime;
@@ -224,14 +225,17 @@ public class RssEoHandler extends DefaultHandler {
 			// summary = new Summary();
 		} else if (localName.equalsIgnoreCase("where")) {
 			where = new Where();
-		} else if (localName.equalsIgnoreCase("polygon")) {
+		} else if (localName.equalsIgnoreCase("Polygon")) {
 			polygon = new Polygon();
+			polygon.set_gml_id(atts.getValue("gml:id"));
+			polygon.set_srsName(atts.getValue("srsName"));
 		} else if (localName.equalsIgnoreCase("exterior")) {
 			exterior = new Exterior();
-		} else if (localName.equalsIgnoreCase("linearring")) {
+		} else if (localName.equalsIgnoreCase("LinearRing")) {
 			linearRing = new LinearRing();
+			posList = new ArrayList<Pos>();
 		} else if (localName.equalsIgnoreCase("poslist")) {
-			posList = new PosList();
+			posString = new PosString();
 		}
 		// EO MetaData
 		else if (localName.equalsIgnoreCase("EarthObservation")) {
@@ -246,8 +250,9 @@ public class RssEoHandler extends DefaultHandler {
 			earthObservation.set_xmlns_swe(atts.getValue("xmlns:swe"));
 			earthObservation.set_xmlns_xlink(atts.getValue("xmlns:xlink"));
 			earthObservation.set_xmlns_xsi(atts.getValue("xmlns:xsi"));
-			earthObservation.set_xsi_schemaLocation(atts.getValue("xsi:schemaLocation"));
-			
+			earthObservation.set_xsi_schemaLocation(atts
+					.getValue("xsi:schemaLocation"));
+
 			isInEarthObservation = true;
 		}
 		// PhenomenonTime markup
@@ -388,6 +393,7 @@ public class RssEoHandler extends DefaultHandler {
 		} else if (localName.equalsIgnoreCase("multiSurface")) {
 			multiSurface = new MultiSurface();
 			multiSurface.set_gml_id(atts.getValue("gml:id"));
+			multiSurface.set_srsName(atts.getValue("srsName"));
 		} else if (localName.equalsIgnoreCase("surfaceMembers")) {
 			surfaceMembers = new SurfaceMembers();
 		} else if (localName.equalsIgnoreCase("nominalTrack")) {
@@ -835,8 +841,8 @@ public class RssEoHandler extends DefaultHandler {
 					point.setPos(pos);
 				} else if (localName.equalsIgnoreCase("coordinates")) {
 					coordinates.set__text(chars.toString());
-				} else if (localName.equalsIgnoreCase("pos")) {
-					pos.set__text(chars.toString());
+					// } else if (localName.equalsIgnoreCase("pos")) {
+					// pos.set__text(chars.toString());
 				} else if (localName.equalsIgnoreCase("locationName")) {
 					locationName.set__text(chars.toString());
 				} else if (localName.equalsIgnoreCase("maximumAltitude")) {
@@ -846,7 +852,6 @@ public class RssEoHandler extends DefaultHandler {
 				} else if (localName.equalsIgnoreCase("multiExtentOf")) {
 					multiExtentOf.setMultiSurface(multiSurface);
 				} else if (localName.equalsIgnoreCase("multiSurface")) {
-					multiSurface.set_srsName(chars.toString());
 					multiSurface.setSurfaceMembers(surfaceMembers);
 				} else if (localName.equalsIgnoreCase("surfaceMembers")) {
 					surfaceMembers.setPolygon(polygon);
@@ -1103,22 +1108,29 @@ public class RssEoHandler extends DefaultHandler {
 					statusSubType.set__text(chars.toString());
 				}
 
+				// Coordinates - footprint and polygons
+				else if (localName.equalsIgnoreCase("where")) {
+					where.setPolygon(polygon);
+					entry.setWhere(where);
+				} else if (localName.equalsIgnoreCase("Polygon")) {
+					polygon.setExterior(exterior);
+				} else if (localName.equalsIgnoreCase("exterior")) {
+					exterior.setLinearRing(linearRing);
+				} else if (localName.equalsIgnoreCase("LinearRing")) {
+					linearRing.setPosString(posString);
+					linearRing.setPosList(posList);
+				} else if (localName.equalsIgnoreCase("pos")) {
+					pos.set__text(chars.toString());
+					posList.add(pos);
+				} else if (localName.equalsIgnoreCase("poslist")) {
+					posString.setPointsString(chars.toString());
+				}
 
+				else if (localName.equalsIgnoreCase("group")) {
+				}
 			}
-
-			else if (localName.equalsIgnoreCase("where")) {
-				where.setPolygon(polygon);
-				entry.setWhere(where);
-			} else if (localName.equalsIgnoreCase("polygon")) {
-				polygon.setExterior(exterior);
-			} else if (localName.equalsIgnoreCase("exterior")) {
-				exterior.setLinearRing(linearRing);
-			} else if (localName.equalsIgnoreCase("linearring")) {
-				linearRing.setPosList(posList);
-			} else if (localName.equalsIgnoreCase("poslist")) {
-				posList.setPointsString(chars.toString());
-			} else if (localName.equalsIgnoreCase("group")) {
-			} else if (localName.equalsIgnoreCase("entry")) {
+			// Close Entry
+			else if (localName.equalsIgnoreCase("entry")) {
 				entry.setGuid(String.valueOf(entryAdded));
 				entry.setLinks(linksEntry);
 				entries.add(entry);
@@ -1128,18 +1140,8 @@ public class RssEoHandler extends DefaultHandler {
 				if (entryAdded >= DATASERIES_LIMIT) {
 					return;
 				}
-
-			} else if (localName.equalsIgnoreCase("_xmlns")) {
-			} else if (localName.equalsIgnoreCase("_xmlns_dc")) {
-			} else if (localName.equalsIgnoreCase("_xmlns_eo")) {
-			} else if (localName.equalsIgnoreCase("_xmlns_geo")) {
-			} else if (localName.equalsIgnoreCase("_xmlns_georss")) {
-			} else if (localName.equalsIgnoreCase("_xmlns_media")) {
-			} else if (localName.equalsIgnoreCase("_xmlns_os")) {
-			} else if (localName.equalsIgnoreCase("_xmlns_sru")) {
-			} else if (localName.equalsIgnoreCase("_xmlns_time")) {
-			} else if (localName.equalsIgnoreCase("_xmlns_wrs")) {
 			}
+
 		}
 	}
 

@@ -1,6 +1,6 @@
 package pl.wasat.smarthma.database;
 
-import pl.wasat.smarthma.model.Article;
+import pl.wasat.smarthma.model.NewsArticle;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -10,7 +10,7 @@ import android.database.sqlite.SQLiteDatabase.CursorFactory;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.provider.BaseColumns;
 
-public class DbAdapter{
+public class NewsDbAdapter{
 	
 	public static final String KEY_ROWID = BaseColumns._ID;
 	public static final String KEY_GUID = "guid";
@@ -32,17 +32,17 @@ public class DbAdapter{
 	private SQLiteDatabase sqLiteDatabase;
 	private Context context;
 
-	public DbAdapter(Context c){
+	public NewsDbAdapter(Context c){
 		context = c;
 	}
 
-	public DbAdapter openToRead() throws android.database.SQLException {
+	public NewsDbAdapter openToRead() throws android.database.SQLException {
 		sqLiteHelper = new SQLiteHelper(context, DATABASE_NAME, null, DATABASE_VERSION);
 		sqLiteDatabase = sqLiteHelper.getReadableDatabase();
 		return this; 
 	}
 
-	public DbAdapter openToWrite() throws android.database.SQLException {
+	public NewsDbAdapter openToWrite() throws android.database.SQLException {
 		sqLiteHelper = new SQLiteHelper(context, DATABASE_NAME, null, DATABASE_VERSION);
 		sqLiteDatabase = sqLiteHelper.getWritableDatabase();
 		return this; 
@@ -75,7 +75,7 @@ public class DbAdapter{
         return sqLiteDatabase.insert(DATABASE_TABLE, null, initialValues);
     }
     
-    public Article getBlogListing(String guid) throws SQLException {
+    public NewsArticle getBlogListing(String guid) throws SQLException {
         Cursor mCursor =
         		sqLiteDatabase.query(true, DATABASE_TABLE, new String[] {
                 		KEY_ROWID,
@@ -91,7 +91,7 @@ public class DbAdapter{
                 		null);
         if (mCursor != null && mCursor.getCount() > 0) {
         	mCursor.moveToFirst();
-        	Article a = new Article();
+        	NewsArticle a = new NewsArticle();
    			a.setGuid(mCursor.getString(mCursor.getColumnIndex(KEY_GUID)));
    			a.setRead(mCursor.getInt(mCursor.getColumnIndex(KEY_READ)) > 0);
    			a.setDbId(mCursor.getLong(mCursor.getColumnIndex(KEY_ROWID)));

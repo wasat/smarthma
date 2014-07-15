@@ -7,13 +7,13 @@ import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
-import pl.wasat.smarthma.model.Article;
+import pl.wasat.smarthma.model.NewsArticle;
 
-public class RssHandler extends DefaultHandler {
+public class NewsRssHandler extends DefaultHandler {
 
 	// Feed and Article objects to use for temporary storage
-	private Article currentArticle = new Article();
-	private List<Article> articleList = new ArrayList<Article>();
+	private NewsArticle currentArticle = new NewsArticle();
+	private List<NewsArticle> articleList = new ArrayList<NewsArticle>();
 
 	// Number of articles added so far
 	private int articlesAdded = 0;
@@ -24,7 +24,7 @@ public class RssHandler extends DefaultHandler {
 	// Current characters being accumulated
 	StringBuffer chars = new StringBuffer();
 
-	public List<Article> getArticleList() {
+	public List<NewsArticle> getArticleList() {
 		return articleList;
 	}
 
@@ -82,7 +82,7 @@ public class RssHandler extends DefaultHandler {
 
 			articleList.add(currentArticle);
 
-			currentArticle = new Article();
+			currentArticle = new NewsArticle();
 
 			// Lets check if we've hit our limit on number of articles
 			articlesAdded++;

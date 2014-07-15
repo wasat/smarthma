@@ -1,6 +1,7 @@
 package pl.wasat.smarthma.ui.activities;
 
 import pl.wasat.smarthma.R;
+import pl.wasat.smarthma.ui.frags.MapSearchFragment.OnMapSearchFragmentListener;
 import pl.wasat.smarthma.ui.frags.search.SearchBasicInfoRightFragment;
 import pl.wasat.smarthma.ui.frags.search.SearchBasicInfoRightFragment.OnSearchBasicInfoRightFragmentListener;
 import pl.wasat.smarthma.ui.frags.search.SearchFragment;
@@ -10,7 +11,6 @@ import android.app.SearchManager;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.util.Log;
 import android.view.Menu;
@@ -18,8 +18,11 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.SearchView;
 
-public class SearchActivity extends FragmentActivity implements
-		OnSearchBasicInfoRightFragmentListener, OnSearchFragmentListener {
+import com.google.android.gms.maps.model.LatLngBounds;
+
+public class SearchActivity extends BaseSmartHMActivity implements
+		OnSearchBasicInfoRightFragmentListener, OnSearchFragmentListener,
+		OnMapSearchFragmentListener {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -137,8 +140,10 @@ public class SearchActivity extends FragmentActivity implements
 	private void loadRightPanel() {
 		SearchBasicInfoRightFragment rightInfoFragment = SearchBasicInfoRightFragment
 				.newInstance("EO Dataset Series Search");
-		getSupportFragmentManager().beginTransaction()
-				.add(R.id.search_activ_right_container, rightInfoFragment)
+		getSupportFragmentManager()
+				.beginTransaction()
+				.add(R.id.search_activ_right_container, rightInfoFragment,
+						"SearchBasicInfoRightFragment")
 				.addToBackStack("SearchBasicInfoRightFragment").commit();
 	}
 
@@ -162,13 +167,52 @@ public class SearchActivity extends FragmentActivity implements
 
 	}
 
-	/* (non-Javadoc)
-	 * @see pl.wasat.smarthma.ui.frags.search.SearchFragment.OnSearchFragmentListener#onSearchFragmentInteraction(android.net.Uri)
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * pl.wasat.smarthma.ui.frags.search.SearchFragment.OnSearchFragmentListener
+	 * #onSearchFragmentInteraction(android.net.Uri)
 	 */
 	@Override
 	public void onSearchFragmentInteraction(Uri uri) {
 		// TODO Auto-generated method stub
-		
+
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * pl.wasat.smarthma.ui.frags.MapSearchFragment.OnMapSearchFragmentListener
+	 * #onMapSearchFragmentInteraction(android.net.Uri)
+	 */
+	@Override
+	public void onMapSearchFragmentInteraction(Uri uri) {
+		// TODO Auto-generated method stub
+
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * pl.wasat.smarthma.ui.frags.MapSearchFragment.OnMapSearchFragmentListener
+	 * #onMapSearchFragmentBoundsChange
+	 * (com.google.android.gms.maps.model.LatLngBounds)
+	 */
+	@Override
+	public void onMapSearchFragmentBoundsChange(LatLngBounds bounds) {
+
+		SearchBasicInfoRightFragment searchBasicInfoRightFragment = (SearchBasicInfoRightFragment) getSupportFragmentManager()
+				.findFragmentByTag("SearchBasicInfoRightFragment");
+
+		if (searchBasicInfoRightFragment != null) {
+			// If article frag is available, we're in two-pane layout...
+			// Call a method in the ArticleFragment to update its content
+			searchBasicInfoRightFragment.updateCollectionsAreaBounds(bounds);
+		}
+
 	}
 
 }
