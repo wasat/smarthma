@@ -41,13 +41,13 @@ public class MainSmartHMActivity extends BaseSmartHMActivity implements
 	private ProgressBar progressBarWmsLoad;
 	private InitialisationReceiver initReceiver;
 	private SpinnerStateReceiver spinnerStateRec;
-	boolean isWmsLoading = false;
+	private boolean isWmsLoading = false;
 
 	/**
 	 * Whether or not the activity is in two-pane mode, i.e. running on a tablet
 	 * device.
 	 */
-	public static boolean TWO_PANEL_MODE;
+	private static boolean TWO_PANEL_MODE;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -71,7 +71,7 @@ public class MainSmartHMActivity extends BaseSmartHMActivity implements
 			TWO_PANEL_MODE = true;
 			loadRightListPanel();
 			//loadGalleryPanel();
-			loadMapView("", "");
+			loadMapView();
 		}
 	}
 
@@ -94,16 +94,6 @@ public class MainSmartHMActivity extends BaseSmartHMActivity implements
 		unregisterReceiver(initReceiver);
 		unregisterReceiver(spinnerStateRec);
 		super.onPause();
-	}
-
-	@Override
-	protected void onStart() {
-		super.onStart();
-	}
-
-	@Override
-	protected void onStop() {
-		super.onStop();
 	}
 
 	@Override
@@ -133,12 +123,6 @@ public class MainSmartHMActivity extends BaseSmartHMActivity implements
 	public boolean onPrepareOptionsMenu(Menu menu) {
 		// menu.setGroupEnabled(R.id.menu_group_gis, isMenuEnabled);
 		return super.onPrepareOptionsMenu(menu);
-	}
-
-	@Override
-	public void supportInvalidateOptionsMenu() {
-		// TODO Auto-generated method stub
-		super.supportInvalidateOptionsMenu();
 	}
 
 	@Override
@@ -201,9 +185,9 @@ public class MainSmartHMActivity extends BaseSmartHMActivity implements
 				.replace(R.id.gallery_bottom_panel, galleryFragment).commit();
 	}
 
-	private void loadMapView(String title, String pubDate) {
-		MapSearchFragment mapSearchFragment = MapSearchFragment.newInstance("",
-				"");
+	private void loadMapView() {
+		MapSearchFragment mapSearchFragment = MapSearchFragment.newInstance(
+        );
 
 		getSupportFragmentManager().beginTransaction()
 				.replace(R.id.left_panel_map, mapSearchFragment)
@@ -217,7 +201,7 @@ public class MainSmartHMActivity extends BaseSmartHMActivity implements
 	}
 
 	@Override
-	public void onCollectionSelected(Integer chosenCollectionId, String urlArgs) {
+	public void onCollectionSelected(Integer chosenCollectionId) {
 
 		if (chosenCollectionId == -1) {
 			Toast.makeText(MainSmartHMActivity.this,
@@ -226,19 +210,19 @@ public class MainSmartHMActivity extends BaseSmartHMActivity implements
 			return;
 		}
 
-		if (urlArgs == null) {
-			urlArgs = "";
-		} else {
-			urlArgs = "&time=" + urlArgs;
-		}
+//		if (urlArgs == null) {
+//			urlArgs = "";
+//		} else {
+//			urlArgs = "&time=" + urlArgs;
+//		}
 
 		MapSearchFragment gisFrag = (MapSearchFragment) getSupportFragmentManager()
 				.findFragmentById(R.id.left_panel_map);
 
-		if (gisFrag != null) {
+		//if (gisFrag != null) {
 			// If frag is available, we're in two-pane layout...
 			// Call a method in the MapFragment to update its content
-		} else {
+		//} else {
 			// Otherwise, we're in the one-pane layout and must swap frags...
 			// Create fragment and give it an argument for the selected data
 			MapSearchFragment newGisFrag = new MapSearchFragment();
@@ -256,7 +240,7 @@ public class MainSmartHMActivity extends BaseSmartHMActivity implements
 			transaction.replace(R.id.left_panel_map, newGisFrag);
 			// transaction.addToBackStack(null);
 			transaction.commit();
-		}
+		//}
 	}
 
 	private void disableProgressBar() {
@@ -294,9 +278,9 @@ public class MainSmartHMActivity extends BaseSmartHMActivity implements
 			}
 			supportInvalidateOptionsMenu();
 		}
-	};
+	}
 
-	private class SpinnerStateReceiver extends BroadcastReceiver {
+    private class SpinnerStateReceiver extends BroadcastReceiver {
 		@Override
 		public void onReceive(Context context, Intent intent) {
 			isWmsLoading = intent.getBooleanExtra(Const.KEY_MAP_WMS_LOAD_STATE,
@@ -340,7 +324,7 @@ public class MainSmartHMActivity extends BaseSmartHMActivity implements
 	 * OnFragmentInteractionListener#onFragmentInteraction(android.net.Uri)
 	 */
 	@Override
-	public void onFragmentInteraction(Uri uri) {
+	public void onFragmentInteraction() {
 		// TODO Auto-generated method stub
 
 	}

@@ -5,11 +5,11 @@ import java.util.List;
 import pl.wasat.smarthma.R;
 import pl.wasat.smarthma.adapter.DataSeriesListAdapter;
 import pl.wasat.smarthma.database.EoDbAdapter;
+import pl.wasat.smarthma.model.FedeoRequest;
 import pl.wasat.smarthma.model.feed.Entry;
 import pl.wasat.smarthma.model.feed.Feed;
 import pl.wasat.smarthma.ui.frags.BaseSpiceListFragment;
-import pl.wasat.smarthma.ui.frags.FailureFragment;
-import pl.wasat.smarthma.utils.rss.DataSeriesFeedRequest;
+import pl.wasat.smarthma.utils.rss.FedeoSearchRequest;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -22,14 +22,12 @@ import android.widget.Toast;
 /**
  * A simple {@link android.support.v4.app.Fragment} subclass. Activities that
  * contain this fragment must implement the
- * {@link DataSeriesListFragment.OnDataSeriesListFragmentListener}
- * interface to handle interaction events. Use the
- * {@link DataSeriesListFragment#newInstance} factory method to create an
- * instance of this fragment.
+ * {@link DataSeriesListFragment.OnDataSeriesListFragmentListener} interface to
+ * handle interaction events. Use the {@link DataSeriesListFragment#newInstance}
+ * factory method to create an instance of this fragment.
  * 
  */
-public class DataSeriesListFragment extends BaseSpiceListFragment  
-{
+public class DataSeriesListFragment extends BaseSpiceListFragment {
 	// TODO: Rename parameter arguments, choose names that match
 	// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 	private static final String ARG_PARAM1 = "param1";
@@ -82,13 +80,6 @@ public class DataSeriesListFragment extends BaseSpiceListFragment
 		}
 	}
 
-	// TODO: Rename method, update argument and hook method into UI event
-	public void onButtonPressed(String id) {
-		if (mListener != null) {
-			mListener.onDataSeriesFragmentItemSelected(id);
-		}
-	}
-
 	@Override
 	public void onAttach(Activity activity) {
 		super.onAttach(activity);
@@ -113,16 +104,14 @@ public class DataSeriesListFragment extends BaseSpiceListFragment
 		if (mParam1 != null) {
 			loadDataSeriesFeedResponse(mParam1);
 		}
-	}	
-	
+	}
+
 	@Override
 	public void onListItemClick(ListView listView, View view, int position,
 			long id) {
 		super.onListItemClick(listView, view, position, id);
 		mListener.onDataSeriesFragmentItemSelected(String.valueOf(position));
 	}
-
-
 
 	@Override
 	public void onSaveInstanceState(Bundle outState) {
@@ -164,15 +153,16 @@ public class DataSeriesListFragment extends BaseSpiceListFragment
 
 	private void updateEOListViewContent(List<Entry> dataSeriesFeedList) {
 		if (dataSeriesFeedList.isEmpty()) {
-			getView().setVisibility(View.GONE);
+            //noinspection ConstantConditions
+            getView().setVisibility(View.GONE);
 
-			String searchFail = "Nothing to display. Please search again.";
-
-			FailureFragment failureFragment = FailureFragment
-					.newInstance(searchFail);
-			getActivity().getSupportFragmentManager().beginTransaction()
-					.replace(R.id.dataseries_detail_container, failureFragment)
-					.commit();
+			// String searchFail = "Nothing to display. Please search again.";
+			//
+			// FailureFragment failureFragment = FailureFragment
+			// .newInstance(searchFail);
+			// getActivity().getSupportFragmentManager().beginTransaction()
+			// .replace(R.id.dataseries_detail_container, failureFragment)
+			// .commit();
 		} else {
 
 			for (Entry a : dataSeriesFeedList) {
@@ -196,7 +186,8 @@ public class DataSeriesListFragment extends BaseSpiceListFragment
 			this.setListAdapter(adapter);
 			adapter.notifyDataSetChanged();
 			// loadingView.setVisibility(View.GONE);
-			getView().setVisibility(View.VISIBLE);
+            //noinspection ConstantConditions
+            getView().setVisibility(View.VISIBLE);
 		}
 
 	}
@@ -206,12 +197,15 @@ public class DataSeriesListFragment extends BaseSpiceListFragment
 	 */
 	private void loadDataSeriesFeedResponse(String feedSearch) {
 		if (feedSearch != null) {
+
+			FedeoRequest req = new FedeoRequest();
+			req.setDefaultParams();
+			req.setParentIdentifier(feedSearch);
+
 			getActivity().setProgressBarIndeterminateVisibility(true);
-			getSpiceManager().execute(new DataSeriesFeedRequest(
-					feedSearch), this);
+			getSpiceManager().execute(new FedeoSearchRequest(req), this);
 		}
 	}
-
 
 	/*
 	 * (non-Javadoc)
@@ -225,6 +219,24 @@ public class DataSeriesListFragment extends BaseSpiceListFragment
 		getActivity().setProgressBarIndeterminateVisibility(false);
 		Toast.makeText(getActivity(), "OK!!! ", Toast.LENGTH_SHORT).show();
 		updateEOListViewContent(dataSeriesFeeds.getEntries());
+
+		loadIntroFeedInfo(dataSeriesFeeds);
+
+	}
+
+	/**
+	 * @param dataSeriesFeeds
+	 * 
+	 */
+	private void loadIntroFeedInfo(Feed dataSeriesFeeds) {
+		BrowseDataSeriesIntroFragment browseDataSeriesIntroFragment = BrowseDataSeriesIntroFragment
+				.newInstance(dataSeriesFeeds);
+		getActivity()
+				.getSupportFragmentManager()
+				.beginTransaction()
+				.replace(R.id.dataseries_detail_container,
+						browseDataSeriesIntroFragment)
+				.addToBackStack("BrowseDataSeriesIntroFragment").commit();
 
 	}
 
@@ -243,5 +255,4 @@ public class DataSeriesListFragment extends BaseSpiceListFragment
 		public void onDataSeriesFragmentItemSelected(String id);
 	}
 
-	
 }

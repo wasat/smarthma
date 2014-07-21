@@ -3,6 +3,7 @@
  */
 package pl.wasat.smarthma.ui.activities;
 
+import android.content.Intent;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 
@@ -13,8 +14,10 @@ import android.util.Log;
 public class BaseSmartHMActivity extends FragmentActivity {
 
 	public void doPositiveClick() {
-		// Do stuff here.
+		Intent i = new Intent(getBaseContext(), SearchActivity.class);                      
+		startActivity(i);
 		Log.i("FragmentAlertDialog", "Positive click!");
+		finish();
 	}
 
 	public void doNegativeClick() {

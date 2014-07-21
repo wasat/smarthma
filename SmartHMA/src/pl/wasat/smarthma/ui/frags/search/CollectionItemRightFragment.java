@@ -1,9 +1,9 @@
 package pl.wasat.smarthma.ui.frags.search;
 
 import pl.wasat.smarthma.R;
+import pl.wasat.smarthma.model.FedeoRequest;
 import pl.wasat.smarthma.model.feed.Entry;
 import android.app.Activity;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -40,9 +40,8 @@ public class CollectionItemRightFragment extends Fragment {
 	private TextView tvAreaSWLon;
 	private TextView tvAreaNELat;
 	private TextView tvAreaNELon;
-	private Button buttonSearchProd;
 
-	LatLngBounds geoBounds = null;
+    private LatLngBounds geoBounds = null;
 
 	private OnCollectionItemRightFragmentListener mListener;
 
@@ -105,25 +104,25 @@ public class CollectionItemRightFragment extends Fragment {
 		tvAreaNELon = (TextView) rootView
 				.findViewById(R.id.coll_item_right_frag_tv_area_ne_lon);
 
-		buttonSearchProd = (Button) rootView
-				.findViewById(R.id.coll_item_right_frag_button_search_prod);
+        Button buttonSearchProd = (Button) rootView
+                .findViewById(R.id.coll_item_right_frag_button_search_prod);
 		buttonSearchProd.setOnClickListener(new OnClickListener() {
 
-			@Override
-			public void onClick(View v) {
-				startSearchProducts();
+            @Override
+            public void onClick(View v) {
+                startSearchProducts();
 
-			}
-		});
+            }
+        });
 
 		return rootView;
 
 	}
 
 	// TODO: Rename method, update argument and hook method into UI event
-	public void onButtonPressed(Uri uri) {
+	public void onButtonPressed() {
 		if (mListener != null) {
-			mListener.onCollectionItemRightFragmentInteraction(uri);
+			mListener.onCollectionItemRightFragmentInteraction();
 		}
 	}
 
@@ -155,7 +154,7 @@ public class CollectionItemRightFragment extends Fragment {
 	 */
 	public interface OnCollectionItemRightFragmentListener {
 		// TODO: Update argument type and name
-		public void onCollectionItemRightFragmentInteraction(Uri uri);
+		public void onCollectionItemRightFragmentInteraction();
 	}
 
 	public void updateProductAreaBounds(LatLngBounds bounds) {
@@ -169,11 +168,15 @@ public class CollectionItemRightFragment extends Fragment {
 	/**
 	 * 
 	 */
-	protected void startSearchProducts() {
+    void startSearchProducts() {
+		FedeoRequest request = new FedeoRequest();
+		request.setDefaultParams();
+		request.setParentIdentifier(paramCollEntry.getIdentifier());
+		request.setBbox(geoBounds);
 		SearchProductsListFragment searchProductsFeedsFragment = SearchProductsListFragment
-				.newInstance(paramCollEntry, geoBounds);
+				.newInstance(request);
 		getActivity().getSupportFragmentManager().beginTransaction()
-				.add(R.id.search_list_container, searchProductsFeedsFragment)
+				.add(R.id.search_results_list_container, searchProductsFeedsFragment)
 				.commit();
 	}
 }

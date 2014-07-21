@@ -24,12 +24,11 @@ import android.util.Log;
 
 public class NewsRssServiceNoAsync  {
 
-	private ProgressDialog progress;
-	private Context context;
-	private NewsListFragment articleListFrag;
+	private final ProgressDialog progress;
+    private final NewsListFragment articleListFrag;
 
 	public NewsRssServiceNoAsync(NewsListFragment articleListFragment) {
-		context = articleListFragment.getActivity();
+        Context context = articleListFragment.getActivity();
 		articleListFrag = articleListFragment;
 		progress = new ProgressDialog(context);
 		progress.setMessage("Loading...");
@@ -37,20 +36,20 @@ public class NewsRssServiceNoAsync  {
 	}
 
 	
-	public void exec(String urls)
+	public void exec()
 	{
 		onPreExecute();
-		List<NewsArticle> art = doInBackground(urls);
+		List<NewsArticle> art = doInBackground(NewsListFragment.BLOG_URL);
 		onPostExecute(art);
 	}
 
-	protected void onPreExecute() {
+	void onPreExecute() {
 		Log.e("ASYNC", "PRE EXECUTE");
 		progress.show();
 	}
 
 
-	protected  void onPostExecute(final List<NewsArticle>  articles) {
+	void onPostExecute(final List<NewsArticle> articles) {
 		Log.e("ASYNC", "POST EXECUTE");
 		articleListFrag.getActivity().runOnUiThread(new Runnable() {
 			@Override
@@ -84,10 +83,10 @@ public class NewsRssServiceNoAsync  {
 
 
 
-	protected List<NewsArticle> doInBackground(String... urls) {
+	List<NewsArticle> doInBackground(String... urls) {
 		String feed = urls[0];
 
-		URL url = null;
+		URL url;
 		try {
 
 			SAXParserFactory spf = SAXParserFactory.newInstance();

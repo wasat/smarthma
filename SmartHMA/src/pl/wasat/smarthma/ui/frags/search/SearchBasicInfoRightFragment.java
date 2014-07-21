@@ -46,9 +46,9 @@ import com.google.android.gms.maps.model.LatLngBounds;
  */
 public class SearchBasicInfoRightFragment extends Fragment {
 	private static final String KEY_COLLECTION_NAME = "pl.wasat.smarthma.COLLECTION_NAME";
-	private static final String KEY_BUTTON_TAG = "pl.wasat.smarthma.KEY_BUTTON_TAG";;
+	private static final String KEY_BUTTON_TAG = "pl.wasat.smarthma.KEY_BUTTON_TAG";
 
-	private String paramCollName;
+    private String paramCollName;
 
 	private TextView tvAreaSWLat;
 	private TextView tvAreaSWLon;
@@ -66,27 +66,21 @@ public class SearchBasicInfoRightFragment extends Fragment {
 
 	private OnSearchBasicInfoRightFragmentListener mListener;
 
-	private static CharSequence[] cataloguesList = { "FEDEO",
+	private static final CharSequence[] cataloguesList = { "FEDEO",
 			"FEDEO:COLLECTIONS", "GPOD-EO", "EO-VIRTUAL-ARCHIVE4",
 			"REFERENCEDATA" };
-
-	final CharSequence[] items = { "Rajesh", "Mahesh", "Vijayakumar" };
 
 	/**
 	 * Use this factory method to create a new instance of this fragment using
 	 * the provided parameters.
 	 * 
-	 * @param collectionName
-	 *            Parameter 1.
-	 * @param collectionDates
-	 *            Parameter 2.
 	 * @return A new instance of fragment CollectionItemRightFragment.
 	 */
 	// TODO: Rename and change types and number of parameters
-	public static SearchBasicInfoRightFragment newInstance(String collectionName) {
+	public static SearchBasicInfoRightFragment newInstance() {
 		SearchBasicInfoRightFragment fragment = new SearchBasicInfoRightFragment();
 		Bundle args = new Bundle();
-		args.putString(KEY_COLLECTION_NAME, collectionName);
+		args.putString(KEY_COLLECTION_NAME, "EO Dataset Series Search");
 		fragment.setArguments(args);
 		return fragment;
 	}
@@ -115,7 +109,7 @@ public class SearchBasicInfoRightFragment extends Fragment {
 		tvCatalogName.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				showCatalogueListDialog(rootView);
+				showCatalogueListDialog();
 			}
 		});
 		setParentIdPrefs(getActivity(), tvCatalogName.getText().toString());
@@ -136,7 +130,7 @@ public class SearchBasicInfoRightFragment extends Fragment {
 			@Override
 			public void onClick(View v) {
 				MapSearchFragment mapSearchFragment = MapSearchFragment
-						.newInstance(null, null);
+						.newInstance();
 				getActivity()
 						.getSupportFragmentManager()
 						.beginTransaction()
@@ -198,16 +192,6 @@ public class SearchBasicInfoRightFragment extends Fragment {
 		return rootView;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see android.support.v4.app.Fragment#onResume()
-	 */
-	@Override
-	public void onResume() {
-		super.onResume();
-	}
-
 	// TODO: Rename method, update argument and hook method into UI event
 	public void onButtonPressed(Uri uri) {
 		if (mListener != null) {
@@ -262,13 +246,13 @@ public class SearchBasicInfoRightFragment extends Fragment {
 			// String tvStr = fr.format("%10f", location.getLatitude() -
 			// 0.1).toString();
 			tvAreaSWLat.setText(String.format(Locale.UK, "% 4f",
-					(float) (location.getLatitude() - 0.1)));
+					(float) (location.getLatitude() - 0.5)));
 			tvAreaSWLon.setText(String.format(Locale.UK, "% 4f",
-					(float) location.getLongitude() - 0.15));
+					(float) location.getLongitude() - 0.5));
 			tvAreaNELat.setText(String.format(Locale.UK, "% 4f",
-					(float) location.getLatitude() + 0.1));
+					(float) location.getLatitude() + 0.5));
 			tvAreaNELon.setText(String.format(Locale.UK, "% 4f",
-					(float) location.getLongitude() + 0.15));
+					(float) location.getLongitude() + 0.5));
 		}
 
 		setBboxPrefs();
@@ -280,7 +264,7 @@ public class SearchBasicInfoRightFragment extends Fragment {
 	private void setInitDateTime() {
 
 		calStart = Calendar.getInstance();
-		calStart.roll(Calendar.HOUR_OF_DAY, -6);
+		calStart.roll(Calendar.YEAR, -1);
 		btnFromDate.setText(formatDate(calStart));
 		btnFromTime.setText(formatTime(calStart));
 
@@ -291,7 +275,7 @@ public class SearchBasicInfoRightFragment extends Fragment {
 		setDateTimePrefs(getActivity());
 	}
 
-	public void showCatalogueListDialog(View v) {
+	public void showCatalogueListDialog() {
 		CatalogueListDialogFragment listDialFrag = new CatalogueListDialogFragment();
 		listDialFrag.show(getActivity().getSupportFragmentManager(),
 				"CatalogueListDialogFragment");
@@ -306,7 +290,7 @@ public class SearchBasicInfoRightFragment extends Fragment {
 				"datePicker");
 	}
 
-	public void showTimePickerDialog(View v) {
+	void showTimePickerDialog(View v) {
 		DialogFragment newFragment = new MyTimePickerFragment();
 		Bundle args = new Bundle();
 		args.putString(KEY_BUTTON_TAG, (String) v.getTag());
@@ -407,7 +391,7 @@ public class SearchBasicInfoRightFragment extends Fragment {
 		}
 	}
 
-	public static class CatalogueListDialogFragment extends DialogFragment {
+	private static class CatalogueListDialogFragment extends DialogFragment {
 		@Override
 		public Dialog onCreateDialog(Bundle savedInstanceState) {
 			AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
@@ -429,8 +413,7 @@ public class SearchBasicInfoRightFragment extends Fragment {
 	 */
 	private static String formatDate(Calendar cal) {
 		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd", Locale.UK);
-		String dateToSet = df.format(cal.getTime());
-		return dateToSet;
+		return df.format(cal.getTime());
 	}
 
 	/**
@@ -439,15 +422,13 @@ public class SearchBasicInfoRightFragment extends Fragment {
 	 */
 	private static String formatTime(Calendar cal) {
 		SimpleDateFormat dfTime = new SimpleDateFormat("HH:mm:ss", Locale.UK);
-		String timeToSet = dfTime.format(cal.getTime());
-		return timeToSet;
+		return dfTime.format(cal.getTime());
 	}
 
 	private static String setDtISO(Calendar cal) {
 		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'",
 				Locale.UK);
-		String nowAsISO = df.format(cal.getTime());
-		return nowAsISO;
+		return df.format(cal.getTime());
 	}
 
 	/**
@@ -459,7 +440,7 @@ public class SearchBasicInfoRightFragment extends Fragment {
 		SharedPreferences.Editor editor = settings.edit();
 		editor.putString(Const.KEY_PREF_DATETIME_START, setDtISO(calStart));
 		editor.putString(Const.KEY_PREF_DATETIME_END, setDtISO(calEnd));
-		editor.commit();
+		editor.apply();
 
 		Log.i("DT", setDtISO(calStart) + " - " + setDtISO(calEnd));
 	}
@@ -469,7 +450,7 @@ public class SearchBasicInfoRightFragment extends Fragment {
 				Const.KEY_PREF_FILE, 0);
 		SharedPreferences.Editor editor = settings.edit();
 		editor.putString(Const.KEY_PREF_PARENT_ID, "EOP:ESA:" + parentId);
-		editor.commit();
+		editor.apply();
 	}
 
 	private void setBboxPrefs() {
@@ -485,7 +466,7 @@ public class SearchBasicInfoRightFragment extends Fragment {
 				Float.valueOf(tvAreaNELon.getText().toString()));
 		editor.putFloat(Const.KEY_PREF_BBOX_NORTH,
 				Float.valueOf(tvAreaNELat.getText().toString()));
-		editor.commit();
+		editor.apply();
 	}
 
 	/**

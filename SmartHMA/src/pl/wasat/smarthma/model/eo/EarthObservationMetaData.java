@@ -36,7 +36,7 @@ public class EarthObservationMetaData {
     private ProductGroupId productGroupId;
     private DerivedFrom derivedFrom;
     private NominalDate nominalDate;
-    private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+    private final Map<String, Object> additionalProperties = new HashMap<String, Object>();
     private AcquisitionSubType acquisitionSubType;
     private ProductQualityDegradationQuotationMode productQualityDegradationQuotationMode;
     

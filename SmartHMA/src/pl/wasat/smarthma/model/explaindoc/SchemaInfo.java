@@ -49,10 +49,8 @@ public class SchemaInfo {
 		if (getClass() != obj.getClass())
 			return false;
 		SchemaInfo other = (SchemaInfo) obj;
-		if (id != other.id)
-			return false;
-		return true;
-	}
+        return id == other.id;
+    }
 
 	/*
 	 * (non-Javadoc)

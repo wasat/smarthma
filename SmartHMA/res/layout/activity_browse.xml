@@ -42,8 +42,7 @@
             <FrameLayout
                 android:id="@+id/left_panel_map"
                 android:layout_width="match_parent"
-                android:layout_height="fill_parent"
-                android:layout_above="@+id/gallery_bottom_panel" />
+                android:layout_height="fill_parent"/>
         </RelativeLayout>
 
         <ProgressBar

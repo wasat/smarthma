@@ -19,7 +19,7 @@ public class MultiCurve {
     private String __prefix;
     private List<CurveMember> curveMember = new ArrayList<CurveMember>();
     private String _gml_id;
-    private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+    private final Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
     public String get__prefix() {
         return __prefix;

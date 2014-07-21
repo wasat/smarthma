@@ -8,10 +8,12 @@ import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
 import pl.wasat.smarthma.model.eo.*;
+import pl.wasat.smarthma.model.feed.Author;
 import pl.wasat.smarthma.model.feed.Entry;
 import pl.wasat.smarthma.model.feed.Feed;
 import pl.wasat.smarthma.model.feed.ItemsPerPage;
 import pl.wasat.smarthma.model.feed.Link;
+import pl.wasat.smarthma.model.feed.Query;
 import pl.wasat.smarthma.model.feed.StartIndex;
 import pl.wasat.smarthma.model.feed.TotalResults;
 import pl.wasat.smarthma.model.feed.Where;
@@ -41,10 +43,17 @@ public class SmartHmaEoHandler extends DefaultHandler {
 	private TotalResults totalResults;
 	private StartIndex startIndex;
 	private ItemsPerPage itemsPerPage;
+	private Query query;
+	private Author author;
+	private String generator;
+	private String feedId;
+	private String title;
+	private String updated;
 	private List<Entry> entries;
 	private Entry entry;
 	private Link link;
 	private ArrayList<Link> linksEntry;
+	private ArrayList<Link> linksFeed;
 	// private Summary summary;
 	private Where where;
 	private Polygon polygon;
@@ -204,13 +213,37 @@ public class SmartHmaEoHandler extends DefaultHandler {
 		chars = new StringBuffer();
 		if (localName.equalsIgnoreCase("feed")) {
 			feed = new Feed();
+			feed.set_xmlns(atts.getValue("xmlns"));
+			feed.set_xmlns_dc(atts.getValue("xmlns:dc"));
+			feed.set_xmlns_eo(atts.getValue("xmlns:eo"));
+			feed.set_xmlns_geo(atts.getValue("xmlns:geo"));
+			feed.set_xmlns_georss(atts.getValue("xmlns:georss"));
+			feed.set_xmlns_media(atts.getValue("xmlns:media"));
+			feed.set_xmlns_os(atts.getValue("xmlns:os"));
+			feed.set_xmlns_sru(atts.getValue("xmlns:sru"));
+			feed.set_xmlns_time(atts.getValue("xmlns:time"));
+			feed.set_xmlns_wrs(atts.getValue("xmlns:wrs"));
 			entries = new ArrayList<Entry>();
+			linksFeed = new ArrayList<Link>();
 		} else if (localName.equalsIgnoreCase("totalResults")) {
 			totalResults = new TotalResults();
 		} else if (localName.equalsIgnoreCase("startIndex")) {
 			startIndex = new StartIndex();
 		} else if (localName.equalsIgnoreCase("itemsPerPage")) {
 			itemsPerPage = new ItemsPerPage();
+		} else if (localName.equalsIgnoreCase("query")) {
+			query = new Query();
+			query.set_count(atts.getValue("count"));
+			query.set_dc_subject(atts.getValue("dc:subject"));
+			query.set_eo_parentIdentifier(atts.getValue("eo:parentIdentifier"));
+			query.set_role(atts.getValue("role"));
+			query.set_searchTerms(atts.getValue("searchTerms"));
+			query.set_sru_recordSchema(atts.getValue("sru:recordSchema"));
+			query.set_startIndex(atts.getValue("startIndex"));
+			query.set_time_end(atts.getValue("time:end"));
+			query.set_time_start(atts.getValue("time:start"));
+		} else if (localName.equalsIgnoreCase("author")) {
+			author = new Author();
 		} else if (localName.equalsIgnoreCase("entry")) {
 			entry = new Entry();
 			isInEntry = true;
@@ -625,22 +658,37 @@ public class SmartHmaEoHandler extends DefaultHandler {
 		if (!isInEntry) {
 			if (localName.equalsIgnoreCase("feed")) {
 				feed.setEntries(entries);
+				feed.setTotalResults(totalResults);
+				feed.setStartIndex(startIndex);
+				feed.setItemsPerPage(itemsPerPage);
+				feed.setQuery(query);
+				feed.setAuthor(author);
+				feed.setGenerator(generator);
+				feed.setId(feedId);
+				feed.setTitle(title);
+				feed.setUpdated(updated);
+				feed.setLink(linksFeed);
 			} else if (localName.equalsIgnoreCase("totalResults")) {
 				totalResults.set__text(chars.toString());
-				feed.setTotalResults(totalResults);
 			} else if (localName.equalsIgnoreCase("startIndex")) {
-				startIndex.set__text(chars.toString());
-				feed.setStartIndex(startIndex);
+				startIndex.set__text(chars.toString());	
 			} else if (localName.equalsIgnoreCase("itemsPerPage")) {
 				itemsPerPage.set__text(chars.toString());
-				feed.setItemsPerPage(itemsPerPage);
 			} else if (localName.equalsIgnoreCase("query")) {
 			} else if (localName.equalsIgnoreCase("author")) {
+				author.setName(name);
+			} else if (localName.equalsIgnoreCase("name")) {
+				name.set__text(chars.toString());
 			} else if (localName.equalsIgnoreCase("generator")) {
+				generator = chars.toString();
 			} else if (localName.equalsIgnoreCase("id")) {
+				feedId = chars.toString();
 			} else if (localName.equalsIgnoreCase("title")) {
+				title = chars.toString();
 			} else if (localName.equalsIgnoreCase("updated")) {
+				updated = chars.toString();
 			} else if (localName.equalsIgnoreCase("link")) {
+				linksFeed.add(link);
 			}
 		}
 		if (isInEntry) {
@@ -1138,8 +1186,7 @@ public class SmartHmaEoHandler extends DefaultHandler {
 				entryAdded++;
 				isInEntry = false;
 				if (entryAdded >= DATASERIES_LIMIT) {
-					return;
-				}
+                }
 			}
 
 		}

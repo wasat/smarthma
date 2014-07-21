@@ -15,7 +15,6 @@ import android.location.Location;
 import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.LocalBroadcastManager;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -49,13 +48,6 @@ import com.google.android.gms.maps.model.TileProvider;
  */
 public class MapSearchFragment extends SupportMapFragment implements
 		GooglePlayServicesClient.ConnectionCallbacks {
-	// private static final String ARG_PARAM1 = "param1";
-	// private static final String ARG_PARAM2 = "param2";
-	private static final String MAP_FRAGMENT_TAG = "MapSearchFragment";
-
-	// TODO: Rename and change types of parameters
-	// private String mParam1;
-	// private String mParam2;
 
 	/** reference to Google Maps object */
 	private SupportMapFragment supportMapFrag;
@@ -71,14 +63,10 @@ public class MapSearchFragment extends SupportMapFragment implements
 	 * Use this factory method to create a new instance of this fragment using
 	 * the provided parameters.
 	 * 
-	 * @param param1
-	 *            Parameter 1.
-	 * @param param2
-	 *            Parameter 2.
 	 * @return A new instance of fragment MapSearchFragment.
 	 */
 	// TODO: Rename and change types and number of parameters
-	public static MapSearchFragment newInstance(String param1, String param2) {
+	public static MapSearchFragment newInstance() {
 		MapSearchFragment fragment = new MapSearchFragment();
 		// Bundle args = new Bundle();
 		// args.putString(ARG_PARAM1, param1);
@@ -106,18 +94,6 @@ public class MapSearchFragment extends SupportMapFragment implements
 		View view = super.onCreateView(inflater, container, savedInstanceState);
 		// Inflate the layout for this fragment
 		return view;
-	}
-
-	@Override
-	public void onResume() {
-		super.onResume();
-	}
-
-	@Override
-	public void onViewCreated(View view, Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
-		super.onViewCreated(view, savedInstanceState);
-
 	}
 
 	/**
@@ -172,38 +148,25 @@ public class MapSearchFragment extends SupportMapFragment implements
 			supportMapFrag = this;
 
 			// GoogleMap mapFragment = this.getMap();
-			if (supportMapFrag == null) {
-				// To programmatically add the map, we first create a
-				// SupportMapFragment.
-				supportMapFrag = SupportMapFragment.newInstance();
 
-				// Then we add it using a FragmentTransaction.
-				FragmentTransaction fragmentTransaction = getActivity()
-						.getSupportFragmentManager().beginTransaction();
-				fragmentTransaction.add(android.R.id.content, supportMapFrag,
-						MAP_FRAGMENT_TAG);
-				fragmentTransaction.commit();
-			} else {
+            setUpMapIfNeeded();
+            if (savedInstanceState != null) {
+                // Reincarnated activity. The obtained map is the same map
+                // instance in the previous activity life cycle.
+                // There is no need to reinitialize it if setRetainInstance
+                // is set.
+                // However, you still have to add all your listeners to it
+                // later.
+                mMap = getMap();
 
-				setUpMapIfNeeded();
-				if (savedInstanceState != null) {
-					// Reincarnated activity. The obtained map is the same map
-					// instance in the previous activity life cycle.
-					// There is no need to reinitialize it if setRetainInstance
-					// is set.
-					// However, you still have to add all your listeners to it
-					// later.
-					mMap = getMap();
-
-				} else {
-					// First incarnation of this activity.
-					// set retaininstance to minimize rotation time w/ google
-					// maps
-					// this.setRetainInstance(true);
-				}
-				// setUpMapIfNeeded();
-			}
-		} else {
+            } else {
+                // First incarnation of this activity.
+                // set retaininstance to minimize rotation time w/ google
+                // maps
+                // this.setRetainInstance(true);
+            }
+            // setUpMapIfNeeded();
+        } else {
 			Dialog dialog = GooglePlayServicesUtil.getErrorDialog(status,
 					getActivity(), 42);
 			dialog.show();
@@ -217,7 +180,6 @@ public class MapSearchFragment extends SupportMapFragment implements
 		}
 		if (mMap != null) {
 			setUpMap();
-		} else {
 		}
 
 	}
@@ -348,27 +310,27 @@ public class MapSearchFragment extends SupportMapFragment implements
 	 */
 	public void showFootPrints(ArrayList<List<Pos>> footPrints) {
 
-		for (int i = 0; i < footPrints.size(); i++) {
-			ArrayList<LatLng> footPrintPoints = new ArrayList<LatLng>();
+        for (List<Pos> footPrint : footPrints) {
+            ArrayList<LatLng> footPrintPoints = new ArrayList<LatLng>();
 
-			for (int j = 0; j < footPrints.get(i).size(); j++) {
-				String posStr = footPrints.get(i).get(j).get__text();
-				LatLng ftPt = new LatLng(Double.valueOf(posStr.split(" ")[0]),
-						Double.valueOf(posStr.split(" ")[1]));
-				footPrintPoints.add(ftPt);
-			}
+            for (Pos aFootPrint : footPrint) {
+                String posStr = aFootPrint.get__text();
+                LatLng ftPt = new LatLng(Double.valueOf(posStr.split(" ")[0]),
+                        Double.valueOf(posStr.split(" ")[1]));
+                footPrintPoints.add(ftPt);
+            }
 
-			if (footPrintPoints.size() > 0) {
-				PolygonOptions rectOptions = new PolygonOptions();
-				rectOptions.addAll(footPrintPoints);
-				rectOptions.strokeColor(Color.BLUE);
-				rectOptions.strokeWidth(4);
-				rectOptions.fillColor(Color.LTGRAY);
-				rectOptions.geodesic(true);
-				rectOptions.zIndex(1);
-				mMap.addPolygon(rectOptions);
-			}
-		}
+            if (footPrintPoints.size() > 0) {
+                PolygonOptions rectOptions = new PolygonOptions();
+                rectOptions.addAll(footPrintPoints);
+                rectOptions.strokeColor(Color.BLUE);
+                rectOptions.strokeWidth(4);
+                rectOptions.fillColor(Color.LTGRAY);
+                rectOptions.geodesic(true);
+                rectOptions.zIndex(1);
+                mMap.addPolygon(rectOptions);
+            }
+        }
 
 	}
 

@@ -1,6 +1,7 @@
 
 package pl.wasat.smarthma.model.feed;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -13,9 +14,12 @@ import org.apache.commons.lang.builder.ToStringStyle;
 
 import pl.wasat.smarthma.utils.text.SmartHMAStringStyle;
 
-public class Feed {
-
-    private TotalResults totalResults;
+public class Feed implements Serializable{
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 8408882105386475192L;
+	private TotalResults totalResults;
     private StartIndex startIndex;
     private ItemsPerPage itemsPerPage;
     private Query query;
@@ -37,7 +41,7 @@ public class Feed {
     private String _xmlns_sru;
     private String _xmlns_time;
     private String _xmlns_wrs;
-    private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+    private final Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
     public TotalResults getTotalResults() {
         return totalResults;

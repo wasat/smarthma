@@ -18,7 +18,7 @@ public class LinearRing {
     private String __prefix;
     private PosString posString;
     private List<Pos> posList;
-    private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+    private final Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
     public String get__prefix() {
         return __prefix;

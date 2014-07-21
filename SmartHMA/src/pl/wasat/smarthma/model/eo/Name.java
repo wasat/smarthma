@@ -17,7 +17,7 @@ public class Name {
     private String __text;
     private String _xmlns;
     private String _codeSpace;
-    private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+    private final Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
     public String get__text() {
         return __text;

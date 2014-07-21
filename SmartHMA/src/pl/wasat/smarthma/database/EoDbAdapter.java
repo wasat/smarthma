@@ -30,7 +30,7 @@ public class EoDbAdapter{
 
 	private SQLiteHelper sqLiteHelper;
 	private SQLiteDatabase sqLiteDatabase;
-	private Context context;
+	private final Context context;
 
 	public EoDbAdapter(Context c){
 		context = c;

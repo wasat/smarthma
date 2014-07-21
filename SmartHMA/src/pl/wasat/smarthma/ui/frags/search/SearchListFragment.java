@@ -5,11 +5,12 @@ import java.util.List;
 import pl.wasat.smarthma.R;
 import pl.wasat.smarthma.adapter.SearchListAdapter;
 import pl.wasat.smarthma.database.EoDbAdapter;
+import pl.wasat.smarthma.model.FedeoRequest;
 import pl.wasat.smarthma.model.feed.Entry;
 import pl.wasat.smarthma.model.feed.Feed;
 import pl.wasat.smarthma.ui.frags.BaseSpiceListFragment;
 import pl.wasat.smarthma.ui.frags.FailureFragment;
-import pl.wasat.smarthma.utils.rss.SearchCollectionsFeedRequest;
+import pl.wasat.smarthma.utils.rss.FedeoSearchRequest;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -27,11 +28,10 @@ import android.widget.Toast;
  * method to create an instance of this fragment.
  * 
  */
-public class SearchListFragment extends BaseSpiceListFragment
-{
-	private static final String ARG_PARAM1 = "param1";
+public class SearchListFragment extends BaseSpiceListFragment {
+	private static final String KEY_PARAM_FEDEO_REQUEST = "param1";
 
-	private String mParam1;
+	private FedeoRequest searchRequest;
 
 	private static final String STATE_ACTIVATED_POSITION = "activated_position";
 	private int mActivatedPosition = ListView.INVALID_POSITION;
@@ -48,12 +48,12 @@ public class SearchListFragment extends BaseSpiceListFragment
 	 *            Parameter 1.
 	 * @param param2
 	 *            Parameter 2.
-	 * @return A new instance of fragment DataSeriesListFragment.
+	 * @return A new instance of fragment SearchListFragment.
 	 */
-	public static SearchListFragment newInstance(String param1) {
+	public static SearchListFragment newInstance(FedeoRequest fedeoRequest) {
 		SearchListFragment fragment = new SearchListFragment();
 		Bundle args = new Bundle();
-		args.putString(ARG_PARAM1, param1);
+		args.putSerializable(KEY_PARAM_FEDEO_REQUEST, fedeoRequest);
 		fragment.setArguments(args);
 		return fragment;
 	}
@@ -66,7 +66,7 @@ public class SearchListFragment extends BaseSpiceListFragment
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		if (getArguments() != null) {
-			mParam1 = getArguments().getString(ARG_PARAM1);
+			searchRequest = (FedeoRequest) getArguments().getSerializable(KEY_PARAM_FEDEO_REQUEST);
 		}
 	}
 
@@ -108,8 +108,8 @@ public class SearchListFragment extends BaseSpiceListFragment
 	public void onStart() {
 		super.onStart();
 		// TODO: Find solution - why fragment is called twice
-		if (mParam1 != null) {
-			loadSearchFeedResponse(mParam1);
+		if (searchRequest != null) {
+			loadSearchFeedResponse(searchRequest);
 		}
 	}
 
@@ -152,7 +152,7 @@ public class SearchListFragment extends BaseSpiceListFragment
 	public boolean onOptionsItemSelected(MenuItem item) {
 		int id = item.getItemId();
 		if (id == R.id.actionbar_refresh) {
-			loadSearchFeedResponse(mParam1);
+			loadSearchFeedResponse(searchRequest);
 			return true;
 		}
 		return false;
@@ -167,9 +167,11 @@ public class SearchListFragment extends BaseSpiceListFragment
 
 			FailureFragment failureFragment = FailureFragment
 					.newInstance(searchFail);
-			getActivity().getSupportFragmentManager().beginTransaction()
-					.replace(R.id.search_detail_container, failureFragment)
-					.commit();
+			getActivity()
+					.getSupportFragmentManager()
+					.beginTransaction()
+					.replace(R.id.search_results_detail_container,
+							failureFragment).commit();
 		} else {
 
 			for (Entry a : searchFeedList) {
@@ -192,7 +194,6 @@ public class SearchListFragment extends BaseSpiceListFragment
 					searchFeedList);
 			this.setListAdapter(adapter);
 			adapter.notifyDataSetChanged();
-			;
 			getView().setVisibility(View.VISIBLE);
 		}
 
@@ -201,24 +202,24 @@ public class SearchListFragment extends BaseSpiceListFragment
 	/**
 	 * 
 	 */
-	private void loadSearchFeedResponse(String feedSearch) {
-		if (feedSearch != null) {
+	private void loadSearchFeedResponse(FedeoRequest feedSearchRequest) {
+		if (feedSearchRequest != null) {
 			getActivity().setProgressBarIndeterminateVisibility(true);
 			getSpiceManager().execute(
-					new SearchCollectionsFeedRequest(feedSearch), this);
+					new FedeoSearchRequest(feedSearchRequest), this);
 		}
 	}
 
 	/**
 	 * @param searchFeeds
 	 */
-	private void showDataSeriesIntro(List<Entry> searchFeeds) {
+	private void showDataSeriesIntro(Feed searchResultFeed) {
 		SearchDataSeriesIntroFragment searchDataSeriesIntroFragment = SearchDataSeriesIntroFragment
-				.newInstance(searchFeeds);
+				.newInstance(searchResultFeed);
 		getActivity()
 				.getSupportFragmentManager()
 				.beginTransaction()
-				.add(R.id.search_detail_container,
+				.add(R.id.search_results_detail_container,
 						searchDataSeriesIntroFragment).commit();
 
 	}
@@ -243,7 +244,7 @@ public class SearchListFragment extends BaseSpiceListFragment
 		Toast.makeText(getActivity(), R.string.ok_, Toast.LENGTH_SHORT).show();
 		updateSearchListViewContent(searchFeeds.getEntries());
 
-		showDataSeriesIntro(searchFeeds.getEntries());
+		showDataSeriesIntro(searchFeeds);
 
 	}
 

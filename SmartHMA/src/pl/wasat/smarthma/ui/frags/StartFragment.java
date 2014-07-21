@@ -27,12 +27,8 @@ import android.widget.Button;
 public class StartFragment extends Fragment {
 
 	private OnStartFragmentListener mListener;
-	private Button buttonStartSearch;
-	private Button buttonStartBrowse;
-	private Button buttonStartMission;
-	private Button buttonStartOnline;
 
-	/**
+    /**
 	 * Use this factory method to create a new instance of this fragment using
 	 * the provided parameters.
 	 * 
@@ -71,67 +67,54 @@ public class StartFragment extends Fragment {
 		View rootView = inflater.inflate(R.layout.fragment_start, container,
 				false);
 
-		buttonStartSearch = (Button) rootView
-				.findViewById(R.id.start_frag_button_search);
+        Button buttonStartSearch = (Button) rootView
+                .findViewById(R.id.start_frag_button_search);
 		buttonStartSearch.setOnClickListener(new OnClickListener() {
 
-			@Override
-			public void onClick(View v) {
-				Intent startIntent = new Intent(getActivity(),
-						SearchActivity.class);
-				startActivity(startIntent);
+            @Override
+            public void onClick(View v) {
+                Intent startIntent = new Intent(getActivity(),
+                        SearchActivity.class);
+                startActivity(startIntent);
 
-			}
-		});
+            }
+        });
 
-		buttonStartBrowse = (Button) rootView
-				.findViewById(R.id.start_frag_button_browse);
+        Button buttonStartBrowse = (Button) rootView
+                .findViewById(R.id.start_frag_button_browse);
 		buttonStartBrowse.setOnClickListener(new OnClickListener() {
 
-			@Override
-			public void onClick(View v) {
-				Intent startIntent = new Intent(getActivity(),
-						MainSmartHMActivity.class);
-				startActivity(startIntent);
-			}
-		});
-		buttonStartMission = (Button) rootView
-				.findViewById(R.id.start_frag_button_mission);
+            @Override
+            public void onClick(View v) {
+                Intent startIntent = new Intent(getActivity(),
+                        MainSmartHMActivity.class);
+                startActivity(startIntent);
+            }
+        });
+        Button buttonStartMission = (Button) rootView
+                .findViewById(R.id.start_frag_button_mission);
 		buttonStartMission.setOnClickListener(new OnClickListener() {
 
-			@Override
-			public void onClick(View v) {
-				Intent startMissionIntent = new Intent(getActivity(),
-						MissionsActivity.class);
-				startActivity(startMissionIntent);
-			}
-		});
-		buttonStartOnline = (Button) rootView
-				.findViewById(R.id.start_frag_button_online);
+            @Override
+            public void onClick(View v) {
+                Intent startMissionIntent = new Intent(getActivity(),
+                        MissionsActivity.class);
+                startActivity(startMissionIntent);
+            }
+        });
+        Button buttonStartOnline = (Button) rootView
+                .findViewById(R.id.start_frag_button_online);
 		buttonStartOnline.setOnClickListener(new OnClickListener() {
 
-			@Override
-			public void onClick(View v) {
-				Intent startEsaNewsIntent = new Intent(getActivity(),
-						NewsActivity.class);
-				startActivity(startEsaNewsIntent);
-			}
-		});
+            @Override
+            public void onClick(View v) {
+                Intent startEsaNewsIntent = new Intent(getActivity(),
+                        NewsActivity.class);
+                startActivity(startEsaNewsIntent);
+            }
+        });
 
 		return rootView;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see android.support.v4.app.Fragment#onViewCreated(android.view.View,
-	 * android.os.Bundle)
-	 */
-	@Override
-	public void onViewCreated(View view, Bundle savedInstanceState) {
-		// tvFailure = (TextView) getView().findViewById(R.id.failure_text);
-		// tvFailure.setText(mParam1);
-		super.onViewCreated(view, savedInstanceState);
 	}
 
 	// TODO: Rename method, update argument and hook method into UI event

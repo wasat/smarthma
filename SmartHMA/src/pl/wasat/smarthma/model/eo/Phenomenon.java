@@ -20,7 +20,7 @@ public class Phenomenon {
     private String _ns1_id;
     private String _xmlns_gml31;
     private String _gml31_id;
-    private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+    private final Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
     public String get__prefix() {
         return __prefix;

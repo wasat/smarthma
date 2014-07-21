@@ -14,7 +14,7 @@ public class FedeoExceptionHandler extends DefaultHandler {
 	private ExceptionReport exceptionReport;
 	private Exception exception;
 	private ExceptionText exceptionText;
-	private Fedeo fedeo;
+	private final Fedeo fedeo;
 
 	public FedeoExceptionHandler() {
 		super();

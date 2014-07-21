@@ -1,4 +1,4 @@
-package pl.wasat.smarthma.utils.rss;
+/*package pl.wasat.smarthma.utils.rss;
 
 import java.io.InputStream;
 
@@ -25,9 +25,9 @@ public class SearchProductsFeedRequest extends GoogleHttpClientSpiceRequest<Feed
 	private LatLngBounds geoSearchParam;
 	private String parentIdParam;
 
-	/**
+	*//**
 	 * 
-	 */
+	 *//*
 	public SearchProductsFeedRequest(Entry collectionEntry, LatLngBounds geoBox) {
 		super(null);
 		parentIdParam = getParetnId(collectionEntry);
@@ -40,10 +40,10 @@ public class SearchProductsFeedRequest extends GoogleHttpClientSpiceRequest<Feed
 			+ "&maximumRecords=10"
 			+ "&startDate=2009-06-14T06:00:00Z&endDate=2009-06-14T10:00:00Z";
 
-	/**
+	*//**
 	 * @param collectionEntry
 	 * @return
-	 */
+	 *//*
 	private String getParetnId(Entry collectionEntry) {
 		String fullIdentifier = collectionEntry.getIdentifier();
 		String[] idArr = fullIdentifier.split("urn:ogc:def:");
@@ -104,3 +104,4 @@ public class SearchProductsFeedRequest extends GoogleHttpClientSpiceRequest<Feed
 
 	}
 }
+*/

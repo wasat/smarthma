@@ -35,11 +35,7 @@ public class MetadataFragment extends Fragment {
 
 	private OnMetadataFragmentListener mListener;
 
-	private TextView tvMetaHeader;
-
-	private TextView tvMetaContent;
-
-	private LinearLayout linearLayout;
+    private LinearLayout linearLayout;
 
 	/**
 	 * Use this factory method to create a new instance of this fragment using
@@ -133,9 +129,9 @@ public class MetadataFragment extends Fragment {
 
 	private void setMetaDataViews(String headerText, String values) {
 
-		tvMetaHeader = new TextView(getActivity());
+        TextView tvMetaHeader = new TextView(getActivity());
 		tvMetaHeader.setLayoutParams(new TableLayout.LayoutParams(
-				LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT, 1f));
+                LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT, 1f));
 		tvMetaHeader.setPadding(16, 2, 16, 16);
 		tvMetaHeader.setTextSize(18);
 		tvMetaHeader.setTypeface(Typeface.DEFAULT_BOLD);
@@ -146,9 +142,9 @@ public class MetadataFragment extends Fragment {
 
 		String newValues = values.replace(SystemUtils.LINE_SEPARATOR + " "
 				+ SystemUtils.LINE_SEPARATOR + " ", "");
-		tvMetaContent = new TextView(getActivity());
+        TextView tvMetaContent = new TextView(getActivity());
 		tvMetaContent.setLayoutParams(new TableLayout.LayoutParams(
-				LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT, 1f));
+                LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT, 1f));
 		tvMetaContent.setPadding(16, 2, 16, 16);
 		tvMetaContent.setTextSize(16);
 		tvMetaContent.setTextColor(0xffA9A9A9);
@@ -176,7 +172,7 @@ public class MetadataFragment extends Fragment {
 	// TODO: Rename method, update argument and hook method into UI event
 	public void onButtonPressed(Uri uri) {
 		if (mListener != null) {
-			mListener.onMetadataFragmentInteraction(uri);
+			mListener.onMetadataFragmentInteraction();
 		}
 	}
 
@@ -208,7 +204,7 @@ public class MetadataFragment extends Fragment {
 	 */
 	public interface OnMetadataFragmentListener {
 		// TODO: Update argument type and name
-		public void onMetadataFragmentInteraction(Uri uri);
+		public void onMetadataFragmentInteraction();
 	}
 
 }

@@ -9,7 +9,6 @@
     -->
     <item name="activity_two_panel" type="layout">@layout/activity_browse</item>
     <item name="menu_eo_map" type="menu">@menu/menu_eo_map_twopane</item>
-    <item name="menu_main_list" type="menu">@menu/menu_main_list_twopane</item>
     <item name="activity_dataseries_list" type="layout">@layout/activity_dataseries</item>
     <item type="layout" name="activity_article_list">@layout/activity_news</item>
 

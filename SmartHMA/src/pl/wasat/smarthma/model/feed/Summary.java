@@ -16,7 +16,7 @@ public class Summary {
 
     private String __cdata;
     private String _type;
-    private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+    private final Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
     public String get__cdata() {
         return __cdata;

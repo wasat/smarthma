@@ -57,10 +57,8 @@ public class ResponseFormat {
 		if (getClass() != obj.getClass())
 			return false;
 		ResponseFormat other = (ResponseFormat) obj;
-		if (id != other.id)
-			return false;
-		return true;
-	}
+        return id == other.id;
+    }
 
 	/*
 	 * (non-Javadoc)

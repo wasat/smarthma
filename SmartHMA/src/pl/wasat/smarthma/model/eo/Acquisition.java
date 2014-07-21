@@ -31,7 +31,7 @@ public class Acquisition {
     private PolarisationChannels polarisationChannels;
     private WrsLongitudeGrid wrsLongitudeGrid;
     private WrsLatitudeGrid wrsLatitudeGrid;
-    private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+    private final Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
     public String get__prefix() {
         return __prefix;

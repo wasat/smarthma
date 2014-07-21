@@ -18,7 +18,7 @@ public class BrowseInformation {
     private Type type;
     private ReferenceSystemIdentifier referenceSystemIdentifier;
     private FileName fileName;
-    private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+    private final Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
     public String get__prefix() {
         return __prefix;

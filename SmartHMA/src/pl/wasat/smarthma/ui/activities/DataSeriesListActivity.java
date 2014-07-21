@@ -10,6 +10,7 @@ import pl.wasat.smarthma.model.eo.Pos;
 import pl.wasat.smarthma.model.feed.Entry;
 import pl.wasat.smarthma.ui.frags.FailureFragment.OnFailureFragmentListener;
 import pl.wasat.smarthma.ui.frags.MapSearchFragment.OnMapSearchFragmentListener;
+import pl.wasat.smarthma.ui.frags.browse.BrowseDataSeriesIntroFragment.OnBrowseDataSeriesIntroFragmentListener;
 import pl.wasat.smarthma.ui.frags.browse.CollectionsListFragment;
 import pl.wasat.smarthma.ui.frags.browse.DataSeriesDetailFragment;
 import pl.wasat.smarthma.ui.frags.browse.DataSeriesDetailFragment.OnDataSeriesDetailFragmentInteractionListener;
@@ -33,7 +34,7 @@ public class DataSeriesListActivity extends BaseSmartHMActivity implements
 		OnMapSearchFragmentListener,
 		OnCollectionItemRightFragmentListener,
 		OnSearchListFragmentListener,
-		OnSearchProductsListFragmentListener {
+		OnSearchProductsListFragmentListener, OnBrowseDataSeriesIntroFragmentListener {
 
 	private boolean mTwoPane;
 	private EoDbAdapter dba;
@@ -99,14 +100,14 @@ public class DataSeriesListActivity extends BaseSmartHMActivity implements
 	}
 	
 	@Override
-	public void onDataSeriesDetailFragmentInteraction(Uri uri) {
+	public void onDataSeriesDetailFragmentInteraction() {
 		// TODO Auto-generated method stub
 
 	}
 
 
 	@Override
-	public void onFailureFragmentInteraction(Uri uri) {
+	public void onFailureFragmentInteraction() {
 		// TODO Auto-generated method stub
 		
 	}
@@ -141,7 +142,7 @@ public class DataSeriesListActivity extends BaseSmartHMActivity implements
 	 * @see pl.wasat.smarthma.ui.fragments.CollectionItemRightFragment.OnCollectionItemRightFragmentInteractionListener#onCollectionItemRightFragmentInteraction(android.net.Uri)
 	 */
 	@Override
-	public void onCollectionItemRightFragmentInteraction(Uri uri) {
+	public void onCollectionItemRightFragmentInteraction() {
 		// TODO Auto-generated method stub
 		
 	}
@@ -173,6 +174,15 @@ public class DataSeriesListActivity extends BaseSmartHMActivity implements
 	@Override
 	public void onSearchProductsListFragmentFootprintSend(
 			ArrayList<List<Pos>> footPrints) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	/* (non-Javadoc)
+	 * @see pl.wasat.smarthma.ui.frags.browse.BrowseDataSeriesIntroFragment.OnBrowseDataSeriesIntroFragmentListener#onBrowseDataSeriesIntroFragmentInteraction(android.net.Uri)
+	 */
+	@Override
+	public void onBrowseDataSeriesIntroFragmentInteraction() {
 		// TODO Auto-generated method stub
 		
 	}

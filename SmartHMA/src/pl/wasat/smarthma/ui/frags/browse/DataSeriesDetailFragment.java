@@ -6,7 +6,6 @@ import pl.wasat.smarthma.model.feed.Entry;
 import pl.wasat.smarthma.ui.frags.MapSearchFragment;
 import pl.wasat.smarthma.ui.frags.search.CollectionItemRightFragment;
 import android.app.Activity;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -37,23 +36,15 @@ public class DataSeriesDetailFragment extends Fragment {
 
 	private OnDataSeriesDetailFragmentInteractionListener mListener;
 	private Entry displayedEntry;
-	private EoDbAdapter db;
-	
-	private Button searchButton;
 
-	/**
+    /**
 	 * Use this factory method to create a new instance of this fragment using
 	 * the provided parameters.
 	 * 
-	 * @param param1
-	 *            Parameter 1.
-	 * @param param2
-	 *            Parameter 2.
 	 * @return A new instance of fragment DataSeriesDetailFragment.
 	 */
 	// TODO: Rename and change types and number of parameters
-	public static DataSeriesDetailFragment newInstance(String param1,
-			String param2) {
+	public static DataSeriesDetailFragment newInstance() {
 		DataSeriesDetailFragment fragment = new DataSeriesDetailFragment();
 		Bundle args = new Bundle();
 		fragment.setArguments(args);
@@ -70,7 +61,7 @@ public class DataSeriesDetailFragment extends Fragment {
 		if (getArguments() != null) {
 		}
 
-		db = new EoDbAdapter(getActivity());
+        EoDbAdapter db = new EoDbAdapter(getActivity());
 		if (getArguments().containsKey(Entry.KEY_RSS_ENTRY)) {
 			displayedEntry = (Entry) getArguments().getSerializable(
 					Entry.KEY_RSS_ENTRY);
@@ -97,26 +88,19 @@ public class DataSeriesDetailFragment extends Fragment {
 					.findViewById(R.id.dataseries_detail);
 			detailWebView.loadData(content, "text/html", "UTF-8");
 
-			searchButton = (Button) rootView
-					.findViewById(R.id.ds_detail_button_search_product);
+            Button searchButton = (Button) rootView
+                    .findViewById(R.id.ds_detail_button_search_product);
 			searchButton.setOnClickListener(new OnClickListener() {
 
-				@Override
-				public void onClick(View v) {
-					loadSearchParameters(title, pubDate);
+                @Override
+                public void onClick(View v) {
+                    loadSearchParameters(title, pubDate);
 
-				}
+                }
 
-			});
+            });
 		}
 		return rootView;
-	}
-
-	// TODO: Rename method, update argument and hook method into UI event
-	public void onButtonPressed(Uri uri) {
-		if (mListener != null) {
-			mListener.onDataSeriesDetailFragmentInteraction(uri);
-		}
 	}
 
 	@Override
@@ -167,13 +151,13 @@ public class DataSeriesDetailFragment extends Fragment {
 	 */
 	public interface OnDataSeriesDetailFragmentInteractionListener {
 		// TODO: Update argument type and name
-		public void onDataSeriesDetailFragmentInteraction(Uri uri);
+		public void onDataSeriesDetailFragmentInteraction();
 	}
 
 	private void loadSearchParameters(String title, String pubDate) {
 
 		MapSearchFragment mapSearchFragment = MapSearchFragment.newInstance(
-				null, null);
+        );
 		getActivity().getSupportFragmentManager().beginTransaction()
 				.replace(R.id.dataseries_detail_container, mapSearchFragment)
 				.addToBackStack("MapSearchFragment").commit();

@@ -13,7 +13,7 @@ import pl.wasat.smarthma.utils.text.SmartHMAStringStyle;
 public class Fedeo {
 
     private ExceptionReport exceptionReport;
-    private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+    private final Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
     public ExceptionReport getExceptionReport() {
         return exceptionReport;

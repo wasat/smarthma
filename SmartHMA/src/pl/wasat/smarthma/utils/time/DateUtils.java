@@ -3,7 +3,7 @@ package pl.wasat.smarthma.utils.time;
 import java.util.Calendar;
 import java.util.Date;
 
-public class DateUtils {
+class DateUtils {
 
 	public static String getDateDifference(Date thenDate){
         Calendar now = Calendar.getInstance();

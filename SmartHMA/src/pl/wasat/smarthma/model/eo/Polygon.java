@@ -18,7 +18,7 @@ public class Polygon {
     private Exterior exterior;
     private String _srsName;
     private String _gml_id;
-    private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+    private final Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
     public String get__prefix() {
         return __prefix;

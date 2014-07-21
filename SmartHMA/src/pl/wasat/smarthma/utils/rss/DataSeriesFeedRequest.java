@@ -1,4 +1,4 @@
-package pl.wasat.smarthma.utils.rss;
+/*package pl.wasat.smarthma.utils.rss;
 
 import java.io.InputStream;
 
@@ -22,9 +22,6 @@ public class DataSeriesFeedRequest extends GoogleHttpClientSpiceRequest<Feed> {
 
 	private String urlSearchParam;
 
-	/**
-	 * 
-	 */
 	public DataSeriesFeedRequest(String urlSearchParameter) {
 		super(null);
 		urlSearchParam = urlSearchParameter;
@@ -78,3 +75,4 @@ public class DataSeriesFeedRequest extends GoogleHttpClientSpiceRequest<Feed> {
 
 	}
 }
+*/

@@ -38,13 +38,8 @@ public class ProductDetailSearchFragment extends Fragment {
 	// TODO: Rename and change types of parameters
 
 	private Entry displayedEntry;
-	private EoDbAdapter db;
 
-	private Button showMapButton;
-	private Button quicklookButton;
-	private Button metaButton;
-
-	private OnProductDetailSearchFragmentListener mListener;
+    private OnProductDetailSearchFragmentListener mListener;
 
 	/**
 	 * Use this factory method to create a new instance of this fragment using
@@ -77,7 +72,7 @@ public class ProductDetailSearchFragment extends Fragment {
 					KEY_PRODUCT_ENTRY);
 		}
 
-		db = new EoDbAdapter(getActivity());
+        EoDbAdapter db = new EoDbAdapter(getActivity());
 	}
 
 	@Override
@@ -102,48 +97,50 @@ public class ProductDetailSearchFragment extends Fragment {
 					.findViewById(R.id.product_frag_detail_content);
 			detailWebView.loadData(content, "text/html", "UTF-8");
 
-			quicklookButton = (Button) rootView
-					.findViewById(R.id.product_frag_detail_button_quicklook);
+            Button quicklookButton = (Button) rootView
+                    .findViewById(R.id.product_frag_detail_button_quicklook);
 			quicklookButton.setOnClickListener(new OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					// loadSearchParameters(title, pubDate);
-				}
-			});
+                @Override
+                public void onClick(View v) {
+                    showQuickLook();
+                }
 
-			metaButton = (Button) rootView
-					.findViewById(R.id.product_frag_detail_button_show_meta);
+
+            });
+
+            Button metaButton = (Button) rootView
+                    .findViewById(R.id.product_frag_detail_button_show_meta);
 			metaButton.setOnClickListener(new OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					MetadataFragment mapSearchFragment = MetadataFragment
-							.newInstance(displayedEntry);
-					getActivity()
-							.getSupportFragmentManager()
-							.beginTransaction()
-							.replace(R.id.search_detail_container,
-									mapSearchFragment)
-							.addToBackStack("MetadataFragment").commit();
+                @Override
+                public void onClick(View v) {
+                    MetadataFragment mapSearchFragment = MetadataFragment
+                            .newInstance(displayedEntry);
+                    getActivity()
+                            .getSupportFragmentManager()
+                            .beginTransaction()
+                            .replace(R.id.search_results_detail_container,
+                                    mapSearchFragment)
+                            .addToBackStack("MetadataFragment").commit();
 
-				}
-			});
+                }
+            });
 
-			showMapButton = (Button) rootView
-					.findViewById(R.id.product_frag_detail_button_show_map);
+            Button showMapButton = (Button) rootView
+                    .findViewById(R.id.product_frag_detail_button_show_map);
 			showMapButton.setOnClickListener(new OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					MapSearchFragment mapSearchFragment = MapSearchFragment
-							.newInstance(null, null);
-					getActivity()
-							.getSupportFragmentManager()
-							.beginTransaction()
-							.replace(R.id.search_detail_container,
-									mapSearchFragment)
-							.addToBackStack("MapSearchFragment").commit();
+                @Override
+                public void onClick(View v) {
+                    MapSearchFragment mapSearchFragment = MapSearchFragment
+                            .newInstance();
+                    getActivity()
+                            .getSupportFragmentManager()
+                            .beginTransaction()
+                            .replace(R.id.search_results_detail_container,
+                                    mapSearchFragment)
+                            .addToBackStack("MapSearchFragment").commit();
 
-				}
-			});
+                }
+            });
 		}
 		return rootView;
 	}
@@ -191,6 +188,12 @@ public class ProductDetailSearchFragment extends Fragment {
 
 	}
 
+	private void showQuickLook() {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	
 	/**
 	 * This interface must be implemented by activities that contain this
 	 * fragment to allow an interaction in this fragment to be communicated to

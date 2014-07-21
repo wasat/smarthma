@@ -20,7 +20,7 @@ public class Sensor {
     private Resolution resolution;
     private MeasurementType measurementType;
         private SwathIdentifier swathIdentifier;
-    private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+    private final Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
     public String get__prefix() {
         return __prefix;
