@@ -109,10 +109,8 @@ public class ServerInfo {
 			return false;
 		if (id != other.id)
 			return false;
-		if (port != other.port)
-			return false;
-		return true;
-	}
+        return port == other.port;
+    }
 
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()

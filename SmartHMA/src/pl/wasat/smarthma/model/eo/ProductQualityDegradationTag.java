@@ -17,7 +17,7 @@ public class ProductQualityDegradationTag {
     private String __prefix;
     private String _codeSpace;
     private String __text;
-    private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+    private final Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
     public String get__prefix() {
         return __prefix;

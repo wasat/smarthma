@@ -21,7 +21,7 @@ public class ExceptionReport {
     private String version;
     private String xmlLang;
     private String xsiSchemaLocation;
-    private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+    private final Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
     public String getPrefix() {
         return prefix;

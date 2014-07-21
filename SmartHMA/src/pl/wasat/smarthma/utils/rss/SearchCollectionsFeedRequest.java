@@ -1,4 +1,4 @@
-package pl.wasat.smarthma.utils.rss;
+/*package pl.wasat.smarthma.utils.rss;
 
 import java.io.InputStream;
 
@@ -23,21 +23,21 @@ public class SearchCollectionsFeedRequest extends
 
 	private String searchUrlFinal;
 
-	/**
+	*//**
 	 * 
-	 */
+	 *//*
 	public SearchCollectionsFeedRequest(String searchUrl) {
 		super(Feed.class);
 		searchUrlFinal = searchUrl;
 	}
-
-	// private static final String FEDEO_SEARCH_URL =
-	// "http://geo.spacebel.be/opensearch/request/?httpAccept=application/atom%2Bxml&type=collection&startRecord=1&maximumRecords=10&startDate=2009-01-01T00:00:00Z&endDate=2009-06-14T00:00:00Z&query=";
-
+	
 	@Override
 	public Feed loadDataFromNetwork() throws Exception {
 		SmartHmaEoHandler rh = null;
 		try {
+			
+			Log.i("URL", searchUrlFinal);
+			
 			HttpRequest request = getHttpRequestFactory().buildGetRequest(
 					new GenericUrl(searchUrlFinal));
 			// request.setThrowExceptionOnExecuteError(false);
@@ -74,3 +74,4 @@ public class SearchCollectionsFeedRequest extends
 
 	}
 }
+*/

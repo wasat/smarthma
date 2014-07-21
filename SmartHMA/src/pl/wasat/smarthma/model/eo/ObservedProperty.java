@@ -16,7 +16,7 @@ public class ObservedProperty {
 
     private String __prefix;
     private String _nilReason;
-    private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+    private final Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
     public String get__prefix() {
         return __prefix;

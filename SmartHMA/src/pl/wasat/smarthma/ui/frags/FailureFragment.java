@@ -2,7 +2,6 @@ package pl.wasat.smarthma.ui.frags;
 
 import pl.wasat.smarthma.R;
 import android.app.Activity;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -26,9 +25,7 @@ public class FailureFragment extends Fragment {
 	// TODO: Rename and change types of parameters
 	private String mParam1;
 
-	TextView tvFailure;
-
-	private OnFailureFragmentListener mListener;
+    private OnFailureFragmentListener mListener;
 
 	/**
 	 * Use this factory method to create a new instance of this fragment using
@@ -76,17 +73,20 @@ public class FailureFragment extends Fragment {
 	 */
 	@Override
 	public void onViewCreated(View view, Bundle savedInstanceState) {
-		tvFailure = (TextView) getView().findViewById(R.id.failure_text);
+        //noinspection ConstantConditions
+        TextView tvFailure = (TextView) getView().findViewById(R.id.failure_text);
 		tvFailure.setText(mParam1);
 		super.onViewCreated(view, savedInstanceState);
 	}
 
-	// TODO: Rename method, update argument and hook method into UI event
-	public void onButtonPressed(Uri uri) {
-		if (mListener != null) {
-			mListener.onFailureFragmentInteraction(uri);
-		}
-	}
+// --Commented out by Inspection START (2014-07-19 14:36):
+//	// TODO: Rename method, update argument and hook method into UI event
+//	public void onButtonPressed(Uri uri) {
+//		if (mListener != null) {
+//			mListener.onFailureFragmentInteraction();
+//		}
+//	}
+// --Commented out by Inspection STOP (2014-07-19 14:36)
 
 	@Override
 	public void onAttach(Activity activity) {
@@ -116,7 +116,7 @@ public class FailureFragment extends Fragment {
 	 */
 	public interface OnFailureFragmentListener {
 		// TODO: Update argument type and name
-		public void onFailureFragmentInteraction(Uri uri);
+		public void onFailureFragmentInteraction();
 	}
 
 }

@@ -9,23 +9,24 @@ import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;
 
+import pl.wasat.smarthma.model.eo.Name;
 import pl.wasat.smarthma.utils.text.SmartHMAStringStyle;
 
 
 public class Author {
 
-    private String name;
-    private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+    private Name name;
+    private final Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
-    public String getName() {
+    public Name getName() {
         return name;
     }
 
-    public void setName(String name) {
+    public void setName(Name name) {
         this.name = name;
     }
 
-    public Author withName(String name) {
+    public Author withName(Name name) {
         this.name = name;
         return this;
     }

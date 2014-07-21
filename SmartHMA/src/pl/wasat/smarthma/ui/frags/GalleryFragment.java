@@ -16,9 +16,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 public class GalleryFragment extends Fragment {
-	private LinearLayout myGallery;
 
-	@Override
+    @Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setRetainInstance(true);
@@ -37,7 +36,7 @@ public class GalleryFragment extends Fragment {
 	}
 
 	private void initUI() {
-		myGallery = (LinearLayout) getView().findViewById(R.id.mygallery);
+        LinearLayout myGallery = (LinearLayout) getView().findViewById(R.id.mygallery);
 
 		Field[] drawables = R.raw.class.getFields();
 		for (Field f : drawables) {
@@ -54,7 +53,7 @@ public class GalleryFragment extends Fragment {
 	}
 
 	private View insertPhoto(String path, int resId) {
-		Bitmap bm = decodeSampledBitmapFromUri(path, resId, 128, 128);
+		Bitmap bm = decodeSampledBitmapFromUri(resId);
 
 		LinearLayout layout = new LinearLayout(getActivity()
 				.getApplicationContext());
@@ -71,9 +70,8 @@ public class GalleryFragment extends Fragment {
 		return layout;
 	}
 
-	public Bitmap decodeSampledBitmapFromUri(String path, int resId,
-			int reqWidth, int reqHeight) {
-		Bitmap bm = null;
+	Bitmap decodeSampledBitmapFromUri(int resId) {
+		Bitmap bm;
 
 		// First decode with inJustDecodeBounds=true to check dimensions
 		final BitmapFactory.Options options = new BitmapFactory.Options();
@@ -82,8 +80,8 @@ public class GalleryFragment extends Fragment {
 		BitmapFactory.decodeResource(getResources(), resId);
 
 		// Calculate inSampleSize
-		options.inSampleSize = calculateInSampleSize(options, reqWidth,
-				reqHeight);
+		options.inSampleSize = calculateInSampleSize(options
+        );
 
 		// Decode bitmap with inSampleSize set
 		options.inJustDecodeBounds = false;
@@ -92,18 +90,17 @@ public class GalleryFragment extends Fragment {
 		return bm;
 	}
 
-	public int calculateInSampleSize(BitmapFactory.Options options,
-			int reqWidth, int reqHeight) {
+	int calculateInSampleSize(BitmapFactory.Options options) {
 		// Raw height and width of image
 		final int height = options.outHeight;
 		final int width = options.outWidth;
 		int inSampleSize = 1;
 
-		if (height > reqHeight || width > reqWidth) {
+		if (height > 128 || width > 128) {
 			if (width > height) {
-				inSampleSize = Math.round((float) height / (float) reqHeight);
+				inSampleSize = Math.round((float) height / (float) 128);
 			} else {
-				inSampleSize = Math.round((float) width / (float) reqWidth);
+				inSampleSize = Math.round((float) width / (float) 128);
 			}
 		}
 

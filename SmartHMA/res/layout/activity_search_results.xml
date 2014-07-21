@@ -21,41 +21,14 @@
             android:layout_height="fill_parent"
             android:contentDescription="@string/desc" />
 
-        <RelativeLayout
+        <FrameLayout
+            android:id="@+id/search_results_detail_container"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true"
-            android:orientation="vertical" >
-
-            <FrameLayout
-                android:id="@+id/gallery_search_bottom_panel"
-                android:name="pl.wasat.smarthma.ui.fragments.GalleryFragment"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:layout_gravity="bottom" >
-            </FrameLayout>
-
-            <FrameLayout
-                android:id="@+id/search_detail_container"
-                android:layout_width="match_parent"
-                android:layout_height="fill_parent"
-                android:layout_above="@+id/gallery_search_bottom_panel" />
-        </RelativeLayout>
-
-        <ProgressBar
-            android:id="@+id/progressBarWmsLoad"
-            style="@android:style/Widget.ProgressBar.Inverse"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true"
-            android:visibility="invisible" />
+            android:layout_height="fill_parent" />
     </RelativeLayout>
 
     <FrameLayout
-        android:id="@+id/search_list_container"
+        android:id="@+id/search_results_list_container"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1" />

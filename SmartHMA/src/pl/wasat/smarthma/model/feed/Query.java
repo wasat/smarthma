@@ -19,11 +19,12 @@ public class Query {
     private String _dc_subject;
     private String _eo_parentIdentifier;
     private String _role;
+    private String searchTerms;
     private String _sru_recordSchema;
     private String _startIndex;
     private String _time_end;
     private String _time_start;
-    private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+    private final Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
     public String get__prefix() {
         return __prefix;
@@ -87,6 +88,19 @@ public class Query {
 
     public Query with_role(String _role) {
         this._role = _role;
+        return this;
+    }
+    
+    public String get_searchTerms() {
+        return searchTerms;
+    }
+
+    public void set_searchTerms(String searchTerms) {
+        this.searchTerms = searchTerms;
+    }
+
+    public Query with_searchTerms(String searchTerms) {
+        this.searchTerms = searchTerms;
         return this;
     }
 

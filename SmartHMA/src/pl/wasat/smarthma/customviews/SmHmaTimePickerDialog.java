@@ -65,10 +65,10 @@ public class SmHmaTimePickerDialog extends AlertDialog implements OnClickListene
 	private final Calendar mCalendar;
 	private final java.text.DateFormat mDateFormat;
 
-	int mInitialHourOfDay;
-	int mInitialMinute;
-	int mInitialSeconds;
-	boolean mIs24HourView;
+	private final int mInitialHourOfDay;
+	private final int mInitialMinute;
+	private final int mInitialSeconds;
+	private final boolean mIs24HourView;
 
 	/**
 	 * @param context

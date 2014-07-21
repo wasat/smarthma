@@ -16,7 +16,7 @@ public class Product {
 
     private String __prefix;
     private ProductInformation productInformation;
-    private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+    private final Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
     public String get__prefix() {
         return __prefix;

@@ -17,18 +17,18 @@ public class TileProviderFactory {
 		super.finalize();
 	}
 
-	private static String URL_BASE_OSM = "http://a.tile.openstreetmap.org/{z}/{x}/{y}.png";
+	private static final String URL_BASE_OSM = "http://a.tile.openstreetmap.org/{z}/{x}/{y}.png";
 
 	public static WMSTileProvider getWmsTileProvider(final String WMS_name,
 			final Context context) {
-		WMSTileProvider tileProvider = new WMSTileProvider(256, 256) {
+		return new WMSTileProvider(256, 256) {
 
 			@Override
 			public synchronized URL getTileUrl(int x, int y, int zoom) {
 				double[] bbox = getBoundingBox(x, y, zoom);
 				String s = String.format(Locale.US, WMS_name, bbox[MINX],
 						bbox[MINY], bbox[MAXX], bbox[MAXY]);
-				URL url = null;
+				URL url;
 				try {
 					url = new URL(s);
 					sendWmsLoadState(context);
@@ -40,19 +40,18 @@ public class TileProviderFactory {
 				return url;
 			}
 		};
-		return tileProvider;
 	}
 
 	public static WMSTileProvider getOsmWmsTileProvider(final String WMS_name) {
 
-		WMSTileProvider tileProvider = new WMSTileProvider(256, 256) {
+		return new WMSTileProvider(256, 256) {
 
 			@Override
 			public synchronized URL getTileUrl(int x, int y, int zoom) {
 				double[] bbox = getBoundingBox(x, y, zoom);
 				String s = String.format(Locale.US, WMS_name, bbox[MINX],
 						bbox[MINY], bbox[MAXX], bbox[MAXY]);
-				URL url = null;
+				URL url;
 				try {
 					url = new URL(s);
 				} catch (MalformedURLException e) {
@@ -62,12 +61,11 @@ public class TileProviderFactory {
 				return url;
 			}
 		};
-		return tileProvider;
 	}
 
 	public static WMSTileProvider getOSMTileProvider() {
 
-		WMSTileProvider tileProvider = new WMSTileProvider(256, 256) {
+		return new WMSTileProvider(256, 256) {
 
 			@Override
 			public URL getTileUrl(int x, int y, int zoom) {
@@ -82,7 +80,6 @@ public class TileProviderFactory {
 			}
 		};
 
-		return tileProvider;
 	}
 
 	private static void sendWmsLoadState(Context con) {

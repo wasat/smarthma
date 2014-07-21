@@ -6,18 +6,18 @@ import java.util.List;
 import pl.wasat.smarthma.R;
 import pl.wasat.smarthma.adapter.ProductsListAdapter;
 import pl.wasat.smarthma.database.EoDbAdapter;
+import pl.wasat.smarthma.model.FedeoRequest;
 import pl.wasat.smarthma.model.eo.Pos;
 import pl.wasat.smarthma.model.feed.Entry;
 import pl.wasat.smarthma.model.feed.Feed;
 import pl.wasat.smarthma.ui.frags.BaseSpiceListFragment;
 import pl.wasat.smarthma.ui.frags.FailureFragment;
-import pl.wasat.smarthma.utils.rss.SearchProductsFeedRequest;
+import pl.wasat.smarthma.utils.rss.FedeoSearchRequest;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.Toast;
-import com.google.android.gms.maps.model.LatLngBounds;
 
 /**
  * A simple {@link android.support.v4.app.Fragment} subclass. Activities that
@@ -29,17 +29,17 @@ import com.google.android.gms.maps.model.LatLngBounds;
  * 
  */
 public class SearchProductsListFragment extends BaseSpiceListFragment {
-	private static final String KEY_COLL_ENTRY = "pl.wasat.samrthma.KEY_COLL_ENTRY";
-	private static final String KEY_PROD_BOUNDS = "pl.wasat.samrthma.KEY_PROD_BOUNDS";
-	
-	private LatLngBounds paramGeoBounds;
-	private Entry paramCollEntry;
+	private static final String KEY_PARAM_FEDEO_REQUEST = "pl.wasat.samrthma.KEY_PARAM_FEDEO_REQUEST";
+
+	// private LatLngBounds paramGeoBounds;
+	// private Entry paramCollEntry;
+
+	private FedeoRequest fedeoRequest;
 
 	private OnSearchProductsListFragmentListener mListener;
 
 	private static final String STATE_ACTIVATED_POSITION = "activated_position";
 	private int mActivatedPosition = ListView.INVALID_POSITION;
-
 
 	/**
 	 * Use this factory method to create a new instance of this fragment using
@@ -51,12 +51,11 @@ public class SearchProductsListFragment extends BaseSpiceListFragment {
 	 *            Parameter 2.
 	 * @return A new instance of fragment SearchProductsFeedsFragment.
 	 */
-	public static SearchProductsListFragment newInstance(Entry collectionEntry,
-			LatLngBounds bounds) {
+	public static SearchProductsListFragment newInstance(
+			FedeoRequest fedeoRequest) {
 		SearchProductsListFragment fragment = new SearchProductsListFragment();
 		Bundle args = new Bundle();
-		args.putSerializable(KEY_COLL_ENTRY, collectionEntry);
-		args.putParcelable(KEY_PROD_BOUNDS, bounds);
+		args.putSerializable(KEY_PARAM_FEDEO_REQUEST, fedeoRequest);
 		fragment.setArguments(args);
 		return fragment;
 	}
@@ -69,9 +68,8 @@ public class SearchProductsListFragment extends BaseSpiceListFragment {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		if (getArguments() != null) {
-			paramGeoBounds = getArguments().getParcelable(KEY_PROD_BOUNDS);
-			paramCollEntry = (Entry) getArguments().getSerializable(
-					KEY_COLL_ENTRY);
+			fedeoRequest = (FedeoRequest) getArguments().getSerializable(
+					KEY_PARAM_FEDEO_REQUEST);
 		}
 	}
 
@@ -112,8 +110,8 @@ public class SearchProductsListFragment extends BaseSpiceListFragment {
 	public void onStart() {
 		super.onStart();
 		// TODO: Find solution - why fragment is called twice
-		if (paramGeoBounds != null) {
-			loadSearchProductsFeedResponse(paramCollEntry, paramGeoBounds);
+		if (fedeoRequest != null) {
+			loadSearchProductsFeedResponse(fedeoRequest);
 		}
 	}
 
@@ -159,9 +157,11 @@ public class SearchProductsListFragment extends BaseSpiceListFragment {
 			FailureFragment failureFragment = FailureFragment
 					.newInstance(searchFail);
 
-			getActivity().getSupportFragmentManager().beginTransaction()
-					.replace(R.id.search_list_container, failureFragment)
-					.commit();
+			getActivity()
+					.getSupportFragmentManager()
+					.beginTransaction()
+					.replace(R.id.search_results_list_container,
+							failureFragment).commit();
 		} else {
 
 			for (Entry a : searchProductsFeedList) {
@@ -192,13 +192,12 @@ public class SearchProductsListFragment extends BaseSpiceListFragment {
 	/**
 	 * 
 	 */
-	private void loadSearchProductsFeedResponse(Entry collEntry,
-			LatLngBounds geoBounds) {
-		if (geoBounds != null) {
+	private void loadSearchProductsFeedResponse(FedeoRequest fedeoRequest) {
+		if (fedeoRequest != null) {
 			getActivity().setProgressBarIndeterminateVisibility(true);
 
-			getSpiceManager().execute(
-					new SearchProductsFeedRequest(collEntry, geoBounds), this);
+			getSpiceManager().execute(new FedeoSearchRequest(fedeoRequest),
+					this);
 		}
 	}
 
@@ -218,7 +217,6 @@ public class SearchProductsListFragment extends BaseSpiceListFragment {
 		public void onSearchProductsListFragmentFootprintSend(
 				ArrayList<List<Pos>> footPrints);
 	}
-
 
 	/*
 	 * (non-Javadoc)
@@ -247,14 +245,13 @@ public class SearchProductsListFragment extends BaseSpiceListFragment {
 	 */
 	private ArrayList<List<Pos>> getFootprints(List<Entry> searchProductFeeds) {
 		ArrayList<List<Pos>> footPrintsArr = new ArrayList<List<Pos>>();
-		for (int i = 0; i < searchProductFeeds.size(); i++) {
-			footPrintsArr.add(searchProductFeeds.get(i).getEarthObservation()
-					.getFeatureOfInterest().getFootprint().getMultiExtentOf()
-					.getMultiSurface().getSurfaceMembers().getPolygon()
-					.getExterior().getLinearRing().getPosList());
-		}
+        for (Entry searchProductFeed : searchProductFeeds) {
+            footPrintsArr.add(searchProductFeed.getEarthObservation()
+                    .getFeatureOfInterest().getFootprint().getMultiExtentOf()
+                    .getMultiSurface().getSurfaceMembers().getPolygon()
+                    .getExterior().getLinearRing().getPosList());
+        }
 		return footPrintsArr;
 	}
-
 
 }

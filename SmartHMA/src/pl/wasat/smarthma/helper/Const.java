@@ -2,7 +2,7 @@ package pl.wasat.smarthma.helper;
 
 public class Const {
 
-	public static String IMG_URL = "http://89.250.194.14/smarthma/img/";
+	public static final String IMG_URL = "http://89.250.194.14/smarthma/img/";
 	public static final String URL_EXPLAIN_DOC = "http://geo.spacebel.be/opensearch/request";
 	public static final String HTTP_REQUEST_BASE_URL = "http://geo.spacebel.be/opensearch/request/";
 	public static final String URL_PARM_QUERY = "&query=";

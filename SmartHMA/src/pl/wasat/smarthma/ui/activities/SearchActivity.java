@@ -40,27 +40,6 @@ public class SearchActivity extends BaseSmartHMActivity implements
 
 		}
 	}
-
-	@Override
-	protected void onResume() {
-		super.onResume();
-	}
-
-	@Override
-	protected void onPause() {
-		super.onPause();
-	}
-
-	@Override
-	protected void onStart() {
-		super.onStart();
-	}
-
-	@Override
-	protected void onStop() {
-		super.onStop();
-	}
-
 	@Override
 	protected void onSaveInstanceState(Bundle outState) {
 		super.onSaveInstanceState(outState);
@@ -88,11 +67,6 @@ public class SearchActivity extends BaseSmartHMActivity implements
 		return super.onPrepareOptionsMenu(menu);
 	}
 
-	@Override
-	public void supportInvalidateOptionsMenu() {
-		// TODO Auto-generated method stub
-		super.supportInvalidateOptionsMenu();
-	}
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
@@ -139,7 +113,7 @@ public class SearchActivity extends BaseSmartHMActivity implements
 	 */
 	private void loadRightPanel() {
 		SearchBasicInfoRightFragment rightInfoFragment = SearchBasicInfoRightFragment
-				.newInstance("EO Dataset Series Search");
+				.newInstance();
 		getSupportFragmentManager()
 				.beginTransaction()
 				.add(R.id.search_activ_right_container, rightInfoFragment,

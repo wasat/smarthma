@@ -18,7 +18,7 @@ public class Link {
     private String _rel;
     private String _title;
     private String _type;
-    private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+    private final Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
     public String get_href() {
         return _href;

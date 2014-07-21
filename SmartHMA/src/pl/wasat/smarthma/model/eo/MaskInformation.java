@@ -21,7 +21,7 @@ public class MaskInformation {
     private ReferenceSystemIdentifier referenceSystemIdentifier;
     private MultiExtentOf multiExtentOf;
         private FileName fileName;
-    private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+    private final Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
     public String get__prefix() {
         return __prefix;

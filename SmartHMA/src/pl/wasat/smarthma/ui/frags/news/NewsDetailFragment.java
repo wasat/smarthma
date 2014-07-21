@@ -25,8 +25,8 @@ public class NewsDetailFragment extends Fragment {
 
 	public static final String ARG_ITEM_ID = "item_id";
 
-	NewsArticle displayedArticle;
-	EoDbAdapter db;
+	private NewsArticle displayedArticle;
+	private EoDbAdapter db;
 
 	public NewsDetailFragment() {
 		setHasOptionsMenu(true); // this enables us to set actionbar from

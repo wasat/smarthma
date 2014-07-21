@@ -25,9 +25,9 @@ import com.squareup.picasso.Picasso;
  */
 public class CollectionsListAdapter extends BaseAdapter {
 
-	private Activity activity;
-	private ArrayList<Collection> collData;
-	private String groupName;
+	private final Activity activity;
+	private final ArrayList<Collection> collData;
+	private final String groupName;
 	private static LayoutInflater inflater = null;
 
 	// public ImageLoader imageLoader;
@@ -65,8 +65,8 @@ public class CollectionsListAdapter extends BaseAdapter {
 		ImageView thumb_image = (ImageView) vi
 				.findViewById(R.id.collection_image);
 
-		Collection collection = new Collection();
-		collection = collData.get(position);
+		Collection collection;
+        collection = collData.get(position);
 
 		// Setting all values in listview
 		title.setText(collection.getName());
@@ -81,6 +81,6 @@ public class CollectionsListAdapter extends BaseAdapter {
 
 	private int mod(int x, int y) {
 		int result = x % y;
-		return result < 0 ? result + y : result;
+		return result < 0 ? result + 15 : result;
 	}
 }

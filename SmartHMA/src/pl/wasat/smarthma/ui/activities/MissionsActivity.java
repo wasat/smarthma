@@ -10,7 +10,6 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
@@ -31,7 +30,7 @@ public class MissionsActivity extends BaseSmartHMActivity implements
 	private ProgressBar progressBarWmsLoad;
 	private InitialisationReceiver initReceiver;
 	private SpinnerStateReceiver spinnerStateRec;
-	boolean isWmsLoading = false;
+	private boolean isWmsLoading = false;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -79,16 +78,6 @@ public class MissionsActivity extends BaseSmartHMActivity implements
 	}
 
 	@Override
-	protected void onStart() {
-		super.onStart();
-	}
-
-	@Override
-	protected void onStop() {
-		super.onStop();
-	}
-
-	@Override
 	protected void onSaveInstanceState(Bundle outState) {
 		// outState.putBoolean(KEY_STATE_MENU_ENABLED, isMenuEnabled);
 		// outState.putString(KEY_VISIBLE_WORKSPACE, visibleWorskpace);
@@ -117,12 +106,6 @@ public class MissionsActivity extends BaseSmartHMActivity implements
 	public boolean onPrepareOptionsMenu(Menu menu) {
 		// menu.setGroupEnabled(R.id.menu_group_gis, isMenuEnabled);
 		return super.onPrepareOptionsMenu(menu);
-	}
-
-	@Override
-	public void supportInvalidateOptionsMenu() {
-		// TODO Auto-generated method stub
-		super.supportInvalidateOptionsMenu();
 	}
 
 	@Override
@@ -273,9 +256,9 @@ public class MissionsActivity extends BaseSmartHMActivity implements
 			}
 			supportInvalidateOptionsMenu();
 		}
-	};
+	}
 
-	private class SpinnerStateReceiver extends BroadcastReceiver {
+    private class SpinnerStateReceiver extends BroadcastReceiver {
 		@Override
 		public void onReceive(Context context, Intent intent) {
 			isWmsLoading = intent.getBooleanExtra(Const.KEY_MAP_WMS_LOAD_STATE,
@@ -313,7 +296,7 @@ public class MissionsActivity extends BaseSmartHMActivity implements
 	}
 
 	@Override
-	public void onMissionsDetailFragmentInteraction(Uri uri) {
+	public void onMissionsDetailFragmentInteraction() {
 		// TODO Auto-generated method stub
 
 	}

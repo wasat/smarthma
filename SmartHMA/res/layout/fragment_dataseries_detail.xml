@@ -3,8 +3,7 @@
     android:id="@+id/ScrollView"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="#FFFFFF"
-    android:layoutMode="opticalBounds" >
+    android:background="#FFFFFF" >
 
     <LinearLayout
         android:id="@+id/dataseried_detail_layout"

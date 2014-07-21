@@ -52,8 +52,8 @@ public class XMLParser {
 		int collItemId = 0;
 		int groupId = 0;
 
-		XmlPullParserFactory factory = null;
-		XmlPullParser parser = null;
+		XmlPullParserFactory factory;
+		XmlPullParser parser;
 		try {
 			StringReader reader = new StringReader(xmlString);
 			factory = XmlPullParserFactory.newInstance();

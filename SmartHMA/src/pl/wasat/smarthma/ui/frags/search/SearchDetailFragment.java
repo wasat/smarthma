@@ -1,7 +1,5 @@
 package pl.wasat.smarthma.ui.frags.search;
 
-import java.util.Iterator;
-
 import pl.wasat.smarthma.R;
 import pl.wasat.smarthma.database.EoDbAdapter;
 import pl.wasat.smarthma.model.feed.Entry;
@@ -32,25 +30,18 @@ import android.widget.Toast;
  * 
  */
 public class SearchDetailFragment extends Fragment {
-	private Button searchButton;
-	private Button showMapButton;
 
-	private OnSearchDetailFragmentListener mListener;
+    private OnSearchDetailFragmentListener mListener;
 	private Entry displayedEntry;
-	private EoDbAdapter db;
 
-	/**
+    /**
 	 * Use this factory method to create a new instance of this fragment using
 	 * the provided parameters.
 	 * 
-	 * @param param1
-	 *            Parameter 1.
-	 * @param param2
-	 *            Parameter 2.
 	 * @return A new instance of fragment SearchDetailFragment.
 	 */
 	// TODO: Rename and change types and number of parameters
-	public static SearchDetailFragment newInstance(String param1, String param2) {
+	public static SearchDetailFragment newInstance() {
 		SearchDetailFragment fragment = new SearchDetailFragment();
 		Bundle args = new Bundle();
 		fragment.setArguments(args);
@@ -67,7 +58,7 @@ public class SearchDetailFragment extends Fragment {
 		if (getArguments() != null) {
 		}
 
-		db = new EoDbAdapter(getActivity());
+        EoDbAdapter db = new EoDbAdapter(getActivity());
 		if (getArguments().containsKey(Entry.KEY_RSS_ENTRY)) {
 			displayedEntry = (Entry) getArguments().getSerializable(
 					Entry.KEY_RSS_ENTRY);
@@ -98,40 +89,38 @@ public class SearchDetailFragment extends Fragment {
 					.findViewById(R.id.search_fragment_detail_content);
 			detailWebView.loadData(content, "text/html", "UTF-8");
 
-			searchButton = (Button) rootView
-					.findViewById(R.id.search_detail_button_search_product);
+            Button searchButton = (Button) rootView
+                    .findViewById(R.id.search_detail_button_search_product);
 			searchButton.setOnClickListener(new OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					loadSearchParameters(title, pubDate);
-				}
-			});
+                @Override
+                public void onClick(View v) {
+                    loadSearchParameters(title, pubDate);
+                }
+            });
 
-			for (Iterator<Link> iterator = displayedEntry.getLinks().iterator(); iterator
-					.hasNext();) {
-				Link entityLink = (Link) iterator.next();
-				if (entityLink.get_rel().equalsIgnoreCase("search")) {
-					searchButton.setEnabled(true);
-				}
+            for (Link entityLink : displayedEntry.getLinks()) {
+                if (entityLink.get_rel().equalsIgnoreCase("search")) {
+                    searchButton.setEnabled(true);
+                }
 
-			}
+            }
 
-			showMapButton = (Button) rootView
-					.findViewById(R.id.search_detail_button_show_map);
+            Button showMapButton = (Button) rootView
+                    .findViewById(R.id.search_detail_button_show_map);
 			showMapButton.setOnClickListener(new OnClickListener() {
-				@Override
-				public void onClick(View v) {
-					MapSearchFragment mapSearchFragment = MapSearchFragment
-							.newInstance(null, null);
-					getActivity()
-							.getSupportFragmentManager()
-							.beginTransaction()
-							.replace(R.id.search_detail_container,
-									mapSearchFragment)
-							.addToBackStack("MapSearchFragment").commit();
+                @Override
+                public void onClick(View v) {
+                    MapSearchFragment mapSearchFragment = MapSearchFragment
+                            .newInstance();
+                    getActivity()
+                            .getSupportFragmentManager()
+                            .beginTransaction()
+                            .replace(R.id.search_results_detail_container,
+                                    mapSearchFragment)
+                            .addToBackStack("MapSearchFragment").commit();
 
-				}
-			});
+                }
+            });
 		}
 		return rootView;
 	}
@@ -196,9 +185,9 @@ public class SearchDetailFragment extends Fragment {
 	private void loadSearchParameters(String title, String pubDate) {
 
 		MapSearchFragment mapSearchFragment = MapSearchFragment.newInstance(
-				null, null);
+        );
 		getActivity().getSupportFragmentManager().beginTransaction()
-				.replace(R.id.search_detail_container, mapSearchFragment, "MapSearchFragment")
+				.replace(R.id.search_results_detail_container, mapSearchFragment, "MapSearchFragment")
 				.addToBackStack("MapSearchFragment").commit();
 
 		CollectionItemRightFragment collectionItemRightFragment = CollectionItemRightFragment
@@ -206,7 +195,7 @@ public class SearchDetailFragment extends Fragment {
 		getActivity()
 				.getSupportFragmentManager()
 				.beginTransaction()
-				.add(R.id.search_list_container, collectionItemRightFragment,
+				.add(R.id.search_results_list_container, collectionItemRightFragment,
 						"CollectionItemRightFragment")
 				.addToBackStack("CollectionItemRightFragment").commit();
 

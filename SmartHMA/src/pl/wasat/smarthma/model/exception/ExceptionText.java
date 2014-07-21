@@ -15,7 +15,7 @@ public class ExceptionText {
 
     private String prefix;
     private String text;
-    private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+    private final Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
     public String getPrefix() {
         return prefix;

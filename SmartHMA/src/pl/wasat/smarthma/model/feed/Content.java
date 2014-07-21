@@ -19,7 +19,7 @@ public class Content {
     private String _medium;
     private String _type;
     private String _url;
-    private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+    private final Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
     public String get__prefix() {
         return __prefix;

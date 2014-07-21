@@ -18,7 +18,7 @@ public class LineString {
     private Coordinates coordinates;
     private String _gml_id;
     private String _srsName;
-    private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+    private final Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
     public String get__prefix() {
         return __prefix;

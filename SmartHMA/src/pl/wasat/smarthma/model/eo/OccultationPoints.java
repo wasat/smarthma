@@ -16,7 +16,7 @@ public class OccultationPoints {
 
     private String __prefix;
     private MultiPoint multiPoint;
-    private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+    private final Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
     public String get__prefix() {
         return __prefix;

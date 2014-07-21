@@ -13,7 +13,7 @@ public class NewsRssHandler extends DefaultHandler {
 
 	// Feed and Article objects to use for temporary storage
 	private NewsArticle currentArticle = new NewsArticle();
-	private List<NewsArticle> articleList = new ArrayList<NewsArticle>();
+	private final List<NewsArticle> articleList = new ArrayList<NewsArticle>();
 
 	// Number of articles added so far
 	private int articlesAdded = 0;
@@ -22,7 +22,7 @@ public class NewsRssHandler extends DefaultHandler {
 	private static final int ARTICLES_LIMIT = 15;
 
 	// Current characters being accumulated
-	StringBuffer chars = new StringBuffer();
+    private StringBuffer chars = new StringBuffer();
 
 	public List<NewsArticle> getArticleList() {
 		return articleList;
@@ -88,8 +88,7 @@ public class NewsRssHandler extends DefaultHandler {
 			articlesAdded++;
 			if (articlesAdded >= ARTICLES_LIMIT) {
 				// throw new SAXException();
-				return;
-			}
+            }
 		}
 	}
 

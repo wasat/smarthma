@@ -15,17 +15,16 @@ public class NewsListFragment extends ListFragment {
 
     private static final String STATE_ACTIVATED_POSITION = "activated_position";
     //private static final String BLOG_URL = "http://blog.nerdability.com/feeds/posts/default";
-    private static final String BLOG_URL = "http://www.esa.int/rssfeed/EOB";
+    public static final String BLOG_URL = "http://www.esa.int/rssfeed/EOB";
     
     private Callbacks mCallbacks = sDummyCallbacks;
     private int mActivatedPosition = ListView.INVALID_POSITION;
-    private NewsRssServiceNoAsync rssService;
 
     public interface Callbacks {
         public void onItemSelected(String id);
     }
 
-    private static Callbacks sDummyCallbacks = new Callbacks() {
+    private static final Callbacks sDummyCallbacks = new Callbacks() {
         @Override
         public void onItemSelected(String id) {
         }
@@ -112,7 +111,7 @@ public class NewsListFragment extends ListFragment {
     }
     
     private void refreshList(){
-    	rssService = new NewsRssServiceNoAsync(this);
-        rssService.exec(BLOG_URL);
+        NewsRssServiceNoAsync rssService = new NewsRssServiceNoAsync(this);
+        rssService.exec();
     }
 }

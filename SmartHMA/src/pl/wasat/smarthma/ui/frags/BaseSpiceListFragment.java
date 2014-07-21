@@ -40,7 +40,7 @@ import com.octo.android.robospice.request.listener.RequestListener;
 public class BaseSpiceListFragment extends ListFragment implements
 		RequestListener<Feed> {
 
-	public SpiceManager samrtHMASpiceManager = new SpiceManager(
+	private final SpiceManager samrtHMASpiceManager = new SpiceManager(
 			SmartHmaHttpSpiceService.class);
 
 	@Override
@@ -71,25 +71,19 @@ public class BaseSpiceListFragment extends ListFragment implements
 	@Override
 	public void onRequestFailure(SpiceException spiceException) {
 
-		String messTxt = "";
+		String messTxt;
 
 		if (spiceException.getCause() instanceof HttpResponseException) {
 			FedeoExceptionHandler fedHr = null;
 			try {
 
 				String inStr = null;
-				try {
 
-					HttpResponseException exception = (HttpResponseException) spiceException
-							.getCause();
-					inStr = exception.getContent().toString();
+                HttpResponseException exception = (HttpResponseException) spiceException
+                        .getCause();
+                inStr = exception.getContent().toString();
 
-				} finally {
-					if (inStr != null) {
-					}
-				}
-
-				SAXParserFactory spf = SAXParserFactory.newInstance();
+                SAXParserFactory spf = SAXParserFactory.newInstance();
 				SAXParser sp = spf.newSAXParser();
 				XMLReader xr = sp.getXMLReader();
 
@@ -111,7 +105,8 @@ public class BaseSpiceListFragment extends ListFragment implements
 				Log.e("RSS Handler Parser Config", e.toString());
 			}
 
-			messTxt = fedHr.getFedeoException().getExceptionReport()
+            assert fedHr != null;
+            messTxt = fedHr.getFedeoException().getExceptionReport()
 					.getException().getExceptionText().getText();
 
 		} else {
@@ -138,17 +133,16 @@ public class BaseSpiceListFragment extends ListFragment implements
 
 	private void showDialog(String messText) {
 		DialogFragment newFragment = ExceptionDialogFragment.newInstance(
-				R.string.alert_dialog_two_buttons_title, messText);
+                messText);
 		newFragment.show(getFragmentManager(), "dialog");
 	}
 
 	public static class ExceptionDialogFragment extends DialogFragment {
 
-		public static ExceptionDialogFragment newInstance(int title,
-				String message) {
+		public static ExceptionDialogFragment newInstance(String message) {
 			ExceptionDialogFragment frag = new ExceptionDialogFragment();
 			Bundle args = new Bundle();
-			args.putInt("title", title);
+			args.putInt("title", R.string.alert_dialog_response_error);
 			args.putString("Message", message);
 			frag.setArguments(args);
 			return frag;
@@ -162,7 +156,7 @@ public class BaseSpiceListFragment extends ListFragment implements
 			return new AlertDialog.Builder(getActivity())
 					.setIcon(R.drawable.ic_action_name)
 					.setTitle(title)
-					.setMessage(exMess)
+					.setMessage(exMess + getString(R.string.please_correct_your_query_))
 					.setPositiveButton(R.string.alert_dialog_ok,
 							new DialogInterface.OnClickListener() {
 								public void onClick(DialogInterface dialog,

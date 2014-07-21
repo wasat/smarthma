@@ -8,6 +8,7 @@ import pl.wasat.smarthma.adapter.ProductsListAdapter;
 import pl.wasat.smarthma.adapter.SearchListAdapter;
 import pl.wasat.smarthma.database.EoDbAdapter;
 import pl.wasat.smarthma.helper.Const;
+import pl.wasat.smarthma.model.FedeoRequest;
 import pl.wasat.smarthma.model.eo.Pos;
 import pl.wasat.smarthma.model.feed.Entry;
 import pl.wasat.smarthma.ui.frags.FailureFragment.OnFailureFragmentListener;
@@ -18,9 +19,9 @@ import pl.wasat.smarthma.ui.frags.search.CollectionItemRightFragment;
 import pl.wasat.smarthma.ui.frags.search.CollectionItemRightFragment.OnCollectionItemRightFragmentListener;
 import pl.wasat.smarthma.ui.frags.search.ProductDetailSearchFragment;
 import pl.wasat.smarthma.ui.frags.search.ProductDetailSearchFragment.OnProductDetailSearchFragmentListener;
+import pl.wasat.smarthma.ui.frags.search.SearchResultCollectionDetailsFragment;
+import pl.wasat.smarthma.ui.frags.search.SearchResultCollectionDetailsFragment.OnSearchResultCollectionDetailsFragmentListener;
 import pl.wasat.smarthma.ui.frags.search.SearchDataSeriesIntroFragment.OnSearchDataSeriesIntroFragmentListener;
-import pl.wasat.smarthma.ui.frags.search.SearchDetailFragment;
-import pl.wasat.smarthma.ui.frags.search.SearchDetailFragment.OnSearchDetailFragmentListener;
 import pl.wasat.smarthma.ui.frags.search.SearchListFragment;
 import pl.wasat.smarthma.ui.frags.search.SearchListFragment.OnSearchListFragmentListener;
 import pl.wasat.smarthma.ui.frags.search.SearchProductsListFragment;
@@ -36,12 +37,11 @@ import android.view.Window;
 import com.google.android.gms.maps.model.LatLngBounds;
 
 public class SearchResultsActivity extends BaseSmartHMActivity implements
-		OnSearchListFragmentListener, OnSearchDetailFragmentListener,
-		OnSearchProductsListFragmentListener, OnFailureFragmentListener,
-		OnProductDetailSearchFragmentListener,
+		OnSearchListFragmentListener, OnSearchProductsListFragmentListener,
+		OnFailureFragmentListener, OnProductDetailSearchFragmentListener,
 		OnCollectionItemRightFragmentListener, OnMapSearchFragmentListener,
-		OnSearchDataSeriesIntroFragmentListener, OnMetadataFragmentListener
-		 {
+		OnSearchDataSeriesIntroFragmentListener, OnMetadataFragmentListener,
+		OnSearchResultCollectionDetailsFragmentListener {
 
 	private EoDbAdapter dba;
 	private boolean mTwoPane;
@@ -58,7 +58,7 @@ public class SearchResultsActivity extends BaseSmartHMActivity implements
 		// Enabling Back navigation on Action Bar icon
 		actionBar.setDisplayHomeAsUpEnabled(true);
 
-		if (findViewById(R.id.search_detail_container) != null) {
+		if (findViewById(R.id.search_results_detail_container) != null) {
 			mTwoPane = true;
 		}
 
@@ -78,12 +78,13 @@ public class SearchResultsActivity extends BaseSmartHMActivity implements
 			 * from SQLite and showing in listview 2. Making webrequest and
 			 * displaying the data For now we just display the query only
 			 */
-			String queryUrl = buildSearchUrl(query);
+			FedeoRequest request = buildSearchRequest(query);
 
 			SearchListFragment searchListFragment = SearchListFragment
-					.newInstance(queryUrl);
-			getSupportFragmentManager().beginTransaction()
-					.add(R.id.search_list_container, searchListFragment)
+					.newInstance(request);
+			getSupportFragmentManager()
+					.beginTransaction()
+					.add(R.id.search_results_list_container, searchListFragment)
 					.commit();
 
 		}
@@ -94,27 +95,40 @@ public class SearchResultsActivity extends BaseSmartHMActivity implements
 	 * @param query
 	 * @return
 	 */
-	private String buildSearchUrl(String query) {
+	private FedeoRequest buildSearchRequest(String query) {
 
 		SharedPreferences prefs = getSharedPreferences(Const.KEY_PREF_FILE, 0);
 
-		String queryUrl = Const.HTTP_REQUEST_BASE_URL
-				+ Const.URL_PARM_HTTP_ACCEPT + Const.URL_PARM_TYPE
-				+ Const.URL_PARM_PARENT_ID
-				+ prefs.getString(Const.KEY_PREF_PARENT_ID, "EOP:ESA:FEDEO")
-				+ Const.URL_PARM_START_RECORD + "1" + Const.URL_PARM_MAX_REC
-				+ "15" + Const.URL_PARM_START_DATE
-				+ prefs.getString(Const.KEY_PREF_DATETIME_START, "0")
-				+ Const.URL_PARM_END_DATE
-				+ prefs.getString(Const.KEY_PREF_DATETIME_END, "0")
-				+ Const.URL_PARM_BBOX
-				+ prefs.getFloat(Const.KEY_PREF_BBOX_WEST, -180) + ","
-				+ prefs.getFloat(Const.KEY_PREF_BBOX_SOUTH, -90) + ","
-				+ prefs.getFloat(Const.KEY_PREF_BBOX_EAST, 180) + ","
-				+ prefs.getFloat(Const.KEY_PREF_BBOX_NORTH, 90)
-				+ Const.URL_PARM_QUERY + query;
+		FedeoRequest request = new FedeoRequest();
+		request.setDefaultParams();
+		request.setParentIdentifier(prefs.getString(Const.KEY_PREF_PARENT_ID,
+				"EOP:ESA:FEDEO"));
+		request.setStartDate(prefs
+				.getString(Const.KEY_PREF_DATETIME_START, "0"));
+		request.setEndDate(prefs.getString(Const.KEY_PREF_DATETIME_END, "0"));
+		request.setBbox(prefs.getFloat(Const.KEY_PREF_BBOX_WEST, -180),
+				prefs.getFloat(Const.KEY_PREF_BBOX_SOUTH, -90),
+				prefs.getFloat(Const.KEY_PREF_BBOX_EAST, 180),
+				prefs.getFloat(Const.KEY_PREF_BBOX_NORTH, 90));
+		request.setQuery(query);
 
-		return queryUrl;
+//		String queryUrl = Const.HTTP_REQUEST_BASE_URL
+//				+ Const.URL_PARM_HTTP_ACCEPT + Const.URL_PARM_TYPE
+//				+ Const.URL_PARM_PARENT_ID
+//				+ prefs.getString(Const.KEY_PREF_PARENT_ID, "EOP:ESA:FEDEO")
+//				+ Const.URL_PARM_START_RECORD + "1" + Const.URL_PARM_MAX_REC
+//				+ "15" + Const.URL_PARM_START_DATE
+//				+ prefs.getString(Const.KEY_PREF_DATETIME_START, "0")
+//				+ Const.URL_PARM_END_DATE
+//				+ prefs.getString(Const.KEY_PREF_DATETIME_END, "0")
+//				+ Const.URL_PARM_BBOX
+//				+ prefs.getFloat(Const.KEY_PREF_BBOX_WEST, -180) + ","
+//				+ prefs.getFloat(Const.KEY_PREF_BBOX_SOUTH, -90) + ","
+//				+ prefs.getFloat(Const.KEY_PREF_BBOX_EAST, 180) + ","
+//				+ prefs.getFloat(Const.KEY_PREF_BBOX_NORTH, 90)
+//				+ Const.URL_PARM_QUERY + query;
+
+		return request;
 	}
 
 	/*
@@ -127,8 +141,8 @@ public class SearchResultsActivity extends BaseSmartHMActivity implements
 	@Override
 	public void onSearchListFragmentItemSelected(String id) {
 		Entry selectedEntry = (Entry) ((SearchListFragment) getSupportFragmentManager()
-				.findFragmentById(R.id.search_list_container)).getListAdapter()
-				.getItem(Integer.parseInt(id));
+				.findFragmentById(R.id.search_results_list_container))
+				.getListAdapter().getItem(Integer.parseInt(id));
 
 		// mark metadata as read
 		dba.openToWrite();
@@ -136,20 +150,20 @@ public class SearchResultsActivity extends BaseSmartHMActivity implements
 		dba.close();
 		selectedEntry.setRead(true);
 		SearchListAdapter adapter = (SearchListAdapter) ((SearchListFragment) getSupportFragmentManager()
-				.findFragmentById(R.id.search_list_container)).getListAdapter();
+				.findFragmentById(R.id.search_results_list_container))
+				.getListAdapter();
 		adapter.notifyDataSetChanged();
 
-		// load metadata details to main panel
-		if (mTwoPane) {
-			Bundle arguments = new Bundle();
-			arguments.putSerializable(Entry.KEY_RSS_ENTRY, selectedEntry);
+		SearchResultCollectionDetailsFragment searchResultCollectionDetailsFragment = SearchResultCollectionDetailsFragment
+				.newInstance(selectedEntry);
+		getSupportFragmentManager()
+				.beginTransaction()
+				.replace(R.id.search_results_detail_container,
+						searchResultCollectionDetailsFragment,
+						"SearchResultCollectionDetailsFragment")
+				.addToBackStack("SearchResultCollectionDetailsFragment")
+				.commit();
 
-			SearchDetailFragment fragment = new SearchDetailFragment();
-			fragment.setArguments(arguments);
-			getSupportFragmentManager().beginTransaction()
-					.replace(R.id.search_detail_container, fragment).commit();
-
-		}
 	}
 
 	/*
@@ -159,20 +173,15 @@ public class SearchResultsActivity extends BaseSmartHMActivity implements
 	 * OnSearchDetailFragmentInteractionListener
 	 * #onSearchDetailFragmentInteraction(android.net.Uri)
 	 */
+
 	@Override
-	public void onSearchDetailFragmentInteraction(Uri uri) {
+	public void onFailureFragmentInteraction() {
 		// TODO Auto-generated method stub
 
 	}
 
 	@Override
-	public void onFailureFragmentInteraction(Uri uri) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void onCollectionItemRightFragmentInteraction(Uri uri) {
+	public void onCollectionItemRightFragmentInteraction() {
 		// TODO Auto-generated method stub
 
 	}
@@ -229,8 +238,8 @@ public class SearchResultsActivity extends BaseSmartHMActivity implements
 	@Override
 	public void onSearchProductsListFragmentItemSelected(String id) {
 		Entry selectedEntry = (Entry) ((SearchProductsListFragment) getSupportFragmentManager()
-				.findFragmentById(R.id.search_list_container)).getListAdapter()
-				.getItem(Integer.parseInt(id));
+				.findFragmentById(R.id.search_results_list_container))
+				.getListAdapter().getItem(Integer.parseInt(id));
 
 		// mark metadata as read
 		dba.openToWrite();
@@ -238,7 +247,8 @@ public class SearchResultsActivity extends BaseSmartHMActivity implements
 		dba.close();
 		selectedEntry.setRead(true);
 		ProductsListAdapter adapter = (ProductsListAdapter) ((SearchProductsListFragment) getSupportFragmentManager()
-				.findFragmentById(R.id.search_list_container)).getListAdapter();
+				.findFragmentById(R.id.search_results_list_container))
+				.getListAdapter();
 		adapter.notifyDataSetChanged();
 
 		// load metadata details to main panel
@@ -246,7 +256,8 @@ public class SearchResultsActivity extends BaseSmartHMActivity implements
 			ProductDetailSearchFragment fragment = ProductDetailSearchFragment
 					.newInstance(selectedEntry);
 			getSupportFragmentManager().beginTransaction()
-					.replace(R.id.search_detail_container, fragment).commit();
+					.replace(R.id.search_results_detail_container, fragment)
+					.commit();
 		}
 	}
 
@@ -258,7 +269,7 @@ public class SearchResultsActivity extends BaseSmartHMActivity implements
 	 * #onMetadataFragmentInteraction(android.net.Uri)
 	 */
 	@Override
-	public void onMetadataFragmentInteraction(Uri uri) {
+	public void onMetadataFragmentInteraction() {
 		// TODO Auto-generated method stub
 
 	}
@@ -284,5 +295,33 @@ public class SearchResultsActivity extends BaseSmartHMActivity implements
 
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * pl.wasat.smarthma.ui.frags.search.SearchResultCollectionDetailsFragment
+	 * .OnSearchResultCollectionDetailsFragmentListener
+	 * #onSearchResultCollectionDetailsFragmentShowProducts(java.lang.String)
+	 */
+	@Override
+	public void onSearchResultCollectionDetailsFragmentShowProducts(
+			FedeoRequest request) {
+		MapSearchFragment mapSearchFragment = MapSearchFragment.newInstance(
+        );
+		getSupportFragmentManager()
+				.beginTransaction()
+				.replace(R.id.search_results_detail_container,
+						mapSearchFragment, "MapSearchFragment")
+				.addToBackStack("MapSearchFragment").commit();
+
+		SearchProductsListFragment searchProductsFeedsFragment = SearchProductsListFragment
+				.newInstance(request);
+		getSupportFragmentManager()
+				.beginTransaction()
+				.replace(R.id.search_results_list_container,
+						searchProductsFeedsFragment)
+				.addToBackStack("SearchProductsListFragment").commit();
+
+	}
 
 }

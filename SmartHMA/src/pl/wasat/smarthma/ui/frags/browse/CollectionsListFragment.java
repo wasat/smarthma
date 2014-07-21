@@ -9,7 +9,6 @@ import pl.wasat.smarthma.model.Collection;
 import pl.wasat.smarthma.ui.activities.DataSeriesListActivity;
 import android.app.Activity;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -36,9 +35,7 @@ public class CollectionsListFragment extends Fragment {
 
 	private int parentListPos;
 	private String selectGroupName;
-	private ListView list;
-	private CollectionsListAdapter adapter;
-	private OnFragmentInteractionListener mListener;
+    private OnFragmentInteractionListener mListener;
 
 	/**
 	 * Use this factory method to create a new instance of this fragment using
@@ -98,32 +95,33 @@ public class CollectionsListFragment extends Fragment {
 	}
 
 	private void initList() {
-		list = (ListView) getView().findViewById(R.id.collections_list);
+        //noinspection ConstantConditions
+        ListView list = (ListView) getView().findViewById(R.id.collections_list);
 
 		// Getting adapter by passing xml data ArrayList
 		final ArrayList<Collection> collections = SmartHMApplication.GlobalEODataList
 				.getCollectionsGroupList().get(parentListPos).getCollections();
-		adapter = new CollectionsListAdapter(getActivity(), collections,
-				selectGroupName);
+        CollectionsListAdapter adapter = new CollectionsListAdapter(getActivity(), collections,
+                selectGroupName);
 		list.setAdapter(adapter);
 
 		// Click event for single list row
 		list.setOnItemClickListener(new OnItemClickListener() {
 
-			@Override
-			public void onItemClick(AdapterView<?> parent, View view,
-					int position, long id) {
-				String collName = collections.get(position).getName();			
-				loadDataSeriesFeedsActivity(collName);
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view,
+                                    int position, long id) {
+                String collName = collections.get(position).getName();
+                loadDataSeriesFeedsActivity(collName);
 
-			}
-		});
+            }
+        });
 	}
 
 	// TODO: Rename method, update argument and hook method into UI event
-	public void onButtonPressed(Uri uri) {
+	public void onButtonPressed() {
 		if (mListener != null) {
-			mListener.onFragmentInteraction(uri);
+			mListener.onFragmentInteraction();
 		}
 	}
 
@@ -162,7 +160,7 @@ public class CollectionsListFragment extends Fragment {
 	 */
 	public interface OnFragmentInteractionListener {
 		// TODO: Update argument type and name
-		public void onFragmentInteraction(Uri uri);
+		public void onFragmentInteraction();
 	}
 
 }

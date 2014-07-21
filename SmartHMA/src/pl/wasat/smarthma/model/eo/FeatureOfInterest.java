@@ -16,7 +16,7 @@ public class FeatureOfInterest {
 
     private String __prefix;
     private Footprint footprint;
-    private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+    private final Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
     public String get__prefix() {
         return __prefix;

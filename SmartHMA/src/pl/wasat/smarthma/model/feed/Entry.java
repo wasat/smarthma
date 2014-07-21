@@ -41,7 +41,7 @@ public class Entry implements Serializable{
 	private boolean offline;
 
     
-    private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+    private final Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
     public String getId() {
         return id;

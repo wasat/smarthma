@@ -68,10 +68,8 @@ public class MetaInfo {
 				return false;
 		} else if (!dateModified.equals(other.dateModified))
 			return false;
-		if (id != other.id)
-			return false;
-		return true;
-	}
+        return id == other.id;
+    }
 
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()

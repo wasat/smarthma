@@ -77,7 +77,7 @@ public class MissionsDetailFragment extends Fragment {
 	// TODO: Rename method, update argument and hook method into UI event
 	public void onButtonPressed(Uri uri) {
 		if (mListener != null) {
-			mListener.onMissionsDetailFragmentInteraction(uri);
+			mListener.onMissionsDetailFragmentInteraction();
 		}
 	}
 
@@ -129,7 +129,7 @@ public class MissionsDetailFragment extends Fragment {
 	 */
 	public interface OnMissionsDetailFragmentListener {
 		// TODO: Update argument type and name
-		public void onMissionsDetailFragmentInteraction(Uri uri);
+		public void onMissionsDetailFragmentInteraction();
 	}
 
 //	private void loadSearchParameters(String title, String pubDate) {
