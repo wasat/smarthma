@@ -5,7 +5,7 @@
         <item
             android:id="@+id/action_pref1"
             android:icon="@android:drawable/ic_dialog_alert"
-            android:showAsAction="always"
+            android:showAsAction="ifRoom"
             android:title="@string/action_pref1"
             android:titleCondensed="@string/action_pref1">
         </item>

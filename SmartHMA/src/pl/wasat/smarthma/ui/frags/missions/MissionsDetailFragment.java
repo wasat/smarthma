@@ -24,10 +24,6 @@ import android.widget.Toast;
  * 
  */
 public class MissionsDetailFragment extends Fragment {
-	// TODO: Rename parameter arguments, choose names that match
-	// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-	//public static final String ARG_ITEM_ID = "item_id";
-
 	private OnMissionsDetailFragmentListener mListener;
 
 
@@ -74,7 +70,6 @@ public class MissionsDetailFragment extends Fragment {
 		return rootView;
 	}
 
-	// TODO: Rename method, update argument and hook method into UI event
 	public void onButtonPressed(Uri uri) {
 		if (mListener != null) {
 			mListener.onMissionsDetailFragmentInteraction();
@@ -128,27 +123,8 @@ public class MissionsDetailFragment extends Fragment {
 	 * >Communicating with Other Fragments</a> for more information.
 	 */
 	public interface OnMissionsDetailFragmentListener {
-		// TODO: Update argument type and name
 		public void onMissionsDetailFragmentInteraction();
 	}
 
-//	private void loadSearchParameters(String title, String pubDate) {
-//
-//		MapSearchFragment mapSearchFragment = MapSearchFragment.newInstance(
-//				null, null);
-//		getActivity().getSupportFragmentManager().beginTransaction()
-//				.replace(R.id.dataseries_detail_container, mapSearchFragment)
-//				.addToBackStack("MapSearchFragment").commit();
-//
-//		CollectionItemRightFragment collectionItemRightFragment = CollectionItemRightFragment
-//				.newInstance(displayedEntry, title, pubDate);
-//		getActivity()
-//				.getSupportFragmentManager()
-//				.beginTransaction()
-//				.add(R.id.dataseries_list,
-//						collectionItemRightFragment,"CollectionItemRightFragment")
-//				.addToBackStack("CollectionItemRightFragment").commit();
-//
-//	}
 	
 }

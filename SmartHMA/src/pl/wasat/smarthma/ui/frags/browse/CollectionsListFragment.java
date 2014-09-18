@@ -6,7 +6,7 @@ import pl.wasat.smarthma.R;
 import pl.wasat.smarthma.SmartHMApplication;
 import pl.wasat.smarthma.adapter.CollectionsListAdapter;
 import pl.wasat.smarthma.model.Collection;
-import pl.wasat.smarthma.ui.activities.DataSeriesListActivity;
+import pl.wasat.smarthma.ui.activities.BrowseProductsActivity;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -144,7 +144,7 @@ public class CollectionsListFragment extends Fragment {
 
 	private void loadDataSeriesFeedsActivity(String collName) {
 		Intent dsFeedsIntent = new Intent(getActivity(),
-				DataSeriesListActivity.class);
+				BrowseProductsActivity.class);
 		dsFeedsIntent.putExtra(KEY_COLLECTIONS_NAME, collName);
 		startActivity(dsFeedsIntent);
 	}

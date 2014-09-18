@@ -8,6 +8,6 @@
     http://developer.android.com/training/multiscreen/screensizes.html#TaskUseAliasFilters
     -->
     <item name="menu_eo_map" type="menu">@menu/menu_eo_map_twopane</item>
-    <item name="activity_dataseries_list" type="layout">@layout/activity_dataseries</item>
+    <item name="activity_dataseries_list" type="layout">@layout/activity_browse_products</item>
     <item type="layout" name="activity_article_list">@layout/activity_news</item>
 </resources>

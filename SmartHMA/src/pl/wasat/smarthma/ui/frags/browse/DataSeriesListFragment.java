@@ -8,7 +8,7 @@ import pl.wasat.smarthma.database.EoDbAdapter;
 import pl.wasat.smarthma.model.FedeoRequest;
 import pl.wasat.smarthma.model.feed.Entry;
 import pl.wasat.smarthma.model.feed.Feed;
-import pl.wasat.smarthma.ui.frags.BaseSpiceListFragment;
+import pl.wasat.smarthma.ui.frags.base.BaseSpiceListFragment;
 import pl.wasat.smarthma.utils.rss.FedeoSearchRequest;
 import android.app.Activity;
 import android.os.Bundle;
@@ -28,14 +28,12 @@ import android.widget.Toast;
  * 
  */
 public class DataSeriesListFragment extends BaseSpiceListFragment {
-	// TODO: Rename parameter arguments, choose names that match
-	// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-	private static final String ARG_PARAM1 = "param1";
 
-	// TODO: Rename and change types of parameters
-	private String mParam1;
+	private FedeoRequest browseRequest;
 
 	private static final String STATE_ACTIVATED_POSITION = "activated_position";
+
+	private static final String KEY_PARAM_BROWSE_FEDEO_REQUEST = "pl.wasat.smarthma.KEY_PARAM_BROWSE_FEDEO_REQUEST";
 	private int mActivatedPosition = ListView.INVALID_POSITION;
 
 	private OnDataSeriesListFragmentListener mListener;
@@ -50,10 +48,10 @@ public class DataSeriesListFragment extends BaseSpiceListFragment {
 	 *            Parameter 2.
 	 * @return A new instance of fragment DataSeriesListFragment.
 	 */
-	public static DataSeriesListFragment newInstance(String param1) {
+	public static DataSeriesListFragment newInstance(FedeoRequest fedeoRequest) {
 		DataSeriesListFragment fragment = new DataSeriesListFragment();
 		Bundle args = new Bundle();
-		args.putString(ARG_PARAM1, param1);
+		args.putSerializable(KEY_PARAM_BROWSE_FEDEO_REQUEST, fedeoRequest);
 		fragment.setArguments(args);
 		return fragment;
 	}
@@ -66,7 +64,7 @@ public class DataSeriesListFragment extends BaseSpiceListFragment {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		if (getArguments() != null) {
-			mParam1 = getArguments().getString(ARG_PARAM1);
+			browseRequest = (FedeoRequest) getArguments().getSerializable(KEY_PARAM_BROWSE_FEDEO_REQUEST);
 		}
 	}
 
@@ -101,8 +99,8 @@ public class DataSeriesListFragment extends BaseSpiceListFragment {
 	public void onStart() {
 		super.onStart();
 		// TODO: Find solution - why fragment is called twice
-		if (mParam1 != null) {
-			loadDataSeriesFeedResponse(mParam1);
+		if (browseRequest != null) {
+			loadDataSeriesFeedResponse(browseRequest);
 		}
 	}
 
@@ -145,7 +143,7 @@ public class DataSeriesListFragment extends BaseSpiceListFragment {
 	public boolean onOptionsItemSelected(MenuItem item) {
 		int id = item.getItemId();
 		if (id == R.id.actionbar_refresh) {
-			loadDataSeriesFeedResponse(mParam1);
+			loadDataSeriesFeedResponse(browseRequest);
 			return true;
 		}
 		return false;
@@ -153,16 +151,7 @@ public class DataSeriesListFragment extends BaseSpiceListFragment {
 
 	private void updateEOListViewContent(List<Entry> dataSeriesFeedList) {
 		if (dataSeriesFeedList.isEmpty()) {
-            //noinspection ConstantConditions
-            getView().setVisibility(View.GONE);
-
-			// String searchFail = "Nothing to display. Please search again.";
-			//
-			// FailureFragment failureFragment = FailureFragment
-			// .newInstance(searchFail);
-			// getActivity().getSupportFragmentManager().beginTransaction()
-			// .replace(R.id.dataseries_detail_container, failureFragment)
-			// .commit();
+			getView().setVisibility(View.GONE);
 		} else {
 
 			for (Entry a : dataSeriesFeedList) {
@@ -185,9 +174,7 @@ public class DataSeriesListFragment extends BaseSpiceListFragment {
 					getActivity(), dataSeriesFeedList);
 			this.setListAdapter(adapter);
 			adapter.notifyDataSetChanged();
-			// loadingView.setVisibility(View.GONE);
-            //noinspection ConstantConditions
-            getView().setVisibility(View.VISIBLE);
+			getView().setVisibility(View.VISIBLE);
 		}
 
 	}
@@ -195,15 +182,11 @@ public class DataSeriesListFragment extends BaseSpiceListFragment {
 	/**
 	 * 
 	 */
-	private void loadDataSeriesFeedResponse(String feedSearch) {
-		if (feedSearch != null) {
-
-			FedeoRequest req = new FedeoRequest();
-			req.setDefaultParams();
-			req.setParentIdentifier(feedSearch);
+	private void loadDataSeriesFeedResponse(FedeoRequest browseRequest) {
+		if (browseRequest != null) {
 
 			getActivity().setProgressBarIndeterminateVisibility(true);
-			getSpiceManager().execute(new FedeoSearchRequest(req), this);
+			getSpiceManager().execute(new FedeoSearchRequest(browseRequest), this);
 		}
 	}
 
@@ -221,7 +204,6 @@ public class DataSeriesListFragment extends BaseSpiceListFragment {
 		updateEOListViewContent(dataSeriesFeeds.getEntries());
 
 		loadIntroFeedInfo(dataSeriesFeeds);
-
 	}
 
 	/**
@@ -229,14 +211,14 @@ public class DataSeriesListFragment extends BaseSpiceListFragment {
 	 * 
 	 */
 	private void loadIntroFeedInfo(Feed dataSeriesFeeds) {
-		BrowseDataSeriesIntroFragment browseDataSeriesIntroFragment = BrowseDataSeriesIntroFragment
+		FeedSummaryBrowseFragment feedSummaryBrowseFragment = (FeedSummaryBrowseFragment) FeedSummaryBrowseFragment
 				.newInstance(dataSeriesFeeds);
 		getActivity()
 				.getSupportFragmentManager()
 				.beginTransaction()
 				.replace(R.id.dataseries_detail_container,
-						browseDataSeriesIntroFragment)
-				.addToBackStack("BrowseDataSeriesIntroFragment").commit();
+						feedSummaryBrowseFragment)
+				.addToBackStack("FeedSummaryBrowseFragment").commit();
 
 	}
 

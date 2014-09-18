@@ -1,8 +1,8 @@
 package pl.wasat.smarthma.ui.activities;
 
 import pl.wasat.smarthma.R;
-import pl.wasat.smarthma.ui.frags.StartFragment;
-import pl.wasat.smarthma.ui.frags.StartFragment.OnStartFragmentListener;
+import pl.wasat.smarthma.ui.frags.common.StartFragment;
+import pl.wasat.smarthma.ui.frags.common.StartFragment.OnStartFragmentListener;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
@@ -20,7 +20,7 @@ public class StartActivity extends ActionBarActivity implements
 		if (savedInstanceState == null) {
 			StartFragment startFrag = StartFragment.newInstance();
 			getSupportFragmentManager().beginTransaction()
-					.add(R.id.container, startFrag).commit();
+					.replace(R.id.container, startFrag).commit();
 		}
 	}
 
@@ -38,30 +38,13 @@ public class StartActivity extends ActionBarActivity implements
 		// automatically handle clicks on the Home/Up button, so long
 		// as you specify a parent activity in AndroidManifest.xml.
 		int id = item.getItemId();
-        return id == R.id.action_settings || super.onOptionsItemSelected(item);
-    }
+		return id == R.id.action_settings || super.onOptionsItemSelected(item);
+	}
 
 	@Override
 	public void onStartFragmentInteraction(Uri uri) {
 		// TODO Auto-generated method stub
 
 	}
-
-	/**
-	 * A placeholder fragment containing a simple view.
-	 */
-	// public static class PlaceholderFragment extends Fragment {
-	//
-	// public PlaceholderFragment() {
-	// }
-	//
-	// @Override
-	// public View onCreateView(LayoutInflater inflater, ViewGroup container,
-	// Bundle savedInstanceState) {
-	// View rootView = inflater.inflate(R.layout.fragment_start,
-	// container, false);
-	// return rootView;
-	// }
-	// }
 
 }

@@ -114,8 +114,6 @@ public class CollectionsGroupListFragment extends Fragment implements
 	private void loadListSmartHMA() {
 		getActivity().setProgressBarIndeterminateVisibility(true);
 		spiceManager.execute(new ExplainDocRequest(), this);
-		// spiceManager.execute(new ExplainDocRequest(),
-		// "smarthma_expdoc",DurationInMillis.ONE_SECOND * 1, this);
 
 	}
 

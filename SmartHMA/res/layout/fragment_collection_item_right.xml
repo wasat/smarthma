@@ -147,7 +147,7 @@
 
         <Button
             android:id="@+id/coll_item_right_frag_button_search_prod"
-            style="@style/button_details"
+            style="@style/styleBtnDetails"
             android:layout_width="140dp"
             android:layout_height="40dp"
             android:layout_marginLeft="15dp"

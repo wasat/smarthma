@@ -11,7 +11,7 @@
     <string name="specific_collection_does_not_exist">Specific collection does not exist. Please try later.</string>
     <string name="download_explain_doc_complete">Download explain document complete.</string>
     <string name="download_failed">Download failed</string>
-    <string name="loading_please_wait">Loading FedEO Explain Document. \nPlease wait &#8230; </string>
+    <string name="loading_please_wait">Data is loading \nPlease wait &#8230; </string>
     <string name="content_picture">Collection picture</string>
     <string name="search_hint">Search EO data</string>
     <string name="action_search">Search</string>
@@ -77,5 +77,6 @@
     <string name="items_from">Items from</string>
     <string name="to">to</string>
     <string name="collection_id">Collection ID: </string>
+    <string name="show_products">Show Products</string>
 
 </resources>

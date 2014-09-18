@@ -1,7 +1,7 @@
 package pl.wasat.smarthma.ui.activities;
 
 import pl.wasat.smarthma.R;
-import pl.wasat.smarthma.ui.frags.MapSearchFragment.OnMapSearchFragmentListener;
+import pl.wasat.smarthma.ui.frags.common.MapSearchFragment.OnMapSearchFragmentListener;
 import pl.wasat.smarthma.ui.frags.search.SearchBasicInfoRightFragment;
 import pl.wasat.smarthma.ui.frags.search.SearchBasicInfoRightFragment.OnSearchBasicInfoRightFragmentListener;
 import pl.wasat.smarthma.ui.frags.search.SearchFragment;
@@ -63,7 +63,6 @@ public class SearchActivity extends BaseSmartHMActivity implements
 
 	@Override
 	public boolean onPrepareOptionsMenu(Menu menu) {
-		// menu.setGroupEnabled(R.id.menu_group_gis, isMenuEnabled);
 		return super.onPrepareOptionsMenu(menu);
 	}
 
@@ -72,10 +71,8 @@ public class SearchActivity extends BaseSmartHMActivity implements
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
 		case R.id.action_pref1:
-			// showThreatsDialog();
 			break;
 		case R.id.action_pref2:
-			// showWorkspaceDialog();
 			break;
 		case R.id.action_pref3:
 			break;
@@ -91,23 +88,22 @@ public class SearchActivity extends BaseSmartHMActivity implements
 		return true;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
+
+
+	/* (non-Javadoc)
 	 * @see android.support.v4.app.FragmentActivity#onBackPressed()
 	 */
 	@Override
 	public void onBackPressed() {
 		FragmentManager fm = getSupportFragmentManager();
 		int bsec = fm.getBackStackEntryCount();
-		if (bsec > 1) {
+		if (bsec > 0) {
 			fm.popBackStack();
 		} else {
 			finish();
 			super.onBackPressed();
 		}
 	}
-
 	/**
 	 * 
 	 */
@@ -116,16 +112,16 @@ public class SearchActivity extends BaseSmartHMActivity implements
 				.newInstance();
 		getSupportFragmentManager()
 				.beginTransaction()
-				.add(R.id.search_activ_right_container, rightInfoFragment,
+				.replace(R.id.search_activ_right_container, rightInfoFragment,
 						"SearchBasicInfoRightFragment")
-				.addToBackStack("SearchBasicInfoRightFragment").commit();
+				.commit();
 	}
 
 	private void loadLeftPanel() {
 		SearchFragment searchLeftFragment = SearchFragment.newInstance();
 		getSupportFragmentManager().beginTransaction()
-				.add(R.id.search_activ_left_container, searchLeftFragment)
-				.addToBackStack("SearchLeftFragment").commit();
+				.replace(R.id.search_activ_left_container, searchLeftFragment)
+				.commit();
 	}
 
 	/*

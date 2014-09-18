@@ -35,8 +35,8 @@ import android.view.Window;
  * A dialog that prompts the user for the time of day using a {@link TimePicker}
  * .
  */
-public class SmHmaTimePickerDialog extends AlertDialog implements OnClickListener,
-		OnTimeChangedListener {
+public class SmHmaTimePickerDialog extends AlertDialog implements
+		OnClickListener, OnTimeChangedListener {
 
 	/**
 	 * The callback interface used to indicate the user is done filling in the

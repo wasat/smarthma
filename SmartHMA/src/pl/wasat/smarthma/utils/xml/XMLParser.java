@@ -88,7 +88,6 @@ public class XMLParser {
 
 				case XmlPullParser.COMMENT:
 
-					// allDataGroups.add(group);
 					collectionGrList.addItem(group);
 					collItemId = 0;
 

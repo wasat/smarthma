@@ -159,7 +159,6 @@ public class CollectionsGroup {
 		 */
 		public void setCollectionGroupList(
 				ArrayList<CollectionsGroup> collectionsGroupList) {
-			// this.collectionsGroupList = new ArrayList<CollectionsGroup>();
 			this.collectionsGroupList = collectionsGroupList;
 		}
 

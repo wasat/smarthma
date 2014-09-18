@@ -14,7 +14,6 @@ import android.widget.ListView;
 public class NewsListFragment extends ListFragment {
 
     private static final String STATE_ACTIVATED_POSITION = "activated_position";
-    //private static final String BLOG_URL = "http://blog.nerdability.com/feeds/posts/default";
     public static final String BLOG_URL = "http://www.esa.int/rssfeed/EOB";
     
     private Callbacks mCallbacks = sDummyCallbacks;

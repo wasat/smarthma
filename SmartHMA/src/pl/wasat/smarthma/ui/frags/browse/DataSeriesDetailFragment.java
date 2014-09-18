@@ -1,10 +1,8 @@
 package pl.wasat.smarthma.ui.frags.browse;
 
 import pl.wasat.smarthma.R;
-import pl.wasat.smarthma.database.EoDbAdapter;
 import pl.wasat.smarthma.model.feed.Entry;
-import pl.wasat.smarthma.ui.frags.MapSearchFragment;
-import pl.wasat.smarthma.ui.frags.search.CollectionItemRightFragment;
+import pl.wasat.smarthma.ui.frags.common.MapSearchFragment;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -30,20 +28,16 @@ import android.widget.Toast;
  * 
  */
 public class DataSeriesDetailFragment extends Fragment {
-	// TODO: Rename parameter arguments, choose names that match
-	// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 	public static final String ARG_ITEM_ID = "item_id";
 
-	private OnDataSeriesDetailFragmentInteractionListener mListener;
 	private Entry displayedEntry;
 
-    /**
+	/**
 	 * Use this factory method to create a new instance of this fragment using
 	 * the provided parameters.
 	 * 
 	 * @return A new instance of fragment DataSeriesDetailFragment.
 	 */
-	// TODO: Rename and change types and number of parameters
 	public static DataSeriesDetailFragment newInstance() {
 		DataSeriesDetailFragment fragment = new DataSeriesDetailFragment();
 		Bundle args = new Bundle();
@@ -61,7 +55,6 @@ public class DataSeriesDetailFragment extends Fragment {
 		if (getArguments() != null) {
 		}
 
-        EoDbAdapter db = new EoDbAdapter(getActivity());
 		if (getArguments().containsKey(Entry.KEY_RSS_ENTRY)) {
 			displayedEntry = (Entry) getArguments().getSerializable(
 					Entry.KEY_RSS_ENTRY);
@@ -88,17 +81,17 @@ public class DataSeriesDetailFragment extends Fragment {
 					.findViewById(R.id.dataseries_detail);
 			detailWebView.loadData(content, "text/html", "UTF-8");
 
-            Button searchButton = (Button) rootView
-                    .findViewById(R.id.ds_detail_button_search_product);
+			Button searchButton = (Button) rootView
+					.findViewById(R.id.ds_detail_button_search_product);
 			searchButton.setOnClickListener(new OnClickListener() {
 
-                @Override
-                public void onClick(View v) {
-                    loadSearchParameters(title, pubDate);
+				@Override
+				public void onClick(View v) {
+					loadSearchParameters(title, pubDate);
 
-                }
+				}
 
-            });
+			});
 		}
 		return rootView;
 	}
@@ -107,7 +100,6 @@ public class DataSeriesDetailFragment extends Fragment {
 	public void onAttach(Activity activity) {
 		super.onAttach(activity);
 		try {
-			mListener = (OnDataSeriesDetailFragmentInteractionListener) activity;
 		} catch (ClassCastException e) {
 			throw new ClassCastException(activity.toString()
 					+ " must implement OnFragmentInteractionListener");
@@ -117,7 +109,6 @@ public class DataSeriesDetailFragment extends Fragment {
 	@Override
 	public void onDetach() {
 		super.onDetach();
-		mListener = null;
 	}
 
 	@Override
@@ -133,8 +124,7 @@ public class DataSeriesDetailFragment extends Fragment {
 					"This metadata has been saved offline.", Toast.LENGTH_LONG)
 					.show();
 			return true;
-		}
-		else {
+		} else {
 			return super.onOptionsItemSelected(item);
 		}
 
@@ -150,27 +140,16 @@ public class DataSeriesDetailFragment extends Fragment {
 	 * >Communicating with Other Fragments</a> for more information.
 	 */
 	public interface OnDataSeriesDetailFragmentInteractionListener {
-		// TODO: Update argument type and name
 		public void onDataSeriesDetailFragmentInteraction();
 	}
 
 	private void loadSearchParameters(String title, String pubDate) {
 
-		MapSearchFragment mapSearchFragment = MapSearchFragment.newInstance(
-        );
+		MapSearchFragment mapSearchFragment = MapSearchFragment.newInstance();
 		getActivity().getSupportFragmentManager().beginTransaction()
 				.replace(R.id.dataseries_detail_container, mapSearchFragment)
 				.addToBackStack("MapSearchFragment").commit();
 
-		CollectionItemRightFragment collectionItemRightFragment = CollectionItemRightFragment
-				.newInstance(displayedEntry, title, pubDate);
-		getActivity()
-				.getSupportFragmentManager()
-				.beginTransaction()
-				.add(R.id.dataseries_list,
-						collectionItemRightFragment,"CollectionItemRightFragment")
-				.addToBackStack("CollectionItemRightFragment").commit();
-
 	}
-	
+
 }

@@ -8,7 +8,7 @@ import pl.wasat.smarthma.R;
 import pl.wasat.smarthma.customviews.SmHmaTimePickerDialog;
 import pl.wasat.smarthma.customviews.TimePicker;
 import pl.wasat.smarthma.helper.Const;
-import pl.wasat.smarthma.ui.frags.MapSearchFragment;
+import pl.wasat.smarthma.ui.frags.common.MapSearchFragment;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
@@ -74,9 +74,8 @@ public class SearchBasicInfoRightFragment extends Fragment {
 	 * Use this factory method to create a new instance of this fragment using
 	 * the provided parameters.
 	 * 
-	 * @return A new instance of fragment CollectionItemRightFragment.
+	 * @return A new instance of fragment SearchBasicInfoRightFragment.
 	 */
-	// TODO: Rename and change types and number of parameters
 	public static SearchBasicInfoRightFragment newInstance() {
 		SearchBasicInfoRightFragment fragment = new SearchBasicInfoRightFragment();
 		Bundle args = new Bundle();
@@ -192,7 +191,6 @@ public class SearchBasicInfoRightFragment extends Fragment {
 		return rootView;
 	}
 
-	// TODO: Rename method, update argument and hook method into UI event
 	public void onButtonPressed(Uri uri) {
 		if (mListener != null) {
 			mListener.onSearchBasicInfoRightFragmentInteraction(uri);
@@ -226,7 +224,6 @@ public class SearchBasicInfoRightFragment extends Fragment {
 	 * >Communicating with Other Fragments</a> for more information.
 	 */
 	public interface OnSearchBasicInfoRightFragmentListener {
-		// TODO: Update argument type and name
 		public void onSearchBasicInfoRightFragmentInteraction(Uri uri);
 	}
 
@@ -241,10 +238,6 @@ public class SearchBasicInfoRightFragment extends Fragment {
 				.getLastKnownLocation(locationManager.getBestProvider(criteria,
 						true));
 		if (location != null) {
-
-			// Formatter fr = new Formatter();
-			// String tvStr = fr.format("%10f", location.getLatitude() -
-			// 0.1).toString();
 			tvAreaSWLat.setText(String.format(Locale.UK, "% 4f",
 					(float) (location.getLatitude() - 0.5)));
 			tvAreaSWLon.setText(String.format(Locale.UK, "% 4f",
@@ -391,7 +384,7 @@ public class SearchBasicInfoRightFragment extends Fragment {
 		}
 	}
 
-	private static class CatalogueListDialogFragment extends DialogFragment {
+	public static class CatalogueListDialogFragment extends DialogFragment {
 		@Override
 		public Dialog onCreateDialog(Bundle savedInstanceState) {
 			AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());

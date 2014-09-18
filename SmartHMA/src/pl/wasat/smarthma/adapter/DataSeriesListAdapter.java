@@ -1,20 +1,16 @@
 package pl.wasat.smarthma.adapter;
 
-
 import java.util.List;
 
 import pl.wasat.smarthma.R;
 import pl.wasat.smarthma.model.feed.Entry;
 import android.app.Activity;
-import android.graphics.Color;
 import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.LinearLayout;
 import android.widget.TextView;
-
 
 public class DataSeriesListAdapter extends ArrayAdapter<Entry> {
 
@@ -22,40 +18,44 @@ public class DataSeriesListAdapter extends ArrayAdapter<Entry> {
 		super(activity, 0, dataSeriesList);
 	}
 
-
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
+		ViewHolder holder;
 		Activity activity = (Activity) getContext();
 		LayoutInflater inflater = activity.getLayoutInflater();
 
-		View rowView = inflater.inflate(R.layout.fragment_dataseries_list, null);
 		Entry dataSeriesItem = getItem(position);
-		
 
-		TextView textView = (TextView) rowView.findViewById(R.id.dataseries_list_name);
-		textView.setText(dataSeriesItem.getTitle());
-		
-		TextView dateView = (TextView) rowView.findViewById(R.id.dataseries_listing_smallprint);
-		String pubDate = "Date: " +dataSeriesItem.getDate() + ", published: " + dataSeriesItem.getDate() + ", updated: " + dataSeriesItem.getUpdated();
-				
-//		SimpleDateFormat df = new SimpleDateFormat("EEE, dd MMM yyyy kk:mm:ss Z", Locale.ENGLISH);
-//		Date pDate;
-//		try {
-//			pDate = df.parse(pubDate);
-//			pubDate = "published " + DateUtils.getDateDifference(pDate) + " updated " + dataSeriesItem.getUpdated();
-//		} catch (ParseException e) {
-//			pubDate = "published " + dataSeriesItem.getDate() + " updated " + dataSeriesItem.getUpdated();
-//			
-//		}
-		dateView.setText(pubDate);
+		if (convertView == null) {
+			convertView = inflater.inflate(R.layout.view_cell_product, parent, false);
 
-		
-		if (!dataSeriesItem.isRead()){
-			LinearLayout row = (LinearLayout) rowView.findViewById(R.id.dataseries_list_frag_layout);
-			row.setBackgroundColor(Color.WHITE);
-			textView.setTypeface(Typeface.DEFAULT_BOLD);
+			holder = new ViewHolder();
+			holder.textView = (TextView) convertView
+					.findViewById(R.id.dataseries_list_name);
+			holder.dateView = (TextView) convertView
+					.findViewById(R.id.dataseries_listing_smallprint);
+
+			convertView.setTag(holder);
+		} else {
+			holder = (ViewHolder) convertView.getTag();
 		}
-		return rowView;
 
-	} 
+		holder.textView.setText(dataSeriesItem.getTitle());
+		String pubDate = "Date: " + dataSeriesItem.getDate() + ", published: "
+				+ dataSeriesItem.getDate() + ", updated: "
+				+ dataSeriesItem.getUpdated();
+		holder.dateView.setText(pubDate);
+
+		if (!dataSeriesItem.isRead()) {
+			holder.textView.setTypeface(Typeface.DEFAULT_BOLD);
+		}
+
+		return convertView;
+
+	}
+
+	private static class ViewHolder {
+		public TextView textView;
+		public TextView dateView;
+	}
 }

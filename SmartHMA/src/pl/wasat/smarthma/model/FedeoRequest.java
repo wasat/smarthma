@@ -6,6 +6,10 @@ package pl.wasat.smarthma.model;
 import java.io.Serializable;
 import java.util.HashMap;
 
+import pl.wasat.smarthma.helper.Const;
+
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.util.Log;
 
 import com.google.android.gms.maps.model.LatLng;
@@ -47,8 +51,8 @@ public class FedeoRequest implements Serializable {
 		this.httpAccept = "application/atom%2Bxml";
 		this.startRecord = "1";
 		this.maximumRecords = "20";
-		this.startDate = "2013-05-23T09:00:00Z";
-		this.endDate = "2014-05-23T00:00:00Z";
+		this.startDate = "2011-07-23T00:00:00Z";
+		this.endDate = "2014-07-23T00:00:00Z";
 		this.bbox = "20,50,21,51";
 		this.recordSchema = "om";
 		this.params.put("httpAccept", httpAccept);
@@ -59,6 +63,23 @@ public class FedeoRequest implements Serializable {
 		this.params.put("bbox", bbox);
 		this.params.put("recordSchema", recordSchema);
 
+	}
+	
+	public void buildFromShared(Context context) {
+		SharedPreferences prefs = context.getSharedPreferences(Const.KEY_PREF_FILE, 0);
+
+		setDefaultParams();
+		setParentIdentifier(prefs.getString(Const.KEY_PREF_PARENT_ID,
+				"EOP:ESA:FEDEO"));
+		setStartDate(prefs
+				.getString(Const.KEY_PREF_DATETIME_START, "0"));
+		setEndDate(prefs.getString(Const.KEY_PREF_DATETIME_END, "0"));
+		setBbox(prefs.getFloat(Const.KEY_PREF_BBOX_WEST, -180),
+				prefs.getFloat(Const.KEY_PREF_BBOX_SOUTH, -90),
+				prefs.getFloat(Const.KEY_PREF_BBOX_EAST, 180),
+				prefs.getFloat(Const.KEY_PREF_BBOX_NORTH, 90));
+		setQuery(prefs.getString(Const.KEY_PREF_QUERY, ""));
+		
 	}
 
 	/**
@@ -299,5 +320,7 @@ public class FedeoRequest implements Serializable {
 		String[] idArr = urn.split("urn:ogc:def:");
 		return idArr[idArr.length - 1];
 	}
+
+
 
 }

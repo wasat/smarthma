@@ -14,10 +14,6 @@ public class Const {
 	public static final String URL_PARM_HTTP_ACCEPT = "?httpAccept=application/atom%2Bxml";
 	public static final String URL_PARM_PARENT_ID = "&parentIdentifier=";
 	public static final String URL_PARM_BBOX = "&bbox=";
-	
-	
-	
-	//public static LatLng CENTER_LAYER = new LatLng(54.410139, 18.625946);
 
 	public static final String KEY_LIST_WORKSPACE_NAME_TO_LOAD = "pl.wasat.smarthma.KEY_LIST_WORKSPACE_NAME_TO_LOAD";
 	public static final String KEY_LIST_ID_LAYERS_TO_DISPLAY = "pl.wasat.smarthma.KEY_LIST_ID_LAYERS_TO_DISPLAY";
@@ -39,6 +35,7 @@ public class Const {
 	public static final String KEY_PREF_BBOX_SOUTH ="pl.wasat.smarthma.KEY_PREF_BBOX_SOUTH";
 	public static final String KEY_PREF_BBOX_EAST = "pl.wasat.smarthma.KEY_PREF_BBOX_EAST";
 	public static final String KEY_PREF_BBOX_NORTH = "pl.wasat.smarthma.KEY_PREF_BBOX_NORTH";
+	public static final String KEY_PREF_QUERY = "pl.wasat.smarthma.KEY_PREF_QUERY";
 	
 
 }

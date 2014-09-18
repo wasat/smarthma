@@ -8,8 +8,8 @@ import pl.wasat.smarthma.database.EoDbAdapter;
 import pl.wasat.smarthma.model.FedeoRequest;
 import pl.wasat.smarthma.model.feed.Entry;
 import pl.wasat.smarthma.model.feed.Feed;
-import pl.wasat.smarthma.ui.frags.BaseSpiceListFragment;
-import pl.wasat.smarthma.ui.frags.FailureFragment;
+import pl.wasat.smarthma.ui.frags.base.BaseSpiceListFragment;
+import pl.wasat.smarthma.ui.frags.common.FailureFragment;
 import pl.wasat.smarthma.utils.rss.FedeoSearchRequest;
 import android.app.Activity;
 import android.os.Bundle;
@@ -29,14 +29,12 @@ import android.widget.Toast;
  * 
  */
 public class SearchListFragment extends BaseSpiceListFragment {
-	private static final String KEY_PARAM_FEDEO_REQUEST = "param1";
-
+	private static final String KEY_PARAM_SEARCH_FEDEO_REQUEST = "pl.wasat.smarthma.KEY_PARAM_SEARCH_FEDEO_REQUEST";
+	private static final String STATE_ACTIVATED_POSITION = "activated_position";
+	
 	private FedeoRequest searchRequest;
 
-	private static final String STATE_ACTIVATED_POSITION = "activated_position";
 	private int mActivatedPosition = ListView.INVALID_POSITION;
-	// private SpiceManager searchFeedSpiceManager = new SpiceManager(
-	// SmartHmaHttpSpiceService.class);
 
 	private OnSearchListFragmentListener mListener;
 
@@ -53,7 +51,7 @@ public class SearchListFragment extends BaseSpiceListFragment {
 	public static SearchListFragment newInstance(FedeoRequest fedeoRequest) {
 		SearchListFragment fragment = new SearchListFragment();
 		Bundle args = new Bundle();
-		args.putSerializable(KEY_PARAM_FEDEO_REQUEST, fedeoRequest);
+		args.putSerializable(KEY_PARAM_SEARCH_FEDEO_REQUEST, fedeoRequest);
 		fragment.setArguments(args);
 		return fragment;
 	}
@@ -66,7 +64,8 @@ public class SearchListFragment extends BaseSpiceListFragment {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		if (getArguments() != null) {
-			searchRequest = (FedeoRequest) getArguments().getSerializable(KEY_PARAM_FEDEO_REQUEST);
+			searchRequest = (FedeoRequest) getArguments().getSerializable(
+					KEY_PARAM_SEARCH_FEDEO_REQUEST);
 		}
 	}
 
@@ -77,13 +76,6 @@ public class SearchListFragment extends BaseSpiceListFragment {
 				&& savedInstanceState.containsKey(STATE_ACTIVATED_POSITION)) {
 			setActivatedPosition(savedInstanceState
 					.getInt(STATE_ACTIVATED_POSITION));
-		}
-	}
-
-	// TODO: Rename method, update argument and hook method into UI event
-	public void onButtonPressed(String id) {
-		if (mListener != null) {
-			mListener.onSearchListFragmentItemSelected(id);
 		}
 	}
 
@@ -214,13 +206,11 @@ public class SearchListFragment extends BaseSpiceListFragment {
 	 * @param searchFeeds
 	 */
 	private void showDataSeriesIntro(Feed searchResultFeed) {
-		SearchDataSeriesIntroFragment searchDataSeriesIntroFragment = SearchDataSeriesIntroFragment
+		FeedSummarySearchFragment feedSummarySearchFragment = FeedSummarySearchFragment
 				.newInstance(searchResultFeed);
-		getActivity()
-				.getSupportFragmentManager()
-				.beginTransaction()
-				.add(R.id.search_results_detail_container,
-						searchDataSeriesIntroFragment).commit();
+		getActivity().getSupportFragmentManager().beginTransaction()
+				.replace(R.id.search_results_detail_container, feedSummarySearchFragment)
+				.commit();
 
 	}
 
@@ -234,7 +224,6 @@ public class SearchListFragment extends BaseSpiceListFragment {
 	 * >Communicating with Other Fragments</a> for more information.
 	 */
 	public interface OnSearchListFragmentListener {
-		// TODO: Update argument type and name
 		public void onSearchListFragmentItemSelected(String id);
 	}
 

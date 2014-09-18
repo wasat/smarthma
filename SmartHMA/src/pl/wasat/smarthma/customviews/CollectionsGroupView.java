@@ -23,10 +23,10 @@ public class CollectionsGroupView extends RelativeLayout implements SpiceListIte
     }
 
     private void inflateView(Context context) {
-        LayoutInflater.from(context).inflate(R.layout.view_cell_collection_groups, this);
-        this.groupNameTextView = (TextView) this.findViewById(R.id.collections_group_name_textview);
-        this.groupContentTextView = (TextView) this.findViewById(R.id.collections_group_std_textview);
-        this.thumbImageView = (ImageView) this.findViewById(R.id.collections_group_thumb_imageview);
+        LayoutInflater.from(context).inflate(R.layout.view_cell_entry_item, this);
+        this.groupNameTextView = (TextView) this.findViewById(R.id.entry_item_title_textview);
+        this.groupContentTextView = (TextView) this.findViewById(R.id.entry_item_dates_textview);
+        this.thumbImageView = (ImageView) this.findViewById(R.id.entry_item_thumb_imageview);
     }
 
     @Override
