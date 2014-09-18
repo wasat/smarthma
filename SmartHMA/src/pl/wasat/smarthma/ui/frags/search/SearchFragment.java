@@ -36,7 +36,6 @@ public class SearchFragment extends Fragment {
 	 *            Parameter 2.
 	 * @return A new instance of fragment SearchFragment.
 	 */
-	// TODO: Rename and change types and number of parameters
 	public static SearchFragment newInstance() {
 		SearchFragment fragment = new SearchFragment();
 		return fragment;
@@ -72,7 +71,6 @@ public class SearchFragment extends Fragment {
 		return rootView;
 	}
 
-	// TODO: Rename method, update argument and hook method into UI event
 	public void onButtonPressed(Uri uri) {
 		if (mListener != null) {
 			mListener.onSearchFragmentInteraction(uri);
@@ -106,7 +104,6 @@ public class SearchFragment extends Fragment {
 	 * >Communicating with Other Fragments</a> for more information.
 	 */
 	public interface OnSearchFragmentListener {
-		// TODO: Update argument type and name
 		public void onSearchFragmentInteraction(Uri uri);
 	}
 

@@ -28,7 +28,7 @@ public class NewsArticleListAdapter extends ArrayAdapter<NewsArticle> {
 		Activity activity = (Activity) getContext();
 		LayoutInflater inflater = activity.getLayoutInflater();
 
-		View rowView = inflater.inflate(R.layout.fragment_article_list, null);
+		View rowView = inflater.inflate(R.layout.view_cell_article, parent, false);
 		NewsArticle article = getItem(position);
 		
 
@@ -37,15 +37,6 @@ public class NewsArticleListAdapter extends ArrayAdapter<NewsArticle> {
 		
 		TextView dateView = (TextView) rowView.findViewById(R.id.article_listing_smallprint);
 		String pubDate = article.getPubDate();
-//		SimpleDateFormat df = new SimpleDateFormat("EEE, dd MMM yyyy kk:mm:ss Z", Locale.ENGLISH);
-//		Date pDate;
-//		try {
-//			pDate = df.parse(pubDate);
-//			pubDate = "published " + DateUtils.getDateDifference(pDate) + " by " + article.getAuthor();
-//		} catch (ParseException e) {
-//			Log.e("DATE PARSING", "Error parsing date..");
-//			pubDate = "published by " + article.getAuthor();
-//		}
 		dateView.setText(pubDate);
 
 		

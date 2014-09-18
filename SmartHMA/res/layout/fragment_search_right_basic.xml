@@ -1,8 +1,7 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/search_frag_right_basic_scroll_id"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:background="#FFFFFF">
+    android:layout_height="fill_parent">
 
     <LinearLayout
         android:id="@+id/search_frag_right_basic_linear_id"

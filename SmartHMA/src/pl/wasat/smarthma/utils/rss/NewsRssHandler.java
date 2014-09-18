@@ -65,8 +65,6 @@ public class NewsRssHandler extends DefaultHandler {
 
 		if (localName.equalsIgnoreCase("title")) {
 			currentArticle.setTitle(chars.toString());
-			// } else if (localName.equalsIgnoreCase("description")){
-			// currentArticle.setDescription(chars.toString());
 		} else if (localName.equalsIgnoreCase("pubDate")) {
 			currentArticle.setPubDate(chars.toString());
 		} else if (localName.equalsIgnoreCase("guid")) {

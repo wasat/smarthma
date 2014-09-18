@@ -21,23 +21,20 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.util.Log;
 
-
-public class NewsRssServiceNoAsync  {
+public class NewsRssServiceNoAsync {
 
 	private final ProgressDialog progress;
-    private final NewsListFragment articleListFrag;
+	private final NewsListFragment articleListFrag;
 
 	public NewsRssServiceNoAsync(NewsListFragment articleListFragment) {
-        Context context = articleListFragment.getActivity();
+		Context context = articleListFragment.getActivity();
 		articleListFrag = articleListFragment;
 		progress = new ProgressDialog(context);
 		progress.setMessage("Loading...");
 
 	}
 
-	
-	public void exec()
-	{
+	public void exec() {
 		onPreExecute();
 		List<NewsArticle> art = doInBackground(NewsListFragment.BLOG_URL);
 		onPostExecute(art);
@@ -48,40 +45,40 @@ public class NewsRssServiceNoAsync  {
 		progress.show();
 	}
 
-
 	void onPostExecute(final List<NewsArticle> articles) {
 		Log.e("ASYNC", "POST EXECUTE");
 		articleListFrag.getActivity().runOnUiThread(new Runnable() {
 			@Override
 			public void run() {
-				for (NewsArticle a : articles){
+				for (NewsArticle a : articles) {
 					Log.d("DB", "Searching DB for GUID: " + a.getGuid());
-					NewsDbAdapter dba = new NewsDbAdapter(articleListFrag.getActivity());
-		            dba.openToRead();
-		            NewsArticle fetchedArticle = dba.getBlogListing(a.getGuid());
-		            dba.close();
-					if (fetchedArticle == null){
-						Log.d("DB", "Found entry for first time: " + a.getTitle());
+					NewsDbAdapter dba = new NewsDbAdapter(articleListFrag
+							.getActivity());
+					dba.openToRead();
+					NewsArticle fetchedArticle = dba.getBlogListing(a.getGuid());
+					dba.close();
+					if (fetchedArticle == null) {
+						Log.d("DB",
+								"Found entry for first time: " + a.getTitle());
 						dba = new NewsDbAdapter(articleListFrag.getActivity());
-			            dba.openToWrite();
-			            dba.insertBlogListing(a.getGuid());
-			            dba.close();
-					}else{
+						dba.openToWrite();
+						dba.insertBlogListing(a.getGuid());
+						dba.close();
+					} else {
 						a.setDbId(fetchedArticle.getDbId());
 						a.setOffline(fetchedArticle.isOffline());
 						a.setRead(fetchedArticle.isRead());
 					}
 				}
-				NewsArticleListAdapter adapter = new NewsArticleListAdapter(articleListFrag.getActivity(), articles);
+				NewsArticleListAdapter adapter = new NewsArticleListAdapter(
+						articleListFrag.getActivity(), articles);
 				articleListFrag.setListAdapter(adapter);
 				adapter.notifyDataSetChanged();
-				
+
 			}
 		});
 		progress.dismiss();
 	}
-
-
 
 	List<NewsArticle> doInBackground(String... urls) {
 		String feed = urls[0];
@@ -98,7 +95,6 @@ public class NewsRssServiceNoAsync  {
 
 			xr.setContentHandler(rh);
 			xr.parse(new InputSource(url.openStream()));
-
 
 			Log.e("ASYNC", "PARSING FINISHED");
 			return rh.getArticleList();

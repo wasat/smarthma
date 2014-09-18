@@ -40,10 +40,6 @@ public class MissionsActivity extends BaseSmartHMActivity implements
 		setContentView(R.layout.activity_missions);
 
 		if (savedInstanceState != null) {
-			// isMenuEnabled =
-			// savedInstanceState.getBoolean(KEY_STATE_MENU_ENABLED);
-			// visibleWorskpace =
-			// savedInstanceState.getString(KEY_VISIBLE_WORKSPACE);
 		}
 		ViewGroup topLayout = (ViewGroup) findViewById(R.id.missions_activ_left_container);
 		topLayout.requestTransparentRegion(topLayout);
@@ -51,8 +47,6 @@ public class MissionsActivity extends BaseSmartHMActivity implements
 		progressBarWmsLoad = (ProgressBar) findViewById(R.id.progressBarWmsLoad);
 
 		loadDetailContainer();
-		// loadGalleryPanel();
-		// loadSearchParameters("", "");
 
 	}
 
@@ -79,8 +73,6 @@ public class MissionsActivity extends BaseSmartHMActivity implements
 
 	@Override
 	protected void onSaveInstanceState(Bundle outState) {
-		// outState.putBoolean(KEY_STATE_MENU_ENABLED, isMenuEnabled);
-		// outState.putString(KEY_VISIBLE_WORKSPACE, visibleWorskpace);
 		super.onSaveInstanceState(outState);
 	}
 
@@ -90,21 +82,11 @@ public class MissionsActivity extends BaseSmartHMActivity implements
 		MenuInflater inflater = getMenuInflater();
 		inflater.inflate(R.menu.menu_eo_map, menu);
 
-		// Associate searchable configuration with the SearchView
-		// SearchManager searchManager = (SearchManager)
-		// getSystemService(Context.SEARCH_SERVICE);
-		// SearchView searchView = (SearchView)
-		// menu.findItem(R.id.action_search)
-		// .getActionView();
-		// searchView.setSearchableInfo(searchManager
-		// .getSearchableInfo(getComponentName()));
-
 		return super.onCreateOptionsMenu(menu);
 	}
 
 	@Override
 	public boolean onPrepareOptionsMenu(Menu menu) {
-		// menu.setGroupEnabled(R.id.menu_group_gis, isMenuEnabled);
 		return super.onPrepareOptionsMenu(menu);
 	}
 
@@ -112,10 +94,8 @@ public class MissionsActivity extends BaseSmartHMActivity implements
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
 		case R.id.action_pref1:
-			// showThreatsDialog();
 			break;
 		case R.id.action_pref2:
-			// showWorkspaceDialog();
 			break;
 		case R.id.action_pref3:
 			break;
@@ -155,71 +135,9 @@ public class MissionsActivity extends BaseSmartHMActivity implements
 		MissionsDetailFragment missionsDetailFragment = new MissionsDetailFragment();
 		getSupportFragmentManager()
 				.beginTransaction()
-				.add(R.id.missions_activ_left_container, missionsDetailFragment)
+				.replace(R.id.missions_activ_left_container, missionsDetailFragment)
 				.addToBackStack("MissionsDetailFragment").commit();
 	}
-
-//	private void loadGalleryPanel() {
-//		GalleryFragment galleryFragment = new GalleryFragment();
-//		Bundle args = new Bundle();
-//		galleryFragment.setArguments(args);
-//		getSupportFragmentManager().beginTransaction()
-//				.replace(R.id.gallery_bottom_panel, galleryFragment).commit();
-//	}
-//
-//	private void loadSearchParameters(String title, String pubDate) {
-//		MapSearchFragment mapSearchFragment = MapSearchFragment.newInstance("",
-//				"");
-//
-//		getSupportFragmentManager().beginTransaction()
-//				.replace(R.id.left_panel_map, mapSearchFragment)
-//				.addToBackStack("MapSearchFragment").commit();
-//	}
-
-	// @Override
-	// public void onCollectionSelected(Integer chosenCollectionId, String
-	// urlArgs) {
-	//
-	// if (chosenCollectionId == -1) {
-	// Toast.makeText(MissionsActivity.this,
-	// R.string.specific_collection_does_not_exist,
-	// Toast.LENGTH_LONG).show();
-	// return;
-	// }
-	//
-	// if (urlArgs == null) {
-	// urlArgs = "";
-	// } else {
-	// urlArgs = "&time=" + urlArgs;
-	// }
-	//
-	// MapSearchFragment gisFrag = (MapSearchFragment)
-	// getSupportFragmentManager()
-	// .findFragmentById(R.id.left_panel_map);
-	//
-	// if (gisFrag != null) {
-	// // If frag is available, we're in two-pane layout...
-	// // Call a method in the MapFragment to update its content
-	// } else {
-	// // Otherwise, we're in the one-pane layout and must swap frags...
-	// // Create fragment and give it an argument for the selected data
-	// MapSearchFragment newGisFrag = new MapSearchFragment();
-	// Bundle args = new Bundle();
-	//
-	// newGisFrag.setArguments(args);
-	//
-	// FragmentTransaction transaction = getSupportFragmentManager()
-	// .beginTransaction();
-	//
-	// // Replace whatever is in the fragment_container view with this
-	// // fragment,
-	// // and add the transaction to the back stack so the user can
-	// // navigate back
-	// transaction.replace(R.id.left_panel_map, newGisFrag);
-	// // transaction.addToBackStack(null);
-	// transaction.commit();
-	// }
-	// }
 
 	private void disableProgressBar() {
 		if (initSpinner != null) {

@@ -30,8 +30,6 @@ public class CollectionsListAdapter extends BaseAdapter {
 	private final String groupName;
 	private static LayoutInflater inflater = null;
 
-	// public ImageLoader imageLoader;
-
 	public CollectionsListAdapter(Activity avtiv, ArrayList<Collection> data,
 			String grName) {
 		activity = avtiv;
@@ -56,7 +54,7 @@ public class CollectionsListAdapter extends BaseAdapter {
 	public View getView(int position, View convertView, ViewGroup parent) {
 		View vi = convertView;
 		if (convertView == null)
-			vi = inflater.inflate(R.layout.view_cell_collection, null);
+			vi = inflater.inflate(R.layout.view_cell_collection, parent, false);
 
 		TextView title = (TextView) vi.findViewById(R.id.collection_name);
 		TextView artist = (TextView) vi.findViewById(R.id.collection_desc);

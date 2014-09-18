@@ -9,8 +9,11 @@ import org.xml.sax.helpers.DefaultHandler;
 
 import pl.wasat.smarthma.model.eo.*;
 import pl.wasat.smarthma.model.feed.Author;
+import pl.wasat.smarthma.model.feed.Category;
+import pl.wasat.smarthma.model.feed.Content;
 import pl.wasat.smarthma.model.feed.Entry;
 import pl.wasat.smarthma.model.feed.Feed;
+import pl.wasat.smarthma.model.feed.Group;
 import pl.wasat.smarthma.model.feed.ItemsPerPage;
 import pl.wasat.smarthma.model.feed.Link;
 import pl.wasat.smarthma.model.feed.Query;
@@ -27,8 +30,6 @@ public class SmartHmaEoHandler extends DefaultHandler {
 	private int entryAdded = 0;
 	private boolean isInEntry = false;
 	private boolean isInEarthObservation = false;
-	// private boolean isInInstruments = false;
-	// private boolean isInPlatforms = false;
 	private int instrumentLevel = 1;
 	private int platformLevel = 1;
 	private int sensorLevel = 1;
@@ -54,13 +55,16 @@ public class SmartHmaEoHandler extends DefaultHandler {
 	private Link link;
 	private ArrayList<Link> linksEntry;
 	private ArrayList<Link> linksFeed;
-	// private Summary summary;
 	private Where where;
 	private Polygon polygon;
 	private Exterior exterior;
 	private LinearRing linearRing;
 	private PosString posString;
 	private List<Pos> posList;
+	private Group group;
+	private Content content;
+	private ArrayList<Content> contentList;
+	private Category category;
 
 	private EarthObservation earthObservation;
 	private PhenomenonTime phenomenonTime;
@@ -240,6 +244,7 @@ public class SmartHmaEoHandler extends DefaultHandler {
 			query.set_searchTerms(atts.getValue("searchTerms"));
 			query.set_sru_recordSchema(atts.getValue("sru:recordSchema"));
 			query.set_startIndex(atts.getValue("startIndex"));
+			query.set_geo_box(atts.getValue("geo:box"));
 			query.set_time_end(atts.getValue("time:end"));
 			query.set_time_start(atts.getValue("time:start"));
 		} else if (localName.equalsIgnoreCase("author")) {
@@ -269,7 +274,19 @@ public class SmartHmaEoHandler extends DefaultHandler {
 			posList = new ArrayList<Pos>();
 		} else if (localName.equalsIgnoreCase("poslist")) {
 			posString = new PosString();
+		} else if (localName.equalsIgnoreCase("group")) {
+			group = new Group();
+			contentList = new ArrayList<Content>();
+		} else if (localName.equalsIgnoreCase("content")) {
+			content = new Content();
+			content.set_medium(atts.getValue("medium"));
+			content.set_type(atts.getValue("type"));
+			content.set_url(atts.getValue("url"));
+		} else if (localName.equalsIgnoreCase("category")) {
+			category = new Category();
+			category.set_scheme(atts.getValue("schema"));
 		}
+
 		// EO MetaData
 		else if (localName.equalsIgnoreCase("EarthObservation")) {
 			earthObservation = new EarthObservation();
@@ -671,7 +688,7 @@ public class SmartHmaEoHandler extends DefaultHandler {
 			} else if (localName.equalsIgnoreCase("totalResults")) {
 				totalResults.set__text(chars.toString());
 			} else if (localName.equalsIgnoreCase("startIndex")) {
-				startIndex.set__text(chars.toString());	
+				startIndex.set__text(chars.toString());
 			} else if (localName.equalsIgnoreCase("itemsPerPage")) {
 				itemsPerPage.set__text(chars.toString());
 			} else if (localName.equalsIgnoreCase("query")) {
@@ -712,7 +729,16 @@ public class SmartHmaEoHandler extends DefaultHandler {
 				entry.setIdentifier(chars.toString());
 			} else if (localName.equalsIgnoreCase("date")) {
 				entry.setDate(chars.toString());
+			} else if (qName.equalsIgnoreCase("media:group")) {
+				group.setContent(contentList);
+				entry.setGroup(group);
+			} else if (qName.equalsIgnoreCase("media:content")) {
+				content.setCategory(category);
+				contentList.add(content);
+			} else if (qName.equalsIgnoreCase("media:category")) {
+				category.set__text(chars.toString());
 			}
+
 			if (isInEarthObservation) {
 				// EO MetaData
 				if (localName.equalsIgnoreCase("EarthObservation")) {
@@ -979,7 +1005,6 @@ public class SmartHmaEoHandler extends DefaultHandler {
 				} else if (localName.equalsIgnoreCase("serviceReference")) {
 					serviceReference.setRequestMessage(requestMessage);
 				} else if (localName.equalsIgnoreCase("requestMessage")) {
-					// requestMessage.set
 				} else if (localName
 						.equalsIgnoreCase("referenceSystemIdentifier")) {
 					referenceSystemIdentifier.set__text(chars.toString());
@@ -1083,7 +1108,6 @@ public class SmartHmaEoHandler extends DefaultHandler {
 				} else if (localName.equalsIgnoreCase("creationDate")) {
 					creationDate.set__text(chars.toString());
 				} else if (localName.equalsIgnoreCase("derivedFrom")) {
-					// derivedFrom.set
 				} else if (localName.equalsIgnoreCase("downlinkedTo")) {
 					downlinkedTo.setDownlinkInformation(downlinkInformation);
 				} else if (localName.equalsIgnoreCase("downlinkInformation")) {
@@ -1117,7 +1141,6 @@ public class SmartHmaEoHandler extends DefaultHandler {
 				} else if (localName.equalsIgnoreCase("method")) {
 					method.set__text(chars.toString());
 				} else if (localName.equalsIgnoreCase("processingCenter")) {
-					// processingCenter.set
 				} else if (localName.equalsIgnoreCase("processingDate")) {
 					processingDate.set__text(chars.toString());
 				} else if (localName.equalsIgnoreCase("processingMode")) {
@@ -1173,9 +1196,6 @@ public class SmartHmaEoHandler extends DefaultHandler {
 				} else if (localName.equalsIgnoreCase("poslist")) {
 					posString.setPointsString(chars.toString());
 				}
-
-				else if (localName.equalsIgnoreCase("group")) {
-				}
 			}
 			// Close Entry
 			else if (localName.equalsIgnoreCase("entry")) {
@@ -1186,7 +1206,7 @@ public class SmartHmaEoHandler extends DefaultHandler {
 				entryAdded++;
 				isInEntry = false;
 				if (entryAdded >= DATASERIES_LIMIT) {
-                }
+				}
 			}
 
 		}

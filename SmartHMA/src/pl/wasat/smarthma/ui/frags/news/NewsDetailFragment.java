@@ -51,24 +51,13 @@ public class NewsDetailFragment extends Fragment {
 		if (displayedArticle != null) {
 			String title = displayedArticle.getTitle();
 			String pubDate = displayedArticle.getPubDate();
-//			SimpleDateFormat df = new SimpleDateFormat(
-//					"EEE, dd MMM yyyy kk:mm:ss Z", Locale.ENGLISH);
-//			try {
-//				Date pDate = df.parse(pubDate);
-//				pubDate = "This post was published "
-//						+ DateUtils.getDateDifference(pDate) + " by "
-//						+ displayedArticle.getAuthor();
-//			} catch (ParseException e) {
-//				Log.e("DATE PARSING", "Error parsing date..");
-//				pubDate = "published by " + displayedArticle.getAuthor();
-//			}
 
 			String content = displayedArticle.getEncodedContent();
 			((TextView) rootView.findViewById(R.id.article_title))
 					.setText(title);
 			((TextView) rootView.findViewById(R.id.article_author))
 					.setText(pubDate);
-			WebView webArticleDetail = (WebView) rootView
+			final WebView webArticleDetail = (WebView) rootView
 					.findViewById(R.id.article_web_detail);
 			webArticleDetail.loadData(content, "text/html", "UTF-8");
 			Button buttonMore = (Button) rootView

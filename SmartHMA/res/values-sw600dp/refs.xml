@@ -9,6 +9,6 @@
     -->
     <item name="menu_eo_map" type="menu">@menu/menu_eo_map_twopane</item>
     
-     <item type="layout" name="activity_dataseries_list">@layout/activity_dataseries</item>
+     <item type="layout" name="activity_dataseries_list">@layout/activity_browse_products</item>
 <item type="layout" name="activity_article_list">@layout/activity_news</item>
 </resources>

@@ -16,7 +16,7 @@
         android:layout_weight="2" >
 
         <ImageView
-            style="@style/image_bg"
+            style="@style/styleImageBg"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:contentDescription="@string/desc" />

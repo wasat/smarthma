@@ -8,7 +8,7 @@
     <LinearLayout
         android:id="@+id/product_frag_detail_layout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:background="#FFFFFF"
         android:orientation="vertical" >
 
@@ -23,7 +23,7 @@
             android:textColor="#38b4ea"
             android:textSize="20sp"
             android:textStyle="bold"
-            tools:context="pl.wasat.smarthma.ui.frags.search.ProductDetailSearchFragment" />
+            tools:context="pl.wasat.smarthma.ui.frags.base.BaseProductDetailsFragment" />
 
         <TextView
             android:id="@+id/product_frag_detail_dates"
@@ -37,16 +37,17 @@
             android:textColor="#A8A8A8"
             android:textSize="12sp"
             android:textStyle="italic"
-            tools:context="pl.wasat.smarthma.ui.frags.search.ProductDetailSearchFragment" />
+            tools:context="pl.wasat.smarthma.ui.frags.base.BaseProductDetailsFragment" />
 
         <WebView
             android:id="@+id/product_frag_detail_content"
             style="?android:attr/textAppearanceLarge"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:minHeight = "200dp"
             android:padding="16dp"
             android:textSize="16sp"
-            tools:context="pl.wasat.smarthma.ui.frags.search.ProductDetailSearchFragment" />
+            tools:context="pl.wasat.smarthma.ui.frags.base.BaseProductDetailsFragment" />
 
         <LinearLayout
             android:id="@+id/product_frag_detail_buttons"
@@ -58,7 +59,7 @@
 
             <Button
                 android:id="@+id/product_frag_detail_button_quicklook"
-                style="@style/button_details"
+                style="@style/styleBtnDetails"
                 android:layout_width="140dp"
                 android:layout_height="40dp"
                 android:layout_gravity="center"
@@ -66,7 +67,7 @@
 
             <Button
                 android:id="@+id/product_frag_detail_button_show_meta"
-                style="@style/button_details"
+                style="@style/styleBtnDetails"
                 android:layout_width="140dp"
                 android:layout_height="40dp"
                 android:layout_gravity="center"
@@ -74,7 +75,7 @@
 
             <Button
                 android:id="@+id/product_frag_detail_button_show_map"
-                style="@style/button_details"
+                style="@style/styleBtnDetails"
                 android:layout_width="140dp"
                 android:layout_height="40dp"
                 android:layout_gravity="center"
@@ -82,7 +83,7 @@
 
             <Button
                 android:id="@+id/product_frag_detail_button_download"
-                style="@style/button_details"
+                style="@style/styleBtnDetails"
                 android:layout_width="140dp"
                 android:layout_height="40dp"
                 android:layout_gravity="center"

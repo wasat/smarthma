@@ -1,10 +1,9 @@
 package pl.wasat.smarthma.ui.frags.search;
 
 import pl.wasat.smarthma.R;
-import pl.wasat.smarthma.database.EoDbAdapter;
 import pl.wasat.smarthma.model.feed.Entry;
 import pl.wasat.smarthma.model.feed.Link;
-import pl.wasat.smarthma.ui.frags.MapSearchFragment;
+import pl.wasat.smarthma.ui.frags.common.MapSearchFragment;
 import android.app.Activity;
 import android.net.Uri;
 import android.os.Bundle;
@@ -31,16 +30,15 @@ import android.widget.Toast;
  */
 public class SearchDetailFragment extends Fragment {
 
-    private OnSearchDetailFragmentListener mListener;
+	private OnSearchDetailFragmentListener mListener;
 	private Entry displayedEntry;
 
-    /**
+	/**
 	 * Use this factory method to create a new instance of this fragment using
 	 * the provided parameters.
 	 * 
 	 * @return A new instance of fragment SearchDetailFragment.
 	 */
-	// TODO: Rename and change types and number of parameters
 	public static SearchDetailFragment newInstance() {
 		SearchDetailFragment fragment = new SearchDetailFragment();
 		Bundle args = new Bundle();
@@ -58,7 +56,6 @@ public class SearchDetailFragment extends Fragment {
 		if (getArguments() != null) {
 		}
 
-        EoDbAdapter db = new EoDbAdapter(getActivity());
 		if (getArguments().containsKey(Entry.KEY_RSS_ENTRY)) {
 			displayedEntry = (Entry) getArguments().getSerializable(
 					Entry.KEY_RSS_ENTRY);
@@ -89,43 +86,41 @@ public class SearchDetailFragment extends Fragment {
 					.findViewById(R.id.search_fragment_detail_content);
 			detailWebView.loadData(content, "text/html", "UTF-8");
 
-            Button searchButton = (Button) rootView
-                    .findViewById(R.id.search_detail_button_search_product);
+			Button searchButton = (Button) rootView
+					.findViewById(R.id.search_detail_button_search_product);
 			searchButton.setOnClickListener(new OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    loadSearchParameters(title, pubDate);
-                }
-            });
+				@Override
+				public void onClick(View v) {
+					loadSearchParameters(title, pubDate);
+				}
+			});
 
-            for (Link entityLink : displayedEntry.getLinks()) {
-                if (entityLink.get_rel().equalsIgnoreCase("search")) {
-                    searchButton.setEnabled(true);
-                }
+			for (Link entityLink : displayedEntry.getLinks()) {
+				if (entityLink.get_rel().equalsIgnoreCase("search")) {
+					searchButton.setEnabled(true);
+				}
 
-            }
+			}
 
-            Button showMapButton = (Button) rootView
-                    .findViewById(R.id.search_detail_button_show_map);
+			Button showMapButton = (Button) rootView
+					.findViewById(R.id.search_detail_button_show_map);
 			showMapButton.setOnClickListener(new OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    MapSearchFragment mapSearchFragment = MapSearchFragment
-                            .newInstance();
-                    getActivity()
-                            .getSupportFragmentManager()
-                            .beginTransaction()
-                            .replace(R.id.search_results_detail_container,
-                                    mapSearchFragment)
-                            .addToBackStack("MapSearchFragment").commit();
+				@Override
+				public void onClick(View v) {
+					MapSearchFragment mapSearchFragment = MapSearchFragment
+							.newInstance();
+					getActivity()
+							.getSupportFragmentManager()
+							.beginTransaction()
+							.replace(R.id.search_results_detail_container,
+									mapSearchFragment)
+							.addToBackStack("MapSearchFragment").commit();
 
-                }
-            });
+				}
+			});
 		}
 		return rootView;
 	}
-
-	// TODO: Rename method, update argument and hook method into UI event
 	public void onButtonPressed(Uri uri) {
 		if (mListener != null) {
 			mListener.onSearchDetailFragmentInteraction(uri);
@@ -178,26 +173,18 @@ public class SearchDetailFragment extends Fragment {
 	 * >Communicating with Other Fragments</a> for more information.
 	 */
 	public interface OnSearchDetailFragmentListener {
-		// TODO: Update argument type and name
 		public void onSearchDetailFragmentInteraction(Uri uri);
 	}
 
 	private void loadSearchParameters(String title, String pubDate) {
 
-		MapSearchFragment mapSearchFragment = MapSearchFragment.newInstance(
-        );
-		getActivity().getSupportFragmentManager().beginTransaction()
-				.replace(R.id.search_results_detail_container, mapSearchFragment, "MapSearchFragment")
-				.addToBackStack("MapSearchFragment").commit();
-
-		CollectionItemRightFragment collectionItemRightFragment = CollectionItemRightFragment
-				.newInstance(displayedEntry, title, pubDate);
+		MapSearchFragment mapSearchFragment = MapSearchFragment.newInstance();
 		getActivity()
 				.getSupportFragmentManager()
 				.beginTransaction()
-				.add(R.id.search_results_list_container, collectionItemRightFragment,
-						"CollectionItemRightFragment")
-				.addToBackStack("CollectionItemRightFragment").commit();
+				.replace(R.id.search_results_detail_container,
+						mapSearchFragment, "MapSearchFragment")
+				.addToBackStack("MapSearchFragment").commit();
 
 	}
 

@@ -24,6 +24,7 @@ public class Query {
     private String _startIndex;
     private String _time_end;
     private String _time_start;
+    private String _geo_box;
     private final Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
     public String get__prefix() {
@@ -156,7 +157,26 @@ public class Query {
         return this;
     }
 
-    @Override
+    /**
+	 * @return the _geo_box
+	 */
+	public String get_geo_box() {
+		return _geo_box;
+	}
+
+	/**
+	 * @param _geo_box the _geo_box to set
+	 */
+	public void set_geo_box(String _geo_box) {
+		this._geo_box = _geo_box;
+	}
+	
+    public Query with_geo_box(String _geo_box) {
+        this._geo_box = _geo_box;
+        return this;
+    }
+
+	@Override
     public String toString() {
             	 ToStringStyle style = new SmartHMAStringStyle(); ToStringBuilder.setDefaultStyle(style); return ToStringBuilder.reflectionToString(this);
     }

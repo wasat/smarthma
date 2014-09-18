@@ -8,7 +8,7 @@
     <LinearLayout
         android:id="@+id/dataseried_detail_layout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:background="#FFFFFF"
         android:orientation="vertical" >
 
@@ -44,6 +44,7 @@
             style="?android:attr/textAppearanceLarge"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:minHeight = "200dp"
             android:padding="16dp"
             android:textSize="16sp"
             tools:context="pl.wasat.smarthma.ui.frags.browse.DataSeriesDetailFragment" />
@@ -59,7 +60,7 @@
 
             <Button
                 android:id="@+id/ds_detail_button_search_product"
-                style="@style/button_details"
+                style="@style/styleBtnDetails"
                 android:layout_width="140dp"
                 android:layout_height="40dp"
                 android:layout_gravity="center"
@@ -67,7 +68,7 @@
 
             <Button
                 android:id="@+id/ds_detail_button_show_meta"
-                style="@style/button_details"
+                style="@style/styleBtnDetails"
                 android:layout_width="140dp"
                 android:layout_height="40dp"
                 android:layout_gravity="center"
@@ -75,7 +76,7 @@
 
             <Button
                 android:id="@+id/ds_detail_button_show_map"
-                style="@style/button_details"
+                style="@style/styleBtnDetails"
                 android:layout_width="140dp"
                 android:layout_height="40dp"
                 android:layout_gravity="center"
@@ -83,7 +84,7 @@
 
             <Button
                 android:id="@+id/ds_detail_button_download"
-                style="@style/button_details"
+                style="@style/styleBtnDetails"
                 android:layout_width="140dp"
                 android:layout_height="40dp"
                 android:layout_gravity="center"

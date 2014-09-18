@@ -19,16 +19,9 @@ public class ExplainDocRequest extends GoogleHttpClientSpiceRequest<String> {
 
 	@Override
 	public String loadDataFromNetwork() throws Exception {
-
-		// With Uri.Builder class we can build our url is a safe manner
-		//Uri.Builder uriBuilder = Uri.parse(Const.URL_EXPLAIN_DOC).buildUpon();
-		//URI uri = new URI(uriBuilder.build().toString());
-
-		//HttpURLConnection connection = getOkHttpClient().open(uri.toURL());
 		HttpRequest request = getHttpRequestFactory()
 				.buildGetRequest(
 						new GenericUrl(Const.URL_EXPLAIN_DOC));
-		// request.setThrowExceptionOnExecuteError(false);
 		HttpResponse response = request.execute();
 		
 		InputStream in = null;
