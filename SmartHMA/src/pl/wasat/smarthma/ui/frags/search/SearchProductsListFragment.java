@@ -53,7 +53,7 @@ public class SearchProductsListFragment extends BaseShowProductsListFragment {
 		SearchProductDetailsFragment fragment = SearchProductDetailsFragment
 				.newInstance(entry);
 		getActivity().getSupportFragmentManager().beginTransaction()
-				.replace(R.id.search_results_detail_container, fragment)
+				.replace(R.id.activity_base_details_container, fragment)
 				.commit();
 
 		super.loadProductItemDetails(entry);
@@ -69,7 +69,7 @@ public class SearchProductsListFragment extends BaseShowProductsListFragment {
 		getActivity()
 				.getSupportFragmentManager()
 				.beginTransaction()
-				.replace(R.id.search_results_detail_container,
+				.replace(R.id.activity_base_details_container,
 						productsIntroFragment, "ProductsIntroFragment")
 				.addToBackStack("ProductsIntroFragment").commit();
 		super.loadSearchResultProductsIntroDetailsFrag(searchProductFeeds);
@@ -91,7 +91,7 @@ public class SearchProductsListFragment extends BaseShowProductsListFragment {
 				.newInstance(searchFail);
 
 		getActivity().getSupportFragmentManager().beginTransaction()
-				.replace(R.id.search_results_list_container, failureFragment)
+				.replace(R.id.activity_base_list_container, failureFragment)
 				.commit();
 		super.loadFailureFrag();
 	}

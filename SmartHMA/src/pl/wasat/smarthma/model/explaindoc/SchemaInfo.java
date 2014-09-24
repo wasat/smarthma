@@ -1,6 +1,10 @@
 package pl.wasat.smarthma.model.explaindoc;
 
-public class SchemaInfo {
+import java.io.Serializable;
+
+public class SchemaInfo implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 
 	private int id;
 
@@ -49,8 +53,8 @@ public class SchemaInfo {
 		if (getClass() != obj.getClass())
 			return false;
 		SchemaInfo other = (SchemaInfo) obj;
-        return id == other.id;
-    }
+		return id == other.id;
+	}
 
 	/*
 	 * (non-Javadoc)

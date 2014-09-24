@@ -49,7 +49,7 @@ public class FeedSummaryBrowseFragment extends BaseFeedSummaryFragment {
 		getActivity()
 				.getSupportFragmentManager()
 				.beginTransaction()
-				.replace(R.id.dataseries_list, dataseriesListFragment)
+				.replace(R.id.activity_base_list_container, dataseriesListFragment)
 				.commit();
 		super.loadNavSearch(linkHref);
 	}

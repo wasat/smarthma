@@ -55,7 +55,7 @@ public class BaseViewAndBasicSettingsDetailFragment extends Fragment {
 	private static TextView tvToDate;
 	private static TextView tvToTime;
 
-	protected Button btnSearch;
+	protected Button btnShowProducts;
 
 	protected Entry displayedEntry;
 
@@ -212,7 +212,7 @@ public class BaseViewAndBasicSettingsDetailFragment extends Fragment {
 		getBboxPrefs();
 		getDateTimePrefs();
 
-		btnSearch = (Button) rootView
+		btnShowProducts = (Button) rootView
 				.findViewById(R.id.frag_search_res_coll_det_btn_search_product);
 		return rootView;
 	}

@@ -25,15 +25,13 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.Window;
 import android.widget.ProgressBar;
 import android.widget.SearchView;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.model.LatLngBounds;
 
-public class BrowseCollectionsActivity extends BaseSmartHMActivity implements
+public class CollectionsDefinitionActivity extends BaseSmartHMActivity implements
 		OnCollectionsListSelectionListener, OnFragmentInteractionListener,
 		OnMapSearchFragmentListener {
 
@@ -53,17 +51,15 @@ public class BrowseCollectionsActivity extends BaseSmartHMActivity implements
 	protected void onCreate(Bundle savedInstanceState) {
 		Ln.getConfig().setLoggingLevel(Log.ERROR);
 		super.onCreate(savedInstanceState);
-		requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
-		setContentView(R.layout.activity_two_panel);
 
 		if (savedInstanceState != null) {
 		}
-		ViewGroup topLayout = (ViewGroup) findViewById(R.id.left_panel_map);
-		topLayout.requestTransparentRegion(topLayout);
+		//ViewGroup topLayout = (ViewGroup) findViewById(R.id.left_panel_map);
+		//topLayout.requestTransparentRegion(topLayout);
 
 		progressBarWmsLoad = (ProgressBar) findViewById(R.id.progressBarWmsLoad);
 
-		if (findViewById(R.id.right_list_container) != null) {
+		if (findViewById(R.id.activity_base_details_container) != null) {
 			TWO_PANEL_MODE = true;
 			loadRightListPanel();
 			loadMapWithBasicSettingsView();
@@ -165,7 +161,7 @@ public class BrowseCollectionsActivity extends BaseSmartHMActivity implements
 		Bundle args = new Bundle();
 		collectionsGroupListFragment.setArguments(args);
 		getSupportFragmentManager().beginTransaction()
-				.replace(R.id.right_list_container, collectionsGroupListFragment)
+				.replace(R.id.activity_base_list_container, collectionsGroupListFragment)
 				.commit();
 	}
 
@@ -175,7 +171,7 @@ public class BrowseCollectionsActivity extends BaseSmartHMActivity implements
 
 		getSupportFragmentManager()
 				.beginTransaction()
-				.replace(R.id.left_panel_map,
+				.replace(R.id.activity_base_details_container,
 						browseCollectionFirstDetailFragment,"BrowseCollectionFirstDetailFragment")
 				.commit();
 	}
@@ -190,7 +186,7 @@ public class BrowseCollectionsActivity extends BaseSmartHMActivity implements
 	public void onCollectionSelected(Integer chosenCollectionId) {
 
 		if (chosenCollectionId == -1) {
-			Toast.makeText(BrowseCollectionsActivity.this,
+			Toast.makeText(CollectionsDefinitionActivity.this,
 					R.string.specific_collection_does_not_exist,
 					Toast.LENGTH_LONG).show();
 			return;
@@ -208,7 +204,7 @@ public class BrowseCollectionsActivity extends BaseSmartHMActivity implements
 		// fragment,
 		// and add the transaction to the back stack so the user can
 		// navigate back
-		transaction.replace(R.id.left_panel_map, newGisFrag);
+		transaction.replace(R.id.activity_base_details_container, newGisFrag);
 		transaction.commit();
 		
 	}
@@ -238,11 +234,11 @@ public class BrowseCollectionsActivity extends BaseSmartHMActivity implements
 				int resultCode = bundle
 						.getInt(Const.REQUEST_CODE_SERVICE_RESULT);
 				if (resultCode == RESULT_OK) {
-					Toast.makeText(BrowseCollectionsActivity.this,
+					Toast.makeText(CollectionsDefinitionActivity.this,
 							R.string.download_explain_doc_complete,
 							Toast.LENGTH_SHORT).show();
 				} else {
-					Toast.makeText(BrowseCollectionsActivity.this,
+					Toast.makeText(CollectionsDefinitionActivity.this,
 							R.string.download_failed, Toast.LENGTH_LONG).show();
 				}
 			}

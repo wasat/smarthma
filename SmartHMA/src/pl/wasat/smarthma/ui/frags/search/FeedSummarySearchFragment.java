@@ -50,7 +50,7 @@ public class FeedSummarySearchFragment extends BaseFeedSummaryFragment {
 		getActivity()
 				.getSupportFragmentManager()
 				.beginTransaction()
-				.replace(R.id.search_results_list_container, searchListFragment)
+				.replace(R.id.activity_base_list_container, searchListFragment)
 				.commit();
 		super.loadNavSearch(linkHref);
 	}

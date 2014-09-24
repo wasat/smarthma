@@ -6,13 +6,13 @@ import java.util.List;
 import pl.wasat.smarthma.R;
 import pl.wasat.smarthma.adapter.DataSeriesListAdapter;
 import pl.wasat.smarthma.database.EoDbAdapter;
+import pl.wasat.smarthma.helper.Const;
 import pl.wasat.smarthma.model.FedeoRequest;
 import pl.wasat.smarthma.model.eo.Pos;
 import pl.wasat.smarthma.model.feed.Entry;
 import pl.wasat.smarthma.preferences.SharedPrefs;
 import pl.wasat.smarthma.ui.frags.base.BaseProductDetailsFragment.OnProductDetailSearchFragmentListener;
 import pl.wasat.smarthma.ui.frags.base.BaseShowProductsListFragment.OnBaseShowProductsListFragmentListener;
-import pl.wasat.smarthma.ui.frags.browse.BrowseProductsListFragment;
 import pl.wasat.smarthma.ui.frags.browse.CollectionsListFragment;
 import pl.wasat.smarthma.ui.frags.browse.DataSeriesDetailFragment;
 import pl.wasat.smarthma.ui.frags.browse.DataSeriesDetailFragment.OnDataSeriesDetailFragmentInteractionListener;
@@ -27,11 +27,10 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
-import android.view.Window;
 
 import com.google.android.gms.maps.model.LatLngBounds;
 
-public class BrowseProductsActivity extends BaseSmartHMActivity implements
+public class CollectionsBrowserActivity extends BaseSmartHMActivity implements
 		OnDataSeriesListFragmentListener,
 		OnDataSeriesDetailFragmentInteractionListener,
 		OnMapSearchFragmentListener, OnSearchListFragmentListener,
@@ -42,32 +41,32 @@ public class BrowseProductsActivity extends BaseSmartHMActivity implements
 	private boolean mTwoPane;
 	private EoDbAdapter dba;
 
-	public BrowseProductsActivity() {
+	public CollectionsBrowserActivity() {
 	}
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
-		setContentView(R.layout.activity_dataseries_list);
 
 		Intent intent = getIntent();
 		String collectionName = intent
 				.getStringExtra(CollectionsListFragment.KEY_COLLECTIONS_NAME);
-		
+
 		SharedPrefs sharedPrefs = new SharedPrefs(getApplicationContext());
 		sharedPrefs.setParentIdPrefs(collectionName);
-		
+		sharedPrefs.setQueryPrefs("");
+
 		FedeoRequest fedeoRequest = new FedeoRequest();
 		fedeoRequest.buildFromShared(this);
 
 		dba = new EoDbAdapter(this);
 
-		if (findViewById(R.id.dataseries_detail_container) != null) {
+		if (findViewById(R.id.activity_base_details_container) != null) {
 			DataSeriesListFragment dsListFragment = DataSeriesListFragment
 					.newInstance(fedeoRequest);
 			getSupportFragmentManager().beginTransaction()
-					.replace(R.id.dataseries_list, dsListFragment).commit();
+					.replace(R.id.activity_base_list_container, dsListFragment)
+					.commit();
 		}
 	}
 
@@ -101,8 +100,8 @@ public class BrowseProductsActivity extends BaseSmartHMActivity implements
 	@Override
 	public void onSearchListFragmentItemSelected(String id) {
 		Entry selectedEntry = (Entry) ((DataSeriesListFragment) getSupportFragmentManager()
-				.findFragmentById(R.id.dataseries_list)).getListAdapter()
-				.getItem(Integer.parseInt(id));
+				.findFragmentById(R.id.activity_base_list_container))
+				.getListAdapter().getItem(Integer.parseInt(id));
 
 		// mark metadata as read
 		dba.openToWrite();
@@ -110,7 +109,8 @@ public class BrowseProductsActivity extends BaseSmartHMActivity implements
 		dba.close();
 		selectedEntry.setRead(true);
 		DataSeriesListAdapter adapter = (DataSeriesListAdapter) ((DataSeriesListFragment) getSupportFragmentManager()
-				.findFragmentById(R.id.dataseries_list)).getListAdapter();
+				.findFragmentById(R.id.activity_base_list_container))
+				.getListAdapter();
 		adapter.notifyDataSetChanged();
 
 		// load metadata details to main panel
@@ -122,7 +122,7 @@ public class BrowseProductsActivity extends BaseSmartHMActivity implements
 			dataSeriesDetailFragment.setArguments(arguments);
 			getSupportFragmentManager()
 					.beginTransaction()
-					.replace(R.id.dataseries_detail_container,
+					.replace(R.id.activity_base_details_container,
 							dataSeriesDetailFragment,
 							"DataSeriesDetailFragment")
 					.addToBackStack("DataSeriesDetailFragment").commit();
@@ -141,7 +141,7 @@ public class BrowseProductsActivity extends BaseSmartHMActivity implements
 
 		FragmentManager fm = getSupportFragmentManager();
 		DataSeriesListFragment dataseriesListFragment = (DataSeriesListFragment) fm
-				.findFragmentById(R.id.dataseries_list);
+				.findFragmentById(R.id.activity_base_list_container);
 		Entry selectedEntry = (Entry) dataseriesListFragment.getListAdapter()
 				.getItem(Integer.parseInt(id));
 
@@ -151,14 +151,15 @@ public class BrowseProductsActivity extends BaseSmartHMActivity implements
 		dba.close();
 		selectedEntry.setRead(true);
 		DataSeriesListAdapter adapter = (DataSeriesListAdapter) ((DataSeriesListFragment) getSupportFragmentManager()
-				.findFragmentById(R.id.dataseries_list)).getListAdapter();
+				.findFragmentById(R.id.activity_base_list_container))
+				.getListAdapter();
 		adapter.notifyDataSetChanged();
 
 		CollectionDetailsFragment collectionDetailsFragment = CollectionDetailsFragment
 				.newInstance(selectedEntry);
 		getSupportFragmentManager()
 				.beginTransaction()
-				.replace(R.id.dataseries_detail_container,
+				.replace(R.id.activity_base_details_container,
 						collectionDetailsFragment, "CollectionDetailsFragment")
 				.addToBackStack("CollectionDetailsFragment").commit();
 
@@ -207,7 +208,7 @@ public class BrowseProductsActivity extends BaseSmartHMActivity implements
 	 * (non-Javadoc)
 	 * 
 	 * @see pl.wasat.smarthma.ui.fragments.SearchProductsFeedsFragment.
-	 * OnSearchProductsFeedFragmentListener
+	 * onBaseShowProductsListFragmentListener
 	 * #onSearchProductsFeedFragmentItemSelected(java.lang.String)
 	 */
 	@Override
@@ -240,12 +241,19 @@ public class BrowseProductsActivity extends BaseSmartHMActivity implements
 	 * (pl.wasat.smarthma.model.FedeoRequest)
 	 */
 	@Override
-	public void onCollectionDetailsFragmentShowProducts(FedeoRequest request) {
-		BrowseProductsListFragment browseProductsListFragment = BrowseProductsListFragment
-				.newInstance(request);
-		getSupportFragmentManager().beginTransaction()
-				.replace(R.id.dataseries_list, browseProductsListFragment)
-				.commit();
+	public void onCollectionDetailsFragmentShowProducts(String parentID) {
+		// BrowseProductsListFragment browseProductsListFragment =
+		// BrowseProductsListFragment
+		// .newInstance(request);
+		// getSupportFragmentManager().beginTransaction()
+		// .replace(R.id.dataseries_list, browseProductsListFragment)
+		// .commit();
+
+		Intent showProductsIntent = new Intent(this,
+				ProductsBrowserActivity.class);
+		showProductsIntent.putExtra(Const.KEY_INTENT_PARENT_ID, parentID);
+		startActivity(showProductsIntent);
+
 
 	}
 
@@ -274,4 +282,6 @@ public class BrowseProductsActivity extends BaseSmartHMActivity implements
 		// TODO Auto-generated method stub
 
 	}
+
+
 }

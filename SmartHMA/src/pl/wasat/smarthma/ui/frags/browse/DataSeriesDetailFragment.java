@@ -147,7 +147,7 @@ public class DataSeriesDetailFragment extends Fragment {
 
 		MapSearchFragment mapSearchFragment = MapSearchFragment.newInstance();
 		getActivity().getSupportFragmentManager().beginTransaction()
-				.replace(R.id.dataseries_detail_container, mapSearchFragment)
+				.replace(R.id.activity_base_details_container, mapSearchFragment)
 				.addToBackStack("MapSearchFragment").commit();
 
 	}

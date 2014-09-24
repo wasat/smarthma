@@ -51,7 +51,7 @@ public class SearchResultProductsDetailsFragment extends BaseViewAndBasicSetting
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		super.onCreateView(inflater, container, savedInstanceState);
-		btnSearch.setOnClickListener(new OnClickListener() {
+		btnShowProducts.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -68,7 +68,7 @@ public class SearchResultProductsDetailsFragment extends BaseViewAndBasicSetting
 
         for (Link entityLink : displayedEntry.getLinks()) {
             if (entityLink.get_rel().equalsIgnoreCase("search")) {
-                btnSearch.setEnabled(true);
+                btnShowProducts.setEnabled(true);
             }
 
         }

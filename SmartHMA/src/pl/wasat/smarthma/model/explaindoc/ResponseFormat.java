@@ -3,11 +3,15 @@
  */
 package pl.wasat.smarthma.model.explaindoc;
 
+import java.io.Serializable;
+
 /**
  * @author Daniel
  * 
  */
-public class ResponseFormat {
+public class ResponseFormat implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 
 	private int id;
 
@@ -57,8 +61,8 @@ public class ResponseFormat {
 		if (getClass() != obj.getClass())
 			return false;
 		ResponseFormat other = (ResponseFormat) obj;
-        return id == other.id;
-    }
+		return id == other.id;
+	}
 
 	/*
 	 * (non-Javadoc)

@@ -62,7 +62,7 @@ public class BrowseCollectionFirstDetailFragment extends
 						mapSearchFragment).addToBackStack("MapSearchFragment")
 				.commit();
 
-		btnSearch.setVisibility(View.INVISIBLE);
+		btnShowProducts.setVisibility(View.INVISIBLE);
 
 		LinearLayout parentNameArea = (LinearLayout) rootView
 				.findViewById(R.id.frag_search_res_coll_det_layout_parent_name);

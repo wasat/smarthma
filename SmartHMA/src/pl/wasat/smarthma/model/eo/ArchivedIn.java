@@ -1,70 +1,75 @@
-
 package pl.wasat.smarthma.model.eo;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.apache.commons.lang.builder.EqualsBuilder;
-import org.apache.commons.lang.builder.HashCodeBuilder;
-import org.apache.commons.lang.builder.ToStringBuilder;
-import org.apache.commons.lang.builder.ToStringStyle;
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
 
 import pl.wasat.smarthma.utils.text.SmartHMAStringStyle;
 
+public class ArchivedIn implements Serializable {
 
-public class ArchivedIn {
+	private static final long serialVersionUID = 1L;
 
-    private String __prefix;
-    private ArchivingInformation archivingInformation;
-    private final Map<String, Object> additionalProperties = new HashMap<String, Object>();
+	private String __prefix;
+	private ArchivingInformation archivingInformation;
+	private final Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
-    public String get__prefix() {
-        return __prefix;
-    }
+	public String get__prefix() {
+		return __prefix;
+	}
 
-    public void set__prefix(String __prefix) {
-        this.__prefix = __prefix;
-    }
+	public void set__prefix(String __prefix) {
+		this.__prefix = __prefix;
+	}
 
-    public ArchivedIn with__prefix(String __prefix) {
-        this.__prefix = __prefix;
-        return this;
-    }
+	public ArchivedIn with__prefix(String __prefix) {
+		this.__prefix = __prefix;
+		return this;
+	}
 
-    public ArchivingInformation getArchivingInformation() {
-        return archivingInformation;
-    }
+	public ArchivingInformation getArchivingInformation() {
+		return archivingInformation;
+	}
 
-    public void setArchivingInformation(ArchivingInformation archivingInformation) {
-        this.archivingInformation = archivingInformation;
-    }
+	public void setArchivingInformation(
+			ArchivingInformation archivingInformation) {
+		this.archivingInformation = archivingInformation;
+	}
 
-    public ArchivedIn withArchivingInformation(ArchivingInformation archivingInformation) {
-        this.archivingInformation = archivingInformation;
-        return this;
-    }
+	public ArchivedIn withArchivingInformation(
+			ArchivingInformation archivingInformation) {
+		this.archivingInformation = archivingInformation;
+		return this;
+	}
 
-    @Override
-    public String toString() {
-            	 ToStringStyle style = new SmartHMAStringStyle(); ToStringBuilder.setDefaultStyle(style); return ToStringBuilder.reflectionToString(this);
-    }
+	@Override
+	public String toString() {
+		ToStringStyle style = new SmartHMAStringStyle();
+		ToStringBuilder.setDefaultStyle(style);
+		return ToStringBuilder.reflectionToString(this, style);
+	}
 
-    @Override
-    public int hashCode() {
-        return HashCodeBuilder.reflectionHashCode(this);
-    }
+	@Override
+	public int hashCode() {
+		return HashCodeBuilder.reflectionHashCode(this);
+	}
 
-    @Override
-    public boolean equals(Object other) {
-        return EqualsBuilder.reflectionEquals(this, other);
-    }
+	@Override
+	public boolean equals(Object other) {
+		return EqualsBuilder.reflectionEquals(this, other);
+	}
 
-    public Map<String, Object> getAdditionalProperties() {
-        return this.additionalProperties;
-    }
+	public Map<String, Object> getAdditionalProperties() {
+		return this.additionalProperties;
+	}
 
-    public void setAdditionalProperty(String name, Object value) {
-        this.additionalProperties.put(name, value);
-    }
+	public void setAdditionalProperty(String name, Object value) {
+		this.additionalProperties.put(name, value);
+	}
 
 }

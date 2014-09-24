@@ -1,8 +1,11 @@
 package pl.wasat.smarthma.model.explaindoc;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class DatabaseInfo {
+public class DatabaseInfo implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 
 	private int id;
 	private String title;
@@ -104,7 +107,9 @@ public class DatabaseInfo {
 		this.links = links;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#hashCode()
 	 */
 	@Override
@@ -120,7 +125,9 @@ public class DatabaseInfo {
 		return result;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
 	@Override
@@ -162,7 +169,9 @@ public class DatabaseInfo {
 		return true;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
@@ -170,7 +179,5 @@ public class DatabaseInfo {
 		return "DatabaseInfo [title=" + title + ", desc=" + desc + ", history="
 				+ history + ", autor=" + autor + ", links=" + links + "]";
 	}
-
-
 
 }

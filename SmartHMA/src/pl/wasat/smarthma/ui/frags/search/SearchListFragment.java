@@ -162,7 +162,7 @@ public class SearchListFragment extends BaseSpiceListFragment {
 			getActivity()
 					.getSupportFragmentManager()
 					.beginTransaction()
-					.replace(R.id.search_results_detail_container,
+					.replace(R.id.activity_base_details_container,
 							failureFragment).commit();
 		} else {
 
@@ -209,7 +209,7 @@ public class SearchListFragment extends BaseSpiceListFragment {
 		FeedSummarySearchFragment feedSummarySearchFragment = FeedSummarySearchFragment
 				.newInstance(searchResultFeed);
 		getActivity().getSupportFragmentManager().beginTransaction()
-				.replace(R.id.search_results_detail_container, feedSummarySearchFragment)
+				.replace(R.id.activity_base_details_container, feedSummarySearchFragment)
 				.commit();
 
 	}

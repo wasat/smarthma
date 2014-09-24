@@ -216,7 +216,7 @@ public class DataSeriesListFragment extends BaseSpiceListFragment {
 		getActivity()
 				.getSupportFragmentManager()
 				.beginTransaction()
-				.replace(R.id.dataseries_detail_container,
+				.replace(R.id.activity_base_details_container,
 						feedSummaryBrowseFragment)
 				.addToBackStack("FeedSummaryBrowseFragment").commit();
 

@@ -112,7 +112,7 @@ public class SearchDetailFragment extends Fragment {
 					getActivity()
 							.getSupportFragmentManager()
 							.beginTransaction()
-							.replace(R.id.search_results_detail_container,
+							.replace(R.id.activity_base_details_container,
 									mapSearchFragment)
 							.addToBackStack("MapSearchFragment").commit();
 
@@ -182,7 +182,7 @@ public class SearchDetailFragment extends Fragment {
 		getActivity()
 				.getSupportFragmentManager()
 				.beginTransaction()
-				.replace(R.id.search_results_detail_container,
+				.replace(R.id.activity_base_details_container,
 						mapSearchFragment, "MapSearchFragment")
 				.addToBackStack("MapSearchFragment").commit();
 

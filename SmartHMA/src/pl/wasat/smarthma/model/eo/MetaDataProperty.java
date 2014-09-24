@@ -1,70 +1,75 @@
-
 package pl.wasat.smarthma.model.eo;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.apache.commons.lang.builder.EqualsBuilder;
-import org.apache.commons.lang.builder.HashCodeBuilder;
-import org.apache.commons.lang.builder.ToStringBuilder;
-import org.apache.commons.lang.builder.ToStringStyle;
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
 
 import pl.wasat.smarthma.utils.text.SmartHMAStringStyle;
 
+public class MetaDataProperty implements Serializable {
 
-public class MetaDataProperty {
+	private static final long serialVersionUID = 1L;
 
-    private String __prefix;
-    private EarthObservationMetaData earthObservationMetaData;
-    private final Map<String, Object> additionalProperties = new HashMap<String, Object>();
+	private String __prefix;
+	private EarthObservationMetaData earthObservationMetaData;
+	private final Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
-    public String get__prefix() {
-        return __prefix;
-    }
+	public String get__prefix() {
+		return __prefix;
+	}
 
-    public void set__prefix(String __prefix) {
-        this.__prefix = __prefix;
-    }
+	public void set__prefix(String __prefix) {
+		this.__prefix = __prefix;
+	}
 
-    public MetaDataProperty with__prefix(String __prefix) {
-        this.__prefix = __prefix;
-        return this;
-    }
+	public MetaDataProperty with__prefix(String __prefix) {
+		this.__prefix = __prefix;
+		return this;
+	}
 
-    public EarthObservationMetaData getEarthObservationMetaData() {
-        return earthObservationMetaData;
-    }
+	public EarthObservationMetaData getEarthObservationMetaData() {
+		return earthObservationMetaData;
+	}
 
-    public void setEarthObservationMetaData(EarthObservationMetaData earthObservationMetaData) {
-        this.earthObservationMetaData = earthObservationMetaData;
-    }
+	public void setEarthObservationMetaData(
+			EarthObservationMetaData earthObservationMetaData) {
+		this.earthObservationMetaData = earthObservationMetaData;
+	}
 
-    public MetaDataProperty withEarthObservationMetaData(EarthObservationMetaData earthObservationMetaData) {
-        this.earthObservationMetaData = earthObservationMetaData;
-        return this;
-    }
+	public MetaDataProperty withEarthObservationMetaData(
+			EarthObservationMetaData earthObservationMetaData) {
+		this.earthObservationMetaData = earthObservationMetaData;
+		return this;
+	}
 
-    @Override
-    public String toString() {
-            	 ToStringStyle style = new SmartHMAStringStyle(); ToStringBuilder.setDefaultStyle(style); return ToStringBuilder.reflectionToString(this);
-    }
+	@Override
+	public String toString() {
+		ToStringStyle style = new SmartHMAStringStyle();
+		ToStringBuilder.setDefaultStyle(style);
+		return ToStringBuilder.reflectionToString(this, style);
+	}
 
-    @Override
-    public int hashCode() {
-        return HashCodeBuilder.reflectionHashCode(this);
-    }
+	@Override
+	public int hashCode() {
+		return HashCodeBuilder.reflectionHashCode(this);
+	}
 
-    @Override
-    public boolean equals(Object other) {
-        return EqualsBuilder.reflectionEquals(this, other);
-    }
+	@Override
+	public boolean equals(Object other) {
+		return EqualsBuilder.reflectionEquals(this, other);
+	}
 
-    public Map<String, Object> getAdditionalProperties() {
-        return this.additionalProperties;
-    }
+	public Map<String, Object> getAdditionalProperties() {
+		return this.additionalProperties;
+	}
 
-    public void setAdditionalProperty(String name, Object value) {
-        this.additionalProperties.put(name, value);
-    }
+	public void setAdditionalProperty(String name, Object value) {
+		this.additionalProperties.put(name, value);
+	}
 
 }

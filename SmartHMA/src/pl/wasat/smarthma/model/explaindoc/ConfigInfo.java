@@ -1,8 +1,11 @@
 package pl.wasat.smarthma.model.explaindoc;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class ConfigInfo {
+public class ConfigInfo implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 
 	private int id;
 	private String default_type;
@@ -72,7 +75,9 @@ public class ConfigInfo {
 		this.setting = setting;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#hashCode()
 	 */
 	@Override
@@ -88,7 +93,9 @@ public class ConfigInfo {
 		return result;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
 	@Override
@@ -120,7 +127,9 @@ public class ConfigInfo {
 		return true;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#toString()
 	 */
 	@Override

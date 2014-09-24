@@ -120,10 +120,10 @@ public class BaseSpiceFragment extends Fragment implements
 			assert fedHr != null;
 			messTxt = fedHr.getFedeoException().getExceptionReport()
 					.getException().getExceptionText().getText();
-			if (fedHr.getFedeoException().getExceptionReport().getException().getExceptionCode().equalsIgnoreCase("NoApplicableCode"))
-			{
-				messTxt = "No Applicable Exception Code.";
-			}
+			//if (fedHr.getFedeoException().getExceptionReport().getException().getExceptionCode().equalsIgnoreCase("NoApplicableCode"))
+			//{
+			//	messTxt = "No Applicable Exception Code.";
+			//}
 
 		} else {
 			messTxt = "Probably a wide area of search or to long time span ";

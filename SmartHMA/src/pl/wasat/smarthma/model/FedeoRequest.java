@@ -21,10 +21,7 @@ import com.google.android.gms.maps.model.LatLngBounds;
  */
 public class FedeoRequest implements Serializable {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 3736600846301730973L;
+	private static final long serialVersionUID = 1L;
 	private static final String FEDEO_BASE_URL = "http://geo.spacebel.be/opensearch/request/?";
 	private HashMap<String, String> params;
 	private String url;
@@ -62,24 +59,25 @@ public class FedeoRequest implements Serializable {
 		this.params.put("endDate", endDate);
 		this.params.put("bbox", bbox);
 		this.params.put("recordSchema", recordSchema);
+		this.params.put("query", query);
 
 	}
-	
+
 	public void buildFromShared(Context context) {
-		SharedPreferences prefs = context.getSharedPreferences(Const.KEY_PREF_FILE, 0);
+		SharedPreferences prefs = context.getSharedPreferences(
+				Const.KEY_PREF_FILE, 0);
 
 		setDefaultParams();
 		setParentIdentifier(prefs.getString(Const.KEY_PREF_PARENT_ID,
 				"EOP:ESA:FEDEO"));
-		setStartDate(prefs
-				.getString(Const.KEY_PREF_DATETIME_START, "0"));
+		setStartDate(prefs.getString(Const.KEY_PREF_DATETIME_START, "0"));
 		setEndDate(prefs.getString(Const.KEY_PREF_DATETIME_END, "0"));
 		setBbox(prefs.getFloat(Const.KEY_PREF_BBOX_WEST, -180),
 				prefs.getFloat(Const.KEY_PREF_BBOX_SOUTH, -90),
 				prefs.getFloat(Const.KEY_PREF_BBOX_EAST, 180),
 				prefs.getFloat(Const.KEY_PREF_BBOX_NORTH, 90));
 		setQuery(prefs.getString(Const.KEY_PREF_QUERY, ""));
-		
+
 	}
 
 	/**
@@ -320,7 +318,5 @@ public class FedeoRequest implements Serializable {
 		String[] idArr = urn.split("urn:ogc:def:");
 		return idArr[idArr.length - 1];
 	}
-
-
 
 }

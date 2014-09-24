@@ -7,7 +7,7 @@ import java.util.Locale;
 import pl.wasat.smarthma.R;
 import pl.wasat.smarthma.customviews.SmHmaTimePickerDialog;
 import pl.wasat.smarthma.customviews.TimePicker;
-import pl.wasat.smarthma.helper.Const;
+import pl.wasat.smarthma.preferences.SharedPrefs;
 import pl.wasat.smarthma.ui.frags.common.MapSearchFragment;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -15,7 +15,6 @@ import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.SharedPreferences;
 import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationManager;
@@ -23,7 +22,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -48,7 +46,7 @@ public class SearchBasicInfoRightFragment extends Fragment {
 	private static final String KEY_COLLECTION_NAME = "pl.wasat.smarthma.COLLECTION_NAME";
 	private static final String KEY_BUTTON_TAG = "pl.wasat.smarthma.KEY_BUTTON_TAG";
 
-    private String paramCollName;
+	private String paramCollName;
 
 	private TextView tvAreaSWLat;
 	private TextView tvAreaSWLon;
@@ -65,6 +63,7 @@ public class SearchBasicInfoRightFragment extends Fragment {
 	private static Button btnToTime;
 
 	private OnSearchBasicInfoRightFragmentListener mListener;
+	private static SharedPrefs sharedPrefs;
 
 	private static final CharSequence[] cataloguesList = { "FEDEO",
 			"FEDEO:COLLECTIONS", "GPOD-EO", "EO-VIRTUAL-ARCHIVE4",
@@ -94,6 +93,8 @@ public class SearchBasicInfoRightFragment extends Fragment {
 		if (getArguments() != null) {
 			paramCollName = getArguments().getString(KEY_COLLECTION_NAME);
 		}
+
+		sharedPrefs = new SharedPrefs(getActivity());
 	}
 
 	@Override
@@ -111,7 +112,10 @@ public class SearchBasicInfoRightFragment extends Fragment {
 				showCatalogueListDialog();
 			}
 		});
-		setParentIdPrefs(getActivity(), tvCatalogName.getText().toString());
+
+		// setParentIdPrefs(getActivity(), tvCatalogName.getText().toString());
+		sharedPrefs.setParentIdPrefs(tvCatalogName.getText().toString());
+
 		((TextView) rootView.findViewById(R.id.search_frag_right_basic_tv_name))
 				.setText(paramCollName);
 		tvAreaSWLat = (TextView) rootView
@@ -133,7 +137,7 @@ public class SearchBasicInfoRightFragment extends Fragment {
 				getActivity()
 						.getSupportFragmentManager()
 						.beginTransaction()
-						.replace(R.id.search_activ_left_container,
+						.replace(R.id.activity_base_details_container,
 								mapSearchFragment)
 						.addToBackStack("MapSearchFragment").commit();
 
@@ -190,6 +194,14 @@ public class SearchBasicInfoRightFragment extends Fragment {
 
 		return rootView;
 	}
+	
+	
+
+	@Override
+	public void onResume() {
+		sharedPrefs.setParentIdPrefs(tvCatalogName.getText().toString());
+		super.onResume();
+	}
 
 	public void onButtonPressed(Uri uri) {
 		if (mListener != null) {
@@ -227,7 +239,14 @@ public class SearchBasicInfoRightFragment extends Fragment {
 		public void onSearchBasicInfoRightFragmentInteraction(Uri uri);
 	}
 
+	
+	
+	
 	private void updateSearchAreaBounds() {
+		String bboxWest = "";
+		String bboxSouth = "";
+		String bboxEast = "";
+		String bboxNorth = "";
 
 		LocationManager locationManager = (LocationManager) getActivity()
 				.getSystemService(Context.LOCATION_SERVICE);
@@ -238,19 +257,29 @@ public class SearchBasicInfoRightFragment extends Fragment {
 				.getLastKnownLocation(locationManager.getBestProvider(criteria,
 						true));
 		if (location != null) {
-			tvAreaSWLat.setText(String.format(Locale.UK, "% 4f",
-					(float) (location.getLatitude() - 0.5)));
-			tvAreaSWLon.setText(String.format(Locale.UK, "% 4f",
-					(float) location.getLongitude() - 0.5));
-			tvAreaNELat.setText(String.format(Locale.UK, "% 4f",
-					(float) location.getLatitude() + 0.5));
-			tvAreaNELon.setText(String.format(Locale.UK, "% 4f",
-					(float) location.getLongitude() + 0.5));
+			bboxWest = String.format(Locale.UK, "% 4f",
+					(float) location.getLongitude() - 0.5);
+			bboxSouth = String.format(Locale.UK, "% 4f",
+					(float) (location.getLatitude() - 0.5));
+			bboxEast = String.format(Locale.UK, "% 4f",
+					(float) location.getLongitude() + 0.5);
+			bboxNorth = String.format(Locale.UK, "% 4f",
+					(float) location.getLatitude() + 0.5);
+
+			tvAreaSWLat.setText(bboxSouth);
+			tvAreaSWLon.setText(bboxWest);
+			tvAreaNELat.setText(bboxNorth);
+			tvAreaNELon.setText(bboxEast);
+
+			sharedPrefs.setBboxPrefs(bboxWest, bboxSouth, bboxEast, bboxNorth);
 		}
 
-		setBboxPrefs();
+		// setBboxPrefs();
+
 	}
 
+	
+	
 	/**
 	 * 
 	 */
@@ -265,7 +294,8 @@ public class SearchBasicInfoRightFragment extends Fragment {
 		btnToDate.setText(formatDate(calEnd));
 		btnToTime.setText(formatTime(calEnd));
 
-		setDateTimePrefs(getActivity());
+		//setDateTimePrefs(getActivity());
+		sharedPrefs.setDateTimePrefs(setDtISO(calStart), setDtISO(calEnd));
 	}
 
 	public void showCatalogueListDialog() {
@@ -324,7 +354,8 @@ public class SearchBasicInfoRightFragment extends Fragment {
 				String dateToSet = formatDate(calEnd);
 				btnToDate.setText(dateToSet);
 			}
-			setDateTimePrefs(getActivity());
+			//setDateTimePrefs(getActivity());
+			sharedPrefs.setDateTimePrefs(setDtISO(calStart), setDtISO(calEnd));
 
 		}
 	}
@@ -380,7 +411,8 @@ public class SearchBasicInfoRightFragment extends Fragment {
 				String timeToSet = formatTime(calEnd);
 				btnToTime.setText(timeToSet);
 			}
-			setDateTimePrefs(getActivity());
+			//setDateTimePrefs(getActivity());
+			sharedPrefs.setDateTimePrefs(setDtISO(calStart), setDtISO(calEnd));
 		}
 	}
 
@@ -392,8 +424,9 @@ public class SearchBasicInfoRightFragment extends Fragment {
 					cataloguesList, new DialogInterface.OnClickListener() {
 						public void onClick(DialogInterface dialog, int which) {
 							tvCatalogName.setText(cataloguesList[which]);
-							setParentIdPrefs(getActivity(),
-									cataloguesList[which].toString());
+							
+							sharedPrefs.setParentIdPrefs(cataloguesList[which].toString());
+							//setParentIdPrefs(getActivity(),	cataloguesList[which].toString());
 						}
 					});
 			return builder.create();
@@ -425,53 +458,25 @@ public class SearchBasicInfoRightFragment extends Fragment {
 	}
 
 	/**
-	 * 
-	 */
-	private static void setDateTimePrefs(Context context) {
-		SharedPreferences settings = context.getSharedPreferences(
-				Const.KEY_PREF_FILE, 0);
-		SharedPreferences.Editor editor = settings.edit();
-		editor.putString(Const.KEY_PREF_DATETIME_START, setDtISO(calStart));
-		editor.putString(Const.KEY_PREF_DATETIME_END, setDtISO(calEnd));
-		editor.apply();
-
-		Log.i("DT", setDtISO(calStart) + " - " + setDtISO(calEnd));
-	}
-
-	private static void setParentIdPrefs(Context context, String parentId) {
-		SharedPreferences settings = context.getSharedPreferences(
-				Const.KEY_PREF_FILE, 0);
-		SharedPreferences.Editor editor = settings.edit();
-		editor.putString(Const.KEY_PREF_PARENT_ID, "EOP:ESA:" + parentId);
-		editor.apply();
-	}
-
-	private void setBboxPrefs() {
-
-		SharedPreferences settings = getActivity().getSharedPreferences(
-				Const.KEY_PREF_FILE, 0);
-		SharedPreferences.Editor editor = settings.edit();
-		editor.putFloat(Const.KEY_PREF_BBOX_WEST,
-				Float.valueOf(tvAreaSWLon.getText().toString()));
-		editor.putFloat(Const.KEY_PREF_BBOX_SOUTH,
-				Float.valueOf(tvAreaSWLat.getText().toString()));
-		editor.putFloat(Const.KEY_PREF_BBOX_EAST,
-				Float.valueOf(tvAreaNELon.getText().toString()));
-		editor.putFloat(Const.KEY_PREF_BBOX_NORTH,
-				Float.valueOf(tvAreaNELat.getText().toString()));
-		editor.apply();
-	}
-
-	/**
 	 * @param bounds
 	 */
 	public void updateCollectionsAreaBounds(LatLngBounds bounds) {
-		tvAreaSWLat.setText(String.format(Locale.UK, "% 4f", bounds.southwest.latitude));
-		tvAreaSWLon.setText(String.format(Locale.UK, "% 4f", bounds.southwest.longitude));
-		tvAreaNELat.setText(String.format(Locale.UK, "% 4f", bounds.northeast.latitude));
-		tvAreaNELon.setText(String.format(Locale.UK, "% 4f", bounds.northeast.longitude));
 
-		setBboxPrefs();
+		String bboxWest = String.format(Locale.UK, "% 4f",
+				(float) bounds.southwest.longitude);
+		String bboxSouth = String.format(Locale.UK, "% 4f",
+				(float) bounds.southwest.latitude);
+		String bboxEast = String.format(Locale.UK, "% 4f",
+				(float) bounds.northeast.longitude);
+		String bboxNorth = String.format(Locale.UK, "% 4f",
+				(float) bounds.northeast.latitude);
+
+		tvAreaSWLat.setText(bboxSouth);
+		tvAreaSWLon.setText(bboxWest);
+		tvAreaNELat.setText(bboxNorth);
+		tvAreaNELon.setText(bboxEast);
+
+		sharedPrefs.setBboxPrefs(bboxWest, bboxSouth, bboxEast, bboxNorth);
 
 	}
 }
