@@ -80,7 +80,7 @@ public class SharedPrefs {
 		if (!parentId.contentEquals("")) {
 			if (!parentId.startsWith("urn:ogc:")) {
 
-				if (!parentId.startsWith("EOP:ESA:")) {
+				if (!parentId.startsWith("EOP:")) {
 					parentId = "EOP:ESA:" + parentId;
 				}
 			}

@@ -1,61 +1,63 @@
-
 package pl.wasat.smarthma.model.exception;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
-import org.apache.commons.lang.builder.EqualsBuilder;
-import org.apache.commons.lang.builder.HashCodeBuilder;
-import org.apache.commons.lang.builder.ToStringBuilder;
-import org.apache.commons.lang.builder.ToStringStyle;
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
 
 import pl.wasat.smarthma.utils.text.SmartHMAStringStyle;
 
-public class Fedeo {
+public class Fedeo implements Serializable {
 
-    private ExceptionReport exceptionReport;
-    private final Map<String, Object> additionalProperties = new HashMap<String, Object>();
+	private static final long serialVersionUID = 1L;
 
-    public ExceptionReport getExceptionReport() {
-        return exceptionReport;
-    }
+	private ExceptionReport exceptionReport;
+	private final Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
-    public void setExceptionReport(ExceptionReport exceptionReport) {
-        this.exceptionReport = exceptionReport;
-    }
+	public ExceptionReport getExceptionReport() {
+		return exceptionReport;
+	}
 
-    public Fedeo withExceptionReport(ExceptionReport exceptionReport) {
-        this.exceptionReport = exceptionReport;
-        return this;
-    }
+	public void setExceptionReport(ExceptionReport exceptionReport) {
+		this.exceptionReport = exceptionReport;
+	}
 
-    @Override
-    public String toString() {
+	public Fedeo withExceptionReport(ExceptionReport exceptionReport) {
+		this.exceptionReport = exceptionReport;
+		return this;
+	}
+
+	@Override
+	public String toString() {
 		ToStringStyle style = new SmartHMAStringStyle();
 		ToStringBuilder.setDefaultStyle(style);
-		return ToStringBuilder.reflectionToString(this);
-    }
+		return ToStringBuilder.reflectionToString(this, style);
+	}
 
-    @Override
-    public int hashCode() {
-        return HashCodeBuilder.reflectionHashCode(this);
-    }
+	@Override
+	public int hashCode() {
+		return HashCodeBuilder.reflectionHashCode(this);
+	}
 
-    @Override
-    public boolean equals(Object other) {
-        return EqualsBuilder.reflectionEquals(this, other);
-    }
+	@Override
+	public boolean equals(Object other) {
+		return EqualsBuilder.reflectionEquals(this, other);
+	}
 
-    public Map<String, Object> getAdditionalProperties() {
-        return this.additionalProperties;
-    }
+	public Map<String, Object> getAdditionalProperties() {
+		return this.additionalProperties;
+	}
 
-    public void setAdditionalProperty(String name, Object value) {
-        this.additionalProperties.put(name, value);
-    }
+	public void setAdditionalProperty(String name, Object value) {
+		this.additionalProperties.put(name, value);
+	}
 
-    public Fedeo withAdditionalProperty(String name, Object value) {
-        this.additionalProperties.put(name, value);
-        return this;
-    }
+	public Fedeo withAdditionalProperty(String name, Object value) {
+		this.additionalProperties.put(name, value);
+		return this;
+	}
 
 }

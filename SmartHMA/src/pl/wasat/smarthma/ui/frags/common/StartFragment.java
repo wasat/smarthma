@@ -2,7 +2,7 @@ package pl.wasat.smarthma.ui.frags.common;
 
 import pl.wasat.smarthma.R;
 import pl.wasat.smarthma.ui.activities.NewsActivity;
-import pl.wasat.smarthma.ui.activities.BrowseCollectionsActivity;
+import pl.wasat.smarthma.ui.activities.CollectionsDefinitionActivity;
 import pl.wasat.smarthma.ui.activities.MissionsActivity;
 import pl.wasat.smarthma.ui.activities.SearchActivity;
 import android.app.Activity;
@@ -85,7 +85,7 @@ public class StartFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent startIntent = new Intent(getActivity(),
-                        BrowseCollectionsActivity.class);
+                        CollectionsDefinitionActivity.class);
                 startActivity(startIntent);
             }
         });

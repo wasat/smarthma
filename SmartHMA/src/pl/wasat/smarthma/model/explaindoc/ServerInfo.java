@@ -1,6 +1,10 @@
 package pl.wasat.smarthma.model.explaindoc;
 
-public class ServerInfo {
+import java.io.Serializable;
+
+public class ServerInfo implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 
 	private int id;
 	private String host;
@@ -70,7 +74,9 @@ public class ServerInfo {
 		this.database = database;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#hashCode()
 	 */
 	@Override
@@ -85,7 +91,9 @@ public class ServerInfo {
 		return result;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
 	@Override
@@ -109,10 +117,12 @@ public class ServerInfo {
 			return false;
 		if (id != other.id)
 			return false;
-        return port == other.port;
-    }
+		return port == other.port;
+	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
@@ -120,6 +130,5 @@ public class ServerInfo {
 		return "ServerInfo [host=" + host + ", port=" + port + ", database="
 				+ database + "]";
 	}
-
 
 }

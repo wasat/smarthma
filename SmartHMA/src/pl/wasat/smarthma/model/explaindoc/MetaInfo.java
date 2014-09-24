@@ -1,6 +1,10 @@
 package pl.wasat.smarthma.model.explaindoc;
 
-public class MetaInfo {
+import java.io.Serializable;
+
+public class MetaInfo implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 
 	private int id;
 	private String dateModified;
@@ -38,7 +42,9 @@ public class MetaInfo {
 		this.dateModified = dateModified;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#hashCode()
 	 */
 	@Override
@@ -51,7 +57,9 @@ public class MetaInfo {
 		return result;
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
 	@Override
@@ -68,17 +76,17 @@ public class MetaInfo {
 				return false;
 		} else if (!dateModified.equals(other.dateModified))
 			return false;
-        return id == other.id;
-    }
+		return id == other.id;
+	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
 	public String toString() {
 		return "MetaInfo [dateModified=" + dateModified + "]";
 	}
-
-
 
 }

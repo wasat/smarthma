@@ -1,8 +1,11 @@
 package pl.wasat.smarthma.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class CollectionsGroup {
+public class CollectionsGroup implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 
 	private int id;
 	private String groupName;

@@ -6,6 +6,7 @@ import java.util.List;
 import pl.wasat.smarthma.R;
 import pl.wasat.smarthma.adapter.SearchListAdapter;
 import pl.wasat.smarthma.database.EoDbAdapter;
+import pl.wasat.smarthma.helper.Const;
 import pl.wasat.smarthma.model.FedeoRequest;
 import pl.wasat.smarthma.model.eo.Pos;
 import pl.wasat.smarthma.model.feed.Entry;
@@ -19,17 +20,15 @@ import pl.wasat.smarthma.ui.frags.common.MapSearchFragment.OnMapSearchFragmentLi
 import pl.wasat.smarthma.ui.frags.common.MetadataFragment.OnMetadataFragmentListener;
 import pl.wasat.smarthma.ui.frags.search.SearchListFragment;
 import pl.wasat.smarthma.ui.frags.search.SearchListFragment.OnSearchListFragmentListener;
-import pl.wasat.smarthma.ui.frags.search.SearchProductsListFragment;
 import android.app.ActionBar;
 import android.app.SearchManager;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.view.Window;
 
 import com.google.android.gms.maps.model.LatLngBounds;
 
-public class SearchResultsActivity extends BaseSmartHMActivity implements
+public class SearchCollectionResultsActivity extends BaseSmartHMActivity implements
 		OnSearchListFragmentListener, OnBaseShowProductsListFragmentListener,
 		OnProductDetailSearchFragmentListener,
 		OnMapSearchFragmentListener,
@@ -41,8 +40,6 @@ public class SearchResultsActivity extends BaseSmartHMActivity implements
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
-		setContentView(R.layout.activity_search_results);
 
 		// get the action bar
 		ActionBar actionBar = getActionBar();
@@ -77,7 +74,7 @@ public class SearchResultsActivity extends BaseSmartHMActivity implements
 					.newInstance(fedeoRequest);
 			getSupportFragmentManager()
 					.beginTransaction()
-					.replace(R.id.search_results_list_container, searchListFragment)
+					.replace(R.id.activity_base_list_container, searchListFragment)
 					.commit();
 
 		}
@@ -94,7 +91,7 @@ public class SearchResultsActivity extends BaseSmartHMActivity implements
 	@Override
 	public void onSearchListFragmentItemSelected(String id) {
 		Entry selectedEntry = (Entry) ((SearchListFragment) getSupportFragmentManager()
-				.findFragmentById(R.id.search_results_list_container))
+				.findFragmentById(R.id.activity_base_list_container))
 				.getListAdapter().getItem(Integer.parseInt(id));
 
 		// mark metadata as read
@@ -103,7 +100,7 @@ public class SearchResultsActivity extends BaseSmartHMActivity implements
 		dba.close();
 		selectedEntry.setRead(true);
 		SearchListAdapter adapter = (SearchListAdapter) ((SearchListFragment) getSupportFragmentManager()
-				.findFragmentById(R.id.search_results_list_container))
+				.findFragmentById(R.id.activity_base_list_container))
 				.getListAdapter();
 		adapter.notifyDataSetChanged();
 
@@ -111,7 +108,7 @@ public class SearchResultsActivity extends BaseSmartHMActivity implements
 				.newInstance(selectedEntry);
 		getSupportFragmentManager()
 				.beginTransaction()
-				.replace(R.id.search_results_detail_container,
+				.replace(R.id.activity_base_details_container,
 						searchResultCollectionDetailsFragment,
 						"SearchResultCollectionDetailsFragment")
 				.addToBackStack("SearchResultCollectionDetailsFragment")
@@ -182,8 +179,6 @@ public class SearchResultsActivity extends BaseSmartHMActivity implements
 				.findFragmentByTag("MapSearchFragment");
 
 		if (mapSearchFragment != null) {
-			// If article frag is available, we're in two-pane layout...
-			// Call a method in the ArticleFragment to update its content
 			mapSearchFragment.showFootPrints(footPrints);
 		}
 
@@ -197,13 +192,13 @@ public class SearchResultsActivity extends BaseSmartHMActivity implements
 	 * .OnSearchResultCollectionDetailsFragmentListener
 	 * #onSearchResultCollectionDetailsFragmentShowProducts(java.lang.String)
 	 */
-	@Override
+/*	@Override
 	public void onCollectionDetailsFragmentShowProducts(
 			FedeoRequest request) {
 		MapSearchFragment mapSearchFragment = MapSearchFragment.newInstance();
 		getSupportFragmentManager()
 				.beginTransaction()
-				.replace(R.id.search_results_detail_container,
+				.replace(R.id.activity_base_details_container,
 						mapSearchFragment, "MapSearchFragment")
 				.addToBackStack("MapSearchFragment").commit();
 
@@ -211,10 +206,20 @@ public class SearchResultsActivity extends BaseSmartHMActivity implements
 				.newInstance(request);
 		getSupportFragmentManager()
 				.beginTransaction()
-				.replace(R.id.search_results_list_container,
+				.replace(R.id.activity_base_list_container,
 						searchProductsFeedsFragment)
 				.addToBackStack("SearchProductsListFragment2").commit();
 
+	}*/
+
+	@Override
+	public void onCollectionDetailsFragmentShowProducts(String parentID) {
+		Intent showProductsIntent = new Intent(this,
+				ProductsBrowserActivity.class);
+		showProductsIntent.putExtra(Const.KEY_INTENT_PARENT_ID, parentID);
+		startActivity(showProductsIntent);
+		
 	}
+
 
 }

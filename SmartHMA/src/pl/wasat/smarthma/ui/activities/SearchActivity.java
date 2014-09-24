@@ -28,12 +28,11 @@ public class SearchActivity extends BaseSmartHMActivity implements
 	protected void onCreate(Bundle savedInstanceState) {
 		Ln.getConfig().setLoggingLevel(Log.ERROR);
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_search);
 
 		if (savedInstanceState != null) {
 		}
 
-		if (findViewById(R.id.search_activ_right_container) != null) {
+		if (findViewById(R.id.activity_base_list_container) != null) {
 
 			loadRightPanel();
 			loadLeftPanel();
@@ -112,7 +111,7 @@ public class SearchActivity extends BaseSmartHMActivity implements
 				.newInstance();
 		getSupportFragmentManager()
 				.beginTransaction()
-				.replace(R.id.search_activ_right_container, rightInfoFragment,
+				.replace(R.id.activity_base_list_container, rightInfoFragment,
 						"SearchBasicInfoRightFragment")
 				.commit();
 	}
@@ -120,7 +119,7 @@ public class SearchActivity extends BaseSmartHMActivity implements
 	private void loadLeftPanel() {
 		SearchFragment searchLeftFragment = SearchFragment.newInstance();
 		getSupportFragmentManager().beginTransaction()
-				.replace(R.id.search_activ_left_container, searchLeftFragment)
+				.replace(R.id.activity_base_details_container, searchLeftFragment)
 				.commit();
 	}
 

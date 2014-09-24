@@ -1,6 +1,5 @@
 package pl.wasat.smarthma.ui.frags.common;
 
-import pl.wasat.smarthma.model.FedeoRequest;
 import pl.wasat.smarthma.model.feed.Entry;
 import pl.wasat.smarthma.model.feed.Link;
 import pl.wasat.smarthma.ui.frags.base.BaseViewAndBasicSettingsDetailFragment;
@@ -62,18 +61,17 @@ public class CollectionDetailsFragment extends
 
 		for (Link entityLink : displayedEntry.getLinks()) {
 			if (entityLink.get_rel().equalsIgnoreCase("search")) {
-				btnSearch.setEnabled(true);
+				btnShowProducts.setEnabled(true);
 			}
 		}
 
-		btnSearch.setOnClickListener(new OnClickListener() {
+		btnShowProducts.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
 
 				if (mListener != null) {
-					FedeoRequest request = new FedeoRequest();
-					request.buildFromShared(getActivity());
-					mListener.onCollectionDetailsFragmentShowProducts(request);
+					String parentID = displayedEntry.getIdentifier();
+					mListener.onCollectionDetailsFragmentShowProducts(parentID);
 				}
 			}
 		});
@@ -109,7 +107,7 @@ public class CollectionDetailsFragment extends
 	 * >Communicating with Other Fragments</a> for more information.
 	 */
 	public interface OnCollectionDetailsFragmentListener {
-		public void onCollectionDetailsFragmentShowProducts(FedeoRequest request);
+		public void onCollectionDetailsFragmentShowProducts(String parentID);
 	}
 
 }

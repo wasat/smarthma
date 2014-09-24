@@ -104,7 +104,7 @@ public class CollectionsGroupListFragment extends Fragment implements
 		CollectionsListFragment collectionsListFragment = CollectionsListFragment
 				.newInstance(listPosition);
 		getActivity().getSupportFragmentManager().beginTransaction()
-				.replace(R.id.right_list_container, collectionsListFragment).addToBackStack("CollectionsListFragment")
+				.replace(R.id.activity_base_list_container, collectionsListFragment).addToBackStack("CollectionsListFragment")
 				.commit();
 	}
 

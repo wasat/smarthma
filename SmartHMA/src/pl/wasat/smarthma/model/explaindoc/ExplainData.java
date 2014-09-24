@@ -1,6 +1,10 @@
 package pl.wasat.smarthma.model.explaindoc;
 
-public class ExplainData {
+import java.io.Serializable;
+
+public class ExplainData implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 
 	private int id;
 	private ServerInfo serverInfo;

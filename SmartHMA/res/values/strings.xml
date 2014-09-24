@@ -78,5 +78,13 @@
     <string name="to">to</string>
     <string name="collection_id">Collection ID: </string>
     <string name="show_products">Show Products</string>
+    <string name="activity_name_collections_definition">Collections Definition</string>
+    <string name="activity_name_collections_browser">Collections Browser</string>
+    <string name="activity_name_products_browser">Products Browser</string>
+    <string name="activity_name_search_eo_data">Search EO Data</string>
+    <string name="activity_name_search_collections_results">Searched Collections</string>
+    <string name="title_activity_products_browser">ProductsBrowserActivity</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="title_activity_test_actv">Test_actv</string>
 
 </resources>

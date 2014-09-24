@@ -6,21 +6,23 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.apache.commons.lang.builder.EqualsBuilder;
-import org.apache.commons.lang.builder.HashCodeBuilder;
-import org.apache.commons.lang.builder.ToStringBuilder;
-import org.apache.commons.lang.builder.ToStringStyle;
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
 
 import pl.wasat.smarthma.model.eo.EarthObservation;
 import pl.wasat.smarthma.utils.text.SmartHMAStringStyle;
 
 
-public class Entry implements Serializable{
+public class Entry implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 
 	
 	public static final String KEY_RSS_ENTRY = "KEY_RSS_ENTRY";
 
-	private static final long serialVersionUID = -8995609562150813178L;
+
 	
     private String id;
     private ArrayList<Link> links;
@@ -219,7 +221,7 @@ public class Entry implements Serializable{
 
 	@Override
     public String toString() {
-            	 ToStringStyle style = new SmartHMAStringStyle(); ToStringBuilder.setDefaultStyle(style); return ToStringBuilder.reflectionToString(this);
+            	 ToStringStyle style = new SmartHMAStringStyle(); ToStringBuilder.setDefaultStyle(style); return ToStringBuilder.reflectionToString(this, style);
     }
 
     @Override

@@ -1,19 +1,22 @@
 
 package pl.wasat.smarthma.model.feed;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.apache.commons.lang.builder.EqualsBuilder;
-import org.apache.commons.lang.builder.HashCodeBuilder;
-import org.apache.commons.lang.builder.ToStringBuilder;
-import org.apache.commons.lang.builder.ToStringStyle;
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
 
 import pl.wasat.smarthma.model.eo.Polygon;
 import pl.wasat.smarthma.utils.text.SmartHMAStringStyle;
 
 
-public class Where {
+public class Where implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 
     private String __prefix;
     private Polygon polygon;
@@ -61,7 +64,7 @@ public class Where {
 
     @Override
     public String toString() {
-            	 ToStringStyle style = new SmartHMAStringStyle(); ToStringBuilder.setDefaultStyle(style); return ToStringBuilder.reflectionToString(this);
+            	 ToStringStyle style = new SmartHMAStringStyle(); ToStringBuilder.setDefaultStyle(style); return ToStringBuilder.reflectionToString(this, style);
     }
 
     @Override

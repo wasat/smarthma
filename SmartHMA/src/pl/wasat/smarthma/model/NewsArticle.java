@@ -4,10 +4,11 @@ import java.io.Serializable;
 import java.net.URL;
 
 public class NewsArticle implements Serializable {
-	
-	public static final String KEY = "pl.wasat.smarthma.NEWS_ARTICLE";
 
 	private static final long serialVersionUID = 1L;
+
+	public static final String KEY = "pl.wasat.smarthma.NEWS_ARTICLE";
+
 	private String guid;
 	private String title;
 	private String description;
@@ -18,7 +19,6 @@ public class NewsArticle implements Serializable {
 	private boolean read;
 	private boolean offline;
 	private long dbId;
-
 
 	public String getGuid() {
 		return guid;
@@ -75,7 +75,7 @@ public class NewsArticle implements Serializable {
 	public String getEncodedContent() {
 		return encodedContent;
 	}
-	
+
 	public boolean isRead() {
 		return read;
 	}
@@ -100,7 +100,7 @@ public class NewsArticle implements Serializable {
 		this.dbId = dbId;
 	}
 
-	private String extractCData(String data){
+	private String extractCData(String data) {
 		data = data.replaceAll("<!\\[CDATA\\[", "");
 		data = data.replaceAll("\\]\\]>", "");
 		return data;

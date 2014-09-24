@@ -51,7 +51,7 @@ public class BrowseProductDetailsFragment extends BaseProductDetailsFragment {
         getActivity()
                 .getSupportFragmentManager()
                 .beginTransaction()
-                .replace(R.id.dataseries_detail_container,
+                .replace(R.id.activity_base_details_container,
                         mapSearchFragment)
                 .addToBackStack("MetadataFragment").commit();
 		super.loadMetadataFrag();
@@ -76,7 +76,7 @@ public class BrowseProductDetailsFragment extends BaseProductDetailsFragment {
 		getActivity()
 		        .getSupportFragmentManager()
 		        .beginTransaction()
-		        .replace(R.id.dataseries_detail_container,
+		        .replace(R.id.activity_base_details_container,
 		                mapSearchFragment)
 		        .addToBackStack("MapSearchFragment").commit();
 		super.loadMapFragment();

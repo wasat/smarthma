@@ -1,103 +1,105 @@
-
 package pl.wasat.smarthma.model.exception;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
-import org.apache.commons.lang.builder.EqualsBuilder;
-import org.apache.commons.lang.builder.HashCodeBuilder;
-import org.apache.commons.lang.builder.ToStringBuilder;
-import org.apache.commons.lang.builder.ToStringStyle;
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
 
 import pl.wasat.smarthma.utils.text.SmartHMAStringStyle;
 
-public class Exception {
+public class Exception implements Serializable {
 
-    private String prefix;
-    private ExceptionText exceptionText;
-    private String exceptionCode;
-    private String locator;
-    private final Map<String, Object> additionalProperties = new HashMap<String, Object>();
+	private static final long serialVersionUID = 1L;
 
-    public String getPrefix() {
-        return prefix;
-    }
+	private String prefix;
+	private ExceptionText exceptionText;
+	private String exceptionCode;
+	private String locator;
+	private final Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
-    public void setPrefix(String prefix) {
-        this.prefix = prefix;
-    }
+	public String getPrefix() {
+		return prefix;
+	}
 
-    public Exception withPrefix(String prefix) {
-        this.prefix = prefix;
-        return this;
-    }
+	public void setPrefix(String prefix) {
+		this.prefix = prefix;
+	}
 
-    public ExceptionText getExceptionText() {
-        return exceptionText;
-    }
+	public Exception withPrefix(String prefix) {
+		this.prefix = prefix;
+		return this;
+	}
 
-    public void setExceptionText(ExceptionText exceptionText) {
-        this.exceptionText = exceptionText;
-    }
+	public ExceptionText getExceptionText() {
+		return exceptionText;
+	}
 
-    public Exception withExceptionText(ExceptionText exceptionText) {
-        this.exceptionText = exceptionText;
-        return this;
-    }
+	public void setExceptionText(ExceptionText exceptionText) {
+		this.exceptionText = exceptionText;
+	}
 
-    public String getExceptionCode() {
-        return exceptionCode;
-    }
+	public Exception withExceptionText(ExceptionText exceptionText) {
+		this.exceptionText = exceptionText;
+		return this;
+	}
 
-    public void setExceptionCode(String exceptionCode) {
-        this.exceptionCode = exceptionCode;
-    }
+	public String getExceptionCode() {
+		return exceptionCode;
+	}
 
-    public Exception withExceptionCode(String exceptionCode) {
-        this.exceptionCode = exceptionCode;
-        return this;
-    }
+	public void setExceptionCode(String exceptionCode) {
+		this.exceptionCode = exceptionCode;
+	}
 
-    public String getLocator() {
-        return locator;
-    }
+	public Exception withExceptionCode(String exceptionCode) {
+		this.exceptionCode = exceptionCode;
+		return this;
+	}
 
-    public void setLocator(String locator) {
-        this.locator = locator;
-    }
+	public String getLocator() {
+		return locator;
+	}
 
-    public Exception withLocator(String locator) {
-        this.locator = locator;
-        return this;
-    }
+	public void setLocator(String locator) {
+		this.locator = locator;
+	}
 
-    @Override
-    public String toString() {
+	public Exception withLocator(String locator) {
+		this.locator = locator;
+		return this;
+	}
+
+	@Override
+	public String toString() {
 		ToStringStyle style = new SmartHMAStringStyle();
 		ToStringBuilder.setDefaultStyle(style);
-		return ToStringBuilder.reflectionToString(this);
-    }
+		return ToStringBuilder.reflectionToString(this, style);
+	}
 
-    @Override
-    public int hashCode() {
-        return HashCodeBuilder.reflectionHashCode(this);
-    }
+	@Override
+	public int hashCode() {
+		return HashCodeBuilder.reflectionHashCode(this);
+	}
 
-    @Override
-    public boolean equals(Object other) {
-        return EqualsBuilder.reflectionEquals(this, other);
-    }
+	@Override
+	public boolean equals(Object other) {
+		return EqualsBuilder.reflectionEquals(this, other);
+	}
 
-    public Map<String, Object> getAdditionalProperties() {
-        return this.additionalProperties;
-    }
+	public Map<String, Object> getAdditionalProperties() {
+		return this.additionalProperties;
+	}
 
-    public void setAdditionalProperty(String name, Object value) {
-        this.additionalProperties.put(name, value);
-    }
+	public void setAdditionalProperty(String name, Object value) {
+		this.additionalProperties.put(name, value);
+	}
 
-    public Exception withAdditionalProperty(String name, Object value) {
-        this.additionalProperties.put(name, value);
-        return this;
-    }
+	public Exception withAdditionalProperty(String name, Object value) {
+		this.additionalProperties.put(name, value);
+		return this;
+	}
 
 }
