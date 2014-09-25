@@ -29,5 +29,6 @@ public class BaseSmartHMActivity extends FragmentActivity {
 	}
 
 	public void doNegativeClick() {
+		finish();
 	}
 }

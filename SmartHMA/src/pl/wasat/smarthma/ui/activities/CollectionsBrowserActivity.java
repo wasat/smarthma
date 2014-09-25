@@ -11,7 +11,7 @@ import pl.wasat.smarthma.model.FedeoRequest;
 import pl.wasat.smarthma.model.eo.Pos;
 import pl.wasat.smarthma.model.feed.Entry;
 import pl.wasat.smarthma.preferences.SharedPrefs;
-import pl.wasat.smarthma.ui.frags.base.BaseProductDetailsFragment.OnProductDetailSearchFragmentListener;
+import pl.wasat.smarthma.ui.frags.base.BaseProductDetailsFragment.OnProductDetailsFragmentListener;
 import pl.wasat.smarthma.ui.frags.base.BaseShowProductsListFragment.OnBaseShowProductsListFragmentListener;
 import pl.wasat.smarthma.ui.frags.browse.CollectionsListFragment;
 import pl.wasat.smarthma.ui.frags.browse.DataSeriesDetailFragment;
@@ -35,7 +35,7 @@ public class CollectionsBrowserActivity extends BaseSmartHMActivity implements
 		OnDataSeriesDetailFragmentInteractionListener,
 		OnMapSearchFragmentListener, OnSearchListFragmentListener,
 		OnBaseShowProductsListFragmentListener,
-		OnProductDetailSearchFragmentListener, OnMetadataFragmentListener,
+		OnProductDetailsFragmentListener, OnMetadataFragmentListener,
 		OnCollectionDetailsFragmentListener {
 
 	private boolean mTwoPane;
@@ -242,18 +242,11 @@ public class CollectionsBrowserActivity extends BaseSmartHMActivity implements
 	 */
 	@Override
 	public void onCollectionDetailsFragmentShowProducts(String parentID) {
-		// BrowseProductsListFragment browseProductsListFragment =
-		// BrowseProductsListFragment
-		// .newInstance(request);
-		// getSupportFragmentManager().beginTransaction()
-		// .replace(R.id.dataseries_list, browseProductsListFragment)
-		// .commit();
 
 		Intent showProductsIntent = new Intent(this,
 				ProductsBrowserActivity.class);
 		showProductsIntent.putExtra(Const.KEY_INTENT_PARENT_ID, parentID);
 		startActivity(showProductsIntent);
-
 
 	}
 
@@ -265,7 +258,7 @@ public class CollectionsBrowserActivity extends BaseSmartHMActivity implements
 	 * #onProductDetailSearchFragmentInteraction(android.net.Uri)
 	 */
 	@Override
-	public void onProductDetailSearchFragmentInteraction(Uri uri) {
+	public void onProductDetailsFragmentInteraction(Uri uri) {
 		// TODO Auto-generated method stub
 
 	}
@@ -282,6 +275,5 @@ public class CollectionsBrowserActivity extends BaseSmartHMActivity implements
 		// TODO Auto-generated method stub
 
 	}
-
 
 }

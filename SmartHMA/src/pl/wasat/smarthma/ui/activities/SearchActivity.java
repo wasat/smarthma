@@ -39,6 +39,7 @@ public class SearchActivity extends BaseSmartHMActivity implements
 
 		}
 	}
+
 	@Override
 	protected void onSaveInstanceState(Bundle outState) {
 		super.onSaveInstanceState(outState);
@@ -65,7 +66,6 @@ public class SearchActivity extends BaseSmartHMActivity implements
 		return super.onPrepareOptionsMenu(menu);
 	}
 
-
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
@@ -87,22 +87,26 @@ public class SearchActivity extends BaseSmartHMActivity implements
 		return true;
 	}
 
-
-
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see android.support.v4.app.FragmentActivity#onBackPressed()
 	 */
 	@Override
 	public void onBackPressed() {
 		FragmentManager fm = getSupportFragmentManager();
 		int bsec = fm.getBackStackEntryCount();
-		if (bsec > 0) {
-			fm.popBackStack();
+		if (bsec > 1) {
+			while (bsec > 1) {
+				fm.popBackStackImmediate();
+				bsec = fm.getBackStackEntryCount();
+			}
 		} else {
 			finish();
 			super.onBackPressed();
 		}
 	}
+
 	/**
 	 * 
 	 */
@@ -112,15 +116,15 @@ public class SearchActivity extends BaseSmartHMActivity implements
 		getSupportFragmentManager()
 				.beginTransaction()
 				.replace(R.id.activity_base_list_container, rightInfoFragment,
-						"SearchBasicInfoRightFragment")
-				.commit();
+						"SearchBasicInfoRightFragment").commit();
 	}
 
 	private void loadLeftPanel() {
 		SearchFragment searchLeftFragment = SearchFragment.newInstance();
-		getSupportFragmentManager().beginTransaction()
-				.replace(R.id.activity_base_details_container, searchLeftFragment)
-				.commit();
+		getSupportFragmentManager()
+				.beginTransaction()
+				.replace(R.id.activity_base_details_container,
+						searchLeftFragment).commit();
 	}
 
 	/*

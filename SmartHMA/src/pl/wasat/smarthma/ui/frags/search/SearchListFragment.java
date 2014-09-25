@@ -31,7 +31,7 @@ import android.widget.Toast;
 public class SearchListFragment extends BaseSpiceListFragment {
 	private static final String KEY_PARAM_SEARCH_FEDEO_REQUEST = "pl.wasat.smarthma.KEY_PARAM_SEARCH_FEDEO_REQUEST";
 	private static final String STATE_ACTIVATED_POSITION = "activated_position";
-	
+
 	private FedeoRequest searchRequest;
 
 	private int mActivatedPosition = ListView.INVALID_POSITION;
@@ -208,9 +208,12 @@ public class SearchListFragment extends BaseSpiceListFragment {
 	private void showDataSeriesIntro(Feed searchResultFeed) {
 		FeedSummarySearchFragment feedSummarySearchFragment = FeedSummarySearchFragment
 				.newInstance(searchResultFeed);
-		getActivity().getSupportFragmentManager().beginTransaction()
-				.replace(R.id.activity_base_details_container, feedSummarySearchFragment)
-				.commit();
+		getActivity()
+				.getSupportFragmentManager()
+				.beginTransaction()
+				.replace(R.id.activity_base_details_container,
+						feedSummarySearchFragment, "FeedSummarySearchFragment")
+				.addToBackStack("FeedSummarySearchFragment").commit();
 
 	}
 

@@ -286,7 +286,7 @@ public class SearchBasicInfoRightFragment extends Fragment {
 	private void setInitDateTime() {
 
 		calStart = Calendar.getInstance();
-		calStart.roll(Calendar.YEAR, -1);
+		calStart.roll(Calendar.YEAR, -3);
 		btnFromDate.setText(formatDate(calStart));
 		btnFromTime.setText(formatTime(calStart));
 

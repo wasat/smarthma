@@ -11,7 +11,7 @@ import pl.wasat.smarthma.model.FedeoRequest;
 import pl.wasat.smarthma.model.eo.Pos;
 import pl.wasat.smarthma.model.feed.Entry;
 import pl.wasat.smarthma.preferences.SharedPrefs;
-import pl.wasat.smarthma.ui.frags.base.BaseProductDetailsFragment.OnProductDetailSearchFragmentListener;
+import pl.wasat.smarthma.ui.frags.base.BaseProductDetailsFragment.OnProductDetailsFragmentListener;
 import pl.wasat.smarthma.ui.frags.base.BaseShowProductsListFragment.OnBaseShowProductsListFragmentListener;
 import pl.wasat.smarthma.ui.frags.common.CollectionDetailsFragment;
 import pl.wasat.smarthma.ui.frags.common.CollectionDetailsFragment.OnCollectionDetailsFragmentListener;
@@ -25,15 +25,15 @@ import android.app.SearchManager;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
 
 import com.google.android.gms.maps.model.LatLngBounds;
 
-public class SearchCollectionResultsActivity extends BaseSmartHMActivity implements
-		OnSearchListFragmentListener, OnBaseShowProductsListFragmentListener,
-		OnProductDetailSearchFragmentListener,
-		OnMapSearchFragmentListener,
-		OnMetadataFragmentListener,
-		OnCollectionDetailsFragmentListener {
+public class SearchCollectionResultsActivity extends BaseSmartHMActivity
+		implements OnSearchListFragmentListener,
+		OnBaseShowProductsListFragmentListener,
+		OnProductDetailsFragmentListener, OnMapSearchFragmentListener,
+		OnMetadataFragmentListener, OnCollectionDetailsFragmentListener {
 
 	private EoDbAdapter dba;
 
@@ -63,10 +63,10 @@ public class SearchCollectionResultsActivity extends BaseSmartHMActivity impleme
 			 * from SQLite and showing in listview 2. Making webrequest and
 			 * displaying the data For now we just display the query only
 			 */
-			
+
 			SharedPrefs sharedPrefs = new SharedPrefs(this);
 			sharedPrefs.setQueryPrefs(query);
-			
+
 			FedeoRequest fedeoRequest = new FedeoRequest();
 			fedeoRequest.buildFromShared(this);
 
@@ -74,11 +74,31 @@ public class SearchCollectionResultsActivity extends BaseSmartHMActivity impleme
 					.newInstance(fedeoRequest);
 			getSupportFragmentManager()
 					.beginTransaction()
-					.replace(R.id.activity_base_list_container, searchListFragment)
-					.commit();
+					.replace(R.id.activity_base_list_container,
+							searchListFragment).commit();
 
 		}
 
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see android.support.v4.app.FragmentActivity#onBackPressed()
+	 */
+	@Override
+	public void onBackPressed() {
+		FragmentManager fm = getSupportFragmentManager();
+		int bsec = fm.getBackStackEntryCount();
+		if (bsec > 1) {
+			while (bsec > 1) {
+				fm.popBackStackImmediate();
+				bsec = fm.getBackStackEntryCount();
+			}
+		} else {
+			finish();
+			super.onBackPressed();
+		}
 	}
 
 	/*
@@ -117,7 +137,7 @@ public class SearchCollectionResultsActivity extends BaseSmartHMActivity impleme
 	}
 
 	@Override
-	public void onProductDetailSearchFragmentInteraction(Uri uri) {
+	public void onProductDetailsFragmentInteraction(Uri uri) {
 		// TODO Auto-generated method stub
 
 	}
@@ -135,8 +155,7 @@ public class SearchCollectionResultsActivity extends BaseSmartHMActivity impleme
 				.findFragmentByTag("SearchResultCollectionDetailsFragment");
 
 		if (searchResultCollectionDetailsFragment != null) {
-			searchResultCollectionDetailsFragment
-					.updateAreaBounds(bounds);
+			searchResultCollectionDetailsFragment.updateAreaBounds(bounds);
 		}
 
 	}
@@ -184,42 +203,13 @@ public class SearchCollectionResultsActivity extends BaseSmartHMActivity impleme
 
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * pl.wasat.smarthma.ui.frags.search.SearchResultCollectionDetailsFragment
-	 * .OnSearchResultCollectionDetailsFragmentListener
-	 * #onSearchResultCollectionDetailsFragmentShowProducts(java.lang.String)
-	 */
-/*	@Override
-	public void onCollectionDetailsFragmentShowProducts(
-			FedeoRequest request) {
-		MapSearchFragment mapSearchFragment = MapSearchFragment.newInstance();
-		getSupportFragmentManager()
-				.beginTransaction()
-				.replace(R.id.activity_base_details_container,
-						mapSearchFragment, "MapSearchFragment")
-				.addToBackStack("MapSearchFragment").commit();
-
-		SearchProductsListFragment searchProductsFeedsFragment = SearchProductsListFragment
-				.newInstance(request);
-		getSupportFragmentManager()
-				.beginTransaction()
-				.replace(R.id.activity_base_list_container,
-						searchProductsFeedsFragment)
-				.addToBackStack("SearchProductsListFragment2").commit();
-
-	}*/
-
 	@Override
 	public void onCollectionDetailsFragmentShowProducts(String parentID) {
 		Intent showProductsIntent = new Intent(this,
 				ProductsBrowserActivity.class);
 		showProductsIntent.putExtra(Const.KEY_INTENT_PARENT_ID, parentID);
 		startActivity(showProductsIntent);
-		
-	}
 
+	}
 
 }
