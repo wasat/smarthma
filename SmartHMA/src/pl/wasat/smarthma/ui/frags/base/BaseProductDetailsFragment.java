@@ -21,7 +21,7 @@ import android.widget.Toast;
 /**
  * A simple {@link android.support.v4.app.Fragment} subclass. Activities that
  * contain this fragment must implement the
- * {@link BaseProductDetailsFragment.OnProductDetailSearchFragmentListener}
+ * {@link BaseProductDetailsFragment.OnProductDetailsFragmentListener}
  * interface to handle interaction events. Use the
  * {@link BaseProductDetailsFragment#newInstance} factory method to create an
  * instance of this fragment.
@@ -32,7 +32,7 @@ public class BaseProductDetailsFragment extends Fragment {
 
 	protected Entry displayedEntry;
 
-    private OnProductDetailSearchFragmentListener mListener;
+    private OnProductDetailsFragmentListener mListener;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -48,7 +48,7 @@ public class BaseProductDetailsFragment extends Fragment {
 			Bundle savedInstanceState) {
 		// Inflate the layout for this fragment
 		View rootView = inflater.inflate(
-				R.layout.fragment_product_detail_search, container, false);
+				R.layout.fragment_base_product_detail, container, false);
 
 		if (displayedEntry != null) {
 			final String title = displayedEntry.getTitle();
@@ -101,7 +101,7 @@ public class BaseProductDetailsFragment extends Fragment {
 	// TODO: Rename method, update argument and hook method into UI event
 	public void onButtonPressed(Uri uri) {
 		if (mListener != null) {
-			mListener.onProductDetailSearchFragmentInteraction(uri);
+			mListener.onProductDetailsFragmentInteraction(uri);
 		}
 	}
 
@@ -109,10 +109,10 @@ public class BaseProductDetailsFragment extends Fragment {
 	public void onAttach(Activity activity) {
 		super.onAttach(activity);
 		try {
-			mListener = (OnProductDetailSearchFragmentListener) activity;
+			mListener = (OnProductDetailsFragmentListener) activity;
 		} catch (ClassCastException e) {
 			throw new ClassCastException(activity.toString()
-					+ " must implement OnProductDetailSearchFragmentListener");
+					+ " must implement OnProductDetailsFragmentListener");
 		}
 	}
 
@@ -162,9 +162,9 @@ public class BaseProductDetailsFragment extends Fragment {
 	 * "http://developer.android.com/training/basics/fragments/communicating.html"
 	 * >Communicating with Other Fragments</a> for more information.
 	 */
-	public interface OnProductDetailSearchFragmentListener {
+	public interface OnProductDetailsFragmentListener {
 		// TODO: Update argument type and name
-		public void onProductDetailSearchFragmentInteraction(Uri uri);
+		public void onProductDetailsFragmentInteraction(Uri uri);
 	}
 
 }

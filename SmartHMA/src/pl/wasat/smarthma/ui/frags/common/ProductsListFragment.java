@@ -1,12 +1,11 @@
-package pl.wasat.smarthma.ui.frags.browse;
+package pl.wasat.smarthma.ui.frags.common;
 
 import pl.wasat.smarthma.R;
 import pl.wasat.smarthma.model.FedeoRequest;
 import pl.wasat.smarthma.model.feed.Entry;
 import pl.wasat.smarthma.model.feed.Feed;
 import pl.wasat.smarthma.ui.frags.base.BaseShowProductsListFragment;
-import pl.wasat.smarthma.ui.frags.common.FailureFragment;
-import pl.wasat.smarthma.ui.frags.search.SearchProductsListFragment;
+import pl.wasat.smarthma.ui.frags.browse.FeedSummaryBrowseFragment;
 import android.os.Bundle;
 
 /**
@@ -14,11 +13,11 @@ import android.os.Bundle;
  * contain this fragment must implement the
  * {@link SearchProductsListFragment.OnBaseShowProductsListFragmentListener}
  * interface to handle interaction events. Use the
- * {@link BrowseProductsListFragment#newInstance} factory method to create an
+ * {@link ProductsListFragment#newInstance} factory method to create an
  * instance of this fragment.
  * 
  */
-public class BrowseProductsListFragment extends BaseShowProductsListFragment {
+public class ProductsListFragment extends BaseShowProductsListFragment {
 	private static final String KEY_PARAM_FEDEO_REQUEST = "pl.wasat.samrthma.KEY_PARAM_FEDEO_REQUEST";
 
 	/**
@@ -31,16 +30,16 @@ public class BrowseProductsListFragment extends BaseShowProductsListFragment {
 	 *            Parameter 2.
 	 * @return A new instance of fragment SearchProductsFeedsFragment.
 	 */
-	public static BrowseProductsListFragment newInstance(
+	public static ProductsListFragment newInstance(
 			FedeoRequest fedeoRequest) {
-		BrowseProductsListFragment fragment = new BrowseProductsListFragment();
+		ProductsListFragment fragment = new ProductsListFragment();
 		Bundle args = new Bundle();
 		args.putSerializable(KEY_PARAM_FEDEO_REQUEST, fedeoRequest);
 		fragment.setArguments(args);
 		return fragment;
 	}
 
-	public BrowseProductsListFragment() {
+	public ProductsListFragment() {
 		// Required empty public constructor
 	}
 
@@ -52,11 +51,15 @@ public class BrowseProductsListFragment extends BaseShowProductsListFragment {
 	 */
 	@Override
 	public void loadProductItemDetails(Entry entry) {
-		BrowseProductDetailsFragment fragment = BrowseProductDetailsFragment
+		ProductDetailsFragment productDetailsFragment = ProductDetailsFragment
 				.newInstance(entry);
-		getActivity().getSupportFragmentManager().beginTransaction()
-				.replace(R.id.activity_base_details_container, fragment)
-				.commit();
+		getActivity()
+				.getSupportFragmentManager()
+				.beginTransaction()
+				.add(R.id.activity_base_details_container,
+						productDetailsFragment,
+						"BrowseProductDetailsFragment")
+				.addToBackStack("BrowseProductDetailsFragment").commit();
 
 		super.loadProductItemDetails(entry);
 	}
@@ -75,9 +78,9 @@ public class BrowseProductsListFragment extends BaseShowProductsListFragment {
 		getActivity()
 				.getSupportFragmentManager()
 				.beginTransaction()
-				.replace(R.id.activity_base_details_container,
-						productsIntroFragment, "ProductsIntroFragment")
-				.addToBackStack("ProductsIntroFragment").commit();
+				.add(R.id.activity_base_details_container,
+						productsIntroFragment, "BrowseProductsIntroFragment")
+				.addToBackStack("BrowseProductsIntroFragment").commit();
 		super.loadSearchResultProductsIntroDetailsFrag(searchProductFeeds);
 	}
 
@@ -97,7 +100,8 @@ public class BrowseProductsListFragment extends BaseShowProductsListFragment {
 				.newInstance(searchFail);
 
 		getActivity().getSupportFragmentManager().beginTransaction()
-				.replace(R.id.activity_base_list_container, failureFragment).commit();
+				.replace(R.id.activity_base_list_container, failureFragment)
+				.commit();
 		super.loadFailureFrag();
 	}
 

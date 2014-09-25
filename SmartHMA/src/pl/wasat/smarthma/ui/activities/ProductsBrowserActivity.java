@@ -3,22 +3,27 @@ package pl.wasat.smarthma.ui.activities;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.google.android.gms.maps.model.LatLngBounds;
+
 import pl.wasat.smarthma.R;
 import pl.wasat.smarthma.helper.Const;
 import pl.wasat.smarthma.model.FedeoRequest;
 import pl.wasat.smarthma.model.eo.Pos;
 import pl.wasat.smarthma.preferences.SharedPrefs;
-import pl.wasat.smarthma.ui.frags.base.BaseProductDetailsFragment.OnProductDetailSearchFragmentListener;
+import pl.wasat.smarthma.ui.frags.base.BaseProductDetailsFragment.OnProductDetailsFragmentListener;
 import pl.wasat.smarthma.ui.frags.base.BaseShowProductsListFragment.OnBaseShowProductsListFragmentListener;
-import pl.wasat.smarthma.ui.frags.browse.BrowseProductsListFragment;
+import pl.wasat.smarthma.ui.frags.common.MapSearchFragment.OnMapSearchFragmentListener;
+import pl.wasat.smarthma.ui.frags.common.ProductsListFragment;
 import pl.wasat.smarthma.ui.frags.common.MetadataFragment.OnMetadataFragmentListener;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
 
 public class ProductsBrowserActivity extends BaseSmartHMActivity implements
 		OnBaseShowProductsListFragmentListener,
-		OnProductDetailSearchFragmentListener, OnMetadataFragmentListener {
+		OnProductDetailsFragmentListener, OnMetadataFragmentListener,
+		OnMapSearchFragmentListener {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -33,12 +38,39 @@ public class ProductsBrowserActivity extends BaseSmartHMActivity implements
 		FedeoRequest fedeoRequest = new FedeoRequest();
 		fedeoRequest.buildFromShared(this);
 
-		BrowseProductsListFragment browseProductsListFragment = BrowseProductsListFragment
+		ProductsListFragment productsListFragment = ProductsListFragment
 				.newInstance(fedeoRequest);
 		getSupportFragmentManager()
 				.beginTransaction()
 				.replace(R.id.activity_base_list_container,
-						browseProductsListFragment).commit();
+						productsListFragment).commit();
+	}
+
+	@Override
+	public void onBackPressed() {
+		FragmentManager fm = getSupportFragmentManager();
+		int bsec = fm.getBackStackEntryCount();
+		if (bsec > 0) {
+			String bstEntry = fm.getBackStackEntryAt(bsec - 1).getName();
+
+			if (bstEntry.equalsIgnoreCase("MetadataFragment")) {
+				fm.popBackStackImmediate("MetadataFragment",
+						FragmentManager.POP_BACK_STACK_INCLUSIVE);
+			} else {
+
+				bsec = fm.getBackStackEntryCount();
+
+				if (bsec > 1) {
+					while (bsec > 1) {
+						fm.popBackStackImmediate();
+						bsec = fm.getBackStackEntryCount();
+					}
+				} else {
+					finish();
+					super.onBackPressed();
+				}
+			}
+		}
 	}
 
 	@Override
@@ -55,7 +87,7 @@ public class ProductsBrowserActivity extends BaseSmartHMActivity implements
 	}
 
 	@Override
-	public void onProductDetailSearchFragmentInteraction(Uri uri) {
+	public void onProductDetailsFragmentInteraction(Uri uri) {
 		// TODO Auto-generated method stub
 
 	}
@@ -64,5 +96,17 @@ public class ProductsBrowserActivity extends BaseSmartHMActivity implements
 	public void onMetadataFragmentInteraction() {
 		// TODO Auto-generated method stub
 
+	}
+
+	@Override
+	public void onMapSearchFragmentInteraction(Uri uri) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onMapSearchFragmentBoundsChange(LatLngBounds bounds) {
+		// TODO Auto-generated method stub
+		
 	}
 }

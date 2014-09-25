@@ -24,11 +24,11 @@ public class SmartHMAStringStyle extends ToStringStyle {
 		this.setUseFieldNames(true);
 		this.setUseIdentityHashCode(false);
 		this.setContentStart("");
-		this.setFieldSeparator(SystemUtils.LINE_SEPARATOR);
+		this.setFieldSeparator(SystemUtils.LINE_SEPARATOR + " ");
 		this.setFieldSeparatorAtStart(false);
 		this.setFieldSeparatorAtEnd(false);
 		this.setUseClassName(false);
-		this.setContentEnd(SystemUtils.LINE_SEPARATOR);
+		this.setContentEnd("");
 		this.setArrayEnd("");
 		this.setArrayStart("");
 		this.setArraySeparator("-");

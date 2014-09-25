@@ -107,7 +107,7 @@ public class MapSearchFragment extends SupportMapFragment implements
 			mListener = (OnMapSearchFragmentListener) activity;
 		} catch (ClassCastException e) {
 			throw new ClassCastException(activity.toString()
-					+ " must implement OnFragmentInteractionListener");
+					+ " must implement OnMapSearchFragmentListener");
 		}
 	}
 
@@ -140,8 +140,6 @@ public class MapSearchFragment extends SupportMapFragment implements
 				.isGooglePlayServicesAvailable(getActivity());
 		if (status == ConnectionResult.SUCCESS) {
 			supportMapFrag = this;
-
-			// GoogleMap mapFragment = this.getMap();
 
 			setUpMapIfNeeded();
 			if (savedInstanceState != null) {
