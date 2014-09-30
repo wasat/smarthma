@@ -1,6 +1,7 @@
 package pl.wasat.smarthma.model.eo;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -9,6 +10,8 @@ import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
+
+import com.google.android.gms.maps.model.LatLng;
 
 import pl.wasat.smarthma.utils.text.SmartHMAStringStyle;
 
@@ -19,6 +22,7 @@ public class LinearRing implements Serializable {
 	private String __prefix;
 	private PosString posString;
 	private List<Pos> posList;
+	private List<LatLng> posLatLngList = new ArrayList<LatLng>();
 	private final Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
 	public String get__prefix() {
@@ -53,11 +57,20 @@ public class LinearRing implements Serializable {
 
 	public void setPosList(List<Pos> posList) {
 		this.posList = posList;
+		toPosLatLngList();
 	}
 
 	public LinearRing withPosList(List<Pos> posList) {
 		this.posList = posList;
 		return this;
+	}
+
+	public List<LatLng> getPosLatLngList() {
+		return posLatLngList;
+	}
+
+	public void setPosLatLngList(List<LatLng> posLatLngList) {
+		this.posLatLngList = posLatLngList;
 	}
 
 	@Override
@@ -83,6 +96,16 @@ public class LinearRing implements Serializable {
 
 	public void setAdditionalProperty(String name, Object value) {
 		this.additionalProperties.put(name, value);
+	}
+	
+	private void toPosLatLngList(){
+		for (int j = 0; j < posList.size(); j++) {
+			String posStr = posList.get(j).get__text();
+			LatLng ftPt = new LatLng(Double.valueOf(posStr.split(" ")[0]),
+					Double.valueOf(posStr.split(" ")[1]));
+			posLatLngList.add(ftPt);
+		}
+		
 	}
 
 }

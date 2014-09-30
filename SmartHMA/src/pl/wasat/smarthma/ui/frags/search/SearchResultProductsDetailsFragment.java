@@ -28,10 +28,8 @@ public class SearchResultProductsDetailsFragment extends BaseViewAndBasicSetting
 	 * Use this factory method to create a new instance of this fragment using
 	 * the provided parameters.
 	 * 
-	 * @param collectionName
+	 * @param collectionEntry
 	 *            Parameter 1.
-	 * @param collectionDates
-	 *            Parameter 2.
 	 * @return A new instance of fragment SearchResultProductsDetailsFragment.
 	 */
 	public static SearchResultProductsDetailsFragment newInstance(

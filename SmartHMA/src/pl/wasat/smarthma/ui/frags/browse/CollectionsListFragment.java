@@ -21,7 +21,7 @@ import android.widget.ListView;
 /**
  * A simple {@link android.support.v4.app.Fragment} subclass. Activities that
  * contain this fragment must implement the
- * {@link CollectionsListFragment.OnFragmentInteractionListener} interface to
+ * {@link CollectionsListFragment.OnCollectionsListFragmentListener} interface to
  * handle interaction events. Use the
  * {@link CollectionsListFragment#newInstance} factory method to create an
  * instance of this fragment.
@@ -35,16 +35,14 @@ public class CollectionsListFragment extends Fragment {
 
 	private int parentListPos;
 	private String selectGroupName;
-    private OnFragmentInteractionListener mListener;
+    private OnCollectionsListFragmentListener mListener;
 
 	/**
 	 * Use this factory method to create a new instance of this fragment using
 	 * the provided parameters.
 	 * 
-	 * @param param1
+	 * @param listPosParam
 	 *            Parameter 1.
-	 * @param param2
-	 *            Parameter 2.
 	 * @return A new instance of fragment BlankFragment.
 	 */
 	public static CollectionsListFragment newInstance(int listPosParam) {
@@ -129,10 +127,10 @@ public class CollectionsListFragment extends Fragment {
 	public void onAttach(Activity activity) {
 		super.onAttach(activity);
 		try {
-			mListener = (OnFragmentInteractionListener) activity;
+			mListener = (OnCollectionsListFragmentListener) activity;
 		} catch (ClassCastException e) {
 			throw new ClassCastException(activity.toString()
-					+ " must implement OnFragmentInteractionListener");
+					+ " must implement OnCollectionsListFragmentListener");
 		}
 	}
 
@@ -158,7 +156,7 @@ public class CollectionsListFragment extends Fragment {
 	 * "http://developer.android.com/training/basics/fragments/communicating.html"
 	 * >Communicating with Other Fragments</a> for more information.
 	 */
-	public interface OnFragmentInteractionListener {
+	public interface OnCollectionsListFragmentListener {
 		// TODO: Update argument type and name
 		public void onFragmentInteraction();
 	}

@@ -20,7 +20,6 @@
     <string name="second_line_desc">Second line desc</string>
     <string name="right_side_desc">Right side desc</string>
     <string name="desc">desc</string>
-    <string name="dataseries_list_name">Data Series Viewer</string>
     <string name="btn_offline_reading">Save for later</string>
     <string name="btn_mark_unread">Mark unread</string>
     <string name="btn_refresh">Refresh</string>
@@ -83,8 +82,5 @@
     <string name="activity_name_products_browser">Products Browser</string>
     <string name="activity_name_search_eo_data">Search EO Data</string>
     <string name="activity_name_search_collections_results">Searched Collections</string>
-    <string name="title_activity_products_browser">ProductsBrowserActivity</string>
-    <string name="hello_world">Hello world!</string>
-    <string name="title_activity_test_actv">Test_actv</string>
 
 </resources>

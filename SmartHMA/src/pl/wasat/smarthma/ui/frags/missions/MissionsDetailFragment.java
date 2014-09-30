@@ -30,11 +30,7 @@ public class MissionsDetailFragment extends Fragment {
 	/**
 	 * Use this factory method to create a new instance of this fragment using
 	 * the provided parameters.
-	 * 
-	 * @param param1
-	 *            Parameter 1.
-	 * @param param2
-	 *            Parameter 2.
+	 *
 	 * @return A new instance of fragment DataSeriesDetailFragment.
 	 */
 	// TODO: Rename and change types and number of parameters
@@ -83,7 +79,7 @@ public class MissionsDetailFragment extends Fragment {
 			mListener = (OnMissionsDetailFragmentListener) activity;
 		} catch (ClassCastException e) {
 			throw new ClassCastException(activity.toString()
-					+ " must implement OnFragmentInteractionListener");
+					+ " must implement OnMissionsDetailFragmentListener");
 		}
 	}
 

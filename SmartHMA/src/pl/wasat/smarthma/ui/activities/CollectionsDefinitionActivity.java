@@ -5,7 +5,7 @@ import pl.wasat.smarthma.helper.Const;
 import pl.wasat.smarthma.interfaces.OnCollectionsListSelectionListener;
 import pl.wasat.smarthma.ui.frags.browse.BrowseCollectionFirstDetailFragment;
 import pl.wasat.smarthma.ui.frags.browse.CollectionsGroupListFragment;
-import pl.wasat.smarthma.ui.frags.browse.CollectionsListFragment.OnFragmentInteractionListener;
+import pl.wasat.smarthma.ui.frags.browse.CollectionsListFragment.OnCollectionsListFragmentListener;
 import pl.wasat.smarthma.ui.frags.common.MapSearchFragment;
 import pl.wasat.smarthma.ui.frags.common.MapSearchFragment.OnMapSearchFragmentListener;
 import roboguice.util.temp.Ln;
@@ -15,7 +15,6 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
@@ -31,9 +30,9 @@ import android.widget.Toast;
 
 import com.google.android.gms.maps.model.LatLngBounds;
 
-public class CollectionsDefinitionActivity extends BaseSmartHMActivity implements
-		OnCollectionsListSelectionListener, OnFragmentInteractionListener,
-		OnMapSearchFragmentListener {
+public class CollectionsDefinitionActivity extends BaseSmartHMActivity
+		implements OnCollectionsListSelectionListener,
+		OnCollectionsListFragmentListener, OnMapSearchFragmentListener {
 
 	private ProgressDialog initSpinner;
 	private ProgressBar progressBarWmsLoad;
@@ -54,8 +53,8 @@ public class CollectionsDefinitionActivity extends BaseSmartHMActivity implement
 
 		if (savedInstanceState != null) {
 		}
-		//ViewGroup topLayout = (ViewGroup) findViewById(R.id.left_panel_map);
-		//topLayout.requestTransparentRegion(topLayout);
+		// ViewGroup topLayout = (ViewGroup) findViewById(R.id.left_panel_map);
+		// topLayout.requestTransparentRegion(topLayout);
 
 		progressBarWmsLoad = (ProgressBar) findViewById(R.id.progressBarWmsLoad);
 
@@ -160,9 +159,10 @@ public class CollectionsDefinitionActivity extends BaseSmartHMActivity implement
 		CollectionsGroupListFragment collectionsGroupListFragment = new CollectionsGroupListFragment();
 		Bundle args = new Bundle();
 		collectionsGroupListFragment.setArguments(args);
-		getSupportFragmentManager().beginTransaction()
-				.replace(R.id.activity_base_list_container, collectionsGroupListFragment)
-				.commit();
+		getSupportFragmentManager()
+				.beginTransaction()
+				.replace(R.id.activity_base_list_container,
+						collectionsGroupListFragment).commit();
 	}
 
 	private void loadMapWithBasicSettingsView() {
@@ -172,8 +172,8 @@ public class CollectionsDefinitionActivity extends BaseSmartHMActivity implement
 		getSupportFragmentManager()
 				.beginTransaction()
 				.replace(R.id.activity_base_details_container,
-						browseCollectionFirstDetailFragment,"BrowseCollectionFirstDetailFragment")
-				.commit();
+						browseCollectionFirstDetailFragment,
+						"BrowseCollectionFirstDetailFragment").commit();
 	}
 
 	/** for fragment to find out if activity is in two-pane mode */
@@ -206,7 +206,7 @@ public class CollectionsDefinitionActivity extends BaseSmartHMActivity implement
 		// navigate back
 		transaction.replace(R.id.activity_base_details_container, newGisFrag);
 		transaction.commit();
-		
+
 	}
 
 	private void disableProgressBar() {
@@ -283,31 +283,6 @@ public class CollectionsDefinitionActivity extends BaseSmartHMActivity implement
 
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see pl.wasat.smarthma.ui.fragments.CustomizedListViewFragment.
-	 * OnFragmentInteractionListener#onFragmentInteraction(android.net.Uri)
-	 */
-	@Override
-	public void onFragmentInteraction() {
-		// TODO Auto-generated method stub
-
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see pl.wasat.smarthma.ui.fragments.MapSearchFragment.
-	 * OnMapSearchFragmentInteractionListener
-	 * #onMapSearchFragmentInteraction(android.net.Uri)
-	 */
-	@Override
-	public void onMapSearchFragmentInteraction(Uri uri) {
-		// TODO Auto-generated method stub
-
-	}
-
 	@Override
 	public void onMapSearchFragmentBoundsChange(LatLngBounds bounds) {
 		BrowseCollectionFirstDetailFragment browseCollectionFirstDetailFragment = (BrowseCollectionFirstDetailFragment) getSupportFragmentManager()
@@ -318,9 +293,18 @@ public class CollectionsDefinitionActivity extends BaseSmartHMActivity implement
 			// Call a method in the ArticleFragment to update its content
 			browseCollectionFirstDetailFragment.updateAreaBounds(bounds);
 		}
+	}
+
+	@Override
+	public void onMapReady(int mapMode) {
+		// TODO Auto-generated method stub
 
 	}
 
+	@Override
+	public void onFragmentInteraction() {
+		// TODO Auto-generated method stub
 
+	}
 
 }

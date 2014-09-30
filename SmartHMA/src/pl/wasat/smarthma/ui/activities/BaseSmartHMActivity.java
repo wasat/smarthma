@@ -23,12 +23,12 @@ public class BaseSmartHMActivity extends FragmentActivity {
 	}
 
 	public void doPositiveClick() {
-		Intent i = new Intent(getBaseContext(), StartActivity.class);
-		startActivity(i);
 		finish();
 	}
 
 	public void doNegativeClick() {
+		Intent i = new Intent(getBaseContext(), StartActivity.class);
+		startActivity(i);
 		finish();
 	}
 }

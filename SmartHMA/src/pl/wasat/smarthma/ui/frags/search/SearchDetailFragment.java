@@ -108,7 +108,7 @@ public class SearchDetailFragment extends Fragment {
 				@Override
 				public void onClick(View v) {
 					MapSearchFragment mapSearchFragment = MapSearchFragment
-							.newInstance();
+							.newInstance(0);
 					getActivity()
 							.getSupportFragmentManager()
 							.beginTransaction()
@@ -134,7 +134,7 @@ public class SearchDetailFragment extends Fragment {
 			mListener = (OnSearchDetailFragmentListener) activity;
 		} catch (ClassCastException e) {
 			throw new ClassCastException(activity.toString()
-					+ " must implement OnFragmentInteractionListener");
+					+ " must implement OnSearchDetailFragmentListener");
 		}
 	}
 
@@ -178,7 +178,7 @@ public class SearchDetailFragment extends Fragment {
 
 	private void loadSearchParameters(String title, String pubDate) {
 
-		MapSearchFragment mapSearchFragment = MapSearchFragment.newInstance();
+		MapSearchFragment mapSearchFragment = MapSearchFragment.newInstance(0);
 		getActivity()
 				.getSupportFragmentManager()
 				.beginTransaction()

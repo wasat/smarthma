@@ -49,6 +49,7 @@
             android:layout_width="70dip"
             android:layout_height="wrap_content"
             android:layout_marginStart="5dip"
+            android:layout_marginLeft="5dip"
             android:focusable="true"
             android:focusableInTouchMode="true" />
 
@@ -59,6 +60,7 @@
             android:layout_width="70dip"
             android:layout_height="wrap_content"
             android:layout_marginStart="5dip"
+            android:layout_marginLeft="5dip"
             android:focusable="true"
             android:focusableInTouchMode="true" />
     </LinearLayout>
@@ -71,6 +73,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="5dip"
+        android:layout_marginLeft="5dip"
         android:layout_marginTop="43dip"
         android:paddingEnd="20dip"
         android:paddingStart="20dip"

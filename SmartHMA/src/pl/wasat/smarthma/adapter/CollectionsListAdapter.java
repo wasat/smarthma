@@ -78,7 +78,7 @@ public class CollectionsListAdapter extends BaseAdapter {
 	}
 
 	private int mod(int x, int y) {
-		int result = x % y;
+		int result = x % 15;
 		return result < 0 ? result + 15 : result;
 	}
 }

@@ -45,13 +45,10 @@ public class MetadataFragment extends Fragment {
 	 * Use this factory method to create a new instance of this fragment using
 	 * the provided parameters.
 	 * 
-	 * @param param1
+	 * @param entryItm
 	 *            Parameter 1.
-	 * @param param2
-	 *            Parameter 2.
 	 * @return A new instance of fragment MetadataFragment.
 	 */
-	// TODO: Rename and change types and number of parameters
 	public static MetadataFragment newInstance(Entry entryItm) {
 		MetadataFragment fragment = new MetadataFragment();
 		Bundle args = new Bundle();
@@ -149,7 +146,7 @@ public class MetadataFragment extends Fragment {
 		tvMetaHeader.setText(headerText);
 		linearLayout.addView(tvMetaHeader);
 
-		Class<? extends Object> c1 = eOMetaDataObject.getClass();
+		Class<?> c1 = eOMetaDataObject.getClass();
 		// Map<String, Object> map = new HashMap<String, Object>();
 		Field[] fields = c1.getDeclaredFields();
 		for (int i = 0; i < fields.length; i++) {

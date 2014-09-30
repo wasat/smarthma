@@ -23,7 +23,7 @@
             android:textColor="#38b4ea"
             android:textSize="20sp"
             android:textStyle="bold"
-            tools:context="pl.wasat.smarthma.ui.frags.base.BaseProductDetailsFragment" />
+            tools:context="pl.wasat.smarthma.ui.frags.common.ProductDetailsFragment" />
 
         <TextView
             android:id="@+id/product_frag_detail_dates"
@@ -37,7 +37,7 @@
             android:textColor="#A8A8A8"
             android:textSize="12sp"
             android:textStyle="italic"
-            tools:context="pl.wasat.smarthma.ui.frags.base.BaseProductDetailsFragment" />
+            tools:context="pl.wasat.smarthma.ui.frags.common.ProductDetailsFragment" />
 
         <WebView
             android:id="@+id/product_frag_detail_content"
@@ -47,7 +47,7 @@
             android:minHeight = "200dp"
             android:padding="16dp"
             android:textSize="16sp"
-            tools:context="pl.wasat.smarthma.ui.frags.base.BaseProductDetailsFragment" />
+            tools:context="pl.wasat.smarthma.ui.frags.common.ProductDetailsFragment" />
 
         <LinearLayout
             android:id="@+id/product_frag_detail_buttons"

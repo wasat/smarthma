@@ -3,27 +3,33 @@ package pl.wasat.smarthma.ui.activities;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.google.android.gms.maps.model.LatLngBounds;
-
 import pl.wasat.smarthma.R;
 import pl.wasat.smarthma.helper.Const;
 import pl.wasat.smarthma.model.FedeoRequest;
-import pl.wasat.smarthma.model.eo.Pos;
+import pl.wasat.smarthma.model.eo.Footprint;
 import pl.wasat.smarthma.preferences.SharedPrefs;
-import pl.wasat.smarthma.ui.frags.base.BaseProductDetailsFragment.OnProductDetailsFragmentListener;
 import pl.wasat.smarthma.ui.frags.base.BaseShowProductsListFragment.OnBaseShowProductsListFragmentListener;
+import pl.wasat.smarthma.ui.frags.common.MapSearchFragment;
 import pl.wasat.smarthma.ui.frags.common.MapSearchFragment.OnMapSearchFragmentListener;
-import pl.wasat.smarthma.ui.frags.common.ProductsListFragment;
 import pl.wasat.smarthma.ui.frags.common.MetadataFragment.OnMetadataFragmentListener;
+import pl.wasat.smarthma.ui.frags.common.ProductDetailsFragment.OnProductDetailsFragmentListener;
+import pl.wasat.smarthma.ui.frags.common.ProductsListFragment;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.LatLngBounds;
+
 public class ProductsBrowserActivity extends BaseSmartHMActivity implements
-		OnBaseShowProductsListFragmentListener,
 		OnProductDetailsFragmentListener, OnMetadataFragmentListener,
-		OnMapSearchFragmentListener {
+		OnMapSearchFragmentListener, OnBaseShowProductsListFragmentListener {
+
+	MapSearchFragment mapSearchFragment;
+	private List<LatLng> mFootprintPoints;
+	private String quicklookUrl;
+	private static int QUICKLOOK_MAP_MODE = 1;
+	private static int FOOTPRINT_MAP_MODE = 2;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -56,7 +62,12 @@ public class ProductsBrowserActivity extends BaseSmartHMActivity implements
 			if (bstEntry.equalsIgnoreCase("MetadataFragment")) {
 				fm.popBackStackImmediate("MetadataFragment",
 						FragmentManager.POP_BACK_STACK_INCLUSIVE);
-			} else {
+			} else if (bstEntry.equalsIgnoreCase("MapSearchFragment")) {
+				fm.popBackStackImmediate("MapSearchFragment",
+						FragmentManager.POP_BACK_STACK_INCLUSIVE);
+			}
+
+			else {
 
 				bsec = fm.getBackStackEntryCount();
 
@@ -73,23 +84,15 @@ public class ProductsBrowserActivity extends BaseSmartHMActivity implements
 		}
 	}
 
-	@Override
-	public void onBaseShowProductsListFragmentItemSelected(String id) {
-		// TODO Auto-generated method stub
+	private void checkMapFragment() {
+		try {
+			if (mapSearchFragment != null) {
+				getSupportFragmentManager().beginTransaction()
+						.remove(mapSearchFragment).commit();
+			}
 
-	}
-
-	@Override
-	public void onBaseShowProductsListFragmentFootprintSend(
-			ArrayList<List<Pos>> footPrints) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void onProductDetailsFragmentInteraction(Uri uri) {
-		// TODO Auto-generated method stub
-
+		} catch (IllegalStateException e) {
+		}
 	}
 
 	@Override
@@ -99,14 +102,80 @@ public class ProductsBrowserActivity extends BaseSmartHMActivity implements
 	}
 
 	@Override
-	public void onMapSearchFragmentInteraction(Uri uri) {
+	public void onMapSearchFragmentBoundsChange(LatLngBounds bounds) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
-	public void onMapSearchFragmentBoundsChange(LatLngBounds bounds) {
-		// TODO Auto-generated method stub
-		
+	public void onProductDetailsFragmentQuicklookShow(String url,
+			List<LatLng> footprintPoints) {
+		quicklookUrl = url;
+		mFootprintPoints = footprintPoints;
+
+		checkMapFragment();
+
+		// mapSearchFragment = MapSearchFragment.newInstance(0);
+		mapSearchFragment = MapSearchFragment.newInstance(QUICKLOOK_MAP_MODE);
+
+		getSupportFragmentManager()
+				.beginTransaction()
+				.replace(R.id.activity_base_details_container,
+						mapSearchFragment, "MapSearchFragment")
+				.addToBackStack("MapSearchFragment").commit();
+
 	}
+
+	@Override
+	public void onProductDetailsFragmentMapShow(List<LatLng> footprintPoints) {
+		mFootprintPoints = footprintPoints;
+
+		checkMapFragment();
+
+		// mapSearchFragment = MapSearchFragment.newInstance(0);
+		mapSearchFragment = MapSearchFragment.newInstance(FOOTPRINT_MAP_MODE);
+
+		getSupportFragmentManager()
+				.beginTransaction()
+				.add(R.id.activity_base_details_container, mapSearchFragment,
+						"MapSearchFragment")
+				.addToBackStack("MapSearchFragment").commit();
+	}
+
+	@Override
+	public void onMapReady(int mapMode) {
+		if (mapSearchFragment != null) {
+			switch (mapMode) {
+			case 1:
+				mapSearchFragment.showQuicklookOnMap(quicklookUrl,
+						mFootprintPoints);
+				break;
+			case 2:
+				mapSearchFragment.showFootPrints(mFootprintPoints);
+				break;
+			default:
+				break;
+			}
+		}
+	}
+
+	@Override
+	public void onProductDetailsFragmentMetadataLoad() {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void onBaseShowProductsListFragmentItemSelected(String id) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void onBaseShowProductsListFragmentFootprintSend(
+			ArrayList<Footprint> footPrints) {
+		// TODO Auto-generated method stub
+
+	}
+
 }
