@@ -65,12 +65,7 @@ public class SmHmaTimePickerDialog extends AlertDialog implements
 	private final Calendar mCalendar;
 	private final java.text.DateFormat mDateFormat;
 
-	private final int mInitialHourOfDay;
-	private final int mInitialMinute;
-	private final int mInitialSeconds;
-	private final boolean mIs24HourView;
-
-	/**
+    /**
 	 * @param context
 	 *            Parent.
 	 * @param callBack
@@ -108,10 +103,10 @@ public class SmHmaTimePickerDialog extends AlertDialog implements
 		super(context, theme);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		mCallback = callBack;
-		mInitialHourOfDay = hourOfDay;
-		mInitialMinute = minute;
-		mInitialSeconds = seconds;
-		mIs24HourView = is24HourView;
+        int mInitialHourOfDay = hourOfDay;
+        int mInitialMinute = minute;
+        int mInitialSeconds = seconds;
+        boolean mIs24HourView = is24HourView;
 
 		mDateFormat = DateFormat.getTimeFormat(context);
 		mCalendar = Calendar.getInstance();

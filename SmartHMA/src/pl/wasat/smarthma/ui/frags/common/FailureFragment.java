@@ -9,10 +9,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 /**
- * A simple {@link android.support.v4.app.Fragment} subclass. Activities that
- * contain this fragment must implement the
- * {@link FailureFragment.OnFailureFragmentListener} interface to handle
- * interaction events. Use the {@link FailureFragment#newInstance} factory
+ * A simple {@link android.support.v4.app.Fragment} subclass. Use the {@link FailureFragment#newInstance} factory
  * method to create an instance of this fragment.
  * 
  */
@@ -27,8 +24,6 @@ public class FailureFragment extends Fragment {
 	 * 
 	 * @param failureText
 	 *            Parameter 1.
-	 * @param param2
-	 *            Parameter 2.
 	 * @return A new instance of fragment FailureFragment.
 	 */
 	public static FailureFragment newInstance(String failureText) {

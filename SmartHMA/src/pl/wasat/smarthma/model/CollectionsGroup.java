@@ -157,7 +157,7 @@ public class CollectionsGroup implements Serializable {
 		}
 
 		/**
-		 * @param collectionGroupList
+		 * @param collectionsGroupList
 		 *            the collectionGroupList to set
 		 */
 		public void setCollectionGroupList(

@@ -1,24 +1,20 @@
 package pl.wasat.smarthma.ui.frags.common;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import pl.wasat.smarthma.model.eo.Pos;
 import pl.wasat.smarthma.utils.wms.TileProviderFactory;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationManager;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.content.LocalBroadcastManager;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesClient;
@@ -30,13 +26,19 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.GoogleMap.OnCameraChangeListener;
 import com.google.android.gms.maps.GoogleMap.OnMapLongClickListener;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptor;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
+import com.google.android.gms.maps.model.GroundOverlayOptions;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.PolygonOptions;
 import com.google.android.gms.maps.model.TileOverlay;
 import com.google.android.gms.maps.model.TileOverlayOptions;
 import com.google.android.gms.maps.model.TileProvider;
+import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Picasso.LoadedFrom;
+import com.squareup.picasso.Target;
 
 /**
  * A simple {@link android.support.v4.app.Fragment} subclass. Activities that
@@ -47,7 +49,9 @@ import com.google.android.gms.maps.model.TileProvider;
  * 
  */
 public class MapSearchFragment extends SupportMapFragment implements
-		GooglePlayServicesClient.ConnectionCallbacks {
+		GooglePlayServicesClient.ConnectionCallbacks, Target {
+
+	private static final String KEY_MAP_MODE = "pl.wasat.smarthma.KEY_MAP_MODE";
 
 	/** reference to Google Maps object */
 	private SupportMapFragment supportMapFrag;
@@ -59,35 +63,38 @@ public class MapSearchFragment extends SupportMapFragment implements
 
 	private OnMapSearchFragmentListener mListener;
 
+	private int mapMode;
+
+	private LatLngBounds targetBounds;
+
 	/**
 	 * Use this factory method to create a new instance of this fragment using
 	 * the provided parameters.
 	 * 
+	 * @param mapMode
+	 * 
 	 * @return A new instance of fragment MapSearchFragment.
 	 */
 	// TODO: Rename and change types and number of parameters
-	public static MapSearchFragment newInstance() {
+	public static MapSearchFragment newInstance(int mapMode) {
 		MapSearchFragment fragment = new MapSearchFragment();
+		Bundle args = new Bundle();
+		args.putSerializable(KEY_MAP_MODE, mapMode);
+		fragment.setArguments(args);
 		return fragment;
 	}
 
 	public MapSearchFragment() {
-		// Required empty public constructor
+		// super();
+		// checkMapFragment();
 	}
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		if (getArguments() != null) {
+			mapMode = getArguments().getInt(KEY_MAP_MODE);
 		}
-	}
-
-	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-			Bundle savedInstanceState) {
-		View view = super.onCreateView(inflater, container, savedInstanceState);
-		// Inflate the layout for this fragment
-		return view;
 	}
 
 	/**
@@ -98,6 +105,10 @@ public class MapSearchFragment extends SupportMapFragment implements
 		super.onActivityCreated(savedInstanceState);
 
 		startCreateMap(savedInstanceState);
+
+		if (mListener != null) {
+			mListener.onMapReady(mapMode);
+		}
 	}
 
 	@Override
@@ -128,6 +139,17 @@ public class MapSearchFragment extends SupportMapFragment implements
 		mMap.animateCamera(cameraUpdate);
 	}
 
+	/*
+	 * private void checkMapFragment() { try { SupportMapFragment
+	 * supportMapFragment = (SupportMapFragment) getActivity()
+	 * .getSupportFragmentManager().findFragmentByTag( "MapSearchFragment");
+	 * 
+	 * if (supportMapFragment != null) {
+	 * getActivity().getSupportFragmentManager().beginTransaction()
+	 * .remove(supportMapFragment).commit(); } } catch (IllegalStateException e)
+	 * { } }
+	 */
+
 	private void startCreateMap(Bundle savedInstanceState) {
 		// restore selected party if any
 		// NOTE: this doesn't work because if you use setRetainInstance(true) to
@@ -149,7 +171,7 @@ public class MapSearchFragment extends SupportMapFragment implements
 				// is set.
 				// However, you still have to add all your listeners to it
 				// later.
-				mMap = getMap();
+				mMap = supportMapFrag.getMap();
 
 			} else {
 				// First incarnation of this activity.
@@ -184,29 +206,9 @@ public class MapSearchFragment extends SupportMapFragment implements
 
 		setupOSM();
 
-		// ------------------Zooming camera to position user-----------------
-		LocationManager locationManager = (LocationManager) getActivity()
-				.getSystemService(Context.LOCATION_SERVICE);
-		Criteria criteria = new Criteria();
-		criteria.setAccuracy(Criteria.ACCURACY_LOW);
-
-		Location location = locationManager
-				.getLastKnownLocation(locationManager.getBestProvider(criteria,
-						true));
-		if (location != null) {
-
-			CameraPosition cameraPosition = new CameraPosition.Builder()
-					.target(new LatLng(location.getLatitude(), location
-							.getLongitude())) // Sets the center of the map to
-												// location user
-					.zoom(12) // Sets the zoom
-					.build(); // Creates a CameraPosition from the builder
-			mMap.animateCamera(CameraUpdateFactory
-					.newCameraPosition(cameraPosition));
-
+		if (targetBounds == null) {
+			animateToCurrentPosition();
 		}
-
-		// ---------------Zooming camera to position user--------
 
 		mMap.setOnMapLongClickListener(new OnMapLongClickListener() {
 			@Override
@@ -218,10 +220,21 @@ public class MapSearchFragment extends SupportMapFragment implements
 
 			@Override
 			public void onCameraChange(CameraPosition arg0) {
-				// Move camera.
-				// Remove listener to prevent position reset on camera move.
 				LatLngBounds bounds = mMap.getProjection().getVisibleRegion().latLngBounds;
 				mListener.onMapSearchFragmentBoundsChange(bounds);
+
+				/*
+				 * if (boundsBuilder != null) {
+				 * mMap.animateCamera(CameraUpdateFactory.newLatLngBounds(
+				 * boundsBuilder.build(), 50)); }
+				 */
+			}
+		});
+
+		mMap.setOnMapLoadedCallback(new GoogleMap.OnMapLoadedCallback() {
+			@Override
+			public void onMapLoaded() {
+				animateToBounds();
 			}
 		});
 	}
@@ -247,6 +260,44 @@ public class MapSearchFragment extends SupportMapFragment implements
 		return wmsTileOverlay;
 	}
 
+	private void animateToCurrentPosition() {
+		// ------------------Zooming camera to position user-----------------
+		LocationManager locationManager = (LocationManager) getActivity()
+				.getSystemService(Context.LOCATION_SERVICE);
+		Criteria criteria = new Criteria();
+		criteria.setAccuracy(Criteria.ACCURACY_LOW);
+
+		Location location = locationManager
+				.getLastKnownLocation(locationManager.getBestProvider(criteria,
+						true));
+		if (location != null) {
+
+			CameraPosition cameraPosition = new CameraPosition.Builder()
+					.target(new LatLng(location.getLatitude(), location
+							.getLongitude())) // Sets the center of the map to
+												// location user
+					.zoom(12) // Sets the zoom
+					.build(); // Creates a CameraPosition from the builder
+			mMap.animateCamera(CameraUpdateFactory
+					.newCameraPosition(cameraPosition));
+		}
+	}
+
+	private void buildFootprintBounds(List<LatLng> footprintPoints) {
+		LatLngBounds.Builder boundsBuilder = new LatLngBounds.Builder();
+		for (int j = 0; j < footprintPoints.size() - 1; j++) {
+			boundsBuilder.include(footprintPoints.get(j));
+		}
+		targetBounds = boundsBuilder.build();
+	}
+
+	private void animateToBounds() {
+		if (targetBounds != null) {
+			mMap.animateCamera(CameraUpdateFactory.newLatLngBounds(
+					targetBounds, 50));
+		}
+	}
+
 	@Override
 	public void onPause() {
 		super.onPause();
@@ -269,9 +320,10 @@ public class MapSearchFragment extends SupportMapFragment implements
 	 * >Communicating with Other Fragments</a> for more information.
 	 */
 	public interface OnMapSearchFragmentListener {
-		public void onMapSearchFragmentInteraction(Uri uri);
 
 		public void onMapSearchFragmentBoundsChange(LatLngBounds bounds);
+
+		public void onMapReady(int mapMode);
 	}
 
 	@Override
@@ -281,31 +333,52 @@ public class MapSearchFragment extends SupportMapFragment implements
 	}
 
 	/**
-	 * @param footPrints
+	 * @param footprints
 	 */
-	public void showFootPrints(ArrayList<List<Pos>> footPrints) {
+	public void showFootPrints(List<LatLng> footprintPoints) {
 
-		for (int i = 0; i < footPrints.size(); i++) {
-			ArrayList<LatLng> footPrintPoints = new ArrayList<LatLng>();
-
-			for (int j = 0; j < footPrints.get(i).size() - 1; j++) {
-				String posStr = footPrints.get(i).get(j).get__text();
-				LatLng ftPt = new LatLng(Double.valueOf(posStr.split(" ")[0]),
-						Double.valueOf(posStr.split(" ")[1]));
-				footPrintPoints.add(ftPt);
-			}
-
-			if (footPrintPoints.size() > 0) {
-				PolygonOptions rectOptions = new PolygonOptions();
-				rectOptions.addAll(footPrintPoints);
-				rectOptions.strokeColor(Color.HSVToColor(new float[] {
-						179 + (9 * i), 1, 1 }));
-				rectOptions.strokeWidth(4);
-				rectOptions.geodesic(true);
-				rectOptions.zIndex(1);
-				mMap.addPolygon(rectOptions);
-			}
+		if (footprintPoints.size() > 0) {
+			PolygonOptions rectOptions = new PolygonOptions();
+			rectOptions.addAll(footprintPoints);
+			rectOptions.strokeColor(Color.HSVToColor(new float[] {
+					179 + (9 * 4), 1, 1 })); // change 4 to variable;
+			rectOptions.strokeWidth(4);
+			rectOptions.geodesic(true);
+			rectOptions.zIndex(1);
+			mMap.addPolygon(rectOptions);
 		}
+		buildFootprintBounds(footprintPoints);
+		//animateToBounds();
+	}
+
+	public void showQuicklookOnMap(String url, List<LatLng> footprintPoints) {
+		//showFootPrints(footprintPoints);
+
+		buildFootprintBounds(footprintPoints);
+
+		Target quicklookTarget = this;
+		Picasso.with(getActivity()).load(url).into(quicklookTarget);
+	}
+
+	@Override
+	public void onPrepareLoad(Drawable arg0) {
+		// TODO Auto-generated method stub
+	}
+
+	@Override
+	public void onBitmapLoaded(Bitmap bitmap, LoadedFrom arg1) {
+		BitmapDescriptor image = BitmapDescriptorFactory.fromBitmap(bitmap);
+
+		GroundOverlayOptions groundOverlay = new GroundOverlayOptions()
+				.image(image).positionFromBounds(targetBounds).zIndex(2)
+				.transparency((float) 0.60);
+		mMap.addGroundOverlay(groundOverlay);
+		animateToBounds();
+	}
+
+	@Override
+	public void onBitmapFailed(Drawable arg0) {
+		// TODO Auto-generated method stub
 
 	}
 

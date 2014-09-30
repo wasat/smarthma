@@ -19,7 +19,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
@@ -36,7 +35,6 @@ public class MissionsActivity extends BaseSmartHMActivity implements
 	protected void onCreate(Bundle savedInstanceState) {
 		Ln.getConfig().setLoggingLevel(Log.ERROR);
 		super.onCreate(savedInstanceState);
-		requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
 		setContentView(R.layout.activity_missions);
 
 		if (savedInstanceState != null) {

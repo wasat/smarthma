@@ -133,7 +133,7 @@ public class SearchBasicInfoRightFragment extends Fragment {
 			@Override
 			public void onClick(View v) {
 				MapSearchFragment mapSearchFragment = MapSearchFragment
-						.newInstance();
+						.newInstance(0);
 				getActivity()
 						.getSupportFragmentManager()
 						.beginTransaction()

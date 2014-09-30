@@ -1,18 +1,12 @@
 package pl.wasat.smarthma.ui.activities;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import pl.wasat.smarthma.R;
 import pl.wasat.smarthma.adapter.DataSeriesListAdapter;
 import pl.wasat.smarthma.database.EoDbAdapter;
 import pl.wasat.smarthma.helper.Const;
 import pl.wasat.smarthma.model.FedeoRequest;
-import pl.wasat.smarthma.model.eo.Pos;
 import pl.wasat.smarthma.model.feed.Entry;
 import pl.wasat.smarthma.preferences.SharedPrefs;
-import pl.wasat.smarthma.ui.frags.base.BaseProductDetailsFragment.OnProductDetailsFragmentListener;
-import pl.wasat.smarthma.ui.frags.base.BaseShowProductsListFragment.OnBaseShowProductsListFragmentListener;
 import pl.wasat.smarthma.ui.frags.browse.CollectionsListFragment;
 import pl.wasat.smarthma.ui.frags.browse.DataSeriesDetailFragment;
 import pl.wasat.smarthma.ui.frags.browse.DataSeriesDetailFragment.OnDataSeriesDetailFragmentInteractionListener;
@@ -24,7 +18,6 @@ import pl.wasat.smarthma.ui.frags.common.MapSearchFragment.OnMapSearchFragmentLi
 import pl.wasat.smarthma.ui.frags.common.MetadataFragment.OnMetadataFragmentListener;
 import pl.wasat.smarthma.ui.frags.search.SearchListFragment.OnSearchListFragmentListener;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 
@@ -34,8 +27,7 @@ public class CollectionsBrowserActivity extends BaseSmartHMActivity implements
 		OnDataSeriesListFragmentListener,
 		OnDataSeriesDetailFragmentInteractionListener,
 		OnMapSearchFragmentListener, OnSearchListFragmentListener,
-		OnBaseShowProductsListFragmentListener,
-		OnProductDetailsFragmentListener, OnMetadataFragmentListener,
+		OnMetadataFragmentListener,
 		OnCollectionDetailsFragmentListener {
 
 	private boolean mTwoPane;
@@ -171,18 +163,6 @@ public class CollectionsBrowserActivity extends BaseSmartHMActivity implements
 
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see pl.wasat.smarthma.ui.fragments.MapSearchFragment.
-	 * OnMapSearchFragmentInteractionListener
-	 * #onMapSearchFragmentInteraction(android.net.Uri)
-	 */
-	@Override
-	public void onMapSearchFragmentInteraction(Uri uri) {
-		// TODO Auto-generated method stub
-
-	}
 
 	/*
 	 * (non-Javadoc)
@@ -204,32 +184,7 @@ public class CollectionsBrowserActivity extends BaseSmartHMActivity implements
 
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see pl.wasat.smarthma.ui.fragments.SearchProductsFeedsFragment.
-	 * onBaseShowProductsListFragmentListener
-	 * #onSearchProductsFeedFragmentItemSelected(java.lang.String)
-	 */
-	@Override
-	public void onBaseShowProductsListFragmentItemSelected(String id) {
-		// TODO Auto-generated method stub
 
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see pl.wasat.smarthma.ui.frags.search.SearchProductsListFragment.
-	 * OnSearchProductsListFragmentListener
-	 * #onSearchProductsListFragmentFootprintSend(java.util.ArrayList)
-	 */
-	@Override
-	public void onBaseShowProductsListFragmentFootprintSend(
-			ArrayList<List<Pos>> footPrints) {
-		// TODO Auto-generated method stub
-
-	}
 
 	/*
 	 * (non-Javadoc)
@@ -253,19 +208,6 @@ public class CollectionsBrowserActivity extends BaseSmartHMActivity implements
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see pl.wasat.smarthma.ui.frags.search.ProductDetailSearchFragment.
-	 * OnProductDetailSearchFragmentListener
-	 * #onProductDetailSearchFragmentInteraction(android.net.Uri)
-	 */
-	@Override
-	public void onProductDetailsFragmentInteraction(Uri uri) {
-		// TODO Auto-generated method stub
-
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
 	 * @see
 	 * pl.wasat.smarthma.ui.frags.common.MetadataFragment.OnMetadataFragmentListener
 	 * #onMetadataFragmentInteraction()
@@ -274,6 +216,12 @@ public class CollectionsBrowserActivity extends BaseSmartHMActivity implements
 	public void onMetadataFragmentInteraction() {
 		// TODO Auto-generated method stub
 
+	}
+
+	@Override
+	public void onMapReady(int mapMode) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

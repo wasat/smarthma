@@ -124,7 +124,8 @@ public class SearchActivity extends BaseSmartHMActivity implements
 		getSupportFragmentManager()
 				.beginTransaction()
 				.replace(R.id.activity_base_details_container,
-						searchLeftFragment).commit();
+						searchLeftFragment, "SearchFragment")
+				.addToBackStack("SearchFragment").commit();
 	}
 
 	/*
@@ -158,19 +159,6 @@ public class SearchActivity extends BaseSmartHMActivity implements
 	 * 
 	 * @see
 	 * pl.wasat.smarthma.ui.frags.MapSearchFragment.OnMapSearchFragmentListener
-	 * #onMapSearchFragmentInteraction(android.net.Uri)
-	 */
-	@Override
-	public void onMapSearchFragmentInteraction(Uri uri) {
-		// TODO Auto-generated method stub
-
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * pl.wasat.smarthma.ui.frags.MapSearchFragment.OnMapSearchFragmentListener
 	 * #onMapSearchFragmentBoundsChange
 	 * (com.google.android.gms.maps.model.LatLngBounds)
 	 */
@@ -185,6 +173,12 @@ public class SearchActivity extends BaseSmartHMActivity implements
 			// Call a method in the ArticleFragment to update its content
 			searchBasicInfoRightFragment.updateCollectionsAreaBounds(bounds);
 		}
+
+	}
+
+	@Override
+	public void onMapReady(int mapMode) {
+		// TODO Auto-generated method stub
 
 	}
 

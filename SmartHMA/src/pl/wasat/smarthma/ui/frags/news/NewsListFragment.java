@@ -83,7 +83,7 @@ public class NewsListFragment extends ListFragment {
                 : ListView.CHOICE_MODE_NONE);
     }
 
-    public void setActivatedPosition(int position) {
+    void setActivatedPosition(int position) {
         if (position == ListView.INVALID_POSITION) {
             getListView().setItemChecked(mActivatedPosition, false);
         } else {

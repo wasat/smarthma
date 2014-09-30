@@ -12,11 +12,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 /**
- * A simple {@link android.support.v4.app.Fragment} subclass. Activities that
- * contain this fragment must implement the
- * {@link BaseFeedSummaryFragment.OnFeedSummaryFragmentListener} interface to
- * handle interaction events. Use the {@link BaseFeedSummaryFragment#newInstance}
- * factory method to create an instance of this fragment.
+ * A simple {@link android.support.v4.app.Fragment} subclass.
  * 
  */
 public class BaseFeedSummaryFragment extends Fragment {

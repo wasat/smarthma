@@ -13,7 +13,7 @@ public class ObjectUtils {
 	public static Map<String, Object> getFieldNamesAndValues(final Object obj,
 			boolean publicOnly) throws IllegalArgumentException,
 			IllegalAccessException {
-		Class<? extends Object> c1 = obj.getClass();
+		Class<?> c1 = obj.getClass();
 		Map<String, Object> map = new HashMap<String, Object>();
 		Field[] fields = c1.getDeclaredFields();
 		for (int i = 0; i < fields.length; i++) {

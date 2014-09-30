@@ -42,10 +42,8 @@ public class DataSeriesListFragment extends BaseSpiceListFragment {
 	 * Use this factory method to create a new instance of this fragment using
 	 * the provided parameters.
 	 * 
-	 * @param param1
+	 * @param fedeoRequest
 	 *            Parameter 1.
-	 * @param param2
-	 *            Parameter 2.
 	 * @return A new instance of fragment DataSeriesListFragment.
 	 */
 	public static DataSeriesListFragment newInstance(FedeoRequest fedeoRequest) {

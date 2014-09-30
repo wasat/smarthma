@@ -7,10 +7,7 @@ import pl.wasat.smarthma.model.feed.Feed;
 import pl.wasat.smarthma.ui.frags.base.BaseFeedSummaryFragment;
 
 /**
- * A simple {@link android.support.v4.app.Fragment} subclass. Activities that
- * contain this fragment must implement the
- * {@link BaseFeedSummaryFragment.OnFeedSummaryFragmentListener} interface to
- * handle interaction events. Use the {@link FeedSummarySearchFragment#newInstance}
+ * A simple {@link android.support.v4.app.Fragment} subclass. Use the {@link FeedSummarySearchFragment#newInstance}
  * factory method to create an instance of this fragment.
  * 
  */
@@ -20,7 +17,7 @@ public class FeedSummarySearchFragment extends BaseFeedSummaryFragment {
 	 * Use this factory method to create a new instance of this fragment using
 	 * the provided parameters.
 	 * 
-	 * @param paramSearchFeeds
+	 * @param feedParam
 	 *            Parameter 1.
 	 * @return A new instance of fragment FeedSummaryFragment.
 	 */

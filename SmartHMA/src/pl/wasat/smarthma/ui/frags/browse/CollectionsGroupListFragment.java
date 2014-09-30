@@ -39,9 +39,7 @@ public class CollectionsGroupListFragment extends Fragment implements
 	private ListView collectionsGroupListView;
 	private View loadingView;
 
-	private CollectionsGroupListAdapter collectionsGroupListAdapter;
-
-	@Override
+    @Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setRetainInstance(true);
@@ -81,8 +79,8 @@ public class CollectionsGroupListFragment extends Fragment implements
 	}
 
 	private void updateEOListViewContent(List collectGrList) {
-		collectionsGroupListAdapter = new CollectionsGroupListAdapter(
-				getActivity(), spiceManagerBinary, collectGrList);
+        CollectionsGroupListAdapter collectionsGroupListAdapter = new CollectionsGroupListAdapter(
+                getActivity(), spiceManagerBinary, collectGrList);
 		collectionsGroupListView.setAdapter(collectionsGroupListAdapter);
 
 		loadingView.setVisibility(View.GONE);

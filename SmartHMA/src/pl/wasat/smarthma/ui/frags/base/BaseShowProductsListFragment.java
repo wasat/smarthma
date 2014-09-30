@@ -7,7 +7,7 @@ import pl.wasat.smarthma.R;
 import pl.wasat.smarthma.adapter.EntryImagesListAdapter;
 import pl.wasat.smarthma.database.EoDbAdapter;
 import pl.wasat.smarthma.model.FedeoRequest;
-import pl.wasat.smarthma.model.eo.Pos;
+import pl.wasat.smarthma.model.eo.Footprint;
 import pl.wasat.smarthma.model.feed.Entry;
 import pl.wasat.smarthma.model.feed.Feed;
 import pl.wasat.smarthma.utils.rss.FedeoSearchRequest;
@@ -41,19 +41,15 @@ public class BaseShowProductsListFragment extends BaseSpiceFragment {
 	private ListView entryImagesListView;
 	private View loadingView;
 
-	private EntryImagesListAdapter entryImagesListAdapter;
-
-	private static final String STATE_ACTIVATED_POSITION = "activated_position";
+    private static final String STATE_ACTIVATED_POSITION = "activated_position";
 	private int mActivatedPosition = ListView.INVALID_POSITION;
 
 	/**
 	 * Use this factory method to create a new instance of this fragment using
 	 * the provided parameters.
 	 * 
-	 * @param bounds
+	 * @param fedeoRequest
 	 *            Parameter 1.
-	 * @param param2
-	 *            Parameter 2.
 	 * @return A new instance of fragment SearchProductsFeedsFragment.
 	 */
 	public static BaseShowProductsListFragment newInstance(
@@ -115,7 +111,7 @@ public class BaseShowProductsListFragment extends BaseSpiceFragment {
 			mListener = (OnBaseShowProductsListFragmentListener) activity;
 		} catch (ClassCastException e) {
 			throw new ClassCastException(activity.toString()
-					+ " must implement OnSearchProductsFeedFragmentListener");
+					+ " must implement OnBaseShowProductsListFragmentListener");
 		}
 	}
 
@@ -180,8 +176,8 @@ public class BaseShowProductsListFragment extends BaseSpiceFragment {
 				}
 			}
 
-			entryImagesListAdapter = new EntryImagesListAdapter(getActivity()
-					.getBaseContext(), getBitmapSpiceManager(), entryList);
+            EntryImagesListAdapter entryImagesListAdapter = new EntryImagesListAdapter(getActivity()
+                    .getBaseContext(), getBitmapSpiceManager(), entryList);
 			entryImagesListView.setAdapter(entryImagesListAdapter);
 
 			loadingView.setVisibility(View.GONE);
@@ -240,7 +236,7 @@ public class BaseShowProductsListFragment extends BaseSpiceFragment {
 		public void onBaseShowProductsListFragmentItemSelected(String id);
 
 		public void onBaseShowProductsListFragmentFootprintSend(
-				ArrayList<List<Pos>> footPrints);
+				ArrayList<Footprint> footPrints);
 	}
 
 	/*
@@ -259,7 +255,7 @@ public class BaseShowProductsListFragment extends BaseSpiceFragment {
 		}
 		updateShowProductsListViewContent(searchProductFeeds.getEntries());
 		loadSearchResultProductsIntroDetailsFrag(searchProductFeeds);
-		ArrayList<List<Pos>> footPrints = getFootprints(searchProductFeeds
+		ArrayList<Footprint> footPrints = getFootprints(searchProductFeeds
 				.getEntries());
 		mListener.onBaseShowProductsListFragmentFootprintSend(footPrints);
 
@@ -269,15 +265,12 @@ public class BaseShowProductsListFragment extends BaseSpiceFragment {
 	 * @param searchProductFeeds
 	 * @return
 	 */
-	private ArrayList<List<Pos>> getFootprints(List<Entry> searchProductFeeds) {
-		ArrayList<List<Pos>> footPrintsArr = new ArrayList<List<Pos>>();
+	private ArrayList<Footprint> getFootprints(List<Entry> searchProductFeeds) {
+		ArrayList<Footprint> footPrintsArr = new ArrayList<Footprint>();
 		for (Entry searchProductFeed : searchProductFeeds) {
 			if (searchProductFeed.getEarthObservation() != null) {
 				footPrintsArr.add(searchProductFeed.getEarthObservation()
-						.getFeatureOfInterest().getFootprint()
-						.getMultiExtentOf().getMultiSurface()
-						.getSurfaceMembers().getPolygon().getExterior()
-						.getLinearRing().getPosList());
+						.getFeatureOfInterest().getFootprint());
 			}
 		}
 		return footPrintsArr;

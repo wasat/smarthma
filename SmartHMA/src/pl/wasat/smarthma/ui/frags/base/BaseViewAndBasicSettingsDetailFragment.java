@@ -29,10 +29,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 
 /**
- * A simple {@link android.support.v4.app.Fragment} subclass. Activities that
- * contain this fragment must implement the
- * {@link BaseViewAndBasicSettingsDetailFragment.OnBaseViewAndBasicSettingsDetailFragmentListener}
- * interface to handle interaction events. Use the
+ * A simple {@link android.support.v4.app.Fragment} subclass. Use the
  * {@link BaseViewAndBasicSettingsDetailFragment#newInstance} factory method to
  * create an instance of this fragment.
  * 
@@ -69,10 +66,8 @@ public class BaseViewAndBasicSettingsDetailFragment extends Fragment {
 	 * Use this factory method to create a new instance of this fragment using
 	 * the provided parameters.
 	 * 
-	 * @param collectionName
+	 * @param collectionEntry
 	 *            Parameter 1.
-	 * @param collectionDates
-	 *            Parameter 2.
 	 * @return A new instance of fragment
 	 *         BaseViewAndBasicSettingsDetailFragment.
 	 */
@@ -150,7 +145,7 @@ public class BaseViewAndBasicSettingsDetailFragment extends Fragment {
 			@Override
 			public void onClick(View v) {
 				MapSearchFragment mapSearchFragment = MapSearchFragment
-						.newInstance();
+						.newInstance(0);
 				getActivity()
 						.getSupportFragmentManager()
 						.beginTransaction()

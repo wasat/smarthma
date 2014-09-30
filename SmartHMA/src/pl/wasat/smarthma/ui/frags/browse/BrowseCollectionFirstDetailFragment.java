@@ -24,10 +24,8 @@ public class BrowseCollectionFirstDetailFragment extends
 	 * Use this factory method to create a new instance of this fragment using
 	 * the provided parameters.
 	 * 
-	 * @param collectionName
+	 * @param collectionEntry
 	 *            Parameter 1.
-	 * @param collectionDates
-	 *            Parameter 2.
 	 * @return A new instance of fragment BrowseCollectionFirstDetailFragment.
 	 */
 	public static BrowseCollectionFirstDetailFragment newInstance(
@@ -54,7 +52,7 @@ public class BrowseCollectionFirstDetailFragment extends
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		super.onCreateView(inflater, container, savedInstanceState);
-		MapSearchFragment mapSearchFragment = MapSearchFragment.newInstance();
+		MapSearchFragment mapSearchFragment = MapSearchFragment.newInstance(0);
 		getActivity()
 				.getSupportFragmentManager()
 				.beginTransaction()
