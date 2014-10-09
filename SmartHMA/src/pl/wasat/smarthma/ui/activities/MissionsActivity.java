@@ -78,7 +78,7 @@ public class MissionsActivity extends BaseSmartHMActivity implements
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		MenuInflater inflater = getMenuInflater();
-		inflater.inflate(R.menu.menu_eo_map, menu);
+		inflater.inflate(R.menu.menu_eo_map_twopane, menu);
 
 		return super.onCreateOptionsMenu(menu);
 	}
@@ -91,14 +91,14 @@ public class MissionsActivity extends BaseSmartHMActivity implements
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
-		case R.id.action_pref1:
+/*		case R.id.action_pref1:
 			break;
 		case R.id.action_pref2:
 			break;
 		case R.id.action_pref3:
 			break;
 		case R.id.action_clear_all_settings:
-			break;
+			break;*/
 		case R.id.action_exit:
 			moveTaskToBack(true);
 			finish();

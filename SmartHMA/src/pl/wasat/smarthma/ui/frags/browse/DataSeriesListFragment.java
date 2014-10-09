@@ -5,6 +5,7 @@ import java.util.List;
 import pl.wasat.smarthma.R;
 import pl.wasat.smarthma.adapter.DataSeriesListAdapter;
 import pl.wasat.smarthma.database.EoDbAdapter;
+import pl.wasat.smarthma.helper.Const;
 import pl.wasat.smarthma.model.FedeoRequest;
 import pl.wasat.smarthma.model.feed.Entry;
 import pl.wasat.smarthma.model.feed.Feed;
@@ -17,7 +18,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ListView;
-import android.widget.Toast;
 
 /**
  * A simple {@link android.support.v4.app.Fragment} subclass. Activities that
@@ -46,10 +46,11 @@ public class DataSeriesListFragment extends BaseSpiceListFragment {
 	 *            Parameter 1.
 	 * @return A new instance of fragment DataSeriesListFragment.
 	 */
-	public static DataSeriesListFragment newInstance(FedeoRequest fedeoRequest) {
+	public static DataSeriesListFragment newInstance(FedeoRequest fedeoRequest, Boolean stopNewSearch) {
 		DataSeriesListFragment fragment = new DataSeriesListFragment();
 		Bundle args = new Bundle();
 		args.putSerializable(KEY_PARAM_BROWSE_FEDEO_REQUEST, fedeoRequest);
+		args.putBoolean(Const.KEY_INTENT_RETURN_STOP_SEARCH, stopNewSearch);
 		fragment.setArguments(args);
 		return fragment;
 	}
@@ -97,7 +98,8 @@ public class DataSeriesListFragment extends BaseSpiceListFragment {
 	public void onStart() {
 		super.onStart();
 		// TODO: Find solution - why fragment is called twice
-		if (browseRequest != null) {
+		stopSearch = getArguments().getBoolean(Const.KEY_INTENT_RETURN_STOP_SEARCH);
+		if (browseRequest != null && stopSearch == false) {
 			loadDataSeriesFeedResponse(browseRequest);
 		}
 	}
@@ -198,7 +200,7 @@ public class DataSeriesListFragment extends BaseSpiceListFragment {
 	@Override
 	public void onRequestSuccess(Feed dataSeriesFeeds) {
 		getActivity().setProgressBarIndeterminateVisibility(false);
-		Toast.makeText(getActivity(), "OK!!! ", Toast.LENGTH_SHORT).show();
+		//Toast.makeText(getActivity(), "OK!!! ", Toast.LENGTH_SHORT).show();
 		updateEOListViewContent(dataSeriesFeeds.getEntries());
 
 		loadIntroFeedInfo(dataSeriesFeeds);

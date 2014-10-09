@@ -26,8 +26,8 @@
     <string name="ok_">"OK!!! "</string>
     <string name="nothing_to_display_please_search_again_">Nothing to display. Please search again.</string>
     <string name="search_product">Search Product</string>
-    <string name="show_metadata">Show Metadata</string>
-    <string name="show_map">Show Map</string>
+    <string name="show_metadata">Metadata</string>
+    <string name="show_map">Footprint</string>
     <string name="download">Download</string>
     <string name="products_search_area">Products search area</string>
     <string name="sw_">SW: </string>

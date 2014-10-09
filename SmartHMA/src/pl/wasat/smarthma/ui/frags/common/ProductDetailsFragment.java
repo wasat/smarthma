@@ -1,11 +1,11 @@
 package pl.wasat.smarthma.ui.frags.common;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
 import pl.wasat.smarthma.R;
 import pl.wasat.smarthma.model.eo.Browse;
+import pl.wasat.smarthma.model.eo.Footprint;
 import pl.wasat.smarthma.model.feed.Entry;
 import android.app.Activity;
 import android.os.Bundle;
@@ -21,8 +21,6 @@ import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.google.android.gms.maps.model.LatLng;
 
 /**
  * A simple {@link android.support.v4.app.Fragment} subclass. Activities that
@@ -193,20 +191,13 @@ public class ProductDetailsFragment extends Fragment {
 						.getServiceReference().get_xlink_href();
 			}
 		}
+		Footprint footprint = displayedEntry.getEarthObservation()
+				.getFeatureOfInterest().getFootprint();
 
-		//Builder boundsBuilder = new LatLngBounds.Builder();
-		List<LatLng> footprintsPosList = extractLatLngFootprint();
-
-		//for (int j = 0; j < footprintsPosList.size(); j++) {
-		//	boundsBuilder.include(footprintsPosList.get(j));
-		//}
-		
-		//bounds = boundsBuilder.build();
-
-		mListener.onProductDetailsFragmentQuicklookShow(url, footprintsPosList);
+		mListener.onProductDetailsFragmentQuicklookShow(url, footprint);
 	}
 
-	private List<LatLng> extractLatLngFootprint() {
+/*	private List<LatLng> extractLatLngFootprint() {
 		List<LatLng> footprintsPosList = new ArrayList<LatLng>();
 		
 		footprintsPosList = displayedEntry.getEarthObservation()
@@ -214,11 +205,12 @@ public class ProductDetailsFragment extends Fragment {
 				.getMultiSurface().getSurfaceMembers().getPolygon()
 				.getExterior().getLinearRing().getPosLatLngList();
 		return footprintsPosList;
-	}
+	}*/
 
 	public void loadFootprint() {
-		List<LatLng> footprintsPosList = extractLatLngFootprint();
-		mListener.onProductDetailsFragmentMapShow(footprintsPosList);
+		Footprint footprint = displayedEntry.getEarthObservation()
+				.getFeatureOfInterest().getFootprint();
+		mListener.onProductDetailsFragmentMapShow(footprint);
 	}
 
 	/**
@@ -232,12 +224,12 @@ public class ProductDetailsFragment extends Fragment {
 	 */
 	public interface OnProductDetailsFragmentListener {
 
-		public void onProductDetailsFragmentMapShow(List<LatLng> footprintPoints);
+		public void onProductDetailsFragmentMapShow(Footprint footprint);
 
 		public void onProductDetailsFragmentMetadataLoad();
 
 		public void onProductDetailsFragmentQuicklookShow(String url,
-				List<LatLng> footprintPoints);
+				Footprint footprint);
 
 	}
 

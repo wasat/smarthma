@@ -5,6 +5,7 @@ import java.util.List;
 import pl.wasat.smarthma.R;
 import pl.wasat.smarthma.adapter.SearchListAdapter;
 import pl.wasat.smarthma.database.EoDbAdapter;
+import pl.wasat.smarthma.helper.Const;
 import pl.wasat.smarthma.model.FedeoRequest;
 import pl.wasat.smarthma.model.feed.Entry;
 import pl.wasat.smarthma.model.feed.Feed;
@@ -13,12 +14,13 @@ import pl.wasat.smarthma.ui.frags.common.FailureFragment;
 import pl.wasat.smarthma.utils.rss.FedeoSearchRequest;
 import android.app.Activity;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ListView;
-import android.widget.Toast;
 
 /**
  * A simple {@link android.support.v4.app.Fragment} subclass. Activities that
@@ -30,6 +32,7 @@ import android.widget.Toast;
  */
 public class SearchListFragment extends BaseSpiceListFragment {
 	private static final String KEY_PARAM_SEARCH_FEDEO_REQUEST = "pl.wasat.smarthma.KEY_PARAM_SEARCH_FEDEO_REQUEST";
+	//private static final String KEY_PARAM_STOP_NEW_SEARCH = "pl.wasat.smarthma.KEY_PARAM_STOP_NEW_SEARCH";
 	private static final String STATE_ACTIVATED_POSITION = "activated_position";
 
 	private FedeoRequest searchRequest;
@@ -46,10 +49,11 @@ public class SearchListFragment extends BaseSpiceListFragment {
 	 *            Parameter 2.
 	 * @return A new instance of fragment SearchListFragment.
 	 */
-	public static SearchListFragment newInstance(FedeoRequest fedeoRequest) {
+	public static SearchListFragment newInstance(FedeoRequest fedeoRequest, Boolean stopNewSearch) {
 		SearchListFragment fragment = new SearchListFragment();
 		Bundle args = new Bundle();
 		args.putSerializable(KEY_PARAM_SEARCH_FEDEO_REQUEST, fedeoRequest);
+		args.putBoolean(Const.KEY_INTENT_RETURN_STOP_SEARCH, stopNewSearch);
 		fragment.setArguments(args);
 		return fragment;
 	}
@@ -64,7 +68,15 @@ public class SearchListFragment extends BaseSpiceListFragment {
 		if (getArguments() != null) {
 			searchRequest = (FedeoRequest) getArguments().getSerializable(
 					KEY_PARAM_SEARCH_FEDEO_REQUEST);
+			//stopSearch = getArguments().getBoolean(KEY_PARAM_STOP_NEW_SEARCH);
 		}
+	}
+
+	
+	@Override
+	public View onCreateView(LayoutInflater inflater, ViewGroup container,
+			Bundle savedInstanceState) {
+		return super.onCreateView(inflater, container, savedInstanceState);
 	}
 
 	@Override
@@ -98,7 +110,8 @@ public class SearchListFragment extends BaseSpiceListFragment {
 	public void onStart() {
 		super.onStart();
 		// TODO: Find solution - why fragment is called twice
-		if (searchRequest != null) {
+		stopSearch = getArguments().getBoolean(Const.KEY_INTENT_RETURN_STOP_SEARCH);
+		if (searchRequest != null && stopSearch == false) {
 			loadSearchFeedResponse(searchRequest);
 		}
 	}
@@ -231,7 +244,7 @@ public class SearchListFragment extends BaseSpiceListFragment {
 	@Override
 	public void onRequestSuccess(Feed searchFeeds) {
 		getActivity().setProgressBarIndeterminateVisibility(false);
-		Toast.makeText(getActivity(), R.string.ok_, Toast.LENGTH_SHORT).show();
+		//Toast.makeText(getActivity(), R.string.ok_, Toast.LENGTH_SHORT).show();
 		updateSearchListViewContent(searchFeeds.getEntries());
 
 		showDataSeriesIntro(searchFeeds);

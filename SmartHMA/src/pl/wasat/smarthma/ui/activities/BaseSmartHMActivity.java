@@ -4,6 +4,8 @@
 package pl.wasat.smarthma.ui.activities;
 
 import pl.wasat.smarthma.R;
+import pl.wasat.smarthma.helper.Const;
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
@@ -14,6 +16,9 @@ import android.view.Window;
  * 
  */
 public class BaseSmartHMActivity extends FragmentActivity {
+	
+	protected static final int REQUEST_NEW_SEARCH = 0;
+	protected boolean stopNewSearch = false;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -23,6 +28,9 @@ public class BaseSmartHMActivity extends FragmentActivity {
 	}
 
 	public void doPositiveClick() {
+		Intent resultIntent = new Intent();
+		resultIntent.putExtra(Const.KEY_INTENT_RETURN_STOP_SEARCH, true);
+		setResult(Activity.RESULT_OK, resultIntent);
 		finish();
 	}
 

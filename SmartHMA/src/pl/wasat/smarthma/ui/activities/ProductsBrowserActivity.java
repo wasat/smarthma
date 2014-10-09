@@ -1,7 +1,6 @@
 package pl.wasat.smarthma.ui.activities;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import pl.wasat.smarthma.R;
 import pl.wasat.smarthma.helper.Const;
@@ -14,11 +13,11 @@ import pl.wasat.smarthma.ui.frags.common.MapSearchFragment.OnMapSearchFragmentLi
 import pl.wasat.smarthma.ui.frags.common.MetadataFragment.OnMetadataFragmentListener;
 import pl.wasat.smarthma.ui.frags.common.ProductDetailsFragment.OnProductDetailsFragmentListener;
 import pl.wasat.smarthma.ui.frags.common.ProductsListFragment;
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 
-import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 
 public class ProductsBrowserActivity extends BaseSmartHMActivity implements
@@ -26,7 +25,7 @@ public class ProductsBrowserActivity extends BaseSmartHMActivity implements
 		OnMapSearchFragmentListener, OnBaseShowProductsListFragmentListener {
 
 	MapSearchFragment mapSearchFragment;
-	private List<LatLng> mFootprintPoints;
+	private Footprint mFootprint;
 	private String quicklookUrl;
 	private static int QUICKLOOK_MAP_MODE = 1;
 	private static int FOOTPRINT_MAP_MODE = 2;
@@ -63,20 +62,20 @@ public class ProductsBrowserActivity extends BaseSmartHMActivity implements
 				fm.popBackStackImmediate("MetadataFragment",
 						FragmentManager.POP_BACK_STACK_INCLUSIVE);
 			} else if (bstEntry.equalsIgnoreCase("MapSearchFragment")) {
-				fm.popBackStackImmediate("MapSearchFragment",
-						FragmentManager.POP_BACK_STACK_INCLUSIVE);
+				//fm.popBackStackImmediate();
+				super.onBackPressed();
 			}
-
 			else {
-
 				bsec = fm.getBackStackEntryCount();
-
 				if (bsec > 1) {
 					while (bsec > 1) {
 						fm.popBackStackImmediate();
 						bsec = fm.getBackStackEntryCount();
 					}
 				} else {
+					Intent resultIntent = new Intent();
+					resultIntent.putExtra(Const.KEY_INTENT_RETURN_STOP_SEARCH, true);
+					setResult(Activity.RESULT_OK, resultIntent);
 					finish();
 					super.onBackPressed();
 				}
@@ -109,9 +108,9 @@ public class ProductsBrowserActivity extends BaseSmartHMActivity implements
 
 	@Override
 	public void onProductDetailsFragmentQuicklookShow(String url,
-			List<LatLng> footprintPoints) {
+			Footprint footprint) {
 		quicklookUrl = url;
-		mFootprintPoints = footprintPoints;
+		mFootprint = footprint;
 
 		checkMapFragment();
 
@@ -120,15 +119,15 @@ public class ProductsBrowserActivity extends BaseSmartHMActivity implements
 
 		getSupportFragmentManager()
 				.beginTransaction()
-				.replace(R.id.activity_base_details_container,
+				.add(R.id.activity_base_details_container,
 						mapSearchFragment, "MapSearchFragment")
 				.addToBackStack("MapSearchFragment").commit();
 
 	}
 
 	@Override
-	public void onProductDetailsFragmentMapShow(List<LatLng> footprintPoints) {
-		mFootprintPoints = footprintPoints;
+	public void onProductDetailsFragmentMapShow(Footprint footprint) {
+		mFootprint = footprint;
 
 		checkMapFragment();
 
@@ -148,10 +147,10 @@ public class ProductsBrowserActivity extends BaseSmartHMActivity implements
 			switch (mapMode) {
 			case 1:
 				mapSearchFragment.showQuicklookOnMap(quicklookUrl,
-						mFootprintPoints);
+						mFootprint);
 				break;
 			case 2:
-				mapSearchFragment.showFootPrints(mFootprintPoints);
+				mapSearchFragment.showFootPrints(mFootprint);
 				break;
 			default:
 				break;

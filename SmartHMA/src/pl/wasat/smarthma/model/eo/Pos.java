@@ -9,6 +9,8 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
+import com.google.android.gms.maps.model.LatLng;
+
 import pl.wasat.smarthma.utils.text.SmartHMAStringStyle;
 
 public class Pos implements Serializable {
@@ -17,6 +19,7 @@ public class Pos implements Serializable {
 
 	private String __prefix;
 	private String __text;
+	private LatLng latLng;
 	private final Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
 	public String get__prefix() {
@@ -37,12 +40,25 @@ public class Pos implements Serializable {
 	}
 
 	public void set__text(String __text) {
+		__text = __text.replaceAll(",", " ");
 		this.__text = __text;
+		toLatLng();
 	}
 
 	public Pos with__text(String __text) {
+		__text = __text.replaceAll(",", " ");
 		this.__text = __text;
 		return this;
+	}
+
+	public LatLng getLatLng() {
+		return latLng;
+	}
+
+	public void setLatLng(LatLng latLng) {
+		this.latLng = latLng;
+		this.__text = latLng.latitude + " " + latLng.longitude;
+				
 	}
 
 	@Override
@@ -70,4 +86,8 @@ public class Pos implements Serializable {
 		this.additionalProperties.put(name, value);
 	}
 
+	private void toLatLng() {
+		latLng = new LatLng(Double.valueOf(__text.split(" ")[0]),
+				Double.valueOf(__text.split(" ")[1]));
+	}
 }

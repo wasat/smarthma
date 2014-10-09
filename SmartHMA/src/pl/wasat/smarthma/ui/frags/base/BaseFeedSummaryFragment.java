@@ -16,7 +16,7 @@ import android.widget.TextView;
  * 
  */
 public class BaseFeedSummaryFragment extends Fragment {
-	public static final String KEY_FEED_SUMMARY = "pl.wasat.smarthma.KEY_FEED_SUMMARY";
+	protected static final String KEY_FEED_SUMMARY = "pl.wasat.smarthma.KEY_FEED_SUMMARY";
 
 	private Feed resultFeed;
 	private TextView tvTitle;
@@ -167,7 +167,7 @@ public class BaseFeedSummaryFragment extends Fragment {
 		}
 	}
 
-	public void loadNavSearch(String linkHref) {
+	protected void loadNavSearch(String linkHref) {
 	}
 
 }

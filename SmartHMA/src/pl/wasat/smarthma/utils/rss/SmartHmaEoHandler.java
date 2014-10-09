@@ -428,6 +428,7 @@ public class SmartHmaEoHandler extends DefaultHandler {
 			point.set_gml_id(atts.getValue("gml:id"));
 		} else if (localName.equalsIgnoreCase("coordinates")) {
 			coordinates = new Coordinates();
+			pos = new Pos();
 		} else if (localName.equalsIgnoreCase("pos")) {
 			pos = new Pos();
 		} else if (localName.equalsIgnoreCase("locationName")) {
@@ -501,7 +502,7 @@ public class SmartHmaEoHandler extends DefaultHandler {
 		} else if (localName.equalsIgnoreCase("serviceReference")) {
 			serviceReference = new ServiceReference();
 			serviceReference.set_xlink_href(atts.getValue("xlink:href"));
-			serviceReference.set_xmlns("xmlns");
+			serviceReference.set_xmlns();
 		} else if (localName.equalsIgnoreCase("requestMessage")) {
 			requestMessage = new RequestMessage();
 		} else if (localName.equalsIgnoreCase("referenceSystemIdentifier")) {
@@ -915,6 +916,7 @@ public class SmartHmaEoHandler extends DefaultHandler {
 					point.setPos(pos);
 				} else if (localName.equalsIgnoreCase("coordinates")) {
 					coordinates.set__text(chars.toString());
+					pos.set__text(chars.toString());
 					// } else if (localName.equalsIgnoreCase("pos")) {
 					// pos.set__text(chars.toString());
 				} else if (localName.equalsIgnoreCase("locationName")) {
@@ -1188,8 +1190,8 @@ public class SmartHmaEoHandler extends DefaultHandler {
 				} else if (localName.equalsIgnoreCase("exterior")) {
 					exterior.setLinearRing(linearRing);
 				} else if (localName.equalsIgnoreCase("LinearRing")) {
-					linearRing.setPosString(posString);
 					linearRing.setPosList(posList);
+					linearRing.setPosString(posString);
 				} else if (localName.equalsIgnoreCase("pos")) {
 					pos.set__text(chars.toString());
 					posList.add(pos);

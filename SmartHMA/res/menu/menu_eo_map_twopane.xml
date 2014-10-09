@@ -9,7 +9,7 @@
         android:title="@string/action_search">
     </item>
 
-    <group android:id="@+id/menu_group_gis" >
+<!--     <group android:id="@+id/menu_group_gis" > 
         <item
             android:id="@+id/action_pref1"
             android:icon="@android:drawable/ic_dialog_alert"
@@ -38,7 +38,7 @@
             android:title="@string/action_clear_all_settings"
             android:titleCondensed="@string/action_clear_all_settings">
         </item>
-    </group>
+    </group> -->
 
     <item
         android:id="@+id/action_exit"

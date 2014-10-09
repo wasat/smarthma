@@ -61,7 +61,7 @@ public class BaseShowProductsListFragment extends BaseSpiceFragment {
 		return fragment;
 	}
 
-	public BaseShowProductsListFragment() {
+	protected BaseShowProductsListFragment() {
 		// Required empty public constructor
 	}
 
@@ -197,7 +197,7 @@ public class BaseShowProductsListFragment extends BaseSpiceFragment {
 		}
 	}
 
-	public void loadFailureFrag() {
+	protected void loadFailureFrag() {
 	}
 
 	public void loadProductItemDetails(Entry entry) {

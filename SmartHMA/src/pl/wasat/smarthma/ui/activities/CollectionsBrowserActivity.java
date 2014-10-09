@@ -55,13 +55,33 @@ public class CollectionsBrowserActivity extends BaseSmartHMActivity implements
 
 		if (findViewById(R.id.activity_base_details_container) != null) {
 			DataSeriesListFragment dsListFragment = DataSeriesListFragment
-					.newInstance(fedeoRequest);
+					.newInstance(fedeoRequest, stopNewSearch);
 			getSupportFragmentManager().beginTransaction()
 					.replace(R.id.activity_base_list_container, dsListFragment)
 					.commit();
 		}
 	}
 
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		if (resultCode == RESULT_OK) {
+			stopNewSearch = data.getBooleanExtra(
+					Const.KEY_INTENT_RETURN_STOP_SEARCH, true);
+		} else {
+			stopNewSearch = false;
+		}
+
+		DataSeriesListFragment dtSeriesListFragment = (DataSeriesListFragment) getSupportFragmentManager()
+			.findFragmentById(R.id.activity_base_list_container);
+		if (dtSeriesListFragment != null) {
+			Bundle bundle = dtSeriesListFragment.getArguments();
+			bundle.putBoolean(Const.KEY_INTENT_RETURN_STOP_SEARCH,
+					stopNewSearch);
+		}
+		super.onActivityResult(requestCode, resultCode, data);
+	}
+	
+	
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -201,7 +221,8 @@ public class CollectionsBrowserActivity extends BaseSmartHMActivity implements
 		Intent showProductsIntent = new Intent(this,
 				ProductsBrowserActivity.class);
 		showProductsIntent.putExtra(Const.KEY_INTENT_PARENT_ID, parentID);
-		startActivity(showProductsIntent);
+		startActivityForResult(showProductsIntent, REQUEST_NEW_SEARCH);
+		//startActivity(showProductsIntent);
 
 	}
 
