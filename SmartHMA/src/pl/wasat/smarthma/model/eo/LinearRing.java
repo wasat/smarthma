@@ -11,9 +11,9 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
-import com.google.android.gms.maps.model.LatLng;
-
 import pl.wasat.smarthma.utils.text.SmartHMAStringStyle;
+
+import com.google.android.gms.maps.model.LatLng;
 
 public class LinearRing implements Serializable {
 
@@ -21,8 +21,7 @@ public class LinearRing implements Serializable {
 
 	private String __prefix;
 	private PosString posString;
-	private List<Pos> posList;
-	private List<LatLng> posLatLngList = new ArrayList<LatLng>();
+	private List<Pos> posList = new ArrayList<Pos>();
 	private final Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
 	public String get__prefix() {
@@ -43,7 +42,17 @@ public class LinearRing implements Serializable {
 	}
 
 	public void setPosString(PosString posString) {
+		if(posString == null)
+		{
+			posString = new PosString();
+			posString.setPointsString("");
+		}
 		this.posString = posString;
+		
+		if (!posString.getPointsString().isEmpty()
+				&& posString.getPointsString().length() < 200) {
+			this.posList = setPosList(posString.getPointsString());
+		}
 	}
 
 	public LinearRing withPosString(PosString posString) {
@@ -56,8 +65,31 @@ public class LinearRing implements Serializable {
 	}
 
 	public void setPosList(List<Pos> posList) {
-		this.posList = posList;
-		toPosLatLngList();
+		if (!posList.isEmpty()) {
+			this.posList = posList;
+		}
+		// toPosLatLngList();
+	}
+
+	public List<Pos> setPosList(String pointsString) {
+		String[] coorStr = pointsString.split(" ");
+		List<Pos> latLngPosList = new ArrayList<Pos>();
+
+		//String tempStr = "";
+
+		for (int j = 0; j < coorStr.length - 1; j = j + 2) {
+			LatLng ftPt = new LatLng(Double.valueOf(coorStr[j]),
+					Double.valueOf(coorStr[j + 1]));
+			Pos pos = new Pos();
+			pos.setLatLng(ftPt);
+			latLngPosList.add(pos);
+			//tempStr = tempStr + coorStr[j] + "," + coorStr[j + 1] + ";"
+			//		+ SystemUtils.LINE_SEPARATOR;
+		}
+		//Log.i("FOOT", tempStr);
+		
+
+		return latLngPosList;
 	}
 
 	public LinearRing withPosList(List<Pos> posList) {
@@ -65,13 +97,12 @@ public class LinearRing implements Serializable {
 		return this;
 	}
 
-	public List<LatLng> getPosLatLngList() {
-		return posLatLngList;
-	}
-
-	public void setPosLatLngList(List<LatLng> posLatLngList) {
-		this.posLatLngList = posLatLngList;
-	}
+	/*
+	 * public List<LatLng> getPosLatLngList() { return posLatLngList; }
+	 * 
+	 * public void setPosLatLngList(List<LatLng> posLatLngList) {
+	 * this.posLatLngList = posLatLngList; }
+	 */
 
 	@Override
 	public String toString() {
@@ -97,15 +128,14 @@ public class LinearRing implements Serializable {
 	public void setAdditionalProperty(String name, Object value) {
 		this.additionalProperties.put(name, value);
 	}
-	
-	private void toPosLatLngList(){
-		for (int j = 0; j < posList.size(); j++) {
-			String posStr = posList.get(j).get__text();
-			LatLng ftPt = new LatLng(Double.valueOf(posStr.split(" ")[0]),
-					Double.valueOf(posStr.split(" ")[1]));
-			posLatLngList.add(ftPt);
-		}
-		
-	}
+
+	// private void toPosLatLngList(){
+	// for (int j = 0; j < posList.size(); j++) {
+	// String posStr = posList.get(j).get__text();
+	// LatLng ftPt = new LatLng(Double.valueOf(posStr.split(" ")[0]),
+	// Double.valueOf(posStr.split(" ")[1]));
+	// posLatLngList.add(ftPt);
+	// }
+	// }
 
 }

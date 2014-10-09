@@ -29,7 +29,7 @@ public class NewsActivity extends BaseSmartHMActivity implements
 					.permitAll().build();
 			StrictMode.setThreadPolicy(policy);
 		}
-		setContentView(R.layout.activity_article_list);
+		setContentView(R.layout.activity_news);
 
 		dba = new EoDbAdapter(this);
 

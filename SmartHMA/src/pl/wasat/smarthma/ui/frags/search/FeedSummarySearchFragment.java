@@ -43,7 +43,7 @@ public class FeedSummarySearchFragment extends BaseFeedSummaryFragment {
 		request.setUrl(linkHref);
 
 		SearchListFragment searchListFragment = SearchListFragment
-				.newInstance(request);
+				.newInstance(request, false);
 		getActivity()
 				.getSupportFragmentManager()
 				.beginTransaction()

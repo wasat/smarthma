@@ -39,6 +39,8 @@ import com.octo.android.robospice.request.listener.RequestListener;
  */
 public class BaseSpiceListFragment extends ListFragment implements
 		RequestListener<Feed> {
+	
+	protected Boolean stopSearch = false;
 
 	private final SpiceManager samrtHMASpiceManager = new SpiceManager(
 			SmartHmaHttpSpiceService.class);

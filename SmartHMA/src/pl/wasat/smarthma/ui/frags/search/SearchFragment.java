@@ -32,8 +32,7 @@ public class SearchFragment extends Fragment {
 	 * @return A new instance of fragment SearchFragment.
 	 */
 	public static SearchFragment newInstance() {
-		SearchFragment fragment = new SearchFragment();
-		return fragment;
+		return new SearchFragment();
 	}
 
 	public SearchFragment() {

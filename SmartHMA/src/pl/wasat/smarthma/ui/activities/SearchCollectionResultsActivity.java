@@ -28,11 +28,11 @@ import com.google.android.gms.maps.model.LatLngBounds;
 
 public class SearchCollectionResultsActivity extends BaseSmartHMActivity
 		implements OnSearchListFragmentListener,
-		OnBaseShowProductsListFragmentListener,
-		OnMapSearchFragmentListener,
+		OnBaseShowProductsListFragmentListener, OnMapSearchFragmentListener,
 		OnMetadataFragmentListener, OnCollectionDetailsFragmentListener {
 
 	private EoDbAdapter dba;
+
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +46,25 @@ public class SearchCollectionResultsActivity extends BaseSmartHMActivity
 
 		handleIntent(getIntent());
 		dba = new EoDbAdapter(this);
+	}
+
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		if (resultCode == RESULT_OK) {
+			stopNewSearch = data.getBooleanExtra(
+					Const.KEY_INTENT_RETURN_STOP_SEARCH, true);
+		} else {
+			stopNewSearch = false;
+		}
+
+		SearchListFragment searchListFrag = (SearchListFragment) getSupportFragmentManager()
+			.findFragmentById(R.id.activity_base_list_container);
+		if (searchListFrag != null) {
+			Bundle bundle = searchListFrag.getArguments();
+			bundle.putBoolean(Const.KEY_INTENT_RETURN_STOP_SEARCH,
+					stopNewSearch);
+		}
+		super.onActivityResult(requestCode, resultCode, data);
 	}
 
 	/**
@@ -68,14 +87,12 @@ public class SearchCollectionResultsActivity extends BaseSmartHMActivity
 			fedeoRequest.buildFromShared(this);
 
 			SearchListFragment searchListFragment = SearchListFragment
-					.newInstance(fedeoRequest);
+					.newInstance(fedeoRequest, stopNewSearch);
 			getSupportFragmentManager()
 					.beginTransaction()
 					.replace(R.id.activity_base_list_container,
 							searchListFragment).commit();
-
 		}
-
 	}
 
 	/*
@@ -193,14 +210,15 @@ public class SearchCollectionResultsActivity extends BaseSmartHMActivity
 		Intent showProductsIntent = new Intent(this,
 				ProductsBrowserActivity.class);
 		showProductsIntent.putExtra(Const.KEY_INTENT_PARENT_ID, parentID);
-		startActivity(showProductsIntent);
+		startActivityForResult(showProductsIntent, REQUEST_NEW_SEARCH);
+		// startActivity(showProductsIntent);
 
 	}
 
 	@Override
 	public void onMapReady(int mapMode) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 }

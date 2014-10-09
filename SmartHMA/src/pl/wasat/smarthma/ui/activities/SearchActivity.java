@@ -7,8 +7,6 @@ import pl.wasat.smarthma.ui.frags.search.SearchBasicInfoRightFragment.OnSearchBa
 import pl.wasat.smarthma.ui.frags.search.SearchFragment;
 import pl.wasat.smarthma.ui.frags.search.SearchFragment.OnSearchFragmentListener;
 import roboguice.util.temp.Ln;
-import android.app.SearchManager;
-import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
@@ -16,7 +14,6 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.widget.SearchView;
 
 import com.google.android.gms.maps.model.LatLngBounds;
 
@@ -49,14 +46,14 @@ public class SearchActivity extends BaseSmartHMActivity implements
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		MenuInflater inflater = getMenuInflater();
-		inflater.inflate(R.menu.menu_eo_map, menu);
+		inflater.inflate(R.menu.menu_eo_map_twopane, menu);
 
 		// Associate searchable configuration with the SearchView
-		SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+/*		SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
 		SearchView searchView = (SearchView) menu.findItem(R.id.action_search)
 				.getActionView();
 		searchView.setSearchableInfo(searchManager
-				.getSearchableInfo(getComponentName()));
+				.getSearchableInfo(getComponentName()));*/
 
 		return super.onCreateOptionsMenu(menu);
 	}
@@ -69,14 +66,14 @@ public class SearchActivity extends BaseSmartHMActivity implements
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
-		case R.id.action_pref1:
+/*		case R.id.action_pref1:
 			break;
 		case R.id.action_pref2:
 			break;
 		case R.id.action_pref3:
 			break;
 		case R.id.action_clear_all_settings:
-			break;
+			break;*/
 		case R.id.action_exit:
 			moveTaskToBack(true);
 			finish();

@@ -1,7 +1,15 @@
 package pl.wasat.smarthma.ui.frags.common;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.List;
 
+import pl.wasat.smarthma.model.eo.Footprint;
+import pl.wasat.smarthma.model.eo.Pos;
 import pl.wasat.smarthma.utils.wms.TileProviderFactory;
 import android.app.Activity;
 import android.app.Dialog;
@@ -52,6 +60,7 @@ public class MapSearchFragment extends SupportMapFragment implements
 		GooglePlayServicesClient.ConnectionCallbacks, Target {
 
 	private static final String KEY_MAP_MODE = "pl.wasat.smarthma.KEY_MAP_MODE";
+	private static final int BEARING_LEVEL_VALUE = 0;
 
 	/** reference to Google Maps object */
 	private SupportMapFragment supportMapFrag;
@@ -66,6 +75,14 @@ public class MapSearchFragment extends SupportMapFragment implements
 	private int mapMode;
 
 	private LatLngBounds targetBounds;
+
+	private LatLng qLookCenter;
+
+	private float qLookWidth;
+
+	private float qLookHeight;
+
+	private float qLookBearing;
 
 	/**
 	 * Use this factory method to create a new instance of this fragment using
@@ -139,17 +156,6 @@ public class MapSearchFragment extends SupportMapFragment implements
 		mMap.animateCamera(cameraUpdate);
 	}
 
-	/*
-	 * private void checkMapFragment() { try { SupportMapFragment
-	 * supportMapFragment = (SupportMapFragment) getActivity()
-	 * .getSupportFragmentManager().findFragmentByTag( "MapSearchFragment");
-	 * 
-	 * if (supportMapFragment != null) {
-	 * getActivity().getSupportFragmentManager().beginTransaction()
-	 * .remove(supportMapFragment).commit(); } } catch (IllegalStateException e)
-	 * { } }
-	 */
-
 	private void startCreateMap(Bundle savedInstanceState) {
 		// restore selected party if any
 		// NOTE: this doesn't work because if you use setRetainInstance(true) to
@@ -222,12 +228,6 @@ public class MapSearchFragment extends SupportMapFragment implements
 			public void onCameraChange(CameraPosition arg0) {
 				LatLngBounds bounds = mMap.getProjection().getVisibleRegion().latLngBounds;
 				mListener.onMapSearchFragmentBoundsChange(bounds);
-
-				/*
-				 * if (boundsBuilder != null) {
-				 * mMap.animateCamera(CameraUpdateFactory.newLatLngBounds(
-				 * boundsBuilder.build(), 50)); }
-				 */
 			}
 		});
 
@@ -276,7 +276,7 @@ public class MapSearchFragment extends SupportMapFragment implements
 					.target(new LatLng(location.getLatitude(), location
 							.getLongitude())) // Sets the center of the map to
 												// location user
-					.zoom(12) // Sets the zoom
+					.zoom(8) // Sets the zoom
 					.build(); // Creates a CameraPosition from the builder
 			mMap.animateCamera(CameraUpdateFactory
 					.newCameraPosition(cameraPosition));
@@ -285,10 +285,59 @@ public class MapSearchFragment extends SupportMapFragment implements
 
 	private void buildFootprintBounds(List<LatLng> footprintPoints) {
 		LatLngBounds.Builder boundsBuilder = new LatLngBounds.Builder();
-		for (int j = 0; j < footprintPoints.size() - 1; j++) {
+		// String tempStr = "";
+		for (int j = 0; j < footprintPoints.size(); j++) {
 			boundsBuilder.include(footprintPoints.get(j));
+			// tempStr = tempStr + footprintPoints.get(j).latitude + "," +
+			// footprintPoints.get(j).longitude + ";"
+			// + SystemUtils.LINE_SEPARATOR;
 		}
 		targetBounds = boundsBuilder.build();
+
+		// writeToSDFile(tempStr);
+	}
+
+	private void writeToSDFile(String strToWrite) {
+
+		File root = android.os.Environment.getExternalStorageDirectory();
+
+		File dir = new File(root.getAbsolutePath() + "/download");
+		dir.mkdirs();
+		File file = new File(dir, "FootprintData.txt");
+
+		try {
+			FileOutputStream f = new FileOutputStream(file);
+			PrintWriter pw = new PrintWriter(f);
+			pw.println(strToWrite);
+			pw.flush();
+			pw.close();
+			f.close();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	private void calcQuickLookParams(Footprint footprint,
+			ArrayList<LatLng> footprintPoints) {
+		double oneLat = footprintPoints.get(0).latitude;
+		double oneLng = footprintPoints.get(0).longitude;
+		double twoLat = footprintPoints.get(1).latitude;
+		double twoLng = footprintPoints.get(1).longitude;
+		double fourLat = footprintPoints.get(3).latitude;
+		double fourLng = footprintPoints.get(3).longitude;
+		float[] results = new float[3];
+
+		qLookCenter = footprint.getCenterOf().getPoint().getPos().getLatLng();
+
+		Location.distanceBetween(oneLat, oneLng, twoLat, twoLng, results);
+		qLookHeight = results[0];
+
+		Location.distanceBetween(oneLat, oneLng, fourLat, fourLng, results);
+		qLookWidth = results[0];
+		qLookBearing = ((results[1] + results[2]) / 2) - 90;
+
 	}
 
 	private void animateToBounds() {
@@ -335,8 +384,15 @@ public class MapSearchFragment extends SupportMapFragment implements
 	/**
 	 * @param footprints
 	 */
-	public void showFootPrints(List<LatLng> footprintPoints) {
+	public void showFootPrints(Footprint footprint) {
 
+		ArrayList<LatLng> footprintPoints = extractLatLngFootprint(footprint);
+		buildFootprintBounds(footprintPoints);
+		drawFootprint(footprintPoints);
+
+	}
+
+	private void drawFootprint(ArrayList<LatLng> footprintPoints) {
 		if (footprintPoints.size() > 0) {
 			PolygonOptions rectOptions = new PolygonOptions();
 			rectOptions.addAll(footprintPoints);
@@ -347,14 +403,52 @@ public class MapSearchFragment extends SupportMapFragment implements
 			rectOptions.zIndex(1);
 			mMap.addPolygon(rectOptions);
 		}
-		buildFootprintBounds(footprintPoints);
-		//animateToBounds();
 	}
 
-	public void showQuicklookOnMap(String url, List<LatLng> footprintPoints) {
-		//showFootPrints(footprintPoints);
+	private ArrayList<LatLng> extractLatLngFootprint(Footprint footprint) {
+		List<Pos> footprintPosList = footprint.getMultiExtentOf()
+				.getMultiSurface().getSurfaceMembers().getPolygon()
+				.getExterior().getLinearRing().getPosList();
+		if (footprintPosList.isEmpty()) {
+			String posStr = footprint.getMultiExtentOf().getMultiSurface()
+					.getSurfaceMembers().getPolygon().getExterior()
+					.getLinearRing().getPosString().getPointsString();
+			footprintPosList = footprint.getMultiExtentOf().getMultiSurface()
+					.getSurfaceMembers().getPolygon().getExterior()
+					.getLinearRing().setPosList(posStr);
+		}
+
+		ArrayList<LatLng> footprintPoints = new ArrayList<LatLng>();
+		float prevBearing = 0;
+
+		for (int i = 0; i < footprintPosList.size() - 1; i++) {
+			double currLat = footprintPosList.get(i).getLatLng().latitude;
+			double currLng = footprintPosList.get(i).getLatLng().longitude;
+			double nextLat = footprintPosList.get(i + 1).getLatLng().latitude;
+			double nextLng = footprintPosList.get(i + 1).getLatLng().longitude;
+
+			float[] results = new float[3];
+
+			Location.distanceBetween(currLat, currLng, nextLat, nextLng,
+					results);
+
+			if (Math.abs(results[2] - prevBearing) >= BEARING_LEVEL_VALUE) {
+				footprintPoints.add(footprintPosList.get(i).getLatLng());
+			}
+			prevBearing = results[2];
+		}
+
+		return footprintPoints;
+	}
+
+	public void showQuicklookOnMap(String url, Footprint footprint) {
+
+		ArrayList<LatLng> footprintPoints = extractLatLngFootprint(footprint);
 
 		buildFootprintBounds(footprintPoints);
+
+		calcQuickLookParams(footprint, footprintPoints);
+		//drawFootprint(footprintPoints);
 
 		Target quicklookTarget = this;
 		Picasso.with(getActivity()).load(url).into(quicklookTarget);
@@ -369,11 +463,16 @@ public class MapSearchFragment extends SupportMapFragment implements
 	public void onBitmapLoaded(Bitmap bitmap, LoadedFrom arg1) {
 		BitmapDescriptor image = BitmapDescriptorFactory.fromBitmap(bitmap);
 
+		// GroundOverlayOptions groundOverlay = new GroundOverlayOptions()
+		// .image(image).positionFromBounds(targetBounds).zIndex(2)
+		// .transparency((float) 0.60);
+
 		GroundOverlayOptions groundOverlay = new GroundOverlayOptions()
-				.image(image).positionFromBounds(targetBounds).zIndex(2)
-				.transparency((float) 0.60);
+				.image(image).position(qLookCenter, qLookWidth, qLookHeight)
+				.bearing(qLookBearing).zIndex(2).transparency((float) 0.25);
+
 		mMap.addGroundOverlay(groundOverlay);
-		animateToBounds();
+		// animateToBounds();
 	}
 
 	@Override

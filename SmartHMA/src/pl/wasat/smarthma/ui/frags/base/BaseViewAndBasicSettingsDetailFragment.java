@@ -392,8 +392,8 @@ public class BaseViewAndBasicSettingsDetailFragment extends Fragment {
 	private static String setDtISO(Calendar cal) {
 		SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'",
 				Locale.UK);
-		String isoTime = df.format(cal.getTime());
-		return isoTime;
+        return df.format(cal.getTime());
+
 	}
 
 }

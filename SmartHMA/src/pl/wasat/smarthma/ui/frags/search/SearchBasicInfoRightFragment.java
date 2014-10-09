@@ -194,8 +194,6 @@ public class SearchBasicInfoRightFragment extends Fragment {
 
 		return rootView;
 	}
-	
-	
 
 	@Override
 	public void onResume() {
@@ -239,9 +237,6 @@ public class SearchBasicInfoRightFragment extends Fragment {
 		public void onSearchBasicInfoRightFragmentInteraction(Uri uri);
 	}
 
-	
-	
-	
 	private void updateSearchAreaBounds() {
 		String bboxWest = "";
 		String bboxSouth = "";
@@ -253,9 +248,18 @@ public class SearchBasicInfoRightFragment extends Fragment {
 		Criteria criteria = new Criteria();
 		criteria.setAccuracy(Criteria.ACCURACY_LOW);
 
-		Location location = locationManager
-				.getLastKnownLocation(locationManager.getBestProvider(criteria,
-						true));
+		Location location;
+
+		String bestProvider = locationManager.getBestProvider(criteria, true);
+
+		if (bestProvider == null || bestProvider.isEmpty()) {
+			bestProvider = "DummyProvider";
+			location = new Location(bestProvider);
+			location.setLatitude(0.0);
+			location.setLongitude(0.0);
+		} else {
+			location = locationManager.getLastKnownLocation(bestProvider);
+		}
 		if (location != null) {
 			bboxWest = String.format(Locale.UK, "% 4f",
 					(float) location.getLongitude() - 0.5);
@@ -265,28 +269,31 @@ public class SearchBasicInfoRightFragment extends Fragment {
 					(float) location.getLongitude() + 0.5);
 			bboxNorth = String.format(Locale.UK, "% 4f",
 					(float) location.getLatitude() + 0.5);
-
-			tvAreaSWLat.setText(bboxSouth);
-			tvAreaSWLon.setText(bboxWest);
-			tvAreaNELat.setText(bboxNorth);
-			tvAreaNELon.setText(bboxEast);
-
-			sharedPrefs.setBboxPrefs(bboxWest, bboxSouth, bboxEast, bboxNorth);
+		} else {
+			bboxWest = "0.0";
+			bboxSouth = "0.0";
+			bboxEast = "0.0";
+			bboxNorth = "0.0";
 		}
+
+		tvAreaSWLat.setText(bboxSouth);
+		tvAreaSWLon.setText(bboxWest);
+		tvAreaNELat.setText(bboxNorth);
+		tvAreaNELon.setText(bboxEast);
+
+		sharedPrefs.setBboxPrefs(bboxWest, bboxSouth, bboxEast, bboxNorth);
 
 		// setBboxPrefs();
 
 	}
 
-	
-	
 	/**
 	 * 
 	 */
 	private void setInitDateTime() {
 
 		calStart = Calendar.getInstance();
-		calStart.roll(Calendar.YEAR, -3);
+		calStart.roll(Calendar.MONTH, -1);
 		btnFromDate.setText(formatDate(calStart));
 		btnFromTime.setText(formatTime(calStart));
 
@@ -294,7 +301,7 @@ public class SearchBasicInfoRightFragment extends Fragment {
 		btnToDate.setText(formatDate(calEnd));
 		btnToTime.setText(formatTime(calEnd));
 
-		//setDateTimePrefs(getActivity());
+		// setDateTimePrefs(getActivity());
 		sharedPrefs.setDateTimePrefs(setDtISO(calStart), setDtISO(calEnd));
 	}
 
@@ -354,7 +361,7 @@ public class SearchBasicInfoRightFragment extends Fragment {
 				String dateToSet = formatDate(calEnd);
 				btnToDate.setText(dateToSet);
 			}
-			//setDateTimePrefs(getActivity());
+			// setDateTimePrefs(getActivity());
 			sharedPrefs.setDateTimePrefs(setDtISO(calStart), setDtISO(calEnd));
 
 		}
@@ -411,7 +418,7 @@ public class SearchBasicInfoRightFragment extends Fragment {
 				String timeToSet = formatTime(calEnd);
 				btnToTime.setText(timeToSet);
 			}
-			//setDateTimePrefs(getActivity());
+			// setDateTimePrefs(getActivity());
 			sharedPrefs.setDateTimePrefs(setDtISO(calStart), setDtISO(calEnd));
 		}
 	}
@@ -424,9 +431,11 @@ public class SearchBasicInfoRightFragment extends Fragment {
 					cataloguesList, new DialogInterface.OnClickListener() {
 						public void onClick(DialogInterface dialog, int which) {
 							tvCatalogName.setText(cataloguesList[which]);
-							
-							sharedPrefs.setParentIdPrefs(cataloguesList[which].toString());
-							//setParentIdPrefs(getActivity(),	cataloguesList[which].toString());
+
+							sharedPrefs.setParentIdPrefs(cataloguesList[which]
+									.toString());
+							// setParentIdPrefs(getActivity(),
+							// cataloguesList[which].toString());
 						}
 					});
 			return builder.create();

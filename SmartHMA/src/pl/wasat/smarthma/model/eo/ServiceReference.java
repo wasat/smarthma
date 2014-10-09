@@ -51,8 +51,8 @@ public class ServiceReference implements Serializable {
 		return _xmlns;
 	}
 
-	public void set_xmlns(String _xmlns) {
-		this._xmlns = _xmlns;
+	public void set_xmlns() {
+		this._xmlns = "xmlns";
 	}
 
 	public ServiceReference with_xmlns(String _xmlns) {

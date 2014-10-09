@@ -42,7 +42,7 @@ public class FeedSummaryBrowseFragment extends BaseFeedSummaryFragment {
 		request.setUrl(linkHref);
 
 		DataSeriesListFragment dataseriesListFragment = DataSeriesListFragment
-				.newInstance(request);
+				.newInstance(request, false);
 		getActivity()
 				.getSupportFragmentManager()
 				.beginTransaction()

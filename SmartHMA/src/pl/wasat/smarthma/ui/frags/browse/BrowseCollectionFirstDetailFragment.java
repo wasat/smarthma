@@ -1,7 +1,6 @@
 package pl.wasat.smarthma.ui.frags.browse;
 
 import pl.wasat.smarthma.R;
-import pl.wasat.smarthma.model.feed.Entry;
 import pl.wasat.smarthma.ui.frags.base.BaseViewAndBasicSettingsDetailFragment;
 import pl.wasat.smarthma.ui.frags.common.MapSearchFragment;
 import android.os.Bundle;
@@ -24,17 +23,10 @@ public class BrowseCollectionFirstDetailFragment extends
 	 * Use this factory method to create a new instance of this fragment using
 	 * the provided parameters.
 	 * 
-	 * @param collectionEntry
-	 *            Parameter 1.
 	 * @return A new instance of fragment BrowseCollectionFirstDetailFragment.
 	 */
-	public static BrowseCollectionFirstDetailFragment newInstance(
-			Entry collectionEntry) {
-		BrowseCollectionFirstDetailFragment fragment = new BrowseCollectionFirstDetailFragment();
-		Bundle args = new Bundle();
-		args.putSerializable(KEY_COLLECTION_ENTRY, collectionEntry);
-		fragment.setArguments(args);
-		return fragment;
+	public static BrowseCollectionFirstDetailFragment newInstance() {
+		return new BrowseCollectionFirstDetailFragment();
 	}
 
 	public BrowseCollectionFirstDetailFragment() {
