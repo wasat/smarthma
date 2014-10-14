@@ -5,7 +5,6 @@ import pl.wasat.smarthma.model.FedeoRequest;
 import pl.wasat.smarthma.model.feed.Entry;
 import pl.wasat.smarthma.model.feed.Feed;
 import pl.wasat.smarthma.ui.frags.base.BaseShowProductsListFragment;
-import pl.wasat.smarthma.ui.frags.browse.FeedSummaryBrowseFragment;
 import android.os.Bundle;
 
 /**
@@ -68,14 +67,14 @@ public class ProductsListFragment extends BaseShowProductsListFragment {
 	 */
 	@Override
 	public void loadSearchResultProductsIntroDetailsFrag(Feed searchProductFeeds) {
-		FeedSummaryBrowseFragment productsIntroFragment = FeedSummaryBrowseFragment
+		FeedSummaryProductsFragment productsIntroFragment = FeedSummaryProductsFragment
 				.newInstance(searchProductFeeds);
 		getActivity()
 				.getSupportFragmentManager()
 				.beginTransaction()
 				.add(R.id.activity_base_details_container,
-						productsIntroFragment, "BrowseProductsIntroFragment")
-				.addToBackStack("BrowseProductsIntroFragment").commit();
+						productsIntroFragment, "FeedSummaryProductsFragment")
+				.addToBackStack("FeedSummaryProductsFragment").commit();
 		super.loadSearchResultProductsIntroDetailsFrag(searchProductFeeds);
 	}
 

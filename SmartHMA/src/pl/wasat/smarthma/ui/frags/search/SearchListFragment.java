@@ -217,13 +217,13 @@ public class SearchListFragment extends BaseSpiceListFragment {
 	 * @param searchResultFeed
 	 */
 	private void showDataSeriesIntro(Feed searchResultFeed) {
-		FeedSummarySearchFragment feedSummarySearchFragment = FeedSummarySearchFragment
+		FeedSummarySearchCollectionFragment feedSummarySearchCollectionFragment = FeedSummarySearchCollectionFragment
 				.newInstance(searchResultFeed);
 		getActivity()
 				.getSupportFragmentManager()
 				.beginTransaction()
 				.replace(R.id.activity_base_details_container,
-						feedSummarySearchFragment, "FeedSummarySearchFragment")
+						feedSummarySearchCollectionFragment, "FeedSummarySearchFragment")
 				.addToBackStack("FeedSummarySearchFragment").commit();
 
 	}

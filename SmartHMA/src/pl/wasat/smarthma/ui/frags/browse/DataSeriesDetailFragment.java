@@ -2,7 +2,7 @@ package pl.wasat.smarthma.ui.frags.browse;
 
 import pl.wasat.smarthma.R;
 import pl.wasat.smarthma.model.feed.Entry;
-import pl.wasat.smarthma.ui.frags.common.MapSearchFragment;
+import pl.wasat.smarthma.ui.frags.common.AreaPickerMapFragment;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -145,10 +145,11 @@ public class DataSeriesDetailFragment extends Fragment {
 
 	private void loadSearchParameters(String title, String pubDate) {
 
-		MapSearchFragment mapSearchFragment = MapSearchFragment.newInstance(0);
+		AreaPickerMapFragment areaPickerMapFragment = AreaPickerMapFragment
+				.newInstance(0);
 		getActivity().getSupportFragmentManager().beginTransaction()
-				.replace(R.id.activity_base_details_container, mapSearchFragment)
-				.addToBackStack("MapSearchFragment").commit();
+				.replace(R.id.activity_base_details_container, areaPickerMapFragment)
+				.addToBackStack("AreaPickerMapFragment").commit();
 
 	}
 

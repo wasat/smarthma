@@ -7,11 +7,11 @@ import pl.wasat.smarthma.ui.frags.base.BaseFeedSummaryFragment;
 import android.os.Bundle;
 
 /**
- * A simple {@link android.support.v4.app.Fragment} subclass. Use the {@link FeedSummaryBrowseFragment#newInstance}
+ * A simple {@link android.support.v4.app.Fragment} subclass. Use the {@link FeedSummaryBrowseCollectionsFragment#newInstance}
  * factory method to create an instance of this fragment.
  * 
  */
-public class FeedSummaryBrowseFragment extends BaseFeedSummaryFragment {
+public class FeedSummaryBrowseCollectionsFragment extends BaseFeedSummaryFragment {
 
 	/**
 	 * Use this factory method to create a new instance of this fragment using
@@ -22,15 +22,15 @@ public class FeedSummaryBrowseFragment extends BaseFeedSummaryFragment {
 	 * @return A new instance of fragment FeedSummaryFragment.
 	 */
 	// TODO: Rename and change types and number of parameters
-	public static FeedSummaryBrowseFragment newInstance(Feed feedParam) {
-		FeedSummaryBrowseFragment fragment = new FeedSummaryBrowseFragment();
+	public static FeedSummaryBrowseCollectionsFragment newInstance(Feed feedParam) {
+		FeedSummaryBrowseCollectionsFragment fragment = new FeedSummaryBrowseCollectionsFragment();
 		Bundle args = new Bundle();
 		args.putSerializable(BaseFeedSummaryFragment.KEY_FEED_SUMMARY, feedParam);
 		fragment.setArguments(args);
 		return fragment;
 	}
 
-	public FeedSummaryBrowseFragment() {
+	public FeedSummaryBrowseCollectionsFragment() {
 		// Required empty public constructor
 	}
 	/* (non-Javadoc)

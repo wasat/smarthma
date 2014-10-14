@@ -165,12 +165,12 @@ public class ProductDetailsFragment extends Fragment {
 	 * 
 	 */
 	public void loadMetadataFrag() {
-		MetadataFragment mapSearchFragment = MetadataFragment
+		MetadataFragment metadataFragment = MetadataFragment
 				.newInstance(displayedEntry);
 		getActivity()
 				.getSupportFragmentManager()
 				.beginTransaction()
-				.replace(R.id.activity_base_details_container, mapSearchFragment,
+				.replace(R.id.activity_base_details_container, metadataFragment,
 						"MetadataFragment").addToBackStack("MetadataFragment")
 				.commit();
 	}

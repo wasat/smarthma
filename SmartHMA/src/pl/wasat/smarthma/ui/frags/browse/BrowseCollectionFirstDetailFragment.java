@@ -2,7 +2,7 @@ package pl.wasat.smarthma.ui.frags.browse;
 
 import pl.wasat.smarthma.R;
 import pl.wasat.smarthma.ui.frags.base.BaseViewAndBasicSettingsDetailFragment;
-import pl.wasat.smarthma.ui.frags.common.MapSearchFragment;
+import pl.wasat.smarthma.ui.frags.common.AreaPickerMapFragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -44,12 +44,13 @@ public class BrowseCollectionFirstDetailFragment extends
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		super.onCreateView(inflater, container, savedInstanceState);
-		MapSearchFragment mapSearchFragment = MapSearchFragment.newInstance(0);
+		AreaPickerMapFragment areaPickerMapFragment = AreaPickerMapFragment
+				.newInstance(0);
 		getActivity()
 				.getSupportFragmentManager()
 				.beginTransaction()
 				.replace(R.id.frag_search_res_coll_det_layout_top,
-						mapSearchFragment).addToBackStack("MapSearchFragment")
+						areaPickerMapFragment).addToBackStack("AreaPickerMapFragment")
 				.commit();
 
 		btnShowProducts.setVisibility(View.INVISIBLE);

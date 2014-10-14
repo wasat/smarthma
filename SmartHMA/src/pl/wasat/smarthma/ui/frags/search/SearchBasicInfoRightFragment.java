@@ -8,16 +8,14 @@ import pl.wasat.smarthma.R;
 import pl.wasat.smarthma.customviews.SmHmaTimePickerDialog;
 import pl.wasat.smarthma.customviews.TimePicker;
 import pl.wasat.smarthma.preferences.SharedPrefs;
-import pl.wasat.smarthma.ui.frags.common.MapSearchFragment;
+import pl.wasat.smarthma.ui.frags.common.AreaPickerMapFragment;
+import pl.wasat.smarthma.utils.loc.LocManager;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
-import android.content.Context;
 import android.content.DialogInterface;
-import android.location.Criteria;
 import android.location.Location;
-import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
@@ -132,14 +130,14 @@ public class SearchBasicInfoRightFragment extends Fragment {
 		areaLayout.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				MapSearchFragment mapSearchFragment = MapSearchFragment
+				AreaPickerMapFragment areaPickerMapFragment = AreaPickerMapFragment
 						.newInstance(0);
 				getActivity()
 						.getSupportFragmentManager()
 						.beginTransaction()
 						.replace(R.id.activity_base_details_container,
-								mapSearchFragment)
-						.addToBackStack("MapSearchFragment").commit();
+								areaPickerMapFragment)
+						.addToBackStack("AreaPickerMapFragment").commit();
 
 			}
 		});
@@ -243,23 +241,9 @@ public class SearchBasicInfoRightFragment extends Fragment {
 		String bboxEast = "";
 		String bboxNorth = "";
 
-		LocationManager locationManager = (LocationManager) getActivity()
-				.getSystemService(Context.LOCATION_SERVICE);
-		Criteria criteria = new Criteria();
-		criteria.setAccuracy(Criteria.ACCURACY_LOW);
-
-		Location location;
-
-		String bestProvider = locationManager.getBestProvider(criteria, true);
-
-		if (bestProvider == null || bestProvider.isEmpty()) {
-			bestProvider = "DummyProvider";
-			location = new Location(bestProvider);
-			location.setLatitude(0.0);
-			location.setLongitude(0.0);
-		} else {
-			location = locationManager.getLastKnownLocation(bestProvider);
-		}
+		LocManager locManager = new LocManager(getActivity());
+		Location location = locManager.getAvailableLocation();
+		
 		if (location != null) {
 			bboxWest = String.format(Locale.UK, "% 4f",
 					(float) location.getLongitude() - 0.5);
@@ -286,6 +270,8 @@ public class SearchBasicInfoRightFragment extends Fragment {
 		// setBboxPrefs();
 
 	}
+
+
 
 	/**
 	 * 

@@ -211,14 +211,14 @@ public class DataSeriesListFragment extends BaseSpiceListFragment {
 	 * 
 	 */
 	private void loadIntroFeedInfo(Feed dataSeriesFeeds) {
-		FeedSummaryBrowseFragment feedSummaryBrowseFragment = (FeedSummaryBrowseFragment) FeedSummaryBrowseFragment
+		FeedSummaryBrowseCollectionsFragment feedSummaryBrowseCollectionsFragment = (FeedSummaryBrowseCollectionsFragment) FeedSummaryBrowseCollectionsFragment
 				.newInstance(dataSeriesFeeds);
 		getActivity()
 				.getSupportFragmentManager()
 				.beginTransaction()
 				.replace(R.id.activity_base_details_container,
-						feedSummaryBrowseFragment)
-				.addToBackStack("FeedSummaryBrowseFragment").commit();
+						feedSummaryBrowseCollectionsFragment)
+				.addToBackStack("FeedSummaryBrowseCollectionsFragment").commit();
 
 	}
 

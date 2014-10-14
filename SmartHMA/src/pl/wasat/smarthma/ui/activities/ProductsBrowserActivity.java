@@ -2,14 +2,14 @@ package pl.wasat.smarthma.ui.activities;
 
 import java.util.ArrayList;
 
+import pl.wasat.smarthma.ExtendedMapFragment;
+import pl.wasat.smarthma.ExtendedMapFragment.OnExtendedMapFragmentListener;
 import pl.wasat.smarthma.R;
 import pl.wasat.smarthma.helper.Const;
 import pl.wasat.smarthma.model.FedeoRequest;
 import pl.wasat.smarthma.model.eo.Footprint;
 import pl.wasat.smarthma.preferences.SharedPrefs;
 import pl.wasat.smarthma.ui.frags.base.BaseShowProductsListFragment.OnBaseShowProductsListFragmentListener;
-import pl.wasat.smarthma.ui.frags.common.MapSearchFragment;
-import pl.wasat.smarthma.ui.frags.common.MapSearchFragment.OnMapSearchFragmentListener;
 import pl.wasat.smarthma.ui.frags.common.MetadataFragment.OnMetadataFragmentListener;
 import pl.wasat.smarthma.ui.frags.common.ProductDetailsFragment.OnProductDetailsFragmentListener;
 import pl.wasat.smarthma.ui.frags.common.ProductsListFragment;
@@ -18,13 +18,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 
-import com.google.android.gms.maps.model.LatLngBounds;
-
 public class ProductsBrowserActivity extends BaseSmartHMActivity implements
-		OnProductDetailsFragmentListener, OnMetadataFragmentListener,
-		OnMapSearchFragmentListener, OnBaseShowProductsListFragmentListener {
+		OnProductDetailsFragmentListener, OnMetadataFragmentListener, OnExtendedMapFragmentListener,
+		OnBaseShowProductsListFragmentListener {
 
-	MapSearchFragment mapSearchFragment;
+	ExtendedMapFragment extendedMapFragment;
 	private Footprint mFootprint;
 	private String quicklookUrl;
 	private static int QUICKLOOK_MAP_MODE = 1;
@@ -61,7 +59,7 @@ public class ProductsBrowserActivity extends BaseSmartHMActivity implements
 			if (bstEntry.equalsIgnoreCase("MetadataFragment")) {
 				fm.popBackStackImmediate("MetadataFragment",
 						FragmentManager.POP_BACK_STACK_INCLUSIVE);
-			} else if (bstEntry.equalsIgnoreCase("MapSearchFragment")) {
+			} else if (bstEntry.equalsIgnoreCase("ExtendedMapFragment")) {
 				//fm.popBackStackImmediate();
 				super.onBackPressed();
 			}
@@ -85,9 +83,9 @@ public class ProductsBrowserActivity extends BaseSmartHMActivity implements
 
 	private void checkMapFragment() {
 		try {
-			if (mapSearchFragment != null) {
+			if (extendedMapFragment != null) {
 				getSupportFragmentManager().beginTransaction()
-						.remove(mapSearchFragment).commit();
+						.remove(extendedMapFragment).commit();
 			}
 
 		} catch (IllegalStateException e) {
@@ -97,13 +95,6 @@ public class ProductsBrowserActivity extends BaseSmartHMActivity implements
 	@Override
 	public void onMetadataFragmentInteraction() {
 		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void onMapSearchFragmentBoundsChange(LatLngBounds bounds) {
-		// TODO Auto-generated method stub
-
 	}
 
 	@Override
@@ -113,15 +104,14 @@ public class ProductsBrowserActivity extends BaseSmartHMActivity implements
 		mFootprint = footprint;
 
 		checkMapFragment();
-
-		// mapSearchFragment = MapSearchFragment.newInstance(0);
-		mapSearchFragment = MapSearchFragment.newInstance(QUICKLOOK_MAP_MODE);
+		
+		extendedMapFragment = ExtendedMapFragment.newInstance();
 
 		getSupportFragmentManager()
 				.beginTransaction()
 				.add(R.id.activity_base_details_container,
-						mapSearchFragment, "MapSearchFragment")
-				.addToBackStack("MapSearchFragment").commit();
+						extendedMapFragment, "ExtendedMapFragment")
+				.addToBackStack("ExtendedMapFragment").commit();
 
 	}
 
@@ -131,26 +121,25 @@ public class ProductsBrowserActivity extends BaseSmartHMActivity implements
 
 		checkMapFragment();
 
-		// mapSearchFragment = MapSearchFragment.newInstance(0);
-		mapSearchFragment = MapSearchFragment.newInstance(FOOTPRINT_MAP_MODE);
+		extendedMapFragment = ExtendedMapFragment.newInstance();
 
 		getSupportFragmentManager()
 				.beginTransaction()
-				.add(R.id.activity_base_details_container, mapSearchFragment,
-						"MapSearchFragment")
-				.addToBackStack("MapSearchFragment").commit();
+				.add(R.id.activity_base_details_container, extendedMapFragment,
+						"ExtendedMapFragment")
+				.addToBackStack("ExtendedMapFragment").commit();
 	}
 
 	@Override
 	public void onMapReady(int mapMode) {
-		if (mapSearchFragment != null) {
+		if (extendedMapFragment != null) {
 			switch (mapMode) {
 			case 1:
-				mapSearchFragment.showQuicklookOnMap(quicklookUrl,
+				extendedMapFragment.showQuicklookOnMap(quicklookUrl,
 						mFootprint);
 				break;
 			case 2:
-				mapSearchFragment.showFootPrints(mFootprint);
+				extendedMapFragment.showFootPrints(mFootprint);
 				break;
 			default:
 				break;

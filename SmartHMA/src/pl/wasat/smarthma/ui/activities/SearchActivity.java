@@ -1,7 +1,7 @@
 package pl.wasat.smarthma.ui.activities;
 
 import pl.wasat.smarthma.R;
-import pl.wasat.smarthma.ui.frags.common.MapSearchFragment.OnMapSearchFragmentListener;
+import pl.wasat.smarthma.ui.frags.common.AreaPickerMapFragment.OnAreaPickerMapFragmentListener;
 import pl.wasat.smarthma.ui.frags.search.SearchBasicInfoRightFragment;
 import pl.wasat.smarthma.ui.frags.search.SearchBasicInfoRightFragment.OnSearchBasicInfoRightFragmentListener;
 import pl.wasat.smarthma.ui.frags.search.SearchFragment;
@@ -19,7 +19,7 @@ import com.google.android.gms.maps.model.LatLngBounds;
 
 public class SearchActivity extends BaseSmartHMActivity implements
 		OnSearchBasicInfoRightFragmentListener, OnSearchFragmentListener,
-		OnMapSearchFragmentListener {
+		OnAreaPickerMapFragmentListener {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -155,12 +155,12 @@ public class SearchActivity extends BaseSmartHMActivity implements
 	 * (non-Javadoc)
 	 * 
 	 * @see
-	 * pl.wasat.smarthma.ui.frags.MapSearchFragment.OnMapSearchFragmentListener
-	 * #onMapSearchFragmentBoundsChange
+	 * pl.wasat.smarthma.ui.frags.MapFragment.OnMapFragmentListener
+	 * #onMapFragmentBoundsChange
 	 * (com.google.android.gms.maps.model.LatLngBounds)
 	 */
 	@Override
-	public void onMapSearchFragmentBoundsChange(LatLngBounds bounds) {
+	public void onMapFragmentBoundsChange(LatLngBounds bounds) {
 
 		SearchBasicInfoRightFragment searchBasicInfoRightFragment = (SearchBasicInfoRightFragment) getSupportFragmentManager()
 				.findFragmentByTag("SearchBasicInfoRightFragment");
@@ -173,10 +173,5 @@ public class SearchActivity extends BaseSmartHMActivity implements
 
 	}
 
-	@Override
-	public void onMapReady(int mapMode) {
-		// TODO Auto-generated method stub
-
-	}
 
 }
