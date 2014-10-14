@@ -9,7 +9,7 @@ import pl.wasat.smarthma.customviews.SmHmaTimePickerDialog;
 import pl.wasat.smarthma.customviews.TimePicker;
 import pl.wasat.smarthma.model.feed.Entry;
 import pl.wasat.smarthma.preferences.SharedPrefs;
-import pl.wasat.smarthma.ui.frags.common.MapSearchFragment;
+import pl.wasat.smarthma.ui.frags.common.AreaPickerMapFragment;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.os.Bundle;
@@ -144,14 +144,14 @@ public class BaseViewAndBasicSettingsDetailFragment extends Fragment {
 		areaLayout.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				MapSearchFragment mapSearchFragment = MapSearchFragment
+				AreaPickerMapFragment areaPickerMapFragment = AreaPickerMapFragment
 						.newInstance(0);
 				getActivity()
 						.getSupportFragmentManager()
 						.beginTransaction()
 						.replace(R.id.frag_search_res_coll_det_layout_top,
-								mapSearchFragment)
-						.addToBackStack("MapSearchFragment").commit();
+								areaPickerMapFragment)
+						.addToBackStack("AreaPickerMapFragment").commit();
 
 			}
 		});

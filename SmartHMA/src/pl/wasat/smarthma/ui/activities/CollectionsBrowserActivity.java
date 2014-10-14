@@ -12,9 +12,9 @@ import pl.wasat.smarthma.ui.frags.browse.DataSeriesDetailFragment;
 import pl.wasat.smarthma.ui.frags.browse.DataSeriesDetailFragment.OnDataSeriesDetailFragmentInteractionListener;
 import pl.wasat.smarthma.ui.frags.browse.DataSeriesListFragment;
 import pl.wasat.smarthma.ui.frags.browse.DataSeriesListFragment.OnDataSeriesListFragmentListener;
+import pl.wasat.smarthma.ui.frags.common.AreaPickerMapFragment.OnAreaPickerMapFragmentListener;
 import pl.wasat.smarthma.ui.frags.common.CollectionDetailsFragment;
 import pl.wasat.smarthma.ui.frags.common.CollectionDetailsFragment.OnCollectionDetailsFragmentListener;
-import pl.wasat.smarthma.ui.frags.common.MapSearchFragment.OnMapSearchFragmentListener;
 import pl.wasat.smarthma.ui.frags.common.MetadataFragment.OnMetadataFragmentListener;
 import pl.wasat.smarthma.ui.frags.search.SearchListFragment.OnSearchListFragmentListener;
 import android.content.Intent;
@@ -26,7 +26,7 @@ import com.google.android.gms.maps.model.LatLngBounds;
 public class CollectionsBrowserActivity extends BaseSmartHMActivity implements
 		OnDataSeriesListFragmentListener,
 		OnDataSeriesDetailFragmentInteractionListener,
-		OnMapSearchFragmentListener, OnSearchListFragmentListener,
+		OnAreaPickerMapFragmentListener, OnSearchListFragmentListener,
 		OnMetadataFragmentListener,
 		OnCollectionDetailsFragmentListener {
 
@@ -187,13 +187,13 @@ public class CollectionsBrowserActivity extends BaseSmartHMActivity implements
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see pl.wasat.smarthma.ui.fragments.MapSearchFragment.
-	 * OnMapSearchFragmentInteractionListener
-	 * #onMapSearchFragmentBoundsChange(com
+	 * @see pl.wasat.smarthma.ui.fragments.BaseMapFragment.
+	 * OnMapFragmentInteractionListener
+	 * #onMapFragmentBoundsChange(com
 	 * .google.android.gms.maps.model.LatLngBounds)
 	 */
 	@Override
-	public void onMapSearchFragmentBoundsChange(LatLngBounds bounds) {
+	public void onMapFragmentBoundsChange(LatLngBounds bounds) {
 
 		CollectionDetailsFragment collectionDetailsFragment = (CollectionDetailsFragment) getSupportFragmentManager()
 				.findFragmentByTag("CollectionDetailsFragment");
@@ -237,12 +237,6 @@ public class CollectionsBrowserActivity extends BaseSmartHMActivity implements
 	public void onMetadataFragmentInteraction() {
 		// TODO Auto-generated method stub
 
-	}
-
-	@Override
-	public void onMapReady(int mapMode) {
-		// TODO Auto-generated method stub
-		
 	}
 
 }

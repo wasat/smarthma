@@ -2,6 +2,7 @@ package pl.wasat.smarthma.ui.activities;
 
 import java.util.ArrayList;
 
+import pl.wasat.smarthma.ExtendedMapFragment;
 import pl.wasat.smarthma.R;
 import pl.wasat.smarthma.adapter.SearchListAdapter;
 import pl.wasat.smarthma.database.EoDbAdapter;
@@ -11,10 +12,9 @@ import pl.wasat.smarthma.model.eo.Footprint;
 import pl.wasat.smarthma.model.feed.Entry;
 import pl.wasat.smarthma.preferences.SharedPrefs;
 import pl.wasat.smarthma.ui.frags.base.BaseShowProductsListFragment.OnBaseShowProductsListFragmentListener;
+import pl.wasat.smarthma.ui.frags.common.AreaPickerMapFragment.OnAreaPickerMapFragmentListener;
 import pl.wasat.smarthma.ui.frags.common.CollectionDetailsFragment;
 import pl.wasat.smarthma.ui.frags.common.CollectionDetailsFragment.OnCollectionDetailsFragmentListener;
-import pl.wasat.smarthma.ui.frags.common.MapSearchFragment;
-import pl.wasat.smarthma.ui.frags.common.MapSearchFragment.OnMapSearchFragmentListener;
 import pl.wasat.smarthma.ui.frags.common.MetadataFragment.OnMetadataFragmentListener;
 import pl.wasat.smarthma.ui.frags.search.SearchListFragment;
 import pl.wasat.smarthma.ui.frags.search.SearchListFragment.OnSearchListFragmentListener;
@@ -28,7 +28,7 @@ import com.google.android.gms.maps.model.LatLngBounds;
 
 public class SearchCollectionResultsActivity extends BaseSmartHMActivity
 		implements OnSearchListFragmentListener,
-		OnBaseShowProductsListFragmentListener, OnMapSearchFragmentListener,
+		OnBaseShowProductsListFragmentListener, OnAreaPickerMapFragmentListener,
 		OnMetadataFragmentListener, OnCollectionDetailsFragmentListener {
 
 	private EoDbAdapter dba;
@@ -151,7 +151,7 @@ public class SearchCollectionResultsActivity extends BaseSmartHMActivity
 	}
 
 	@Override
-	public void onMapSearchFragmentBoundsChange(LatLngBounds bounds) {
+	public void onMapFragmentBoundsChange(LatLngBounds bounds) {
 
 		CollectionDetailsFragment searchResultCollectionDetailsFragment = (CollectionDetailsFragment) getSupportFragmentManager()
 				.findFragmentByTag("SearchResultCollectionDetailsFragment");
@@ -196,11 +196,11 @@ public class SearchCollectionResultsActivity extends BaseSmartHMActivity
 	@Override
 	public void onBaseShowProductsListFragmentFootprintSend(
 			ArrayList<Footprint> footPrints) {
-		MapSearchFragment mapSearchFragment = (MapSearchFragment) getSupportFragmentManager()
-				.findFragmentByTag("MapSearchFragment");
+		ExtendedMapFragment extendedMapFragment = (ExtendedMapFragment) getSupportFragmentManager()
+				.findFragmentByTag("ExtendedMapFragment");
 
-		if (mapSearchFragment != null) {
-			mapSearchFragment.showFootPrints(null);
+		if (extendedMapFragment != null) {
+			extendedMapFragment.showFootPrints(null);
 		}
 
 	}
@@ -211,14 +211,7 @@ public class SearchCollectionResultsActivity extends BaseSmartHMActivity
 				ProductsBrowserActivity.class);
 		showProductsIntent.putExtra(Const.KEY_INTENT_PARENT_ID, parentID);
 		startActivityForResult(showProductsIntent, REQUEST_NEW_SEARCH);
-		// startActivity(showProductsIntent);
-
 	}
 
-	@Override
-	public void onMapReady(int mapMode) {
-		// TODO Auto-generated method stub
-
-	}
 
 }

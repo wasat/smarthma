@@ -3,11 +3,11 @@ package pl.wasat.smarthma.ui.activities;
 import pl.wasat.smarthma.R;
 import pl.wasat.smarthma.helper.Const;
 import pl.wasat.smarthma.interfaces.OnCollectionsListSelectionListener;
+import pl.wasat.smarthma.ui.frags.base.BaseMapFragment;
 import pl.wasat.smarthma.ui.frags.browse.BrowseCollectionFirstDetailFragment;
 import pl.wasat.smarthma.ui.frags.browse.CollectionsGroupListFragment;
 import pl.wasat.smarthma.ui.frags.browse.CollectionsListFragment.OnCollectionsListFragmentListener;
-import pl.wasat.smarthma.ui.frags.common.MapSearchFragment;
-import pl.wasat.smarthma.ui.frags.common.MapSearchFragment.OnMapSearchFragmentListener;
+import pl.wasat.smarthma.ui.frags.common.AreaPickerMapFragment.OnAreaPickerMapFragmentListener;
 import roboguice.util.temp.Ln;
 import android.app.ProgressDialog;
 import android.app.SearchManager;
@@ -32,7 +32,7 @@ import com.google.android.gms.maps.model.LatLngBounds;
 
 public class CollectionsDefinitionActivity extends BaseSmartHMActivity
 		implements OnCollectionsListSelectionListener,
-		OnCollectionsListFragmentListener, OnMapSearchFragmentListener {
+		OnCollectionsListFragmentListener, OnAreaPickerMapFragmentListener {
 
 	private ProgressDialog initSpinner;
 	private ProgressBar progressBarWmsLoad;
@@ -192,7 +192,7 @@ public class CollectionsDefinitionActivity extends BaseSmartHMActivity
 			return;
 		}
 
-		MapSearchFragment newGisFrag = new MapSearchFragment();
+		BaseMapFragment newGisFrag = new BaseMapFragment();
 		Bundle args = new Bundle();
 
 		newGisFrag.setArguments(args);
@@ -284,7 +284,7 @@ public class CollectionsDefinitionActivity extends BaseSmartHMActivity
 	}
 
 	@Override
-	public void onMapSearchFragmentBoundsChange(LatLngBounds bounds) {
+	public void onMapFragmentBoundsChange(LatLngBounds bounds) {
 		BrowseCollectionFirstDetailFragment browseCollectionFirstDetailFragment = (BrowseCollectionFirstDetailFragment) getSupportFragmentManager()
 				.findFragmentByTag("BrowseCollectionFirstDetailFragment");
 
@@ -293,12 +293,6 @@ public class CollectionsDefinitionActivity extends BaseSmartHMActivity
 			// Call a method in the ArticleFragment to update its content
 			browseCollectionFirstDetailFragment.updateAreaBounds(bounds);
 		}
-	}
-
-	@Override
-	public void onMapReady(int mapMode) {
-		// TODO Auto-generated method stub
-
 	}
 
 	@Override

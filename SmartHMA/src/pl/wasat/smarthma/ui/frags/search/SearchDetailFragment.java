@@ -3,7 +3,7 @@ package pl.wasat.smarthma.ui.frags.search;
 import pl.wasat.smarthma.R;
 import pl.wasat.smarthma.model.feed.Entry;
 import pl.wasat.smarthma.model.feed.Link;
-import pl.wasat.smarthma.ui.frags.common.MapSearchFragment;
+import pl.wasat.smarthma.ui.frags.common.AreaPickerMapFragment;
 import android.app.Activity;
 import android.net.Uri;
 import android.os.Bundle;
@@ -107,14 +107,14 @@ public class SearchDetailFragment extends Fragment {
 			showMapButton.setOnClickListener(new OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					MapSearchFragment mapSearchFragment = MapSearchFragment
+					AreaPickerMapFragment areaPickerMapFragment = AreaPickerMapFragment
 							.newInstance(0);
 					getActivity()
 							.getSupportFragmentManager()
 							.beginTransaction()
 							.replace(R.id.activity_base_details_container,
-									mapSearchFragment)
-							.addToBackStack("MapSearchFragment").commit();
+									areaPickerMapFragment)
+							.addToBackStack("AreaPickerMapFragment").commit();
 
 				}
 			});
@@ -178,13 +178,14 @@ public class SearchDetailFragment extends Fragment {
 
 	private void loadSearchParameters(String title, String pubDate) {
 
-		MapSearchFragment mapSearchFragment = MapSearchFragment.newInstance(0);
+		AreaPickerMapFragment areaPickerMapFragment = AreaPickerMapFragment
+				.newInstance(0);
 		getActivity()
 				.getSupportFragmentManager()
 				.beginTransaction()
 				.replace(R.id.activity_base_details_container,
-						mapSearchFragment, "MapSearchFragment")
-				.addToBackStack("MapSearchFragment").commit();
+						areaPickerMapFragment, "AreaPickerMapFragment")
+				.addToBackStack("AreaPickerMapFragment").commit();
 
 	}
 
