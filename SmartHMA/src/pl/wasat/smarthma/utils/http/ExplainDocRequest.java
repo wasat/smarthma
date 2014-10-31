@@ -21,7 +21,7 @@ public class ExplainDocRequest extends GoogleHttpClientSpiceRequest<String> {
 	public String loadDataFromNetwork() throws Exception {
 		HttpRequest request = getHttpRequestFactory()
 				.buildGetRequest(
-						new GenericUrl(Const.URL_EXPLAIN_DOC));
+						new GenericUrl(Const.HTTP_FEDEO_BASE_URL));
 		HttpResponse response = request.execute();
 		
 		InputStream in = null;

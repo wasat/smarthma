@@ -1,8 +1,9 @@
-package pl.wasat.smarthma;
+package pl.wasat.smarthma.ui.frags.common;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import pl.wasat.smarthma.R;
 import pl.wasat.smarthma.model.eo.Footprint;
 import pl.wasat.smarthma.model.eo.Pos;
 import pl.wasat.smarthma.ui.frags.base.BaseMapFragment;
@@ -147,7 +148,7 @@ public class ExtendedMapFragment extends Fragment implements
 	 * >Communicating with Other Fragments</a> for more information.
 	 */
 	public interface OnExtendedMapFragmentListener {
-		public void onMapReady(int mapMode);
+		public void onMapReady();
 	}
 
 	private void buildFootprintBounds(List<LatLng> footprintPoints) {
@@ -254,7 +255,7 @@ public class ExtendedMapFragment extends Fragment implements
 	public void onBaseSupportMapReady() {
 		mMap = baseMapFragment.getMap();
 		if (mListener != null) {
-			mListener.onMapReady(1);
+			mListener.onMapReady();
 		}
 
 	}

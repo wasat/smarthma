@@ -89,7 +89,7 @@
                 android:layout_height="40dp"
                 android:layout_gravity="center"
                 android:enabled="false"
-                android:text="@string/download" />
+                android:text="@string/Share" />
         </LinearLayout>
     </LinearLayout>
 

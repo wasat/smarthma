@@ -38,7 +38,7 @@ public class RecursiveToSrtingStyle extends ToStringStyle {
     
     
     @Override
-    protected void appendDetail(StringBuffer buffer, String fieldName, Map map) {
+    protected void appendDetail(StringBuffer buffer, String fieldName, @SuppressWarnings("rawtypes") Map map) {
         //super.appendDetail(buffer, fieldName, map);
     	buffer.append(getArrayStart());
         int count = 0;
@@ -57,7 +57,7 @@ public class RecursiveToSrtingStyle extends ToStringStyle {
     }
 
 	@Override
-    protected void appendDetail(StringBuffer buffer, String fieldName, Collection coll) {
+    protected void appendDetail(StringBuffer buffer, String fieldName, @SuppressWarnings("rawtypes") Collection coll) {
         appendContentStart(buffer);
         int count = 0;
         for(Object o : coll){

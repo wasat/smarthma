@@ -27,8 +27,8 @@
     <string name="nothing_to_display_please_search_again_">Nothing to display. Please search again.</string>
     <string name="search_product">Search Product</string>
     <string name="show_metadata">Metadata</string>
-    <string name="show_map">Footprint</string>
-    <string name="download">Download</string>
+    <string name="show_map">Show Map</string>
+    <string name="Share">Share</string>
     <string name="products_search_area">Products search area</string>
     <string name="sw_">SW: </string>
     <string name="ne_">NE: </string>
@@ -83,5 +83,16 @@
     <string name="activity_name_search_eo_data">Search EO Data</string>
     <string name="activity_name_search_collections_results">Searched Collections</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="actionbar_share">Share</string>
+    <string name="app_id">825236790862337</string>
+    <string name="cancelled">Cancelled</string>
+    <string name="permission_not_granted">Unable to perform selected action because permissions were not granted.</string>
+    <string name="ok">OK</string>
+    <string name="success">Success</string>
+    <string name="successfully_posted_post">Successfully posted on facebook \'%1$s\'.\nwith fb ID: %2$s</string>
+    <string name="error">Error</string>
+    <string name="hello_user">You are logged as\n%1$s</string>
+    <string name="share_quicklook">Share Quicklook</string>
+    <string name="quicklook_img_desc">Quicklook Image</string>
 
 </resources>

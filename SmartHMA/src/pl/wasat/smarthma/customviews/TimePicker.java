@@ -278,6 +278,7 @@ public class TimePicker extends FrameLayout {
 			dest.writeInt(mMinute);
 		}
 
+		@SuppressWarnings("unused")
 		public static final Parcelable.Creator<SavedState> CREATOR = new Creator<SavedState>() {
 			public SavedState createFromParcel(Parcel in) {
 				return new SavedState(in);

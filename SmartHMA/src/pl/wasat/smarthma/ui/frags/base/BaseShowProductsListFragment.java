@@ -101,6 +101,10 @@ public class BaseShowProductsListFragment extends BaseSpiceFragment {
 		entryImagesListView = (ListView) getView().findViewById(
 				R.id.listview_collections_group);
 		loadingView = getView().findViewById(R.id.loading_layout);
+		
+		if (fedeoRequest != null) {
+			loadSearchProductsFeedResponse(fedeoRequest);
+		}
 
 	}
 
@@ -125,9 +129,9 @@ public class BaseShowProductsListFragment extends BaseSpiceFragment {
 	public void onStart() {
 		super.onStart();
 		// TODO: Find solution - why fragment is called twice
-		if (fedeoRequest != null) {
-			loadSearchProductsFeedResponse(fedeoRequest);
-		}
+		//if (fedeoRequest != null) {
+		//	loadSearchProductsFeedResponse(fedeoRequest);
+		//}
 	}
 
 	@Override

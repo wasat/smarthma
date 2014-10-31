@@ -3,12 +3,21 @@ package pl.wasat.smarthma.ui.frags.common;
 import java.util.Iterator;
 import java.util.List;
 
+import com.squareup.picasso.Picasso.LoadedFrom;
+import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Target;
+
 import pl.wasat.smarthma.R;
 import pl.wasat.smarthma.model.eo.Browse;
 import pl.wasat.smarthma.model.eo.Footprint;
 import pl.wasat.smarthma.model.feed.Entry;
 import android.app.Activity;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore.Images;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -30,7 +39,7 @@ import android.widget.Toast;
  * factory method to create an instance of this fragment.
  * 
  */
-public class ProductDetailsFragment extends Fragment {
+public class ProductDetailsFragment extends Fragment implements Target {
 	private static final String KEY_PRODUCT_ENTRY = "pl.wasat.smarthma.KEY_PRODUCT_ENTRY";
 
 	protected Entry displayedEntry;
@@ -54,7 +63,6 @@ public class ProductDetailsFragment extends Fragment {
 	}
 
 	public ProductDetailsFragment() {
-		// Required empty public constructor
 	}
 
 	@Override
@@ -70,6 +78,8 @@ public class ProductDetailsFragment extends Fragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		// Inflate the layout for this fragment
+
+		setHasOptionsMenu(true);
 		View rootView = inflater.inflate(R.layout.fragment_product_details,
 				container, false);
 
@@ -93,7 +103,7 @@ public class ProductDetailsFragment extends Fragment {
 			quicklookButton.setOnClickListener(new OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					showQuickLook();
+					showQuicklookGallery();
 				}
 			});
 
@@ -111,7 +121,16 @@ public class ProductDetailsFragment extends Fragment {
 			showMapButton.setOnClickListener(new OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					loadFootprint();
+					showExtendedMap();
+				}
+			});
+
+			Button shareQLookButton = (Button) rootView
+					.findViewById(R.id.product_frag_detail_button_share);
+			shareQLookButton.setOnClickListener(new OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					openShareDialog();
 				}
 			});
 		}
@@ -128,8 +147,6 @@ public class ProductDetailsFragment extends Fragment {
 					+ " must implement OnProductDetailsFragmentListener");
 		}
 	}
-	
-	
 
 	@Override
 	public void onDestroyView() {
@@ -156,9 +173,40 @@ public class ProductDetailsFragment extends Fragment {
 					"This metadata has been saved offline.", Toast.LENGTH_LONG)
 					.show();
 			return true;
+		} else if (id == R.id.actionbar_share) {
+			startQLookTarget();
+			// sendIntentShareUrl();
+			return true;
 		} else {
 			return super.onOptionsItemSelected(item);
 		}
+	}
+
+	private void startQLookTarget() {
+		Target quicklookTarget = this;
+		Picasso.with(getActivity()).load(getQuicklookUrl())
+				.into(quicklookTarget);
+	}
+
+	private void sendIntentShareUrl() {
+		Intent shareIntent = new Intent(Intent.ACTION_SEND);
+		shareIntent.setType("text/plain");
+		shareIntent.putExtra(Intent.EXTRA_TEXT, getQuicklookUrl());
+		startActivity(Intent.createChooser(shareIntent, "Share Quicklook"));
+	}
+
+	private void sendIntentShareImg(Bitmap bitmapImg) {
+		String path = Images.Media.insertImage(getActivity()
+				.getContentResolver(), bitmapImg, "title", null);
+		Uri qlookUri = Uri.parse(path);
+
+		final Intent shareIntent = new Intent(
+				android.content.Intent.ACTION_SEND);
+		shareIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+		shareIntent.putExtra(Intent.EXTRA_STREAM, qlookUri);
+		shareIntent.setType("image/*");
+
+		startActivity(Intent.createChooser(shareIntent, "Share Quicklook"));
 	}
 
 	/**
@@ -170,14 +218,26 @@ public class ProductDetailsFragment extends Fragment {
 		getActivity()
 				.getSupportFragmentManager()
 				.beginTransaction()
-				.replace(R.id.activity_base_details_container, metadataFragment,
-						"MetadataFragment").addToBackStack("MetadataFragment")
-				.commit();
+				.replace(R.id.activity_base_details_container,
+						metadataFragment, "MetadataFragment")
+				.addToBackStack("MetadataFragment").commit();
 	}
 
-	public void showQuickLook() {
+	public void showExtendedMap() {
+		String url = getQuicklookUrl();
+		Footprint footprint = displayedEntry.getEarthObservation()
+				.getFeatureOfInterest().getFootprint();
+
+		mListener.onProductDetailsFragmentExtendedMapShow(url, footprint);
+	}
+
+	public void showQuicklookGallery() {
+		String qLookUrl = getQuicklookUrl();
+		mListener.onProductDetailsFragmentQuicklookShow(qLookUrl);
+	}
+
+	private String getQuicklookUrl() {
 		String url = "";
-		//LatLngBounds bounds = null;
 
 		List<Browse> browseList = displayedEntry.getEarthObservation()
 				.getResult().getEarthObservationResult().getBrowseList();
@@ -191,26 +251,12 @@ public class ProductDetailsFragment extends Fragment {
 						.getServiceReference().get_xlink_href();
 			}
 		}
-		Footprint footprint = displayedEntry.getEarthObservation()
-				.getFeatureOfInterest().getFootprint();
-
-		mListener.onProductDetailsFragmentQuicklookShow(url, footprint);
+		return url;
 	}
 
-/*	private List<LatLng> extractLatLngFootprint() {
-		List<LatLng> footprintsPosList = new ArrayList<LatLng>();
-		
-		footprintsPosList = displayedEntry.getEarthObservation()
-				.getFeatureOfInterest().getFootprint().getMultiExtentOf()
-				.getMultiSurface().getSurfaceMembers().getPolygon()
-				.getExterior().getLinearRing().getPosLatLngList();
-		return footprintsPosList;
-	}*/
-
-	public void loadFootprint() {
-		Footprint footprint = displayedEntry.getEarthObservation()
-				.getFeatureOfInterest().getFootprint();
-		mListener.onProductDetailsFragmentMapShow(footprint);
+	private void openShareDialog() {
+		String qLookUrl = getQuicklookUrl();
+		mListener.onProductDetailsFragmentShareDialogShow(qLookUrl);
 	}
 
 	/**
@@ -224,12 +270,33 @@ public class ProductDetailsFragment extends Fragment {
 	 */
 	public interface OnProductDetailsFragmentListener {
 
-		public void onProductDetailsFragmentMapShow(Footprint footprint);
-
 		public void onProductDetailsFragmentMetadataLoad();
 
-		public void onProductDetailsFragmentQuicklookShow(String url,
+		public void onProductDetailsFragmentExtendedMapShow(String url,
 				Footprint footprint);
+
+		public void onProductDetailsFragmentQuicklookShow(String url);
+
+		public void onProductDetailsFragmentShareDialogShow(String url);
+
+	}
+
+	@Override
+	public void onBitmapFailed(Drawable arg0) {
+		sendIntentShareUrl();
+	}
+
+	@Override
+	public void onBitmapLoaded(Bitmap image, LoadedFrom arg1) {
+
+		Bitmap scaled = Bitmap.createScaledBitmap(image, 480, 480, true);
+		sendIntentShareImg(scaled);
+
+	}
+
+	@Override
+	public void onPrepareLoad(Drawable arg0) {
+		// TODO Auto-generated method stub
 
 	}
 
