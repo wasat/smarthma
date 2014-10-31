@@ -15,14 +15,13 @@ import android.util.Log;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 
-/**
+/** 
  * @author Daniel Zinkiewicz Wasat Sp. z o.o 18-07-2014
  * 
  */
 public class FedeoRequest implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	private static final String FEDEO_BASE_URL = "http://geo.spacebel.be/opensearch/request/?";
 	private HashMap<String, String> params;
 	private String url;
 	private String httpAccept;
@@ -85,7 +84,7 @@ public class FedeoRequest implements Serializable {
 	 */
 	public String getUrl() {
 		if (url == null) {
-			url = FEDEO_BASE_URL;
+			url = Const.HTTP_BASE_URL + "?";
 			for (HashMap.Entry<String, String> entry : params.entrySet()) {
 				String key = entry.getKey();
 				String value = entry.getValue();

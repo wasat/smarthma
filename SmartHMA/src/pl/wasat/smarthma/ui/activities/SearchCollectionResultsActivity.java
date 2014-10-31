@@ -2,7 +2,6 @@ package pl.wasat.smarthma.ui.activities;
 
 import java.util.ArrayList;
 
-import pl.wasat.smarthma.ExtendedMapFragment;
 import pl.wasat.smarthma.R;
 import pl.wasat.smarthma.adapter.SearchListAdapter;
 import pl.wasat.smarthma.database.EoDbAdapter;
@@ -14,6 +13,7 @@ import pl.wasat.smarthma.preferences.SharedPrefs;
 import pl.wasat.smarthma.ui.frags.base.BaseShowProductsListFragment.OnBaseShowProductsListFragmentListener;
 import pl.wasat.smarthma.ui.frags.common.AreaPickerMapFragment.OnAreaPickerMapFragmentListener;
 import pl.wasat.smarthma.ui.frags.common.CollectionDetailsFragment;
+import pl.wasat.smarthma.ui.frags.common.ExtendedMapFragment;
 import pl.wasat.smarthma.ui.frags.common.CollectionDetailsFragment.OnCollectionDetailsFragmentListener;
 import pl.wasat.smarthma.ui.frags.common.MetadataFragment.OnMetadataFragmentListener;
 import pl.wasat.smarthma.ui.frags.search.SearchListFragment;

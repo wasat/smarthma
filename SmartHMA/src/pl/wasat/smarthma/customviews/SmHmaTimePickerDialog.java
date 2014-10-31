@@ -21,6 +21,7 @@ import java.util.Calendar;
 import pl.wasat.smarthma.R;
 import pl.wasat.smarthma.customviews.TimePicker.OnTimeChangedListener;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -97,6 +98,8 @@ public class SmHmaTimePickerDialog extends AlertDialog implements
 	 * @param is24HourView
 	 *            Whether this is a 24 hour view, or AM/PM.
 	 */
+	@SuppressLint("InflateParams")
+	@SuppressWarnings("deprecation")
 	public SmHmaTimePickerDialog(Context context, int theme,
 			OnTimeSetListener callBack, int hourOfDay, int minute, int seconds,
 			boolean is24HourView) {

@@ -1,5 +1,8 @@
 package pl.wasat.smarthma.model.eo;
 
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
@@ -19,7 +22,7 @@ public class Pos implements Serializable {
 
 	private String __prefix;
 	private String __text;
-	private LatLng latLng;
+	private transient LatLng latLng;
 	private final Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
 	public String get__prefix() {
@@ -85,7 +88,18 @@ public class Pos implements Serializable {
 	public void setAdditionalProperty(String name, Object value) {
 		this.additionalProperties.put(name, value);
 	}
+	
+    private void writeObject(ObjectOutputStream out) throws IOException {
+        out.defaultWriteObject();
+        out.writeDouble(latLng.latitude);
+        out.writeDouble(latLng.longitude);
+    }
 
+    private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
+        in.defaultReadObject();
+        latLng = new LatLng(in.readDouble(), in.readDouble());
+    }
+	
 	private void toLatLng() {
 		latLng = new LatLng(Double.valueOf(__text.split(" ")[0]),
 				Double.valueOf(__text.split(" ")[1]));
