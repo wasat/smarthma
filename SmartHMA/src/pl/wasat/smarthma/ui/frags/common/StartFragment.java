@@ -5,10 +5,12 @@ import pl.wasat.smarthma.ui.activities.NewsActivity;
 import pl.wasat.smarthma.ui.activities.CollectionsDefinitionActivity;
 import pl.wasat.smarthma.ui.activities.MissionsActivity;
 import pl.wasat.smarthma.ui.activities.SearchActivity;
+import pl.wasat.smarthma.utils.conn.ConnectionDetector;
 import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -28,10 +30,10 @@ public class StartFragment extends Fragment {
 
 	private OnStartFragmentListener mListener;
 
-    /**
+	/**
 	 * Use this factory method to create a new instance of this fragment using
 	 * the provided parameters.
-	 *
+	 * 
 	 * @return A new instance of fragment FailureFragment.
 	 */
 	// TODO: Rename and change types and number of parameters
@@ -61,59 +63,67 @@ public class StartFragment extends Fragment {
 		View rootView = inflater.inflate(R.layout.fragment_start, container,
 				false);
 
-        Button buttonStartSearch = (Button) rootView
-                .findViewById(R.id.start_frag_button_search);
+		Button buttonStartSearch = (Button) rootView
+				.findViewById(R.id.start_frag_button_search);
 		buttonStartSearch.setOnClickListener(new OnClickListener() {
 
-            @Override
-            public void onClick(View v) {
-                Intent startIntent = new Intent(getActivity(),
-                        SearchActivity.class);
-                startActivity(startIntent);
+			@Override
+			public void onClick(View v) {
+				if (isConnected()) {
+					Intent startIntent = new Intent(getActivity(),
+							SearchActivity.class);
+					startActivity(startIntent);
+				}
 
-            }
-        });
+			}
+		});
 
-        Button buttonStartBrowse = (Button) rootView
-                .findViewById(R.id.start_frag_button_browse);
+		Button buttonStartBrowse = (Button) rootView
+				.findViewById(R.id.start_frag_button_browse);
 		buttonStartBrowse.setOnClickListener(new OnClickListener() {
 
-            @Override
-            public void onClick(View v) {
-                Intent startIntent = new Intent(getActivity(),
-                        CollectionsDefinitionActivity.class);
-                startActivity(startIntent);
-            }
-        });
-        Button buttonStartMission = (Button) rootView
-                .findViewById(R.id.start_frag_button_mission);
+			@Override
+			public void onClick(View v) {
+				if (isConnected()) {
+					Intent startIntent = new Intent(getActivity(),
+							CollectionsDefinitionActivity.class);
+					startActivity(startIntent);
+				}
+			}
+		});
+		Button buttonStartMission = (Button) rootView
+				.findViewById(R.id.start_frag_button_mission);
 		buttonStartMission.setOnClickListener(new OnClickListener() {
 
-            @Override
-            public void onClick(View v) {
-                Intent startMissionIntent = new Intent(getActivity(),
-                        MissionsActivity.class);
-                startActivity(startMissionIntent);
-            }
-        });
-        Button buttonStartOnline = (Button) rootView
-                .findViewById(R.id.start_frag_button_online);
+			@Override
+			public void onClick(View v) {
+				if (isConnected()) {
+					Intent startMissionIntent = new Intent(getActivity(),
+							MissionsActivity.class);
+					startActivity(startMissionIntent);
+				}
+			}
+		});
+		Button buttonStartOnline = (Button) rootView
+				.findViewById(R.id.start_frag_button_online);
 		buttonStartOnline.setOnClickListener(new OnClickListener() {
 
-            @Override
-            public void onClick(View v) {
-                Intent startEsaNewsIntent = new Intent(getActivity(),
-                        NewsActivity.class);
-                startActivity(startEsaNewsIntent);
-            }
-        });
+			@Override
+			public void onClick(View v) {
+				if (isConnected()) {
+					Intent startEsaNewsIntent = new Intent(getActivity(),
+							NewsActivity.class);
+					startActivity(startEsaNewsIntent);
+				}
+			}
+		});
 
 		return rootView;
 	}
 
 	public void onButtonPressed(Uri uri) {
 		if (mListener != null) {
-			mListener.onStartFragmentInteraction(uri);
+			mListener.onStartFragmentConnectionSetup();
 		}
 	}
 
@@ -144,7 +154,19 @@ public class StartFragment extends Fragment {
 	 * >Communicating with Other Fragments</a> for more information.
 	 */
 	public interface OnStartFragmentListener {
-		public void onStartFragmentInteraction(Uri uri);
+		public void onStartFragmentConnectionSetup();
 	}
 
+	private boolean isConnected() {
+		ConnectionDetector detect = new ConnectionDetector(getActivity());
+		// Boolean isCoonected = detect.isConnectingToInternet();
+
+		if (detect.isConnectingToInternet()) {
+			return true;
+		} else {
+			Intent intent = new Intent(Settings.ACTION_WIRELESS_SETTINGS);
+			startActivity(intent);
+			return false;
+		}
+	}
 }

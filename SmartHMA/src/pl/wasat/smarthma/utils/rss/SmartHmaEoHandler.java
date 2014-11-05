@@ -338,15 +338,15 @@ public class SmartHmaEoHandler extends DefaultHandler {
 		// Procedure - Acquisition markup
 		else if (localName.equalsIgnoreCase("acrossTrackIncidenceAngle")) {
 			acrossTrackIncidenceAngle = new AcrossTrackIncidenceAngle();
-			acrossTrackIncidenceAngle.set_uom(atts.getValue("uom"));
+			acrossTrackIncidenceAngle.setUom(atts.getValue("uom"));
 		} else if (localName.equalsIgnoreCase("alongTrackIncidenceAngle")) {
 			alongTrackIncidenceAngle = new AlongTrackIncidenceAngle();
-			alongTrackIncidenceAngle.set_uom(atts.getValue("uom"));
+			alongTrackIncidenceAngle.setUom(atts.getValue("uom"));
 		} else if (localName.equalsIgnoreCase("cycleNumber")) {
 			cycleNumber = new CycleNumber();
 		} else if (localName.equalsIgnoreCase("illuminationAzimuthAngle")) {
 			illuminationAzimuthAngle = new IlluminationAzimuthAngle();
-			illuminationAzimuthAngle.set_uom(atts.getValue("uom"));
+			illuminationAzimuthAngle.setUom(atts.getValue("uom"));
 		} else if (localName.equalsIgnoreCase("isSegment")) {
 			isSegment = new IsSegment();
 		} else if (localName.equalsIgnoreCase("lastOrbitNumber")) {
@@ -357,7 +357,7 @@ public class SmartHmaEoHandler extends DefaultHandler {
 			orbitNumber = new OrbitNumber();
 		} else if (localName.equalsIgnoreCase("pitch")) {
 			pitch = new Pitch();
-			pitch.set_uom(atts.getValue("uom"));
+			pitch.setUom(atts.getValue("uom"));
 		} else if (localName.equalsIgnoreCase("polarisationChannels")) {
 			polarisationChannels = new PolarisationChannels();
 		} else if (localName.equalsIgnoreCase("polarisationMode")) {
@@ -366,16 +366,16 @@ public class SmartHmaEoHandler extends DefaultHandler {
 			relativePassNumber = new RelativePassNumber();
 		} else if (localName.equalsIgnoreCase("roll")) {
 			roll = new Roll();
-			roll.set_uom(atts.getValue("uom"));
+			roll.setUom(atts.getValue("uom"));
 		} else if (localName.equalsIgnoreCase("wrsLatitudeGrid")) {
 			wrsLatitudeGrid = new WrsLatitudeGrid();
-			wrsLatitudeGrid.set_codeSpace(atts.getValue("codeSpace"));
+			wrsLatitudeGrid.setcodeSpace(atts.getValue("codeSpace"));
 		} else if (localName.equalsIgnoreCase("wrsLongitudeGrid")) {
 			wrsLongitudeGrid = new WrsLongitudeGrid();
-			wrsLongitudeGrid.set_codeSpace(atts.getValue("codeSpace"));
+			wrsLongitudeGrid.setcodeSpace(atts.getValue("codeSpace"));
 		} else if (localName.equalsIgnoreCase("yaw")) {
 			yaw = new Yaw();
-			yaw.set_uom(atts.getValue("uom"));
+			yaw.setUom(atts.getValue("uom"));
 		}
 
 		// Procedure - AuxiliaryInstrument markup
@@ -417,7 +417,7 @@ public class SmartHmaEoHandler extends DefaultHandler {
 			measurementType = new MeasurementType();
 		} else if (localName.equalsIgnoreCase("operationalMode")) {
 			operationalMode = new OperationalMode();
-			operationalMode.set_codeSpace(atts.getValue("codeSpace"));
+			operationalMode.setcodeSpace(atts.getValue("codeSpace"));
 		} else if (localName.equalsIgnoreCase("footprint")) {
 			footprint = new Footprint();
 			footprint.set_gml_id(atts.getValue("gml:id"));
@@ -435,10 +435,10 @@ public class SmartHmaEoHandler extends DefaultHandler {
 			locationName = new LocationName();
 		} else if (localName.equalsIgnoreCase("maximumAltitude")) {
 			maximumAltitude = new MaximumAltitude();
-			maximumAltitude.set_uom(atts.getValue("uom"));
+			maximumAltitude.setUom(atts.getValue("uom"));
 		} else if (localName.equalsIgnoreCase("minimumAltitude")) {
 			minimumAltitude = new MinimumAltitude();
-			minimumAltitude.set_uom(atts.getValue("uom"));
+			minimumAltitude.setUom(atts.getValue("uom"));
 		} else if (localName.equalsIgnoreCase("multiExtentOf")) {
 			multiExtentOf = new MultiExtentOf();
 		} else if (localName.equalsIgnoreCase("multiSurface")) {
@@ -478,7 +478,7 @@ public class SmartHmaEoHandler extends DefaultHandler {
 			}
 		} else if (localName.equalsIgnoreCase("resolution")) {
 			resolution = new Resolution();
-			resolution.set_uom(atts.getValue("uom"));
+			resolution.setUom(atts.getValue("uom"));
 		} else if (localName.equalsIgnoreCase("sensorType")) {
 			sensorType = new SensorType();
 		} else if (localName.equalsIgnoreCase("swathIdentifier")) {
@@ -507,12 +507,12 @@ public class SmartHmaEoHandler extends DefaultHandler {
 			requestMessage = new RequestMessage();
 		} else if (localName.equalsIgnoreCase("referenceSystemIdentifier")) {
 			referenceSystemIdentifier = new ReferenceSystemIdentifier();
-			referenceSystemIdentifier.set_codeSpace(atts.getValue("codeSpace"));
+			referenceSystemIdentifier.setcodeSpace(atts.getValue("codeSpace"));
 		} else if (localName.equalsIgnoreCase("type")) {
 			type = new Type();
 		} else if (localName.equalsIgnoreCase("cloudCoverPercentage")) {
 			cloudCoverPercentage = new CloudCoverPercentage();
-			cloudCoverPercentage.set_uom(atts.getValue("uom"));
+			cloudCoverPercentage.setUom(atts.getValue("uom"));
 		} else if (localName
 				.equalsIgnoreCase("cloudCoverPercentageQuotationMode")) {
 			cloudCoverPercentageQuotationMode = new CloudCoverPercentageQuotationMode();
@@ -536,21 +536,21 @@ public class SmartHmaEoHandler extends DefaultHandler {
 			phenomenon.set_xmlns_ns1(atts.getValue("xmlns:ns1"));
 		} else if (localName.equalsIgnoreCase("name")) {
 			name = new Name();
-			name.set_codeSpace(atts.getValue("codeSpace"));
+			name.setcodeSpace(atts.getValue("codeSpace"));
 			name.set_xmlns(atts.getValue("xmlns"));
 		} else if (localName.equalsIgnoreCase("unitOfMeasure")) {
 			unitOfMeasure = new UnitOfMeasure();
-			unitOfMeasure.set_uom(atts.getValue("uom"));
+			unitOfMeasure.setUom(atts.getValue("uom"));
 		} else if (localName.equalsIgnoreCase("product")) {
 			product = new Product();
 		} else if (localName.equalsIgnoreCase("productInformation")) {
 			productInformation = new ProductInformation();
 		} else if (localName.equalsIgnoreCase("size")) {
 			size = new Size();
-			size.set_uom(atts.getValue("uom"));
+			size.setUom(atts.getValue("uom"));
 		} else if (localName.equalsIgnoreCase("timeliness")) {
 			timeliness = new Timeliness();
-			timeliness.set_codeSpace(atts.getValue("codeSpace"));
+			timeliness.setcodeSpace(atts.getValue("codeSpace"));
 		}
 
 		else if (localName.equalsIgnoreCase("ObservedProperty")) {
@@ -578,7 +578,7 @@ public class SmartHmaEoHandler extends DefaultHandler {
 			archivingInformation = new ArchivingInformation();
 		} else if (localName.equalsIgnoreCase("archivingCenter")) {
 			archivingCenter = new ArchivingCenter();
-			archivingCenter.set_codeSpace(atts.getValue("codeSpace"));
+			archivingCenter.setcodeSpace(atts.getValue("codeSpace"));
 		} else if (localName.equalsIgnoreCase("archivingDate")) {
 			archivingDate = new ArchivingDate();
 		} else if (localName.equalsIgnoreCase("composedOf")) {
@@ -594,7 +594,7 @@ public class SmartHmaEoHandler extends DefaultHandler {
 			downlinkInformation = new DownlinkInformation();
 		} else if (localName.equalsIgnoreCase("acquisitionStation")) {
 			acquisitionStation = new AcquisitionStation();
-			acquisitionStation.set_codeSpace(atts.getValue("codeSpace"));
+			acquisitionStation.setCodeSpace(atts.getValue("codeSpace"));
 		} else if (localName.equalsIgnoreCase("identifier")) {
 			identifier = new Identifier();
 		} else if (localName.equalsIgnoreCase("modificationDate")) {
@@ -610,12 +610,12 @@ public class SmartHmaEoHandler extends DefaultHandler {
 			samplingRateList = new ArrayList<SamplingRate>();
 		} else if (localName.equalsIgnoreCase("groundTrackUncertainty")) {
 			groundTrackUncertainty = new GroundTrackUncertainty();
-			groundTrackUncertainty.set_uom(atts.getValue("uom"));
+			groundTrackUncertainty.setUom(atts.getValue("uom"));
 		} else if (localName.equalsIgnoreCase("method")) {
 			method = new Method();
 		} else if (localName.equalsIgnoreCase("processingCenter")) {
 			processingCenter = new ProcessingCenter();
-			processingCenter.set_codeSpace(atts.getValue("codeSpace"));
+			processingCenter.setcodeSpace(atts.getValue("codeSpace"));
 		} else if (localName.equalsIgnoreCase("processingDate")) {
 			processingDate = new ProcessingDate();
 		} else if (localName.equalsIgnoreCase("processingMode")) {
@@ -626,18 +626,18 @@ public class SmartHmaEoHandler extends DefaultHandler {
 			processorVersion = new ProcessorVersion();
 		} else if (localName.equalsIgnoreCase("samplingRate")) {
 			samplingRate = new SamplingRate();
-			samplingRate.set_uom(atts.getValue("uom"));
+			samplingRate.setUom(atts.getValue("uom"));
 		} else if (localName.equalsIgnoreCase("productGroupId")) {
 			productGroupId = new ProductGroupId();
 		} else if (localName.equalsIgnoreCase("productQualityDegradation")) {
 			productQualityDegradation = new ProductQualityDegradation();
-			productQualityDegradation.set_uom(atts.getValue("uom"));
+			productQualityDegradation.setUom(atts.getValue("uom"));
 		} else if (localName
 				.equalsIgnoreCase("productQualityDegradationQuotationMode")) {
 			productQualityDegradationQuotationMode = new ProductQualityDegradationQuotationMode();
 		} else if (localName.equalsIgnoreCase("productQualityDegradationTag")) {
 			productQualityDegradationTag = new ProductQualityDegradationTag();
-			productQualityDegradationTag.set_codeSpace(atts
+			productQualityDegradationTag.setcodeSpace(atts
 					.getValue("codeSpace"));
 		} else if (localName.equalsIgnoreCase("productQualityReportURL")) {
 			productQualityReportURL = new ProductQualityReportURL();

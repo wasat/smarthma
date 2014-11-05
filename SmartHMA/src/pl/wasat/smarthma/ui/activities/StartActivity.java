@@ -3,7 +3,6 @@ package pl.wasat.smarthma.ui.activities;
 import pl.wasat.smarthma.R;
 import pl.wasat.smarthma.ui.frags.common.StartFragment;
 import pl.wasat.smarthma.ui.frags.common.StartFragment.OnStartFragmentListener;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
@@ -42,9 +41,10 @@ public class StartActivity extends ActionBarActivity implements
 	}
 
 	@Override
-	public void onStartFragmentInteraction(Uri uri) {
+	public void onStartFragmentConnectionSetup() {
 		// TODO Auto-generated method stub
-
+		
 	}
+
 
 }

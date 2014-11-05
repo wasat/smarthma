@@ -91,6 +91,7 @@ public class SearchActivity extends BaseSmartHMActivity implements
 	 */
 	@Override
 	public void onBackPressed() {
+		Log.i("BACK", "Search back pressed");
 		FragmentManager fm = getSupportFragmentManager();
 		int bsec = fm.getBackStackEntryCount();
 		if (bsec > 1) {
@@ -170,7 +171,6 @@ public class SearchActivity extends BaseSmartHMActivity implements
 			// Call a method in the ArticleFragment to update its content
 			searchBasicInfoRightFragment.updateCollectionsAreaBounds(bounds);
 		}
-
 	}
 
 

@@ -3,13 +3,15 @@
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:layout_gravity="center"
-    android:layout_margin="10dp">
+    android:layout_margin="10dp" >
 
     <LinearLayout
         android:id="@+id/search_frag_layout_id"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
         android:gravity="center_vertical|center_horizontal|center"
         android:orientation="vertical" >
 
@@ -17,6 +19,8 @@
             android:id="@+id/search_frag_tv_title_large"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
             android:text="@string/smarthma"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:textSize="48sp" />
@@ -34,7 +38,11 @@
             android:id="@+id/search_frag_searchview"
             android:layout_width="500dp"
             android:layout_height="100dp"
-            android:iconifiedByDefault="false" >
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:iconifiedByDefault="false"
+            android:visibility="visible" >
+
         </SearchView>
 
         <LinearLayout

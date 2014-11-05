@@ -25,7 +25,7 @@ public class XMLParser {
 	public XMLParser() {
 	}
 
-	/**
+	/** 
 	 * @param xmlString
 	 *            String to access to xml file
 	 */

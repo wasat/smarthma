@@ -16,7 +16,7 @@ public class MaximumIncidenceAngle implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private String __prefix;
-	private String _uom;
+	private String uom;
 	private String __text;
 	private final Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
@@ -33,16 +33,16 @@ public class MaximumIncidenceAngle implements Serializable {
 		return this;
 	}
 
-	public String get_uom() {
-		return _uom;
+	public String getuom() {
+		return uom;
 	}
 
-	public void set_uom(String _uom) {
-		this._uom = _uom;
+	public void setUom(String uom) {
+		this.uom = uom;
 	}
 
-	public MaximumIncidenceAngle with_uom(String _uom) {
-		this._uom = _uom;
+	public MaximumIncidenceAngle withuom(String uom) {
+		this.uom = uom;
 		return this;
 	}
 

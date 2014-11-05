@@ -8,6 +8,9 @@ import android.location.Location;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.LocalBroadcastManager;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesClient;
@@ -69,14 +72,21 @@ public class BaseMapFragment extends SupportMapFragment implements
 	}
 
 	@Override
-	public void onActivityCreated(Bundle savedInstanceState) {
-		startCreateMap(savedInstanceState);
+	public View onCreateView(LayoutInflater inflater, ViewGroup container,
+			Bundle savedInstanceState) {
 
+		return super.onCreateView(inflater, container, savedInstanceState);
+	}
+
+	@Override
+	public void onActivityCreated(Bundle savedInstanceState) {
+		super.onActivityCreated(savedInstanceState);
+		
+		startCreateMap(savedInstanceState);
 		Fragment fragment = getParentFragment();
 		if (fragment != null && fragment instanceof OnBaseMapFragmentListener) {
 			((OnBaseMapFragmentListener) fragment).onBaseSupportMapReady();
 		}
-		super.onActivityCreated(savedInstanceState);
 	}
 
 	@Override

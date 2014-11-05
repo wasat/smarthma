@@ -7,6 +7,7 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -54,6 +55,9 @@ public class SearchFragment extends Fragment {
 		searchView.setSearchableInfo(searchManager
 				.getSearchableInfo(getActivity().getComponentName()));
 		searchView.setSubmitButtonEnabled(true);
+		searchView.setFocusable(true);
+		searchView.setIconified(false);
+		searchView.requestFocus();
 
 		LinearLayout linearLayout1 = (LinearLayout) searchView.getChildAt(0);
 		LinearLayout linearLayout2 = (LinearLayout) linearLayout1.getChildAt(2);
@@ -69,6 +73,7 @@ public class SearchFragment extends Fragment {
 		if (mListener != null) {
 			mListener.onSearchFragmentInteraction(uri);
 		}
+		Log.i("SEARCH_FRAG","onButtonPressed");
 	}
 
 	@Override

@@ -16,7 +16,7 @@ public class Name implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private String __text;
 	private String _xmlns;
-	private String _codeSpace;
+	private String codeSpace;
 	private final Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
 	public String get__text() {
@@ -45,16 +45,16 @@ public class Name implements Serializable {
 		return this;
 	}
 
-	public String get_codeSpace() {
-		return _codeSpace;
+	public String getcodeSpace() {
+		return codeSpace;
 	}
 
-	public void set_codeSpace(String _codeSpace) {
-		this._codeSpace = _codeSpace;
+	public void setcodeSpace(String codeSpace) {
+		this.codeSpace = codeSpace;
 	}
 
-	public Name with_codeSpace(String _codeSpace) {
-		this._codeSpace = _codeSpace;
+	public Name withcodeSpace(String codeSpace) {
+		this.codeSpace = codeSpace;
 		return this;
 	}
 
