@@ -21,8 +21,8 @@ import android.widget.ListView;
 /**
  * A simple {@link android.support.v4.app.Fragment} subclass. Activities that
  * contain this fragment must implement the
- * {@link CollectionsListFragment.OnCollectionsListFragmentListener} interface to
- * handle interaction events. Use the
+ * {@link CollectionsListFragment.OnCollectionsListFragmentListener} interface
+ * to handle interaction events. Use the
  * {@link CollectionsListFragment#newInstance} factory method to create an
  * instance of this fragment.
  * 
@@ -35,7 +35,7 @@ public class CollectionsListFragment extends Fragment {
 
 	private int parentListPos;
 	private String selectGroupName;
-    private OnCollectionsListFragmentListener mListener;
+	private OnCollectionsListFragmentListener mListener;
 
 	/**
 	 * Use this factory method to create a new instance of this fragment using
@@ -93,27 +93,33 @@ public class CollectionsListFragment extends Fragment {
 	}
 
 	private void initList() {
-        //noinspection ConstantConditions
-        ListView list = (ListView) getView().findViewById(R.id.collections_list);
+		// noinspection ConstantConditions
+		ListView list = (ListView) getView()
+				.findViewById(R.id.collections_list);
 
 		// Getting adapter by passing xml data ArrayList
-		final ArrayList<Collection> collections = SmartHMApplication.GlobalEODataList
-				.getCollectionsGroupList().get(parentListPos).getCollections();
-        CollectionsListAdapter adapter = new CollectionsListAdapter(getActivity(), collections,
-                selectGroupName);
-		list.setAdapter(adapter);
 
-		// Click event for single list row
-		list.setOnItemClickListener(new OnItemClickListener() {
+		if (!SmartHMApplication.GlobalEODataList.getCollectionsGroupList()
+				.isEmpty()) {
+			final ArrayList<Collection> collections = SmartHMApplication.GlobalEODataList
+					.getCollectionsGroupList().get(parentListPos)
+					.getCollections();
+			CollectionsListAdapter adapter = new CollectionsListAdapter(
+					getActivity(), collections, selectGroupName);
+			list.setAdapter(adapter);
 
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view,
-                                    int position, long id) {
-                String collName = collections.get(position).getName();
-                loadDataSeriesFeedsActivity(collName);
+			// Click event for single list row
+			list.setOnItemClickListener(new OnItemClickListener() {
 
-            }
-        });
+				@Override
+				public void onItemClick(AdapterView<?> parent, View view,
+						int position, long id) {
+					String collName = collections.get(position).getName();
+					loadDataSeriesFeedsActivity(collName);
+
+				}
+			});
+		}
 	}
 
 	// TODO: Rename method, update argument and hook method into UI event

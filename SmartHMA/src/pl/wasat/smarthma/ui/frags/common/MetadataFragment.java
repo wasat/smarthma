@@ -2,10 +2,9 @@ package pl.wasat.smarthma.ui.frags.common;
 
 import java.lang.reflect.Field;
 
-import org.apache.commons.lang3.SystemUtils;
-
 import pl.wasat.smarthma.R;
 import pl.wasat.smarthma.model.feed.Entry;
+import pl.wasat.smarthma.utils.text.MetadataCleaner;
 import android.app.Activity;
 import android.graphics.Typeface;
 import android.net.Uri;
@@ -134,7 +133,6 @@ public class MetadataFragment extends Fragment {
 		return rootView;
 	}
 
-
 	private void setEOMetaDataViews(String headerText, Object eOMetaDataObject) {
 
 		TextView tvMetaHeader = new TextView(getActivity());
@@ -191,7 +189,7 @@ public class MetadataFragment extends Fragment {
 			itemTvValue.setTextSize(14);
 			itemTvValue.setTextColor(0xff646464);
 			itemTvValue.setTypeface(Typeface.DEFAULT);
-			itemTvValue.setText(cleanValue(value));
+			itemTvValue.setText(new MetadataCleaner().getCleanValue(value));
 
 			LinearLayout itemLinearRow = new LinearLayout(getActivity());
 			itemLinearRow.setLayoutParams(new TableLayout.LayoutParams(
@@ -204,19 +202,6 @@ public class MetadataFragment extends Fragment {
 
 		}
 
-	}
-	
-	private String cleanValue(String value)
-	{
-		String cleanedValue = "";
-		
-		String doubleNewLine  = SystemUtils.LINE_SEPARATOR + SystemUtils.LINE_SEPARATOR;
-		cleanedValue = value.replaceAll(doubleNewLine, SystemUtils.LINE_SEPARATOR);
-		cleanedValue = cleanedValue.replaceAll("\\[", "");
-		cleanedValue = cleanedValue.replaceAll("\\]", "");
-		cleanedValue = cleanedValue.replaceAll(" _", "");
-		return cleanedValue;
-		
 	}
 
 

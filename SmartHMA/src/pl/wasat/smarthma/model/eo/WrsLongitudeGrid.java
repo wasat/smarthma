@@ -16,7 +16,7 @@ public class WrsLongitudeGrid implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private String __prefix;
-	private String _codeSpace;
+	private String codeSpace;
 	private String __text;
 	private final Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
@@ -33,16 +33,16 @@ public class WrsLongitudeGrid implements Serializable {
 		return this;
 	}
 
-	public String get_codeSpace() {
-		return _codeSpace;
+	public String getcodeSpace() {
+		return codeSpace;
 	}
 
-	public void set_codeSpace(String _codeSpace) {
-		this._codeSpace = _codeSpace;
+	public void setcodeSpace(String codeSpace) {
+		this.codeSpace = codeSpace;
 	}
 
-	public WrsLongitudeGrid with_codeSpace(String _codeSpace) {
-		this._codeSpace = _codeSpace;
+	public WrsLongitudeGrid withcodeSpace(String codeSpace) {
+		this.codeSpace = codeSpace;
 		return this;
 	}
 

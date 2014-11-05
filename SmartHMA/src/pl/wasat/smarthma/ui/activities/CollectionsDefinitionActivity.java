@@ -1,7 +1,6 @@
 package pl.wasat.smarthma.ui.activities;
 
 import pl.wasat.smarthma.R;
-import pl.wasat.smarthma.helper.Const;
 import pl.wasat.smarthma.interfaces.OnCollectionsListSelectionListener;
 import pl.wasat.smarthma.ui.frags.base.BaseMapFragment;
 import pl.wasat.smarthma.ui.frags.browse.BrowseCollectionFirstDetailFragment;
@@ -9,13 +8,8 @@ import pl.wasat.smarthma.ui.frags.browse.CollectionsGroupListFragment;
 import pl.wasat.smarthma.ui.frags.browse.CollectionsListFragment.OnCollectionsListFragmentListener;
 import pl.wasat.smarthma.ui.frags.common.AreaPickerMapFragment.OnAreaPickerMapFragmentListener;
 import roboguice.util.temp.Ln;
-import android.app.ProgressDialog;
 import android.app.SearchManager;
-import android.content.BroadcastReceiver;
 import android.content.Context;
-import android.content.Intent;
-import android.content.IntentFilter;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -23,8 +17,6 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.ProgressBar;
 import android.widget.SearchView;
 import android.widget.Toast;
 
@@ -34,11 +26,11 @@ public class CollectionsDefinitionActivity extends BaseSmartHMActivity
 		implements OnCollectionsListSelectionListener,
 		OnCollectionsListFragmentListener, OnAreaPickerMapFragmentListener {
 
-	private ProgressDialog initSpinner;
-	private ProgressBar progressBarWmsLoad;
-	private InitialisationReceiver initReceiver;
-	private SpinnerStateReceiver spinnerStateRec;
-	private boolean isWmsLoading = false;
+	//private ProgressDialog initSpinner;
+	//private ProgressBar progressBarWmsLoad;
+	//private InitialisationReceiver initReceiver;
+	//private SpinnerStateReceiver spinnerStateRec;
+	//private boolean isWmsLoading = false;
 
 	/**
 	 * Whether or not the activity is in two-pane mode, i.e. running on a tablet
@@ -56,7 +48,7 @@ public class CollectionsDefinitionActivity extends BaseSmartHMActivity
 		// ViewGroup topLayout = (ViewGroup) findViewById(R.id.left_panel_map);
 		// topLayout.requestTransparentRegion(topLayout);
 
-		progressBarWmsLoad = (ProgressBar) findViewById(R.id.progressBarWmsLoad);
+		//progressBarWmsLoad = (ProgressBar) findViewById(R.id.progressBarWmsLoad);
 
 		if (findViewById(R.id.activity_base_details_container) != null) {
 			TWO_PANEL_MODE = true;
@@ -67,22 +59,22 @@ public class CollectionsDefinitionActivity extends BaseSmartHMActivity
 
 	@Override
 	protected void onResume() {
-		initReceiver = new InitialisationReceiver();
+/*		initReceiver = new InitialisationReceiver();
 		registerReceiver(initReceiver, new IntentFilter(
 				Const.KEY_SERVICE_INTENTFILTER_NOTIFICATION));
 
 		spinnerStateRec = new SpinnerStateReceiver();
 		registerReceiver(spinnerStateRec, new IntentFilter(
-				Const.KEY_MAP_SPINNER_INTENTFILTER_NOTIFICATION));
+				Const.KEY_MAP_SPINNER_INTENTFILTER_NOTIFICATION));*/
 
 		super.onResume();
 	}
 
 	@Override
 	protected void onPause() {
-		disableProgressBar();
-		unregisterReceiver(initReceiver);
-		unregisterReceiver(spinnerStateRec);
+		//disableProgressBar();
+		//unregisterReceiver(initReceiver);
+		//unregisterReceiver(spinnerStateRec);
 		super.onPause();
 	}
 
@@ -208,7 +200,7 @@ public class CollectionsDefinitionActivity extends BaseSmartHMActivity
 		transaction.commit();
 
 	}
-
+/*
 	private void disableProgressBar() {
 		if (initSpinner != null) {
 			if (initSpinner.isShowing()) {
@@ -224,9 +216,9 @@ public class CollectionsDefinitionActivity extends BaseSmartHMActivity
 			postReceivingData(intent);
 		}
 
-		/**
+		*//**
 		 * @param intent
-		 */
+		 *//*
 		private void postReceivingData(Intent intent) {
 			disableProgressBar();
 			Bundle bundle = intent.getExtras();
@@ -280,9 +272,9 @@ public class CollectionsDefinitionActivity extends BaseSmartHMActivity
 			progressBarWmsLoad.setVisibility(View.GONE);
 			super.onPostExecute(result);
 		}
-
 	}
 
+	*/
 	@Override
 	public void onMapFragmentBoundsChange(LatLngBounds bounds) {
 		BrowseCollectionFirstDetailFragment browseCollectionFirstDetailFragment = (BrowseCollectionFirstDetailFragment) getSupportFragmentManager()

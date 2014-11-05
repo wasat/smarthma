@@ -50,10 +50,10 @@ public class ProductsListFragment extends BaseShowProductsListFragment {
 		getActivity()
 				.getSupportFragmentManager()
 				.beginTransaction()
-				.add(R.id.activity_base_details_container,
+				.replace(R.id.activity_base_details_container,
 						productDetailsFragment,
-						"BrowseProductDetailsFragment")
-				.addToBackStack("BrowseProductDetailsFragment").commit();
+						"ProductDetailsFragment")
+				.addToBackStack("ProductDetailsFragment").commit();
 
 		super.loadProductItemDetails(entry);
 	}

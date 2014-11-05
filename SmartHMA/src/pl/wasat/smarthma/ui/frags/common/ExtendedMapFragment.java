@@ -1,5 +1,8 @@
 package pl.wasat.smarthma.ui.frags.common;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,6 +13,7 @@ import pl.wasat.smarthma.ui.frags.base.BaseMapFragment;
 import pl.wasat.smarthma.ui.frags.base.BaseMapFragment.OnBaseMapFragmentListener;
 import android.app.Activity;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.location.Location;
@@ -34,6 +38,7 @@ import com.google.android.gms.maps.model.PolygonOptions;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Picasso.LoadedFrom;
 import com.squareup.picasso.Target;
+import com.squareup.picasso.Transformation;
 
 /**
  * A simple {@link Fragment} subclass. Activities that contain this fragment
@@ -44,7 +49,8 @@ import com.squareup.picasso.Target;
  * 
  */
 public class ExtendedMapFragment extends Fragment implements
-		OnBaseMapFragmentListener, Target, OnSeekBarChangeListener {
+		OnBaseMapFragmentListener, Target, Transformation,
+		OnSeekBarChangeListener {
 
 	private BaseMapFragment baseMapFragment;
 	private GoogleMap mMap;
@@ -248,7 +254,34 @@ public class ExtendedMapFragment extends Fragment implements
 		drawFootprint(footprintPoints);
 
 		Target quicklookTarget = this;
-		Picasso.with(getActivity()).load(url).into(quicklookTarget);
+		Picasso.with(getActivity()).load(url).transform(this)
+				.into(quicklookTarget);
+	}
+
+	// decodes image and scales it to reduce memory consumption
+	private Bitmap decodeFile(File f) {
+		try {
+			// Decode image size
+			BitmapFactory.Options o = new BitmapFactory.Options();
+			o.inJustDecodeBounds = true;
+			BitmapFactory.decodeStream(new FileInputStream(f), null, o);
+
+			// The new size we want to scale to
+			final int REQUIRED_SIZE = 70;
+
+			// Find the correct scale value. It should be the power of 2.
+			int scale = 1;
+			while (o.outWidth / scale / 2 >= REQUIRED_SIZE
+					&& o.outHeight / scale / 2 >= REQUIRED_SIZE)
+				scale *= 2;
+
+			// Decode with inSampleSize
+			BitmapFactory.Options o2 = new BitmapFactory.Options();
+			o2.inSampleSize = scale;
+			return BitmapFactory.decodeStream(new FileInputStream(f), null, o2);
+		} catch (FileNotFoundException e) {
+		}
+		return null;
 	}
 
 	@Override
@@ -314,6 +347,24 @@ public class ExtendedMapFragment extends Fragment implements
 	public void onStopTrackingTouch(SeekBar seekBar) {
 		// TODO Auto-generated method stub
 
+	}
+
+	@Override
+	public String key() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Bitmap transform(Bitmap source) {
+		//int size = Math.min(source.getWidth(), source.getHeight());
+		int x = (int) ((source.getWidth()) / 1.5);
+		int y = (int) ((source.getHeight()) / 1.5);
+		Bitmap result = Bitmap.createScaledBitmap(source, x, y, false);
+		if (result != source) {
+			source.recycle();
+		}
+		return result;
 	}
 
 }
