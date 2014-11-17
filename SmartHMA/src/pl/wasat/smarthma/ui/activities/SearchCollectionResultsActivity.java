@@ -28,11 +28,11 @@ import com.google.android.gms.maps.model.LatLngBounds;
 
 public class SearchCollectionResultsActivity extends BaseSmartHMActivity
 		implements OnSearchListFragmentListener,
-		OnBaseShowProductsListFragmentListener, OnAreaPickerMapFragmentListener,
-		OnMetadataFragmentListener, OnCollectionDetailsFragmentListener {
+		OnBaseShowProductsListFragmentListener,
+		OnAreaPickerMapFragmentListener, OnMetadataFragmentListener,
+		OnCollectionDetailsFragmentListener {
 
 	private EoDbAdapter dba;
-
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -58,7 +58,7 @@ public class SearchCollectionResultsActivity extends BaseSmartHMActivity
 		}
 
 		SearchListFragment searchListFrag = (SearchListFragment) getSupportFragmentManager()
-			.findFragmentById(R.id.activity_base_list_container);
+				.findFragmentById(R.id.activity_base_list_container);
 		if (searchListFrag != null) {
 			Bundle bundle = searchListFrag.getArguments();
 			bundle.putBoolean(Const.KEY_INTENT_RETURN_STOP_SEARCH,
@@ -81,6 +81,22 @@ public class SearchCollectionResultsActivity extends BaseSmartHMActivity
 			 */
 
 			SharedPrefs sharedPrefs = new SharedPrefs(this);
+			sharedPrefs.setQueryPrefs(query);
+
+			FedeoRequest fedeoRequest = new FedeoRequest();
+			fedeoRequest.buildFromShared(this);
+
+			SearchListFragment searchListFragment = SearchListFragment
+					.newInstance(fedeoRequest, stopNewSearch);
+			getSupportFragmentManager()
+					.beginTransaction()
+					.replace(R.id.activity_base_list_container,
+							searchListFragment).commit();
+		}
+		if (intent.getAction().equals(Const.KEY_ACTION_SEARCH_MISSION_DATA)) {
+			String query = intent.getStringExtra(Const.KEY_INTENT_QUERY);
+			SharedPrefs sharedPrefs = new SharedPrefs(this);
+			sharedPrefs.setParentIdPrefs("EOP:ESA:FEDEO");
 			sharedPrefs.setQueryPrefs(query);
 
 			FedeoRequest fedeoRequest = new FedeoRequest();
@@ -212,6 +228,5 @@ public class SearchCollectionResultsActivity extends BaseSmartHMActivity
 		showProductsIntent.putExtra(Const.KEY_INTENT_PARENT_ID, parentID);
 		startActivityForResult(showProductsIntent, REQUEST_NEW_SEARCH);
 	}
-
 
 }
