@@ -1,9 +1,9 @@
 package pl.wasat.smarthma.ui.frags.common;
 
 import pl.wasat.smarthma.R;
-import pl.wasat.smarthma.ui.activities.NewsActivity;
 import pl.wasat.smarthma.ui.activities.CollectionsDefinitionActivity;
 import pl.wasat.smarthma.ui.activities.MissionsActivity;
+import pl.wasat.smarthma.ui.activities.NewsActivity;
 import pl.wasat.smarthma.ui.activities.SearchActivity;
 import pl.wasat.smarthma.utils.conn.ConnectionDetector;
 import android.app.Activity;

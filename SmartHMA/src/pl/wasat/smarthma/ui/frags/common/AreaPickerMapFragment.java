@@ -3,9 +3,12 @@ package pl.wasat.smarthma.ui.frags.common;
 import java.util.ArrayList;
 
 import pl.wasat.smarthma.ui.frags.base.BaseMapFragment;
+import pl.wasat.smarthma.ui.frags.base.BaseMapFragment.OnBaseMapFragmentListener;
+import pl.wasat.smarthma.utils.io.AcraExtension;
 import android.app.Activity;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 
 import com.google.android.gms.maps.GoogleMap.OnCameraChangeListener;
 import com.google.android.gms.maps.GoogleMap.OnMapLongClickListener;
@@ -24,7 +27,7 @@ import com.google.android.gms.maps.model.PolygonOptions;
  * method to create an instance of this fragment.
  * 
  */
-public class AreaPickerMapFragment extends BaseMapFragment {
+public class AreaPickerMapFragment extends BaseMapFragment implements OnBaseMapFragmentListener {
 
 	private OnAreaPickerMapFragmentListener mListener;
 
@@ -56,6 +59,7 @@ public class AreaPickerMapFragment extends BaseMapFragment {
 	@Override
 	public void onAttach(Activity activity) {
 		super.onAttach(activity);
+		AcraExtension.mapCustomLog("AreaMap.onAttach", mMap);
 		try {
 			mListener = (OnAreaPickerMapFragmentListener) activity;
 		} catch (ClassCastException e) {
@@ -73,14 +77,51 @@ public class AreaPickerMapFragment extends BaseMapFragment {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		AcraExtension.mapCustomLog("AreaMap.onCreate", mMap);
 		prepareArea();
+		
 	}
 
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onActivityCreated(savedInstanceState);
+		Log.i("MAP","onActivityCreated");
+		AcraExtension.mapCustomLog("AreaMap.onActivityCreated", mMap);
+		
+	}
 
+	@Override
+	public void onPause() {
+		postDrawArea();
+		AcraExtension.mapCustomLog("AreaMap.onPause", mMap);
+		
+		super.onPause();
+	}
+
+	@Override
+	public void onBaseSupportMapReady() {
+		AcraExtension.mapCustomLog("AreaMap.onBaseSupportMapReady", mMap);
+		setMapListeners();
+		
+	}
+	
+	/**
+	 * This interface must be implemented by activities that contain this
+	 * fragment to allow an interaction in this fragment to be communicated to
+	 * the activity and potentially other fragments contained in that activity.
+	 * <p>
+	 * See the Android Training lesson <a href=
+	 * "http://developer.android.com/training/basics/fragments/communicating.html"
+	 * >Communicating with Other Fragments</a> for more information.
+	 */
+	public interface OnAreaPickerMapFragmentListener {
+		public void onMapFragmentBoundsChange(LatLngBounds bounds);
+	}
+
+	private void setMapListeners() {
+		AcraExtension.mapCustomLog("AreaMap.setMapListeners", mMap);
+		Log.i("MAP","setMapListeners");
 		mMap.setOnCameraChangeListener(new OnCameraChangeListener() {
 
 			@Override
@@ -101,26 +142,6 @@ public class AreaPickerMapFragment extends BaseMapFragment {
 				postDrawArea();
 			}
 		});
-	}
-
-	@Override
-	public void onPause() {
-		postDrawArea();
-
-		super.onPause();
-	}
-
-	/**
-	 * This interface must be implemented by activities that contain this
-	 * fragment to allow an interaction in this fragment to be communicated to
-	 * the activity and potentially other fragments contained in that activity.
-	 * <p>
-	 * See the Android Training lesson <a href=
-	 * "http://developer.android.com/training/basics/fragments/communicating.html"
-	 * >Communicating with Other Fragments</a> for more information.
-	 */
-	public interface OnAreaPickerMapFragmentListener {
-		public void onMapFragmentBoundsChange(LatLngBounds bounds);
 	}
 
 	private void prepareArea() {
@@ -179,5 +200,7 @@ public class AreaPickerMapFragment extends BaseMapFragment {
 			mMap.addCircle(circle);
 		}
 	}
+
+
 
 }

@@ -10,10 +10,10 @@ public class MetadataCleaner {
 
 	public String getCleanValue(String value) {
 		String cleanValue = value;
-		
+
 		cleanValue = removeUnessesary(value);
-		//cleanValue = changeUperCase(cleanValue);
-		
+		cleanValue = changeUperCase(cleanValue);
+
 		return cleanValue;
 	}
 
@@ -63,24 +63,21 @@ public class MetadataCleaner {
 	}
 
 	public String changeUperCase(String inputString) {
-		// String inputString = null; // get user input
-
+		if (inputString.isEmpty()) {
+			return inputString;
+		}
 		String outputString = String.valueOf(inputString.charAt(0));
 
 		for (int i = 1; i < inputString.length(); i++) {
 			char cThis = inputString.charAt(i);
-			char cPrev = inputString.charAt(i);
-			if (Character.isUpperCase(cThis)) {
-				if (Character.isLowerCase(cPrev)) {
-					// outputString = Character.isUpperCase(cThis) ? cThis + " "
-					// : "";
-					outputString = " " + Character.toLowerCase(cThis);
-				}
+			char cPrev = inputString.charAt(i - 1);
+			if (Character.isUpperCase(cThis) && Character.isLowerCase(cPrev)) {
+				outputString = outputString + " "
+						+ Character.toLowerCase(cThis);
 			} else {
 				outputString = outputString + cThis;
 			}
 		}
-		System.out.println(outputString);
 		return outputString;
 	}
 

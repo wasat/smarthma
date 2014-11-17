@@ -1,19 +1,15 @@
 package pl.wasat.smarthma.ui.frags.common;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
 import pl.wasat.smarthma.R;
+import pl.wasat.smarthma.interfaces.OnBaseMapFragmentPublicListener;
 import pl.wasat.smarthma.model.eo.Footprint;
 import pl.wasat.smarthma.model.eo.Pos;
 import pl.wasat.smarthma.ui.frags.base.BaseMapFragment;
-import pl.wasat.smarthma.ui.frags.base.BaseMapFragment.OnBaseMapFragmentListener;
 import android.app.Activity;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.location.Location;
@@ -49,7 +45,7 @@ import com.squareup.picasso.Transformation;
  * 
  */
 public class ExtendedMapFragment extends Fragment implements
-		OnBaseMapFragmentListener, Target, Transformation,
+		OnBaseMapFragmentPublicListener, Target, Transformation,
 		OnSeekBarChangeListener {
 
 	private BaseMapFragment baseMapFragment;
@@ -119,7 +115,7 @@ public class ExtendedMapFragment extends Fragment implements
 		baseMapFragment = (BaseMapFragment) fm
 				.findFragmentById(R.id.frag_support_map_base);
 		if (baseMapFragment == null) {
-			baseMapFragment = BaseMapFragment.newInstance();
+			baseMapFragment = BaseMapFragment.newInstance(this);
 			fm.beginTransaction()
 					.replace(R.id.frag_support_map_base, baseMapFragment)
 					.commit();
@@ -258,7 +254,7 @@ public class ExtendedMapFragment extends Fragment implements
 				.into(quicklookTarget);
 	}
 
-	// decodes image and scales it to reduce memory consumption
+/*	// decodes image and scales it to reduce memory consumption
 	private Bitmap decodeFile(File f) {
 		try {
 			// Decode image size
@@ -282,10 +278,10 @@ public class ExtendedMapFragment extends Fragment implements
 		} catch (FileNotFoundException e) {
 		}
 		return null;
-	}
+	}*/
 
 	@Override
-	public void onBaseSupportMapReady() {
+	public void onBaseSupportMapPublicReady() {
 		mMap = baseMapFragment.getMap();
 		if (mListener != null) {
 			mListener.onMapReady();
