@@ -148,7 +148,7 @@ public class BaseShowProductsListFragment extends BaseSpiceFragment {
 						: ListView.CHOICE_MODE_NONE);
 	}
 
-	public void setActivatedPosition(int position) {
+	void setActivatedPosition(int position) {
 		if (position == ListView.INVALID_POSITION) {
 			entryImagesListView.setItemChecked(mActivatedPosition, false);
 		} else {
@@ -204,14 +204,14 @@ public class BaseShowProductsListFragment extends BaseSpiceFragment {
 	protected void loadFailureFrag() {
 	}
 
-	public void loadProductItemDetails(Entry entry) {
+	protected void loadProductItemDetails(Entry entry) {
 	}
 
 	/**
 	 * @param searchProductFeeds
 	 */
-	public void loadSearchResultProductsIntroDetailsFrag(
-			Feed searchProductFeeds) {
+    protected void loadSearchResultProductsIntroDetailsFrag(
+            Feed searchProductFeeds) {
 	}
 
 	/**

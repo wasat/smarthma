@@ -111,7 +111,7 @@ public class SearchListFragment extends BaseSpiceListFragment {
 		super.onStart();
 		// TODO: Find solution - why fragment is called twice
 		stopSearch = getArguments().getBoolean(Const.KEY_INTENT_RETURN_STOP_SEARCH);
-		if (searchRequest != null && stopSearch == false) {
+		if (searchRequest != null && !stopSearch) {
 			loadSearchFeedResponse(searchRequest);
 		}
 	}

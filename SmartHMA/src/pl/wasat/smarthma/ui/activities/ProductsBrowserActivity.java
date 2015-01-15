@@ -23,7 +23,7 @@ public class ProductsBrowserActivity extends BaseSmartHMActivity implements
 		OnProductDetailsFragmentListener, OnMetadataFragmentListener,
 		OnExtendedMapFragmentListener, OnBaseShowProductsListFragmentListener {
 
-	ExtendedMapFragment extendedMapFragment;
+	private ExtendedMapFragment extendedMapFragment;
 	private Footprint mFootprint;
 	private String quicklookUrl;
 

@@ -50,10 +50,10 @@ public class ExtendedMapFragment extends Fragment implements
 
 	private BaseMapFragment baseMapFragment;
 	private GoogleMap mMap;
-	GroundOverlay groundOverlay;
-	SeekBar seekBarOpacity;
+	private GroundOverlay groundOverlay;
+	private SeekBar seekBarOpacity;
 
-	BitmapDescriptor qLookImage;
+	private BitmapDescriptor qLookImage;
 
 	private static final int BEARING_LEVEL_VALUE = 0;
 	private static final int START_OPACITY = 25;
@@ -77,8 +77,7 @@ public class ExtendedMapFragment extends Fragment implements
 	 */
 	// TODO: Rename and change types and number of parameters
 	public static ExtendedMapFragment newInstance() {
-		ExtendedMapFragment fragment = new ExtendedMapFragment();
-		return fragment;
+		return new ExtendedMapFragment();
 	}
 
 	public ExtendedMapFragment() {
@@ -88,8 +87,6 @@ public class ExtendedMapFragment extends Fragment implements
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		if (getArguments() != null) {
-		}
 	}
 
 	@Override

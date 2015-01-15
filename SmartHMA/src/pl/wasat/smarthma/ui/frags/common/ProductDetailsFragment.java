@@ -42,7 +42,7 @@ import android.widget.Toast;
 public class ProductDetailsFragment extends Fragment implements Target {
 	private static final String KEY_PRODUCT_ENTRY = "pl.wasat.smarthma.KEY_PRODUCT_ENTRY";
 
-	protected Entry displayedEntry;
+	private Entry displayedEntry;
 
 	private OnProductDetailsFragmentListener mListener;
 
@@ -212,7 +212,7 @@ public class ProductDetailsFragment extends Fragment implements Target {
 	/**
 	 * 
 	 */
-	public void loadMetadataFrag() {
+    void loadMetadataFrag() {
 		MetadataFragment metadataFragment = MetadataFragment
 				.newInstance(displayedEntry);
 		getActivity()
@@ -223,7 +223,7 @@ public class ProductDetailsFragment extends Fragment implements Target {
 				.addToBackStack("MetadataFragment").commit();
 	}
 
-	public void showExtendedMap() {
+	void showExtendedMap() {
 		String url = getQuicklookUrl();
 		Footprint footprint = displayedEntry.getEarthObservation()
 				.getFeatureOfInterest().getFootprint();
@@ -231,7 +231,7 @@ public class ProductDetailsFragment extends Fragment implements Target {
 		mListener.onProductDetailsFragmentExtendedMapShow(url, footprint);
 	}
 
-	public void showQuicklookGallery() {
+	void showQuicklookGallery() {
 		String qLookUrl = getQuicklookUrl();
 		mListener.onProductDetailsFragmentQuicklookShow(qLookUrl);
 	}
@@ -244,7 +244,7 @@ public class ProductDetailsFragment extends Fragment implements Target {
 
 		for (Iterator<Browse> iterator = browseList.iterator(); iterator
 				.hasNext();) {
-			Browse browse = (Browse) iterator.next();
+			Browse browse = iterator.next();
 			if (browse.getBrowseInformation().getType().get__text()
 					.equalsIgnoreCase("QUICKLOOK")) {
 				url = browse.getBrowseInformation().getFileName()

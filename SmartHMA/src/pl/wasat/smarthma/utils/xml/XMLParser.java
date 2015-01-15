@@ -78,7 +78,6 @@ public class XMLParser {
 						supports = new ArrayList<String>();
 					} else if (tagname.equalsIgnoreCase("supports")) {
 						collectionItem = new Collection();
-					} else if (tagname.equalsIgnoreCase("test")) {
 					}
 					break;
 

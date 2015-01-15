@@ -15,7 +15,8 @@ import android.util.Log;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesClient;
 import com.google.android.gms.common.GooglePlayServicesUtil;
-import com.google.android.gms.location.LocationClient;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -36,29 +37,32 @@ import com.google.android.gms.maps.model.TileProvider;
  * 
  */
 public class BaseMapFragment extends SupportMapFragment implements
-		GooglePlayServicesClient.ConnectionCallbacks {
+		GooglePlayServicesClient.ConnectionCallbacks,
+		GoogleApiClient.ConnectionCallbacks,
+		GoogleApiClient.OnConnectionFailedListener {
 
 	protected static final String KEY_MAP_MODE = "pl.wasat.smarthma.KEY_MAP_MODE";
 
 	/** reference to Google Maps object */
-	public SupportMapFragment supportMapFrag;
+	private SupportMapFragment supportMapFrag;
 	protected GoogleMap mMap;
-	protected LocationClient mLocationClient;
+	// private LocationClient mLocationClient;
+
+	private GoogleApiClient mGoogleApiClient;
 
 	/** broadcast receiver */
-	protected BroadcastReceiver mReceiver;
+	private BroadcastReceiver mReceiver;
 
 	public OnBaseMapFragmentListener mListener;
-	protected OnBaseMapFragmentPublicListener publicListener;
+	private OnBaseMapFragmentPublicListener publicListener;
 
 	protected int mapMode;
 
-	protected LatLngBounds targetBounds;
+	private LatLngBounds targetBounds;
 
 	public static BaseMapFragment newInstance(
 			OnBaseMapFragmentPublicListener listener) {
-		BaseMapFragment fragment = new BaseMapFragment(listener);
-		return fragment;
+		return new BaseMapFragment(listener);
 	}
 
 	public BaseMapFragment() {
@@ -78,6 +82,10 @@ public class BaseMapFragment extends SupportMapFragment implements
 		if (getArguments() != null) {
 			// mapMode = getArguments().getInt(KEY_MAP_MODE);
 		}
+
+		mGoogleApiClient = new GoogleApiClient.Builder(getActivity())
+				.addApi(LocationServices.API).addConnectionCallbacks(this)
+				.addOnConnectionFailedListener(this).build();
 	}
 
 	@Override
@@ -91,10 +99,25 @@ public class BaseMapFragment extends SupportMapFragment implements
 	}
 
 	@Override
+	public void onStart() {
+		super.onStart();
+		// Connect the client.
+		mGoogleApiClient.connect();
+	}
+
+	@Override
+	public void onStop() {
+		// Disconnecting the client invalidates it.
+		mGoogleApiClient.disconnect();
+		super.onStop();
+	}
+
+	@Override
 	public void onConnected(Bundle dataBundle) {
 		AcraExtension.mapCustomLog("BaseMap.onConnected", mMap);
 
-		Location location = mLocationClient.getLastLocation();
+		Location location = LocationServices.FusedLocationApi
+				.getLastLocation(mGoogleApiClient);
 		LatLng latLng = new LatLng(location.getLatitude(),
 				location.getLongitude());
 		CameraUpdate cameraUpdate = CameraUpdateFactory
@@ -129,10 +152,6 @@ public class BaseMapFragment extends SupportMapFragment implements
 
 				AcraExtension.mapCustomLog(
 						"BaseMap.startCreateMap.sIStNotNull", mMap);
-			} else {
-				// First incarnation of this activity.
-				// set retaininstance to minimize rotation time w/ google
-				// maps
 			}
 		} else {
 			Dialog dialog = GooglePlayServicesUtil.getErrorDialog(status,
@@ -191,13 +210,11 @@ public class BaseMapFragment extends SupportMapFragment implements
 
 	private void sendSupportMapReadyCallback() {
 		Fragment fragment = this;
-		if (fragment != null) {
-			if (fragment instanceof OnBaseMapFragmentListener) {
-				((OnBaseMapFragmentListener) fragment).onBaseSupportMapReady();
-				Log.i("BASE_MAP", "onActivityCreated.Listener");
-			} else {
-				publicListener.onBaseSupportMapPublicReady();
-			}
+		if (fragment instanceof OnBaseMapFragmentListener) {
+			((OnBaseMapFragmentListener) fragment).onBaseSupportMapReady();
+			Log.i("BASE_MAP", "onActivityCreated.Listener");
+		} else {
+			publicListener.onBaseSupportMapPublicReady();
 		}
 	}
 
@@ -285,6 +302,18 @@ public class BaseMapFragment extends SupportMapFragment implements
 
 	public void setTargetBounds(LatLngBounds bounds) {
 		targetBounds = bounds;
+	}
+
+	@Override
+	public void onConnectionSuspended(int cause) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void onConnectionFailed(ConnectionResult result) {
+		// TODO Auto-generated method stub
+
 	}
 
 }

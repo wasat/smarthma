@@ -9,7 +9,7 @@ public class MetadataCleaner {
 	}
 
 	public String getCleanValue(String value) {
-		String cleanValue = value;
+		String cleanValue;
 
 		cleanValue = removeUnessesary(value);
 		cleanValue = changeUperCase(cleanValue);

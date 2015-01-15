@@ -12,7 +12,7 @@ public class AcraExtension {
 
 	public static void mapState(String instance) {
 		ACRA.getErrorReporter().putCustomData(
-				System.currentTimeMillis()+ "-map_instance", instance);
+				System.currentTimeMillis() + "-map_instance", instance);
 	}
 
 	public static void mapCustomLog(String place, GoogleMap map) {

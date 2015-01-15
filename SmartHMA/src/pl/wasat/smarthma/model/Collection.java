@@ -25,7 +25,7 @@ public class Collection implements Parcelable, Comparator<Object> {
 	public Collection() {
 	}
 
-	public Collection(Parcel source) {
+	private Collection(Parcel source) {
 		this.id = source.readInt();
 		this.name = source.readString();
 	}

@@ -35,22 +35,15 @@ public class AreaPickerMapFragment extends BaseMapFragment implements OnBaseMapF
 	private ArrayList<LatLng> markedPtList;
 	private LatLngBounds.Builder areaBoundsBuilder;
 
-	Polygon areaPolygon;
+	private Polygon areaPolygon;
 
 	/**
 	 * Use this factory method to create a new instance of this fragment using
 	 * the provided parameters.
-	 * 
-	 * @param mapMode
-	 * 
 	 * @return A new instance of fragment BaseMapFragment.
 	 */
-	public static AreaPickerMapFragment newInstance(int mapMode) {
-		AreaPickerMapFragment fragment = new AreaPickerMapFragment();
-		Bundle args = new Bundle();
-		args.putSerializable(KEY_MAP_MODE, mapMode);
-		fragment.setArguments(args);
-		return fragment;
+	public static AreaPickerMapFragment newInstance() {
+		return new AreaPickerMapFragment();
 	}
 
 	public AreaPickerMapFragment() {

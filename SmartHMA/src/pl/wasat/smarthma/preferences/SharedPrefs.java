@@ -5,7 +5,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 
 public class SharedPrefs {
-	static SharedPreferences settings;
+	private static SharedPreferences settings;
 
 	public SharedPrefs(Context context) {
 		settings = context.getSharedPreferences(Const.KEY_PREF_FILE, 0);

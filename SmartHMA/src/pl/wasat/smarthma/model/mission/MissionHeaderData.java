@@ -2,9 +2,9 @@ package pl.wasat.smarthma.model.mission;
 
 public class MissionHeaderData {
 
-	int id;
-	String name;
-	String url;
+	private int id;
+	private String name;
+	private String url;
 
 	public MissionHeaderData() {
 		super();
