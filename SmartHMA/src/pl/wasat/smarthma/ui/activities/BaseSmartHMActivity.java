@@ -16,8 +16,11 @@ import android.support.v4.app.FragmentActivity;
  */
 public class BaseSmartHMActivity extends FragmentActivity {
 	
-	protected static final int REQUEST_NEW_SEARCH = 0;
-	protected boolean stopNewSearch = false;
+	static final int REQUEST_NEW_SEARCH = 0;
+	boolean stopNewSearch = false;
+
+	public BaseSmartHMActivity() {
+	}
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

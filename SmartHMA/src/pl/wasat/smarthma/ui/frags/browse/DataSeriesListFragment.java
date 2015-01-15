@@ -99,7 +99,7 @@ public class DataSeriesListFragment extends BaseSpiceListFragment {
 		super.onStart();
 		// TODO: Find solution - why fragment is called twice
 		stopSearch = getArguments().getBoolean(Const.KEY_INTENT_RETURN_STOP_SEARCH);
-		if (browseRequest != null && stopSearch == false) {
+		if (browseRequest != null && !stopSearch) {
 			loadDataSeriesFeedResponse(browseRequest);
 		}
 	}
@@ -211,7 +211,7 @@ public class DataSeriesListFragment extends BaseSpiceListFragment {
 	 * 
 	 */
 	private void loadIntroFeedInfo(Feed dataSeriesFeeds) {
-		FeedSummaryBrowseCollectionsFragment feedSummaryBrowseCollectionsFragment = (FeedSummaryBrowseCollectionsFragment) FeedSummaryBrowseCollectionsFragment
+		FeedSummaryBrowseCollectionsFragment feedSummaryBrowseCollectionsFragment = FeedSummaryBrowseCollectionsFragment
 				.newInstance(dataSeriesFeeds);
 		getActivity()
 				.getSupportFragmentManager()

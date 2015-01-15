@@ -30,7 +30,7 @@ public class MissionsActivity extends BaseSmartHMActivity implements
 		listLayout.setBackgroundColor(Color.parseColor("#D9D9D9"));
 		
 		MissionsExtListFragment extendedListFragment = MissionsExtListFragment
-				.newInstance(null, null);
+				.newInstance();
 
 		getSupportFragmentManager()
 				.beginTransaction()

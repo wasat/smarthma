@@ -45,7 +45,7 @@ public class BrowseCollectionFirstDetailFragment extends
 			Bundle savedInstanceState) {
 		super.onCreateView(inflater, container, savedInstanceState);
 		AreaPickerMapFragment areaPickerMapFragment = AreaPickerMapFragment
-				.newInstance(0);
+				.newInstance();
 		getActivity()
 				.getSupportFragmentManager()
 				.beginTransaction()

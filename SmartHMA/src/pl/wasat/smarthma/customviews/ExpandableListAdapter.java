@@ -81,7 +81,7 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
 	public int getChildrenCount(int groupPosition) {
 		String missKey =  this._listDataHeader.get(groupPosition).getName();
 		List<MissionItemData> hsh = this._listDataChild.get(missKey);
-		int size = hsh.size();
+        int size = hsh.size();
 		 
 		return size;
 				

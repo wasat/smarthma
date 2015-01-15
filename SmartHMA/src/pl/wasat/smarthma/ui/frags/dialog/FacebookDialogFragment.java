@@ -38,10 +38,7 @@ import com.squareup.picasso.Picasso.LoadedFrom;
 import com.squareup.picasso.Target;
 
 /**
- * A simple {@link Fragment} subclass. Activities that contain this fragment
- * must implement the
- * {@link FacebookDialogFragment.OnFacebookFragmentInteractionListener}
- * interface to handle interaction events. Use the
+ * A simple {@link Fragment} subclass. Use the
  * {@link FacebookDialogFragment#newInstance} factory method to create an
  * instance of this fragment.
  * 
@@ -53,8 +50,7 @@ public class FacebookDialogFragment extends DialogFragment implements Target {
 	private String paramQLookUrl;
 
 	private Button postPhotoButton;
-	private LoginButton loginButton;
-	private ImageView imgViewQLook;
+    private ImageView imgViewQLook;
 
 	private Bitmap quicklookImg;
 
@@ -105,10 +101,6 @@ public class FacebookDialogFragment extends DialogFragment implements Target {
 	 * 
 	 * @param qUrl
 	 * 
-	 * @param param1
-	 *            Parameter 1.
-	 * @param param2
-	 *            Parameter 2.
 	 * @return A new instance of fragment FacebookFragment.
 	 */
 	public static FacebookDialogFragment newInstance(String qUrl) {
@@ -158,22 +150,22 @@ public class FacebookDialogFragment extends DialogFragment implements Target {
 		profilePictureView.isInEditMode();
 		userInfo = (TextView) rootView.findViewById(R.id.facebook_dialog_tv_user_info);
 
-		loginButton = (LoginButton) rootView.findViewById(R.id.facebook_dialog_btn_login);
+        LoginButton loginButton = (LoginButton) rootView.findViewById(R.id.facebook_dialog_btn_login);
 		loginButton.setFragment(this);
 		loginButton.isInEditMode();
 		loginButton
 				.setUserInfoChangedCallback(new LoginButton.UserInfoChangedCallback() {
-					@Override
-					public void onUserInfoFetched(GraphUser user) {
-						//Log.i("FB", "onUserInfoFetched");
-						graphUser = user;
-						updateUI();
-						// It's possible that we were waiting for this.user to
-						// be populated in order to post a
-						// status update.
-						handlePendingAction();
-					}
-				});
+                    @Override
+                    public void onUserInfoFetched(GraphUser user) {
+                        //Log.i("FB", "onUserInfoFetched");
+                        graphUser = user;
+                        updateUI();
+                        // It's possible that we were waiting for this.user to
+                        // be populated in order to post a
+                        // status update.
+                        handlePendingAction();
+                    }
+                });
 
 		imgViewQLook = (ImageView) rootView.findViewById(R.id.facebook_dialog_img_share_qlook);
 
@@ -373,8 +365,8 @@ public class FacebookDialogFragment extends DialogFragment implements Target {
 	private void showPublishResult(String message, GraphObject result,
 			FacebookRequestError error) {
 		//Log.i("FB", "showPublishResult");
-		String title = null;
-		String alertMessage = null;
+		String title;
+		String alertMessage;
 		Boolean isSuccess;
 		if (error == null) {
 			title = getString(R.string.success);
@@ -398,8 +390,8 @@ public class FacebookDialogFragment extends DialogFragment implements Target {
 								if (isFinished) {
 									dismiss();
 								}
-							};
-						}).show();
+							}
+                        }).show();
 	}
 
 	private interface GraphObjectWithId extends GraphObject {

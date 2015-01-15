@@ -12,10 +12,10 @@ import android.provider.BaseColumns;
 
 public class EoDbAdapter{
 	
-	public static final String KEY_ROWID = BaseColumns._ID;
-	public static final String KEY_GUID = "guid";
-	public static final String KEY_READ = "read";
-	public static final String KEY_OFFLINE = "offline";    
+	private static final String KEY_ROWID = BaseColumns._ID;
+	private static final String KEY_GUID = "guid";
+	private static final String KEY_READ = "read";
+	private static final String KEY_OFFLINE = "offline";
 	
 	private static final String DATABASE_NAME = "blogposts";
 	private static final String DATABASE_TABLE = "blogpostlist";

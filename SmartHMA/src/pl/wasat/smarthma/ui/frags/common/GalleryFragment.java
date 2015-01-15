@@ -15,7 +15,7 @@ import android.view.ViewGroup.LayoutParams;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
-public class GalleryFragment extends Fragment {
+class GalleryFragment extends Fragment {
 
     @Override
 	public void onCreate(Bundle savedInstanceState) {

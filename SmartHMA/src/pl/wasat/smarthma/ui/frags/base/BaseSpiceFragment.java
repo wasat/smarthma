@@ -64,11 +64,11 @@ public class BaseSpiceFragment extends Fragment implements
 		super.onStop();
 	}
 
-	protected SpiceManager getSpiceManager() {
+	SpiceManager getSpiceManager() {
 		return smartHMASpiceManager;
 	}
 	
-	protected OkHttpBitmapSpiceManager getBitmapSpiceManager()
+	OkHttpBitmapSpiceManager getBitmapSpiceManager()
 	{
 		return spiceManagerBinary;
 	}
@@ -89,7 +89,7 @@ public class BaseSpiceFragment extends Fragment implements
 			FedeoExceptionHandler fedHr = null;
 			try {
 
-				String inStr = null;
+				String inStr;
 
 				HttpResponseException exception = (HttpResponseException) spiceException
 						.getCause();

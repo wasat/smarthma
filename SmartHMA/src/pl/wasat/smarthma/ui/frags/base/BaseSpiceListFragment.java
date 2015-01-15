@@ -79,7 +79,7 @@ public class BaseSpiceListFragment extends ListFragment implements
 			FedeoExceptionHandler fedHr = null;
 			try {
 
-				String inStr = null;
+				String inStr;
 
                 HttpResponseException exception = (HttpResponseException) spiceException
                         .getCause();

@@ -54,12 +54,11 @@ public class SearchDetailFragment extends Fragment {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		if (getArguments() != null) {
-		}
-
-		if (getArguments().containsKey(Entry.KEY_RSS_ENTRY)) {
-			displayedEntry = (Entry) getArguments().getSerializable(
-					Entry.KEY_RSS_ENTRY);
-		}
+            if (getArguments().containsKey(Entry.KEY_RSS_ENTRY)) {
+                displayedEntry = (Entry) getArguments().getSerializable(
+                        Entry.KEY_RSS_ENTRY);
+            }
+        }
 
 	}
 
@@ -108,7 +107,7 @@ public class SearchDetailFragment extends Fragment {
 				@Override
 				public void onClick(View v) {
 					AreaPickerMapFragment areaPickerMapFragment = AreaPickerMapFragment
-							.newInstance(0);
+							.newInstance();
 					getActivity()
 							.getSupportFragmentManager()
 							.beginTransaction()
@@ -179,7 +178,7 @@ public class SearchDetailFragment extends Fragment {
 	private void loadSearchParameters(String title, String pubDate) {
 
 		AreaPickerMapFragment areaPickerMapFragment = AreaPickerMapFragment
-				.newInstance(0);
+				.newInstance();
 		getActivity()
 				.getSupportFragmentManager()
 				.beginTransaction()

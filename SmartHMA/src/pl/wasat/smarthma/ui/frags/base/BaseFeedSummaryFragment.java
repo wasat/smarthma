@@ -35,6 +35,11 @@ public class BaseFeedSummaryFragment extends Fragment {
 	private Button btnReload;
 	private Button btnNext;
 	private Button btnLast;
+	
+	
+
+	public BaseFeedSummaryFragment() {
+	}
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {

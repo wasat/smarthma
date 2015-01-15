@@ -47,7 +47,7 @@ public class FedeoSearchRequest extends GoogleHttpClientSpiceRequest<Feed> {
 					new GenericUrl(fedeoRequest.getUrl()));
 			HttpResponse response = request.execute();
 
-			InputStream in = null;
+			InputStream in;
             in = response.getContent();
 
             SAXParserFactory spf = SAXParserFactory.newInstance();

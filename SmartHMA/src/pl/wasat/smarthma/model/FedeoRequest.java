@@ -43,7 +43,7 @@ public class FedeoRequest implements Serializable {
 		this.httpAccept = "application/atom%2Bxml";
 	}
 
-	public void setDefaultParams() {
+	void setDefaultParams() {
 		this.httpAccept = "application/atom%2Bxml";
 		this.startRecord = "1";
 		this.maximumRecords = "20";
@@ -80,7 +80,7 @@ public class FedeoRequest implements Serializable {
 	}
 
 	/**
-	 * @return
+	 * @return String url
 	 */
 	public String getUrl() {
 		if (url == null) {
@@ -191,7 +191,7 @@ public class FedeoRequest implements Serializable {
 	 * @param startDate
 	 *            the startDate to set
 	 */
-	public void setStartDate(String startDate) {
+    void setStartDate(String startDate) {
 		this.startDate = startDate;
 		this.params.put("startDate", startDate);
 	}
@@ -207,7 +207,7 @@ public class FedeoRequest implements Serializable {
 	 * @param endDate
 	 *            the endDate to set
 	 */
-	public void setEndDate(String endDate) {
+    void setEndDate(String endDate) {
 		this.endDate = endDate;
 		this.params.put("endDate", endDate);
 	}
@@ -223,7 +223,7 @@ public class FedeoRequest implements Serializable {
 	 * @param parentIdentifier
 	 *            the parentIdentifier to set
 	 */
-	public void setParentIdentifier(String parentIdentifier) {
+    void setParentIdentifier(String parentIdentifier) {
 
 		String urn = parentIdentifier.substring(0, 4);
 		String baseParentIdentifier = parentIdentifier;
@@ -245,7 +245,7 @@ public class FedeoRequest implements Serializable {
 	 * @param bbox
 	 *            the box to set
 	 */
-	public void setBbox(String bbox) {
+    void setBbox(String bbox) {
 		this.bbox = bbox;
 		this.params.put("bbox", bbox);
 	}
@@ -256,7 +256,7 @@ public class FedeoRequest implements Serializable {
 	 * @param neLon
 	 * @param neLat
 	 */
-	public void setBbox(Float swLon, Float swLat, Float neLon, Float neLat) {
+    void setBbox(Float swLon, Float swLat, Float neLon, Float neLat) {
 		String bbox = swLon + "," + swLat + "," + neLon + "," + neLat;
 		setBbox(bbox);
 	}
@@ -265,7 +265,7 @@ public class FedeoRequest implements Serializable {
 	 * @param southwest
 	 * @param northeast
 	 */
-	public void setBbox(LatLng southwest, LatLng northeast) {
+    void setBbox(LatLng southwest, LatLng northeast) {
 		setBbox((float) southwest.longitude, (float) southwest.latitude,
 				(float) northeast.longitude, (float) northeast.latitude);
 	}
@@ -304,7 +304,7 @@ public class FedeoRequest implements Serializable {
 	 * @param query
 	 *            the query to set
 	 */
-	public void setQuery(String query) {
+    void setQuery(String query) {
 		this.query = query;
 		this.params.put("query", query);
 	}

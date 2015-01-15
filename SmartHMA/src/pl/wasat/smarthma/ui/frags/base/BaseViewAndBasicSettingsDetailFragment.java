@@ -56,9 +56,10 @@ public class BaseViewAndBasicSettingsDetailFragment extends Fragment {
 
 	protected Entry displayedEntry;
 
-	static SharedPrefs sharedPrefs;
+	private static SharedPrefs sharedPrefs;
 
-	protected LatLngBounds geoBounds = null;
+	@SuppressWarnings("unused")
+	private LatLngBounds geoBounds = null;
 
 	protected View rootView;
 
@@ -80,7 +81,7 @@ public class BaseViewAndBasicSettingsDetailFragment extends Fragment {
 		return fragment;
 	}
 
-	public BaseViewAndBasicSettingsDetailFragment() {
+	protected BaseViewAndBasicSettingsDetailFragment() {
 		// Required empty public constructor
 	}
 
@@ -145,7 +146,7 @@ public class BaseViewAndBasicSettingsDetailFragment extends Fragment {
 			@Override
 			public void onClick(View v) {
 				AreaPickerMapFragment areaPickerMapFragment = AreaPickerMapFragment
-						.newInstance(0);
+						.newInstance();
 				getActivity()
 						.getSupportFragmentManager()
 						.beginTransaction()

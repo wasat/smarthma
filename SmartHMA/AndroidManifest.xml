@@ -87,10 +87,6 @@
             android:label="@string/esa_missions" >
         </activity>
         <activity
-            android:name="pl.wasat.smarthma.ui.activities.MissionsActivity"
-            android:label="@string/esa_missions" >
-        </activity>
-        <activity
             android:name=".ui.activities.NewsActivity"
             android:label="@string/title_article_list" >
         </activity>

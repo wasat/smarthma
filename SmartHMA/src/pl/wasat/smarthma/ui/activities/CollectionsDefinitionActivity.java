@@ -43,8 +43,6 @@ public class CollectionsDefinitionActivity extends BaseSmartHMActivity
 		Ln.getConfig().setLoggingLevel(Log.ERROR);
 		super.onCreate(savedInstanceState);
 
-		if (savedInstanceState != null) {
-		}
 		// ViewGroup topLayout = (ViewGroup) findViewById(R.id.left_panel_map);
 		// topLayout.requestTransparentRegion(topLayout);
 
@@ -216,9 +214,6 @@ public class CollectionsDefinitionActivity extends BaseSmartHMActivity
 			postReceivingData(intent);
 		}
 
-		*//**
-		 * @param intent
-		 *//*
 		private void postReceivingData(Intent intent) {
 			disableProgressBar();
 			Bundle bundle = intent.getExtras();

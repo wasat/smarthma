@@ -131,7 +131,7 @@ public class SearchBasicInfoRightFragment extends Fragment {
 			@Override
 			public void onClick(View v) {
 				AreaPickerMapFragment areaPickerMapFragment = AreaPickerMapFragment
-						.newInstance(0);
+						.newInstance();
 				getActivity()
 						.getSupportFragmentManager()
 						.beginTransaction()
@@ -236,10 +236,10 @@ public class SearchBasicInfoRightFragment extends Fragment {
 	}
 
 	private void updateSearchAreaBounds() {
-		String bboxWest = "";
-		String bboxSouth = "";
-		String bboxEast = "";
-		String bboxNorth = "";
+		String bboxWest;
+		String bboxSouth;
+		String bboxEast;
+		String bboxNorth;
 
 		LocManager locManager = new LocManager(getActivity());
 		Location location = locManager.getAvailableLocation();
@@ -291,13 +291,13 @@ public class SearchBasicInfoRightFragment extends Fragment {
 		sharedPrefs.setDateTimePrefs(setDtISO(calStart), setDtISO(calEnd));
 	}
 
-	public void showCatalogueListDialog() {
+	void showCatalogueListDialog() {
 		CatalogueListDialogFragment listDialFrag = new CatalogueListDialogFragment();
 		listDialFrag.show(getActivity().getSupportFragmentManager(),
 				"CatalogueListDialogFragment");
 	}
 
-	public void showDatePickerDialog(View v) {
+	void showDatePickerDialog(View v) {
 		DialogFragment newFragment = new DatePickerFragment();
 		Bundle args = new Bundle();
 		args.putString(KEY_BUTTON_TAG, (String) v.getTag());
@@ -409,7 +409,7 @@ public class SearchBasicInfoRightFragment extends Fragment {
 		}
 	}
 
-	public static class CatalogueListDialogFragment extends DialogFragment {
+	private static class CatalogueListDialogFragment extends DialogFragment {
 		@Override
 		public Dialog onCreateDialog(Bundle savedInstanceState) {
 			AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());

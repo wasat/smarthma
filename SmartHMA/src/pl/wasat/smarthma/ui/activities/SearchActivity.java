@@ -26,9 +26,6 @@ public class SearchActivity extends BaseSmartHMActivity implements
 		Ln.getConfig().setLoggingLevel(Log.ERROR);
 		super.onCreate(savedInstanceState);
 
-		if (savedInstanceState != null) {
-		}
-
 		if (findViewById(R.id.activity_base_list_container) != null) {
 
 			loadRightPanel();
