@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="pl.wasat.smarthma"
+    android:versionCode="25"
+    android:versionName="1.0.25" >
+
+    <uses-sdk
+        android:minSdkVersion="14"
+        android:targetSdkVersion="21" />
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+
+    <uses-feature
+        android:glEsVersion="0x00020000"
+        android:required="true" />
+
+    <application
+        android:name=".SmartHMApplication"
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme" >
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+        <meta-data
+            android:name="com.google.android.maps.v2.API_KEY"
+            android:value="AIzaSyCMZWIkdMS9FlyCt0eb_cMosMTFrt7FZxY" />
+        <meta-data
+            android:name="com.facebook.sdk.ApplicationId"
+            android:value="@string/app_id" />
+
+        <activity
+            android:name=".ui.activities.StartActivity"
+            android:label="@string/app_name"
+            android:theme="@style/Theme.AppCompat.Light" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".ui.activities.CollectionsDefinitionActivity"
+            android:label="@string/activity_name_collections_definition" >
+            <meta-data
+                android:name="android.app.default_searchable"
+                android:value="pl.wasat.smarthma.ui.activities.SearchCollectionResultsActivity" />
+        </activity>
+        <activity
+            android:name=".ui.activities.CollectionsBrowserActivity"
+            android:label="@string/activity_name_collections_browser" >
+        </activity>
+        <activity
+            android:name=".ui.activities.ProductsBrowserActivity"
+            android:label="@string/activity_name_products_browser" >
+        </activity>
+        <activity
+            android:name=".ui.activities.SearchActivity"
+            android:label="@string/activity_name_search_eo_data" >
+            <meta-data
+                android:name="android.app.default_searchable"
+                android:value="pl.wasat.smarthma.ui.activities.SearchCollectionResultsActivity" />
+        </activity>
+        <!-- Search results activity -->
+        <activity
+            android:name=".ui.activities.SearchCollectionResultsActivity"
+            android:label="@string/activity_name_search_collections_results"
+            android:launchMode="singleTop" >
+            <intent-filter>
+                <action android:name="android.intent.action.SEARCH" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.app.searchable"
+                android:resource="@xml/searchable" />
+        </activity>
+        <activity
+            android:name=".ui.activities.MissionsActivity"
+            android:label="@string/esa_missions" >
+        </activity>
+        <activity
+            android:name=".ui.activities.NewsActivity"
+            android:label="@string/title_article_list" >
+        </activity>
+        <activity android:name=".ui.activities.BaseSmartHMActivity" >
+        </activity>
+        <activity
+            android:name="com.facebook.LoginActivity"
+            android:label="@string/app_name"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+
+        <!-- ROBOSPICE SERVICES -->
+
+        <service
+            android:name="com.octo.android.robospice.spicelist.okhttp.OkHttpBitmapSpiceService"
+            android:exported="false" />
+        <service
+            android:name=".services.SmartHmaHttpSpiceService"
+            android:exported="false" />
+
+        <provider
+            android:name="com.facebook.NativeAppCallContentProvider"
+            android:authorities="com.facebook.app.NativeAppCallContentProvider355198514515820"
+            android:exported="false" />
+
+        <receiver
+            android:name="pl.wasat.smarthma.receivers.SmartHmaFacebookBroadcastReceiver"
+            android:exported="false" >
+            <intent-filter>
+                <action android:name="com.facebook.platform.AppCallResultBroadcast" />
+            </intent-filter>
+        </receiver>
+    </application>
+
+</manifest>
