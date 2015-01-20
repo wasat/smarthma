@@ -1,0 +1,17 @@
+# Remove this line if you are using SupportMapFragment
+-dontwarn com.amazon.geo.mapsv2.SupportMapFragment
+
+# Keep all Maps internal interfaces
+-keep public class com.amazon.geo.mapsv2.**internal.* {
+    *;
+}
+
+# Keep all Parcelable Creators
+-keepnames class * implements android.os.Parcelable {
+    public static final ** CREATOR;
+}
+
+# Keep all resource identifiers
+-keepclassmembers class **.R$* {
+    public static <fields>;
+}

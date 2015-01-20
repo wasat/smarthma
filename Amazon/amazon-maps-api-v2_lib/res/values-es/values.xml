@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- From: file:/local/p4clients/pkgbuild-_9DcW/workspace/build/MapsAPIClientLib/MapsAPIClientLib-1.5.39.5/RHEL5_64/DEV.STD.PTHREAD/build/private/android-gradle/intermediates/exploded-aar/MapsAPISupportLibrary.aar/res/values-es/strings.xml -->
+    <eat-comment />
+
+    <string name="amazon_maps_service_missing_manual_message">Es necesario descargar e instalar el servicio de Mapas de Amazon para que la aplicación funcione. Sincroniza el dispositivo.</string>
+    <string name="amazon_maps_service_missing_message">Es necesario descargar e instalar el servicio de Mapas de Amazon para que la aplicación funcione.</string>
+    <string name="amazon_maps_service_missing_title">Se requiere el servicio de Mapas de Amazon</string>
+    <string name="amazon_maps_service_update_manual_message">Es necesario descargar e instalar la actualización del servicio de Mapas de Amazon para que la aplicación funcione. Sincroniza el dispositivo.</string>
+    <string name="amazon_maps_service_update_message">Es necesario descargar e instalar la actualización del servicio de Mapas de Amazon para que la aplicación funcione.</string>
+    <string name="amazon_maps_service_update_title">Se requiere actualización del servicio de Mapas de Amazon</string>
+    <string name="amazon_maps_unhandled_title">Error desconocido</string>
+    <string name="amazon_maps_update">Actualizar</string>
+
+</resources>
