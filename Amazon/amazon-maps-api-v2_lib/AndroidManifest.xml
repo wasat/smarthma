@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.amazon.geo.mapsv2.support"
+    android:versionCode="9710"
+    android:versionName="1.5.39.5_9710" >
+
+    <uses-sdk android:minSdkVersion="11" />
+
+    <application>
+        <uses-library
+            android:name="com.amazon.application.compatibility.enforcer"
+            android:required="false" />
+
+        <meta-data
+            android:name="required_amazon_package:com.amazon.geo.mapsv2.services"
+            android:value="@integer/amazon_maps_services_version" />
+        <meta-data
+            android:name="amazon_maps_services_required"
+            android:value="true" />
+    </application>
+
+</manifest>
