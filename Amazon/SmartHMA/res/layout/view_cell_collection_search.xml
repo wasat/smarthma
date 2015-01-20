@@ -1,0 +1,35 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/search_list_frag_layout"
+    style="?android:attr/textAppearanceLarge"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/list_selector"
+    android:orientation="vertical"
+    tools:context="pl.wasat.smarthma.ui.activities.SearchCollectionResultsActivity" >
+
+    <TextView
+        android:id="@+id/search_list_name"
+        style="?android:attr/textAppearanceLarge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingLeft="15dip"
+        android:paddingRight="8dip"
+        android:paddingTop="5dip"
+        android:textColor="#040404"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/search_listing_smallprint"
+        style="?android:attr/textAppearanceLarge"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="15dip"
+        android:paddingLeft="15dip"
+        android:paddingRight="8dip"
+        android:paddingTop="2dp"
+        android:textColor="#343434"
+        android:textSize="12sp"
+        android:textStyle="italic" />
+
+</LinearLayout>

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- From: file:/local/p4clients/pkgbuild-_9DcW/workspace/build/MapsAPIClientLib/MapsAPIClientLib-1.5.39.5/RHEL5_64/DEV.STD.PTHREAD/build/private/android-gradle/intermediates/exploded-aar/MapsAPISupportLibrary.aar/res/values/version.xml -->
+    <eat-comment />
+
+    <bool name="amazon_maps_class_replacer">false</bool>
+    <!-- From: file:/local/p4clients/pkgbuild-_9DcW/workspace/build/MapsAPIClientLib/MapsAPIClientLib-1.5.39.5/RHEL5_64/DEV.STD.PTHREAD/build/private/android-gradle/intermediates/exploded-aar/MapsAPISupportLibrary.aar/res/values/amzn_maps_attrs.xml -->
+    <eat-comment />
+
+    <declare-styleable name="AmznMapAttrs">
+        <attr name="amzn_mapType" format="enum">
+            <enum name="amzn_none" value="0" />
+            <enum name="amzn_normal" value="1" />
+            <enum name="amzn_satellite" value="2" />
+            <enum name="amzn_terrain" value="3" />
+            <enum name="amzn_hybrid" value="4" />
+        </attr>
+        <attr name="amzn_cameraBearing" format="float" />
+        <attr name="amzn_cameraTargetLat" format="float" />
+        <attr name="amzn_cameraTargetLng" format="float" />
+        <attr name="amzn_cameraTilt" format="float" />
+        <attr name="amzn_cameraZoom" format="float" />
+        <attr name="amzn_uiCompass" format="boolean" />
+        <attr name="amzn_uiRotateGestures" format="boolean" />
+        <attr name="amzn_uiScrollGestures" format="boolean" />
+        <attr name="amzn_uiTiltGestures" format="boolean" />
+        <attr name="amzn_uiZoomControls" format="boolean" />
+        <attr name="amzn_uiZoomGestures" format="boolean" />
+        <attr name="amzn_useViewLifecycle" format="boolean" />
+        <attr name="amzn_zOrderOnTop" format="boolean" />
+    </declare-styleable>
+    <!-- From: file:/local/p4clients/pkgbuild-_9DcW/workspace/build/MapsAPIClientLib/MapsAPIClientLib-1.5.39.5/RHEL5_64/DEV.STD.PTHREAD/build/private/android-gradle/generated/res/generated/release/values/generated.xml -->
+    <eat-comment />
+
+    <item name="amazon_maps_client_lib_version" type="integer">97</item>
+    <item name="amazon_maps_services_version" type="integer">2000000</item>
+    <!-- From: file:/local/p4clients/pkgbuild-_9DcW/workspace/build/MapsAPIClientLib/MapsAPIClientLib-1.5.39.5/RHEL5_64/DEV.STD.PTHREAD/build/private/android-gradle/intermediates/exploded-aar/MapsAPISupportLibrary.aar/res/values/api_build.xml -->
+    <eat-comment />
+
+    <string name="amazon_maps_api_build">1.5.403.0</string>
+    <!-- From: file:/local/p4clients/pkgbuild-_9DcW/workspace/build/MapsAPIClientLib/MapsAPIClientLib-1.5.39.5/RHEL5_64/DEV.STD.PTHREAD/build/private/android-gradle/intermediates/exploded-aar/MapsAPISupportLibrary.aar/res/values/strings.xml -->
+    <eat-comment />
+
+    <string name="amazon_maps_service_missing_manual_message">An Amazon Maps Service must be downloaded and installed in order for this application to function. Please sync your device.</string>
+    <string name="amazon_maps_service_missing_message">An Amazon Maps Service must be downloaded and installed in order for this application to function.</string>
+    <string name="amazon_maps_service_missing_title">Amazon Maps Service Required</string>
+    <string name="amazon_maps_service_update_manual_message">An Amazon Maps Service update must be downloaded and installed in order for this application to function. Please sync your device.</string>
+    <string name="amazon_maps_service_update_message">An Amazon Maps Service update must be downloaded and installed in order for this application to function.</string>
+    <string name="amazon_maps_service_update_title">Amazon Maps Service Update Required</string>
+    <string name="amazon_maps_unhandled_title">Unknown Error</string>
+    <string name="amazon_maps_update">Update</string>
+
+</resources>
