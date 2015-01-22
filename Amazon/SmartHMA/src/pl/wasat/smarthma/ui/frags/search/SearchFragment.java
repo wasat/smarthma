@@ -55,6 +55,8 @@ public class SearchFragment extends Fragment {
 		searchView.setSearchableInfo(searchManager
 				.getSearchableInfo(getActivity().getComponentName()));
 		searchView.setSubmitButtonEnabled(true);
+		searchView.setFocusable(true);
+		searchView.setIconified(false);
 		searchView.clearFocus();
 
 		LinearLayout linearLayout1 = (LinearLayout) searchView.getChildAt(0);
