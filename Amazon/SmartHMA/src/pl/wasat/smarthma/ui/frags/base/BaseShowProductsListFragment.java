@@ -252,7 +252,6 @@ public class BaseShowProductsListFragment extends BaseSpiceFragment {
 	@Override
 	public void onRequestSuccess(Feed searchProductFeeds) {
 		getActivity().setProgressBarIndeterminateVisibility(false);
-		//Toast.makeText(getActivity(), R.string.ok_, Toast.LENGTH_SHORT).show();
 		if (searchProductFeeds == null) {
 			searchProductFeeds = new Feed();
 		}
