@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:paddingBottom="15dp"
-        android:paddingLeft="70dp"
-        android:paddingRight="70dp" />
+        android:paddingLeft="80dp"
+        android:paddingRight="100dp" />
 
 </RelativeLayout>
