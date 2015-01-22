@@ -54,7 +54,7 @@
     <string name="cancel">Cancel</string>
     <string name="catalogue">Catalogue</string>
     <string name="eo_catalogue_list_title">EO Catalogues</string>
-    <string name="fedeo">FEDEO</string>
+    <string name="fedeo">EOP:ESA:FEDEO</string>
     <string name="zero">0</string>
     <string name="alert_dialog_cancel">Cancel</string>
     <string name="alert_dialog_ok">OK</string>
