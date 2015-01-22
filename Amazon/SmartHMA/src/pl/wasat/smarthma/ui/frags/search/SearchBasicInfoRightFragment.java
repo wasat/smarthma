@@ -63,9 +63,9 @@ public class SearchBasicInfoRightFragment extends Fragment {
 	private OnSearchBasicInfoRightFragmentListener mListener;
 	private static SharedPrefs sharedPrefs;
 
-	private static final CharSequence[] cataloguesList = { "FEDEO",
-			"FEDEO:COLLECTIONS", "GPOD-EO", "EO-VIRTUAL-ARCHIVE4",
-			"REFERENCEDATA" };
+	private static final CharSequence[] cataloguesList = { "EOP:ESA:FEDEO",
+			"EOP:ESA:FEDEO:COLLECTIONS", "EOP:ESA:GPOD-EO", "EOP:ESA:EO-VIRTUAL-ARCHIVE4",
+			"EOP:ESA:REFERENCEDATA" };
 
 	/**
 	 * Use this factory method to create a new instance of this fragment using
