@@ -27,7 +27,6 @@ import android.widget.ExpandableListView.OnChildClickListener;
 import android.widget.ExpandableListView.OnGroupClickListener;
 import android.widget.ExpandableListView.OnGroupCollapseListener;
 import android.widget.ExpandableListView.OnGroupExpandListener;
-import android.widget.Toast;
 
 /**
  * A simple {@link Fragment} subclass. Activities that contain this fragment
@@ -97,9 +96,9 @@ public class MissionsExtListFragment extends Fragment {
 			@Override
 			public boolean onGroupClick(ExpandableListView parent, View v,
 					int groupPosition, long id) {
-				Toast.makeText(getActivity(),
-						"Group Clicked " + listDataHeader.get(groupPosition),
-						Toast.LENGTH_SHORT).show();
+//				Toast.makeText(getActivity(),
+//						"Group Clicked " + listDataHeader.get(groupPosition),
+//						Toast.LENGTH_SHORT).show();
 				//getHtml(listDataHeader.get(groupPosition).getUrl(),	groupPosition);
 				
 				
@@ -112,9 +111,9 @@ public class MissionsExtListFragment extends Fragment {
 
 			@Override
 			public void onGroupExpand(int groupPosition) {
-				Toast.makeText(getActivity(),
-						listDataHeader.get(groupPosition) + " Expanded",
-						Toast.LENGTH_SHORT).show();
+//				Toast.makeText(getActivity(),
+//						listDataHeader.get(groupPosition) + " Expanded",
+//						Toast.LENGTH_SHORT).show();
 
 			}
 		});
@@ -124,9 +123,9 @@ public class MissionsExtListFragment extends Fragment {
 
 			@Override
 			public void onGroupCollapse(int groupPosition) {
-				Toast.makeText(getActivity(),
-						listDataHeader.get(groupPosition) + " Collapsed",
-						Toast.LENGTH_SHORT).show();
+//				Toast.makeText(getActivity(),
+//						listDataHeader.get(groupPosition) + " Collapsed",
+//						Toast.LENGTH_SHORT).show();
 
 			}
 		});
@@ -151,9 +150,9 @@ public class MissionsExtListFragment extends Fragment {
 								missionsDetailNewFragment, "MissionsDetailNewFragment")
 						.commit();
 				
-				Toast.makeText(getActivity(),
-						listDataHeaderName + " : " + missionItem.getName(),
-						Toast.LENGTH_SHORT).show();
+//				Toast.makeText(getActivity(),
+//						listDataHeaderName + " : " + missionItem.getName(),
+//						Toast.LENGTH_SHORT).show();
 				return false;
 			}
 		});
