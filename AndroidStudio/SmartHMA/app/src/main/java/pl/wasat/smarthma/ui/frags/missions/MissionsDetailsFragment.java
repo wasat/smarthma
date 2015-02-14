@@ -1,7 +1,5 @@
 package pl.wasat.smarthma.ui.frags.missions;
 
-import pl.wasat.smarthma.R;
-import pl.wasat.smarthma.model.mission.MissionItemData;
 import android.app.Activity;
 import android.net.Uri;
 import android.os.Bundle;
@@ -17,6 +15,9 @@ import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import pl.wasat.smarthma.R;
+import pl.wasat.smarthma.model.mission.MissionItemData;
 
 /**
  * A simple {@link android.support.v4.app.Fragment} subclass. Activities that

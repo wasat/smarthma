@@ -5,7 +5,7 @@ import java.lang.reflect.Modifier;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ObjectUtils {
+class ObjectUtils {
 
 	private ObjectUtils() {
 	}

@@ -1,17 +1,5 @@
 package pl.wasat.smarthma.ui.frags.search;
 
-import java.util.List;
-
-import pl.wasat.smarthma.R;
-import pl.wasat.smarthma.adapter.SearchListAdapter;
-import pl.wasat.smarthma.database.EoDbAdapter;
-import pl.wasat.smarthma.helper.Const;
-import pl.wasat.smarthma.model.FedeoRequest;
-import pl.wasat.smarthma.model.feed.Entry;
-import pl.wasat.smarthma.model.feed.Feed;
-import pl.wasat.smarthma.ui.frags.base.BaseSpiceListFragment;
-import pl.wasat.smarthma.ui.frags.common.FailureFragment;
-import pl.wasat.smarthma.utils.rss.FedeoSearchRequest;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -21,6 +9,19 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+
+import java.util.List;
+
+import pl.wasat.smarthma.R;
+import pl.wasat.smarthma.adapter.SearchListAdapter;
+import pl.wasat.smarthma.helper.Const;
+import pl.wasat.smarthma.helper.DataSorter;
+import pl.wasat.smarthma.model.FedeoRequest;
+import pl.wasat.smarthma.model.feed.Feed;
+import pl.wasat.smarthma.model.iso.EntryISO;
+import pl.wasat.smarthma.ui.frags.base.BaseSpiceListFragment;
+import pl.wasat.smarthma.ui.frags.common.FailureFragment;
+import pl.wasat.smarthma.utils.rss.FedeoSearchRequest;
 
 /**
  * A simple {@link android.support.v4.app.Fragment} subclass. Activities that
@@ -137,7 +138,7 @@ public class SearchListFragment extends BaseSpiceListFragment {
 						: ListView.CHOICE_MODE_NONE);
 	}
 
-	public void setActivatedPosition(int position) {
+	void setActivatedPosition(int position) {
 		if (position == ListView.INVALID_POSITION) {
 			getListView().setItemChecked(mActivatedPosition, false);
 		} else {
@@ -161,7 +162,7 @@ public class SearchListFragment extends BaseSpiceListFragment {
 		return false;
 	}
 
-	private void updateSearchListViewContent(List<Entry> searchFeedList) {
+	private void updateSearchListViewContent(List<EntryISO> searchFeedList) {
 		if (searchFeedList.isEmpty()) {
 			getView().setVisibility(View.GONE);
 
@@ -177,10 +178,10 @@ public class SearchListFragment extends BaseSpiceListFragment {
 							failureFragment).commit();
 		} else {
 
-			for (Entry a : searchFeedList) {
+/*			for (EntryOM a : searchFeedList) {
 				EoDbAdapter dba = new EoDbAdapter(getActivity());
 				dba.openToRead();
-				Entry fetchedSearch = dba.getBlogListing(a.getGuid());
+				EntryOM fetchedSearch = dba.getBlogListing(a.getGuid());
 				dba.close();
 				if (fetchedSearch == null) {
 					dba = new EoDbAdapter(getActivity());
@@ -192,7 +193,9 @@ public class SearchListFragment extends BaseSpiceListFragment {
 					a.setOffline(fetchedSearch.isOffline());
 					a.setRead(fetchedSearch.isRead());
 				}
-			}
+			}*/
+
+
 			SearchListAdapter adapter = new SearchListAdapter(getActivity(),
 					searchFeedList);
 			this.setListAdapter(adapter);
@@ -209,7 +212,7 @@ public class SearchListFragment extends BaseSpiceListFragment {
 		if (feedSearchRequest != null) {
 			getActivity().setProgressBarIndeterminateVisibility(true);
 			getSpiceManager().execute(
-					new FedeoSearchRequest(feedSearchRequest), this);
+					new FedeoSearchRequest(feedSearchRequest, 1), this);
 		}
 	}
 
@@ -243,9 +246,12 @@ public class SearchListFragment extends BaseSpiceListFragment {
 
 	@Override
 	public void onRequestSuccess(Feed searchFeeds) {
+        List<EntryISO> entries = searchFeeds.getEntriesISO();
+        DataSorter sorter = new DataSorter();
+        sorter.sort(entries);
+
 		getActivity().setProgressBarIndeterminateVisibility(false);
-		//Toast.makeText(getActivity(), R.string.ok_, Toast.LENGTH_SHORT).show();
-		updateSearchListViewContent(searchFeeds.getEntries());
+		updateSearchListViewContent(searchFeeds.getEntriesISO());
 
 		showDataSeriesIntro(searchFeeds);
 

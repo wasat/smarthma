@@ -45,4 +45,10 @@ public class Const {
 	public static final String KEY_PREF_BBOX_NORTH = "pl.wasat.smarthma.KEY_PREF_BBOX_NORTH";
 	public static final String KEY_PREF_QUERY = "pl.wasat.smarthma.KEY_PREF_QUERY";
 
+    public static final int SORT_BY_TITLE_ASCENDING = 0;
+    public static final int SORT_BY_TITLE_DESCENDING = 1;
+    public static final int SORT_BY_DATE_ASCENDING = 2;
+    public static final int SORT_BY_DATE_DESCENDING = 3;
+
+    public static final String DATE_NULL = "0000-00-00T00:00:00Z";
 }

@@ -1,15 +1,16 @@
 package pl.wasat.smarthma.ui.frags.search;
 
-import pl.wasat.smarthma.model.FedeoRequest;
-import pl.wasat.smarthma.model.feed.Entry;
-import pl.wasat.smarthma.model.feed.Link;
-import pl.wasat.smarthma.ui.frags.base.BaseViewAndBasicSettingsDetailFragment;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+
+import pl.wasat.smarthma.model.FedeoRequest;
+import pl.wasat.smarthma.model.feed.Link;
+import pl.wasat.smarthma.model.iso.EntryISO;
+import pl.wasat.smarthma.ui.frags.base.BaseViewAndBasicSettingsDetailFragment;
 
 /**
  * A simple {@link android.support.v4.app.Fragment} subclass. Activities that
@@ -33,7 +34,7 @@ public class SearchResultProductsDetailsFragment extends BaseViewAndBasicSetting
 	 * @return A new instance of fragment SearchResultProductsDetailsFragment.
 	 */
 	public static SearchResultProductsDetailsFragment newInstance(
-			Entry collectionEntry) {
+			EntryISO collectionEntry) {
 		SearchResultProductsDetailsFragment fragment = new SearchResultProductsDetailsFragment();
 		Bundle args = new Bundle();
 		args.putSerializable(KEY_COLLECTION_ENTRY, collectionEntry);
@@ -57,20 +58,26 @@ public class SearchResultProductsDetailsFragment extends BaseViewAndBasicSetting
                     FedeoRequest request = new FedeoRequest();
                     request.buildFromShared(getActivity());
                     //request.setDefaultParams();
-                    //request.setParentIdentifier(displayedEntry.getIdentifier());
+                    //request.setParentIdentifier(displayedISOEntry.getIdentifier());
                     //request.setBbox(geoBounds);
                     mListener.onSearchResultCollectionDetailsFragmentShowProducts(request);
                 }
             }
         });
 
-        for (Link entityLink : displayedEntry.getLinks()) {
-            if (entityLink.get_rel().equalsIgnoreCase("search")) {
+        for (Link entityLink : displayedISOEntry.getLink()) {
+            if (entityLink.getRel().equalsIgnoreCase("search")) {
                 btnShowProducts.setEnabled(true);
             }
-
         }
-		
+
+
+        btnShowMetadata.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mListener.onSearchResultCollectionDetailsFragmentShowMetadata(displayedISOEntry);
+            }
+        });
 		return rootView;
 	}
 
@@ -102,6 +109,7 @@ public class SearchResultProductsDetailsFragment extends BaseViewAndBasicSetting
 	 */
 	public interface OnSearchResultCollectionDetailsFragmentListener {
 		public void onSearchResultCollectionDetailsFragmentShowProducts(FedeoRequest request);
+        public void onSearchResultCollectionDetailsFragmentShowMetadata(EntryISO displayedEntry);
 	}
 
 }

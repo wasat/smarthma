@@ -1,15 +1,15 @@
 package pl.wasat.smarthma.utils.http;
 
-import java.io.InputStream;
-
-import org.apache.commons.io.IOUtils;
-
-import pl.wasat.smarthma.helper.Const;
-
 import com.google.api.client.http.GenericUrl;
 import com.google.api.client.http.HttpRequest;
 import com.google.api.client.http.HttpResponse;
 import com.octo.android.robospice.request.googlehttpclient.GoogleHttpClientSpiceRequest;
+
+import org.apache.commons.io.IOUtils;
+
+import java.io.InputStream;
+
+import pl.wasat.smarthma.helper.Const;
 
 public class ExplainDocRequest extends GoogleHttpClientSpiceRequest<String> {
 

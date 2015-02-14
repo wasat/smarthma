@@ -1,6 +1,5 @@
 package pl.wasat.smarthma.ui.frags.search;
 
-import pl.wasat.smarthma.R;
 import android.app.Activity;
 import android.app.SearchManager;
 import android.content.Context;
@@ -14,6 +13,8 @@ import android.view.ViewGroup;
 import android.widget.AutoCompleteTextView;
 import android.widget.LinearLayout;
 import android.widget.SearchView;
+
+import pl.wasat.smarthma.R;
 
 /**
  * A simple {@link android.support.v4.app.Fragment} subclass. Activities that
@@ -57,7 +58,7 @@ public class SearchFragment extends Fragment {
 		searchView.setSubmitButtonEnabled(true);
 		searchView.setFocusable(true);
 		searchView.setIconified(false);
-		searchView.requestFocus();
+		searchView.clearFocus();
 
 		LinearLayout linearLayout1 = (LinearLayout) searchView.getChildAt(0);
 		LinearLayout linearLayout2 = (LinearLayout) linearLayout1.getChildAt(2);

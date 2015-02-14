@@ -1,55 +1,56 @@
-
 package pl.wasat.smarthma.model.feed;
-
-import java.io.Serializable;
-import java.util.HashMap;
-import java.util.Map;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
+import java.io.Serializable;
+import java.util.HashMap;
+import java.util.Map;
+
 import pl.wasat.smarthma.utils.text.SmartHMAStringStyle;
 
 
 public class StartIndex implements Serializable {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-    private String __prefix;
-    private String __text;
+    private String prefix;
+    private String text;
     private final Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
-    public String get__prefix() {
-        return __prefix;
+    public String getPrefix() {
+        return prefix;
     }
 
-    public void set__prefix(String __prefix) {
-        this.__prefix = __prefix;
+    public void setPrefix(String prefix) {
+        this.prefix = prefix;
     }
 
-    public StartIndex with__prefix(String __prefix) {
-        this.__prefix = __prefix;
+    public StartIndex with_prefix(String _prefix) {
+        this.prefix = _prefix;
         return this;
     }
 
-    public String get__text() {
-        return __text;
+    public String getText() {
+        return text;
     }
 
-    public void set__text(String __text) {
-        this.__text = __text;
+    public void setText(String text) {
+        this.text = text;
     }
 
-    public StartIndex with__text(String __text) {
-        this.__text = __text;
+    public StartIndex with_text(String _text) {
+        this.text = _text;
         return this;
     }
 
     @Override
     public String toString() {
-            	 ToStringStyle style = new SmartHMAStringStyle(); ToStringBuilder.setDefaultStyle(style); return ToStringBuilder.reflectionToString(this, style);
+        ToStringStyle style = new SmartHMAStringStyle();
+        ToStringBuilder.setDefaultStyle(style);
+        return ToStringBuilder.reflectionToString(this, style);
     }
 
     @Override

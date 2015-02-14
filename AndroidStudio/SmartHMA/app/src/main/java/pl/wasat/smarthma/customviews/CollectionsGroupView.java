@@ -1,7 +1,5 @@
 package pl.wasat.smarthma.customviews;
 
-import pl.wasat.smarthma.R;
-import pl.wasat.smarthma.model.CollectionsGroup;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.widget.ImageView;
@@ -9,6 +7,9 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.octo.android.robospice.spicelist.SpiceListItemView;
+
+import pl.wasat.smarthma.R;
+import pl.wasat.smarthma.model.CollectionsGroup;
 
 public class CollectionsGroupView extends RelativeLayout implements SpiceListItemView<CollectionsGroup> {
 

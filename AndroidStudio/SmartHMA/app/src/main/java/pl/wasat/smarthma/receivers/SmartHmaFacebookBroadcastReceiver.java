@@ -18,6 +18,7 @@ package pl.wasat.smarthma.receivers;
 
 import android.os.Bundle;
 import android.util.Log;
+
 import com.facebook.FacebookBroadcastReceiver;
 
 /**
