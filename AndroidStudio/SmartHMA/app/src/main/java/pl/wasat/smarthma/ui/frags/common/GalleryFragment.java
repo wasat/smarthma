@@ -1,8 +1,5 @@
 package pl.wasat.smarthma.ui.frags.common;
 
-import java.lang.reflect.Field;
-
-import pl.wasat.smarthma.R;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
@@ -15,7 +12,11 @@ import android.view.ViewGroup.LayoutParams;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
-class GalleryFragment extends Fragment {
+import java.lang.reflect.Field;
+
+import pl.wasat.smarthma.R;
+
+public class GalleryFragment extends Fragment {
 
     @Override
 	public void onCreate(Bundle savedInstanceState) {

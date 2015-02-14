@@ -1,9 +1,9 @@
 package pl.wasat.smarthma.utils.wms;
 
+import com.google.android.gms.maps.model.UrlTileProvider;
+
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
-
-import com.google.android.gms.maps.model.UrlTileProvider;
 
 public abstract class WMSTileProvider extends UrlTileProvider {
 	
@@ -17,10 +17,10 @@ public abstract class WMSTileProvider extends UrlTileProvider {
     private static final double MAP_SIZE = 20037508.34789244 * 2;
     
     // array indexes for array to hold bounding boxes.
-    protected static final int MINX = 0;
-    protected static final int MAXX = 1;
-    protected static final int MINY = 2;
-    protected static final int MAXY = 3;
+    static final int MINX = 0;
+    static final int MAXX = 1;
+    static final int MINY = 2;
+    static final int MAXY = 3;
     
     // cql filters
     private String cqlString = ""; 
@@ -40,7 +40,7 @@ public abstract class WMSTileProvider extends UrlTileProvider {
      
     // Return a web Mercator bounding box given tile x/y indexes and a zoom
     // level.
-	protected double[] getBoundingBox(int x, int y, int zoom) {
+    double[] getBoundingBox(int x, int y, int zoom) {
     	double tileSize = MAP_SIZE / Math.pow(2, zoom);
     	double minx = TILE_ORIGIN[ORIG_X] + x * tileSize;
     	double maxx = TILE_ORIGIN[ORIG_X] + (x+1) * tileSize;

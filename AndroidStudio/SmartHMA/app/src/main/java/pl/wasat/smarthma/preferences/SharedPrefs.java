@@ -1,8 +1,9 @@
 package pl.wasat.smarthma.preferences;
 
-import pl.wasat.smarthma.helper.Const;
 import android.content.Context;
 import android.content.SharedPreferences;
+
+import pl.wasat.smarthma.helper.Const;
 
 public class SharedPrefs {
 	private static SharedPreferences settings;
@@ -81,7 +82,7 @@ public class SharedPrefs {
 			if (!parentId.startsWith("urn:ogc:")) {
 
 				if (!parentId.startsWith("EOP:")) {
-					parentId = "EOP:ESA:" + parentId;
+					//parentId = "EOP:ESA:" + parentId;
 				}
 			}
 		}

@@ -1,13 +1,5 @@
 package pl.wasat.smarthma.ui.frags.common;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import pl.wasat.smarthma.R;
-import pl.wasat.smarthma.interfaces.OnBaseMapFragmentPublicListener;
-import pl.wasat.smarthma.model.eo.Footprint;
-import pl.wasat.smarthma.model.eo.Pos;
-import pl.wasat.smarthma.ui.frags.base.BaseMapFragment;
 import android.app.Activity;
 import android.graphics.Bitmap;
 import android.graphics.Color;
@@ -36,9 +28,18 @@ import com.squareup.picasso.Picasso.LoadedFrom;
 import com.squareup.picasso.Target;
 import com.squareup.picasso.Transformation;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import pl.wasat.smarthma.R;
+import pl.wasat.smarthma.interfaces.OnBaseMapFragmentPublicListener;
+import pl.wasat.smarthma.model.om.Footprint;
+import pl.wasat.smarthma.model.om.Pos;
+import pl.wasat.smarthma.ui.frags.base.BaseMapFragment;
+
 /**
  * A simple {@link Fragment} subclass. Activities that contain this fragment
- * must implement the {@link ExtendedMapFragment.OnFragmentInteractionListener}
+ * must implement the
  * interface to handle interaction events. Use the
  * {@link ExtendedMapFragment#newInstance} factory method to create an instance
  * of this fragment.
@@ -68,11 +69,6 @@ public class ExtendedMapFragment extends Fragment implements
 	/**
 	 * Use this factory method to create a new instance of this fragment using
 	 * the provided parameters.
-	 * 
-	 * @param param1
-	 *            Parameter 1.
-	 * @param param2
-	 *            Parameter 2.
 	 * @return A new instance of fragment MapExtendedFragment.
 	 */
 	// TODO: Rename and change types and number of parameters
@@ -159,7 +155,7 @@ public class ExtendedMapFragment extends Fragment implements
 	}
 
 	/**
-	 * @param footprints
+	 * @param footprint
 	 */
 	public void showFootPrints(Footprint footprint) {
 		ArrayList<LatLng> footprintPoints = extractLatLngFootprint(footprint);
@@ -247,7 +243,9 @@ public class ExtendedMapFragment extends Fragment implements
 		drawFootprint(footprintPoints);
 
 		Target quicklookTarget = this;
-		Picasso.with(getActivity()).load(url).transform(this)
+		Picasso.with(getActivity())
+                .load(url)
+                .transform(this)
 				.into(quicklookTarget);
 	}
 

@@ -1,20 +1,5 @@
 package pl.wasat.smarthma.ui.frags.missions;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
-
-import pl.wasat.smarthma.R;
-import pl.wasat.smarthma.customviews.ExpandableListAdapter;
-import pl.wasat.smarthma.model.mission.MissionHeaderData;
-import pl.wasat.smarthma.model.mission.MissionItemData;
-
 import android.app.Activity;
 import android.net.Uri;
 import android.os.Bundle;
@@ -27,7 +12,21 @@ import android.widget.ExpandableListView.OnChildClickListener;
 import android.widget.ExpandableListView.OnGroupClickListener;
 import android.widget.ExpandableListView.OnGroupCollapseListener;
 import android.widget.ExpandableListView.OnGroupExpandListener;
-import android.widget.Toast;
+
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
+import pl.wasat.smarthma.R;
+import pl.wasat.smarthma.customviews.ExpandableListAdapter;
+import pl.wasat.smarthma.model.mission.MissionHeaderData;
+import pl.wasat.smarthma.model.mission.MissionItemData;
 
 /**
  * A simple {@link Fragment} subclass. Activities that contain this fragment
@@ -39,14 +38,10 @@ import android.widget.Toast;
  */
 public class MissionsExtListFragment extends Fragment {
 
-	private ExpandableListAdapter listAdapter;
-	private ExpandableListView expListView;
-	private List<MissionHeaderData> listDataHeader;
+    private List<MissionHeaderData> listDataHeader;
 	private HashMap<String, List<MissionItemData>> listDataChild;
 
-	private List<MissionItemData> missionsList;
-
-	private OnExtendedListFragmentListener mListener;
+    private OnExtendedListFragmentListener mListener;
 
 	/**
 	 * Use this factory method to create a new instance of this fragment using
@@ -79,14 +74,14 @@ public class MissionsExtListFragment extends Fragment {
 				container, false);
 
 		// get the listview
-		expListView = (ExpandableListView) rootView
-				.findViewById(R.id.missions_extended_listview);
+        ExpandableListView expListView = (ExpandableListView) rootView
+                .findViewById(R.id.missions_extended_listview);
 
 		// preparing list data
 		prepareListData();
 
-		listAdapter = new ExpandableListAdapter(getActivity(), listDataHeader,
-				listDataChild);
+        ExpandableListAdapter listAdapter = new ExpandableListAdapter(getActivity(), listDataHeader,
+                listDataChild);
 
 		// setting list adapter
 		expListView.setAdapter(listAdapter);
@@ -94,69 +89,57 @@ public class MissionsExtListFragment extends Fragment {
 		// Listview Group click listener
 		expListView.setOnGroupClickListener(new OnGroupClickListener() {
 
-			@Override
-			public boolean onGroupClick(ExpandableListView parent, View v,
-					int groupPosition, long id) {
-				Toast.makeText(getActivity(),
-						"Group Clicked " + listDataHeader.get(groupPosition),
-						Toast.LENGTH_SHORT).show();
-				//getHtml(listDataHeader.get(groupPosition).getUrl(),	groupPosition);
-				
-				
-				return false;
-			}
-		});
+            @Override
+            public boolean onGroupClick(ExpandableListView parent, View v,
+                                        int groupPosition, long id) {
+                //getHtml(listDataHeader.get(groupPosition).getUrl(),	groupPosition);
+
+
+                return false;
+            }
+        });
 
 		// Listview Group expanded listener
 		expListView.setOnGroupExpandListener(new OnGroupExpandListener() {
 
-			@Override
-			public void onGroupExpand(int groupPosition) {
-				Toast.makeText(getActivity(),
-						listDataHeader.get(groupPosition) + " Expanded",
-						Toast.LENGTH_SHORT).show();
+            @Override
+            public void onGroupExpand(int groupPosition) {
 
-			}
-		});
+            }
+        });
 
 		// Listview Group collasped listener
 		expListView.setOnGroupCollapseListener(new OnGroupCollapseListener() {
 
-			@Override
-			public void onGroupCollapse(int groupPosition) {
-				Toast.makeText(getActivity(),
-						listDataHeader.get(groupPosition) + " Collapsed",
-						Toast.LENGTH_SHORT).show();
+            @Override
+            public void onGroupCollapse(int groupPosition) {
 
-			}
-		});
+            }
+        });
 
 		// Listview on child click listener
 		expListView.setOnChildClickListener(new OnChildClickListener() {
 
-			@Override
-			public boolean onChildClick(ExpandableListView parent, View v,
-					int groupPosition, int childPosition, long id) {
-				// TODO Auto-generated method stub
-				String listDataHeaderName = listDataHeader.get(groupPosition)
-						.getName();
-				MissionItemData missionItem = listDataChild.get(listDataHeaderName)
-						.get(childPosition);
+            @Override
+            public boolean onChildClick(ExpandableListView parent, View v,
+                                        int groupPosition, int childPosition, long id) {
+                // TODO Auto-generated method stub
+                String listDataHeaderName = listDataHeader.get(groupPosition)
+                        .getName();
+                MissionItemData missionItem = listDataChild.get(listDataHeaderName)
+                        .get(childPosition);
 
-				MissionsDetailsFragment missionsDetailNewFragment = MissionsDetailsFragment
-						.newInstance(missionItem);
-				getActivity().getSupportFragmentManager()
-						.beginTransaction()
-						.replace(R.id.activity_base_details_container,
-								missionsDetailNewFragment, "MissionsDetailNewFragment")
-						.commit();
-				
-				Toast.makeText(getActivity(),
-						listDataHeaderName + " : " + missionItem.getName(),
-						Toast.LENGTH_SHORT).show();
-				return false;
-			}
-		});
+                MissionsDetailsFragment missionsDetailNewFragment = MissionsDetailsFragment
+                        .newInstance(missionItem);
+                getActivity().getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.activity_base_details_container,
+                                missionsDetailNewFragment, "MissionsDetailNewFragment")
+                        .commit();
+
+                return false;
+            }
+        });
 
 		return rootView;
 	}
@@ -404,7 +387,7 @@ public class MissionsExtListFragment extends Fragment {
 		Document doc;
 		try {
 
-			missionsList = new ArrayList<MissionItemData>();
+            List<MissionItemData> missionsList = new ArrayList<MissionItemData>();
 			// need http protocol
 			doc = Jsoup.connect(url).userAgent("Mozilla").get();
 			Elements elementsByClass = doc.getElementsByClass("asset-abstract");
@@ -437,7 +420,7 @@ public class MissionsExtListFragment extends Fragment {
 			}
 
 			listDataChild.put(listDataHeader.get(groupPos).getName(),
-					missionsList);
+                    missionsList);
 
 		} catch (IOException e) {
 			e.printStackTrace();

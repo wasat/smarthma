@@ -3,12 +3,13 @@
  */
 package pl.wasat.smarthma.ui.activities;
 
-import pl.wasat.smarthma.R;
-import pl.wasat.smarthma.helper.Const;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+
+import pl.wasat.smarthma.R;
+import pl.wasat.smarthma.helper.Const;
 
 /**
  * @author Daniel Zinkiewicz Wasat Sp. z o.o 14-07-2014

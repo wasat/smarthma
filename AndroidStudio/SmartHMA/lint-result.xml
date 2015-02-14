@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<issues format="4" by="lint 24.0.2">
+
+    <issue
+        id="LintError"
+        severity="Fatal"
+        message="&quot;`facebook`&quot; is a Gradle project. To correctly analyze Gradle projects, you should run &quot;`gradlew :lint`&quot; instead."
+        category="Lint"
+        priority="10"
+        summary="Lint Failure"
+        explanation="This issue type represents a problem running lint itself. Examples include failure to find bytecode for source files (which means certain detectors could not be run), parsing errors in lint configuration files, etc.
+These errors are not errors in your own code, but they are shown to make it clear that some checks were not completed.">
+        <location
+            file="facebook"/>
+    </issue>
+
+    <issue
+        id="LintError"
+        severity="Fatal"
+        message="&quot;`main`&quot; is a Gradle project. To correctly analyze Gradle projects, you should run &quot;`gradlew :lint`&quot; instead."
+        category="Lint"
+        priority="10"
+        summary="Lint Failure"
+        explanation="This issue type represents a problem running lint itself. Examples include failure to find bytecode for source files (which means certain detectors could not be run), parsing errors in lint configuration files, etc.
+These errors are not errors in your own code, but they are shown to make it clear that some checks were not completed.">
+        <location
+            file="app\src\main"/>
+    </issue>
+
+</issues>

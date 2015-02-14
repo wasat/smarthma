@@ -1,11 +1,5 @@
 package pl.wasat.smarthma.ui.frags.common;
 
-import pl.wasat.smarthma.R;
-import pl.wasat.smarthma.ui.activities.CollectionsDefinitionActivity;
-import pl.wasat.smarthma.ui.activities.MissionsActivity;
-import pl.wasat.smarthma.ui.activities.NewsActivity;
-import pl.wasat.smarthma.ui.activities.SearchActivity;
-import pl.wasat.smarthma.utils.conn.ConnectionDetector;
 import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
@@ -17,6 +11,13 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
+
+import pl.wasat.smarthma.R;
+import pl.wasat.smarthma.ui.activities.CollectionsDefinitionActivity;
+import pl.wasat.smarthma.ui.activities.MissionsActivity;
+import pl.wasat.smarthma.ui.activities.NewsActivity;
+import pl.wasat.smarthma.ui.activities.SearchActivity;
+import pl.wasat.smarthma.utils.conn.ConnectionDetector;
 
 /**
  * A simple {@link android.support.v4.app.Fragment} subclass. Activities that

@@ -1,12 +1,13 @@
 package pl.wasat.smarthma.ui.activities;
 
-import pl.wasat.smarthma.R;
-import pl.wasat.smarthma.ui.frags.common.StartFragment;
-import pl.wasat.smarthma.ui.frags.common.StartFragment.OnStartFragmentListener;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import pl.wasat.smarthma.R;
+import pl.wasat.smarthma.ui.frags.common.StartFragment;
+import pl.wasat.smarthma.ui.frags.common.StartFragment.OnStartFragmentListener;
 
 public class StartActivity extends ActionBarActivity implements
 		OnStartFragmentListener {

@@ -1,10 +1,5 @@
 package pl.wasat.smarthma.ui.frags.common;
 
-import java.lang.reflect.Field;
-
-import pl.wasat.smarthma.R;
-import pl.wasat.smarthma.model.feed.Entry;
-import pl.wasat.smarthma.utils.text.MetadataCleaner;
 import android.app.Activity;
 import android.graphics.Typeface;
 import android.net.Uri;
@@ -18,6 +13,12 @@ import android.widget.TableLayout;
 import android.widget.TableLayout.LayoutParams;
 import android.widget.TextView;
 
+import java.lang.reflect.Field;
+
+import pl.wasat.smarthma.R;
+import pl.wasat.smarthma.model.om.EntryOM;
+import pl.wasat.smarthma.utils.text.MetadataCleaner;
+
 /**
  * A simple {@link android.support.v4.app.Fragment} subclass. Activities that
  * contain this fragment must implement the
@@ -29,7 +30,7 @@ import android.widget.TextView;
 public class MetadataFragment extends Fragment {
 	private static final String KEY_ENTRY_ITEM = "pl.wasat.smarthma.KEY_ENTRY_ITEM";
 
-	private Entry entryItem;
+	private EntryOM entryItem;
 
 	private OnMetadataFragmentListener mListener;
 
@@ -48,7 +49,7 @@ public class MetadataFragment extends Fragment {
 	 *            Parameter 1.
 	 * @return A new instance of fragment MetadataFragment.
 	 */
-	public static MetadataFragment newInstance(Entry entryItm) {
+	public static MetadataFragment newInstance(EntryOM entryItm) {
 		MetadataFragment fragment = new MetadataFragment();
 		Bundle args = new Bundle();
 		args.putSerializable(KEY_ENTRY_ITEM, entryItm);
@@ -64,7 +65,7 @@ public class MetadataFragment extends Fragment {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		if (getArguments() != null) {
-			entryItem = (Entry) getArguments().getSerializable(KEY_ENTRY_ITEM);
+			entryItem = (EntryOM) getArguments().getSerializable(KEY_ENTRY_ITEM);
 		}
 	}
 
@@ -91,7 +92,7 @@ public class MetadataFragment extends Fragment {
 		 */
 
 		if (!entryItem.getEarthObservation().getMetaDataProperty()
-				.getEarthObservationMetaData().getIdentifier().get__text()
+				.getEarthObservationMetaData().getIdentifier().get_text()
 				.isEmpty()) {
 			setEOMetaDataViews("Earth Observation Metadata ", entryItem
 					.getEarthObservation().getMetaDataProperty()
@@ -125,7 +126,7 @@ public class MetadataFragment extends Fragment {
 					.getEarthObservation().getPhenomenonTime().getTimePeriod());
 		}
 		if (!entryItem.getEarthObservation().getResultTime().getTimeInstant()
-				.getTimePosition().get__text().isEmpty()) {
+				.getTimePosition().get_text().isEmpty()) {
 			setEOMetaDataViews("Earth Observation Result Time ", entryItem
 					.getEarthObservation().getResultTime().getTimeInstant()
 					.getTimePosition());
@@ -153,14 +154,11 @@ public class MetadataFragment extends Fragment {
 			Object value = null;
 			try {
 				value = fields[i].get(eOMetaDataObject);
-			} catch (IllegalAccessException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (IllegalArgumentException e) {
+			} catch (IllegalAccessException | IllegalArgumentException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			if (value != null) {
+            if (value != null) {
 				addNewRowView(name, value.toString());
 			}
 		}
