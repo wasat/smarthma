@@ -1,10 +1,5 @@
 package pl.wasat.smarthma.ui.frags.common;
 
-import java.util.ArrayList;
-
-import pl.wasat.smarthma.ui.frags.base.BaseMapFragment;
-import pl.wasat.smarthma.ui.frags.base.BaseMapFragment.OnBaseMapFragmentListener;
-import pl.wasat.smarthma.utils.io.AcraExtension;
 import android.app.Activity;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -19,10 +14,16 @@ import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Polygon;
 import com.google.android.gms.maps.model.PolygonOptions;
 
+import java.util.ArrayList;
+
+import pl.wasat.smarthma.ui.frags.base.BaseMapFragment;
+import pl.wasat.smarthma.ui.frags.base.BaseMapFragment.OnBaseMapFragmentListener;
+import pl.wasat.smarthma.utils.io.AcraExtension;
+
 /**
  * A simple {@link android.support.v4.app.Fragment} subclass. Activities that
  * contain this fragment must implement the
- * {@link AreaPickerMapFragment.OnMapFragmentListener} interface to handle
+ * {@link pl.wasat.smarthma.ui.frags.common.AreaPickerMapFragment.OnAreaPickerMapFragmentListener} interface to handle
  * interaction events. Use the {@link AreaPickerMapFragment#newInstance} factory
  * method to create an instance of this fragment.
  * 
@@ -193,7 +194,4 @@ public class AreaPickerMapFragment extends BaseMapFragment implements OnBaseMapF
 			mMap.addCircle(circle);
 		}
 	}
-
-
-
 }

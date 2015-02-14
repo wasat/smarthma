@@ -1,34 +1,36 @@
 package pl.wasat.smarthma.ui.activities;
 
-import pl.wasat.smarthma.R;
-import pl.wasat.smarthma.adapter.DataSeriesListAdapter;
-import pl.wasat.smarthma.database.EoDbAdapter;
-import pl.wasat.smarthma.helper.Const;
-import pl.wasat.smarthma.model.FedeoRequest;
-import pl.wasat.smarthma.model.feed.Entry;
-import pl.wasat.smarthma.preferences.SharedPrefs;
-import pl.wasat.smarthma.ui.frags.browse.CollectionsListFragment;
-import pl.wasat.smarthma.ui.frags.browse.DataSeriesDetailFragment;
-import pl.wasat.smarthma.ui.frags.browse.DataSeriesDetailFragment.OnDataSeriesDetailFragmentInteractionListener;
-import pl.wasat.smarthma.ui.frags.browse.DataSeriesListFragment;
-import pl.wasat.smarthma.ui.frags.browse.DataSeriesListFragment.OnDataSeriesListFragmentListener;
-import pl.wasat.smarthma.ui.frags.common.AreaPickerMapFragment.OnAreaPickerMapFragmentListener;
-import pl.wasat.smarthma.ui.frags.common.CollectionDetailsFragment;
-import pl.wasat.smarthma.ui.frags.common.CollectionDetailsFragment.OnCollectionDetailsFragmentListener;
-import pl.wasat.smarthma.ui.frags.common.MetadataFragment.OnMetadataFragmentListener;
-import pl.wasat.smarthma.ui.frags.search.SearchListFragment.OnSearchListFragmentListener;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 
 import com.google.android.gms.maps.model.LatLngBounds;
 
+import pl.wasat.smarthma.R;
+import pl.wasat.smarthma.adapter.DataSeriesListAdapter;
+import pl.wasat.smarthma.database.EoDbAdapter;
+import pl.wasat.smarthma.helper.Const;
+import pl.wasat.smarthma.model.FedeoRequest;
+import pl.wasat.smarthma.model.iso.EntryISO;
+import pl.wasat.smarthma.preferences.SharedPrefs;
+import pl.wasat.smarthma.ui.frags.browse.CollectionsListFragment;
+import pl.wasat.smarthma.ui.frags.browse.DataSeriesListFragment;
+import pl.wasat.smarthma.ui.frags.browse.DataSeriesListFragment.OnDataSeriesListFragmentListener;
+import pl.wasat.smarthma.ui.frags.common.AreaPickerMapFragment.OnAreaPickerMapFragmentListener;
+import pl.wasat.smarthma.ui.frags.common.CollectionDetailsFragment;
+import pl.wasat.smarthma.ui.frags.common.CollectionDetailsFragment.OnCollectionDetailsFragmentListener;
+import pl.wasat.smarthma.ui.frags.common.MetadataISOFragment;
+import pl.wasat.smarthma.ui.frags.common.MetadataISOFragment.OnMetadataISOFragmentListener;
+import pl.wasat.smarthma.ui.frags.search.SearchListFragment.OnSearchListFragmentListener;
+
+//import pl.wasat.smarthma.ui.frags.browse.DataSeriesDetailFragment;
+//import pl.wasat.smarthma.ui.frags.browse.DataSeriesDetailFragment.OnDataSeriesDetailFragmentInteractionListener;
+
 public class CollectionsBrowserActivity extends BaseSmartHMActivity implements
 		OnDataSeriesListFragmentListener,
-		OnDataSeriesDetailFragmentInteractionListener,
+		//OnDataSeriesDetailFragmentInteractionListener,
 		OnAreaPickerMapFragmentListener, OnSearchListFragmentListener,
-		OnMetadataFragmentListener,
-		OnCollectionDetailsFragmentListener {
+		OnCollectionDetailsFragmentListener, OnMetadataISOFragmentListener {
 
 	private boolean mTwoPane;
 	private EoDbAdapter dba;
@@ -64,12 +66,7 @@ public class CollectionsBrowserActivity extends BaseSmartHMActivity implements
 
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-		if (resultCode == RESULT_OK) {
-			stopNewSearch = data.getBooleanExtra(
-					Const.KEY_INTENT_RETURN_STOP_SEARCH, true);
-		} else {
-			stopNewSearch = false;
-		}
+        stopNewSearch = resultCode == RESULT_OK && data.getBooleanExtra(Const.KEY_INTENT_RETURN_STOP_SEARCH, true);
 
 		DataSeriesListFragment dtSeriesListFragment = (DataSeriesListFragment) getSupportFragmentManager()
 			.findFragmentById(R.id.activity_base_list_container);
@@ -111,7 +108,7 @@ public class CollectionsBrowserActivity extends BaseSmartHMActivity implements
 	 */
 	@Override
 	public void onSearchListFragmentItemSelected(String id) {
-		Entry selectedEntry = (Entry) ((DataSeriesListFragment) getSupportFragmentManager()
+		EntryISO selectedEntry = (EntryISO) ((DataSeriesListFragment) getSupportFragmentManager()
 				.findFragmentById(R.id.activity_base_list_container))
 				.getListAdapter().getItem(Integer.parseInt(id));
 
@@ -125,7 +122,7 @@ public class CollectionsBrowserActivity extends BaseSmartHMActivity implements
 				.getListAdapter();
 		adapter.notifyDataSetChanged();
 
-		// load metadata details to main panel
+/*		// load metadata details to main panel
 		if (mTwoPane) {
 			Bundle arguments = new Bundle();
 			arguments.putSerializable(Entry.KEY_RSS_ENTRY, selectedEntry);
@@ -138,7 +135,7 @@ public class CollectionsBrowserActivity extends BaseSmartHMActivity implements
 							dataSeriesDetailFragment,
 							"DataSeriesDetailFragment")
 					.addToBackStack("DataSeriesDetailFragment").commit();
-		}
+		}*/
 	}
 
 	/*
@@ -154,7 +151,7 @@ public class CollectionsBrowserActivity extends BaseSmartHMActivity implements
 		FragmentManager fm = getSupportFragmentManager();
 		DataSeriesListFragment dataseriesListFragment = (DataSeriesListFragment) fm
 				.findFragmentById(R.id.activity_base_list_container);
-		Entry selectedEntry = (Entry) dataseriesListFragment.getListAdapter()
+		EntryISO selectedEntry = (EntryISO) dataseriesListFragment.getListAdapter()
 				.getItem(Integer.parseInt(id));
 
 		// mark metadata as read
@@ -177,11 +174,11 @@ public class CollectionsBrowserActivity extends BaseSmartHMActivity implements
 
 	}
 
-	@Override
+/*	@Override
 	public void onDataSeriesDetailFragmentInteraction() {
 		// TODO Auto-generated method stub
 
-	}
+	}*/
 
 
 	/*
@@ -201,10 +198,7 @@ public class CollectionsBrowserActivity extends BaseSmartHMActivity implements
 		if (collectionDetailsFragment != null) {
 			collectionDetailsFragment.updateAreaBounds(bounds);
 		}
-
 	}
-
-
 
 	/*
 	 * (non-Javadoc)
@@ -226,17 +220,21 @@ public class CollectionsBrowserActivity extends BaseSmartHMActivity implements
 
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * pl.wasat.smarthma.ui.frags.common.MetadataFragment.OnMetadataFragmentListener
-	 * #onMetadataFragmentInteraction()
-	 */
-	@Override
-	public void onMetadataFragmentInteraction() {
-		// TODO Auto-generated method stub
+    @Override
+    public void onCollectionDetailsFragmentShowMetadata(EntryISO displayedEntry) {
 
-	}
+        MetadataISOFragment metadataISOFragment = MetadataISOFragment
+                .newInstance(displayedEntry);
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.activity_base_details_container,
+                        metadataISOFragment, "MetadataISOFragment")
+                .addToBackStack("MetadataISOFragment").commit();
 
+    }
+
+    @Override
+    public void onMetadataISOFragmentInteraction() {
+
+    }
 }

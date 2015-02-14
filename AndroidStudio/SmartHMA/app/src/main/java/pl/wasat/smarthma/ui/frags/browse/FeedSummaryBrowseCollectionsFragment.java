@@ -1,10 +1,11 @@
 package pl.wasat.smarthma.ui.frags.browse;
 
+import android.os.Bundle;
+
 import pl.wasat.smarthma.R;
 import pl.wasat.smarthma.model.FedeoRequest;
 import pl.wasat.smarthma.model.feed.Feed;
 import pl.wasat.smarthma.ui.frags.base.BaseFeedSummaryFragment;
-import android.os.Bundle;
 
 /**
  * A simple {@link android.support.v4.app.Fragment} subclass. Use the {@link FeedSummaryBrowseCollectionsFragment#newInstance}

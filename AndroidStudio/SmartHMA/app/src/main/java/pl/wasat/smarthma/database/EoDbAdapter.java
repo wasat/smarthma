@@ -1,6 +1,5 @@
 package pl.wasat.smarthma.database;
 
-import pl.wasat.smarthma.model.feed.Entry;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -9,6 +8,8 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteDatabase.CursorFactory;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.provider.BaseColumns;
+
+import pl.wasat.smarthma.model.om.EntryOM;
 
 public class EoDbAdapter{
 	
@@ -75,7 +76,7 @@ public class EoDbAdapter{
         return sqLiteDatabase.insert(DATABASE_TABLE, null, initialValues);
     }
     
-    public Entry getBlogListing(String guid) throws SQLException {
+    public EntryOM getBlogListing(String guid) throws SQLException {
         Cursor mCursor =
         		sqLiteDatabase.query(true, DATABASE_TABLE, new String[] {
                 		KEY_ROWID,
@@ -91,7 +92,7 @@ public class EoDbAdapter{
                 		null);
         if (mCursor != null && mCursor.getCount() > 0) {
         	mCursor.moveToFirst();
-        	Entry a = new Entry();
+        	EntryOM a = new EntryOM();
    			a.setGuid(mCursor.getString(mCursor.getColumnIndex(KEY_GUID)));
    			a.setRead(mCursor.getInt(mCursor.getColumnIndex(KEY_READ)) > 0);
    			a.setDbId(mCursor.getLong(mCursor.getColumnIndex(KEY_ROWID)));

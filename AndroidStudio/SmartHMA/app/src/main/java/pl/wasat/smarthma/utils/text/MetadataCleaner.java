@@ -17,7 +17,7 @@ public class MetadataCleaner {
 		return cleanValue;
 	}
 
-	public String removeUnessesary(String value) {
+	String removeUnessesary(String value) {
 		String cleanedValue = value;
 
 		String newLine = SystemUtils.LINE_SEPARATOR;
@@ -62,7 +62,7 @@ public class MetadataCleaner {
 
 	}
 
-	public String changeUperCase(String inputString) {
+	String changeUperCase(String inputString) {
 		if (inputString.isEmpty()) {
 			return inputString;
 		}

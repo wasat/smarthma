@@ -1,5 +1,9 @@
-
 package pl.wasat.smarthma.model.feed;
+
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -7,32 +11,28 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.lang3.builder.EqualsBuilder;
-import org.apache.commons.lang3.builder.HashCodeBuilder;
-import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.apache.commons.lang3.builder.ToStringStyle;
-
+import pl.wasat.smarthma.model.om.Content;
 import pl.wasat.smarthma.utils.text.SmartHMAStringStyle;
 
 
 public class Group implements Serializable {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-    private String __prefix;
-    private List<Content> content = new ArrayList<Content>();
+    private String _prefix;
+    private List<Content> content = new ArrayList<>();
     private final Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
-    public String get__prefix() {
-        return __prefix;
+    public String get_prefix() {
+        return _prefix;
     }
 
-    public void set__prefix(String __prefix) {
-        this.__prefix = __prefix;
+    public void set_prefix(String _prefix) {
+        this._prefix = _prefix;
     }
 
-    public Group with__prefix(String __prefix) {
-        this.__prefix = __prefix;
+    public Group with_prefix(String _prefix) {
+        this._prefix = _prefix;
         return this;
     }
 
@@ -51,7 +51,9 @@ public class Group implements Serializable {
 
     @Override
     public String toString() {
-            	 ToStringStyle style = new SmartHMAStringStyle(); ToStringBuilder.setDefaultStyle(style); return ToStringBuilder.reflectionToString(this, style);
+        ToStringStyle style = new SmartHMAStringStyle();
+        ToStringBuilder.setDefaultStyle(style);
+        return ToStringBuilder.reflectionToString(this, style);
     }
 
     @Override

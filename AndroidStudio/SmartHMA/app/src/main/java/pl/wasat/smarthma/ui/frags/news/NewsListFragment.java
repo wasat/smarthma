@@ -1,7 +1,5 @@
 package pl.wasat.smarthma.ui.frags.news;
 
-import pl.wasat.smarthma.R;
-import pl.wasat.smarthma.services.NewsRssServiceNoAsync;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
@@ -10,6 +8,9 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ListView;
+
+import pl.wasat.smarthma.R;
+import pl.wasat.smarthma.services.NewsRssServiceNoAsync;
 
 public class NewsListFragment extends ListFragment {
 

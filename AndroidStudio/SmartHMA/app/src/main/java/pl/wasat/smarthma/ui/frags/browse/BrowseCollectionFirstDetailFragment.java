@@ -1,13 +1,14 @@
 package pl.wasat.smarthma.ui.frags.browse;
 
-import pl.wasat.smarthma.R;
-import pl.wasat.smarthma.ui.frags.base.BaseViewAndBasicSettingsDetailFragment;
-import pl.wasat.smarthma.ui.frags.common.AreaPickerMapFragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+
+import pl.wasat.smarthma.R;
+import pl.wasat.smarthma.ui.frags.base.BaseViewAndBasicSettingsDetailFragment;
+import pl.wasat.smarthma.ui.frags.common.AreaPickerMapFragment;
 
 /**
  * A simple {@link android.support.v4.app.Fragment} subclass. Activities that
@@ -50,17 +51,34 @@ public class BrowseCollectionFirstDetailFragment extends
 				.getSupportFragmentManager()
 				.beginTransaction()
 				.replace(R.id.frag_search_res_coll_det_layout_top,
-						areaPickerMapFragment).addToBackStack("AreaPickerMapFragment")
-				.commit();
+						areaPickerMapFragment)
+				.addToBackStack("AreaPickerMapFragment").commit();
 
-		btnShowProducts.setVisibility(View.INVISIBLE);
-
-		LinearLayout parentNameArea = (LinearLayout) rootView
-				.findViewById(R.id.frag_search_res_coll_det_layout_parent_name);
-		parentNameArea.setVisibility(View.INVISIBLE);
+		changeViewsSizeAndVisibility();
 
 		return rootView;
 
+	}
+
+	private void changeViewsSizeAndVisibility() {
+		ViewGroup.LayoutParams btnShowProductParams = btnShowProducts
+				.getLayoutParams();
+		btnShowProductParams.height = 0;
+		btnShowProducts.setLayoutParams(btnShowProductParams);
+		btnShowProducts.setVisibility(View.INVISIBLE);
+
+        ViewGroup.LayoutParams btnShowMetaParams = btnShowProducts
+                .getLayoutParams();
+        btnShowMetaParams.height = 0;
+        btnShowMetadata.setLayoutParams(btnShowMetaParams);
+        btnShowMetadata.setVisibility(View.INVISIBLE);
+
+		LinearLayout parentNameArea = (LinearLayout) rootView
+				.findViewById(R.id.frag_search_res_coll_det_layout_parent_name);
+		ViewGroup.LayoutParams parentNameAreaParams = parentNameArea
+				.getLayoutParams();
+		parentNameAreaParams.height = 0;
+		parentNameArea.setVisibility(View.INVISIBLE);
 	}
 
 }

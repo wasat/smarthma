@@ -7,7 +7,7 @@ import android.location.LocationManager;
 
 public class LocManager {
 
-	Context context;
+	private final Context context;
 
 	public LocManager(Context context) {
 		super();

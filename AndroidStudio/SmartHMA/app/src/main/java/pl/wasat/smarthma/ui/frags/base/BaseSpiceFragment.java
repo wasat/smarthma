@@ -3,22 +3,6 @@
  */
 package pl.wasat.smarthma.ui.frags.base;
 
-import java.io.IOException;
-import java.io.StringReader;
-
-import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.parsers.SAXParser;
-import javax.xml.parsers.SAXParserFactory;
-
-import org.xml.sax.InputSource;
-import org.xml.sax.SAXException;
-import org.xml.sax.XMLReader;
-
-import pl.wasat.smarthma.R;
-import pl.wasat.smarthma.model.feed.Feed;
-import pl.wasat.smarthma.services.SmartHmaHttpSpiceService;
-import pl.wasat.smarthma.ui.activities.BaseSmartHMActivity;
-import pl.wasat.smarthma.utils.rss.FedeoExceptionHandler;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
@@ -34,6 +18,23 @@ import com.octo.android.robospice.persistence.exception.SpiceException;
 import com.octo.android.robospice.request.listener.RequestListener;
 import com.octo.android.robospice.spicelist.okhttp.OkHttpBitmapSpiceManager;
 
+import org.xml.sax.InputSource;
+import org.xml.sax.SAXException;
+import org.xml.sax.XMLReader;
+
+import java.io.IOException;
+import java.io.StringReader;
+
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.parsers.SAXParser;
+import javax.xml.parsers.SAXParserFactory;
+
+import pl.wasat.smarthma.R;
+import pl.wasat.smarthma.model.feed.Feed;
+import pl.wasat.smarthma.services.SmartHmaHttpSpiceService;
+import pl.wasat.smarthma.ui.activities.BaseSmartHMActivity;
+import pl.wasat.smarthma.utils.rss.FedeoExceptionHandler;
+
 /**
  * @author Daniel Zinkiewicz Wasat Sp. z o.o 14-07-2014
  * 
@@ -43,7 +44,7 @@ public class BaseSpiceFragment extends Fragment implements
 
 	private final SpiceManager smartHMASpiceManager = new SpiceManager(
 			SmartHmaHttpSpiceService.class);
-	private OkHttpBitmapSpiceManager spiceManagerBinary = new OkHttpBitmapSpiceManager();
+	private final OkHttpBitmapSpiceManager spiceManagerBinary = new OkHttpBitmapSpiceManager();
 
 	@Override
 	public void onStart() {
@@ -93,7 +94,7 @@ public class BaseSpiceFragment extends Fragment implements
 
 				HttpResponseException exception = (HttpResponseException) spiceException
 						.getCause();
-				inStr = exception.getContent().toString();
+				inStr = exception.getContent();
 
 				SAXParserFactory spf = SAXParserFactory.newInstance();
 				SAXParser sp = spf.newSAXParser();
