@@ -1,5 +1,11 @@
 package pl.wasat.smarthma.ui.activities;
 
+import android.content.Intent;
+import android.graphics.Color;
+import android.net.Uri;
+import android.os.Bundle;
+import android.widget.FrameLayout;
+
 import pl.wasat.smarthma.R;
 import pl.wasat.smarthma.helper.Const;
 import pl.wasat.smarthma.model.mission.MissionItemData;
@@ -7,11 +13,6 @@ import pl.wasat.smarthma.ui.frags.missions.MissionsDetailsFragment;
 import pl.wasat.smarthma.ui.frags.missions.MissionsDetailsFragment.OnMissionsDetailNewFragmentListener;
 import pl.wasat.smarthma.ui.frags.missions.MissionsExtListFragment;
 import pl.wasat.smarthma.ui.frags.missions.MissionsExtListFragment.OnExtendedListFragmentListener;
-import android.content.Intent;
-import android.graphics.Color;
-import android.net.Uri;
-import android.os.Bundle;
-import android.widget.FrameLayout;
 
 public class MissionsActivity extends BaseSmartHMActivity implements
 		OnExtendedListFragmentListener, OnMissionsDetailNewFragmentListener {

@@ -62,7 +62,7 @@ public class SmartHMAStringStyle extends ToStringStyle {
 
 		// buffer = new StringBuffer(str);
 
-		if (fieldName.equalsIgnoreCase("__text")) {
+		if (fieldName.equalsIgnoreCase("_text")) {
 			fieldName = "value";
 		}
 		if (fieldName.equalsIgnoreCase("_xlink_href")) {

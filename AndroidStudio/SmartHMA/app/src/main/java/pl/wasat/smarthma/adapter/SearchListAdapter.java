@@ -1,9 +1,5 @@
 package pl.wasat.smarthma.adapter;
 
-import java.util.List;
-
-import pl.wasat.smarthma.R;
-import pl.wasat.smarthma.model.feed.Entry;
 import android.app.Activity;
 import android.graphics.Typeface;
 import android.view.LayoutInflater;
@@ -12,36 +8,40 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-public class SearchListAdapter extends ArrayAdapter<Entry> {
+import java.util.List;
 
-	public SearchListAdapter(Activity activity, List<Entry> searchList) {
-		super(activity, 0, searchList);
-	}
+import pl.wasat.smarthma.R;
+import pl.wasat.smarthma.model.iso.EntryISO;
 
-	@Override
-	public View getView(int position, View convertView, ViewGroup parent) {
-		Activity activity = (Activity) getContext();
-		LayoutInflater inflater = activity.getLayoutInflater();
+public class SearchListAdapter extends ArrayAdapter<EntryISO> {
 
-		View rowView = inflater.inflate(R.layout.view_cell_collection_search, parent, false);
-		Entry searchItem = getItem(position);
+    public SearchListAdapter(Activity activity, List<EntryISO> searchList) {
+        super(activity, 0, searchList);
+    }
 
-		TextView textView = (TextView) rowView
-				.findViewById(R.id.search_list_name);
-		textView.setText(searchItem.getTitle());
+    @Override
+    public View getView(int position, View convertView, ViewGroup parent) {
+        Activity activity = (Activity) getContext();
+        LayoutInflater inflater = activity.getLayoutInflater();
 
-		TextView dateView = (TextView) rowView
-				.findViewById(R.id.search_listing_smallprint);
-		String pubDate = "Date: " + searchItem.getDate() + ", published: "
-				+ searchItem.getDate() + ", updated: "
-				+ searchItem.getUpdated();
+        View rowView = inflater.inflate(R.layout.view_cell_collection_search, parent, false);
+        EntryISO searchItem = getItem(position);
 
-		dateView.setText(pubDate);
+        TextView textView = (TextView) rowView
+                .findViewById(R.id.search_list_name);
+        textView.setText(searchItem.getTitle());
 
-		if (!searchItem.isRead()) {
-			textView.setTypeface(Typeface.DEFAULT_BOLD);
-		}
-		return rowView;
+        TextView dateView = (TextView) rowView
+                .findViewById(R.id.search_listing_smallprint);
+        String pubDate = "Date: " + searchItem.getDate().getCIDate().getDateInCIDate().getDateGco().getText() + ", updated: "
+                + searchItem.getUpdated();
 
-	}
+        dateView.setText(pubDate);
+
+        if (!searchItem.isRead()) {
+            textView.setTypeface(Typeface.DEFAULT_BOLD);
+        }
+        return rowView;
+
+    }
 }

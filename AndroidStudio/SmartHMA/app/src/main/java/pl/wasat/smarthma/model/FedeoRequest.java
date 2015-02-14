@@ -3,17 +3,17 @@
  */
 package pl.wasat.smarthma.model;
 
-import java.io.Serializable;
-import java.util.HashMap;
-
-import pl.wasat.smarthma.helper.Const;
-
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.Log;
 
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
+
+import java.io.Serializable;
+import java.util.HashMap;
+
+import pl.wasat.smarthma.helper.Const;
 
 /** 
  * @author Daniel Zinkiewicz Wasat Sp. z o.o 18-07-2014
@@ -50,7 +50,8 @@ public class FedeoRequest implements Serializable {
 		this.startDate = "2011-07-23T00:00:00Z";
 		this.endDate = "2014-07-23T00:00:00Z";
 		this.bbox = "20,50,21,51";
-		this.recordSchema = "om";
+		this.recordSchema = "server-choice";
+        //this.recordSchema = "om";
 		this.params.put("httpAccept", httpAccept);
 		this.params.put("startRecord", startRecord);
 		this.params.put("maximumRecords", maximumRecords);

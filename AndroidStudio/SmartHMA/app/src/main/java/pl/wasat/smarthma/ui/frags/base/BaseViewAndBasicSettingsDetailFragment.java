@@ -1,15 +1,5 @@
 package pl.wasat.smarthma.ui.frags.base;
 
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Locale;
-
-import pl.wasat.smarthma.R;
-import pl.wasat.smarthma.customviews.SmHmaTimePickerDialog;
-import pl.wasat.smarthma.customviews.TimePicker;
-import pl.wasat.smarthma.model.feed.Entry;
-import pl.wasat.smarthma.preferences.SharedPrefs;
-import pl.wasat.smarthma.ui.frags.common.AreaPickerMapFragment;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.os.Bundle;
@@ -27,6 +17,17 @@ import android.widget.TextView;
 
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Locale;
+
+import pl.wasat.smarthma.R;
+import pl.wasat.smarthma.customviews.SmHmaTimePickerDialog;
+import pl.wasat.smarthma.customviews.TimePicker;
+import pl.wasat.smarthma.model.iso.EntryISO;
+import pl.wasat.smarthma.preferences.SharedPrefs;
+import pl.wasat.smarthma.ui.frags.common.AreaPickerMapFragment;
 
 /**
  * A simple {@link android.support.v4.app.Fragment} subclass. Use the
@@ -53,8 +54,9 @@ public class BaseViewAndBasicSettingsDetailFragment extends Fragment {
 	private static TextView tvToTime;
 
 	protected Button btnShowProducts;
+    protected Button btnShowMetadata;
 
-	protected Entry displayedEntry;
+	protected EntryISO displayedISOEntry;
 
 	private static SharedPrefs sharedPrefs;
 
@@ -73,7 +75,7 @@ public class BaseViewAndBasicSettingsDetailFragment extends Fragment {
 	 *         BaseViewAndBasicSettingsDetailFragment.
 	 */
 	public static BaseViewAndBasicSettingsDetailFragment newInstance(
-			Entry collectionEntry) {
+			EntryISO collectionEntry) {
 		BaseViewAndBasicSettingsDetailFragment fragment = new BaseViewAndBasicSettingsDetailFragment();
 		Bundle args = new Bundle();
 		args.putSerializable(KEY_COLLECTION_ENTRY, collectionEntry);
@@ -81,7 +83,7 @@ public class BaseViewAndBasicSettingsDetailFragment extends Fragment {
 		return fragment;
 	}
 
-	protected BaseViewAndBasicSettingsDetailFragment() {
+	public BaseViewAndBasicSettingsDetailFragment() {
 		// Required empty public constructor
 	}
 
@@ -89,7 +91,7 @@ public class BaseViewAndBasicSettingsDetailFragment extends Fragment {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		if (getArguments() != null) {
-			displayedEntry = (Entry) getArguments().getSerializable(
+			displayedISOEntry = (EntryISO) getArguments().getSerializable(
 					KEY_COLLECTION_ENTRY);
 		}
 		sharedPrefs = new SharedPrefs(getActivity());
@@ -107,14 +109,14 @@ public class BaseViewAndBasicSettingsDetailFragment extends Fragment {
 		tvParentId = (TextView) rootView
 				.findViewById(R.id.frag_search_res_coll_det_tv_parent_id);
 
-		if (displayedEntry != null) {
-			final String title = displayedEntry.getTitle();
+		if (displayedISOEntry != null) {
+			final String title = displayedISOEntry.getTitle();
 			final String pubDate = "This data were published: "
-					+ displayedEntry.getPublished() + " and updated: "
-					+ displayedEntry.getUpdated();
-			parentID = displayedEntry.getIdentifier();
+					+ displayedISOEntry.getDate().getCIDate().getDateInCIDate().getDateGco().getText() + " and updated: "
+					+ displayedISOEntry.getUpdated();
+			parentID = displayedISOEntry.getIdentifier();
 
-			String content = displayedEntry.getSummary();
+			String content = displayedISOEntry.getSummary().getCdata();
 			((TextView) rootView
 					.findViewById(R.id.frag_search_res_coll_det_tv_coll_name))
 					.setText(title);
@@ -210,7 +212,9 @@ public class BaseViewAndBasicSettingsDetailFragment extends Fragment {
 
 		btnShowProducts = (Button) rootView
 				.findViewById(R.id.frag_search_res_coll_det_btn_search_product);
-		return rootView;
+        btnShowMetadata = (Button) rootView.findViewById(R.id.frag_search_res_coll_det_btn_show_meta);
+
+        return rootView;
 	}
 
 	private void getDateTimePrefs() {

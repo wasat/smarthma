@@ -1,13 +1,13 @@
 package pl.wasat.smarthma.utils.xml;
 
-import java.io.IOException;
-import java.io.StringReader;
-import java.util.ArrayList;
-
 import org.acra.ACRA;
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
 import org.xmlpull.v1.XmlPullParserFactory;
+
+import java.io.IOException;
+import java.io.StringReader;
+import java.util.ArrayList;
 
 import pl.wasat.smarthma.SmartHMApplication;
 import pl.wasat.smarthma.model.Collection;
@@ -150,18 +150,15 @@ public class XMLParser {
 				eventType = parser.nextToken();
 			}
 
-		} catch (XmlPullParserException e) {
-			e.printStackTrace();
-			ACRA.getErrorReporter().handleSilentException(e);
-		} catch (IOException e) {
+		} catch (XmlPullParserException | IOException e) {
 			e.printStackTrace();
 			ACRA.getErrorReporter().handleSilentException(e);
 		}
 
-		setDataGlobals();
+        setDataGlobals();
 	}
 
-	public void setDataGlobals() {
+	void setDataGlobals() {
 		SmartHMApplication.GlobalEODataList = collectionGrList;
 		SmartHMApplication.GlobalExplainData = expData;
 	}

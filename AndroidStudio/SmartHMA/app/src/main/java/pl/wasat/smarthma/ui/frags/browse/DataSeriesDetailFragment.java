@@ -1,3 +1,4 @@
+/*
 package pl.wasat.smarthma.ui.frags.browse;
 
 import android.app.Activity;
@@ -16,9 +17,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import pl.wasat.smarthma.R;
-import pl.wasat.smarthma.model.feed.Entry;
+import pl.wasat.smarthma.model.eo.Entry;
 import pl.wasat.smarthma.ui.frags.common.AreaPickerMapFragment;
 
+*/
 /**
  * A simple {@link android.support.v4.app.Fragment} subclass. Activities that
  * contain this fragment must implement the
@@ -26,18 +28,21 @@ import pl.wasat.smarthma.ui.frags.common.AreaPickerMapFragment;
  * interface to handle interaction events. Use the
  * {@link DataSeriesDetailFragment#newInstance} factory method to create an
  * instance of this fragment.
- */
+ *//*
+
 public class DataSeriesDetailFragment extends Fragment {
     public static final String ARG_ITEM_ID = "item_id";
 
-    private Entry displayedEntry;
+    private Entry displayedISOEntry;
 
-    /**
+    */
+/**
      * Use this factory method to create a new instance of this fragment using
      * the provided parameters.
      *
      * @return A new instance of fragment DataSeriesDetailFragment.
-     */
+     *//*
+
     public static DataSeriesDetailFragment newInstance() {
         DataSeriesDetailFragment fragment = new DataSeriesDetailFragment();
         Bundle args = new Bundle();
@@ -54,7 +59,7 @@ public class DataSeriesDetailFragment extends Fragment {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             if (getArguments().containsKey(Entry.KEY_RSS_ENTRY)) {
-                displayedEntry = (Entry) getArguments().getSerializable(
+                displayedISOEntry = (Entry) getArguments().getSerializable(
                         Entry.KEY_RSS_ENTRY);
             }
         }
@@ -65,13 +70,13 @@ public class DataSeriesDetailFragment extends Fragment {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_dataseries_detail,
                 container, false);
-        if (displayedEntry != null) {
-            final String title = displayedEntry.getTitle();
+        if (displayedISOEntry != null) {
+            final String title = displayedISOEntry.getTitle();
             final String pubDate = "This EO data ware published: "
-                    + displayedEntry.getPublished() + " and updated: "
-                    + displayedEntry.getUpdated();
+                    + displayedISOEntry.getPublished() + " and updated: "
+                    + displayedISOEntry.getUpdated();
 
-            String content = displayedEntry.getSummary();
+            String content = displayedISOEntry.getSummary();
             ((TextView) rootView.findViewById(R.id.dataseries_name))
                     .setText(title);
             ((TextView) rootView.findViewById(R.id.dataseries_dates))
@@ -98,11 +103,6 @@ public class DataSeriesDetailFragment extends Fragment {
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
-        try {
-        } catch (ClassCastException e) {
-            throw new ClassCastException(activity.toString()
-                    + " must implement OnDataSeriesDetailFragmentInteractionListener");
-        }
     }
 
     @Override
@@ -129,7 +129,8 @@ public class DataSeriesDetailFragment extends Fragment {
 
     }
 
-    /**
+    */
+/**
      * This interface must be implemented by activities that contain this
      * fragment to allow an interaction in this fragment to be communicated to
      * the activity and potentially other fragments contained in that activity.
@@ -137,7 +138,8 @@ public class DataSeriesDetailFragment extends Fragment {
      * See the Android Training lesson <a href=
      * "http://developer.android.com/training/basics/fragments/communicating.html"
      * >Communicating with Other Fragments</a> for more information.
-     */
+     *//*
+
     public interface OnDataSeriesDetailFragmentInteractionListener {
         public void onDataSeriesDetailFragmentInteraction();
     }
@@ -153,3 +155,4 @@ public class DataSeriesDetailFragment extends Fragment {
     }
 
 }
+*/

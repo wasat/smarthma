@@ -1,14 +1,5 @@
 package pl.wasat.smarthma.customviews;
 
-import java.util.HashMap;
-import java.util.List;
-
-import pl.wasat.smarthma.R;
-import pl.wasat.smarthma.model.mission.MissionHeaderData;
-import pl.wasat.smarthma.model.mission.MissionItemData;
-
-import com.squareup.picasso.Picasso;
-
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Typeface;
@@ -19,14 +10,23 @@ import android.widget.BaseExpandableListAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+
+import java.util.HashMap;
+import java.util.List;
+
+import pl.wasat.smarthma.R;
+import pl.wasat.smarthma.model.mission.MissionHeaderData;
+import pl.wasat.smarthma.model.mission.MissionItemData;
+
 @SuppressLint("InflateParams")
 public class ExpandableListAdapter extends BaseExpandableListAdapter {
 
 	private static final String EARTH_ESA_URL = "https://earth.esa.int";
-	private Context _context;
-	private List<MissionHeaderData> _listDataHeader; // header titles
+	private final Context _context;
+	private final List<MissionHeaderData> _listDataHeader; // header titles
 	// child data in format of header title, child title
-	private HashMap<String, List<MissionItemData>> _listDataChild;
+	private final HashMap<String, List<MissionItemData>> _listDataChild;
 
 	public ExpandableListAdapter(Context context, List<MissionHeaderData> listDataHeader,
 			HashMap<String, List<MissionItemData>> listDataChild) {
@@ -81,9 +81,9 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
 	public int getChildrenCount(int groupPosition) {
 		String missKey =  this._listDataHeader.get(groupPosition).getName();
 		List<MissionItemData> hsh = this._listDataChild.get(missKey);
-        int size = hsh.size();
+        return hsh.size();
 		 
-		return size;
+		//return size;
 				
 	}
 

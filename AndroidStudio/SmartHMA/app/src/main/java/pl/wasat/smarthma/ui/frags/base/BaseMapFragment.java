@@ -1,9 +1,5 @@
 package pl.wasat.smarthma.ui.frags.base;
 
-import pl.wasat.smarthma.interfaces.OnBaseMapFragmentPublicListener;
-import pl.wasat.smarthma.utils.io.AcraExtension;
-import pl.wasat.smarthma.utils.loc.LocManager;
-import pl.wasat.smarthma.utils.wms.TileProviderFactory;
 import android.app.Dialog;
 import android.content.BroadcastReceiver;
 import android.location.Location;
@@ -28,10 +24,15 @@ import com.google.android.gms.maps.model.TileOverlay;
 import com.google.android.gms.maps.model.TileOverlayOptions;
 import com.google.android.gms.maps.model.TileProvider;
 
+import pl.wasat.smarthma.interfaces.OnBaseMapFragmentPublicListener;
+import pl.wasat.smarthma.utils.io.AcraExtension;
+import pl.wasat.smarthma.utils.loc.LocManager;
+import pl.wasat.smarthma.utils.wms.TileProviderFactory;
+
 /**
  * A simple {@link android.support.v4.app.Fragment} subclass. Activities that
  * contain this fragment must implement the
- * {@link BaseMapFragment.OnMapFragmentListener} interface to handle interaction
+ * {@link pl.wasat.smarthma.ui.frags.base.BaseMapFragment.OnBaseMapFragmentListener} interface to handle interaction
  * events. Use the {@link BaseMapFragment#newInstance} factory method to create
  * an instance of this fragment.
  * 
@@ -42,6 +43,8 @@ public class BaseMapFragment extends SupportMapFragment implements
 		GoogleApiClient.OnConnectionFailedListener {
 
 	protected static final String KEY_MAP_MODE = "pl.wasat.smarthma.KEY_MAP_MODE";
+    private static final String KEY_PARAM_PUBLIC_LISTENER = "pl.wasat.samrthma.KEY_PARAM_PUBLIC_LISTENER";
+
 
 	/** reference to Google Maps object */
 	private SupportMapFragment supportMapFrag;
@@ -60,19 +63,30 @@ public class BaseMapFragment extends SupportMapFragment implements
 
 	private LatLngBounds targetBounds;
 
+    public BaseMapFragment() {
+    }
+
 	public static BaseMapFragment newInstance(
 			OnBaseMapFragmentPublicListener listener) {
-		return new BaseMapFragment(listener);
+        BaseMapFragment baseMapFragment = new BaseMapFragment();
+        baseMapFragment.publicListener = listener;
+       // Bundle args = new Bundle();
+        //args.putSerializable(KEY_PARAM_PUBLIC_LISTENER, listener);
+        //baseMapFragment.setArguments(args);
+        return baseMapFragment;
+		//return new BaseMapFragment(listener);
 	}
 
-	public BaseMapFragment() {
-		// Required empty public constructor
-	}
+
 
 	// constructor
-	BaseMapFragment(OnBaseMapFragmentPublicListener ml) {
-		this.publicListener = ml;
-	}
+	//public BaseMapFragment(OnBaseMapFragmentPublicListener ml) {
+	//	this.publicListener = ml;
+	//}
+
+    private void callBaseMapFragment(OnBaseMapFragmentPublicListener ml) {
+    	this.publicListener = ml;
+    }
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {

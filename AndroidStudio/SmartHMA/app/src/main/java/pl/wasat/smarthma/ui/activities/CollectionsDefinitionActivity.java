@@ -1,13 +1,5 @@
 package pl.wasat.smarthma.ui.activities;
 
-import pl.wasat.smarthma.R;
-import pl.wasat.smarthma.interfaces.OnCollectionsListSelectionListener;
-import pl.wasat.smarthma.ui.frags.base.BaseMapFragment;
-import pl.wasat.smarthma.ui.frags.browse.BrowseCollectionFirstDetailFragment;
-import pl.wasat.smarthma.ui.frags.browse.CollectionsGroupListFragment;
-import pl.wasat.smarthma.ui.frags.browse.CollectionsListFragment.OnCollectionsListFragmentListener;
-import pl.wasat.smarthma.ui.frags.common.AreaPickerMapFragment.OnAreaPickerMapFragmentListener;
-import roboguice.util.temp.Ln;
 import android.app.SearchManager;
 import android.content.Context;
 import android.os.Bundle;
@@ -21,6 +13,15 @@ import android.widget.SearchView;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.model.LatLngBounds;
+
+import pl.wasat.smarthma.R;
+import pl.wasat.smarthma.interfaces.OnCollectionsListSelectionListener;
+import pl.wasat.smarthma.ui.frags.base.BaseMapFragment;
+import pl.wasat.smarthma.ui.frags.browse.BrowseCollectionFirstDetailFragment;
+import pl.wasat.smarthma.ui.frags.browse.CollectionsGroupListFragment;
+import pl.wasat.smarthma.ui.frags.browse.CollectionsListFragment.OnCollectionsListFragmentListener;
+import pl.wasat.smarthma.ui.frags.common.AreaPickerMapFragment.OnAreaPickerMapFragmentListener;
+import roboguice.util.temp.Ln;
 
 public class CollectionsDefinitionActivity extends BaseSmartHMActivity
 		implements OnCollectionsListSelectionListener,

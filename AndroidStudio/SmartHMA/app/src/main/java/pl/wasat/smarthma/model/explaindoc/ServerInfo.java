@@ -115,10 +115,8 @@ public class ServerInfo implements Serializable {
 				return false;
 		} else if (!host.equals(other.host))
 			return false;
-		if (id != other.id)
-			return false;
-		return port == other.port;
-	}
+        return id == other.id && port == other.port;
+    }
 
 	/*
 	 * (non-Javadoc)
