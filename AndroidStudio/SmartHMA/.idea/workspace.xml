@@ -35,134 +35,7 @@
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="app: pl.wasat.smarthma" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5dca7b90-b835-4844-b157-9a39df993946" name="Default" comment="Added ISO Metadata and sorting functions - part 2">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/Abstract.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/Abstract.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/AccessConstraints.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/AccessConstraints.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/AcquisitionStation.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/AcquisitionStation.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/utils/io/AcraExtension.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/utils/io/AcraExtension.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/Address.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/Address.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/ui/frags/base/BaseFeedSummaryFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/ui/frags/base/BaseFeedSummaryFragment.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/ui/frags/base/BaseShowProductsListFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/ui/frags/base/BaseShowProductsListFragment.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/ui/frags/base/BaseSpiceFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/ui/frags/base/BaseSpiceFragment.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/BeginPosition.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/BeginPosition.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/Boolean.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/Boolean.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/CIAddress.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/CIAddress.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/CICitation.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/CICitation.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/CIContact.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/CIContact.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/CIDate.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/CIDate.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/CIDateTypeCode.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/CIDateTypeCode.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/CIOnlineResource.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/CIOnlineResource.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/CIResponsibleParty.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/CIResponsibleParty.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/CIRoleCode.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/CIRoleCode.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/CITelephone.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/CITelephone.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/CharacterString.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/CharacterString.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/Citation.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/Citation.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/City.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/City.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/Code.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/Code.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/CodeSpace.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/CodeSpace.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/ui/frags/browse/CollectionsGroupListFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/ui/frags/browse/CollectionsGroupListFragment.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/utils/conn/ConnectionDetector.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/utils/conn/ConnectionDetector.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/Contact.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/Contact.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/ContactInfo.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/ContactInfo.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/Country.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/Country.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/DQConformanceResult.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/DQConformanceResult.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/DQDataQuality.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/DQDataQuality.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/DQDomainConsistency.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/DQDomainConsistency.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/DQScope.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/DQScope.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/DataQualityInfo.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/DataQualityInfo.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/ui/frags/browse/DataSeriesListFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/ui/frags/browse/DataSeriesListFragment.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/helper/DataSorter.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/helper/DataSorter.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/Date.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/Date.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/DateGco.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/DateGco.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/DateInCIDate.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/DateInCIDate.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/DateStamp.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/DateStamp.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/DateType.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/DateType.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/Decimal.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/Decimal.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/DeliveryPoint.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/DeliveryPoint.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/DescriptiveKeyword.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/DescriptiveKeyword.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/EXExtent.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/EXExtent.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/EXGeographicBoundingBox.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/EXGeographicBoundingBox.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/EXTemporalExtent.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/EXTemporalExtent.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/EastBoundLongitude.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/EastBoundLongitude.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/ElectronicMailAddress.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/ElectronicMailAddress.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/EndPosition.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/EndPosition.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/EntryISO.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/EntryISO.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/exception/Exception.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/exception/Exception.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/customviews/ExpandableListAdapter.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/customviews/ExpandableListAdapter.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/Explanation.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/Explanation.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/Extent.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/Extent.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/ExtentInEXTemp.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/ExtentInEXTemp.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/ui/frags/dialog/FacebookDialogFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/ui/frags/dialog/FacebookDialogFragment.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/Facsimile.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/Facsimile.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/feed/Feed.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/feed/Feed.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/Feed.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/Feed.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/FileIdentifier.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/FileIdentifier.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/GeographicElement.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/GeographicElement.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/feed/Group.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/feed/Group.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/HierarchyLevel.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/HierarchyLevel.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/IdentificationInfo.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/IdentificationInfo.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/Identifier.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/Identifier.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/IndividualName.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/IndividualName.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/Keyword.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/Keyword.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/LILineage.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/LILineage.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/Language.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/Language.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/LanguageCode.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/LanguageCode.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/Level.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/Level.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/Lineage.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/Lineage.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/Linkage.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/Linkage.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/utils/loc/LocManager.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/utils/loc/LocManager.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/utils/io/LogWriter.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/utils/io/LogWriter.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/MDConstraints.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/MDConstraints.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/MDDataIdentification.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/MDDataIdentification.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/MDKeywords.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/MDKeywords.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/MDLegalConstraints.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/MDLegalConstraints.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/MDMetadata.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/MDMetadata.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/MDRestrictionCode.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/MDRestrictionCode.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/MDScopeCode.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/MDScopeCode.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/MDTopicCategoryCode.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/MDTopicCategoryCode.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/utils/text/MetadataCleaner.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/utils/text/MetadataCleaner.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/MetadataStandardName.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/MetadataStandardName.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/MetadataStandardVersion.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/MetadataStandardVersion.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/ui/frags/missions/MissionsExtListFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/ui/frags/missions/MissionsExtListFragment.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/NorthBoundLatitude.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/NorthBoundLatitude.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/utils/obj/ObjectUtils.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/utils/obj/ObjectUtils.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/OnlineResource.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/OnlineResource.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/OrganisationName.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/OrganisationName.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/OtherConstraints.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/OtherConstraints.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/Pass.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/Pass.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/Phone.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/Phone.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/PointOfContact.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/PointOfContact.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/Polygon.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/Polygon.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/PositionName.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/PositionName.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/PostalCode.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/PostalCode.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/RSIdentifier.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/RSIdentifier.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/utils/text/RecursiveToSrtingStyle.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/utils/text/RecursiveToSrtingStyle.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/Report.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/Report.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/ResourceConstraint.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/ResourceConstraint.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/Result.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/Result.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/Role.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/Role.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/Scope.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/Scope.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/ui/frags/search/SearchListFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/ui/frags/search/SearchListFragment.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/helper/SimpleDate.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/helper/SimpleDate.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/utils/rss/SmartHmaEoHandler.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/utils/rss/SmartHmaEoHandler.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/utils/rss/SmartHmaISOHandler.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/utils/rss/SmartHmaISOHandler.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/SouthBoundLatitude.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/SouthBoundLatitude.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/Specification.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/Specification.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/Statement.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/Statement.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/Summary.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/Summary.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/TemporalElement.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/TemporalElement.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/utils/wms/TileProviderFactory.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/utils/wms/TileProviderFactory.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/TimePeriod.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/TimePeriod.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/customviews/TimePicker.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/customviews/TimePicker.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/Title.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/Title.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/TopicCategory.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/TopicCategory.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/URL.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/URL.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/UseLimitation.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/UseLimitation.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/Voice.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/Voice.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/utils/wms/WMSTileProvider.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/utils/wms/WMSTileProvider.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/WestBoundLongitude.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/WestBoundLongitude.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/utils/xml/XMLParser.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/utils/xml/XMLParser.java" />
-    </list>
+    <list default="true" id="5dca7b90-b835-4844-b157-9a39df993946" name="Default" comment="Added ISO Metadata and sorting functions - part 2" />
     <ignored path="SmartHMA.iws" />
     <ignored path=".idea/workspace.xml" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -189,9 +62,7 @@
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0" vertical-offset="116" max-vertical-offset="612">
               <caret line="14" column="8" selection-start-line="14" selection-start-column="8" selection-end-line="14" selection-end-column="8" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
+              <folding />
             </state>
           </provider>
         </entry>
@@ -199,7 +70,7 @@
       <file leaf-file-name="DataSorter.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/helper/DataSorter.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="1782" max-vertical-offset="3604">
+            <state vertical-scroll-proportion="0.0" vertical-offset="2295" max-vertical-offset="4403">
               <caret line="135" column="12" selection-start-line="135" selection-start-column="12" selection-end-line="135" selection-end-column="12" />
               <folding />
             </state>
@@ -209,7 +80,7 @@
       <file leaf-file-name="BaseFeedSummaryFragment.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/ui/frags/base/BaseFeedSummaryFragment.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="592" max-vertical-offset="3179">
+            <state vertical-scroll-proportion="0.0" vertical-offset="986" max-vertical-offset="3706">
               <caret line="58" column="14" selection-start-line="58" selection-start-column="14" selection-end-line="58" selection-end-column="14" />
               <folding />
             </state>
@@ -219,7 +90,7 @@
       <file leaf-file-name="SmartHMAStringStyle.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/utils/text/SmartHMAStringStyle.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="1366" max-vertical-offset="1734">
+            <state vertical-scroll-proportion="0.0" vertical-offset="1547" max-vertical-offset="1785">
               <caret line="91" column="16" selection-start-line="91" selection-start-column="16" selection-end-line="91" selection-end-column="16" />
               <folding />
             </state>
@@ -229,7 +100,7 @@
       <file leaf-file-name="EntryISO.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/EntryISO.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="2292" max-vertical-offset="3349">
+            <state vertical-scroll-proportion="0.0" vertical-offset="3434" max-vertical-offset="4505">
               <caret line="202" column="24" selection-start-line="202" selection-start-column="24" selection-end-line="202" selection-end-column="24" />
               <folding />
             </state>
@@ -239,7 +110,7 @@
       <file leaf-file-name="SmartHmaISOHandler.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/utils/rss/SmartHmaISOHandler.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="14875">
+            <state vertical-scroll-proportion="0.0" vertical-offset="1955" max-vertical-offset="16796">
               <caret line="115" column="6" selection-start-line="115" selection-start-column="6" selection-end-line="115" selection-end-column="6" />
               <folding />
             </state>
@@ -249,12 +120,9 @@
       <file leaf-file-name="TimePicker.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/customviews/TimePicker.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="473" max-vertical-offset="6443">
+            <state vertical-scroll-proportion="0.0" vertical-offset="1105" max-vertical-offset="7633">
               <caret line="65" column="48" selection-start-line="65" selection-start-column="48" selection-end-line="65" selection-end-column="48" />
-              <folding>
-                <element signature="e#2247#2409#0" expanded="true" />
-                <element signature="e#2405#2406#0" expanded="true" />
-              </folding>
+              <folding />
             </state>
           </provider>
         </entry>
@@ -262,8 +130,8 @@
       <file leaf-file-name="SimpleDate.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/helper/SimpleDate.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.33152175" vertical-offset="14" max-vertical-offset="1190">
-              <caret line="8" column="22" selection-start-line="8" selection-start-column="22" selection-end-line="8" selection-end-column="22" />
+            <state vertical-scroll-proportion="0.25" vertical-offset="14" max-vertical-offset="1190">
+              <caret line="11" column="28" selection-start-line="11" selection-start-column="28" selection-end-line="11" selection-end-column="28" />
               <folding />
             </state>
           </provider>
@@ -275,7 +143,7 @@
             <state />
           </provider>
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-4.185185" vertical-offset="431" max-vertical-offset="1479">
+            <state vertical-scroll-proportion="0.0" vertical-offset="431" max-vertical-offset="1479">
               <caret line="32" column="8" selection-start-line="32" selection-start-column="8" selection-end-line="32" selection-end-column="8" />
               <folding />
             </state>
@@ -285,11 +153,9 @@
       <file leaf-file-name="MissionsExtListFragment.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/ui/frags/missions/MissionsExtListFragment.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="171" max-vertical-offset="6749">
+            <state vertical-scroll-proportion="0.0" vertical-offset="731" max-vertical-offset="7395">
               <caret line="43" column="4" selection-start-line="43" selection-start-column="4" selection-end-line="43" selection-end-column="4" />
-              <folding>
-                <element signature="e#18214#18231#0" expanded="true" />
-              </folding>
+              <folding />
             </state>
           </provider>
         </entry>
@@ -1437,6 +1303,28 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="AndroidView">
+        <subPane>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="SmartHMA" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="SmartHMA" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -1493,28 +1381,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
-      <pane id="AndroidView">
-        <subPane>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="SmartHMA" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="SmartHMA" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="app" />
-              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
-            </PATH_ELEMENT>
-          </PATH>
-        </subPane>
-      </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -1751,37 +1617,37 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1616" height="876" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.38472223" sideWeight="0.5796915" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.19237147" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.67777777" sideWeight="0.16452442" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.22083333" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.38472223" sideWeight="0.5796915" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.19237147" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.42916667" sideWeight="0.5919023" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Inspection" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.45" sideWeight="0.6182519" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.20372751" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32777777" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.38333333" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3283582" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.6236111" sideWeight="0.6529563" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.67777777" sideWeight="0.38174808" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2647815" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Memory Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.6263889" sideWeight="0.63946015" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.22083333" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.42916667" sideWeight="0.5919023" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.45" sideWeight="0.6182519" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.20372751" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.6263889" sideWeight="0.63946015" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -1865,7 +1731,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="1122" max-vertical-offset="1921">
           <caret line="80" column="39" selection-start-line="80" selection-start-column="39" selection-end-line="80" selection-end-column="39" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1873,7 +1738,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="4845" max-vertical-offset="6392">
           <caret line="340" column="32" selection-start-line="340" selection-start-column="32" selection-end-line="340" selection-end-column="32" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1889,7 +1753,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.5091384" vertical-offset="961" max-vertical-offset="1904">
           <caret line="87" column="5" selection-start-line="87" selection-start-column="5" selection-end-line="87" selection-end-column="5" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1897,7 +1760,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="1734" max-vertical-offset="3927">
           <caret line="134" column="38" selection-start-line="134" selection-start-column="38" selection-end-line="134" selection-end-column="38" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1905,7 +1767,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.098265894" vertical-offset="204" max-vertical-offset="935">
           <caret line="19" column="21" selection-start-line="19" selection-start-column="21" selection-end-line="19" selection-end-column="21" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1913,7 +1774,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.36127168" vertical-offset="804" max-vertical-offset="1496">
           <caret line="64" column="11" selection-start-line="64" selection-start-column="11" selection-end-line="64" selection-end-column="11" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1921,7 +1781,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.098265894" vertical-offset="0" max-vertical-offset="20706">
           <caret line="20" column="6" selection-start-line="20" selection-start-column="6" selection-end-line="20" selection-end-column="6" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1929,7 +1788,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.098265894" vertical-offset="0" max-vertical-offset="692">
           <caret line="7" column="6" selection-start-line="7" selection-start-column="6" selection-end-line="7" selection-end-column="6" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1937,7 +1795,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.098265894" vertical-offset="0" max-vertical-offset="697">
           <caret line="7" column="13" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1945,7 +1802,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.098265894" vertical-offset="1921" max-vertical-offset="4114">
           <caret line="140" column="9" selection-start-line="140" selection-start-column="9" selection-end-line="140" selection-end-column="9" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1953,7 +1809,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="153" max-vertical-offset="1241">
           <caret line="35" column="5" selection-start-line="35" selection-start-column="5" selection-end-line="35" selection-end-column="5" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1961,7 +1816,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="2380" max-vertical-offset="2635">
           <caret line="166" column="8" selection-start-line="166" selection-start-column="8" selection-end-line="166" selection-end-column="8" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1969,7 +1823,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1428">
           <caret line="13" column="34" selection-start-line="13" selection-start-column="34" selection-end-line="13" selection-end-column="34" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1977,7 +1830,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="340" max-vertical-offset="1394">
           <caret line="32" column="11" selection-start-line="32" selection-start-column="11" selection-end-line="32" selection-end-column="11" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1985,7 +1837,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="34" max-vertical-offset="2023">
           <caret line="9" column="38" selection-start-line="9" selection-start-column="38" selection-end-line="9" selection-end-column="38" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1993,7 +1844,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="34" max-vertical-offset="1428">
           <caret line="15" column="30" selection-start-line="15" selection-start-column="30" selection-end-line="15" selection-end-column="30" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2001,7 +1851,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="34" max-vertical-offset="1428">
           <caret line="15" column="30" selection-start-line="15" selection-start-column="30" selection-end-line="15" selection-end-column="30" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2009,7 +1858,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="102" max-vertical-offset="510">
           <caret line="27" column="13" selection-start-line="27" selection-start-column="13" selection-end-line="27" selection-end-column="13" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2017,7 +1865,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="1224" max-vertical-offset="2346">
           <caret line="99" column="16" selection-start-line="99" selection-start-column="16" selection-end-line="99" selection-end-column="16" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2025,7 +1872,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="1332" max-vertical-offset="1700">
           <caret line="106" column="52" selection-start-line="106" selection-start-column="52" selection-end-line="106" selection-end-column="52" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2033,7 +1879,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="3091" max-vertical-offset="3944">
           <caret line="206" column="36" selection-start-line="206" selection-start-column="36" selection-end-line="206" selection-end-column="36" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2041,7 +1886,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="354" max-vertical-offset="1904">
           <caret line="39" column="4" selection-start-line="39" selection-start-column="4" selection-end-line="39" selection-end-column="4" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2049,7 +1893,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1564">
           <caret line="11" column="0" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2057,7 +1900,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1377">
           <caret line="11" column="0" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2065,7 +1907,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="82" max-vertical-offset="1377">
           <caret line="25" column="5" selection-start-line="25" selection-start-column="5" selection-end-line="25" selection-end-column="5" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2073,7 +1914,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="48" max-vertical-offset="1037">
           <caret line="19" column="73" selection-start-line="19" selection-start-column="73" selection-end-line="19" selection-end-column="73" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2081,7 +1921,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="184" max-vertical-offset="2856">
           <caret line="31" column="44" selection-start-line="31" selection-start-column="44" selection-end-line="31" selection-end-column="44" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2089,7 +1928,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="48" max-vertical-offset="969">
           <caret line="33" column="34" selection-start-line="33" selection-start-column="34" selection-end-line="33" selection-end-column="34" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2097,7 +1935,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="252" max-vertical-offset="1122">
           <caret line="31" column="31" selection-start-line="31" selection-start-column="31" selection-end-line="31" selection-end-column="31" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2105,7 +1942,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="629">
           <caret line="4" column="21" selection-start-line="4" selection-start-column="21" selection-end-line="4" selection-end-column="21" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2113,7 +1949,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="320" max-vertical-offset="1122">
           <caret line="43" column="37" selection-start-line="43" selection-start-column="37" selection-end-line="43" selection-end-column="37" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2121,7 +1956,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="252" max-vertical-offset="1122">
           <caret line="35" column="18" selection-start-line="35" selection-start-column="18" selection-end-line="35" selection-end-column="18" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2129,7 +1963,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="1238" max-vertical-offset="4386">
           <caret line="101" column="41" selection-start-line="101" selection-start-column="41" selection-end-line="101" selection-end-column="41" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2137,7 +1970,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="1697" max-vertical-offset="2533">
           <caret line="139" column="46" selection-start-line="139" selection-start-column="46" selection-end-line="139" selection-end-column="46" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2145,7 +1977,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="2267" max-vertical-offset="2635">
           <caret line="37" column="40" selection-start-line="37" selection-start-column="40" selection-end-line="37" selection-end-column="40" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2153,7 +1984,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="3720" max-vertical-offset="4097">
           <caret line="279" column="19" selection-start-line="279" selection-start-column="19" selection-end-line="279" selection-end-column="19" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2161,7 +1991,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="2309" max-vertical-offset="2737">
           <caret line="189" column="58" selection-start-line="189" selection-start-column="58" selection-end-line="189" selection-end-column="58" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2169,7 +1998,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="1935" max-vertical-offset="2533">
           <caret line="154" column="22" selection-start-line="154" selection-start-column="22" selection-end-line="154" selection-end-column="22" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2177,7 +2005,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="3417" max-vertical-offset="5950">
           <caret line="298" column="22" selection-start-line="298" selection-start-column="22" selection-end-line="298" selection-end-column="22" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2185,7 +2012,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="4247" max-vertical-offset="7072">
           <caret line="323" column="22" selection-start-line="323" selection-start-column="22" selection-end-line="323" selection-end-column="22" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2193,9 +2019,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="116" max-vertical-offset="612">
           <caret line="14" column="8" selection-start-line="14" selection-start-column="8" selection-end-line="14" selection-end-column="8" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -2228,7 +2052,7 @@
         <state />
       </provider>
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-4.185185" vertical-offset="431" max-vertical-offset="1479">
+        <state vertical-scroll-proportion="0.0" vertical-offset="431" max-vertical-offset="1479">
           <caret line="32" column="8" selection-start-line="32" selection-start-column="8" selection-end-line="32" selection-end-column="8" />
           <folding />
         </state>
@@ -2238,9 +2062,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="171" max-vertical-offset="6749">
           <caret line="43" column="4" selection-start-line="43" selection-start-column="4" selection-end-line="43" selection-end-column="4" />
-          <folding>
-            <element signature="e#18214#18231#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -2264,17 +2086,14 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="473" max-vertical-offset="6443">
           <caret line="65" column="48" selection-start-line="65" selection-start-column="48" selection-end-line="65" selection-end-column="48" />
-          <folding>
-            <element signature="e#2247#2409#0" expanded="true" />
-            <element signature="e#2405#2406#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/helper/SimpleDate.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.33152175" vertical-offset="14" max-vertical-offset="1190">
-          <caret line="8" column="22" selection-start-line="8" selection-start-column="22" selection-end-line="8" selection-end-column="22" />
+        <state vertical-scroll-proportion="0.25" vertical-offset="14" max-vertical-offset="1190">
+          <caret line="11" column="28" selection-start-line="11" selection-start-column="28" selection-end-line="11" selection-end-column="28" />
           <folding />
         </state>
       </provider>
