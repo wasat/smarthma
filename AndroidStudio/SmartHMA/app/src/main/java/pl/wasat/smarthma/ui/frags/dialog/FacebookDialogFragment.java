@@ -1,9 +1,5 @@
 package pl.wasat.smarthma.ui.frags.dialog;
 
-import java.util.Arrays;
-
-import pl.wasat.smarthma.R;
-
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -37,6 +33,10 @@ import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Picasso.LoadedFrom;
 import com.squareup.picasso.Target;
 
+import java.util.Arrays;
+
+import pl.wasat.smarthma.R;
+
 /**
  * A simple {@link Fragment} subclass. Use the
  * {@link FacebookDialogFragment#newInstance} factory method to create an
@@ -69,7 +69,7 @@ public class FacebookDialogFragment extends DialogFragment implements Target {
 		NONE, POST_PHOTO
 	}
 
-	private Session.StatusCallback callback = new Session.StatusCallback() {
+	private final Session.StatusCallback callback = new Session.StatusCallback() {
 
 		@Override
 		public void call(Session session, SessionState state,
@@ -79,7 +79,7 @@ public class FacebookDialogFragment extends DialogFragment implements Target {
 		}
 	};
 
-	private FacebookDialog.Callback dialogCallback = new FacebookDialog.Callback() {
+	private final FacebookDialog.Callback dialogCallback = new FacebookDialog.Callback() {
 		@Override
 		public void onError(FacebookDialog.PendingCall pendingCall,
 				Exception error, Bundle data) {

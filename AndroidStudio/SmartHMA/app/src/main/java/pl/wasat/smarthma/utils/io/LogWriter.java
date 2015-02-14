@@ -1,12 +1,11 @@
 package pl.wasat.smarthma.utils.io;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-public class LogWriter {
+class LogWriter {
 
 	public void writeToSDFile(String strToWrite, String fileName) {
 
@@ -23,8 +22,6 @@ public class LogWriter {
 			pw.flush();
 			pw.close();
 			f.close();
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

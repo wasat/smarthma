@@ -1,14 +1,15 @@
 package pl.wasat.smarthma.ui.activities;
 
+import android.os.Bundle;
+import android.os.StrictMode;
+import android.util.Log;
+
 import pl.wasat.smarthma.R;
 import pl.wasat.smarthma.adapter.NewsArticleListAdapter;
 import pl.wasat.smarthma.database.EoDbAdapter;
 import pl.wasat.smarthma.model.NewsArticle;
 import pl.wasat.smarthma.ui.frags.news.NewsDetailFragment;
 import pl.wasat.smarthma.ui.frags.news.NewsListFragment;
-import android.os.Bundle;
-import android.os.StrictMode;
-import android.util.Log;
 
 public class NewsActivity extends BaseSmartHMActivity implements
 		NewsListFragment.Callbacks {

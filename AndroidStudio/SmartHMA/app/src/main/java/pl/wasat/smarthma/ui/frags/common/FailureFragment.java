@@ -1,12 +1,13 @@
 package pl.wasat.smarthma.ui.frags.common;
 
-import pl.wasat.smarthma.R;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import pl.wasat.smarthma.R;
 
 /**
  * A simple {@link android.support.v4.app.Fragment} subclass. Use the {@link FailureFragment#newInstance} factory

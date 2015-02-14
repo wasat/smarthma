@@ -1,11 +1,11 @@
 package pl.wasat.smarthma.utils.rss;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import pl.wasat.smarthma.model.NewsArticle;
 

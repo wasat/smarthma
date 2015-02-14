@@ -1,6 +1,7 @@
 package pl.wasat.smarthma.ui.frags.search;
 
 import android.os.Bundle;
+
 import pl.wasat.smarthma.R;
 import pl.wasat.smarthma.model.FedeoRequest;
 import pl.wasat.smarthma.model.feed.Feed;

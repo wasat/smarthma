@@ -1,16 +1,5 @@
 package pl.wasat.smarthma.ui.frags.browse;
 
-import java.util.List;
-
-import pl.wasat.smarthma.R;
-import pl.wasat.smarthma.adapter.DataSeriesListAdapter;
-import pl.wasat.smarthma.database.EoDbAdapter;
-import pl.wasat.smarthma.helper.Const;
-import pl.wasat.smarthma.model.FedeoRequest;
-import pl.wasat.smarthma.model.feed.Entry;
-import pl.wasat.smarthma.model.feed.Feed;
-import pl.wasat.smarthma.ui.frags.base.BaseSpiceListFragment;
-import pl.wasat.smarthma.utils.rss.FedeoSearchRequest;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -18,6 +7,18 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ListView;
+
+import java.util.List;
+
+import pl.wasat.smarthma.R;
+import pl.wasat.smarthma.adapter.DataSeriesListAdapter;
+import pl.wasat.smarthma.helper.Const;
+import pl.wasat.smarthma.helper.DataSorter;
+import pl.wasat.smarthma.model.FedeoRequest;
+import pl.wasat.smarthma.model.feed.Feed;
+import pl.wasat.smarthma.model.iso.EntryISO;
+import pl.wasat.smarthma.ui.frags.base.BaseSpiceListFragment;
+import pl.wasat.smarthma.utils.rss.FedeoSearchRequest;
 
 /**
  * A simple {@link android.support.v4.app.Fragment} subclass. Activities that
@@ -125,7 +126,7 @@ public class DataSeriesListFragment extends BaseSpiceListFragment {
 						: ListView.CHOICE_MODE_NONE);
 	}
 
-	public void setActivatedPosition(int position) {
+	void setActivatedPosition(int position) {
 		if (position == ListView.INVALID_POSITION) {
 			getListView().setItemChecked(mActivatedPosition, false);
 		} else {
@@ -149,15 +150,15 @@ public class DataSeriesListFragment extends BaseSpiceListFragment {
 		return false;
 	}
 
-	private void updateEOListViewContent(List<Entry> dataSeriesFeedList) {
+	private void updateEOListViewContent(List<EntryISO> dataSeriesFeedList) {
 		if (dataSeriesFeedList.isEmpty()) {
 			getView().setVisibility(View.GONE);
 		} else {
 
-			for (Entry a : dataSeriesFeedList) {
+/*			for (EntryISO a : dataSeriesFeedList) {
 				EoDbAdapter dba = new EoDbAdapter(getActivity());
 				dba.openToRead();
-				Entry fetchedDataSeries = dba.getBlogListing(a.getGuid());
+                EntryISO fetchedDataSeries = dba.getBlogListing(a.getGuid());
 				dba.close();
 				if (fetchedDataSeries == null) {
 					dba = new EoDbAdapter(getActivity());
@@ -169,7 +170,7 @@ public class DataSeriesListFragment extends BaseSpiceListFragment {
 					a.setOffline(fetchedDataSeries.isOffline());
 					a.setRead(fetchedDataSeries.isRead());
 				}
-			}
+			}*/
 			DataSeriesListAdapter adapter = new DataSeriesListAdapter(
 					getActivity(), dataSeriesFeedList);
 			this.setListAdapter(adapter);
@@ -186,7 +187,7 @@ public class DataSeriesListFragment extends BaseSpiceListFragment {
 		if (browseRequest != null) {
 
 			getActivity().setProgressBarIndeterminateVisibility(true);
-			getSpiceManager().execute(new FedeoSearchRequest(browseRequest), this);
+			getSpiceManager().execute(new FedeoSearchRequest(browseRequest, 1), this);
 		}
 	}
 
@@ -200,8 +201,12 @@ public class DataSeriesListFragment extends BaseSpiceListFragment {
 	@Override
 	public void onRequestSuccess(Feed dataSeriesFeeds) {
 		getActivity().setProgressBarIndeterminateVisibility(false);
-		//Toast.makeText(getActivity(), "OK!!! ", Toast.LENGTH_SHORT).show();
-		updateEOListViewContent(dataSeriesFeeds.getEntries());
+
+        List<EntryISO> entries = dataSeriesFeeds.getEntriesISO();
+        DataSorter sorter = new DataSorter();
+        sorter.sort(entries);
+
+		updateEOListViewContent(dataSeriesFeeds.getEntriesISO());
 
 		loadIntroFeedInfo(dataSeriesFeeds);
 	}

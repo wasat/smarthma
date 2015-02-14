@@ -1,12 +1,5 @@
 package pl.wasat.smarthma.ui.frags.browse;
 
-import pl.wasat.smarthma.R;
-import pl.wasat.smarthma.SmartHMApplication;
-import pl.wasat.smarthma.adapter.CollectionsGroupListAdapter;
-import pl.wasat.smarthma.model.CollectionsGroup.List;
-import pl.wasat.smarthma.services.SmartHmaHttpSpiceService;
-import pl.wasat.smarthma.utils.http.ExplainDocRequest;
-import pl.wasat.smarthma.utils.xml.XMLParser;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -23,6 +16,19 @@ import com.octo.android.robospice.persistence.exception.SpiceException;
 import com.octo.android.robospice.request.listener.RequestListener;
 import com.octo.android.robospice.spicelist.okhttp.OkHttpBitmapSpiceManager;
 
+import java.util.ArrayList;
+
+import pl.wasat.smarthma.R;
+import pl.wasat.smarthma.SmartHMApplication;
+import pl.wasat.smarthma.adapter.CollectionsGroupListAdapter;
+import pl.wasat.smarthma.helper.DataSorter;
+import pl.wasat.smarthma.model.Collection;
+import pl.wasat.smarthma.model.CollectionsGroup;
+import pl.wasat.smarthma.model.CollectionsGroup.List;
+import pl.wasat.smarthma.services.SmartHmaHttpSpiceService;
+import pl.wasat.smarthma.utils.http.ExplainDocRequest;
+import pl.wasat.smarthma.utils.xml.XMLParser;
+
 public class CollectionsGroupListFragment extends Fragment implements
 		RequestListener<String> {
 
@@ -31,9 +37,9 @@ public class CollectionsGroupListFragment extends Fragment implements
 	 * to declare it in AndroidManifest.xml
 	 */
 
-	private OkHttpBitmapSpiceManager spiceManagerBinary = new OkHttpBitmapSpiceManager();
+	private final OkHttpBitmapSpiceManager spiceManagerBinary = new OkHttpBitmapSpiceManager();
 
-	private SpiceManager spiceManager = new SpiceManager(
+	private final SpiceManager spiceManager = new SpiceManager(
 			SmartHmaHttpSpiceService.class);
 
 	private ListView collectionsGroupListView;
@@ -79,6 +85,17 @@ public class CollectionsGroupListFragment extends Fragment implements
 	}
 
 	private void updateEOListViewContent(List collectGrList) {
+        DataSorter sorter = new DataSorter();
+        ArrayList<CollectionsGroup> collectionsGroupList = collectGrList.getCollectionsGroupList();
+        sorter.sort(collectionsGroupList);
+
+        ArrayList<Collection> collection;
+        for (int i=0; i<collectionsGroupList.size(); i++)
+        {
+            collection = collectionsGroupList.get(i).getCollections();
+            sorter.sort(collection);
+        }
+
         CollectionsGroupListAdapter collectionsGroupListAdapter = new CollectionsGroupListAdapter(
                 getActivity(), spiceManagerBinary, collectGrList);
 		collectionsGroupListView.setAdapter(collectionsGroupListAdapter);
@@ -150,7 +167,6 @@ public class CollectionsGroupListFragment extends Fragment implements
 	@Override
 	public void onRequestSuccess(String result) {
 		getActivity().setProgressBarIndeterminateVisibility(false);
-		Toast.makeText(getActivity(), "OK!!! ", Toast.LENGTH_SHORT).show();
 		XMLParser xmlResult = new XMLParser();
 		xmlResult.parseXml(result);
 		updateEOListViewContent(SmartHMApplication.GlobalEODataList);

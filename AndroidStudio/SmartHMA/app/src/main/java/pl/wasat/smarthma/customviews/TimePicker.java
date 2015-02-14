@@ -17,12 +17,6 @@
 
 package pl.wasat.smarthma.customviews;
 
-import java.text.DateFormatSymbols;
-import java.util.Calendar;
-import java.util.Locale;
-
-import pl.wasat.smarthma.R;
-
 import android.content.Context;
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -33,6 +27,12 @@ import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.NumberPicker;
 import android.widget.NumberPicker.Formatter;
+
+import java.text.DateFormatSymbols;
+import java.util.Calendar;
+import java.util.Locale;
+
+import pl.wasat.smarthma.R;
 
 /**
  * A view for selecting the time of day, in either 24 hour or AM/PM mode.
@@ -63,7 +63,7 @@ public class TimePicker extends FrameLayout {
 		}
 	};
 
-	public static final NumberPicker.Formatter TWO_DIGIT_FORMATTER = new Formatter() {
+	private static final NumberPicker.Formatter TWO_DIGIT_FORMATTER = new Formatter() {
 
 		@Override
 		public String format(int value) {

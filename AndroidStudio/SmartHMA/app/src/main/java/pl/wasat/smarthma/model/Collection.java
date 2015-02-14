@@ -1,9 +1,9 @@
 package pl.wasat.smarthma.model;
 
-import java.util.Comparator;
-
 import android.os.Parcel;
 import android.os.Parcelable;
+
+import java.util.Comparator;
 
 public class Collection implements Parcelable, Comparator<Object> {
 
