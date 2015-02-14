@@ -1,15 +1,22 @@
 package pl.wasat.smarthma.ui.frags.base;
 
-import pl.wasat.smarthma.R;
-import pl.wasat.smarthma.model.feed.Feed;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.Spinner;
 import android.widget.TextView;
+
+import java.util.List;
+
+import pl.wasat.smarthma.R;
+import pl.wasat.smarthma.helper.Global;
+import pl.wasat.smarthma.model.feed.Feed;
+import pl.wasat.smarthma.model.om.EntryOM;
 
 /**
  * A simple {@link android.support.v4.app.Fragment} subclass.
@@ -35,8 +42,9 @@ public class BaseFeedSummaryFragment extends Fragment {
 	private Button btnReload;
 	private Button btnNext;
 	private Button btnLast;
-	
-	
+
+    private Spinner spnSortType;
+
 
 	public BaseFeedSummaryFragment() {
 	}
@@ -47,6 +55,9 @@ public class BaseFeedSummaryFragment extends Fragment {
 		if (getArguments() != null) {
 			resultFeed = (Feed) getArguments()
 					.getSerializable(KEY_FEED_SUMMARY);
+
+            //List<EntryOM> entries = resultFeed.getEntriesEO();
+            //sorter.sort(entries);
 		}
 	}
 
@@ -89,6 +100,9 @@ public class BaseFeedSummaryFragment extends Fragment {
 		btnLast = (Button) rootView
 				.findViewById(R.id.search_frag_ds_intro_button_last);
 
+        spnSortType = (Spinner) rootView
+                .findViewById(R.id.search_frag_ds_intro_spinner_sort_type);
+
 		initUITexts();
 		initUIButtons();
 
@@ -100,18 +114,18 @@ public class BaseFeedSummaryFragment extends Fragment {
 	 */
 	private void initUITexts() {
 		tvTitle.setText(resultFeed.getTitle());
-		tvSearchTerms.setText(resultFeed.getQuery().get_searchTerms());
-		tvParentName.setText(resultFeed.getQuery().get_dc_subject());
-		tvTimeStart.setText(resultFeed.getQuery().get_time_start());
-		tvTimeEnd.setText(resultFeed.getQuery().get_time_end());
-		tvArea.setText(resultFeed.getQuery().get_geo_box());
+		tvSearchTerms.setText(resultFeed.getQuery().getSearchTerms());
+		tvParentName.setText(resultFeed.getQuery().getDcSubject());
+		tvTimeStart.setText(resultFeed.getQuery().getTimeStart());
+		tvTimeEnd.setText(resultFeed.getQuery().getTimeEnd());
+		tvArea.setText(resultFeed.getQuery().getGeoBox());
 		tvUpdated.setText(resultFeed.getUpdated());
-		tvTotal.setText(resultFeed.getTotalResults().get__text());
-		tvItemsFrom.setText(resultFeed.getStartIndex().get__text());
-		int toVal = Integer.valueOf(resultFeed.getStartIndex().get__text())
-				+ Integer.valueOf(resultFeed.getItemsPerPage().get__text()) - 1;
-		if (toVal > Integer.valueOf(resultFeed.getTotalResults().get__text())) {
-			toVal = Integer.valueOf(resultFeed.getTotalResults().get__text());
+		tvTotal.setText(resultFeed.getTotalResults().getText());
+		tvItemsFrom.setText(resultFeed.getStartIndex().getText());
+		int toVal = Integer.valueOf(resultFeed.getStartIndex().getText())
+				+ Integer.valueOf(resultFeed.getItemsPerPage().getText()) - 1;
+		if (toVal > Integer.valueOf(resultFeed.getTotalResults().getText())) {
+			toVal = Integer.valueOf(resultFeed.getTotalResults().getText());
 		}
 		tvItemsTo.setText(String.valueOf(toVal));
 	}
@@ -120,7 +134,7 @@ public class BaseFeedSummaryFragment extends Fragment {
 		int linkSize = resultFeed.getLink().size();
 
 		for (int i = 0; i < linkSize; i++) {
-			String linkRel = resultFeed.getLink().get(i).get_rel();
+			String linkRel = resultFeed.getLink().get(i).getRel();
 			final int incFinal = i;
 
 			if (linkRel.equalsIgnoreCase("first")) {
@@ -128,7 +142,7 @@ public class BaseFeedSummaryFragment extends Fragment {
 					@Override
 					public void onClick(View v) {
 						String linkHref = resultFeed.getLink().get(incFinal)
-								.get_href();
+								.getHref();
 						loadNavSearch(linkHref);
 					}
 				});
@@ -137,7 +151,7 @@ public class BaseFeedSummaryFragment extends Fragment {
 					@Override
 					public void onClick(View v) {
 						String linkHref = resultFeed.getLink().get(incFinal)
-								.get_href();
+								.getHref();
 						loadNavSearch(linkHref);
 					}
 				});
@@ -146,7 +160,7 @@ public class BaseFeedSummaryFragment extends Fragment {
 					@Override
 					public void onClick(View v) {
 						String linkHref = resultFeed.getLink().get(incFinal)
-								.get_href();
+								.getHref();
 						loadNavSearch(linkHref);
 					}
 				});
@@ -155,7 +169,7 @@ public class BaseFeedSummaryFragment extends Fragment {
 					@Override
 					public void onClick(View v) {
 						String linkHref = resultFeed.getLink().get(incFinal)
-								.get_href();
+								.getHref();
 						loadNavSearch(linkHref);
 					}
 				});
@@ -164,12 +178,32 @@ public class BaseFeedSummaryFragment extends Fragment {
 					@Override
 					public void onClick(View v) {
 						String linkHref = resultFeed.getLink().get(incFinal)
-								.get_href();
+								.getHref();
 						loadNavSearch(linkHref);
 					}
 				});
 			}
 		}
+
+        spnSortType.setSelection(Global.sortingType, false);
+        spnSortType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener()
+        {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
+            {
+                if (position != Global.sortingType)
+                {
+                    Global.sortingType = position;
+                    btnReload.performClick();
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent)
+            {
+
+            }
+        });
 	}
 
 	protected void loadNavSearch(String linkHref) {

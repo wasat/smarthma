@@ -3,13 +3,14 @@
  */
 package pl.wasat.smarthma;
 
+import android.app.Application;
+
 import org.acra.ACRA;
 import org.acra.annotation.ReportsCrashes;
 
 import pl.wasat.smarthma.model.CollectionsGroup;
 import pl.wasat.smarthma.model.CollectionsGroup.List;
 import pl.wasat.smarthma.model.explaindoc.ExplainData;
-import android.app.Application;
 
 /**
  * @author Daniel

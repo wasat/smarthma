@@ -1,83 +1,84 @@
-
 package pl.wasat.smarthma.model.feed;
-
-import java.io.Serializable;
-import java.util.HashMap;
-import java.util.Map;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
+import java.io.Serializable;
+import java.util.HashMap;
+import java.util.Map;
+
 import pl.wasat.smarthma.utils.text.SmartHMAStringStyle;
 
 
 public class Link implements Serializable {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-    private String _href;
-    private String _rel;
-    private String _title;
-    private String _type;
+    private String href;
+    private String rel;
+    private String title;
+    private String type;
     private final Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
-    public String get_href() {
-        return _href;
+    public String getHref() {
+        return href;
     }
 
-    public void set_href(String _href) {
-        this._href = _href;
+    public void setHref(String href) {
+        this.href = href;
     }
 
     public Link with_href(String _href) {
-        this._href = _href;
+        this.href = _href;
         return this;
     }
 
-    public String get_rel() {
-        return _rel;
+    public String getRel() {
+        return rel;
     }
 
-    public void set_rel(String _rel) {
-        this._rel = _rel;
+    public void setRel(String rel) {
+        this.rel = rel;
     }
 
     public Link with_rel(String _rel) {
-        this._rel = _rel;
+        this.rel = _rel;
         return this;
     }
 
-    public String get_title() {
-        return _title;
+    public String getTitle() {
+        return title;
     }
 
-    public void set_title(String _title) {
-        this._title = _title;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public Link with_title(String _title) {
-        this._title = _title;
+        this.title = _title;
         return this;
     }
 
-    public String get_type() {
-        return _type;
+    public String getType() {
+        return type;
     }
 
-    public void set_type(String _type) {
-        this._type = _type;
+    public void setType(String type) {
+        this.type = type;
     }
 
     public Link with_type(String _type) {
-        this._type = _type;
+        this.type = _type;
         return this;
     }
 
     @Override
     public String toString() {
-            	 ToStringStyle style = new SmartHMAStringStyle(); ToStringBuilder.setDefaultStyle(style); return ToStringBuilder.reflectionToString(this, style);
+        ToStringStyle style = new SmartHMAStringStyle();
+        ToStringBuilder.setDefaultStyle(style);
+        return ToStringBuilder.reflectionToString(this, style);
     }
 
     @Override

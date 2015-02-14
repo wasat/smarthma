@@ -210,13 +210,25 @@
             android:orientation="horizontal" >
 
             <Button
+                android:id="@+id/frag_search_res_coll_det_btn_show_meta"
+                style="@style/styleBtnShowProduct"
+                android:layout_width="200dp"
+                android:layout_height="60dp"
+                android:layout_gravity="center_vertical|center_horizontal|center"
+                android:text="@string/show_metadata"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp" />
+
+            <Button
                 android:id="@+id/frag_search_res_coll_det_btn_search_product"
                 style="@style/styleBtnShowProduct"
                 android:layout_width="200dp"
                 android:layout_height="60dp"
                 android:layout_gravity="center_vertical|center_horizontal|center"
                 android:enabled="false"
-                android:text="@string/show_products" />
+                android:text="@string/show_products"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp" />
             
         </LinearLayout>
     </LinearLayout>

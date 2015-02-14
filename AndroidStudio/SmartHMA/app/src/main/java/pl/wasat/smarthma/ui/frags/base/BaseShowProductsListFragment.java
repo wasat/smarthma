@@ -1,16 +1,5 @@
 package pl.wasat.smarthma.ui.frags.base;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import pl.wasat.smarthma.R;
-import pl.wasat.smarthma.adapter.EntryImagesListAdapter;
-import pl.wasat.smarthma.database.EoDbAdapter;
-import pl.wasat.smarthma.model.FedeoRequest;
-import pl.wasat.smarthma.model.eo.Footprint;
-import pl.wasat.smarthma.model.feed.Entry;
-import pl.wasat.smarthma.model.feed.Feed;
-import pl.wasat.smarthma.utils.rss.FedeoSearchRequest;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -20,7 +9,19 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
-import android.widget.Toast;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import pl.wasat.smarthma.R;
+import pl.wasat.smarthma.adapter.EntryImagesListAdapter;
+import pl.wasat.smarthma.database.EoDbAdapter;
+import pl.wasat.smarthma.helper.DataSorter;
+import pl.wasat.smarthma.model.FedeoRequest;
+import pl.wasat.smarthma.model.feed.Feed;
+import pl.wasat.smarthma.model.om.EntryOM;
+import pl.wasat.smarthma.model.om.Footprint;
+import pl.wasat.smarthma.utils.rss.FedeoSearchRequest;
 
 /**
  * A simple {@link android.support.v4.app.Fragment} subclass. Activities that
@@ -61,7 +62,7 @@ public class BaseShowProductsListFragment extends BaseSpiceFragment {
 		return fragment;
 	}
 
-	protected BaseShowProductsListFragment() {
+	public BaseShowProductsListFragment() {
 		// Required empty public constructor
 	}
 
@@ -126,15 +127,6 @@ public class BaseShowProductsListFragment extends BaseSpiceFragment {
 	}
 
 	@Override
-	public void onStart() {
-		super.onStart();
-		// TODO: Find solution - why fragment is called twice
-		//if (fedeoRequest != null) {
-		//	loadSearchProductsFeedResponse(fedeoRequest);
-		//}
-	}
-
-	@Override
 	public void onSaveInstanceState(Bundle outState) {
 		super.onSaveInstanceState(outState);
 		if (mActivatedPosition != ListView.INVALID_POSITION) {
@@ -157,16 +149,16 @@ public class BaseShowProductsListFragment extends BaseSpiceFragment {
 		mActivatedPosition = position;
 	}
 
-	private void updateShowProductsListViewContent(final List<Entry> entryList) {
+	private void updateShowProductsListViewContent(final List<EntryOM> entryList) {
 		if (entryList.isEmpty()) {
 			getView().setVisibility(View.GONE);
 			loadFailureFrag();
 			
 		} else {
-			for (Entry a : entryList) {
+			for (EntryOM a : entryList) {
 				EoDbAdapter dba = new EoDbAdapter(getActivity());
 				dba.openToRead();
-				Entry fetchedSearch = dba.getBlogListing(a.getGuid());
+				EntryOM fetchedSearch = dba.getBlogListing(a.getGuid());
 				dba.close();
 				if (fetchedSearch == null) {
 					dba = new EoDbAdapter(getActivity());
@@ -204,7 +196,7 @@ public class BaseShowProductsListFragment extends BaseSpiceFragment {
 	protected void loadFailureFrag() {
 	}
 
-	protected void loadProductItemDetails(Entry entry) {
+	protected void loadProductItemDetails(EntryOM entry) {
 	}
 
 	/**
@@ -221,7 +213,7 @@ public class BaseShowProductsListFragment extends BaseSpiceFragment {
 		if (fedeoRequest != null) {
 			getActivity().setProgressBarIndeterminateVisibility(true);
 
-			getSpiceManager().execute(new FedeoSearchRequest(fedeoRequest),
+			getSpiceManager().execute(new FedeoSearchRequest(fedeoRequest, 2),
 					this);
 		}
 	}
@@ -253,14 +245,17 @@ public class BaseShowProductsListFragment extends BaseSpiceFragment {
 	@Override
 	public void onRequestSuccess(Feed searchProductFeeds) {
 		getActivity().setProgressBarIndeterminateVisibility(false);
-		Toast.makeText(getActivity(), R.string.ok_, Toast.LENGTH_SHORT).show();
 		if (searchProductFeeds == null) {
 			searchProductFeeds = new Feed();
 		}
-		updateShowProductsListViewContent(searchProductFeeds.getEntries());
+        List<EntryOM> entries = searchProductFeeds.getEntriesEO();
+        DataSorter sorter = new DataSorter();
+        sorter.sort(entries);
+
+        updateShowProductsListViewContent(searchProductFeeds.getEntriesEO());
 		loadSearchResultProductsIntroDetailsFrag(searchProductFeeds);
 		ArrayList<Footprint> footPrints = getFootprints(searchProductFeeds
-				.getEntries());
+				.getEntriesEO());
 		mListener.onBaseShowProductsListFragmentFootprintSend(footPrints);
 
 	}
@@ -269,9 +264,9 @@ public class BaseShowProductsListFragment extends BaseSpiceFragment {
 	 * @param searchProductFeeds
 	 * @return
 	 */
-	private ArrayList<Footprint> getFootprints(List<Entry> searchProductFeeds) {
+	private ArrayList<Footprint> getFootprints(List<EntryOM> searchProductFeeds) {
 		ArrayList<Footprint> footPrintsArr = new ArrayList<Footprint>();
-		for (Entry searchProductFeed : searchProductFeeds) {
+		for (EntryOM searchProductFeed : searchProductFeeds) {
 			if (searchProductFeed.getEarthObservation() != null) {
 				footPrintsArr.add(searchProductFeed.getEarthObservation()
 						.getFeatureOfInterest().getFootprint());

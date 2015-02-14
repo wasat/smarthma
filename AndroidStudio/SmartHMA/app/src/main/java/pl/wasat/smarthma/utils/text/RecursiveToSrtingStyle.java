@@ -1,21 +1,21 @@
 package pl.wasat.smarthma.utils.text;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
+
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.apache.commons.lang3.builder.ToStringStyle;
-
 public class RecursiveToSrtingStyle extends ToStringStyle {
     /**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private List<String> recursivePackags;
-    private int recursiveLimit = 10;
+	private final List<String> recursivePackags;
+    private final int recursiveLimit = 10;
 
     public RecursiveToSrtingStyle(String... pkgs) {
         super();

@@ -1,16 +1,5 @@
 package pl.wasat.smarthma.ui.frags.common;
 
-import java.util.Iterator;
-import java.util.List;
-
-import com.squareup.picasso.Picasso.LoadedFrom;
-import com.squareup.picasso.Picasso;
-import com.squareup.picasso.Target;
-
-import pl.wasat.smarthma.R;
-import pl.wasat.smarthma.model.eo.Browse;
-import pl.wasat.smarthma.model.eo.Footprint;
-import pl.wasat.smarthma.model.feed.Entry;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -31,6 +20,18 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Picasso.LoadedFrom;
+import com.squareup.picasso.Target;
+
+import java.util.Iterator;
+import java.util.List;
+
+import pl.wasat.smarthma.R;
+import pl.wasat.smarthma.model.om.Browse;
+import pl.wasat.smarthma.model.om.EntryOM;
+import pl.wasat.smarthma.model.om.Footprint;
+
 /**
  * A simple {@link android.support.v4.app.Fragment} subclass. Activities that
  * contain this fragment must implement the
@@ -42,7 +43,7 @@ import android.widget.Toast;
 public class ProductDetailsFragment extends Fragment implements Target {
 	private static final String KEY_PRODUCT_ENTRY = "pl.wasat.smarthma.KEY_PRODUCT_ENTRY";
 
-	private Entry displayedEntry;
+	private EntryOM displayedEntry;
 
 	private OnProductDetailsFragmentListener mListener;
 
@@ -50,11 +51,11 @@ public class ProductDetailsFragment extends Fragment implements Target {
 	 * Use this factory method to create a new instance of this fragment using
 	 * the provided parameters.
 	 * 
-	 * @param param1
+	 * @param prodEntry
 	 *            Parameter 1.
 	 * @return A new instance of fragment ProductDetailsFragment.
 	 */
-	public static ProductDetailsFragment newInstance(Entry prodEntry) {
+	public static ProductDetailsFragment newInstance(EntryOM prodEntry) {
 		ProductDetailsFragment fragment = new ProductDetailsFragment();
 		Bundle args = new Bundle();
 		args.putSerializable(KEY_PRODUCT_ENTRY, prodEntry);
@@ -69,7 +70,7 @@ public class ProductDetailsFragment extends Fragment implements Target {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		if (getArguments() != null) {
-			displayedEntry = (Entry) getArguments().getSerializable(
+			displayedEntry = (EntryOM) getArguments().getSerializable(
 					KEY_PRODUCT_ENTRY);
 		}
 	}
@@ -245,7 +246,7 @@ public class ProductDetailsFragment extends Fragment implements Target {
 		for (Iterator<Browse> iterator = browseList.iterator(); iterator
 				.hasNext();) {
 			Browse browse = iterator.next();
-			if (browse.getBrowseInformation().getType().get__text()
+			if (browse.getBrowseInformation().getType().get_text()
 					.equalsIgnoreCase("QUICKLOOK")) {
 				url = browse.getBrowseInformation().getFileName()
 						.getServiceReference().get_xlink_href();

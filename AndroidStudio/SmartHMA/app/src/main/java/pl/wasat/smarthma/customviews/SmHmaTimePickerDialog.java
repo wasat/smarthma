@@ -16,11 +16,6 @@
 
 package pl.wasat.smarthma.customviews;
 
-import java.util.Calendar;
-
-import pl.wasat.smarthma.R;
-import pl.wasat.smarthma.customviews.TimePicker.OnTimeChangedListener;
-
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Context;
@@ -31,6 +26,11 @@ import android.text.format.DateFormat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
+
+import java.util.Calendar;
+
+import pl.wasat.smarthma.R;
+import pl.wasat.smarthma.customviews.TimePicker.OnTimeChangedListener;
 
 /**
  * A dialog that prompts the user for the time of day using a {@link TimePicker}

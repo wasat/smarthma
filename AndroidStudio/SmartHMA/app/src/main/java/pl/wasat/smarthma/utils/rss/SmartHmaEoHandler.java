@@ -1,17 +1,14 @@
 package pl.wasat.smarthma.utils.rss;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
-import pl.wasat.smarthma.model.eo.*;
+import java.util.ArrayList;
+import java.util.List;
+
 import pl.wasat.smarthma.model.feed.Author;
-import pl.wasat.smarthma.model.feed.Category;
-import pl.wasat.smarthma.model.feed.Content;
-import pl.wasat.smarthma.model.feed.Entry;
+import pl.wasat.smarthma.model.feed.EOPrefixes;
 import pl.wasat.smarthma.model.feed.Feed;
 import pl.wasat.smarthma.model.feed.Group;
 import pl.wasat.smarthma.model.feed.ItemsPerPage;
@@ -19,9 +16,9 @@ import pl.wasat.smarthma.model.feed.Link;
 import pl.wasat.smarthma.model.feed.Query;
 import pl.wasat.smarthma.model.feed.StartIndex;
 import pl.wasat.smarthma.model.feed.TotalResults;
-import pl.wasat.smarthma.model.feed.Where;
+import pl.wasat.smarthma.model.om.*;
 
-public class SmartHmaEoHandler extends DefaultHandler {
+class SmartHmaEoHandler extends DefaultHandler {
 
 	// Feed and EO data objects to use for temporary storage
 
@@ -50,8 +47,8 @@ public class SmartHmaEoHandler extends DefaultHandler {
 	private String feedId;
 	private String title;
 	private String updated;
-	private List<Entry> entries;
-	private Entry entry;
+	private List<EntryOM> entries;
+    private EntryOM entry;
 	private Link link;
 	private ArrayList<Link> linksEntry;
 	private ArrayList<Link> linksFeed;
@@ -217,17 +214,21 @@ public class SmartHmaEoHandler extends DefaultHandler {
 		chars = new StringBuffer();
 		if (localName.equalsIgnoreCase("feed")) {
 			feed = new Feed();
-			feed.set_xmlns(atts.getValue("xmlns"));
-			feed.set_xmlns_dc(atts.getValue("xmlns:dc"));
-			feed.set_xmlns_eo(atts.getValue("xmlns:eo"));
-			feed.set_xmlns_geo(atts.getValue("xmlns:geo"));
-			feed.set_xmlns_georss(atts.getValue("xmlns:georss"));
-			feed.set_xmlns_media(atts.getValue("xmlns:media"));
-			feed.set_xmlns_os(atts.getValue("xmlns:os"));
-			feed.set_xmlns_sru(atts.getValue("xmlns:sru"));
-			feed.set_xmlns_time(atts.getValue("xmlns:time"));
-			feed.set_xmlns_wrs(atts.getValue("xmlns:wrs"));
-			entries = new ArrayList<Entry>();
+
+            EOPrefixes eoPrefixes = new EOPrefixes();
+            eoPrefixes.set_xmlns(atts.getValue("xmlns"));
+            eoPrefixes.set_xmlns_dc(atts.getValue("xmlns:dc"));
+            eoPrefixes.set_xmlns_eo(atts.getValue("xmlns:eo"));
+            eoPrefixes.set_xmlns_geo(atts.getValue("xmlns:geo"));
+            eoPrefixes.set_xmlns_georss(atts.getValue("xmlns:georss"));
+            eoPrefixes.set_xmlns_media(atts.getValue("xmlns:media"));
+            eoPrefixes.set_xmlns_os(atts.getValue("xmlns:os"));
+            eoPrefixes.set_xmlns_sru(atts.getValue("xmlns:sru"));
+            eoPrefixes.set_xmlns_time(atts.getValue("xmlns:time"));
+            eoPrefixes.set_xmlns_wrs(atts.getValue("xmlns:wrs"));
+            feed.setEoPrefixes(eoPrefixes);
+
+			entries = new ArrayList<EntryOM>();
 			linksFeed = new ArrayList<Link>();
 		} else if (localName.equalsIgnoreCase("totalResults")) {
 			totalResults = new TotalResults();
@@ -237,28 +238,28 @@ public class SmartHmaEoHandler extends DefaultHandler {
 			itemsPerPage = new ItemsPerPage();
 		} else if (localName.equalsIgnoreCase("query")) {
 			query = new Query();
-			query.set_count(atts.getValue("count"));
-			query.set_dc_subject(atts.getValue("dc:subject"));
-			query.set_eo_parentIdentifier(atts.getValue("eo:parentIdentifier"));
-			query.set_role(atts.getValue("role"));
-			query.set_searchTerms(atts.getValue("searchTerms"));
-			query.set_sru_recordSchema(atts.getValue("sru:recordSchema"));
-			query.set_startIndex(atts.getValue("startIndex"));
-			query.set_geo_box(atts.getValue("geo:box"));
-			query.set_time_end(atts.getValue("time:end"));
-			query.set_time_start(atts.getValue("time:start"));
+			query.setCount(atts.getValue("count"));
+			query.setDcSubject(atts.getValue("dc:subject"));
+			query.setEoParentIdentifier(atts.getValue("eo:parentIdentifier"));
+			query.setRole(atts.getValue("role"));
+			query.setSearchTerms(atts.getValue("searchTerms"));
+			query.setSruRecordSchema(atts.getValue("sru:recordSchema"));
+			query.setStartIndex(atts.getValue("startIndex"));
+			query.setGeoBox(atts.getValue("geo:box"));
+			query.setTimeEnd(atts.getValue("time:end"));
+			query.setTimeStart(atts.getValue("time:start"));
 		} else if (localName.equalsIgnoreCase("author")) {
 			author = new Author();
 		} else if (localName.equalsIgnoreCase("entry")) {
-			entry = new Entry();
+			entry = new EntryOM();
 			isInEntry = true;
 			linksEntry = new ArrayList<Link>();
 		} else if (localName.equalsIgnoreCase("link")) {
 			link = new Link();
-			link.set_href(atts.getValue("href"));
-			link.set_rel(atts.getValue("rel"));
-			link.set_title(atts.getValue("title"));
-			link.set_type(atts.getValue("type"));
+			link.setHref(atts.getValue("href"));
+			link.setRel(atts.getValue("rel"));
+			link.setTitle(atts.getValue("title"));
+			link.setType(atts.getValue("type"));
 		} else if (localName.equalsIgnoreCase("summary")) {
 			// summary = new Summary();
 		} else if (localName.equalsIgnoreCase("where")) {
@@ -675,7 +676,7 @@ public class SmartHmaEoHandler extends DefaultHandler {
 
 		if (!isInEntry) {
 			if (localName.equalsIgnoreCase("feed")) {
-				feed.setEntries(entries);
+				feed.setEntriesEO(entries);
 				feed.setTotalResults(totalResults);
 				feed.setStartIndex(startIndex);
 				feed.setItemsPerPage(itemsPerPage);
@@ -687,16 +688,16 @@ public class SmartHmaEoHandler extends DefaultHandler {
 				feed.setUpdated(updated);
 				feed.setLink(linksFeed);
 			} else if (localName.equalsIgnoreCase("totalResults")) {
-				totalResults.set__text(chars.toString());
+				totalResults.setText(chars.toString());
 			} else if (localName.equalsIgnoreCase("startIndex")) {
-				startIndex.set__text(chars.toString());
+				startIndex.setText(chars.toString());
 			} else if (localName.equalsIgnoreCase("itemsPerPage")) {
-				itemsPerPage.set__text(chars.toString());
+				itemsPerPage.setText(chars.toString());
 			} else if (localName.equalsIgnoreCase("query")) {
 			} else if (localName.equalsIgnoreCase("author")) {
 				author.setName(name);
 			} else if (localName.equalsIgnoreCase("name")) {
-				name.set__text(chars.toString());
+				name.set_text(chars.toString());
 			} else if (localName.equalsIgnoreCase("generator")) {
 				generator = chars.toString();
 			} else if (localName.equalsIgnoreCase("id")) {
@@ -721,7 +722,7 @@ public class SmartHmaEoHandler extends DefaultHandler {
 			} else if (localName.equalsIgnoreCase("updated")) {
 				entry.setUpdated(chars.toString());
 			} else if (localName.equalsIgnoreCase("summary")) {
-				// summary.set__cdata(chars.toString());
+				// summary.set_cdata(chars.toString());
 				entry.setSummary(chars.toString());
 			} else if (localName.equalsIgnoreCase("content")
 					&& !qName.equalsIgnoreCase("media:content")) {
@@ -737,7 +738,7 @@ public class SmartHmaEoHandler extends DefaultHandler {
 				content.setCategory(category);
 				contentList.add(content);
 			} else if (qName.equalsIgnoreCase("media:category")) {
-				category.set__text(chars.toString());
+				category.set_text(chars.toString());
 			}
 
 			if (isInEarthObservation) {
@@ -755,9 +756,9 @@ public class SmartHmaEoHandler extends DefaultHandler {
 				}
 				// PhenomenonTime markup
 				else if (localName.equalsIgnoreCase("beginPosition")) {
-					beginPosition.set__text(chars.toString());
+					beginPosition.set_text(chars.toString());
 				} else if (localName.equalsIgnoreCase("endPosition")) {
-					endPosition.set__text(chars.toString());
+					endPosition.set_text(chars.toString());
 				} else if (localName.equalsIgnoreCase("timePeriod")) {
 					timePeriod.set_gml_id(chars.toString());
 					timePeriod.setBeginPosition(beginPosition);
@@ -773,7 +774,7 @@ public class SmartHmaEoHandler extends DefaultHandler {
 					timeInstant.set_gml_id(chars.toString());
 					timeInstant.setTimePosition(timePosition);
 				} else if (localName.equalsIgnoreCase("timePosition")) {
-					timePosition.set__text(chars.toString());
+					timePosition.set_text(chars.toString());
 				}
 
 				// Procedure markup
@@ -813,39 +814,39 @@ public class SmartHmaEoHandler extends DefaultHandler {
 					acquisition.setYaw(yaw);
 				} else if (localName
 						.equalsIgnoreCase("acrossTrackIncidenceAngle")) {
-					acrossTrackIncidenceAngle.set__text(chars.toString());
+					acrossTrackIncidenceAngle.set_text(chars.toString());
 				} else if (localName
 						.equalsIgnoreCase("alongTrackIncidenceAngle")) {
-					alongTrackIncidenceAngle.set__text(chars.toString());
+					alongTrackIncidenceAngle.set_text(chars.toString());
 				} else if (localName.equalsIgnoreCase("cycleNumber")) {
-					cycleNumber.set__text(chars.toString());
+					cycleNumber.set_text(chars.toString());
 				} else if (localName
 						.equalsIgnoreCase("illuminationAzimuthAngle")) {
-					illuminationAzimuthAngle.set__text(chars.toString());
+					illuminationAzimuthAngle.set_text(chars.toString());
 				} else if (localName.equalsIgnoreCase("isSegment")) {
-					isSegment.set__text(chars.toString());
+					isSegment.set_text(chars.toString());
 				} else if (localName.equalsIgnoreCase("lastOrbitNumber")) {
-					lastOrbitNumber.set__text(chars.toString());
+					lastOrbitNumber.set_text(chars.toString());
 				} else if (localName.equalsIgnoreCase("orbitDirection")) {
-					orbitDirection.set__text(chars.toString());
+					orbitDirection.set_text(chars.toString());
 				} else if (localName.equalsIgnoreCase("orbitNumber")) {
-					orbitNumber.set__text(chars.toString());
+					orbitNumber.set_text(chars.toString());
 				} else if (localName.equalsIgnoreCase("pitch")) {
-					pitch.set__text(chars.toString());
+					pitch.set_text(chars.toString());
 				} else if (localName.equalsIgnoreCase("polarisationChannels")) {
-					polarisationChannels.set__text(chars.toString());
+					polarisationChannels.set_text(chars.toString());
 				} else if (localName.equalsIgnoreCase("polarisationMode")) {
-					polarisationMode.set__text(chars.toString());
+					polarisationMode.set_text(chars.toString());
 				} else if (localName.equalsIgnoreCase("relativePassNumber")) {
-					relativePassNumber.set__text(chars.toString());
+					relativePassNumber.set_text(chars.toString());
 				} else if (localName.equalsIgnoreCase("roll")) {
-					roll.set__text(chars.toString());
+					roll.set_text(chars.toString());
 				} else if (localName.equalsIgnoreCase("wrsLatitudeGrid")) {
-					wrsLatitudeGrid.set__text(chars.toString());
+					wrsLatitudeGrid.set_text(chars.toString());
 				} else if (localName.equalsIgnoreCase("wrsLongitudeGrid")) {
-					wrsLongitudeGrid.set__text(chars.toString());
+					wrsLongitudeGrid.set_text(chars.toString());
 				} else if (localName.equalsIgnoreCase("yaw")) {
-					yaw.set__text(chars.toString());
+					yaw.set_text(chars.toString());
 				}
 
 				// Procedure - AuxiliaryInstrument markup
@@ -855,9 +856,9 @@ public class SmartHmaEoHandler extends DefaultHandler {
 					auxiliaryInstrument.setInstrumentType(instrumentType);
 					auxiliaryInstrument.setShortName(shortName);
 				} else if (localName.equalsIgnoreCase("instrumentType")) {
-					instrumentType.set__text(chars.toString());
+					instrumentType.set_text(chars.toString());
 				} else if (localName.equalsIgnoreCase("shortName")) {
-					shortName.set__text(chars.toString());
+					shortName.set_text(chars.toString());
 				}
 
 				// Procedure - Instrument markup
@@ -880,7 +881,7 @@ public class SmartHmaEoHandler extends DefaultHandler {
 					}
 					platformLevel = platformLevel + 1;
 				} else if (localName.equalsIgnoreCase("serialIdentifier")) {
-					serialIdentifier.set__text(chars.toString());
+					serialIdentifier.set_text(chars.toString());
 				}
 
 				// Procedure - Sensor markup
@@ -897,9 +898,9 @@ public class SmartHmaEoHandler extends DefaultHandler {
 					}
 					sensorLevel = sensorLevel + 1;
 				} else if (localName.equalsIgnoreCase("measurementType")) {
-					measurementType.set__text(chars.toString());
+					measurementType.set_text(chars.toString());
 				} else if (localName.equalsIgnoreCase("operationalMode")) {
-					operationalMode.set__text(chars.toString());
+					operationalMode.set_text(chars.toString());
 				} else if (localName.equalsIgnoreCase("footprint")) {
 					footprint.setCenterOf(centerOf);
 					footprint.setLocationName(locationName);
@@ -915,16 +916,16 @@ public class SmartHmaEoHandler extends DefaultHandler {
 					point.setCoordinates(coordinates);
 					point.setPos(pos);
 				} else if (localName.equalsIgnoreCase("coordinates")) {
-					coordinates.set__text(chars.toString());
-					pos.set__text(chars.toString());
+					coordinates.set_text(chars.toString());
+					pos.set_text(chars.toString());
 					// } else if (localName.equalsIgnoreCase("pos")) {
-					// pos.set__text(chars.toString());
+					// pos.setText(chars.toString());
 				} else if (localName.equalsIgnoreCase("locationName")) {
-					locationName.set__text(chars.toString());
+					locationName.set_text(chars.toString());
 				} else if (localName.equalsIgnoreCase("maximumAltitude")) {
-					maximumAltitude.set__text(chars.toString());
+					maximumAltitude.set_text(chars.toString());
 				} else if (localName.equalsIgnoreCase("minimumAltitude")) {
-					minimumAltitude.set__text(chars.toString());
+					minimumAltitude.set_text(chars.toString());
 				} else if (localName.equalsIgnoreCase("multiExtentOf")) {
 					multiExtentOf.setMultiSurface(multiSurface);
 				} else if (localName.equalsIgnoreCase("multiSurface")) {
@@ -964,11 +965,11 @@ public class SmartHmaEoHandler extends DefaultHandler {
 				}
 
 				else if (localName.equalsIgnoreCase("resolution")) {
-					resolution.set__text(chars.toString());
+					resolution.set_text(chars.toString());
 				} else if (localName.equalsIgnoreCase("sensorType")) {
-					sensorType.set__text(chars.toString());
+					sensorType.set_text(chars.toString());
 				} else if (localName.equalsIgnoreCase("swathIdentifier")) {
-					swathIdentifier.set__text(chars.toString());
+					swathIdentifier.set_text(chars.toString());
 				} else if (localName.equalsIgnoreCase("Procedure")) {
 					procedure
 							.setEarthObservationEquipment(earthObservationEquipment);
@@ -1009,14 +1010,14 @@ public class SmartHmaEoHandler extends DefaultHandler {
 				} else if (localName.equalsIgnoreCase("requestMessage")) {
 				} else if (localName
 						.equalsIgnoreCase("referenceSystemIdentifier")) {
-					referenceSystemIdentifier.set__text(chars.toString());
+					referenceSystemIdentifier.set_text(chars.toString());
 				} else if (localName.equalsIgnoreCase("type")) {
-					type.set__text(chars.toString());
+					type.set_text(chars.toString());
 				} else if (localName.equalsIgnoreCase("cloudCoverPercentage")) {
-					cloudCoverPercentage.set__text(chars.toString());
+					cloudCoverPercentage.set_text(chars.toString());
 				} else if (localName
 						.equalsIgnoreCase("cloudCoverPercentageQuotationMode")) {
-					cloudCoverPercentageQuotationMode.set__text(chars
+					cloudCoverPercentageQuotationMode.set_text(chars
 							.toString());
 				} else if (localName.equalsIgnoreCase("mask")) {
 					mask.setMaskInformation(maskInformation);
@@ -1030,9 +1031,9 @@ public class SmartHmaEoHandler extends DefaultHandler {
 					maskInformation.setSubType(subType);
 					maskInformation.setType(type);
 				} else if (localName.equalsIgnoreCase("format")) {
-					format.set__text(chars.toString());
+					format.set_text(chars.toString());
 				} else if (localName.equalsIgnoreCase("subType")) {
-					subType.set__text(chars.toString());
+					subType.set_text(chars.toString());
 				} else if (localName.equalsIgnoreCase("parameter")) {
 					parameter.setParameterInformation(parameterInformation);
 				} else if (localName.equalsIgnoreCase("parameterInformation")) {
@@ -1041,7 +1042,7 @@ public class SmartHmaEoHandler extends DefaultHandler {
 				} else if (localName.equalsIgnoreCase("phenomenon")) {
 					phenomenon.setName(name);
 				} else if (localName.equalsIgnoreCase("name")) {
-					name.set__text(chars.toString());
+					name.set_text(chars.toString());
 				} else if (localName.equalsIgnoreCase("unitOfMeasure")) {
 				} else if (localName.equalsIgnoreCase("product")) {
 					product.setProductInformation(productInformation);
@@ -1052,9 +1053,9 @@ public class SmartHmaEoHandler extends DefaultHandler {
 					productInformation.setSize(size);
 					productInformation.setTimeliness(timeliness);
 				} else if (localName.equalsIgnoreCase("size")) {
-					size.set__text(chars.toString());
+					size.set_text(chars.toString());
 				} else if (localName.equalsIgnoreCase("timeliness")) {
-					timeliness.set__text(chars.toString());
+					timeliness.set_text(chars.toString());
 				}
 
 				// MetaDataProperty Markups
@@ -1094,21 +1095,21 @@ public class SmartHmaEoHandler extends DefaultHandler {
 					earthObservationMetaData.setStatus(status);
 					earthObservationMetaData.setStatusSubType(statusSubType);
 				} else if (localName.equalsIgnoreCase("acquisitionSubType")) {
-					acquisitionSubType.set__text(chars.toString());
+					acquisitionSubType.set_text(chars.toString());
 				} else if (localName.equalsIgnoreCase("acquisitionType")) {
-					acquisitionType.set__text(chars.toString());
+					acquisitionType.set_text(chars.toString());
 				} else if (localName.equalsIgnoreCase("archivedIn")) {
 					archivedIn.setArchivingInformation(archivingInformation);
 				} else if (localName.equalsIgnoreCase("archivingInformation")) {
 					archivingInformation.setArchivingCenter(archivingCenter);
 					archivingInformation.setArchivingDate(archivingDate);
 				} else if (localName.equalsIgnoreCase("archivingCenter")) {
-					archivingCenter.set__text(chars.toString());
+					archivingCenter.set_text(chars.toString());
 				} else if (localName.equalsIgnoreCase("archivingDate")) {
-					archivingDate.set__text(chars.toString());
+					archivingDate.set_text(chars.toString());
 				} else if (localName.equalsIgnoreCase("composedOf")) {
 				} else if (localName.equalsIgnoreCase("creationDate")) {
-					creationDate.set__text(chars.toString());
+					creationDate.set_text(chars.toString());
 				} else if (localName.equalsIgnoreCase("derivedFrom")) {
 				} else if (localName.equalsIgnoreCase("downlinkedTo")) {
 					downlinkedTo.setDownlinkInformation(downlinkInformation);
@@ -1116,15 +1117,15 @@ public class SmartHmaEoHandler extends DefaultHandler {
 					downlinkInformation
 							.setAcquisitionStation(acquisitionStation);
 				} else if (localName.equalsIgnoreCase("acquisitionStation")) {
-					acquisitionStation.set__text(chars.toString());
+					acquisitionStation.set_text(chars.toString());
 				} else if (localName.equalsIgnoreCase("identifier")) {
-					identifier.set__text(chars.toString());
+					identifier.set_text(chars.toString());
 				} else if (localName.equalsIgnoreCase("modificationDate")) {
-					modificationDate.set__text(chars.toString());
+					modificationDate.set_text(chars.toString());
 				} else if (localName.equalsIgnoreCase("nominalDate")) {
-					nominalDate.set__text(chars.toString());
+					nominalDate.set_text(chars.toString());
 				} else if (localName.equalsIgnoreCase("parentIdentifier")) {
-					parentIdentifier.set__text(chars.toString());
+					parentIdentifier.set_text(chars.toString());
 				} else if (localName.equalsIgnoreCase("processing")) {
 					processing.setProcessingInformation(processingInformation);
 					processingList.add(processing);
@@ -1139,46 +1140,46 @@ public class SmartHmaEoHandler extends DefaultHandler {
 					processingInformation.setProcessorVersion(processorVersion);
 					processingInformation.setSamplingRate(samplingRateList);
 				} else if (localName.equalsIgnoreCase("groundTrackUncertainty")) {
-					groundTrackUncertainty.set__text(chars.toString());
+					groundTrackUncertainty.set_text(chars.toString());
 				} else if (localName.equalsIgnoreCase("method")) {
-					method.set__text(chars.toString());
+					method.set_text(chars.toString());
 				} else if (localName.equalsIgnoreCase("processingCenter")) {
 				} else if (localName.equalsIgnoreCase("processingDate")) {
-					processingDate.set__text(chars.toString());
+					processingDate.set_text(chars.toString());
 				} else if (localName.equalsIgnoreCase("processingMode")) {
-					processingMode.set__text(chars.toString());
+					processingMode.set_text(chars.toString());
 				} else if (localName.equalsIgnoreCase("processorName")) {
-					processorName.set__text(chars.toString());
+					processorName.set_text(chars.toString());
 				} else if (localName.equalsIgnoreCase("processorVersion")) {
-					processorVersion.set__text(chars.toString());
+					processorVersion.set_text(chars.toString());
 				} else if (localName.equalsIgnoreCase("samplingRate")) {
-					samplingRate.set__text(chars.toString());
+					samplingRate.set_text(chars.toString());
 					samplingRateList.add(samplingRate);
 				} else if (localName.equalsIgnoreCase("productGroupId")) {
-					productGroupId.set__text(chars.toString());
+					productGroupId.set_text(chars.toString());
 				} else if (localName
 						.equalsIgnoreCase("productQualityDegradation")) {
-					productQualityDegradation.set__text(chars.toString());
+					productQualityDegradation.set_text(chars.toString());
 				} else if (localName
 						.equalsIgnoreCase("productQualityDegradationQuotationMode")) {
-					productQualityDegradationQuotationMode.set__text(chars
+					productQualityDegradationQuotationMode.set_text(chars
 							.toString());
 				} else if (localName
 						.equalsIgnoreCase("productQualityDegradationTag")) {
-					productQualityDegradationTag.set__text(chars.toString());
+					productQualityDegradationTag.set_text(chars.toString());
 					productQualityDegradationTagList
 							.add(productQualityDegradationTag);
 				} else if (localName
 						.equalsIgnoreCase("productQualityReportURL")) {
-					productQualityReportURL.set__text(chars.toString());
+					productQualityReportURL.set_text(chars.toString());
 				} else if (localName.equalsIgnoreCase("productQualityStatus")) {
-					productQualityStatus.set__text(chars.toString());
+					productQualityStatus.set_text(chars.toString());
 				} else if (localName.equalsIgnoreCase("productType")) {
-					productType.set__text(chars.toString());
+					productType.set_text(chars.toString());
 				} else if (localName.equalsIgnoreCase("status")) {
-					status.set__text(chars.toString());
+					status.set_text(chars.toString());
 				} else if (localName.equalsIgnoreCase("statusSubType")) {
-					statusSubType.set__text(chars.toString());
+					statusSubType.set_text(chars.toString());
 				}
 
 				// Coordinates - footprint and polygons
@@ -1193,7 +1194,7 @@ public class SmartHmaEoHandler extends DefaultHandler {
 					linearRing.setPosList(posList);
 					linearRing.setPosString(posString);
 				} else if (localName.equalsIgnoreCase("pos")) {
-					pos.set__text(chars.toString());
+					pos.set_text(chars.toString());
 					posList.add(pos);
 				} else if (localName.equalsIgnoreCase("poslist")) {
 					posString.setPointsString(chars.toString());

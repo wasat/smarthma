@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
         android:id="@+id/action_search"
         android:actionViewClass="android.widget.SearchView"
         android:icon="@android:drawable/ic_menu_search"
-        android:showAsAction="always"
+        app:showAsAction="always"
         android:title="@string/action_search">
     </item>
 
@@ -43,7 +44,7 @@
     <item
         android:id="@+id/action_exit"
         android:icon="@android:drawable/ic_notification_clear_all"
-        android:showAsAction="ifRoom"
+        app:showAsAction="ifRoom"
         android:title="@string/action_exit"
         android:titleCondensed="@string/action_exit">
     </item>
