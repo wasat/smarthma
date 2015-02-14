@@ -1,5 +1,9 @@
-
 package pl.wasat.smarthma.model.feed;
+
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -7,39 +11,31 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.lang3.builder.EqualsBuilder;
-import org.apache.commons.lang3.builder.HashCodeBuilder;
-import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.apache.commons.lang3.builder.ToStringStyle;
-
+import pl.wasat.smarthma.model.iso.EntryISO;
+import pl.wasat.smarthma.model.om.EntryOM;
 import pl.wasat.smarthma.utils.text.SmartHMAStringStyle;
 
 public class Feed implements Serializable {
 
-	private static final long serialVersionUID = 1L;
-	
-	private TotalResults totalResults;
+    private static final long serialVersionUID = 1L;
+
+    private TotalResults totalResults;
     private StartIndex startIndex;
     private ItemsPerPage itemsPerPage;
     private Query query;
     private Author author;
     private String generator;
     private String id;
+    private String identifier;
     private String title;
     private String updated;
-    private List<Link> link = new ArrayList<Link>();
-    private List<Entry> entries = new ArrayList<Entry>();
+    private List<Link> link = new ArrayList<>();
+    private EOPrefixes eoPrefixes;
+    private ISOPrefixes isoPrefixes;
+    private List<EntryOM> entriesEO = new ArrayList<EntryOM>();
+    private List<EntryISO> entriesISO = new ArrayList<EntryISO>();
     //private Entry entry;
-    private String _xmlns;
-    private String _xmlns_dc;
-    private String _xmlns_eo;
-    private String _xmlns_geo;
-    private String _xmlns_georss;
-    private String _xmlns_media;
-    private String _xmlns_os;
-    private String _xmlns_sru;
-    private String _xmlns_time;
-    private String _xmlns_wrs;
+
     private final Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
     public TotalResults getTotalResults() {
@@ -133,6 +129,14 @@ public class Feed implements Serializable {
         return this;
     }
 
+    public String getIdentifier() {
+        return identifier;
+    }
+
+    public void setIdentifier(String identifier) {
+        this.identifier = identifier;
+    }
+
     public String getTitle() {
         return title;
     }
@@ -172,152 +176,48 @@ public class Feed implements Serializable {
         return this;
     }
 
-    public List<Entry> getEntries() {
-        return entries;
+    public EOPrefixes getEoPrefixes() {
+        return eoPrefixes;
     }
 
-    public void setEntries(List<Entry> entries) {
-        this.entries = entries;
+    public void setEoPrefixes(EOPrefixes eoPrefixes) {
+        this.eoPrefixes = eoPrefixes;
     }
 
-    public Feed withEntries(List<Entry> entries) {
-        this.entries = entries;
+    public ISOPrefixes getIsoPrefixes() {
+        return isoPrefixes;
+    }
+
+    public void setIsoPrefixes(ISOPrefixes isoPrefixes) {
+        this.isoPrefixes = isoPrefixes;
+    }
+
+    public List<EntryOM> getEntriesEO() {
+        return entriesEO;
+    }
+
+    public void setEntriesEO(List<EntryOM> entriesEO) {
+        this.entriesEO = entriesEO;
+    }
+
+    public Feed withEntries(List<EntryOM> entries) {
+        this.entriesEO = entries;
         return this;
     }
 
-    public String get_xmlns() {
-        return _xmlns;
+    public List<EntryISO> getEntriesISO() {
+        return entriesISO;
     }
 
-    public void set_xmlns(String _xmlns) {
-        this._xmlns = _xmlns;
-    }
-
-    public Feed with_xmlns(String _xmlns) {
-        this._xmlns = _xmlns;
-        return this;
-    }
-
-    public String get_xmlns_dc() {
-        return _xmlns_dc;
-    }
-
-    public void set_xmlns_dc(String _xmlns_dc) {
-        this._xmlns_dc = _xmlns_dc;
-    }
-
-    public Feed with_xmlns_dc(String _xmlns_dc) {
-        this._xmlns_dc = _xmlns_dc;
-        return this;
-    }
-
-    public String get_xmlns_eo() {
-        return _xmlns_eo;
-    }
-
-    public void set_xmlns_eo(String _xmlns_eo) {
-        this._xmlns_eo = _xmlns_eo;
-    }
-
-    public Feed with_xmlns_eo(String _xmlns_eo) {
-        this._xmlns_eo = _xmlns_eo;
-        return this;
-    }
-
-    public String get_xmlns_geo() {
-        return _xmlns_geo;
-    }
-
-    public void set_xmlns_geo(String _xmlns_geo) {
-        this._xmlns_geo = _xmlns_geo;
-    }
-
-    public Feed with_xmlns_geo(String _xmlns_geo) {
-        this._xmlns_geo = _xmlns_geo;
-        return this;
-    }
-
-    public String get_xmlns_georss() {
-        return _xmlns_georss;
-    }
-
-    public void set_xmlns_georss(String _xmlns_georss) {
-        this._xmlns_georss = _xmlns_georss;
-    }
-
-    public Feed with_xmlns_georss(String _xmlns_georss) {
-        this._xmlns_georss = _xmlns_georss;
-        return this;
-    }
-
-    public String get_xmlns_media() {
-        return _xmlns_media;
-    }
-
-    public void set_xmlns_media(String _xmlns_media) {
-        this._xmlns_media = _xmlns_media;
-    }
-
-    public Feed with_xmlns_media(String _xmlns_media) {
-        this._xmlns_media = _xmlns_media;
-        return this;
-    }
-
-    public String get_xmlns_os() {
-        return _xmlns_os;
-    }
-
-    public void set_xmlns_os(String _xmlns_os) {
-        this._xmlns_os = _xmlns_os;
-    }
-
-    public Feed with_xmlns_os(String _xmlns_os) {
-        this._xmlns_os = _xmlns_os;
-        return this;
-    }
-
-    public String get_xmlns_sru() {
-        return _xmlns_sru;
-    }
-
-    public void set_xmlns_sru(String _xmlns_sru) {
-        this._xmlns_sru = _xmlns_sru;
-    }
-
-    public Feed with_xmlns_sru(String _xmlns_sru) {
-        this._xmlns_sru = _xmlns_sru;
-        return this;
-    }
-
-    public String get_xmlns_time() {
-        return _xmlns_time;
-    }
-
-    public void set_xmlns_time(String _xmlns_time) {
-        this._xmlns_time = _xmlns_time;
-    }
-
-    public Feed with_xmlns_time(String _xmlns_time) {
-        this._xmlns_time = _xmlns_time;
-        return this;
-    }
-
-    public String get_xmlns_wrs() {
-        return _xmlns_wrs;
-    }
-
-    public void set_xmlns_wrs(String _xmlns_wrs) {
-        this._xmlns_wrs = _xmlns_wrs;
-    }
-
-    public Feed with_xmlns_wrs(String _xmlns_wrs) {
-        this._xmlns_wrs = _xmlns_wrs;
-        return this;
+    public void setEntriesISO(List<EntryISO> entriesISO) {
+        this.entriesISO = entriesISO;
     }
 
     @Override
     public String toString() {
-            	 ToStringStyle style = new SmartHMAStringStyle(); ToStringBuilder.setDefaultStyle(style); return ToStringBuilder.reflectionToString(this, style);
+        ToStringStyle style = new SmartHMAStringStyle();
+        ToStringBuilder.setDefaultStyle(style);
+        return ToStringBuilder.reflectionToString(this, style);
     }
 
     @Override

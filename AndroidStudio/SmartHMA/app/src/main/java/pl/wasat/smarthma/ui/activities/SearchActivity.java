@@ -1,12 +1,5 @@
 package pl.wasat.smarthma.ui.activities;
 
-import pl.wasat.smarthma.R;
-import pl.wasat.smarthma.ui.frags.common.AreaPickerMapFragment.OnAreaPickerMapFragmentListener;
-import pl.wasat.smarthma.ui.frags.search.SearchBasicInfoRightFragment;
-import pl.wasat.smarthma.ui.frags.search.SearchBasicInfoRightFragment.OnSearchBasicInfoRightFragmentListener;
-import pl.wasat.smarthma.ui.frags.search.SearchFragment;
-import pl.wasat.smarthma.ui.frags.search.SearchFragment.OnSearchFragmentListener;
-import roboguice.util.temp.Ln;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
@@ -16,6 +9,14 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 
 import com.google.android.gms.maps.model.LatLngBounds;
+
+import pl.wasat.smarthma.R;
+import pl.wasat.smarthma.ui.frags.common.AreaPickerMapFragment.OnAreaPickerMapFragmentListener;
+import pl.wasat.smarthma.ui.frags.search.SearchBasicInfoRightFragment;
+import pl.wasat.smarthma.ui.frags.search.SearchBasicInfoRightFragment.OnSearchBasicInfoRightFragmentListener;
+import pl.wasat.smarthma.ui.frags.search.SearchFragment;
+import pl.wasat.smarthma.ui.frags.search.SearchFragment.OnSearchFragmentListener;
+import roboguice.util.temp.Ln;
 
 public class SearchActivity extends BaseSmartHMActivity implements
 		OnSearchBasicInfoRightFragmentListener, OnSearchFragmentListener,

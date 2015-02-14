@@ -1,11 +1,12 @@
 package pl.wasat.smarthma.ui.frags.common;
 
+import android.os.Bundle;
+
 import pl.wasat.smarthma.R;
 import pl.wasat.smarthma.model.FedeoRequest;
-import pl.wasat.smarthma.model.feed.Entry;
 import pl.wasat.smarthma.model.feed.Feed;
+import pl.wasat.smarthma.model.om.EntryOM;
 import pl.wasat.smarthma.ui.frags.base.BaseShowProductsListFragment;
-import android.os.Bundle;
 
 /**
  * A simple {@link android.support.v4.app.Fragment} subclass. Use the
@@ -41,10 +42,10 @@ public class ProductsListFragment extends BaseShowProductsListFragment {
 	 * (non-Javadoc)
 	 * 
 	 * @see pl.wasat.smarthma.ui.frags.base.BaseShowProductsListFragment#
-	 * loadProductItemDetails(pl.wasat.smarthma.model.feed.Entry)
+	 * loadProductItemDetails(pl.wasat.smarthma.model.eo.Entry)
 	 */
 	@Override
-	public void loadProductItemDetails(Entry entry) {
+	public void loadProductItemDetails(EntryOM entry) {
 		ProductDetailsFragment productDetailsFragment = ProductDetailsFragment
 				.newInstance(entry);
 		getActivity()

@@ -1,9 +1,6 @@
+/*
 package pl.wasat.smarthma.ui.frags.search;
 
-import pl.wasat.smarthma.R;
-import pl.wasat.smarthma.model.feed.Entry;
-import pl.wasat.smarthma.model.feed.Link;
-import pl.wasat.smarthma.ui.frags.common.AreaPickerMapFragment;
 import android.app.Activity;
 import android.net.Uri;
 import android.os.Bundle;
@@ -20,6 +17,12 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import pl.wasat.smarthma.R;
+import pl.wasat.smarthma.model.om.EntryOM;
+import pl.wasat.smarthma.model.feed.Link;
+import pl.wasat.smarthma.ui.frags.common.AreaPickerMapFragment;
+
+*/
 /**
  * A simple {@link android.support.v4.app.Fragment} subclass. Activities that
  * contain this fragment must implement the
@@ -27,18 +30,21 @@ import android.widget.Toast;
  * handle interaction events. Use the {@link SearchDetailFragment#newInstance}
  * factory method to create an instance of this fragment.
  * 
- */
+ *//*
+
 public class SearchDetailFragment extends Fragment {
 
 	private OnSearchDetailFragmentListener mListener;
-	private Entry displayedEntry;
+	private EntryOM displayedEntry;
 
-	/**
+	*/
+/**
 	 * Use this factory method to create a new instance of this fragment using
 	 * the provided parameters.
 	 * 
 	 * @return A new instance of fragment SearchDetailFragment.
-	 */
+	 *//*
+
 	public static SearchDetailFragment newInstance() {
 		SearchDetailFragment fragment = new SearchDetailFragment();
 		Bundle args = new Bundle();
@@ -54,9 +60,9 @@ public class SearchDetailFragment extends Fragment {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		if (getArguments() != null) {
-            if (getArguments().containsKey(Entry.KEY_RSS_ENTRY)) {
-                displayedEntry = (Entry) getArguments().getSerializable(
-                        Entry.KEY_RSS_ENTRY);
+            if (getArguments().containsKey(EntryOM.KEY_RSS_ENTRY)) {
+                displayedEntry = (EntryOM) getArguments().getSerializable(
+                        EntryOM.KEY_RSS_ENTRY);
             }
         }
 
@@ -95,7 +101,7 @@ public class SearchDetailFragment extends Fragment {
 			});
 
 			for (Link entityLink : displayedEntry.getLinks()) {
-				if (entityLink.get_rel().equalsIgnoreCase("search")) {
+				if (entityLink.getRel().equalsIgnoreCase("search")) {
 					searchButton.setEnabled(true);
 				}
 
@@ -162,7 +168,8 @@ public class SearchDetailFragment extends Fragment {
 
 	}
 
-	/**
+	*/
+/**
 	 * This interface must be implemented by activities that contain this
 	 * fragment to allow an interaction in this fragment to be communicated to
 	 * the activity and potentially other fragments contained in that activity.
@@ -170,7 +177,8 @@ public class SearchDetailFragment extends Fragment {
 	 * See the Android Training lesson <a href=
 	 * "http://developer.android.com/training/basics/fragments/communicating.html"
 	 * >Communicating with Other Fragments</a> for more information.
-	 */
+	 *//*
+
 	public interface OnSearchDetailFragmentListener {
 		public void onSearchDetailFragmentInteraction(Uri uri);
 	}
@@ -189,3 +197,4 @@ public class SearchDetailFragment extends Fragment {
 	}
 
 }
+*/

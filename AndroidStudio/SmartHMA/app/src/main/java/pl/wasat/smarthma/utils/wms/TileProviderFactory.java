@@ -1,21 +1,17 @@
 package pl.wasat.smarthma.utils.wms;
 
+import android.content.Context;
+import android.content.Intent;
+
+import org.acra.ACRA;
+
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Locale;
 
-import org.acra.ACRA;
-
 import pl.wasat.smarthma.helper.Const;
-import android.content.Context;
-import android.content.Intent;
 
 public class TileProviderFactory {
-
-	@Override
-	protected void finalize() throws Throwable {
-		super.finalize();
-	}
 
 	private static final String URL_BASE_OSM = "http://a.tile.openstreetmap.org/{z}/{x}/{y}.png";
 

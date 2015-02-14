@@ -1,23 +1,5 @@
 package pl.wasat.smarthma.ui.activities;
 
-import java.util.ArrayList;
-
-import pl.wasat.smarthma.R;
-import pl.wasat.smarthma.adapter.SearchListAdapter;
-import pl.wasat.smarthma.database.EoDbAdapter;
-import pl.wasat.smarthma.helper.Const;
-import pl.wasat.smarthma.model.FedeoRequest;
-import pl.wasat.smarthma.model.eo.Footprint;
-import pl.wasat.smarthma.model.feed.Entry;
-import pl.wasat.smarthma.preferences.SharedPrefs;
-import pl.wasat.smarthma.ui.frags.base.BaseShowProductsListFragment.OnBaseShowProductsListFragmentListener;
-import pl.wasat.smarthma.ui.frags.common.AreaPickerMapFragment.OnAreaPickerMapFragmentListener;
-import pl.wasat.smarthma.ui.frags.common.CollectionDetailsFragment;
-import pl.wasat.smarthma.ui.frags.common.ExtendedMapFragment;
-import pl.wasat.smarthma.ui.frags.common.CollectionDetailsFragment.OnCollectionDetailsFragmentListener;
-import pl.wasat.smarthma.ui.frags.common.MetadataFragment.OnMetadataFragmentListener;
-import pl.wasat.smarthma.ui.frags.search.SearchListFragment;
-import pl.wasat.smarthma.ui.frags.search.SearchListFragment.OnSearchListFragmentListener;
 import android.app.ActionBar;
 import android.app.SearchManager;
 import android.content.Intent;
@@ -26,10 +8,30 @@ import android.support.v4.app.FragmentManager;
 
 import com.google.android.gms.maps.model.LatLngBounds;
 
+import java.util.ArrayList;
+
+import pl.wasat.smarthma.R;
+import pl.wasat.smarthma.adapter.SearchListAdapter;
+import pl.wasat.smarthma.database.EoDbAdapter;
+import pl.wasat.smarthma.helper.Const;
+import pl.wasat.smarthma.model.FedeoRequest;
+import pl.wasat.smarthma.model.iso.EntryISO;
+import pl.wasat.smarthma.model.om.Footprint;
+import pl.wasat.smarthma.preferences.SharedPrefs;
+import pl.wasat.smarthma.ui.frags.base.BaseShowProductsListFragment.OnBaseShowProductsListFragmentListener;
+import pl.wasat.smarthma.ui.frags.common.AreaPickerMapFragment.OnAreaPickerMapFragmentListener;
+import pl.wasat.smarthma.ui.frags.common.CollectionDetailsFragment;
+import pl.wasat.smarthma.ui.frags.common.CollectionDetailsFragment.OnCollectionDetailsFragmentListener;
+import pl.wasat.smarthma.ui.frags.common.ExtendedMapFragment;
+import pl.wasat.smarthma.ui.frags.common.MetadataISOFragment;
+import pl.wasat.smarthma.ui.frags.common.MetadataISOFragment.OnMetadataISOFragmentListener;
+import pl.wasat.smarthma.ui.frags.search.SearchListFragment;
+import pl.wasat.smarthma.ui.frags.search.SearchListFragment.OnSearchListFragmentListener;
+
 public class SearchCollectionResultsActivity extends BaseSmartHMActivity
 		implements OnSearchListFragmentListener,
 		OnBaseShowProductsListFragmentListener,
-		OnAreaPickerMapFragmentListener, OnMetadataFragmentListener,
+		OnAreaPickerMapFragmentListener, OnMetadataISOFragmentListener,
 		OnCollectionDetailsFragmentListener {
 
 	private EoDbAdapter dba;
@@ -51,12 +53,7 @@ public class SearchCollectionResultsActivity extends BaseSmartHMActivity
 
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-		if (resultCode == RESULT_OK) {
-			stopNewSearch = data.getBooleanExtra(
-					Const.KEY_INTENT_RETURN_STOP_SEARCH, true);
-		} else {
-			stopNewSearch = false;
-		}
+        stopNewSearch = resultCode == RESULT_OK && data.getBooleanExtra(Const.KEY_INTENT_RETURN_STOP_SEARCH, true);
 
 		SearchListFragment searchListFrag = (SearchListFragment) getSupportFragmentManager()
 				.findFragmentById(R.id.activity_base_list_container);
@@ -141,7 +138,7 @@ public class SearchCollectionResultsActivity extends BaseSmartHMActivity
 	 */
 	@Override
 	public void onSearchListFragmentItemSelected(String id) {
-		Entry selectedEntry = (Entry) ((SearchListFragment) getSupportFragmentManager()
+		EntryISO selectedEntry = (EntryISO) ((SearchListFragment) getSupportFragmentManager()
 				.findFragmentById(R.id.activity_base_list_container))
 				.getListAdapter().getItem(Integer.parseInt(id));
 
@@ -190,18 +187,6 @@ public class SearchCollectionResultsActivity extends BaseSmartHMActivity
 	public void onBaseShowProductsListFragmentItemSelected(String id) {
 	}
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * pl.wasat.smarthma.ui.fragments.MetadataFragment.OnMetadataFragmentListener
-	 * #onMetadataFragmentInteraction(android.net.Uri)
-	 */
-	@Override
-	public void onMetadataFragmentInteraction() {
-		// TODO Auto-generated method stub
-
-	}
 
 	/*
 	 * (non-Javadoc)
@@ -230,4 +215,20 @@ public class SearchCollectionResultsActivity extends BaseSmartHMActivity
 		startActivityForResult(showProductsIntent, REQUEST_NEW_SEARCH);
 	}
 
+    @Override
+    public void onCollectionDetailsFragmentShowMetadata(EntryISO displayedEntry) {
+        MetadataISOFragment metadataISOFragment = MetadataISOFragment
+                .newInstance(displayedEntry);
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.activity_base_details_container,
+                        metadataISOFragment, "MetadataISOFragment")
+                .addToBackStack("MetadataISOFragment").commit();
+
+    }
+
+    @Override
+    public void onMetadataISOFragmentInteraction() {
+
+    }
 }

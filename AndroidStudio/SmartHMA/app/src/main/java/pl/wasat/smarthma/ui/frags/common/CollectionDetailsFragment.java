@@ -1,14 +1,15 @@
 package pl.wasat.smarthma.ui.frags.common;
 
-import pl.wasat.smarthma.model.feed.Entry;
-import pl.wasat.smarthma.model.feed.Link;
-import pl.wasat.smarthma.ui.frags.base.BaseViewAndBasicSettingsDetailFragment;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+
+import pl.wasat.smarthma.model.feed.Link;
+import pl.wasat.smarthma.model.iso.EntryISO;
+import pl.wasat.smarthma.ui.frags.base.BaseViewAndBasicSettingsDetailFragment;
 
 /**
  * A simple {@link android.support.v4.app.Fragment} subclass. Activities that
@@ -32,7 +33,7 @@ public class CollectionDetailsFragment extends
 	 *            Parameter 1.
 	 * @return A new instance of fragment CollectionDetailsFragment.
 	 */
-	public static CollectionDetailsFragment newInstance(Entry collectionEntry) {
+	public static CollectionDetailsFragment newInstance(EntryISO collectionEntry) {
 		CollectionDetailsFragment fragment = new CollectionDetailsFragment();
 		Bundle args = new Bundle();
 		args.putSerializable(KEY_COLLECTION_ENTRY, collectionEntry);
@@ -57,8 +58,8 @@ public class CollectionDetailsFragment extends
 			Bundle savedInstanceState) {
 		super.onCreateView(inflater, container, savedInstanceState);
 
-		for (Link entityLink : displayedEntry.getLinks()) {
-			if (entityLink.get_rel().equalsIgnoreCase("search")) {
+		for (Link entityLink: displayedISOEntry.getLink()) {
+			if (entityLink.getRel().equalsIgnoreCase("search")) {
 				btnShowProducts.setEnabled(true);
 			}
 		}
@@ -66,14 +67,19 @@ public class CollectionDetailsFragment extends
 		btnShowProducts.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-
+                final String parentID = displayedISOEntry.getIdentifier();
 				if (mListener != null) {
-					String parentID = displayedEntry.getIdentifier();
 					mListener.onCollectionDetailsFragmentShowProducts(parentID);
 				}
 			}
 		});
 
+        btnShowMetadata.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mListener.onCollectionDetailsFragmentShowMetadata(displayedISOEntry);
+            }
+        });
 		return rootView;
 
 	}
@@ -106,6 +112,7 @@ public class CollectionDetailsFragment extends
 	 */
 	public interface OnCollectionDetailsFragmentListener {
 		public void onCollectionDetailsFragmentShowProducts(String parentID);
+        public void onCollectionDetailsFragmentShowMetadata(EntryISO displayedEntry);
 	}
 
 }

@@ -1,12 +1,5 @@
 package pl.wasat.smarthma.ui.frags.browse;
 
-import java.util.ArrayList;
-
-import pl.wasat.smarthma.R;
-import pl.wasat.smarthma.SmartHMApplication;
-import pl.wasat.smarthma.adapter.CollectionsListAdapter;
-import pl.wasat.smarthma.model.Collection;
-import pl.wasat.smarthma.ui.activities.CollectionsBrowserActivity;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -17,6 +10,14 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
+
+import java.util.ArrayList;
+
+import pl.wasat.smarthma.R;
+import pl.wasat.smarthma.SmartHMApplication;
+import pl.wasat.smarthma.adapter.CollectionsListAdapter;
+import pl.wasat.smarthma.model.Collection;
+import pl.wasat.smarthma.ui.activities.CollectionsBrowserActivity;
 
 /**
  * A simple {@link android.support.v4.app.Fragment} subclass. Activities that

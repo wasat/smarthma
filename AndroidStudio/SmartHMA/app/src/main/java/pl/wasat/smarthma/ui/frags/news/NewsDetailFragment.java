@@ -1,9 +1,5 @@
 package pl.wasat.smarthma.ui.frags.news;
 
-import pl.wasat.smarthma.R;
-import pl.wasat.smarthma.adapter.NewsArticleListAdapter;
-import pl.wasat.smarthma.database.EoDbAdapter;
-import pl.wasat.smarthma.model.NewsArticle;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -20,6 +16,11 @@ import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import pl.wasat.smarthma.R;
+import pl.wasat.smarthma.adapter.NewsArticleListAdapter;
+import pl.wasat.smarthma.database.EoDbAdapter;
+import pl.wasat.smarthma.model.NewsArticle;
 
 public class NewsDetailFragment extends Fragment {
 
