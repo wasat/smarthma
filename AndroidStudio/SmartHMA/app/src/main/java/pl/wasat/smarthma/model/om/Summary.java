@@ -1,4 +1,3 @@
-
 package pl.wasat.smarthma.model.om;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
@@ -7,8 +6,6 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
 import java.io.Serializable;
-import java.util.HashMap;
-import java.util.Map;
 
 import pl.wasat.smarthma.utils.text.SmartHMAStringStyle;
 
@@ -19,7 +16,7 @@ public class Summary implements Serializable {
 
     private String _cdata;
     private String _type;
-    private final Map<String, Object> additionalProperties = new HashMap<String, Object>();
+
 
     public String get_cdata() {
         return _cdata;
@@ -64,12 +61,5 @@ public class Summary implements Serializable {
         return EqualsBuilder.reflectionEquals(this, other);
     }
 
-    public Map<String, Object> getAdditionalProperties() {
-        return this.additionalProperties;
-    }
-
-    public void setAdditionalProperty(String name, Object value) {
-        this.additionalProperties.put(name, value);
-    }
 
 }

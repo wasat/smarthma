@@ -7,9 +7,7 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import pl.wasat.smarthma.utils.text.SmartHMAStringStyle;
 
@@ -18,10 +16,10 @@ public class MultiPoint implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private String _prefix;
-    private List<PointMember> pointMember = new ArrayList<PointMember>();
+    private List<PointMember> pointMember = new ArrayList<>();
     private String _gml_id;
     private String _srsName;
-    private final Map<String, Object> additionalProperties = new HashMap<String, Object>();
+
 
     public String get_prefix() {
         return _prefix;
@@ -92,12 +90,5 @@ public class MultiPoint implements Serializable {
         return EqualsBuilder.reflectionEquals(this, other);
     }
 
-    public Map<String, Object> getAdditionalProperties() {
-        return this.additionalProperties;
-    }
-
-    public void setAdditionalProperty(String name, Object value) {
-        this.additionalProperties.put(name, value);
-    }
 
 }

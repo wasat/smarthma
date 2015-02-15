@@ -6,8 +6,6 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
 import java.io.Serializable;
-import java.util.HashMap;
-import java.util.Map;
 
 import pl.wasat.smarthma.utils.text.SmartHMAStringStyle;
 
@@ -19,7 +17,7 @@ public class LineString implements Serializable {
     private Coordinates coordinates;
     private String _gml_id;
     private String _srsName;
-    private final Map<String, Object> additionalProperties = new HashMap<String, Object>();
+
 
     public String get_prefix() {
         return _prefix;
@@ -90,12 +88,5 @@ public class LineString implements Serializable {
         return EqualsBuilder.reflectionEquals(this, other);
     }
 
-    public Map<String, Object> getAdditionalProperties() {
-        return this.additionalProperties;
-    }
-
-    public void setAdditionalProperty(String name, Object value) {
-        this.additionalProperties.put(name, value);
-    }
 
 }
