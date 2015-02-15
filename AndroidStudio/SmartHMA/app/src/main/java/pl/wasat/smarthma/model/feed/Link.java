@@ -6,8 +6,6 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
 import java.io.Serializable;
-import java.util.HashMap;
-import java.util.Map;
 
 import pl.wasat.smarthma.utils.text.SmartHMAStringStyle;
 
@@ -20,7 +18,7 @@ public class Link implements Serializable {
     private String rel;
     private String title;
     private String type;
-    private final Map<String, Object> additionalProperties = new HashMap<String, Object>();
+
 
     public String getHref() {
         return href;
@@ -91,12 +89,5 @@ public class Link implements Serializable {
         return EqualsBuilder.reflectionEquals(this, other);
     }
 
-    public Map<String, Object> getAdditionalProperties() {
-        return this.additionalProperties;
-    }
-
-    public void setAdditionalProperty(String name, Object value) {
-        this.additionalProperties.put(name, value);
-    }
 
 }

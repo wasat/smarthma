@@ -35,9 +35,425 @@
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="app: pl.wasat.smarthma" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5dca7b90-b835-4844-b157-9a39df993946" name="Default" comment="Added ISO Metadata and sorting functions - part 2" />
+    <list default="true" id="5dca7b90-b835-4844-b157-9a39df993946" name="Default" comment="Added ISO Metadata and sorting functions - part 2">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/Abstract.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/Abstract.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/AccessConstraints.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/AccessConstraints.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/Acquisition.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/Acquisition.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/AcquisitionParameters.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/AcquisitionParameters.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/AcquisitionStation.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/AcquisitionStation.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/AcquisitionSubType.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/AcquisitionSubType.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/AcquisitionType.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/AcquisitionType.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/utils/io/AcraExtension.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/utils/io/AcraExtension.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/AcrossTrackIncidenceAngle.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/AcrossTrackIncidenceAngle.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/Address.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/Address.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/AlongTrackIncidenceAngle.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/AlongTrackIncidenceAngle.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/AntennaLookDirection.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/AntennaLookDirection.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/ArchivedIn.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/ArchivedIn.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/ArchivingCenter.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/ArchivingCenter.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/ArchivingDate.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/ArchivingDate.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/ArchivingIdentifier.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/ArchivingIdentifier.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/ArchivingInformation.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/ArchivingInformation.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/ui/frags/common/AreaPickerMapFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/ui/frags/common/AreaPickerMapFragment.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/feed/Author.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/feed/Author.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/AuxiliaryInstrument.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/AuxiliaryInstrument.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/ui/frags/base/BaseFeedSummaryFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/ui/frags/base/BaseFeedSummaryFragment.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/ui/frags/base/BaseMapFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/ui/frags/base/BaseMapFragment.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/ui/frags/base/BaseShowProductsListFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/ui/frags/base/BaseShowProductsListFragment.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/ui/activities/BaseSmartHMActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/ui/activities/BaseSmartHMActivity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/ui/frags/base/BaseSpiceFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/ui/frags/base/BaseSpiceFragment.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/ui/frags/base/BaseSpiceListFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/ui/frags/base/BaseSpiceListFragment.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/ui/frags/base/BaseViewAndBasicSettingsDetailFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/ui/frags/base/BaseViewAndBasicSettingsDetailFragment.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/BeginPosition.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/BeginPosition.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/BeginPosition.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/BeginPosition.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/Boolean.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/Boolean.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/Browse.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/Browse.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/ui/frags/browse/BrowseCollectionFirstDetailFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/ui/frags/browse/BrowseCollectionFirstDetailFragment.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/BrowseInformation.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/BrowseInformation.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/CIAddress.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/CIAddress.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/CICitation.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/CICitation.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/CIContact.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/CIContact.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/CIDate.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/CIDate.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/CIDateTypeCode.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/CIDateTypeCode.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/CIOnlineResource.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/CIOnlineResource.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/CIResponsibleParty.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/CIResponsibleParty.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/CIRoleCode.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/CIRoleCode.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/CITelephone.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/CITelephone.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/Category.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/Category.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/CenterOf.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/CenterOf.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/CharacterString.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/CharacterString.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/Citation.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/Citation.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/City.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/City.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/CloudCoverPercentage.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/CloudCoverPercentage.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/CloudCoverPercentageQuotationMode.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/CloudCoverPercentageQuotationMode.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/Code.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/Code.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/CodeSpace.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/CodeSpace.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/Collection.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/Collection.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/ui/frags/common/CollectionDetailsFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/ui/frags/common/CollectionDetailsFragment.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/ui/activities/CollectionsBrowserActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/ui/activities/CollectionsBrowserActivity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/ui/activities/CollectionsDefinitionActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/ui/activities/CollectionsDefinitionActivity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/CollectionsGroup.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/CollectionsGroup.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/adapter/CollectionsGroupListAdapter.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/adapter/CollectionsGroupListAdapter.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/ui/frags/browse/CollectionsGroupListFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/ui/frags/browse/CollectionsGroupListFragment.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/adapter/CollectionsListAdapter.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/adapter/CollectionsListAdapter.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/ui/frags/browse/CollectionsListFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/ui/frags/browse/CollectionsListFragment.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/ComposedOf.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/ComposedOf.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/explaindoc/ConfigInfo.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/explaindoc/ConfigInfo.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/utils/conn/ConnectionDetector.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/utils/conn/ConnectionDetector.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/helper/Const.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/helper/Const.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/Contact.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/Contact.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/ContactInfo.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/ContactInfo.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/Content.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/Content.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/Coordinates.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/Coordinates.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/Country.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/Country.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/CreationDate.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/CreationDate.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/CurveMember.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/CurveMember.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/CycleNumber.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/CycleNumber.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/DQConformanceResult.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/DQConformanceResult.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/DQDataQuality.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/DQDataQuality.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/DQDomainConsistency.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/DQDomainConsistency.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/DQScope.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/DQScope.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/DataQualityInfo.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/DataQualityInfo.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/ui/frags/browse/DataSeriesDetailFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/ui/frags/browse/DataSeriesDetailFragment.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/ui/frags/browse/DataSeriesListFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/ui/frags/browse/DataSeriesListFragment.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/DataSetFeeds.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/DataSetFeeds.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/helper/DataSorter.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/helper/DataSorter.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/explaindoc/DatabaseInfo.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/explaindoc/DatabaseInfo.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/Date.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/Date.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/DateGco.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/DateGco.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/DateInCIDate.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/DateInCIDate.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/DateStamp.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/DateStamp.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/DateType.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/DateType.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/utils/time/DateUtils.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/utils/time/DateUtils.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/Decimal.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/Decimal.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/DeliveryPoint.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/DeliveryPoint.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/DerivedFrom.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/DerivedFrom.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/DescriptiveKeyword.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/DescriptiveKeyword.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/DownlinkInformation.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/DownlinkInformation.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/DownlinkedTo.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/DownlinkedTo.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/feed/EOPrefixes.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/feed/EOPrefixes.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/EXExtent.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/EXExtent.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/EXGeographicBoundingBox.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/EXGeographicBoundingBox.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/EXTemporalExtent.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/EXTemporalExtent.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/EarthObservation.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/EarthObservation.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/EarthObservationEquipment.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/EarthObservationEquipment.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/EarthObservationMetaData.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/EarthObservationMetaData.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/EarthObservationResult.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/EarthObservationResult.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/EastBoundLongitude.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/EastBoundLongitude.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/ElectronicMailAddress.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/ElectronicMailAddress.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/EndPosition.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/EndPosition.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/EndPosition.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/EndPosition.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/EntryISO.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/EntryISO.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/customviews/EntryItemView.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/customviews/EntryItemView.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/EntryOM.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/EntryOM.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/database/EoDbAdapter.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/database/EoDbAdapter.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/exception/Exception.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/exception/Exception.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/exception/ExceptionReport.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/exception/ExceptionReport.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/exception/ExceptionText.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/exception/ExceptionText.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/customviews/ExpandableListAdapter.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/customviews/ExpandableListAdapter.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/explaindoc/ExplainData.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/explaindoc/ExplainData.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/utils/http/ExplainDocRequest.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/utils/http/ExplainDocRequest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/Explanation.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/Explanation.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/ui/frags/common/ExtendedMapFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/ui/frags/common/ExtendedMapFragment.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/Extent.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/Extent.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/ExtentInEXTemp.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/ExtentInEXTemp.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/Exterior.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/Exterior.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/ui/frags/dialog/FacebookDialogFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/ui/frags/dialog/FacebookDialogFragment.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/Facsimile.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/Facsimile.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/ui/frags/common/FailureFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/ui/frags/common/FailureFragment.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/FeatureOfInterest.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/FeatureOfInterest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/exception/Fedeo.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/exception/Fedeo.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/utils/rss/FedeoExceptionHandler.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/utils/rss/FedeoExceptionHandler.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/FedeoRequest.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/FedeoRequest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/feed/Feed.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/feed/Feed.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/Feed.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/Feed.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/ui/frags/browse/FeedSummaryBrowseCollectionsFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/ui/frags/browse/FeedSummaryBrowseCollectionsFragment.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/ui/frags/common/FeedSummaryProductsFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/ui/frags/common/FeedSummaryProductsFragment.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/ui/frags/search/FeedSummarySearchCollectionFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/ui/frags/search/FeedSummarySearchCollectionFragment.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/FileIdentifier.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/FileIdentifier.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/FileName.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/FileName.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/Footprint.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/Footprint.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/Format.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/Format.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/ui/frags/common/GalleryFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/ui/frags/common/GalleryFragment.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/GeographicElement.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/GeographicElement.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/helper/Global.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/helper/Global.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/GroundTrackUncertainty.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/GroundTrackUncertainty.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/feed/Group.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/feed/Group.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/HierarchyLevel.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/HierarchyLevel.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/feed/ISOPrefixes.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/feed/ISOPrefixes.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/IdentificationInfo.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/IdentificationInfo.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/Identifier.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/Identifier.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/Identifier.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/Identifier.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/IlluminationAzimuthAngle.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/IlluminationAzimuthAngle.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/ImageQualityDegradationQuotationMode.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/ImageQualityDegradationQuotationMode.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/explaindoc/Index.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/explaindoc/Index.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/explaindoc/IndexInfo.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/explaindoc/IndexInfo.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/IndividualName.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/IndividualName.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/Instrument.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/Instrument.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/InstrumentType.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/InstrumentType.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/IsSegment.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/IsSegment.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/feed/ItemsPerPage.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/feed/ItemsPerPage.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/Keyword.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/Keyword.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/LILineage.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/LILineage.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/Language.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/Language.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/LanguageCode.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/LanguageCode.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/LastOrbitNumber.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/LastOrbitNumber.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/Level.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/Level.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/LineString.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/LineString.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/Lineage.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/Lineage.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/LinearRing.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/LinearRing.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/feed/Link.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/feed/Link.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/Linkage.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/Linkage.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/utils/loc/LocManager.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/utils/loc/LocManager.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/LocationName.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/LocationName.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/utils/io/LogWriter.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/utils/io/LogWriter.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/MDConstraints.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/MDConstraints.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/MDDataIdentification.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/MDDataIdentification.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/MDKeywords.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/MDKeywords.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/MDLegalConstraints.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/MDLegalConstraints.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/MDMetadata.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/MDMetadata.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/MDRestrictionCode.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/MDRestrictionCode.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/MDScopeCode.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/MDScopeCode.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/MDTopicCategoryCode.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/MDTopicCategoryCode.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/Mask.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/Mask.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/MaskInformation.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/MaskInformation.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/MaximumAltitude.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/MaximumAltitude.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/MaximumIncidenceAngle.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/MaximumIncidenceAngle.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/MeasurementType.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/MeasurementType.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/MetaDataProperty.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/MetaDataProperty.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/explaindoc/MetaInfo.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/explaindoc/MetaInfo.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/utils/text/MetadataCleaner.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/utils/text/MetadataCleaner.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/ui/frags/common/MetadataFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/ui/frags/common/MetadataFragment.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/ui/frags/common/MetadataISOFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/ui/frags/common/MetadataISOFragment.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/MetadataStandardName.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/MetadataStandardName.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/MetadataStandardVersion.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/MetadataStandardVersion.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/Method.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/Method.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/MinimumAltitude.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/MinimumAltitude.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/MinimumIncidenceAngle.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/MinimumIncidenceAngle.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/mission/MissionHeaderData.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/mission/MissionHeaderData.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/mission/MissionItemData.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/mission/MissionItemData.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/ui/activities/MissionsActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/ui/activities/MissionsActivity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/ui/frags/missions/MissionsDetailsFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/ui/frags/missions/MissionsDetailsFragment.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/ui/frags/missions/MissionsExtListFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/ui/frags/missions/MissionsExtListFragment.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/ModificationDate.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/ModificationDate.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/MultiCurve.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/MultiCurve.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/MultiExtentOf.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/MultiExtentOf.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/MultiPoint.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/MultiPoint.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/MultiSurface.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/MultiSurface.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/Name.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/Name.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/ui/activities/NewsActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/ui/activities/NewsActivity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/NewsArticle.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/NewsArticle.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/database/NewsDbAdapter.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/database/NewsDbAdapter.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/ui/frags/news/NewsDetailFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/ui/frags/news/NewsDetailFragment.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/ui/frags/news/NewsListFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/ui/frags/news/NewsListFragment.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/utils/rss/NewsRssHandler.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/utils/rss/NewsRssHandler.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/services/NewsRssServiceNoAsync.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/services/NewsRssServiceNoAsync.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/NominalDate.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/NominalDate.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/NominalTrack.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/NominalTrack.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/NorthBoundLatitude.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/NorthBoundLatitude.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/utils/obj/ObjectUtils.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/utils/obj/ObjectUtils.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/ObservedProperty.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/ObservedProperty.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/OccultationPoints.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/OccultationPoints.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/interfaces/OnBaseMapFragmentPublicListener.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/interfaces/OnBaseMapFragmentPublicListener.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/interfaces/OnCollectionsListSelectionListener.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/interfaces/OnCollectionsListSelectionListener.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/OnlineResource.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/OnlineResource.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/OperationalMode.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/OperationalMode.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/OrbitDirection.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/OrbitDirection.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/OrbitNumber.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/OrbitNumber.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/OrbitType.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/OrbitType.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/OrganisationName.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/OrganisationName.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/OtherConstraints.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/OtherConstraints.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/Parameter.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/Parameter.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/ParameterInformation.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/ParameterInformation.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/ParentIdentifier.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/ParentIdentifier.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/Pass.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/Pass.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/Phenomenon.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/Phenomenon.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/PhenomenonTime.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/PhenomenonTime.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/Phone.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/Phone.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/Pitch.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/Pitch.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/Platform.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/Platform.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/Point.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/Point.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/PointMember.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/PointMember.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/PointOfContact.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/PointOfContact.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/PolarisationChannels.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/PolarisationChannels.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/PolarisationMode.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/PolarisationMode.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/Polygon.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/Polygon.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/Polygon.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/Polygon.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/Pos.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/Pos.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/PosString.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/PosString.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/PositionName.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/PositionName.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/PostalCode.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/PostalCode.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/Procedure.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/Procedure.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/Processing.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/Processing.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/ProcessingCenter.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/ProcessingCenter.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/ProcessingDate.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/ProcessingDate.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/ProcessingInformation.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/ProcessingInformation.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/ProcessingMode.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/ProcessingMode.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/ProcessorName.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/ProcessorName.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/ProcessorVersion.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/ProcessorVersion.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/Product.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/Product.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/ui/frags/common/ProductDetailsFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/ui/frags/common/ProductDetailsFragment.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/ProductGroupId.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/ProductGroupId.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/ProductInformation.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/ProductInformation.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/ProductQualityDegradation.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/ProductQualityDegradation.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/ProductQualityDegradationQuotationMode.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/ProductQualityDegradationQuotationMode.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/ProductQualityDegradationTag.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/ProductQualityDegradationTag.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/ProductQualityReportURL.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/ProductQualityReportURL.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/ProductQualityStatus.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/ProductQualityStatus.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/ProductType.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/ProductType.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/ui/frags/common/ProductsListFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/ui/frags/common/ProductsListFragment.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/feed/Query.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/feed/Query.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/RSIdentifier.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/RSIdentifier.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/utils/text/RecursiveToSrtingStyle.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/utils/text/RecursiveToSrtingStyle.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/ReferenceSystemIdentifier.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/ReferenceSystemIdentifier.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/RelativePassNumber.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/RelativePassNumber.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/Report.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/Report.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/RequestMessage.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/RequestMessage.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/Resolution.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/Resolution.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/ResourceConstraint.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/ResourceConstraint.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/explaindoc/ResponseFormat.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/explaindoc/ResponseFormat.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/Result.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/Result.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/Result.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/Result.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/ResultTime.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/ResultTime.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/Role.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/Role.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/Roll.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/Roll.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/SamplingRate.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/SamplingRate.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/explaindoc/SchemaInfo.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/explaindoc/SchemaInfo.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/Scope.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/Scope.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/ui/activities/SearchActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/ui/activities/SearchActivity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/ui/frags/search/SearchBasicInfoRightFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/ui/frags/search/SearchBasicInfoRightFragment.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/ui/activities/SearchCollectionResultsActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/ui/activities/SearchCollectionResultsActivity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/ui/frags/search/SearchDetailFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/ui/frags/search/SearchDetailFragment.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/ui/frags/search/SearchFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/ui/frags/search/SearchFragment.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/ui/frags/search/SearchListFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/ui/frags/search/SearchListFragment.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/ui/frags/search/SearchResultProductsDetailsFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/ui/frags/search/SearchResultProductsDetailsFragment.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/Sensor.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/Sensor.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/SensorType.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/SensorType.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/SerialIdentifier.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/SerialIdentifier.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/explaindoc/ServerInfo.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/explaindoc/ServerInfo.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/ServiceReference.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/ServiceReference.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/preferences/SharedPrefs.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/preferences/SharedPrefs.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/ShortName.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/ShortName.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/helper/SimpleDate.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/helper/SimpleDate.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/Size.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/Size.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/customviews/SmHmaTimePickerDialog.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/customviews/SmHmaTimePickerDialog.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/utils/text/SmartHMAStringStyle.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/utils/text/SmartHMAStringStyle.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/SmartHMApplication.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/SmartHMApplication.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/utils/rss/SmartHmaEoHandler.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/utils/rss/SmartHmaEoHandler.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/services/SmartHmaHttpSpiceService.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/services/SmartHmaHttpSpiceService.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/utils/rss/SmartHmaISOHandler.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/utils/rss/SmartHmaISOHandler.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/SouthBoundLatitude.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/SouthBoundLatitude.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/Specification.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/Specification.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/ui/activities/StartActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/ui/activities/StartActivity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/ui/frags/common/StartFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/ui/frags/common/StartFragment.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/feed/StartIndex.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/feed/StartIndex.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/Statement.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/Statement.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/Status.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/Status.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/StatusSubType.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/StatusSubType.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/SubType.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/SubType.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/Summary.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/Summary.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/Summary.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/Summary.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/SurfaceMembers.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/SurfaceMembers.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/SwathIdentifier.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/SwathIdentifier.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/TemporalElement.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/TemporalElement.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/utils/wms/TileProviderFactory.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/utils/wms/TileProviderFactory.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/TimeInstant.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/TimeInstant.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/TimePeriod.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/TimePeriod.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/TimePeriod.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/TimePeriod.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/customviews/TimePicker.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/customviews/TimePicker.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/TimePosition.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/TimePosition.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/Timeliness.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/Timeliness.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/Title.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/Title.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/TopicCategory.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/TopicCategory.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/feed/TotalResults.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/feed/TotalResults.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/Type.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/Type.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/URL.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/URL.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/UnitOfMeasure.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/UnitOfMeasure.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/UseLimitation.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/UseLimitation.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/Voice.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/Voice.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/utils/wms/WMSTileProvider.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/utils/wms/WMSTileProvider.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/WestBoundLongitude.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/WestBoundLongitude.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/Where.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/Where.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/WrsLatitudeGrid.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/WrsLatitudeGrid.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/WrsLongitudeGrid.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/WrsLongitudeGrid.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/utils/xml/XMLParser.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/utils/xml/XMLParser.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/Yaw.java" afterPath="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/Yaw.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_base_two_panel.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_base_two_panel.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_news.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_news.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/app.iml" afterPath="$PROJECT_DIR$/app/app.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/drawable-hdpi/button_details.xml" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-hdpi/button_details.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/drawable-ldpi/button_details.xml" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-ldpi/button_details.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/drawable-mdpi/button_details.xml" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-mdpi/button_details.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/button_details.xml" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/button_details.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/drawable-xxhdpi/button_details.xml" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xxhdpi/button_details.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/drawable-xxxhdpi/button_details.xml" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xxxhdpi/button_details.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/drawable-hdpi/button_disabled.xml" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-hdpi/button_disabled.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/drawable-ldpi/button_disabled.xml" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-ldpi/button_disabled.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/drawable-mdpi/button_disabled.xml" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-mdpi/button_disabled.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/button_disabled.xml" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/button_disabled.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/drawable-xxhdpi/button_disabled.xml" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xxhdpi/button_disabled.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/drawable-xxxhdpi/button_disabled.xml" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xxxhdpi/button_disabled.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/drawable-hdpi/button_enabled.xml" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-hdpi/button_enabled.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/drawable-ldpi/button_enabled.xml" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-ldpi/button_enabled.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/drawable-mdpi/button_enabled.xml" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-mdpi/button_enabled.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/button_enabled.xml" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xhdpi/button_enabled.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/drawable-xxhdpi/button_enabled.xml" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xxhdpi/button_enabled.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/drawable-xxxhdpi/button_enabled.xml" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-xxxhdpi/button_enabled.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/drawable-hdpi/button_show_prod.xml" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-hdpi/button_show_prod.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/drawable-hdpi/button_show_prod_disabled.xml" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-hdpi/button_show_prod_disabled.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/drawable-hdpi/button_show_prod_enabled.xml" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-hdpi/button_show_prod_enabled.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/drawable-hdpi/custom_btn_opal.xml" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-hdpi/custom_btn_opal.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/menu/detailmenu.xml" afterPath="$PROJECT_DIR$/app/src/main/res/menu/detailmenu.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/dialog_time_picker.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/dialog_time_picker.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/dialog_widget_time_picker.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/dialog_widget_time_picker.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_article_detail.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_article_detail.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_collections_group_list.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_collections_group_list.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_collections_list.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_collections_list.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_facebook_dialog.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_facebook_dialog.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_failure.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_failure.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_gallery.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_gallery.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_map_and_basic_settings_detail.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_map_and_basic_settings_detail.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_map_extended.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_map_extended.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_metadata.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_metadata.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_missions_new_detail.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_missions_new_detail.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_product_details.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_product_details.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_search.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_search.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_search_data_series_intro.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_search_data_series_intro.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_search_detail.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_search_detail.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_search_right_basic.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_search_right_basic.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_start.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_start.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/drawable-hdpi/gradient_bg.xml" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-hdpi/gradient_bg.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/drawable-hdpi/gradient_bg_hover.xml" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-hdpi/gradient_bg_hover.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/drawable-hdpi/image_bg.xml" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-hdpi/image_bg.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/drawable-hdpi/list_selector.xml" afterPath="$PROJECT_DIR$/app/src/main/res/drawable-hdpi/list_selector.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/menu/menu_detail_twopane.xml" afterPath="$PROJECT_DIR$/app/src/main/res/menu/menu_detail_twopane.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/menu/menu_eo_map_twopane.xml" afterPath="$PROJECT_DIR$/app/src/main/res/menu/menu_eo_map_twopane.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/menu/menu_list_refresh.xml" afterPath="$PROJECT_DIR$/app/src/main/res/menu/menu_list_refresh.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/menu/news_refreshmenu.xml" afterPath="$PROJECT_DIR$/app/src/main/res/menu/news_refreshmenu.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/values-land/refs.xml" afterPath="$PROJECT_DIR$/app/src/main/res/values-land/refs.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/values-large/refs.xml" afterPath="$PROJECT_DIR$/app/src/main/res/values-large/refs.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/values-large-land/refs.xml" afterPath="$PROJECT_DIR$/app/src/main/res/values-large-land/refs.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/values-sw600dp/refs.xml" afterPath="$PROJECT_DIR$/app/src/main/res/values-sw600dp/refs.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/values-sw600dp-land/refs.xml" afterPath="$PROJECT_DIR$/app/src/main/res/values-sw600dp-land/refs.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/values-sw720dp/refs.xml" afterPath="$PROJECT_DIR$/app/src/main/res/values-sw720dp/refs.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/values-sw720dp-land/refs.xml" afterPath="$PROJECT_DIR$/app/src/main/res/values-sw720dp-land/refs.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/values-v11/refs.xml" afterPath="$PROJECT_DIR$/app/src/main/res/values-v11/refs.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/values-v14/refs.xml" afterPath="$PROJECT_DIR$/app/src/main/res/values-v14/refs.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/values-w820dp/refs.xml" afterPath="$PROJECT_DIR$/app/src/main/res/values-w820dp/refs.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/menu/start.xml" afterPath="$PROJECT_DIR$/app/src/main/res/menu/start.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/view_cell_article.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/view_cell_article.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/view_cell_collection.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/view_cell_collection.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/view_cell_collection_search.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/view_cell_collection_search.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/view_cell_entry_item.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/view_cell_entry_item.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/view_cell_missions_list_group.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/view_cell_missions_list_group.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/view_cell_missions_list_item.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/view_cell_missions_list_item.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/view_cell_product.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/view_cell_product.xml" />
+    </list>
     <ignored path="SmartHMA.iws" />
     <ignored path=".idea/workspace.xml" />
+    <ignored path="build/" />
+    <ignored path="app/build/" />
+    <ignored path="gradle/" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -56,111 +472,7 @@
     <favorites_list name="SmartHMA" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
-      <file leaf-file-name="LogWriter.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/utils/io/LogWriter.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="116" max-vertical-offset="612">
-              <caret line="14" column="8" selection-start-line="14" selection-start-column="8" selection-end-line="14" selection-end-column="8" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="DataSorter.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/helper/DataSorter.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="2295" max-vertical-offset="4403">
-              <caret line="135" column="12" selection-start-line="135" selection-start-column="12" selection-end-line="135" selection-end-column="12" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="BaseFeedSummaryFragment.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/ui/frags/base/BaseFeedSummaryFragment.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="986" max-vertical-offset="3706">
-              <caret line="58" column="14" selection-start-line="58" selection-start-column="14" selection-end-line="58" selection-end-column="14" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="SmartHMAStringStyle.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/utils/text/SmartHMAStringStyle.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="1547" max-vertical-offset="1785">
-              <caret line="91" column="16" selection-start-line="91" selection-start-column="16" selection-end-line="91" selection-end-column="16" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="EntryISO.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/EntryISO.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="3434" max-vertical-offset="4505">
-              <caret line="202" column="24" selection-start-line="202" selection-start-column="24" selection-end-line="202" selection-end-column="24" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="SmartHmaISOHandler.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/utils/rss/SmartHmaISOHandler.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="1955" max-vertical-offset="16796">
-              <caret line="115" column="6" selection-start-line="115" selection-start-column="6" selection-end-line="115" selection-end-column="6" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="TimePicker.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/customviews/TimePicker.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="1105" max-vertical-offset="7633">
-              <caret line="65" column="48" selection-start-line="65" selection-start-column="48" selection-end-line="65" selection-end-column="48" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="SimpleDate.java" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/helper/SimpleDate.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.25" vertical-offset="14" max-vertical-offset="1190">
-              <caret line="11" column="28" selection-start-line="11" selection-start-column="28" selection-end-line="11" selection-end-column="28" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="dialog_widget_time_picker.xml" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/dialog_widget_time_picker.xml">
-          <provider editor-type-id="android-designer">
-            <state />
-          </provider>
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="431" max-vertical-offset="1479">
-              <caret line="32" column="8" selection-start-line="32" selection-start-column="8" selection-end-line="32" selection-end-column="8" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="MissionsExtListFragment.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/ui/frags/missions/MissionsExtListFragment.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="731" max-vertical-offset="7395">
-              <caret line="43" column="4" selection-start-line="43" selection-start-column="4" selection-end-line="43" selection-end-column="4" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <leaf />
   </component>
   <component name="FindManager">
     <FindUsagesManager>
@@ -1201,57 +1513,57 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/AccessConstraints.java" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_dataseries_detail.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/ui/frags/browse/DataSeriesDetailFragment.java" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_map_and_basic_settings_detail.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/ui/frags/base/BaseViewAndBasicSettingsDetailFragment.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/ui/frags/common/CollectionDetailsFragment.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/ui/frags/search/SearchResultProductsDetailsFragment.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/Entry.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/ui/frags/base/BaseSpiceListFragment.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/feed/Entry.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/feed/EOPrefixes.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/feed/ISOPrefixes.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/Feed.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/ui/activities/CollectionsBrowserActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/ui/frags/base/BaseMapFragment.java" />
-        <option value="$PROJECT_DIR$/app/build.gradle" />
-        <option value="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/ui/activities/ProductsBrowserActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/ui/activities/SearchCollectionResultsActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/ui/frags/common/MetadataISOFragment.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/MDKeywords.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/DateStamp.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/DateInCIDate.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/EXTemporalExtent.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/CIDate.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/MDDataIdentification.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/EntryISO.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/ui/frags/common/ExtendedMapFragment.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/customviews/ExpandableListAdapter.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/ui/frags/browse/DataSeriesListFragment.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/ui/frags/search/SearchListFragment.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/utils/io/AcraExtension.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/utils/loc/LocManager.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/utils/obj/ObjectUtils.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/utils/rss/SmartHmaEoHandler.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/utils/text/MetadataCleaner.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/utils/wms/WMSTileProvider.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/utils/xml/XMLParser.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/utils/text/RecursiveToSrtingStyle.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/utils/wms/TileProviderFactory.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/ui/frags/base/BaseShowProductsListFragment.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/helper/DataSorter.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/utils/io/LogWriter.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/exception/Exception.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/feed/Feed.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/feed/Group.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/AcquisitionStation.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/ui/frags/base/BaseFeedSummaryFragment.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/ui/frags/missions/MissionsExtListFragment.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/utils/rss/SmartHmaISOHandler.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/customviews/TimePicker.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/helper/SimpleDate.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/feed/ISOPrefixes.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/ui/frags/base/BaseFeedSummaryFragment.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/feed/Author.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/DataSetFeeds.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/Abstract.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/exception/Exception.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/adapter/CollectionsGroupListAdapter.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/adapter/CollectionsListAdapter.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/EntryISO.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/customviews/SmHmaTimePickerDialog.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/feed/EOPrefixes.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/ui/frags/common/AreaPickerMapFragment.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/CollectionsGroup.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/EarthObservationMetaData.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/EarthObservationResult.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/exception/ExceptionReport.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/Feed.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/MDDataIdentification.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/MDKeywords.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/ui/frags/missions/MissionsExtListFragment.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/MultiCurve.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/utils/rss/SmartHmaISOHandler.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/utils/xml/XMLParser.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/utils/conn/ConnectionDetector.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/ui/frags/common/MetadataFragment.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/utils/obj/ObjectUtils.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/ui/frags/common/ProductDetailsFragment.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/ui/frags/common/MetadataISOFragment.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/ui/frags/base/BaseShowProductsListFragment.java" />
       </list>
     </option>
   </component>
@@ -1379,6 +1691,36 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="SmartHMA" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="SmartHMA" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="smarthma" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
     </panes>
@@ -1390,7 +1732,7 @@
     <property name="MemberChooser.sorted" value="false" />
     <property name="MemberChooser.showClasses" value="true" />
     <property name="MemberChooser.copyJavadoc" value="false" />
-    <property name="options.lastSelected" value="reference.settingsdialog.project.gradle" />
+    <property name="options.lastSelected" value="vcs.Git" />
     <property name="options.splitter.main.proportions" value="0.3" />
     <property name="options.splitter.details.proportions" value="0.2" />
     <property name="options.searchVisible" value="true" />
@@ -1405,7 +1747,8 @@
     <property name="OverrideImplement.overriding.sorted" value="false" />
     <property name="LayoutCode.rearrangeEntriesJava" value="false" />
     <property name="ANDROID_EXTENDED_DEVICE_CHOOSER_AVD" value="1" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/gradle" />
+    <property name="LayoutCode.rearrangeEntries" value="false" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -1617,37 +1960,37 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1616" height="876" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
-      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.38472223" sideWeight="0.5796915" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.19237147" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.67777777" sideWeight="0.16452442" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4652778" sideWeight="0.36053985" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.22083333" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.38472223" sideWeight="0.7789203" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.19237147" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.42916667" sideWeight="0.5919023" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.56805557" sideWeight="0.83868897" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.31426734" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32777777" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.38333333" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3283582" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.6236111" sideWeight="0.6529563" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.67777777" sideWeight="0.38174808" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Gradle Console" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25416666" sideWeight="0.16131106" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2647815" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Memory Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.6263889" sideWeight="0.63946015" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.22083333" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.42916667" sideWeight="0.5919023" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Inspection" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.45" sideWeight="0.6182519" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.20372751" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.6263889" sideWeight="0.63946015" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -1727,280 +2070,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/ui/frags/news/NewsListFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1122" max-vertical-offset="1921">
-          <caret line="80" column="39" selection-start-line="80" selection-start-column="39" selection-end-line="80" selection-end-column="39" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/ui/frags/dialog/FacebookDialogFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="4845" max-vertical-offset="6392">
-          <caret line="340" column="32" selection-start-line="340" selection-start-column="32" selection-end-line="340" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/ui/frags/common/ExtendedMapFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1972" max-vertical-offset="5576">
-          <caret line="163" column="5" selection-start-line="163" selection-start-column="5" selection-end-line="163" selection-end-column="5" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/customviews/ExpandableListAdapter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5091384" vertical-offset="961" max-vertical-offset="1904">
-          <caret line="87" column="5" selection-start-line="87" selection-start-column="5" selection-end-line="87" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/ui/frags/browse/DataSeriesListFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1734" max-vertical-offset="3927">
-          <caret line="134" column="38" selection-start-line="134" selection-start-column="38" selection-end-line="134" selection-end-column="38" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/utils/wms/WMSTileProvider.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.098265894" vertical-offset="204" max-vertical-offset="935">
-          <caret line="19" column="21" selection-start-line="19" selection-start-column="21" selection-end-line="19" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/utils/text/MetadataCleaner.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.36127168" vertical-offset="804" max-vertical-offset="1496">
-          <caret line="64" column="11" selection-start-line="64" selection-start-column="11" selection-end-line="64" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/utils/rss/SmartHmaEoHandler.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.098265894" vertical-offset="0" max-vertical-offset="20706">
-          <caret line="20" column="6" selection-start-line="20" selection-start-column="6" selection-end-line="20" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/utils/obj/ObjectUtils.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.098265894" vertical-offset="0" max-vertical-offset="692">
-          <caret line="7" column="6" selection-start-line="7" selection-start-column="6" selection-end-line="7" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/utils/loc/LocManager.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.098265894" vertical-offset="0" max-vertical-offset="697">
-          <caret line="7" column="13" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/ui/frags/search/SearchListFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.098265894" vertical-offset="1921" max-vertical-offset="4114">
-          <caret line="140" column="9" selection-start-line="140" selection-start-column="9" selection-end-line="140" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/utils/text/RecursiveToSrtingStyle.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="153" max-vertical-offset="1241">
-          <caret line="35" column="5" selection-start-line="35" selection-start-column="5" selection-end-line="35" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/ui/frags/browse/CollectionsListFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="2380" max-vertical-offset="2635">
-          <caret line="166" column="8" selection-start-line="166" selection-start-column="8" selection-end-line="166" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/utils/wms/TileProviderFactory.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1428">
-          <caret line="13" column="34" selection-start-line="13" selection-start-column="34" selection-end-line="13" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/ui/frags/browse/BrowseCollectionFirstDetailFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="340" max-vertical-offset="1394">
-          <caret line="32" column="11" selection-start-line="32" selection-start-column="11" selection-end-line="32" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/Collection.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="34" max-vertical-offset="2023">
-          <caret line="9" column="38" selection-start-line="9" selection-start-column="38" selection-end-line="9" selection-end-column="38" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/CIDate.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="34" max-vertical-offset="1428">
-          <caret line="15" column="30" selection-start-line="15" selection-start-column="30" selection-end-line="15" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/CITelephone.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="34" max-vertical-offset="1428">
-          <caret line="15" column="30" selection-start-line="15" selection-start-column="30" selection-end-line="15" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/receivers/SmartHmaFacebookBroadcastReceiver.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="102" max-vertical-offset="510">
-          <caret line="27" column="13" selection-start-line="27" selection-start-column="13" selection-end-line="27" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/ui/frags/missions/MissionsDetailsFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1224" max-vertical-offset="2346">
-          <caret line="99" column="16" selection-start-line="99" selection-start-column="16" selection-end-line="99" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/ui/frags/search/SearchFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1332" max-vertical-offset="1700">
-          <caret line="106" column="52" selection-start-line="106" selection-start-column="52" selection-end-line="106" selection-end-column="52" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/ui/frags/common/MetadataFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="3091" max-vertical-offset="3944">
-          <caret line="206" column="36" selection-start-line="206" selection-start-column="36" selection-end-line="206" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/database/EoDbAdapter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="354" max-vertical-offset="1904">
-          <caret line="39" column="4" selection-start-line="39" selection-start-column="4" selection-end-line="39" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/feed/ISOPrefixes.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1564">
-          <caret line="11" column="0" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/feed/EOPrefixes.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1377">
-          <caret line="11" column="0" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/exception/Exception.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="82" max-vertical-offset="1377">
-          <caret line="25" column="5" selection-start-line="25" selection-start-column="5" selection-end-line="25" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/exception/ExceptionText.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="48" max-vertical-offset="1037">
-          <caret line="19" column="73" selection-start-line="19" selection-start-column="73" selection-end-line="19" selection-end-column="73" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/feed/Feed.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="184" max-vertical-offset="2856">
-          <caret line="31" column="44" selection-start-line="31" selection-start-column="44" selection-end-line="31" selection-end-column="44" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/feed/Group.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="48" max-vertical-offset="969">
-          <caret line="33" column="34" selection-start-line="33" selection-start-column="34" selection-end-line="33" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/AcquisitionStation.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="252" max-vertical-offset="1122">
-          <caret line="31" column="31" selection-start-line="31" selection-start-column="31" selection-end-line="31" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/utils/io/AcraExtension.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="629">
-          <caret line="4" column="21" selection-start-line="4" selection-start-column="21" selection-end-line="4" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/AcrossTrackIncidenceAngle.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="320" max-vertical-offset="1122">
-          <caret line="43" column="37" selection-start-line="43" selection-start-column="37" selection-end-line="43" selection-end-column="37" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/AlongTrackIncidenceAngle.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="252" max-vertical-offset="1122">
-          <caret line="35" column="18" selection-start-line="35" selection-start-column="18" selection-end-line="35" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/ui/frags/base/BaseShowProductsListFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1238" max-vertical-offset="4386">
-          <caret line="101" column="41" selection-start-line="101" selection-start-column="41" selection-end-line="101" selection-end-column="41" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/ui/frags/browse/CollectionsGroupListFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1697" max-vertical-offset="2533">
-          <caret line="139" column="46" selection-start-line="139" selection-start-column="46" selection-end-line="139" selection-end-column="46" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/utils/xml/XMLParser.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="2267" max-vertical-offset="2635">
-          <caret line="37" column="40" selection-start-line="37" selection-start-column="40" selection-end-line="37" selection-end-column="40" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/Acquisition.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="3720" max-vertical-offset="4097">
-          <caret line="279" column="19" selection-start-line="279" selection-start-column="19" selection-end-line="279" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/ui/frags/base/BaseSpiceFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="2309" max-vertical-offset="2737">
-          <caret line="189" column="58" selection-start-line="189" selection-start-column="58" selection-end-line="189" selection-end-column="58" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/ui/frags/base/BaseSpiceListFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1935" max-vertical-offset="2533">
-          <caret line="154" column="22" selection-start-line="154" selection-start-column="22" selection-end-line="154" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/ui/frags/base/BaseViewAndBasicSettingsDetailFragment.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="3417" max-vertical-offset="5950">
@@ -2019,22 +2088,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="116" max-vertical-offset="612">
           <caret line="14" column="8" selection-start-line="14" selection-start-column="8" selection-end-line="14" selection-end-column="8" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/helper/DataSorter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1782" max-vertical-offset="3604">
-          <caret line="135" column="12" selection-start-line="135" selection-start-column="12" selection-end-line="135" selection-end-column="12" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/ui/frags/base/BaseFeedSummaryFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="592" max-vertical-offset="3179">
-          <caret line="58" column="14" selection-start-line="58" selection-start-column="14" selection-end-line="58" selection-end-column="14" />
           <folding />
         </state>
       </provider>
@@ -2058,30 +2111,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/ui/frags/missions/MissionsExtListFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="171" max-vertical-offset="6749">
-          <caret line="43" column="4" selection-start-line="43" selection-start-column="4" selection-end-line="43" selection-end-column="4" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/EntryISO.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="2292" max-vertical-offset="3349">
-          <caret line="202" column="24" selection-start-line="202" selection-start-column="24" selection-end-line="202" selection-end-column="24" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/utils/rss/SmartHmaISOHandler.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="14875">
-          <caret line="115" column="6" selection-start-line="115" selection-start-column="6" selection-end-line="115" selection-end-column="6" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/customviews/TimePicker.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="473" max-vertical-offset="6443">
@@ -2092,8 +2121,383 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/helper/SimpleDate.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.25" vertical-offset="14" max-vertical-offset="1190">
-          <caret line="11" column="28" selection-start-line="11" selection-start-column="28" selection-end-line="11" selection-end-column="28" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="14" max-vertical-offset="1190">
+          <caret line="12" column="30" selection-start-line="12" selection-start-column="30" selection-end-line="12" selection-end-column="30" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/view_cell_missions_list_item.xml">
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.037037037" vertical-offset="492" max-vertical-offset="833">
+          <caret line="29" column="56" selection-start-line="29" selection-start-column="56" selection-end-line="29" selection-end-column="56" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/view_cell_collection.xml">
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-3.148148" vertical-offset="663" max-vertical-offset="1326">
+          <caret line="44" column="30" selection-start-line="44" selection-start-column="30" selection-end-line="44" selection-end-column="30" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/build.gradle">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="671" max-vertical-offset="1224">
+          <caret line="45" column="12" selection-start-line="45" selection-start-column="12" selection-end-line="45" selection-end-column="12" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/adapter/NewsArticleListAdapter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="212" max-vertical-offset="748">
+          <caret line="31" column="23" selection-start-line="31" selection-start-column="23" selection-end-line="31" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/ui/frags/base/BaseFeedSummaryFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="212" max-vertical-offset="3400">
+          <caret line="15" column="0" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/feed/Author.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.5995717" vertical-offset="383" max-vertical-offset="850">
+          <caret line="61" column="0" selection-start-line="61" selection-start-column="0" selection-end-line="61" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/DataSetFeeds.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.5267666" vertical-offset="315" max-vertical-offset="782">
+          <caret line="50" column="9" selection-start-line="50" selection-start-column="9" selection-end-line="50" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/feed/ISOPrefixes.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="255" max-vertical-offset="1564">
+          <caret line="22" column="28" selection-start-line="22" selection-start-column="28" selection-end-line="22" selection-end-column="28" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/Acquisition.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="212" max-vertical-offset="4063">
+          <caret line="34" column="0" selection-start-line="34" selection-start-column="0" selection-end-line="34" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/exception/Exception.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.70877945" vertical-offset="825" max-vertical-offset="1292">
+          <caret line="97" column="0" selection-start-line="97" selection-start-column="0" selection-end-line="97" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/adapter/CollectionsGroupListAdapter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="431" max-vertical-offset="816">
+          <caret line="48" column="0" selection-start-line="48" selection-start-column="0" selection-end-line="48" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/adapter/CollectionsListAdapter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="788" max-vertical-offset="1122">
+          <caret line="79" column="35" selection-start-line="79" selection-start-column="35" selection-end-line="79" selection-end-column="35" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/EntryISO.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="2320" max-vertical-offset="3349">
+          <caret line="205" column="0" selection-start-line="205" selection-start-column="0" selection-end-line="205" selection-end-column="0" />
+          <folding>
+            <element signature="e#3752#3753#0" expanded="true" />
+            <element signature="e#3784#3785#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/ui/frags/dialog/FacebookDialogFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="4819" max-vertical-offset="6392">
+          <caret line="340" column="32" selection-start-line="340" selection-start-column="32" selection-end-line="340" selection-end-column="32" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/ui/frags/news/NewsListFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="1096" max-vertical-offset="1921">
+          <caret line="80" column="39" selection-start-line="80" selection-start-column="39" selection-end-line="80" selection-end-column="39" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/services/NewsRssServiceNoAsync.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="926" max-vertical-offset="1649">
+          <caret line="83" column="37" selection-start-line="83" selection-start-column="37" selection-end-line="83" selection-end-column="37" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/utils/wms/WMSTileProvider.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="331" max-vertical-offset="1037">
+          <caret line="28" column="34" selection-start-line="28" selection-start-column="34" selection-end-line="28" selection-end-column="34" />
+          <folding>
+            <element signature="e#977#978#0" expanded="true" />
+            <element signature="e#1004#1005#0" expanded="true" />
+            <element signature="e#1073#1074#0" expanded="true" />
+            <element signature="e#1133#1134#0" expanded="true" />
+            <element signature="e#1169#1170#0" expanded="true" />
+            <element signature="e#1198#1199#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/customviews/SmHmaTimePickerDialog.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="1164" max-vertical-offset="2788">
+          <caret line="102" column="12" selection-start-line="102" selection-start-column="12" selection-end-line="102" selection-end-column="12" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/ui/frags/common/ExtendedMapFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="670" max-vertical-offset="5610">
+          <caret line="82" column="4" selection-start-line="82" selection-start-column="4" selection-end-line="82" selection-end-column="4" />
+          <folding>
+            <element signature="e#2869#2870#0" expanded="false" />
+            <element signature="e#2919#2920#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/database/EoDbAdapter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="382" max-vertical-offset="2193">
+          <caret line="42" column="21" selection-start-line="41" selection-start-column="34" selection-end-line="41" selection-end-column="34" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/feed/EOPrefixes.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1394">
+          <caret line="11" column="0" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/database/NewsDbAdapter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="484" max-vertical-offset="1904">
+          <caret line="45" column="4" selection-start-line="45" selection-start-column="4" selection-end-line="45" selection-end-column="4" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/helper/DataSorter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="195" max-vertical-offset="3315">
+          <caret line="21" column="32" selection-start-line="21" selection-start-column="32" selection-end-line="21" selection-end-column="32" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/Abstract.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1241">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/ui/frags/common/AreaPickerMapFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="1827" max-vertical-offset="2975">
+          <caret line="141" column="37" selection-start-line="141" selection-start-column="37" selection-end-line="141" selection-end-column="37" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/CollectionsGroup.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="127" max-vertical-offset="2652">
+          <caret line="15" column="36" selection-start-line="15" selection-start-column="36" selection-end-line="15" selection-end-column="36" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/EarthObservationMetaData.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="263" max-vertical-offset="5015">
+          <caret line="30" column="92" selection-start-line="30" selection-start-column="92" selection-end-line="30" selection-end-column="92" />
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/EarthObservationResult.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="59" max-vertical-offset="2074">
+          <caret line="18" column="52" selection-start-line="18" selection-start-column="52" selection-end-line="18" selection-end-column="52" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/AuxiliaryInstrument.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="8" max-vertical-offset="1292">
+          <caret line="13" column="30" selection-start-line="13" selection-start-column="30" selection-end-line="13" selection-end-column="30" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/receivers/SmartHmaFacebookBroadcastReceiver.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="76" max-vertical-offset="510">
+          <caret line="27" column="13" selection-start-line="27" selection-start-column="13" selection-end-line="27" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/exception/ExceptionReport.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="178" max-vertical-offset="2006">
+          <caret line="25" column="73" selection-start-line="25" selection-start-column="73" selection-end-line="25" selection-end-column="73" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/Feed.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2686">
+          <caret line="17" column="13" selection-start-line="17" selection-start-column="13" selection-end-line="17" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/MDDataIdentification.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="93" max-vertical-offset="2788">
+          <caret line="20" column="73" selection-start-line="20" selection-start-column="73" selection-end-line="20" selection-end-column="73" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/iso/MDKeywords.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="42" max-vertical-offset="1156">
+          <caret line="17" column="51" selection-start-line="17" selection-start-column="51" selection-end-line="17" selection-end-column="51" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/ui/frags/missions/MissionsExtListFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.18145162" vertical-offset="2477" max-vertical-offset="6749">
+          <caret line="189" column="36" selection-start-line="189" selection-start-column="36" selection-end-line="189" selection-end-column="36" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/model/om/MultiCurve.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.18467583" vertical-offset="59" max-vertical-offset="1037">
+          <caret line="18" column="58" selection-start-line="18" selection-start-column="58" selection-end-line="18" selection-end-column="58" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/utils/rss/SmartHmaISOHandler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="2932" max-vertical-offset="14875">
+          <caret line="291" column="36" selection-start-line="291" selection-start-column="36" selection-end-line="291" selection-end-column="36" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/utils/xml/XMLParser.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="841" max-vertical-offset="2618">
+          <caret line="71" column="52" selection-start-line="71" selection-start-column="52" selection-end-line="71" selection-end-column="52" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/utils/conn/ConnectionDetector.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="178" max-vertical-offset="561">
+          <caret line="20" column="16" selection-start-line="20" selection-start-column="16" selection-end-line="20" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/ui/frags/common/MetadataFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="2286" max-vertical-offset="3893">
+          <caret line="150" column="38" selection-start-line="150" selection-start-column="38" selection-end-line="150" selection-end-column="38" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/utils/obj/ObjectUtils.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.26522595" vertical-offset="120" max-vertical-offset="629">
+          <caret line="18" column="8" selection-start-line="18" selection-start-column="8" selection-end-line="18" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/ui/frags/common/ProductDetailsFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.18467583" vertical-offset="3221" max-vertical-offset="4352">
+          <caret line="243" column="8" selection-start-line="243" selection-start-column="8" selection-end-line="243" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/ui/frags/common/MetadataISOFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="2184" max-vertical-offset="5253">
+          <caret line="155" column="13" selection-start-line="155" selection-start-column="13" selection-end-line="155" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/pl/wasat/smarthma/ui/frags/base/BaseShowProductsListFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.69155204" vertical-offset="3660" max-vertical-offset="4352">
+          <caret line="262" column="28" selection-start-line="262" selection-start-column="28" selection-end-line="262" selection-end-column="28" />
           <folding />
         </state>
       </provider>

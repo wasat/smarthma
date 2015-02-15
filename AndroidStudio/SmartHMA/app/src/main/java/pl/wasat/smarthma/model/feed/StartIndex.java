@@ -6,8 +6,6 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
 import java.io.Serializable;
-import java.util.HashMap;
-import java.util.Map;
 
 import pl.wasat.smarthma.utils.text.SmartHMAStringStyle;
 
@@ -18,7 +16,7 @@ public class StartIndex implements Serializable {
 
     private String prefix;
     private String text;
-    private final Map<String, Object> additionalProperties = new HashMap<String, Object>();
+
 
     public String getPrefix() {
         return prefix;
@@ -63,12 +61,5 @@ public class StartIndex implements Serializable {
         return EqualsBuilder.reflectionEquals(this, other);
     }
 
-    public Map<String, Object> getAdditionalProperties() {
-        return this.additionalProperties;
-    }
-
-    public void setAdditionalProperty(String name, Object value) {
-        this.additionalProperties.put(name, value);
-    }
 
 }

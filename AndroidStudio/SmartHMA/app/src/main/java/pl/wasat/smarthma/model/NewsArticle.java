@@ -5,105 +5,105 @@ import java.net.URL;
 
 public class NewsArticle implements Serializable {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	public static final String KEY = "pl.wasat.smarthma.NEWS_ARTICLE";
+    public static final String KEY = "pl.wasat.smarthma.NEWS_ARTICLE";
 
-	private String guid;
-	private String title;
-	private String description;
-	private String pubDate;
-	private String author;
-	private URL url;
-	private String encodedContent;
-	private boolean read;
-	private boolean offline;
-	private long dbId;
+    private String guid;
+    private String title;
+    private String description;
+    private String pubDate;
+    private String author;
+    private URL url;
+    private String encodedContent;
+    private boolean read;
+    private boolean offline;
+    private long dbId;
 
-	public String getGuid() {
-		return guid;
-	}
+    public String getGuid() {
+        return guid;
+    }
 
-	public void setGuid(String guid) {
-		this.guid = guid;
-	}
+    public void setGuid(String guid) {
+        this.guid = guid;
+    }
 
-	public String getTitle() {
-		return title;
-	}
+    public String getTitle() {
+        return title;
+    }
 
-	public void setTitle(String title) {
-		this.title = title;
-	}
+    public void setTitle(String title) {
+        this.title = title;
+    }
 
-	public URL getUrl() {
-		return url;
-	}
+    public URL getUrl() {
+        return url;
+    }
 
-	public void setUrl(URL url) {
-		this.url = url;
-	}
+    public void setUrl(URL url) {
+        this.url = url;
+    }
 
-	public void setDescription(String description) {
-		this.description = extractCData(description);
-	}
+    public void setDescription(String description) {
+        this.description = extractCData(description);
+    }
 
-	public String getDescription() {
-		return description;
-	}
+    public String getDescription() {
+        return description;
+    }
 
-	public void setPubDate(String pubDate) {
-		this.pubDate = pubDate;
-	}
+    public void setPubDate(String pubDate) {
+        this.pubDate = pubDate;
+    }
 
-	public String getPubDate() {
-		return pubDate;
-	}
+    public String getPubDate() {
+        return pubDate;
+    }
 
-	public String getAuthor() {
-		return author;
-	}
+    public String getAuthor() {
+        return author;
+    }
 
-	public void setAuthor(String author) {
-		this.author = author;
-	}
+    public void setAuthor(String author) {
+        this.author = author;
+    }
 
-	public void setEncodedContent(String encodedContent) {
-		this.encodedContent = extractCData(encodedContent);
-	}
+    public void setEncodedContent(String encodedContent) {
+        this.encodedContent = extractCData(encodedContent);
+    }
 
-	public String getEncodedContent() {
-		return encodedContent;
-	}
+    public String getEncodedContent() {
+        return encodedContent;
+    }
 
-	public boolean isRead() {
-		return read;
-	}
+    public boolean isRead() {
+        return read;
+    }
 
-	public void setRead(boolean read) {
-		this.read = read;
-	}
+    public void setRead(boolean read) {
+        this.read = read;
+    }
 
-	public boolean isOffline() {
-		return offline;
-	}
+    public boolean isOffline() {
+        return offline;
+    }
 
-	public void setOffline(boolean offline) {
-		this.offline = offline;
-	}
+    public void setOffline(boolean offline) {
+        this.offline = offline;
+    }
 
-	public long getDbId() {
-		return dbId;
-	}
+    public long getDbId() {
+        return dbId;
+    }
 
-	public void setDbId(long dbId) {
-		this.dbId = dbId;
-	}
+    public void setDbId(long dbId) {
+        this.dbId = dbId;
+    }
 
-	private String extractCData(String data) {
-		data = data.replaceAll("<!\\[CDATA\\[", "");
-		data = data.replaceAll("\\]\\]>", "");
-		return data;
-	}
+    private String extractCData(String data) {
+        data = data.replaceAll("<!\\[CDATA\\[", "");
+        data = data.replaceAll("\\]\\]>", "");
+        return data;
+    }
 
 }

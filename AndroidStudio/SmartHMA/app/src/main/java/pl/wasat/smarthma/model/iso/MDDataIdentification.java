@@ -7,9 +7,7 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import pl.wasat.smarthma.utils.text.SmartHMAStringStyle;
 
@@ -20,13 +18,13 @@ public class MDDataIdentification implements Serializable {
     private Citation citation;
     private Abstract _abstract;
     private PointOfContact pointOfContact;
-    private List<DescriptiveKeyword> descriptiveKeywords = new ArrayList<DescriptiveKeyword>();
-    private List<ResourceConstraint> resourceConstraints = new ArrayList<ResourceConstraint>();
+    private List<DescriptiveKeyword> descriptiveKeywords = new ArrayList<>();
+    private List<ResourceConstraint> resourceConstraints = new ArrayList<>();
     private Language language;
     private TopicCategory topicCategory;
-    private List<Extent> extents = new ArrayList<Extent>();
+    private List<Extent> extents = new ArrayList<>();
     private String Prefix;
-    private final Map<String, Object> additionalProperties = new HashMap<String, Object>();
+
 
     /**
      * @return The citation
@@ -163,13 +161,6 @@ public class MDDataIdentification implements Serializable {
         return ToStringBuilder.reflectionToString(this, style);
     }
 
-    public Map<String, Object> getAdditionalProperties() {
-        return this.additionalProperties;
-    }
-
-    public void setAdditionalProperty(String name, Object value) {
-        this.additionalProperties.put(name, value);
-    }
 
     @Override
     public int hashCode() {
@@ -177,7 +168,7 @@ public class MDDataIdentification implements Serializable {
                 .append(pointOfContact).append(descriptiveKeywords)
                 .append(resourceConstraints).append(language)
                 .append(topicCategory).append(extents).append(Prefix)
-                .append(additionalProperties).toHashCode();
+                .toHashCode();
     }
 
     @Override
@@ -197,7 +188,7 @@ public class MDDataIdentification implements Serializable {
                 .append(language, rhs.language)
                 .append(topicCategory, rhs.topicCategory)
                 .append(extents, rhs.extents).append(Prefix, rhs.Prefix)
-                .append(additionalProperties, rhs.additionalProperties)
+
                 .isEquals();
     }
 

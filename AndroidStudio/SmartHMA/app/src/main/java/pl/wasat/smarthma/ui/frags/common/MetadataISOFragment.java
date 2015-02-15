@@ -144,16 +144,13 @@ public class MetadataISOFragment extends Fragment {
         Class<?> c1 = eOMetaDataObject.getClass();
         // Map<String, Object> map = new HashMap<String, Object>();
         Field[] fields = c1.getDeclaredFields();
-        for (int i = 0; i < fields.length; i++) {
-            String name = fields[i].getName();
-            fields[i].setAccessible(true);
+        for (Field field : fields) {
+            String name = field.getName();
+            field.setAccessible(true);
             Object value = null;
             try {
-                value = fields[i].get(eOMetaDataObject);
-            } catch (IllegalAccessException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            } catch (IllegalArgumentException e) {
+                value = field.get(eOMetaDataObject);
+            } catch (IllegalAccessException | IllegalArgumentException e) {
                 // TODO Auto-generated catch block
                 e.printStackTrace();
             }
@@ -219,7 +216,7 @@ public class MetadataISOFragment extends Fragment {
         cleanedValue = cleanedValue.replaceAll("_abstract", "abstract");
 
         cleanedValue = cleanedValue.replaceAll("CharacterString", "name");
-		
+
 		
 		
 		
