@@ -48,7 +48,7 @@ public class CollectionsGroupListAdapter extends
     }
 
     private int mod(int x, int y) {
-        int result = x % 15;
-        return result < 0 ? result + 15 : result;
+        int result = x % y;
+        return result < 0 ? result + y : result;
     }
 }

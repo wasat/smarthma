@@ -47,12 +47,12 @@ public class EntryItemView extends RelativeLayout implements SpiceListItemView<E
         return 1;
     }
 
-	/* (non-Javadoc)
-	 * @see com.octo.android.robospice.spicelist.SpiceListItemView#getData()
-	 */
-	@Override
-	public EntryOM getData() {
-		return entry;
-	}
+    /* (non-Javadoc)
+     * @see com.octo.android.robospice.spicelist.SpiceListItemView#getData()
+     */
+    @Override
+    public EntryOM getData() {
+        return entry;
+    }
 
 }
