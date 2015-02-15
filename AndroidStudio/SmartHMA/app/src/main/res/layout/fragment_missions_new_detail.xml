@@ -8,7 +8,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#FFFFFF"
-        android:orientation="vertical" >
+        android:orientation="vertical">
 
         <TextView
             android:id="@+id/missions_detail_frag_title_tv"
@@ -20,7 +20,7 @@
             android:paddingTop="16dp"
             android:textColor="#38b4ea"
             android:textSize="20sp"
-            android:textStyle="bold"/>
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/missions_detail_frag_subtitle_tv"
@@ -33,7 +33,7 @@
             android:paddingTop="2dp"
             android:textColor="#A8A8A8"
             android:textSize="12sp"
-            android:textStyle="italic"/>
+            android:textStyle="italic" />
 
         <WebView
             android:id="@+id/missions_detail_frag_content_web"
@@ -51,14 +51,14 @@
             android:background="#FFFFFF"
             android:gravity="center"
             android:orientation="horizontal"
-            android:padding="10dp" >
+            android:padding="10dp">
 
             <Button
                 android:id="@+id/missions_detail_frag_search_data_btn"
                 style="@style/styleBtnShowProduct"
                 android:layout_width="200dp"
                 android:layout_height="60dp"
-                android:layout_gravity="center" 
+                android:layout_gravity="center"
                 android:text="@string/search_eo_data" />
         </LinearLayout>
     </LinearLayout>

@@ -10,7 +10,8 @@ import java.io.Serializable;
 import pl.wasat.smarthma.utils.text.SmartHMAStringStyle;
 
 /**
- * Created by Daniel on 11.02.15.
+ * Created by Daniel Zinkiewicz on 11.02.15 01:47.
+ * Part of the project  ${PROJECT_NAME}
  */
 public class ISOPrefixes implements Serializable {
 

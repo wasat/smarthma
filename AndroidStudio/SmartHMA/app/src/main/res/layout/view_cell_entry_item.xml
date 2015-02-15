@@ -3,7 +3,7 @@
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:background="@drawable/list_selector"
-    android:padding="5dp" >
+    android:padding="5dp">
 
     <LinearLayout
         android:id="@+id/entry_item_collection_thumb_layout"
@@ -13,7 +13,7 @@
         android:layout_centerVertical="true"
         android:layout_marginRight="5dip"
         android:background="@drawable/image_bg"
-        android:padding="3dip" >
+        android:padding="3dip">
 
         <ImageView
             android:id="@+id/entry_item_thumb_imageview"

@@ -9,9 +9,7 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import pl.wasat.smarthma.utils.text.SmartHMAStringStyle;
 
@@ -21,8 +19,8 @@ public class LinearRing implements Serializable {
 
     private String _prefix;
     private PosString posString;
-    private List<Pos> posList = new ArrayList<Pos>();
-    private final Map<String, Object> additionalProperties = new HashMap<String, Object>();
+    private List<Pos> posList = new ArrayList<>();
+
 
     public String get_prefix() {
         return _prefix;
@@ -72,7 +70,7 @@ public class LinearRing implements Serializable {
 
     public List<Pos> setPosList(String pointsString) {
         String[] coorStr = pointsString.split(" ");
-        List<Pos> latLngPosList = new ArrayList<Pos>();
+        List<Pos> latLngPosList = new ArrayList<>();
 
         //String tempStr = "";
 
@@ -120,13 +118,6 @@ public class LinearRing implements Serializable {
         return EqualsBuilder.reflectionEquals(this, other);
     }
 
-    public Map<String, Object> getAdditionalProperties() {
-        return this.additionalProperties;
-    }
-
-    public void setAdditionalProperty(String name, Object value) {
-        this.additionalProperties.put(name, value);
-    }
 
     // private void toPosLatLngList(){
     // for (int j = 0; j < posList.size(); j++) {
