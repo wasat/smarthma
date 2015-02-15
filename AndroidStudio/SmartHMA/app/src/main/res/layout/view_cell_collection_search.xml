@@ -6,7 +6,7 @@
     android:layout_height="wrap_content"
     android:background="@drawable/list_selector"
     android:orientation="vertical"
-    tools:context="pl.wasat.smarthma.ui.activities.SearchCollectionResultsActivity" >
+    tools:context="pl.wasat.smarthma.ui.activities.SearchCollectionResultsActivity">
 
     <TextView
         android:id="@+id/search_list_name"

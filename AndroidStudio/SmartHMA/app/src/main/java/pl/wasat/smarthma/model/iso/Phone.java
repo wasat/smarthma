@@ -6,8 +6,6 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
 import java.io.Serializable;
-import java.util.HashMap;
-import java.util.Map;
 
 import pl.wasat.smarthma.utils.text.SmartHMAStringStyle;
 
@@ -17,7 +15,7 @@ public class Phone implements Serializable {
 
     private pl.wasat.smarthma.model.iso.CITelephone CITelephone;
     private String Prefix;
-    private final Map<String, Object> additionalProperties = new HashMap<String, Object>();
+
 
     /**
      * @return The CITelephone
@@ -55,18 +53,11 @@ public class Phone implements Serializable {
         return ToStringBuilder.reflectionToString(this, style);
     }
 
-    public Map<String, Object> getAdditionalProperties() {
-        return this.additionalProperties;
-    }
-
-    public void setAdditionalProperty(String name, Object value) {
-        this.additionalProperties.put(name, value);
-    }
 
     @Override
     public int hashCode() {
         return new HashCodeBuilder().append(CITelephone).append(Prefix)
-                .append(additionalProperties).toHashCode();
+                .toHashCode();
     }
 
     @Override
@@ -80,7 +71,7 @@ public class Phone implements Serializable {
         Phone rhs = ((Phone) other);
         return new EqualsBuilder().append(CITelephone, rhs.CITelephone)
                 .append(Prefix, rhs.Prefix)
-                .append(additionalProperties, rhs.additionalProperties)
+
                 .isEquals();
     }
 

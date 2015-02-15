@@ -7,8 +7,6 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 import pl.wasat.smarthma.model.feed.Group;
 import pl.wasat.smarthma.model.feed.Link;
@@ -41,8 +39,6 @@ public class EntryOM implements Serializable {
     private boolean read;
     private boolean offline;
 
-
-    private final Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
     public String getId() {
         return id;
@@ -234,13 +230,6 @@ public class EntryOM implements Serializable {
         return EqualsBuilder.reflectionEquals(this, other);
     }
 
-    public Map<String, Object> getAdditionalProperties() {
-        return this.additionalProperties;
-    }
-
-    public void setAdditionalProperty(String name, Object value) {
-        this.additionalProperties.put(name, value);
-    }
 
     private String extractCData(String data) {
         data = data.replaceAll("<!\\[CDATA\\[", "");

@@ -4,7 +4,7 @@
     android:layout_height="wrap_content"
     android:background="@drawable/list_selector"
     android:orientation="horizontal"
-    android:padding="5dip" >
+    android:padding="5dip">
 
     <!-- ListRow Left sied Thumbnail image -->
 
@@ -15,7 +15,7 @@
         android:layout_alignParentLeft="true"
         android:layout_marginRight="5dip"
         android:background="@drawable/image_bg"
-        android:padding="3dip" >
+        android:padding="3dip">
 
         <ImageView
             android:id="@+id/collection_image"

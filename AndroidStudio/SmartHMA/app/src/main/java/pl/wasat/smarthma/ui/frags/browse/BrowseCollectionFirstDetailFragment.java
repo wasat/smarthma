@@ -15,57 +15,56 @@ import pl.wasat.smarthma.ui.frags.common.AreaPickerMapFragment;
  * contain this fragment must implement the. Use the
  * {@link BrowseCollectionFirstDetailFragment#newInstance} factory method to
  * create an instance of this fragment.
- * 
  */
 public class BrowseCollectionFirstDetailFragment extends
-		BaseViewAndBasicSettingsDetailFragment {
+        BaseViewAndBasicSettingsDetailFragment {
 
-	/**
-	 * Use this factory method to create a new instance of this fragment using
-	 * the provided parameters.
-	 * 
-	 * @return A new instance of fragment BrowseCollectionFirstDetailFragment.
-	 */
-	public static BrowseCollectionFirstDetailFragment newInstance() {
-		return new BrowseCollectionFirstDetailFragment();
-	}
+    /**
+     * Use this factory method to create a new instance of this fragment using
+     * the provided parameters.
+     *
+     * @return A new instance of fragment BrowseCollectionFirstDetailFragment.
+     */
+    public static BrowseCollectionFirstDetailFragment newInstance() {
+        return new BrowseCollectionFirstDetailFragment();
+    }
 
-	public BrowseCollectionFirstDetailFragment() {
-		// Required empty public constructor
-	}
+    public BrowseCollectionFirstDetailFragment() {
+        // Required empty public constructor
+    }
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see pl.wasat.smarthma.ui.frags.base.MapAndBasicSettingsDetailFragment#
-	 * onCreateView(android.view.LayoutInflater, android.view.ViewGroup,
-	 * android.os.Bundle)
-	 */
-	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-			Bundle savedInstanceState) {
-		super.onCreateView(inflater, container, savedInstanceState);
-		AreaPickerMapFragment areaPickerMapFragment = AreaPickerMapFragment
-				.newInstance();
-		getActivity()
-				.getSupportFragmentManager()
-				.beginTransaction()
-				.replace(R.id.frag_search_res_coll_det_layout_top,
-						areaPickerMapFragment)
-				.addToBackStack("AreaPickerMapFragment").commit();
+    /*
+     * (non-Javadoc)
+     *
+     * @see pl.wasat.smarthma.ui.frags.base.MapAndBasicSettingsDetailFragment#
+     * onCreateView(android.view.LayoutInflater, android.view.ViewGroup,
+     * android.os.Bundle)
+     */
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        super.onCreateView(inflater, container, savedInstanceState);
+        AreaPickerMapFragment areaPickerMapFragment = AreaPickerMapFragment
+                .newInstance();
+        getActivity()
+                .getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.frag_search_res_coll_det_layout_top,
+                        areaPickerMapFragment)
+                .addToBackStack("AreaPickerMapFragment").commit();
 
-		changeViewsSizeAndVisibility();
+        changeViewsSizeAndVisibility();
 
-		return rootView;
+        return rootView;
 
-	}
+    }
 
-	private void changeViewsSizeAndVisibility() {
-		ViewGroup.LayoutParams btnShowProductParams = btnShowProducts
-				.getLayoutParams();
-		btnShowProductParams.height = 0;
-		btnShowProducts.setLayoutParams(btnShowProductParams);
-		btnShowProducts.setVisibility(View.INVISIBLE);
+    private void changeViewsSizeAndVisibility() {
+        ViewGroup.LayoutParams btnShowProductParams = btnShowProducts
+                .getLayoutParams();
+        btnShowProductParams.height = 0;
+        btnShowProducts.setLayoutParams(btnShowProductParams);
+        btnShowProducts.setVisibility(View.INVISIBLE);
 
         ViewGroup.LayoutParams btnShowMetaParams = btnShowProducts
                 .getLayoutParams();
@@ -73,12 +72,12 @@ public class BrowseCollectionFirstDetailFragment extends
         btnShowMetadata.setLayoutParams(btnShowMetaParams);
         btnShowMetadata.setVisibility(View.INVISIBLE);
 
-		LinearLayout parentNameArea = (LinearLayout) rootView
-				.findViewById(R.id.frag_search_res_coll_det_layout_parent_name);
-		ViewGroup.LayoutParams parentNameAreaParams = parentNameArea
-				.getLayoutParams();
-		parentNameAreaParams.height = 0;
-		parentNameArea.setVisibility(View.INVISIBLE);
-	}
+        LinearLayout parentNameArea = (LinearLayout) rootView
+                .findViewById(R.id.frag_search_res_coll_det_layout_parent_name);
+        ViewGroup.LayoutParams parentNameAreaParams = parentNameArea
+                .getLayoutParams();
+        parentNameAreaParams.height = 0;
+        parentNameArea.setVisibility(View.INVISIBLE);
+    }
 
 }
