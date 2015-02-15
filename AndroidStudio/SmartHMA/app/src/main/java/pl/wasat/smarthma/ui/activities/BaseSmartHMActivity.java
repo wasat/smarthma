@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package pl.wasat.smarthma.ui.activities;
 
@@ -13,33 +13,32 @@ import pl.wasat.smarthma.helper.Const;
 
 /**
  * @author Daniel Zinkiewicz Wasat Sp. z o.o 14-07-2014
- * 
  */
 public class BaseSmartHMActivity extends FragmentActivity {
-	
-	static final int REQUEST_NEW_SEARCH = 0;
-	boolean stopNewSearch = false;
 
-	public BaseSmartHMActivity() {
-	}
+    static final int REQUEST_NEW_SEARCH = 0;
+    boolean stopNewSearch = false;
 
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		//requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
-		setContentView(R.layout.activity_base_two_panel);
-		super.onCreate(savedInstanceState);
-	}
+    public BaseSmartHMActivity() {
+    }
 
-	public void doPositiveClick() {
-		Intent resultIntent = new Intent();
-		resultIntent.putExtra(Const.KEY_INTENT_RETURN_STOP_SEARCH, true);
-		setResult(Activity.RESULT_OK, resultIntent);
-		finish();
-	}
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        //requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
+        setContentView(R.layout.activity_base_two_panel);
+        super.onCreate(savedInstanceState);
+    }
 
-	public void doNegativeClick() {
-		Intent i = new Intent(getBaseContext(), StartActivity.class);
-		startActivity(i);
-		finish();
-	}
+    public void doPositiveClick() {
+        Intent resultIntent = new Intent();
+        resultIntent.putExtra(Const.KEY_INTENT_RETURN_STOP_SEARCH, true);
+        setResult(Activity.RESULT_OK, resultIntent);
+        finish();
+    }
+
+    public void doNegativeClick() {
+        Intent i = new Intent(getBaseContext(), StartActivity.class);
+        startActivity(i);
+        finish();
+    }
 }

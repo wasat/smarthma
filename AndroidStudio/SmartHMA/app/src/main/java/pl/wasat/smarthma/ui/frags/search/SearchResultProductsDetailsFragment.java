@@ -19,38 +19,36 @@ import pl.wasat.smarthma.ui.frags.base.BaseViewAndBasicSettingsDetailFragment;
  * interface to handle interaction events. Use the
  * {@link SearchResultProductsDetailsFragment#newInstance} factory method to
  * create an instance of this fragment.
- * 
  */
 public class SearchResultProductsDetailsFragment extends BaseViewAndBasicSettingsDetailFragment {
 
-	private OnSearchResultCollectionDetailsFragmentListener mListener;
+    private OnSearchResultCollectionDetailsFragmentListener mListener;
 
-	/**
-	 * Use this factory method to create a new instance of this fragment using
-	 * the provided parameters.
-	 * 
-	 * @param collectionEntry
-	 *            Parameter 1.
-	 * @return A new instance of fragment SearchResultProductsDetailsFragment.
-	 */
-	public static SearchResultProductsDetailsFragment newInstance(
-			EntryISO collectionEntry) {
-		SearchResultProductsDetailsFragment fragment = new SearchResultProductsDetailsFragment();
-		Bundle args = new Bundle();
-		args.putSerializable(KEY_COLLECTION_ENTRY, collectionEntry);
-		fragment.setArguments(args);
-		return fragment;
-	}
+    /**
+     * Use this factory method to create a new instance of this fragment using
+     * the provided parameters.
+     *
+     * @param collectionEntry Parameter 1.
+     * @return A new instance of fragment SearchResultProductsDetailsFragment.
+     */
+    public static SearchResultProductsDetailsFragment newInstance(
+            EntryISO collectionEntry) {
+        SearchResultProductsDetailsFragment fragment = new SearchResultProductsDetailsFragment();
+        Bundle args = new Bundle();
+        args.putSerializable(KEY_COLLECTION_ENTRY, collectionEntry);
+        fragment.setArguments(args);
+        return fragment;
+    }
 
-	public SearchResultProductsDetailsFragment() {
-		// Required empty public constructor
-	}
+    public SearchResultProductsDetailsFragment() {
+        // Required empty public constructor
+    }
 
-	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-			Bundle savedInstanceState) {
-		super.onCreateView(inflater, container, savedInstanceState);
-		btnShowProducts.setOnClickListener(new OnClickListener() {
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        super.onCreateView(inflater, container, savedInstanceState);
+        btnShowProducts.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -78,38 +76,39 @@ public class SearchResultProductsDetailsFragment extends BaseViewAndBasicSetting
                 mListener.onSearchResultCollectionDetailsFragmentShowMetadata(displayedISOEntry);
             }
         });
-		return rootView;
-	}
+        return rootView;
+    }
 
-	@Override
-	public void onAttach(Activity activity) {
-		super.onAttach(activity);
-		try {
-			mListener = (OnSearchResultCollectionDetailsFragmentListener) activity;
-		} catch (ClassCastException e) {
-			throw new ClassCastException(activity.toString()
-					+ " must implement OnSearchResultCollectionDetailsFragmentListener");
-		}
-	}
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        try {
+            mListener = (OnSearchResultCollectionDetailsFragmentListener) activity;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(activity.toString()
+                    + " must implement OnSearchResultCollectionDetailsFragmentListener");
+        }
+    }
 
-	@Override
-	public void onDetach() {
-		super.onDetach();
-		mListener = null;
-	}
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        mListener = null;
+    }
 
-	/**
-	 * This interface must be implemented by activities that contain this
-	 * fragment to allow an interaction in this fragment to be communicated to
-	 * the activity and potentially other fragments contained in that activity.
-	 * <p>
-	 * See the Android Training lesson <a href=
-	 * "http://developer.android.com/training/basics/fragments/communicating.html"
-	 * >Communicating with Other Fragments</a> for more information.
-	 */
-	public interface OnSearchResultCollectionDetailsFragmentListener {
-		public void onSearchResultCollectionDetailsFragmentShowProducts(FedeoRequest request);
+    /**
+     * This interface must be implemented by activities that contain this
+     * fragment to allow an interaction in this fragment to be communicated to
+     * the activity and potentially other fragments contained in that activity.
+     * <p/>
+     * See the Android Training lesson <a href=
+     * "http://developer.android.com/training/basics/fragments/communicating.html"
+     * >Communicating with Other Fragments</a> for more information.
+     */
+    public interface OnSearchResultCollectionDetailsFragmentListener {
+        public void onSearchResultCollectionDetailsFragmentShowProducts(FedeoRequest request);
+
         public void onSearchResultCollectionDetailsFragmentShowMetadata(EntryISO displayedEntry);
-	}
+    }
 
 }

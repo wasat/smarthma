@@ -7,9 +7,7 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import pl.wasat.smarthma.model.iso.EntryISO;
 import pl.wasat.smarthma.model.om.EntryOM;
@@ -32,11 +30,10 @@ public class Feed implements Serializable {
     private List<Link> link = new ArrayList<>();
     private EOPrefixes eoPrefixes;
     private ISOPrefixes isoPrefixes;
-    private List<EntryOM> entriesEO = new ArrayList<EntryOM>();
-    private List<EntryISO> entriesISO = new ArrayList<EntryISO>();
+    private List<EntryOM> entriesEO = new ArrayList<>();
+    private List<EntryISO> entriesISO = new ArrayList<>();
     //private Entry entry;
 
-    private final Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
     public TotalResults getTotalResults() {
         return totalResults;
@@ -230,12 +227,5 @@ public class Feed implements Serializable {
         return EqualsBuilder.reflectionEquals(this, other);
     }
 
-    public Map<String, Object> getAdditionalProperties() {
-        return this.additionalProperties;
-    }
-
-    public void setAdditionalProperty(String name, Object value) {
-        this.additionalProperties.put(name, value);
-    }
 
 }

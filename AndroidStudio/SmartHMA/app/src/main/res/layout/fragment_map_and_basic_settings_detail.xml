@@ -1,7 +1,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" >
+    android:orientation="vertical">
 
     <LinearLayout
         android:id="@+id/frag_search_res_coll_det_linear_bottom"
@@ -10,14 +10,14 @@
         android:layout_alignParentBottom="true"
         android:layout_gravity="bottom"
         android:background="#FFFFFF"
-        android:orientation="vertical" >
+        android:orientation="vertical">
 
         <LinearLayout
             android:id="@+id/frag_search_res_coll_det_layout_parent_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="#FFFFFF"
-            android:orientation="horizontal" >
+            android:orientation="horizontal">
 
             <TextView
                 style="@style/styleSettingsBasicTitles"
@@ -37,13 +37,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="#FFFFFF"
-            android:orientation="horizontal" >
+            android:orientation="horizontal">
 
             <LinearLayout
                 android:id="@+id/frag_search_res_coll_det_layout_area"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical" >
+                android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/frag_search_res_coll_det_tv_area"
@@ -56,7 +56,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:background="#FFFFFF"
-                    android:orientation="horizontal" >
+                    android:orientation="horizontal">
 
                     <TextView
                         style="@style/styleSettingsBasicValues"
@@ -84,7 +84,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:background="#FFFFFF"
-                    android:orientation="horizontal" >
+                    android:orientation="horizontal">
 
                     <TextView
                         style="@style/styleSettingsBasicValues"
@@ -113,7 +113,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="#FFFFFF"
-                android:orientation="vertical" >
+                android:orientation="vertical">
 
                 <TextView
                     style="?android:attr/textAppearanceLarge"
@@ -131,13 +131,13 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:background="#FFFFFF"
-                    android:orientation="horizontal" >
+                    android:orientation="horizontal">
 
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:background="#FFFFFF"
-                        android:orientation="vertical" >
+                        android:orientation="vertical">
 
                         <TextView
                             style="@style/styleSettingsBasicValues"
@@ -160,7 +160,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:background="#FFFFFF"
-                        android:orientation="vertical" >
+                        android:orientation="vertical">
 
                         <TextView
                             android:id="@+id/frag_search_res_coll_det_tv_time_from_date"
@@ -181,7 +181,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:background="#FFFFFF"
-                        android:orientation="vertical" >
+                        android:orientation="vertical">
 
                         <TextView
                             android:id="@+id/frag_search_res_coll_det_tv_time_from_time"
@@ -207,7 +207,7 @@
             android:layout_marginBottom="30dp"
             android:background="#FFFFFF"
             android:gravity="center"
-            android:orientation="horizontal" >
+            android:orientation="horizontal">
 
             <Button
                 android:id="@+id/frag_search_res_coll_det_btn_show_meta"
@@ -229,7 +229,7 @@
                 android:text="@string/show_products"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp" />
-            
+
         </LinearLayout>
     </LinearLayout>
 
@@ -237,14 +237,14 @@
         android:id="@+id/frag_search_res_coll_det_layout_top"
         android:layout_width="match_parent"
         android:layout_height="fill_parent"
-        android:layout_above="@+id/frag_search_res_coll_det_linear_bottom" >
+        android:layout_above="@+id/frag_search_res_coll_det_linear_bottom">
 
         <LinearLayout
             android:id="@+id/frag_search_res_coll_det_layout_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="#FFFFFF"
-            android:orientation="vertical" >
+            android:orientation="vertical">
 
             <TextView
                 android:id="@+id/frag_search_res_coll_det_tv_coll_name"
@@ -277,7 +277,7 @@
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:layout_below="@id/frag_search_res_coll_det_layout_title"
-            android:background="#FFFFFF" >
+            android:background="#FFFFFF">
 
             <WebView
                 android:id="@+id/frag_search_res_coll_det_web"
