@@ -25,63 +25,61 @@ import pl.wasat.smarthma.utils.text.MetadataCleaner;
  * {@link MetadataFragment.OnMetadataFragmentListener} interface to handle
  * interaction events. Use the {@link MetadataFragment#newInstance} factory
  * method to create an instance of this fragment.
- * 
  */
 public class MetadataFragment extends Fragment {
-	private static final String KEY_ENTRY_ITEM = "pl.wasat.smarthma.KEY_ENTRY_ITEM";
+    private static final String KEY_ENTRY_ITEM = "pl.wasat.smarthma.KEY_ENTRY_ITEM";
 
-	private EntryOM entryItem;
+    private EntryOM entryItem;
 
-	private OnMetadataFragmentListener mListener;
+    private OnMetadataFragmentListener mListener;
 
-	private LinearLayout linearLayout;
+    private LinearLayout linearLayout;
 
 	/*
-	 * private LinearLayout itemLayout; private TextView itemTitle; private
+     * private LinearLayout itemLayout; private TextView itemTitle; private
 	 * TextView itemValues;
 	 */
 
-	/**
-	 * Use this factory method to create a new instance of this fragment using
-	 * the provided parameters.
-	 * 
-	 * @param entryItm
-	 *            Parameter 1.
-	 * @return A new instance of fragment MetadataFragment.
-	 */
-	public static MetadataFragment newInstance(EntryOM entryItm) {
-		MetadataFragment fragment = new MetadataFragment();
-		Bundle args = new Bundle();
-		args.putSerializable(KEY_ENTRY_ITEM, entryItm);
-		fragment.setArguments(args);
-		return fragment;
-	}
+    /**
+     * Use this factory method to create a new instance of this fragment using
+     * the provided parameters.
+     *
+     * @param entryItm Parameter 1.
+     * @return A new instance of fragment MetadataFragment.
+     */
+    public static MetadataFragment newInstance(EntryOM entryItm) {
+        MetadataFragment fragment = new MetadataFragment();
+        Bundle args = new Bundle();
+        args.putSerializable(KEY_ENTRY_ITEM, entryItm);
+        fragment.setArguments(args);
+        return fragment;
+    }
 
-	public MetadataFragment() {
-		// Required empty public constructor
-	}
+    public MetadataFragment() {
+        // Required empty public constructor
+    }
 
-	@Override
-	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		if (getArguments() != null) {
-			entryItem = (EntryOM) getArguments().getSerializable(KEY_ENTRY_ITEM);
-		}
-	}
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if (getArguments() != null) {
+            entryItem = (EntryOM) getArguments().getSerializable(KEY_ENTRY_ITEM);
+        }
+    }
 
-	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-			Bundle savedInstanceState) {
-		// Inflate the layout for this fragment
-		View rootView = inflater.inflate(R.layout.fragment_metadata, container,
-				false);
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        View rootView = inflater.inflate(R.layout.fragment_metadata, container,
+                false);
 
-		linearLayout = (LinearLayout) rootView
-				.findViewById(R.id.metadata_fragment_layout_main_linear);
-		((TextView) rootView.findViewById(R.id.metadata_frag_tv_prod_name))
-				.setText(entryItem.getTitle());
-		((TextView) rootView.findViewById(R.id.metadata_frag_tv_prod_dates))
-				.setText("Date of publication: " + entryItem.getDate());
+        linearLayout = (LinearLayout) rootView
+                .findViewById(R.id.metadata_fragment_layout_main_linear);
+        ((TextView) rootView.findViewById(R.id.metadata_frag_tv_prod_name))
+                .setText(entryItem.getTitle());
+        ((TextView) rootView.findViewById(R.id.metadata_frag_tv_prod_dates))
+                .setText("Date of publication: " + entryItem.getDate());
 
 		/*
 		 * itemLayout = (LinearLayout) rootView
@@ -91,153 +89,152 @@ public class MetadataFragment extends Fragment {
 		 * .findViewById(R.id.metadata_frag_tv_row_values));
 		 */
 
-		if (!entryItem.getEarthObservation().getMetaDataProperty()
-				.getEarthObservationMetaData().getIdentifier().get_text()
-				.isEmpty()) {
-			setEOMetaDataViews("Earth Observation Metadata ", entryItem
-					.getEarthObservation().getMetaDataProperty()
-					.getEarthObservationMetaData());
-		}
-		if (!entryItem.getEarthObservation().getObservedProperty()
-				.get_nilReason().isEmpty()) {
-			setEOMetaDataViews("Earth Observation Observed Property ",
-					entryItem.getEarthObservation().getObservedProperty());
-		}
-		if (entryItem.getEarthObservation().getFeatureOfInterest()
-				.getFootprint() != null) {
-			setEOMetaDataViews("Earth Observation Footprint", entryItem
-					.getEarthObservation().getFeatureOfInterest()
-					.getFootprint());
-		}
-		if (!entryItem.getEarthObservation().getProcedure()
-				.getEarthObservationEquipment().getPlatform().isEmpty()) {
-			setEOMetaDataViews("Earth Observation Equipment ", entryItem
-					.getEarthObservation().getProcedure()
-					.getEarthObservationEquipment());
-		}
-		if (entryItem.getEarthObservation().getResult()
-				.getEarthObservationResult() != null) {
-			setEOMetaDataViews("Earth Observation Result ", entryItem
-					.getEarthObservation().getResult()
-					.getEarthObservationResult());
-		}
-		if (entryItem.getEarthObservation().getPhenomenonTime() != null) {
-			setEOMetaDataViews("Earth Observation Phenomenon Time ", entryItem
-					.getEarthObservation().getPhenomenonTime().getTimePeriod());
-		}
-		if (!entryItem.getEarthObservation().getResultTime().getTimeInstant()
-				.getTimePosition().get_text().isEmpty()) {
-			setEOMetaDataViews("Earth Observation Result Time ", entryItem
-					.getEarthObservation().getResultTime().getTimeInstant()
-					.getTimePosition());
-		}
-		return rootView;
-	}
+        if (!entryItem.getEarthObservation().getMetaDataProperty()
+                .getEarthObservationMetaData().getIdentifier().get_text()
+                .isEmpty()) {
+            setEOMetaDataViews("Earth Observation Metadata ", entryItem
+                    .getEarthObservation().getMetaDataProperty()
+                    .getEarthObservationMetaData());
+        }
+        if (!entryItem.getEarthObservation().getObservedProperty()
+                .get_nilReason().isEmpty()) {
+            setEOMetaDataViews("Earth Observation Observed Property ",
+                    entryItem.getEarthObservation().getObservedProperty());
+        }
+        if (entryItem.getEarthObservation().getFeatureOfInterest()
+                .getFootprint() != null) {
+            setEOMetaDataViews("Earth Observation Footprint", entryItem
+                    .getEarthObservation().getFeatureOfInterest()
+                    .getFootprint());
+        }
+        if (!entryItem.getEarthObservation().getProcedure()
+                .getEarthObservationEquipment().getPlatform().isEmpty()) {
+            setEOMetaDataViews("Earth Observation Equipment ", entryItem
+                    .getEarthObservation().getProcedure()
+                    .getEarthObservationEquipment());
+        }
+        if (entryItem.getEarthObservation().getResult()
+                .getEarthObservationResult() != null) {
+            setEOMetaDataViews("Earth Observation Result ", entryItem
+                    .getEarthObservation().getResult()
+                    .getEarthObservationResult());
+        }
+        if (entryItem.getEarthObservation().getPhenomenonTime() != null) {
+            setEOMetaDataViews("Earth Observation Phenomenon Time ", entryItem
+                    .getEarthObservation().getPhenomenonTime().getTimePeriod());
+        }
+        if (!entryItem.getEarthObservation().getResultTime().getTimeInstant()
+                .getTimePosition().get_text().isEmpty()) {
+            setEOMetaDataViews("Earth Observation Result Time ", entryItem
+                    .getEarthObservation().getResultTime().getTimeInstant()
+                    .getTimePosition());
+        }
+        return rootView;
+    }
 
-	private void setEOMetaDataViews(String headerText, Object eOMetaDataObject) {
+    private void setEOMetaDataViews(String headerText, Object eOMetaDataObject) {
 
-		TextView tvMetaHeader = new TextView(getActivity());
-		tvMetaHeader.setLayoutParams(new TableLayout.LayoutParams(
-				LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT, 1f));
-		tvMetaHeader.setPadding(16, 2, 16, 16);
-		tvMetaHeader.setTextSize(18);
-		tvMetaHeader.setTypeface(Typeface.DEFAULT_BOLD);
-		tvMetaHeader.setText(headerText);
-		linearLayout.addView(tvMetaHeader);
+        TextView tvMetaHeader = new TextView(getActivity());
+        tvMetaHeader.setLayoutParams(new TableLayout.LayoutParams(
+                LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT, 1f));
+        tvMetaHeader.setPadding(16, 2, 16, 16);
+        tvMetaHeader.setTextSize(18);
+        tvMetaHeader.setTypeface(Typeface.DEFAULT_BOLD);
+        tvMetaHeader.setText(headerText);
+        linearLayout.addView(tvMetaHeader);
 
-		Class<?> c1 = eOMetaDataObject.getClass();
-		// Map<String, Object> map = new HashMap<String, Object>();
-		Field[] fields = c1.getDeclaredFields();
-		for (int i = 0; i < fields.length; i++) {
-			String name = fields[i].getName();
-			fields[i].setAccessible(true);
-			Object value = null;
-			try {
-				value = fields[i].get(eOMetaDataObject);
-			} catch (IllegalAccessException | IllegalArgumentException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+        Class<?> c1 = eOMetaDataObject.getClass();
+        // Map<String, Object> map = new HashMap<String, Object>();
+        Field[] fields = c1.getDeclaredFields();
+        for (Field field : fields) {
+            String name = field.getName();
+            field.setAccessible(true);
+            Object value = null;
+            try {
+                value = field.get(eOMetaDataObject);
+            } catch (IllegalAccessException | IllegalArgumentException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
             if (value != null) {
-				addNewRowView(name, value.toString());
-			}
-		}
-	}
+                addNewRowView(name, value.toString());
+            }
+        }
+    }
 
-	private void addNewRowView(String title, String value) {
-		if (!title.equalsIgnoreCase("additionalProperties")
-				&& !title.equalsIgnoreCase("_gml_id")
-				&& !title.equalsIgnoreCase("serialVersionUID")
-				&& !value.isEmpty())
+    private void addNewRowView(String title, String value) {
+        if (!title.equalsIgnoreCase("additionalProperties")
+                && !title.equalsIgnoreCase("_gml_id")
+                && !title.equalsIgnoreCase("serialVersionUID")
+                && !value.isEmpty())
 
-		{
-			TextView itemTvTitle = new TextView(getActivity());
-			itemTvTitle.setLayoutParams(new TableLayout.LayoutParams(
-					LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT, 2f));
-			itemTvTitle.setPadding(10, 2, 2, 2);
-			itemTvTitle.setTextSize(16);
-			itemTvTitle.setTextColor(0xffA9A9A9);
-			itemTvTitle.setTypeface(Typeface.DEFAULT_BOLD);
-			itemTvTitle.setText(title);
+        {
+            TextView itemTvTitle = new TextView(getActivity());
+            itemTvTitle.setLayoutParams(new TableLayout.LayoutParams(
+                    LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT, 2f));
+            itemTvTitle.setPadding(10, 2, 2, 2);
+            itemTvTitle.setTextSize(16);
+            itemTvTitle.setTextColor(0xffA9A9A9);
+            itemTvTitle.setTypeface(Typeface.DEFAULT_BOLD);
+            itemTvTitle.setText(title);
 
-			TextView itemTvValue = new TextView(getActivity());
-			itemTvValue.setLayoutParams(new TableLayout.LayoutParams(
-					LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT, 1f));
-			itemTvValue.setPadding(10, 2, 2, 2);
-			itemTvValue.setTextSize(14);
-			itemTvValue.setTextColor(0xff646464);
-			itemTvValue.setTypeface(Typeface.DEFAULT);
-			itemTvValue.setText(new MetadataCleaner().getCleanValue(value));
+            TextView itemTvValue = new TextView(getActivity());
+            itemTvValue.setLayoutParams(new TableLayout.LayoutParams(
+                    LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT, 1f));
+            itemTvValue.setPadding(10, 2, 2, 2);
+            itemTvValue.setTextSize(14);
+            itemTvValue.setTextColor(0xff646464);
+            itemTvValue.setTypeface(Typeface.DEFAULT);
+            itemTvValue.setText(new MetadataCleaner().getCleanValue(value));
 
-			LinearLayout itemLinearRow = new LinearLayout(getActivity());
-			itemLinearRow.setLayoutParams(new TableLayout.LayoutParams(
-					LayoutParams.WRAP_CONTENT, LayoutParams.MATCH_PARENT, 1f));
-			itemLinearRow.setPadding(10, 2, 2, 2);
-			itemLinearRow.addView(itemTvTitle);
-			itemLinearRow.addView(itemTvValue);
+            LinearLayout itemLinearRow = new LinearLayout(getActivity());
+            itemLinearRow.setLayoutParams(new TableLayout.LayoutParams(
+                    LayoutParams.WRAP_CONTENT, LayoutParams.MATCH_PARENT, 1f));
+            itemLinearRow.setPadding(10, 2, 2, 2);
+            itemLinearRow.addView(itemTvTitle);
+            itemLinearRow.addView(itemTvValue);
 
-			linearLayout.addView(itemLinearRow);
+            linearLayout.addView(itemLinearRow);
 
-		}
+        }
 
-	}
+    }
 
 
+    public void onButtonPressed(Uri uri) {
+        if (mListener != null) {
+            mListener.onMetadataFragmentInteraction();
+        }
+    }
 
-	public void onButtonPressed(Uri uri) {
-		if (mListener != null) {
-			mListener.onMetadataFragmentInteraction();
-		}
-	}
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        try {
+            mListener = (OnMetadataFragmentListener) activity;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(activity.toString()
+                    + " must implement OnMetadataFragmentListener");
+        }
+    }
 
-	@Override
-	public void onAttach(Activity activity) {
-		super.onAttach(activity);
-		try {
-			mListener = (OnMetadataFragmentListener) activity;
-		} catch (ClassCastException e) {
-			throw new ClassCastException(activity.toString()
-					+ " must implement OnMetadataFragmentListener");
-		}
-	}
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        mListener = null;
+    }
 
-	@Override
-	public void onDetach() {
-		super.onDetach();
-		mListener = null;
-	}
-
-	/**
-	 * This interface must be implemented by activities that contain this
-	 * fragment to allow an interaction in this fragment to be communicated to
-	 * the activity and potentially other fragments contained in that activity.
-	 * <p>
-	 * See the Android Training lesson <a href=
-	 * "http://developer.android.com/training/basics/fragments/communicating.html"
-	 * >Communicating with Other Fragments</a> for more information.
-	 */
-	public interface OnMetadataFragmentListener {
-		public void onMetadataFragmentInteraction();
-	}
+    /**
+     * This interface must be implemented by activities that contain this
+     * fragment to allow an interaction in this fragment to be communicated to
+     * the activity and potentially other fragments contained in that activity.
+     * <p/>
+     * See the Android Training lesson <a href=
+     * "http://developer.android.com/training/basics/fragments/communicating.html"
+     * >Communicating with Other Fragments</a> for more information.
+     */
+    public interface OnMetadataFragmentListener {
+        public void onMetadataFragmentInteraction();
+    }
 
 }

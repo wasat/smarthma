@@ -5,9 +5,7 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import pl.wasat.smarthma.model.feed.Author;
 import pl.wasat.smarthma.model.feed.ItemsPerPage;
@@ -31,10 +29,9 @@ public class Feed implements Serializable {
     private String identifier;
     private String title;
     private String updated;
-    private List<Link> link = new ArrayList<Link>();
-    private List<EntryISO> entries = new ArrayList<EntryISO>();
+    private List<Link> link = new ArrayList<>();
+    private List<EntryISO> entries = new ArrayList<>();
 
-    private final Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
     /**
      * @return The totalResults
@@ -212,12 +209,5 @@ public class Feed implements Serializable {
         return ToStringBuilder.reflectionToString(this, style);
     }
 
-    public Map<String, Object> getAdditionalProperties() {
-        return this.additionalProperties;
-    }
-
-    public void setAdditionalProperty(String name, Object value) {
-        this.additionalProperties.put(name, value);
-    }
 
 }

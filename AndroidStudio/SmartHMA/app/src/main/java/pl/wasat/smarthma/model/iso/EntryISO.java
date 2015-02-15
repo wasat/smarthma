@@ -7,9 +7,7 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import pl.wasat.smarthma.model.feed.Link;
 import pl.wasat.smarthma.utils.text.SmartHMAStringStyle;
@@ -27,7 +25,7 @@ public class EntryISO implements Serializable {
     private Date date;
     private Polygon polygon;
     private Summary summary;
-    private List<Link> link = new ArrayList<Link>();
+    private List<Link> link = new ArrayList<>();
     private MDMetadata MDMetadata;
     private String XmlLang;
 
@@ -37,7 +35,6 @@ public class EntryISO implements Serializable {
     private boolean read;
     private boolean offline;
 
-    private final Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
     /**
      * @return The id
@@ -220,13 +217,6 @@ public class EntryISO implements Serializable {
         return ToStringBuilder.reflectionToString(this, style);
     }
 
-    public Map<String, Object> getAdditionalProperties() {
-        return this.additionalProperties;
-    }
-
-    public void setAdditionalProperty(String name, Object value) {
-        this.additionalProperties.put(name, value);
-    }
 
     @Override
     public int hashCode() {
@@ -234,7 +224,7 @@ public class EntryISO implements Serializable {
                 .append(identifier).append(updated).append(date)
                 .append(polygon).append(summary).append(link)
                 .append(MDMetadata).append(XmlLang)
-                .append(additionalProperties).toHashCode();
+                .toHashCode();
     }
 
     @Override
@@ -252,7 +242,7 @@ public class EntryISO implements Serializable {
                 .append(polygon, rhs.polygon).append(summary, rhs.summary)
                 .append(link, rhs.link).append(MDMetadata, rhs.MDMetadata)
                 .append(XmlLang, rhs.XmlLang)
-                .append(additionalProperties, rhs.additionalProperties)
+
                 .isEquals();
     }
 

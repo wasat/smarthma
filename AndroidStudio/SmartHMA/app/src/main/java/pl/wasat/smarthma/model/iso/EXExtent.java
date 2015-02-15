@@ -6,8 +6,6 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
 import java.io.Serializable;
-import java.util.HashMap;
-import java.util.Map;
 
 import pl.wasat.smarthma.utils.text.SmartHMAStringStyle;
 
@@ -18,7 +16,7 @@ public class EXExtent implements Serializable {
     private TemporalElement temporalElement;
     private GeographicElement geographicElement;
     private String Prefix;
-    private final Map<String, Object> additionalProperties = new HashMap<String, Object>();
+
 
     /**
      * @return The temporalElement
@@ -69,19 +67,12 @@ public class EXExtent implements Serializable {
         return ToStringBuilder.reflectionToString(this, style);
     }
 
-    public Map<String, Object> getAdditionalProperties() {
-        return this.additionalProperties;
-    }
-
-    public void setAdditionalProperty(String name, Object value) {
-        this.additionalProperties.put(name, value);
-    }
 
     @Override
     public int hashCode() {
         return new HashCodeBuilder().append(temporalElement)
                 .append(geographicElement).append(Prefix)
-                .append(additionalProperties).toHashCode();
+                .toHashCode();
     }
 
     @Override
@@ -95,7 +86,7 @@ public class EXExtent implements Serializable {
         EXExtent rhs = ((EXExtent) other);
         return new EqualsBuilder().append(temporalElement, rhs.temporalElement)
                 .append(Prefix, rhs.Prefix)
-                .append(additionalProperties, rhs.additionalProperties)
+
                 .isEquals();
     }
 

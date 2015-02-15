@@ -7,9 +7,7 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import pl.wasat.smarthma.utils.text.SmartHMAStringStyle;
 
@@ -18,14 +16,14 @@ public class EarthObservationResult implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private String _prefix;
-    private List<Browse> browseList = new ArrayList<Browse>();
+    private List<Browse> browseList = new ArrayList<>();
     private Product product;
-    private List<Mask> mask = new ArrayList<Mask>();
+    private List<Mask> mask = new ArrayList<>();
     private Parameter parameter;
     private CloudCoverPercentage cloudCoverPercentage;
     private CloudCoverPercentageQuotationMode cloudCoverPercentageQuotationMode;
     private String _gml_id;
-    private final Map<String, Object> additionalProperties = new HashMap<String, Object>();
+
 
     public String get_prefix() {
         return _prefix;
@@ -153,12 +151,5 @@ public class EarthObservationResult implements Serializable {
         return EqualsBuilder.reflectionEquals(this, other);
     }
 
-    public Map<String, Object> getAdditionalProperties() {
-        return this.additionalProperties;
-    }
-
-    public void setAdditionalProperty(String name, Object value) {
-        this.additionalProperties.put(name, value);
-    }
 
 }
