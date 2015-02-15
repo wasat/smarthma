@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- From: file:/D:/wasat/DEVELOP/android/SmartHMA_repo/AndroidStudio/SmartHMA/app/src/main/res/values-sw720dp/dimens.xml -->
+    <eat-comment/>
+    <dimen name="activity_horizontal_margin">128dp</dimen>
+    <!-- From: file:/D:/wasat/DEVELOP/android/SmartHMA_repo/AndroidStudio/SmartHMA/app/src/main/res/values-sw720dp/refs.xml -->
+    <eat-comment/>
+    <item name="activity_article_list" type="layout">@layout/activity_news</item>
+</resources>

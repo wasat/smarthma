@@ -1,0 +1,72 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/search_frag_main_scroll_id"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:layout_margin="10dp">
+
+    <LinearLayout
+        android:id="@+id/search_frag_layout_id"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:gravity="center_vertical|center_horizontal|center"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/search_frag_tv_title_large"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:text="@string/smarthma"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textSize="48sp" />
+
+        <TextView
+            android:id="@+id/search_frag_tv_subtitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="70dp"
+            android:text="@string/fedeo_eo_data_series_search_engine"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textSize="16sp" />
+
+        <SearchView
+            android:id="@+id/search_frag_searchview"
+            android:layout_width="500dp"
+            android:layout_height="100dp"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:iconifiedByDefault="false"
+            android:visibility="visible">
+
+        </SearchView>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:id="@+id/search_frag_button_basic"
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="3dp"
+                android:text="@string/basic_settings"
+                android:textSize="16sp" />
+
+            <Button
+                android:id="@+id/search_frag_button_advance"
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="3dp"
+                android:text="@string/advance_settings"
+                android:textSize="16sp" />
+        </LinearLayout>
+    </LinearLayout>
+
+</ScrollView><!-- From: file:/D:/wasat/DEVELOP/android/SmartHMA_repo/AndroidStudio/SmartHMA/app/src/main/res/layout/fragment_search.xml -->
