@@ -289,8 +289,8 @@ class SmartHmaISOHandler extends DefaultHandler {
             isoPrefixes.setXmlnsXlink(atts.getValue("xmlns:xlink"));
             feed.setIsoPrefixes(isoPrefixes);
 
-            entries = new ArrayList<EntryISO>();
-            linksFeed = new ArrayList<Link>();
+            entries = new ArrayList<>();
+            linksFeed = new ArrayList<>();
         } else if (localName.equalsIgnoreCase("totalResults")) {
             totalResults = new TotalResults();
         } else if (localName.equalsIgnoreCase("startIndex")) {
@@ -330,7 +330,7 @@ class SmartHmaISOHandler extends DefaultHandler {
             entry = new EntryISO();
             isInFeed = false;
             isInEntry = true;
-            linksEntry = new ArrayList<Link>();
+            linksEntry = new ArrayList<>();
             entry.setXmlLang(atts.getValue("xml:lang"));
         } else if (localName.equals("date")) {
             if (isInCIDate) {
@@ -449,9 +449,9 @@ class SmartHmaISOHandler extends DefaultHandler {
             identificationInfo = new IdentificationInfo();
         } else if (localName.equalsIgnoreCase("MD_DataIdentification")) {
             MDDataIdentification = new MDDataIdentification();
-            descriptiveKeywords = new ArrayList<DescriptiveKeyword>();
-            resourceConstraints = new ArrayList<ResourceConstraint>();
-            extents = new ArrayList<Extent>();
+            descriptiveKeywords = new ArrayList<>();
+            resourceConstraints = new ArrayList<>();
+            extents = new ArrayList<>();
         } else if (localName.equalsIgnoreCase("citation")) {
             citation = new Citation();
         } else if (localName.equalsIgnoreCase("CI_Citation")) {
@@ -486,7 +486,7 @@ class SmartHmaISOHandler extends DefaultHandler {
             descriptiveKeyword = new DescriptiveKeyword();
         } else if (localName.equalsIgnoreCase("MD_Keywords")) {
             MDKeywords = new MDKeywords();
-            keywords = new ArrayList<Keyword>();
+            keywords = new ArrayList<>();
         } else if (localName.equalsIgnoreCase("keyword")) {
             keyword = new Keyword();
         } else if (localName.equalsIgnoreCase("resourceConstraints")) {

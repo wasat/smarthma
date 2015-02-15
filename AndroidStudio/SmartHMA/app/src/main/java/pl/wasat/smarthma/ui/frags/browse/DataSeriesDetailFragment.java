@@ -37,11 +37,11 @@ public class DataSeriesDetailFragment extends Fragment {
 
     */
 /**
-     * Use this factory method to create a new instance of this fragment using
-     * the provided parameters.
-     *
-     * @return A new instance of fragment DataSeriesDetailFragment.
-     *//*
+ * Use this factory method to create a new instance of this fragment using
+ * the provided parameters.
+ *
+ * @return A new instance of fragment DataSeriesDetailFragment.
+ *//*
 
     public static DataSeriesDetailFragment newInstance() {
         DataSeriesDetailFragment fragment = new DataSeriesDetailFragment();
@@ -131,14 +131,14 @@ public class DataSeriesDetailFragment extends Fragment {
 
     */
 /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated to
-     * the activity and potentially other fragments contained in that activity.
-     * <p/>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     *//*
+ * This interface must be implemented by activities that contain this
+ * fragment to allow an interaction in this fragment to be communicated to
+ * the activity and potentially other fragments contained in that activity.
+ * <p/>
+ * See the Android Training lesson <a href=
+ * "http://developer.android.com/training/basics/fragments/communicating.html"
+ * >Communicating with Other Fragments</a> for more information.
+ *//*
 
     public interface OnDataSeriesDetailFragmentInteractionListener {
         public void onDataSeriesDetailFragmentInteraction();

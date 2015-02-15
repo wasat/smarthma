@@ -3,14 +3,14 @@
     android:id="@+id/product_detail_fragment_scrollView"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="#FFFFFF" >
+    android:background="#FFFFFF">
 
     <LinearLayout
         android:id="@+id/product_frag_detail_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#FFFFFF"
-        android:orientation="vertical" >
+        android:orientation="vertical">
 
         <TextView
             android:id="@+id/product_frag_detail_name"
@@ -44,7 +44,7 @@
             style="?android:attr/textAppearanceLarge"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:minHeight = "200dp"
+            android:minHeight="200dp"
             android:padding="16dp"
             android:textSize="16sp"
             tools:context="pl.wasat.smarthma.ui.frags.common.ProductDetailsFragment" />
@@ -55,7 +55,7 @@
             android:layout_height="wrap_content"
             android:background="#FFFFFF"
             android:gravity="center"
-            android:orientation="horizontal" >
+            android:orientation="horizontal">
 
             <Button
                 android:id="@+id/product_frag_detail_button_quicklook"

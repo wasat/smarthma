@@ -29,7 +29,7 @@ import pl.wasat.smarthma.ui.frags.common.AreaPickerMapFragment;
  * {@link SearchDetailFragment.OnSearchDetailFragmentListener} interface to
  * handle interaction events. Use the {@link SearchDetailFragment#newInstance}
  * factory method to create an instance of this fragment.
- * 
+ *
  *//*
 
 public class SearchDetailFragment extends Fragment {
@@ -39,11 +39,11 @@ public class SearchDetailFragment extends Fragment {
 
 	*/
 /**
-	 * Use this factory method to create a new instance of this fragment using
-	 * the provided parameters.
-	 * 
-	 * @return A new instance of fragment SearchDetailFragment.
-	 *//*
+ * Use this factory method to create a new instance of this fragment using
+ * the provided parameters.
+ *
+ * @return A new instance of fragment SearchDetailFragment.
+ *//*
 
 	public static SearchDetailFragment newInstance() {
 		SearchDetailFragment fragment = new SearchDetailFragment();
@@ -170,14 +170,14 @@ public class SearchDetailFragment extends Fragment {
 
 	*/
 /**
-	 * This interface must be implemented by activities that contain this
-	 * fragment to allow an interaction in this fragment to be communicated to
-	 * the activity and potentially other fragments contained in that activity.
-	 * <p>
-	 * See the Android Training lesson <a href=
-	 * "http://developer.android.com/training/basics/fragments/communicating.html"
-	 * >Communicating with Other Fragments</a> for more information.
-	 *//*
+ * This interface must be implemented by activities that contain this
+ * fragment to allow an interaction in this fragment to be communicated to
+ * the activity and potentially other fragments contained in that activity.
+ * <p>
+ * See the Android Training lesson <a href=
+ * "http://developer.android.com/training/basics/fragments/communicating.html"
+ * >Communicating with Other Fragments</a> for more information.
+ *//*
 
 	public interface OnSearchDetailFragmentListener {
 		public void onSearchDetailFragmentInteraction(Uri uri);

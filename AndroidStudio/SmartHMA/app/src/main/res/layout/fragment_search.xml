@@ -3,7 +3,7 @@
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:layout_gravity="center"
-    android:layout_margin="10dp" >
+    android:layout_margin="10dp">
 
     <LinearLayout
         android:id="@+id/search_frag_layout_id"
@@ -13,7 +13,7 @@
         android:focusable="true"
         android:focusableInTouchMode="true"
         android:gravity="center_vertical|center_horizontal|center"
-        android:orientation="vertical" >
+        android:orientation="vertical">
 
         <TextView
             android:id="@+id/search_frag_tv_title_large"
@@ -41,13 +41,13 @@
             android:focusable="true"
             android:focusableInTouchMode="true"
             android:iconifiedByDefault="false"
-            android:visibility="visible" >
+            android:visibility="visible">
 
         </SearchView>
 
         <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" >
+            android:layout_height="wrap_content">
 
             <Button
                 android:id="@+id/search_frag_button_basic"

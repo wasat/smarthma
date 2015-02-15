@@ -6,8 +6,6 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
 import java.io.Serializable;
-import java.util.HashMap;
-import java.util.Map;
 
 import pl.wasat.smarthma.utils.text.SmartHMAStringStyle;
 
@@ -17,7 +15,7 @@ public class Decimal implements Serializable {
 
     private String Prefix;
     private String Text;
-    private final Map<String, Object> additionalProperties = new HashMap<String, Object>();
+
 
     /**
      * @return The Prefix
@@ -54,18 +52,11 @@ public class Decimal implements Serializable {
         return ToStringBuilder.reflectionToString(this, style);
     }
 
-    public Map<String, Object> getAdditionalProperties() {
-        return this.additionalProperties;
-    }
-
-    public void setAdditionalProperty(String name, Object value) {
-        this.additionalProperties.put(name, value);
-    }
 
     @Override
     public int hashCode() {
         return new HashCodeBuilder().append(Prefix).append(Text)
-                .append(additionalProperties).toHashCode();
+                .toHashCode();
     }
 
     @Override
@@ -79,7 +70,7 @@ public class Decimal implements Serializable {
         Decimal rhs = ((Decimal) other);
         return new EqualsBuilder().append(Prefix, rhs.Prefix)
                 .append(Text, rhs.Text)
-                .append(additionalProperties, rhs.additionalProperties)
+
                 .isEquals();
     }
 
