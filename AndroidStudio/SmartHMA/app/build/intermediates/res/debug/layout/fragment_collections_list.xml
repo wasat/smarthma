@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    tools:context="pl.wasat.smarthma.ui.frags.browse.CollectionsListFragment">
+
+    <ListView
+        android:id="@+id/collections_list"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:divider="#b5b5b5"
+        android:dividerHeight="1dp"
+        android:listSelector="@drawable/list_selector" />
+
+</LinearLayout><!-- From: file:/D:/wasat/DEVELOP/android/SmartHMA_repo/AndroidStudio/SmartHMA/app/src/main/res/layout/fragment_collections_list.xml -->

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/action_search"
+        android:actionViewClass="android.widget.SearchView"
+        android:icon="@android:drawable/ic_menu_search"
+        app:showAsAction="always"
+        android:title="@string/action_search"></item>
+
+    <!--     <group android:id="@+id/menu_group_gis" >
+            <item
+                android:id="@+id/action_pref1"
+                android:icon="@android:drawable/ic_dialog_alert"
+                android:showAsAction="never"
+                android:title="@string/action_pref1"
+                android:titleCondensed="@string/action_pref1">
+            </item>
+            <item
+                android:id="@+id/action_pref2"
+                android:icon="@android:drawable/ic_dialog_map"
+                android:showAsAction="never"
+                android:title="@string/action_pref2"
+                android:titleCondensed="@string/action_pref2">
+            </item>
+            <item
+                android:id="@+id/action_pref3"
+                android:icon="@drawable/all_layers"
+                android:showAsAction="never"
+                android:title="@string/action_pref3"
+                android:titleCondensed="@string/action_pref3">
+            </item>
+            <item
+                android:id="@+id/action_clear_all_settings"
+                android:icon="@android:drawable/ic_menu_delete"
+                android:showAsAction="never"
+                android:title="@string/action_clear_all_settings"
+                android:titleCondensed="@string/action_clear_all_settings">
+            </item>
+        </group> -->
+
+    <item
+        android:id="@+id/action_exit"
+        android:icon="@android:drawable/ic_notification_clear_all"
+        app:showAsAction="ifRoom"
+        android:title="@string/action_exit"
+        android:titleCondensed="@string/action_exit"></item>
+
+</menu><!-- From: file:/D:/wasat/DEVELOP/android/SmartHMA_repo/AndroidStudio/SmartHMA/app/src/main/res/menu/menu_eo_map_twopane.xml -->
