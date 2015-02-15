@@ -6,101 +6,87 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
 import java.io.Serializable;
-import java.util.HashMap;
-import java.util.Map;
 
 import pl.wasat.smarthma.utils.text.SmartHMAStringStyle;
 
 public class Exception implements Serializable {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	private String prefix;
-	private ExceptionText exceptionText;
-	private String exceptionCode;
-	private String locator;
-	private final Map<String, Object> additionalProperties = new HashMap<>();
+    private String prefix;
+    private ExceptionText exceptionText;
+    private String exceptionCode;
+    private String locator;
 
-	public String getPrefix() {
-		return prefix;
-	}
 
-	public void setPrefix(String prefix) {
-		this.prefix = prefix;
-	}
+    public String getPrefix() {
+        return prefix;
+    }
 
-	public Exception withPrefix(String prefix) {
-		this.prefix = prefix;
-		return this;
-	}
+    public void setPrefix(String prefix) {
+        this.prefix = prefix;
+    }
 
-	public ExceptionText getExceptionText() {
-		return exceptionText;
-	}
+    public Exception withPrefix(String prefix) {
+        this.prefix = prefix;
+        return this;
+    }
 
-	public void setExceptionText(ExceptionText exceptionText) {
-		this.exceptionText = exceptionText;
-	}
+    public ExceptionText getExceptionText() {
+        return exceptionText;
+    }
 
-	public Exception withExceptionText(ExceptionText exceptionText) {
-		this.exceptionText = exceptionText;
-		return this;
-	}
+    public void setExceptionText(ExceptionText exceptionText) {
+        this.exceptionText = exceptionText;
+    }
 
-	public String getExceptionCode() {
-		return exceptionCode;
-	}
+    public Exception withExceptionText(ExceptionText exceptionText) {
+        this.exceptionText = exceptionText;
+        return this;
+    }
 
-	public void setExceptionCode(String exceptionCode) {
-		this.exceptionCode = exceptionCode;
-	}
+    public String getExceptionCode() {
+        return exceptionCode;
+    }
 
-	public Exception withExceptionCode(String exceptionCode) {
-		this.exceptionCode = exceptionCode;
-		return this;
-	}
+    public void setExceptionCode(String exceptionCode) {
+        this.exceptionCode = exceptionCode;
+    }
 
-	public String getLocator() {
-		return locator;
-	}
+    public Exception withExceptionCode(String exceptionCode) {
+        this.exceptionCode = exceptionCode;
+        return this;
+    }
 
-	public void setLocator(String locator) {
-		this.locator = locator;
-	}
+    public String getLocator() {
+        return locator;
+    }
 
-	public Exception withLocator(String locator) {
-		this.locator = locator;
-		return this;
-	}
+    public void setLocator(String locator) {
+        this.locator = locator;
+    }
 
-	@Override
-	public String toString() {
-		ToStringStyle style = new SmartHMAStringStyle();
-		ToStringBuilder.setDefaultStyle(style);
-		return ToStringBuilder.reflectionToString(this, style);
-	}
+    public Exception withLocator(String locator) {
+        this.locator = locator;
+        return this;
+    }
 
-	@Override
-	public int hashCode() {
-		return HashCodeBuilder.reflectionHashCode(this);
-	}
+    @Override
+    public String toString() {
+        ToStringStyle style = new SmartHMAStringStyle();
+        ToStringBuilder.setDefaultStyle(style);
+        return ToStringBuilder.reflectionToString(this, style);
+    }
 
-	@Override
-	public boolean equals(Object other) {
-		return EqualsBuilder.reflectionEquals(this, other);
-	}
+    @Override
+    public int hashCode() {
+        return HashCodeBuilder.reflectionHashCode(this);
+    }
 
-	public Map<String, Object> getAdditionalProperties() {
-		return this.additionalProperties;
-	}
+    @Override
+    public boolean equals(Object other) {
+        return EqualsBuilder.reflectionEquals(this, other);
+    }
 
-	public void setAdditionalProperty(String name, Object value) {
-		this.additionalProperties.put(name, value);
-	}
-
-	public Exception withAdditionalProperty(String name, Object value) {
-		this.additionalProperties.put(name, value);
-		return this;
-	}
 
 }
