@@ -1,77 +1,71 @@
 package pl.wasat.smarthma.model.exception;
 
-import java.io.Serializable;
-import java.util.HashMap;
-import java.util.Map;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
+import java.io.Serializable;
+import java.util.HashMap;
+import java.util.Map;
+
 import pl.wasat.smarthma.utils.text.SmartHMAStringStyle;
 
 public class ExceptionText implements Serializable {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	private String prefix;
-	private String text;
-	private final Map<String, Object> additionalProperties = new HashMap<String, Object>();
+    private String prefix;
+    private String text;
+    private final Map<String, Object> additionalProperties = new HashMap<>();
 
-	public String getPrefix() {
-		return prefix;
-	}
+    public String getPrefix() {
+        return prefix;
+    }
 
-	public void setPrefix(String prefix) {
-		this.prefix = prefix;
-	}
+    public void setPrefix(String prefix) {
+        this.prefix = prefix;
+    }
 
-	public ExceptionText withPrefix(String prefix) {
-		this.prefix = prefix;
-		return this;
-	}
+    public ExceptionText withPrefix(String prefix) {
+        this.prefix = prefix;
+        return this;
+    }
 
-	public String getText() {
-		return text;
-	}
+    public String getText() {
+        return text;
+    }
 
-	public void setText(String text) {
-		this.text = text;
-	}
+    public void setText(String text) {
+        this.text = text;
+    }
 
-	public ExceptionText withText(String text) {
-		this.text = text;
-		return this;
-	}
+    public ExceptionText withText(String text) {
+        this.text = text;
+        return this;
+    }
 
-	@Override
-	public String toString() {
-		ToStringStyle style = new SmartHMAStringStyle();
-		ToStringBuilder.setDefaultStyle(style);
-		return ToStringBuilder.reflectionToString(this, style);
-	}
+    @Override
+    public String toString() {
+        ToStringStyle style = new SmartHMAStringStyle();
+        ToStringBuilder.setDefaultStyle(style);
+        return ToStringBuilder.reflectionToString(this, style);
+    }
 
-	@Override
-	public int hashCode() {
-		return HashCodeBuilder.reflectionHashCode(this);
-	}
+    @Override
+    public int hashCode() {
+        return HashCodeBuilder.reflectionHashCode(this);
+    }
 
-	@Override
-	public boolean equals(Object other) {
-		return EqualsBuilder.reflectionEquals(this, other);
-	}
+    @Override
+    public boolean equals(Object other) {
+        return EqualsBuilder.reflectionEquals(this, other);
+    }
 
-	public Map<String, Object> getAdditionalProperties() {
-		return this.additionalProperties;
-	}
 
-	public void setAdditionalProperty(String name, Object value) {
-		this.additionalProperties.put(name, value);
-	}
-
-	public ExceptionText withAdditionalProperty(String name, Object value) {
-		this.additionalProperties.put(name, value);
-		return this;
-	}
+    public ExceptionText withAdditionalProperty(String name, Object value) {
+        this.additionalProperties.put(name, value);
+        return this;
+    }
 
 }

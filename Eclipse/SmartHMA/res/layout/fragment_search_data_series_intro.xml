@@ -9,7 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#FFFFFF"
-        android:orientation="vertical" >
+        android:orientation="vertical">
 
         <TextView
             android:id="@+id/search_ds_intro_header"
@@ -42,14 +42,14 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:background="#FFFFFF"
-            android:orientation="horizontal" >
+            android:orientation="horizontal">
 
             <LinearLayout
                 android:id="@+id/search_frag_ds_intro_layout_field_titles"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:background="#FFFFFF"
-                android:orientation="vertical" >
+                android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/search_frag_ds_intro_search_terms_title"
@@ -106,49 +106,49 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="#FFFFFF"
-                android:orientation="vertical" >
+                android:orientation="vertical">
 
                 <TextView
                     style="@style/styleDataseriesIntroTitles"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/_" />
+                    android:text="@string/sep" />
 
                 <TextView
                     style="@style/styleDataseriesIntroTitles"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/_" />
+                    android:text="@string/sep" />
 
                 <TextView
                     style="@style/styleDataseriesIntroTitles"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/_" />
+                    android:text="@string/sep" />
 
                 <TextView
                     style="@style/styleDataseriesIntroTitles"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/_" />
+                    android:text="@string/sep" />
 
                 <TextView
                     style="@style/styleDataseriesIntroTitles"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/_" />
+                    android:text="@string/sep" />
 
                 <TextView
                     style="@style/styleDataseriesIntroTitles"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/_" />
+                    android:text="@string/sep" />
 
                 <TextView
                     style="@style/styleDataseriesIntroTitles"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/_" />
+                    android:text="@string/sep" />
             </LinearLayout>
 
             <LinearLayout
@@ -156,7 +156,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="#FFFFFF"
-                android:orientation="vertical" >
+                android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/search_frag_ds_intro_search_terms_value"
@@ -207,7 +207,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal|center"
-            android:orientation="horizontal" >
+            android:orientation="horizontal">
 
             <TextView
                 style="@style/styleDataseriesIntroValues"
@@ -239,7 +239,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal|center"
-            android:orientation="horizontal" >
+            android:orientation="horizontal">
 
             <Button
                 android:id="@+id/search_frag_ds_intro_button_first"
@@ -281,6 +281,32 @@
                 android:text="@string/last_"
                 android:textColor="#A9A9A9" />
         </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/search_frag_ds_intro_layout_sort_options"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#FFFFFF"
+            android:gravity="center_horizontal|center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/search_frag_ds_intro_sort_title"
+                style="@style/styleDataseriesIntroTitles"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/sort_by" />
+
+            <Spinner
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/search_frag_ds_intro_spinner_sort_type"
+                android:layout_gravity="right"
+                android:entries="@array/sorting_modes"
+                android:paddingTop="8dp"
+                android:spinnerMode="dropdown" />
+        </LinearLayout>
+
     </LinearLayout>
 
 </ScrollView>

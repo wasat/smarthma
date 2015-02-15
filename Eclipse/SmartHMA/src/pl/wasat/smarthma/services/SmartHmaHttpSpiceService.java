@@ -8,10 +8,10 @@ import com.octo.android.robospice.persistence.exception.CacheCreationException;
 
 public class SmartHmaHttpSpiceService extends GoogleHttpClientSpiceService {
 
-	@Override
-	public CacheManager createCacheManager(Application application)
-			throws CacheCreationException {
-		return new CacheManager();
-	}
+    @Override
+    public CacheManager createCacheManager(Application application)
+            throws CacheCreationException {
+        return new CacheManager();
+    }
 
 }

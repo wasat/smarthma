@@ -1,7 +1,5 @@
 package pl.wasat.smarthma.ui.frags.news;
 
-import pl.wasat.smarthma.R;
-import pl.wasat.smarthma.services.NewsRssServiceNoAsync;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
@@ -11,11 +9,14 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ListView;
 
+import pl.wasat.smarthma.R;
+import pl.wasat.smarthma.services.NewsRssServiceNoAsync;
+
 public class NewsListFragment extends ListFragment {
 
     private static final String STATE_ACTIVATED_POSITION = "activated_position";
     public static final String BLOG_URL = "http://www.esa.int/rssfeed/EOB";
-    
+
     private Callbacks mCallbacks = sDummyCallbacks;
     private int mActivatedPosition = ListView.INVALID_POSITION;
 
@@ -30,7 +31,7 @@ public class NewsListFragment extends ListFragment {
     };
 
     public NewsListFragment() {
-    	setHasOptionsMenu(true);	//this enables us to set actionbar from fragment
+        setHasOptionsMenu(true);    //this enables us to set actionbar from fragment
     }
 
     @Override
@@ -92,24 +93,24 @@ public class NewsListFragment extends ListFragment {
 
         mActivatedPosition = position;
     }
-    
-    
+
+
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.news_refreshmenu, menu);
     }
-    
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.actionbar_refresh) {
-        	refreshList();
-        	return true;
+            refreshList();
+            return true;
         }
         return false;
     }
-    
-    private void refreshList(){
+
+    private void refreshList() {
         NewsRssServiceNoAsync rssService = new NewsRssServiceNoAsync(this);
         rssService.exec();
     }

@@ -1,7 +1,5 @@
 package pl.wasat.smarthma.customviews;
 
-import pl.wasat.smarthma.R;
-import pl.wasat.smarthma.model.feed.Entry;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.widget.ImageView;
@@ -10,12 +8,15 @@ import android.widget.TextView;
 
 import com.octo.android.robospice.spicelist.SpiceListItemView;
 
-public class EntryItemView extends RelativeLayout implements SpiceListItemView<Entry> {
+import pl.wasat.smarthma.R;
+import pl.wasat.smarthma.model.om.EntryOM;
+
+public class EntryItemView extends RelativeLayout implements SpiceListItemView<EntryOM> {
 
     private TextView tvEntryTitle;
     private TextView tvEntryDates;
     private ImageView thumbImageView;
-    private Entry entry;
+    private EntryOM entry;
 
     public EntryItemView(Context context) {
         super(context);
@@ -30,7 +31,7 @@ public class EntryItemView extends RelativeLayout implements SpiceListItemView<E
     }
 
     @Override
-    public void update(Entry entry) {
+    public void update(EntryOM entry) {
         this.entry = entry;
         tvEntryTitle.setText(entry.getTitle());
         tvEntryDates.setText(entry.getPublished());
@@ -46,12 +47,12 @@ public class EntryItemView extends RelativeLayout implements SpiceListItemView<E
         return 1;
     }
 
-	/* (non-Javadoc)
-	 * @see com.octo.android.robospice.spicelist.SpiceListItemView#getData()
-	 */
-	@Override
-	public Entry getData() {
-		return entry;
-	}
+    /* (non-Javadoc)
+     * @see com.octo.android.robospice.spicelist.SpiceListItemView#getData()
+     */
+    @Override
+    public EntryOM getData() {
+        return entry;
+    }
 
 }

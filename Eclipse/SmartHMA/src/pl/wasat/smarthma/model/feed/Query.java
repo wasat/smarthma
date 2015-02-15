@@ -1,105 +1,104 @@
-
 package pl.wasat.smarthma.model.feed;
-
-import java.io.Serializable;
-import java.util.HashMap;
-import java.util.Map;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
+import java.io.Serializable;
+
 import pl.wasat.smarthma.utils.text.SmartHMAStringStyle;
 
 
 public class Query implements Serializable {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-    private String __prefix;
-    private String _count;
-    private String _dc_subject;
-    private String _eo_parentIdentifier;
-    private String _role;
+    private String prefix;
+    private String count;
+    private String dcSubject;
+    private String dcType;
+    private String eoParentIdentifier;
+    private String role;
     private String searchTerms;
-    private String _sru_recordSchema;
-    private String _startIndex;
-    private String _time_end;
-    private String _time_start;
-    private String _geo_box;
-    private final Map<String, Object> additionalProperties = new HashMap<String, Object>();
+    private String sruRecordSchema;
+    private String startIndex;
+    private String timeEnd;
+    private String timeStart;
+    private String geoBox;
+    private String geoUid;
 
-    public String get__prefix() {
-        return __prefix;
+
+    public String getPrefix() {
+        return prefix;
     }
 
-    public void set__prefix(String __prefix) {
-        this.__prefix = __prefix;
+    public void setPrefix(String prefix) {
+        this.prefix = prefix;
     }
 
-    public Query with__prefix(String __prefix) {
-        this.__prefix = __prefix;
+    public Query with_prefix(String _prefix) {
+        this.prefix = _prefix;
         return this;
     }
 
-    public String get_count() {
-        return _count;
+    public String getCount() {
+        return count;
     }
 
-    public void set_count(String _count) {
-        this._count = _count;
+    public void setCount(String count) {
+        this.count = count;
     }
 
     public Query with_count(String _count) {
-        this._count = _count;
+        this.count = _count;
         return this;
     }
 
-    public String get_dc_subject() {
-        return _dc_subject;
+    public String getDcSubject() {
+        return dcSubject;
     }
 
-    public void set_dc_subject(String _dc_subject) {
-        this._dc_subject = _dc_subject;
+    public void setDcSubject(String dcSubject) {
+        this.dcSubject = dcSubject;
     }
 
     public Query with_dc_subject(String _dc_subject) {
-        this._dc_subject = _dc_subject;
+        this.dcSubject = _dc_subject;
         return this;
     }
 
-    public String get_eo_parentIdentifier() {
-        return _eo_parentIdentifier;
+    public String getEoParentIdentifier() {
+        return eoParentIdentifier;
     }
 
-    public void set_eo_parentIdentifier(String _eo_parentIdentifier) {
-        this._eo_parentIdentifier = _eo_parentIdentifier;
+    public void setEoParentIdentifier(String eoParentIdentifier) {
+        this.eoParentIdentifier = eoParentIdentifier;
     }
 
     public Query with_eo_parentIdentifier(String _eo_parentIdentifier) {
-        this._eo_parentIdentifier = _eo_parentIdentifier;
+        this.eoParentIdentifier = _eo_parentIdentifier;
         return this;
     }
 
-    public String get_role() {
-        return _role;
+    public String getRole() {
+        return role;
     }
 
-    public void set_role(String _role) {
-        this._role = _role;
+    public void setRole(String role) {
+        this.role = role;
     }
 
     public Query with_role(String _role) {
-        this._role = _role;
+        this.role = _role;
         return this;
     }
-    
-    public String get_searchTerms() {
+
+    public String getSearchTerms() {
         return searchTerms;
     }
 
-    public void set_searchTerms(String searchTerms) {
+    public void setSearchTerms(String searchTerms) {
         this.searchTerms = searchTerms;
     }
 
@@ -108,80 +107,98 @@ public class Query implements Serializable {
         return this;
     }
 
-    public String get_sru_recordSchema() {
-        return _sru_recordSchema;
+    public String getSruRecordSchema() {
+        return sruRecordSchema;
     }
 
-    public void set_sru_recordSchema(String _sru_recordSchema) {
-        this._sru_recordSchema = _sru_recordSchema;
+    public void setSruRecordSchema(String sruRecordSchema) {
+        this.sruRecordSchema = sruRecordSchema;
     }
 
     public Query with_sru_recordSchema(String _sru_recordSchema) {
-        this._sru_recordSchema = _sru_recordSchema;
+        this.sruRecordSchema = _sru_recordSchema;
         return this;
     }
 
-    public String get_startIndex() {
-        return _startIndex;
+    public String getStartIndex() {
+        return startIndex;
     }
 
-    public void set_startIndex(String _startIndex) {
-        this._startIndex = _startIndex;
+    public void setStartIndex(String startIndex) {
+        this.startIndex = startIndex;
     }
 
     public Query with_startIndex(String _startIndex) {
-        this._startIndex = _startIndex;
+        this.startIndex = _startIndex;
         return this;
     }
 
-    public String get_time_end() {
-        return _time_end;
+    public String getTimeEnd() {
+        return timeEnd;
     }
 
-    public void set_time_end(String _time_end) {
-        this._time_end = _time_end;
+    public void setTimeEnd(String timeEnd) {
+        this.timeEnd = timeEnd;
     }
 
     public Query with_time_end(String _time_end) {
-        this._time_end = _time_end;
+        this.timeEnd = _time_end;
         return this;
     }
 
-    public String get_time_start() {
-        return _time_start;
+    public String getTimeStart() {
+        return timeStart;
     }
 
-    public void set_time_start(String _time_start) {
-        this._time_start = _time_start;
+    public void setTimeStart(String timeStart) {
+        this.timeStart = timeStart;
     }
 
     public Query with_time_start(String _time_start) {
-        this._time_start = _time_start;
+        this.timeStart = _time_start;
         return this;
     }
 
     /**
-	 * @return the _geo_box
-	 */
-	public String get_geo_box() {
-		return _geo_box;
-	}
+     * @return the geoBox
+     */
+    public String getGeoBox() {
+        return geoBox;
+    }
 
-	/**
-	 * @param _geo_box the _geo_box to set
-	 */
-	public void set_geo_box(String _geo_box) {
-		this._geo_box = _geo_box;
-	}
-	
+    /**
+     * @param geoBox the geoBox to set
+     */
+    public void setGeoBox(String geoBox) {
+        this.geoBox = geoBox;
+    }
+
     public Query with_geo_box(String _geo_box) {
-        this._geo_box = _geo_box;
+        this.geoBox = _geo_box;
         return this;
     }
 
-	@Override
+    public String getDcType() {
+        return dcType;
+    }
+
+    public void setDcType(String dcType) {
+        this.dcType = dcType;
+    }
+
+    public String getGeoUid() {
+        return geoUid;
+    }
+
+    public void setGeoUid(String geoUid) {
+        this.geoUid = geoUid;
+    }
+
+    @Override
     public String toString() {
-            	 ToStringStyle style = new SmartHMAStringStyle(); ToStringBuilder.setDefaultStyle(style); return ToStringBuilder.reflectionToString(this, style);
+        ToStringStyle style = new SmartHMAStringStyle();
+        ToStringBuilder.setDefaultStyle(style);
+        return ToStringBuilder.reflectionToString(this, style);
     }
 
     @Override
@@ -194,12 +211,5 @@ public class Query implements Serializable {
         return EqualsBuilder.reflectionEquals(this, other);
     }
 
-    public Map<String, Object> getAdditionalProperties() {
-        return this.additionalProperties;
-    }
-
-    public void setAdditionalProperty(String name, Object value) {
-        this.additionalProperties.put(name, value);
-    }
 
 }

@@ -1,21 +1,21 @@
 package pl.wasat.smarthma.utils.text;
 
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
+
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.apache.commons.lang3.builder.ToStringStyle;
-
 public class RecursiveToSrtingStyle extends ToStringStyle {
     /**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-	private List<String> recursivePackags;
-    private int recursiveLimit = 10;
+     *
+     */
+    private static final long serialVersionUID = 1L;
+    private final List<String> recursivePackags;
+    private final int recursiveLimit = 10;
 
     public RecursiveToSrtingStyle(String... pkgs) {
         super();
@@ -26,7 +26,7 @@ public class RecursiveToSrtingStyle extends ToStringStyle {
 
     @Override
     protected void appendDetail(StringBuffer buffer, String fieldName, Object value) {
-        for(String packaz : recursivePackags) {
+        for (String packaz : recursivePackags) {
             if (value.getClass().getCanonicalName().startsWith(packaz)) {
                 buffer.append(ToStringBuilder.reflectionToString(value, this));
                 return;
@@ -34,20 +34,19 @@ public class RecursiveToSrtingStyle extends ToStringStyle {
         }
         buffer.append(value);
     }
-    
-    
-    
+
+
     @Override
     protected void appendDetail(StringBuffer buffer, String fieldName, @SuppressWarnings("rawtypes") Map map) {
         //super.appendDetail(buffer, fieldName, map);
-    	buffer.append(getArrayStart());
+        buffer.append(getArrayStart());
         int count = 0;
-        for(Entry<?, ?> entry : ((Map<? ,?>)map).entrySet()) {
+        for (Entry<?, ?> entry : ((Map<?, ?>) map).entrySet()) {
             appendDetail(buffer, fieldName, entry.getKey());
             buffer.append(getFieldNameValueSeparator());
             appendDetail(buffer, fieldName, entry.getValue());
             appendFieldSeparator(buffer);
-            if((count++) > recursiveLimit) {
+            if ((count++) > recursiveLimit) {
                 buffer.append("...");
                 break;
             }
@@ -56,14 +55,14 @@ public class RecursiveToSrtingStyle extends ToStringStyle {
         buffer.append(getArrayEnd());
     }
 
-	@Override
+    @Override
     protected void appendDetail(StringBuffer buffer, String fieldName, @SuppressWarnings("rawtypes") Collection coll) {
         appendContentStart(buffer);
         int count = 0;
-        for(Object o : coll){
+        for (Object o : coll) {
             appendDetail(buffer, fieldName, o);
             appendFieldSeparator(buffer);
-            if((count++) > recursiveLimit) {
+            if ((count++) > recursiveLimit) {
                 buffer.append("...");
                 break;
             }
