@@ -25,10 +25,6 @@ public class MultiExtentOf implements Serializable {
         this._prefix = _prefix;
     }
 
-    public MultiExtentOf with_prefix(String _prefix) {
-        this._prefix = _prefix;
-        return this;
-    }
 
     public MultiSurface getMultiSurface() {
         return multiSurface;
@@ -38,10 +34,6 @@ public class MultiExtentOf implements Serializable {
         this.multiSurface = multiSurface;
     }
 
-    public MultiExtentOf withMultiSurface(MultiSurface multiSurface) {
-        this.multiSurface = multiSurface;
-        return this;
-    }
 
     @Override
     public String toString() {

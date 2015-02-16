@@ -24,10 +24,6 @@ public class RequestMessage implements Serializable {
         this._prefix = _prefix;
     }
 
-    public RequestMessage with_prefix(String _prefix) {
-        this._prefix = _prefix;
-        return this;
-    }
 
     @Override
     public String toString() {

@@ -29,11 +29,6 @@ public class Sensor implements Serializable {
         this._prefix = _prefix;
     }
 
-    public Sensor with_prefix(String _prefix) {
-        this._prefix = _prefix;
-        return this;
-    }
-
     public SensorType getSensorType() {
         return sensorType;
     }
@@ -42,10 +37,6 @@ public class Sensor implements Serializable {
         this.sensorType = sensorType;
     }
 
-    public Sensor withSensorType(SensorType sensorType) {
-        this.sensorType = sensorType;
-        return this;
-    }
 
     public OperationalMode getOperationalMode() {
         return operationalMode;
@@ -55,10 +46,6 @@ public class Sensor implements Serializable {
         this.operationalMode = operationalMode;
     }
 
-    public Sensor withOperationalMode(OperationalMode operationalMode) {
-        this.operationalMode = operationalMode;
-        return this;
-    }
 
     public Resolution getResolution() {
         return resolution;
@@ -68,10 +55,6 @@ public class Sensor implements Serializable {
         this.resolution = resolution;
     }
 
-    public Sensor withResolution(Resolution resolution) {
-        this.resolution = resolution;
-        return this;
-    }
 
     public MeasurementType getMeasurementType() {
         return measurementType;
@@ -81,10 +64,6 @@ public class Sensor implements Serializable {
         this.measurementType = measurementType;
     }
 
-    public Sensor withMeasurementType(MeasurementType measurementType) {
-        this.measurementType = measurementType;
-        return this;
-    }
 
     public SwathIdentifier getSwathIdentifier() {
         return swathIdentifier;
@@ -92,11 +71,6 @@ public class Sensor implements Serializable {
 
     public void setSwathIdentifier(SwathIdentifier swathIdentifier) {
         this.swathIdentifier = swathIdentifier;
-    }
-
-    public Sensor withSwathIdentifier(SwathIdentifier swathIdentifier) {
-        this.swathIdentifier = swathIdentifier;
-        return this;
     }
 
     @Override

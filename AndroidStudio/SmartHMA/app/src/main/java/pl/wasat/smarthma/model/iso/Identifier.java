@@ -42,8 +42,8 @@ public class Identifier implements Serializable {
      * @param text
      *            the text to set
      */
-	/*
-	 * public void setText(String text) { Text = text; }
+    /*
+     * public void setText(String text) { Text = text; }
 	 */
 
     /**
@@ -67,29 +67,14 @@ public class Identifier implements Serializable {
         return ToStringBuilder.reflectionToString(this, style);
     }
 
-
     @Override
     public int hashCode() {
-        return new HashCodeBuilder().append(RSIdentifier)
-                // .append(Text)
-                .append(Prefix).toHashCode();
+        return HashCodeBuilder.reflectionHashCode(this);
     }
 
     @Override
     public boolean equals(Object other) {
-        if (other == this) {
-            return true;
-        }
-        if (!(other instanceof Identifier)) {
-            return false;
-        }
-        Identifier rhs = ((Identifier) other);
-        return new EqualsBuilder()
-                .append(RSIdentifier, rhs.RSIdentifier)
-                        // .append(Text, rhs.Text)
-                .append(Prefix, rhs.Prefix)
-
-                .isEquals();
+        return EqualsBuilder.reflectionEquals(this, other);
     }
 
 }

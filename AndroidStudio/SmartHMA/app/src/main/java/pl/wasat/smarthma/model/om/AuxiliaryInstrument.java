@@ -27,10 +27,6 @@ public class AuxiliaryInstrument implements Serializable {
         this._prefix = _prefix;
     }
 
-    public AuxiliaryInstrument with_prefix(String _prefix) {
-        this._prefix = _prefix;
-        return this;
-    }
 
     public ShortName getShortName() {
         return shortName;
@@ -40,10 +36,6 @@ public class AuxiliaryInstrument implements Serializable {
         this.shortName = shortName;
     }
 
-    public AuxiliaryInstrument withShortName(ShortName shortName) {
-        this.shortName = shortName;
-        return this;
-    }
 
     public InstrumentType getInstrumentType() {
         return instrumentType;
@@ -53,10 +45,6 @@ public class AuxiliaryInstrument implements Serializable {
         this.instrumentType = instrumentType;
     }
 
-    public AuxiliaryInstrument withInstrumentType(InstrumentType instrumentType) {
-        this.instrumentType = instrumentType;
-        return this;
-    }
 
     public AuxiliaryInstrument getAuxiliaryInstrument() {
         return auxiliaryInstrument;
@@ -66,11 +54,6 @@ public class AuxiliaryInstrument implements Serializable {
         this.auxiliaryInstrument = auxiliaryInstrument;
     }
 
-    public AuxiliaryInstrument withAuxiliaryInstrument(
-            AuxiliaryInstrument auxiliaryInstrument) {
-        this.auxiliaryInstrument = auxiliaryInstrument;
-        return this;
-    }
 
     @Override
     public String toString() {

@@ -53,26 +53,14 @@ public class Phone implements Serializable {
         return ToStringBuilder.reflectionToString(this, style);
     }
 
-
     @Override
     public int hashCode() {
-        return new HashCodeBuilder().append(CITelephone).append(Prefix)
-                .toHashCode();
+        return HashCodeBuilder.reflectionHashCode(this);
     }
 
     @Override
     public boolean equals(Object other) {
-        if (other == this) {
-            return true;
-        }
-        if (!(other instanceof Phone)) {
-            return false;
-        }
-        Phone rhs = ((Phone) other);
-        return new EqualsBuilder().append(CITelephone, rhs.CITelephone)
-                .append(Prefix, rhs.Prefix)
-
-                .isEquals();
+        return EqualsBuilder.reflectionEquals(this, other);
     }
 
 }

@@ -26,10 +26,6 @@ public class ArchivingInformation implements Serializable {
         this._prefix = _prefix;
     }
 
-    public ArchivingInformation with_prefix(String _prefix) {
-        this._prefix = _prefix;
-        return this;
-    }
 
     public ArchivingCenter getArchivingCenter() {
         return archivingCenter;
@@ -39,11 +35,6 @@ public class ArchivingInformation implements Serializable {
         this.archivingCenter = archivingCenter;
     }
 
-    public ArchivingInformation withArchivingCenter(
-            ArchivingCenter archivingCenter) {
-        this.archivingCenter = archivingCenter;
-        return this;
-    }
 
     public ArchivingDate getArchivingDate() {
         return archivingDate;
@@ -51,11 +42,6 @@ public class ArchivingInformation implements Serializable {
 
     public void setArchivingDate(ArchivingDate archivingDate) {
         this.archivingDate = archivingDate;
-    }
-
-    public ArchivingInformation withArchivingDate(ArchivingDate archivingDate) {
-        this.archivingDate = archivingDate;
-        return this;
     }
 
     @Override

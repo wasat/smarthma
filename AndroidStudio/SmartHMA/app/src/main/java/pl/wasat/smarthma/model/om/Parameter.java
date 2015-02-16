@@ -25,11 +25,6 @@ public class Parameter implements Serializable {
         this._prefix = _prefix;
     }
 
-    public Parameter with_prefix(String _prefix) {
-        this._prefix = _prefix;
-        return this;
-    }
-
     public ParameterInformation getParameterInformation() {
         return parameterInformation;
     }
@@ -39,11 +34,6 @@ public class Parameter implements Serializable {
         this.parameterInformation = parameterInformation;
     }
 
-    public Parameter withParameterInformation(
-            ParameterInformation parameterInformation) {
-        this.parameterInformation = parameterInformation;
-        return this;
-    }
 
     @Override
     public String toString() {

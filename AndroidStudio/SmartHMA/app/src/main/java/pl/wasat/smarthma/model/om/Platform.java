@@ -26,10 +26,6 @@ public class Platform implements Serializable {
         this._prefix = _prefix;
     }
 
-    public Platform with_prefix(String _prefix) {
-        this._prefix = _prefix;
-        return this;
-    }
 
     public ShortName getShortName() {
         return shortName;
@@ -39,10 +35,6 @@ public class Platform implements Serializable {
         this.shortName = shortName;
     }
 
-    public Platform withShortName(ShortName shortName) {
-        this.shortName = shortName;
-        return this;
-    }
 
     public SerialIdentifier getSerialIdentifier() {
         return serialIdentifier;
@@ -50,11 +42,6 @@ public class Platform implements Serializable {
 
     public void setSerialIdentifier(SerialIdentifier serialIdentifier) {
         this.serialIdentifier = serialIdentifier;
-    }
-
-    public Platform withSerialIdentifier(SerialIdentifier serialIdentifier) {
-        this.serialIdentifier = serialIdentifier;
-        return this;
     }
 
     @Override

@@ -25,11 +25,6 @@ public class Processing implements Serializable {
         this._prefix = _prefix;
     }
 
-    public Processing with_prefix(String _prefix) {
-        this._prefix = _prefix;
-        return this;
-    }
-
     public ProcessingInformation getProcessingInformation() {
         return processingInformation;
     }
@@ -39,11 +34,6 @@ public class Processing implements Serializable {
         this.processingInformation = processingInformation;
     }
 
-    public Processing withProcessingInformation(
-            ProcessingInformation processingInformation) {
-        this.processingInformation = processingInformation;
-        return this;
-    }
 
     @Override
     public String toString() {

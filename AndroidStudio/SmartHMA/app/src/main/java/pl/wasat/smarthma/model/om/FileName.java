@@ -25,10 +25,6 @@ public class FileName implements Serializable {
         this._prefix = _prefix;
     }
 
-    public FileName with_prefix(String _prefix) {
-        this._prefix = _prefix;
-        return this;
-    }
 
     public ServiceReference getServiceReference() {
         return serviceReference;
@@ -38,10 +34,6 @@ public class FileName implements Serializable {
         this.serviceReference = serviceReference;
     }
 
-    public FileName withServiceReference(ServiceReference serviceReference) {
-        this.serviceReference = serviceReference;
-        return this;
-    }
 
     @Override
     public String toString() {

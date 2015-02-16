@@ -29,22 +29,12 @@ public class Phenomenon implements Serializable {
         this._prefix = _prefix;
     }
 
-    public Phenomenon with_prefix(String _prefix) {
-        this._prefix = _prefix;
-        return this;
-    }
-
     public Name getName() {
         return name;
     }
 
     public void setName(Name name) {
         this.name = name;
-    }
-
-    public Phenomenon withName(Name name) {
-        this.name = name;
-        return this;
     }
 
     public String get_xmlns_ns1() {
@@ -55,22 +45,12 @@ public class Phenomenon implements Serializable {
         this._xmlns_ns1 = _xmlns_ns1;
     }
 
-    public Phenomenon with_xmlns_ns1(String _xmlns_ns1) {
-        this._xmlns_ns1 = _xmlns_ns1;
-        return this;
-    }
-
     public String get_ns1_id() {
         return _ns1_id;
     }
 
     public void set_ns1_id(String _ns1_id) {
         this._ns1_id = _ns1_id;
-    }
-
-    public Phenomenon with_ns1_id(String _ns1_id) {
-        this._ns1_id = _ns1_id;
-        return this;
     }
 
     public String get_xmlns_gml31() {
@@ -81,22 +61,12 @@ public class Phenomenon implements Serializable {
         this._xmlns_gml31 = _xmlns_gml31;
     }
 
-    public Phenomenon with_xmlns_gml31(String _xmlns_gml31) {
-        this._xmlns_gml31 = _xmlns_gml31;
-        return this;
-    }
-
     public String get_gml31_id() {
         return _gml31_id;
     }
 
     public void set_gml31_id(String _gml31_id) {
         this._gml31_id = _gml31_id;
-    }
-
-    public Phenomenon with_gml31_id(String _gml31_id) {
-        this._gml31_id = _gml31_id;
-        return this;
     }
 
     @Override

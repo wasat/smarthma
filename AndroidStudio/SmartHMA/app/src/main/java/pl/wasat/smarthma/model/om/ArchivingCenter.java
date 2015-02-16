@@ -26,10 +26,6 @@ public class ArchivingCenter implements Serializable {
         this._prefix = _prefix;
     }
 
-    public ArchivingCenter with_prefix(String _prefix) {
-        this._prefix = _prefix;
-        return this;
-    }
 
     public String getcodeSpace() {
         return codeSpace;
@@ -39,22 +35,12 @@ public class ArchivingCenter implements Serializable {
         this.codeSpace = codeSpace;
     }
 
-    public ArchivingCenter withcodeSpace(String codeSpace) {
-        this.codeSpace = codeSpace;
-        return this;
-    }
-
     public String get_text() {
         return _text;
     }
 
     public void set_text(String _text) {
         this._text = _text;
-    }
-
-    public ArchivingCenter with_text(String _text) {
-        this._text = _text;
-        return this;
     }
 
     @Override

@@ -26,10 +26,6 @@ public class TotalResults implements Serializable {
         this.prefix = prefix;
     }
 
-    public TotalResults with_prefix(String _prefix) {
-        this.prefix = _prefix;
-        return this;
-    }
 
     public String getText() {
         return text;
@@ -37,11 +33,6 @@ public class TotalResults implements Serializable {
 
     public void setText(String _text) {
         this.text = _text;
-    }
-
-    public TotalResults with_text(String _text) {
-        this.text = _text;
-        return this;
     }
 
     @Override

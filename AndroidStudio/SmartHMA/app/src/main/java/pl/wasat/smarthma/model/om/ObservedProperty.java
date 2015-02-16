@@ -25,10 +25,6 @@ public class ObservedProperty implements Serializable {
         this._prefix = _prefix;
     }
 
-    public ObservedProperty with_prefix(String _prefix) {
-        this._prefix = _prefix;
-        return this;
-    }
 
     public String get_nilReason() {
         return _nilReason;
@@ -38,10 +34,6 @@ public class ObservedProperty implements Serializable {
         this._nilReason = _nilReason;
     }
 
-    public ObservedProperty with_nilReason(String _nilReason) {
-        this._nilReason = _nilReason;
-        return this;
-    }
 
     @Override
     public String toString() {

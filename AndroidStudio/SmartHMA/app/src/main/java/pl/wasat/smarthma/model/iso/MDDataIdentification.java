@@ -161,35 +161,14 @@ public class MDDataIdentification implements Serializable {
         return ToStringBuilder.reflectionToString(this, style);
     }
 
-
     @Override
     public int hashCode() {
-        return new HashCodeBuilder().append(citation).append(_abstract)
-                .append(pointOfContact).append(descriptiveKeywords)
-                .append(resourceConstraints).append(language)
-                .append(topicCategory).append(extents).append(Prefix)
-                .toHashCode();
+        return HashCodeBuilder.reflectionHashCode(this);
     }
 
     @Override
     public boolean equals(Object other) {
-        if (other == this) {
-            return true;
-        }
-        if (!(other instanceof MDDataIdentification)) {
-            return false;
-        }
-        MDDataIdentification rhs = ((MDDataIdentification) other);
-        return new EqualsBuilder().append(citation, rhs.citation)
-                .append(_abstract, rhs._abstract)
-                .append(pointOfContact, rhs.pointOfContact)
-                .append(descriptiveKeywords, rhs.descriptiveKeywords)
-                .append(resourceConstraints, rhs.resourceConstraints)
-                .append(language, rhs.language)
-                .append(topicCategory, rhs.topicCategory)
-                .append(extents, rhs.extents).append(Prefix, rhs.Prefix)
-
-                .isEquals();
+        return EqualsBuilder.reflectionEquals(this, other);
     }
 
 }

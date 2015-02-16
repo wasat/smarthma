@@ -37,10 +37,6 @@ public class Query implements Serializable {
         this.prefix = prefix;
     }
 
-    public Query with_prefix(String _prefix) {
-        this.prefix = _prefix;
-        return this;
-    }
 
     public String getCount() {
         return count;
@@ -50,10 +46,6 @@ public class Query implements Serializable {
         this.count = count;
     }
 
-    public Query with_count(String _count) {
-        this.count = _count;
-        return this;
-    }
 
     public String getDcSubject() {
         return dcSubject;
@@ -63,10 +55,6 @@ public class Query implements Serializable {
         this.dcSubject = dcSubject;
     }
 
-    public Query with_dc_subject(String _dc_subject) {
-        this.dcSubject = _dc_subject;
-        return this;
-    }
 
     public String getEoParentIdentifier() {
         return eoParentIdentifier;
@@ -76,10 +64,6 @@ public class Query implements Serializable {
         this.eoParentIdentifier = eoParentIdentifier;
     }
 
-    public Query with_eo_parentIdentifier(String _eo_parentIdentifier) {
-        this.eoParentIdentifier = _eo_parentIdentifier;
-        return this;
-    }
 
     public String getRole() {
         return role;
@@ -87,11 +71,6 @@ public class Query implements Serializable {
 
     public void setRole(String role) {
         this.role = role;
-    }
-
-    public Query with_role(String _role) {
-        this.role = _role;
-        return this;
     }
 
     public String getSearchTerms() {
@@ -102,11 +81,6 @@ public class Query implements Serializable {
         this.searchTerms = searchTerms;
     }
 
-    public Query with_searchTerms(String searchTerms) {
-        this.searchTerms = searchTerms;
-        return this;
-    }
-
     public String getSruRecordSchema() {
         return sruRecordSchema;
     }
@@ -115,10 +89,6 @@ public class Query implements Serializable {
         this.sruRecordSchema = sruRecordSchema;
     }
 
-    public Query with_sru_recordSchema(String _sru_recordSchema) {
-        this.sruRecordSchema = _sru_recordSchema;
-        return this;
-    }
 
     public String getStartIndex() {
         return startIndex;
@@ -126,11 +96,6 @@ public class Query implements Serializable {
 
     public void setStartIndex(String startIndex) {
         this.startIndex = startIndex;
-    }
-
-    public Query with_startIndex(String _startIndex) {
-        this.startIndex = _startIndex;
-        return this;
     }
 
     public String getTimeEnd() {
@@ -141,10 +106,6 @@ public class Query implements Serializable {
         this.timeEnd = timeEnd;
     }
 
-    public Query with_time_end(String _time_end) {
-        this.timeEnd = _time_end;
-        return this;
-    }
 
     public String getTimeStart() {
         return timeStart;
@@ -154,10 +115,6 @@ public class Query implements Serializable {
         this.timeStart = timeStart;
     }
 
-    public Query with_time_start(String _time_start) {
-        this.timeStart = _time_start;
-        return this;
-    }
 
     /**
      * @return the geoBox
@@ -173,10 +130,6 @@ public class Query implements Serializable {
         this.geoBox = geoBox;
     }
 
-    public Query with_geo_box(String _geo_box) {
-        this.geoBox = _geo_box;
-        return this;
-    }
 
     public String getDcType() {
         return dcType;

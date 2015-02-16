@@ -52,26 +52,13 @@ public class Role implements Serializable {
         return ToStringBuilder.reflectionToString(this, style);
     }
 
-
     @Override
     public int hashCode() {
-        return new HashCodeBuilder().append(CIRoleCode).append(Prefix)
-                .toHashCode();
+        return HashCodeBuilder.reflectionHashCode(this);
     }
 
     @Override
     public boolean equals(Object other) {
-        if (other == this) {
-            return true;
-        }
-        if (!(other instanceof Role)) {
-            return false;
-        }
-        Role rhs = ((Role) other);
-        return new EqualsBuilder().append(CIRoleCode, rhs.CIRoleCode)
-                .append(Prefix, rhs.Prefix)
-
-                .isEquals();
+        return EqualsBuilder.reflectionEquals(this, other);
     }
-
 }

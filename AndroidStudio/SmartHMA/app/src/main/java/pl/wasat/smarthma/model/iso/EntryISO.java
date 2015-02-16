@@ -217,33 +217,14 @@ public class EntryISO implements Serializable {
         return ToStringBuilder.reflectionToString(this, style);
     }
 
-
     @Override
     public int hashCode() {
-        return new HashCodeBuilder().append(id).append(title)
-                .append(identifier).append(updated).append(date)
-                .append(polygon).append(summary).append(link)
-                .append(MDMetadata).append(XmlLang)
-                .toHashCode();
+        return HashCodeBuilder.reflectionHashCode(this);
     }
 
     @Override
     public boolean equals(Object other) {
-        if (other == this) {
-            return true;
-        }
-        if (!(other instanceof EntryISO)) {
-            return false;
-        }
-        EntryISO rhs = ((EntryISO) other);
-        return new EqualsBuilder().append(id, rhs.id).append(title, rhs.title)
-                .append(identifier, rhs.identifier)
-                .append(updated, rhs.updated).append(date, rhs.date)
-                .append(polygon, rhs.polygon).append(summary, rhs.summary)
-                .append(link, rhs.link).append(MDMetadata, rhs.MDMetadata)
-                .append(XmlLang, rhs.XmlLang)
-
-                .isEquals();
+        return EqualsBuilder.reflectionEquals(this, other);
     }
 
 }

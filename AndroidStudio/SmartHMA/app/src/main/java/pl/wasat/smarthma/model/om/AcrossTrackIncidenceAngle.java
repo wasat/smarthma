@@ -26,10 +26,6 @@ public class AcrossTrackIncidenceAngle implements Serializable {
         this._prefix = _prefix;
     }
 
-    public AcrossTrackIncidenceAngle with_prefix(String _prefix) {
-        this._prefix = _prefix;
-        return this;
-    }
 
     public String getuom() {
         return uom;
@@ -39,10 +35,6 @@ public class AcrossTrackIncidenceAngle implements Serializable {
         this.uom = uom;
     }
 
-    public AcrossTrackIncidenceAngle withuom(String uom) {
-        this.uom = uom;
-        return this;
-    }
 
     public String get_text() {
         return _text;
@@ -52,10 +44,6 @@ public class AcrossTrackIncidenceAngle implements Serializable {
         this._text = _text;
     }
 
-    public AcrossTrackIncidenceAngle with_text(String _text) {
-        this._text = _text;
-        return this;
-    }
 
     @Override
     public String toString() {

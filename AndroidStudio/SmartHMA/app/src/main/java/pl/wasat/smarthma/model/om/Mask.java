@@ -25,10 +25,6 @@ public class Mask implements Serializable {
         this._prefix = _prefix;
     }
 
-    public Mask with_prefix(String _prefix) {
-        this._prefix = _prefix;
-        return this;
-    }
 
     public MaskInformation getMaskInformation() {
         return maskInformation;
@@ -38,10 +34,6 @@ public class Mask implements Serializable {
         this.maskInformation = maskInformation;
     }
 
-    public Mask withMaskInformation(MaskInformation maskInformation) {
-        this.maskInformation = maskInformation;
-        return this;
-    }
 
     @Override
     public String toString() {

@@ -26,10 +26,6 @@ public class Instrument implements Serializable {
         this._prefix = _prefix;
     }
 
-    public Instrument with_prefix(String _prefix) {
-        this._prefix = _prefix;
-        return this;
-    }
 
     public ShortName getShortName() {
         return shortName;
@@ -39,10 +35,6 @@ public class Instrument implements Serializable {
         this.shortName = shortName;
     }
 
-    public Instrument withShortName(ShortName shortName) {
-        this.shortName = shortName;
-        return this;
-    }
 
     public InstrumentType getInstrumentType() {
         return instrumentType;
@@ -52,10 +44,6 @@ public class Instrument implements Serializable {
         this.instrumentType = instrumentType;
     }
 
-    public Instrument withInstrumentType(InstrumentType instrumentType) {
-        this.instrumentType = instrumentType;
-        return this;
-    }
 
     @Override
     public String toString() {

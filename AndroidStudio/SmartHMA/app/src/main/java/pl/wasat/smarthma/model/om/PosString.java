@@ -25,10 +25,6 @@ public class PosString implements Serializable {
         this._prefix = _prefix;
     }
 
-    public PosString with_prefix(String _prefix) {
-        this._prefix = _prefix;
-        return this;
-    }
 
     public String getPointsString() {
         return pointsString;
@@ -38,10 +34,6 @@ public class PosString implements Serializable {
         this.pointsString = text;
     }
 
-    public PosString withPointsString(String text) {
-        this.pointsString = text;
-        return this;
-    }
 
     @Override
     public String toString() {

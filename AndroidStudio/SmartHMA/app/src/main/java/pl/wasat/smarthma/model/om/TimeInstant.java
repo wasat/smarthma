@@ -26,10 +26,6 @@ public class TimeInstant implements Serializable {
         this._prefix = _prefix;
     }
 
-    public TimeInstant with_prefix(String _prefix) {
-        this._prefix = _prefix;
-        return this;
-    }
 
     public TimePosition getTimePosition() {
         return timePosition;
@@ -39,10 +35,6 @@ public class TimeInstant implements Serializable {
         this.timePosition = timePosition;
     }
 
-    public TimeInstant withTimePosition(TimePosition timePosition) {
-        this.timePosition = timePosition;
-        return this;
-    }
 
     public String get_gml_id() {
         return _gml_id;
@@ -52,10 +44,6 @@ public class TimeInstant implements Serializable {
         this._gml_id = _gml_id;
     }
 
-    public TimeInstant with_gml_id(String _gml_id) {
-        this._gml_id = _gml_id;
-        return this;
-    }
 
     @Override
     public String toString() {

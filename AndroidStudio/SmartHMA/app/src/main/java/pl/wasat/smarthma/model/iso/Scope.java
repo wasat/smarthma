@@ -52,26 +52,14 @@ public class Scope implements Serializable {
         return ToStringBuilder.reflectionToString(this, style);
     }
 
-
     @Override
     public int hashCode() {
-        return new HashCodeBuilder().append(DQScope).append(Prefix)
-                .toHashCode();
+        return HashCodeBuilder.reflectionHashCode(this);
     }
 
     @Override
     public boolean equals(Object other) {
-        if (other == this) {
-            return true;
-        }
-        if (!(other instanceof Scope)) {
-            return false;
-        }
-        Scope rhs = ((Scope) other);
-        return new EqualsBuilder().append(DQScope, rhs.DQScope)
-                .append(Prefix, rhs.Prefix)
-
-                .isEquals();
+        return EqualsBuilder.reflectionEquals(this, other);
     }
 
 }

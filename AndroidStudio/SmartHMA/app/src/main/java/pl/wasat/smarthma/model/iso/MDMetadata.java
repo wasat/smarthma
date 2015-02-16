@@ -354,47 +354,14 @@ public class MDMetadata implements Serializable {
         return ToStringBuilder.reflectionToString(this, style);
     }
 
-
     @Override
     public int hashCode() {
-        return new HashCodeBuilder().append(fileIdentifier).append(language)
-                .append(hierarchyLevel).append(contact).append(dateStamp)
-                .append(metadataStandardName).append(metadataStandardVersion)
-                .append(identificationInfo).append(dataQualityInfo)
-                .append(XmlnsGmd).append(Xmlns).append(XmlnsGco)
-                .append(XmlnsGmx).append(XmlnsGsr).append(XmlnsGss)
-                .append(XmlnsGts).append(XmlnsXsi).append(XmlnsGml)
-                .append(XmlnsXlink).append(Id).append(XsiSchemaLocation)
-                .append(Prefix).toHashCode();
+        return HashCodeBuilder.reflectionHashCode(this);
     }
 
     @Override
     public boolean equals(Object other) {
-        if (other == this) {
-            return true;
-        }
-        if (!(other instanceof MDMetadata)) {
-            return false;
-        }
-        MDMetadata rhs = ((MDMetadata) other);
-        return new EqualsBuilder().append(fileIdentifier, rhs.fileIdentifier)
-                .append(language, rhs.language)
-                .append(hierarchyLevel, rhs.hierarchyLevel)
-                .append(contact, rhs.contact).append(dateStamp, rhs.dateStamp)
-                .append(metadataStandardName, rhs.metadataStandardName)
-                .append(metadataStandardVersion, rhs.metadataStandardVersion)
-                .append(identificationInfo, rhs.identificationInfo)
-                .append(dataQualityInfo, rhs.dataQualityInfo)
-                .append(XmlnsGmd, rhs.XmlnsGmd).append(Xmlns, rhs.Xmlns)
-                .append(XmlnsGco, rhs.XmlnsGco).append(XmlnsGmx, rhs.XmlnsGmx)
-                .append(XmlnsGsr, rhs.XmlnsGsr).append(XmlnsGss, rhs.XmlnsGss)
-                .append(XmlnsGts, rhs.XmlnsGts).append(XmlnsXsi, rhs.XmlnsXsi)
-                .append(XmlnsGml, rhs.XmlnsGml)
-                .append(XmlnsXlink, rhs.XmlnsXlink).append(Id, rhs.Id)
-                .append(XsiSchemaLocation, rhs.XsiSchemaLocation)
-                .append(Prefix, rhs.Prefix)
-
-                .isEquals();
+        return EqualsBuilder.reflectionEquals(this, other);
     }
 
 }

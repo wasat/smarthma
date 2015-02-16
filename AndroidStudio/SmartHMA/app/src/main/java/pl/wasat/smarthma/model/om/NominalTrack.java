@@ -25,11 +25,6 @@ public class NominalTrack implements Serializable {
         this._prefix = _prefix;
     }
 
-    public NominalTrack with_prefix(String _prefix) {
-        this._prefix = _prefix;
-        return this;
-    }
-
     public MultiCurve getMultiCurve() {
         return multiCurve;
     }
@@ -38,10 +33,6 @@ public class NominalTrack implements Serializable {
         this.multiCurve = multiCurve;
     }
 
-    public NominalTrack withMultiCurve(MultiCurve multiCurve) {
-        this.multiCurve = multiCurve;
-        return this;
-    }
 
     @Override
     public String toString() {

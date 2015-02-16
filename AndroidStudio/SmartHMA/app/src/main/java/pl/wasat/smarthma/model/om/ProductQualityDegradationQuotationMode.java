@@ -25,10 +25,6 @@ public class ProductQualityDegradationQuotationMode implements Serializable {
         this._prefix = _prefix;
     }
 
-    public ProductQualityDegradationQuotationMode with_prefix(String _prefix) {
-        this._prefix = _prefix;
-        return this;
-    }
 
     public String get_text() {
         return _text;
@@ -38,10 +34,6 @@ public class ProductQualityDegradationQuotationMode implements Serializable {
         this._text = _text;
     }
 
-    public ProductQualityDegradationQuotationMode with_text(String _text) {
-        this._text = _text;
-        return this;
-    }
 
     @Override
     public String toString() {

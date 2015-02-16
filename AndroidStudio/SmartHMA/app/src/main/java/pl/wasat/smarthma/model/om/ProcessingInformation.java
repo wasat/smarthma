@@ -34,22 +34,12 @@ public class ProcessingInformation implements Serializable {
         this._prefix = _prefix;
     }
 
-    public ProcessingInformation with_prefix(String _prefix) {
-        this._prefix = _prefix;
-        return this;
-    }
-
     public Method getMethod() {
         return method;
     }
 
     public void setMethod(Method method) {
         this.method = method;
-    }
-
-    public ProcessingInformation withMethod(Method method) {
-        this.method = method;
-        return this;
     }
 
     public ProcessorName getProcessorName() {
@@ -60,11 +50,6 @@ public class ProcessingInformation implements Serializable {
         this.processorName = processorName;
     }
 
-    public ProcessingInformation withProcessorName(ProcessorName processorName) {
-        this.processorName = processorName;
-        return this;
-    }
-
     public ProcessorVersion getProcessorVersion() {
         return processorVersion;
     }
@@ -73,11 +58,6 @@ public class ProcessingInformation implements Serializable {
         this.processorVersion = processorVersion;
     }
 
-    public ProcessingInformation withProcessorVersion(
-            ProcessorVersion processorVersion) {
-        this.processorVersion = processorVersion;
-        return this;
-    }
 
     public ProcessingCenter getProcessingCenter() {
         return processingCenter;
@@ -85,12 +65,6 @@ public class ProcessingInformation implements Serializable {
 
     public void setProcessingCenter(ProcessingCenter processingCenter) {
         this.processingCenter = processingCenter;
-    }
-
-    public ProcessingInformation withProcessingCenter(
-            ProcessingCenter processingCenter) {
-        this.processingCenter = processingCenter;
-        return this;
     }
 
     public ProcessingDate getProcessingDate() {
@@ -101,24 +75,12 @@ public class ProcessingInformation implements Serializable {
         this.processingDate = processingDate;
     }
 
-    public ProcessingInformation withProcessingDate(
-            ProcessingDate processingDate) {
-        this.processingDate = processingDate;
-        return this;
-    }
-
     public ProcessingMode getProcessingMode() {
         return processingMode;
     }
 
     public void setProcessingMode(ProcessingMode processingMode) {
         this.processingMode = processingMode;
-    }
-
-    public ProcessingInformation withProcessingMode(
-            ProcessingMode processingMode) {
-        this.processingMode = processingMode;
-        return this;
     }
 
     public GroundTrackUncertainty getGroundTrackUncertainty() {
@@ -130,12 +92,6 @@ public class ProcessingInformation implements Serializable {
         this.groundTrackUncertainty = groundTrackUncertainty;
     }
 
-    public ProcessingInformation withGroundTrackUncertainty(
-            GroundTrackUncertainty groundTrackUncertainty) {
-        this.groundTrackUncertainty = groundTrackUncertainty;
-        return this;
-    }
-
     public List<SamplingRate> getSamplingRate() {
         return samplingRate;
     }
@@ -144,11 +100,6 @@ public class ProcessingInformation implements Serializable {
         this.samplingRate = samplingRate;
     }
 
-    public ProcessingInformation withSamplingRate(
-            List<SamplingRate> samplingRate) {
-        this.samplingRate = samplingRate;
-        return this;
-    }
 
     @Override
     public String toString() {

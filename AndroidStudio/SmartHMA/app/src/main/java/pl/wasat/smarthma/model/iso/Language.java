@@ -53,26 +53,14 @@ public class Language implements Serializable {
         return ToStringBuilder.reflectionToString(this, style);
     }
 
-
     @Override
     public int hashCode() {
-        return new HashCodeBuilder().append(LanguageCode).append(Prefix)
-                .toHashCode();
+        return HashCodeBuilder.reflectionHashCode(this);
     }
 
     @Override
     public boolean equals(Object other) {
-        if (other == this) {
-            return true;
-        }
-        if (!(other instanceof Language)) {
-            return false;
-        }
-        Language rhs = ((Language) other);
-        return new EqualsBuilder().append(LanguageCode, rhs.LanguageCode)
-                .append(Prefix, rhs.Prefix)
-
-                .isEquals();
+        return EqualsBuilder.reflectionEquals(this, other);
     }
 
 }

@@ -26,11 +26,6 @@ public class MinimumAltitude implements Serializable {
         this._prefix = _prefix;
     }
 
-    public MinimumAltitude with_prefix(String _prefix) {
-        this._prefix = _prefix;
-        return this;
-    }
-
     public String getuom() {
         return uom;
     }
@@ -39,22 +34,12 @@ public class MinimumAltitude implements Serializable {
         this.uom = uom;
     }
 
-    public MinimumAltitude withuom(String uom) {
-        this.uom = uom;
-        return this;
-    }
-
     public String get_text() {
         return _text;
     }
 
     public void set_text(String _text) {
         this._text = _text;
-    }
-
-    public MinimumAltitude with_text(String _text) {
-        this._text = _text;
-        return this;
     }
 
     @Override

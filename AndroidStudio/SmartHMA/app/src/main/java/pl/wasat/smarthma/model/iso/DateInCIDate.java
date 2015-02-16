@@ -52,26 +52,13 @@ public class DateInCIDate implements Serializable {
         return ToStringBuilder.reflectionToString(this, style);
     }
 
-
     @Override
     public int hashCode() {
-        return new HashCodeBuilder().append(Prefix).append(dateGco)
-                .toHashCode();
+        return HashCodeBuilder.reflectionHashCode(this);
     }
 
     @Override
     public boolean equals(Object other) {
-        if (other == this) {
-            return true;
-        }
-        if (!(other instanceof DateInCIDate)) {
-            return false;
-        }
-        DateInCIDate rhs = ((DateInCIDate) other);
-        return new EqualsBuilder().append(Prefix, rhs.Prefix)
-                .append(dateGco, rhs.dateGco)
-
-                .isEquals();
+        return EqualsBuilder.reflectionEquals(this, other);
     }
-
 }

@@ -25,11 +25,6 @@ public class OccultationPoints implements Serializable {
         this._prefix = _prefix;
     }
 
-    public OccultationPoints with_prefix(String _prefix) {
-        this._prefix = _prefix;
-        return this;
-    }
-
     public MultiPoint getMultiPoint() {
         return multiPoint;
     }
@@ -38,10 +33,6 @@ public class OccultationPoints implements Serializable {
         this.multiPoint = multiPoint;
     }
 
-    public OccultationPoints withMultiPoint(MultiPoint multiPoint) {
-        this.multiPoint = multiPoint;
-        return this;
-    }
 
     @Override
     public String toString() {

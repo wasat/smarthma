@@ -29,10 +29,6 @@ public class Content implements Serializable {
         this._prefix = _prefix;
     }
 
-    public Content with_prefix(String _prefix) {
-        this._prefix = _prefix;
-        return this;
-    }
 
     public Category getCategory() {
         return category;
@@ -42,10 +38,6 @@ public class Content implements Serializable {
         this.category = category;
     }
 
-    public Content withCategory(Category category) {
-        this.category = category;
-        return this;
-    }
 
     public String get_medium() {
         return _medium;
@@ -53,11 +45,6 @@ public class Content implements Serializable {
 
     public void set_medium(String _medium) {
         this._medium = _medium;
-    }
-
-    public Content with_medium(String _medium) {
-        this._medium = _medium;
-        return this;
     }
 
     public String get_type() {
@@ -68,22 +55,12 @@ public class Content implements Serializable {
         this._type = _type;
     }
 
-    public Content with_type(String _type) {
-        this._type = _type;
-        return this;
-    }
-
     public String get_url() {
         return _url;
     }
 
     public void set_url(String _url) {
         this._url = _url;
-    }
-
-    public Content with_url(String _url) {
-        this._url = _url;
-        return this;
     }
 
     @Override

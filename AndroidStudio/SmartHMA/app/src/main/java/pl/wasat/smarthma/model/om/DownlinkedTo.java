@@ -25,11 +25,6 @@ public class DownlinkedTo implements Serializable {
         this._prefix = _prefix;
     }
 
-    public DownlinkedTo with_prefix(String _prefix) {
-        this._prefix = _prefix;
-        return this;
-    }
-
     public DownlinkInformation getDownlinkInformation() {
         return downlinkInformation;
     }
@@ -38,11 +33,6 @@ public class DownlinkedTo implements Serializable {
         this.downlinkInformation = downlinkInformation;
     }
 
-    public DownlinkedTo withDownlinkInformation(
-            DownlinkInformation downlinkInformation) {
-        this.downlinkInformation = downlinkInformation;
-        return this;
-    }
 
     @Override
     public String toString() {

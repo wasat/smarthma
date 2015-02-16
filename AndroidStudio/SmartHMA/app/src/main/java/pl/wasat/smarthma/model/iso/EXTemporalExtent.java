@@ -52,26 +52,13 @@ public class EXTemporalExtent implements Serializable {
         return ToStringBuilder.reflectionToString(this, style);
     }
 
-
     @Override
     public int hashCode() {
-        return new HashCodeBuilder().append(extentInEXTemp).append(Prefix)
-                .toHashCode();
+        return HashCodeBuilder.reflectionHashCode(this);
     }
 
     @Override
     public boolean equals(Object other) {
-        if (other == this) {
-            return true;
-        }
-        if (!(other instanceof EXTemporalExtent)) {
-            return false;
-        }
-        EXTemporalExtent rhs = ((EXTemporalExtent) other);
-        return new EqualsBuilder().append(extentInEXTemp, rhs.extentInEXTemp)
-                .append(Prefix, rhs.Prefix)
-
-                .isEquals();
+        return EqualsBuilder.reflectionEquals(this, other);
     }
-
 }

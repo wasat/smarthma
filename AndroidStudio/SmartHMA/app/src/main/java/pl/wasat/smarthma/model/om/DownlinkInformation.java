@@ -25,11 +25,6 @@ public class DownlinkInformation implements Serializable {
         this._prefix = _prefix;
     }
 
-    public DownlinkInformation with_prefix(String _prefix) {
-        this._prefix = _prefix;
-        return this;
-    }
-
     public AcquisitionStation getAcquisitionStation() {
         return acquisitionStation;
     }
@@ -38,11 +33,6 @@ public class DownlinkInformation implements Serializable {
         this.acquisitionStation = acquisitionStation;
     }
 
-    public DownlinkInformation withAcquisitionStation(
-            AcquisitionStation acquisitionStation) {
-        this.acquisitionStation = acquisitionStation;
-        return this;
-    }
 
     @Override
     public String toString() {

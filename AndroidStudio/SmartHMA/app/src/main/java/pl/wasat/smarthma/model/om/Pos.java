@@ -31,10 +31,6 @@ public class Pos implements Serializable {
         this._prefix = _prefix;
     }
 
-    public Pos with_prefix(String _prefix) {
-        this._prefix = _prefix;
-        return this;
-    }
 
     public String get_text() {
         return _text;
@@ -46,11 +42,6 @@ public class Pos implements Serializable {
         toLatLng();
     }
 
-    public Pos with_text(String _text) {
-        _text = _text.replaceAll(",", " ");
-        this._text = _text;
-        return this;
-    }
 
     public LatLng getLatLng() {
         return latLng;

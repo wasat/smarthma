@@ -53,26 +53,14 @@ public class HierarchyLevel implements Serializable {
         return ToStringBuilder.reflectionToString(this, style);
     }
 
-
     @Override
     public int hashCode() {
-        return new HashCodeBuilder().append(MDScopeCode).append(Prefix)
-                .toHashCode();
+        return HashCodeBuilder.reflectionHashCode(this);
     }
 
     @Override
     public boolean equals(Object other) {
-        if (other == this) {
-            return true;
-        }
-        if (!(other instanceof HierarchyLevel)) {
-            return false;
-        }
-        HierarchyLevel rhs = ((HierarchyLevel) other);
-        return new EqualsBuilder().append(MDScopeCode, rhs.MDScopeCode)
-                .append(Prefix, rhs.Prefix)
-
-                .isEquals();
+        return EqualsBuilder.reflectionEquals(this, other);
     }
 
 }

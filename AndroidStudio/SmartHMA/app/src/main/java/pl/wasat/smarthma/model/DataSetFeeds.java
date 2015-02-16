@@ -26,11 +26,6 @@ public class DataSetFeeds implements Serializable {
         this.feed = feed;
     }
 
-    public DataSetFeeds withFeed(Feed feed) {
-        this.feed = feed;
-        return this;
-    }
-
     @Override
     public String toString() {
         ToStringStyle style = new SmartHMAStringStyle();

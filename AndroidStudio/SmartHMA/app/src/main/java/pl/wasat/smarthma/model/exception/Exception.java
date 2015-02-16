@@ -27,22 +27,12 @@ public class Exception implements Serializable {
         this.prefix = prefix;
     }
 
-    public Exception withPrefix(String prefix) {
-        this.prefix = prefix;
-        return this;
-    }
-
     public ExceptionText getExceptionText() {
         return exceptionText;
     }
 
     public void setExceptionText(ExceptionText exceptionText) {
         this.exceptionText = exceptionText;
-    }
-
-    public Exception withExceptionText(ExceptionText exceptionText) {
-        this.exceptionText = exceptionText;
-        return this;
     }
 
     public String getExceptionCode() {
@@ -53,10 +43,6 @@ public class Exception implements Serializable {
         this.exceptionCode = exceptionCode;
     }
 
-    public Exception withExceptionCode(String exceptionCode) {
-        this.exceptionCode = exceptionCode;
-        return this;
-    }
 
     public String getLocator() {
         return locator;
@@ -66,10 +52,6 @@ public class Exception implements Serializable {
         this.locator = locator;
     }
 
-    public Exception withLocator(String locator) {
-        this.locator = locator;
-        return this;
-    }
 
     @Override
     public String toString() {

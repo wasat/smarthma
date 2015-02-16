@@ -52,26 +52,14 @@ public class CIOnlineResource implements Serializable {
         return ToStringBuilder.reflectionToString(this, style);
     }
 
-
     @Override
     public int hashCode() {
-        return new HashCodeBuilder().append(linkage).append(Prefix)
-                .toHashCode();
+        return HashCodeBuilder.reflectionHashCode(this);
     }
 
     @Override
     public boolean equals(Object other) {
-        if (other == this) {
-            return true;
-        }
-        if (!(other instanceof CIOnlineResource)) {
-            return false;
-        }
-        CIOnlineResource rhs = ((CIOnlineResource) other);
-        return new EqualsBuilder().append(linkage, rhs.linkage)
-                .append(Prefix, rhs.Prefix)
-
-                .isEquals();
+        return EqualsBuilder.reflectionEquals(this, other);
     }
 
 }

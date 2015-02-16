@@ -48,11 +48,6 @@ public class EntryOM implements Serializable {
         this.id = id;
     }
 
-    public EntryOM withId(String id) {
-        this.id = id;
-        return this;
-    }
-
 
     /**
      * @return the links
@@ -68,22 +63,12 @@ public class EntryOM implements Serializable {
         this.links = links;
     }
 
-    public EntryOM withLink(ArrayList<Link> links) {
-        this.links = links;
-        return this;
-    }
-
     public String getPublished() {
         return published;
     }
 
     public void setPublished(String published) {
         this.published = published;
-    }
-
-    public EntryOM withPublished(String published) {
-        this.published = published;
-        return this;
     }
 
     public String getTitle() {
@@ -94,22 +79,12 @@ public class EntryOM implements Serializable {
         this.title = title;
     }
 
-    public EntryOM withTitle(String title) {
-        this.title = title;
-        return this;
-    }
-
     public String getUpdated() {
         return updated;
     }
 
     public void setUpdated(String updated) {
         this.updated = updated;
-    }
-
-    public EntryOM withUpdated(String updated) {
-        this.updated = updated;
-        return this;
     }
 
     public String getSummary() {
@@ -120,10 +95,6 @@ public class EntryOM implements Serializable {
         this.summary = extractCData(summary);
     }
 
-    public EntryOM withSummary(String summary) {
-        this.summary = summary;
-        return this;
-    }
 
     public EarthObservation getEarthObservation() {
         return earthObservation;
@@ -133,10 +104,6 @@ public class EntryOM implements Serializable {
         this.earthObservation = earthObservation;
     }
 
-    public EntryOM withEarthObservation(EarthObservation earthObservation) {
-        this.earthObservation = earthObservation;
-        return this;
-    }
 
     public Where getWhere() {
         return where;
@@ -146,22 +113,12 @@ public class EntryOM implements Serializable {
         this.where = where;
     }
 
-    public EntryOM withWhere(Where where) {
-        this.where = where;
-        return this;
-    }
-
     public Group getGroup() {
         return group;
     }
 
     public void setGroup(Group group) {
         this.group = group;
-    }
-
-    public EntryOM withGroup(Group group) {
-        this.group = group;
-        return this;
     }
 
 

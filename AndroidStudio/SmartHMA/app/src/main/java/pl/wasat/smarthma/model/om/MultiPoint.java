@@ -29,10 +29,6 @@ public class MultiPoint implements Serializable {
         this._prefix = _prefix;
     }
 
-    public MultiPoint with_prefix(String _prefix) {
-        this._prefix = _prefix;
-        return this;
-    }
 
     public List<PointMember> getPointMember() {
         return pointMember;
@@ -42,10 +38,6 @@ public class MultiPoint implements Serializable {
         this.pointMember = pointMember;
     }
 
-    public MultiPoint withPointMember(List<PointMember> pointMember) {
-        this.pointMember = pointMember;
-        return this;
-    }
 
     public String get_gml_id() {
         return _gml_id;
@@ -55,22 +47,12 @@ public class MultiPoint implements Serializable {
         this._gml_id = _gml_id;
     }
 
-    public MultiPoint with_gml_id(String _gml_id) {
-        this._gml_id = _gml_id;
-        return this;
-    }
-
     public String get_srsName() {
         return _srsName;
     }
 
     public void set_srsName(String _srsName) {
         this._srsName = _srsName;
-    }
-
-    public MultiPoint with_srsName(String _srsName) {
-        this._srsName = _srsName;
-        return this;
     }
 
     @Override

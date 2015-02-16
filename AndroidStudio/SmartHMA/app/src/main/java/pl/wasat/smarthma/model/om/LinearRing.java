@@ -30,11 +30,6 @@ public class LinearRing implements Serializable {
         this._prefix = _prefix;
     }
 
-    public LinearRing with_prefix(String _prefix) {
-        this._prefix = _prefix;
-        return this;
-    }
-
     public PosString getPosString() {
         return posString;
     }
@@ -52,10 +47,6 @@ public class LinearRing implements Serializable {
         }
     }
 
-    public LinearRing withPosString(PosString posString) {
-        this.posString = posString;
-        return this;
-    }
 
     public List<Pos> getPosList() {
         return posList;
@@ -89,10 +80,6 @@ public class LinearRing implements Serializable {
         return latLngPosList;
     }
 
-    public LinearRing withPosList(List<Pos> posList) {
-        this.posList = posList;
-        return this;
-    }
 
 	/*
      * public List<LatLng> getPosLatLngList() { return posLatLngList; }

@@ -27,10 +27,6 @@ public class Point implements Serializable {
         this._prefix = _prefix;
     }
 
-    public Point with_prefix(String _prefix) {
-        this._prefix = _prefix;
-        return this;
-    }
 
     public Pos getPos() {
         return pos;
@@ -38,11 +34,6 @@ public class Point implements Serializable {
 
     public void setPos(Pos pos) {
         this.pos = pos;
-    }
-
-    public Point withPos(Pos pos) {
-        this.pos = pos;
-        return this;
     }
 
     public Coordinates getCoordinates() {
@@ -53,10 +44,6 @@ public class Point implements Serializable {
         this.coordinates = coordinates;
     }
 
-    public Point withCoordinates(Coordinates coordinates) {
-        this.coordinates = coordinates;
-        return this;
-    }
 
     public String get_gml_id() {
         return _gml_id;
@@ -64,11 +51,6 @@ public class Point implements Serializable {
 
     public void set_gml_id(String _gml_id) {
         this._gml_id = _gml_id;
-    }
-
-    public Point with_gml_id(String _gml_id) {
-        this._gml_id = _gml_id;
-        return this;
     }
 
     @Override

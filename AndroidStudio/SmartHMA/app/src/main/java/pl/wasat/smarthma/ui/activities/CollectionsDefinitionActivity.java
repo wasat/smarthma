@@ -107,7 +107,7 @@ public class CollectionsDefinitionActivity extends BaseSmartHMActivity
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
 /*		case R.id.action_pref1:
-			// showThreatsDialog();
+            // showThreatsDialog();
 			break;
 		case R.id.action_pref2:
 			// showWorkspaceDialog();

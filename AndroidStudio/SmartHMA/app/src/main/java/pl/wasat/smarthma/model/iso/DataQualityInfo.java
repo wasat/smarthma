@@ -53,26 +53,13 @@ public class DataQualityInfo implements Serializable {
         return ToStringBuilder.reflectionToString(this, style);
     }
 
-
     @Override
     public int hashCode() {
-        return new HashCodeBuilder().append(DQDataQuality).append(Prefix)
-                .toHashCode();
+        return HashCodeBuilder.reflectionHashCode(this);
     }
 
     @Override
     public boolean equals(Object other) {
-        if (other == this) {
-            return true;
-        }
-        if (!(other instanceof DataQualityInfo)) {
-            return false;
-        }
-        DataQualityInfo rhs = ((DataQualityInfo) other);
-        return new EqualsBuilder().append(DQDataQuality, rhs.DQDataQuality)
-                .append(Prefix, rhs.Prefix)
-
-                .isEquals();
+        return EqualsBuilder.reflectionEquals(this, other);
     }
-
 }

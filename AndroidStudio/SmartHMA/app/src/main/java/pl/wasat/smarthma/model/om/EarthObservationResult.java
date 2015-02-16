@@ -33,10 +33,6 @@ public class EarthObservationResult implements Serializable {
         this._prefix = _prefix;
     }
 
-    public EarthObservationResult with_prefix(String _prefix) {
-        this._prefix = _prefix;
-        return this;
-    }
 
     public List<Browse> getBrowseList() {
         return browseList;
@@ -44,11 +40,6 @@ public class EarthObservationResult implements Serializable {
 
     public void setBrowseList(List<Browse> browseList) {
         this.browseList = browseList;
-    }
-
-    public EarthObservationResult withBrowse(List<Browse> browseList) {
-        this.browseList = browseList;
-        return this;
     }
 
     public Product getProduct() {
@@ -59,10 +50,6 @@ public class EarthObservationResult implements Serializable {
         this.product = product;
     }
 
-    public EarthObservationResult withProduct(Product product) {
-        this.product = product;
-        return this;
-    }
 
     /**
      * @return the parameter
@@ -86,10 +73,6 @@ public class EarthObservationResult implements Serializable {
         this.mask = mask;
     }
 
-    public EarthObservationResult withMask(List<Mask> mask) {
-        this.mask = mask;
-        return this;
-    }
 
     public CloudCoverPercentage getCloudCoverPercentage() {
         return cloudCoverPercentage;
@@ -100,11 +83,6 @@ public class EarthObservationResult implements Serializable {
         this.cloudCoverPercentage = cloudCoverPercentage;
     }
 
-    public EarthObservationResult withCloudCoverPercentage(
-            CloudCoverPercentage cloudCoverPercentage) {
-        this.cloudCoverPercentage = cloudCoverPercentage;
-        return this;
-    }
 
     public CloudCoverPercentageQuotationMode getCloudCoverPercentageQuotationMode() {
         return cloudCoverPercentageQuotationMode;
@@ -115,11 +93,6 @@ public class EarthObservationResult implements Serializable {
         this.cloudCoverPercentageQuotationMode = cloudCoverPercentageQuotationMode;
     }
 
-    public EarthObservationResult withCloudCoverPercentageQuotationMode(
-            CloudCoverPercentageQuotationMode cloudCoverPercentageQuotationMode) {
-        this.cloudCoverPercentageQuotationMode = cloudCoverPercentageQuotationMode;
-        return this;
-    }
 
     public String get_gml_id() {
         return _gml_id;
@@ -129,10 +102,6 @@ public class EarthObservationResult implements Serializable {
         this._gml_id = _gml_id;
     }
 
-    public EarthObservationResult with_gml_id(String _gml_id) {
-        this._gml_id = _gml_id;
-        return this;
-    }
 
     @Override
     public String toString() {

@@ -32,22 +32,12 @@ public class EarthObservationEquipment implements Serializable {
         this._prefix = _prefix;
     }
 
-    public EarthObservationEquipment with_prefix(String _prefix) {
-        this._prefix = _prefix;
-        return this;
-    }
-
     public List<Sensor> getSensor() {
         return sensor;
     }
 
     public void setSensor(List<Sensor> sensor) {
         this.sensor = sensor;
-    }
-
-    public EarthObservationEquipment withSensor(List<Sensor> sensor) {
-        this.sensor = sensor;
-        return this;
     }
 
     public List<Instrument> getInstrument() {
@@ -58,22 +48,12 @@ public class EarthObservationEquipment implements Serializable {
         this.instrument = instrument;
     }
 
-    public EarthObservationEquipment withInstrument(List<Instrument> instrument) {
-        this.instrument = instrument;
-        return this;
-    }
-
     public List<Platform> getPlatform() {
         return platform;
     }
 
     public void setPlatform(List<Platform> platform) {
         this.platform = platform;
-    }
-
-    public EarthObservationEquipment withPlatform(List<Platform> platform) {
-        this.platform = platform;
-        return this;
     }
 
     public AcquisitionParameters getAcquisitionParameters() {
@@ -85,11 +65,6 @@ public class EarthObservationEquipment implements Serializable {
         this.acquisitionParameters = acquisitionParameters;
     }
 
-    public EarthObservationEquipment withAcquisitionParameters(
-            AcquisitionParameters acquisitionParameters) {
-        this.acquisitionParameters = acquisitionParameters;
-        return this;
-    }
 
     public AuxiliaryInstrument getAuxiliaryInstrument() {
         return auxiliaryInstrument;
@@ -97,12 +72,6 @@ public class EarthObservationEquipment implements Serializable {
 
     public void setAuxiliaryInstrument(AuxiliaryInstrument auxiliaryInstrument) {
         this.auxiliaryInstrument = auxiliaryInstrument;
-    }
-
-    public EarthObservationEquipment withAuxiliaryInstrument(
-            AuxiliaryInstrument auxiliaryInstrument) {
-        this.auxiliaryInstrument = auxiliaryInstrument;
-        return this;
     }
 
     public String get_gml_id() {
@@ -113,10 +82,6 @@ public class EarthObservationEquipment implements Serializable {
         this._gml_id = _gml_id;
     }
 
-    public EarthObservationEquipment with_gml_id(String _gml_id) {
-        this._gml_id = _gml_id;
-        return this;
-    }
 
     @Override
     public String toString() {

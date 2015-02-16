@@ -27,22 +27,12 @@ public class LineString implements Serializable {
         this._prefix = _prefix;
     }
 
-    public LineString with_prefix(String _prefix) {
-        this._prefix = _prefix;
-        return this;
-    }
-
     public Coordinates getCoordinates() {
         return coordinates;
     }
 
     public void setCoordinates(Coordinates coordinates) {
         this.coordinates = coordinates;
-    }
-
-    public LineString withCoordinates(Coordinates coordinates) {
-        this.coordinates = coordinates;
-        return this;
     }
 
     public String get_gml_id() {
@@ -53,22 +43,12 @@ public class LineString implements Serializable {
         this._gml_id = _gml_id;
     }
 
-    public LineString with_gml_id(String _gml_id) {
-        this._gml_id = _gml_id;
-        return this;
-    }
-
     public String get_srsName() {
         return _srsName;
     }
 
     public void set_srsName(String _srsName) {
         this._srsName = _srsName;
-    }
-
-    public LineString with_srsName(String _srsName) {
-        this._srsName = _srsName;
-        return this;
     }
 
     @Override

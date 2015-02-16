@@ -29,11 +29,6 @@ public class Group implements Serializable {
         this._prefix = _prefix;
     }
 
-    public Group with_prefix(String _prefix) {
-        this._prefix = _prefix;
-        return this;
-    }
-
     public List<Content> getContent() {
         return content;
     }
@@ -42,10 +37,6 @@ public class Group implements Serializable {
         this.content = content;
     }
 
-    public Group withContent(List<Content> content) {
-        this.content = content;
-        return this;
-    }
 
     @Override
     public String toString() {

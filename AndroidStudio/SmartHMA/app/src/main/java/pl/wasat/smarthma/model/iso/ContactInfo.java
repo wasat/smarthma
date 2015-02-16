@@ -52,26 +52,13 @@ public class ContactInfo implements Serializable {
         return ToStringBuilder.reflectionToString(this, style);
     }
 
-
     @Override
     public int hashCode() {
-        return new HashCodeBuilder().append(CIContact).append(Prefix)
-                .toHashCode();
+        return HashCodeBuilder.reflectionHashCode(this);
     }
 
     @Override
     public boolean equals(Object other) {
-        if (other == this) {
-            return true;
-        }
-        if (!(other instanceof ContactInfo)) {
-            return false;
-        }
-        ContactInfo rhs = ((ContactInfo) other);
-        return new EqualsBuilder().append(CIContact, rhs.CIContact)
-                .append(Prefix, rhs.Prefix)
-
-                .isEquals();
+        return EqualsBuilder.reflectionEquals(this, other);
     }
-
 }

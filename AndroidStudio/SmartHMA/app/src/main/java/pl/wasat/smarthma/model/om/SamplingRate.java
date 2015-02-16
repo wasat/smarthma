@@ -26,10 +26,6 @@ public class SamplingRate implements Serializable {
         this._prefix = _prefix;
     }
 
-    public SamplingRate with_prefix(String _prefix) {
-        this._prefix = _prefix;
-        return this;
-    }
 
     public String getuom() {
         return uom;
@@ -39,10 +35,6 @@ public class SamplingRate implements Serializable {
         this.uom = uom;
     }
 
-    public SamplingRate withuom(String uom) {
-        this.uom = uom;
-        return this;
-    }
 
     public String get_text() {
         return _text;
@@ -50,11 +42,6 @@ public class SamplingRate implements Serializable {
 
     public void set_text(String _text) {
         this._text = _text;
-    }
-
-    public SamplingRate with_text(String _text) {
-        this._text = _text;
-        return this;
     }
 
     @Override

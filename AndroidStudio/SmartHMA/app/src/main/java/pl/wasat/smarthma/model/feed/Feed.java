@@ -32,7 +32,6 @@ public class Feed implements Serializable {
     private ISOPrefixes isoPrefixes;
     private List<EntryOM> entriesEO = new ArrayList<>();
     private List<EntryISO> entriesISO = new ArrayList<>();
-    //private Entry entry;
 
 
     public TotalResults getTotalResults() {
@@ -43,22 +42,12 @@ public class Feed implements Serializable {
         this.totalResults = totalResults;
     }
 
-    public Feed withTotalResults(TotalResults totalResults) {
-        this.totalResults = totalResults;
-        return this;
-    }
-
     public StartIndex getStartIndex() {
         return startIndex;
     }
 
     public void setStartIndex(StartIndex startIndex) {
         this.startIndex = startIndex;
-    }
-
-    public Feed withStartIndex(StartIndex startIndex) {
-        this.startIndex = startIndex;
-        return this;
     }
 
     public ItemsPerPage getItemsPerPage() {
@@ -69,22 +58,12 @@ public class Feed implements Serializable {
         this.itemsPerPage = itemsPerPage;
     }
 
-    public Feed withItemsPerPage(ItemsPerPage itemsPerPage) {
-        this.itemsPerPage = itemsPerPage;
-        return this;
-    }
-
     public Query getQuery() {
         return query;
     }
 
     public void setQuery(Query query) {
         this.query = query;
-    }
-
-    public Feed withQuery(Query query) {
-        this.query = query;
-        return this;
     }
 
     public Author getAuthor() {
@@ -95,11 +74,6 @@ public class Feed implements Serializable {
         this.author = author;
     }
 
-    public Feed withAuthor(Author author) {
-        this.author = author;
-        return this;
-    }
-
     public String getGenerator() {
         return generator;
     }
@@ -108,22 +82,12 @@ public class Feed implements Serializable {
         this.generator = generator;
     }
 
-    public Feed withGenerator(String generator) {
-        this.generator = generator;
-        return this;
-    }
-
     public String getId() {
         return id;
     }
 
     public void setId(String id) {
         this.id = id;
-    }
-
-    public Feed withId(String id) {
-        this.id = id;
-        return this;
     }
 
     public String getIdentifier() {
@@ -142,11 +106,6 @@ public class Feed implements Serializable {
         this.title = title;
     }
 
-    public Feed withTitle(String title) {
-        this.title = title;
-        return this;
-    }
-
     public String getUpdated() {
         return updated;
     }
@@ -155,22 +114,12 @@ public class Feed implements Serializable {
         this.updated = updated;
     }
 
-    public Feed withUpdated(String updated) {
-        this.updated = updated;
-        return this;
-    }
-
     public List<Link> getLink() {
         return link;
     }
 
     public void setLink(List<Link> link) {
         this.link = link;
-    }
-
-    public Feed withLink(List<Link> link) {
-        this.link = link;
-        return this;
     }
 
     public EOPrefixes getEoPrefixes() {
@@ -195,11 +144,6 @@ public class Feed implements Serializable {
 
     public void setEntriesEO(List<EntryOM> entriesEO) {
         this.entriesEO = entriesEO;
-    }
-
-    public Feed withEntries(List<EntryOM> entries) {
-        this.entriesEO = entries;
-        return this;
     }
 
     public List<EntryISO> getEntriesISO() {

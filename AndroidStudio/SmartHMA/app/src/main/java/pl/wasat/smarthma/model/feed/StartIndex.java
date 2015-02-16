@@ -26,11 +26,6 @@ public class StartIndex implements Serializable {
         this.prefix = prefix;
     }
 
-    public StartIndex with_prefix(String _prefix) {
-        this.prefix = _prefix;
-        return this;
-    }
-
     public String getText() {
         return text;
     }
@@ -39,10 +34,6 @@ public class StartIndex implements Serializable {
         this.text = text;
     }
 
-    public StartIndex with_text(String _text) {
-        this.text = _text;
-        return this;
-    }
 
     @Override
     public String toString() {

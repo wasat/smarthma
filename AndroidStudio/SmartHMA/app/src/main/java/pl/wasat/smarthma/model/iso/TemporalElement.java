@@ -53,27 +53,14 @@ public class TemporalElement implements Serializable {
         return ToStringBuilder.reflectionToString(this, style);
     }
 
-
     @Override
     public int hashCode() {
-        return new HashCodeBuilder().append(EXTemporalExtent).append(Prefix)
-                .toHashCode();
+        return HashCodeBuilder.reflectionHashCode(this);
     }
 
     @Override
     public boolean equals(Object other) {
-        if (other == this) {
-            return true;
-        }
-        if (!(other instanceof TemporalElement)) {
-            return false;
-        }
-        TemporalElement rhs = ((TemporalElement) other);
-        return new EqualsBuilder()
-                .append(EXTemporalExtent, rhs.EXTemporalExtent)
-                .append(Prefix, rhs.Prefix)
-
-                .isEquals();
+        return EqualsBuilder.reflectionEquals(this, other);
     }
 
 }

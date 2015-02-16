@@ -65,7 +65,7 @@ public class SearchActivity extends BaseSmartHMActivity implements
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
 /*		case R.id.action_pref1:
-			break;
+            break;
 		case R.id.action_pref2:
 			break;
 		case R.id.action_pref3:

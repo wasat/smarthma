@@ -67,26 +67,14 @@ public class CIDate implements Serializable {
         return ToStringBuilder.reflectionToString(this, style);
     }
 
-
     @Override
     public int hashCode() {
-        return new HashCodeBuilder().append(dateInCIDate).append(dateType)
-                .append(Prefix).toHashCode();
+        return HashCodeBuilder.reflectionHashCode(this);
     }
 
     @Override
     public boolean equals(Object other) {
-        if (other == this) {
-            return true;
-        }
-        if (!(other instanceof CIDate)) {
-            return false;
-        }
-        CIDate rhs = ((CIDate) other);
-        return new EqualsBuilder().append(dateInCIDate, rhs.dateInCIDate)
-                .append(dateType, rhs.dateType).append(Prefix, rhs.Prefix)
-
-                .isEquals();
+        return EqualsBuilder.reflectionEquals(this, other);
     }
 
 }

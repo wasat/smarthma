@@ -47,10 +47,6 @@ public class EarthObservationMetaData implements Serializable {
         this._prefix = _prefix;
     }
 
-    public EarthObservationMetaData with_prefix(String _prefix) {
-        this._prefix = _prefix;
-        return this;
-    }
 
     public Identifier getIdentifier() {
         return identifier;
@@ -58,11 +54,6 @@ public class EarthObservationMetaData implements Serializable {
 
     public void setIdentifier(Identifier identifier) {
         this.identifier = identifier;
-    }
-
-    public EarthObservationMetaData withIdentifier(Identifier identifier) {
-        this.identifier = identifier;
-        return this;
     }
 
     public CreationDate getCreationDate() {
@@ -73,11 +64,6 @@ public class EarthObservationMetaData implements Serializable {
         this.creationDate = creationDate;
     }
 
-    public EarthObservationMetaData withCreationDate(CreationDate creationDate) {
-        this.creationDate = creationDate;
-        return this;
-    }
-
     public ModificationDate getModificationDate() {
         return modificationDate;
     }
@@ -86,11 +72,6 @@ public class EarthObservationMetaData implements Serializable {
         this.modificationDate = modificationDate;
     }
 
-    public EarthObservationMetaData withModificationDate(
-            ModificationDate modificationDate) {
-        this.modificationDate = modificationDate;
-        return this;
-    }
 
     public ParentIdentifier getParentIdentifier() {
         return parentIdentifier;
@@ -100,11 +81,6 @@ public class EarthObservationMetaData implements Serializable {
         this.parentIdentifier = parentIdentifier;
     }
 
-    public EarthObservationMetaData withParentIdentifier(
-            ParentIdentifier parentIdentifier) {
-        this.parentIdentifier = parentIdentifier;
-        return this;
-    }
 
     public AcquisitionType getAcquisitionType() {
         return acquisitionType;
@@ -114,11 +90,6 @@ public class EarthObservationMetaData implements Serializable {
         this.acquisitionType = acquisitionType;
     }
 
-    public EarthObservationMetaData withAcquisitionType(
-            AcquisitionType acquisitionType) {
-        this.acquisitionType = acquisitionType;
-        return this;
-    }
 
     public ProductType getProductType() {
         return productType;
@@ -126,11 +97,6 @@ public class EarthObservationMetaData implements Serializable {
 
     public void setProductType(ProductType productType) {
         this.productType = productType;
-    }
-
-    public EarthObservationMetaData withProductType(ProductType productType) {
-        this.productType = productType;
-        return this;
     }
 
     public Status getStatus() {
@@ -141,23 +107,12 @@ public class EarthObservationMetaData implements Serializable {
         this.status = status;
     }
 
-    public EarthObservationMetaData withStatus(Status status) {
-        this.status = status;
-        return this;
-    }
-
     public StatusSubType getStatusSubType() {
         return statusSubType;
     }
 
     public void setStatusSubType(StatusSubType statusSubType) {
         this.statusSubType = statusSubType;
-    }
-
-    public EarthObservationMetaData withStatusSubType(
-            StatusSubType statusSubType) {
-        this.statusSubType = statusSubType;
-        return this;
     }
 
     public DownlinkedTo getDownlinkedTo() {
@@ -168,10 +123,6 @@ public class EarthObservationMetaData implements Serializable {
         this.downlinkedTo = downlinkedTo;
     }
 
-    public EarthObservationMetaData withDownlinkedTo(DownlinkedTo downlinkedTo) {
-        this.downlinkedTo = downlinkedTo;
-        return this;
-    }
 
     public ArchivedIn getArchivedIn() {
         return archivedIn;
@@ -181,10 +132,6 @@ public class EarthObservationMetaData implements Serializable {
         this.archivedIn = archivedIn;
     }
 
-    public EarthObservationMetaData withArchivedIn(ArchivedIn archivedIn) {
-        this.archivedIn = archivedIn;
-        return this;
-    }
 
     public ProductQualityDegradation getProductQualityDegradation() {
         return productQualityDegradation;
@@ -195,11 +142,6 @@ public class EarthObservationMetaData implements Serializable {
         this.productQualityDegradation = productQualityDegradation;
     }
 
-    public EarthObservationMetaData withProductQualityDegradation(
-            ProductQualityDegradation productQualityDegradation) {
-        this.productQualityDegradation = productQualityDegradation;
-        return this;
-    }
 
     public ProductQualityStatus getProductQualityStatus() {
         return productQualityStatus;
@@ -210,11 +152,6 @@ public class EarthObservationMetaData implements Serializable {
         this.productQualityStatus = productQualityStatus;
     }
 
-    public EarthObservationMetaData withProductQualityStatus(
-            ProductQualityStatus productQualityStatus) {
-        this.productQualityStatus = productQualityStatus;
-        return this;
-    }
 
     public List<ProductQualityDegradationTag> getProductQualityDegradationTag() {
         return productQualityDegradationTag;
@@ -225,11 +162,6 @@ public class EarthObservationMetaData implements Serializable {
         this.productQualityDegradationTag = productQualityDegradationTag;
     }
 
-    public EarthObservationMetaData withProductQualityDegradationTag(
-            List<ProductQualityDegradationTag> productQualityDegradationTag) {
-        this.productQualityDegradationTag = productQualityDegradationTag;
-        return this;
-    }
 
     public ProductQualityReportURL getProductQualityReportURL() {
         return productQualityReportURL;
@@ -240,12 +172,6 @@ public class EarthObservationMetaData implements Serializable {
         this.productQualityReportURL = productQualityReportURL;
     }
 
-    public EarthObservationMetaData withProductQualityReportURL(
-            ProductQualityReportURL productQualityReportURL) {
-        this.productQualityReportURL = productQualityReportURL;
-        return this;
-    }
-
     public ComposedOf getComposedOf() {
         return composedOf;
     }
@@ -254,10 +180,6 @@ public class EarthObservationMetaData implements Serializable {
         this.composedOf = composedOf;
     }
 
-    public EarthObservationMetaData withComposedOf(ComposedOf composedOf) {
-        this.composedOf = composedOf;
-        return this;
-    }
 
     public List<Processing> getProcessing() {
         return processing;
@@ -265,11 +187,6 @@ public class EarthObservationMetaData implements Serializable {
 
     public void setProcessing(List<Processing> processing) {
         this.processing = processing;
-    }
-
-    public EarthObservationMetaData withProcessing(List<Processing> processing) {
-        this.processing = processing;
-        return this;
     }
 
     public ProductGroupId getProductGroupId() {
@@ -280,11 +197,6 @@ public class EarthObservationMetaData implements Serializable {
         this.productGroupId = productGroupId;
     }
 
-    public EarthObservationMetaData withProductGroupId(
-            ProductGroupId productGroupId) {
-        this.productGroupId = productGroupId;
-        return this;
-    }
 
     public DerivedFrom getDerivedFrom() {
         return derivedFrom;
@@ -292,11 +204,6 @@ public class EarthObservationMetaData implements Serializable {
 
     public void setDerivedFrom(DerivedFrom derivedFrom) {
         this.derivedFrom = derivedFrom;
-    }
-
-    public EarthObservationMetaData withDerivedFrom(DerivedFrom derivedFrom) {
-        this.derivedFrom = derivedFrom;
-        return this;
     }
 
     public NominalDate getNominalDate() {
@@ -307,10 +214,6 @@ public class EarthObservationMetaData implements Serializable {
         this.nominalDate = nominalDate;
     }
 
-    public EarthObservationMetaData withNominalDate(NominalDate nominalDate) {
-        this.nominalDate = nominalDate;
-        return this;
-    }
 
     public ProductQualityDegradationQuotationMode getProductQualityDegradationQuotationMode() {
         return productQualityDegradationQuotationMode;
@@ -321,11 +224,6 @@ public class EarthObservationMetaData implements Serializable {
         this.productQualityDegradationQuotationMode = productQualityDegradationQuotationMode;
     }
 
-    public EarthObservationMetaData withProductQualityDegradationQuotationMode(
-            ProductQualityDegradationQuotationMode productQualityDegradationQuotationMode) {
-        this.productQualityDegradationQuotationMode = productQualityDegradationQuotationMode;
-        return this;
-    }
 
     /**
      * @return the acquisitionSubType

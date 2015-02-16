@@ -27,10 +27,6 @@ public class Where implements Serializable {
         this._prefix = _prefix;
     }
 
-    public Where with_prefix(String _prefix) {
-        this._prefix = _prefix;
-        return this;
-    }
 
     public Polygon getPolygon() {
         return polygon;
@@ -40,10 +36,6 @@ public class Where implements Serializable {
         this.polygon = polygon;
     }
 
-    public Where withPolygon(Polygon polygon) {
-        this.polygon = polygon;
-        return this;
-    }
 
     public String get_xmlns_gml() {
         return _xmlns_gml;
@@ -51,11 +43,6 @@ public class Where implements Serializable {
 
     public void set_xmlns_gml(String _xmlns_gml) {
         this._xmlns_gml = _xmlns_gml;
-    }
-
-    public Where with_xmlns_gml(String _xmlns_gml) {
-        this._xmlns_gml = _xmlns_gml;
-        return this;
     }
 
     @Override

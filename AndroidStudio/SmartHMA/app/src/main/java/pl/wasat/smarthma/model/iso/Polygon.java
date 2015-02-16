@@ -52,26 +52,14 @@ public class Polygon implements Serializable {
         return ToStringBuilder.reflectionToString(this, style);
     }
 
-
     @Override
     public int hashCode() {
-        return new HashCodeBuilder().append(Prefix).append(Text)
-                .toHashCode();
+        return HashCodeBuilder.reflectionHashCode(this);
     }
 
     @Override
     public boolean equals(Object other) {
-        if (other == this) {
-            return true;
-        }
-        if (!(other instanceof Polygon)) {
-            return false;
-        }
-        Polygon rhs = ((Polygon) other);
-        return new EqualsBuilder().append(Prefix, rhs.Prefix)
-                .append(Text, rhs.Text)
-
-                .isEquals();
+        return EqualsBuilder.reflectionEquals(this, other);
     }
 
 }

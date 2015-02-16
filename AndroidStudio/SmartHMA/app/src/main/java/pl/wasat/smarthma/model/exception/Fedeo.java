@@ -26,11 +26,6 @@ public class Fedeo implements Serializable {
         this.exceptionReport = exceptionReport;
     }
 
-    public Fedeo withExceptionReport(ExceptionReport exceptionReport) {
-        this.exceptionReport = exceptionReport;
-        return this;
-    }
-
     @Override
     public String toString() {
         ToStringStyle style = new SmartHMAStringStyle();
@@ -46,12 +41,6 @@ public class Fedeo implements Serializable {
     @Override
     public boolean equals(Object other) {
         return EqualsBuilder.reflectionEquals(this, other);
-    }
-
-
-    public Fedeo withAdditionalProperty(String name, Object value) {
-        this.additionalProperties.put(name, value);
-        return this;
     }
 
 }

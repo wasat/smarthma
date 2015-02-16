@@ -26,11 +26,6 @@ public class Size implements Serializable {
         this._prefix = _prefix;
     }
 
-    public Size with_prefix(String _prefix) {
-        this._prefix = _prefix;
-        return this;
-    }
-
     public String getuom() {
         return uom;
     }
@@ -39,22 +34,12 @@ public class Size implements Serializable {
         this.uom = uom;
     }
 
-    public Size withuom(String uom) {
-        this.uom = uom;
-        return this;
-    }
-
     public String get_text() {
         return _text;
     }
 
     public void set_text(String _text) {
         this._text = _text;
-    }
-
-    public Size with_text(String _text) {
-        this._text = _text;
-        return this;
     }
 
     @Override

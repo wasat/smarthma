@@ -25,10 +25,6 @@ public class Exterior implements Serializable {
         this._prefix = _prefix;
     }
 
-    public Exterior with_prefix(String _prefix) {
-        this._prefix = _prefix;
-        return this;
-    }
 
     public LinearRing getLinearRing() {
         return linearRing;
@@ -38,10 +34,6 @@ public class Exterior implements Serializable {
         this.linearRing = linearRing;
     }
 
-    public Exterior withLinearRing(LinearRing linearRing) {
-        this.linearRing = linearRing;
-        return this;
-    }
 
     @Override
     public String toString() {

@@ -97,32 +97,14 @@ public class EXGeographicBoundingBox implements Serializable {
         return ToStringBuilder.reflectionToString(this, style);
     }
 
-
     @Override
     public int hashCode() {
-        return new HashCodeBuilder().append(westBoundLongitude)
-                .append(eastBoundLongitude).append(southBoundLatitude)
-                .append(northBoundLatitude).append(Prefix)
-                .toHashCode();
+        return HashCodeBuilder.reflectionHashCode(this);
     }
 
     @Override
     public boolean equals(Object other) {
-        if (other == this) {
-            return true;
-        }
-        if (!(other instanceof EXGeographicBoundingBox)) {
-            return false;
-        }
-        EXGeographicBoundingBox rhs = ((EXGeographicBoundingBox) other);
-        return new EqualsBuilder()
-                .append(westBoundLongitude, rhs.westBoundLongitude)
-                .append(eastBoundLongitude, rhs.eastBoundLongitude)
-                .append(southBoundLatitude, rhs.southBoundLatitude)
-                .append(northBoundLatitude, rhs.northBoundLatitude)
-                .append(Prefix, rhs.Prefix)
-
-                .isEquals();
+        return EqualsBuilder.reflectionEquals(this, other);
     }
 
 }

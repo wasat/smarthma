@@ -26,10 +26,6 @@ public class Summary implements Serializable {
         this._cdata = _cdata;
     }
 
-    public Summary with_cdata(String _cdata) {
-        this._cdata = _cdata;
-        return this;
-    }
 
     public String get_type() {
         return _type;
@@ -37,11 +33,6 @@ public class Summary implements Serializable {
 
     public void set_type(String _type) {
         this._type = _type;
-    }
-
-    public Summary with_type(String _type) {
-        this._type = _type;
-        return this;
     }
 
     @Override

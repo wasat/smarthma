@@ -25,11 +25,6 @@ public class Browse implements Serializable {
         this._prefix = _prefix;
     }
 
-    public Browse with_prefix(String _prefix) {
-        this._prefix = _prefix;
-        return this;
-    }
-
     public BrowseInformation getBrowseInformation() {
         return browseInformation;
     }
@@ -38,10 +33,6 @@ public class Browse implements Serializable {
         this.browseInformation = browseInformation;
     }
 
-    public Browse withBrowseInformation(BrowseInformation browseInformation) {
-        this.browseInformation = browseInformation;
-        return this;
-    }
 
     @Override
     public String toString() {

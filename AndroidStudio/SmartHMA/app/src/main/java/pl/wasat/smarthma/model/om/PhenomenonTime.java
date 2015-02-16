@@ -25,22 +25,12 @@ public class PhenomenonTime implements Serializable {
         this._prefix = _prefix;
     }
 
-    public PhenomenonTime with_prefix(String _prefix) {
-        this._prefix = _prefix;
-        return this;
-    }
-
     public TimePeriod getTimePeriod() {
         return timePeriod;
     }
 
     public void setTimePeriod(TimePeriod timePeriod) {
         this.timePeriod = timePeriod;
-    }
-
-    public PhenomenonTime withTimePeriod(TimePeriod timePeriod) {
-        this.timePeriod = timePeriod;
-        return this;
     }
 
     @Override

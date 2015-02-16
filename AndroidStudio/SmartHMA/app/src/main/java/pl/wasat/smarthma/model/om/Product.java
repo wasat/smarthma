@@ -25,11 +25,6 @@ public class Product implements Serializable {
         this._prefix = _prefix;
     }
 
-    public Product with_prefix(String _prefix) {
-        this._prefix = _prefix;
-        return this;
-    }
-
     public ProductInformation getProductInformation() {
         return productInformation;
     }
@@ -38,10 +33,6 @@ public class Product implements Serializable {
         this.productInformation = productInformation;
     }
 
-    public Product withProductInformation(ProductInformation productInformation) {
-        this.productInformation = productInformation;
-        return this;
-    }
 
     @Override
     public String toString() {

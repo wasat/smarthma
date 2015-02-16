@@ -53,27 +53,14 @@ public class TopicCategory implements Serializable {
         return ToStringBuilder.reflectionToString(this, style);
     }
 
-
     @Override
     public int hashCode() {
-        return new HashCodeBuilder().append(MDTopicCategoryCode).append(Prefix)
-                .toHashCode();
+        return HashCodeBuilder.reflectionHashCode(this);
     }
 
     @Override
     public boolean equals(Object other) {
-        if (other == this) {
-            return true;
-        }
-        if (!(other instanceof TopicCategory)) {
-            return false;
-        }
-        TopicCategory rhs = ((TopicCategory) other);
-        return new EqualsBuilder()
-                .append(MDTopicCategoryCode, rhs.MDTopicCategoryCode)
-                .append(Prefix, rhs.Prefix)
-
-                .isEquals();
+        return EqualsBuilder.reflectionEquals(this, other);
     }
 
 }

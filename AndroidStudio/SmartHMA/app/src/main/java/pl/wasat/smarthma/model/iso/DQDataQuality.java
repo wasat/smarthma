@@ -82,28 +82,14 @@ public class DQDataQuality implements Serializable {
         return ToStringBuilder.reflectionToString(this, style);
     }
 
-
     @Override
     public int hashCode() {
-        return new HashCodeBuilder().append(scope).append(report)
-                .append(lineage).append(Prefix)
-                .toHashCode();
+        return HashCodeBuilder.reflectionHashCode(this);
     }
 
     @Override
     public boolean equals(Object other) {
-        if (other == this) {
-            return true;
-        }
-        if (!(other instanceof DQDataQuality)) {
-            return false;
-        }
-        DQDataQuality rhs = ((DQDataQuality) other);
-        return new EqualsBuilder().append(scope, rhs.scope)
-                .append(report, rhs.report).append(lineage, rhs.lineage)
-                .append(Prefix, rhs.Prefix)
-
-                .isEquals();
+        return EqualsBuilder.reflectionEquals(this, other);
     }
 
 }

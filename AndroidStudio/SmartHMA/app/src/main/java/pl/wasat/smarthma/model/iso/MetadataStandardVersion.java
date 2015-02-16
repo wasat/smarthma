@@ -52,26 +52,13 @@ public class MetadataStandardVersion implements Serializable {
         return ToStringBuilder.reflectionToString(this, style);
     }
 
-
     @Override
     public int hashCode() {
-        return new HashCodeBuilder().append(CharacterString).append(Prefix)
-                .toHashCode();
+        return HashCodeBuilder.reflectionHashCode(this);
     }
 
     @Override
     public boolean equals(Object other) {
-        if (other == this) {
-            return true;
-        }
-        if (!(other instanceof MetadataStandardVersion)) {
-            return false;
-        }
-        MetadataStandardVersion rhs = ((MetadataStandardVersion) other);
-        return new EqualsBuilder().append(CharacterString, rhs.CharacterString)
-                .append(Prefix, rhs.Prefix)
-
-                .isEquals();
+        return EqualsBuilder.reflectionEquals(this, other);
     }
-
 }

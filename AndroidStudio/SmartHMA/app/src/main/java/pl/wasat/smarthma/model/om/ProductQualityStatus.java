@@ -25,11 +25,6 @@ public class ProductQualityStatus implements Serializable {
         this._prefix = _prefix;
     }
 
-    public ProductQualityStatus with_prefix(String _prefix) {
-        this._prefix = _prefix;
-        return this;
-    }
-
     public String get_text() {
         return _text;
     }
@@ -38,10 +33,6 @@ public class ProductQualityStatus implements Serializable {
         this._text = _text;
     }
 
-    public ProductQualityStatus with_text(String _text) {
-        this._text = _text;
-        return this;
-    }
 
     @Override
     public String toString() {

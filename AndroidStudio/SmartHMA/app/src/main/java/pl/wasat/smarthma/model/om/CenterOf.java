@@ -25,11 +25,6 @@ public class CenterOf implements Serializable {
         this._prefix = _prefix;
     }
 
-    public CenterOf with_prefix(String _prefix) {
-        this._prefix = _prefix;
-        return this;
-    }
-
     public Point getPoint() {
         return point;
     }
@@ -38,10 +33,6 @@ public class CenterOf implements Serializable {
         this.point = point;
     }
 
-    public CenterOf withPoint(Point point) {
-        this.point = point;
-        return this;
-    }
 
     @Override
     public String toString() {

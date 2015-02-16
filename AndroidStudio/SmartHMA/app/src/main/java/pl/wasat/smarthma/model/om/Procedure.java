@@ -25,10 +25,6 @@ public class Procedure implements Serializable {
         this._prefix = _prefix;
     }
 
-    public Procedure with_prefix(String _prefix) {
-        this._prefix = _prefix;
-        return this;
-    }
 
     public EarthObservationEquipment getEarthObservationEquipment() {
         return earthObservationEquipment;
@@ -37,12 +33,6 @@ public class Procedure implements Serializable {
     public void setEarthObservationEquipment(
             EarthObservationEquipment earthObservationEquipment) {
         this.earthObservationEquipment = earthObservationEquipment;
-    }
-
-    public Procedure withEarthObservationEquipment(
-            EarthObservationEquipment earthObservationEquipment) {
-        this.earthObservationEquipment = earthObservationEquipment;
-        return this;
     }
 
     @Override

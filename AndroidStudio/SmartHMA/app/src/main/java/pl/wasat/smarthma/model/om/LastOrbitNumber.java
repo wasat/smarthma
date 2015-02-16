@@ -25,10 +25,6 @@ public class LastOrbitNumber implements Serializable {
         this._prefix = _prefix;
     }
 
-    public LastOrbitNumber with_prefix(String _prefix) {
-        this._prefix = _prefix;
-        return this;
-    }
 
     public String get_text() {
         return _text;
@@ -36,11 +32,6 @@ public class LastOrbitNumber implements Serializable {
 
     public void set_text(String _text) {
         this._text = _text;
-    }
-
-    public LastOrbitNumber with_text(String _text) {
-        this._text = _text;
-        return this;
     }
 
     @Override

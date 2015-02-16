@@ -32,11 +32,6 @@ public class Footprint implements Serializable {
         this._prefix = _prefix;
     }
 
-    public Footprint with_prefix(String _prefix) {
-        this._prefix = _prefix;
-        return this;
-    }
-
     public MultiExtentOf getMultiExtentOf() {
         return multiExtentOf;
     }
@@ -45,10 +40,6 @@ public class Footprint implements Serializable {
         this.multiExtentOf = multiExtentOf;
     }
 
-    public Footprint withMultiExtentOf(MultiExtentOf multiExtentOf) {
-        this.multiExtentOf = multiExtentOf;
-        return this;
-    }
 
     public MaximumAltitude getMaximumAltitude() {
         return maximumAltitude;
@@ -58,10 +49,6 @@ public class Footprint implements Serializable {
         this.maximumAltitude = maximumAltitude;
     }
 
-    public Footprint withMaximumAltitude(MaximumAltitude maximumAltitude) {
-        this.maximumAltitude = maximumAltitude;
-        return this;
-    }
 
     public MinimumAltitude getMinimumAltitude() {
         return minimumAltitude;
@@ -71,10 +58,6 @@ public class Footprint implements Serializable {
         this.minimumAltitude = minimumAltitude;
     }
 
-    public Footprint withMinimumAltitude(MinimumAltitude minimumAltitude) {
-        this.minimumAltitude = minimumAltitude;
-        return this;
-    }
 
     public NominalTrack getNominalTrack() {
         return nominalTrack;
@@ -84,10 +67,6 @@ public class Footprint implements Serializable {
         this.nominalTrack = nominalTrack;
     }
 
-    public Footprint withNominalTrack(NominalTrack nominalTrack) {
-        this.nominalTrack = nominalTrack;
-        return this;
-    }
 
     public OccultationPoints getOccultationPoints() {
         return occultationPoints;
@@ -97,10 +76,6 @@ public class Footprint implements Serializable {
         this.occultationPoints = occultationPoints;
     }
 
-    public Footprint withOccultationPoints(OccultationPoints occultationPoints) {
-        this.occultationPoints = occultationPoints;
-        return this;
-    }
 
     public CenterOf getCenterOf() {
         return centerOf;
@@ -110,10 +85,6 @@ public class Footprint implements Serializable {
         this.centerOf = centerOf;
     }
 
-    public Footprint withCenterOf(CenterOf centerOf) {
-        this.centerOf = centerOf;
-        return this;
-    }
 
     public LocationName getLocationName() {
         return locationName;
@@ -121,11 +92,6 @@ public class Footprint implements Serializable {
 
     public void setLocationName(LocationName locationName) {
         this.locationName = locationName;
-    }
-
-    public Footprint withLocationName(LocationName locationName) {
-        this.locationName = locationName;
-        return this;
     }
 
     public String get_gml_id() {
@@ -136,10 +102,6 @@ public class Footprint implements Serializable {
         this._gml_id = _gml_id;
     }
 
-    public Footprint with_gml_id(String _gml_id) {
-        this._gml_id = _gml_id;
-        return this;
-    }
 
     @Override
     public String toString() {

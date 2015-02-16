@@ -52,26 +52,14 @@ public class MDConstraints implements Serializable {
         return ToStringBuilder.reflectionToString(this, style);
     }
 
-
     @Override
     public int hashCode() {
-        return new HashCodeBuilder().append(useLimitation).append(Prefix)
-                .toHashCode();
+        return HashCodeBuilder.reflectionHashCode(this);
     }
 
     @Override
     public boolean equals(Object other) {
-        if (other == this) {
-            return true;
-        }
-        if (!(other instanceof MDConstraints)) {
-            return false;
-        }
-        MDConstraints rhs = ((MDConstraints) other);
-        return new EqualsBuilder().append(useLimitation, rhs.useLimitation)
-                .append(Prefix, rhs.Prefix)
-
-                .isEquals();
+        return EqualsBuilder.reflectionEquals(this, other);
     }
 
 }

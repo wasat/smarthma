@@ -55,23 +55,12 @@ public class Address implements Serializable {
 
     @Override
     public int hashCode() {
-        return new HashCodeBuilder().append(CIAddress).append(Prefix)
-                .toHashCode();
+        return HashCodeBuilder.reflectionHashCode(this);
     }
 
     @Override
     public boolean equals(Object other) {
-        if (other == this) {
-            return true;
-        }
-        if (!(other instanceof Address)) {
-            return false;
-        }
-        Address rhs = ((Address) other);
-        return new EqualsBuilder().append(CIAddress, rhs.CIAddress)
-                .append(Prefix, rhs.Prefix)
-
-                .isEquals();
+        return EqualsBuilder.reflectionEquals(this, other);
     }
 
 }

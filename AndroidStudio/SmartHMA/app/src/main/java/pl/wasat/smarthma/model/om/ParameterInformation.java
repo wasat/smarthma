@@ -26,11 +26,6 @@ public class ParameterInformation implements Serializable {
         this._prefix = _prefix;
     }
 
-    public ParameterInformation with_prefix(String _prefix) {
-        this._prefix = _prefix;
-        return this;
-    }
-
     public UnitOfMeasure getUnitOfMeasure() {
         return unitOfMeasure;
     }
@@ -39,10 +34,6 @@ public class ParameterInformation implements Serializable {
         this.unitOfMeasure = unitOfMeasure;
     }
 
-    public ParameterInformation withUnitOfMeasure(UnitOfMeasure unitOfMeasure) {
-        this.unitOfMeasure = unitOfMeasure;
-        return this;
-    }
 
     public Phenomenon getPhenomenon() {
         return phenomenon;
@@ -50,11 +41,6 @@ public class ParameterInformation implements Serializable {
 
     public void setPhenomenon(Phenomenon phenomenon) {
         this.phenomenon = phenomenon;
-    }
-
-    public ParameterInformation withPhenomenon(Phenomenon phenomenon) {
-        this.phenomenon = phenomenon;
-        return this;
     }
 
     @Override

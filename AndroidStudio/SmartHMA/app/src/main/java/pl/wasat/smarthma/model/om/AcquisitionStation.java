@@ -17,18 +17,12 @@ public class AcquisitionStation implements Serializable {
     private String codeSpace;
     private String _text;
 
-
     public String get_prefix() {
         return _prefix;
     }
 
     public void set_prefix(String _prefix) {
         this._prefix = _prefix;
-    }
-
-    public AcquisitionStation with_prefix(String _prefix) {
-        this._prefix = _prefix;
-        return this;
     }
 
     public String getCodeSpace() {
@@ -39,22 +33,12 @@ public class AcquisitionStation implements Serializable {
         this.codeSpace = codeSpace;
     }
 
-    public AcquisitionStation withcodeSpace(String codeSpace) {
-        this.codeSpace = codeSpace;
-        return this;
-    }
-
     public String get_text() {
         return _text;
     }
 
     public void set_text(String _text) {
         this._text = _text;
-    }
-
-    public AcquisitionStation with_text(String _text) {
-        this._text = _text;
-        return this;
     }
 
     @Override

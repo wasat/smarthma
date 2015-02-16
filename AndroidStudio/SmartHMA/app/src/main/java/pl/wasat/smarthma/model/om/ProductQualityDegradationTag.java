@@ -26,10 +26,6 @@ public class ProductQualityDegradationTag implements Serializable {
         this._prefix = _prefix;
     }
 
-    public ProductQualityDegradationTag with_prefix(String _prefix) {
-        this._prefix = _prefix;
-        return this;
-    }
 
     public String getcodeSpace() {
         return codeSpace;
@@ -39,10 +35,6 @@ public class ProductQualityDegradationTag implements Serializable {
         this.codeSpace = codeSpace;
     }
 
-    public ProductQualityDegradationTag withcodeSpace(String codeSpace) {
-        this.codeSpace = codeSpace;
-        return this;
-    }
 
     public String get_text() {
         return _text;
@@ -52,10 +44,6 @@ public class ProductQualityDegradationTag implements Serializable {
         this._text = _text;
     }
 
-    public ProductQualityDegradationTag with_text(String _text) {
-        this._text = _text;
-        return this;
-    }
 
     @Override
     public String toString() {

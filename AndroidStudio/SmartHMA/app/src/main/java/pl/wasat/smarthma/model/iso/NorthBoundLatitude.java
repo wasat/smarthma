@@ -52,26 +52,13 @@ public class NorthBoundLatitude implements Serializable {
         return ToStringBuilder.reflectionToString(this, style);
     }
 
-
     @Override
     public int hashCode() {
-        return new HashCodeBuilder().append(Decimal).append(Prefix)
-                .toHashCode();
+        return HashCodeBuilder.reflectionHashCode(this);
     }
 
     @Override
     public boolean equals(Object other) {
-        if (other == this) {
-            return true;
-        }
-        if (!(other instanceof NorthBoundLatitude)) {
-            return false;
-        }
-        NorthBoundLatitude rhs = ((NorthBoundLatitude) other);
-        return new EqualsBuilder().append(Decimal, rhs.Decimal)
-                .append(Prefix, rhs.Prefix)
-
-                .isEquals();
+        return EqualsBuilder.reflectionEquals(this, other);
     }
-
 }

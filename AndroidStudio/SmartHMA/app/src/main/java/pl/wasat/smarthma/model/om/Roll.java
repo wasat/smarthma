@@ -26,22 +26,12 @@ public class Roll implements Serializable {
         this._prefix = _prefix;
     }
 
-    public Roll with_prefix(String _prefix) {
-        this._prefix = _prefix;
-        return this;
-    }
-
     public String getuom() {
         return uom;
     }
 
     public void setUom(String uom) {
         this.uom = uom;
-    }
-
-    public Roll withuom(String uom) {
-        this.uom = uom;
-        return this;
     }
 
     public String get_text() {
@@ -52,10 +42,6 @@ public class Roll implements Serializable {
         this._text = _text;
     }
 
-    public Roll with_text(String _text) {
-        this._text = _text;
-        return this;
-    }
 
     @Override
     public String toString() {

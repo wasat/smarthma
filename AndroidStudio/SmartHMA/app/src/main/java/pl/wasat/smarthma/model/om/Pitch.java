@@ -26,11 +26,6 @@ public class Pitch implements Serializable {
         this._prefix = _prefix;
     }
 
-    public Pitch with_prefix(String _prefix) {
-        this._prefix = _prefix;
-        return this;
-    }
-
     public String getuom() {
         return uom;
     }
@@ -39,10 +34,6 @@ public class Pitch implements Serializable {
         this.uom = uom;
     }
 
-    public Pitch withuom(String uom) {
-        this.uom = uom;
-        return this;
-    }
 
     public String get_text() {
         return _text;
@@ -50,11 +41,6 @@ public class Pitch implements Serializable {
 
     public void set_text(String _text) {
         this._text = _text;
-    }
-
-    public Pitch with_text(String _text) {
-        this._text = _text;
-        return this;
     }
 
     @Override

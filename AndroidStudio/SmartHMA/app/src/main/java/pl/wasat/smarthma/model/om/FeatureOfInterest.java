@@ -25,22 +25,12 @@ public class FeatureOfInterest implements Serializable {
         this._prefix = _prefix;
     }
 
-    public FeatureOfInterest with_prefix(String _prefix) {
-        this._prefix = _prefix;
-        return this;
-    }
-
     public Footprint getFootprint() {
         return footprint;
     }
 
     public void setFootprint(Footprint footprint) {
         this.footprint = footprint;
-    }
-
-    public FeatureOfInterest withFootprint(Footprint footprint) {
-        this.footprint = footprint;
-        return this;
     }
 
     @Override

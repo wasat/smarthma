@@ -42,22 +42,12 @@ public class EarthObservation implements Serializable {
         this._prefix = _prefix;
     }
 
-    public EarthObservation with_prefix(String _prefix) {
-        this._prefix = _prefix;
-        return this;
-    }
-
     public PhenomenonTime getPhenomenonTime() {
         return phenomenonTime;
     }
 
     public void setPhenomenonTime(PhenomenonTime phenomenonTime) {
         this.phenomenonTime = phenomenonTime;
-    }
-
-    public EarthObservation withPhenomenonTime(PhenomenonTime phenomenonTime) {
-        this.phenomenonTime = phenomenonTime;
-        return this;
     }
 
     public ResultTime getResultTime() {
@@ -68,11 +58,6 @@ public class EarthObservation implements Serializable {
         this.resultTime = resultTime;
     }
 
-    public EarthObservation withResultTime(ResultTime resultTime) {
-        this.resultTime = resultTime;
-        return this;
-    }
-
     public Procedure getProcedure() {
         return procedure;
     }
@@ -81,10 +66,6 @@ public class EarthObservation implements Serializable {
         this.procedure = procedure;
     }
 
-    public EarthObservation withProcedure(Procedure procedure) {
-        this.procedure = procedure;
-        return this;
-    }
 
     public ObservedProperty getObservedProperty() {
         return observedProperty;
@@ -92,12 +73,6 @@ public class EarthObservation implements Serializable {
 
     public void setObservedProperty(ObservedProperty observedProperty) {
         this.observedProperty = observedProperty;
-    }
-
-    public EarthObservation withObservedProperty(
-            ObservedProperty observedProperty) {
-        this.observedProperty = observedProperty;
-        return this;
     }
 
     public FeatureOfInterest getFeatureOfInterest() {
@@ -108,12 +83,6 @@ public class EarthObservation implements Serializable {
         this.featureOfInterest = featureOfInterest;
     }
 
-    public EarthObservation withFeatureOfInterest(
-            FeatureOfInterest featureOfInterest) {
-        this.featureOfInterest = featureOfInterest;
-        return this;
-    }
-
     public Result getResult() {
         return result;
     }
@@ -122,10 +91,6 @@ public class EarthObservation implements Serializable {
         this.result = result;
     }
 
-    public EarthObservation withResult(Result result) {
-        this.result = result;
-        return this;
-    }
 
     public MetaDataProperty getMetaDataProperty() {
         return metaDataProperty;
@@ -135,11 +100,6 @@ public class EarthObservation implements Serializable {
         this.metaDataProperty = metaDataProperty;
     }
 
-    public EarthObservation withMetaDataProperty(
-            MetaDataProperty metaDataProperty) {
-        this.metaDataProperty = metaDataProperty;
-        return this;
-    }
 
     public String get_xmlns_xsi() {
         return _xmlns_xsi;
@@ -149,10 +109,6 @@ public class EarthObservation implements Serializable {
         this._xmlns_xsi = _xmlns_xsi;
     }
 
-    public EarthObservation with_xmlns_xsi(String _xmlns_xsi) {
-        this._xmlns_xsi = _xmlns_xsi;
-        return this;
-    }
 
     public String get_xmlns_xlink() {
         return _xmlns_xlink;
@@ -162,10 +118,6 @@ public class EarthObservation implements Serializable {
         this._xmlns_xlink = _xmlns_xlink;
     }
 
-    public EarthObservation with_xmlns_xlink(String _xmlns_xlink) {
-        this._xmlns_xlink = _xmlns_xlink;
-        return this;
-    }
 
     public String get_xmlns_gml() {
         return _xmlns_gml;
@@ -175,10 +127,6 @@ public class EarthObservation implements Serializable {
         this._xmlns_gml = _xmlns_gml;
     }
 
-    public EarthObservation with_xmlns_gml(String _xmlns_gml) {
-        this._xmlns_gml = _xmlns_gml;
-        return this;
-    }
 
     public String get_xmlns_eop() {
         return _xmlns_eop;
@@ -188,10 +136,6 @@ public class EarthObservation implements Serializable {
         this._xmlns_eop = _xmlns_eop;
     }
 
-    public EarthObservation with_xmlns_eop(String _xmlns_eop) {
-        this._xmlns_eop = _xmlns_eop;
-        return this;
-    }
 
     public String get_xmlns_opt() {
         return _xmlns_opt;
@@ -201,10 +145,6 @@ public class EarthObservation implements Serializable {
         this._xmlns_opt = _xmlns_opt;
     }
 
-    public EarthObservation with_xmlns_opt(String _xmlns_opt) {
-        this._xmlns_opt = _xmlns_opt;
-        return this;
-    }
 
     public String get_xmlns_atm() {
         return _xmlns_atm;
@@ -212,11 +152,6 @@ public class EarthObservation implements Serializable {
 
     public void set_xmlns_atm(String _xmlns_atm) {
         this._xmlns_atm = _xmlns_atm;
-    }
-
-    public EarthObservation with_xmlns_atm(String _xmlns_atm) {
-        this._xmlns_atm = _xmlns_atm;
-        return this;
     }
 
     public String get_xmlns_ows() {
@@ -227,22 +162,12 @@ public class EarthObservation implements Serializable {
         this._xmlns_ows = _xmlns_ows;
     }
 
-    public EarthObservation with_xmlns_ows(String _xmlns_ows) {
-        this._xmlns_ows = _xmlns_ows;
-        return this;
-    }
-
     public String get_xmlns_swe() {
         return _xmlns_swe;
     }
 
     public void set_xmlns_swe(String _xmlns_swe) {
         this._xmlns_swe = _xmlns_swe;
-    }
-
-    public EarthObservation with_xmlns_swe(String _xmlns_swe) {
-        this._xmlns_swe = _xmlns_swe;
-        return this;
     }
 
     public String get_xmlns_om() {
@@ -253,11 +178,6 @@ public class EarthObservation implements Serializable {
         this._xmlns_om = _xmlns_om;
     }
 
-    public EarthObservation with_xmlns_om(String _xmlns_om) {
-        this._xmlns_om = _xmlns_om;
-        return this;
-    }
-
     public String get_gml_id() {
         return _gml_id;
     }
@@ -266,22 +186,12 @@ public class EarthObservation implements Serializable {
         this._gml_id = _gml_id;
     }
 
-    public EarthObservation with_gml_id(String _gml_id) {
-        this._gml_id = _gml_id;
-        return this;
-    }
-
     public String get_xsi_schemaLocation() {
         return _xsi_schemaLocation;
     }
 
     public void set_xsi_schemaLocation(String _xsi_schemaLocation) {
         this._xsi_schemaLocation = _xsi_schemaLocation;
-    }
-
-    public EarthObservation with_xsi_schemaLocation(String _xsi_schemaLocation) {
-        this._xsi_schemaLocation = _xsi_schemaLocation;
-        return this;
     }
 
     @Override

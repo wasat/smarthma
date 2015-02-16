@@ -28,10 +28,6 @@ public class ProductInformation implements Serializable {
         this._prefix = _prefix;
     }
 
-    public ProductInformation with_prefix(String _prefix) {
-        this._prefix = _prefix;
-        return this;
-    }
 
     public ReferenceSystemIdentifier getReferenceSystemIdentifier() {
         return referenceSystemIdentifier;
@@ -42,11 +38,6 @@ public class ProductInformation implements Serializable {
         this.referenceSystemIdentifier = referenceSystemIdentifier;
     }
 
-    public ProductInformation withReferenceSystemIdentifier(
-            ReferenceSystemIdentifier referenceSystemIdentifier) {
-        this.referenceSystemIdentifier = referenceSystemIdentifier;
-        return this;
-    }
 
     public FileName getFileName() {
         return fileName;
@@ -54,11 +45,6 @@ public class ProductInformation implements Serializable {
 
     public void setFileName(FileName fileName) {
         this.fileName = fileName;
-    }
-
-    public ProductInformation withFileName(FileName fileName) {
-        this.fileName = fileName;
-        return this;
     }
 
     public Size getSize() {
@@ -69,22 +55,12 @@ public class ProductInformation implements Serializable {
         this.size = size;
     }
 
-    public ProductInformation withSize(Size size) {
-        this.size = size;
-        return this;
-    }
-
     public Timeliness getTimeliness() {
         return timeliness;
     }
 
     public void setTimeliness(Timeliness timeliness) {
         this.timeliness = timeliness;
-    }
-
-    public ProductInformation withTimeliness(Timeliness timeliness) {
-        this.timeliness = timeliness;
-        return this;
     }
 
     @Override

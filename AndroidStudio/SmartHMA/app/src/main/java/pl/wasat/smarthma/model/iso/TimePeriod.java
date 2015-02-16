@@ -82,28 +82,14 @@ public class TimePeriod implements Serializable {
         return ToStringBuilder.reflectionToString(this, style);
     }
 
-
     @Override
     public int hashCode() {
-        return new HashCodeBuilder().append(beginPosition).append(endPosition)
-                .append(GmlId).append(Prefix)
-                .toHashCode();
+        return HashCodeBuilder.reflectionHashCode(this);
     }
 
     @Override
     public boolean equals(Object other) {
-        if (other == this) {
-            return true;
-        }
-        if (!(other instanceof TimePeriod)) {
-            return false;
-        }
-        TimePeriod rhs = ((TimePeriod) other);
-        return new EqualsBuilder().append(beginPosition, rhs.beginPosition)
-                .append(endPosition, rhs.endPosition).append(GmlId, rhs.GmlId)
-                .append(Prefix, rhs.Prefix)
-
-                .isEquals();
+        return EqualsBuilder.reflectionEquals(this, other);
     }
 
 }

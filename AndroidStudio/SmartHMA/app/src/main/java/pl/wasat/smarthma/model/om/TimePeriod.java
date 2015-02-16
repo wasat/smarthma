@@ -27,22 +27,12 @@ public class TimePeriod implements Serializable {
         this._prefix = _prefix;
     }
 
-    public TimePeriod with_prefix(String _prefix) {
-        this._prefix = _prefix;
-        return this;
-    }
-
     public BeginPosition getBeginPosition() {
         return beginPosition;
     }
 
     public void setBeginPosition(BeginPosition beginPosition) {
         this.beginPosition = beginPosition;
-    }
-
-    public TimePeriod withBeginPosition(BeginPosition beginPosition) {
-        this.beginPosition = beginPosition;
-        return this;
     }
 
     public EndPosition getEndPosition() {
@@ -53,22 +43,12 @@ public class TimePeriod implements Serializable {
         this.endPosition = endPosition;
     }
 
-    public TimePeriod withEndPosition(EndPosition endPosition) {
-        this.endPosition = endPosition;
-        return this;
-    }
-
     public String get_gml_id() {
         return _gml_id;
     }
 
     public void set_gml_id(String _gml_id) {
         this._gml_id = _gml_id;
-    }
-
-    public TimePeriod with_gml_id(String _gml_id) {
-        this._gml_id = _gml_id;
-        return this;
     }
 
     @Override

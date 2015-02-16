@@ -33,11 +33,6 @@ public class ExceptionReport implements Serializable {
         this.prefix = prefix;
     }
 
-    public ExceptionReport withPrefix(String prefix) {
-        this.prefix = prefix;
-        return this;
-    }
-
     public Exception getException() {
         return exception;
     }
@@ -46,10 +41,6 @@ public class ExceptionReport implements Serializable {
         this.exception = exception;
     }
 
-    public ExceptionReport withException(Exception exception) {
-        this.exception = exception;
-        return this;
-    }
 
     public String getXmlnsOws() {
         return xmlnsOws;
@@ -59,10 +50,6 @@ public class ExceptionReport implements Serializable {
         this.xmlnsOws = xmlnsOws;
     }
 
-    public ExceptionReport withXmlnsOws(String xmlnsOws) {
-        this.xmlnsOws = xmlnsOws;
-        return this;
-    }
 
     public String getXmlnsXlink() {
         return xmlnsXlink;
@@ -72,10 +59,6 @@ public class ExceptionReport implements Serializable {
         this.xmlnsXlink = xmlnsXlink;
     }
 
-    public ExceptionReport withXmlnsXlink(String xmlnsXlink) {
-        this.xmlnsXlink = xmlnsXlink;
-        return this;
-    }
 
     public String getXmlnsXsi() {
         return xmlnsXsi;
@@ -85,10 +68,6 @@ public class ExceptionReport implements Serializable {
         this.xmlnsXsi = xmlnsXsi;
     }
 
-    public ExceptionReport withXmlnsXsi(String xmlnsXsi) {
-        this.xmlnsXsi = xmlnsXsi;
-        return this;
-    }
 
     public String getVersion() {
         return version;
@@ -96,11 +75,6 @@ public class ExceptionReport implements Serializable {
 
     public void setVersion(String version) {
         this.version = version;
-    }
-
-    public ExceptionReport withVersion(String version) {
-        this.version = version;
-        return this;
     }
 
     public String getXmlLang() {
@@ -111,11 +85,6 @@ public class ExceptionReport implements Serializable {
         this.xmlLang = xmlLang;
     }
 
-    public ExceptionReport withXmlLang(String xmlLang) {
-        this.xmlLang = xmlLang;
-        return this;
-    }
-
     public String getXsiSchemaLocation() {
         return xsiSchemaLocation;
     }
@@ -124,10 +93,6 @@ public class ExceptionReport implements Serializable {
         this.xsiSchemaLocation = xsiSchemaLocation;
     }
 
-    public ExceptionReport withXsiSchemaLocation(String xsiSchemaLocation) {
-        this.xsiSchemaLocation = xsiSchemaLocation;
-        return this;
-    }
 
     @Override
     public String toString() {
@@ -146,10 +111,5 @@ public class ExceptionReport implements Serializable {
         return EqualsBuilder.reflectionEquals(this, other);
     }
 
-
-    public ExceptionReport withAdditionalProperty(String name, Object value) {
-        this.additionalProperties.put(name, value);
-        return this;
-    }
 
 }

@@ -28,10 +28,6 @@ public class Link implements Serializable {
         this.href = href;
     }
 
-    public Link with_href(String _href) {
-        this.href = _href;
-        return this;
-    }
 
     public String getRel() {
         return rel;
@@ -39,11 +35,6 @@ public class Link implements Serializable {
 
     public void setRel(String rel) {
         this.rel = rel;
-    }
-
-    public Link with_rel(String _rel) {
-        this.rel = _rel;
-        return this;
     }
 
     public String getTitle() {
@@ -54,11 +45,6 @@ public class Link implements Serializable {
         this.title = title;
     }
 
-    public Link with_title(String _title) {
-        this.title = _title;
-        return this;
-    }
-
     public String getType() {
         return type;
     }
@@ -67,10 +53,6 @@ public class Link implements Serializable {
         this.type = type;
     }
 
-    public Link with_type(String _type) {
-        this.type = _type;
-        return this;
-    }
 
     @Override
     public String toString() {

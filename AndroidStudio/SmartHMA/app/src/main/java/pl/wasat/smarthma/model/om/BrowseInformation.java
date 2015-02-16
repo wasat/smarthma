@@ -27,10 +27,6 @@ public class BrowseInformation implements Serializable {
         this._prefix = _prefix;
     }
 
-    public BrowseInformation with_prefix(String _prefix) {
-        this._prefix = _prefix;
-        return this;
-    }
 
     public Type getType() {
         return type;
@@ -38,11 +34,6 @@ public class BrowseInformation implements Serializable {
 
     public void setType(Type type) {
         this.type = type;
-    }
-
-    public BrowseInformation withType(Type type) {
-        this.type = type;
-        return this;
     }
 
     public ReferenceSystemIdentifier getReferenceSystemIdentifier() {
@@ -54,23 +45,12 @@ public class BrowseInformation implements Serializable {
         this.referenceSystemIdentifier = referenceSystemIdentifier;
     }
 
-    public BrowseInformation withReferenceSystemIdentifier(
-            ReferenceSystemIdentifier referenceSystemIdentifier) {
-        this.referenceSystemIdentifier = referenceSystemIdentifier;
-        return this;
-    }
-
     public FileName getFileName() {
         return fileName;
     }
 
     public void setFileName(FileName fileName) {
         this.fileName = fileName;
-    }
-
-    public BrowseInformation withFileName(FileName fileName) {
-        this.fileName = fileName;
-        return this;
     }
 
     @Override

@@ -115,26 +115,12 @@ public class CIResponsibleParty implements Serializable {
 
     @Override
     public int hashCode() {
-        return new HashCodeBuilder().append(individualName)
-                .append(organisationName).append(contactInfo).append(role)
-                .append(Prefix).toHashCode();
+        return HashCodeBuilder.reflectionHashCode(this);
     }
 
     @Override
     public boolean equals(Object other) {
-        if (other == this) {
-            return true;
-        }
-        if (!(other instanceof CIResponsibleParty)) {
-            return false;
-        }
-        CIResponsibleParty rhs = ((CIResponsibleParty) other);
-        return new EqualsBuilder().append(individualName, rhs.individualName)
-                .append(organisationName, rhs.organisationName)
-                .append(contactInfo, rhs.contactInfo).append(role, rhs.role)
-                .append(Prefix, rhs.Prefix)
-
-                .isEquals();
+        return EqualsBuilder.reflectionEquals(this, other);
     }
 
 }

@@ -27,10 +27,6 @@ public class Polygon implements Serializable {
         this._prefix = _prefix;
     }
 
-    public Polygon with_prefix(String _prefix) {
-        this._prefix = _prefix;
-        return this;
-    }
 
     public Exterior getExterior() {
         return exterior;
@@ -38,11 +34,6 @@ public class Polygon implements Serializable {
 
     public void setExterior(Exterior exterior) {
         this.exterior = exterior;
-    }
-
-    public Polygon withExterior(Exterior exterior) {
-        this.exterior = exterior;
-        return this;
     }
 
     public String get_srsName() {
@@ -53,11 +44,6 @@ public class Polygon implements Serializable {
         this._srsName = _srsName;
     }
 
-    public Polygon with_srsName(String _srsName) {
-        this._srsName = _srsName;
-        return this;
-    }
-
     public String get_gml_id() {
         return _gml_id;
     }
@@ -66,10 +52,6 @@ public class Polygon implements Serializable {
         this._gml_id = _gml_id;
     }
 
-    public Polygon with_gml_id(String _gml_id) {
-        this._gml_id = _gml_id;
-        return this;
-    }
 
     @Override
     public String toString() {

@@ -25,22 +25,12 @@ public class PointMember implements Serializable {
         this._prefix = _prefix;
     }
 
-    public PointMember with_prefix(String _prefix) {
-        this._prefix = _prefix;
-        return this;
-    }
-
     public Point getPoint() {
         return point;
     }
 
     public void setPoint(Point point) {
         this.point = point;
-    }
-
-    public PointMember withPoint(Point point) {
-        this.point = point;
-        return this;
     }
 
     @Override

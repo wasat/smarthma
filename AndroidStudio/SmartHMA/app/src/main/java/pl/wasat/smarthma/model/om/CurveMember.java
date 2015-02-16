@@ -25,10 +25,6 @@ public class CurveMember implements Serializable {
         this._prefix = _prefix;
     }
 
-    public CurveMember with_prefix(String _prefix) {
-        this._prefix = _prefix;
-        return this;
-    }
 
     public LineString getLineString() {
         return lineString;
@@ -36,11 +32,6 @@ public class CurveMember implements Serializable {
 
     public void setLineString(LineString lineString) {
         this.lineString = lineString;
-    }
-
-    public CurveMember withLineString(LineString lineString) {
-        this.lineString = lineString;
-        return this;
     }
 
     @Override

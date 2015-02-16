@@ -25,10 +25,6 @@ public class ArchivedIn implements Serializable {
         this._prefix = _prefix;
     }
 
-    public ArchivedIn with_prefix(String _prefix) {
-        this._prefix = _prefix;
-        return this;
-    }
 
     public ArchivingInformation getArchivingInformation() {
         return archivingInformation;
@@ -39,11 +35,6 @@ public class ArchivedIn implements Serializable {
         this.archivingInformation = archivingInformation;
     }
 
-    public ArchivedIn withArchivingInformation(
-            ArchivingInformation archivingInformation) {
-        this.archivingInformation = archivingInformation;
-        return this;
-    }
 
     @Override
     public String toString() {

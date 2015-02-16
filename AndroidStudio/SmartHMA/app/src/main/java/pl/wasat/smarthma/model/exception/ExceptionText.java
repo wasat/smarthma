@@ -27,11 +27,6 @@ public class ExceptionText implements Serializable {
         this.prefix = prefix;
     }
 
-    public ExceptionText withPrefix(String prefix) {
-        this.prefix = prefix;
-        return this;
-    }
-
     public String getText() {
         return text;
     }
@@ -40,10 +35,6 @@ public class ExceptionText implements Serializable {
         this.text = text;
     }
 
-    public ExceptionText withText(String text) {
-        this.text = text;
-        return this;
-    }
 
     @Override
     public String toString() {
@@ -62,10 +53,5 @@ public class ExceptionText implements Serializable {
         return EqualsBuilder.reflectionEquals(this, other);
     }
 
-
-    public ExceptionText withAdditionalProperty(String name, Object value) {
-        this.additionalProperties.put(name, value);
-        return this;
-    }
 
 }

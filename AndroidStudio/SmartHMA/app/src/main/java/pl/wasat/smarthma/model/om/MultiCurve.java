@@ -28,10 +28,6 @@ public class MultiCurve implements Serializable {
         this._prefix = _prefix;
     }
 
-    public MultiCurve with_prefix(String _prefix) {
-        this._prefix = _prefix;
-        return this;
-    }
 
     public List<CurveMember> getCurveMember() {
         return curveMember;
@@ -41,10 +37,6 @@ public class MultiCurve implements Serializable {
         this.curveMember = curveMember;
     }
 
-    public MultiCurve withCurveMember(List<CurveMember> curveMember) {
-        this.curveMember = curveMember;
-        return this;
-    }
 
     public String get_gml_id() {
         return _gml_id;
@@ -52,11 +44,6 @@ public class MultiCurve implements Serializable {
 
     public void set_gml_id(String _gml_id) {
         this._gml_id = _gml_id;
-    }
-
-    public MultiCurve with_gml_id(String _gml_id) {
-        this._gml_id = _gml_id;
-        return this;
     }
 
     @Override

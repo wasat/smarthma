@@ -52,26 +52,14 @@ public class Summary implements Serializable {
         return ToStringBuilder.reflectionToString(this, style);
     }
 
-
     @Override
     public int hashCode() {
-        return new HashCodeBuilder().append(Type).append(Cdata)
-                .toHashCode();
+        return HashCodeBuilder.reflectionHashCode(this);
     }
 
     @Override
     public boolean equals(Object other) {
-        if (other == this) {
-            return true;
-        }
-        if (!(other instanceof Summary)) {
-            return false;
-        }
-        Summary rhs = ((Summary) other);
-        return new EqualsBuilder().append(Type, rhs.Type)
-                .append(Cdata, rhs.Cdata)
-
-                .isEquals();
+        return EqualsBuilder.reflectionEquals(this, other);
     }
 
 }

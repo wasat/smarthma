@@ -53,27 +53,14 @@ public class Report implements Serializable {
         return ToStringBuilder.reflectionToString(this, style);
     }
 
-
     @Override
     public int hashCode() {
-        return new HashCodeBuilder().append(DQDomainConsistency).append(Prefix)
-                .toHashCode();
+        return HashCodeBuilder.reflectionHashCode(this);
     }
 
     @Override
     public boolean equals(Object other) {
-        if (other == this) {
-            return true;
-        }
-        if (!(other instanceof Report)) {
-            return false;
-        }
-        Report rhs = ((Report) other);
-        return new EqualsBuilder()
-                .append(DQDomainConsistency, rhs.DQDomainConsistency)
-                .append(Prefix, rhs.Prefix)
-
-                .isEquals();
+        return EqualsBuilder.reflectionEquals(this, other);
     }
 
 }

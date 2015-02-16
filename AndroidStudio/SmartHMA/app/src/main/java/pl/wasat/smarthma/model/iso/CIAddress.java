@@ -116,28 +116,12 @@ public class CIAddress implements Serializable {
 
     @Override
     public int hashCode() {
-        return new HashCodeBuilder().append(deliveryPoint).append(city)
-                .append(postalCode).append(country)
-                .append(electronicMailAddress).append(Prefix)
-                .toHashCode();
+        return HashCodeBuilder.reflectionHashCode(this);
     }
 
     @Override
     public boolean equals(Object other) {
-        if (other == this) {
-            return true;
-        }
-        if (!(other instanceof CIAddress)) {
-            return false;
-        }
-        CIAddress rhs = ((CIAddress) other);
-        return new EqualsBuilder().append(deliveryPoint, rhs.deliveryPoint)
-                .append(city, rhs.city).append(postalCode, rhs.postalCode)
-                .append(country, rhs.country)
-                .append(electronicMailAddress, rhs.electronicMailAddress)
-                .append(Prefix, rhs.Prefix)
-
-                .isEquals();
+        return EqualsBuilder.reflectionEquals(this, other);
     }
 
 }

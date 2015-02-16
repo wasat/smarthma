@@ -25,10 +25,6 @@ public class AcquisitionParameters implements Serializable {
         this._prefix = _prefix;
     }
 
-    public AcquisitionParameters with_prefix(String _prefix) {
-        this._prefix = _prefix;
-        return this;
-    }
 
     public Acquisition getAcquisition() {
         return acquisition;
@@ -38,10 +34,6 @@ public class AcquisitionParameters implements Serializable {
         this.acquisition = acquisition;
     }
 
-    public AcquisitionParameters withAcquisition(Acquisition acquisition) {
-        this.acquisition = acquisition;
-        return this;
-    }
 
     @Override
     public String toString() {

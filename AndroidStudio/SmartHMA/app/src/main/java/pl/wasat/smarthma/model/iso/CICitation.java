@@ -85,25 +85,12 @@ public class CICitation implements Serializable {
 
     @Override
     public int hashCode() {
-        return new HashCodeBuilder().append(title).append(date)
-                .append(identifier).append(Prefix)
-                .toHashCode();
+        return HashCodeBuilder.reflectionHashCode(this);
     }
 
     @Override
     public boolean equals(Object other) {
-        if (other == this) {
-            return true;
-        }
-        if (!(other instanceof CICitation)) {
-            return false;
-        }
-        CICitation rhs = ((CICitation) other);
-        return new EqualsBuilder().append(title, rhs.title)
-                .append(date, rhs.date).append(identifier, rhs.identifier)
-                .append(Prefix, rhs.Prefix)
-
-                .isEquals();
+        return EqualsBuilder.reflectionEquals(this, other);
     }
 
 }

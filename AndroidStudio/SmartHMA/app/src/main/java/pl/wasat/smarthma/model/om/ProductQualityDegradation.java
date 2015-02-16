@@ -26,11 +26,6 @@ public class ProductQualityDegradation implements Serializable {
         this._prefix = _prefix;
     }
 
-    public ProductQualityDegradation with_prefix(String _prefix) {
-        this._prefix = _prefix;
-        return this;
-    }
-
     public String getuom() {
         return uom;
     }
@@ -39,10 +34,6 @@ public class ProductQualityDegradation implements Serializable {
         this.uom = uom;
     }
 
-    public ProductQualityDegradation withuom(String uom) {
-        this.uom = uom;
-        return this;
-    }
 
     public String get_text() {
         return _text;
@@ -52,10 +43,6 @@ public class ProductQualityDegradation implements Serializable {
         this._text = _text;
     }
 
-    public ProductQualityDegradation with_text(String _text) {
-        this._text = _text;
-        return this;
-    }
 
     @Override
     public String toString() {

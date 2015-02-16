@@ -25,10 +25,6 @@ public class Name implements Serializable {
         this._text = _text;
     }
 
-    public Name with_text(String _text) {
-        this._text = _text;
-        return this;
-    }
 
     public String get_xmlns() {
         return _xmlns;
@@ -38,22 +34,12 @@ public class Name implements Serializable {
         this._xmlns = _xmlns;
     }
 
-    public Name with_xmlns(String _xmlns) {
-        this._xmlns = _xmlns;
-        return this;
-    }
-
     public String getcodeSpace() {
         return codeSpace;
     }
 
     public void setcodeSpace(String codeSpace) {
         this.codeSpace = codeSpace;
-    }
-
-    public Name withcodeSpace(String codeSpace) {
-        this.codeSpace = codeSpace;
-        return this;
     }
 
     @Override

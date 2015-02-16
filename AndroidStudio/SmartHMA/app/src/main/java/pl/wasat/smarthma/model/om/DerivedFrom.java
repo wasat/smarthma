@@ -25,10 +25,6 @@ public class DerivedFrom implements Serializable {
         this._prefix = _prefix;
     }
 
-    public DerivedFrom with_prefix(String _prefix) {
-        this._prefix = _prefix;
-        return this;
-    }
 
     public String get_xlink_href() {
         return _xlink_href;
@@ -38,10 +34,6 @@ public class DerivedFrom implements Serializable {
         this._xlink_href = _xlink_href;
     }
 
-    public DerivedFrom with_xlink_href(String _xlink_href) {
-        this._xlink_href = _xlink_href;
-        return this;
-    }
 
     @Override
     public String toString() {

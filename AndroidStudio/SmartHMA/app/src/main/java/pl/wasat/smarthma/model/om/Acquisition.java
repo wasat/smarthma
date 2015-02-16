@@ -40,11 +40,6 @@ public class Acquisition implements Serializable {
         this._prefix = _prefix;
     }
 
-    public Acquisition with_prefix(String _prefix) {
-        this._prefix = _prefix;
-        return this;
-    }
-
     public OrbitNumber getOrbitNumber() {
         return orbitNumber;
     }
@@ -53,10 +48,6 @@ public class Acquisition implements Serializable {
         this.orbitNumber = orbitNumber;
     }
 
-    public Acquisition withOrbitNumber(OrbitNumber orbitNumber) {
-        this.orbitNumber = orbitNumber;
-        return this;
-    }
 
     public LastOrbitNumber getLastOrbitNumber() {
         return lastOrbitNumber;
@@ -66,10 +57,6 @@ public class Acquisition implements Serializable {
         this.lastOrbitNumber = lastOrbitNumber;
     }
 
-    public Acquisition withLastOrbitNumber(LastOrbitNumber lastOrbitNumber) {
-        this.lastOrbitNumber = lastOrbitNumber;
-        return this;
-    }
 
     public OrbitDirection getOrbitDirection() {
         return orbitDirection;
@@ -77,11 +64,6 @@ public class Acquisition implements Serializable {
 
     public void setOrbitDirection(OrbitDirection orbitDirection) {
         this.orbitDirection = orbitDirection;
-    }
-
-    public Acquisition withOrbitDirection(OrbitDirection orbitDirection) {
-        this.orbitDirection = orbitDirection;
-        return this;
     }
 
     public IlluminationAzimuthAngle getIlluminationAzimuthAngle() {
@@ -93,11 +75,6 @@ public class Acquisition implements Serializable {
         this.illuminationAzimuthAngle = illuminationAzimuthAngle;
     }
 
-    public Acquisition withIlluminationAzimuthAngle(
-            IlluminationAzimuthAngle illuminationAzimuthAngle) {
-        this.illuminationAzimuthAngle = illuminationAzimuthAngle;
-        return this;
-    }
 
     public AcrossTrackIncidenceAngle getAcrossTrackIncidenceAngle() {
         return acrossTrackIncidenceAngle;
@@ -108,11 +85,6 @@ public class Acquisition implements Serializable {
         this.acrossTrackIncidenceAngle = acrossTrackIncidenceAngle;
     }
 
-    public Acquisition withAcrossTrackIncidenceAngle(
-            AcrossTrackIncidenceAngle acrossTrackIncidenceAngle) {
-        this.acrossTrackIncidenceAngle = acrossTrackIncidenceAngle;
-        return this;
-    }
 
     public AlongTrackIncidenceAngle getAlongTrackIncidenceAngle() {
         return alongTrackIncidenceAngle;
@@ -123,11 +95,6 @@ public class Acquisition implements Serializable {
         this.alongTrackIncidenceAngle = alongTrackIncidenceAngle;
     }
 
-    public Acquisition withAlongTrackIncidenceAngle(
-            AlongTrackIncidenceAngle alongTrackIncidenceAngle) {
-        this.alongTrackIncidenceAngle = alongTrackIncidenceAngle;
-        return this;
-    }
 
     public Pitch getPitch() {
         return pitch;
@@ -135,11 +102,6 @@ public class Acquisition implements Serializable {
 
     public void setPitch(Pitch pitch) {
         this.pitch = pitch;
-    }
-
-    public Acquisition withPitch(Pitch pitch) {
-        this.pitch = pitch;
-        return this;
     }
 
     public Roll getRoll() {
@@ -150,10 +112,6 @@ public class Acquisition implements Serializable {
         this.roll = roll;
     }
 
-    public Acquisition withRoll(Roll roll) {
-        this.roll = roll;
-        return this;
-    }
 
     public Yaw getYaw() {
         return yaw;
@@ -163,10 +121,6 @@ public class Acquisition implements Serializable {
         this.yaw = yaw;
     }
 
-    public Acquisition withYaw(Yaw yaw) {
-        this.yaw = yaw;
-        return this;
-    }
 
     public CycleNumber getCycleNumber() {
         return cycleNumber;
@@ -174,11 +128,6 @@ public class Acquisition implements Serializable {
 
     public void setCycleNumber(CycleNumber cycleNumber) {
         this.cycleNumber = cycleNumber;
-    }
-
-    public Acquisition withCycleNumber(CycleNumber cycleNumber) {
-        this.cycleNumber = cycleNumber;
-        return this;
     }
 
     public IsSegment getIsSegment() {
@@ -189,10 +138,6 @@ public class Acquisition implements Serializable {
         this.isSegment = isSegment;
     }
 
-    public Acquisition withIsSegment(IsSegment isSegment) {
-        this.isSegment = isSegment;
-        return this;
-    }
 
     public RelativePassNumber getRelativePassNumber() {
         return relativePassNumber;
@@ -202,11 +147,6 @@ public class Acquisition implements Serializable {
         this.relativePassNumber = relativePassNumber;
     }
 
-    public Acquisition withRelativePassNumber(
-            RelativePassNumber relativePassNumber) {
-        this.relativePassNumber = relativePassNumber;
-        return this;
-    }
 
     public PolarisationMode getPolarisationMode() {
         return polarisationMode;
@@ -216,10 +156,6 @@ public class Acquisition implements Serializable {
         this.polarisationMode = polarisationMode;
     }
 
-    public Acquisition withPolarisationMode(PolarisationMode polarisationMode) {
-        this.polarisationMode = polarisationMode;
-        return this;
-    }
 
     public PolarisationChannels getPolarisationChannels() {
         return polarisationChannels;
@@ -230,11 +166,6 @@ public class Acquisition implements Serializable {
         this.polarisationChannels = polarisationChannels;
     }
 
-    public Acquisition withPolarisationChannels(
-            PolarisationChannels polarisationChannels) {
-        this.polarisationChannels = polarisationChannels;
-        return this;
-    }
 
     public WrsLongitudeGrid getWrsLongitudeGrid() {
         return wrsLongitudeGrid;
@@ -244,10 +175,6 @@ public class Acquisition implements Serializable {
         this.wrsLongitudeGrid = wrsLongitudeGrid;
     }
 
-    public Acquisition withWrsLongitudeGrid(WrsLongitudeGrid wrsLongitudeGrid) {
-        this.wrsLongitudeGrid = wrsLongitudeGrid;
-        return this;
-    }
 
     public WrsLatitudeGrid getWrsLatitudeGrid() {
         return wrsLatitudeGrid;
@@ -257,10 +184,6 @@ public class Acquisition implements Serializable {
         this.wrsLatitudeGrid = wrsLatitudeGrid;
     }
 
-    public Acquisition withWrsLatitudeGrid(WrsLatitudeGrid wrsLatitudeGrid) {
-        this.wrsLatitudeGrid = wrsLatitudeGrid;
-        return this;
-    }
 
     @Override
     public String toString() {

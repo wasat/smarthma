@@ -27,11 +27,6 @@ public class Category implements Serializable {
         this._prefix = _prefix;
     }
 
-    public Category with_prefix(String _prefix) {
-        this._prefix = _prefix;
-        return this;
-    }
-
     public String get_scheme() {
         return _scheme;
     }
@@ -40,22 +35,12 @@ public class Category implements Serializable {
         this._scheme = _scheme;
     }
 
-    public Category with_scheme(String _scheme) {
-        this._scheme = _scheme;
-        return this;
-    }
-
     public String get_text() {
         return _text;
     }
 
     public void set_text(String _text) {
         this._text = _text;
-    }
-
-    public Category with_text(String _text) {
-        this._text = _text;
-        return this;
     }
 
     @Override

@@ -25,10 +25,6 @@ public class ProcessingCenter implements Serializable {
         this._prefix = _prefix;
     }
 
-    public ProcessingCenter with_prefix(String _prefix) {
-        this._prefix = _prefix;
-        return this;
-    }
 
     public String getcodeSpace() {
         return codeSpace;
@@ -38,10 +34,6 @@ public class ProcessingCenter implements Serializable {
         this.codeSpace = codeSpace;
     }
 
-    public ProcessingCenter withcodeSpace(String codeSpace) {
-        this.codeSpace = codeSpace;
-        return this;
-    }
 
     @Override
     public String toString() {

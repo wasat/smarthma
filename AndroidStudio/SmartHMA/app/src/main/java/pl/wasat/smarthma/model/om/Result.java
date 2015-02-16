@@ -25,10 +25,6 @@ public class Result implements Serializable {
         this._prefix = _prefix;
     }
 
-    public Result with_prefix(String _prefix) {
-        this._prefix = _prefix;
-        return this;
-    }
 
     public EarthObservationResult getEarthObservationResult() {
         return earthObservationResult;
@@ -39,11 +35,6 @@ public class Result implements Serializable {
         this.earthObservationResult = earthObservationResult;
     }
 
-    public Result withEarthObservationResult(
-            EarthObservationResult earthObservationResult) {
-        this.earthObservationResult = earthObservationResult;
-        return this;
-    }
 
     @Override
     public String toString() {

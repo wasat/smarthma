@@ -53,27 +53,13 @@ public class Contact implements Serializable {
         return ToStringBuilder.reflectionToString(this, style);
     }
 
-
     @Override
     public int hashCode() {
-        return new HashCodeBuilder().append(CIResponsibleParty).append(Prefix)
-                .toHashCode();
+        return HashCodeBuilder.reflectionHashCode(this);
     }
 
     @Override
     public boolean equals(Object other) {
-        if (other == this) {
-            return true;
-        }
-        if (!(other instanceof Contact)) {
-            return false;
-        }
-        Contact rhs = ((Contact) other);
-        return new EqualsBuilder()
-                .append(CIResponsibleParty, rhs.CIResponsibleParty)
-                .append(Prefix, rhs.Prefix)
-
-                .isEquals();
+        return EqualsBuilder.reflectionEquals(this, other);
     }
-
 }

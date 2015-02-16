@@ -85,26 +85,12 @@ public class CIContact implements Serializable {
 
     @Override
     public int hashCode() {
-        return new HashCodeBuilder().append(phone).append(address)
-                .append(onlineResource).append(Prefix)
-                .toHashCode();
+        return HashCodeBuilder.reflectionHashCode(this);
     }
 
     @Override
     public boolean equals(Object other) {
-        if (other == this) {
-            return true;
-        }
-        if (!(other instanceof CIContact)) {
-            return false;
-        }
-        CIContact rhs = ((CIContact) other);
-        return new EqualsBuilder().append(phone, rhs.phone)
-                .append(address, rhs.address)
-                .append(onlineResource, rhs.onlineResource)
-                .append(Prefix, rhs.Prefix)
-
-                .isEquals();
+        return EqualsBuilder.reflectionEquals(this, other);
     }
 
 }

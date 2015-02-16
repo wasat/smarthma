@@ -52,26 +52,14 @@ public class DescriptiveKeyword implements Serializable {
         return ToStringBuilder.reflectionToString(this, style);
     }
 
-
     @Override
     public int hashCode() {
-        return new HashCodeBuilder().append(MDKeywords).append(Prefix)
-                .toHashCode();
+        return HashCodeBuilder.reflectionHashCode(this);
     }
 
     @Override
     public boolean equals(Object other) {
-        if (other == this) {
-            return true;
-        }
-        if (!(other instanceof DescriptiveKeyword)) {
-            return false;
-        }
-        DescriptiveKeyword rhs = ((DescriptiveKeyword) other);
-        return new EqualsBuilder().append(MDKeywords, rhs.MDKeywords)
-                .append(Prefix, rhs.Prefix)
-
-                .isEquals();
+        return EqualsBuilder.reflectionEquals(this, other);
     }
 
 }

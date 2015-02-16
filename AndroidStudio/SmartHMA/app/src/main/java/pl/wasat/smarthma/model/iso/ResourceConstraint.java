@@ -67,28 +67,13 @@ public class ResourceConstraint implements Serializable {
         return ToStringBuilder.reflectionToString(this, style);
     }
 
-
     @Override
     public int hashCode() {
-        return new HashCodeBuilder().append(MDConstraints).append(Prefix)
-                .append(MDLegalConstraints)
-                .toHashCode();
+        return HashCodeBuilder.reflectionHashCode(this);
     }
 
     @Override
     public boolean equals(Object other) {
-        if (other == this) {
-            return true;
-        }
-        if (!(other instanceof ResourceConstraint)) {
-            return false;
-        }
-        ResourceConstraint rhs = ((ResourceConstraint) other);
-        return new EqualsBuilder().append(MDConstraints, rhs.MDConstraints)
-                .append(Prefix, rhs.Prefix)
-                .append(MDLegalConstraints, rhs.MDLegalConstraints)
-
-                .isEquals();
+        return EqualsBuilder.reflectionEquals(this, other);
     }
-
 }

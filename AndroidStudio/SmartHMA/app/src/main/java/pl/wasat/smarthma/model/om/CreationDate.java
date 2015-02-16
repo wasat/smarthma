@@ -25,22 +25,12 @@ public class CreationDate implements Serializable {
         this._prefix = _prefix;
     }
 
-    public CreationDate with_prefix(String _prefix) {
-        this._prefix = _prefix;
-        return this;
-    }
-
     public String get_text() {
         return _text;
     }
 
     public void set_text(String _text) {
         this._text = _text;
-    }
-
-    public CreationDate with_text(String _text) {
-        this._text = _text;
-        return this;
     }
 
     @Override

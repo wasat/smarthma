@@ -27,11 +27,6 @@ public class ServiceReference implements Serializable {
         this._prefix = _prefix;
     }
 
-    public ServiceReference with_prefix(String _prefix) {
-        this._prefix = _prefix;
-        return this;
-    }
-
     public RequestMessage getRequestMessage() {
         return requestMessage;
     }
@@ -40,10 +35,6 @@ public class ServiceReference implements Serializable {
         this.requestMessage = requestMessage;
     }
 
-    public ServiceReference withRequestMessage(RequestMessage requestMessage) {
-        this.requestMessage = requestMessage;
-        return this;
-    }
 
     public String get_xmlns() {
         return _xmlns;
@@ -53,22 +44,12 @@ public class ServiceReference implements Serializable {
         this._xmlns = "xmlns";
     }
 
-    public ServiceReference with_xmlns(String _xmlns) {
-        this._xmlns = _xmlns;
-        return this;
-    }
-
     public String get_xlink_href() {
         return _xlink_href;
     }
 
     public void set_xlink_href(String _xlink_href) {
         this._xlink_href = _xlink_href;
-    }
-
-    public ServiceReference with_xlink_href(String _xlink_href) {
-        this._xlink_href = _xlink_href;
-        return this;
     }
 
     @Override

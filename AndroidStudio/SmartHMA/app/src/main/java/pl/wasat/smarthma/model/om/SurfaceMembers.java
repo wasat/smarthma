@@ -25,10 +25,6 @@ public class SurfaceMembers implements Serializable {
         this._prefix = _prefix;
     }
 
-    public SurfaceMembers with_prefix(String _prefix) {
-        this._prefix = _prefix;
-        return this;
-    }
 
     public Polygon getPolygon() {
         return polygon;
@@ -36,11 +32,6 @@ public class SurfaceMembers implements Serializable {
 
     public void setPolygon(Polygon polygon) {
         this.polygon = polygon;
-    }
-
-    public SurfaceMembers withPolygon(Polygon polygon) {
-        this.polygon = polygon;
-        return this;
     }
 
     @Override

@@ -25,11 +25,6 @@ public class ResultTime implements Serializable {
         this._prefix = _prefix;
     }
 
-    public ResultTime with_prefix(String _prefix) {
-        this._prefix = _prefix;
-        return this;
-    }
-
     public TimeInstant getTimeInstant() {
         return timeInstant;
     }
@@ -38,10 +33,6 @@ public class ResultTime implements Serializable {
         this.timeInstant = timeInstant;
     }
 
-    public ResultTime withTimeInstant(TimeInstant timeInstant) {
-        this.timeInstant = timeInstant;
-        return this;
-    }
 
     @Override
     public String toString() {

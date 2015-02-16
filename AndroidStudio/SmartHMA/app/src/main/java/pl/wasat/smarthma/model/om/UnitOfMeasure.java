@@ -25,10 +25,6 @@ public class UnitOfMeasure implements Serializable {
         this._prefix = _prefix;
     }
 
-    public UnitOfMeasure with_prefix(String _prefix) {
-        this._prefix = _prefix;
-        return this;
-    }
 
     public String getuom() {
         return uom;
@@ -36,11 +32,6 @@ public class UnitOfMeasure implements Serializable {
 
     public void setUom(String uom) {
         this.uom = uom;
-    }
-
-    public UnitOfMeasure withuom(String uom) {
-        this.uom = uom;
-        return this;
     }
 
     @Override

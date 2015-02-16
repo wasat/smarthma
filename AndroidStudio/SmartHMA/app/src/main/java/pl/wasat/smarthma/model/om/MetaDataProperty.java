@@ -25,10 +25,6 @@ public class MetaDataProperty implements Serializable {
         this._prefix = _prefix;
     }
 
-    public MetaDataProperty with_prefix(String _prefix) {
-        this._prefix = _prefix;
-        return this;
-    }
 
     public EarthObservationMetaData getEarthObservationMetaData() {
         return earthObservationMetaData;
@@ -39,11 +35,6 @@ public class MetaDataProperty implements Serializable {
         this.earthObservationMetaData = earthObservationMetaData;
     }
 
-    public MetaDataProperty withEarthObservationMetaData(
-            EarthObservationMetaData earthObservationMetaData) {
-        this.earthObservationMetaData = earthObservationMetaData;
-        return this;
-    }
 
     @Override
     public String toString() {

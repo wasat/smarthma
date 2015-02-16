@@ -52,27 +52,14 @@ public class AccessConstraints implements Serializable {
         return ToStringBuilder.reflectionToString(this, style);
     }
 
-
     @Override
     public int hashCode() {
-        return new HashCodeBuilder().append(MDRestrictionCode).append(Prefix)
-                .toHashCode();
+        return HashCodeBuilder.reflectionHashCode(this);
     }
 
     @Override
     public boolean equals(Object other) {
-        if (other == this) {
-            return true;
-        }
-        if (!(other instanceof AccessConstraints)) {
-            return false;
-        }
-        AccessConstraints rhs = ((AccessConstraints) other);
-        return new EqualsBuilder()
-                .append(MDRestrictionCode, rhs.MDRestrictionCode)
-                .append(Prefix, rhs.Prefix)
-
-                .isEquals();
+        return EqualsBuilder.reflectionEquals(this, other);
     }
 
 }

@@ -175,7 +175,7 @@ public class CollectionsBrowserActivity extends BaseSmartHMActivity implements
     }
 
 /*	@Override
-	public void onDataSeriesDetailFragmentInteraction() {
+    public void onDataSeriesDetailFragmentInteraction() {
 		// TODO Auto-generated method stub
 
 	}*/

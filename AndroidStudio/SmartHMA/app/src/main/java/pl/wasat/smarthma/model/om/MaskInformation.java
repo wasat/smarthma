@@ -30,10 +30,6 @@ public class MaskInformation implements Serializable {
         this._prefix = _prefix;
     }
 
-    public MaskInformation with_prefix(String _prefix) {
-        this._prefix = _prefix;
-        return this;
-    }
 
     public Type getType() {
         return type;
@@ -41,11 +37,6 @@ public class MaskInformation implements Serializable {
 
     public void setType(Type type) {
         this.type = type;
-    }
-
-    public MaskInformation withType(Type type) {
-        this.type = type;
-        return this;
     }
 
     public SubType getSubType() {
@@ -56,10 +47,6 @@ public class MaskInformation implements Serializable {
         this.subType = subType;
     }
 
-    public MaskInformation withSubType(SubType subType) {
-        this.subType = subType;
-        return this;
-    }
 
     public Format getFormat() {
         return format;
@@ -69,10 +56,6 @@ public class MaskInformation implements Serializable {
         this.format = format;
     }
 
-    public MaskInformation withFormat(Format format) {
-        this.format = format;
-        return this;
-    }
 
     public ReferenceSystemIdentifier getReferenceSystemIdentifier() {
         return referenceSystemIdentifier;
@@ -83,12 +66,6 @@ public class MaskInformation implements Serializable {
         this.referenceSystemIdentifier = referenceSystemIdentifier;
     }
 
-    public MaskInformation withReferenceSystemIdentifier(
-            ReferenceSystemIdentifier referenceSystemIdentifier) {
-        this.referenceSystemIdentifier = referenceSystemIdentifier;
-        return this;
-    }
-
     public MultiExtentOf getMultiExtentOf() {
         return multiExtentOf;
     }
@@ -97,10 +74,6 @@ public class MaskInformation implements Serializable {
         this.multiExtentOf = multiExtentOf;
     }
 
-    public MaskInformation withMultiExtentOf(MultiExtentOf multiExtentOf) {
-        this.multiExtentOf = multiExtentOf;
-        return this;
-    }
 
     public FileName getFileName() {
         return fileName;
@@ -108,11 +81,6 @@ public class MaskInformation implements Serializable {
 
     public void setFileName(FileName fileName) {
         this.fileName = fileName;
-    }
-
-    public MaskInformation withFileName(FileName fileName) {
-        this.fileName = fileName;
-        return this;
     }
 
     @Override
