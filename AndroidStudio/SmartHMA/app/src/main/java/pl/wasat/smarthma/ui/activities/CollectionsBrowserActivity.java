@@ -4,12 +4,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 
-import com.google.android.gms.maps.model.LatLngBounds;
-
 import pl.wasat.smarthma.R;
 import pl.wasat.smarthma.adapter.DataSeriesListAdapter;
 import pl.wasat.smarthma.database.EoDbAdapter;
 import pl.wasat.smarthma.helper.Const;
+import pl.wasat.smarthma.kindle.AmznAreaPickerMapFragment.OnAmznAreaPickerMapFragmentListener;
 import pl.wasat.smarthma.model.FedeoRequest;
 import pl.wasat.smarthma.model.iso.EntryISO;
 import pl.wasat.smarthma.preferences.SharedPrefs;
@@ -22,17 +21,17 @@ import pl.wasat.smarthma.ui.frags.common.CollectionDetailsFragment.OnCollectionD
 import pl.wasat.smarthma.ui.frags.common.MetadataISOFragment;
 import pl.wasat.smarthma.ui.frags.common.MetadataISOFragment.OnMetadataISOFragmentListener;
 import pl.wasat.smarthma.ui.frags.search.SearchListFragment.OnSearchListFragmentListener;
+import pl.wasat.smarthma.utils.obj.LatLngBoundsExt;
 
 //import pl.wasat.smarthma.ui.frags.browse.DataSeriesDetailFragment;
 //import pl.wasat.smarthma.ui.frags.browse.DataSeriesDetailFragment.OnDataSeriesDetailFragmentInteractionListener;
 
 public class CollectionsBrowserActivity extends BaseSmartHMActivity implements
         OnDataSeriesListFragmentListener,
-        //OnDataSeriesDetailFragmentInteractionListener,
-        OnAreaPickerMapFragmentListener, OnSearchListFragmentListener,
+        OnAreaPickerMapFragmentListener, OnAmznAreaPickerMapFragmentListener, OnSearchListFragmentListener,
         OnCollectionDetailsFragmentListener, OnMetadataISOFragmentListener {
 
-    private boolean mTwoPane;
+    // private boolean mTwoPane;
     private EoDbAdapter dba;
 
     public CollectionsBrowserActivity() {
@@ -180,18 +179,17 @@ public class CollectionsBrowserActivity extends BaseSmartHMActivity implements
 
 	}*/
 
-
-    /*
-     * (non-Javadoc)
-     *
-     * @see pl.wasat.smarthma.ui.fragments.BaseMapFragment.
-     * OnMapFragmentInteractionListener
-     * #onMapFragmentBoundsChange(com
-     * .google.android.gms.maps.model.LatLngBounds)
-     */
     @Override
-    public void onMapFragmentBoundsChange(LatLngBounds bounds) {
+    public void onMapFragmentBoundsChange(LatLngBoundsExt bounds) {
+        callUpdateDetailFrag(bounds);
+    }
 
+    @Override
+    public void onAmznMapFragmentBoundsChange(LatLngBoundsExt bounds) {
+        callUpdateDetailFrag(bounds);
+    }
+
+    private void callUpdateDetailFrag(LatLngBoundsExt bounds) {
         CollectionDetailsFragment collectionDetailsFragment = (CollectionDetailsFragment) getSupportFragmentManager()
                 .findFragmentByTag("CollectionDetailsFragment");
 
@@ -237,4 +235,6 @@ public class CollectionsBrowserActivity extends BaseSmartHMActivity implements
     public void onMetadataISOFragmentInteraction() {
 
     }
+
+
 }

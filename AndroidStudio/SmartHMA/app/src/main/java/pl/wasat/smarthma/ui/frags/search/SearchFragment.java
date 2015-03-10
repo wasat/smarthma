@@ -10,11 +10,21 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.SearchView;
+import android.widget.Spinner;
+
+import java.util.ArrayList;
+import java.util.Calendar;
 
 import pl.wasat.smarthma.R;
+import pl.wasat.smarthma.database.SearchHistory;
+import pl.wasat.smarthma.database.SearchParams;
+import pl.wasat.smarthma.helper.SimpleDate;
 
 /**
  * A simple {@link android.support.v4.app.Fragment} subclass. Activities that
@@ -26,6 +36,8 @@ import pl.wasat.smarthma.R;
 public class SearchFragment extends Fragment {
 
     private OnSearchFragmentListener mListener;
+    private SearchBasicInfoRightFragment rightPanel;
+    private String[] lastBbox;
 
     /**
      * Use this factory method to create a new instance of this fragment using
@@ -41,6 +53,11 @@ public class SearchFragment extends Fragment {
         // Required empty public constructor
     }
 
+    public void setRightPanel(SearchBasicInfoRightFragment fragment) {
+        this.rightPanel = fragment;
+        updateAreaBounds();
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -51,7 +68,7 @@ public class SearchFragment extends Fragment {
         // Associate searchable configuration with the SearchView
         SearchManager searchManager = (SearchManager) getActivity()
                 .getSystemService(Context.SEARCH_SERVICE);
-        SearchView searchView = (SearchView) rootView
+        final SearchView searchView = (SearchView) rootView
                 .findViewById(R.id.search_frag_searchview);
         searchView.setSearchableInfo(searchManager
                 .getSearchableInfo(getActivity().getComponentName()));
@@ -59,6 +76,29 @@ public class SearchFragment extends Fragment {
         searchView.setFocusable(true);
         searchView.setIconified(false);
         searchView.clearFocus();
+
+        final Spinner spnParams = (Spinner) rootView.findViewById(R.id.search_frag_prev_params_list);
+        refreshSearchHistoryList(spnParams);
+        spnParams.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                performSearchHistoryListAction(position, searchView);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
+        });
+
+        Button btnParams = (Button) rootView.findViewById(R.id.search_frag_button_clear_history);
+        btnParams.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SearchHistory searchHistory = new SearchHistory(getActivity());
+                searchHistory.clearHistory();
+                refreshSearchHistoryList(spnParams);
+            }
+        });
 
         LinearLayout linearLayout1 = (LinearLayout) searchView.getChildAt(0);
         LinearLayout linearLayout2 = (LinearLayout) linearLayout1.getChildAt(2);
@@ -68,6 +108,57 @@ public class SearchFragment extends Fragment {
         autoComplete.setTextSize(32);
 
         return rootView;
+    }
+
+    protected void refreshSearchHistoryList(Spinner spnParams) {
+        SearchHistory searchHistory = new SearchHistory(getActivity());
+        String[] items = searchHistory.getSearchHistoryListAsStringArray(true);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(getActivity(), R.layout.search_history_spinner, items);
+        spnParams.setAdapter(adapter);
+    }
+
+    protected void performSearchHistoryListAction(int position, SearchView searchView) {
+        SearchHistory searchHistory = new SearchHistory(getActivity());
+        ArrayList<SearchParams> searchHistoryList = searchHistory.getSearchHistoryList(true);
+        if (rightPanel != null && searchHistoryList.size() > 0) {
+            SearchParams params = searchHistoryList.get(position);
+
+            if (searchView != null) {
+                searchView.setQuery(params.getSearchPhrase(), false);
+            }
+
+            CharSequence[] cataloguesList = rightPanel.getCataloguesList();
+            for (int i = 0; i < cataloguesList.length; i++) {
+                //Log.d("ZX", cataloguesList[i].toString());
+                if (params.getCatalogue().equalsIgnoreCase(cataloguesList[i].toString())) {
+                    //Log.d("ZX", "Found match");
+                    rightPanel.setCatalogue(i);
+                }
+            }
+
+            Calendar calStart = Calendar.getInstance();
+            SimpleDate dateStart = new SimpleDate(params.getStartDate());
+            calStart.set(dateStart.getYear(), dateStart.getMonth(), dateStart.getDay(),
+                    dateStart.getHours(), dateStart.getMinutes(), dateStart.getSeconds());
+            Calendar calEnd = Calendar.getInstance();
+            SimpleDate dateEnd = new SimpleDate(params.getEndDate());
+            calEnd.set(dateEnd.getYear(), dateEnd.getMonth(), dateEnd.getDay(),
+                    dateEnd.getHours(), dateEnd.getMinutes(), dateEnd.getSeconds());
+            rightPanel.setDateTime(calStart, calEnd);
+
+            if (!rightPanel.getAreaBoundsUpdated()) {
+                String[] bbox = params.getBbox().split(",");
+                rightPanel.setBounds(bbox[0], bbox[1], bbox[2], bbox[3]);
+                lastBbox = bbox;
+            }
+            rightPanel.setAreaBoundsUpdated(false);
+        }
+    }
+
+    protected void updateAreaBounds() {
+        if (lastBbox != null) {
+            rightPanel.setBounds(lastBbox[0], lastBbox[1], lastBbox[2], lastBbox[3]);
+        }
     }
 
     public void onButtonPressed(Uri uri) {

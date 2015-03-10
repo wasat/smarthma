@@ -24,7 +24,6 @@ import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Picasso.LoadedFrom;
 import com.squareup.picasso.Target;
 
-import java.util.Iterator;
 import java.util.List;
 
 import pl.wasat.smarthma.R;

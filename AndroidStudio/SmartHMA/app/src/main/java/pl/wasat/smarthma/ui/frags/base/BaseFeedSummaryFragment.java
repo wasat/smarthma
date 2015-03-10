@@ -12,7 +12,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import pl.wasat.smarthma.R;
-import pl.wasat.smarthma.helper.Global;
+import pl.wasat.smarthma.SmartHMApplication;
 import pl.wasat.smarthma.model.feed.Feed;
 
 /**
@@ -99,6 +99,7 @@ public class BaseFeedSummaryFragment extends Fragment {
         spnSortType = (Spinner) rootView
                 .findViewById(R.id.search_frag_ds_intro_spinner_sort_type);
 
+
         initUITexts();
         initUIButtons();
 
@@ -181,12 +182,12 @@ public class BaseFeedSummaryFragment extends Fragment {
             }
         }
 
-        spnSortType.setSelection(Global.sortingType, false);
+        spnSortType.setSelection(SmartHMApplication.sortingType, false);
         spnSortType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                if (position != Global.sortingType) {
-                    Global.sortingType = position;
+                if (position != SmartHMApplication.sortingType) {
+                    SmartHMApplication.sortingType = position;
                     btnReload.performClick();
                 }
             }

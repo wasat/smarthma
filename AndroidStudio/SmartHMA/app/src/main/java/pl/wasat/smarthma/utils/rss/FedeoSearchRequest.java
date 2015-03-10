@@ -45,6 +45,7 @@ public class FedeoSearchRequest extends GoogleHttpClientSpiceRequest<Feed> {
     @Override
     public Feed loadDataFromNetwork() throws Exception {
 
+        //Log.d("ZX", "loadDataFromNetwork()");
         Feed feed = null;
         switch (schemaMode) {
             case 1:

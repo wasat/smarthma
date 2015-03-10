@@ -42,8 +42,12 @@
     <string name="more">More &gt;&gt;</string>
     <string name="smarthma">SmartHMA</string>
     <string name="fedeo_eo_data_series_search_engine">with ESA/FedEO Search Engine</string>
+    <string name="search_history">Search history:</string>
+    <string name="search_history_empty">(search history is empty)</string>
+    <string name="query">Query</string>
+    <string name="clear_search_history">Clear search history</string>
     <string name="basic_settings">Basic Settings</string>
-    <string name="advance_settings">Advance Settings</string>
+    <string name="advanced_settings">Advanced Settings</string>
     <string name="basic_search_settings">Basic Search Settings</string>
     <string name="search_area">Search Area</string>
     <string name="time_period">Time Period</string>

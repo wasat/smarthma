@@ -14,6 +14,8 @@ import java.util.List;
 
 import pl.wasat.smarthma.R;
 import pl.wasat.smarthma.adapter.SearchListAdapter;
+import pl.wasat.smarthma.database.SearchHistory;
+import pl.wasat.smarthma.database.SearchParams;
 import pl.wasat.smarthma.helper.Const;
 import pl.wasat.smarthma.helper.DataSorter;
 import pl.wasat.smarthma.model.FedeoRequest;
@@ -68,6 +70,8 @@ public class SearchListFragment extends BaseSpiceListFragment {
             searchRequest = (FedeoRequest) getArguments().getSerializable(
                     KEY_PARAM_SEARCH_FEDEO_REQUEST);
             //stopSearch = getArguments().getBoolean(KEY_PARAM_STOP_NEW_SEARCH);
+            SearchHistory searchHistory = new SearchHistory(getActivity());
+            searchHistory.addSearchParameters(new SearchParams(searchRequest));
         }
     }
 

@@ -10,6 +10,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -19,8 +20,6 @@ import android.widget.DatePicker;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.google.android.gms.maps.model.LatLngBounds;
-
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
@@ -28,9 +27,12 @@ import java.util.Locale;
 import pl.wasat.smarthma.R;
 import pl.wasat.smarthma.customviews.SmHmaTimePickerDialog;
 import pl.wasat.smarthma.customviews.TimePicker;
+import pl.wasat.smarthma.helper.Const;
+import pl.wasat.smarthma.kindle.AmznAreaPickerMapFragment;
 import pl.wasat.smarthma.preferences.SharedPrefs;
 import pl.wasat.smarthma.ui.frags.common.AreaPickerMapFragment;
 import pl.wasat.smarthma.utils.loc.LocManager;
+import pl.wasat.smarthma.utils.obj.LatLngBoundsExt;
 
 /**
  * A simple {@link android.support.v4.app.Fragment} subclass. Activities that
@@ -59,6 +61,8 @@ public class SearchBasicInfoRightFragment extends Fragment {
     private static Button btnFromTime;
     private static Button btnToDate;
     private static Button btnToTime;
+
+    private boolean areaBoundsUpdated = false;
 
     private OnSearchBasicInfoRightFragmentListener mListener;
     private static SharedPrefs sharedPrefs;
@@ -130,14 +134,25 @@ public class SearchBasicInfoRightFragment extends Fragment {
         areaLayout.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                AreaPickerMapFragment areaPickerMapFragment = AreaPickerMapFragment
-                        .newInstance();
-                getActivity()
-                        .getSupportFragmentManager()
-                        .beginTransaction()
-                        .replace(R.id.activity_base_details_container,
-                                areaPickerMapFragment)
-                        .addToBackStack("AreaPickerMapFragment").commit();
+                if (Const.IS_KINDLE) {
+                    AmznAreaPickerMapFragment areaPickerMapFragment = AmznAreaPickerMapFragment
+                            .newInstance();
+                    getActivity()
+                            .getSupportFragmentManager()
+                            .beginTransaction()
+                            .replace(R.id.activity_base_details_container,
+                                    areaPickerMapFragment)
+                            .addToBackStack("AreaPickerMapFragment").commit();
+                } else {
+                    AreaPickerMapFragment areaPickerMapFragment = AreaPickerMapFragment
+                            .newInstance();
+                    getActivity()
+                            .getSupportFragmentManager()
+                            .beginTransaction()
+                            .replace(R.id.activity_base_details_container,
+                                    areaPickerMapFragment)
+                            .addToBackStack("AreaPickerMapFragment").commit();
+                }
 
             }
         });
@@ -267,10 +282,18 @@ public class SearchBasicInfoRightFragment extends Fragment {
 
         sharedPrefs.setBboxPrefs(bboxWest, bboxSouth, bboxEast, bboxNorth);
 
-        // setBboxPrefs();
+        areaBoundsUpdated = true;
 
+        // setBboxPrefs();
     }
 
+    public boolean getAreaBoundsUpdated() {
+        return areaBoundsUpdated;
+    }
+
+    public void setAreaBoundsUpdated(boolean areaBoundsUpdated) {
+        this.areaBoundsUpdated = areaBoundsUpdated;
+    }
 
     /**
      *
@@ -394,6 +417,7 @@ public class SearchBasicInfoRightFragment extends Fragment {
                         seconds);
                 String timeToSet = formatTime(calStart);
                 btnFromTime.setText(timeToSet);
+                Log.d("ZX", timeToSet);
 
             } else if (buttonTag.equalsIgnoreCase("btnToTime")) {
                 calEnd.set(calEnd.get(Calendar.YEAR),
@@ -402,6 +426,7 @@ public class SearchBasicInfoRightFragment extends Fragment {
                         seconds);
                 String timeToSet = formatTime(calEnd);
                 btnToTime.setText(timeToSet);
+                Log.d("ZX", timeToSet);
             }
             // setDateTimePrefs(getActivity());
             sharedPrefs.setDateTimePrefs(setDtISO(calStart), setDtISO(calEnd));
@@ -415,10 +440,7 @@ public class SearchBasicInfoRightFragment extends Fragment {
             builder.setTitle(R.string.eo_catalogue_list_title).setItems(
                     cataloguesList, new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
-                            tvCatalogName.setText(cataloguesList[which]);
-
-                            sharedPrefs.setParentIdPrefs(cataloguesList[which]
-                                    .toString());
+                            setCatalogue(which);
                             // setParentIdPrefs(getActivity(),
                             // cataloguesList[which].toString());
                         }
@@ -427,11 +449,42 @@ public class SearchBasicInfoRightFragment extends Fragment {
         }
     }
 
+    public static void setCatalogue(int which) {
+        tvCatalogName.setText(cataloguesList[which]);
+        sharedPrefs.setParentIdPrefs(cataloguesList[which].toString());
+    }
+
+    public static void setDateTime(Calendar calStart, Calendar calEnd) {
+        SearchBasicInfoRightFragment.calStart = calStart;
+        SearchBasicInfoRightFragment.calEnd = calEnd;
+
+        String dateToSet = formatDate(calStart);
+        btnFromDate.setText(dateToSet);
+        String dateToSet2 = formatDate(calEnd);
+        btnToDate.setText(dateToSet2);
+        /*
+        String timeToSet = formatTime(calStart);
+        btnFromTime.setText(timeToSet);
+        String timeToSet2 = formatTime(calEnd);
+        btnToTime.setText(timeToSet2);
+        */
+        sharedPrefs.setDateTimePrefs(setDtISO(calStart), setDtISO(calEnd));
+    }
+
+    public void setBounds(String bboxWest, String bboxSouth, String bboxEast, String bboxNorth) {
+        tvAreaSWLat.setText(bboxSouth);
+        tvAreaSWLon.setText(bboxWest);
+        tvAreaNELat.setText(bboxNorth);
+        tvAreaNELon.setText(bboxEast);
+
+        sharedPrefs.setBboxPrefs(bboxWest, bboxSouth, bboxEast, bboxNorth);
+    }
+
     /**
      * @param cal
      * @return
      */
-    private static String formatDate(Calendar cal) {
+    public static String formatDate(Calendar cal) {
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd", Locale.UK);
         return df.format(cal.getTime());
     }
@@ -440,12 +493,12 @@ public class SearchBasicInfoRightFragment extends Fragment {
      * @param cal
      * @return
      */
-    private static String formatTime(Calendar cal) {
+    public static String formatTime(Calendar cal) {
         SimpleDateFormat dfTime = new SimpleDateFormat("HH:mm:ss", Locale.UK);
         return dfTime.format(cal.getTime());
     }
 
-    private static String setDtISO(Calendar cal) {
+    public static String setDtISO(Calendar cal) {
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'",
                 Locale.UK);
         return df.format(cal.getTime());
@@ -454,7 +507,7 @@ public class SearchBasicInfoRightFragment extends Fragment {
     /**
      * @param bounds
      */
-    public void updateCollectionsAreaBounds(LatLngBounds bounds) {
+    public void updateCollectionsAreaBounds(LatLngBoundsExt bounds) {
 
         String bboxWest = String.format(Locale.UK, "% 4f",
                 (float) bounds.southwest.longitude);
@@ -472,5 +525,11 @@ public class SearchBasicInfoRightFragment extends Fragment {
 
         sharedPrefs.setBboxPrefs(bboxWest, bboxSouth, bboxEast, bboxNorth);
 
+        Log.d("ZX", "updateCollectionsAreaBounds()");
+        areaBoundsUpdated = true;
+    }
+
+    public static CharSequence[] getCataloguesList() {
+        return cataloguesList;
     }
 }

@@ -7,6 +7,8 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 import pl.wasat.smarthma.R;
+import pl.wasat.smarthma.helper.Const;
+import pl.wasat.smarthma.kindle.AmznAreaPickerMapFragment;
 import pl.wasat.smarthma.ui.frags.base.BaseViewAndBasicSettingsDetailFragment;
 import pl.wasat.smarthma.ui.frags.common.AreaPickerMapFragment;
 
@@ -44,14 +46,26 @@ public class BrowseCollectionFirstDetailFragment extends
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
-        AreaPickerMapFragment areaPickerMapFragment = AreaPickerMapFragment
-                .newInstance();
-        getActivity()
-                .getSupportFragmentManager()
-                .beginTransaction()
-                .replace(R.id.frag_search_res_coll_det_layout_top,
-                        areaPickerMapFragment)
-                .addToBackStack("AreaPickerMapFragment").commit();
+        if (Const.IS_KINDLE) {
+            AmznAreaPickerMapFragment areaPickerMapFragment = AmznAreaPickerMapFragment
+                    .newInstance();
+            getActivity()
+                    .getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.frag_search_res_coll_det_layout_top,
+                            areaPickerMapFragment)
+                    .addToBackStack("AreaPickerMapFragment").commit();
+        } else {
+            AreaPickerMapFragment areaPickerMapFragment = AreaPickerMapFragment
+                    .newInstance();
+            getActivity()
+                    .getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.frag_search_res_coll_det_layout_top,
+                            areaPickerMapFragment)
+                    .addToBackStack("AreaPickerMapFragment").commit();
+        }
+
 
         changeViewsSizeAndVisibility();
 

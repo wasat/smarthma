@@ -8,19 +8,22 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
-import com.google.android.gms.maps.model.LatLngBounds;
-
 import pl.wasat.smarthma.R;
+import pl.wasat.smarthma.kindle.AmznAreaPickerMapFragment.OnAmznAreaPickerMapFragmentListener;
 import pl.wasat.smarthma.ui.frags.common.AreaPickerMapFragment.OnAreaPickerMapFragmentListener;
 import pl.wasat.smarthma.ui.frags.search.SearchBasicInfoRightFragment;
 import pl.wasat.smarthma.ui.frags.search.SearchBasicInfoRightFragment.OnSearchBasicInfoRightFragmentListener;
 import pl.wasat.smarthma.ui.frags.search.SearchFragment;
 import pl.wasat.smarthma.ui.frags.search.SearchFragment.OnSearchFragmentListener;
+import pl.wasat.smarthma.utils.obj.LatLngBoundsExt;
 import roboguice.util.temp.Ln;
 
 public class SearchActivity extends BaseSmartHMActivity implements
         OnSearchBasicInfoRightFragmentListener, OnSearchFragmentListener,
-        OnAreaPickerMapFragmentListener {
+        OnAreaPickerMapFragmentListener, OnAmznAreaPickerMapFragmentListener {
+
+    private SearchBasicInfoRightFragment rightPanel;
+    private SearchFragment leftPanel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,7 +34,7 @@ public class SearchActivity extends BaseSmartHMActivity implements
 
             loadRightPanel();
             loadLeftPanel();
-
+            leftPanel.setRightPanel(rightPanel);
         }
     }
 
@@ -109,6 +112,7 @@ public class SearchActivity extends BaseSmartHMActivity implements
     private void loadRightPanel() {
         SearchBasicInfoRightFragment rightInfoFragment = SearchBasicInfoRightFragment
                 .newInstance();
+        rightPanel = rightInfoFragment;
         getSupportFragmentManager()
                 .beginTransaction()
                 .replace(R.id.activity_base_list_container, rightInfoFragment,
@@ -117,6 +121,7 @@ public class SearchActivity extends BaseSmartHMActivity implements
 
     private void loadLeftPanel() {
         SearchFragment searchLeftFragment = SearchFragment.newInstance();
+        leftPanel = searchLeftFragment;
         getSupportFragmentManager()
                 .beginTransaction()
                 .replace(R.id.activity_base_details_container,
@@ -159,14 +164,19 @@ public class SearchActivity extends BaseSmartHMActivity implements
      * (com.google.android.gms.maps.model.LatLngBounds)
      */
     @Override
-    public void onMapFragmentBoundsChange(LatLngBounds bounds) {
+    public void onMapFragmentBoundsChange(LatLngBoundsExt bounds) {
+        callUpdateCollectionsBounds(bounds);
+    }
 
+    @Override
+    public void onAmznMapFragmentBoundsChange(LatLngBoundsExt bounds) {
+        callUpdateCollectionsBounds(bounds);
+    }
+
+    private void callUpdateCollectionsBounds(LatLngBoundsExt bounds) {
         SearchBasicInfoRightFragment searchBasicInfoRightFragment = (SearchBasicInfoRightFragment) getSupportFragmentManager()
                 .findFragmentByTag("SearchBasicInfoRightFragment");
-
         if (searchBasicInfoRightFragment != null) {
-            // If article frag is available, we're in two-pane layout...
-            // Call a method in the ArticleFragment to update its content
             searchBasicInfoRightFragment.updateCollectionsAreaBounds(bounds);
         }
     }

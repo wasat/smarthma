@@ -191,7 +191,7 @@ public class ExtendedMapFragment extends Fragment implements
                     results);
 
             if (Math.abs(results[2] - prevBearing) >= BEARING_LEVEL_VALUE) {
-                footprintPoints.add(footprintPosList.get(i).getLatLng());
+                footprintPoints.add(footprintPosList.get(i).getLatLng().getGoogleLatLon());
             }
             prevBearing = results[2];
         }
@@ -222,7 +222,7 @@ public class ExtendedMapFragment extends Fragment implements
         double fourLng = footprintPoints.get(3).longitude;
         float[] results = new float[3];
 
-        qLookCenter = footprint.getCenterOf().getPoint().getPos().getLatLng();
+        qLookCenter = footprint.getCenterOf().getPoint().getPos().getLatLng().getGoogleLatLon();
 
         Location.distanceBetween(oneLat, oneLng, twoLat, twoLng, results);
         qLookHeight = results[0];

@@ -12,20 +12,22 @@ import android.view.MenuItem;
 import android.widget.SearchView;
 import android.widget.Toast;
 
-import com.google.android.gms.maps.model.LatLngBounds;
-
 import pl.wasat.smarthma.R;
+import pl.wasat.smarthma.helper.Const;
 import pl.wasat.smarthma.interfaces.OnCollectionsListSelectionListener;
+import pl.wasat.smarthma.kindle.AmznAreaPickerMapFragment.OnAmznAreaPickerMapFragmentListener;
+import pl.wasat.smarthma.kindle.AmznBaseMapFragment;
 import pl.wasat.smarthma.ui.frags.base.BaseMapFragment;
 import pl.wasat.smarthma.ui.frags.browse.BrowseCollectionFirstDetailFragment;
 import pl.wasat.smarthma.ui.frags.browse.CollectionsGroupListFragment;
 import pl.wasat.smarthma.ui.frags.browse.CollectionsListFragment.OnCollectionsListFragmentListener;
 import pl.wasat.smarthma.ui.frags.common.AreaPickerMapFragment.OnAreaPickerMapFragmentListener;
+import pl.wasat.smarthma.utils.obj.LatLngBoundsExt;
 import roboguice.util.temp.Ln;
 
 public class CollectionsDefinitionActivity extends BaseSmartHMActivity
         implements OnCollectionsListSelectionListener,
-        OnCollectionsListFragmentListener, OnAreaPickerMapFragmentListener {
+        OnCollectionsListFragmentListener, OnAreaPickerMapFragmentListener, OnAmznAreaPickerMapFragmentListener {
 
     //private ProgressDialog initSpinner;
     //private ProgressBar progressBarWmsLoad;
@@ -185,20 +187,24 @@ public class CollectionsDefinitionActivity extends BaseSmartHMActivity
             return;
         }
 
-        BaseMapFragment newGisFrag = new BaseMapFragment();
-        Bundle args = new Bundle();
+        if (Const.IS_KINDLE) {
+            AmznBaseMapFragment amznBaseMapFrag = new AmznBaseMapFragment();
+            Bundle args = new Bundle();
+            amznBaseMapFrag.setArguments(args);
+            FragmentTransaction transaction = getSupportFragmentManager()
+                    .beginTransaction();
+            transaction.replace(R.id.activity_base_details_container, amznBaseMapFrag);
+            transaction.commit();
+        } else {
+            BaseMapFragment baseMapFrag = new BaseMapFragment();
+            Bundle args = new Bundle();
+            baseMapFrag.setArguments(args);
+            FragmentTransaction transaction = getSupportFragmentManager()
+                    .beginTransaction();
+            transaction.replace(R.id.activity_base_details_container, baseMapFrag);
+            transaction.commit();
+        }
 
-        newGisFrag.setArguments(args);
-
-        FragmentTransaction transaction = getSupportFragmentManager()
-                .beginTransaction();
-
-        // Replace whatever is in the fragment_container view with this
-        // fragment,
-        // and add the transaction to the back stack so the user can
-        // navigate back
-        transaction.replace(R.id.activity_base_details_container, newGisFrag);
-        transaction.commit();
 
     }
 
@@ -275,13 +281,21 @@ public class CollectionsDefinitionActivity extends BaseSmartHMActivity
 
         */
     @Override
-    public void onMapFragmentBoundsChange(LatLngBounds bounds) {
+    public void onMapFragmentBoundsChange(LatLngBoundsExt bounds) {
+        callUpdateFirstDetailFrag(bounds);
+    }
+
+
+    @Override
+    public void onAmznMapFragmentBoundsChange(LatLngBoundsExt bounds) {
+        callUpdateFirstDetailFrag(bounds);
+
+    }
+
+    private void callUpdateFirstDetailFrag(LatLngBoundsExt bounds) {
         BrowseCollectionFirstDetailFragment browseCollectionFirstDetailFragment = (BrowseCollectionFirstDetailFragment) getSupportFragmentManager()
                 .findFragmentByTag("BrowseCollectionFirstDetailFragment");
-
         if (browseCollectionFirstDetailFragment != null) {
-            // If article frag is available, we're in two-pane layout...
-            // Call a method in the ArticleFragment to update its content
             browseCollectionFirstDetailFragment.updateAreaBounds(bounds);
         }
     }

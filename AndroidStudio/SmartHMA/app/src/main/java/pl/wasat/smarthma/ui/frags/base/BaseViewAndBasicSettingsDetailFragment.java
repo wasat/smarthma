@@ -15,9 +15,6 @@ import android.widget.DatePicker;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.LatLngBounds;
-
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
@@ -25,9 +22,13 @@ import java.util.Locale;
 import pl.wasat.smarthma.R;
 import pl.wasat.smarthma.customviews.SmHmaTimePickerDialog;
 import pl.wasat.smarthma.customviews.TimePicker;
+import pl.wasat.smarthma.helper.Const;
+import pl.wasat.smarthma.kindle.AmznAreaPickerMapFragment;
 import pl.wasat.smarthma.model.iso.EntryISO;
 import pl.wasat.smarthma.preferences.SharedPrefs;
 import pl.wasat.smarthma.ui.frags.common.AreaPickerMapFragment;
+import pl.wasat.smarthma.utils.obj.LatLngBoundsExt;
+import pl.wasat.smarthma.utils.obj.LatLngExt;
 
 /**
  * A simple {@link android.support.v4.app.Fragment} subclass. Use the
@@ -59,8 +60,7 @@ public class BaseViewAndBasicSettingsDetailFragment extends Fragment {
 
     private static SharedPrefs sharedPrefs;
 
-    @SuppressWarnings("unused")
-    private LatLngBounds geoBounds = null;
+    private LatLngBoundsExt geoBounds = null;
 
     protected View rootView;
 
@@ -145,14 +145,26 @@ public class BaseViewAndBasicSettingsDetailFragment extends Fragment {
         areaLayout.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                AreaPickerMapFragment areaPickerMapFragment = AreaPickerMapFragment
-                        .newInstance();
-                getActivity()
-                        .getSupportFragmentManager()
-                        .beginTransaction()
-                        .replace(R.id.frag_search_res_coll_det_layout_top,
-                                areaPickerMapFragment)
-                        .addToBackStack("AreaPickerMapFragment").commit();
+                if (Const.IS_KINDLE) {
+                    AmznAreaPickerMapFragment areaPickerMapFragment = AmznAreaPickerMapFragment
+                            .newInstance();
+                    getActivity()
+                            .getSupportFragmentManager()
+                            .beginTransaction()
+                            .replace(R.id.frag_search_res_coll_det_layout_top,
+                                    areaPickerMapFragment)
+                            .addToBackStack("AreaPickerMapFragment").commit();
+                } else {
+                    AreaPickerMapFragment areaPickerMapFragment = AreaPickerMapFragment
+                            .newInstance();
+                    getActivity()
+                            .getSupportFragmentManager()
+                            .beginTransaction()
+                            .replace(R.id.frag_search_res_coll_det_layout_top,
+                                    areaPickerMapFragment)
+                            .addToBackStack("AreaPickerMapFragment").commit();
+                }
+
 
             }
         });
@@ -236,15 +248,15 @@ public class BaseViewAndBasicSettingsDetailFragment extends Fragment {
         tvAreaSWLat.setText(String.format(Locale.UK, "% 4f", south));
         tvAreaSWLon.setText(String.format(Locale.UK, "% 4f", west));
 
-        geoBounds = new LatLngBounds(new LatLng(south, west), new LatLng(north,
+        geoBounds = new LatLngBoundsExt(new LatLngExt(south, west), new LatLngExt(north,
                 east));
 
     }
 
     /**
-     * @param bounds
+     * @param bounds bounding box
      */
-    public void updateAreaBounds(LatLngBounds bounds) {
+    public void updateAreaBounds(LatLngBoundsExt bounds) {
         geoBounds = bounds;
         String west = String.format(Locale.UK, "% 4f",
                 bounds.southwest.longitude);
@@ -384,8 +396,8 @@ public class BaseViewAndBasicSettingsDetailFragment extends Fragment {
     }
 
     /**
-     * @param cal
-     * @return
+     * @param cal calendar
+     * @return Time in String format
      */
     private static String formatTime(Calendar cal) {
         SimpleDateFormat dfTime = new SimpleDateFormat("HH:mm:ss", Locale.UK);

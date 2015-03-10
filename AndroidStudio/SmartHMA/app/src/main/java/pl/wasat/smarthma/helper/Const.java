@@ -19,9 +19,6 @@ public class Const {
     public static final String URL_PARM_PARENT_ID = "&parentIdentifier=";
     public static final String URL_PARM_BBOX = "&bbox=";
 
-    public static final String KEY_LIST_WORKSPACE_NAME_TO_LOAD = "pl.wasat.smarthma.KEY_LIST_WORKSPACE_NAME_TO_LOAD";
-    public static final String KEY_LIST_ID_LAYERS_TO_DISPLAY = "pl.wasat.smarthma.KEY_LIST_ID_LAYERS_TO_DISPLAY";
-
     public static final int REQUEST_CODE_MAP_ADD_LAYER = 100;
 
     public static final String KEY_MAP_LAYER_TO_DISPLAY = "pl.wasat.smarthma.KEY_MAP_LAYER_TO_DISPLAY";
@@ -51,4 +48,8 @@ public class Const {
     public static final int SORT_BY_DATE_DESCENDING = 3;
 
     public static final String DATE_NULL = "0000-00-00T00:00:00Z";
+
+    public static final int MAX_SEARCH_HISTORY_ENTRIES = 5;
+
+    public static boolean IS_KINDLE = false;
 }

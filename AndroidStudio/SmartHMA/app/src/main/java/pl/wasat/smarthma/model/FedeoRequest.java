@@ -7,13 +7,12 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.Log;
 
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.LatLngBounds;
-
 import java.io.Serializable;
 import java.util.HashMap;
 
 import pl.wasat.smarthma.helper.Const;
+import pl.wasat.smarthma.utils.obj.LatLngBoundsExt;
+import pl.wasat.smarthma.utils.obj.LatLngExt;
 
 /**
  * @author Daniel Zinkiewicz Wasat Sp. z o.o 18-07-2014
@@ -94,6 +93,7 @@ public class FedeoRequest implements Serializable {
         }
 
         Log.i("URL", url);
+        //Log.d("ZX", url);
         return url;
     }
 
@@ -256,7 +256,7 @@ public class FedeoRequest implements Serializable {
      * @param southwest
      * @param northeast
      */
-    void setBbox(LatLng southwest, LatLng northeast) {
+    void setBbox(LatLngExt southwest, LatLngExt northeast) {
         setBbox((float) southwest.longitude, (float) southwest.latitude,
                 (float) northeast.longitude, (float) northeast.latitude);
     }
@@ -264,7 +264,7 @@ public class FedeoRequest implements Serializable {
     /**
      * @param bbox
      */
-    public void setBbox(LatLngBounds bbox) {
+    public void setBbox(LatLngBoundsExt bbox) {
         setBbox(bbox.southwest, bbox.northeast);
     }
 

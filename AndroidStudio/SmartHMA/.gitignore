@@ -2,3 +2,5 @@ build/
 app/build/
 gradle/
 .gradle/
+
+.idea/workspace.xml
