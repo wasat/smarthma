@@ -54,7 +54,14 @@ public class EntryISO implements Serializable {
      * @return The title
      */
     public String getTitle() {
-        return title;
+        if (title != null)
+        {
+            return title;
+        }
+        else
+        {
+            return "(null)";
+        }
     }
 
     /**

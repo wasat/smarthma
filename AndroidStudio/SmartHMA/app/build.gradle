@@ -4,12 +4,12 @@ apply plugin: 'android'
 android {
     signingConfigs {
     }
-    compileSdkVersion 21
-    buildToolsVersion '21.1.2'
+    compileSdkVersion 22
+    buildToolsVersion '22.0'
     defaultConfig {
         applicationId "pl.wasat.smarthma"
         minSdkVersion 14
-        targetSdkVersion 21
+        targetSdkVersion 22
     }
     buildTypes {
         release {
@@ -42,8 +42,8 @@ repositories {
 
 dependencies {
     // You must install or update the Support Repository through the SDK manager to use this dependency.
-    compile 'com.android.support:support-v4:21.+'
-    compile 'com.android.support:appcompat-v7:21.+'
+    compile 'com.android.support:support-v4:22.+'
+    compile 'com.android.support:appcompat-v7:22.+'
     compile 'com.google.android.gms:play-services:+'
     compile 'com.amazon.android:amazon-maps-api:2.+'
 

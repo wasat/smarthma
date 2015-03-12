@@ -47,7 +47,18 @@ public class DataSorter
 
     void sortCollection(List list, Comparator comparator)
     {
-        Collections.sort(list, comparator);
+        if (list == null || comparator == null)
+        {
+            return;
+        }
+        try
+        {
+            Collections.sort(list, comparator);
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
     }
 
     void sortCollections(List<Collection> list)
