@@ -48,7 +48,11 @@ public class AmznBaseMapFragment extends SupportMapFragment
      */
     private SupportMapFragment supportMapFrag;
     // protected GoogleMap mMap;
+<<<<<<< HEAD
     AmazonMap mMap;
+=======
+    protected AmazonMap mMap;
+>>>>>>> 3cdf4b5c6a0ee0167bee856d291a553acdc6d2f4
     // private LocationClient mLocationClient;
 
     // private GoogleApiClient mGoogleApiClient;
@@ -90,19 +94,33 @@ public class AmznBaseMapFragment extends SupportMapFragment
         this.publicListener = ml;
     }*/
 
+<<<<<<< HEAD
 /*    @Override
+=======
+    @Override
+>>>>>>> 3cdf4b5c6a0ee0167bee856d291a553acdc6d2f4
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //AcraExtension.mapCustomLog("BaseMap.onCreate", mMap);
 
+<<<<<<< HEAD
 *//*        if (getArguments() != null) {
             // mapMode = getArguments().getInt(KEY_MAP_MODE);
         }*//*
+=======
+        if (getArguments() != null) {
+            // mapMode = getArguments().getInt(KEY_MAP_MODE);
+        }
+>>>>>>> 3cdf4b5c6a0ee0167bee856d291a553acdc6d2f4
 
         // mGoogleApiClient = new GoogleApiClient.Builder(getActivity())
         // .addApi(LocationServices.API).addConnectionCallbacks(this)
         // .addOnConnectionFailedListener(this).build();
+<<<<<<< HEAD
     }*/
+=======
+    }
+>>>>>>> 3cdf4b5c6a0ee0167bee856d291a553acdc6d2f4
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
@@ -114,19 +132,33 @@ public class AmznBaseMapFragment extends SupportMapFragment
         // sendSupportMapReady();
     }
 
+<<<<<<< HEAD
 /*    @Override
+=======
+    @Override
+>>>>>>> 3cdf4b5c6a0ee0167bee856d291a553acdc6d2f4
     public void onStart() {
         super.onStart();
         // Connect the client.
         // mGoogleApiClient.connect();
+<<<<<<< HEAD
     }*/
 
 /*    @Override
+=======
+    }
+
+    @Override
+>>>>>>> 3cdf4b5c6a0ee0167bee856d291a553acdc6d2f4
     public void onStop() {
         // Disconnecting the client invalidates it.
         // mGoogleApiClient.disconnect();
         super.onStop();
+<<<<<<< HEAD
     }*/
+=======
+    }
+>>>>>>> 3cdf4b5c6a0ee0167bee856d291a553acdc6d2f4
 
     // @Override
     // public void onConnected(Bundle dataBundle) {

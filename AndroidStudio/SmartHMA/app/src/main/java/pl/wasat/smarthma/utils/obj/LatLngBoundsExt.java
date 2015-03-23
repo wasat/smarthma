@@ -5,17 +5,32 @@ package pl.wasat.smarthma.utils.obj;
  * Wasat Sp. z o.o.
  */
 public class LatLngBoundsExt {
+<<<<<<< HEAD
     public final LatLngExt southwest;
     public final LatLngExt northeast;
 
     public LatLngBoundsExt(com.google.android.gms.maps.model.LatLngBounds areaBounds) {
         //com.google.android.gms.maps.model.LatLngBounds googleBounds = areaBounds;
+=======
+    public LatLngExt southwest;
+    public LatLngExt northeast;
+
+    private com.amazon.geo.mapsv2.model.LatLngBounds amznBounds;
+    private com.google.android.gms.maps.model.LatLngBounds googleBounds;
+
+    public LatLngBoundsExt(com.google.android.gms.maps.model.LatLngBounds areaBounds) {
+        googleBounds = areaBounds;
+>>>>>>> 3cdf4b5c6a0ee0167bee856d291a553acdc6d2f4
         southwest = new LatLngExt(areaBounds.southwest);
         northeast = new LatLngExt(areaBounds.northeast);
     }
 
     public LatLngBoundsExt(com.amazon.geo.mapsv2.model.LatLngBounds areaBounds) {
+<<<<<<< HEAD
         //com.amazon.geo.mapsv2.model.LatLngBounds amznBounds = areaBounds;
+=======
+        amznBounds = areaBounds;
+>>>>>>> 3cdf4b5c6a0ee0167bee856d291a553acdc6d2f4
         southwest = new LatLngExt(areaBounds.southwest);
         northeast = new LatLngExt(areaBounds.northeast);
     }

@@ -6,6 +6,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 
+<<<<<<< HEAD
+=======
+import java.util.ArrayList;
+
+>>>>>>> 3cdf4b5c6a0ee0167bee856d291a553acdc6d2f4
 import pl.wasat.smarthma.R;
 import pl.wasat.smarthma.adapter.SearchListAdapter;
 import pl.wasat.smarthma.database.EoDbAdapter;
@@ -114,9 +119,14 @@ public class SearchCollectionResultsActivity extends BaseSmartHMActivity
      */
     @Override
     public void onBackPressed() {
+        //Log.d("ZX", "onBackPressed()");
         FragmentManager fm = getSupportFragmentManager();
         int bsec = fm.getBackStackEntryCount();
         String bstEntry = fm.getBackStackEntryAt(bsec - 1).getName();
+<<<<<<< HEAD
+=======
+        //Log.d("ZX", bstEntry);
+>>>>>>> 3cdf4b5c6a0ee0167bee856d291a553acdc6d2f4
         if (bsec > 1) {
             while (bsec > 1) {
                 fm.popBackStackImmediate();
@@ -174,9 +184,15 @@ public class SearchCollectionResultsActivity extends BaseSmartHMActivity
     public void onMapFragmentBoundsChange(LatLngBoundsExt bounds) {
 
         callUpdateCollectionsBounds(bounds);
+<<<<<<< HEAD
 
     }
 
+=======
+
+    }
+
+>>>>>>> 3cdf4b5c6a0ee0167bee856d291a553acdc6d2f4
     @Override
     public void onAmznMapFragmentBoundsChange(LatLngBoundsExt bounds) {
         callUpdateCollectionsBounds(bounds);
@@ -188,6 +204,20 @@ public class SearchCollectionResultsActivity extends BaseSmartHMActivity
         if (searchResultCollectionDetailsFragment != null) {
             searchResultCollectionDetailsFragment.updateAreaBounds(bounds);
         }
+<<<<<<< HEAD
+=======
+    }
+
+    /*
+     * (non-Javadoc)
+     *
+     * @see pl.wasat.smarthma.ui.fragments.SearchProductsFeedsFragment.
+     * OnSearchProductsFeedFragmentListener
+     * #onSearchProductsFeedFragmentItemSelected(java.lang.String)
+     */
+    @Override
+    public void onBaseShowProductsListFragmentItemSelected(String id) {
+>>>>>>> 3cdf4b5c6a0ee0167bee856d291a553acdc6d2f4
     }
 
 
@@ -199,7 +229,12 @@ public class SearchCollectionResultsActivity extends BaseSmartHMActivity
      * #onSearchProductsListFragmentFootprintSend(java.util.ArrayList)
      */
     @Override
+<<<<<<< HEAD
     public void onBaseShowProductsListFragmentFootprintSend() {
+=======
+    public void onBaseShowProductsListFragmentFootprintSend(
+            ArrayList<Footprint> footPrints) {
+>>>>>>> 3cdf4b5c6a0ee0167bee856d291a553acdc6d2f4
         if (Const.IS_KINDLE) {
             AmznExtendedMapFragment extendedMapFragment = (AmznExtendedMapFragment) getSupportFragmentManager()
                     .findFragmentByTag("ExtendedMapFragment");
@@ -238,4 +273,10 @@ public class SearchCollectionResultsActivity extends BaseSmartHMActivity
     }
 
 
+<<<<<<< HEAD
+=======
+    }
+
+
+>>>>>>> 3cdf4b5c6a0ee0167bee856d291a553acdc6d2f4
 }

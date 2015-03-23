@@ -86,7 +86,11 @@ public class Query {
         if (other == this) {
             return true;
         }
+<<<<<<< HEAD
         if (!(other instanceof Query)) {
+=======
+        if ((other instanceof Query) == false) {
+>>>>>>> 3cdf4b5c6a0ee0167bee856d291a553acdc6d2f4
             return false;
         }
         Query rhs = ((Query) other);

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Built application files
 /*/build
 build
@@ -37,3 +38,13 @@ gradle
 .Trashes
 ehthumbs.db
 Thumbs.db
+=======
+build
+app/build
+gradle
+.gradle
+
+local.properties
+.idea/workspace.xml
+.idea/libraries
+>>>>>>> 3cdf4b5c6a0ee0167bee856d291a553acdc6d2f4

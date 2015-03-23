@@ -12,12 +12,21 @@ import java.util.Locale;
 
 import pl.wasat.smarthma.helper.Const;
 
+<<<<<<< HEAD
 class AmznTileProviderFactory {
 
 /*    @Override
     protected void finalize() throws Throwable {
         super.finalize();
     }*/
+=======
+public class AmznTileProviderFactory {
+
+    @Override
+    protected void finalize() throws Throwable {
+        super.finalize();
+    }
+>>>>>>> 3cdf4b5c6a0ee0167bee856d291a553acdc6d2f4
 
     private static final String URL_BASE_OSM = "http://a.tile.openstreetmap.org/{z}/{x}/{y}.png";
 

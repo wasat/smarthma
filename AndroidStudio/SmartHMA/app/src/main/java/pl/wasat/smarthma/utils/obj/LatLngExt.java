@@ -7,8 +7,13 @@ import pl.wasat.smarthma.helper.Const;
  * Part of the project  SmartHMA
  */
 public class LatLngExt {
+<<<<<<< HEAD
     public final double latitude;
     public final double longitude;
+=======
+    public double latitude;
+    public double longitude;
+>>>>>>> 3cdf4b5c6a0ee0167bee856d291a553acdc6d2f4
 
     public LatLngExt(Double lat, Double lng) {
         latitude = lat;

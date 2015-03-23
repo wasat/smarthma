@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -27,15 +28,21 @@ import java.util.Locale;
 import pl.wasat.smarthma.R;
 import pl.wasat.smarthma.customviews.SmHmaTimePickerDialog;
 import pl.wasat.smarthma.customviews.TimePicker;
+<<<<<<< HEAD
 import pl.wasat.smarthma.database.SearchHistory;
 import pl.wasat.smarthma.database.SearchParams;
+=======
+>>>>>>> 3cdf4b5c6a0ee0167bee856d291a553acdc6d2f4
 import pl.wasat.smarthma.helper.Const;
 import pl.wasat.smarthma.kindle.AmznAreaPickerMapFragment;
 import pl.wasat.smarthma.preferences.SharedPrefs;
 import pl.wasat.smarthma.ui.frags.common.AreaPickerMapFragment;
 import pl.wasat.smarthma.utils.loc.LocManager;
 import pl.wasat.smarthma.utils.obj.LatLngBoundsExt;
+<<<<<<< HEAD
 import pl.wasat.smarthma.utils.time.SimpleDate;
+=======
+>>>>>>> 3cdf4b5c6a0ee0167bee856d291a553acdc6d2f4
 
 /**
  * A simple {@link android.support.v4.app.Fragment} subclass. Activities that
@@ -288,6 +295,11 @@ public class SearchBasicInfoRightFragment extends Fragment {
         sharedPrefs.setBboxPrefs(bboxWest, bboxSouth, bboxEast, bboxNorth);
 
         areaBoundsUpdated = true;
+<<<<<<< HEAD
+=======
+
+        // setBboxPrefs();
+>>>>>>> 3cdf4b5c6a0ee0167bee856d291a553acdc6d2f4
     }
 
     public boolean getAreaBoundsUpdated() {
@@ -297,6 +309,7 @@ public class SearchBasicInfoRightFragment extends Fragment {
     public void setAreaBoundsUpdated(boolean areaBoundsUpdated) {
         this.areaBoundsUpdated = areaBoundsUpdated;
     }
+<<<<<<< HEAD
 
     private static Calendar getCalStart() {
         return calStart;
@@ -305,6 +318,8 @@ public class SearchBasicInfoRightFragment extends Fragment {
     private static Calendar getCalEnd() {
         return calEnd;
     }
+=======
+>>>>>>> 3cdf4b5c6a0ee0167bee856d291a553acdc6d2f4
 
     /**
      *
@@ -428,6 +443,7 @@ public class SearchBasicInfoRightFragment extends Fragment {
                         seconds);
                 String timeToSet = formatTime(calStart);
                 btnFromTime.setText(timeToSet);
+                Log.d("ZX", timeToSet);
 
             } else if (buttonTag.equalsIgnoreCase("btnToTime")) {
                 calEnd.set(calEnd.get(Calendar.YEAR),
@@ -436,6 +452,7 @@ public class SearchBasicInfoRightFragment extends Fragment {
                         seconds);
                 String timeToSet = formatTime(calEnd);
                 btnToTime.setText(timeToSet);
+                Log.d("ZX", timeToSet);
             }
             sharedPrefs.setDateTimePrefs(setDtISO(calStart), setDtISO(calEnd));
         }
@@ -450,23 +467,37 @@ public class SearchBasicInfoRightFragment extends Fragment {
                     cataloguesList, new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
                             setCatalogue(which);
+<<<<<<< HEAD
+=======
+                            // setParentIdPrefs(getActivity(),
+                            // cataloguesList[which].toString());
+>>>>>>> 3cdf4b5c6a0ee0167bee856d291a553acdc6d2f4
                         }
                     });
             return builder.create();
         }
     }
 
+<<<<<<< HEAD
     private static void setCatalogue(int which) {
+=======
+    public static void setCatalogue(int which) {
+>>>>>>> 3cdf4b5c6a0ee0167bee856d291a553acdc6d2f4
         tvCatalogName.setText(cataloguesList[which]);
         sharedPrefs.setParentIdPrefs(cataloguesList[which].toString());
     }
 
+<<<<<<< HEAD
     private static void setDateTime(Calendar calStart, Calendar calEnd) {
+=======
+    public static void setDateTime(Calendar calStart, Calendar calEnd) {
+>>>>>>> 3cdf4b5c6a0ee0167bee856d291a553acdc6d2f4
         SearchBasicInfoRightFragment.calStart = calStart;
         SearchBasicInfoRightFragment.calEnd = calEnd;
 
         String dateToSet = formatDate(calStart);
         btnFromDate.setText(dateToSet);
+<<<<<<< HEAD
         String timeToSet = formatTime(calStart);
         btnFromTime.setText(timeToSet);
 
@@ -479,6 +510,20 @@ public class SearchBasicInfoRightFragment extends Fragment {
     }
 
     void setBounds(String bboxWest, String bboxSouth, String bboxEast, String bboxNorth) {
+=======
+        String dateToSet2 = formatDate(calEnd);
+        btnToDate.setText(dateToSet2);
+        /*
+        String timeToSet = formatTime(calStart);
+        btnFromTime.setText(timeToSet);
+        String timeToSet2 = formatTime(calEnd);
+        btnToTime.setText(timeToSet2);
+        */
+        sharedPrefs.setDateTimePrefs(setDtISO(calStart), setDtISO(calEnd));
+    }
+
+    public void setBounds(String bboxWest, String bboxSouth, String bboxEast, String bboxNorth) {
+>>>>>>> 3cdf4b5c6a0ee0167bee856d291a553acdc6d2f4
         tvAreaSWLat.setText(bboxSouth);
         tvAreaSWLon.setText(bboxWest);
         tvAreaNELat.setText(bboxNorth);
@@ -487,6 +532,7 @@ public class SearchBasicInfoRightFragment extends Fragment {
         sharedPrefs.setBboxPrefs(bboxWest, bboxSouth, bboxEast, bboxNorth);
     }
 
+<<<<<<< HEAD
     public void setCatalogue(String catalogue) {
         CharSequence[] cataloguesList = getCataloguesList();
         for (int i = 0; i < cataloguesList.length; i++) {
@@ -518,11 +564,13 @@ public class SearchBasicInfoRightFragment extends Fragment {
         setDateTime(getCalStart(), calEnd);
     }
 
+=======
+>>>>>>> 3cdf4b5c6a0ee0167bee856d291a553acdc6d2f4
     /**
      * @param cal - Calendar
      * @return - String with date
      */
-    private static String formatDate(Calendar cal) {
+    public static String formatDate(Calendar cal) {
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd", Locale.UK);
         return df.format(cal.getTime());
     }
@@ -531,12 +579,12 @@ public class SearchBasicInfoRightFragment extends Fragment {
      * @param cal - Calendar
      * @return - String of time
      */
-    private static String formatTime(Calendar cal) {
+    public static String formatTime(Calendar cal) {
         SimpleDateFormat dfTime = new SimpleDateFormat("HH:mm:ss", Locale.UK);
         return dfTime.format(cal.getTime());
     }
 
-    private static String setDtISO(Calendar cal) {
+    public static String setDtISO(Calendar cal) {
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'",
                 Locale.UK);
         return df.format(cal.getTime());
@@ -563,11 +611,19 @@ public class SearchBasicInfoRightFragment extends Fragment {
 
         sharedPrefs.setBboxPrefs(bboxWest, bboxSouth, bboxEast, bboxNorth);
 
+<<<<<<< HEAD
         areaBoundsUpdated = true;
     }
 
     @SuppressWarnings("SameReturnValue")
     private static CharSequence[] getCataloguesList() {
+=======
+        Log.d("ZX", "updateCollectionsAreaBounds()");
+        areaBoundsUpdated = true;
+    }
+
+    public static CharSequence[] getCataloguesList() {
+>>>>>>> 3cdf4b5c6a0ee0167bee856d291a553acdc6d2f4
         return cataloguesList;
     }
 }

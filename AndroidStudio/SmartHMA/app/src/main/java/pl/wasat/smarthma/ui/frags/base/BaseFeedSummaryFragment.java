@@ -10,6 +10,10 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import pl.wasat.smarthma.R;
+<<<<<<< HEAD
+=======
+import pl.wasat.smarthma.SmartHMApplication;
+>>>>>>> 3cdf4b5c6a0ee0167bee856d291a553acdc6d2f4
 import pl.wasat.smarthma.model.feed.Feed;
 
 /**
@@ -96,6 +100,7 @@ public class BaseFeedSummaryFragment extends Fragment {
         //spnSortType = (Spinner) rootView.findViewById(R.id.search_frag_ds_intro_spinner_sort_type);
 
 
+
         initUITexts();
         initUIButtons();
 
@@ -178,7 +183,10 @@ public class BaseFeedSummaryFragment extends Fragment {
             }
         }
 
+<<<<<<< HEAD
         /*
+=======
+>>>>>>> 3cdf4b5c6a0ee0167bee856d291a553acdc6d2f4
         spnSortType.setSelection(SmartHMApplication.sortingType, false);
         spnSortType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override

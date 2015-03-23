@@ -71,7 +71,11 @@ public class Option {
         if (other == this) {
             return true;
         }
+<<<<<<< HEAD
         if (!(other instanceof Option)) {
+=======
+        if ((other instanceof Option) == false) {
+>>>>>>> 3cdf4b5c6a0ee0167bee856d291a553acdc6d2f4
             return false;
         }
         Option rhs = ((Option) other);

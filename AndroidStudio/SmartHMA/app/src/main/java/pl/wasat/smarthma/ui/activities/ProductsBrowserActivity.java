@@ -175,6 +175,21 @@ public class ProductsBrowserActivity extends BaseSmartHMActivity implements
         if (amznExtendedMapFragment != null) {
             amznExtendedMapFragment.showQuicklookOnMap(quicklookUrl, mFootprint);
         }
+<<<<<<< HEAD
+=======
+    }
+
+    @Override
+    public void onProductDetailsFragmentMetadataLoad() {
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public void onBaseShowProductsListFragmentItemSelected(String id) {
+        // TODO Auto-generated method stub
+
+>>>>>>> 3cdf4b5c6a0ee0167bee856d291a553acdc6d2f4
     }
 
     @Override

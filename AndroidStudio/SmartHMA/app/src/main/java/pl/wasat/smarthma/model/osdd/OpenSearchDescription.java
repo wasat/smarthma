@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+=======
+
+>>>>>>> 3cdf4b5c6a0ee0167bee856d291a553acdc6d2f4
 package pl.wasat.smarthma.model.osdd;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
@@ -13,11 +17,19 @@ public class OpenSearchDescription {
     private String ShortName;
     private String LongName;
     private String Description;
+<<<<<<< HEAD
     private List<pl.wasat.smarthma.model.osdd.Url> Url = new ArrayList<>();
     private List<pl.wasat.smarthma.model.osdd.Parameter> Parameter = new ArrayList<>();
     private List<pl.wasat.smarthma.model.osdd.Query> Query = new ArrayList<>();
     private String Tags;
     private List<pl.wasat.smarthma.model.osdd.Image> Image = new ArrayList<>();
+=======
+    private List<pl.wasat.smarthma.model.osdd.Url> Url = new ArrayList<pl.wasat.smarthma.model.osdd.Url>();
+    private List<pl.wasat.smarthma.model.osdd.Parameter> Parameter = new ArrayList<pl.wasat.smarthma.model.osdd.Parameter>();
+    private List<pl.wasat.smarthma.model.osdd.Query> Query = new ArrayList<pl.wasat.smarthma.model.osdd.Query>();
+    private String Tags;
+    private List<pl.wasat.smarthma.model.osdd.Image> Image = new ArrayList<pl.wasat.smarthma.model.osdd.Image>();
+>>>>>>> 3cdf4b5c6a0ee0167bee856d291a553acdc6d2f4
     private String Developer;
     private String Attribution;
     private String SyndicationRight;
@@ -358,7 +370,11 @@ public class OpenSearchDescription {
         if (other == this) {
             return true;
         }
+<<<<<<< HEAD
         if (!(other instanceof OpenSearchDescription)) {
+=======
+        if ((other instanceof OpenSearchDescription) == false) {
+>>>>>>> 3cdf4b5c6a0ee0167bee856d291a553acdc6d2f4
             return false;
         }
         OpenSearchDescription rhs = ((OpenSearchDescription) other);

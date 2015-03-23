@@ -15,8 +15,11 @@ import android.widget.DatePicker;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+<<<<<<< HEAD
 import com.wunderlist.slidinglayer.SlidingLayer;
 
+=======
+>>>>>>> 3cdf4b5c6a0ee0167bee856d291a553acdc6d2f4
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
@@ -60,7 +63,11 @@ public class BaseViewAndBasicSettingsDetailFragment extends BaseSpiceFragment {
 
     protected SlidingLayer mSlidingLayer;
 
+<<<<<<< HEAD
     protected LinearLayout layoutSpinners;
+=======
+    private LatLngBoundsExt geoBounds = null;
+>>>>>>> 3cdf4b5c6a0ee0167bee856d291a553acdc6d2f4
 
     protected View rootView;
 

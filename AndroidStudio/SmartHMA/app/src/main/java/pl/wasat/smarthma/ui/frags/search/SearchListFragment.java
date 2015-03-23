@@ -68,6 +68,10 @@ public class SearchListFragment extends BaseSpiceListFragment {
         if (getArguments() != null) {
             searchRequest = (FedeoRequest) getArguments().getSerializable(
                     KEY_PARAM_SEARCH_FEDEO_REQUEST);
+<<<<<<< HEAD
+=======
+            //stopSearch = getArguments().getBoolean(KEY_PARAM_STOP_NEW_SEARCH);
+>>>>>>> 3cdf4b5c6a0ee0167bee856d291a553acdc6d2f4
             SearchHistory searchHistory = new SearchHistory(getActivity());
             searchHistory.addSearchParameters(new SearchParams(searchRequest));
         }
