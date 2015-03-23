@@ -8,19 +8,11 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.SubMenu;
 
-<<<<<<< HEAD
-<<<<<<< HEAD
 import java.util.ArrayList;
 
 import pl.wasat.smarthma.R;
 import pl.wasat.smarthma.database.SearchHistory;
 import pl.wasat.smarthma.database.SearchParams;
-=======
-import pl.wasat.smarthma.R;
->>>>>>> 3cdf4b5c6a0ee0167bee856d291a553acdc6d2f4
-=======
-import pl.wasat.smarthma.R;
->>>>>>> 3cdf4b5c6a0ee0167bee856d291a553acdc6d2f4
 import pl.wasat.smarthma.kindle.AmznAreaPickerMapFragment.OnAmznAreaPickerMapFragmentListener;
 import pl.wasat.smarthma.ui.frags.common.AreaPickerMapFragment.OnAreaPickerMapFragmentListener;
 import pl.wasat.smarthma.ui.frags.search.SearchBasicInfoRightFragment;
@@ -36,18 +28,12 @@ public class SearchActivity extends BaseSmartHMActivity implements
 
     private SearchBasicInfoRightFragment rightPanel;
     private SearchFragment leftPanel;
-<<<<<<< HEAD
-<<<<<<< HEAD
     private static final int MENU_QUERY_IDS = 1000;
     private static final int MENU_CATALOGUE_IDS = 1100;
     private static final int MENU_BBOX_IDS = 1200;
     private static final int MENU_STARTDATE_IDS = 1300;
     private static final int MENU_ENDDATE_IDS = 1400;
     private static final int MENU_CLEAR_ID = 2000;
-=======
->>>>>>> 3cdf4b5c6a0ee0167bee856d291a553acdc6d2f4
-=======
->>>>>>> 3cdf4b5c6a0ee0167bee856d291a553acdc6d2f4
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,14 +44,6 @@ public class SearchActivity extends BaseSmartHMActivity implements
 
             loadRightPanel();
             loadLeftPanel();
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-            leftPanel.setRightPanel(rightPanel);
->>>>>>> 3cdf4b5c6a0ee0167bee856d291a553acdc6d2f4
-=======
-            leftPanel.setRightPanel(rightPanel);
->>>>>>> 3cdf4b5c6a0ee0167bee856d291a553acdc6d2f4
         }
 
         //refreshParameters();
@@ -273,32 +251,12 @@ public class SearchActivity extends BaseSmartHMActivity implements
     public void onMapFragmentBoundsChange(LatLngBoundsExt bounds) {
         callUpdateCollectionsBounds(bounds);
     }
-<<<<<<< HEAD
 
     @Override
     public void onAmznMapFragmentBoundsChange(LatLngBoundsExt bounds) {
         callUpdateCollectionsBounds(bounds);
     }
 
-=======
-
-    @Override
-<<<<<<< HEAD
-=======
-    public void onMapFragmentBoundsChange(LatLngBoundsExt bounds) {
-        callUpdateCollectionsBounds(bounds);
-    }
-
-    @Override
->>>>>>> 3cdf4b5c6a0ee0167bee856d291a553acdc6d2f4
-    public void onAmznMapFragmentBoundsChange(LatLngBoundsExt bounds) {
-        callUpdateCollectionsBounds(bounds);
-    }
-
-<<<<<<< HEAD
->>>>>>> 3cdf4b5c6a0ee0167bee856d291a553acdc6d2f4
-=======
->>>>>>> 3cdf4b5c6a0ee0167bee856d291a553acdc6d2f4
     private void callUpdateCollectionsBounds(LatLngBoundsExt bounds) {
         SearchBasicInfoRightFragment searchBasicInfoRightFragment = (SearchBasicInfoRightFragment) getSupportFragmentManager()
                 .findFragmentByTag("SearchBasicInfoRightFragment");

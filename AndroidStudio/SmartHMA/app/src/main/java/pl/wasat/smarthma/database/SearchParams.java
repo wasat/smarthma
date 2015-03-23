@@ -9,25 +9,11 @@ import pl.wasat.smarthma.model.FedeoRequest;
  * ETI
  */
 public class SearchParams {
-<<<<<<< HEAD
-<<<<<<< HEAD
     private final String searchPhrase;
     private final String catalogue;
     private final String bbox;
     private final String startDate;
     private final String endDate;
-=======
-=======
->>>>>>> 3cdf4b5c6a0ee0167bee856d291a553acdc6d2f4
-    private String searchPhrase;
-    private String catalogue;
-    private String bbox;
-    private String startDate;
-    private String endDate;
-<<<<<<< HEAD
->>>>>>> 3cdf4b5c6a0ee0167bee856d291a553acdc6d2f4
-=======
->>>>>>> 3cdf4b5c6a0ee0167bee856d291a553acdc6d2f4
 
     public SearchParams(FedeoRequest request) {
         searchPhrase = request.getQuery();
@@ -73,8 +59,6 @@ public class SearchParams {
     public String getEndDate() {
         return endDate;
     }
-<<<<<<< HEAD
-<<<<<<< HEAD
 
     public String getSearchPhraseWithPrefix() {
         return SmartHMApplication.appSingleton.getString(R.string.query) + ": " + getSearchPhrase();
@@ -95,8 +79,4 @@ public class SearchParams {
     public String getEndDateWithPrefix() {
         return SmartHMApplication.appSingleton.getString(R.string.end_date) + ": " + getEndDate();
     }
-=======
->>>>>>> 3cdf4b5c6a0ee0167bee856d291a553acdc6d2f4
-=======
->>>>>>> 3cdf4b5c6a0ee0167bee856d291a553acdc6d2f4
 }

@@ -71,15 +71,7 @@ public class Url {
         if (other == this) {
             return true;
         }
-<<<<<<< HEAD
-<<<<<<< HEAD
         if (!(other instanceof Url)) {
-=======
-        if ((other instanceof Url) == false) {
->>>>>>> 3cdf4b5c6a0ee0167bee856d291a553acdc6d2f4
-=======
-        if ((other instanceof Url) == false) {
->>>>>>> 3cdf4b5c6a0ee0167bee856d291a553acdc6d2f4
             return false;
         }
         Url rhs = ((Url) other);

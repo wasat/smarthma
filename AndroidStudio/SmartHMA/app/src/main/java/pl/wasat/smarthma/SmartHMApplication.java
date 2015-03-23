@@ -46,35 +46,7 @@ public class SmartHMApplication extends Application {
 
 
     private void deviceCheck() {
-<<<<<<< HEAD
-<<<<<<< HEAD
         Const.IS_KINDLE = Build.MANUFACTURER.equalsIgnoreCase("Amazon");
-=======
-=======
->>>>>>> 3cdf4b5c6a0ee0167bee856d291a553acdc6d2f4
-        if (Build.MANUFACTURER.equalsIgnoreCase("Amazon")) {
-            Const.IS_KINDLE = true;
-
-            if (Build.MODEL.equalsIgnoreCase("KFAPWA")
-                    || Build.MODEL.equalsIgnoreCase("KFAPWI")
-                    || Build.MODEL.equalsIgnoreCase("KFTHWA")
-                    || Build.MODEL.equalsIgnoreCase("KFTHWI")
-                    || Build.MODEL.equalsIgnoreCase("KFSOWI")
-                    || Build.MODEL.equalsIgnoreCase("KFJWA")
-                    || Build.MODEL.equalsIgnoreCase("KFJWI")) {
-                // Do something if it is an HD or HDX device
-
-            } else {
-                // Do something if it not an HD or HDX device
-            }
-        } else {
-            Const.IS_KINDLE = false;
-
-        }
-<<<<<<< HEAD
->>>>>>> 3cdf4b5c6a0ee0167bee856d291a553acdc6d2f4
-=======
->>>>>>> 3cdf4b5c6a0ee0167bee856d291a553acdc6d2f4
     }
 }
 

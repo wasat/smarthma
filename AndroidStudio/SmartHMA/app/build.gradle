@@ -1,23 +1,9 @@
-<<<<<<< HEAD
 //apply plugin: 'com.android.application'
 apply plugin: 'android'
 
 android {
     compileSdkVersion 22
     buildToolsVersion '22.0.1'
-=======
-apply plugin: 'com.android.application'
-apply plugin: 'android'
-
-android {
-    signingConfigs {
-    }
-    compileSdkVersion 22
-    buildToolsVersion '22.0'
-<<<<<<< HEAD
->>>>>>> 3cdf4b5c6a0ee0167bee856d291a553acdc6d2f4
-=======
->>>>>>> 3cdf4b5c6a0ee0167bee856d291a553acdc6d2f4
     defaultConfig {
         applicationId "pl.wasat.smarthma"
         minSdkVersion 14
@@ -52,33 +38,11 @@ repositories {
 
 dependencies {
     // You must install or update the Support Repository through the SDK manager to use this dependency.
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-=======
->>>>>>> 3cdf4b5c6a0ee0167bee856d291a553acdc6d2f4
-    compile 'com.android.support:support-v4:22.+'
-    compile 'com.android.support:appcompat-v7:22.+'
-    compile 'com.google.android.gms:play-services:+'
-    compile 'com.amazon.android:amazon-maps-api:2.+'
-
-
-    compile 'com.octo.android.robospice:robospice:1.4.14'
-    compile 'com.octo.android.robospice:robospice-ui-spicelist:1.4.14'
-    compile 'com.octo.android.robospice:robospice-okhttp:1.4.14'
->>>>>>> 3cdf4b5c6a0ee0167bee856d291a553acdc6d2f4
     compile('com.octo.android.robospice:robospice-google-http-client:1.4.14') {
         exclude group: 'org.apache.httpcomponents'
         exclude group: 'org.apache.commons', module: 'commons-io'
     }
 
-<<<<<<< HEAD
-=======
-    compile 'org.jsoup:jsoup:1.8.1'
-<<<<<<< HEAD
->>>>>>> 3cdf4b5c6a0ee0167bee856d291a553acdc6d2f4
-=======
->>>>>>> 3cdf4b5c6a0ee0167bee856d291a553acdc6d2f4
     compile('ch.acra:acra:4.6.1') {
         exclude group: 'org.json'
     }

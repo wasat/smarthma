@@ -11,15 +11,7 @@ import java.util.List;
 
 public class Parameter {
 
-<<<<<<< HEAD
-<<<<<<< HEAD
     private List<pl.wasat.smarthma.model.osdd.Option> Option = new ArrayList<>();
-=======
-    private List<pl.wasat.smarthma.model.osdd.Option> Option = new ArrayList<pl.wasat.smarthma.model.osdd.Option>();
->>>>>>> 3cdf4b5c6a0ee0167bee856d291a553acdc6d2f4
-=======
-    private List<pl.wasat.smarthma.model.osdd.Option> Option = new ArrayList<pl.wasat.smarthma.model.osdd.Option>();
->>>>>>> 3cdf4b5c6a0ee0167bee856d291a553acdc6d2f4
     private String Name;
     private String Value;
     private String Prefix;
@@ -97,15 +89,7 @@ public class Parameter {
         if (other == this) {
             return true;
         }
-<<<<<<< HEAD
-<<<<<<< HEAD
         if (!(other instanceof Parameter)) {
-=======
-        if ((other instanceof Parameter) == false) {
->>>>>>> 3cdf4b5c6a0ee0167bee856d291a553acdc6d2f4
-=======
-        if ((other instanceof Parameter) == false) {
->>>>>>> 3cdf4b5c6a0ee0167bee856d291a553acdc6d2f4
             return false;
         }
         Parameter rhs = ((Parameter) other);

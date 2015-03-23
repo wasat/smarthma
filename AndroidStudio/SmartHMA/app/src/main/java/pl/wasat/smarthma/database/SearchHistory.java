@@ -13,15 +13,7 @@ import pl.wasat.smarthma.helper.Const;
  * Wasat Sp. z o.o.
  */
 public class SearchHistory {
-<<<<<<< HEAD
-<<<<<<< HEAD
     private Context context;
-=======
-    Context context;
->>>>>>> 3cdf4b5c6a0ee0167bee856d291a553acdc6d2f4
-=======
-    Context context;
->>>>>>> 3cdf4b5c6a0ee0167bee856d291a553acdc6d2f4
 
     public SearchHistory(Context context) {
         this.context = context;
@@ -79,8 +71,6 @@ public class SearchHistory {
         dba.close();
     }
 
-<<<<<<< HEAD
-<<<<<<< HEAD
     public ArrayList<String> getQueries(boolean reversedOrder) {
         ArrayList<SearchParams> searchHistoryList = getSearchHistoryList(reversedOrder);
         ArrayList<String> results = new ArrayList<>();
@@ -160,10 +150,6 @@ public class SearchHistory {
         */
     }
 
-=======
->>>>>>> 3cdf4b5c6a0ee0167bee856d291a553acdc6d2f4
-=======
->>>>>>> 3cdf4b5c6a0ee0167bee856d291a553acdc6d2f4
     /*
     public void test()
     {

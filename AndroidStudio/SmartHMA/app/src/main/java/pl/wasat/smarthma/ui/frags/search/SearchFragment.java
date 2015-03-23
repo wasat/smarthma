@@ -8,33 +8,15 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
-import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.SearchView;
-import android.widget.Spinner;
 
 import java.util.ArrayList;
-import java.util.Calendar;
-<<<<<<< HEAD
-
-import java.util.ArrayList;
-=======
->>>>>>> 3cdf4b5c6a0ee0167bee856d291a553acdc6d2f4
 
 import pl.wasat.smarthma.R;
 import pl.wasat.smarthma.database.SearchHistory;
 import pl.wasat.smarthma.database.SearchParams;
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-import pl.wasat.smarthma.helper.SimpleDate;
->>>>>>> 3cdf4b5c6a0ee0167bee856d291a553acdc6d2f4
-=======
-import pl.wasat.smarthma.helper.SimpleDate;
->>>>>>> 3cdf4b5c6a0ee0167bee856d291a553acdc6d2f4
 
 /**
  * A simple {@link android.support.v4.app.Fragment} subclass. Activities that
@@ -46,17 +28,7 @@ import pl.wasat.smarthma.helper.SimpleDate;
 public class SearchFragment extends Fragment {
 
     private OnSearchFragmentListener mListener;
-<<<<<<< HEAD
-<<<<<<< HEAD
     private View rootView;
-=======
-    private SearchBasicInfoRightFragment rightPanel;
-    private String[] lastBbox;
->>>>>>> 3cdf4b5c6a0ee0167bee856d291a553acdc6d2f4
-=======
-    private SearchBasicInfoRightFragment rightPanel;
-    private String[] lastBbox;
->>>>>>> 3cdf4b5c6a0ee0167bee856d291a553acdc6d2f4
 
     /**
      * Use this factory method to create a new instance of this fragment using
@@ -70,11 +42,6 @@ public class SearchFragment extends Fragment {
 
     public SearchFragment() {
         // Required empty public constructor
-    }
-
-    public void setRightPanel(SearchBasicInfoRightFragment fragment) {
-        this.rightPanel = fragment;
-        updateAreaBounds();
     }
 
     @Override
@@ -97,13 +64,7 @@ public class SearchFragment extends Fragment {
         searchView.setIconified(false);
         searchView.clearFocus();
 
-<<<<<<< HEAD
-<<<<<<< HEAD
         /*
-=======
->>>>>>> 3cdf4b5c6a0ee0167bee856d291a553acdc6d2f4
-=======
->>>>>>> 3cdf4b5c6a0ee0167bee856d291a553acdc6d2f4
         final Spinner spnParams = (Spinner) rootView.findViewById(R.id.search_frag_prev_params_list);
         refreshSearchHistoryList(spnParams);
         spnParams.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -126,13 +87,7 @@ public class SearchFragment extends Fragment {
                 refreshSearchHistoryList(spnParams);
             }
         });
-<<<<<<< HEAD
-<<<<<<< HEAD
         */
-=======
->>>>>>> 3cdf4b5c6a0ee0167bee856d291a553acdc6d2f4
-=======
->>>>>>> 3cdf4b5c6a0ee0167bee856d291a553acdc6d2f4
 
         LinearLayout linearLayout1 = (LinearLayout) searchView.getChildAt(0);
         LinearLayout linearLayout2 = (LinearLayout) linearLayout1.getChildAt(2);
@@ -151,8 +106,6 @@ public class SearchFragment extends Fragment {
         return rootView;
     }
 
-<<<<<<< HEAD
-<<<<<<< HEAD
     public void setQuery(String query) {
         if (rootView == null) {
             return;
@@ -165,62 +118,6 @@ public class SearchFragment extends Fragment {
     }
 
 /*    public void onButtonPressed(Uri uri) {
-=======
-=======
->>>>>>> 3cdf4b5c6a0ee0167bee856d291a553acdc6d2f4
-    protected void refreshSearchHistoryList(Spinner spnParams) {
-        SearchHistory searchHistory = new SearchHistory(getActivity());
-        String[] items = searchHistory.getSearchHistoryListAsStringArray(true);
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(getActivity(), R.layout.search_history_spinner, items);
-        spnParams.setAdapter(adapter);
-    }
-
-    protected void performSearchHistoryListAction(int position, SearchView searchView) {
-        SearchHistory searchHistory = new SearchHistory(getActivity());
-        ArrayList<SearchParams> searchHistoryList = searchHistory.getSearchHistoryList(true);
-        if (rightPanel != null && searchHistoryList.size() > 0) {
-            SearchParams params = searchHistoryList.get(position);
-
-            if (searchView != null) {
-                searchView.setQuery(params.getSearchPhrase(), false);
-            }
-
-            CharSequence[] cataloguesList = rightPanel.getCataloguesList();
-            for (int i = 0; i < cataloguesList.length; i++) {
-                //Log.d("ZX", cataloguesList[i].toString());
-                if (params.getCatalogue().equalsIgnoreCase(cataloguesList[i].toString())) {
-                    //Log.d("ZX", "Found match");
-                    rightPanel.setCatalogue(i);
-                }
-            }
-
-            Calendar calStart = Calendar.getInstance();
-            SimpleDate dateStart = new SimpleDate(params.getStartDate());
-            calStart.set(dateStart.getYear(), dateStart.getMonth(), dateStart.getDay(),
-                    dateStart.getHours(), dateStart.getMinutes(), dateStart.getSeconds());
-            Calendar calEnd = Calendar.getInstance();
-            SimpleDate dateEnd = new SimpleDate(params.getEndDate());
-            calEnd.set(dateEnd.getYear(), dateEnd.getMonth(), dateEnd.getDay(),
-                    dateEnd.getHours(), dateEnd.getMinutes(), dateEnd.getSeconds());
-            rightPanel.setDateTime(calStart, calEnd);
-
-            if (!rightPanel.getAreaBoundsUpdated()) {
-                String[] bbox = params.getBbox().split(",");
-                rightPanel.setBounds(bbox[0], bbox[1], bbox[2], bbox[3]);
-                lastBbox = bbox;
-            }
-            rightPanel.setAreaBoundsUpdated(false);
-        }
-    }
-
-    protected void updateAreaBounds() {
-        if (lastBbox != null) {
-            rightPanel.setBounds(lastBbox[0], lastBbox[1], lastBbox[2], lastBbox[3]);
-        }
-    }
-
-    public void onButtonPressed(Uri uri) {
->>>>>>> 3cdf4b5c6a0ee0167bee856d291a553acdc6d2f4
         if (mListener != null) {
             mListener.onSearchFragmentInteraction(uri);
         }

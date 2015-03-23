@@ -2,8 +2,8 @@
   <library name="amazon-maps-api-2.0">
     <CLASSES>
       <root url="jar://$PROJECT_DIR$/app/build/intermediates/exploded-aar/com.amazon.android/amazon-maps-api/2.0/libs/MapsAPISupportLibrary.jar!/" />
-      <root url="file://$PROJECT_DIR$/app/build/intermediates/exploded-aar/com.amazon.android/amazon-maps-api/2.0/res" />
       <root url="jar://$PROJECT_DIR$/app/build/intermediates/exploded-aar/com.amazon.android/amazon-maps-api/2.0/libs/MapsAPIDelegateLibrary.jar!/" />
+      <root url="file://$PROJECT_DIR$/app/build/intermediates/exploded-aar/com.amazon.android/amazon-maps-api/2.0/res" />
       <root url="jar://$PROJECT_DIR$/app/build/intermediates/exploded-aar/com.amazon.android/amazon-maps-api/2.0/classes.jar!/" />
     </CLASSES>
     <JAVADOC />

@@ -28,18 +28,6 @@ import roboguice.util.temp.Ln;
 public class CollectionsDefinitionActivity extends BaseSmartHMActivity
         implements OnCollectionsListSelectionListener,
         OnCollectionsListFragmentListener, OnAreaPickerMapFragmentListener, OnAmznAreaPickerMapFragmentListener {
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-=======
->>>>>>> 3cdf4b5c6a0ee0167bee856d291a553acdc6d2f4
-
-    //private ProgressDialog initSpinner;
-    //private ProgressBar progressBarWmsLoad;
-    //private InitialisationReceiver initReceiver;
-    //private SpinnerStateReceiver spinnerStateRec;
-    //private boolean isWmsLoading = false;
->>>>>>> 3cdf4b5c6a0ee0167bee856d291a553acdc6d2f4
 
     /**
      * Whether or not the activity is in two-pane mode, i.e. running on a tablet
@@ -163,24 +151,6 @@ public class CollectionsDefinitionActivity extends BaseSmartHMActivity
                     .beginTransaction();
             transaction.replace(R.id.activity_base_details_container, baseMapFrag);
             transaction.commit();
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-=======
->>>>>>> 3cdf4b5c6a0ee0167bee856d291a553acdc6d2f4
-        }
-
-
-    }
-
-    /*
-        private void disableProgressBar() {
-            if (initSpinner != null) {
-                if (initSpinner.isShowing()) {
-                    initSpinner.dismiss();
-                }
-            }
->>>>>>> 3cdf4b5c6a0ee0167bee856d291a553acdc6d2f4
         }
 
 
@@ -198,34 +168,6 @@ public class CollectionsDefinitionActivity extends BaseSmartHMActivity
 
     }
 
-<<<<<<< HEAD
-=======
-        */
-    @Override
-    public void onMapFragmentBoundsChange(LatLngBoundsExt bounds) {
-        callUpdateFirstDetailFrag(bounds);
-    }
-
-
-    @Override
-<<<<<<< HEAD
-=======
-    public void onMapFragmentBoundsChange(LatLngBoundsExt bounds) {
-        callUpdateFirstDetailFrag(bounds);
-    }
-
-
-    @Override
->>>>>>> 3cdf4b5c6a0ee0167bee856d291a553acdc6d2f4
-    public void onAmznMapFragmentBoundsChange(LatLngBoundsExt bounds) {
-        callUpdateFirstDetailFrag(bounds);
-
-    }
-
-<<<<<<< HEAD
->>>>>>> 3cdf4b5c6a0ee0167bee856d291a553acdc6d2f4
-=======
->>>>>>> 3cdf4b5c6a0ee0167bee856d291a553acdc6d2f4
     private void callUpdateFirstDetailFrag(LatLngBoundsExt bounds) {
         BrowseCollectionFirstDetailFragment browseCollectionFirstDetailFragment = (BrowseCollectionFirstDetailFragment) getSupportFragmentManager()
                 .findFragmentByTag("BrowseCollectionFirstDetailFragment");

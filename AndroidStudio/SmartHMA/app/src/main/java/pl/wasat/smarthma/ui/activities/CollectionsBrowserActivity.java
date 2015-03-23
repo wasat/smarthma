@@ -157,18 +157,6 @@ public class CollectionsBrowserActivity extends BaseSmartHMActivity implements
 
     }
 
-<<<<<<< HEAD
-=======
-/*	@Override
-    public void onDataSeriesDetailFragmentInteraction() {
-		// TODO Auto-generated method stub
-
-	}*/
-
-<<<<<<< HEAD
->>>>>>> 3cdf4b5c6a0ee0167bee856d291a553acdc6d2f4
-=======
->>>>>>> 3cdf4b5c6a0ee0167bee856d291a553acdc6d2f4
     @Override
     public void onMapFragmentBoundsChange(LatLngBoundsExt bounds) {
         callUpdateDetailFrag(bounds);
@@ -221,13 +209,4 @@ public class CollectionsBrowserActivity extends BaseSmartHMActivity implements
     }
 
 
-<<<<<<< HEAD
-=======
-    }
-
-
-<<<<<<< HEAD
->>>>>>> 3cdf4b5c6a0ee0167bee856d291a553acdc6d2f4
-=======
->>>>>>> 3cdf4b5c6a0ee0167bee856d291a553acdc6d2f4
 }

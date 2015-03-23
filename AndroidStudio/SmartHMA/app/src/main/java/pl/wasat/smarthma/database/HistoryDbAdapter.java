@@ -100,15 +100,7 @@ public class HistoryDbAdapter {
         //hp = new HashMap();
         Cursor res = sqLiteDatabase.rawQuery("select * from " + DATABASE_TABLE, null);
         res.moveToFirst();
-<<<<<<< HEAD
-<<<<<<< HEAD
         while (!res.isAfterLast()) {
-=======
-        while (res.isAfterLast() == false) {
->>>>>>> 3cdf4b5c6a0ee0167bee856d291a553acdc6d2f4
-=======
-        while (res.isAfterLast() == false) {
->>>>>>> 3cdf4b5c6a0ee0167bee856d291a553acdc6d2f4
             String[] values = new String[6];
             values[0] = res.getString(res.getColumnIndex(KEY_ROWID));
             values[1] = res.getString(res.getColumnIndex(KEY_QUERY));
@@ -126,15 +118,7 @@ public class HistoryDbAdapter {
         Log.d("ZX", "Recreating table");
         Cursor res = sqLiteDatabase.rawQuery("select * from " + DATABASE_TABLE, null);
         res.moveToLast();
-<<<<<<< HEAD
-<<<<<<< HEAD
         while (!res.isBeforeFirst()) {
-=======
-        while (res.isBeforeFirst() == false) {
->>>>>>> 3cdf4b5c6a0ee0167bee856d291a553acdc6d2f4
-=======
-        while (res.isBeforeFirst() == false) {
->>>>>>> 3cdf4b5c6a0ee0167bee856d291a553acdc6d2f4
             sqLiteDatabase.delete(DATABASE_TABLE, KEY_ROWID + " = ? ", new String[]{res.getString(res.getColumnIndex(KEY_ROWID))});
             res.moveToPrevious();
         }

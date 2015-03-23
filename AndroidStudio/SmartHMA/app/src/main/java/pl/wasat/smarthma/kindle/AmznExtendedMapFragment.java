@@ -80,23 +80,10 @@ public class AmznExtendedMapFragment extends Fragment implements
         // Required empty public constructor
     }
 
-<<<<<<< HEAD
-<<<<<<< HEAD
 /*    @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }*/
-=======
-=======
->>>>>>> 3cdf4b5c6a0ee0167bee856d291a553acdc6d2f4
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
-<<<<<<< HEAD
->>>>>>> 3cdf4b5c6a0ee0167bee856d291a553acdc6d2f4
-=======
->>>>>>> 3cdf4b5c6a0ee0167bee856d291a553acdc6d2f4
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
