@@ -54,7 +54,11 @@ public class EntryISO implements Serializable {
      * @return The title
      */
     public String getTitle() {
-        return title;
+        if (title != null) {
+            return title;
+        } else {
+            return "(null)";
+        }
     }
 
     /**
@@ -193,12 +197,12 @@ public class EntryISO implements Serializable {
         this.dbId = dbId;
     }
 
-    public boolean isRead() {
-        return read;
+    public boolean isNotRead() {
+        return !read;
     }
 
     public void setRead(boolean read) {
-        this.read = read;
+        this.read = true;
     }
 
     public boolean isOffline() {
@@ -222,6 +226,7 @@ public class EntryISO implements Serializable {
         return HashCodeBuilder.reflectionHashCode(this);
     }
 
+    @SuppressWarnings("EqualsWhichDoesntCheckParameterClass")
     @Override
     public boolean equals(Object other) {
         return EqualsBuilder.reflectionEquals(this, other);

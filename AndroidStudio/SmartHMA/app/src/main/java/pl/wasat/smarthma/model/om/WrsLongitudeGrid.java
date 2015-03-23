@@ -27,11 +27,11 @@ public class WrsLongitudeGrid implements Serializable {
     }
 
 
-    public String getcodeSpace() {
+    public String getCodeSpace() {
         return codeSpace;
     }
 
-    public void setcodeSpace(String codeSpace) {
+    public void setCodeSpace(String codeSpace) {
         this.codeSpace = codeSpace;
     }
 
@@ -56,6 +56,7 @@ public class WrsLongitudeGrid implements Serializable {
         return HashCodeBuilder.reflectionHashCode(this);
     }
 
+    @SuppressWarnings("EqualsWhichDoesntCheckParameterClass")
     @Override
     public boolean equals(Object other) {
         return EqualsBuilder.reflectionEquals(this, other);

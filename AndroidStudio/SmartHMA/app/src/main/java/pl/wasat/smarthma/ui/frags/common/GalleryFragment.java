@@ -37,23 +37,24 @@ public class GalleryFragment extends Fragment {
     }
 
     private void initUI() {
-        LinearLayout myGallery = (LinearLayout) getView().findViewById(R.id.mygallery);
+        View view = getView();
+        if (view != null) {
+            LinearLayout myGallery = (LinearLayout) view.findViewById(R.id.mygallery);
 
-        Field[] drawables = R.raw.class.getFields();
-        for (Field f : drawables) {
-            try {
-                String imgPath = "R.raw." + f.getName() + ".jpg";
-
-                int resId = f.getInt(null);
-                View photo = insertPhoto(imgPath, resId);
-                myGallery.addView(photo);
-            } catch (Exception e) {
-                e.printStackTrace();
+            Field[] drawables = R.raw.class.getFields();
+            for (Field f : drawables) {
+                try {
+                    int resId = f.getInt(null);
+                    View photo = insertPhoto(resId);
+                    myGallery.addView(photo);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         }
     }
 
-    private View insertPhoto(String path, int resId) {
+    private View insertPhoto(int resId) {
         Bitmap bm = decodeSampledBitmapFromUri(resId);
 
         LinearLayout layout = new LinearLayout(getActivity()

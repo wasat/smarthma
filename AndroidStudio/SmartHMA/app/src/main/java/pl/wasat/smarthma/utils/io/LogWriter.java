@@ -12,7 +12,7 @@ class LogWriter {
         File root = android.os.Environment.getExternalStorageDirectory();
 
         File dir = new File(root.getAbsolutePath() + "/smarthma_logs");
-        dir.mkdirs();
+        //dir.mkdirs();
         File file = new File(dir, fileName);
 
         try {

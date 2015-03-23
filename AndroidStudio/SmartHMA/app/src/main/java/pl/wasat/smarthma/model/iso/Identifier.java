@@ -72,6 +72,7 @@ public class Identifier implements Serializable {
         return HashCodeBuilder.reflectionHashCode(this);
     }
 
+    @SuppressWarnings("EqualsWhichDoesntCheckParameterClass")
     @Override
     public boolean equals(Object other) {
         return EqualsBuilder.reflectionEquals(this, other);

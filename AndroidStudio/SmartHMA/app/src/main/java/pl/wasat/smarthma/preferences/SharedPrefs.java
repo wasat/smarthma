@@ -55,7 +55,6 @@ public class SharedPrefs {
 
     public void setParentIdPrefs(String parentId) {
         SharedPreferences.Editor editor = settings.edit();
-        parentId = validateParentId(parentId);
         editor.putString(Const.KEY_PREF_PARENT_ID, parentId);
         editor.apply();
     }
@@ -75,18 +74,6 @@ public class SharedPrefs {
         editor.putString(Const.KEY_PREF_QUERY, query);
         editor.apply();
 
-    }
-
-    private String validateParentId(String parentId) {
-        if (!parentId.contentEquals("")) {
-            if (!parentId.startsWith("urn:ogc:")) {
-
-                if (!parentId.startsWith("EOP:")) {
-                    //parentId = "EOP:ESA:" + parentId;
-                }
-            }
-        }
-        return parentId;
     }
 
 }

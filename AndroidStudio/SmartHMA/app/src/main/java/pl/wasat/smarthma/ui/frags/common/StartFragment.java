@@ -2,7 +2,6 @@ package pl.wasat.smarthma.ui.frags.common;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.support.v4.app.Fragment;
@@ -46,12 +45,6 @@ public class StartFragment extends Fragment {
 
     public StartFragment() {
         // Required empty public constructor
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
     }
 
     @Override
@@ -119,11 +112,11 @@ public class StartFragment extends Fragment {
         return rootView;
     }
 
-    public void onButtonPressed(Uri uri) {
+/*    public void onButtonPressed(Uri uri) {
         if (mListener != null) {
             mListener.onStartFragmentConnectionSetup();
         }
-    }
+    }*/
 
     @Override
     public void onAttach(Activity activity) {
@@ -152,12 +145,11 @@ public class StartFragment extends Fragment {
      * >Communicating with Other Fragments</a> for more information.
      */
     public interface OnStartFragmentListener {
-        public void onStartFragmentConnectionSetup();
+        //public void onStartFragmentConnectionSetup();
     }
 
     private boolean isConnected() {
         ConnectionDetector detect = new ConnectionDetector(getActivity());
-        // Boolean isCoonected = detect.isConnectingToInternet();
 
         if (detect.isConnectingToInternet()) {
             return true;

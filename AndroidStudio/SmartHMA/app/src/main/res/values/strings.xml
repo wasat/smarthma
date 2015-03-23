@@ -42,8 +42,12 @@
     <string name="more">More &gt;&gt;</string>
     <string name="smarthma">SmartHMA</string>
     <string name="fedeo_eo_data_series_search_engine">with ESA/FedEO Search Engine</string>
+    <string name="search_history">Search history:</string>
+    <string name="search_history_empty">(search history is empty)</string>
+    <string name="query">Query</string>
+    <string name="clear_search_history">Clear search history</string>
     <string name="basic_settings">Basic Settings</string>
-    <string name="advance_settings">Advance Settings</string>
+    <string name="advanced_settings">Advanced Settings</string>
     <string name="basic_search_settings">Basic Search Settings</string>
     <string name="search_area">Search Area</string>
     <string name="time_period">Time Period</string>
@@ -97,12 +101,36 @@
     <string name="quicklook_img_desc">Quicklook Image</string>
     <string name="search_eo_data">Search EO Data</string>
     <string name="esa_mission_item">ESA MISSION ITEM</string>
+    <string name="parameters">Parameters</string>
+    <string name="bbox">BBox</string>
+    <string name="start_date">Start date</string>
+    <string name="end_date">End date</string>
+    <string name="search_history_item">Search history…</string>
+    <string name="search_history_pick_query">Pick query…</string>
+    <string name="search_history_pick_catalogue">Pick catalogue…</string>
+    <string name="search_history_pick_bbox">Pick bounding box…</string>
+    <string name="search_history_pick_start_date">Pick start date…</string>
+    <string name="search_history_pick_end_date">Pick end date…</string>
+    <string name="search_history_clear">Clear history</string>
+    <string name="action_sort">Sort…</string>
+    <string name="action_sort_by_title_asc">By title ascending</string>
+    <string name="action_sort_by_title_desc">By title descending</string>
+    <string name="action_sort_by_date_asc">By date ascending</string>
+    <string name="action_sort_by_date_desc">By date descending</string>
+    <string name="refreshing_list">Refreshing list…</string>
+
+    <string name="close_button_container">Close</string>
+
 
     <string-array name="sorting_modes">
         <item>Title ascending</item>
         <item>Title descending</item>
         <item>Date ascending</item>
         <item>Date descending</item>
+    </string-array>
+
+    <string-array name="parameter_options">
+        <item>Default</item>
     </string-array>
 
 </resources>

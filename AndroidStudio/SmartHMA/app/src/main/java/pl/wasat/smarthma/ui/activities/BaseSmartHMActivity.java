@@ -24,7 +24,7 @@ public class BaseSmartHMActivity extends FragmentActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        //requestWindowFeature(Window.FEATURE_INDETERMINATE_PROGRESS);
+
         setContentView(R.layout.activity_base_two_panel);
         super.onCreate(savedInstanceState);
     }

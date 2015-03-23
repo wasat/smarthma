@@ -2,7 +2,6 @@ package pl.wasat.smarthma.ui.frags.common;
 
 import android.app.Activity;
 import android.graphics.Typeface;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -35,11 +34,6 @@ public class MetadataISOFragment extends Fragment {
     private OnMetadataISOFragmentListener mListener;
 
     private LinearLayout linearLayout;
-
-	/*
-     * private LinearLayout itemLayout; private TextView itemTitle; private
-	 * TextView itemValues;
-	 */
 
     /**
      * Use this factory method to create a new instance of this fragment using
@@ -142,7 +136,6 @@ public class MetadataISOFragment extends Fragment {
         linearLayout.addView(tvMetaHeader);
 
         Class<?> c1 = eOMetaDataObject.getClass();
-        // Map<String, Object> map = new HashMap<String, Object>();
         Field[] fields = c1.getDeclaredFields();
         for (Field field : fields) {
             String name = field.getName();
@@ -217,27 +210,6 @@ public class MetadataISOFragment extends Fragment {
 
         cleanedValue = cleanedValue.replaceAll("CharacterString", "name");
 
-		
-		
-		
-/*		cleanedValue = cleanedValue.replaceAll(
-				"\\[processingInformation - samplingRate - \\[\\]", "");
-		cleanedValue = cleanedValue.replaceAll("posString - pointsString - ",
-				"");*/
-
-/*		cleanedValue = cleanedValue.replaceAll(
-				"acquisition - illuminationAzimuthAngle",
-				"illuminationAzimuthAngle");
-		cleanedValue = cleanedValue.replaceAll(
-				"browseInformation - fileName - serviceReference - ",
-				"serviceReference - ");
-		cleanedValue = cleanedValue.replaceAll(
-				"exterior - linearRing - posList - \\[value - ", "Point List: "
-						+ newLine);
-		cleanedValue = cleanedValue.replaceAll("_xmlns - xmlns", "");
-		cleanedValue = cleanedValue.replaceAll(newLine + "unit -", "");*/
-
-
         cleanedValue = cleanedValue.replaceAll(doubleNewLine, newLine);
         cleanedValue = cleanedValue.trim().replaceAll(" +", " ");
         cleanedValue = cleanedValue.replaceAll("\\[", "");
@@ -249,18 +221,12 @@ public class MetadataISOFragment extends Fragment {
         cleanedValue = cleanedValue.replaceAll(spaceTwoNewLine, "");
         cleanedValue = cleanedValue.replaceAll(doubleNewLine, newLine);
 
-/*		cleanedValue = cleanedValue.replaceAll(newLine + "serviceReference - ",
-				doubleNewLine + "serviceReference - ");
-		cleanedValue = cleanedValue.replaceAll(" - value - ", " -> ");
-		cleanedValue = cleanedValue.replaceAll("value - ", "");*/
-
-        cleanedValue = changeUperCase(cleanedValue);
+        cleanedValue = changeUpperCase(cleanedValue);
         return cleanedValue;
 
     }
 
-    private String changeUperCase(String inputString) {
-        // String inputString = null; // get user input
+    private String changeUpperCase(String inputString) {
 
         if (inputString.isEmpty()) {
             return inputString;
@@ -280,12 +246,6 @@ public class MetadataISOFragment extends Fragment {
         }
         System.out.println(outputString);
         return outputString;
-    }
-
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onMetadataISOFragmentInteraction();
-        }
     }
 
     @Override
@@ -315,7 +275,6 @@ public class MetadataISOFragment extends Fragment {
      * >Communicating with Other Fragments</a> for more information.
      */
     public interface OnMetadataISOFragmentListener {
-        public void onMetadataISOFragmentInteraction();
     }
 
 }

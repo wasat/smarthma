@@ -2,18 +2,20 @@ package pl.wasat.smarthma.ui.frags.search;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.List;
 
 import pl.wasat.smarthma.R;
+import pl.wasat.smarthma.SmartHMApplication;
 import pl.wasat.smarthma.adapter.SearchListAdapter;
+import pl.wasat.smarthma.database.SearchHistory;
+import pl.wasat.smarthma.database.SearchParams;
 import pl.wasat.smarthma.helper.Const;
 import pl.wasat.smarthma.helper.DataSorter;
 import pl.wasat.smarthma.model.FedeoRequest;
@@ -32,7 +34,6 @@ import pl.wasat.smarthma.utils.rss.FedeoSearchRequest;
  */
 public class SearchListFragment extends BaseSpiceListFragment {
     private static final String KEY_PARAM_SEARCH_FEDEO_REQUEST = "pl.wasat.smarthma.KEY_PARAM_SEARCH_FEDEO_REQUEST";
-    //private static final String KEY_PARAM_STOP_NEW_SEARCH = "pl.wasat.smarthma.KEY_PARAM_STOP_NEW_SEARCH";
     private static final String STATE_ACTIVATED_POSITION = "activated_position";
 
     private FedeoRequest searchRequest;
@@ -67,16 +68,11 @@ public class SearchListFragment extends BaseSpiceListFragment {
         if (getArguments() != null) {
             searchRequest = (FedeoRequest) getArguments().getSerializable(
                     KEY_PARAM_SEARCH_FEDEO_REQUEST);
-            //stopSearch = getArguments().getBoolean(KEY_PARAM_STOP_NEW_SEARCH);
+            SearchHistory searchHistory = new SearchHistory(getActivity());
+            searchHistory.addSearchParameters(new SearchParams(searchRequest));
         }
     }
 
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        return super.onCreateView(inflater, container, savedInstanceState);
-    }
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
@@ -153,54 +149,62 @@ public class SearchListFragment extends BaseSpiceListFragment {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-        if (id == R.id.actionbar_refresh) {
-            loadSearchFeedResponse(searchRequest);
-            return true;
+        switch (id) {
+            case R.id.action_sort_by_title_asc:
+                SmartHMApplication.sortingType = Const.SORT_BY_TITLE_ASCENDING;
+                refreshList();
+                break;
+            case R.id.action_sort_by_title_desc:
+                SmartHMApplication.sortingType = Const.SORT_BY_TITLE_DESCENDING;
+                refreshList();
+                break;
+            case R.id.action_sort_by_date_asc:
+                SmartHMApplication.sortingType = Const.SORT_BY_DATE_ASCENDING;
+                refreshList();
+                break;
+            case R.id.action_sort_by_date_desc:
+                SmartHMApplication.sortingType = Const.SORT_BY_DATE_DESCENDING;
+                refreshList();
+                break;
+            case R.id.actionbar_refresh:
+                loadSearchFeedResponse(searchRequest);
+                break;
+            default:
+                return super.onOptionsItemSelected(item);
         }
-        return false;
+        return true;
+    }
+
+    void refreshList() {
+        loadSearchFeedResponse(searchRequest);
+        Toast.makeText(getActivity(), getActivity().getString(R.string.refreshing_list), Toast.LENGTH_LONG).show();
     }
 
     private void updateSearchListViewContent(List<EntryISO> searchFeedList) {
-        if (searchFeedList.isEmpty()) {
-            getView().setVisibility(View.GONE);
+        View view = getView();
+        if (view != null) {
+            if (searchFeedList.isEmpty()) {
+                view.setVisibility(View.GONE);
 
-            String searchFail = getActivity().getString(
-                    R.string.nothing_to_display_please_search_again_);
+                String searchFail = getActivity().getString(
+                        R.string.nothing_to_display_please_search_again_);
 
-            FailureFragment failureFragment = FailureFragment
-                    .newInstance(searchFail);
-            getActivity()
-                    .getSupportFragmentManager()
-                    .beginTransaction()
-                    .replace(R.id.activity_base_details_container,
-                            failureFragment).commit();
-        } else {
-
-/*			for (EntryOM a : searchFeedList) {
-                EoDbAdapter dba = new EoDbAdapter(getActivity());
-				dba.openToRead();
-				EntryOM fetchedSearch = dba.getBlogListing(a.getGuid());
-				dba.close();
-				if (fetchedSearch == null) {
-					dba = new EoDbAdapter(getActivity());
-					dba.openToWrite();
-					dba.insertBlogListing(a.getGuid());
-					dba.close();
-				} else {
-					a.setDbId(fetchedSearch.getDbId());
-					a.setOffline(fetchedSearch.isOffline());
-					a.setRead(fetchedSearch.isRead());
-				}
-			}*/
-
-
-            SearchListAdapter adapter = new SearchListAdapter(getActivity(),
-                    searchFeedList);
-            this.setListAdapter(adapter);
-            adapter.notifyDataSetChanged();
-            getView().setVisibility(View.VISIBLE);
+                FailureFragment failureFragment = FailureFragment
+                        .newInstance(searchFail);
+                getActivity()
+                        .getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.activity_base_details_container,
+                                failureFragment).commit();
+            } else {
+                SearchListAdapter adapter = new SearchListAdapter(getActivity(),
+                        searchFeedList);
+                this.setListAdapter(adapter);
+                adapter.notifyDataSetChanged();
+                SearchListAdapter adapter1 = adapter;
+                view.setVisibility(View.VISIBLE);
+            }
         }
-
     }
 
     /**
@@ -215,7 +219,7 @@ public class SearchListFragment extends BaseSpiceListFragment {
     }
 
     /**
-     * @param searchResultFeed
+     * @param searchResultFeed - Dataseries Feed
      */
     private void showDataSeriesIntro(Feed searchResultFeed) {
         FeedSummarySearchCollectionFragment feedSummarySearchCollectionFragment = FeedSummarySearchCollectionFragment

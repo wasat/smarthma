@@ -42,7 +42,6 @@
             android:focusableInTouchMode="true"
             android:iconifiedByDefault="false"
             android:visibility="visible">
-
         </SearchView>
 
         <LinearLayout
@@ -64,7 +63,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="3dp"
-                android:text="@string/advance_settings"
+                android:text="@string/advanced_settings"
                 android:textSize="16sp" />
         </LinearLayout>
     </LinearLayout>

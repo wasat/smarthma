@@ -20,6 +20,11 @@ public class AcraExtension {
         mapState(checkInstance(map));
     }
 
+    public static void mapCustomLog(String place, com.amazon.geo.mapsv2.AmazonMap map) {
+        mapLifeCycle(place);
+        mapState(checkInstance(map));
+    }
+
     private static String checkInstance(GoogleMap map) {
         String instance;
         if (map != null) {
@@ -28,6 +33,15 @@ public class AcraExtension {
             instance = "Null";
         }
         return instance;
+    }
 
+    private static String checkInstance(com.amazon.geo.mapsv2.AmazonMap map) {
+        String instance;
+        if (map != null) {
+            instance = map.toString();
+        } else {
+            instance = "Null";
+        }
+        return instance;
     }
 }

@@ -4,11 +4,13 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+import pl.wasat.smarthma.SmartHMApplication;
 import pl.wasat.smarthma.model.Collection;
 import pl.wasat.smarthma.model.CollectionsGroup;
 import pl.wasat.smarthma.model.iso.EntryISO;
 import pl.wasat.smarthma.model.mission.MissionItemData;
 import pl.wasat.smarthma.model.om.EntryOM;
+import pl.wasat.smarthma.utils.time.SimpleDate;
 
 /*
  *  Used for sorting collections containing various data.
@@ -25,7 +27,7 @@ public class DataSorter {
             } else if (o instanceof MissionItemData) {
                 sortMissionItemsData(list);
             } else if (o instanceof EntryOM) {
-                sortEOEntries(list);
+                sortOMEntries(list);
             } else if (o instanceof EntryISO) {
                 sortISOEntries(list);
             }
@@ -33,7 +35,14 @@ public class DataSorter {
     }
 
     void sortCollection(List list, Comparator comparator) {
-        Collections.sort(list, comparator);
+        if (list == null || comparator == null) {
+            return;
+        }
+        try {
+            Collections.sort(list, comparator);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     void sortCollections(List<Collection> list) {
@@ -70,58 +79,29 @@ public class DataSorter {
     }
 
 
-    void sortEOEntries(List<EntryOM> entries) {
+    void sortOMEntries(List<EntryOM> entries) {
         if (!entries.isEmpty()) {
-            if (Global.sortingType == Const.SORT_BY_TITLE_ASCENDING) {
-                sortEntriesByTitleAscending(entries);
-            } else if (Global.sortingType == Const.SORT_BY_TITLE_DESCENDING) {
-                sortEntriesByTitleDescending(entries);
-            } else if (Global.sortingType == Const.SORT_BY_DATE_ASCENDING) {
+            if (SmartHMApplication.sortingType == Const.SORT_BY_TITLE_ASCENDING) {
+                sortOMEntriesByTitleAscending(entries);
+            } else if (SmartHMApplication.sortingType == Const.SORT_BY_TITLE_DESCENDING) {
+                sortOMEntriesByTitleDescending(entries);
+            } else if (SmartHMApplication.sortingType == Const.SORT_BY_DATE_ASCENDING) {
                 if (entries.get(0).getPublished().compareTo(Const.DATE_NULL) != 0) {
-                    sortEntriesByDatePublishedAscending(entries);
+                    sortOMEntriesByDatePublishedAscending(entries);
                 } else {
-                    sortEntriesByDateUpdatedAscending(entries);
+                    sortOMEntriesByDateUpdatedAscending(entries);
                 }
             } else {
                 if (entries.get(0).getPublished().compareTo(Const.DATE_NULL) != 0) {
-                    sortEntriesByDatePublishedDescending(entries);
+                    sortOMEntriesByDatePublishedDescending(entries);
                 } else {
-                    sortEntriesByDateUpdatedDescending(entries);
+                    sortOMEntriesByDateUpdatedDescending(entries);
                 }
             }
         }
     }
 
-    void sortISOEntries(List<EntryISO> entries) {
-        if (!entries.isEmpty()) {
-            if (Global.sortingType == Const.SORT_BY_TITLE_ASCENDING) {
-                //sortEntriesByTitleAscending(entries);
-            } else if (Global.sortingType == Const.SORT_BY_TITLE_DESCENDING) {
-                // sortEntriesByTitleDescending(entries);
-            } else if (Global.sortingType == Const.SORT_BY_DATE_ASCENDING) {
-/*                if (entries.get(0).getPublished().compareTo(Const.DATE_NULL) != 0)
-                {
-                    sortEntriesByDatePublishedAscending(entries);
-                }
-                else
-                {
-                    sortEntriesByDateUpdatedAscending(entries);
-                }*/
-            } else {
-/*                if (entries.get(0).getPublished().compareTo(Const.DATE_NULL) != 0)
-                {
-                    sortEntriesByDatePublishedDescending(entries);
-                }
-                else
-                {
-                    sortEntriesByDateUpdatedDescending(entries);
-                }*/
-            }
-        }
-    }
-
-
-    void sortEntriesByTitleAscending(List<EntryOM> list) {
+    void sortOMEntriesByTitleAscending(List<EntryOM> list) {
         Comparator comparator = new Comparator<EntryOM>() {
             public int compare(EntryOM c1, EntryOM c2) {
                 String str1 = c1.getTitle().trim();
@@ -132,7 +112,7 @@ public class DataSorter {
         sortCollection(list, comparator);
     }
 
-    void sortEntriesByTitleDescending(List<EntryOM> list) {
+    void sortOMEntriesByTitleDescending(List<EntryOM> list) {
         Comparator comparator = new Comparator<EntryOM>() {
             public int compare(EntryOM c1, EntryOM c2) {
                 String str1 = c1.getTitle().trim();
@@ -143,7 +123,7 @@ public class DataSorter {
         sortCollection(list, comparator);
     }
 
-    void sortEntriesByDatePublishedAscending(List<EntryOM> list) {
+    void sortOMEntriesByDatePublishedAscending(List<EntryOM> list) {
         Comparator comparator = new Comparator<EntryOM>() {
             public int compare(EntryOM c1, EntryOM c2) {
                 SimpleDate v1 = new SimpleDate(c1.getPublished());
@@ -154,7 +134,7 @@ public class DataSorter {
         sortCollection(list, comparator);
     }
 
-    void sortEntriesByDatePublishedDescending(List<EntryOM> list) {
+    void sortOMEntriesByDatePublishedDescending(List<EntryOM> list) {
         Comparator comparator = new Comparator<EntryOM>() {
             public int compare(EntryOM c1, EntryOM c2) {
                 SimpleDate v1 = new SimpleDate(c1.getPublished());
@@ -165,7 +145,7 @@ public class DataSorter {
         sortCollection(list, comparator);
     }
 
-    void sortEntriesByDateUpdatedAscending(List<EntryOM> list) {
+    void sortOMEntriesByDateUpdatedAscending(List<EntryOM> list) {
         Comparator comparator = new Comparator<EntryOM>() {
             public int compare(EntryOM c1, EntryOM c2) {
                 SimpleDate v1 = new SimpleDate(c1.getUpdated());
@@ -176,9 +156,91 @@ public class DataSorter {
         sortCollection(list, comparator);
     }
 
-    void sortEntriesByDateUpdatedDescending(List<EntryOM> list) {
+    void sortOMEntriesByDateUpdatedDescending(List<EntryOM> list) {
         Comparator comparator = new Comparator<EntryOM>() {
             public int compare(EntryOM c1, EntryOM c2) {
+                SimpleDate v1 = new SimpleDate(c1.getUpdated());
+                SimpleDate v2 = new SimpleDate(c2.getUpdated());
+                return v2.compareTo(v1);
+            }
+        };
+        sortCollection(list, comparator);
+    }
+
+    void sortISOEntries(List<EntryISO> entries) {
+        if (!entries.isEmpty()) {
+            if (SmartHMApplication.sortingType == Const.SORT_BY_TITLE_ASCENDING) {
+                sortISOEntriesByTitleAscending(entries);
+            } else if (SmartHMApplication.sortingType == Const.SORT_BY_TITLE_DESCENDING) {
+                sortISOEntriesByTitleDescending(entries);
+            } else if (SmartHMApplication.sortingType == Const.SORT_BY_DATE_ASCENDING) {
+                //sortISOEntriesByDateAscending(entries);
+                sortISOEntriesByDateUpdatedAscending(entries);
+            } else {
+                //sortISOEntriesByDateDescending(entries);
+                sortISOEntriesByDateUpdatedDescending(entries);
+            }
+        }
+    }
+
+    void sortISOEntriesByTitleAscending(List<EntryISO> list) {
+        Comparator comparator = new Comparator<EntryISO>() {
+            public int compare(EntryISO c1, EntryISO c2) {
+                String str1 = c1.getTitle().trim();
+                String str2 = c2.getTitle().trim();
+                return str1.compareTo(str2);
+            }
+        };
+        sortCollection(list, comparator);
+    }
+
+    void sortISOEntriesByTitleDescending(List<EntryISO> list) {
+        Comparator comparator = new Comparator<EntryISO>() {
+            public int compare(EntryISO c1, EntryISO c2) {
+                String str1 = c1.getTitle().trim();
+                String str2 = c2.getTitle().trim();
+                return str2.compareTo(str1);
+            }
+        };
+        sortCollection(list, comparator);
+    }
+
+    void sortISOEntriesByDateAscending(List<EntryISO> list) {
+        Comparator comparator = new Comparator<EntryISO>() {
+            public int compare(EntryISO c1, EntryISO c2) {
+                SimpleDate v1 = new SimpleDate(c1.getDate().getCIDate().getDateInCIDate().getDateGco().getText());
+                SimpleDate v2 = new SimpleDate(c2.getDate().getCIDate().getDateInCIDate().getDateGco().getText());
+                return v1.compareTo(v2);
+            }
+        };
+        sortCollection(list, comparator);
+    }
+
+    void sortISOEntriesByDateDescending(List<EntryISO> list) {
+        Comparator comparator = new Comparator<EntryISO>() {
+            public int compare(EntryISO c1, EntryISO c2) {
+                SimpleDate v1 = new SimpleDate(c1.getDate().getCIDate().getDateInCIDate().getDateGco().getText());
+                SimpleDate v2 = new SimpleDate(c2.getDate().getCIDate().getDateInCIDate().getDateGco().getText());
+                return v2.compareTo(v1);
+            }
+        };
+        sortCollection(list, comparator);
+    }
+
+    void sortISOEntriesByDateUpdatedAscending(List<EntryISO> list) {
+        Comparator comparator = new Comparator<EntryISO>() {
+            public int compare(EntryISO c1, EntryISO c2) {
+                SimpleDate v1 = new SimpleDate(c1.getUpdated());
+                SimpleDate v2 = new SimpleDate(c2.getUpdated());
+                return v1.compareTo(v2);
+            }
+        };
+        sortCollection(list, comparator);
+    }
+
+    void sortISOEntriesByDateUpdatedDescending(List<EntryISO> list) {
+        Comparator comparator = new Comparator<EntryISO>() {
+            public int compare(EntryISO c1, EntryISO c2) {
                 SimpleDate v1 = new SimpleDate(c1.getUpdated());
                 SimpleDate v2 = new SimpleDate(c2.getUpdated());
                 return v2.compareTo(v1);

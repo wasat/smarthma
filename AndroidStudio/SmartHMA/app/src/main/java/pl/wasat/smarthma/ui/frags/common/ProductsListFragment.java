@@ -14,7 +14,7 @@ import pl.wasat.smarthma.ui.frags.base.BaseShowProductsListFragment;
  * instance of this fragment.
  */
 public class ProductsListFragment extends BaseShowProductsListFragment {
-    private static final String KEY_PARAM_FEDEO_REQUEST = "pl.wasat.samrthma.KEY_PARAM_FEDEO_REQUEST";
+    private static final String KEY_PARAM_FEDEO_REQUEST = "pl.wasat.smarthma.KEY_PARAM_FEDEO_REQUEST";
 
     /**
      * Use this factory method to create a new instance of this fragment using

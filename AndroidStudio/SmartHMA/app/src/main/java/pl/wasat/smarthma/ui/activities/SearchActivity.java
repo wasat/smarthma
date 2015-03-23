@@ -1,26 +1,39 @@
 package pl.wasat.smarthma.ui.activities;
 
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.SubMenu;
 
-import com.google.android.gms.maps.model.LatLngBounds;
+import java.util.ArrayList;
 
 import pl.wasat.smarthma.R;
+import pl.wasat.smarthma.database.SearchHistory;
+import pl.wasat.smarthma.database.SearchParams;
+import pl.wasat.smarthma.kindle.AmznAreaPickerMapFragment.OnAmznAreaPickerMapFragmentListener;
 import pl.wasat.smarthma.ui.frags.common.AreaPickerMapFragment.OnAreaPickerMapFragmentListener;
 import pl.wasat.smarthma.ui.frags.search.SearchBasicInfoRightFragment;
 import pl.wasat.smarthma.ui.frags.search.SearchBasicInfoRightFragment.OnSearchBasicInfoRightFragmentListener;
 import pl.wasat.smarthma.ui.frags.search.SearchFragment;
 import pl.wasat.smarthma.ui.frags.search.SearchFragment.OnSearchFragmentListener;
+import pl.wasat.smarthma.utils.obj.LatLngBoundsExt;
 import roboguice.util.temp.Ln;
 
 public class SearchActivity extends BaseSmartHMActivity implements
         OnSearchBasicInfoRightFragmentListener, OnSearchFragmentListener,
-        OnAreaPickerMapFragmentListener {
+        OnAreaPickerMapFragmentListener, OnAmznAreaPickerMapFragmentListener {
+
+    private SearchBasicInfoRightFragment rightPanel;
+    private SearchFragment leftPanel;
+    private static final int MENU_QUERY_IDS = 1000;
+    private static final int MENU_CATALOGUE_IDS = 1100;
+    private static final int MENU_BBOX_IDS = 1200;
+    private static final int MENU_STARTDATE_IDS = 1300;
+    private static final int MENU_ENDDATE_IDS = 1400;
+    private static final int MENU_CLEAR_ID = 2000;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,13 +44,9 @@ public class SearchActivity extends BaseSmartHMActivity implements
 
             loadRightPanel();
             loadLeftPanel();
-
         }
-    }
 
-    @Override
-    protected void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
+        //refreshParameters();
     }
 
     @Override
@@ -45,41 +54,145 @@ public class SearchActivity extends BaseSmartHMActivity implements
         // Inflate the menu; this adds items to the action bar if it is present.
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu_eo_map_twopane, menu);
-
-        // Associate searchable configuration with the SearchView
-/*		SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
-        SearchView searchView = (SearchView) menu.findItem(R.id.action_search)
-				.getActionView();
-		searchView.setSearchableInfo(searchManager
-				.getSearchableInfo(getComponentName()));*/
-
         return super.onCreateOptionsMenu(menu);
     }
 
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
+        SearchHistory searchHistory = new SearchHistory(this);
+        //ArrayList<SearchParams> searchHistoryList = searchHistory.getSearchHistoryList(true);
+        ArrayList<String> queries = searchHistory.getQueries(true);
+        ArrayList<String> catalogues = searchHistory.getCatalogues(true);
+        ArrayList<String> bboxs = searchHistory.getBboxs(true);
+        ArrayList<String> startDates = searchHistory.getStartDates(true);
+        ArrayList<String> endDates = searchHistory.getEndDates(true);
+
+        //Log.d("ZX", "item: "+menu.getItem(0).getSubMenu().getItem(0).getTitle());
+        SubMenu searchMenu = menu.getItem(0).getSubMenu();
+        searchMenu.clear();
+
+        SubMenu pickQueriesMenu = searchMenu.addSubMenu(getString(R.string.search_history_pick_query));
+        for (String str : queries) {
+            pickQueriesMenu.add(MENU_QUERY_IDS, Menu.NONE, Menu.NONE, str);
+        }
+
+        SubMenu pickCataloguesMenu = searchMenu.addSubMenu(getString(R.string.search_history_pick_catalogue));
+        for (String str : catalogues) {
+            pickCataloguesMenu.add(MENU_CATALOGUE_IDS, Menu.NONE, Menu.NONE, str);
+        }
+
+        SubMenu pickBboxsMenu = searchMenu.addSubMenu(getString(R.string.search_history_pick_bbox));
+        for (String str : bboxs) {
+            pickBboxsMenu.add(MENU_BBOX_IDS, Menu.NONE, Menu.NONE, str);
+        }
+
+        SubMenu pickStartDatesMenu = searchMenu.addSubMenu(getString(R.string.search_history_pick_start_date));
+        for (String str : startDates) {
+            pickStartDatesMenu.add(MENU_STARTDATE_IDS, Menu.NONE, Menu.NONE, str);
+        }
+
+        SubMenu pickEndDatesMenu = searchMenu.addSubMenu(getString(R.string.search_history_pick_end_date));
+        for (String str : endDates) {
+            pickEndDatesMenu.add(MENU_ENDDATE_IDS, Menu.NONE, Menu.NONE, str);
+        }
+
+        MenuItem clearItem = searchMenu.add(Menu.NONE, MENU_CLEAR_ID, Menu.NONE, getString(R.string.search_history_clear));
+
         return super.onPrepareOptionsMenu(menu);
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        /*
+        String test = item.getMenuInfo().toString();
+        if (test != null)
+        {
+            Log.d("ZX", test);
+        }
+        */
+        String value;
         switch (item.getItemId()) {
-/*		case R.id.action_pref1:
-            break;
-		case R.id.action_pref2:
-			break;
-		case R.id.action_pref3:
-			break;
-		case R.id.action_clear_all_settings:
-			break;*/
+            case MENU_CLEAR_ID:
+                SearchHistory searchHistory = new SearchHistory(this);
+                searchHistory.clearHistory();
+                break;
             case R.id.action_exit:
                 moveTaskToBack(true);
                 finish();
                 break;
             default:
-                return super.onOptionsItemSelected(item);
+                switch (item.getGroupId()) {
+                    case MENU_QUERY_IDS:
+                        value = item.getTitle().toString();
+                        setQuery(value);
+                        break;
+                    case MENU_CATALOGUE_IDS:
+                        value = item.getTitle().toString();
+                        setCatalogue(value);
+                        break;
+                    case MENU_BBOX_IDS:
+                        value = item.getTitle().toString();
+                        setBbox(value);
+                        break;
+                    case MENU_STARTDATE_IDS:
+                        value = item.getTitle().toString();
+                        setStartDate(value);
+                        break;
+                    case MENU_ENDDATE_IDS:
+                        value = item.getTitle().toString();
+                        setEndDate(value);
+                        break;
+                    default:
+                        return super.onOptionsItemSelected(item);
+                }
         }
         return true;
+    }
+
+    public void refreshParameters() {
+        try {
+            SearchHistory searchHistory = new SearchHistory(this);
+            SearchParams searchParams = searchHistory.getSearchHistoryList(true).get(0);
+            if (searchParams != null) {
+                setQuery(searchParams.getSearchPhrase());
+                setCatalogue(searchParams.getCatalogue());
+                setBbox(searchParams.getBbox());
+                setStartDate(searchParams.getStartDate());
+                setEndDate(searchParams.getEndDate());
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void setQuery(String query) {
+        if (leftPanel != null) {
+            leftPanel.setQuery(query);
+        }
+    }
+
+    private void setCatalogue(String catalogue) {
+        if (rightPanel != null) {
+            rightPanel.setCatalogue(catalogue);
+        }
+    }
+
+    private void setBbox(String boundingBox) {
+        if (rightPanel != null) {
+            rightPanel.setBbox(boundingBox);
+        }
+    }
+
+    private void setStartDate(String startDate) {
+        if (rightPanel != null) {
+            rightPanel.setStartDate(startDate);
+        }
+    }
+
+    private void setEndDate(String endDate) {
+        if (rightPanel != null) {
+            rightPanel.setEndDate(endDate);
+        }
     }
 
     /*
@@ -109,6 +222,7 @@ public class SearchActivity extends BaseSmartHMActivity implements
     private void loadRightPanel() {
         SearchBasicInfoRightFragment rightInfoFragment = SearchBasicInfoRightFragment
                 .newInstance();
+        rightPanel = rightInfoFragment;
         getSupportFragmentManager()
                 .beginTransaction()
                 .replace(R.id.activity_base_list_container, rightInfoFragment,
@@ -117,37 +231,12 @@ public class SearchActivity extends BaseSmartHMActivity implements
 
     private void loadLeftPanel() {
         SearchFragment searchLeftFragment = SearchFragment.newInstance();
+        leftPanel = searchLeftFragment;
         getSupportFragmentManager()
                 .beginTransaction()
                 .replace(R.id.activity_base_details_container,
                         searchLeftFragment, "SearchFragment")
                 .addToBackStack("SearchFragment").commit();
-    }
-
-    /*
-     * (non-Javadoc)
-     *
-     * @see pl.wasat.smarthma.ui.frags.search.SearchBasicInfoRightFragment.
-     * OnSearchBasicInfoRightFragmentListener
-     * #onSearchBasicInfoRightFragmentInteraction(android.net.Uri)
-     */
-    @Override
-    public void onSearchBasicInfoRightFragmentInteraction(Uri uri) {
-        // TODO Auto-generated method stub
-
-    }
-
-    /*
-     * (non-Javadoc)
-     *
-     * @see
-     * pl.wasat.smarthma.ui.frags.search.SearchFragment.OnSearchFragmentListener
-     * #onSearchFragmentInteraction(android.net.Uri)
-     */
-    @Override
-    public void onSearchFragmentInteraction(Uri uri) {
-        // TODO Auto-generated method stub
-
     }
 
     /*
@@ -159,14 +248,19 @@ public class SearchActivity extends BaseSmartHMActivity implements
      * (com.google.android.gms.maps.model.LatLngBounds)
      */
     @Override
-    public void onMapFragmentBoundsChange(LatLngBounds bounds) {
+    public void onMapFragmentBoundsChange(LatLngBoundsExt bounds) {
+        callUpdateCollectionsBounds(bounds);
+    }
 
+    @Override
+    public void onAmznMapFragmentBoundsChange(LatLngBoundsExt bounds) {
+        callUpdateCollectionsBounds(bounds);
+    }
+
+    private void callUpdateCollectionsBounds(LatLngBoundsExt bounds) {
         SearchBasicInfoRightFragment searchBasicInfoRightFragment = (SearchBasicInfoRightFragment) getSupportFragmentManager()
                 .findFragmentByTag("SearchBasicInfoRightFragment");
-
         if (searchBasicInfoRightFragment != null) {
-            // If article frag is available, we're in two-pane layout...
-            // Call a method in the ArticleFragment to update its content
             searchBasicInfoRightFragment.updateCollectionsAreaBounds(bounds);
         }
     }

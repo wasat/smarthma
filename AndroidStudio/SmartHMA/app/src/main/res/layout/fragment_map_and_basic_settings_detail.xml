@@ -1,7 +1,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:paddingLeft="0dp">
 
     <LinearLayout
         android:id="@+id/frag_search_res_coll_det_linear_bottom"
@@ -10,7 +11,8 @@
         android:layout_alignParentBottom="true"
         android:layout_gravity="bottom"
         android:background="#FFFFFF"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:paddingLeft="30dp">
 
         <LinearLayout
             android:id="@+id/frag_search_res_coll_det_layout_parent_name"
@@ -237,7 +239,8 @@
         android:id="@+id/frag_search_res_coll_det_layout_top"
         android:layout_width="match_parent"
         android:layout_height="fill_parent"
-        android:layout_above="@+id/frag_search_res_coll_det_linear_bottom">
+        android:layout_above="@+id/frag_search_res_coll_det_linear_bottom"
+        android:paddingLeft="30dp">
 
         <LinearLayout
             android:id="@+id/frag_search_res_coll_det_layout_title"
@@ -288,5 +291,40 @@
                 android:textSize="16sp" />
         </ScrollView>
     </RelativeLayout>
+
+    <com.wunderlist.slidinglayer.SlidingLayer xmlns:slidingLayer="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/slidingLayer1"
+        android:layout_width="@dimen/layer_size"
+        android:layout_height="match_parent"
+        slidingLayer:shadowDrawable="@drawable/sidebar_shadow"
+        slidingLayer:shadowSize="@dimen/shadow_size"
+        slidingLayer:offsetDistance="@dimen/offset_distance"
+        slidingLayer:previewOffsetDistance="@dimen/preview_offset_distance"
+        slidingLayer:stickTo="left"
+        slidingLayer:changeStateOnTap="true">
+
+        <LinearLayout
+            android:id="@+id/layout_param_sliders"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:background="#e7e7e8">
+
+            <TextView
+                android:id="@+id/txt_slider_params_header"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:textSize="18sp"
+                android:textColor="#074035"
+                android:text="@string/parameters"
+                android:gravity="top"
+                android:layout_centerHorizontal="true"
+                style="@style/styleSettingsBasicTitles" />
+
+        </LinearLayout>
+
+    </com.wunderlist.slidinglayer.SlidingLayer>
 
 </RelativeLayout>

@@ -7,10 +7,12 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.List;
 
 import pl.wasat.smarthma.R;
+import pl.wasat.smarthma.SmartHMApplication;
 import pl.wasat.smarthma.adapter.DataSeriesListAdapter;
 import pl.wasat.smarthma.helper.Const;
 import pl.wasat.smarthma.helper.DataSorter;
@@ -141,41 +143,56 @@ public class DataSeriesListFragment extends BaseSpiceListFragment {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-        if (id == R.id.actionbar_refresh) {
-            loadDataSeriesFeedResponse(browseRequest);
-            return true;
+        switch (id) {
+            case R.id.action_sort_by_title_asc:
+                SmartHMApplication.sortingType = Const.SORT_BY_TITLE_ASCENDING;
+                refreshList();
+                break;
+            case R.id.action_sort_by_title_desc:
+                SmartHMApplication.sortingType = Const.SORT_BY_TITLE_DESCENDING;
+                refreshList();
+                break;
+            case R.id.action_sort_by_date_asc:
+                SmartHMApplication.sortingType = Const.SORT_BY_DATE_ASCENDING;
+                refreshList();
+                break;
+            case R.id.action_sort_by_date_desc:
+                SmartHMApplication.sortingType = Const.SORT_BY_DATE_DESCENDING;
+                refreshList();
+                break;
+            case R.id.actionbar_refresh:
+                loadDataSeriesFeedResponse(browseRequest);
+                break;
+            default:
+                return super.onOptionsItemSelected(item);
         }
-        return false;
+        return true;
+    }
+
+    void refreshList() {
+        loadDataSeriesFeedResponse(browseRequest);
+        Toast.makeText(getActivity(), getActivity().getString(R.string.refreshing_list), Toast.LENGTH_LONG).show();
+        /*
+        if (adapter != null)
+        {
+            adapter.notifyDataSetChanged();
+        }
+        */
     }
 
     private void updateEOListViewContent(List<EntryISO> dataSeriesFeedList) {
-        if (dataSeriesFeedList.isEmpty()) {
-            getView().setVisibility(View.GONE);
-        } else {
-
-/*			for (EntryISO a : dataSeriesFeedList) {
-                EoDbAdapter dba = new EoDbAdapter(getActivity());
-				dba.openToRead();
-                EntryISO fetchedDataSeries = dba.getBlogListing(a.getGuid());
-				dba.close();
-				if (fetchedDataSeries == null) {
-					dba = new EoDbAdapter(getActivity());
-					dba.openToWrite();
-					dba.insertBlogListing(a.getGuid());
-					dba.close();
-				} else {
-					a.setDbId(fetchedDataSeries.getDbId());
-					a.setOffline(fetchedDataSeries.isOffline());
-					a.setRead(fetchedDataSeries.isRead());
-				}
-			}*/
-            DataSeriesListAdapter adapter = new DataSeriesListAdapter(
-                    getActivity(), dataSeriesFeedList);
-            this.setListAdapter(adapter);
-            adapter.notifyDataSetChanged();
-            getView().setVisibility(View.VISIBLE);
+        View view = getView();
+        if (view != null) {
+            if (dataSeriesFeedList.isEmpty()) {
+                view.setVisibility(View.GONE);
+            } else {
+                DataSeriesListAdapter adapter = new DataSeriesListAdapter(
+                        getActivity(), dataSeriesFeedList);
+                this.setListAdapter(adapter);
+                adapter.notifyDataSetChanged();
+                view.setVisibility(View.VISIBLE);
+            }
         }
-
     }
 
     /**
@@ -210,7 +227,7 @@ public class DataSeriesListFragment extends BaseSpiceListFragment {
     }
 
     /**
-     * @param dataSeriesFeeds
+     * @param dataSeriesFeeds - DataSeries Feed
      */
     private void loadIntroFeedInfo(Feed dataSeriesFeeds) {
         FeedSummaryBrowseCollectionsFragment feedSummaryBrowseCollectionsFragment = FeedSummaryBrowseCollectionsFragment

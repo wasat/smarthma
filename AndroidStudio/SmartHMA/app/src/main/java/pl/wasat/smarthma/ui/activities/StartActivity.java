@@ -41,11 +41,11 @@ public class StartActivity extends ActionBarActivity implements
         return id == R.id.action_settings || super.onOptionsItemSelected(item);
     }
 
-    @Override
+/*    @Override
     public void onStartFragmentConnectionSetup() {
         // TODO Auto-generated method stub
 
-    }
+    }*/
 
 
 }

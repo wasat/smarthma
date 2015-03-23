@@ -136,9 +136,12 @@ public class CollectionsGroupListFragment extends Fragment implements
     // --------------------------------------------------------------------------------------------
 
     private void initUIList() {
-        collectionsGroupListView = (ListView) getView().findViewById(
-                R.id.listview_collections_group);
-        loadingView = getView().findViewById(R.id.loading_layout);
+        View view = getView();
+        if (view != null) {
+            collectionsGroupListView = (ListView) view.findViewById(
+                    R.id.listview_collections_group);
+            loadingView = view.findViewById(R.id.loading_layout);
+        }
     }
 
     /*

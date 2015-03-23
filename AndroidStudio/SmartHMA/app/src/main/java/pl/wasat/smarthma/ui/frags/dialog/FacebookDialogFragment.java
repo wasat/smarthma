@@ -73,8 +73,7 @@ public class FacebookDialogFragment extends DialogFragment implements Target {
         @Override
         public void call(Session session, SessionState state,
                          Exception exception) {
-            //Log.i("FB", "StatusCallback.call");
-            onSessionStateChange(session, state, exception);
+            onSessionStateChange(state, exception);
         }
     };
 
@@ -82,15 +81,11 @@ public class FacebookDialogFragment extends DialogFragment implements Target {
         @Override
         public void onError(FacebookDialog.PendingCall pendingCall,
                             Exception error, Bundle data) {
-            //Log.i("FB", "Callback.onError");
-            //Log.d("HelloFacebook", String.format("Error: %s", error.toString()));
         }
 
         @Override
         public void onComplete(FacebookDialog.PendingCall pendingCall,
                                Bundle data) {
-            //Log.i("FB", "Callback.onComplete");
-            //Log.d("HelloFacebook", "Success!");
         }
     };
 
@@ -98,11 +93,10 @@ public class FacebookDialogFragment extends DialogFragment implements Target {
      * Use this factory method to create a new instance of this fragment using
      * the provided parameters.
      *
-     * @param qUrl
+     * @param qUrl - URL to facebook service
      * @return A new instance of fragment FacebookFragment.
      */
     public static FacebookDialogFragment newInstance(String qUrl) {
-        //Log.i("FB", "newInstance");
         FacebookDialogFragment fragment = new FacebookDialogFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM_QUICKLOOK_URL, qUrl);
@@ -117,7 +111,6 @@ public class FacebookDialogFragment extends DialogFragment implements Target {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //Log.i("FB", "onCreate");
         if (getArguments() != null) {
             paramQLookUrl = getArguments().getString(ARG_PARAM_QUICKLOOK_URL);
         }
@@ -135,7 +128,6 @@ public class FacebookDialogFragment extends DialogFragment implements Target {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        //Log.i("FB", "onCreateView");
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_facebook_dialog,
                 container, false);
@@ -155,7 +147,6 @@ public class FacebookDialogFragment extends DialogFragment implements Target {
                 .setUserInfoChangedCallback(new LoginButton.UserInfoChangedCallback() {
                     @Override
                     public void onUserInfoFetched(GraphUser user) {
-                        //Log.i("FB", "onUserInfoFetched");
                         graphUser = user;
                         updateUI();
                         // It's possible that we were waiting for this.user to
@@ -187,7 +178,6 @@ public class FacebookDialogFragment extends DialogFragment implements Target {
     @Override
     public void onResume() {
         super.onResume();
-        //Log.i("FB", "onResume");
         uiHelper.onResume();
 
         // Call the 'activateApp' method to log an app event for use in
@@ -202,7 +192,6 @@ public class FacebookDialogFragment extends DialogFragment implements Target {
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        //Log.i("FB", "onSaveInstanceState");
         uiHelper.onSaveInstanceState(outState);
 
         outState.putString(PENDING_ACTION_BUNDLE_KEY, pendingAction.name());
@@ -211,7 +200,6 @@ public class FacebookDialogFragment extends DialogFragment implements Target {
     @Override
     public void onPause() {
         super.onPause();
-        //Log.i("FB", "onPause");
         uiHelper.onPause();
 
         // Call the 'deactivateApp' method to log an app event for use in
@@ -224,24 +212,19 @@ public class FacebookDialogFragment extends DialogFragment implements Target {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        //Log.i("FB", "onDestroy");
         uiHelper.onDestroy();
     }
 
     public void postOnActivityResult(int requestCode, int resultCode,
                                      Intent data) {
-        //Log.i("FB", "postOnActivityResult");
         // Session session = Session.getActiveSession();
         int sanitizedRequestCode = requestCode % 0x10000;
-        // session.onActivityResult(getActivity(), sanitizedRequestCode,
-        // resultCode, data);
         uiHelper.onActivityResult(sanitizedRequestCode, resultCode, data,
                 dialogCallback);
     }
 
-    private void onSessionStateChange(Session session, SessionState state,
+    private void onSessionStateChange(SessionState state,
                                       Exception exception) {
-        //Log.i("FB", "onSessionStateChange");
         if (pendingAction != PendingAction.NONE
                 && (exception instanceof FacebookOperationCanceledException || exception instanceof FacebookAuthorizationException)) {
             new AlertDialog.Builder(getActivity()).setTitle(R.string.cancelled)
@@ -255,13 +238,11 @@ public class FacebookDialogFragment extends DialogFragment implements Target {
     }
 
     private void onClickPostPhoto() {
-        //Log.i("FB", "onClickPostPhoto");
-        performPublish(PendingAction.POST_PHOTO,
+        performPublish(
                 canPresentShareDialogWithPhotos);
     }
 
     private void handlePendingAction() {
-        //Log.i("FB", "handlePendingAction");
         PendingAction previouslyPendingAction = pendingAction;
         // These actions may re-set pendingAction if they are still pending, but
         // we assume they
@@ -280,8 +261,6 @@ public class FacebookDialogFragment extends DialogFragment implements Target {
     }
 
     private void postPhoto() {
-        //Log.i("FB", "postPhoto");
-
         if (canPresentShareDialogWithPhotos) {
             FacebookDialog shareDialog = createShareDialogBuilderForPhoto(
                     quicklookImg).build();
@@ -292,7 +271,6 @@ public class FacebookDialogFragment extends DialogFragment implements Target {
                     new Request.Callback() {
                         @Override
                         public void onCompleted(Response response) {
-                            //Log.i("FB", "onCompleted");
                             showPublishResult(getString(R.string.quicklook),
                                     response.getGraphObject(),
                                     response.getError());
@@ -306,20 +284,17 @@ public class FacebookDialogFragment extends DialogFragment implements Target {
 
     private FacebookDialog.PhotoShareDialogBuilder createShareDialogBuilderForPhoto(
             Bitmap... photos) {
-        //Log.i("FB", "createShareDialogBuilderForPhoto");
         return new FacebookDialog.PhotoShareDialogBuilder(getActivity())
                 .addPhotos(Arrays.asList(photos));
     }
 
     private boolean hasPublishPermission() {
-        //Log.i("FB", "hasPublishPermission");
         Session session = Session.getActiveSession();
         return session != null
                 && session.getPermissions().contains("publish_actions");
     }
 
     private void updateUI() {
-        //Log.i("FB", "updateUI");
         Session session = Session.getActiveSession();
         boolean enableButtons = (session != null && session.isOpened());
 
@@ -336,11 +311,10 @@ public class FacebookDialogFragment extends DialogFragment implements Target {
         }
     }
 
-    private void performPublish(PendingAction action, boolean allowNoSession) {
-        //Log.i("FB", "performPublish");
+    private void performPublish(boolean allowNoSession) {
         Session session = Session.getActiveSession();
         if (session != null) {
-            pendingAction = action;
+            pendingAction = PendingAction.POST_PHOTO;
             if (hasPublishPermission()) {
                 // We can do the action right away.
                 handlePendingAction();
@@ -355,14 +329,13 @@ public class FacebookDialogFragment extends DialogFragment implements Target {
         }
 
         if (allowNoSession) {
-            pendingAction = action;
+            pendingAction = PendingAction.POST_PHOTO;
             handlePendingAction();
         }
     }
 
     private void showPublishResult(String message, GraphObject result,
                                    FacebookRequestError error) {
-        //Log.i("FB", "showPublishResult");
         String title;
         String alertMessage;
         Boolean isSuccess;
@@ -404,7 +377,6 @@ public class FacebookDialogFragment extends DialogFragment implements Target {
 
     @Override
     public void onBitmapLoaded(Bitmap image, LoadedFrom arg1) {
-        //Log.i("FB", "onBitmapLoaded");
         quicklookImg = image;
 
         Bitmap scaled = Bitmap.createScaledBitmap(image, 160, 160, true);

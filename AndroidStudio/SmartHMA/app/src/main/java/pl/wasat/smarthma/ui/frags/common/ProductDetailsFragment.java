@@ -24,7 +24,6 @@ import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Picasso.LoadedFrom;
 import com.squareup.picasso.Target;
 
-import java.util.Iterator;
 import java.util.List;
 
 import pl.wasat.smarthma.R;
@@ -148,12 +147,6 @@ public class ProductDetailsFragment extends Fragment implements Target {
     }
 
     @Override
-    public void onDestroyView() {
-        // TODO Auto-generated method stub
-        super.onDestroyView();
-    }
-
-    @Override
     public void onDetach() {
         super.onDetach();
         mListener = null;
@@ -266,8 +259,6 @@ public class ProductDetailsFragment extends Fragment implements Target {
      * >Communicating with Other Fragments</a> for more information.
      */
     public interface OnProductDetailsFragmentListener {
-
-        public void onProductDetailsFragmentMetadataLoad();
 
         public void onProductDetailsFragmentExtendedMapShow(String url,
                                                             Footprint footprint);

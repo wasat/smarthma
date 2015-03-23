@@ -20,6 +20,7 @@ package pl.wasat.smarthma.customviews;
 import android.content.Context;
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.support.annotation.NonNull;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -38,7 +39,7 @@ import pl.wasat.smarthma.R;
  * A view for selecting the time of day, in either 24 hour or AM/PM mode.
  * <p/>
  * The hour, each minute digit, each seconds digit, and AM/PM (if applicable)
- * can be conrolled by vertical spinners.
+ * can be controlled by vertical spinners.
  * <p/>
  * The hour can be entered by keyboard input. Entering in two digit hours can be
  * accomplished by hitting two digits within a timeout of about a second (e.g.
@@ -268,7 +269,7 @@ public class TimePicker extends FrameLayout {
         }
 
         @Override
-        public void writeToParcel(Parcel dest, int flags) {
+        public void writeToParcel(@NonNull Parcel dest, int flags) {
             super.writeToParcel(dest, flags);
             dest.writeInt(mHour);
             dest.writeInt(mMinute);

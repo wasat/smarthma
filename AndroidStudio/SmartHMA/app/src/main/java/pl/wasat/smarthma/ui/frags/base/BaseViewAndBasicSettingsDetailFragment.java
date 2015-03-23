@@ -3,8 +3,8 @@ package pl.wasat.smarthma.ui.frags.base;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -15,8 +15,7 @@ import android.widget.DatePicker;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.LatLngBounds;
+import com.wunderlist.slidinglayer.SlidingLayer;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -25,16 +24,20 @@ import java.util.Locale;
 import pl.wasat.smarthma.R;
 import pl.wasat.smarthma.customviews.SmHmaTimePickerDialog;
 import pl.wasat.smarthma.customviews.TimePicker;
+import pl.wasat.smarthma.helper.Const;
+import pl.wasat.smarthma.kindle.AmznAreaPickerMapFragment;
 import pl.wasat.smarthma.model.iso.EntryISO;
 import pl.wasat.smarthma.preferences.SharedPrefs;
 import pl.wasat.smarthma.ui.frags.common.AreaPickerMapFragment;
+import pl.wasat.smarthma.utils.obj.LatLngBoundsExt;
+import pl.wasat.smarthma.utils.obj.LatLngExt;
 
 /**
  * A simple {@link android.support.v4.app.Fragment} subclass. Use the
  * {@link BaseViewAndBasicSettingsDetailFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class BaseViewAndBasicSettingsDetailFragment extends Fragment {
+public class BaseViewAndBasicSettingsDetailFragment extends BaseSpiceFragment {
     protected static final String KEY_COLLECTION_ENTRY = "pl.wasat.smarthma.COLLECTION_NAME";
     private static final String KEY_TEXTVIEW_TAG = "pl.wasat.smarthma.KEY_TEXTVIEW_TAG";
 
@@ -55,14 +58,16 @@ public class BaseViewAndBasicSettingsDetailFragment extends Fragment {
     protected Button btnShowProducts;
     protected Button btnShowMetadata;
 
-    protected EntryISO displayedISOEntry;
+    protected SlidingLayer mSlidingLayer;
 
-    private static SharedPrefs sharedPrefs;
-
-    @SuppressWarnings("unused")
-    private LatLngBounds geoBounds = null;
+    protected LinearLayout layoutSpinners;
 
     protected View rootView;
+
+    protected EntryISO displayedISOEntry;
+    private static SharedPrefs sharedPrefs;
+    private LatLngBoundsExt geoBounds = null;
+
 
     /**
      * Use this factory method to create a new instance of this fragment using
@@ -104,6 +109,11 @@ public class BaseViewAndBasicSettingsDetailFragment extends Fragment {
         rootView = inflater.inflate(
                 R.layout.fragment_map_and_basic_settings_detail, container,
                 false);
+
+        mSlidingLayer = (SlidingLayer) rootView.findViewById(R.id.slidingLayer1);
+
+        //txtParamsSliderHeader = (TextView) rootView.findViewById(R.id.txt_slider_params_header);
+
         tvParentId = (TextView) rootView
                 .findViewById(R.id.frag_search_res_coll_det_tv_parent_id);
 
@@ -145,14 +155,26 @@ public class BaseViewAndBasicSettingsDetailFragment extends Fragment {
         areaLayout.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                AreaPickerMapFragment areaPickerMapFragment = AreaPickerMapFragment
-                        .newInstance();
-                getActivity()
-                        .getSupportFragmentManager()
-                        .beginTransaction()
-                        .replace(R.id.frag_search_res_coll_det_layout_top,
-                                areaPickerMapFragment)
-                        .addToBackStack("AreaPickerMapFragment").commit();
+                if (Const.IS_KINDLE) {
+                    AmznAreaPickerMapFragment areaPickerMapFragment = AmznAreaPickerMapFragment
+                            .newInstance();
+                    getActivity()
+                            .getSupportFragmentManager()
+                            .beginTransaction()
+                            .replace(R.id.frag_search_res_coll_det_layout_top,
+                                    areaPickerMapFragment)
+                            .addToBackStack("AreaPickerMapFragment").commit();
+                } else {
+                    AreaPickerMapFragment areaPickerMapFragment = AreaPickerMapFragment
+                            .newInstance();
+                    getActivity()
+                            .getSupportFragmentManager()
+                            .beginTransaction()
+                            .replace(R.id.frag_search_res_coll_det_layout_top,
+                                    areaPickerMapFragment)
+                            .addToBackStack("AreaPickerMapFragment").commit();
+                }
+
 
             }
         });
@@ -208,6 +230,26 @@ public class BaseViewAndBasicSettingsDetailFragment extends Fragment {
         getBboxPrefs();
         getDateTimePrefs();
 
+        layoutSpinners = (LinearLayout) rootView.findViewById(R.id.layout_param_sliders);
+/*
+        spinnerCount = (Spinner) rootView.findViewById(R.id.spinnerCount);
+        spinnerSearchTerms = (Spinner) rootView.findViewById(R.id.spinnerSearchTerms);
+        spinnerStartId = (Spinner) rootView.findViewById(R.id.spinnerStartId);
+        spinnerTitle = (Spinner) rootView.findViewById(R.id.spinnerTitle);
+        spinnerType = (Spinner) rootView.findViewById(R.id.spinnerType);
+        spinnerOrbitNo = (Spinner) rootView.findViewById(R.id.spinnerOrbitNo);
+        spinnerOrganisationName = (Spinner) rootView.findViewById(R.id.spinnerOrganisationName);
+        spinnerParentId = (Spinner) rootView.findViewById(R.id.spinnerParentId);
+        spinnerProductType = (Spinner) rootView.findViewById(R.id.spinnerProductType);
+        spinnerLat = (Spinner) rootView.findViewById(R.id.spinnerLat);
+        spinnerLon = (Spinner) rootView.findViewById(R.id.spinnerLon);
+        spinnerGeoName = (Spinner) rootView.findViewById(R.id.spinnerGeoName);
+        spinnerRadius = (Spinner) rootView.findViewById(R.id.spinnerRadius);
+        spinnerUid = (Spinner) rootView.findViewById(R.id.spinnerUid);
+        spinnerClassifiedAs = (Spinner) rootView.findViewById(R.id.spinnerClassifiedAs);
+        spinnerRecordSchema = (Spinner) rootView.findViewById(R.id.spinnerRecordSchema);
+*/
+
         btnShowProducts = (Button) rootView
                 .findViewById(R.id.frag_search_res_coll_det_btn_search_product);
         btnShowMetadata = (Button) rootView.findViewById(R.id.frag_search_res_coll_det_btn_show_meta);
@@ -236,15 +278,15 @@ public class BaseViewAndBasicSettingsDetailFragment extends Fragment {
         tvAreaSWLat.setText(String.format(Locale.UK, "% 4f", south));
         tvAreaSWLon.setText(String.format(Locale.UK, "% 4f", west));
 
-        geoBounds = new LatLngBounds(new LatLng(south, west), new LatLng(north,
+        geoBounds = new LatLngBoundsExt(new LatLngExt(south, west), new LatLngExt(north,
                 east));
 
     }
 
     /**
-     * @param bounds
+     * @param bounds bounding box
      */
-    public void updateAreaBounds(LatLngBounds bounds) {
+    public void updateAreaBounds(LatLngBoundsExt bounds) {
         geoBounds = bounds;
         String west = String.format(Locale.UK, "% 4f",
                 bounds.southwest.longitude);
@@ -293,6 +335,7 @@ public class BaseViewAndBasicSettingsDetailFragment extends Fragment {
             DatePickerDialog.OnDateSetListener {
         private String buttonTag;
 
+        @NonNull
         @Override
         public Dialog onCreateDialog(Bundle savedInstanceState) {
             // Use the current date as the default date in the picker
@@ -333,6 +376,7 @@ public class BaseViewAndBasicSettingsDetailFragment extends Fragment {
 
         private String buttonTag;
 
+        @NonNull
         @Override
         public Dialog onCreateDialog(Bundle savedInstanceState) {
             // Use the current time as the default values for the picker
@@ -351,14 +395,6 @@ public class BaseViewAndBasicSettingsDetailFragment extends Fragment {
 
         }
 
-        /*
-         * (non-Javadoc)
-         *
-         * @see com.ikovac.timepickerwithseconds.view.MyTimePickerDialog.
-         * OnTimeSetListener
-         * #onTimeSet(com.ikovac.timepickerwithseconds.view.TimePicker, int,
-         * int, int)
-         */
         @Override
         public void onTimeSet(TimePicker view, int hourOfDay, int minute,
                               int seconds) {
@@ -384,8 +420,8 @@ public class BaseViewAndBasicSettingsDetailFragment extends Fragment {
     }
 
     /**
-     * @param cal
-     * @return
+     * @param cal calendar
+     * @return Time in String format
      */
     private static String formatTime(Calendar cal) {
         SimpleDateFormat dfTime = new SimpleDateFormat("HH:mm:ss", Locale.UK);

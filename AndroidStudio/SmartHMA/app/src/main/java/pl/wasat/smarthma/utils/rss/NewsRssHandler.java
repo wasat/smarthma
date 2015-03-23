@@ -84,15 +84,15 @@ public class NewsRssHandler extends DefaultHandler {
 
             // Lets check if we've hit our limit on number of articles
             articlesAdded++;
-            if (articlesAdded >= ARTICLES_LIMIT) {
+/*            if (articlesAdded >= ARTICLES_LIMIT) {
                 // throw new SAXException();
-            }
+            }*/
         }
     }
 
     /*
      * This method is called when characters are found in between XML markers,
-     * however, there is no guarante that this will be called at the end of the
+     * however, there is no guarantee that this will be called at the end of the
      * node, or that it will be called only once , so we just accumulate these
      * and then deal with them in endElement() to be sure we have all the text
      *

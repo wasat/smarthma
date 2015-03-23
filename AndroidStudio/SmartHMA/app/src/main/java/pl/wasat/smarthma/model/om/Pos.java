@@ -1,7 +1,5 @@
 package pl.wasat.smarthma.model.om;
 
-import com.google.android.gms.maps.model.LatLng;
-
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
@@ -12,6 +10,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
+import pl.wasat.smarthma.utils.obj.LatLngExt;
 import pl.wasat.smarthma.utils.text.SmartHMAStringStyle;
 
 public class Pos implements Serializable {
@@ -20,7 +19,7 @@ public class Pos implements Serializable {
 
     private String _prefix;
     private String _text;
-    private transient LatLng latLng;
+    private transient LatLngExt latLng;
 
 
     public String get_prefix() {
@@ -43,11 +42,11 @@ public class Pos implements Serializable {
     }
 
 
-    public LatLng getLatLng() {
+    public LatLngExt getLatLng() {
         return latLng;
     }
 
-    public void setLatLng(LatLng latLng) {
+    public void setLatLng(LatLngExt latLng) {
         this.latLng = latLng;
         this._text = latLng.latitude + " " + latLng.longitude;
 
@@ -65,6 +64,7 @@ public class Pos implements Serializable {
         return HashCodeBuilder.reflectionHashCode(this);
     }
 
+    @SuppressWarnings("EqualsWhichDoesntCheckParameterClass")
     @Override
     public boolean equals(Object other) {
         return EqualsBuilder.reflectionEquals(this, other);
@@ -79,11 +79,11 @@ public class Pos implements Serializable {
 
     private void readObject(ObjectInputStream in) throws IOException, ClassNotFoundException {
         in.defaultReadObject();
-        latLng = new LatLng(in.readDouble(), in.readDouble());
+        latLng = new LatLngExt(in.readDouble(), in.readDouble());
     }
 
     private void toLatLng() {
-        latLng = new LatLng(Double.valueOf(_text.split(" ")[0]),
+        latLng = new LatLngExt(Double.valueOf(_text.split(" ")[0]),
                 Double.valueOf(_text.split(" ")[1]));
     }
 }

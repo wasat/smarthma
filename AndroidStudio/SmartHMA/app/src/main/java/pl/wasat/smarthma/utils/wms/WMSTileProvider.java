@@ -13,7 +13,7 @@ public abstract class WMSTileProvider extends UrlTileProvider {
     private static final int ORIG_X = 0;
     private static final int ORIG_Y = 1; // "
 
-    // Size of square world map in meters, using WebMerc projection.
+    // Size of square world map in meters, using Web Mercator projection.
     private static final double MAP_SIZE = 20037508.34789244 * 2;
 
     // array indexes for array to hold bounding boxes.

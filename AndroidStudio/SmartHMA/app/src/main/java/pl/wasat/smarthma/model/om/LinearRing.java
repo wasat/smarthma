@@ -1,7 +1,5 @@
 package pl.wasat.smarthma.model.om;
 
-import com.google.android.gms.maps.model.LatLng;
-
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
@@ -11,6 +9,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import pl.wasat.smarthma.utils.obj.LatLngExt;
 import pl.wasat.smarthma.utils.text.SmartHMAStringStyle;
 
 public class LinearRing implements Serializable {
@@ -66,7 +65,7 @@ public class LinearRing implements Serializable {
         //String tempStr = "";
 
         for (int j = 0; j < coorStr.length - 1; j = j + 2) {
-            LatLng ftPt = new LatLng(Double.valueOf(coorStr[j]),
+            LatLngExt ftPt = new LatLngExt(Double.valueOf(coorStr[j]),
                     Double.valueOf(coorStr[j + 1]));
             Pos pos = new Pos();
             pos.setLatLng(ftPt);
@@ -100,6 +99,7 @@ public class LinearRing implements Serializable {
         return HashCodeBuilder.reflectionHashCode(this);
     }
 
+    @SuppressWarnings("EqualsWhichDoesntCheckParameterClass")
     @Override
     public boolean equals(Object other) {
         return EqualsBuilder.reflectionEquals(this, other);

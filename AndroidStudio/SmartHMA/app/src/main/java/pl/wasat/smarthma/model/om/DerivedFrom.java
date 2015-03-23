@@ -14,7 +14,7 @@ public class DerivedFrom implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private String _prefix;
-    private String _xlink_href;
+    private String xlinkHref;
 
 
     public String get_prefix() {
@@ -26,12 +26,12 @@ public class DerivedFrom implements Serializable {
     }
 
 
-    public String get_xlink_href() {
-        return _xlink_href;
+    public String getXlinkHref() {
+        return xlinkHref;
     }
 
-    public void set_xlink_href(String _xlink_href) {
-        this._xlink_href = _xlink_href;
+    public void setXlinkHref(String xlinkHref) {
+        this.xlinkHref = xlinkHref;
     }
 
 
@@ -47,6 +47,7 @@ public class DerivedFrom implements Serializable {
         return HashCodeBuilder.reflectionHashCode(this);
     }
 
+    @SuppressWarnings("EqualsWhichDoesntCheckParameterClass")
     @Override
     public boolean equals(Object other) {
         return EqualsBuilder.reflectionEquals(this, other);

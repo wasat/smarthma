@@ -1,7 +1,6 @@
 package pl.wasat.smarthma.ui.frags.missions;
 
 import android.app.Activity;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -57,14 +56,14 @@ public class MissionsExtListFragment extends Fragment {
         // Required empty public constructor
     }
 
-    @Override
+/*    @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
+*//*        if (getArguments() != null) {
             // mParam1 = getArguments().getString(ARG_PARAM1);
             // mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
+        }*//*
+    }*/
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -92,9 +91,6 @@ public class MissionsExtListFragment extends Fragment {
             @Override
             public boolean onGroupClick(ExpandableListView parent, View v,
                                         int groupPosition, long id) {
-                //getHtml(listDataHeader.get(groupPosition).getUrl(),	groupPosition);
-
-
                 return false;
             }
         });
@@ -123,7 +119,6 @@ public class MissionsExtListFragment extends Fragment {
             @Override
             public boolean onChildClick(ExpandableListView parent, View v,
                                         int groupPosition, int childPosition, long id) {
-                // TODO Auto-generated method stub
                 String listDataHeaderName = listDataHeader.get(groupPosition)
                         .getName();
                 MissionItemData missionItem = listDataChild.get(listDataHeaderName)
@@ -142,13 +137,6 @@ public class MissionsExtListFragment extends Fragment {
         });
 
         return rootView;
-    }
-
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onExtendedListFragmentInteraction(uri);
-        }
     }
 
     @Override
@@ -178,8 +166,6 @@ public class MissionsExtListFragment extends Fragment {
      * >Communicating with Other Fragments</a> for more information.
      */
     public interface OnExtendedListFragmentListener {
-        // TODO: Update argument type and name
-        public void onExtendedListFragmentInteraction(Uri uri);
     }
 
     /*

@@ -60,7 +60,7 @@ public class FailureFragment extends Fragment {
      */
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
-        TextView tvFailure = (TextView) getView().findViewById(
+        TextView tvFailure = (TextView) view.findViewById(
                 R.id.failure_text);
         tvFailure.setText(failureTextParam);
         super.onViewCreated(view, savedInstanceState);
