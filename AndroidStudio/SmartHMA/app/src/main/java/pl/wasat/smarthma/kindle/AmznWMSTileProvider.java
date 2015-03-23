@@ -14,6 +14,7 @@ public abstract class AmznWMSTileProvider extends UrlTileProvider {
     private static final int ORIG_Y = 1; // "
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     // Size of square world map in meters, using Web Mercator projection.
     private static final double MAP_SIZE = 20037508.34789244 * 2;
 
@@ -23,6 +24,8 @@ public abstract class AmznWMSTileProvider extends UrlTileProvider {
     static final int MINY = 2;
     static final int MAXY = 3;
 =======
+=======
+>>>>>>> 3cdf4b5c6a0ee0167bee856d291a553acdc6d2f4
     // Size of square world map in meters, using WebMerc projection.
     private static final double MAP_SIZE = 20037508.34789244 * 2;
 
@@ -31,6 +34,9 @@ public abstract class AmznWMSTileProvider extends UrlTileProvider {
     protected static final int MAXX = 1;
     protected static final int MINY = 2;
     protected static final int MAXY = 3;
+<<<<<<< HEAD
+>>>>>>> 3cdf4b5c6a0ee0167bee856d291a553acdc6d2f4
+=======
 >>>>>>> 3cdf4b5c6a0ee0167bee856d291a553acdc6d2f4
 
     // cql filters
@@ -52,7 +58,11 @@ public abstract class AmznWMSTileProvider extends UrlTileProvider {
     // Return a web Mercator bounding box given tile x/y indexes and a zoom
     // level.
 <<<<<<< HEAD
+<<<<<<< HEAD
     double[] getBoundingBox(int x, int y, int zoom) {
+=======
+    protected double[] getBoundingBox(int x, int y, int zoom) {
+>>>>>>> 3cdf4b5c6a0ee0167bee856d291a553acdc6d2f4
 =======
     protected double[] getBoundingBox(int x, int y, int zoom) {
 >>>>>>> 3cdf4b5c6a0ee0167bee856d291a553acdc6d2f4

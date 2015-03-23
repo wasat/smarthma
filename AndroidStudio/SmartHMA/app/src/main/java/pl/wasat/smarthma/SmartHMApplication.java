@@ -47,8 +47,11 @@ public class SmartHMApplication extends Application {
 
     private void deviceCheck() {
 <<<<<<< HEAD
+<<<<<<< HEAD
         Const.IS_KINDLE = Build.MANUFACTURER.equalsIgnoreCase("Amazon");
 =======
+=======
+>>>>>>> 3cdf4b5c6a0ee0167bee856d291a553acdc6d2f4
         if (Build.MANUFACTURER.equalsIgnoreCase("Amazon")) {
             Const.IS_KINDLE = true;
 
@@ -68,6 +71,9 @@ public class SmartHMApplication extends Application {
             Const.IS_KINDLE = false;
 
         }
+<<<<<<< HEAD
+>>>>>>> 3cdf4b5c6a0ee0167bee856d291a553acdc6d2f4
+=======
 >>>>>>> 3cdf4b5c6a0ee0167bee856d291a553acdc6d2f4
     }
 }

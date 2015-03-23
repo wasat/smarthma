@@ -101,7 +101,11 @@ public class HistoryDbAdapter {
         Cursor res = sqLiteDatabase.rawQuery("select * from " + DATABASE_TABLE, null);
         res.moveToFirst();
 <<<<<<< HEAD
+<<<<<<< HEAD
         while (!res.isAfterLast()) {
+=======
+        while (res.isAfterLast() == false) {
+>>>>>>> 3cdf4b5c6a0ee0167bee856d291a553acdc6d2f4
 =======
         while (res.isAfterLast() == false) {
 >>>>>>> 3cdf4b5c6a0ee0167bee856d291a553acdc6d2f4
@@ -123,7 +127,11 @@ public class HistoryDbAdapter {
         Cursor res = sqLiteDatabase.rawQuery("select * from " + DATABASE_TABLE, null);
         res.moveToLast();
 <<<<<<< HEAD
+<<<<<<< HEAD
         while (!res.isBeforeFirst()) {
+=======
+        while (res.isBeforeFirst() == false) {
+>>>>>>> 3cdf4b5c6a0ee0167bee856d291a553acdc6d2f4
 =======
         while (res.isBeforeFirst() == false) {
 >>>>>>> 3cdf4b5c6a0ee0167bee856d291a553acdc6d2f4

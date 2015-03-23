@@ -72,7 +72,11 @@ public class Option {
             return true;
         }
 <<<<<<< HEAD
+<<<<<<< HEAD
         if (!(other instanceof Option)) {
+=======
+        if ((other instanceof Option) == false) {
+>>>>>>> 3cdf4b5c6a0ee0167bee856d291a553acdc6d2f4
 =======
         if ((other instanceof Option) == false) {
 >>>>>>> 3cdf4b5c6a0ee0167bee856d291a553acdc6d2f4

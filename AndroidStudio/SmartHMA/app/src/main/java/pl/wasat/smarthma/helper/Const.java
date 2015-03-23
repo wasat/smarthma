@@ -20,8 +20,11 @@ public class Const {
     public static final String URL_PARM_PARENT_ID = "&parentIdentifier=";
     public static final String URL_PARM_BBOX = "&bbox=";
 <<<<<<< HEAD
+<<<<<<< HEAD
 */
 =======
+=======
+>>>>>>> 3cdf4b5c6a0ee0167bee856d291a553acdc6d2f4
 
     public static final int REQUEST_CODE_MAP_ADD_LAYER = 100;
 >>>>>>> 3cdf4b5c6a0ee0167bee856d291a553acdc6d2f4

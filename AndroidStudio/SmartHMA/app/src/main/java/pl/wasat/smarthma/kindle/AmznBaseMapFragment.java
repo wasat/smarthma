@@ -49,7 +49,11 @@ public class AmznBaseMapFragment extends SupportMapFragment
     private SupportMapFragment supportMapFrag;
     // protected GoogleMap mMap;
 <<<<<<< HEAD
+<<<<<<< HEAD
     AmazonMap mMap;
+=======
+    protected AmazonMap mMap;
+>>>>>>> 3cdf4b5c6a0ee0167bee856d291a553acdc6d2f4
 =======
     protected AmazonMap mMap;
 >>>>>>> 3cdf4b5c6a0ee0167bee856d291a553acdc6d2f4
@@ -95,7 +99,11 @@ public class AmznBaseMapFragment extends SupportMapFragment
     }*/
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*    @Override
+=======
+    @Override
+>>>>>>> 3cdf4b5c6a0ee0167bee856d291a553acdc6d2f4
 =======
     @Override
 >>>>>>> 3cdf4b5c6a0ee0167bee856d291a553acdc6d2f4
@@ -104,9 +112,15 @@ public class AmznBaseMapFragment extends SupportMapFragment
         //AcraExtension.mapCustomLog("BaseMap.onCreate", mMap);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 *//*        if (getArguments() != null) {
             // mapMode = getArguments().getInt(KEY_MAP_MODE);
         }*//*
+=======
+        if (getArguments() != null) {
+            // mapMode = getArguments().getInt(KEY_MAP_MODE);
+        }
+>>>>>>> 3cdf4b5c6a0ee0167bee856d291a553acdc6d2f4
 =======
         if (getArguments() != null) {
             // mapMode = getArguments().getInt(KEY_MAP_MODE);
@@ -117,7 +131,11 @@ public class AmznBaseMapFragment extends SupportMapFragment
         // .addApi(LocationServices.API).addConnectionCallbacks(this)
         // .addOnConnectionFailedListener(this).build();
 <<<<<<< HEAD
+<<<<<<< HEAD
     }*/
+=======
+    }
+>>>>>>> 3cdf4b5c6a0ee0167bee856d291a553acdc6d2f4
 =======
     }
 >>>>>>> 3cdf4b5c6a0ee0167bee856d291a553acdc6d2f4
@@ -133,7 +151,11 @@ public class AmznBaseMapFragment extends SupportMapFragment
     }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /*    @Override
+=======
+    @Override
+>>>>>>> 3cdf4b5c6a0ee0167bee856d291a553acdc6d2f4
 =======
     @Override
 >>>>>>> 3cdf4b5c6a0ee0167bee856d291a553acdc6d2f4
@@ -142,9 +164,15 @@ public class AmznBaseMapFragment extends SupportMapFragment
         // Connect the client.
         // mGoogleApiClient.connect();
 <<<<<<< HEAD
+<<<<<<< HEAD
     }*/
 
 /*    @Override
+=======
+    }
+
+    @Override
+>>>>>>> 3cdf4b5c6a0ee0167bee856d291a553acdc6d2f4
 =======
     }
 
@@ -155,7 +183,11 @@ public class AmznBaseMapFragment extends SupportMapFragment
         // mGoogleApiClient.disconnect();
         super.onStop();
 <<<<<<< HEAD
+<<<<<<< HEAD
     }*/
+=======
+    }
+>>>>>>> 3cdf4b5c6a0ee0167bee856d291a553acdc6d2f4
 =======
     }
 >>>>>>> 3cdf4b5c6a0ee0167bee856d291a553acdc6d2f4

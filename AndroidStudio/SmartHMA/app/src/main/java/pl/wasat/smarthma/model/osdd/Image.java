@@ -87,7 +87,11 @@ public class Image {
             return true;
         }
 <<<<<<< HEAD
+<<<<<<< HEAD
         if (!(other instanceof Image)) {
+=======
+        if ((other instanceof Image) == false) {
+>>>>>>> 3cdf4b5c6a0ee0167bee856d291a553acdc6d2f4
 =======
         if ((other instanceof Image) == false) {
 >>>>>>> 3cdf4b5c6a0ee0167bee856d291a553acdc6d2f4

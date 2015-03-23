@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 # Built application files
 /*/build
 build
@@ -39,6 +40,8 @@ gradle
 ehthumbs.db
 Thumbs.db
 =======
+=======
+>>>>>>> 3cdf4b5c6a0ee0167bee856d291a553acdc6d2f4
 build
 app/build
 gradle
@@ -46,5 +49,9 @@ gradle
 
 local.properties
 .idea/workspace.xml
+<<<<<<< HEAD
+.idea/libraries
+>>>>>>> 3cdf4b5c6a0ee0167bee856d291a553acdc6d2f4
+=======
 .idea/libraries
 >>>>>>> 3cdf4b5c6a0ee0167bee856d291a553acdc6d2f4

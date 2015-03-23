@@ -11,6 +11,10 @@ import android.widget.TextView;
 
 import pl.wasat.smarthma.R;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+import pl.wasat.smarthma.SmartHMApplication;
+>>>>>>> 3cdf4b5c6a0ee0167bee856d291a553acdc6d2f4
 =======
 import pl.wasat.smarthma.SmartHMApplication;
 >>>>>>> 3cdf4b5c6a0ee0167bee856d291a553acdc6d2f4
@@ -101,6 +105,7 @@ public class BaseFeedSummaryFragment extends Fragment {
 
 
 
+
         initUITexts();
         initUIButtons();
 
@@ -184,7 +189,10 @@ public class BaseFeedSummaryFragment extends Fragment {
         }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
         /*
+=======
+>>>>>>> 3cdf4b5c6a0ee0167bee856d291a553acdc6d2f4
 =======
 >>>>>>> 3cdf4b5c6a0ee0167bee856d291a553acdc6d2f4
         spnSortType.setSelection(SmartHMApplication.sortingType, false);

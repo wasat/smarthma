@@ -18,13 +18,20 @@ import android.widget.Spinner;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+<<<<<<< HEAD
 
 import java.util.ArrayList;
+=======
+>>>>>>> 3cdf4b5c6a0ee0167bee856d291a553acdc6d2f4
 
 import pl.wasat.smarthma.R;
 import pl.wasat.smarthma.database.SearchHistory;
 import pl.wasat.smarthma.database.SearchParams;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+import pl.wasat.smarthma.helper.SimpleDate;
+>>>>>>> 3cdf4b5c6a0ee0167bee856d291a553acdc6d2f4
 =======
 import pl.wasat.smarthma.helper.SimpleDate;
 >>>>>>> 3cdf4b5c6a0ee0167bee856d291a553acdc6d2f4
@@ -40,7 +47,12 @@ public class SearchFragment extends Fragment {
 
     private OnSearchFragmentListener mListener;
 <<<<<<< HEAD
+<<<<<<< HEAD
     private View rootView;
+=======
+    private SearchBasicInfoRightFragment rightPanel;
+    private String[] lastBbox;
+>>>>>>> 3cdf4b5c6a0ee0167bee856d291a553acdc6d2f4
 =======
     private SearchBasicInfoRightFragment rightPanel;
     private String[] lastBbox;
@@ -86,7 +98,10 @@ public class SearchFragment extends Fragment {
         searchView.clearFocus();
 
 <<<<<<< HEAD
+<<<<<<< HEAD
         /*
+=======
+>>>>>>> 3cdf4b5c6a0ee0167bee856d291a553acdc6d2f4
 =======
 >>>>>>> 3cdf4b5c6a0ee0167bee856d291a553acdc6d2f4
         final Spinner spnParams = (Spinner) rootView.findViewById(R.id.search_frag_prev_params_list);
@@ -112,7 +127,10 @@ public class SearchFragment extends Fragment {
             }
         });
 <<<<<<< HEAD
+<<<<<<< HEAD
         */
+=======
+>>>>>>> 3cdf4b5c6a0ee0167bee856d291a553acdc6d2f4
 =======
 >>>>>>> 3cdf4b5c6a0ee0167bee856d291a553acdc6d2f4
 
@@ -134,6 +152,7 @@ public class SearchFragment extends Fragment {
     }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     public void setQuery(String query) {
         if (rootView == null) {
             return;
@@ -147,6 +166,8 @@ public class SearchFragment extends Fragment {
 
 /*    public void onButtonPressed(Uri uri) {
 =======
+=======
+>>>>>>> 3cdf4b5c6a0ee0167bee856d291a553acdc6d2f4
     protected void refreshSearchHistoryList(Spinner spnParams) {
         SearchHistory searchHistory = new SearchHistory(getActivity());
         String[] items = searchHistory.getSearchHistoryListAsStringArray(true);

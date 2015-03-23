@@ -14,7 +14,11 @@ import pl.wasat.smarthma.helper.Const;
  */
 public class SearchHistory {
 <<<<<<< HEAD
+<<<<<<< HEAD
     private Context context;
+=======
+    Context context;
+>>>>>>> 3cdf4b5c6a0ee0167bee856d291a553acdc6d2f4
 =======
     Context context;
 >>>>>>> 3cdf4b5c6a0ee0167bee856d291a553acdc6d2f4
@@ -75,6 +79,7 @@ public class SearchHistory {
         dba.close();
     }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
     public ArrayList<String> getQueries(boolean reversedOrder) {
         ArrayList<SearchParams> searchHistoryList = getSearchHistoryList(reversedOrder);
@@ -155,6 +160,8 @@ public class SearchHistory {
         */
     }
 
+=======
+>>>>>>> 3cdf4b5c6a0ee0167bee856d291a553acdc6d2f4
 =======
 >>>>>>> 3cdf4b5c6a0ee0167bee856d291a553acdc6d2f4
     /*

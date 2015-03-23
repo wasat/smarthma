@@ -7,7 +7,10 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> 3cdf4b5c6a0ee0167bee856d291a553acdc6d2f4
 import java.util.ArrayList;
 
 >>>>>>> 3cdf4b5c6a0ee0167bee856d291a553acdc6d2f4
@@ -124,6 +127,10 @@ public class SearchCollectionResultsActivity extends BaseSmartHMActivity
         int bsec = fm.getBackStackEntryCount();
         String bstEntry = fm.getBackStackEntryAt(bsec - 1).getName();
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+        //Log.d("ZX", bstEntry);
+>>>>>>> 3cdf4b5c6a0ee0167bee856d291a553acdc6d2f4
 =======
         //Log.d("ZX", bstEntry);
 >>>>>>> 3cdf4b5c6a0ee0167bee856d291a553acdc6d2f4
@@ -185,6 +192,7 @@ public class SearchCollectionResultsActivity extends BaseSmartHMActivity
 
         callUpdateCollectionsBounds(bounds);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
     }
 
@@ -198,6 +206,16 @@ public class SearchCollectionResultsActivity extends BaseSmartHMActivity
         callUpdateCollectionsBounds(bounds);
     }
 
+=======
+
+    }
+
+    @Override
+    public void onAmznMapFragmentBoundsChange(LatLngBoundsExt bounds) {
+        callUpdateCollectionsBounds(bounds);
+    }
+
+>>>>>>> 3cdf4b5c6a0ee0167bee856d291a553acdc6d2f4
     private void callUpdateCollectionsBounds(LatLngBoundsExt bounds) {
         CollectionDetailsFragment searchResultCollectionDetailsFragment = (CollectionDetailsFragment) getSupportFragmentManager()
                 .findFragmentByTag("SearchResultCollectionDetailsFragment");
@@ -205,7 +223,10 @@ public class SearchCollectionResultsActivity extends BaseSmartHMActivity
             searchResultCollectionDetailsFragment.updateAreaBounds(bounds);
         }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> 3cdf4b5c6a0ee0167bee856d291a553acdc6d2f4
     }
 
     /*
@@ -234,6 +255,9 @@ public class SearchCollectionResultsActivity extends BaseSmartHMActivity
 =======
     public void onBaseShowProductsListFragmentFootprintSend(
             ArrayList<Footprint> footPrints) {
+<<<<<<< HEAD
+>>>>>>> 3cdf4b5c6a0ee0167bee856d291a553acdc6d2f4
+=======
 >>>>>>> 3cdf4b5c6a0ee0167bee856d291a553acdc6d2f4
         if (Const.IS_KINDLE) {
             AmznExtendedMapFragment extendedMapFragment = (AmznExtendedMapFragment) getSupportFragmentManager()
@@ -278,5 +302,8 @@ public class SearchCollectionResultsActivity extends BaseSmartHMActivity
     }
 
 
+<<<<<<< HEAD
+>>>>>>> 3cdf4b5c6a0ee0167bee856d291a553acdc6d2f4
+=======
 >>>>>>> 3cdf4b5c6a0ee0167bee856d291a553acdc6d2f4
 }

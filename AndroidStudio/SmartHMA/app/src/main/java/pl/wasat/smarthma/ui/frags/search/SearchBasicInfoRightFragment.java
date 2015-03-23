@@ -29,8 +29,11 @@ import pl.wasat.smarthma.R;
 import pl.wasat.smarthma.customviews.SmHmaTimePickerDialog;
 import pl.wasat.smarthma.customviews.TimePicker;
 <<<<<<< HEAD
+<<<<<<< HEAD
 import pl.wasat.smarthma.database.SearchHistory;
 import pl.wasat.smarthma.database.SearchParams;
+=======
+>>>>>>> 3cdf4b5c6a0ee0167bee856d291a553acdc6d2f4
 =======
 >>>>>>> 3cdf4b5c6a0ee0167bee856d291a553acdc6d2f4
 import pl.wasat.smarthma.helper.Const;
@@ -40,7 +43,10 @@ import pl.wasat.smarthma.ui.frags.common.AreaPickerMapFragment;
 import pl.wasat.smarthma.utils.loc.LocManager;
 import pl.wasat.smarthma.utils.obj.LatLngBoundsExt;
 <<<<<<< HEAD
+<<<<<<< HEAD
 import pl.wasat.smarthma.utils.time.SimpleDate;
+=======
+>>>>>>> 3cdf4b5c6a0ee0167bee856d291a553acdc6d2f4
 =======
 >>>>>>> 3cdf4b5c6a0ee0167bee856d291a553acdc6d2f4
 
@@ -296,6 +302,7 @@ public class SearchBasicInfoRightFragment extends Fragment {
 
         areaBoundsUpdated = true;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 
         // setBboxPrefs();
@@ -319,6 +326,19 @@ public class SearchBasicInfoRightFragment extends Fragment {
         return calEnd;
     }
 =======
+>>>>>>> 3cdf4b5c6a0ee0167bee856d291a553acdc6d2f4
+=======
+
+        // setBboxPrefs();
+    }
+
+    public boolean getAreaBoundsUpdated() {
+        return areaBoundsUpdated;
+    }
+
+    public void setAreaBoundsUpdated(boolean areaBoundsUpdated) {
+        this.areaBoundsUpdated = areaBoundsUpdated;
+    }
 >>>>>>> 3cdf4b5c6a0ee0167bee856d291a553acdc6d2f4
 
     /**
@@ -468,7 +488,10 @@ public class SearchBasicInfoRightFragment extends Fragment {
                         public void onClick(DialogInterface dialog, int which) {
                             setCatalogue(which);
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> 3cdf4b5c6a0ee0167bee856d291a553acdc6d2f4
                             // setParentIdPrefs(getActivity(),
                             // cataloguesList[which].toString());
 >>>>>>> 3cdf4b5c6a0ee0167bee856d291a553acdc6d2f4
@@ -479,7 +502,11 @@ public class SearchBasicInfoRightFragment extends Fragment {
     }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     private static void setCatalogue(int which) {
+=======
+    public static void setCatalogue(int which) {
+>>>>>>> 3cdf4b5c6a0ee0167bee856d291a553acdc6d2f4
 =======
     public static void setCatalogue(int which) {
 >>>>>>> 3cdf4b5c6a0ee0167bee856d291a553acdc6d2f4
@@ -488,7 +515,11 @@ public class SearchBasicInfoRightFragment extends Fragment {
     }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     private static void setDateTime(Calendar calStart, Calendar calEnd) {
+=======
+    public static void setDateTime(Calendar calStart, Calendar calEnd) {
+>>>>>>> 3cdf4b5c6a0ee0167bee856d291a553acdc6d2f4
 =======
     public static void setDateTime(Calendar calStart, Calendar calEnd) {
 >>>>>>> 3cdf4b5c6a0ee0167bee856d291a553acdc6d2f4
@@ -497,6 +528,7 @@ public class SearchBasicInfoRightFragment extends Fragment {
 
         String dateToSet = formatDate(calStart);
         btnFromDate.setText(dateToSet);
+<<<<<<< HEAD
 <<<<<<< HEAD
         String timeToSet = formatTime(calStart);
         btnFromTime.setText(timeToSet);
@@ -511,6 +543,8 @@ public class SearchBasicInfoRightFragment extends Fragment {
 
     void setBounds(String bboxWest, String bboxSouth, String bboxEast, String bboxNorth) {
 =======
+=======
+>>>>>>> 3cdf4b5c6a0ee0167bee856d291a553acdc6d2f4
         String dateToSet2 = formatDate(calEnd);
         btnToDate.setText(dateToSet2);
         /*
@@ -523,6 +557,9 @@ public class SearchBasicInfoRightFragment extends Fragment {
     }
 
     public void setBounds(String bboxWest, String bboxSouth, String bboxEast, String bboxNorth) {
+<<<<<<< HEAD
+>>>>>>> 3cdf4b5c6a0ee0167bee856d291a553acdc6d2f4
+=======
 >>>>>>> 3cdf4b5c6a0ee0167bee856d291a553acdc6d2f4
         tvAreaSWLat.setText(bboxSouth);
         tvAreaSWLon.setText(bboxWest);
@@ -532,6 +569,7 @@ public class SearchBasicInfoRightFragment extends Fragment {
         sharedPrefs.setBboxPrefs(bboxWest, bboxSouth, bboxEast, bboxNorth);
     }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
     public void setCatalogue(String catalogue) {
         CharSequence[] cataloguesList = getCataloguesList();
@@ -564,6 +602,8 @@ public class SearchBasicInfoRightFragment extends Fragment {
         setDateTime(getCalStart(), calEnd);
     }
 
+=======
+>>>>>>> 3cdf4b5c6a0ee0167bee856d291a553acdc6d2f4
 =======
 >>>>>>> 3cdf4b5c6a0ee0167bee856d291a553acdc6d2f4
     /**
@@ -612,17 +652,23 @@ public class SearchBasicInfoRightFragment extends Fragment {
         sharedPrefs.setBboxPrefs(bboxWest, bboxSouth, bboxEast, bboxNorth);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
         areaBoundsUpdated = true;
     }
 
     @SuppressWarnings("SameReturnValue")
     private static CharSequence[] getCataloguesList() {
 =======
+=======
+>>>>>>> 3cdf4b5c6a0ee0167bee856d291a553acdc6d2f4
         Log.d("ZX", "updateCollectionsAreaBounds()");
         areaBoundsUpdated = true;
     }
 
     public static CharSequence[] getCataloguesList() {
+<<<<<<< HEAD
+>>>>>>> 3cdf4b5c6a0ee0167bee856d291a553acdc6d2f4
+=======
 >>>>>>> 3cdf4b5c6a0ee0167bee856d291a553acdc6d2f4
         return cataloguesList;
     }
