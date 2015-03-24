@@ -106,7 +106,7 @@ public class NewsRssServiceNoAsync {
             Log.e("RSS Handler SAX", e.toString());
             e.printStackTrace();
         } catch (ParserConfigurationException e) {
-            Log.e("RSS Handler Parser Config", e.toString());
+            Log.e("RSS Parser Config", e.toString());
         }
 
         return null;

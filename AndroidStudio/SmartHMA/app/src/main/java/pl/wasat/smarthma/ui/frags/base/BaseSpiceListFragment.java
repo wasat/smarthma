@@ -7,6 +7,7 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.ListFragment;
 import android.util.Log;
@@ -42,25 +43,25 @@ public class BaseSpiceListFragment extends ListFragment implements
 
     protected Boolean stopSearch = false;
 
-    private final SpiceManager samrtHMASpiceManager = new SpiceManager(
+    private final SpiceManager smartHMASpiceManager = new SpiceManager(
             SmartHmaHttpSpiceService.class);
 
     @Override
     public void onStart() {
         super.onStart();
-        samrtHMASpiceManager.start(getActivity());
+        smartHMASpiceManager.start(getActivity());
     }
 
     @Override
     public void onStop() {
-        if (samrtHMASpiceManager.isStarted()) {
-            samrtHMASpiceManager.shouldStop();
+        if (smartHMASpiceManager.isStarted()) {
+            smartHMASpiceManager.shouldStop();
         }
         super.onStop();
     }
 
     protected SpiceManager getSpiceManager() {
-        return samrtHMASpiceManager;
+        return smartHMASpiceManager;
     }
 
     /*
@@ -102,7 +103,7 @@ public class BaseSpiceListFragment extends ListFragment implements
                 Log.e("RSS Handler SAX", e.toString());
                 e.printStackTrace();
             } catch (ParserConfigurationException e) {
-                Log.e("RSS Handler Parser Config", e.toString());
+                Log.e("RSS Parser Config", e.toString());
             }
 
             assert fedHr != null;
@@ -148,6 +149,7 @@ public class BaseSpiceListFragment extends ListFragment implements
             return frag;
         }
 
+        @NonNull
         @Override
         public Dialog onCreateDialog(Bundle savedInstanceState) {
             int title = getArguments().getInt("title");

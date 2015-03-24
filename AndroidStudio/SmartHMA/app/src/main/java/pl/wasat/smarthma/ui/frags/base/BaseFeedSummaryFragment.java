@@ -6,13 +6,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.Spinner;
 import android.widget.TextView;
 
 import pl.wasat.smarthma.R;
-import pl.wasat.smarthma.helper.Global;
 import pl.wasat.smarthma.model.feed.Feed;
 
 /**
@@ -39,7 +36,7 @@ public class BaseFeedSummaryFragment extends Fragment {
     private Button btnNext;
     private Button btnLast;
 
-    private Spinner spnSortType;
+    //private Spinner spnSortType;
 
 
     public BaseFeedSummaryFragment() {
@@ -96,8 +93,8 @@ public class BaseFeedSummaryFragment extends Fragment {
         btnLast = (Button) rootView
                 .findViewById(R.id.search_frag_ds_intro_button_last);
 
-        spnSortType = (Spinner) rootView
-                .findViewById(R.id.search_frag_ds_intro_spinner_sort_type);
+        //spnSortType = (Spinner) rootView.findViewById(R.id.search_frag_ds_intro_spinner_sort_type);
+
 
         initUITexts();
         initUIButtons();
@@ -181,12 +178,13 @@ public class BaseFeedSummaryFragment extends Fragment {
             }
         }
 
-        spnSortType.setSelection(Global.sortingType, false);
+        /*
+        spnSortType.setSelection(SmartHMApplication.sortingType, false);
         spnSortType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                if (position != Global.sortingType) {
-                    Global.sortingType = position;
+                if (position != SmartHMApplication.sortingType) {
+                    SmartHMApplication.sortingType = position;
                     btnReload.performClick();
                 }
             }
@@ -196,6 +194,7 @@ public class BaseFeedSummaryFragment extends Fragment {
 
             }
         });
+        */
     }
 
     protected void loadNavSearch(String linkHref) {

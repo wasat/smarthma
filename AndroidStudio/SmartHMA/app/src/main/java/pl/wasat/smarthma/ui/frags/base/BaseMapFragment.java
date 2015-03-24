@@ -42,7 +42,7 @@ public class BaseMapFragment extends SupportMapFragment implements
         GoogleApiClient.OnConnectionFailedListener {
 
     protected static final String KEY_MAP_MODE = "pl.wasat.smarthma.KEY_MAP_MODE";
-    private static final String KEY_PARAM_PUBLIC_LISTENER = "pl.wasat.samrthma.KEY_PARAM_PUBLIC_LISTENER";
+    private static final String KEY_PARAM_PUBLIC_LISTENER = "pl.wasat.smarthma.KEY_PARAM_PUBLIC_LISTENER";
 
 
     /**
@@ -95,9 +95,9 @@ public class BaseMapFragment extends SupportMapFragment implements
         super.onCreate(savedInstanceState);
         AcraExtension.mapCustomLog("BaseMap.onCreate", mMap);
 
-        if (getArguments() != null) {
+/*        if (getArguments() != null) {
             // mapMode = getArguments().getInt(KEY_MAP_MODE);
-        }
+        }*/
 
         mGoogleApiClient = new GoogleApiClient.Builder(getActivity())
                 .addApi(LocationServices.API).addConnectionCallbacks(this)

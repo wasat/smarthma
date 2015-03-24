@@ -63,19 +63,18 @@ public class XMLParser {
 
             int eventType = parser.getEventType();
             while (eventType != XmlPullParser.END_DOCUMENT) {
-                String tagname = parser.getName();
+                String tagName = parser.getName();
                 switch (eventType) {
                     case XmlPullParser.START_TAG:
-                        if (tagname.equalsIgnoreCase("test")) {
-                        } else if (tagname.equalsIgnoreCase("indexInfo")) {
+                        if (tagName.equalsIgnoreCase("indexInfo")) {
                             indexInfo = new IndexInfo();
                             indexes = new ArrayList<>();
-                        } else if (tagname.equalsIgnoreCase("index")) {
+                        } else if (tagName.equalsIgnoreCase("index")) {
                             index = new Index();
-                        } else if (tagname.equalsIgnoreCase("configInfo")) {
+                        } else if (tagName.equalsIgnoreCase("configInfo")) {
                             configInfo = new ConfigInfo();
                             supports = new ArrayList<>();
-                        } else if (tagname.equalsIgnoreCase("supports")) {
+                        } else if (tagName.equalsIgnoreCase("supports")) {
                             collectionItem = new Collection();
                         }
                         break;
@@ -107,22 +106,22 @@ public class XMLParser {
                         break;
 
                     case XmlPullParser.END_TAG:
-                        if (tagname.equalsIgnoreCase("explain")) {
+                        if (tagName.equalsIgnoreCase("explain")) {
                             expData.setIndexInfo(indexInfo);
-                        } else if (tagname.equalsIgnoreCase("indexInfo")) {
+                        } else if (tagName.equalsIgnoreCase("indexInfo")) {
                             indexInfo.setIndexes(indexes);
-                        } else if (tagname.equalsIgnoreCase("index")) {
+                        } else if (tagName.equalsIgnoreCase("index")) {
                             indexes.add(index);
-                        } else if (tagname.equalsIgnoreCase("title")) {
+                        } else if (tagName.equalsIgnoreCase("title")) {
                             indexTitle = text;
-                        } else if (tagname.equalsIgnoreCase("configInfo")) {
+                        } else if (tagName.equalsIgnoreCase("configInfo")) {
                             configInfo.setSupports(supports);
                             index.setConfigInfo(configInfo);
                             if (isAfterComment) {
                                 collectionGrList.addItem(group);
                                 isAfterComment = false;
                             }
-                        } else if (tagname.equalsIgnoreCase("supports")
+                        } else if (tagName.equalsIgnoreCase("supports")
                                 && indexTitle.equalsIgnoreCase("Dataset series")) {
                             supports.add(text);
 

@@ -12,26 +12,22 @@ import android.view.MenuItem;
 import android.widget.SearchView;
 import android.widget.Toast;
 
-import com.google.android.gms.maps.model.LatLngBounds;
-
 import pl.wasat.smarthma.R;
+import pl.wasat.smarthma.helper.Const;
 import pl.wasat.smarthma.interfaces.OnCollectionsListSelectionListener;
+import pl.wasat.smarthma.kindle.AmznAreaPickerMapFragment.OnAmznAreaPickerMapFragmentListener;
+import pl.wasat.smarthma.kindle.AmznBaseMapFragment;
 import pl.wasat.smarthma.ui.frags.base.BaseMapFragment;
 import pl.wasat.smarthma.ui.frags.browse.BrowseCollectionFirstDetailFragment;
 import pl.wasat.smarthma.ui.frags.browse.CollectionsGroupListFragment;
 import pl.wasat.smarthma.ui.frags.browse.CollectionsListFragment.OnCollectionsListFragmentListener;
 import pl.wasat.smarthma.ui.frags.common.AreaPickerMapFragment.OnAreaPickerMapFragmentListener;
+import pl.wasat.smarthma.utils.obj.LatLngBoundsExt;
 import roboguice.util.temp.Ln;
 
 public class CollectionsDefinitionActivity extends BaseSmartHMActivity
         implements OnCollectionsListSelectionListener,
-        OnCollectionsListFragmentListener, OnAreaPickerMapFragmentListener {
-
-    //private ProgressDialog initSpinner;
-    //private ProgressBar progressBarWmsLoad;
-    //private InitialisationReceiver initReceiver;
-    //private SpinnerStateReceiver spinnerStateRec;
-    //private boolean isWmsLoading = false;
+        OnCollectionsListFragmentListener, OnAreaPickerMapFragmentListener, OnAmznAreaPickerMapFragmentListener {
 
     /**
      * Whether or not the activity is in two-pane mode, i.e. running on a tablet
@@ -44,42 +40,11 @@ public class CollectionsDefinitionActivity extends BaseSmartHMActivity
         Ln.getConfig().setLoggingLevel(Log.ERROR);
         super.onCreate(savedInstanceState);
 
-        // ViewGroup topLayout = (ViewGroup) findViewById(R.id.left_panel_map);
-        // topLayout.requestTransparentRegion(topLayout);
-
-        //progressBarWmsLoad = (ProgressBar) findViewById(R.id.progressBarWmsLoad);
-
         if (findViewById(R.id.activity_base_details_container) != null) {
             TWO_PANEL_MODE = true;
             loadRightListPanel();
             loadMapWithBasicSettingsView();
         }
-    }
-
-    @Override
-    protected void onResume() {
-/*		initReceiver = new InitialisationReceiver();
-        registerReceiver(initReceiver, new IntentFilter(
-				Const.KEY_SERVICE_INTENTFILTER_NOTIFICATION));
-
-		spinnerStateRec = new SpinnerStateReceiver();
-		registerReceiver(spinnerStateRec, new IntentFilter(
-				Const.KEY_MAP_SPINNER_INTENTFILTER_NOTIFICATION));*/
-
-        super.onResume();
-    }
-
-    @Override
-    protected void onPause() {
-        //disableProgressBar();
-        //unregisterReceiver(initReceiver);
-        //unregisterReceiver(spinnerStateRec);
-        super.onPause();
-    }
-
-    @Override
-    protected void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
     }
 
     @Override
@@ -99,23 +64,8 @@ public class CollectionsDefinitionActivity extends BaseSmartHMActivity
     }
 
     @Override
-    public boolean onPrepareOptionsMenu(Menu menu) {
-        return super.onPrepareOptionsMenu(menu);
-    }
-
-    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-/*		case R.id.action_pref1:
-            // showThreatsDialog();
-			break;
-		case R.id.action_pref2:
-			// showWorkspaceDialog();
-			break;
-		case R.id.action_pref3:
-			break;
-		case R.id.action_clear_all_settings:
-			break;*/
             case R.id.action_exit:
                 moveTaskToBack(true);
                 finish();
@@ -185,111 +135,45 @@ public class CollectionsDefinitionActivity extends BaseSmartHMActivity
             return;
         }
 
-        BaseMapFragment newGisFrag = new BaseMapFragment();
-        Bundle args = new Bundle();
+        if (Const.IS_KINDLE) {
+            AmznBaseMapFragment amznBaseMapFrag = new AmznBaseMapFragment();
+            Bundle args = new Bundle();
+            amznBaseMapFrag.setArguments(args);
+            FragmentTransaction transaction = getSupportFragmentManager()
+                    .beginTransaction();
+            transaction.replace(R.id.activity_base_details_container, amznBaseMapFrag);
+            transaction.commit();
+        } else {
+            BaseMapFragment baseMapFrag = new BaseMapFragment();
+            Bundle args = new Bundle();
+            baseMapFrag.setArguments(args);
+            FragmentTransaction transaction = getSupportFragmentManager()
+                    .beginTransaction();
+            transaction.replace(R.id.activity_base_details_container, baseMapFrag);
+            transaction.commit();
+        }
 
-        newGisFrag.setArguments(args);
-
-        FragmentTransaction transaction = getSupportFragmentManager()
-                .beginTransaction();
-
-        // Replace whatever is in the fragment_container view with this
-        // fragment,
-        // and add the transaction to the back stack so the user can
-        // navigate back
-        transaction.replace(R.id.activity_base_details_container, newGisFrag);
-        transaction.commit();
 
     }
 
-    /*
-        private void disableProgressBar() {
-            if (initSpinner != null) {
-                if (initSpinner.isShowing()) {
-                    initSpinner.dismiss();
-                }
-            }
-        }
-
-        private class InitialisationReceiver extends BroadcastReceiver {
-
-            @Override
-            public void onReceive(Context context, Intent intent) {
-                postReceivingData(intent);
-            }
-
-            private void postReceivingData(Intent intent) {
-                disableProgressBar();
-                Bundle bundle = intent.getExtras();
-                if (bundle != null) {
-                    int resultCode = bundle
-                            .getInt(Const.REQUEST_CODE_SERVICE_RESULT);
-                    if (resultCode == RESULT_OK) {
-                        Toast.makeText(CollectionsDefinitionActivity.this,
-                                R.string.download_explain_doc_complete,
-                                Toast.LENGTH_SHORT).show();
-                    } else {
-                        Toast.makeText(CollectionsDefinitionActivity.this,
-                                R.string.download_failed, Toast.LENGTH_LONG).show();
-                    }
-                }
-                supportInvalidateOptionsMenu();
-            }
-        }
-
-        private class SpinnerStateReceiver extends BroadcastReceiver {
-            @Override
-            public void onReceive(Context context, Intent intent) {
-                isWmsLoading = intent.getBooleanExtra(Const.KEY_MAP_WMS_LOAD_STATE,
-                        false);
-                new AsyncShowWmsSpinner().execute();
-            }
-        }
-
-        private class AsyncShowWmsSpinner extends AsyncTask<String, Void, Void> {
-
-            @Override
-            protected void onPreExecute() {
-                progressBarWmsLoad.setVisibility(View.VISIBLE);
-            }
-
-            @Override
-            protected Void doInBackground(String... strTimes) {
-                while (isWmsLoading) {
-                    try {
-                        Thread.sleep(5000);
-                        isWmsLoading = false;
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                }
-                return null;
-            }
-
-            @Override
-            protected void onPostExecute(Void result) {
-                progressBarWmsLoad.setVisibility(View.GONE);
-                super.onPostExecute(result);
-            }
-        }
-
-        */
     @Override
-    public void onMapFragmentBoundsChange(LatLngBounds bounds) {
+    public void onMapFragmentBoundsChange(LatLngBoundsExt bounds) {
+        callUpdateFirstDetailFrag(bounds);
+    }
+
+
+    @Override
+    public void onAmznMapFragmentBoundsChange(LatLngBoundsExt bounds) {
+        callUpdateFirstDetailFrag(bounds);
+
+    }
+
+    private void callUpdateFirstDetailFrag(LatLngBoundsExt bounds) {
         BrowseCollectionFirstDetailFragment browseCollectionFirstDetailFragment = (BrowseCollectionFirstDetailFragment) getSupportFragmentManager()
                 .findFragmentByTag("BrowseCollectionFirstDetailFragment");
-
         if (browseCollectionFirstDetailFragment != null) {
-            // If article frag is available, we're in two-pane layout...
-            // Call a method in the ArticleFragment to update its content
             browseCollectionFirstDetailFragment.updateAreaBounds(bounds);
         }
-    }
-
-    @Override
-    public void onFragmentInteraction() {
-        // TODO Auto-generated method stub
-
     }
 
 }

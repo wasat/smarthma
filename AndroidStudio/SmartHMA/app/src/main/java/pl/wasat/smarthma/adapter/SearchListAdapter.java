@@ -38,7 +38,7 @@ public class SearchListAdapter extends ArrayAdapter<EntryISO> {
 
         dateView.setText(pubDate);
 
-        if (!searchItem.isRead()) {
+        if (searchItem.isNotRead()) {
             textView.setTypeface(Typeface.DEFAULT_BOLD);
         }
         return rowView;

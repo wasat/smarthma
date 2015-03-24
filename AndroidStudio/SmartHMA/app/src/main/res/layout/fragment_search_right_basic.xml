@@ -236,7 +236,7 @@
                 android:orientation="vertical">
 
                 <Button
-                    android:id="@+id/search_frag_right_basic_buton_time_from_date"
+                    android:id="@+id/search_frag_right_basic_button_time_from_date"
                     style="?android:attr/buttonBarButtonStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -244,7 +244,7 @@
                     android:textColor="#A9A9A9" />
 
                 <Button
-                    android:id="@+id/search_frag_right_basic_buton_time_to_date"
+                    android:id="@+id/search_frag_right_basic_button_time_to_date"
                     style="?android:attr/buttonBarButtonStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -260,7 +260,7 @@
                 android:orientation="vertical">
 
                 <Button
-                    android:id="@+id/search_frag_right_basic_buton_time_from_time"
+                    android:id="@+id/search_frag_right_basic_button_time_from_time"
                     style="?android:attr/buttonBarButtonStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -268,7 +268,7 @@
                     android:textColor="#A9A9A9" />
 
                 <Button
-                    android:id="@+id/search_frag_right_basic_buton_time_to_time"
+                    android:id="@+id/search_frag_right_basic_button_time_to_time"
                     style="?android:attr/buttonBarButtonStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

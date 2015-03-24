@@ -22,6 +22,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.text.format.DateFormat;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -133,9 +134,9 @@ public class SmHmaTimePickerDialog extends AlertDialog implements
         updateTitle(hourOfDay, minute, seconds);
     }
 
-    public void updateTime(int hourOfDay, int minutOfHour, int seconds) {
+    public void updateTime(int hourOfDay, int minutesOfHour, int seconds) {
         mTimePicker.setCurrentHour(hourOfDay);
-        mTimePicker.setCurrentMinute(minutOfHour);
+        mTimePicker.setCurrentMinute(minutesOfHour);
         mTimePicker.setCurrentSecond(seconds);
     }
 
@@ -158,7 +159,7 @@ public class SmHmaTimePickerDialog extends AlertDialog implements
     }
 
     @Override
-    public void onRestoreInstanceState(Bundle savedInstanceState) {
+    public void onRestoreInstanceState(@NonNull Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
         int hour = savedInstanceState.getInt(HOUR);
         int minute = savedInstanceState.getInt(MINUTE);

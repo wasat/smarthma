@@ -2,14 +2,29 @@ package pl.wasat.smarthma.ui.frags.common;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
+import android.widget.TableLayout;
+
+import com.octo.android.robospice.persistence.exception.SpiceException;
+import com.octo.android.robospice.request.listener.RequestListener;
+import com.wunderlist.slidinglayer.SlidingLayer;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import pl.wasat.smarthma.model.feed.Link;
 import pl.wasat.smarthma.model.iso.EntryISO;
+import pl.wasat.smarthma.model.osdd.OpenSearchDescription;
+import pl.wasat.smarthma.model.osdd.Option;
+import pl.wasat.smarthma.model.osdd.Parameter;
 import pl.wasat.smarthma.ui.frags.base.BaseViewAndBasicSettingsDetailFragment;
+import pl.wasat.smarthma.utils.rss.FedeoOSDDRequest;
 
 /**
  * A simple {@link android.support.v4.app.Fragment} subclass. Activities that
@@ -23,6 +38,8 @@ public class CollectionDetailsFragment extends
         BaseViewAndBasicSettingsDetailFragment {
 
     private OnCollectionDetailsFragmentListener mListener;
+    private boolean waitForOsddLoad = true;
+
 
     /**
      * Use this factory method to create a new instance of this fragment using
@@ -56,9 +73,13 @@ public class CollectionDetailsFragment extends
                              Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
 
+        String osddUrl = "";
         for (Link entityLink : displayedISOEntry.getLink()) {
             if (entityLink.getRel().equalsIgnoreCase("search")) {
                 btnShowProducts.setEnabled(true);
+            }
+            if (entityLink.getRel().equalsIgnoreCase("search") && entityLink.getType().equalsIgnoreCase("application/opensearchdescription+xml")) {
+                osddUrl = entityLink.getHref();
             }
         }
 
@@ -78,9 +99,52 @@ public class CollectionDetailsFragment extends
                 mListener.onCollectionDetailsFragmentShowMetadata(displayedISOEntry);
             }
         });
+
+        final String finalOsddUrl = osddUrl;
+
+        mSlidingLayer.setOnInteractListener(new SlidingLayer.OnInteractListener() {
+            @Override
+            public void onOpen() {
+                Log.i("SLIDER", "onOpen");
+                if (waitForOsddLoad) {
+                    startAsyncLoadOsddData(finalOsddUrl);
+                }
+            }
+
+            @Override
+            public void onShowPreview() {
+                Log.i("SLIDER", "onShowPreview");
+            }
+
+            @Override
+            public void onClose() {
+                Log.i("SLIDER", "onClose");
+
+            }
+
+            @Override
+            public void onOpened() {
+                Log.i("SLIDER", "onOpened");
+
+            }
+
+            @Override
+            public void onPreviewShowed() {
+                Log.i("SLIDER", "onPreviewShowed");
+
+            }
+
+            @Override
+            public void onClosed() {
+                Log.i("SLIDER", "onClosed");
+            }
+        });
+
+
         return rootView;
 
     }
+
 
     @Override
     public void onAttach(Activity activity) {
@@ -99,6 +163,47 @@ public class CollectionDetailsFragment extends
         mListener = null;
     }
 
+
+    private void startAsyncLoadOsddData(String fedeoDescUrl) {
+        if (fedeoDescUrl != null) {
+            getActivity().setProgressBarIndeterminateVisibility(true);
+
+            getSpiceManager().execute(new FedeoOSDDRequest(fedeoDescUrl),
+                    new OsddRequestListener());
+        }
+    }
+
+    void loadRequestSuccess(OpenSearchDescription osdd) {
+        getActivity().setProgressBarIndeterminateVisibility(false);
+        addParameterSpinners(osdd);
+    }
+
+    private void addParameterSpinners(OpenSearchDescription osdd) {
+
+        for (Parameter param : osdd.getParameter()) {
+
+            Spinner spinner = new Spinner(getActivity());
+            spinner.setLayoutParams(new TableLayout.LayoutParams(
+                    TableLayout.LayoutParams.WRAP_CONTENT, TableLayout.LayoutParams.WRAP_CONTENT, 1f));
+            spinner.setPadding(25, 2, 25, 2);
+            //spinner.setPrompt(param.getName());
+
+            List<String> optList = new ArrayList<>();
+            optList.add(param.getName());
+            for (Option opt : param.getOption()) {
+                optList.add(opt.getLabel());
+            }
+
+            ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_item, optList);
+            spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            spinner.setAdapter(spinnerAdapter);
+
+            layoutSpinners.addView(spinner);
+        }
+
+
+    }
+
     /**
      * This interface must be implemented by activities that contain this
      * fragment to allow an interaction in this fragment to be communicated to
@@ -112,6 +217,21 @@ public class CollectionDetailsFragment extends
         public void onCollectionDetailsFragmentShowProducts(String parentID);
 
         public void onCollectionDetailsFragmentShowMetadata(EntryISO displayedEntry);
+
     }
 
+
+    private final class OsddRequestListener implements RequestListener<OpenSearchDescription> {
+
+        @Override
+        public void onRequestFailure(SpiceException spiceException) {
+            parseRequestFailure(spiceException);
+        }
+
+        @Override
+        public void onRequestSuccess(OpenSearchDescription osdd) {
+            loadRequestSuccess(osdd);
+            waitForOsddLoad = false;
+        }
+    }
 }

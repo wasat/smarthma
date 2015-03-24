@@ -120,13 +120,13 @@ public class CollectionsListFragment extends Fragment {
             });
         }
     }
-
+/*
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed() {
         if (mListener != null) {
             mListener.onFragmentInteraction();
         }
-    }
+    }*/
 
     @Override
     public void onAttach(Activity activity) {
@@ -162,8 +162,6 @@ public class CollectionsListFragment extends Fragment {
      * >Communicating with Other Fragments</a> for more information.
      */
     public interface OnCollectionsListFragmentListener {
-        // TODO: Update argument type and name
-        public void onFragmentInteraction();
     }
 
 }

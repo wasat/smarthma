@@ -26,7 +26,7 @@ public class GroundTrackUncertainty implements Serializable {
         this._prefix = _prefix;
     }
 
-    public String getuom() {
+    public String getUom() {
         return uom;
     }
 
@@ -55,6 +55,7 @@ public class GroundTrackUncertainty implements Serializable {
         return HashCodeBuilder.reflectionHashCode(this);
     }
 
+    @SuppressWarnings("EqualsWhichDoesntCheckParameterClass")
     @Override
     public boolean equals(Object other) {
         return EqualsBuilder.reflectionEquals(this, other);

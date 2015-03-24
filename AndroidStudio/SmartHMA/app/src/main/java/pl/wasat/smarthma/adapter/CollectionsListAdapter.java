@@ -30,9 +30,9 @@ public class CollectionsListAdapter extends BaseAdapter {
     private final String groupName;
     private static LayoutInflater inflater = null;
 
-    public CollectionsListAdapter(Activity avtiv, ArrayList<Collection> data,
+    public CollectionsListAdapter(Activity activ, ArrayList<Collection> data,
                                   String grName) {
-        activity = avtiv;
+        activity = activ;
         collData = data;
         groupName = grName;
         inflater = (LayoutInflater) activity

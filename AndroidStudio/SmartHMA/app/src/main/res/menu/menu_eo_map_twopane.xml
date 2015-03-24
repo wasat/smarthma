@@ -3,11 +3,25 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
+        android:id="@+id/action_search_history"
+        android:title="@string/search_history_item">
+        <!-- "file" submenu -->
+        <menu>
+            <item
+                android:id="@+id/action_search_pick"
+                android:title="@string/search_history_pick_query" />
+            <item
+                android:id="@+id/sction_search_clear"
+                android:title="@string/search_history_clear" />
+        </menu>
+    </item>
+
+    <item
         android:id="@+id/action_search"
         android:actionViewClass="android.widget.SearchView"
         android:icon="@android:drawable/ic_menu_search"
         app:showAsAction="always"
-        android:title="@string/action_search"></item>
+        android:title="@string/action_search" />
 
     <!--     <group android:id="@+id/menu_group_gis" >
             <item
@@ -45,6 +59,6 @@
         android:icon="@android:drawable/ic_notification_clear_all"
         app:showAsAction="ifRoom"
         android:title="@string/action_exit"
-        android:titleCondensed="@string/action_exit"></item>
+        android:titleCondensed="@string/action_exit" />
 
 </menu>

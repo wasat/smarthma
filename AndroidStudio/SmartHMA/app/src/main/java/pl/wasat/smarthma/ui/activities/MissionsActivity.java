@@ -2,7 +2,6 @@ package pl.wasat.smarthma.ui.activities;
 
 import android.content.Intent;
 import android.graphics.Color;
-import android.net.Uri;
 import android.os.Bundle;
 import android.widget.FrameLayout;
 
@@ -20,12 +19,6 @@ public class MissionsActivity extends BaseSmartHMActivity implements
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-/*		if (android.os.Build.VERSION.SDK_INT > 9) {
-            StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder()
-					.permitAll().build();
-			StrictMode.setThreadPolicy(policy);
-		}*/
 
         FrameLayout listLayout = (FrameLayout) findViewById(R.id.activity_base_list_container);
         listLayout.setBackgroundColor(Color.parseColor("#D9D9D9"));
@@ -49,12 +42,6 @@ public class MissionsActivity extends BaseSmartHMActivity implements
                 .add(R.id.activity_base_details_container,
                         missionsDetailNewFragment, "MissionsDetailNewFragment")
                 .commit();
-    }
-
-    @Override
-    public void onExtendedListFragmentInteraction(Uri uri) {
-        // TODO Auto-generated method stub
-
     }
 
 

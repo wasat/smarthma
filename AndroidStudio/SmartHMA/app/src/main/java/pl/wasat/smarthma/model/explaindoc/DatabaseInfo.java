@@ -11,7 +11,7 @@ public class DatabaseInfo implements Serializable {
     private String title;
     private String desc;
     private String history;
-    private String autor;
+    private String author;
     private ArrayList<String> links;
 
     public DatabaseInfo() {
@@ -74,17 +74,17 @@ public class DatabaseInfo implements Serializable {
     }
 
     /**
-     * @return the autor
+     * @return the author
      */
-    public String getAutor() {
-        return autor;
+    public String getAuthor() {
+        return author;
     }
 
     /**
-     * @param autor the autor to set
+     * @param author the author to set
      */
-    public void setAutor(String autor) {
-        this.autor = autor;
+    public void setAuthor(String author) {
+        this.author = author;
     }
 
     /**
@@ -110,7 +110,7 @@ public class DatabaseInfo implements Serializable {
     public int hashCode() {
         final int prime = 31;
         int result = 1;
-        result = prime * result + ((autor == null) ? 0 : autor.hashCode());
+        result = prime * result + ((author == null) ? 0 : author.hashCode());
         result = prime * result + ((desc == null) ? 0 : desc.hashCode());
         result = prime * result + ((history == null) ? 0 : history.hashCode());
         result = prime * result + id;
@@ -133,10 +133,10 @@ public class DatabaseInfo implements Serializable {
         if (getClass() != obj.getClass())
             return false;
         DatabaseInfo other = (DatabaseInfo) obj;
-        if (autor == null) {
-            if (other.autor != null)
+        if (author == null) {
+            if (other.author != null)
                 return false;
-        } else if (!autor.equals(other.autor))
+        } else if (!author.equals(other.author))
             return false;
         if (desc == null) {
             if (other.desc != null)
@@ -171,7 +171,7 @@ public class DatabaseInfo implements Serializable {
     @Override
     public String toString() {
         return "DatabaseInfo [title=" + title + ", desc=" + desc + ", history="
-                + history + ", autor=" + autor + ", links=" + links + "]";
+                + history + ", author=" + author + ", links=" + links + "]";
     }
 
 }

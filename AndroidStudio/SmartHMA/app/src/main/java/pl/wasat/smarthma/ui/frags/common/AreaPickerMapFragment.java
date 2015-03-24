@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import pl.wasat.smarthma.ui.frags.base.BaseMapFragment;
 import pl.wasat.smarthma.ui.frags.base.BaseMapFragment.OnBaseMapFragmentListener;
 import pl.wasat.smarthma.utils.io.AcraExtension;
+import pl.wasat.smarthma.utils.obj.LatLngBoundsExt;
 
 /**
  * A simple {@link android.support.v4.app.Fragment} subclass. Activities that
@@ -41,7 +42,7 @@ public class AreaPickerMapFragment extends BaseMapFragment implements OnBaseMapF
      * Use this factory method to create a new instance of this fragment using
      * the provided parameters.
      *
-     * @return A new instance of fragment BaseMapFragment.
+     * @return A new instance of fragment AreaPickerMapFragment.
      */
     public static AreaPickerMapFragment newInstance() {
         return new AreaPickerMapFragment();
@@ -110,7 +111,7 @@ public class AreaPickerMapFragment extends BaseMapFragment implements OnBaseMapF
      * >Communicating with Other Fragments</a> for more information.
      */
     public interface OnAreaPickerMapFragmentListener {
-        public void onMapFragmentBoundsChange(LatLngBounds bounds);
+        public void onMapFragmentBoundsChange(LatLngBoundsExt bounds);
     }
 
     private void setMapListeners() {
@@ -122,7 +123,8 @@ public class AreaPickerMapFragment extends BaseMapFragment implements OnBaseMapF
             public void onCameraChange(CameraPosition arg0) {
                 if (markedPtList.isEmpty()) {
                     areaBounds = mMap.getProjection().getVisibleRegion().latLngBounds;
-                    mListener.onMapFragmentBoundsChange(areaBounds);
+                    LatLngBoundsExt areaBoundsExt = new LatLngBoundsExt(areaBounds);
+                    mListener.onMapFragmentBoundsChange(areaBoundsExt);
                 }
             }
         });
@@ -146,7 +148,8 @@ public class AreaPickerMapFragment extends BaseMapFragment implements OnBaseMapF
     private void postDrawArea() {
         if (!markedPtList.isEmpty()) {
             areaBounds = areaBoundsBuilder.build();
-            mListener.onMapFragmentBoundsChange(areaBounds);
+            LatLngBoundsExt areaBoundsExt = new LatLngBoundsExt(areaBounds);
+            mListener.onMapFragmentBoundsChange(areaBoundsExt);
         }
     }
 

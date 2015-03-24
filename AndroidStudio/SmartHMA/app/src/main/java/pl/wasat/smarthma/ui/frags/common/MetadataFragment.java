@@ -2,7 +2,6 @@ package pl.wasat.smarthma.ui.frags.common;
 
 import android.app.Activity;
 import android.graphics.Typeface;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -34,11 +33,6 @@ public class MetadataFragment extends Fragment {
     private OnMetadataFragmentListener mListener;
 
     private LinearLayout linearLayout;
-
-	/*
-     * private LinearLayout itemLayout; private TextView itemTitle; private
-	 * TextView itemValues;
-	 */
 
     /**
      * Use this factory method to create a new instance of this fragment using
@@ -80,14 +74,6 @@ public class MetadataFragment extends Fragment {
                 .setText(entryItem.getTitle());
         ((TextView) rootView.findViewById(R.id.metadata_frag_tv_prod_dates))
                 .setText("Date of publication: " + entryItem.getDate());
-
-		/*
-		 * itemLayout = (LinearLayout) rootView
-		 * .findViewById(R.id.metadata_frag_layout_row); itemTitle = ((TextView)
-		 * rootView .findViewById(R.id.metadata_frag_tv_row_title)); itemValues
-		 * = ((TextView) rootView
-		 * .findViewById(R.id.metadata_frag_tv_row_values));
-		 */
 
         if (!entryItem.getEarthObservation().getMetaDataProperty()
                 .getEarthObservationMetaData().getIdentifier().get_text()
@@ -144,7 +130,6 @@ public class MetadataFragment extends Fragment {
         linearLayout.addView(tvMetaHeader);
 
         Class<?> c1 = eOMetaDataObject.getClass();
-        // Map<String, Object> map = new HashMap<String, Object>();
         Field[] fields = c1.getDeclaredFields();
         for (Field field : fields) {
             String name = field.getName();
@@ -200,13 +185,6 @@ public class MetadataFragment extends Fragment {
 
     }
 
-
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onMetadataFragmentInteraction();
-        }
-    }
-
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
@@ -234,7 +212,6 @@ public class MetadataFragment extends Fragment {
      * >Communicating with Other Fragments</a> for more information.
      */
     public interface OnMetadataFragmentListener {
-        public void onMetadataFragmentInteraction();
     }
 
 }

@@ -1,7 +1,6 @@
 package pl.wasat.smarthma.ui.frags.missions;
 
 import android.app.Activity;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -41,7 +40,6 @@ public class MissionsDetailsFragment extends Fragment {
      *
      * @return A new instance of fragment DataSeriesDetailFragment.
      */
-    // TODO: Rename and change types and number of parameters
     public static MissionsDetailsFragment newInstance(
             MissionItemData missionData) {
         MissionsDetailsFragment fragment = new MissionsDetailsFragment();
@@ -88,19 +86,17 @@ public class MissionsDetailsFragment extends Fragment {
             public void onClick(View arg0) {
 
                 mListener.onMissionsDetailNewFragmentSearchData(missionName);
-
-
             }
         });
 
         return rootView;
     }
 
-    public void onButtonPressed(Uri uri) {
+ /*   public void onButtonPressed(Uri uri) {
         if (mListener != null) {
             mListener.onMissionsDetailNewFragmentSearchData("");
         }
-    }
+    }*/
 
     @Override
     public void onAttach(Activity activity) {

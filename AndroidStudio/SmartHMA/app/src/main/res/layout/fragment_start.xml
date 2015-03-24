@@ -41,7 +41,7 @@
                     android:layout_gravity="center_vertical|center_horizontal|center"
                     android:adjustViewBounds="true"
                     android:contentDescription="@string/desc"
-                    android:text="@string/search_products"></Button>
+                    android:text="@string/search_products" />
             </LinearLayout>
 
             <LinearLayout
@@ -60,7 +60,7 @@
                     android:layout_gravity="center_vertical|center_horizontal|center"
                     android:adjustViewBounds="true"
                     android:contentDescription="@string/desc"
-                    android:text="@string/browse_products"></Button>
+                    android:text="@string/browse_products" />
             </LinearLayout>
         </LinearLayout>
 
@@ -88,7 +88,7 @@
                     android:layout_gravity="center_vertical|center_horizontal|center"
                     android:adjustViewBounds="true"
                     android:contentDescription="@string/desc"
-                    android:text="@string/esa_missions"></Button>
+                    android:text="@string/esa_missions" />
             </LinearLayout>
 
             <LinearLayout
@@ -107,7 +107,7 @@
                     android:layout_gravity="center_vertical|center_horizontal|center"
                     android:adjustViewBounds="true"
                     android:contentDescription="@string/desc"
-                    android:text="@string/esa_online"></Button>
+                    android:text="@string/esa_online" />
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>

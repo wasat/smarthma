@@ -1,12 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="pl.wasat.smarthma"
-    android:versionCode="26"
-    android:versionName="1.0.26">
-
-    <uses-sdk
-        android:minSdkVersion="14"
-        android:targetSdkVersion="21" />
+    android:versionCode="28"
+    android:versionName="1.0.28">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
@@ -53,10 +49,10 @@
         </activity>
         <activity
             android:name=".ui.activities.CollectionsBrowserActivity"
-            android:label="@string/activity_name_collections_browser"></activity>
+            android:label="@string/activity_name_collections_browser" />
         <activity
             android:name=".ui.activities.ProductsBrowserActivity"
-            android:label="@string/activity_name_products_browser"></activity>
+            android:label="@string/activity_name_products_browser" />
         <activity
             android:name=".ui.activities.SearchActivity"
             android:label="@string/activity_name_search_eo_data">
@@ -79,11 +75,11 @@
         </activity>
         <activity
             android:name=".ui.activities.MissionsActivity"
-            android:label="@string/esa_missions"></activity>
+            android:label="@string/esa_missions" />
         <activity
             android:name=".ui.activities.NewsActivity"
-            android:label="@string/title_article_list"></activity>
-        <activity android:name=".ui.activities.BaseSmartHMActivity"></activity>
+            android:label="@string/title_article_list" />
+        <activity android:name=".ui.activities.BaseSmartHMActivity" />
         <activity
             android:name="com.facebook.LoginActivity"
             android:label="@string/app_name"

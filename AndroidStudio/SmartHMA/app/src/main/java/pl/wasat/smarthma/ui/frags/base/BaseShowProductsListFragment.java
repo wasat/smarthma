@@ -10,6 +10,9 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
+import com.octo.android.robospice.persistence.exception.SpiceException;
+import com.octo.android.robospice.request.listener.RequestListener;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,7 +35,7 @@ import pl.wasat.smarthma.utils.rss.FedeoSearchRequest;
  * instance of this fragment.
  */
 public class BaseShowProductsListFragment extends BaseSpiceFragment {
-    private static final String KEY_PARAM_FEDEO_REQUEST = "pl.wasat.samrthma.KEY_PARAM_FEDEO_REQUEST";
+    private static final String KEY_PARAM_FEDEO_REQUEST = "pl.wasat.smarthma.KEY_PARAM_FEDEO_REQUEST";
 
     private FedeoRequest fedeoRequest;
 
@@ -97,9 +100,9 @@ public class BaseShowProductsListFragment extends BaseSpiceFragment {
                     .getInt(STATE_ACTIVATED_POSITION));
         }
 
-        entryImagesListView = (ListView) getView().findViewById(
+        entryImagesListView = (ListView) view.findViewById(
                 R.id.listview_collections_group);
-        loadingView = getView().findViewById(R.id.loading_layout);
+        loadingView = view.findViewById(R.id.loading_layout);
 
         if (fedeoRequest != null) {
             loadSearchProductsFeedResponse(fedeoRequest);
@@ -148,46 +151,50 @@ public class BaseShowProductsListFragment extends BaseSpiceFragment {
     }
 
     private void updateShowProductsListViewContent(final List<EntryOM> entryList) {
-        if (entryList.isEmpty()) {
-            getView().setVisibility(View.GONE);
-            loadFailureFrag();
+        View view = getView();
+        if (view != null) {
 
-        } else {
-            for (EntryOM a : entryList) {
-                EoDbAdapter dba = new EoDbAdapter(getActivity());
-                dba.openToRead();
-                EntryOM fetchedSearch = dba.getBlogListing(a.getGuid());
-                dba.close();
-                if (fetchedSearch == null) {
-                    dba = new EoDbAdapter(getActivity());
-                    dba.openToWrite();
-                    dba.insertBlogListing(a.getGuid());
+            if (entryList.isEmpty()) {
+                view.setVisibility(View.GONE);
+                loadFailureFrag();
+
+            } else {
+                for (EntryOM a : entryList) {
+                    EoDbAdapter dba = new EoDbAdapter(getActivity());
+                    dba.openToRead();
+                    EntryOM fetchedSearch = dba.getBlogListing(a.getGuid());
                     dba.close();
-                } else {
-                    a.setDbId(fetchedSearch.getDbId());
-                    a.setOffline(fetchedSearch.isOffline());
-                    a.setRead(fetchedSearch.isRead());
+                    if (fetchedSearch == null) {
+                        dba = new EoDbAdapter(getActivity());
+                        dba.openToWrite();
+                        dba.insertBlogListing(a.getGuid());
+                        dba.close();
+                    } else {
+                        a.setDbId(fetchedSearch.getDbId());
+                        a.setOffline(fetchedSearch.isOffline());
+                        a.setRead(fetchedSearch.isRead());
+                    }
                 }
+
+                EntryImagesListAdapter entryImagesListAdapter = new EntryImagesListAdapter(getActivity()
+                        .getBaseContext(), getBitmapSpiceManager(), entryList);
+                entryImagesListView.setAdapter(entryImagesListAdapter);
+
+                loadingView.setVisibility(View.GONE);
+                entryImagesListAdapter.notifyDataSetChanged();
+                entryImagesListView.setVisibility(View.VISIBLE);
+
+                // Click event for single list row
+                entryImagesListView
+                        .setOnItemClickListener(new OnItemClickListener() {
+
+                            @Override
+                            public void onItemClick(AdapterView<?> parent,
+                                                    View view, int position, long id) {
+                                loadProductItemDetails(entryList.get(position));
+                            }
+                        });
             }
-
-            EntryImagesListAdapter entryImagesListAdapter = new EntryImagesListAdapter(getActivity()
-                    .getBaseContext(), getBitmapSpiceManager(), entryList);
-            entryImagesListView.setAdapter(entryImagesListAdapter);
-
-            loadingView.setVisibility(View.GONE);
-            entryImagesListAdapter.notifyDataSetChanged();
-            entryImagesListView.setVisibility(View.VISIBLE);
-
-            // Click event for single list row
-            entryImagesListView
-                    .setOnItemClickListener(new OnItemClickListener() {
-
-                        @Override
-                        public void onItemClick(AdapterView<?> parent,
-                                                View view, int position, long id) {
-                            loadProductItemDetails(entryList.get(position));
-                        }
-                    });
         }
     }
 
@@ -198,7 +205,7 @@ public class BaseShowProductsListFragment extends BaseSpiceFragment {
     }
 
     /**
-     * @param searchProductFeeds
+     * @param searchProductFeeds searched Feed
      */
     protected void loadSearchResultProductsIntroDetailsFrag(
             Feed searchProductFeeds) {
@@ -212,7 +219,7 @@ public class BaseShowProductsListFragment extends BaseSpiceFragment {
             getActivity().setProgressBarIndeterminateVisibility(true);
 
             getSpiceManager().execute(new FedeoSearchRequest(fedeoRequest, 2),
-                    this);
+                    new FeedRequestListener());
         }
     }
 
@@ -226,22 +233,12 @@ public class BaseShowProductsListFragment extends BaseSpiceFragment {
      * >Communicating with Other Fragments</a> for more information.
      */
     public interface OnBaseShowProductsListFragmentListener {
-        // TODO: Update argument type and name
-        public void onBaseShowProductsListFragmentItemSelected(String id);
 
-        public void onBaseShowProductsListFragmentFootprintSend(
-                ArrayList<Footprint> footPrints);
+        public void onBaseShowProductsListFragmentFootprintSend();
     }
 
-    /*
-     * (non-Javadoc)
-     *
-     * @see
-     * com.octo.android.robospice.request.listener.RequestListener#onRequestSuccess
-     * (java.lang.Object)
-     */
-    @Override
-    public void onRequestSuccess(Feed searchProductFeeds) {
+
+    void loadRequestSuccess(Feed searchProductFeeds) {
         getActivity().setProgressBarIndeterminateVisibility(false);
         if (searchProductFeeds == null) {
             searchProductFeeds = new Feed();
@@ -254,12 +251,11 @@ public class BaseShowProductsListFragment extends BaseSpiceFragment {
         loadSearchResultProductsIntroDetailsFrag(searchProductFeeds);
         ArrayList<Footprint> footPrints = getFootprints(searchProductFeeds
                 .getEntriesEO());
-        mListener.onBaseShowProductsListFragmentFootprintSend(footPrints);
-
+        mListener.onBaseShowProductsListFragmentFootprintSend();
     }
 
     /**
-     * @param searchProductFeeds
+     * @param searchProductFeeds - Product Feed
      * @return footPrintsArr
      */
     private ArrayList<Footprint> getFootprints(List<EntryOM> searchProductFeeds) {
@@ -271,6 +267,19 @@ public class BaseShowProductsListFragment extends BaseSpiceFragment {
             }
         }
         return footPrintsArr;
+    }
+
+    private final class FeedRequestListener implements RequestListener<Feed> {
+
+        @Override
+        public void onRequestFailure(SpiceException spiceException) {
+            parseRequestFailure(spiceException);
+        }
+
+        @Override
+        public void onRequestSuccess(Feed feed) {
+            loadRequestSuccess(feed);
+        }
     }
 
 }

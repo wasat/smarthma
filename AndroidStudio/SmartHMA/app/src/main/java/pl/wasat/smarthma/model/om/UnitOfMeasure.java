@@ -26,7 +26,7 @@ public class UnitOfMeasure implements Serializable {
     }
 
 
-    public String getuom() {
+    public String getUom() {
         return uom;
     }
 
@@ -46,6 +46,7 @@ public class UnitOfMeasure implements Serializable {
         return HashCodeBuilder.reflectionHashCode(this);
     }
 
+    @SuppressWarnings("EqualsWhichDoesntCheckParameterClass")
     @Override
     public boolean equals(Object other) {
         return EqualsBuilder.reflectionEquals(this, other);

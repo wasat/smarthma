@@ -6,17 +6,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 
-import com.google.android.gms.maps.model.LatLngBounds;
-
-import java.util.ArrayList;
-
 import pl.wasat.smarthma.R;
 import pl.wasat.smarthma.adapter.SearchListAdapter;
 import pl.wasat.smarthma.database.EoDbAdapter;
 import pl.wasat.smarthma.helper.Const;
+import pl.wasat.smarthma.kindle.AmznAreaPickerMapFragment.OnAmznAreaPickerMapFragmentListener;
+import pl.wasat.smarthma.kindle.AmznExtendedMapFragment;
 import pl.wasat.smarthma.model.FedeoRequest;
 import pl.wasat.smarthma.model.iso.EntryISO;
-import pl.wasat.smarthma.model.om.Footprint;
 import pl.wasat.smarthma.preferences.SharedPrefs;
 import pl.wasat.smarthma.ui.frags.base.BaseShowProductsListFragment.OnBaseShowProductsListFragmentListener;
 import pl.wasat.smarthma.ui.frags.common.AreaPickerMapFragment.OnAreaPickerMapFragmentListener;
@@ -27,11 +24,12 @@ import pl.wasat.smarthma.ui.frags.common.MetadataISOFragment;
 import pl.wasat.smarthma.ui.frags.common.MetadataISOFragment.OnMetadataISOFragmentListener;
 import pl.wasat.smarthma.ui.frags.search.SearchListFragment;
 import pl.wasat.smarthma.ui.frags.search.SearchListFragment.OnSearchListFragmentListener;
+import pl.wasat.smarthma.utils.obj.LatLngBoundsExt;
 
 public class SearchCollectionResultsActivity extends BaseSmartHMActivity
         implements OnSearchListFragmentListener,
         OnBaseShowProductsListFragmentListener,
-        OnAreaPickerMapFragmentListener, OnMetadataISOFragmentListener,
+        OnAreaPickerMapFragmentListener, OnAmznAreaPickerMapFragmentListener, OnMetadataISOFragmentListener,
         OnCollectionDetailsFragmentListener {
 
     private EoDbAdapter dba;
@@ -74,7 +72,7 @@ public class SearchCollectionResultsActivity extends BaseSmartHMActivity
 
             /**
              * Use this query to display search results like 1. Getting the data
-             * from SQLite and showing in listview 2. Making webrequest and
+             * from SQLite and showing in listview 2. Making web request and
              * displaying the data For now we just display the query only
              */
 
@@ -118,6 +116,7 @@ public class SearchCollectionResultsActivity extends BaseSmartHMActivity
     public void onBackPressed() {
         FragmentManager fm = getSupportFragmentManager();
         int bsec = fm.getBackStackEntryCount();
+        String bstEntry = fm.getBackStackEntryAt(bsec - 1).getName();
         if (bsec > 1) {
             while (bsec > 1) {
                 fm.popBackStackImmediate();
@@ -125,7 +124,14 @@ public class SearchCollectionResultsActivity extends BaseSmartHMActivity
             }
         } else {
             finish();
-            super.onBackPressed();
+            if (bstEntry.equalsIgnoreCase("FeedSummarySearchFragment")) {
+                // Restart SearchActivity.
+                Intent intent = new Intent(this, SearchActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+            } else {
+                super.onBackPressed();
+            }
         }
     }
 
@@ -165,26 +171,23 @@ public class SearchCollectionResultsActivity extends BaseSmartHMActivity
     }
 
     @Override
-    public void onMapFragmentBoundsChange(LatLngBounds bounds) {
+    public void onMapFragmentBoundsChange(LatLngBoundsExt bounds) {
 
-        CollectionDetailsFragment searchResultCollectionDetailsFragment = (CollectionDetailsFragment) getSupportFragmentManager()
-                .findFragmentByTag("SearchResultCollectionDetailsFragment");
-
-        if (searchResultCollectionDetailsFragment != null) {
-            searchResultCollectionDetailsFragment.updateAreaBounds(bounds);
-        }
+        callUpdateCollectionsBounds(bounds);
 
     }
 
-    /*
-     * (non-Javadoc)
-     *
-     * @see pl.wasat.smarthma.ui.fragments.SearchProductsFeedsFragment.
-     * OnSearchProductsFeedFragmentListener
-     * #onSearchProductsFeedFragmentItemSelected(java.lang.String)
-     */
     @Override
-    public void onBaseShowProductsListFragmentItemSelected(String id) {
+    public void onAmznMapFragmentBoundsChange(LatLngBoundsExt bounds) {
+        callUpdateCollectionsBounds(bounds);
+    }
+
+    private void callUpdateCollectionsBounds(LatLngBoundsExt bounds) {
+        CollectionDetailsFragment searchResultCollectionDetailsFragment = (CollectionDetailsFragment) getSupportFragmentManager()
+                .findFragmentByTag("SearchResultCollectionDetailsFragment");
+        if (searchResultCollectionDetailsFragment != null) {
+            searchResultCollectionDetailsFragment.updateAreaBounds(bounds);
+        }
     }
 
 
@@ -196,14 +199,21 @@ public class SearchCollectionResultsActivity extends BaseSmartHMActivity
      * #onSearchProductsListFragmentFootprintSend(java.util.ArrayList)
      */
     @Override
-    public void onBaseShowProductsListFragmentFootprintSend(
-            ArrayList<Footprint> footPrints) {
-        ExtendedMapFragment extendedMapFragment = (ExtendedMapFragment) getSupportFragmentManager()
-                .findFragmentByTag("ExtendedMapFragment");
-
-        if (extendedMapFragment != null) {
-            extendedMapFragment.showFootPrints(null);
+    public void onBaseShowProductsListFragmentFootprintSend() {
+        if (Const.IS_KINDLE) {
+            AmznExtendedMapFragment extendedMapFragment = (AmznExtendedMapFragment) getSupportFragmentManager()
+                    .findFragmentByTag("ExtendedMapFragment");
+            if (extendedMapFragment != null) {
+                extendedMapFragment.showFootPrints(null);
+            }
+        } else {
+            ExtendedMapFragment extendedMapFragment = (ExtendedMapFragment) getSupportFragmentManager()
+                    .findFragmentByTag("ExtendedMapFragment");
+            if (extendedMapFragment != null) {
+                extendedMapFragment.showFootPrints(null);
+            }
         }
+
 
     }
 
@@ -227,8 +237,5 @@ public class SearchCollectionResultsActivity extends BaseSmartHMActivity
 
     }
 
-    @Override
-    public void onMetadataISOFragmentInteraction() {
 
-    }
 }

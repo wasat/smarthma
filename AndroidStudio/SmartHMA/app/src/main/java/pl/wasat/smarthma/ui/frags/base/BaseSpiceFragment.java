@@ -7,6 +7,7 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -15,7 +16,6 @@ import android.widget.Toast;
 import com.google.api.client.http.HttpResponseException;
 import com.octo.android.robospice.SpiceManager;
 import com.octo.android.robospice.persistence.exception.SpiceException;
-import com.octo.android.robospice.request.listener.RequestListener;
 import com.octo.android.robospice.spicelist.okhttp.OkHttpBitmapSpiceManager;
 
 import org.xml.sax.InputSource;
@@ -30,7 +30,6 @@ import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 
 import pl.wasat.smarthma.R;
-import pl.wasat.smarthma.model.feed.Feed;
 import pl.wasat.smarthma.services.SmartHmaHttpSpiceService;
 import pl.wasat.smarthma.ui.activities.BaseSmartHMActivity;
 import pl.wasat.smarthma.utils.rss.FedeoExceptionHandler;
@@ -38,8 +37,7 @@ import pl.wasat.smarthma.utils.rss.FedeoExceptionHandler;
 /**
  * @author Daniel Zinkiewicz Wasat Sp. z o.o 14-07-2014
  */
-public class BaseSpiceFragment extends Fragment implements
-        RequestListener<Feed> {
+public class BaseSpiceFragment extends Fragment {
 
     private final SpiceManager smartHMASpiceManager = new SpiceManager(
             SmartHmaHttpSpiceService.class);
@@ -64,7 +62,7 @@ public class BaseSpiceFragment extends Fragment implements
         super.onStop();
     }
 
-    SpiceManager getSpiceManager() {
+    protected SpiceManager getSpiceManager() {
         return smartHMASpiceManager;
     }
 
@@ -72,15 +70,7 @@ public class BaseSpiceFragment extends Fragment implements
         return spiceManagerBinary;
     }
 
-    /*
-     * (non-Javadoc)
-     *
-     * @see
-     * com.octo.android.robospice.request.listener.RequestListener#onRequestFailure
-     * (com.octo.android.robospice.persistence.exception.SpiceException)
-     */
-    @Override
-    public void onRequestFailure(SpiceException spiceException) {
+    protected void parseRequestFailure(SpiceException spiceException) {
 
         String messTxt;
 
@@ -111,16 +101,12 @@ public class BaseSpiceFragment extends Fragment implements
                 Log.e("RSS Handler SAX", e.toString());
                 e.printStackTrace();
             } catch (ParserConfigurationException e) {
-                Log.e("RSS Handler Parser Config", e.toString());
+                Log.e("RSS Parser Config", e.toString());
             }
 
             assert fedHr != null;
             messTxt = fedHr.getFedeoException().getExceptionReport()
                     .getException().getExceptionText().getText();
-            //if (fedHr.getFedeoException().getExceptionReport().getException().getExceptionCode().equalsIgnoreCase("NoApplicableCode"))
-            //{
-            //	messTxt = "No Applicable Exception Code.";
-            //}
 
         } else {
             messTxt = "Probably a wide area of search or to long time span ";
@@ -132,23 +118,13 @@ public class BaseSpiceFragment extends Fragment implements
 
     }
 
-    /*
-     * (non-Javadoc)
-     *
-     * @see
-     * com.octo.android.robospice.request.listener.RequestListener#onRequestSuccess
-     * (java.lang.Object)
-     */
-    @Override
-    public void onRequestSuccess(Feed feed) {
-
-    }
 
     private void showDialog(String messText) {
         DialogFragment newFragment = ExceptionDialogFragment
                 .newInstance(messText);
         newFragment.show(getFragmentManager(), "dialog");
     }
+
 
     public static class ExceptionDialogFragment extends DialogFragment {
 
@@ -161,6 +137,7 @@ public class BaseSpiceFragment extends Fragment implements
             return frag;
         }
 
+        @NonNull
         @Override
         public Dialog onCreateDialog(Bundle savedInstanceState) {
             int title = getArguments().getInt("title");

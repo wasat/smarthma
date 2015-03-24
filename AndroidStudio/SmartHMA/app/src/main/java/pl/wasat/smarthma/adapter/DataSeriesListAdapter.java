@@ -46,7 +46,7 @@ public class DataSeriesListAdapter extends ArrayAdapter<EntryISO> {
                 + ", updated: " + dataSeriesItem.getUpdated();
         holder.dateView.setText(pubDate);
 
-        if (!dataSeriesItem.isRead()) {
+        if (dataSeriesItem.isNotRead()) {
             holder.textView.setTypeface(Typeface.DEFAULT_BOLD);
         }
 

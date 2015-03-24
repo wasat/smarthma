@@ -81,11 +81,6 @@ public class ExtendedMapFragment extends Fragment implements
     }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
-
-    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
@@ -155,7 +150,7 @@ public class ExtendedMapFragment extends Fragment implements
     }
 
     /**
-     * @param footprint
+     * @param footprint - Footprint of EO data item
      */
     public void showFootPrints(Footprint footprint) {
         ArrayList<LatLng> footprintPoints = extractLatLngFootprint(footprint);
@@ -191,7 +186,7 @@ public class ExtendedMapFragment extends Fragment implements
                     results);
 
             if (Math.abs(results[2] - prevBearing) >= BEARING_LEVEL_VALUE) {
-                footprintPoints.add(footprintPosList.get(i).getLatLng());
+                footprintPoints.add(footprintPosList.get(i).getLatLng().getGoogleLatLon());
             }
             prevBearing = results[2];
         }
@@ -222,7 +217,7 @@ public class ExtendedMapFragment extends Fragment implements
         double fourLng = footprintPoints.get(3).longitude;
         float[] results = new float[3];
 
-        qLookCenter = footprint.getCenterOf().getPoint().getPos().getLatLng();
+        qLookCenter = footprint.getCenterOf().getPoint().getPos().getLatLng().getGoogleLatLon();
 
         Location.distanceBetween(oneLat, oneLng, twoLat, twoLng, results);
         qLookHeight = results[0];
@@ -249,31 +244,6 @@ public class ExtendedMapFragment extends Fragment implements
                 .into(quicklookTarget);
     }
 
-/*	// decodes image and scales it to reduce memory consumption
-    private Bitmap decodeFile(File f) {
-		try {
-			// Decode image size
-			BitmapFactory.Options o = new BitmapFactory.Options();
-			o.inJustDecodeBounds = true;
-			BitmapFactory.decodeStream(new FileInputStream(f), null, o);
-
-			// The new size we want to scale to
-			final int REQUIRED_SIZE = 70;
-
-			// Find the correct scale value. It should be the power of 2.
-			int scale = 1;
-			while (o.outWidth / scale / 2 >= REQUIRED_SIZE
-					&& o.outHeight / scale / 2 >= REQUIRED_SIZE)
-				scale *= 2;
-
-			// Decode with inSampleSize
-			BitmapFactory.Options o2 = new BitmapFactory.Options();
-			o2.inSampleSize = scale;
-			return BitmapFactory.decodeStream(new FileInputStream(f), null, o2);
-		} catch (FileNotFoundException e) {
-		}
-		return null;
-	}*/
 
     @Override
     public void onBaseSupportMapPublicReady() {
@@ -348,7 +318,6 @@ public class ExtendedMapFragment extends Fragment implements
 
     @Override
     public Bitmap transform(Bitmap source) {
-        //int size = Math.min(source.getWidth(), source.getHeight());
         int x = (int) ((source.getWidth()) / 1.5);
         int y = (int) ((source.getHeight()) / 1.5);
         Bitmap result = Bitmap.createScaledBitmap(source, x, y, false);

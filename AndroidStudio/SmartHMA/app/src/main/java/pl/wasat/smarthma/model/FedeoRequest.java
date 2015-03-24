@@ -7,13 +7,12 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.Log;
 
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.LatLngBounds;
-
 import java.io.Serializable;
 import java.util.HashMap;
 
 import pl.wasat.smarthma.helper.Const;
+import pl.wasat.smarthma.utils.obj.LatLngBoundsExt;
+import pl.wasat.smarthma.utils.obj.LatLngExt;
 
 /**
  * @author Daniel Zinkiewicz Wasat Sp. z o.o 18-07-2014
@@ -33,6 +32,8 @@ public class FedeoRequest implements Serializable {
     private String bbox;
     private String recordSchema;
     private String query;
+
+    private String descUrl;
 
     /**
      *
@@ -94,6 +95,7 @@ public class FedeoRequest implements Serializable {
         }
 
         Log.i("URL", url);
+        //Log.d("ZX", url);
         return url;
     }
 
@@ -242,10 +244,10 @@ public class FedeoRequest implements Serializable {
     }
 
     /**
-     * @param swLon
-     * @param swLat
-     * @param neLon
-     * @param neLat
+     * @param swLon - South West Longitude
+     * @param swLat - South West Latitude
+     * @param neLon - North East Longitude
+     * @param neLat - North East Latitude
      */
     void setBbox(Float swLon, Float swLat, Float neLon, Float neLat) {
         String bbox = swLon + "," + swLat + "," + neLon + "," + neLat;
@@ -253,18 +255,18 @@ public class FedeoRequest implements Serializable {
     }
 
     /**
-     * @param southwest
-     * @param northeast
+     * @param southwest - South West Coordinates
+     * @param northeast - North East Coordinates
      */
-    void setBbox(LatLng southwest, LatLng northeast) {
+    void setBbox(LatLngExt southwest, LatLngExt northeast) {
         setBbox((float) southwest.longitude, (float) southwest.latitude,
                 (float) northeast.longitude, (float) northeast.latitude);
     }
 
     /**
-     * @param bbox
+     * @param bbox - Bounding Box
      */
-    public void setBbox(LatLngBounds bbox) {
+    public void setBbox(LatLngBoundsExt bbox) {
         setBbox(bbox.southwest, bbox.northeast);
     }
 
@@ -298,9 +300,18 @@ public class FedeoRequest implements Serializable {
         this.params.put("query", query);
     }
 
+
+    public String getDescUrl() {
+        return descUrl;
+    }
+
+    public void setDescUrl(String descUrl) {
+        this.descUrl = descUrl;
+    }
+
     /**
-     * @param urn
-     * @return
+     * @param urn - URN
+     * @return String with Parent ID
      */
     private String getParetnId(String urn) {
         String[] idArr = urn.split("urn:ogc:def:");

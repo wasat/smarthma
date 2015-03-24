@@ -59,7 +59,7 @@ public class FedeoSearchRequest extends GoogleHttpClientSpiceRequest<Feed> {
     }
 
     private Feed parseOMFeed() throws IOException {
-        SmartHmaEoHandler rh = null;
+        OMDataHandler rh = null;
         try {
             HttpRequest request = getHttpRequestFactory().buildGetRequest(
                     new GenericUrl(fedeoRequest.getUrl()));
@@ -72,24 +72,24 @@ public class FedeoSearchRequest extends GoogleHttpClientSpiceRequest<Feed> {
             SAXParser sp = spf.newSAXParser();
             XMLReader xr = sp.getXMLReader();
 
-            rh = new SmartHmaEoHandler();
+            rh = new OMDataHandler();
             xr.setContentHandler(rh);
-            InputSource insour = new InputSource(in);
-            xr.parse(insour);
+            InputSource inputSource = new InputSource(in);
+            xr.parse(inputSource);
 
             Log.i("ASYNC", "PARSING FINISHED");
         } catch (SAXException e) {
             Log.e("RSS Handler SAX", e.toString());
             e.printStackTrace();
         } catch (ParserConfigurationException e) {
-            Log.e("RSS Handler Parser Config", e.toString());
+            Log.e("RSS Parser Config", e.toString());
         }
         //noinspection ConstantConditions
         return rh.getFeeds();
     }
 
     private Feed parseISOFeed() throws IOException {
-        SmartHmaISOHandler rh = null;
+        ISODataHandler rh = null;
         try {
             HttpRequest request = getHttpRequestFactory().buildGetRequest(
                     new GenericUrl(fedeoRequest.getUrl()));
@@ -102,17 +102,17 @@ public class FedeoSearchRequest extends GoogleHttpClientSpiceRequest<Feed> {
             SAXParser sp = spf.newSAXParser();
             XMLReader xr = sp.getXMLReader();
 
-            rh = new SmartHmaISOHandler();
+            rh = new ISODataHandler();
             xr.setContentHandler(rh);
-            InputSource insour = new InputSource(in);
-            xr.parse(insour);
+            InputSource inSource = new InputSource(in);
+            xr.parse(inSource);
 
             Log.i("ASYNC", "PARSING FINISHED");
         } catch (SAXException e) {
             Log.e("RSS Handler SAX", e.toString());
             e.printStackTrace();
         } catch (ParserConfigurationException e) {
-            Log.e("RSS Handler Parser Config", e.toString());
+            Log.e("RSS Parser Config", e.toString());
         }
         //noinspection ConstantConditions
         return rh.getFeeds();

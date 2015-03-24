@@ -4,7 +4,7 @@ package pl.wasat.smarthma.helper;
  * A simple class representing date and time.
  */
 
-class SimpleDate {
+public class SimpleDate {
     private final int year;
     private final int month;
     private final int day;
@@ -17,13 +17,18 @@ class SimpleDate {
         String[] values = date.split("-");
         this.year = Integer.parseInt(values[0]);
         this.month = Integer.parseInt(values[1]);
-        values = values[2].split("T");
-        this.day = Integer.parseInt(values[0]);
+        if (values[2].contains("T")) {
+            values = values[2].split("T");
+            this.day = Integer.parseInt(values[0]);
 
-        values = values[1].split(":");
-        this.hours = Integer.parseInt(values[0]);
-        this.minutes = Integer.parseInt(values[1]);
-        this.seconds = Integer.parseInt(values[2].substring(0, 2));
+            values = values[1].split(":");
+            this.hours = Integer.parseInt(values[0]);
+            this.minutes = Integer.parseInt(values[1]);
+            this.seconds = Integer.parseInt(values[2].substring(0, 2));
+        } else {
+            this.day = Integer.parseInt(values[2]);
+            this.hours = this.minutes = this.seconds = 0;
+        }
     }
 
     public String toString() {
@@ -45,5 +50,29 @@ class SimpleDate {
             return seconds - another.seconds;
         }
         return 0;
+    }
+
+    public int getYear() {
+        return year;
+    }
+
+    public int getMonth() {
+        return month;
+    }
+
+    public int getDay() {
+        return day;
+    }
+
+    public int getHours() {
+        return hours;
+    }
+
+    public int getMinutes() {
+        return minutes;
+    }
+
+    public int getSeconds() {
+        return seconds;
     }
 }

@@ -6,8 +6,8 @@ import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.location.Location;
-import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -19,18 +19,23 @@ import android.widget.DatePicker;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.google.android.gms.maps.model.LatLngBounds;
-
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Locale;
 
 import pl.wasat.smarthma.R;
 import pl.wasat.smarthma.customviews.SmHmaTimePickerDialog;
 import pl.wasat.smarthma.customviews.TimePicker;
+import pl.wasat.smarthma.database.SearchHistory;
+import pl.wasat.smarthma.database.SearchParams;
+import pl.wasat.smarthma.helper.Const;
+import pl.wasat.smarthma.kindle.AmznAreaPickerMapFragment;
 import pl.wasat.smarthma.preferences.SharedPrefs;
 import pl.wasat.smarthma.ui.frags.common.AreaPickerMapFragment;
 import pl.wasat.smarthma.utils.loc.LocManager;
+import pl.wasat.smarthma.utils.obj.LatLngBoundsExt;
+import pl.wasat.smarthma.utils.time.SimpleDate;
 
 /**
  * A simple {@link android.support.v4.app.Fragment} subclass. Activities that
@@ -59,6 +64,8 @@ public class SearchBasicInfoRightFragment extends Fragment {
     private static Button btnFromTime;
     private static Button btnToDate;
     private static Button btnToTime;
+
+    private boolean areaBoundsUpdated = false;
 
     private OnSearchBasicInfoRightFragmentListener mListener;
     private static SharedPrefs sharedPrefs;
@@ -111,7 +118,6 @@ public class SearchBasicInfoRightFragment extends Fragment {
             }
         });
 
-        // setParentIdPrefs(getActivity(), tvCatalogName.getText().toString());
         sharedPrefs.setParentIdPrefs(tvCatalogName.getText().toString());
 
         ((TextView) rootView.findViewById(R.id.search_frag_right_basic_tv_name))
@@ -130,20 +136,31 @@ public class SearchBasicInfoRightFragment extends Fragment {
         areaLayout.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                AreaPickerMapFragment areaPickerMapFragment = AreaPickerMapFragment
-                        .newInstance();
-                getActivity()
-                        .getSupportFragmentManager()
-                        .beginTransaction()
-                        .replace(R.id.activity_base_details_container,
-                                areaPickerMapFragment)
-                        .addToBackStack("AreaPickerMapFragment").commit();
+                if (Const.IS_KINDLE) {
+                    AmznAreaPickerMapFragment areaPickerMapFragment = AmznAreaPickerMapFragment
+                            .newInstance();
+                    getActivity()
+                            .getSupportFragmentManager()
+                            .beginTransaction()
+                            .replace(R.id.activity_base_details_container,
+                                    areaPickerMapFragment)
+                            .addToBackStack("AreaPickerMapFragment").commit();
+                } else {
+                    AreaPickerMapFragment areaPickerMapFragment = AreaPickerMapFragment
+                            .newInstance();
+                    getActivity()
+                            .getSupportFragmentManager()
+                            .beginTransaction()
+                            .replace(R.id.activity_base_details_container,
+                                    areaPickerMapFragment)
+                            .addToBackStack("AreaPickerMapFragment").commit();
+                }
 
             }
         });
 
         btnFromDate = (Button) rootView
-                .findViewById(R.id.search_frag_right_basic_buton_time_from_date);
+                .findViewById(R.id.search_frag_right_basic_button_time_from_date);
         btnFromDate.setTag("btnFromDate");
         btnFromDate.setOnClickListener(new OnClickListener() {
 
@@ -154,7 +171,7 @@ public class SearchBasicInfoRightFragment extends Fragment {
             }
         });
         btnFromTime = (Button) rootView
-                .findViewById(R.id.search_frag_right_basic_buton_time_from_time);
+                .findViewById(R.id.search_frag_right_basic_button_time_from_time);
         btnFromTime.setTag("btnFromTime");
         btnFromTime.setOnClickListener(new OnClickListener() {
 
@@ -165,7 +182,7 @@ public class SearchBasicInfoRightFragment extends Fragment {
             }
         });
         btnToDate = (Button) rootView
-                .findViewById(R.id.search_frag_right_basic_buton_time_to_date);
+                .findViewById(R.id.search_frag_right_basic_button_time_to_date);
         btnToDate.setTag("btnToDate");
         btnToDate.setOnClickListener(new OnClickListener() {
 
@@ -176,7 +193,7 @@ public class SearchBasicInfoRightFragment extends Fragment {
             }
         });
         btnToTime = (Button) rootView
-                .findViewById(R.id.search_frag_right_basic_buton_time_to_time);
+                .findViewById(R.id.search_frag_right_basic_button_time_to_time);
         btnToTime.setTag("btnToTime");
         btnToTime.setOnClickListener(new OnClickListener() {
 
@@ -190,6 +207,16 @@ public class SearchBasicInfoRightFragment extends Fragment {
         updateSearchAreaBounds();
         setInitDateTime();
 
+        SearchHistory searchHistory = new SearchHistory(getActivity());
+        ArrayList<SearchParams> searchHistoryList = searchHistory.getSearchHistoryList(true);
+        if (!searchHistoryList.isEmpty()) {
+            SearchParams searchParams = searchHistoryList.get(0);
+            setCatalogue(searchParams.getCatalogue());
+            setBbox(searchParams.getBbox());
+            setStartDate(searchParams.getStartDate());
+            setEndDate(searchParams.getEndDate());
+        }
+
         return rootView;
     }
 
@@ -197,12 +224,6 @@ public class SearchBasicInfoRightFragment extends Fragment {
     public void onResume() {
         sharedPrefs.setParentIdPrefs(tvCatalogName.getText().toString());
         super.onResume();
-    }
-
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onSearchBasicInfoRightFragmentInteraction(uri);
-        }
     }
 
     @Override
@@ -232,7 +253,6 @@ public class SearchBasicInfoRightFragment extends Fragment {
      * >Communicating with Other Fragments</a> for more information.
      */
     public interface OnSearchBasicInfoRightFragmentListener {
-        public void onSearchBasicInfoRightFragmentInteraction(Uri uri);
     }
 
     private void updateSearchAreaBounds() {
@@ -267,10 +287,24 @@ public class SearchBasicInfoRightFragment extends Fragment {
 
         sharedPrefs.setBboxPrefs(bboxWest, bboxSouth, bboxEast, bboxNorth);
 
-        // setBboxPrefs();
-
+        areaBoundsUpdated = true;
     }
 
+    public boolean getAreaBoundsUpdated() {
+        return areaBoundsUpdated;
+    }
+
+    public void setAreaBoundsUpdated(boolean areaBoundsUpdated) {
+        this.areaBoundsUpdated = areaBoundsUpdated;
+    }
+
+    private static Calendar getCalStart() {
+        return calStart;
+    }
+
+    private static Calendar getCalEnd() {
+        return calEnd;
+    }
 
     /**
      *
@@ -286,7 +320,6 @@ public class SearchBasicInfoRightFragment extends Fragment {
         btnToDate.setText(formatDate(calEnd));
         btnToTime.setText(formatTime(calEnd));
 
-        // setDateTimePrefs(getActivity());
         sharedPrefs.setDateTimePrefs(setDtISO(calStart), setDtISO(calEnd));
     }
 
@@ -318,6 +351,7 @@ public class SearchBasicInfoRightFragment extends Fragment {
             DatePickerDialog.OnDateSetListener {
         private String buttonTag;
 
+        @NonNull
         @Override
         public Dialog onCreateDialog(Bundle savedInstanceState) {
             // Use the current date as the default date in the picker
@@ -346,7 +380,6 @@ public class SearchBasicInfoRightFragment extends Fragment {
                 String dateToSet = formatDate(calEnd);
                 btnToDate.setText(dateToSet);
             }
-            // setDateTimePrefs(getActivity());
             sharedPrefs.setDateTimePrefs(setDtISO(calStart), setDtISO(calEnd));
 
         }
@@ -357,6 +390,7 @@ public class SearchBasicInfoRightFragment extends Fragment {
 
         private String buttonTag;
 
+        @NonNull
         @Override
         public Dialog onCreateDialog(Bundle savedInstanceState) {
             // Use the current time as the default values for the picker
@@ -403,33 +437,90 @@ public class SearchBasicInfoRightFragment extends Fragment {
                 String timeToSet = formatTime(calEnd);
                 btnToTime.setText(timeToSet);
             }
-            // setDateTimePrefs(getActivity());
             sharedPrefs.setDateTimePrefs(setDtISO(calStart), setDtISO(calEnd));
         }
     }
 
     public static class CatalogueListDialogFragment extends DialogFragment {
+        @NonNull
         @Override
         public Dialog onCreateDialog(Bundle savedInstanceState) {
             AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
             builder.setTitle(R.string.eo_catalogue_list_title).setItems(
                     cataloguesList, new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
-                            tvCatalogName.setText(cataloguesList[which]);
-
-                            sharedPrefs.setParentIdPrefs(cataloguesList[which]
-                                    .toString());
-                            // setParentIdPrefs(getActivity(),
-                            // cataloguesList[which].toString());
+                            setCatalogue(which);
                         }
                     });
             return builder.create();
         }
     }
 
+    private static void setCatalogue(int which) {
+        tvCatalogName.setText(cataloguesList[which]);
+        sharedPrefs.setParentIdPrefs(cataloguesList[which].toString());
+    }
+
+    private static void setDateTime(Calendar calStart, Calendar calEnd) {
+        SearchBasicInfoRightFragment.calStart = calStart;
+        SearchBasicInfoRightFragment.calEnd = calEnd;
+
+        String dateToSet = formatDate(calStart);
+        btnFromDate.setText(dateToSet);
+        String timeToSet = formatTime(calStart);
+        btnFromTime.setText(timeToSet);
+
+        String dateToSet2 = formatDate(calEnd);
+        btnToDate.setText(dateToSet2);
+        String timeToSet2 = formatTime(calEnd);
+        btnToTime.setText(timeToSet2);
+
+        sharedPrefs.setDateTimePrefs(setDtISO(calStart), setDtISO(calEnd));
+    }
+
+    void setBounds(String bboxWest, String bboxSouth, String bboxEast, String bboxNorth) {
+        tvAreaSWLat.setText(bboxSouth);
+        tvAreaSWLon.setText(bboxWest);
+        tvAreaNELat.setText(bboxNorth);
+        tvAreaNELon.setText(bboxEast);
+
+        sharedPrefs.setBboxPrefs(bboxWest, bboxSouth, bboxEast, bboxNorth);
+    }
+
+    public void setCatalogue(String catalogue) {
+        CharSequence[] cataloguesList = getCataloguesList();
+        for (int i = 0; i < cataloguesList.length; i++) {
+            if (catalogue.equalsIgnoreCase(cataloguesList[i].toString())) {
+                setCatalogue(i);
+            }
+        }
+    }
+
+    public void setBbox(String boundingBox) {
+        String[] bbox = boundingBox.split(",");
+        setBounds(bbox[0], bbox[1], bbox[2], bbox[3]);
+        areaBoundsUpdated = true;
+    }
+
+    public void setStartDate(String startDate) {
+        Calendar calStart = Calendar.getInstance();
+        SimpleDate dateStart = new SimpleDate(startDate);
+        calStart.set(dateStart.getYear(), dateStart.getMonth() - 1, dateStart.getDay(),
+                dateStart.getHours(), dateStart.getMinutes(), dateStart.getSeconds());
+        setDateTime(calStart, getCalEnd());
+    }
+
+    public void setEndDate(String endDate) {
+        Calendar calEnd = Calendar.getInstance();
+        SimpleDate dateEnd = new SimpleDate(endDate);
+        calEnd.set(dateEnd.getYear(), dateEnd.getMonth() - 1, dateEnd.getDay(),
+                dateEnd.getHours(), dateEnd.getMinutes(), dateEnd.getSeconds());
+        setDateTime(getCalStart(), calEnd);
+    }
+
     /**
-     * @param cal
-     * @return
+     * @param cal - Calendar
+     * @return - String with date
      */
     private static String formatDate(Calendar cal) {
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd", Locale.UK);
@@ -437,8 +528,8 @@ public class SearchBasicInfoRightFragment extends Fragment {
     }
 
     /**
-     * @param cal
-     * @return
+     * @param cal - Calendar
+     * @return - String of time
      */
     private static String formatTime(Calendar cal) {
         SimpleDateFormat dfTime = new SimpleDateFormat("HH:mm:ss", Locale.UK);
@@ -452,9 +543,9 @@ public class SearchBasicInfoRightFragment extends Fragment {
     }
 
     /**
-     * @param bounds
+     * @param bounds - Bounding Box
      */
-    public void updateCollectionsAreaBounds(LatLngBounds bounds) {
+    public void updateCollectionsAreaBounds(LatLngBoundsExt bounds) {
 
         String bboxWest = String.format(Locale.UK, "% 4f",
                 (float) bounds.southwest.longitude);
@@ -472,5 +563,11 @@ public class SearchBasicInfoRightFragment extends Fragment {
 
         sharedPrefs.setBboxPrefs(bboxWest, bboxSouth, bboxEast, bboxNorth);
 
+        areaBoundsUpdated = true;
+    }
+
+    @SuppressWarnings("SameReturnValue")
+    private static CharSequence[] getCataloguesList() {
+        return cataloguesList;
     }
 }
