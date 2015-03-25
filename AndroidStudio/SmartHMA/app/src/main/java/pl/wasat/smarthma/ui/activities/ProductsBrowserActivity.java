@@ -10,9 +10,8 @@ import pl.wasat.smarthma.R;
 import pl.wasat.smarthma.helper.Const;
 import pl.wasat.smarthma.kindle.AmznExtendedMapFragment;
 import pl.wasat.smarthma.kindle.AmznExtendedMapFragment.OnAmznExtendedMapFragmentListener;
-import pl.wasat.smarthma.model.FedeoRequest;
+import pl.wasat.smarthma.model.FedeoRequestParams;
 import pl.wasat.smarthma.model.om.Footprint;
-import pl.wasat.smarthma.preferences.SharedPrefs;
 import pl.wasat.smarthma.ui.frags.base.BaseShowProductsListFragment.OnBaseShowProductsListFragmentListener;
 import pl.wasat.smarthma.ui.frags.common.ExtendedMapFragment;
 import pl.wasat.smarthma.ui.frags.common.ExtendedMapFragment.OnExtendedMapFragmentListener;
@@ -35,16 +34,15 @@ public class ProductsBrowserActivity extends BaseSmartHMActivity implements
         super.onCreate(savedInstanceState);
 
         Intent intent = getIntent();
-        String parentId = intent.getStringExtra(Const.KEY_INTENT_PARENT_ID);
+        //String parentId = intent.getStringExtra(Const.KEY_INTENT_PARENT_ID);
 
-        SharedPrefs sharedPrefs = new SharedPrefs(getApplicationContext());
-        sharedPrefs.setParentIdPrefs(parentId);
+        FedeoRequestParams fedeoRequestParams = (FedeoRequestParams) intent.getSerializableExtra(Const.KEY_INTENT_FEDEO_REQUEST_PARAMS);
+        //fedeoRequestParams.buildFromShared(this);
+        //fedeoRequestParams.setParentIdentifier();
 
-        FedeoRequest fedeoRequest = new FedeoRequest();
-        fedeoRequest.buildFromShared(this);
 
         ProductsListFragment productsListFragment = ProductsListFragment
-                .newInstance(fedeoRequest);
+                .newInstance(fedeoRequestParams);
         getSupportFragmentManager()
                 .beginTransaction()
                 .replace(R.id.activity_base_list_container,

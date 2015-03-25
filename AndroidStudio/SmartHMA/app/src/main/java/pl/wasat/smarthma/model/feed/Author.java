@@ -9,7 +9,6 @@ import java.io.Serializable;
 
 import pl.wasat.smarthma.model.om.Name;
 import pl.wasat.smarthma.utils.text.SmartHMAStringStyle;
-//import pl.wasat.smarthma.utils.text.SmartHMAStringStyle;
 
 
 public class Author implements Serializable {

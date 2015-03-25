@@ -2,7 +2,7 @@ package pl.wasat.smarthma.database;
 
 import pl.wasat.smarthma.R;
 import pl.wasat.smarthma.SmartHMApplication;
-import pl.wasat.smarthma.model.FedeoRequest;
+import pl.wasat.smarthma.model.FedeoRequestParams;
 
 /**
  * Created by Dark Mark on 24/02/2015.
@@ -15,7 +15,7 @@ public class SearchParams {
     private final String startDate;
     private final String endDate;
 
-    public SearchParams(FedeoRequest request) {
+    public SearchParams(FedeoRequestParams request) {
         searchPhrase = request.getQuery();
         catalogue = request.getParams().get("parentIdentifier");
         bbox = request.getBbox();

@@ -160,7 +160,7 @@ public class SearchBasicInfoRightFragment extends Fragment {
         });
 
         btnFromDate = (Button) rootView
-                .findViewById(R.id.search_frag_right_basic_buton_time_from_date);
+                .findViewById(R.id.search_frag_right_basic_button_time_from_date);
         btnFromDate.setTag("btnFromDate");
         btnFromDate.setOnClickListener(new OnClickListener() {
 
@@ -171,7 +171,7 @@ public class SearchBasicInfoRightFragment extends Fragment {
             }
         });
         btnFromTime = (Button) rootView
-                .findViewById(R.id.search_frag_right_basic_buton_time_from_time);
+                .findViewById(R.id.search_frag_right_basic_button_time_from_time);
         btnFromTime.setTag("btnFromTime");
         btnFromTime.setOnClickListener(new OnClickListener() {
 
@@ -182,7 +182,7 @@ public class SearchBasicInfoRightFragment extends Fragment {
             }
         });
         btnToDate = (Button) rootView
-                .findViewById(R.id.search_frag_right_basic_buton_time_to_date);
+                .findViewById(R.id.search_frag_right_basic_button_time_to_date);
         btnToDate.setTag("btnToDate");
         btnToDate.setOnClickListener(new OnClickListener() {
 
@@ -193,7 +193,7 @@ public class SearchBasicInfoRightFragment extends Fragment {
             }
         });
         btnToTime = (Button) rootView
-                .findViewById(R.id.search_frag_right_basic_buton_time_to_time);
+                .findViewById(R.id.search_frag_right_basic_button_time_to_time);
         btnToTime.setTag("btnToTime");
         btnToTime.setOnClickListener(new OnClickListener() {
 

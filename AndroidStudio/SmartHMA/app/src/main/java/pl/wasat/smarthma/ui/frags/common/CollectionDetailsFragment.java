@@ -7,22 +7,28 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.TableLayout;
+import android.widget.Toast;
 
 import com.octo.android.robospice.persistence.exception.SpiceException;
 import com.octo.android.robospice.request.listener.RequestListener;
 import com.wunderlist.slidinglayer.SlidingLayer;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
+import pl.wasat.smarthma.model.FedeoRequestParams;
 import pl.wasat.smarthma.model.feed.Link;
 import pl.wasat.smarthma.model.iso.EntryISO;
 import pl.wasat.smarthma.model.osdd.OpenSearchDescription;
 import pl.wasat.smarthma.model.osdd.Option;
 import pl.wasat.smarthma.model.osdd.Parameter;
+import pl.wasat.smarthma.model.osdd.Url;
+import pl.wasat.smarthma.preferences.SharedPrefs;
 import pl.wasat.smarthma.ui.frags.base.BaseViewAndBasicSettingsDetailFragment;
 import pl.wasat.smarthma.utils.rss.FedeoOSDDRequest;
 
@@ -39,6 +45,9 @@ public class CollectionDetailsFragment extends
 
     private OnCollectionDetailsFragmentListener mListener;
     private boolean waitForOsddLoad = true;
+
+    private FedeoRequestParams fedeoRequestParams;
+    private HashMap<String, String> paramsMap;
 
 
     /**
@@ -73,6 +82,8 @@ public class CollectionDetailsFragment extends
                              Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
 
+        putParentIdToShared();
+
         String osddUrl = "";
         for (Link entityLink : displayedISOEntry.getLink()) {
             if (entityLink.getRel().equalsIgnoreCase("search")) {
@@ -86,9 +97,11 @@ public class CollectionDetailsFragment extends
         btnShowProducts.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                final String parentID = displayedISOEntry.getIdentifier();
+
                 if (mListener != null) {
-                    mListener.onCollectionDetailsFragmentShowProducts(parentID);
+                    //mListener.onCollectionDetailsFragmentShowProducts(parentID);
+                    mSlidingLayer.closeLayer(true);
+                    mListener.onCollectionDetailsFragmentShowProducts(fedeoRequestParams);
                 }
             }
         });
@@ -119,19 +132,18 @@ public class CollectionDetailsFragment extends
             @Override
             public void onClose() {
                 Log.i("SLIDER", "onClose");
-
+                fedeoRequestParams.setParamsExtra(paramsMap);
+                //mListener.onCollectionDetailsFragmentShowProducts(fedeoRequestParams);
             }
 
             @Override
             public void onOpened() {
                 Log.i("SLIDER", "onOpened");
-
             }
 
             @Override
             public void onPreviewShowed() {
                 Log.i("SLIDER", "onPreviewShowed");
-
             }
 
             @Override
@@ -139,12 +151,8 @@ public class CollectionDetailsFragment extends
                 Log.i("SLIDER", "onClosed");
             }
         });
-
-
         return rootView;
-
     }
-
 
     @Override
     public void onAttach(Activity activity) {
@@ -163,11 +171,15 @@ public class CollectionDetailsFragment extends
         mListener = null;
     }
 
+    private void putParentIdToShared() {
+        final String parentID = displayedISOEntry.getIdentifier();
+        SharedPrefs sharedPrefs = new SharedPrefs(getActivity().getApplicationContext());
+        sharedPrefs.setParentIdPrefs(parentID);
+    }
 
     private void startAsyncLoadOsddData(String fedeoDescUrl) {
         if (fedeoDescUrl != null) {
             getActivity().setProgressBarIndeterminateVisibility(true);
-
             getSpiceManager().execute(new FedeoOSDDRequest(fedeoDescUrl),
                     new OsddRequestListener());
         }
@@ -175,12 +187,15 @@ public class CollectionDetailsFragment extends
 
     void loadRequestSuccess(OpenSearchDescription osdd) {
         getActivity().setProgressBarIndeterminateVisibility(false);
+        initFedeoReq(osdd);
         addParameterSpinners(osdd);
     }
 
     private void addParameterSpinners(OpenSearchDescription osdd) {
 
-        for (Parameter param : osdd.getParameter()) {
+        paramsMap = new HashMap<>();
+
+        for (final Parameter param : osdd.getParameter()) {
 
             Spinner spinner = new Spinner(getActivity());
             spinner.setLayoutParams(new TableLayout.LayoutParams(
@@ -189,7 +204,7 @@ public class CollectionDetailsFragment extends
             //spinner.setPrompt(param.getName());
 
             List<String> optList = new ArrayList<>();
-            optList.add(param.getName());
+            optList.add("Choose " + param.getName() + "...");
             for (Option opt : param.getOption()) {
                 optList.add(opt.getLabel());
             }
@@ -198,10 +213,42 @@ public class CollectionDetailsFragment extends
             spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             spinner.setAdapter(spinnerAdapter);
 
+            spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                    if (l > 0) {
+                        paramsMap.put(param.getName(), param.getOption().get(i - 1).getValue());
+
+                        Toast.makeText(adapterView.getContext(),
+                                "Item Selected : " + adapterView.getItemAtPosition(i).toString() + " ID: " + l,
+                                Toast.LENGTH_LONG).show();
+                    } else {
+                        paramsMap.put(param.getName(), "");
+                    }
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> adapterView) {
+
+                }
+            });
+
             layoutSpinners.addView(spinner);
         }
 
 
+    }
+
+    private void initFedeoReq(OpenSearchDescription osdd) {
+        fedeoRequestParams = new FedeoRequestParams();
+        fedeoRequestParams.buildFromShared(getActivity().getApplicationContext());
+        String tmpltUrl = "";
+        for (Url url : osdd.getUrl()) {
+            if (url.getType().equalsIgnoreCase("application/atom+xml")) {
+                tmpltUrl = url.getTemplate();
+            }
+        }
+        fedeoRequestParams.setTemplateUrl(tmpltUrl);
     }
 
     /**
@@ -214,7 +261,9 @@ public class CollectionDetailsFragment extends
      * >Communicating with Other Fragments</a> for more information.
      */
     public interface OnCollectionDetailsFragmentListener {
-        public void onCollectionDetailsFragmentShowProducts(String parentID);
+        // public void onCollectionDetailsFragmentShowProducts(String parentID);
+
+        public void onCollectionDetailsFragmentShowProducts(FedeoRequestParams fedeoRequestParams);
 
         public void onCollectionDetailsFragmentShowMetadata(EntryISO displayedEntry);
 

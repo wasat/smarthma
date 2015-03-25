@@ -1,5 +1,4 @@
-//apply plugin: 'com.android.application'
-apply plugin: 'android'
+apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 22
@@ -42,11 +41,9 @@ dependencies {
         exclude group: 'org.apache.httpcomponents'
         exclude group: 'org.apache.commons', module: 'commons-io'
     }
-
     compile('ch.acra:acra:4.6.1') {
         exclude group: 'org.json'
     }
-
     compile 'com.android.support:support-v4:22.0.0'
     compile 'com.android.support:appcompat-v7:22.0.0'
     compile 'com.google.android.gms:play-services:6.5.87'

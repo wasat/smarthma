@@ -41,7 +41,7 @@
             android:focusable="true"
             android:focusableInTouchMode="true"
             android:iconifiedByDefault="false"
-            android:visibility="visible"></SearchView>
+            android:visibility="visible" />
 
         <LinearLayout
             android:layout_width="wrap_content"

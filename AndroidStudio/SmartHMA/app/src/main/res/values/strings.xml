@@ -4,13 +4,8 @@
     <string name="app_name">SmartHMA</string>
     <string name="action_settings">Settings</string>
     <string name="action_exit">Exit</string>
-    <string name="action_pref3">Preferences 1</string>
-    <string name="action_pref2">Preferences 2</string>
-    <string name="action_pref1">Preferences 3</string>
     <string name="action_clear_all_settings">Clear Settings</string>
     <string name="specific_collection_does_not_exist">Specific collection does not exist. Please try later.</string>
-    <string name="download_explain_doc_complete">Download explain document complete.</string>
-    <string name="download_failed">Download failed</string>
     <string name="loading_please_wait">Data is loading \nPlease wait … </string>
     <string name="content_picture">Collection picture</string>
     <string name="search_hint">Search EO data</string>
@@ -23,13 +18,11 @@
     <string name="btn_offline_reading">Save for later</string>
     <string name="btn_mark_unread">Mark unread</string>
     <string name="btn_refresh">Refresh</string>
-    <string name="ok_">"OK!!! "</string>
     <string name="nothing_to_display_please_search_again_">Nothing to display. Please search again.</string>
     <string name="search_product">Search Product</string>
     <string name="show_metadata">Metadata</string>
     <string name="show_map">Show Map</string>
     <string name="Share">Share</string>
-    <string name="products_search_area">Products search area</string>
     <string name="sw_">SW: </string>
     <string name="ne_">NE: </string>
     <string name="search_products">Search Products</string>
@@ -42,10 +35,8 @@
     <string name="more">More &gt;&gt;</string>
     <string name="smarthma">SmartHMA</string>
     <string name="fedeo_eo_data_series_search_engine">with ESA/FedEO Search Engine</string>
-    <string name="search_history">Search history:</string>
     <string name="search_history_empty">(search history is empty)</string>
     <string name="query">Query</string>
-    <string name="clear_search_history">Clear search history</string>
     <string name="basic_settings">Basic Settings</string>
     <string name="advanced_settings">Advanced Settings</string>
     <string name="basic_search_settings">Basic Search Settings</string>
@@ -79,7 +70,6 @@
     <string name="last_">last &gt;&gt;</string>
     <string name="items_from">Items from</string>
     <string name="to">to</string>
-    <string name="sort_by">Sort by:</string>
     <string name="collection_id">Collection ID: </string>
     <string name="show_products">Show Products</string>
     <string name="activity_name_collections_definition">Collections Definition</string>
@@ -87,7 +77,6 @@
     <string name="activity_name_products_browser">Products Browser</string>
     <string name="activity_name_search_eo_data">Search EO Data</string>
     <string name="activity_name_search_collections_results">Searched Collections</string>
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="actionbar_share">Share</string>
     <string name="app_id">825236790862337</string>
     <string name="cancelled">Cancelled</string>
@@ -119,18 +108,11 @@
     <string name="action_sort_by_date_desc">By date descending</string>
     <string name="refreshing_list">Refreshing list…</string>
 
-    <string name="close_button_container">Close</string>
-
-
     <string-array name="sorting_modes">
         <item>Title ascending</item>
         <item>Title descending</item>
         <item>Date ascending</item>
         <item>Date descending</item>
-    </string-array>
-
-    <string-array name="parameter_options">
-        <item>Default</item>
     </string-array>
 
 </resources>

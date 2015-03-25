@@ -320,7 +320,6 @@
                 android:textColor="#074035"
                 android:text="@string/parameters"
                 android:gravity="top"
-                android:layout_centerHorizontal="true"
                 style="@style/styleSettingsBasicTitles" />
 
         </LinearLayout>

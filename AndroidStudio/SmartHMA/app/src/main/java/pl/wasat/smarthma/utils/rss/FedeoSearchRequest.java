@@ -18,28 +18,28 @@ import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 
-import pl.wasat.smarthma.model.FedeoRequest;
+import pl.wasat.smarthma.model.FedeoRequestParams;
 import pl.wasat.smarthma.model.feed.Feed;
 
 public class FedeoSearchRequest extends GoogleHttpClientSpiceRequest<Feed> {
 
-    private final FedeoRequest fedeoRequest;
+    private final FedeoRequestParams fedeoRequestParams;
     private int schemaMode;
 
     /**
      *
      */
-    public FedeoSearchRequest(FedeoRequest fedeoRequest, int schema) {
+    public FedeoSearchRequest(FedeoRequestParams fedeoRequestParams, int schema) {
         super(null);
-        this.fedeoRequest = fedeoRequest;
+        this.fedeoRequestParams = fedeoRequestParams;
         this.schemaMode = schema;
 
     }
 
     public FedeoSearchRequest(String fedeoUrl) {
         super(null);
-        this.fedeoRequest = new FedeoRequest();
-        fedeoRequest.setUrl(fedeoUrl);
+        this.fedeoRequestParams = new FedeoRequestParams();
+        fedeoRequestParams.setUrl(fedeoUrl);
     }
 
     @Override
@@ -62,7 +62,7 @@ public class FedeoSearchRequest extends GoogleHttpClientSpiceRequest<Feed> {
         OMDataHandler rh = null;
         try {
             HttpRequest request = getHttpRequestFactory().buildGetRequest(
-                    new GenericUrl(fedeoRequest.getUrl()));
+                    new GenericUrl(fedeoRequestParams.getUrl()));
             HttpResponse response = request.execute();
 
             InputStream in;
@@ -92,7 +92,7 @@ public class FedeoSearchRequest extends GoogleHttpClientSpiceRequest<Feed> {
         ISODataHandler rh = null;
         try {
             HttpRequest request = getHttpRequestFactory().buildGetRequest(
-                    new GenericUrl(fedeoRequest.getUrl()));
+                    new GenericUrl(fedeoRequestParams.getUrl()));
             HttpResponse response = request.execute();
 
             InputStream in;

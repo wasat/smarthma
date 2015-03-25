@@ -9,7 +9,7 @@ import pl.wasat.smarthma.adapter.DataSeriesListAdapter;
 import pl.wasat.smarthma.database.EoDbAdapter;
 import pl.wasat.smarthma.helper.Const;
 import pl.wasat.smarthma.kindle.AmznAreaPickerMapFragment.OnAmznAreaPickerMapFragmentListener;
-import pl.wasat.smarthma.model.FedeoRequest;
+import pl.wasat.smarthma.model.FedeoRequestParams;
 import pl.wasat.smarthma.model.iso.EntryISO;
 import pl.wasat.smarthma.preferences.SharedPrefs;
 import pl.wasat.smarthma.ui.frags.browse.CollectionsListFragment;
@@ -47,14 +47,14 @@ public class CollectionsBrowserActivity extends BaseSmartHMActivity implements
         sharedPrefs.setParentIdPrefs(collectionName);
         sharedPrefs.setQueryPrefs("");
 
-        FedeoRequest fedeoRequest = new FedeoRequest();
-        fedeoRequest.buildFromShared(this);
+        FedeoRequestParams fedeoRequestParams = new FedeoRequestParams();
+        fedeoRequestParams.buildFromShared(this);
 
         dba = new EoDbAdapter(this);
 
         if (findViewById(R.id.activity_base_details_container) != null) {
             DataSeriesListFragment dsListFragment = DataSeriesListFragment
-                    .newInstance(fedeoRequest, stopNewSearch);
+                    .newInstance(fedeoRequestParams, stopNewSearch);
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.activity_base_list_container, dsListFragment)
                     .commit();
@@ -186,13 +186,12 @@ public class CollectionsBrowserActivity extends BaseSmartHMActivity implements
      * (pl.wasat.smarthma.model.FedeoRequest)
      */
     @Override
-    public void onCollectionDetailsFragmentShowProducts(String parentID) {
-
+    public void onCollectionDetailsFragmentShowProducts(FedeoRequestParams fedeoSearchProductsParams) {
         Intent showProductsIntent = new Intent(this,
                 ProductsBrowserActivity.class);
-        showProductsIntent.putExtra(Const.KEY_INTENT_PARENT_ID, parentID);
+        //showProductsIntent.putExtra(Const.KEY_INTENT_PARENT_ID, parentID);
+        showProductsIntent.putExtra(Const.KEY_INTENT_FEDEO_REQUEST_PARAMS, fedeoSearchProductsParams);
         startActivityForResult(showProductsIntent, REQUEST_NEW_SEARCH);
-
     }
 
     @Override

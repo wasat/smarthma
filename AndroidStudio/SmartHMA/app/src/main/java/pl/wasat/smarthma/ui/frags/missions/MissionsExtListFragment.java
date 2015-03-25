@@ -368,7 +368,7 @@ public class MissionsExtListFragment extends Fragment {
 
     }
 
-    @SuppressWarnings("unused")
+
     private void getHtml(String url, int groupPos) {
         Document doc;
         try {

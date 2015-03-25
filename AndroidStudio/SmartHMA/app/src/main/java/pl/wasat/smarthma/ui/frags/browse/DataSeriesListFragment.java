@@ -16,7 +16,7 @@ import pl.wasat.smarthma.SmartHMApplication;
 import pl.wasat.smarthma.adapter.DataSeriesListAdapter;
 import pl.wasat.smarthma.helper.Const;
 import pl.wasat.smarthma.helper.DataSorter;
-import pl.wasat.smarthma.model.FedeoRequest;
+import pl.wasat.smarthma.model.FedeoRequestParams;
 import pl.wasat.smarthma.model.feed.Feed;
 import pl.wasat.smarthma.model.iso.EntryISO;
 import pl.wasat.smarthma.ui.frags.base.BaseSpiceListFragment;
@@ -31,7 +31,7 @@ import pl.wasat.smarthma.utils.rss.FedeoSearchRequest;
  */
 public class DataSeriesListFragment extends BaseSpiceListFragment {
 
-    private FedeoRequest browseRequest;
+    private FedeoRequestParams browseRequest;
 
     private static final String STATE_ACTIVATED_POSITION = "activated_position";
 
@@ -44,13 +44,13 @@ public class DataSeriesListFragment extends BaseSpiceListFragment {
      * Use this factory method to create a new instance of this fragment using
      * the provided parameters.
      *
-     * @param fedeoRequest Parameter 1.
+     * @param fedeoRequestParams Parameter 1.
      * @return A new instance of fragment DataSeriesListFragment.
      */
-    public static DataSeriesListFragment newInstance(FedeoRequest fedeoRequest, Boolean stopNewSearch) {
+    public static DataSeriesListFragment newInstance(FedeoRequestParams fedeoRequestParams, Boolean stopNewSearch) {
         DataSeriesListFragment fragment = new DataSeriesListFragment();
         Bundle args = new Bundle();
-        args.putSerializable(KEY_PARAM_BROWSE_FEDEO_REQUEST, fedeoRequest);
+        args.putSerializable(KEY_PARAM_BROWSE_FEDEO_REQUEST, fedeoRequestParams);
         args.putBoolean(Const.KEY_INTENT_RETURN_STOP_SEARCH, stopNewSearch);
         fragment.setArguments(args);
         return fragment;
@@ -64,7 +64,7 @@ public class DataSeriesListFragment extends BaseSpiceListFragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            browseRequest = (FedeoRequest) getArguments().getSerializable(KEY_PARAM_BROWSE_FEDEO_REQUEST);
+            browseRequest = (FedeoRequestParams) getArguments().getSerializable(KEY_PARAM_BROWSE_FEDEO_REQUEST);
         }
     }
 
@@ -198,7 +198,7 @@ public class DataSeriesListFragment extends BaseSpiceListFragment {
     /**
      *
      */
-    private void loadDataSeriesFeedResponse(FedeoRequest browseRequest) {
+    private void loadDataSeriesFeedResponse(FedeoRequestParams browseRequest) {
         if (browseRequest != null) {
 
             getActivity().setProgressBarIndeterminateVisibility(true);
