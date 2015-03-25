@@ -27,6 +27,7 @@ public class Const {
     public static final String KEY_INTENT_PARENT_ID = "pl.wasat.smarthma.KEY_INTENT_PARENT_ID";
     public static final String KEY_INTENT_RETURN_STOP_SEARCH = "pl.wasat.smarthma.KEY_INTENT_RETURN_STOP_SEARCH";
     public static final String KEY_INTENT_QUERY = "pl.wasat.smarthma.KEY_INTENT_QUERY";
+    public static String KEY_INTENT_FEDEO_REQUEST_PARAMS = "pl.wasat.smarthma.KEY_INTENT_FEDEO_REQUEST_PARAMS";
     public static final String KEY_ACTION_SEARCH_MISSION_DATA = "pl.wasat.smarthma.KEY_ACTION_SEARCH_MISSION_DATA";
 
     public static final String KEY_PREF_FILE = "SmartHMAPrefFile";
@@ -49,4 +50,5 @@ public class Const {
     public static final int MAX_SEARCH_HISTORY_ENTRIES = 5;
 
     public static boolean IS_KINDLE = false;
+
 }

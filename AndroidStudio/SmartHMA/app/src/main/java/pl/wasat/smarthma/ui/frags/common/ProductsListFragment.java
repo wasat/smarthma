@@ -3,7 +3,7 @@ package pl.wasat.smarthma.ui.frags.common;
 import android.os.Bundle;
 
 import pl.wasat.smarthma.R;
-import pl.wasat.smarthma.model.FedeoRequest;
+import pl.wasat.smarthma.model.FedeoRequestParams;
 import pl.wasat.smarthma.model.feed.Feed;
 import pl.wasat.smarthma.model.om.EntryOM;
 import pl.wasat.smarthma.ui.frags.base.BaseShowProductsListFragment;
@@ -20,14 +20,14 @@ public class ProductsListFragment extends BaseShowProductsListFragment {
      * Use this factory method to create a new instance of this fragment using
      * the provided parameters.
      *
-     * @param fedeoRequest Parameter 1.
+     * @param fedeoRequestParams Parameter 1.
      * @return A new instance of fragment SearchProductsFeedsFragment.
      */
     public static ProductsListFragment newInstance(
-            FedeoRequest fedeoRequest) {
+            FedeoRequestParams fedeoRequestParams) {
         ProductsListFragment fragment = new ProductsListFragment();
         Bundle args = new Bundle();
-        args.putSerializable(KEY_PARAM_FEDEO_REQUEST, fedeoRequest);
+        args.putSerializable(KEY_PARAM_FEDEO_REQUEST, fedeoRequestParams);
         fragment.setArguments(args);
         return fragment;
     }

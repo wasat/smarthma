@@ -36,6 +36,8 @@ public class FedeoOSDDRequest extends GoogleHttpClientSpiceRequest<OpenSearchDes
             //HttpRequest request = getHttpRequestFactory().buildGetRequest(
             //        new GenericUrl(fedeoRequest.getDescUrl()));
 
+            Log.i("OSDD_URL", osddUrl);
+
             HttpRequest request = getHttpRequestFactory().buildGetRequest(
                     new GenericUrl(osddUrl));
 

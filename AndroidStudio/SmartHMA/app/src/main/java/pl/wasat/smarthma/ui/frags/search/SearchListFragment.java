@@ -18,7 +18,7 @@ import pl.wasat.smarthma.database.SearchHistory;
 import pl.wasat.smarthma.database.SearchParams;
 import pl.wasat.smarthma.helper.Const;
 import pl.wasat.smarthma.helper.DataSorter;
-import pl.wasat.smarthma.model.FedeoRequest;
+import pl.wasat.smarthma.model.FedeoRequestParams;
 import pl.wasat.smarthma.model.feed.Feed;
 import pl.wasat.smarthma.model.iso.EntryISO;
 import pl.wasat.smarthma.ui.frags.base.BaseSpiceListFragment;
@@ -36,7 +36,7 @@ public class SearchListFragment extends BaseSpiceListFragment {
     private static final String KEY_PARAM_SEARCH_FEDEO_REQUEST = "pl.wasat.smarthma.KEY_PARAM_SEARCH_FEDEO_REQUEST";
     private static final String STATE_ACTIVATED_POSITION = "activated_position";
 
-    private FedeoRequest searchRequest;
+    private FedeoRequestParams searchRequest;
 
     private int mActivatedPosition = ListView.INVALID_POSITION;
 
@@ -46,13 +46,13 @@ public class SearchListFragment extends BaseSpiceListFragment {
      * Use this factory method to create a new instance of this fragment using
      * the provided parameters.
      *
-     * @param fedeoRequest Parameter 2.
+     * @param fedeoRequestParams Parameter 2.
      * @return A new instance of fragment SearchListFragment.
      */
-    public static SearchListFragment newInstance(FedeoRequest fedeoRequest, Boolean stopNewSearch) {
+    public static SearchListFragment newInstance(FedeoRequestParams fedeoRequestParams, Boolean stopNewSearch) {
         SearchListFragment fragment = new SearchListFragment();
         Bundle args = new Bundle();
-        args.putSerializable(KEY_PARAM_SEARCH_FEDEO_REQUEST, fedeoRequest);
+        args.putSerializable(KEY_PARAM_SEARCH_FEDEO_REQUEST, fedeoRequestParams);
         args.putBoolean(Const.KEY_INTENT_RETURN_STOP_SEARCH, stopNewSearch);
         fragment.setArguments(args);
         return fragment;
@@ -66,7 +66,7 @@ public class SearchListFragment extends BaseSpiceListFragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            searchRequest = (FedeoRequest) getArguments().getSerializable(
+            searchRequest = (FedeoRequestParams) getArguments().getSerializable(
                     KEY_PARAM_SEARCH_FEDEO_REQUEST);
             SearchHistory searchHistory = new SearchHistory(getActivity());
             searchHistory.addSearchParameters(new SearchParams(searchRequest));
@@ -210,7 +210,7 @@ public class SearchListFragment extends BaseSpiceListFragment {
     /**
      *
      */
-    private void loadSearchFeedResponse(FedeoRequest feedSearchRequest) {
+    private void loadSearchFeedResponse(FedeoRequestParams feedSearchRequest) {
         if (feedSearchRequest != null) {
             getActivity().setProgressBarIndeterminateVisibility(true);
             getSpiceManager().execute(

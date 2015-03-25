@@ -3,7 +3,7 @@ package pl.wasat.smarthma.ui.frags.browse;
 import android.os.Bundle;
 
 import pl.wasat.smarthma.R;
-import pl.wasat.smarthma.model.FedeoRequest;
+import pl.wasat.smarthma.model.FedeoRequestParams;
 import pl.wasat.smarthma.model.feed.Feed;
 import pl.wasat.smarthma.ui.frags.base.BaseFeedSummaryFragment;
 
@@ -38,7 +38,7 @@ public class FeedSummaryBrowseCollectionsFragment extends BaseFeedSummaryFragmen
      */
     @Override
     public void loadNavSearch(String linkHref) {
-        FedeoRequest request = new FedeoRequest();
+        FedeoRequestParams request = new FedeoRequestParams();
         request.setUrl(linkHref);
 
         DataSeriesListFragment dataseriesListFragment = DataSeriesListFragment

@@ -1,10 +1,13 @@
+/*
 package pl.wasat.smarthma.helper;
 
+*/
 /*
  * A simple class representing date and time.
- */
+ *//*
 
-public class SimpleDate {
+
+class SimpleDate {
     private final int year;
     private final int month;
     private final int day;
@@ -76,3 +79,4 @@ public class SimpleDate {
         return seconds;
     }
 }
+*/

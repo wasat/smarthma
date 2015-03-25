@@ -20,7 +20,7 @@ import pl.wasat.smarthma.R;
 import pl.wasat.smarthma.adapter.EntryImagesListAdapter;
 import pl.wasat.smarthma.database.EoDbAdapter;
 import pl.wasat.smarthma.helper.DataSorter;
-import pl.wasat.smarthma.model.FedeoRequest;
+import pl.wasat.smarthma.model.FedeoRequestParams;
 import pl.wasat.smarthma.model.feed.Feed;
 import pl.wasat.smarthma.model.om.EntryOM;
 import pl.wasat.smarthma.model.om.Footprint;
@@ -37,7 +37,7 @@ import pl.wasat.smarthma.utils.rss.FedeoSearchRequest;
 public class BaseShowProductsListFragment extends BaseSpiceFragment {
     private static final String KEY_PARAM_FEDEO_REQUEST = "pl.wasat.smarthma.KEY_PARAM_FEDEO_REQUEST";
 
-    private FedeoRequest fedeoRequest;
+    private FedeoRequestParams fedeoRequestParams;
 
     private OnBaseShowProductsListFragmentListener mListener;
 
@@ -51,14 +51,14 @@ public class BaseShowProductsListFragment extends BaseSpiceFragment {
      * Use this factory method to create a new instance of this fragment using
      * the provided parameters.
      *
-     * @param fedeoRequest Parameter 1.
+     * @param fedeoRequestParams Parameter 1.
      * @return A new instance of fragment SearchProductsFeedsFragment.
      */
     public static BaseShowProductsListFragment newInstance(
-            FedeoRequest fedeoRequest) {
+            FedeoRequestParams fedeoRequestParams) {
         BaseShowProductsListFragment fragment = new BaseShowProductsListFragment();
         Bundle args = new Bundle();
-        args.putSerializable(KEY_PARAM_FEDEO_REQUEST, fedeoRequest);
+        args.putSerializable(KEY_PARAM_FEDEO_REQUEST, fedeoRequestParams);
         fragment.setArguments(args);
         return fragment;
     }
@@ -71,7 +71,7 @@ public class BaseShowProductsListFragment extends BaseSpiceFragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            fedeoRequest = (FedeoRequest) getArguments().getSerializable(
+            fedeoRequestParams = (FedeoRequestParams) getArguments().getSerializable(
                     KEY_PARAM_FEDEO_REQUEST);
         }
     }
@@ -104,8 +104,8 @@ public class BaseShowProductsListFragment extends BaseSpiceFragment {
                 R.id.listview_collections_group);
         loadingView = view.findViewById(R.id.loading_layout);
 
-        if (fedeoRequest != null) {
-            loadSearchProductsFeedResponse(fedeoRequest);
+        if (fedeoRequestParams != null) {
+            loadSearchProductsFeedResponse(fedeoRequestParams);
         }
 
     }
@@ -214,11 +214,11 @@ public class BaseShowProductsListFragment extends BaseSpiceFragment {
     /**
      *
      */
-    private void loadSearchProductsFeedResponse(FedeoRequest fedeoRequest) {
-        if (fedeoRequest != null) {
+    private void loadSearchProductsFeedResponse(FedeoRequestParams fedeoRequestParams) {
+        if (fedeoRequestParams != null) {
             getActivity().setProgressBarIndeterminateVisibility(true);
 
-            getSpiceManager().execute(new FedeoSearchRequest(fedeoRequest, 2),
+            getSpiceManager().execute(new FedeoSearchRequest(fedeoRequestParams, 2),
                     new FeedRequestListener());
         }
     }

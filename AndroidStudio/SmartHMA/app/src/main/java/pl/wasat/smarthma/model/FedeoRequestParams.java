@@ -17,10 +17,11 @@ import pl.wasat.smarthma.utils.obj.LatLngExt;
 /**
  * @author Daniel Zinkiewicz Wasat Sp. z o.o 18-07-2014
  */
-public class FedeoRequest implements Serializable {
+public class FedeoRequestParams implements Serializable {
 
     private static final long serialVersionUID = 1L;
     private HashMap<String, String> params;
+    private HashMap<String, String> paramsExtra;
     private String url;
     private String httpAccept;
     private String type;
@@ -34,11 +35,12 @@ public class FedeoRequest implements Serializable {
     private String query;
 
     private String descUrl;
+    private String templateUrl;
 
     /**
      *
      */
-    public FedeoRequest() {
+    public FedeoRequestParams() {
         this.params = new HashMap<>();
         this.httpAccept = "application/atom%2Bxml";
     }
@@ -77,30 +79,50 @@ public class FedeoRequest implements Serializable {
                 prefs.getFloat(Const.KEY_PREF_BBOX_EAST, 180),
                 prefs.getFloat(Const.KEY_PREF_BBOX_NORTH, 90));
         setQuery(prefs.getString(Const.KEY_PREF_QUERY, ""));
+    }
 
+    private void buildUrl() {
+        String url;
+        url = Const.HTTP_BASE_URL + "?";
+        for (HashMap.Entry<String, String> entry : params.entrySet()) {
+            String key = entry.getKey();
+            String value = entry.getValue();
+            url = url + key + "=" + value + "&";
+        }
+        if (paramsExtra != null) {
+            for (HashMap.Entry<String, String> entry : paramsExtra.entrySet()) {
+                String key = entry.getKey();
+                String value = entry.getValue();
+                if (!value.isEmpty()) {
+                    url = url + key + "=" + value + "&";
+                }
+            }
+        }
+        url = url.substring(0, url.length() - 1);
+
+        Log.i("URL", url);
+        this.url = url;
     }
 
     /**
      * @return String url
      */
     public String getUrl() {
-        if (url == null) {
-            url = Const.HTTP_BASE_URL + "?";
-            for (HashMap.Entry<String, String> entry : params.entrySet()) {
-                String key = entry.getKey();
-                String value = entry.getValue();
-                url = url + key + "=" + value + "&";
-            }
-            url = url.substring(0, url.length() - 1);
-        }
-
-        Log.i("URL", url);
-        //Log.d("ZX", url);
+        buildUrl();
         return url;
     }
 
     public void setUrl(String url) {
         this.url = url;
+    }
+
+
+    public String getTemplateUrl() {
+        return templateUrl;
+    }
+
+    public void setTemplateUrl(String templateUrl) {
+        this.templateUrl = templateUrl;
     }
 
     /**
@@ -115,6 +137,20 @@ public class FedeoRequest implements Serializable {
      */
     public void setParams(HashMap<String, String> params) {
         this.params = params;
+    }
+
+    public HashMap<String, String> getParamsExtra() {
+        return paramsExtra;
+    }
+
+    public void setParamsExtra(HashMap<String, String> paramsExtra) {
+        this.paramsExtra = paramsExtra;
+        this.setRecordSchema(paramsExtra.get("recordSchema"));
+        cleanExtraParams("recordSchema");
+    }
+
+    private void cleanExtraParams(String valueToRemove) {
+        paramsExtra.remove(valueToRemove);
     }
 
     /**
@@ -217,7 +253,7 @@ public class FedeoRequest implements Serializable {
     /**
      * @param parentIdentifier the parentIdentifier to set
      */
-    void setParentIdentifier(String parentIdentifier) {
+    public void setParentIdentifier(String parentIdentifier) {
 
         String urn = parentIdentifier.substring(0, 4);
         String baseParentIdentifier = parentIdentifier;
