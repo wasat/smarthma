@@ -24,6 +24,33 @@
             android:textStyle="bold" />
 
         <TextView
+            android:id="@+id/search_frag_right_basic_tv_endpoint_title"
+            style="?android:attr/textAppearanceLarge"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="2dp"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:paddingTop="16dp"
+            android:text="@string/endpoint"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/search_frag_right_basic_tv_endpoint_name"
+            style="?android:attr/textAppearanceLarge"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="16dp"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:paddingTop="2dp"
+            android:text="@string/fedeo_esa_int"
+            android:textColor="#A9A9A9"
+            android:textSize="14sp"
+            android:textStyle="normal" />
+
+        <TextView
             android:id="@+id/search_frag_right_basic_tv_catalog_title"
             style="?android:attr/textAppearanceLarge"
             android:layout_width="match_parent"
