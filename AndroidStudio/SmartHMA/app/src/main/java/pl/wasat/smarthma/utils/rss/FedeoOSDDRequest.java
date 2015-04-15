@@ -17,15 +17,25 @@ import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 
+import pl.wasat.smarthma.helper.Const;
 import pl.wasat.smarthma.model.osdd.OpenSearchDescription;
 
 public class FedeoOSDDRequest extends GoogleHttpClientSpiceRequest<OpenSearchDescription> {
 
-    private final String osddUrl;
+    private final GenericUrl osddUrl;
 
-    public FedeoOSDDRequest(String descUrl) {
+/*    public FedeoOSDDRequest(String parentID) {
         super(null);
-        this.osddUrl = descUrl;
+        this.osddUrl = buildOsddUrl(parentID);
+    }*/
+
+    public FedeoOSDDRequest(GenericUrl genericOsddUrl) {
+        super(null);
+        osddUrl = genericOsddUrl;
+    }
+
+    private GenericUrl buildOsddUrl(String parentID) {
+        return new GenericUrl(Const.OSDD_BASE_URL + "parentIdentifier=" + parentID);
     }
 
     @Override
@@ -36,10 +46,9 @@ public class FedeoOSDDRequest extends GoogleHttpClientSpiceRequest<OpenSearchDes
             //HttpRequest request = getHttpRequestFactory().buildGetRequest(
             //        new GenericUrl(fedeoRequest.getDescUrl()));
 
-            Log.i("OSDD_URL", osddUrl);
+            Log.i("OSDD_URL", osddUrl.toString());
 
-            HttpRequest request = getHttpRequestFactory().buildGetRequest(
-                    new GenericUrl(osddUrl));
+            HttpRequest request = getHttpRequestFactory().buildGetRequest(osddUrl);
 
             HttpResponse response = request.execute();
 

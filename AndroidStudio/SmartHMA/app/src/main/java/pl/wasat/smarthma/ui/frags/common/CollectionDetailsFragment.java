@@ -13,6 +13,7 @@ import android.widget.Spinner;
 import android.widget.TableLayout;
 import android.widget.Toast;
 
+import com.google.api.client.http.GenericUrl;
 import com.octo.android.robospice.persistence.exception.SpiceException;
 import com.octo.android.robospice.request.listener.RequestListener;
 import com.wunderlist.slidinglayer.SlidingLayer;
@@ -21,6 +22,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import pl.wasat.smarthma.helper.Const;
 import pl.wasat.smarthma.model.FedeoRequestParams;
 import pl.wasat.smarthma.model.feed.Link;
 import pl.wasat.smarthma.model.iso.EntryISO;
@@ -94,6 +96,10 @@ public class CollectionDetailsFragment extends
             }
         }
 
+        if (osddUrl == null || osddUrl.isEmpty()) {
+            osddUrl = Const.OSDD_BASE_URL + "parentIdentifier=" + displayedISOEntry.getIdentifier();
+        }
+
         btnShowProducts.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -113,7 +119,7 @@ public class CollectionDetailsFragment extends
             }
         });
 
-        final String finalOsddUrl = osddUrl;
+        final GenericUrl finalOsddUrl = new GenericUrl(osddUrl);
 
         mSlidingLayer.setOnInteractListener(new SlidingLayer.OnInteractListener() {
             @Override
@@ -132,8 +138,10 @@ public class CollectionDetailsFragment extends
             @Override
             public void onClose() {
                 Log.i("SLIDER", "onClose");
-                fedeoRequestParams.setParamsExtra(paramsMap);
-                //mListener.onCollectionDetailsFragmentShowProducts(fedeoRequestParams);
+                if (paramsMap != null) {
+                    fedeoRequestParams.setParamsExtra(paramsMap);
+                    //mListener.onCollectionDetailsFragmentShowProducts(fedeoRequestParams);
+                }
             }
 
             @Override
@@ -177,7 +185,7 @@ public class CollectionDetailsFragment extends
         sharedPrefs.setParentIdPrefs(parentID);
     }
 
-    private void startAsyncLoadOsddData(String fedeoDescUrl) {
+    private void startAsyncLoadOsddData(GenericUrl fedeoDescUrl) {
         if (fedeoDescUrl != null) {
             getActivity().setProgressBarIndeterminateVisibility(true);
             getSpiceManager().execute(new FedeoOSDDRequest(fedeoDescUrl),
@@ -187,8 +195,10 @@ public class CollectionDetailsFragment extends
 
     void loadRequestSuccess(OpenSearchDescription osdd) {
         getActivity().setProgressBarIndeterminateVisibility(false);
-        initFedeoReq(osdd);
-        addParameterSpinners(osdd);
+        if (osdd != null) {
+            initFedeoReq(osdd);
+            addParameterSpinners(osdd);
+        }
     }
 
     private void addParameterSpinners(OpenSearchDescription osdd) {
@@ -247,6 +257,7 @@ public class CollectionDetailsFragment extends
             if (url.getType().equalsIgnoreCase("application/atom+xml")) {
                 tmpltUrl = url.getTemplate();
             }
+
         }
         fedeoRequestParams.setTemplateUrl(tmpltUrl);
     }
