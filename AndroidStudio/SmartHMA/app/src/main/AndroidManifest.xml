@@ -106,6 +106,28 @@
                 <action android:name="com.facebook.platform.AppCallResultBroadcast" />
             </intent-filter>
         </receiver>
+        <receiver
+            android:label="SmartHMA RSS"
+            android:name=".ui.widgets.RSSWidgetProvider" >
+            <intent-filter>
+                <!-- This widget provider receives broadcast with following action name or simply onUpdate of AppWidgetProvider is called -->
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+                <!-- To receive broadcast with this string name -->
+                <action android:name="com.wordpress.laaptu.DATA_FETCHED" />
+            </intent-filter>
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/rss_widget_info" />
+        </receiver>
+        <service
+            android:name=".ui.widgets.WidgetService"
+            android:permission="android.permission.BIND_REMOTEVIEWS" />
+        <activity android:name=".ui.widgets.WidgetConfigActivity" >
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_CONFIGURE" />
+            </intent-filter>
+        </activity>
+        <service android:name=".ui.widgets.RemoteFetchService" />
     </application>
 
 </manifest>

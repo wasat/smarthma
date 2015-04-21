@@ -88,7 +88,7 @@ public class CollectionDetailsFragment extends
 
         String osddUrl = "";
         for (Link entityLink : displayedISOEntry.getLink()) {
-            if (entityLink.getRel().equalsIgnoreCase("search")) {
+            if (entityLink.getRel().equalsIgnoreCase("search") || Const.HTTP_BASE_URL.equals(Const.HTTP_SPACEBEL_BASE_URL)) {
                 btnShowProducts.setEnabled(true);
             }
             if (entityLink.getRel().equalsIgnoreCase("search") && entityLink.getType().equalsIgnoreCase("application/opensearchdescription+xml")) {
@@ -205,45 +205,51 @@ public class CollectionDetailsFragment extends
 
         paramsMap = new HashMap<>();
 
-        for (final Parameter param : osdd.getParameter()) {
+        // TODO - remove this loop and condition to fit to final version of OSDD based on geo.spacebel.be endpoint
+        for (int i = 0; i < osdd.getUrl().size(); i++) {
+            if (osdd.getUrl().get(i).getType().equalsIgnoreCase("application/atom+xml")) {
 
-            Spinner spinner = new Spinner(getActivity());
-            spinner.setLayoutParams(new TableLayout.LayoutParams(
-                    TableLayout.LayoutParams.WRAP_CONTENT, TableLayout.LayoutParams.WRAP_CONTENT, 1f));
-            spinner.setPadding(25, 2, 25, 2);
-            //spinner.setPrompt(param.getName());
+                for (final Parameter param : osdd.getParameter()) {
 
-            List<String> optList = new ArrayList<>();
-            optList.add("Choose " + param.getName() + "...");
-            for (Option opt : param.getOption()) {
-                optList.add(opt.getLabel());
-            }
+                    Spinner spinner = new Spinner(getActivity());
+                    spinner.setLayoutParams(new TableLayout.LayoutParams(
+                            TableLayout.LayoutParams.WRAP_CONTENT, TableLayout.LayoutParams.WRAP_CONTENT, 1f));
+                    spinner.setPadding(25, 2, 25, 2);
+                    //spinner.setPrompt(param.getName());
 
-            ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_item, optList);
-            spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-            spinner.setAdapter(spinnerAdapter);
-
-            spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                @Override
-                public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                    if (l > 0) {
-                        paramsMap.put(param.getName(), param.getOption().get(i - 1).getValue());
-
-                        Toast.makeText(adapterView.getContext(),
-                                "Item Selected : " + adapterView.getItemAtPosition(i).toString() + " ID: " + l,
-                                Toast.LENGTH_LONG).show();
-                    } else {
-                        paramsMap.put(param.getName(), "");
+                    List<String> optList = new ArrayList<>();
+                    optList.add("Choose " + param.getName() + "...");
+                    for (Option opt : param.getOption()) {
+                        optList.add(opt.getLabel());
                     }
+
+                    ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_item, optList);
+                    spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    spinner.setAdapter(spinnerAdapter);
+
+                    spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                        @Override
+                        public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                            if (l > 0) {
+                                paramsMap.put(param.getName(), param.getOption().get(i - 1).getValue());
+
+                                Toast.makeText(adapterView.getContext(),
+                                        "Item Selected : " + adapterView.getItemAtPosition(i).toString() + " ID: " + l,
+                                        Toast.LENGTH_LONG).show();
+                            } else {
+                                paramsMap.put(param.getName(), "");
+                            }
+                        }
+
+                        @Override
+                        public void onNothingSelected(AdapterView<?> adapterView) {
+
+                        }
+                    });
+
+                    layoutSpinners.addView(spinner);
                 }
-
-                @Override
-                public void onNothingSelected(AdapterView<?> adapterView) {
-
-                }
-            });
-
-            layoutSpinners.addView(spinner);
+            }
         }
     }
 

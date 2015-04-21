@@ -31,6 +31,7 @@
     <string name="browse_products">Browse Products</string>
     <string name="esa_missions">ESA Missions</string>
     <string name="esa_online">ESA Online</string>
+    <string name="esa_news">ESA Online News</string>
     <string name="title_article_list">ESA EO News SmartHMA Reader</string>
     <string name="more">More &gt;&gt;</string>
     <string name="smarthma">SmartHMA</string>
@@ -110,6 +111,8 @@
     <string name="endpoint">ENDPOINT</string>
     <string name="fedeo_esa_int">fedeo.esa.int</string>
     <string name="endpoint_list_title">ENDPOINT LIST</string>
+    <string name="widget_empty_list">List is empty</string>
+    <string name="launch_widget">Launch widget</string>
 
     <string-array name="sorting_modes">
         <item>Title ascending</item>

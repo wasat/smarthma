@@ -504,6 +504,7 @@ public class SearchBasicInfoRightFragment extends Fragment {
                 default:
                     break;
             }
+            tvEndpointName.setText(endpointsList[which]);
         }
     }
 
