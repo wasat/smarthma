@@ -57,6 +57,7 @@ public class SearchBasicInfoRightFragment extends Fragment {
     private TextView tvAreaNELon;
 
     private static TextView tvCatalogName;
+    private static TextView tvEndpointName;
 
     private static Calendar calStart;
     private static Calendar calEnd;
@@ -73,6 +74,9 @@ public class SearchBasicInfoRightFragment extends Fragment {
     private static final CharSequence[] cataloguesList = {"EOP:ESA:FEDEO",
             "EOP:ESA:FEDEO:COLLECTIONS", "EOP:ESA:GPOD-EO", "EOP:ESA:EO-VIRTUAL-ARCHIVE4",
             "EOP:ESA:REFERENCEDATA"};
+
+    private static final CharSequence[] endpointsList = {"fedeo.esa.int",
+            "geo.spacebel.be", "smaad.spacebel.be"};
 
     /**
      * Use this factory method to create a new instance of this fragment using
@@ -107,6 +111,16 @@ public class SearchBasicInfoRightFragment extends Fragment {
                              Bundle savedInstanceState) {
         final View rootView = inflater.inflate(
                 R.layout.fragment_search_right_basic, container, false);
+
+        tvEndpointName = (TextView) rootView
+                .findViewById(R.id.search_frag_right_basic_tv_endpoint_name);
+
+        tvEndpointName.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showEndpointsListDialog();
+            }
+        });
 
         tvCatalogName = (TextView) rootView
                 .findViewById(R.id.search_frag_right_basic_tv_catalog_name);
@@ -329,6 +343,12 @@ public class SearchBasicInfoRightFragment extends Fragment {
                 "CatalogueListDialogFragment");
     }
 
+    void showEndpointsListDialog() {
+        EndpointsListDialogFragment endpointslistDialFrag = new EndpointsListDialogFragment();
+        endpointslistDialFrag.show(getActivity().getSupportFragmentManager(),
+                "EndpointsListDialogFragment");
+    }
+
     void showDatePickerDialog(View v) {
         DialogFragment newFragment = new DatePickerFragment();
         Bundle args = new Bundle();
@@ -453,6 +473,37 @@ public class SearchBasicInfoRightFragment extends Fragment {
                         }
                     });
             return builder.create();
+        }
+    }
+
+    public static class EndpointsListDialogFragment extends DialogFragment {
+        @NonNull
+        @Override
+        public Dialog onCreateDialog(Bundle savedInstanceState) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+            builder.setTitle(R.string.endpoint_list_title).setItems(
+                    endpointsList, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            setBaseUrl(which);
+                        }
+                    });
+            return builder.create();
+        }
+
+        private void setBaseUrl(int which) {
+            switch (which) {
+                case 0:
+                    Const.setHttpEsaBaseUrl();
+                    break;
+                case 1:
+                    Const.setHttpSpacebelBaseUrl();
+                    break;
+                case 2:
+                    Const.setHttpSmaadBaseUrl();
+                    break;
+                default:
+                    break;
+            }
         }
     }
 

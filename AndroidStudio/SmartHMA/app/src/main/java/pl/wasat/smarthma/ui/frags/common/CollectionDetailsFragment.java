@@ -138,8 +138,10 @@ public class CollectionDetailsFragment extends
             @Override
             public void onClose() {
                 Log.i("SLIDER", "onClose");
-                fedeoRequestParams.setParamsExtra(paramsMap);
-                //mListener.onCollectionDetailsFragmentShowProducts(fedeoRequestParams);
+                if (paramsMap != null) {
+                    fedeoRequestParams.setParamsExtra(paramsMap);
+                    //mListener.onCollectionDetailsFragmentShowProducts(fedeoRequestParams);
+                }
             }
 
             @Override
@@ -193,8 +195,10 @@ public class CollectionDetailsFragment extends
 
     void loadRequestSuccess(OpenSearchDescription osdd) {
         getActivity().setProgressBarIndeterminateVisibility(false);
-        initFedeoReq(osdd);
-        addParameterSpinners(osdd);
+        if (osdd != null) {
+            initFedeoReq(osdd);
+            addParameterSpinners(osdd);
+        }
     }
 
     private void addParameterSpinners(OpenSearchDescription osdd) {
@@ -251,6 +255,7 @@ public class CollectionDetailsFragment extends
             if (url.getType().equalsIgnoreCase("application/atom+xml")) {
                 tmpltUrl = url.getTemplate();
             }
+
         }
         fedeoRequestParams.setTemplateUrl(tmpltUrl);
     }

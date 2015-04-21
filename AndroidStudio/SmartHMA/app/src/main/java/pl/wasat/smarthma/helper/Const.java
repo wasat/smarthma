@@ -3,11 +3,11 @@ package pl.wasat.smarthma.helper;
 public class Const {
 
     public static final String IMG_URL = "http://89.250.194.14/smarthma/img/";
-    private static final String HTTP_FEDEO_BASE_URL = "http://geo.spacebel.be/opensearch/request/";
-    //public static final String HTTP_SMAAD_BASE_URL = "http://smaad.spacebel.be/opensearch/request/";
+    private static final String HTTP_SPACEBEL_BASE_URL = "http://geo.spacebel.be/opensearch/request/";
+    public static final String HTTP_SMAAD_BASE_URL = "http://smaad.spacebel.be/opensearch/request/";
     private static final String HTTP_ESA_BASE_URL = "http://fedeo.esa.int/opensearch/request/";
 
-    public static final String HTTP_BASE_URL = HTTP_ESA_BASE_URL;
+    public static String HTTP_BASE_URL = HTTP_ESA_BASE_URL;
 
     public static final String OSDD_BASE_URL = "http://fedeo.esa.int:80/opensearch/description.xml?";
 
@@ -52,5 +52,17 @@ public class Const {
     public static final int MAX_SEARCH_HISTORY_ENTRIES = 5;
 
     public static boolean IS_KINDLE = false;
+
+    public static void setHttpEsaBaseUrl() {
+        HTTP_BASE_URL = HTTP_ESA_BASE_URL;
+    }
+
+    public static void setHttpSpacebelBaseUrl() {
+        HTTP_BASE_URL = HTTP_SPACEBEL_BASE_URL;
+    }
+
+    public static void setHttpSmaadBaseUrl() {
+        HTTP_BASE_URL = HTTP_SMAAD_BASE_URL;
+    }
 
 }
