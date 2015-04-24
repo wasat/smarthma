@@ -31,6 +31,7 @@ import pl.wasat.smarthma.preferences.SharedPrefs;
 import pl.wasat.smarthma.ui.frags.common.AreaPickerMapFragment;
 import pl.wasat.smarthma.utils.obj.LatLngBoundsExt;
 import pl.wasat.smarthma.utils.obj.LatLngExt;
+import pl.wasat.smarthma.utils.time.DateUtils;
 
 /**
  * A simple {@link android.support.v4.app.Fragment} subclass. Use the
@@ -118,8 +119,14 @@ public class BaseViewAndBasicSettingsDetailFragment extends BaseSpiceFragment {
 
         if (displayedISOEntry != null) {
             final String title = displayedISOEntry.getTitle();
+/*            String dateStr = displayedISOEntry.getDate().toString();
+            if (dateStr.isEmpty()) {
+                dateStr = "1970-01-01T00:00:00.000Z";
+            } else {
+                dateStr = displayedISOEntry.getDate().getCIDate().getDateInCIDate().getDateGco().getText();
+            }*/
             final String pubDate = "This data were published: "
-                    + displayedISOEntry.getDate().getCIDate().getDateInCIDate().getDateGco().getText() + " and updated: "
+                    + DateUtils.getISOPubDate(displayedISOEntry) + " and updated: "
                     + displayedISOEntry.getUpdated();
             parentID = displayedISOEntry.getIdentifier();
 
@@ -268,9 +275,9 @@ public class BaseViewAndBasicSettingsDetailFragment extends BaseSpiceFragment {
     private void getBboxPrefs() {
 
         float west = sharedPrefs.getBboxPrefs()[0];
-        float south = sharedPrefs.getBboxPrefs()[0];
-        float east = sharedPrefs.getBboxPrefs()[0];
-        float north = sharedPrefs.getBboxPrefs()[0];
+        float south = sharedPrefs.getBboxPrefs()[1];
+        float east = sharedPrefs.getBboxPrefs()[2];
+        float north = sharedPrefs.getBboxPrefs()[3];
 
         tvAreaNELat.setText(String.format(Locale.UK, "% 4f", north));
         tvAreaNELon.setText(String.format(Locale.UK, "% 4f", east));

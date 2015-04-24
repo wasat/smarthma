@@ -238,10 +238,12 @@ public class ExtendedMapFragment extends Fragment implements
         drawFootprint(footprintPoints);
 
         Target quicklookTarget = this;
-        Picasso.with(getActivity())
-                .load(url)
-                .transform(this)
-                .into(quicklookTarget);
+        if (!url.isEmpty()) {
+            Picasso.with(getActivity())
+                    .load(url)
+                    .transform(this)
+                    .into(quicklookTarget);
+        }
     }
 
 

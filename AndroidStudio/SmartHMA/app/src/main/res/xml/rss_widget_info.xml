@@ -2,8 +2,9 @@
 <appwidget-provider xmlns:android="http://schemas.android.com/apk/res/android"
                     android:configure="pl.wasat.smarthma.ui.widgets.WidgetConfigActivity"
                     android:initialLayout="@layout/widget_layout"
-                    android:minHeight="110dip"
                     android:minWidth="250dip"
+                    android:minHeight="200dip"
+                    android:previewImage="@drawable/esa_logo"
                     android:resizeMode="vertical|horizontal"
                     android:updatePeriodMillis="300000" >
-</appwidget-provider> 
+</appwidget-provider>

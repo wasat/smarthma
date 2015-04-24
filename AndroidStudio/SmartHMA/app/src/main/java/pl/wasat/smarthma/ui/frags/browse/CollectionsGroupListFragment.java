@@ -87,7 +87,7 @@ public class CollectionsGroupListFragment extends Fragment implements
     private void updateEOListViewContent(List collectGrList) {
         DataSorter sorter = new DataSorter();
         ArrayList<CollectionsGroup> collectionsGroupList = collectGrList.getCollectionsGroupList();
-        sorter.sort(collectionsGroupList);
+        //sorter.sort(collectionsGroupList);
 
         ArrayList<Collection> collection;
         for (int i = 0; i < collectionsGroupList.size(); i++) {

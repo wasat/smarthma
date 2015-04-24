@@ -9,8 +9,8 @@ import android.util.Log;
 import java.util.ArrayList;
 import java.util.List;
 
+import pl.wasat.smarthma.helper.Const;
 import pl.wasat.smarthma.model.NewsArticle;
-import pl.wasat.smarthma.ui.frags.news.NewsListFragment;
 
 public class RemoteFetchService extends Service {
 
@@ -45,20 +45,17 @@ public class RemoteFetchService extends Service {
      */
     private void fetchDataFromWeb() {
         RSSTask task = new RSSTask();
-        task.execute(NewsListFragment.BLOG_URL, this);
+        task.execute(Const.URL_ESA_NEWS_1, this);
     }
 
-    public void refreshList(List<NewsArticle> articles)
-    {
+    public void refreshList(List<NewsArticle> articles) {
         Log.d("ZX", "articles:");
         listItemList = new ArrayList<ListItem>();
-        for (NewsArticle article : articles)
-        {
+        for (NewsArticle article : articles) {
             String title = article.getTitle();
             String date = article.getPubDate();
-            if (title != null && date != null)
-            {
-                Log.d("ZX", title+" "+date);
+            if (title != null && date != null) {
+                Log.d("ZX", title + " " + date);
                 ListItem listItem = new ListItem();
                 listItem.heading = title;
                 listItem.content = date;

@@ -18,6 +18,7 @@ import java.lang.reflect.Field;
 
 import pl.wasat.smarthma.R;
 import pl.wasat.smarthma.model.iso.EntryISO;
+import pl.wasat.smarthma.utils.time.DateUtils;
 
 /**
  * A simple {@link android.support.v4.app.Fragment} subclass. Activities that
@@ -74,7 +75,7 @@ public class MetadataISOFragment extends Fragment {
         ((TextView) rootView.findViewById(R.id.metadata_frag_tv_prod_name))
                 .setText(entryItem.getTitle());
         ((TextView) rootView.findViewById(R.id.metadata_frag_tv_prod_dates))
-                .setText("Date of publication: " + entryItem.getDate().getCIDate().getDateInCIDate().getDateGco().getText());
+                .setText("Date of publication: " + DateUtils.getISOPubDate(entryItem));
 
         if (!entryItem.getMDMetadata().getFileIdentifier().getCharacterString()
                 .getText().isEmpty()) {
@@ -244,7 +245,6 @@ public class MetadataISOFragment extends Fragment {
             }
 
         }
-        System.out.println(outputString);
         return outputString;
     }
 

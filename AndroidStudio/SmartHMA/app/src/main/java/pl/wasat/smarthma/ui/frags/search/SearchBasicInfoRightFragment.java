@@ -68,7 +68,7 @@ public class SearchBasicInfoRightFragment extends Fragment {
 
     private boolean areaBoundsUpdated = false;
 
-    private OnSearchBasicInfoRightFragmentListener mListener;
+    //private OnSearchBasicInfoRightFragmentListener mListener;
     private static SharedPrefs sharedPrefs;
 
     private static final CharSequence[] cataloguesList = {"EOP:ESA:FEDEO",
@@ -243,18 +243,18 @@ public class SearchBasicInfoRightFragment extends Fragment {
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
-        try {
+/*        try {
             mListener = (OnSearchBasicInfoRightFragmentListener) activity;
         } catch (ClassCastException e) {
             throw new ClassCastException(activity.toString()
                     + " must implement OnSearchBasicInfoRightFragmentListener");
-        }
+        }*/
     }
 
     @Override
     public void onDetach() {
         super.onDetach();
-        mListener = null;
+        //mListener = null;
     }
 
     /**
@@ -304,13 +304,13 @@ public class SearchBasicInfoRightFragment extends Fragment {
         areaBoundsUpdated = true;
     }
 
-    public boolean getAreaBoundsUpdated() {
+/*    public boolean getAreaBoundsUpdated() {
         return areaBoundsUpdated;
-    }
+    }*/
 
-    public void setAreaBoundsUpdated(boolean areaBoundsUpdated) {
+/*    public void setAreaBoundsUpdated(boolean areaBoundsUpdated) {
         this.areaBoundsUpdated = areaBoundsUpdated;
-    }
+    }*/
 
     private static Calendar getCalStart() {
         return calStart;
@@ -347,6 +347,7 @@ public class SearchBasicInfoRightFragment extends Fragment {
         EndpointsListDialogFragment endpointslistDialFrag = new EndpointsListDialogFragment();
         endpointslistDialFrag.show(getActivity().getSupportFragmentManager(),
                 "EndpointsListDialogFragment");
+
     }
 
     void showDatePickerDialog(View v) {

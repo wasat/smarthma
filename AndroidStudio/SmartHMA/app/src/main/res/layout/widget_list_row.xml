@@ -3,36 +3,35 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="horizontal"
-                android:background="@android:color/black" >
-
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="57dp"
-        android:layout_height="57dp"
-        android:layout_alignParentRight="true"
-        android:layout_marginTop="8dip"
-        android:src="@drawable/ic_launcher" />
+                android:background="#aaffffff" >
 
     <TextView
-        android:id="@+id/heading"
+        android:id="@+id/widget_list_heading"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_toRightOf="@id/imageView"
-        android:singleLine="true"
-        android:textSize="14sp"
+        android:singleLine="false"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:paddingTop="16dp"
+        android:textColor="#38b4ea"
+        android:textSize="16sp"
         android:textStyle="bold"
-        android:text="Heading"/>
+        android:text="Heading" />
 
     <TextView
-        android:id="@+id/content"
+        android:id="@+id/widget_list_content"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_below="@id/heading"
-        android:layout_marginTop="5dip"
-        android:layout_toRightOf="@id/imageView"
-        android:textSize="14sp"
-        android:text="Content"/>
+        android:layout_below="@id/widget_list_heading"
+        android:paddingBottom="2dp"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:paddingTop="2dp"
+        android:textColor="#A8A8A8"
+        android:textSize="12sp"
+        android:textStyle="italic"
+        android:text="Content" />
 
 </RelativeLayout>

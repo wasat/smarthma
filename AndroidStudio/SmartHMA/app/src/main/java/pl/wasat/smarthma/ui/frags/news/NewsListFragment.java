@@ -15,7 +15,7 @@ import pl.wasat.smarthma.services.NewsRssServiceNoAsync;
 public class NewsListFragment extends ListFragment {
 
     private static final String STATE_ACTIVATED_POSITION = "activated_position";
-    public static final String BLOG_URL = "http://www.esa.int/rssfeed/EOB";
+
 
     private Callbacks mCallbacks = sDummyCallbacks;
     private int mActivatedPosition = ListView.INVALID_POSITION;

@@ -26,9 +26,9 @@
     <string name="sw_">SW: </string>
     <string name="ne_">NE: </string>
     <string name="search_products">Search Products</string>
-    <string name="dataset_series_search_results">Dataset Series Search Results</string>
+    <string name="collections_search_results">Collections Search Results</string>
     <string name="quicklook">Quicklook</string>
-    <string name="browse_products">Browse Products</string>
+    <string name="browse_eo_data">Browse EO Data</string>
     <string name="esa_missions">ESA Missions</string>
     <string name="esa_online">ESA Online</string>
     <string name="esa_news">ESA Online News</string>
@@ -111,7 +111,7 @@
     <string name="endpoint">ENDPOINT</string>
     <string name="fedeo_esa_int">fedeo.esa.int</string>
     <string name="endpoint_list_title">ENDPOINT LIST</string>
-    <string name="widget_empty_list">List is empty</string>
+    <string name="widget_empty_list">Could not download data</string>
     <string name="launch_widget">Launch widget</string>
 
     <string-array name="sorting_modes">

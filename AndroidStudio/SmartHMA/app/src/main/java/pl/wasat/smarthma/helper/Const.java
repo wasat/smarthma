@@ -7,9 +7,13 @@ public class Const {
     public static final String HTTP_SMAAD_BASE_URL = "http://smaad.spacebel.be/opensearch/request/";
     private static final String HTTP_ESA_BASE_URL = "http://fedeo.esa.int/opensearch/request/";
 
-    public static String HTTP_BASE_URL = HTTP_ESA_BASE_URL;
+    public static String HTTP_BASE_URL = HTTP_SPACEBEL_BASE_URL;
 
     public static final String OSDD_BASE_URL = "http://fedeo.esa.int:80/opensearch/description.xml?";
+
+    public static final String URL_ESA_NEWS_1 = "http://www.esa.int/rssfeed/EOB";
+    public static final String URL_ESA_NEWS_2 = "https://earth.esa.int/eodisp-portlets/eodisp-rss?tags=news";
+    //public static final String URL_ESA_NEWS_2 = "http://www.esa.int/rssfeed/TopNews";
 
 /*
     public static final String URL_PARM_QUERY = "&query=";
@@ -23,10 +27,9 @@ public class Const {
     public static final String URL_PARM_BBOX = "&bbox=";
 */
 
-    public static final String KEY_MAP_LAYER_TO_DISPLAY = "pl.wasat.smarthma.KEY_MAP_LAYER_TO_DISPLAY";
     public static final String KEY_MAP_SPINNER_INTENTFILTER_NOTIFICATION = "pl.wasat.smarthma.KEY_MAP_SPINNER_INTENTFILTER_NOTIFICATION";
     public static final String KEY_MAP_WMS_LOAD_STATE = "pl.wasat.smarthma.KEY_MAP_WMS_LOAD_STATE";
-    public static final String KEY_INTENT_PARENT_ID = "pl.wasat.smarthma.KEY_INTENT_PARENT_ID";
+    //public static final String KEY_INTENT_PARENT_ID = "pl.wasat.smarthma.KEY_INTENT_PARENT_ID";
     public static final String KEY_INTENT_RETURN_STOP_SEARCH = "pl.wasat.smarthma.KEY_INTENT_RETURN_STOP_SEARCH";
     public static final String KEY_INTENT_QUERY = "pl.wasat.smarthma.KEY_INTENT_QUERY";
     public static String KEY_INTENT_FEDEO_REQUEST_PARAMS = "pl.wasat.smarthma.KEY_INTENT_FEDEO_REQUEST_PARAMS";

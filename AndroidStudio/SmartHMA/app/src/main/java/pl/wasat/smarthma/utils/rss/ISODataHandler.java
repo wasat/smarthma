@@ -676,7 +676,7 @@ class ISODataHandler extends DefaultHandler {
 
             if (isInMDMetadata) {
                 // EO MetaData
-                if (localName.equalsIgnoreCase("MD_Metadata")) {
+                if (localName.equalsIgnoreCase("MD_Metadata") || localName.equalsIgnoreCase("mi_metadata")) {
                     mdMetadata.setFileIdentifier(fileIdentifier);
                     mdMetadata.setLanguage(language);
                     mdMetadata.setHierarchyLevel(hierarchyLevel);

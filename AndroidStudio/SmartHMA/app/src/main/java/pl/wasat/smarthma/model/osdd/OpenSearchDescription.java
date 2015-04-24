@@ -14,7 +14,7 @@ public class OpenSearchDescription {
     private String LongName;
     private String Description;
     private List<pl.wasat.smarthma.model.osdd.Url> Url = new ArrayList<>();
-    private List<pl.wasat.smarthma.model.osdd.Parameter> Parameter = new ArrayList<>();
+    //private List<pl.wasat.smarthma.model.osdd.Parameter> Parameter = new ArrayList<>();
     private List<pl.wasat.smarthma.model.osdd.Query> Query = new ArrayList<>();
     private String Tags;
     private List<pl.wasat.smarthma.model.osdd.Image> Image = new ArrayList<>();
@@ -90,19 +90,19 @@ public class OpenSearchDescription {
         this.Url = Url;
     }
 
-    /**
+/*    *//**
      * @return The Parameter
-     */
+     *//*
     public List<pl.wasat.smarthma.model.osdd.Parameter> getParameter() {
         return Parameter;
-    }
+    }*/
 
-    /**
+/*    *//**
      * @param Parameter The Parameter
-     */
+     *//*
     public void setParameter(List<pl.wasat.smarthma.model.osdd.Parameter> Parameter) {
         this.Parameter = Parameter;
-    }
+    }*/
 
     /**
      * @return The Query
@@ -350,7 +350,7 @@ public class OpenSearchDescription {
 
     @Override
     public int hashCode() {
-        return new HashCodeBuilder().append(ShortName).append(LongName).append(Description).append(Url).append(Parameter).append(Query).append(Tags).append(Image).append(Developer).append(Attribution).append(SyndicationRight).append(AdultContent).append(Language).append(OutputEncoding).append(InputEncoding).append(Xmlns).append(XmlnsDc).append(XmlnsEo).append(XmlnsGeo).append(XmlnsParam).append(XmlnsSru).append(XmlnsTime).toHashCode();
+        return new HashCodeBuilder().append(ShortName).append(LongName).append(Description).append(Url).append(Query).append(Tags).append(Image).append(Developer).append(Attribution).append(SyndicationRight).append(AdultContent).append(Language).append(OutputEncoding).append(InputEncoding).append(Xmlns).append(XmlnsDc).append(XmlnsEo).append(XmlnsGeo).append(XmlnsParam).append(XmlnsSru).append(XmlnsTime).toHashCode();
     }
 
     @Override
@@ -362,7 +362,7 @@ public class OpenSearchDescription {
             return false;
         }
         OpenSearchDescription rhs = ((OpenSearchDescription) other);
-        return new EqualsBuilder().append(ShortName, rhs.ShortName).append(LongName, rhs.LongName).append(Description, rhs.Description).append(Url, rhs.Url).append(Parameter, rhs.Parameter).append(Query, rhs.Query).append(Tags, rhs.Tags).append(Image, rhs.Image).append(Developer, rhs.Developer).append(Attribution, rhs.Attribution).append(SyndicationRight, rhs.SyndicationRight).append(AdultContent, rhs.AdultContent).append(Language, rhs.Language).append(OutputEncoding, rhs.OutputEncoding).append(InputEncoding, rhs.InputEncoding).append(Xmlns, rhs.Xmlns).append(XmlnsDc, rhs.XmlnsDc).append(XmlnsEo, rhs.XmlnsEo).append(XmlnsGeo, rhs.XmlnsGeo).append(XmlnsParam, rhs.XmlnsParam).append(XmlnsSru, rhs.XmlnsSru).append(XmlnsTime, rhs.XmlnsTime).isEquals();
+        return new EqualsBuilder().append(ShortName, rhs.ShortName).append(LongName, rhs.LongName).append(Description, rhs.Description).append(Url, rhs.Url).append(Query, rhs.Query).append(Tags, rhs.Tags).append(Image, rhs.Image).append(Developer, rhs.Developer).append(Attribution, rhs.Attribution).append(SyndicationRight, rhs.SyndicationRight).append(AdultContent, rhs.AdultContent).append(Language, rhs.Language).append(OutputEncoding, rhs.OutputEncoding).append(InputEncoding, rhs.InputEncoding).append(Xmlns, rhs.Xmlns).append(XmlnsDc, rhs.XmlnsDc).append(XmlnsEo, rhs.XmlnsEo).append(XmlnsGeo, rhs.XmlnsGeo).append(XmlnsParam, rhs.XmlnsParam).append(XmlnsSru, rhs.XmlnsSru).append(XmlnsTime, rhs.XmlnsTime).isEquals();
     }
 
 }

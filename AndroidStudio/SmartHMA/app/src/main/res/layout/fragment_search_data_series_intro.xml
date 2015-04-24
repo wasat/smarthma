@@ -20,7 +20,7 @@
             android:paddingLeft="16dp"
             android:paddingRight="16dp"
             android:paddingTop="16dp"
-            android:text="@string/dataset_series_search_results"
+            android:text="@string/collections_search_results"
             android:textColor="#38b4ea"
             android:textSize="20sp"
             android:textStyle="bold" />

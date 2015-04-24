@@ -3,7 +3,9 @@ package pl.wasat.smarthma.utils.time;
 import java.util.Calendar;
 import java.util.Date;
 
-class DateUtils {
+import pl.wasat.smarthma.model.iso.EntryISO;
+
+public class DateUtils {
 
     public static String getDateDifference(Date thenDate) {
         Calendar now = Calendar.getInstance();
@@ -44,5 +46,15 @@ class DateUtils {
         }
     }
 
-
+    public static String getISOPubDate(EntryISO entry) {
+        String date = "";
+        if (entry.getDate() != null) {
+            date = entry.getDate().getCIDate().getDateInCIDate().getDateGco().getText();
+        } else if (entry.getMDMetadata().getDateStamp() != null) {
+            date = entry.getMDMetadata().getDateStamp().getDateGco().getText();
+        } else if (date.isEmpty()) {
+            date = "1970-01-01";
+        }
+        return date;
+    }
 }

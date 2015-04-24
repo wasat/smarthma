@@ -41,7 +41,7 @@
                     android:layout_gravity="center_vertical|center_horizontal|center"
                     android:adjustViewBounds="true"
                     android:contentDescription="@string/desc"
-                    android:text="@string/search_products" />
+                    android:text="@string/search_eo_data" />
             </LinearLayout>
 
             <LinearLayout
@@ -60,7 +60,7 @@
                     android:layout_gravity="center_vertical|center_horizontal|center"
                     android:adjustViewBounds="true"
                     android:contentDescription="@string/desc"
-                    android:text="@string/browse_products" />
+                    android:text="@string/browse_eo_data" />
             </LinearLayout>
         </LinearLayout>
 

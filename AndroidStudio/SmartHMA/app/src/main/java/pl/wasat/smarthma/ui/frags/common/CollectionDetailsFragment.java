@@ -11,7 +11,6 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.TableLayout;
-import android.widget.Toast;
 
 import com.google.api.client.http.GenericUrl;
 import com.octo.android.robospice.persistence.exception.SpiceException;
@@ -86,6 +85,8 @@ public class CollectionDetailsFragment extends
 
         putParentIdToShared();
 
+        loadDefaultFedeoParams();
+
         String osddUrl = "";
         for (Link entityLink : displayedISOEntry.getLink()) {
             if (entityLink.getRel().equalsIgnoreCase("search") || Const.HTTP_BASE_URL.equals(Const.HTTP_SPACEBEL_BASE_URL)) {
@@ -103,7 +104,6 @@ public class CollectionDetailsFragment extends
         btnShowProducts.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 if (mListener != null) {
                     //mListener.onCollectionDetailsFragmentShowProducts(parentID);
                     mSlidingLayer.closeLayer(true);
@@ -119,6 +119,12 @@ public class CollectionDetailsFragment extends
             }
         });
 
+        loadParamsSliderView(osddUrl);
+
+        return rootView;
+    }
+
+    private void loadParamsSliderView(String osddUrl) {
         final GenericUrl finalOsddUrl = new GenericUrl(osddUrl);
 
         mSlidingLayer.setOnInteractListener(new SlidingLayer.OnInteractListener() {
@@ -159,7 +165,11 @@ public class CollectionDetailsFragment extends
                 Log.i("SLIDER", "onClosed");
             }
         });
-        return rootView;
+    }
+
+    private void loadDefaultFedeoParams() {
+        fedeoRequestParams = new FedeoRequestParams();
+        fedeoRequestParams.buildFromShared(getActivity().getApplicationContext());
     }
 
     @Override
@@ -209,7 +219,7 @@ public class CollectionDetailsFragment extends
         for (int i = 0; i < osdd.getUrl().size(); i++) {
             if (osdd.getUrl().get(i).getType().equalsIgnoreCase("application/atom+xml")) {
 
-                for (final Parameter param : osdd.getParameter()) {
+                for (final Parameter param : osdd.getUrl().get(i).getParameters()) {
 
                     Spinner spinner = new Spinner(getActivity());
                     spinner.setLayoutParams(new TableLayout.LayoutParams(
@@ -233,9 +243,9 @@ public class CollectionDetailsFragment extends
                             if (l > 0) {
                                 paramsMap.put(param.getName(), param.getOption().get(i - 1).getValue());
 
-                                Toast.makeText(adapterView.getContext(),
+/*                                Toast.makeText(adapterView.getContext(),
                                         "Item Selected : " + adapterView.getItemAtPosition(i).toString() + " ID: " + l,
-                                        Toast.LENGTH_LONG).show();
+                                        Toast.LENGTH_LONG).show();*/
                             } else {
                                 paramsMap.put(param.getName(), "");
                             }
@@ -254,14 +264,12 @@ public class CollectionDetailsFragment extends
     }
 
     private void initFedeoReq(OpenSearchDescription osdd) {
-        fedeoRequestParams = new FedeoRequestParams();
-        fedeoRequestParams.buildFromShared(getActivity().getApplicationContext());
+        loadDefaultFedeoParams();
         String tmpltUrl = "";
         for (Url url : osdd.getUrl()) {
             if (url.getType().equalsIgnoreCase("application/atom+xml")) {
                 tmpltUrl = url.getTemplate();
             }
-
         }
         fedeoRequestParams.setTemplateUrl(tmpltUrl);
     }

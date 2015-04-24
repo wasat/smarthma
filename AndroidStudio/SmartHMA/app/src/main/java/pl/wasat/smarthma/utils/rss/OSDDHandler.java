@@ -74,7 +74,7 @@ class OSDDHandler extends DefaultHandler {
             openSearchDescription.setXmlnsTime(atts.getValue("xmlns:time"));
 
             urls = new ArrayList<>();
-            parameters = new ArrayList<>();
+            //parameters = new ArrayList<>();
             queries = new ArrayList<>();
             images = new ArrayList<>();
 
@@ -87,6 +87,9 @@ class OSDDHandler extends DefaultHandler {
             url.setRel(atts.getValue("rel"));
             url.setTemplate(atts.getValue("template"));
             url.setType(atts.getValue("type"));
+            url.setIndexOffset(atts.getValue("indexOffset"));
+            url.setPageOffset(atts.getValue("pageOffset"));
+            parameters = new ArrayList<>();
         } else if (localName.equalsIgnoreCase("Parameter")) {
             parameter = new Parameter();
             parameter.setName(atts.getValue("name"));
@@ -146,7 +149,7 @@ class OSDDHandler extends DefaultHandler {
             openSearchDescription.setLongName(longName);
             openSearchDescription.setDescription(description);
             openSearchDescription.setUrl(urls);
-            openSearchDescription.setParameter(parameters);
+            //openSearchDescription.setParameter(parameters);
             openSearchDescription.setQuery(queries);
             openSearchDescription.setTags(tags);
             openSearchDescription.setImage(images);
@@ -164,6 +167,7 @@ class OSDDHandler extends DefaultHandler {
         } else if (localName.equalsIgnoreCase("Description")) {
             description = chars.toString();
         } else if (localName.equalsIgnoreCase("Url")) {
+            url.setParameters(parameters);
             urls.add(url);
         } else if (localName.equalsIgnoreCase("Parameter")) {
             parameter.setOption(options);
