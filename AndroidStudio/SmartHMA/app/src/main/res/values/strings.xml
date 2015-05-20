@@ -113,6 +113,11 @@
     <string name="endpoint_list_title">ENDPOINT LIST</string>
     <string name="widget_empty_list">Could not download data</string>
     <string name="launch_widget">Launch widget</string>
+    <string name="title_parameter">Title</string>
+    <string name="title_osdd_parameter">Search Title Parameter</string>
+    <string name="value_osdd_parameter">Search parameter</string>
+    <string name="organisation_header">Organisation</string>
+    <string name="platform_header">Platform</string>
 
     <string-array name="sorting_modes">
         <item>Title ascending</item>

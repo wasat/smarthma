@@ -1,7 +1,7 @@
 package pl.wasat.smarthma.ui.activities;
 
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -9,7 +9,7 @@ import pl.wasat.smarthma.R;
 import pl.wasat.smarthma.ui.frags.common.StartFragment;
 import pl.wasat.smarthma.ui.frags.common.StartFragment.OnStartFragmentListener;
 
-public class StartActivity extends ActionBarActivity implements
+public class StartActivity extends AppCompatActivity implements
         OnStartFragmentListener {
 
     @Override

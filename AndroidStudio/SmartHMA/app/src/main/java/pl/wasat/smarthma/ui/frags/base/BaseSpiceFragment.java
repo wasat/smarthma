@@ -11,7 +11,6 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.google.api.client.http.HttpResponseException;
 import com.octo.android.robospice.SpiceManager;
@@ -112,7 +111,7 @@ public class BaseSpiceFragment extends Fragment {
             messTxt = "Probably a wide area of search or to long time span ";
         }
 
-        Toast.makeText(getActivity(), messTxt, Toast.LENGTH_LONG).show();
+        //Toast.makeText(getActivity(), messTxt, Toast.LENGTH_LONG).show();
 
         showDialog(messTxt);
 

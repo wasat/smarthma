@@ -201,7 +201,7 @@ public class SearchListFragment extends BaseSpiceListFragment {
                         searchFeedList);
                 this.setListAdapter(adapter);
                 adapter.notifyDataSetChanged();
-                SearchListAdapter adapter1 = adapter;
+                //SearchListAdapter adapter1 = adapter;
                 view.setVisibility(View.VISIBLE);
             }
         }
@@ -243,7 +243,7 @@ public class SearchListFragment extends BaseSpiceListFragment {
      * >Communicating with Other Fragments</a> for more information.
      */
     public interface OnSearchListFragmentListener {
-        public void onSearchListFragmentItemSelected(String id);
+        void onSearchListFragmentItemSelected(String id);
     }
 
     @Override

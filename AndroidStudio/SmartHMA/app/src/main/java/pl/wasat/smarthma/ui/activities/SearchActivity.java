@@ -96,7 +96,7 @@ public class SearchActivity extends BaseSmartHMActivity implements
             pickEndDatesMenu.add(MENU_ENDDATE_IDS, Menu.NONE, Menu.NONE, str);
         }
 
-        MenuItem clearItem = searchMenu.add(Menu.NONE, MENU_CLEAR_ID, Menu.NONE, getString(R.string.search_history_clear));
+        //MenuItem clearItem = searchMenu.add(Menu.NONE, MENU_CLEAR_ID, Menu.NONE, getString(R.string.search_history_clear));
 
         return super.onPrepareOptionsMenu(menu);
     }
@@ -266,4 +266,9 @@ public class SearchActivity extends BaseSmartHMActivity implements
     }
 
 
+    @Override
+    public void onSearchBasicInfoRightFragmentEditTextChange(String parameterKey, String parameterValue) {
+        leftPanel.setAdditionalParams(parameterKey, parameterValue);
+
+    }
 }

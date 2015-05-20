@@ -1,6 +1,7 @@
 package pl.wasat.smarthma.database;
 
 import android.content.Context;
+import android.util.Log;
 
 import java.util.ArrayList;
 
@@ -24,11 +25,30 @@ public class SearchHistory {
     }
 
     public void addSearchParameters(SearchParams parameters) {
+        Log.d("ZX", "addSearchParameters()");
         HistoryDbAdapter dba = new HistoryDbAdapter(context);
         dba.openToWrite();
-        dba.insertEntry(parameters);
+
+        //TODO - ERROR to remove
+        long dbaResult = dba.insertEntry(parameters);
+        Log.d("ZX", "Database result on inserting entry: "+dbaResult);
         dba.reduceNumberOfEntries(Const.MAX_SEARCH_HISTORY_ENTRIES);
         dba.close();
+
+        Log.d("ZX", "---");
+        dba.openToRead();
+        ArrayList<String[]> all = dba.getAll();
+        for (String[] s : all)
+        {
+            String tmp = "";
+            for (int i=0; i<s.length; i++)
+            {
+                tmp += s[i]+" ";
+            }
+            Log.d("ZX", tmp);
+        }
+        dba.close();
+        Log.d("ZX", "---");
     }
 
     public ArrayList<SearchParams> getSearchHistoryList(boolean reversedOrder) {

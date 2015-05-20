@@ -18,13 +18,12 @@ import pl.wasat.smarthma.ui.frags.browse.DataSeriesListFragment.OnDataSeriesList
 import pl.wasat.smarthma.ui.frags.common.AreaPickerMapFragment.OnAreaPickerMapFragmentListener;
 import pl.wasat.smarthma.ui.frags.common.CollectionDetailsFragment;
 import pl.wasat.smarthma.ui.frags.common.CollectionDetailsFragment.OnCollectionDetailsFragmentListener;
-import pl.wasat.smarthma.ui.frags.common.MetadataISOFragment;
 import pl.wasat.smarthma.ui.frags.common.MetadataISOFragment.OnMetadataISOFragmentListener;
 import pl.wasat.smarthma.ui.frags.search.SearchListFragment.OnSearchListFragmentListener;
 import pl.wasat.smarthma.utils.obj.LatLngBoundsExt;
 
 
-public class CollectionsBrowserActivity extends BaseSmartHMActivity implements
+public class CollectionsBrowserActivity extends BaseCollectionsActivity implements
         OnDataSeriesListFragmentListener,
         OnAreaPickerMapFragmentListener, OnAmznAreaPickerMapFragmentListener, OnSearchListFragmentListener,
         OnCollectionDetailsFragmentListener, OnMetadataISOFragmentListener {
@@ -187,24 +186,13 @@ public class CollectionsBrowserActivity extends BaseSmartHMActivity implements
      */
     @Override
     public void onCollectionDetailsFragmentShowProducts(FedeoRequestParams fedeoSearchProductsParams) {
-        Intent showProductsIntent = new Intent(this,
-                ProductsBrowserActivity.class);
-        //showProductsIntent.putExtra(Const.KEY_INTENT_PARENT_ID, parentID);
-        showProductsIntent.putExtra(Const.KEY_INTENT_FEDEO_REQUEST_PARAMS, fedeoSearchProductsParams);
-        startActivityForResult(showProductsIntent, REQUEST_NEW_SEARCH);
+        startSearchingProductsProcess(fedeoSearchProductsParams);
     }
+
 
     @Override
     public void onCollectionDetailsFragmentShowMetadata(EntryISO displayedEntry) {
-
-        MetadataISOFragment metadataISOFragment = MetadataISOFragment
-                .newInstance(displayedEntry);
-        getSupportFragmentManager()
-                .beginTransaction()
-                .replace(R.id.activity_base_details_container,
-                        metadataISOFragment, "MetadataISOFragment")
-                .addToBackStack("MetadataISOFragment").commit();
-
+        loadIsoMetadataFragment(displayedEntry);
     }
 
 

@@ -49,7 +49,11 @@ public class DateUtils {
     public static String getISOPubDate(EntryISO entry) {
         String date = "";
         if (entry.getDate() != null) {
-            date = entry.getDate().getCIDate().getDateInCIDate().getDateGco().getText();
+            if (entry.getDate().getCIDate() != null) {
+                date = entry.getDate().getCIDate().getDateInCIDate().getDateGco().getText();
+            } else {
+                date = entry.getDate().toString();
+            }
         } else if (entry.getMDMetadata().getDateStamp() != null) {
             date = entry.getMDMetadata().getDateStamp().getDateGco().getText();
         } else if (date.isEmpty()) {

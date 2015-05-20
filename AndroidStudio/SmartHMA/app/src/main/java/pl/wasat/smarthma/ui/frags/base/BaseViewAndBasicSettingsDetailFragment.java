@@ -39,7 +39,7 @@ import pl.wasat.smarthma.utils.time.DateUtils;
  * create an instance of this fragment.
  */
 public class BaseViewAndBasicSettingsDetailFragment extends BaseSpiceFragment {
-    protected static final String KEY_COLLECTION_ENTRY = "pl.wasat.smarthma.COLLECTION_NAME";
+    protected static final String KEY_COLLECTION_ENTRY = "pl.wasat.smarthma.KEY_COLLECTION_ENTRY";
     private static final String KEY_TEXTVIEW_TAG = "pl.wasat.smarthma.KEY_TEXTVIEW_TAG";
 
     private TextView tvAreaSWLat;
@@ -47,7 +47,7 @@ public class BaseViewAndBasicSettingsDetailFragment extends BaseSpiceFragment {
     private TextView tvAreaNELat;
     private TextView tvAreaNELon;
 
-    private static TextView tvParentId;
+    protected static TextView tvParentId;
 
     private static Calendar calStart;
     private static Calendar calEnd;
@@ -65,6 +65,7 @@ public class BaseViewAndBasicSettingsDetailFragment extends BaseSpiceFragment {
     protected View rootView;
 
     protected EntryISO displayedISOEntry;
+    protected String collectionName;
     private static SharedPrefs sharedPrefs;
     private LatLngBoundsExt geoBounds = null;
 
@@ -142,6 +143,10 @@ public class BaseViewAndBasicSettingsDetailFragment extends BaseSpiceFragment {
             detailWebView.loadData(content, "text/html", "UTF-8");
 
             tvParentId.setText(parentID);
+        } else {
+            ((TextView) rootView
+                    .findViewById(R.id.frag_search_res_coll_det_tv_coll_name))
+                    .setText(collectionName);
         }
 
         // sharedPrefs.setParentIdPrefs(tvParentId.getText().toString());
@@ -319,7 +324,7 @@ public class BaseViewAndBasicSettingsDetailFragment extends BaseSpiceFragment {
         calEnd = Calendar.getInstance();
     }
 
-    void showDatePickerDialog(View v) {
+    private void showDatePickerDialog(View v) {
         DialogFragment newFragment = new DatePickerFragment();
         Bundle args = new Bundle();
         args.putString(KEY_TEXTVIEW_TAG, (String) v.getTag());
@@ -328,7 +333,7 @@ public class BaseViewAndBasicSettingsDetailFragment extends BaseSpiceFragment {
                 "datePicker");
     }
 
-    void showTimePickerDialog(View v) {
+    private void showTimePickerDialog(View v) {
         DialogFragment newFragment = new MyTimePickerFragment();
         Bundle args = new Bundle();
         args.putString(KEY_TEXTVIEW_TAG, (String) v.getTag());

@@ -25,6 +25,13 @@ import pl.wasat.smarthma.model.explaindoc.ExplainData;
         httpMethod = org.acra.sender.HttpSender.Method.POST,
         formUriBasicAuthLogin = "apabyetionedishouresseri",
         formUriBasicAuthPassword = "1koM7DkJ13AdkJFB2teSrtLJ"
+
+        // NAVIN
+        //formUri = "https://wasat.cloudant.com/acra-navin/_design/acra-storage/_update/report",
+        //reportType = org.acra.sender.HttpSender.Type.JSON,
+        //httpMethod = org.acra.sender.HttpSender.Method.POST,
+        //formUriBasicAuthLogin = "llynorthclitedeshentsele",
+        //formUriBasicAuthPassword = "8TH1Rph6koNQ4nA6iGHR3ies"
 )
 
 public class SmartHMApplication extends Application {

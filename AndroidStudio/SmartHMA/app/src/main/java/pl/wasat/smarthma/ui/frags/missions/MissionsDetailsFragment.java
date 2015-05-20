@@ -144,7 +144,7 @@ public class MissionsDetailsFragment extends Fragment {
      * >Communicating with Other Fragments</a> for more information.
      */
     public interface OnMissionsDetailNewFragmentListener {
-        public void onMissionsDetailNewFragmentSearchData(String missionName);
+        void onMissionsDetailNewFragmentSearchData(String missionName);
     }
 
 }

@@ -138,7 +138,7 @@ public class ExtendedMapFragment extends Fragment implements
      * >Communicating with Other Fragments</a> for more information.
      */
     public interface OnExtendedMapFragmentListener {
-        public void onMapReady();
+        void onMapReady();
     }
 
     private void buildFootprintBounds(List<LatLng> footprintPoints) {
@@ -217,6 +217,7 @@ public class ExtendedMapFragment extends Fragment implements
         double fourLng = footprintPoints.get(3).longitude;
         float[] results = new float[3];
 
+        //TODO - Calculate center from boundary points
         qLookCenter = footprint.getCenterOf().getPoint().getPos().getLatLng().getGoogleLatLon();
 
         Location.distanceBetween(oneLat, oneLng, twoLat, twoLng, results);

@@ -108,7 +108,7 @@ public class AmznAreaPickerMapFragment extends AmznBaseMapFragment implements Am
      * >Communicating with Other Fragments</a> for more information.
      */
     public interface OnAmznAreaPickerMapFragmentListener {
-        public void onAmznMapFragmentBoundsChange(LatLngBoundsExt bounds);
+        void onAmznMapFragmentBoundsChange(LatLngBoundsExt bounds);
     }
 
     private void setMapListeners() {

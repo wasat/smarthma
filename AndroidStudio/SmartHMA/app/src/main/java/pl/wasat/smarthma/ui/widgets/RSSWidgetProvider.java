@@ -1,10 +1,12 @@
 package pl.wasat.smarthma.ui.widgets;
 
+import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.util.Log;
 import android.widget.RemoteViews;
 
 import pl.wasat.smarthma.R;
@@ -28,11 +30,24 @@ public class RSSWidgetProvider extends AppWidgetProvider {
     public void onUpdate(Context context, AppWidgetManager appWidgetManager,
                          int[] appWidgetIds) {
         final int N = appWidgetIds.length;
-        for (int i = 0; i < N; i++) {
+        for (int appWidgetId : appWidgetIds) {
             Intent serviceIntent = new Intent(context, RemoteFetchService.class);
             serviceIntent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID,
-                    appWidgetIds[i]);
+                    appWidgetId);
             context.startService(serviceIntent);
+
+            // Register an onClickListener for the Refresh button
+            RemoteViews remoteViews = new RemoteViews(context.getPackageName(),
+                    R.layout.widget_layout);
+
+            Intent clickIntent = new Intent(context, RSSWidgetProvider.class);
+            clickIntent.setAction(AppWidgetManager.ACTION_APPWIDGET_UPDATE);
+            clickIntent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, appWidgetIds);
+
+            PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, clickIntent,
+                    PendingIntent.FLAG_UPDATE_CURRENT);
+            remoteViews.setOnClickPendingIntent(R.id.widget_refresh, pendingIntent);
+            appWidgetManager.updateAppWidget(appWidgetId, remoteViews);
         }
         super.onUpdate(context, appWidgetManager, appWidgetIds);
     }

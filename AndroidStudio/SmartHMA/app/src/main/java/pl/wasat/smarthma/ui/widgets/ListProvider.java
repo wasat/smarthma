@@ -1,5 +1,6 @@
 package pl.wasat.smarthma.ui.widgets;
 
+import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
 import android.content.Context;
 import android.content.Intent;
@@ -9,6 +10,8 @@ import android.widget.RemoteViewsService.RemoteViewsFactory;
 import java.util.ArrayList;
 
 import pl.wasat.smarthma.R;
+import pl.wasat.smarthma.ui.activities.NewsActivity;
+import pl.wasat.smarthma.ui.activities.SearchActivity;
 
 /**
  * If you are familiar with Adapter of ListView,this is the same as adapter
@@ -18,27 +21,26 @@ import pl.wasat.smarthma.R;
  * and this example won't work if there are multiple widgets and
  * they update at same time i.e they modify RemoteFetchService ArrayList at same
  * time.
- * For that use Database or other techniquest
+ * For that use Database or other techniques
  */
-public class ListProvider implements RemoteViewsFactory {
-    private ArrayList<ListItem> listItemList = new ArrayList<ListItem>();
+class ListProvider implements RemoteViewsFactory {
+    private ArrayList<ListItem> listItemList = new ArrayList<>();
     private Context context = null;
-    private int appWidgetId;
 
     public ListProvider(Context context, Intent intent) {
         this.context = context;
-        appWidgetId = intent.getIntExtra(AppWidgetManager.EXTRA_APPWIDGET_ID,
+        int appWidgetId = intent.getIntExtra(AppWidgetManager.EXTRA_APPWIDGET_ID,
                 AppWidgetManager.INVALID_APPWIDGET_ID);
 
         populateListItem();
     }
 
     private void populateListItem() {
-        if(RemoteFetchService.listItemList !=null )
+        if (RemoteFetchService.listItemList != null)
             listItemList = (ArrayList<ListItem>) RemoteFetchService.listItemList
                     .clone();
         else
-            listItemList = new ArrayList<ListItem>();
+            listItemList = new ArrayList<>();
 
     }
 
@@ -64,6 +66,10 @@ public class ListProvider implements RemoteViewsFactory {
         ListItem listItem = listItemList.get(position);
         remoteView.setTextViewText(R.id.widget_list_heading, listItem.heading);
         remoteView.setTextViewText(R.id.widget_list_content, listItem.content);
+
+        Intent intent = new Intent(context, SearchActivity.class);
+        PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        remoteView.setOnClickPendingIntent(R.layout.widget_list_row, pendingIntent);
 
         return remoteView;
     }

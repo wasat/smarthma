@@ -50,11 +50,19 @@ public class RemoteFetchService extends Service {
 
     public void refreshList(List<NewsArticle> articles) {
         Log.d("ZX", "articles:");
-        listItemList = new ArrayList<ListItem>();
-        for (NewsArticle article : articles) {
+        listItemList = new ArrayList<>();
+        for (NewsArticle article : articles)
+        {
             String title = article.getTitle();
             String date = article.getPubDate();
-            if (title != null && date != null) {
+            if (title != null && date != null)
+            {
+                /*
+                if (listItemList.size() > 10)
+                {
+                    break;
+                }
+                */
                 Log.d("ZX", title + " " + date);
                 ListItem listItem = new ListItem();
                 listItem.heading = title;

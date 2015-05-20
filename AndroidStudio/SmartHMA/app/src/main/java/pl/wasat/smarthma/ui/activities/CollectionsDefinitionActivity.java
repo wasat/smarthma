@@ -17,17 +17,21 @@ import pl.wasat.smarthma.helper.Const;
 import pl.wasat.smarthma.interfaces.OnCollectionsListSelectionListener;
 import pl.wasat.smarthma.kindle.AmznAreaPickerMapFragment.OnAmznAreaPickerMapFragmentListener;
 import pl.wasat.smarthma.kindle.AmznBaseMapFragment;
+import pl.wasat.smarthma.model.FedeoRequestParams;
+import pl.wasat.smarthma.model.iso.EntryISO;
 import pl.wasat.smarthma.ui.frags.base.BaseMapFragment;
 import pl.wasat.smarthma.ui.frags.browse.BrowseCollectionFirstDetailFragment;
+import pl.wasat.smarthma.ui.frags.browse.CollectionEmptyDetailsFragment.OnCollectionEmptyDetailsFragmentListener;
 import pl.wasat.smarthma.ui.frags.browse.CollectionsGroupListFragment;
 import pl.wasat.smarthma.ui.frags.browse.CollectionsListFragment.OnCollectionsListFragmentListener;
 import pl.wasat.smarthma.ui.frags.common.AreaPickerMapFragment.OnAreaPickerMapFragmentListener;
+import pl.wasat.smarthma.ui.frags.common.CollectionDetailsFragment.OnCollectionDetailsFragmentListener;
 import pl.wasat.smarthma.utils.obj.LatLngBoundsExt;
 import roboguice.util.temp.Ln;
 
-public class CollectionsDefinitionActivity extends BaseSmartHMActivity
+public class CollectionsDefinitionActivity extends BaseCollectionsActivity
         implements OnCollectionsListSelectionListener,
-        OnCollectionsListFragmentListener, OnAreaPickerMapFragmentListener, OnAmznAreaPickerMapFragmentListener {
+        OnCollectionsListFragmentListener, OnCollectionDetailsFragmentListener, OnCollectionEmptyDetailsFragmentListener, OnAreaPickerMapFragmentListener, OnAmznAreaPickerMapFragmentListener {
 
     /**
      * Whether or not the activity is in two-pane mode, i.e. running on a tablet
@@ -175,5 +179,21 @@ public class CollectionsDefinitionActivity extends BaseSmartHMActivity
             browseCollectionFirstDetailFragment.updateAreaBounds(bounds);
         }
     }
+
+    @Override
+    public void onCollectionDetailsFragmentShowProducts(FedeoRequestParams fedeoRequestParams) {
+        startSearchingProductsProcess(fedeoRequestParams);
+    }
+
+    @Override
+    public void onCollectionEmptyDetailsFragmentShowProducts(FedeoRequestParams fedeoRequestParams) {
+        startSearchingProductsProcess(fedeoRequestParams);
+    }
+
+    @Override
+    public void onCollectionDetailsFragmentShowMetadata(EntryISO displayedEntry) {
+        loadIsoMetadataFragment(displayedEntry);
+    }
+
 
 }

@@ -143,7 +143,7 @@ public class AmznExtendedMapFragment extends Fragment implements
      * >Communicating with Other Fragments</a> for more information.
      */
     public interface OnAmznExtendedMapFragmentListener {
-        public void onAmznMapReady();
+        void onAmznMapReady();
     }
 
     private void buildFootprintBounds(List<LatLng> footprintPoints) {

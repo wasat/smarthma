@@ -30,12 +30,12 @@ public class SmartHmaFacebookBroadcastReceiver extends FacebookBroadcastReceiver
     @Override
     protected void onSuccessfulAppCall(String appCallId, String action, Bundle extras) {
         // A real app could update UI or notify the user that their photo was uploaded.
-        Log.d("HelloFacebook", String.format("Photo uploaded by call " + appCallId + " succeeded."));
+        Log.d("HelloFacebook", "Photo uploaded by call " + appCallId + " succeeded.");
     }
 
     @Override
     protected void onFailedAppCall(String appCallId, String action, Bundle extras) {
         // A real app could update UI or notify the user that their photo was not uploaded.
-        Log.d("HelloFacebook", String.format("Photo uploaded by call " + appCallId + " failed."));
+        Log.d("HelloFacebook", "Photo uploaded by call " + appCallId + " failed.");
     }
 }

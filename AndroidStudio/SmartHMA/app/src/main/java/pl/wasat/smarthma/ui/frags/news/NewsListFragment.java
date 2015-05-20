@@ -21,7 +21,7 @@ public class NewsListFragment extends ListFragment {
     private int mActivatedPosition = ListView.INVALID_POSITION;
 
     public interface Callbacks {
-        public void onItemSelected(String id);
+        void onItemSelected(String id);
     }
 
     private static final Callbacks sDummyCallbacks = new Callbacks() {
@@ -84,7 +84,7 @@ public class NewsListFragment extends ListFragment {
                 : ListView.CHOICE_MODE_NONE);
     }
 
-    void setActivatedPosition(int position) {
+    private void setActivatedPosition(int position) {
         if (position == ListView.INVALID_POSITION) {
             getListView().setItemChecked(mActivatedPosition, false);
         } else {

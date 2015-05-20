@@ -109,7 +109,7 @@
         <receiver
             android:label="SmartHMA RSS"
             android:name=".ui.widgets.RSSWidgetProvider">
-            <intent-filter>
+        <intent-filter>
                 <!-- This widget provider receives broadcast with following action name or simply onUpdate of AppWidgetProvider is called -->
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
                 <!-- To receive broadcast with this string name -->
@@ -124,7 +124,7 @@
             android:name=".ui.widgets.WidgetService"
             android:permission="android.permission.BIND_REMOTEVIEWS" />
         <activity android:name=".ui.widgets.WidgetConfigActivity">
-            <intent-filter>
+        <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_CONFIGURE" />
             </intent-filter>
         </activity>

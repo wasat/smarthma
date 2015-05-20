@@ -12,6 +12,7 @@ import java.util.List;
 
 import pl.wasat.smarthma.R;
 import pl.wasat.smarthma.model.iso.EntryISO;
+import pl.wasat.smarthma.utils.time.DateUtils;
 
 public class SearchListAdapter extends ArrayAdapter<EntryISO> {
 
@@ -33,7 +34,11 @@ public class SearchListAdapter extends ArrayAdapter<EntryISO> {
 
         TextView dateView = (TextView) rowView
                 .findViewById(R.id.search_listing_smallprint);
-        String pubDate = "Date: " + searchItem.getDate().getCIDate().getDateInCIDate().getDateGco().getText() + ", updated: "
+        //String pubDate = "Date: " + searchItem.getDate().getCIDate().getDateInCIDate().getDateGco().getText() + ", updated: "
+        //        + searchItem.getUpdated();
+
+        final String pubDate = "This data were published: "
+                + DateUtils.getISOPubDate(searchItem) + " and updated: "
                 + searchItem.getUpdated();
 
         dateView.setText(pubDate);

@@ -82,6 +82,7 @@ public class StartFragment extends Fragment {
                 }
             }
         });
+
         Button buttonStartMission = (Button) rootView
                 .findViewById(R.id.start_frag_button_mission);
         buttonStartMission.setOnClickListener(new OnClickListener() {

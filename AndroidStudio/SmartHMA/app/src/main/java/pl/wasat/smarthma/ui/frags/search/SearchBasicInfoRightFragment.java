@@ -10,12 +10,16 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -48,6 +52,9 @@ import pl.wasat.smarthma.utils.time.SimpleDate;
 public class SearchBasicInfoRightFragment extends Fragment {
     private static final String KEY_COLLECTION_NAME = "pl.wasat.smarthma.COLLECTION_NAME";
     private static final String KEY_BUTTON_TAG = "pl.wasat.smarthma.KEY_BUTTON_TAG";
+    private static final int EDIT_TEXT_TITLE = 1;
+    private static final int EDIT_TEXT_ORGANISATION = 2;
+    private static final int EDIT_TEXT_PLATFORM = 3;
 
     private String paramCollName;
 
@@ -66,9 +73,13 @@ public class SearchBasicInfoRightFragment extends Fragment {
     private static Button btnToDate;
     private static Button btnToTime;
 
+    private EditText edtTitle;
+    private EditText edtOrganisation;
+    private EditText edtPlatform;
+
     private boolean areaBoundsUpdated = false;
 
-    //private OnSearchBasicInfoRightFragmentListener mListener;
+    private OnSearchBasicInfoRightFragmentListener mListener;
     private static SharedPrefs sharedPrefs;
 
     private static final CharSequence[] cataloguesList = {"EOP:ESA:FEDEO",
@@ -218,6 +229,15 @@ public class SearchBasicInfoRightFragment extends Fragment {
             }
         });
 
+        edtTitle = (EditText) rootView.findViewById(R.id.search_frag_right_basic_editv_title);
+        edtTitle.addTextChangedListener(new EditTextViewInputWatcher(EDIT_TEXT_TITLE));
+
+        edtOrganisation = (EditText) rootView.findViewById(R.id.search_frag_right_basic_editv_org);
+        edtOrganisation.addTextChangedListener(new EditTextViewInputWatcher(EDIT_TEXT_ORGANISATION));
+
+        edtPlatform = (EditText) rootView.findViewById(R.id.search_frag_right_basic_editv_platform);
+        edtPlatform.addTextChangedListener(new EditTextViewInputWatcher(EDIT_TEXT_PLATFORM));
+
         updateSearchAreaBounds();
         setInitDateTime();
 
@@ -243,18 +263,18 @@ public class SearchBasicInfoRightFragment extends Fragment {
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
-/*        try {
+        try {
             mListener = (OnSearchBasicInfoRightFragmentListener) activity;
         } catch (ClassCastException e) {
             throw new ClassCastException(activity.toString()
                     + " must implement OnSearchBasicInfoRightFragmentListener");
-        }*/
+        }
     }
 
     @Override
     public void onDetach() {
         super.onDetach();
-        //mListener = null;
+        mListener = null;
     }
 
     /**
@@ -267,6 +287,7 @@ public class SearchBasicInfoRightFragment extends Fragment {
      * >Communicating with Other Fragments</a> for more information.
      */
     public interface OnSearchBasicInfoRightFragmentListener {
+        void onSearchBasicInfoRightFragmentEditTextChange(String parameterKey, String parameterValue);
     }
 
     private void updateSearchAreaBounds() {
@@ -337,20 +358,20 @@ public class SearchBasicInfoRightFragment extends Fragment {
         sharedPrefs.setDateTimePrefs(setDtISO(calStart), setDtISO(calEnd));
     }
 
-    void showCatalogueListDialog() {
+    private void showCatalogueListDialog() {
         CatalogueListDialogFragment listDialFrag = new CatalogueListDialogFragment();
         listDialFrag.show(getActivity().getSupportFragmentManager(),
                 "CatalogueListDialogFragment");
     }
 
-    void showEndpointsListDialog() {
+    private void showEndpointsListDialog() {
         EndpointsListDialogFragment endpointslistDialFrag = new EndpointsListDialogFragment();
         endpointslistDialFrag.show(getActivity().getSupportFragmentManager(),
                 "EndpointsListDialogFragment");
 
     }
 
-    void showDatePickerDialog(View v) {
+    private void showDatePickerDialog(View v) {
         DialogFragment newFragment = new DatePickerFragment();
         Bundle args = new Bundle();
         args.putString(KEY_BUTTON_TAG, (String) v.getTag());
@@ -359,7 +380,7 @@ public class SearchBasicInfoRightFragment extends Fragment {
                 "datePicker");
     }
 
-    void showTimePickerDialog(View v) {
+    private void showTimePickerDialog(View v) {
         DialogFragment newFragment = new MyTimePickerFragment();
         Bundle args = new Bundle();
         args.putString(KEY_BUTTON_TAG, (String) v.getTag());
@@ -509,6 +530,38 @@ public class SearchBasicInfoRightFragment extends Fragment {
         }
     }
 
+    private class EditTextViewInputWatcher implements TextWatcher {
+
+        private int choosenEditTv;
+
+        EditTextViewInputWatcher(int editTextView) {
+            choosenEditTv = editTextView;
+        }
+
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+        }
+
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+        }
+
+        @Override
+        public void afterTextChanged(Editable s) {
+            Log.i("PARAMS", s.toString());
+            switch (choosenEditTv){
+                case EDIT_TEXT_TITLE:
+                    mListener.onSearchBasicInfoRightFragmentEditTextChange("title", s.toString());
+                case EDIT_TEXT_ORGANISATION:
+                    mListener.onSearchBasicInfoRightFragmentEditTextChange("organisation", s.toString());
+                case EDIT_TEXT_PLATFORM:
+                    mListener.onSearchBasicInfoRightFragmentEditTextChange("platform", s.toString());
+                default:
+                    mListener.onSearchBasicInfoRightFragmentEditTextChange("", "");
+            }
+        }
+    }
+
     private static void setCatalogue(int which) {
         tvCatalogName.setText(cataloguesList[which]);
         sharedPrefs.setParentIdPrefs(cataloguesList[which].toString());
@@ -531,7 +584,7 @@ public class SearchBasicInfoRightFragment extends Fragment {
         sharedPrefs.setDateTimePrefs(setDtISO(calStart), setDtISO(calEnd));
     }
 
-    void setBounds(String bboxWest, String bboxSouth, String bboxEast, String bboxNorth) {
+    private void setBounds(String bboxWest, String bboxSouth, String bboxEast, String bboxNorth) {
         tvAreaSWLat.setText(bboxSouth);
         tvAreaSWLon.setText(bboxWest);
         tvAreaNELat.setText(bboxNorth);
@@ -623,4 +676,6 @@ public class SearchBasicInfoRightFragment extends Fragment {
     private static CharSequence[] getCataloguesList() {
         return cataloguesList;
     }
+
+
 }

@@ -25,6 +25,7 @@ import pl.wasat.smarthma.helper.DataSorter;
 import pl.wasat.smarthma.model.Collection;
 import pl.wasat.smarthma.model.CollectionsGroup;
 import pl.wasat.smarthma.model.CollectionsGroup.List;
+import pl.wasat.smarthma.preferences.SharedPrefs;
 import pl.wasat.smarthma.services.SmartHmaHttpSpiceService;
 import pl.wasat.smarthma.utils.http.ExplainDocRequest;
 import pl.wasat.smarthma.utils.xml.XMLParser;
@@ -101,6 +102,9 @@ public class CollectionsGroupListFragment extends Fragment implements
 
         loadingView.setVisibility(View.GONE);
         collectionsGroupListView.setVisibility(View.VISIBLE);
+
+        SharedPrefs sharedPrefs = new SharedPrefs(getActivity());
+        sharedPrefs.setParentIdPrefs("EOP:ESA:FEDEO");
 
         // Click event for single list row
         collectionsGroupListView

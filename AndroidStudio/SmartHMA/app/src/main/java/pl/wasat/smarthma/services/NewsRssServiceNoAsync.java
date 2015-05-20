@@ -46,12 +46,12 @@ public class NewsRssServiceNoAsync {
         onPostExecute(art2);*/
     }
 
-    void onPreExecute() {
+    private void onPreExecute() {
         Log.e("ASYNC", "PRE EXECUTE");
         progress.show();
     }
 
-    void onPostExecute(final List<NewsArticle> articles) {
+    private void onPostExecute(final List<NewsArticle> articles) {
         Log.e("ASYNC", "POST EXECUTE");
         articleListFrag.getActivity().runOnUiThread(new Runnable() {
             @Override
@@ -86,7 +86,7 @@ public class NewsRssServiceNoAsync {
         progress.dismiss();
     }
 
-    List<NewsArticle> doInBackground(String... urls) {
+    private List<NewsArticle> doInBackground(String... urls) {
         String feed = urls[0];
 
         URL url;

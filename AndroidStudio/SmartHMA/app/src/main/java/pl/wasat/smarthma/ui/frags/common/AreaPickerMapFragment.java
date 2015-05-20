@@ -111,7 +111,7 @@ public class AreaPickerMapFragment extends BaseMapFragment implements OnBaseMapF
      * >Communicating with Other Fragments</a> for more information.
      */
     public interface OnAreaPickerMapFragmentListener {
-        public void onMapFragmentBoundsChange(LatLngBoundsExt bounds);
+        void onMapFragmentBoundsChange(LatLngBoundsExt bounds);
     }
 
     private void setMapListeners() {

@@ -1,3 +1,4 @@
+/*
 package pl.wasat.smarthma.ui.frags.common;
 
 import android.graphics.Bitmap;
@@ -72,7 +73,7 @@ public class GalleryFragment extends Fragment {
         return layout;
     }
 
-    Bitmap decodeSampledBitmapFromUri(int resId) {
+    private Bitmap decodeSampledBitmapFromUri(int resId) {
         Bitmap bm;
 
         // First decode with inJustDecodeBounds=true to check dimensions
@@ -92,7 +93,7 @@ public class GalleryFragment extends Fragment {
         return bm;
     }
 
-    int calculateInSampleSize(BitmapFactory.Options options) {
+    private int calculateInSampleSize(BitmapFactory.Options options) {
         // Raw height and width of image
         final int height = options.outHeight;
         final int width = options.outWidth;
@@ -110,3 +111,4 @@ public class GalleryFragment extends Fragment {
     }
 
 }
+*/

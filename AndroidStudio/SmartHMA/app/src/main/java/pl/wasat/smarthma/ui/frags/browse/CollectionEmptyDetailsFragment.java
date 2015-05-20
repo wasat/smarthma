@@ -1,4 +1,4 @@
-package pl.wasat.smarthma.ui.frags.common;
+package pl.wasat.smarthma.ui.frags.browse;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -23,51 +23,60 @@ import java.util.List;
 
 import pl.wasat.smarthma.helper.Const;
 import pl.wasat.smarthma.model.FedeoRequestParams;
-import pl.wasat.smarthma.model.feed.Link;
-import pl.wasat.smarthma.model.iso.EntryISO;
 import pl.wasat.smarthma.model.osdd.OpenSearchDescription;
 import pl.wasat.smarthma.model.osdd.Option;
 import pl.wasat.smarthma.model.osdd.Parameter;
 import pl.wasat.smarthma.model.osdd.Url;
+import pl.wasat.smarthma.preferences.SharedPrefs;
 import pl.wasat.smarthma.ui.frags.base.BaseViewAndBasicSettingsDetailFragment;
 import pl.wasat.smarthma.utils.rss.FedeoOSDDRequest;
 
 /**
  * A simple {@link android.support.v4.app.Fragment} subclass. Activities that
  * contain this fragment must implement the
- * {@link CollectionDetailsFragment.OnCollectionDetailsFragmentListener}
+ * {@link pl.wasat.smarthma.ui.frags.browse.CollectionEmptyDetailsFragment.OnCollectionEmptyDetailsFragmentListener}
  * interface to handle interaction events. Use the
- * {@link CollectionDetailsFragment#newInstance} factory method to create an
+ * {@link CollectionEmptyDetailsFragment#newInstance} factory method to create an
  * instance of this fragment.
  */
-public class CollectionDetailsFragment extends
+public class CollectionEmptyDetailsFragment extends
         BaseViewAndBasicSettingsDetailFragment {
+    private static final String KEY_COLLECTION_NAME = "pl.wasat.smarthma.KEY_COLLECTION_NAME";
 
-
-    private OnCollectionDetailsFragmentListener mListener;
+    private OnCollectionEmptyDetailsFragmentListener mListener;
     private boolean waitForOsddLoad = true;
 
     private FedeoRequestParams fedeoRequestParams;
     private HashMap<String, String> paramsMap;
+    private boolean isSpinnersAdded;
 
 
     /**
      * Use this factory method to create a new instance of this fragment using
      * the provided parameters.
      *
-     * @param collectionEntry Parameter 1.
+     * @param collectionName Parameter 1.
      * @return A new instance of fragment CollectionDetailsFragment.
      */
-    public static CollectionDetailsFragment newInstance(EntryISO collectionEntry) {
-        CollectionDetailsFragment fragment = new CollectionDetailsFragment();
+    public static CollectionEmptyDetailsFragment newInstance(String collectionName) {
+        CollectionEmptyDetailsFragment fragment = new CollectionEmptyDetailsFragment();
         Bundle args = new Bundle();
-        args.putSerializable(KEY_COLLECTION_ENTRY, collectionEntry);
+        args.putString(KEY_COLLECTION_NAME, collectionName);
         fragment.setArguments(args);
         return fragment;
     }
 
-    public CollectionDetailsFragment() {
+    public CollectionEmptyDetailsFragment() {
         // Required empty public constructor
+    }
+
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if (getArguments() != null) {
+            collectionName = getArguments().getString(KEY_COLLECTION_NAME);
+        }
     }
 
     /*
@@ -87,40 +96,24 @@ public class CollectionDetailsFragment extends
 
         loadDefaultFedeoParams();
 
-        String osddUrl = "";
-        for (Link entityLink : displayedISOEntry.getLink()) {
-            if (entityLink.getRel().equalsIgnoreCase("search") || Const.HTTP_BASE_URL.equals(Const.HTTP_SPACEBEL_BASE_URL)) {
-                btnShowProducts.setEnabled(true);
-            }
-            if (entityLink.getRel().equalsIgnoreCase("search") && entityLink.getType().equalsIgnoreCase("application/opensearchdescription+xml")) {
-                osddUrl = entityLink.getHref();
-            }
-        }
-
-        if (osddUrl == null || osddUrl.isEmpty()) {
-            osddUrl = Const.OSDD_BASE_URL + "parentIdentifier=" + displayedISOEntry.getIdentifier();
-        }
-
+        btnShowProducts.setEnabled(true);
         btnShowProducts.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (mListener != null) {
                     //mListener.onCollectionDetailsFragmentShowProducts(parentID);
                     mSlidingLayer.closeLayer(true);
-                    fedeoRequestParams.buildFromShared(getActivity());
-                    fedeoRequestParams.setParentIdentifier(displayedISOEntry.getIdentifier());
-                    mListener.onCollectionDetailsFragmentShowProducts(fedeoRequestParams);
+                    fedeoRequestParams.setParentIdentifier(collectionName);
+                    mListener.onCollectionEmptyDetailsFragmentShowProducts(fedeoRequestParams);
                 }
             }
         });
 
-        btnShowMetadata.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mListener.onCollectionDetailsFragmentShowMetadata(displayedISOEntry);
-            }
-        });
+        btnShowMetadata.setEnabled(false);
 
+        tvParentId.setText(collectionName);
+
+        String osddUrl = Const.OSDD_BASE_URL + "parentIdentifier=" + collectionName;
         loadParamsSliderView(osddUrl);
 
         return rootView;
@@ -178,10 +171,10 @@ public class CollectionDetailsFragment extends
     public void onAttach(Activity activity) {
         super.onAttach(activity);
         try {
-            mListener = (OnCollectionDetailsFragmentListener) activity;
+            mListener = (OnCollectionEmptyDetailsFragmentListener) activity;
         } catch (ClassCastException e) {
             throw new ClassCastException(activity.toString()
-                    + " must implement OnCollectionDetailsFragmentListener");
+                    + " must implement OnCollectionEmptyDetailsFragmentListener");
         }
     }
 
@@ -191,16 +184,14 @@ public class CollectionDetailsFragment extends
         mListener = null;
     }
 
-/*    private void putParentIdToShared() {
-        final String parentID;
-        if (displayedISOEntry != null) {
-            parentID = displayedISOEntry.getIdentifier();
-        } else {
+    private void putParentIdToShared() {
+        String parentID = null;
+        if (!(collectionName == null || collectionName.isEmpty())) {
             parentID = collectionName;
         }
         SharedPrefs sharedPrefs = new SharedPrefs(getActivity().getApplicationContext());
         sharedPrefs.setParentIdPrefs(parentID);
-    }*/
+    }
 
     private void startAsyncLoadOsddData(GenericUrl fedeoDescUrl) {
         if (fedeoDescUrl != null) {
@@ -224,49 +215,55 @@ public class CollectionDetailsFragment extends
 
         // TODO - remove this loop and condition to fit to final version of OSDD based on geo.spacebel.be endpoint
         for (int i = 0; i < osdd.getUrl().size(); i++) {
-            if (osdd.getUrl().get(i).getType().equalsIgnoreCase("application/atom+xml")) {
+            if (!isSpinnersAdded && osdd.getUrl().get(i).getType().equalsIgnoreCase("application/atom+xml")) {
+                loadParametersToSpinner(osdd.getUrl().get(i));
+            } else if (i == osdd.getUrl().size() - 1 && !osdd.getUrl().get(i).getParameters().isEmpty()) {
+                loadParametersToSpinner(osdd.getUrl().get(i));
+            }
+        }
+    }
 
-                for (final Parameter param : osdd.getUrl().get(i).getParameters()) {
+    private void loadParametersToSpinner(Url osddUrl) {
+        for (final Parameter param : osddUrl.getParameters()) {
 
-                    Spinner spinner = new Spinner(getActivity());
-                    spinner.setLayoutParams(new TableLayout.LayoutParams(
-                            TableLayout.LayoutParams.WRAP_CONTENT, TableLayout.LayoutParams.WRAP_CONTENT, 1f));
-                    spinner.setPadding(25, 2, 25, 2);
-                    //spinner.setPrompt(param.getName());
+            Spinner spinner = new Spinner(getActivity());
+            spinner.setLayoutParams(new TableLayout.LayoutParams(
+                    TableLayout.LayoutParams.WRAP_CONTENT, TableLayout.LayoutParams.WRAP_CONTENT, 1f));
+            spinner.setPadding(25, 2, 25, 2);
+            //spinner.setPrompt(param.getName());
 
-                    List<String> optList = new ArrayList<>();
-                    optList.add("Choose " + param.getName() + "...");
-                    for (Option opt : param.getOption()) {
-                        optList.add(opt.getLabel());
-                    }
+            List<String> optList = new ArrayList<>();
+            optList.add("Choose " + param.getName() + "...");
+            for (Option opt : param.getOption()) {
+                optList.add(opt.getLabel());
+            }
 
-                    ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_item, optList);
-                    spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                    spinner.setAdapter(spinnerAdapter);
+            ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_item, optList);
+            spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            spinner.setAdapter(spinnerAdapter);
 
-                    spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                        @Override
-                        public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                            if (l > 0) {
-                                paramsMap.put(param.getName(), param.getOption().get(i - 1).getValue());
+            spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                    if (l > 0) {
+                        paramsMap.put(param.getName(), param.getOption().get(i - 1).getValue());
 
 /*                                Toast.makeText(adapterView.getContext(),
-                                        "Item Selected : " + adapterView.getItemAtPosition(i).toString() + " ID: " + l,
-                                        Toast.LENGTH_LONG).show();*/
-                            } else {
-                                paramsMap.put(param.getName(), "");
-                            }
-                        }
-
-                        @Override
-                        public void onNothingSelected(AdapterView<?> adapterView) {
-
-                        }
-                    });
-
-                    layoutSpinners.addView(spinner);
+                                "Item Selected : " + adapterView.getItemAtPosition(i).toString() + " ID: " + l,
+                                Toast.LENGTH_LONG).show();*/
+                    } else {
+                        paramsMap.put(param.getName(), "");
+                    }
                 }
-            }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> adapterView) {
+
+                }
+            });
+
+            layoutSpinners.addView(spinner);
+            isSpinnersAdded = true;
         }
     }
 
@@ -290,12 +287,10 @@ public class CollectionDetailsFragment extends
      * "http://developer.android.com/training/basics/fragments/communicating.html"
      * >Communicating with Other Fragments</a> for more information.
      */
-    public interface OnCollectionDetailsFragmentListener {
+    public interface OnCollectionEmptyDetailsFragmentListener {
         // public void onCollectionDetailsFragmentShowProducts(String parentID);
 
-        void onCollectionDetailsFragmentShowProducts(FedeoRequestParams fedeoRequestParams);
-
-        void onCollectionDetailsFragmentShowMetadata(EntryISO displayedEntry);
+        void onCollectionEmptyDetailsFragmentShowProducts(FedeoRequestParams fedeoRequestParams);
 
     }
 

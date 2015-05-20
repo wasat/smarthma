@@ -1,3 +1,4 @@
+/*
 package pl.wasat.smarthma.ui.frags.base;
 
 import android.app.Activity;
@@ -26,15 +27,54 @@ import pl.wasat.smarthma.model.om.EntryOM;
 import pl.wasat.smarthma.model.om.Footprint;
 import pl.wasat.smarthma.utils.rss.FedeoSearchRequest;
 
+*/
 /**
  * A simple {@link android.support.v4.app.Fragment} subclass. Activities that
  * contain this fragment must implement the
- * {@link BaseShowProductsListFragment.OnBaseShowProductsListFragmentListener}
+ * {@link BaseCollectionListFragment.OnBaseShowProductsListFragmentListener}
  * interface to handle interaction events. Use the
- * {@link BaseShowProductsListFragment#newInstance} factory method to create an
+ * {@link BaseCollectionListFragment#newInstance} factory method to create an
  * instance of this fragment.
- */
-public class BaseShowProductsListFragment extends BaseSpiceFragment {
+ * <p/>
+ * Use this factory method to create a new instance of this fragment using
+ * the provided parameters.
+ *
+ * @param fedeoRequestParams Parameter 1.
+ * @return A new instance of fragment SearchProductsFeedsFragment.
+ * @param searchProductFeeds searched Feed
+ * <p/>
+ * <p/>
+ * <p/>
+ * This interface must be implemented by activities that contain this
+ * fragment to allow an interaction in this fragment to be communicated to
+ * the activity and potentially other fragments contained in that activity.
+ * <p/>
+ * See the Android Training lesson <a href=
+ * "http://developer.android.com/training/basics/fragments/communicating.html"
+ * >Communicating with Other Fragments</a> for more information.
+ * @param searchProductFeeds - Product Feed
+ * @return footPrintsArr
+ * <p/>
+ * Use this factory method to create a new instance of this fragment using
+ * the provided parameters.
+ * @param fedeoRequestParams Parameter 1.
+ * @return A new instance of fragment SearchProductsFeedsFragment.
+ * @param searchProductFeeds searched Feed
+ * <p/>
+ * <p/>
+ * <p/>
+ * This interface must be implemented by activities that contain this
+ * fragment to allow an interaction in this fragment to be communicated to
+ * the activity and potentially other fragments contained in that activity.
+ * <p/>
+ * See the Android Training lesson <a href=
+ * "http://developer.android.com/training/basics/fragments/communicating.html"
+ * >Communicating with Other Fragments</a> for more information.
+ * @param searchProductFeeds - Product Feed
+ * @return footPrintsArr
+ *//*
+
+public class BaseCollectionListFragment extends BaseSpiceFragment {
     private static final String KEY_PARAM_FEDEO_REQUEST = "pl.wasat.smarthma.KEY_PARAM_FEDEO_REQUEST";
 
     private FedeoRequestParams fedeoRequestParams;
@@ -47,23 +87,25 @@ public class BaseShowProductsListFragment extends BaseSpiceFragment {
     private static final String STATE_ACTIVATED_POSITION = "activated_position";
     private int mActivatedPosition = ListView.INVALID_POSITION;
 
-    /**
-     * Use this factory method to create a new instance of this fragment using
-     * the provided parameters.
-     *
-     * @param fedeoRequestParams Parameter 1.
-     * @return A new instance of fragment SearchProductsFeedsFragment.
-     */
-    public static BaseShowProductsListFragment newInstance(
+    */
+/**
+ * Use this factory method to create a new instance of this fragment using
+ * the provided parameters.
+ *
+ * @param fedeoRequestParams Parameter 1.
+ * @return A new instance of fragment SearchProductsFeedsFragment.
+ *//*
+
+    public static BaseCollectionListFragment newInstance(
             FedeoRequestParams fedeoRequestParams) {
-        BaseShowProductsListFragment fragment = new BaseShowProductsListFragment();
+        BaseCollectionListFragment fragment = new BaseCollectionListFragment();
         Bundle args = new Bundle();
         args.putSerializable(KEY_PARAM_FEDEO_REQUEST, fedeoRequestParams);
         fragment.setArguments(args);
         return fragment;
     }
 
-    public BaseShowProductsListFragment() {
+    public BaseCollectionListFragment() {
         // Required empty public constructor
     }
 
@@ -76,13 +118,15 @@ public class BaseShowProductsListFragment extends BaseSpiceFragment {
         }
     }
 
-    /*
+    */
+/*
      * (non-Javadoc)
      *
      * @see
      * android.support.v4.app.Fragment#onCreateView(android.view.LayoutInflater,
      * android.view.ViewGroup, android.os.Bundle)
-     */
+     *//*
+
     @Override
     public View onCreateView(LayoutInflater inflater,
                              @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -141,7 +185,7 @@ public class BaseShowProductsListFragment extends BaseSpiceFragment {
                         : ListView.CHOICE_MODE_NONE);
     }
 
-    private void setActivatedPosition(int position) {
+    void setActivatedPosition(int position) {
         if (position == ListView.INVALID_POSITION) {
             entryImagesListView.setItemChecked(mActivatedPosition, false);
         } else {
@@ -203,16 +247,20 @@ public class BaseShowProductsListFragment extends BaseSpiceFragment {
     protected void loadProductItemDetails(EntryOM entry) {
     }
 
-    /**
-     * @param searchProductFeeds searched Feed
-     */
+    */
+/**
+ * @param searchProductFeeds searched Feed
+ *//*
+
     protected void loadSearchResultProductsIntroDetailsFrag(
             Feed searchProductFeeds) {
     }
 
-    /**
-     *
-     */
+    */
+/**
+ *
+ *//*
+
     private void loadSearchProductsFeedResponse(FedeoRequestParams fedeoRequestParams) {
         if (fedeoRequestParams != null) {
             getActivity().setProgressBarIndeterminateVisibility(true);
@@ -222,22 +270,24 @@ public class BaseShowProductsListFragment extends BaseSpiceFragment {
         }
     }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated to
-     * the activity and potentially other fragments contained in that activity.
-     * <p/>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
+    */
+/**
+ * This interface must be implemented by activities that contain this
+ * fragment to allow an interaction in this fragment to be communicated to
+ * the activity and potentially other fragments contained in that activity.
+ * <p/>
+ * See the Android Training lesson <a href=
+ * "http://developer.android.com/training/basics/fragments/communicating.html"
+ * >Communicating with Other Fragments</a> for more information.
+ *//*
+
     public interface OnBaseShowProductsListFragmentListener {
 
-        void onBaseShowProductsListFragmentFootprintSend();
+        public void onBaseShowProductsListFragmentFootprintSend();
     }
 
 
-    private void loadRequestSuccess(Feed searchProductFeeds) {
+    void loadRequestSuccess(Feed searchProductFeeds) {
         getActivity().setProgressBarIndeterminateVisibility(false);
         if (searchProductFeeds == null) {
             searchProductFeeds = new Feed();
@@ -253,10 +303,12 @@ public class BaseShowProductsListFragment extends BaseSpiceFragment {
         mListener.onBaseShowProductsListFragmentFootprintSend();
     }
 
-    /**
-     * @param searchProductFeeds - Product Feed
-     * @return footPrintsArr
-     */
+    */
+/**
+ * @param searchProductFeeds - Product Feed
+ * @return footPrintsArr
+ *//*
+
     private ArrayList<Footprint> getFootprints(List<EntryOM> searchProductFeeds) {
         ArrayList<Footprint> footPrintsArr = new ArrayList<>();
         for (EntryOM searchProductFeed : searchProductFeeds) {
@@ -282,3 +334,4 @@ public class BaseShowProductsListFragment extends BaseSpiceFragment {
     }
 
 }
+*/

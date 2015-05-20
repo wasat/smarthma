@@ -27,28 +27,21 @@ public class RSSTask extends AsyncTask
     protected Object doInBackground(Object[] objects)
     {
         Log.d("ZX", "doInBackground()");
-        Log.d("ZX", "1");
         String feed = (String)objects[0];
         URL url;
         try {
-            Log.d("ZX", "2");
             SAXParserFactory spf = SAXParserFactory.newInstance();
             SAXParser sp = spf.newSAXParser();
             XMLReader xr = sp.getXMLReader();
 
-            Log.d("ZX", "3");
             url = new URL(feed);
             Log.d("ZX", url.toString());
-            Log.d("ZX", "4");
             NewsRssHandler rh = new NewsRssHandler();
 
-            Log.d("ZX", "5");
             xr.setContentHandler(rh);
-            Log.d("ZX", "6");
             xr.parse(new InputSource(url.openStream()));
 
-            Log.d("ZX", "7");
-            Log.e("ASYNC", "PARSING FINISHED");
+            Log.i("ASYNC", "PARSING FINISHED");
             List<NewsArticle> articles = rh.getArticleList();
             //((RSSWidgetProvider)objects[1]).refreshList(articles);
             ((RemoteFetchService)objects[1]).refreshList(articles);

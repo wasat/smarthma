@@ -9,7 +9,6 @@ import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 
 import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.GooglePlayServicesClient;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationServices;
@@ -29,6 +28,8 @@ import pl.wasat.smarthma.utils.io.AcraExtension;
 import pl.wasat.smarthma.utils.loc.LocManager;
 import pl.wasat.smarthma.utils.wms.TileProviderFactory;
 
+//import com.google.android.gms.common.GooglePlayServicesClient;
+
 /**
  * A simple {@link android.support.v4.app.Fragment} subclass. Activities that
  * contain this fragment must implement the
@@ -37,7 +38,7 @@ import pl.wasat.smarthma.utils.wms.TileProviderFactory;
  * an instance of this fragment.
  */
 public class BaseMapFragment extends SupportMapFragment implements
-        GooglePlayServicesClient.ConnectionCallbacks,
+        // GooglePlayServicesClient.ConnectionCallbacks,
         GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener {
 
@@ -300,12 +301,6 @@ public class BaseMapFragment extends SupportMapFragment implements
                     .unregisterReceiver(mReceiver);
             mReceiver = null;
         }
-    }
-
-    @Override
-    public void onDisconnected() {
-        // TODO Auto-generated method stub
-
     }
 
     /**

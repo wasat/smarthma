@@ -109,8 +109,7 @@ public class MetadataFragment extends Fragment {
             setEOMetaDataViews("Earth Observation Phenomenon Time ", entryItem
                     .getEarthObservation().getPhenomenonTime().getTimePeriod());
         }
-        if (!entryItem.getEarthObservation().getResultTime().getTimeInstant()
-                .getTimePosition().get_text().isEmpty()) {
+        if (entryItem.getEarthObservation().getResultTime().getTimeInstant() != null) {
             setEOMetaDataViews("Earth Observation Result Time ", entryItem
                     .getEarthObservation().getResultTime().getTimeInstant()
                     .getTimePosition());

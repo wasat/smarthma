@@ -3,6 +3,7 @@ package pl.wasat.smarthma.ui.frags.search;
 import android.app.Activity;
 import android.app.SearchManager;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -29,6 +30,7 @@ public class SearchFragment extends Fragment {
 
     private OnSearchFragmentListener mListener;
     private View rootView;
+    private Intent searchIntent;
 
     /**
      * Use this factory method to create a new instance of this fragment using
@@ -45,6 +47,16 @@ public class SearchFragment extends Fragment {
     }
 
     @Override
+    public void startActivity(Intent intent) {
+        // check if search intent
+        if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
+            searchIntent = intent;
+        }
+        super.startActivity(searchIntent);
+    }
+
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         //Log.d("ZX", "SearchFragment: onCreateView()");
@@ -55,6 +67,7 @@ public class SearchFragment extends Fragment {
         // Associate searchable configuration with the SearchView
         SearchManager searchManager = (SearchManager) getActivity()
                 .getSystemService(Context.SEARCH_SERVICE);
+
         final SearchView searchView = (SearchView) rootView
                 .findViewById(R.id.search_frag_searchview);
         searchView.setSearchableInfo(searchManager
@@ -64,6 +77,12 @@ public class SearchFragment extends Fragment {
         searchView.setIconified(false);
         searchView.clearFocus();
 
+
+        //if (Intent.ACTION_SEARCH.equals(getActivity().getIntent().getAction())) {
+        searchIntent = getActivity().getIntent();
+        //}
+
+        //Intent queryIntent=getActivity().getIntent();
         /*
         final Spinner spnParams = (Spinner) rootView.findViewById(R.id.search_frag_prev_params_list);
         refreshSearchHistoryList(spnParams);
@@ -104,6 +123,11 @@ public class SearchFragment extends Fragment {
         }
 
         return rootView;
+    }
+
+
+    public void setAdditionalParams(String parameterKey, String parameterValue) {
+        searchIntent.putExtra(parameterKey, parameterValue);
     }
 
     public void setQuery(String query) {

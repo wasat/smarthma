@@ -69,6 +69,8 @@ public class SearchCollectionResultsActivity extends BaseSmartHMActivity
     private void handleIntent(Intent intent) {
         if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
             String query = intent.getStringExtra(SearchManager.QUERY);
+            String value = intent.getStringExtra("title");
+
 
             /**
              * Use this query to display search results like 1. Getting the data
@@ -81,6 +83,7 @@ public class SearchCollectionResultsActivity extends BaseSmartHMActivity
 
             FedeoRequestParams fedeoRequestParams = new FedeoRequestParams();
             fedeoRequestParams.buildFromShared(this);
+            fedeoRequestParams.setQuery(query);
 
             SearchListFragment searchListFragment = SearchListFragment
                     .newInstance(fedeoRequestParams, stopNewSearch);

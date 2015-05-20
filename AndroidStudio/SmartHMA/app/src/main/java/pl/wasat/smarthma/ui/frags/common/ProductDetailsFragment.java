@@ -204,7 +204,7 @@ public class ProductDetailsFragment extends Fragment implements Target {
     /**
      *
      */
-    void loadMetadataFrag() {
+    private void loadMetadataFrag() {
         MetadataFragment metadataFragment = MetadataFragment
                 .newInstance(displayedEntry);
         getActivity()
@@ -215,7 +215,7 @@ public class ProductDetailsFragment extends Fragment implements Target {
                 .addToBackStack("MetadataFragment").commit();
     }
 
-    void showExtendedMap() {
+    private void showExtendedMap() {
         String url = getQuicklookUrl();
         Footprint footprint = displayedEntry.getEarthObservation()
                 .getFeatureOfInterest().getFootprint();
@@ -223,7 +223,7 @@ public class ProductDetailsFragment extends Fragment implements Target {
         mListener.onProductDetailsFragmentExtendedMapShow(url, footprint);
     }
 
-    void showQuicklookGallery() {
+    private void showQuicklookGallery() {
         String qLookUrl = getQuicklookUrl();
         mListener.onProductDetailsFragmentQuicklookShow(qLookUrl);
     }
@@ -260,12 +260,12 @@ public class ProductDetailsFragment extends Fragment implements Target {
      */
     public interface OnProductDetailsFragmentListener {
 
-        public void onProductDetailsFragmentExtendedMapShow(String url,
-                                                            Footprint footprint);
+        void onProductDetailsFragmentExtendedMapShow(String url,
+                                                     Footprint footprint);
 
-        public void onProductDetailsFragmentQuicklookShow(String url);
+        void onProductDetailsFragmentQuicklookShow(String url);
 
-        public void onProductDetailsFragmentShareDialogShow(String url);
+        void onProductDetailsFragmentShareDialogShow(String url);
 
     }
 
