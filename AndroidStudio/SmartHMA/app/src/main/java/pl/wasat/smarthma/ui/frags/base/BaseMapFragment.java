@@ -12,7 +12,6 @@ import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationServices;
-import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
@@ -135,11 +134,11 @@ public class BaseMapFragment extends SupportMapFragment implements
 
         Location location = LocationServices.FusedLocationApi
                 .getLastLocation(mGoogleApiClient);
-        LatLng latLng = new LatLng(location.getLatitude(),
+      /*  LatLng latLng = new LatLng(location.getLatitude(),
                 location.getLongitude());
         CameraUpdate cameraUpdate = CameraUpdateFactory
                 .newLatLngZoom(latLng, 4);
-        mMap.animateCamera(cameraUpdate);
+        mMap.animateCamera(cameraUpdate);  */
     }
 
     private void startCreateMap(Bundle savedInstanceState) {
@@ -306,7 +305,7 @@ public class BaseMapFragment extends SupportMapFragment implements
     /**
      * Listener interface to tell when the map is ready
      */
-    public static interface OnBaseMapFragmentListener {
+    public interface OnBaseMapFragmentListener {
 
         void onBaseSupportMapReady();
     }

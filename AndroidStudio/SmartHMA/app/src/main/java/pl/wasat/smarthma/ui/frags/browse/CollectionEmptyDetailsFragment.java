@@ -101,8 +101,9 @@ public class CollectionEmptyDetailsFragment extends
             @Override
             public void onClick(View v) {
                 if (mListener != null) {
+                    //TODO !!!
                     //mListener.onCollectionDetailsFragmentShowProducts(parentID);
-                    mSlidingLayer.closeLayer(true);
+                    //mSlidingLayer.closeLayer(true);
                     fedeoRequestParams.setParentIdentifier(collectionName);
                     mListener.onCollectionEmptyDetailsFragmentShowProducts(fedeoRequestParams);
                 }
@@ -114,7 +115,8 @@ public class CollectionEmptyDetailsFragment extends
         tvParentId.setText(collectionName);
 
         String osddUrl = Const.OSDD_BASE_URL + "parentIdentifier=" + collectionName;
-        loadParamsSliderView(osddUrl);
+        //TODO !!!
+//        loadParamsSliderView(osddUrl);
 
         return rootView;
     }

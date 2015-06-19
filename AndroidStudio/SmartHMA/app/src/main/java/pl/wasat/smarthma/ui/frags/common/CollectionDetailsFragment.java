@@ -105,8 +105,9 @@ public class CollectionDetailsFragment extends
             @Override
             public void onClick(View v) {
                 if (mListener != null) {
+                    // TODO !!!
                     //mListener.onCollectionDetailsFragmentShowProducts(parentID);
-                    mSlidingLayer.closeLayer(true);
+                    //   mSlidingLayer.closeLayer(true);
                     fedeoRequestParams.buildFromShared(getActivity());
                     fedeoRequestParams.setParentIdentifier(displayedISOEntry.getIdentifier());
                     mListener.onCollectionDetailsFragmentShowProducts(fedeoRequestParams);
@@ -120,8 +121,8 @@ public class CollectionDetailsFragment extends
                 mListener.onCollectionDetailsFragmentShowMetadata(displayedISOEntry);
             }
         });
-
-        loadParamsSliderView(osddUrl);
+        //TODO !!!
+        //   loadParamsSliderView(osddUrl);
 
         return rootView;
     }

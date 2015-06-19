@@ -6,7 +6,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TextView;
 
 import pl.wasat.smarthma.R;
@@ -30,11 +29,11 @@ public class BaseFeedSummaryFragment extends Fragment {
     private TextView tvItemsFrom;
     private TextView tvItemsTo;
 
-    private Button btnFirst;
-    private Button btnPrev;
-    private Button btnReload;
-    private Button btnNext;
-    private Button btnLast;
+    private View btnFirst;
+    private View btnPrev;
+    private View btnReload;
+    private View btnNext;
+    private View btnLast;
 
     //private Spinner spnSortType;
 
@@ -82,15 +81,15 @@ public class BaseFeedSummaryFragment extends Fragment {
         tvItemsTo = (TextView) rootView
                 .findViewById(R.id.search_frag_ds_intro_items_to_value);
 
-        btnFirst = (Button) rootView
+        btnFirst = rootView
                 .findViewById(R.id.search_frag_ds_intro_button_first);
-        btnPrev = (Button) rootView
+        btnPrev = rootView
                 .findViewById(R.id.search_frag_ds_intro_button_prev);
-        btnReload = (Button) rootView
+        btnReload = rootView
                 .findViewById(R.id.search_frag_ds_intro_button_reload);
-        btnNext = (Button) rootView
+        btnNext = rootView
                 .findViewById(R.id.search_frag_ds_intro_button_next);
-        btnLast = (Button) rootView
+        btnLast = rootView
                 .findViewById(R.id.search_frag_ds_intro_button_last);
 
         //spnSortType = (Spinner) rootView.findViewById(R.id.search_frag_ds_intro_spinner_sort_type);

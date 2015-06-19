@@ -8,6 +8,7 @@
         android:id="@+id/article_detail_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/background_gray"
         android:orientation="vertical">
 
         <TextView
@@ -15,11 +16,13 @@
             style="?android:attr/textAppearanceLarge"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingLeft="16dp"
-            android:paddingRight="16dp"
-            android:paddingTop="16dp"
-            android:textColor="#38b4ea"
-            android:textSize="20sp"
+            android:paddingLeft="@dimen/esa_missions_padding"
+
+            android:paddingTop="@dimen/esa_missions_padding"
+            android:textColor="@color/text_blue"
+            android:textSize="@dimen/esa_online_cell_text_size_large"
+            android:text="Lorem ipsum dolor"
+            android:background="@color/background_gray"
             android:textStyle="bold"
             tools:context=".NewsDetailFragment" />
 
@@ -28,13 +31,15 @@
             style="?android:attr/textAppearanceLarge"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingBottom="16dp"
-            android:paddingLeft="16dp"
-            android:paddingRight="16dp"
-            android:paddingTop="2dp"
-            android:textColor="#A8A8A8"
+
+            android:paddingLeft="@dimen/esa_missions_padding"
+            android:paddingRight="@dimen/esa_missions_padding"
+            android:paddingTop="@dimen/esa_missions_padding_small"
+            android:textColor="@color/text_black"
             android:textSize="12sp"
             android:textStyle="italic"
+            android:text="Lorem ipsum lorem ipsum"
+            android:background="@color/background_gray"
             tools:context=".NewsDetailFragment" />
 
         <WebView
@@ -42,19 +47,25 @@
             style="?android:attr/textAppearanceLarge"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="16dp"
+
             android:textSize="16sp"
+            android:layout_margin="@dimen/esa_missions_padding"
             tools:context=".NewsDetailFragment" />
 
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
         <Button
             android:id="@+id/button_more"
-            style="?android:attr/buttonBarButtonStyle"
+            style="@style/buttonBlue"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/button_blue_height"
             android:layout_marginLeft="10dp"
-            android:textColor="#A8A8A8"
-            android:text="@string/more" />
 
+            android:layout_centerHorizontal="true"
+            android:layout_marginRight="@dimen/esa_missions_padding"
+            android:text="@string/more" />
+        </RelativeLayout>
     </LinearLayout>
 
 </ScrollView>

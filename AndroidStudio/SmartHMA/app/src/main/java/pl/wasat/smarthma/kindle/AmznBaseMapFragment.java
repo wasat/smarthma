@@ -358,7 +358,7 @@ public class AmznBaseMapFragment extends SupportMapFragment
     /**
      * Listener interface to tell when the map is ready
      */
-    public static interface OnBaseMapFragmentListener {
+    public interface OnBaseMapFragmentListener {
 
         void onBaseSupportMapReady();
     }

@@ -17,7 +17,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -64,14 +63,14 @@ public class SearchBasicInfoRightFragment extends Fragment {
     private TextView tvAreaNELon;
 
     private static TextView tvCatalogName;
-    private static TextView tvEndpointName;
+    //  private static TextView tvEndpointName;
 
     private static Calendar calStart;
     private static Calendar calEnd;
-    private static Button btnFromDate;
-    private static Button btnFromTime;
-    private static Button btnToDate;
-    private static Button btnToTime;
+    private static TextView btnFromDate;
+    private static TextView btnFromTime;
+    private static TextView btnToDate;
+    private static TextView btnToTime;
 
     private EditText edtTitle;
     private EditText edtOrganisation;
@@ -123,15 +122,15 @@ public class SearchBasicInfoRightFragment extends Fragment {
         final View rootView = inflater.inflate(
                 R.layout.fragment_search_right_basic, container, false);
 
-        tvEndpointName = (TextView) rootView
-                .findViewById(R.id.search_frag_right_basic_tv_endpoint_name);
+        // tvEndpointName = (TextView) rootView
+        //        .findViewById(R.id.search_frag_right_basic_tv_endpoint_name);
 
-        tvEndpointName.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showEndpointsListDialog();
-            }
-        });
+        //  tvEndpointName.setOnClickListener(new OnClickListener() {
+        //    @Override
+        //    public void onClick(View v) {
+        //         showEndpointsListDialog();
+        //     }
+        //  });
 
         tvCatalogName = (TextView) rootView
                 .findViewById(R.id.search_frag_right_basic_tv_catalog_name);
@@ -184,7 +183,7 @@ public class SearchBasicInfoRightFragment extends Fragment {
             }
         });
 
-        btnFromDate = (Button) rootView
+        btnFromDate = (TextView) rootView
                 .findViewById(R.id.search_frag_right_basic_button_time_from_date);
         btnFromDate.setTag("btnFromDate");
         btnFromDate.setOnClickListener(new OnClickListener() {
@@ -195,7 +194,7 @@ public class SearchBasicInfoRightFragment extends Fragment {
 
             }
         });
-        btnFromTime = (Button) rootView
+        btnFromTime = (TextView) rootView
                 .findViewById(R.id.search_frag_right_basic_button_time_from_time);
         btnFromTime.setTag("btnFromTime");
         btnFromTime.setOnClickListener(new OnClickListener() {
@@ -206,7 +205,7 @@ public class SearchBasicInfoRightFragment extends Fragment {
 
             }
         });
-        btnToDate = (Button) rootView
+        btnToDate = (TextView) rootView
                 .findViewById(R.id.search_frag_right_basic_button_time_to_date);
         btnToDate.setTag("btnToDate");
         btnToDate.setOnClickListener(new OnClickListener() {
@@ -217,7 +216,7 @@ public class SearchBasicInfoRightFragment extends Fragment {
 
             }
         });
-        btnToTime = (Button) rootView
+        btnToTime = (TextView) rootView
                 .findViewById(R.id.search_frag_right_basic_button_time_to_time);
         btnToTime.setTag("btnToTime");
         btnToTime.setOnClickListener(new OnClickListener() {
@@ -526,7 +525,7 @@ public class SearchBasicInfoRightFragment extends Fragment {
                 default:
                     break;
             }
-            tvEndpointName.setText(endpointsList[which]);
+            //  tvEndpointName.setText(endpointsList[which]);
         }
     }
 

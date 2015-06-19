@@ -110,8 +110,8 @@ public class BaseViewAndBasicSettingsDetailFragment extends BaseSpiceFragment {
         rootView = inflater.inflate(
                 R.layout.fragment_map_and_basic_settings_detail, container,
                 false);
-
-        mSlidingLayer = (SlidingLayer) rootView.findViewById(R.id.slidingLayer1);
+        //TODO INFOAPPS
+        //mSlidingLayer = (SlidingLayer) rootView.findViewById(R.id.slidingLayer1);
 
         //txtParamsSliderHeader = (TextView) rootView.findViewById(R.id.txt_slider_params_header);
 
@@ -240,8 +240,8 @@ public class BaseViewAndBasicSettingsDetailFragment extends BaseSpiceFragment {
         getParentIdPrefs();
         getBboxPrefs();
         getDateTimePrefs();
-
-        layoutSpinners = (LinearLayout) rootView.findViewById(R.id.layout_param_sliders);
+        //TODO INFOAPPS
+        // layoutSpinners = (LinearLayout) rootView.findViewById(R.id.layout_param_sliders);
 /*
         spinnerCount = (Spinner) rootView.findViewById(R.id.spinnerCount);
         spinnerSearchTerms = (Spinner) rootView.findViewById(R.id.spinnerSearchTerms);

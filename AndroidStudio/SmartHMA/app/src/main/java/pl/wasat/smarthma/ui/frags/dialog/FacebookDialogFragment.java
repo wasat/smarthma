@@ -133,7 +133,8 @@ public class FacebookDialogFragment extends DialogFragment implements Target {
                 container, false);
 
         rootView.isInEditMode();
-        getDialog().setTitle("Facebook Quicklook Share");
+        //TODO INFOAPPS
+        //getDialog().setTitle("Facebook Quicklook Share");
 
         profilePictureView = (ProfilePictureView) rootView
                 .findViewById(R.id.facebook_dialog_img_user_profile);

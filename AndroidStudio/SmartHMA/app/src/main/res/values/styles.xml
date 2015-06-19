@@ -4,18 +4,6 @@
         Base application theme, dependent on API level. This theme is replaced
         by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
 
-
-
-
-
-
-
-
-
-
-
-
-
     -->
     <style name="AppBaseTheme" parent="android:Theme.Light">
         <!--
@@ -24,17 +12,9 @@
             backward-compatibility can go here.
 
 
-
-
-
-
-
-
-
-
-
         -->
     </style>
+
 
     <!-- Application theme. -->
     <style name="AppTheme" parent="AppBaseTheme">
@@ -56,8 +36,8 @@
     </style>
 
     <style name="styleBtnStart" parent="@android:style/Widget.Button">
-        <item name="android:textSize">36sp</item>
-        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">40sp</item>
+
         <item name="android:textColor">#FFFFFF</item>
         <item name="android:gravity">center|center_vertical</item>
         <item name="android:shadowColor">#000000</item>
@@ -158,6 +138,67 @@
         <item name="android:textColor">#fff</item>
         <item name="android:fontFamily">sans-serif-light</item>
         <item name="android:background">@drawable/button_red_selector</item>
+    </style>
+
+
+    <!-- Application theme. -->
+    <style name="AppNoActionBarTheme" parent="android:Theme.Light.NoTitleBar.Fullscreen">
+        <!-- All customizations that are NOT specific to a particular API-level can go here. -->
+    </style>
+
+
+    <!-- INFOAPPS -->
+
+    <style name="textTitle" parent="@android:style/TextAppearance.Large">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:padding">@dimen/browse_eo_padding_text</item>
+        <item name="android:textSize">@dimen/browse_eo_text</item>
+        <item name="android:textColor">@color/text_blue</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="textMainTitle" parent="@android:style/TextAppearance.Large">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+
+        <item name="android:paddingTop">@dimen/browse_eo_padding_text</item>
+        <item name="android:paddingBottom">@dimen/browse_eo_padding_text</item>
+        <item name="android:textSize">@dimen/browse_eo_text</item>
+        <item name="android:textColor">@color/text_blue</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="text" parent="@android:style/TextAppearance.Large">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:padding">@dimen/browse_eo_padding_text</item>
+        <item name="android:textSize">@dimen/browse_eo_text</item>
+        <item name="android:textColor">@color/text_black</item>
+    </style>
+
+
+    <style name="buttonBlue" parent="@android:style/Widget.Button">
+        <item name="android:gravity">center_vertical|center_horizontal</item>
+        <item name="android:textColor">@color/background_white</item>
+        <item name="android:textSize">@dimen/button_blue_text_size</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:background">@drawable/button_blue</item>
+        <item name="android:focusable">true</item>
+        <item name="android:clickable">true</item>
+        <item name="android:paddingLeft">35dp</item>
+        <item name="android:paddingRight">30dp</item>
+    </style>
+
+    <style name="dialogHeader" parent="@android:style/TextAppearance.Large">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:padding">10dp</item>
+        <item name="android:gravity">center_horizontal|center_vertical</item>
+        <item name="android:textSize">30sp</item>
+        <item name="android:background">@color/action_bar_background</item>
+        <item name="android:textColor">@color/text_black</item>
+
     </style>
 
 </resources>

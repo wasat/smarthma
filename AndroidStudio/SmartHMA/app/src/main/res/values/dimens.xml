@@ -4,4 +4,109 @@
     <dimen name="layer_size">350dp</dimen>
     <dimen name="preview_offset_distance">150dp</dimen>
     <dimen name="offset_distance">35dp</dimen>
+
+    <!-- INFO APPS -->
+
+
+    <!-- MENU -->
+    <dimen name="menu_button_size">120dp</dimen>
+    <dimen name="menu_copyright_padding">40dp</dimen>
+    <dimen name="menu_copytight_size">16sp</dimen>
+    <dimen name="menu_logo_center_width">300dp</dimen>
+    <dimen name="menu_logo_center_height">300dp</dimen>
+    <dimen name="menu_button_margin">10dp</dimen>
+    <dimen name="menu_button_text_size">15sp</dimen>
+
+    <!-- MENU LAND -->
+    <dimen name="menu_logo_center_width_land">180dp</dimen>
+    <dimen name="menu_logo_center_height_land">180dp</dimen>
+    <dimen name="menu_button_size_land">90dp</dimen>
+    <dimen name="menu_copyright_padding_land">20dp</dimen>
+    <dimen name="menu_button_text_size_land">11sp</dimen>
+    <dimen name="menu_padding_top_land">80dp</dimen>
+    <dimen name="layout_size_land">450dp</dimen>
+
+    <!-- ACTION BAR -->
+    <dimen name="action_bar_padding">30dp</dimen>
+    <dimen name="action_bar_logo_padding">10dp</dimen>
+    <dimen name="action_bar_title_size">20sp</dimen>
+    <dimen name="action_bar_title_padding">30dp</dimen>
+    <dimen name="action_bar_logo_width">100dp</dimen>
+    <dimen name="action_bar_logo_height">130dp</dimen>
+
+    <!-- ACTION BAR LAND-->
+
+    <dimen name="action_bar_height_land">70dp</dimen>
+    <dimen name="action_bar_padding_top">25dp</dimen>
+
+    <!-- ACTIVITY -->
+    <dimen name="copyright_padding">20dp</dimen>
+
+    <!-- ACTIVITY LAND -->
+    <dimen name="copyright_padding_land">15dp</dimen>
+
+    <!-- SEARCH EO DATA -->
+
+    <dimen name="search_eo_data_padding">12dp</dimen>
+    <dimen name="search_eo_data_padding_medium">8dp</dimen>
+    <dimen name="search_eo_data_padding_small">2dp</dimen>
+
+    <dimen name="search_eo_data_text_small">10sp</dimen>
+    <dimen name="search_eo_data_text_medium">13sp</dimen>
+    <dimen name="search_eo_data_text">16sp</dimen>
+
+    <dimen name="search_eo_data_logo_size">330dp</dimen>
+    <dimen name="search_eo_data_edit_text_height">45dp</dimen>
+    <dimen name="search_eo_data_edit_text_width">400dp</dimen>
+
+    <!-- SEARCH EO DATA LAND -->
+
+    <dimen name="search_eo_data_logo_size_land">230dp</dimen>
+
+
+    <!-- ESA MISSIONS & ESA ONLINE -->
+
+    <dimen name="esa_missions_padding">20dp</dimen>
+    <dimen name="esa_missions_padding_medium">8dp</dimen>
+    <dimen name="esa_missions_padding_small">2dp</dimen>
+    <dimen name="esa_missions_indicator_size">20dp</dimen>
+
+    <dimen name="esa_missions_image_size">60dp</dimen>
+    <dimen name="esa_missions_cell_text_size_large">14sp</dimen>
+    <dimen name="esa_missions_cell_text_size">10sp</dimen>
+    <dimen name="esa_missions_star_size">15dp</dimen>
+    <dimen name="esa_missions_cell_padding_left">40dp</dimen>
+    <dimen name="esa_mission_cell_divider">4dp</dimen>
+    <dimen name="esa_missions_cell_height">28dp</dimen>
+
+    <dimen name="esa_online_cell_text_size_large">14sp</dimen>
+    <dimen name="esa_online_cell_text_size">10sp</dimen>
+    <dimen name="esa_online_cell_height">24dp</dimen>
+
+    <!-- FACEBOOK DIALOG -->
+    <dimen name="facebook_header_height">100dp</dimen>
+
+    <!-- BROWSE EO DATA -->
+
+    <dimen name="browse_eo_padding">18dp</dimen>
+    <dimen name="browse_eo_padding_medium">8dp</dimen>
+    <dimen name="browse_eo_padding_small">2dp</dimen>
+    <dimen name="browse_eo_padding_text">5dp</dimen>
+    <dimen name="browse_eo_cell_text_size_large">10sp</dimen>
+    <dimen name="browse_eo_cell_text_size">8sp</dimen>
+    <dimen name="browse_eo_star_size">15dp</dimen>
+    <dimen name="browse_eo_cell_padding_left">40dp</dimen>
+    <dimen name="browse_eo_cell_divider">8dp</dimen>
+    <dimen name="browse_eo_cell_height">28dp</dimen>
+    <dimen name="browse_eo_image_size">65dp</dimen>
+    <dimen name="browse_eo_layout_bottom_height">250dp</dimen>
+
+    <dimen name="browse_eo_text_large">14sp</dimen>
+    <dimen name="browse_eo_text">11sp</dimen>
+
+    <dimen name="divider_size">20dp</dimen>
+
+    <dimen name="button_blue_text_size">10sp</dimen>
+    <dimen name="button_blue_padding">7dp</dimen>
+    <dimen name="button_blue_height">40dp</dimen>
 </resources>

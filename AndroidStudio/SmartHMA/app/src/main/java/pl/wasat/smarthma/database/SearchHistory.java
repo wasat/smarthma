@@ -41,9 +41,8 @@ public class SearchHistory {
         for (String[] s : all)
         {
             String tmp = "";
-            for (int i=0; i<s.length; i++)
-            {
-                tmp += s[i]+" ";
+            for (int i = 0; i < s.length; i++) {
+                tmp += s[i] + " ";
             }
             Log.d("ZX", tmp);
         }

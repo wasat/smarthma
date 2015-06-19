@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/bg_poziom">
+
+    <!-- <ImageView
+         android:layout_width="fill_parent"
+         android:layout_height="fill_parent"
+         android:background="#FFFFFF"
+         android:contentDescription="@string/desc"
+         android:scaleType="fitCenter"
+         android:src="@drawable/earth_bg" />
+     -->
+    <LinearLayout
+        android:id="@+id/menu_action_bar_layout"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:paddingTop="@dimen/action_bar_padding_top"
+        android:paddingLeft="@dimen/action_bar_padding"
+        android:paddingRight="@dimen/action_bar_padding"
+        android:paddingBottom="@dimen/action_bar_padding">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="5"
+            android:background="#ffffff">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/action_bar_height_land"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:src="@drawable/actionbar_logo"
+                android:padding="@dimen/action_bar_logo_padding" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:layout_weight="2"
+            android:background="@color/action_bar_background">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="2">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_rec"
+                    android:layout_centerVertical="true" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/action_bar_title_size"
+                    android:textColor="@color/action_bar_title"
+                    android:text="@string/action_bar_home"
+                    android:paddingLeft="@dimen/action_bar_title_padding"
+                    android:layout_centerVertical="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="8"
+                android:background="@color/action_bar_menu_background"
+                android:layout_alignParentRight="true">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/action_bar_height_land"
+                    android:src="@drawable/actionbar_menu"
+                    android:layout_centerVertical="true"
+                    android:layout_centerHorizontal="true"
+                    android:padding="@dimen/action_bar_logo_padding" />
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="@dimen/layout_size_land"
+        android:layout_height="@dimen/layout_size_land"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/menu_padding_top_land">
+
+        <ImageView
+            android:layout_width="@dimen/menu_logo_center_width_land"
+            android:layout_height="@dimen/menu_logo_center_height_land"
+            android:src="@drawable/menu_glowne_srodek"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
+            android:id="@+id/imageView" />
+
+
+        <Button
+            android:id="@+id/start_frag_button_search"
+            style="@style/styleBtnStart"
+            android:layout_width="@dimen/menu_button_size_land"
+            android:layout_height="@dimen/menu_button_size_land"
+            android:layout_gravity="center_vertical|center_horizontal|center"
+            android:adjustViewBounds="true"
+            android:contentDescription="@string/desc"
+            android:text="@string/search_eo_data"
+            android:textColor="@drawable/custom_button_opal_text"
+            android:textSize="@dimen/menu_button_text_size_land"
+            android:layout_above="@+id/imageView"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="@dimen/menu_button_margin" />
+
+        >
+
+
+        <Button
+
+            android:id="@+id/start_frag_button_mission"
+            style="@style/styleBtnStart"
+            android:layout_width="@dimen/menu_button_size_land"
+            android:layout_height="@dimen/menu_button_size_land"
+            android:layout_gravity="center_vertical|center_horizontal|center"
+            android:adjustViewBounds="true"
+            android:contentDescription="@string/desc"
+            android:text="@string/esa_missions"
+            android:textColor="@drawable/custom_button_opal_text"
+            android:textSize="@dimen/menu_button_text_size_land"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/imageView"
+            android:layout_toStartOf="@+id/imageView"
+            android:layout_marginRight="@dimen/menu_button_margin" />
+
+
+        <Button
+            android:id="@+id/start_frag_button_browse"
+            style="@style/styleBtnStart"
+            android:layout_width="@dimen/menu_button_size_land"
+            android:layout_height="@dimen/menu_button_size_land"
+            android:layout_gravity="center_vertical|center_horizontal|center"
+            android:adjustViewBounds="true"
+            android:contentDescription="@string/desc"
+            android:layout_marginLeft="@dimen/menu_button_margin"
+            android:text="@string/browse_eo_data"
+            android:textColor="@drawable/custom_button_opal_text"
+            android:textSize="@dimen/menu_button_text_size_land"
+            android:layout_alignTop="@+id/start_frag_button_mission"
+            android:layout_toRightOf="@+id/imageView"
+            android:layout_toEndOf="@+id/imageView" />
+
+
+        <Button
+            android:id="@+id/start_frag_button_online"
+            style="@style/styleBtnStart"
+            android:layout_width="@dimen/menu_button_size_land"
+            android:layout_height="@dimen/menu_button_size_land"
+            android:layout_gravity="center_vertical|center_horizontal|center"
+            android:adjustViewBounds="true"
+            android:contentDescription="@string/desc"
+            android:textColor="@drawable/custom_button_opal_text"
+            android:text="@string/esa_online"
+            android:textSize="@dimen/menu_button_text_size_land"
+            android:layout_below="@+id/imageView"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/menu_button_margin" />
+
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/copyright_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/copyright"
+        android:textColor="@color/abc_primary_text_material_dark"
+        android:textSize="@dimen/menu_copytight_size"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:paddingBottom="@dimen/menu_copyright_padding_land" />
+
+</RelativeLayout>

@@ -69,12 +69,14 @@ public class MissionsExtListFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View rootView = inflater.inflate(R.layout.fragment_missions_extended_list,
+        final View rootView = inflater.inflate(R.layout.fragment_missions_extended_list,
                 container, false);
 
         // get the listview
         ExpandableListView expListView = (ExpandableListView) rootView
                 .findViewById(R.id.missions_extended_listview);
+        expListView.setGroupIndicator(null);
+
 
         // preparing list data
         prepareListData();

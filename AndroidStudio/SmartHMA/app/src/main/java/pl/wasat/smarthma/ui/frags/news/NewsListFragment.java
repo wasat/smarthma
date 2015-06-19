@@ -38,6 +38,7 @@ public class NewsListFragment extends ListFragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         refreshList();
+
     }
 
     @Override
@@ -46,6 +47,7 @@ public class NewsListFragment extends ListFragment {
         if (savedInstanceState != null && savedInstanceState.containsKey(STATE_ACTIVATED_POSITION)) {
             setActivatedPosition(savedInstanceState.getInt(STATE_ACTIVATED_POSITION));
         }
+        getListView().setDivider(null);
     }
 
     @Override

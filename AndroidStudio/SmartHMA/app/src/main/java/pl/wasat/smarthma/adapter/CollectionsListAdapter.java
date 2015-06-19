@@ -58,8 +58,8 @@ public class CollectionsListAdapter extends BaseAdapter {
 
         TextView title = (TextView) vi.findViewById(R.id.collection_name);
         TextView artist = (TextView) vi.findViewById(R.id.collection_desc);
-
-        TextView duration = (TextView) vi.findViewById(R.id.collection_id);
+        //TODO INFOAPPS
+        //TextView duration = (TextView) vi.findViewById(R.id.collection_id);
         ImageView thumb_image = (ImageView) vi
                 .findViewById(R.id.collection_image);
 
@@ -69,7 +69,7 @@ public class CollectionsListAdapter extends BaseAdapter {
         // Setting all values in listview
         title.setText(collection.getName());
         artist.setText(groupName);
-        duration.setText("No: " + collection.getId());
+        //   duration.setText("No: " + collection.getId());
         String url = Const.IMG_URL + "sat" + mod(collection.getId(), 15)
                 + ".jpeg";
         Picasso.with(activity).load(url).resize(72, 72).centerCrop()

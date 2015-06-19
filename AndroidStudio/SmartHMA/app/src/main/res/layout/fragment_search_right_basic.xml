@@ -1,13 +1,14 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/search_frag_right_basic_scroll_id"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent">
+    android:layout_height="fill_parent"
+    android:background="@color/background_gray">
 
     <LinearLayout
         android:id="@+id/search_frag_right_basic_linear_id"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#FFFFFF"
+        android:layout_height="match_parent"
+        android:background="@color/background_gray"
         android:orientation="vertical">
 
         <TextView
@@ -15,184 +16,180 @@
             style="?android:attr/textAppearanceLarge"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingLeft="16dp"
-            android:paddingRight="16dp"
-            android:paddingTop="16dp"
+            android:padding="@dimen/search_eo_data_padding"
             android:text="@string/basic_search_settings"
-            android:textColor="#38b4ea"
-            android:textSize="20sp"
+            android:textColor="@color/text_black"
+            android:background="@color/action_bar_background"
+            android:textSize="@dimen/search_eo_data_text"
             android:textStyle="bold" />
+        <!--
+              <TextView
+                  android:id="@+id/search_frag_right_basic_tv_endpoint_title"
+                  style="?android:attr/textAppearanceLarge"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:paddingBottom="2dp"
+                  android:paddingLeft="16dp"
+                  android:paddingRight="16dp"
+                  android:paddingTop="16dp"
+                  android:text="@string/endpoint"
+                  android:textSize="16sp"
+                  android:textStyle="bold" />
 
-        <TextView
-            android:id="@+id/search_frag_right_basic_tv_endpoint_title"
-            style="?android:attr/textAppearanceLarge"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingBottom="2dp"
-            android:paddingLeft="16dp"
-            android:paddingRight="16dp"
-            android:paddingTop="16dp"
-            android:text="@string/endpoint"
-            android:textSize="16sp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/search_frag_right_basic_tv_endpoint_name"
-            style="?android:attr/textAppearanceLarge"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingBottom="16dp"
-            android:paddingLeft="16dp"
-            android:paddingRight="16dp"
-            android:paddingTop="2dp"
-            android:text="@string/fedeo_esa_int"
-            android:textColor="#A9A9A9"
-            android:textSize="14sp"
-            android:textStyle="normal" />
-
+              <TextView
+                  android:id="@+id/search_frag_right_basic_tv_endpoint_name"
+                  style="?android:attr/textAppearanceLarge"
+                  android:layout_width="match_parent"
+                  android:layout_height="wrap_content"
+                  android:paddingBottom="16dp"
+                  android:paddingLeft="16dp"
+                  android:paddingRight="16dp"
+                  android:paddingTop="2dp"
+                  android:text="@string/fedeo_esa_int"
+                  android:textColor="#A9A9A9"
+                  android:textSize="14sp"
+                  android:textStyle="normal" />
+              -->
         <TextView
             android:id="@+id/search_frag_right_basic_tv_catalog_title"
             style="?android:attr/textAppearanceLarge"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingBottom="2dp"
-            android:paddingLeft="16dp"
-            android:paddingRight="16dp"
-            android:paddingTop="16dp"
+            android:paddingBottom="@dimen/search_eo_data_padding_small"
+            android:paddingLeft="@dimen/search_eo_data_padding"
+            android:background="@color/background_white"
+            android:textColor="@color/text_blue"
             android:text="@string/catalogue"
-            android:textSize="16sp"
-            android:textStyle="bold" />
+            android:textSize="@dimen/search_eo_data_text_medium" />
 
         <TextView
             android:id="@+id/search_frag_right_basic_tv_catalog_name"
             style="?android:attr/textAppearanceLarge"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingBottom="16dp"
-            android:paddingLeft="16dp"
-            android:paddingRight="16dp"
-            android:paddingTop="2dp"
+            android:padding="@dimen/search_eo_data_padding"
+            android:paddingBottom="@dimen/search_eo_data_padding_small"
             android:text="@string/fedeo"
-            android:textColor="#A9A9A9"
-            android:textSize="14sp"
-            android:textStyle="normal" />
+            android:textColor="@color/text_black"
+            android:background="@color/background_white"
+            android:textSize="@dimen/search_eo_data_text_medium" />
 
         <LinearLayout
             android:id="@+id/search_frag_right_basic_layout_area"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:paddingTop="@dimen/search_eo_data_padding"
+            android:paddingBottom="@dimen/search_eo_data_padding">
 
             <TextView
                 android:id="@+id/search_frag_right_basic_tv_area"
                 style="?android:attr/textAppearanceLarge"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingBottom="2dp"
-                android:paddingLeft="16dp"
-                android:paddingRight="16dp"
-                android:paddingTop="16dp"
+                android:paddingBottom="@dimen/search_eo_data_padding"
+                android:paddingLeft="@dimen/search_eo_data_padding"
+                android:background="@color/background_white"
                 android:text="@string/search_area"
-                android:textSize="16sp"
-                android:textStyle="bold" />
+                android:textSize="@dimen/search_eo_data_text_medium"
+                android:textColor="@color/text_blue" />
 
             <LinearLayout
                 android:id="@+id/search_frag_right_basic_layout_area_sw"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="#FFFFFF"
+                android:background="@color/background_white"
+
                 android:orientation="horizontal">
 
                 <TextView
                     android:id="@+id/search_frag_right_basic_tv_area_sw_title"
                     style="?android:attr/textAppearanceLarge"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:paddingBottom="16dp"
-                    android:paddingLeft="16dp"
-                    android:paddingRight="16dp"
-                    android:paddingTop="2dp"
+                    android:paddingLeft="@dimen/search_eo_data_padding"
+                    android:paddingRight="@dimen/search_eo_data_padding"
+                    android:paddingBottom="@dimen/search_eo_data_padding_small"
                     android:text="@string/sw_"
                     android:textColor="#A9A9A9"
-                    android:textSize="14sp"
+                    android:textSize="@dimen/search_eo_data_text_medium"
                     android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/search_frag_right_basic_tv_area_sw_lat"
                     style="?android:attr/textAppearanceLarge"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:paddingBottom="16dp"
-                    android:paddingLeft="16dp"
-                    android:paddingRight="16dp"
+                    android:paddingBottom="@dimen/search_eo_data_padding_small"
+                    android:paddingLeft="@dimen/search_eo_data_padding"
+                    android:paddingRight="@dimen/search_eo_data_padding"
                     android:paddingTop="2dp"
                     android:text="@string/zero"
                     android:textColor="#A9A9A9"
-                    android:textSize="14sp"
+                    android:textSize="@dimen/search_eo_data_text_small"
                     android:textStyle="normal" />
 
                 <TextView
                     android:id="@+id/search_frag_right_basic_tv_area_sw_lon"
                     style="?android:attr/textAppearanceLarge"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:paddingBottom="16dp"
-                    android:paddingLeft="16dp"
-                    android:paddingRight="16dp"
+                    android:paddingBottom="@dimen/search_eo_data_padding_small"
+                    android:paddingLeft="@dimen/search_eo_data_padding"
+                    android:paddingRight="@dimen/search_eo_data_padding"
                     android:paddingTop="2dp"
                     android:text="@string/zero"
                     android:textColor="#A9A9A9"
-                    android:textSize="14sp"
+                    android:textSize="@dimen/search_eo_data_text_small"
                     android:textStyle="normal" />
             </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/search_frag_right_basic_layout_area_ne"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="#FFFFFF"
+                android:background="@color/background_white"
                 android:orientation="horizontal">
 
                 <TextView
                     android:id="@+id/search_frag_right_basic_tv_area_ne_title"
                     style="?android:attr/textAppearanceLarge"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:paddingBottom="16dp"
-                    android:paddingLeft="16dp"
-                    android:paddingRight="16dp"
+                    android:paddingLeft="@dimen/search_eo_data_padding"
+                    android:paddingRight="@dimen/search_eo_data_padding"
                     android:paddingTop="2dp"
                     android:text="@string/ne_"
                     android:textColor="#A9A9A9"
-                    android:textSize="14sp"
+                    android:textSize="@dimen/search_eo_data_text_medium"
                     android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/search_frag_right_basic_tv_area_ne_lat"
                     style="?android:attr/textAppearanceLarge"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:paddingBottom="16dp"
-                    android:paddingLeft="16dp"
-                    android:paddingRight="16dp"
+                    android:paddingBottom="@dimen/search_eo_data_padding"
+                    android:paddingLeft="@dimen/search_eo_data_padding"
+                    android:paddingRight="@dimen/search_eo_data_padding"
                     android:paddingTop="2dp"
                     android:text="@string/zero"
                     android:textColor="#A9A9A9"
-                    android:textSize="14sp"
+                    android:textSize="@dimen/search_eo_data_text_small"
                     android:textStyle="normal" />
 
                 <TextView
                     android:id="@+id/search_frag_right_basic_tv_area_ne_lon"
                     style="?android:attr/textAppearanceLarge"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:paddingBottom="16dp"
-                    android:paddingLeft="16dp"
-                    android:paddingRight="16dp"
+                    android:paddingBottom="@dimen/search_eo_data_padding"
+                    android:paddingLeft="@dimen/search_eo_data_padding"
+                    android:paddingRight="@dimen/search_eo_data_padding"
                     android:paddingTop="2dp"
                     android:text="@string/zero"
                     android:textColor="#A9A9A9"
-                    android:textSize="14sp"
+                    android:textSize="@dimen/search_eo_data_text_small"
                     android:textStyle="normal" />
             </LinearLayout>
         </LinearLayout>
@@ -202,79 +199,88 @@
             style="?android:attr/textAppearanceLarge"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingBottom="2dp"
-            android:paddingLeft="16dp"
-            android:paddingRight="16dp"
-            android:paddingTop="16dp"
+            android:paddingTop="@dimen/search_eo_data_padding_small"
+            android:paddingLeft="@dimen/search_eo_data_padding"
+
+            android:background="@color/background_white"
             android:text="@string/time_period"
-            android:textSize="16sp"
-            android:textStyle="bold" />
+            android:textColor="@color/text_blue"
+            android:textSize="@dimen/search_eo_data_text_medium" />
 
         <LinearLayout
             android:id="@+id/search_frag_right_basic_layout_dt"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="#FFFFFF"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:paddingBottom="@dimen/search_eo_data_padding">
 
             <LinearLayout
                 android:id="@+id/search_frag_right_basic_layout_dt_tv"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:background="#FFFFFF"
+                android:layout_height="wrap_content"
+                android:background="@color/background_white"
                 android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/search_frag_right_basic_tv_area_from_title"
                     style="?android:attr/textAppearanceLarge"
                     android:layout_width="wrap_content"
-                    android:layout_height="0dp"
-                    android:layout_weight="1"
-                    android:paddingBottom="2dp"
-                    android:paddingLeft="16dp"
-                    android:paddingRight="16dp"
-                    android:paddingTop="16dp"
+                    android:layout_height="wrap_content"
+
+                    android:paddingLeft="@dimen/search_eo_data_padding"
+                    android:paddingRight="@dimen/search_eo_data_padding"
+                    android:paddingBottom="@dimen/search_eo_data_padding"
+                    android:paddingTop="@dimen/search_eo_data_padding"
                     android:text="@string/from_"
                     android:textColor="#A9A9A9"
-                    android:textSize="14sp"
+                    android:textSize="@dimen/search_eo_data_text_medium"
                     android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/search_frag_right_basic_tv_time_to_title"
                     style="?android:attr/textAppearanceLarge"
                     android:layout_width="wrap_content"
-                    android:layout_height="0dp"
-                    android:layout_weight="1"
-                    android:paddingBottom="2dp"
-                    android:paddingLeft="16dp"
-                    android:paddingRight="16dp"
-                    android:paddingTop="16dp"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="@dimen/search_eo_data_padding"
+                    android:paddingLeft="@dimen/search_eo_data_padding"
+                    android:paddingRight="@dimen/search_eo_data_padding"
+                    android:paddingTop="@dimen/search_eo_data_padding"
                     android:text="@string/to_"
                     android:textColor="#A9A9A9"
-                    android:textSize="14sp"
+                    android:textSize="@dimen/search_eo_data_text_medium"
                     android:textStyle="bold" />
             </LinearLayout>
 
             <LinearLayout
                 android:id="@+id/search_frag_right_basic_layout_dt_but_date"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="#FFFFFF"
+                android:layout_height="fill_parent"
+                android:background="@color/background_white"
                 android:orientation="vertical">
 
-                <Button
+                <TextView
                     android:id="@+id/search_frag_right_basic_button_time_from_date"
-                    style="?android:attr/buttonBarButtonStyle"
+
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/date_time"
+                    android:paddingLeft="@dimen/search_eo_data_padding"
+                    android:paddingRight="@dimen/search_eo_data_padding"
+                    android:paddingBottom="@dimen/search_eo_data_padding"
+                    android:paddingTop="@dimen/search_eo_data_padding"
+                    android:textSize="@dimen/search_eo_data_text_small"
                     android:textColor="#A9A9A9" />
 
-                <Button
+                <TextView
                     android:id="@+id/search_frag_right_basic_button_time_to_date"
-                    style="?android:attr/buttonBarButtonStyle"
+
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:paddingLeft="@dimen/search_eo_data_padding"
+                    android:paddingRight="@dimen/search_eo_data_padding"
+                    android:paddingBottom="@dimen/search_eo_data_padding"
+                    android:paddingTop="@dimen/search_eo_data_padding"
+                    android:textSize="@dimen/search_eo_data_text_small"
                     android:text="@string/date_time"
                     android:textColor="#A9A9A9" />
             </LinearLayout>
@@ -282,26 +288,46 @@
             <LinearLayout
                 android:id="@+id/search_frag_right_basic_layout_dt_but_time"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="#FFFFFF"
+                android:layout_height="fill_parent"
+                android:background="@color/background_white"
                 android:orientation="vertical">
 
-                <Button
+                <TextView
                     android:id="@+id/search_frag_right_basic_button_time_from_time"
-                    style="?android:attr/buttonBarButtonStyle"
+
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:paddingLeft="@dimen/search_eo_data_padding"
+                    android:paddingRight="@dimen/search_eo_data_padding"
+                    android:paddingBottom="@dimen/search_eo_data_padding"
+                    android:paddingTop="@dimen/search_eo_data_padding"
+                    android:textSize="@dimen/search_eo_data_text_small"
                     android:text="@string/date_time"
                     android:textColor="#A9A9A9" />
 
-                <Button
+                <TextView
                     android:id="@+id/search_frag_right_basic_button_time_to_time"
-                    style="?android:attr/buttonBarButtonStyle"
+
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:paddingLeft="@dimen/search_eo_data_padding"
+                    android:paddingRight="@dimen/search_eo_data_padding"
+                    android:paddingBottom="@dimen/search_eo_data_padding"
+                    android:paddingTop="@dimen/search_eo_data_padding"
+                    android:textSize="@dimen/search_eo_data_text_small"
                     android:text="@string/date_time"
                     android:textColor="#A9A9A9" />
+
+
             </LinearLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/background_white">
+
+            </RelativeLayout>
+
         </LinearLayout>
 
         <TextView
@@ -309,82 +335,128 @@
             style="?android:attr/textAppearanceLarge"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingBottom="2dp"
-            android:paddingLeft="16dp"
-            android:paddingRight="16dp"
-            android:paddingTop="16dp"
+            android:paddingBottom="@dimen/search_eo_data_padding_small"
+            android:paddingLeft="@dimen/search_eo_data_padding"
+            android:paddingTop="@dimen/search_eo_data_padding"
             android:text="@string/title_parameter"
-            android:textSize="16sp"
-            android:textStyle="bold" />
+            android:textSize="@dimen/search_eo_data_text_medium"
+            android:textColor="@color/text_blue"
+            android:background="@color/background_white" />
 
-        <EditText
-            android:id="@+id/search_frag_right_basic_editv_title"
-            style="?android:attr/textAppearanceLarge"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
-            android:layout_marginLeft="6dp"
-            android:layout_marginRight="16dp"
-            android:layout_marginTop="2dp"
-            android:text="@string/value_osdd_parameter"
-            android:textColor="#A9A9A9"
-            android:textSize="14sp"
-            android:textStyle="normal" />
+            android:paddingBottom="@dimen/search_eo_data_padding"
+            android:orientation="horizontal">
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/background_white"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/search_frag_right_basic_editv_title"
+                    style="?android:attr/textAppearanceLarge"
+                    android:layout_width="fill_parent"
+                    android:layout_height="@dimen/search_eo_data_edit_text_height"
+                    android:background="@drawable/edit_text"
+                    android:layout_marginBottom="16dp"
+                    android:layout_marginLeft="@dimen/search_eo_data_padding"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginTop="2dp"
+                    android:paddingLeft="@dimen/search_eo_data_padding"
+                    android:text="@string/value_osdd_parameter"
+                    android:textColor="#A9A9A9"
+                    android:textSize="@dimen/search_eo_data_text_medium"
+                    android:textStyle="normal" />
+            </LinearLayout>
+        </LinearLayout>
         <TextView
             android:id="@+id/search_frag_right_basic_tv_org_header"
             style="?android:attr/textAppearanceLarge"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingBottom="2dp"
-            android:paddingLeft="16dp"
-            android:paddingRight="16dp"
-            android:paddingTop="16dp"
+            android:paddingBottom="@dimen/search_eo_data_padding_small"
+            android:paddingLeft="@dimen/search_eo_data_padding"
+            android:paddingTop="@dimen/search_eo_data_padding"
             android:text="@string/organisation_header"
-            android:textSize="16sp"
-            android:textStyle="bold" />
+            android:textSize="@dimen/search_eo_data_text_medium"
+            android:textColor="@color/text_blue"
+            android:background="@color/background_white" />
 
-        <EditText
-            android:id="@+id/search_frag_right_basic_editv_org"
-            style="?android:attr/textAppearanceLarge"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
-            android:layout_marginLeft="6dp"
-            android:layout_marginRight="16dp"
-            android:layout_marginTop="2dp"
-            android:text="@string/value_osdd_parameter"
-            android:textColor="#A9A9A9"
-            android:textSize="14sp"
-            android:textStyle="normal" />
+            android:paddingBottom="@dimen/search_eo_data_padding"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/background_white"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/search_frag_right_basic_editv_org"
+                    style="?android:attr/textAppearanceLarge"
+                    android:layout_width="fill_parent"
+                    android:layout_height="@dimen/search_eo_data_edit_text_height"
+                    android:layout_marginBottom="16dp"
+                    android:background="@drawable/edit_text"
+                    android:layout_marginLeft="@dimen/search_eo_data_padding"
+                    android:layout_marginRight="16dp"
+                    android:paddingLeft="@dimen/search_eo_data_padding"
+                    android:layout_marginTop="2dp"
+                    android:text="@string/value_osdd_parameter"
+                    android:textColor="#A9A9A9"
+                    android:textSize="@dimen/search_eo_data_text_medium"
+                    android:textStyle="normal" />
+            </LinearLayout>
+        </LinearLayout>
 
         <TextView
             android:id="@+id/search_frag_right_basic_tv_platform_header"
             style="?android:attr/textAppearanceLarge"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingBottom="2dp"
-            android:paddingLeft="16dp"
-            android:paddingRight="16dp"
-            android:paddingTop="16dp"
+            android:paddingBottom="@dimen/search_eo_data_padding_small"
+            android:paddingLeft="@dimen/search_eo_data_padding"
+            android:paddingTop="@dimen/search_eo_data_padding"
             android:text="@string/platform_header"
-            android:textSize="16sp"
-            android:textStyle="bold" />
+            android:textSize="@dimen/search_eo_data_text_medium"
+            android:textColor="@color/text_blue"
+            android:background="@color/background_white" />
 
-        <EditText
-            android:id="@+id/search_frag_right_basic_editv_platform"
-            style="?android:attr/textAppearanceLarge"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
-            android:layout_marginLeft="6dp"
-            android:layout_marginRight="16dp"
-            android:layout_marginTop="2dp"
-            android:text="@string/value_osdd_parameter"
-            android:textColor="#A9A9A9"
-            android:textSize="14sp"
-            android:textStyle="normal" />
+            android:paddingBottom="@dimen/search_eo_data_padding"
+            android:orientation="horizontal">
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/background_white"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/search_frag_right_basic_editv_platform"
+                    style="?android:attr/textAppearanceLarge"
+                    android:layout_width="fill_parent"
+                    android:layout_height="@dimen/search_eo_data_edit_text_height"
+                    android:layout_marginBottom="16dp"
+                    android:background="@drawable/edit_text"
+                    android:layout_marginLeft="@dimen/search_eo_data_padding"
+                    android:layout_marginRight="16dp"
+                    android:paddingLeft="@dimen/search_eo_data_padding"
+                    android:layout_marginTop="2dp"
+                    android:text="@string/value_osdd_parameter"
+                    android:textColor="#A9A9A9"
+                    android:textSize="@dimen/search_eo_data_text_medium"
+                    android:textStyle="normal" />
+            </LinearLayout>
+        </LinearLayout>
 
     </LinearLayout>
 

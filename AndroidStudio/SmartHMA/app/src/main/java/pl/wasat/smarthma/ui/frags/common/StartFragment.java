@@ -54,6 +54,7 @@ public class StartFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_start, container,
                 false);
 
+
         Button buttonStartSearch = (Button) rootView
                 .findViewById(R.id.start_frag_button_search);
         buttonStartSearch.setOnClickListener(new OnClickListener() {

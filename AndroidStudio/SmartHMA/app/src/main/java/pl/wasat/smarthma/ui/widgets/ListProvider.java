@@ -10,7 +10,6 @@ import android.widget.RemoteViewsService.RemoteViewsFactory;
 import java.util.ArrayList;
 
 import pl.wasat.smarthma.R;
-import pl.wasat.smarthma.ui.activities.NewsActivity;
 import pl.wasat.smarthma.ui.activities.SearchActivity;
 
 /**

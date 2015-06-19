@@ -28,23 +28,22 @@
     <string name="search_products">Search Products</string>
     <string name="collections_search_results">Collections Search Results</string>
     <string name="quicklook">Quicklook</string>
-    <string name="browse_eo_data">Browse EO Data</string>
+    <string name="browse_eo_data">Browse Products</string>
     <string name="esa_missions">ESA Missions</string>
     <string name="esa_online">ESA Online</string>
     <string name="esa_news">ESA Online News</string>
     <string name="title_article_list">ESA EO News SmartHMA Reader</string>
-    <string name="more">More &gt;&gt;</string>
-    <string name="smarthma">SmartHMA</string>
+    <string name="more">More</string>
     <string name="fedeo_eo_data_series_search_engine">with ESA/FedEO Search Engine</string>
     <string name="search_history_empty">(search history is empty)</string>
     <string name="query">Query</string>
     <string name="basic_settings">Basic Settings</string>
     <string name="advanced_settings">Advanced Settings</string>
-    <string name="basic_search_settings">Basic Search Settings</string>
+    <string name="basic_search_settings">EO Dataset Series Search</string>
     <string name="search_area">Search Area</string>
     <string name="time_period">Time Period</string>
     <string name="from_">"From: "</string>
-    <string name="to_">"To:   "</string>
+    <string name="to_">"To:  "</string>
     <string name="date_time">Date/Time</string>
     <string name="time_set">Set time</string>
     <string name="cancel">Cancel</string>
@@ -57,7 +56,7 @@
     <string name="alert_dialog_response_error">Response Error</string>
     <string name="please_correct_your_query_">\n\nPlease go back and correct your query.</string>
     <string name="sep">" - "</string>
-    <string name="_first">&lt;&lt; first</string>
+    <string name="_first">first</string>
     <string name="search_term_">"SEARCH TERM "</string>
     <string name="collection_">"COLLECTION "</string>
     <string name="time_start_">"TIME START "</string>
@@ -65,12 +64,12 @@
     <string name="area_bounds_">"AREA BOUNDS "</string>
     <string name="updated_">"UPDATED "</string>
     <string name="total_results_">"TOTAL RESULTS "</string>
-    <string name="_prev">&lt; prev</string>
+    <string name="_prev">prev</string>
     <string name="reload">reload</string>
-    <string name="next_">next &gt;</string>
-    <string name="last_">last &gt;&gt;</string>
+    <string name="next_">next</string>
+    <string name="last_">last</string>
     <string name="items_from">Items from</string>
-    <string name="to">to</string>
+    <string name="to">/</string>
     <string name="collection_id">Collection ID: </string>
     <string name="show_products">Show Products</string>
     <string name="activity_name_collections_definition">Collections Definition</string>
@@ -89,7 +88,7 @@
     <string name="hello_user">You are logged as\n%1$s</string>
     <string name="share_quicklook">Share Quicklook</string>
     <string name="quicklook_img_desc">Quicklook Image</string>
-    <string name="search_eo_data">Search EO Data</string>
+    <string name="search_eo_data">Search Products</string>
     <string name="esa_mission_item">ESA MISSION ITEM</string>
     <string name="parameters">Parameters</string>
     <string name="bbox">BBox</string>
@@ -119,11 +118,19 @@
     <string name="organisation_header">Organisation</string>
     <string name="platform_header">Platform</string>
 
+
+    <!--  INFO APPS  -->
+
+    <string name="copyright">Copyright © 2015 SmartHMA</string>
+    <string name="action_bar_home">Home</string>
+
+
     <string-array name="sorting_modes">
         <item>Title ascending</item>
         <item>Title descending</item>
         <item>Date ascending</item>
         <item>Date descending</item>
     </string-array>
+    <string name="title_activity_aaa">Map</string>
 
 </resources>
