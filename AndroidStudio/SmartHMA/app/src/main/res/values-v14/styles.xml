@@ -19,7 +19,7 @@
         <item name="android:background">#C7C7C7</item>
     </style>
 
-    <style name="AppNoActionBarTheme" parent="android:Theme.Light.NoTitleBar.Fullscreen">
+    <style name="AppNoActionBarTheme" parent="android:Theme.Holo.Light.NoActionBar.Fullscreen">
         <!-- All customizations that are NOT specific to a particular API-level can go here. -->
     </style>
 </resources>

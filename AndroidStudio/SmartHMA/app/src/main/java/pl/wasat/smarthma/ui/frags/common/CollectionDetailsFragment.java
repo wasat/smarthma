@@ -107,7 +107,7 @@ public class CollectionDetailsFragment extends
                 if (mListener != null) {
                     // TODO !!!
                     //mListener.onCollectionDetailsFragmentShowProducts(parentID);
-                    //   mSlidingLayer.closeLayer(true);
+                    mSlidingLayer.closeLayer(true);
                     fedeoRequestParams.buildFromShared(getActivity());
                     fedeoRequestParams.setParentIdentifier(displayedISOEntry.getIdentifier());
                     mListener.onCollectionDetailsFragmentShowProducts(fedeoRequestParams);
@@ -122,7 +122,7 @@ public class CollectionDetailsFragment extends
             }
         });
         //TODO !!!
-        //   loadParamsSliderView(osddUrl);
+        loadParamsSliderView(osddUrl);
 
         return rootView;
     }

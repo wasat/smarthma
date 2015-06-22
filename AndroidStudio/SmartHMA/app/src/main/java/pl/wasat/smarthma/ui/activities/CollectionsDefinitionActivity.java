@@ -10,6 +10,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.SearchView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import pl.wasat.smarthma.R;
@@ -43,6 +44,9 @@ public class CollectionsDefinitionActivity extends BaseCollectionsActivity
     protected void onCreate(Bundle savedInstanceState) {
         Ln.getConfig().setLoggingLevel(Log.ERROR);
         super.onCreate(savedInstanceState);
+
+        TextView text = (TextView) findViewById(R.id.action_bar_title);
+        text.setText("Searched Collections");
 
         if (findViewById(R.id.activity_base_details_container) != null) {
             TWO_PANEL_MODE = true;

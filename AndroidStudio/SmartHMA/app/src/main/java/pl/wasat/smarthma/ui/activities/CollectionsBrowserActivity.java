@@ -38,9 +38,11 @@ public class CollectionsBrowserActivity extends BaseCollectionsActivity implemen
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+
         Intent intent = getIntent();
         String collectionName = intent
                 .getStringExtra(CollectionsListFragment.KEY_COLLECTIONS_NAME);
+
 
         SharedPrefs sharedPrefs = new SharedPrefs(getApplicationContext());
         sharedPrefs.setParentIdPrefs(collectionName);

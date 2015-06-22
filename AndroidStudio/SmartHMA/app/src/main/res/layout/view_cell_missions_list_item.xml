@@ -34,7 +34,7 @@
           android:layout_toRightOf="@+id/mission_child_list_item_thmb_imgview"
           android:layout_toEndOf="@+id/mission_child_list_item_thmb_imgview">
         -->
-        <TextView
+    <pl.wasat.smarthma.customviews.TextViewWithFont
             android:id="@+id/mission_child_list_item_tv"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
@@ -44,9 +44,9 @@
             android:textColor="@color/text_black"
             android:textSize="@dimen/esa_missions_cell_text_size"
             android:layout_alignParentTop="true"
-            android:layout_toRightOf="@+id/mission_child_list_item_thmb_imgview" />
+        android:layout_toRightOf="@+id/mission_child_list_item_thmb_imgview" />
 
-    <TextView
+    <pl.wasat.smarthma.customviews.TextViewWithFont
         android:id="@+id/mission_child_list_item_tv_2"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"

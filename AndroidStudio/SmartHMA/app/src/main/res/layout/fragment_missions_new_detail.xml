@@ -10,7 +10,7 @@
         android:background="@color/background_gray"
         android:orientation="vertical">
 
-        <TextView
+        <pl.wasat.smarthma.customviews.TextViewWithFont
             android:id="@+id/missions_detail_frag_title_tv"
             style="?android:attr/textAppearanceLarge"
             android:layout_width="match_parent"

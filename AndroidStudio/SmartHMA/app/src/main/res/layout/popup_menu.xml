@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/popup_menu_layout"
+    android:orientation="vertical"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@color/background_white">
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingTop="@dimen/browse_eo_padding"
+        android:paddingRight="@dimen/browse_eo_padding"
+        android:paddingLeft="@dimen/browse_eo_padding">
+
+        <pl.wasat.smarthma.customviews.TextViewWithFont
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginRight="30dp"
+            style="@style/text"
+            android:text="Sort"
+            android:textColor="@color/text_black"
+            android:id="@+id/view" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:src="@drawable/ic_sort"
+            android:layout_alignParentTop="true"
+            android:layout_toRightOf="@+id/view"
+            android:layout_toEndOf="@+id/view" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingTop="@dimen/browse_eo_padding"
+        android:paddingRight="@dimen/browse_eo_padding"
+        android:paddingLeft="@dimen/browse_eo_padding">
+
+        <pl.wasat.smarthma.customviews.TextViewWithFont
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginRight="@dimen/browse_eo_padding"
+            style="@style/text"
+            android:text="Refresh"
+            android:textColor="@color/text_black"
+            android:id="@+id/view2" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:src="@drawable/ic_refresh"
+            android:layout_toRightOf="@+id/view2"
+            android:layout_toEndOf="@+id/view2" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+
+        android:orientation="horizontal"
+        android:paddingTop="@dimen/browse_eo_padding"
+        android:paddingRight="@dimen/browse_eo_padding"
+        android:paddingLeft="@dimen/browse_eo_padding"
+        android:paddingBottom="@dimen/browse_eo_padding">
+
+        <pl.wasat.smarthma.customviews.TextViewWithFont
+            android:id="@+id/view3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginRight="@dimen/browse_eo_padding"
+            style="@style/text"
+            android:text="Favourite"
+            android:textColor="@color/text_black" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:src="@drawable/menu_favourite"
+            android:layout_toRightOf="@+id/view3"
+            android:layout_toEndOf="@+id/view3" />
+
+    </LinearLayout>
+
+</LinearLayout>

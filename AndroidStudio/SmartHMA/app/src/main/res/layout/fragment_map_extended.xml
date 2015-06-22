@@ -8,7 +8,8 @@
     <FrameLayout
         android:id="@+id/frag_support_map_base"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:layout_above="@+id/seekBar_opacity_overlay" />
 
     <SeekBar
         android:id="@+id/seekBar_opacity_overlay"

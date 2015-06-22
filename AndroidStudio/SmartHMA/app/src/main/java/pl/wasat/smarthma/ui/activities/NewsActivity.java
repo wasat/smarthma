@@ -3,6 +3,7 @@ package pl.wasat.smarthma.ui.activities;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.util.Log;
+import android.widget.TextView;
 
 import pl.wasat.smarthma.R;
 import pl.wasat.smarthma.adapter.NewsArticleListAdapter;
@@ -31,6 +32,9 @@ public class NewsActivity extends BaseSmartHMActivity implements
             StrictMode.setThreadPolicy(policy);
         }
         setContentView(R.layout.activity_news);
+
+        TextView text = (TextView) findViewById(R.id.action_bar_title);
+        text.setText("ESA Online");
 
         dba = new EoDbAdapter(this);
 

@@ -13,7 +13,7 @@
         android:background="@color/background_gray"
         android:orientation="vertical">
 
-        <TextView
+        <pl.wasat.smarthma.customviews.TextViewWithFont
             android:id="@+id/search_fragment_detail_name"
             style="@style/textMainTitle"
             android:text="Lorem"
@@ -26,7 +26,7 @@
 
             tools:context="pl.wasat.smarthma.ui.frags.search.SearchDetailFragment" />
 
-        <TextView
+        <pl.wasat.smarthma.customviews.TextViewWithFont
             android:id="@+id/search_fragment_detail_dates"
             style="@style/textMainTitle"
             android:layout_width="match_parent"
@@ -54,7 +54,6 @@
             android:gravity="center"
             android:layout_alignParentBottom="true"
             android:orientation="vertical">
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

@@ -7,6 +7,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.SubMenu;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
@@ -44,6 +45,9 @@ public class SearchActivity extends BaseSmartHMActivity implements
 
             loadRightPanel();
             loadLeftPanel();
+
+            TextView title = (TextView) findViewById(R.id.action_bar_title);
+            title.setText("Search EO data");
         }
 
         //refreshParameters();

@@ -39,7 +39,7 @@
             android:contentDescription="@string/desc"
             android:src="@drawable/star_button" />
 
-        <TextView
+        <pl.wasat.smarthma.customviews.TextViewWithFont
         android:id="@+id/entry_item_title_textview"
         style="@android:style/TextAppearance.Medium"
         android:layout_width="wrap_content"
@@ -52,7 +52,7 @@
             android:layout_toLeftOf="@id/star_button"
             android:layout_toRightOf="@id/entry_item_thumb_imageview" />
 
-    <TextView
+        <pl.wasat.smarthma.customviews.TextViewWithFont
         android:id="@+id/entry_item_dates_textview"
         style="@android:style/TextAppearance.Small"
         android:layout_width="wrap_content"

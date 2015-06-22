@@ -17,7 +17,7 @@
 package pl.wasat.smarthma.customviews;
 
 import android.annotation.SuppressLint;
-import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
@@ -27,17 +27,19 @@ import android.text.format.DateFormat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
+import android.widget.Button;
 
 import java.util.Calendar;
 
 import pl.wasat.smarthma.R;
 import pl.wasat.smarthma.customviews.TimePicker.OnTimeChangedListener;
 
+
 /**
  * A dialog that prompts the user for the time of day using a {@link TimePicker}
  * .
  */
-public class SmHmaTimePickerDialog extends AlertDialog implements
+public class SmHmaTimePickerDialog extends Dialog implements
         OnClickListener, OnTimeChangedListener {
 
     /**
@@ -63,6 +65,10 @@ public class SmHmaTimePickerDialog extends AlertDialog implements
     private final OnTimeSetListener mCallback;
     private final Calendar mCalendar;
     private final java.text.DateFormat mDateFormat;
+
+    private Button cancel;
+    private Button choose;
+
 
     /**
      * @param context      Parent.
@@ -90,7 +96,8 @@ public class SmHmaTimePickerDialog extends AlertDialog implements
     private SmHmaTimePickerDialog(Context context, int theme,
                                   OnTimeSetListener callBack, int hourOfDay, int minute, int seconds,
                                   boolean is24HourView) {
-        super(context, theme);
+        //TODO INFOAPPS
+        super(context /*, theme*/);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         mCallback = callBack;
         int mInitialHourOfDay = hourOfDay;
@@ -102,14 +109,16 @@ public class SmHmaTimePickerDialog extends AlertDialog implements
         mCalendar = Calendar.getInstance();
         updateTitle(mInitialHourOfDay, mInitialMinute, mInitialSeconds);
 
-        setButton(context.getText(R.string.time_set), this);
-        setButton2(context.getText(R.string.cancel), (OnClickListener) null);
+        //TODO INFOAPPS
+        //  setButton(context.getText(R.string.time_set), this);
+        // setButton2(context.getText(R.string.cancel), (OnClickListener) null);
         // setIcon(android.R.drawable.ic_dialog_time);
 
         LayoutInflater inflater = (LayoutInflater) context
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View view = inflater.inflate(R.layout.dialog_time_picker, null);
-        setView(view);
+        //TODO INFOAPPS setview(view)
+        setContentView(view);
         mTimePicker = (TimePicker) view.findViewById(R.id.timePicker);
 
         // initialize state
@@ -118,6 +127,30 @@ public class SmHmaTimePickerDialog extends AlertDialog implements
         mTimePicker.setCurrentSecond(mInitialSeconds);
         mTimePicker.setIs24HourView(mIs24HourView);
         mTimePicker.setOnTimeChangedListener(this);
+
+        cancel = (Button) view.findViewById(R.id.dialog_time_picker_cancel);
+        choose = (Button) view.findViewById(R.id.dialog_time_picker_choose);
+
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dismiss();
+            }
+        });
+
+        choose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mCallback != null) {
+                    mTimePicker.clearFocus();
+                    mCallback.onTimeSet(mTimePicker, mTimePicker.getCurrentHour(),
+                            mTimePicker.getCurrentMinute(),
+                            mTimePicker.getCurrentSeconds());
+                }
+                dismiss();
+            }
+        });
+
     }
 
     public void onClick(DialogInterface dialog, int which) {

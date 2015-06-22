@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -111,7 +112,7 @@ public class BaseViewAndBasicSettingsDetailFragment extends BaseSpiceFragment {
                 R.layout.fragment_map_and_basic_settings_detail, container,
                 false);
         //TODO INFOAPPS
-        //mSlidingLayer = (SlidingLayer) rootView.findViewById(R.id.slidingLayer1);
+        mSlidingLayer = (SlidingLayer) rootView.findViewById(R.id.slidingLayer1);
 
         //txtParamsSliderHeader = (TextView) rootView.findViewById(R.id.txt_slider_params_header);
 
@@ -241,7 +242,7 @@ public class BaseViewAndBasicSettingsDetailFragment extends BaseSpiceFragment {
         getBboxPrefs();
         getDateTimePrefs();
         //TODO INFOAPPS
-        // layoutSpinners = (LinearLayout) rootView.findViewById(R.id.layout_param_sliders);
+        layoutSpinners = (LinearLayout) rootView.findViewById(R.id.layout_param_sliders);
 /*
         spinnerCount = (Spinner) rootView.findViewById(R.id.spinnerCount);
         spinnerSearchTerms = (Spinner) rootView.findViewById(R.id.spinnerSearchTerms);
@@ -344,7 +345,14 @@ public class BaseViewAndBasicSettingsDetailFragment extends BaseSpiceFragment {
 
     public static class DatePickerFragment extends DialogFragment implements
             DatePickerDialog.OnDateSetListener {
+
         private String buttonTag;
+        private Button choose;
+        private Button cancel;
+        private DatePicker datePicker;
+        private int dpYear;
+        private int dpMonth;
+        private int dpDay;
 
         @NonNull
         @Override
@@ -359,8 +367,55 @@ public class BaseViewAndBasicSettingsDetailFragment extends BaseSpiceFragment {
             int month = c.get(Calendar.MONTH);
             int day = c.get(Calendar.DAY_OF_MONTH);
 
+            //TODO INFOAPPS DatePickerDialog(getActivity(), this, year, month, day);
+            final Dialog dialog = new Dialog(getActivity());
+            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+            dialog.setContentView(R.layout.dialog_date_picker);
+
+            cancel = (Button) dialog.findViewById(R.id.dialog_date_picker_cancel);
+            choose = (Button) dialog.findViewById(R.id.dialog_date_picker_choose);
+            datePicker = (DatePicker) dialog.findViewById(R.id.dialog_date_picker_datePicker);
+
+            datePicker.init(year, month, day, new DatePicker.OnDateChangedListener() {
+                @Override
+                public void onDateChanged(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                    dpYear = year;
+                    dpMonth = monthOfYear;
+                    dpDay = dayOfMonth;
+                }
+            });
+
+            cancel.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    dialog.dismiss();
+                }
+            });
+
+            choose.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (buttonTag.equalsIgnoreCase("tvFromDate")) {
+                        calStart.set(dpYear, dpMonth, dpDay);
+                        // String dateToSet = formatDate(calStart);
+                        String dateToSet = setDtISO(calStart);
+                        tvFromDate.setText(dateToSet);
+
+                    } else if (buttonTag.equalsIgnoreCase("tvToDate")) {
+                        calEnd.set(dpYear, dpMonth, dpDay);
+                        // String dateToSet = formatDate(calEnd);
+                        String dateToSet = setDtISO(calEnd);
+                        tvToDate.setText(dateToSet);
+                    }
+                    sharedPrefs.setDateTimePrefs(setDtISO(calStart), setDtISO(calEnd));
+                    dialog.dismiss();
+                }
+            });
+
             // Create a new instance of DatePickerDialog and return it
-            return new DatePickerDialog(getActivity(), this, year, month, day);
+            return dialog;
+
+
         }
 
         public void onDateSet(DatePicker view, int year, int month, int day) {

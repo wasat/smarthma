@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
+import android.widget.TextView;
 
 import pl.wasat.smarthma.R;
 import pl.wasat.smarthma.helper.Const;
@@ -35,6 +36,9 @@ public class ProductsBrowserActivity extends BaseSmartHMActivity implements
 
         Intent intent = getIntent();
         //String parentId = intent.getStringExtra(Const.KEY_INTENT_PARENT_ID);
+
+        TextView text = (TextView) findViewById(R.id.action_bar_title);
+        text.setText("Products Browser");
 
         FedeoRequestParams fedeoRequestParams = (FedeoRequestParams) intent.getSerializableExtra(Const.KEY_INTENT_FEDEO_REQUEST_PARAMS);
         //fedeoRequestParams.buildFromShared(this);

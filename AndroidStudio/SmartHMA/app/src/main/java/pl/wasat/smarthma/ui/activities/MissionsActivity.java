@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.widget.FrameLayout;
+import android.widget.TextView;
 
 import pl.wasat.smarthma.R;
 import pl.wasat.smarthma.helper.Const;
@@ -19,6 +20,9 @@ public class MissionsActivity extends BaseSmartHMActivity implements
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        TextView text = (TextView) findViewById(R.id.action_bar_title);
+        text.setText("ESA Missions");
 
         FrameLayout listLayout = (FrameLayout) findViewById(R.id.activity_base_list_container);
         listLayout.setBackgroundColor(Color.parseColor("#D9D9D9"));

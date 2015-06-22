@@ -103,7 +103,7 @@ public class CollectionEmptyDetailsFragment extends
                 if (mListener != null) {
                     //TODO !!!
                     //mListener.onCollectionDetailsFragmentShowProducts(parentID);
-                    //mSlidingLayer.closeLayer(true);
+                    mSlidingLayer.closeLayer(true);
                     fedeoRequestParams.setParentIdentifier(collectionName);
                     mListener.onCollectionEmptyDetailsFragmentShowProducts(fedeoRequestParams);
                 }
@@ -116,7 +116,7 @@ public class CollectionEmptyDetailsFragment extends
 
         String osddUrl = Const.OSDD_BASE_URL + "parentIdentifier=" + collectionName;
         //TODO !!!
-//        loadParamsSliderView(osddUrl);
+        loadParamsSliderView(osddUrl);
 
         return rootView;
     }

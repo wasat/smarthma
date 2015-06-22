@@ -47,18 +47,18 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="2">
-
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_rec"
                     android:layout_centerVertical="true" />
 
-                <TextView
+                <pl.wasat.smarthma.customviews.TextViewWithFont
+                    android:id="@+id/action_bar_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="@dimen/action_bar_title_size"
-                    android:textColor="#ffffff"
+                    android:textColor="@color/text_black"
                     android:text="@string/action_bar_home"
                     android:paddingLeft="@dimen/action_bar_title_padding"
                     android:layout_centerVertical="true"
@@ -87,6 +87,7 @@
         </LinearLayout>
 
 
+
     </LinearLayout>
 
     <LinearLayout
@@ -113,7 +114,6 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="2" />
-
         <FrameLayout
             android:id="@+id/article_detail_container"
             android:layout_width="0dp"
@@ -131,7 +131,7 @@
         android:background="@color/background_gray"
         android:id="@+id/relativeLayout">
 
-        <TextView
+        <pl.wasat.smarthma.customviews.TextViewWithFont
             android:id="@+id/copyright_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

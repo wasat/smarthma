@@ -46,7 +46,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
 
-            <TextView
+            <pl.wasat.smarthma.customviews.TextViewWithFont
                 android:id="@+id/s_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -73,7 +73,8 @@
             <LinearLayout
                 android:layout_width="@dimen/search_eo_data_edit_text_width"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/search_frag_searchview">
+                android:layout_below="@id/search_frag_searchview"
+                android:paddingTop="@dimen/search_eo_data_padding_medium">
 
                 <Button
                     android:id="@+id/search_frag_button_basic"
@@ -89,7 +90,7 @@
                     android:id="@+id/search_frag_button_advance"
                     style="@style/buttonBlue"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="@dimen/button_blue_height"
                     android:layout_weight="1"
                     android:layout_margin="3dp"
                     android:text="@string/advanced_settings"

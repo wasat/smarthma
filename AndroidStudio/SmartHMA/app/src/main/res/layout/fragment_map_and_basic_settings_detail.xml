@@ -24,13 +24,13 @@
 
                 android:orientation="vertical">
 
-                <TextView
+                <pl.wasat.smarthma.customviews.TextViewWithFont
                     style="@style/textTitle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/collection_id" />
 
-                <TextView
+                <pl.wasat.smarthma.customviews.TextViewWithFont
                     android:id="@+id/frag_search_res_coll_det_tv_parent_id"
                     style="@style/text"
                     android:layout_width="match_parent"
@@ -51,7 +51,7 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
 
-                    <TextView
+                    <pl.wasat.smarthma.customviews.TextViewWithFont
                         android:id="@+id/frag_search_res_coll_det_tv_area"
                         style="@style/textTitle"
                         android:layout_width="match_parent"
@@ -65,20 +65,20 @@
                         android:background="@color/action_bar_background"
                         android:orientation="horizontal">
 
-                        <TextView
+                        <pl.wasat.smarthma.customviews.TextViewWithFont
                             style="@style/text"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="@string/sw_" />
 
-                        <TextView
+                        <pl.wasat.smarthma.customviews.TextViewWithFont
                             android:id="@+id/frag_search_res_coll_det_tv_area_sw_lat"
                             style="@style/text"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="@string/zero" />
 
-                        <TextView
+                        <pl.wasat.smarthma.customviews.TextViewWithFont
                             android:id="@+id/frag_search_res_coll_det_tv_area_sw_lon"
                             style="@style/text"
                             android:layout_width="match_parent"
@@ -92,20 +92,20 @@
                         android:background="@color/action_bar_background"
                         android:orientation="horizontal">
 
-                        <TextView
+                        <pl.wasat.smarthma.customviews.TextViewWithFont
                             style="@style/text"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="@string/ne_" />
 
-                        <TextView
+                        <pl.wasat.smarthma.customviews.TextViewWithFont
                             android:id="@+id/frag_search_res_coll_det_tv_area_ne_lat"
                             style="@style/text"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="@string/zero" />
 
-                        <TextView
+                        <pl.wasat.smarthma.customviews.TextViewWithFont
                             android:id="@+id/frag_search_res_coll_det_tv_area_ne_lon"
                             style="@style/text"
                             android:layout_width="match_parent"
@@ -120,84 +120,85 @@
                 android:background="@color/action_bar_background"
                 android:orientation="vertical">
 
-                <TextView
+                <pl.wasat.smarthma.customviews.TextViewWithFont
                     style="@style/textTitle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
 
                     android:text="@string/time_period" />
 
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:background="@color/action_bar_background"
-                    android:orientation="horizontal">
-
-                    <LinearLayout
-                            android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:background="@color/action_bar_background"
-                        android:orientation="vertical">
-
-                        <TextView
-                            style="@style/text"
-                            android:layout_width="wrap_content"
-                            android:layout_height="0dp"
-                            android:layout_weight="1"
-                            android:text="@string/from_" />
-
-                        <TextView
-                            style="@style/text"
-                            android:layout_width="wrap_content"
-                            android:layout_height="0dp"
-                            android:layout_weight="1"
-                            android:text="@string/to_" />
-                    </LinearLayout>
-
                     <LinearLayout
                         android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:background="@color/action_bar_background"
-                        android:orientation="vertical">
+                        android:orientation="horizontal">
 
-                        <TextView
-                            android:id="@+id/frag_search_res_coll_det_tv_time_from_date"
-                            style="@style/text"
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:background="@color/action_bar_background"
+                            android:orientation="vertical">
+
+                            <pl.wasat.smarthma.customviews.TextViewWithFont
+                                style="@style/text"
+                                android:layout_width="wrap_content"
+                                android:layout_height="0dp"
+                                android:layout_weight="1"
+                                android:text="@string/from_" />
+
+                            <pl.wasat.smarthma.customviews.TextViewWithFont
+                                style="@style/text"
+                                android:layout_width="wrap_content"
+                                android:layout_height="0dp"
+                                android:layout_weight="1"
+                                android:text="@string/to_" />
+                        </LinearLayout>
+
+                        <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/date_time" />
+                            android:background="@color/action_bar_background"
+                            android:orientation="vertical">
 
-                        <TextView
-                            android:id="@+id/frag_search_res_coll_det_tv_time_to_date"
-                            style="@style/text"
+                            <pl.wasat.smarthma.customviews.TextViewWithFont
+                                android:id="@+id/frag_search_res_coll_det_tv_time_from_date"
+                                style="@style/text"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/date_time" />
+
+                            <pl.wasat.smarthma.customviews.TextViewWithFont
+                                android:id="@+id/frag_search_res_coll_det_tv_time_to_date"
+                                style="@style/text"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/date_time" />
+                        </LinearLayout>
+
+                        <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/date_time" />
-                    </LinearLayout>
+                            android:background="@color/action_bar_background"
+                            android:orientation="vertical">
 
-                    <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                        android:background="@color/action_bar_background"
-                        android:orientation="vertical">
+                            <pl.wasat.smarthma.customviews.TextViewWithFont
+                                android:id="@+id/frag_search_res_coll_det_tv_time_from_time"
+                                style="@style/text"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/date_time" />
 
-                        <TextView
-                            android:id="@+id/frag_search_res_coll_det_tv_time_from_time"
-                            style="@style/text"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/date_time" />
-
-                        <TextView
-                            android:id="@+id/frag_search_res_coll_det_tv_time_to_time"
-                            style="@style/text"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/date_time" />
-                    </LinearLayout>
+                            <pl.wasat.smarthma.customviews.TextViewWithFont
+                                android:id="@+id/frag_search_res_coll_det_tv_time_to_time"
+                                style="@style/text"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/date_time" />
+                        </LinearLayout>
                     </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
+
 
 
         <LinearLayout
@@ -256,7 +257,7 @@
             android:background="@color/background_gray"
             android:orientation="vertical">
 
-            <TextView
+            <pl.wasat.smarthma.customviews.TextViewWithFont
                 android:id="@+id/frag_search_res_coll_det_tv_coll_name"
                 style="@style/textMainTitle"
                 android:layout_width="match_parent"
@@ -267,7 +268,7 @@
 
                 android:text="lorem lorem" />
 
-            <TextView
+            <pl.wasat.smarthma.customviews.TextViewWithFont
                 android:id="@+id/frag_search_res_coll_det_tv_col_dates"
                 style="@style/textMainTitle"
                 android:layout_width="match_parent"
@@ -295,7 +296,7 @@
 
 
     </RelativeLayout>
-    <!--
+
     <com.wunderlist.slidinglayer.SlidingLayer xmlns:slidingLayer="http://schemas.android.com/apk/res-auto"
         android:id="@+id/slidingLayer1"
         android:layout_width="@dimen/layer_size"
@@ -314,22 +315,21 @@
             android:orientation="vertical"
             android:background="#e7e7e8">
 
-            <TextView
+            <pl.wasat.smarthma.customviews.TextViewWithFont
                 android:id="@+id/txt_slider_params_header"
+
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingTop="10dp"
-                android:paddingBottom="10dp"
+                android:padding="@dimen/search_eo_data_padding"
                 android:textSize="18sp"
-                android:textColor="#074035"
+
                 android:text="@string/parameters"
-                android:gravity="top"
-                style="@style/styleSettingsBasicTitles" />
+
+                style="@style/textMainTitle" />
 
         </LinearLayout>
 
     </com.wunderlist.slidinglayer.SlidingLayer>
 
-    -->
 
 </RelativeLayout>

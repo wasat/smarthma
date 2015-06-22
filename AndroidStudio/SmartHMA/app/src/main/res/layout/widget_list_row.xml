@@ -5,7 +5,7 @@
                 android:orientation="horizontal"
                 android:background="#aaffffff" >
 
-    <TextView
+    <pl.wasat.smarthma.customviews.TextViewWithFont
         android:id="@+id/widget_list_heading"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -19,7 +19,7 @@
         android:textStyle="bold"
         android:text="Heading" />
 
-    <TextView
+    <pl.wasat.smarthma.customviews.TextViewWithFont
         android:id="@+id/widget_list_content"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

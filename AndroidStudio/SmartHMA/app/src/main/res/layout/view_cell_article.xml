@@ -18,9 +18,10 @@
         android:paddingBottom="@dimen/esa_online_cell_height"
         android:paddingTop="@dimen/esa_online_cell_height"
         android:background="@color/background_white">
-    <TextView
+
+        <pl.wasat.smarthma.customviews.TextViewWithFont
         android:id="@+id/article_title_text"
-        style="?android:attr/textAppearanceLarge"
+
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/text_blue"
@@ -31,8 +32,8 @@
         android:textSize="@dimen/esa_online_cell_text_size_large" />
 
 
-    <TextView
-        style="?android:attr/textAppearanceLarge"
+        <pl.wasat.smarthma.customviews.TextViewWithFont
+
         android:id="@+id/article_listing_smallprint"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -41,8 +42,10 @@
         android:paddingRight="8dip"
 
         android:textSize="@dimen/esa_online_cell_text_size"
-        android:textStyle="italic"
-        android:text="Lorem ipsum lorem ipsum"
+
+            android:text="Lorem ipsum lorem ipsum"
         android:textColor="@color/text_black" />
+
+
     </LinearLayout>
 </LinearLayout>

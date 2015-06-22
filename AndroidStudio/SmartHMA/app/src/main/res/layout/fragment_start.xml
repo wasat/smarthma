@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:background="@drawable/bg_pion">
@@ -53,7 +54,7 @@
                     android:src="@drawable/ic_rec"
                     android:layout_centerVertical="true" />
 
-                <TextView
+                <pl.wasat.smarthma.customviews.TextViewWithFont
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="@dimen/action_bar_title_size"
@@ -67,6 +68,7 @@
             </RelativeLayout>
 
             <RelativeLayout
+                android:id="@+id/menu_button"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="5"
@@ -84,6 +86,7 @@
             </RelativeLayout>
 
         </LinearLayout>
+
 
 
     </LinearLayout>
@@ -125,6 +128,7 @@
                     android:adjustViewBounds="true"
                     android:contentDescription="@string/desc"
                     android:text="@string/esa_missions"
+
                     android:textColor="@drawable/custom_button_opal_text"
                     android:textSize="@dimen/menu_button_text_size"
                     android:layout_centerVertical="true"
@@ -167,7 +171,7 @@
                     android:layout_marginTop="@dimen/menu_button_margin" />
 
 
-    <TextView
+    <pl.wasat.smarthma.customviews.TextViewWithFont
         android:id="@+id/copyright_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

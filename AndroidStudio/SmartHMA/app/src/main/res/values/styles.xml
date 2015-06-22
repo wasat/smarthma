@@ -16,6 +16,7 @@
     </style>
 
 
+
     <!-- Application theme. -->
     <style name="AppTheme" parent="AppBaseTheme">
         <!-- All customizations that are NOT specific to a particular API-level can go here. -->
@@ -142,8 +143,9 @@
 
 
     <!-- Application theme. -->
-    <style name="AppNoActionBarTheme" parent="android:Theme.Light.NoTitleBar.Fullscreen">
+    <style name="AppNoActionBarTheme" parent="android:Theme.Holo.Light.NoActionBar.Fullscreen">
         <!-- All customizations that are NOT specific to a particular API-level can go here. -->
+
     </style>
 
 
@@ -200,5 +202,10 @@
         <item name="android:textColor">@color/text_black</item>
 
     </style>
+
+    <!--<style name="customNumberPicker" parent="@android:style/Widget.Holo.NumberPicker">
+
+
+    </style> -->
 
 </resources>

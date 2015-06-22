@@ -2,8 +2,6 @@ package pl.wasat.smarthma.adapter;
 
 
 import android.app.Activity;
-import android.graphics.Color;
-import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -43,8 +41,8 @@ public class NewsArticleListAdapter extends ArrayAdapter<NewsArticle> {
 
         if (!article.isRead()) {
             LinearLayout row = (LinearLayout) rowView.findViewById(R.id.article_row_layout);
-            row.setBackgroundColor(Color.WHITE);
-            textView.setTypeface(Typeface.DEFAULT_BOLD);
+            //row.setBackgroundColor(Color.WHITE);
+            //textView.setTypeface(Typeface.DEFAULT_BOLD);
         }
         return rowView;
 

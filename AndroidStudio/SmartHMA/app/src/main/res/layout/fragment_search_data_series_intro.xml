@@ -14,7 +14,7 @@
 
         android:orientation="vertical">
 
-        <TextView
+        <pl.wasat.smarthma.customviews.TextViewWithFont
             android:id="@+id/search_ds_intro_header"
             style="@style/textMainTitle"
             android:layout_width="match_parent"
@@ -25,7 +25,7 @@
             android:paddingTop="@dimen/browse_eo_padding_medium"
             android:text="@string/collections_search_results" />
 
-        <TextView
+        <pl.wasat.smarthma.customviews.TextViewWithFont
             android:id="@+id/search_frag_ds_intro_title"
             style="@style/textMainTitle"
             android:layout_width="match_parent"
@@ -47,49 +47,49 @@
                 android:background="@color/background_gray"
                 android:orientation="vertical">
 
-                <TextView
+                <pl.wasat.smarthma.customviews.TextViewWithFont
                     android:id="@+id/search_frag_ds_intro_search_terms_title"
                     style="@style/text"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/search_term_" />
 
-                <TextView
+                <pl.wasat.smarthma.customviews.TextViewWithFont
                     android:id="@+id/search_frag_ds_intro_collection_title"
                     style="@style/text"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/collection_" />
 
-                <TextView
+                <pl.wasat.smarthma.customviews.TextViewWithFont
                     android:id="@+id/search_frag_ds_intro_time_start_title"
                     style="@style/text"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/time_start_" />
 
-                <TextView
+                <pl.wasat.smarthma.customviews.TextViewWithFont
                     android:id="@+id/search_frag_ds_intro_time_end_title"
                     style="@style/text"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/time_end_" />
 
-                <TextView
+                <pl.wasat.smarthma.customviews.TextViewWithFont
                     android:id="@+id/search_frag_ds_intro_area_title"
                     style="@style/text"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/area_bounds_" />
 
-                <TextView
+                <pl.wasat.smarthma.customviews.TextViewWithFont
                     android:id="@+id/search_frag_ds_intro_updated_title"
                     style="@style/text"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/updated_" />
 
-                <TextView
+                <pl.wasat.smarthma.customviews.TextViewWithFont
                     android:id="@+id/search_frag_ds_intro_total_title"
                     style="@style/text"
                     android:layout_width="match_parent"
@@ -104,43 +104,43 @@
                 android:background="@color/background_gray"
                 android:orientation="vertical">
 
-                <TextView
+                <pl.wasat.smarthma.customviews.TextViewWithFont
                     style="@style/text"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/sep" />
 
-                <TextView
+                <pl.wasat.smarthma.customviews.TextViewWithFont
                     style="@style/text"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/sep" />
 
-                <TextView
+                <pl.wasat.smarthma.customviews.TextViewWithFont
                     style="@style/text"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/sep" />
 
-                <TextView
+                <pl.wasat.smarthma.customviews.TextViewWithFont
                     style="@style/text"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/sep" />
 
-                <TextView
+                <pl.wasat.smarthma.customviews.TextViewWithFont
                     style="@style/text"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/sep" />
 
-                <TextView
+                <pl.wasat.smarthma.customviews.TextViewWithFont
                     style="@style/text"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/sep" />
 
-                <TextView
+                <pl.wasat.smarthma.customviews.TextViewWithFont
                     style="@style/text"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -154,74 +154,70 @@
                 android:background="@color/background_gray"
                 android:orientation="vertical">
 
-                <TextView
+                <pl.wasat.smarthma.customviews.TextViewWithFont
                     android:id="@+id/search_frag_ds_intro_search_terms_value"
                     style="@style/text"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1" />
 
-                <TextView
+                <pl.wasat.smarthma.customviews.TextViewWithFont
                     android:id="@+id/search_frag_ds_intro_collection_value"
                     style="@style/text"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1" />
 
-                <TextView
+                <pl.wasat.smarthma.customviews.TextViewWithFont
                     android:id="@+id/search_frag_ds_intro_time_start_value"
                     style="@style/text"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1" />
 
-                <TextView
+                <pl.wasat.smarthma.customviews.TextViewWithFont
                     android:id="@+id/search_frag_ds_intro_time_end_value"
                     style="@style/text"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1" />
 
-                <TextView
+                <pl.wasat.smarthma.customviews.TextViewWithFont
                     android:id="@+id/search_frag_ds_intro_area_value"
                     style="@style/text"
                     android:textSize="@dimen/browse_eo_cell_text_size"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_weight="1" />
-
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:orientation="horizontal">
 
-                    <TextView
+                    <pl.wasat.smarthma.customviews.TextViewWithFont
                         android:id="@+id/search_frag_ds_intro_updated_value"
                         style="@style/text"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_weight="1" />
-
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:src="@drawable/ic_info" />
 
                 </LinearLayout>
-
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:orientation="horizontal">
 
-                    <TextView
+                    <pl.wasat.smarthma.customviews.TextViewWithFont
                         android:id="@+id/search_frag_ds_intro_total_value"
                         style="@style/text"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent" />
-
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -231,6 +227,7 @@
 
 
         </LinearLayout>
+
 
 
         <!--
@@ -267,7 +264,6 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_alignParentBottom="true">
-
         <LinearLayout
             android:id="@+id/search_frag_ds_intro_layout_items_from_to"
             android:layout_width="match_parent"
@@ -276,25 +272,25 @@
 
             android:orientation="horizontal">
 
-            <TextView
+            <pl.wasat.smarthma.customviews.TextViewWithFont
                 style="@style/text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/items_from" />
 
-            <TextView
+            <pl.wasat.smarthma.customviews.TextViewWithFont
                 android:id="@+id/search_frag_ds_intro_items_from_value"
                 style="@style/text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
-            <TextView
+            <pl.wasat.smarthma.customviews.TextViewWithFont
 
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/to" />
 
-            <TextView
+            <pl.wasat.smarthma.customviews.TextViewWithFont
                 android:id="@+id/search_frag_ds_intro_items_to_value"
                 style="@style/text"
                 android:layout_width="wrap_content"
@@ -308,26 +304,24 @@
             android:gravity="center_horizontal|center"
 
             android:orientation="horizontal">
-
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_first" />
 
-            <TextView
+            <pl.wasat.smarthma.customviews.TextViewWithFont
                 android:id="@+id/search_frag_ds_intro_button_first"
                 style="@style/textMainTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/_first"
                 android:padding="@dimen/esa_missions_padding_medium" />
-
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_prev" />
 
-            <TextView
+            <pl.wasat.smarthma.customviews.TextViewWithFont
                 android:id="@+id/search_frag_ds_intro_button_prev"
                 style="@style/textMainTitle"
                 android:layout_width="wrap_content"
@@ -335,7 +329,7 @@
                 android:text="@string/_prev"
                 android:padding="@dimen/esa_missions_padding_medium" />
 
-            <TextView
+            <pl.wasat.smarthma.customviews.TextViewWithFont
                 android:id="@+id/search_frag_ds_intro_button_reload"
                 style="@style/textMainTitle"
                 android:layout_width="wrap_content"
@@ -343,30 +337,51 @@
                 android:text="@string/reload"
                 android:padding="@dimen/esa_missions_padding_medium" />
 
-            <TextView
+            <pl.wasat.smarthma.customviews.TextViewWithFont
                 android:id="@+id/search_frag_ds_intro_button_next"
                 style="@style/textMainTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/next_"
                 android:padding="@dimen/esa_missions_padding_medium" />
-
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_next" />
-            <TextView
+
+            <pl.wasat.smarthma.customviews.TextViewWithFont
                 android:id="@+id/search_frag_ds_intro_button_last"
                 style="@style/textMainTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/last_"
                 android:padding="@dimen/esa_missions_padding_medium" />
-
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_last" />
         </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal|center"
+            android:paddingTop="@dimen/browse_eo_padding_medium">
+
+
+            <pl.wasat.smarthma.customviews.TextViewWithFont
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/text"
+                android:text="Sort by" />
+
+            <Spinner
+                android:layout_width="@dimen/spinner_width"
+                android:layout_height="@dimen/button_blue_height"
+                android:background="@drawable/edit_text">
+
+            </Spinner>
+        </LinearLayout>
+
     </LinearLayout>
 </RelativeLayout>

@@ -43,7 +43,7 @@ public class SearchCollectionResultsActivity extends BaseSmartHMActivity
 
         // Enabling Back navigation on Action Bar icon
         assert actionBar != null;
-        actionBar.setDisplayHomeAsUpEnabled(true);
+        // actionBar.setDisplayHomeAsUpEnabled(true);
 
         handleIntent(getIntent());
         dba = new EoDbAdapter(this);

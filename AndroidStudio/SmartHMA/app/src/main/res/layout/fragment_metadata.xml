@@ -10,7 +10,7 @@
         android:background="#FFFFFF"
         android:orientation="vertical">
 
-        <TextView
+        <pl.wasat.smarthma.customviews.TextViewWithFont
             android:id="@+id/metadata_frag_tv_prod_name"
             style="?android:attr/textAppearanceLarge"
             android:layout_width="match_parent"
@@ -22,7 +22,7 @@
             android:textSize="20sp"
             android:textStyle="bold" />
 
-        <TextView
+        <pl.wasat.smarthma.customviews.TextViewWithFont
             android:id="@+id/metadata_frag_tv_prod_dates"
             style="?android:attr/textAppearanceLarge"
             android:layout_width="match_parent"

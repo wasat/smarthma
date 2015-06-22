@@ -4,32 +4,56 @@
     style="?android:attr/textAppearanceLarge"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/list_selector"
+    android:background="@color/background_gray"
     android:orientation="vertical"
+    android:paddingBottom="@dimen/esa_mission_cell_divider"
+    android:paddingTop="@dimen/esa_mission_cell_divider"
     tools:context="pl.wasat.smarthma.ui.activities.SearchCollectionResultsActivity">
 
-    <TextView
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingBottom="@dimen/esa_online_cell_height"
+        android:paddingTop="@dimen/esa_online_cell_height"
+        android:paddingRight="@dimen/browse_eo_padding_medium"
+        android:background="@color/background_white">
+
+        <ImageView
+            android:id="@+id/star_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:contentDescription="@string/desc"
+            android:src="@drawable/star_button" />
+
+        <pl.wasat.smarthma.customviews.TextViewWithFont
         android:id="@+id/search_list_name"
-        style="?android:attr/textAppearanceLarge"
-        android:layout_width="wrap_content"
+
+            android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingLeft="15dip"
         android:paddingRight="8dip"
-        android:paddingTop="5dip"
-        android:textColor="#040404"
-        android:textSize="16sp" />
+            android:textColor="@color/text_blue"
+            android:layout_toLeftOf="@+id/star_button"
+            android:textSize="@dimen/browse_eo_cell_text_size_large"
+            android:text="Lorem" />
 
-    <TextView
+        <pl.wasat.smarthma.customviews.TextViewWithFont
         android:id="@+id/search_listing_smallprint"
-        style="?android:attr/textAppearanceLarge"
+
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingBottom="15dip"
+            android:text="lorem"
+            android:layout_below="@+id/search_list_name"
+            android:layout_toLeftOf="@+id/star_button"
         android:paddingLeft="15dip"
         android:paddingRight="8dip"
         android:paddingTop="2dp"
-        android:textColor="#343434"
-        android:textSize="12sp"
-        android:textStyle="italic" />
+            android:textColor="@color/text_black"
+            android:textSize="@dimen/browse_eo_cell_text_size" />
 
+
+    </RelativeLayout>
 </LinearLayout>

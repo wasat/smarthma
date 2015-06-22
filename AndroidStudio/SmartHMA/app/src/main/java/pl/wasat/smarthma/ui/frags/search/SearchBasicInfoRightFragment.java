@@ -17,6 +17,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -391,6 +393,12 @@ public class SearchBasicInfoRightFragment extends Fragment {
     public static class DatePickerFragment extends DialogFragment implements
             DatePickerDialog.OnDateSetListener {
         private String buttonTag;
+        private Button choose;
+        private Button cancel;
+        private DatePicker datePicker;
+        private int dpYear;
+        private int dpMonth;
+        private int dpDay;
 
         @NonNull
         @Override
@@ -405,8 +413,52 @@ public class SearchBasicInfoRightFragment extends Fragment {
             int month = c.get(Calendar.MONTH);
             int day = c.get(Calendar.DAY_OF_MONTH);
 
+            //TODO INFOAPPS
+
+            final Dialog dialog = new Dialog(getActivity());
+            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+            dialog.setContentView(R.layout.dialog_date_picker);
+
+            cancel = (Button) dialog.findViewById(R.id.dialog_date_picker_cancel);
+            choose = (Button) dialog.findViewById(R.id.dialog_date_picker_choose);
+            datePicker = (DatePicker) dialog.findViewById(R.id.dialog_date_picker_datePicker);
+
+            datePicker.init(year, month, day, new DatePicker.OnDateChangedListener() {
+                @Override
+                public void onDateChanged(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                    dpYear = year;
+                    dpMonth = monthOfYear;
+                    dpDay = dayOfMonth;
+                }
+            });
+
+            cancel.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    dialog.dismiss();
+                }
+            });
+
+            choose.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (buttonTag.equalsIgnoreCase("btnFromDate")) {
+                        calStart.set(dpYear, dpMonth, dpDay);
+                        String dateToSet = formatDate(calStart);
+                        btnFromDate.setText(dateToSet);
+
+                    } else if (buttonTag.equalsIgnoreCase("btnToDate")) {
+                        calEnd.set(dpYear, dpMonth, dpDay);
+                        String dateToSet = formatDate(calEnd);
+                        btnToDate.setText(dateToSet);
+                    }
+                    sharedPrefs.setDateTimePrefs(setDtISO(calStart), setDtISO(calEnd));
+                    dialog.dismiss();
+                }
+            });
+
             // Create a new instance of DatePickerDialog and return it
-            return new DatePickerDialog(getActivity(), this, year, month, day);
+            return dialog;
         }
 
         public void onDateSet(DatePicker view, int year, int month, int day) {

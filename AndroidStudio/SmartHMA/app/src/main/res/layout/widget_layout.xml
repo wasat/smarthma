@@ -27,7 +27,7 @@
             android:orientation="vertical"
             android:paddingRight="56dp">
 
-            <TextView
+            <pl.wasat.smarthma.customviews.TextViewWithFont
                 android:id="@+id/widget_title"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
@@ -51,7 +51,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
-    <TextView
+    <pl.wasat.smarthma.customviews.TextViewWithFont
         android:id="@+id/empty_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

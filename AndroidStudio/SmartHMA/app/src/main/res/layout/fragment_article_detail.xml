@@ -11,7 +11,7 @@
         android:background="@color/background_gray"
         android:orientation="vertical">
 
-        <TextView
+        <pl.wasat.smarthma.customviews.TextViewWithFont
             android:id="@+id/article_title"
             style="?android:attr/textAppearanceLarge"
             android:layout_width="match_parent"
@@ -26,7 +26,7 @@
             android:textStyle="bold"
             tools:context=".NewsDetailFragment" />
 
-        <TextView
+        <pl.wasat.smarthma.customviews.TextViewWithFont
             android:id="@+id/article_author"
             style="?android:attr/textAppearanceLarge"
             android:layout_width="match_parent"

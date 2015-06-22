@@ -134,11 +134,12 @@ public class BaseMapFragment extends SupportMapFragment implements
 
         Location location = LocationServices.FusedLocationApi
                 .getLastLocation(mGoogleApiClient);
-      /*  LatLng latLng = new LatLng(location.getLatitude(),
+        //TODO INFOAPPS nullPointerException
+       /* LatLng latLng = new LatLng(location.getLatitude(),
                 location.getLongitude());
         CameraUpdate cameraUpdate = CameraUpdateFactory
                 .newLatLngZoom(latLng, 4);
-        mMap.animateCamera(cameraUpdate);  */
+        mMap.animateCamera(cameraUpdate); */
     }
 
     private void startCreateMap(Bundle savedInstanceState) {

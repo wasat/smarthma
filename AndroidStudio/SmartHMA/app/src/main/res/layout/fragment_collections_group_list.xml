@@ -18,13 +18,13 @@
             android:layout_margin="5dp"
             android:indeterminate="true" />
 
-        <TextView
+        <pl.wasat.smarthma.customviews.TextViewWithFont
             style="@android:style/TextAppearance.Large"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="@string/loading_please_wait"
-            android:textColor="#222222"
+            android:textColor="@color/text_black"
             android:textSize="20sp" />
     </LinearLayout>
 
