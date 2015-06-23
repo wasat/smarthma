@@ -11,11 +11,13 @@ AndroidStudio/SmartHMA/local.properties
 # Gradle generated files
 AndroidStudio/SmartHMA/.gradle
 AndroidStudio/SmartHMA/gradle
+AndroidStudio/SmartHMA/gradlew
  
 # Signing files
 .signing
  
 # User-specific configurations
+AndroidStudio/SmartHMA/.idea/gradle.xml
 AndroidStudio/SmartHMA/.idea/libraries
 AndroidStudio/SmartHMA/.idea/workspace.xml
 AndroidStudio/SmartHMA/.idea/tasks.xml
@@ -27,7 +29,9 @@ AndroidStudio/SmartHMA/.idea/misc.xml
 AndroidStudio/SmartHMA/.idea/modules.xml
 AndroidStudio/SmartHMA/.idea/scopes/scope_settings.xml
 AndroidStudio/SmartHMA/.idea/vcs.xml
+AndroidStudio/SmartHMA/.idea/inspectionProfiles
 AndroidStudio/SmartHMA/*.iml
+AndroidStudio/SmartHMA/app/app.iml
  
 /**/*.iml
  
