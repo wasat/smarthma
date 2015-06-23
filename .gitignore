@@ -29,6 +29,8 @@ AndroidStudio/SmartHMA/.idea/scopes/scope_settings.xml
 AndroidStudio/SmartHMA/.idea/vcs.xml
 AndroidStudio/SmartHMA/*.iml
  
+/**/*.iml
+ 
 # OS-specific files
 .DS_Store
 .DS_Store?

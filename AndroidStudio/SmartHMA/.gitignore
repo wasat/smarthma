@@ -20,4 +20,7 @@ gradle
 .idea/modules.xml
 .idea/vcs.xml
 *.iml
+/**/*.iml
 
+.idea/copyright
+SmartHMA.iml
