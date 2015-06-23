@@ -375,7 +375,7 @@ public class FacebookDialogFragment extends DialogFragment implements Target {
 
     @Override
     public void onBitmapFailed(Drawable arg0) {
-        // TODO Auto-generated method stub
+
 
     }
 
@@ -390,7 +390,7 @@ public class FacebookDialogFragment extends DialogFragment implements Target {
 
     @Override
     public void onPrepareLoad(Drawable arg0) {
-        // TODO Auto-generated method stub
+
 
     }
 

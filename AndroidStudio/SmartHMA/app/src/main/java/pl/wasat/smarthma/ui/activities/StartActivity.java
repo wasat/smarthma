@@ -46,7 +46,7 @@ public class StartActivity extends FragmentActivity implements
 
 /*    @Override
     public void onStartFragmentConnectionSetup() {
-        // TODO Auto-generated method stub
+
 
     }*/
 

@@ -351,7 +351,7 @@ public class AmznBaseMapFragment extends SupportMapFragment
 
     // @Override
     // public void onDisconnected() {
-    // // TODO Auto-generated method stub
+    //
     //
     // }
 
@@ -376,7 +376,7 @@ public class AmznBaseMapFragment extends SupportMapFragment
 
     // @Override
     // public void onConnectionFailed(ConnectionResult result) {
-    // // TODO Auto-generated method stub
+    //
     //
     // }
 

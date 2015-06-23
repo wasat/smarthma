@@ -76,7 +76,7 @@ public class AmznAreaPickerMapFragment extends AmznBaseMapFragment implements Am
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
-        // TODO Auto-generated method stub
+
         super.onActivityCreated(savedInstanceState);
         Log.i("MAP", "onActivityCreated");
         //AcraExtension.mapCustomLog("AreaMap.onActivityCreated", mMap);
