@@ -219,9 +219,11 @@ public class CollectionEmptyDetailsFragment extends
         for (int i = 0; i < osdd.getUrl().size(); i++) {
             if (!isSpinnersAdded && osdd.getUrl().get(i).getType().equalsIgnoreCase("application/atom+xml")) {
                 loadParametersToSpinner(osdd.getUrl().get(i));
-            } else if (i == osdd.getUrl().size() - 1 && !osdd.getUrl().get(i).getParameters().isEmpty()) {
-                loadParametersToSpinner(osdd.getUrl().get(i));
             }
+            //TODO - removed condition for last param url
+/*            else if (i == osdd.getUrl().size() - 1 && !osdd.getUrl().get(i).getParameters().isEmpty()) {
+                loadParametersToSpinner(osdd.getUrl().get(i));
+            }*/
         }
     }
 

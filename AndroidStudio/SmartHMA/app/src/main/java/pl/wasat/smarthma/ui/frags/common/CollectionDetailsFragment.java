@@ -225,7 +225,8 @@ public class CollectionDetailsFragment extends
 
         // TODO - remove this loop and condition to fit to final version of OSDD based on geo.spacebel.be endpoint
         for (int i = 0; i < osdd.getUrl().size(); i++) {
-            if (osdd.getUrl().get(i).getType().equalsIgnoreCase("application/atom+xml")) {
+            String urlType = osdd.getUrl().get(i).getType();
+            if (urlType.equalsIgnoreCase("application/atom+xml")) {
 
                 for (final Parameter param : osdd.getUrl().get(i).getParameters()) {
 

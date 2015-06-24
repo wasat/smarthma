@@ -5,33 +5,47 @@
                 android:orientation="horizontal"
                 android:background="#aaffffff" >
 
-    <pl.wasat.smarthma.customviews.TextViewWithFont
-        android:id="@+id/widget_list_heading"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:singleLine="false"
-        android:paddingLeft="16dp"
-        android:paddingRight="16dp"
-        android:paddingTop="16dp"
-        android:textColor="#38b4ea"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        android:text="Heading" />
+    <LinearLayout
+        android:id="@+id/widget_list_layout"
+        android:orientation="horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" >
 
-    <pl.wasat.smarthma.customviews.TextViewWithFont
-        android:id="@+id/widget_list_content"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_below="@id/widget_list_heading"
-        android:paddingBottom="2dp"
-        android:paddingLeft="16dp"
-        android:paddingRight="16dp"
-        android:paddingTop="2dp"
-        android:textColor="#A8A8A8"
-        android:textSize="12sp"
-        android:textStyle="italic"
-        android:text="Content" />
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent" >
+
+            <TextView
+                android:id="@+id/widget_list_heading"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:singleLine="false"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                android:paddingTop="16dp"
+                android:textColor="#38b4ea"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:text="Heading" />
+
+            <TextView
+                android:id="@+id/widget_list_date_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_below="@id/widget_list_heading"
+                android:paddingBottom="2dp"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                android:paddingTop="2dp"
+                android:textColor="#A8A8A8"
+                android:textSize="12sp"
+                android:textStyle="italic"
+                android:text="Content" />
+
+        </LinearLayout>
+    </LinearLayout>
 
 </RelativeLayout>

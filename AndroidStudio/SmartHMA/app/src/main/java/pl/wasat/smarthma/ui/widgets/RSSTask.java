@@ -15,6 +15,7 @@ import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 
+import pl.wasat.smarthma.helper.Const;
 import pl.wasat.smarthma.model.NewsArticle;
 import pl.wasat.smarthma.utils.rss.NewsRssHandler;
 
@@ -43,26 +44,9 @@ public class RSSTask extends AsyncTask
 
             Log.i("ASYNC", "PARSING FINISHED");
             List<NewsArticle> articles = rh.getArticleList();
-            //((RSSWidgetProvider)objects[1]).refreshList(articles);
+            articles = articles.subList(0, Const.MAX_WIDGET_ENTRIES);
             ((RemoteFetchService)objects[1]).refreshList(articles);
-            /*
-            ArrayList<ListItem> listItemList = (ArrayList<ListItem>)objects[1];
-            for (NewsArticle article : articles)
-            {
-                String title = article.getTitle();
-                String date = article.getPubDate();
-                ListItem listItem = new ListItem();
-                listItem.heading = "Heading";
-                listItem.content = " This is the content of the app widget listview.Nice content though";
-                if (title != null && date != null)
-                {
-                    Log.d("ZX", title+" "+date);
-                    listItem.heading = title;
-                    listItem.content = date;
-                }
-                listItemList.add(listItem);
-            }
-            */
+
             return articles;
 
         } catch (IOException e) {

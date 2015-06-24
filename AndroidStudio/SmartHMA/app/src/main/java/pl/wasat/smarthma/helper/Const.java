@@ -53,6 +53,7 @@ public class Const {
     public static final String DATE_NULL = "0000-00-00T00:00:00Z";
 
     public static final int MAX_SEARCH_HISTORY_ENTRIES = 5;
+    public static final int MAX_WIDGET_ENTRIES = 10;
 
     public static boolean IS_KINDLE = false;
 
