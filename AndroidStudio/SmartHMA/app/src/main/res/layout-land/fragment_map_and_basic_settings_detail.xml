@@ -262,10 +262,7 @@
                 style="@style/textMainTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-
                 android:text="lorem lorem"
-
-
                 android:textSize="@dimen/browse_eo_text_large" />
 
             <pl.wasat.smarthma.customviews.TextViewWithFont
@@ -273,9 +270,7 @@
                 style="@style/textMainTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="@color/text_black"
-
-                />
+                android:textColor="@color/text_black" />
         </LinearLayout>
 
         <ScrollView
@@ -290,7 +285,6 @@
                 style="?android:attr/textAppearanceLarge"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-
                 android:textSize="16sp" />
         </ScrollView>
 

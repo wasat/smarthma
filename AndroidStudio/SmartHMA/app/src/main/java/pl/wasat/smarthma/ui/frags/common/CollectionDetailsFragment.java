@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import pl.wasat.smarthma.R;
 import pl.wasat.smarthma.helper.Const;
 import pl.wasat.smarthma.model.FedeoRequestParams;
 import pl.wasat.smarthma.model.feed.Link;
@@ -234,6 +235,8 @@ public class CollectionDetailsFragment extends
                     spinner.setLayoutParams(new TableLayout.LayoutParams(
                             TableLayout.LayoutParams.WRAP_CONTENT, TableLayout.LayoutParams.WRAP_CONTENT, 1f));
                     spinner.setPadding(25, 2, 25, 2);
+                    spinner.setBackgroundColor(R.color.background_gray);
+                    //android:background="@color/background_gray"
                     //spinner.setPrompt(param.getName());
 
                     List<String> optList = new ArrayList<>();
