@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.List;
@@ -43,8 +44,12 @@ public class SearchListAdapter extends ArrayAdapter<EntryISO> {
 
         dateView.setText(pubDate);
 
-        if (searchItem.isNotRead()) {
-            textView.setTypeface(Typeface.DEFAULT_BOLD);
+        if (!searchItem.isNotRead()) {
+            //textView.setTypeface(Typeface.DEFAULT_BOLD);
+            View row = rowView.findViewById(R.id.view_cell_collection_search_row_background);
+            row.setBackgroundColor(activity.getResources().getColor(R.color.row_selected));
+            ImageView button = (ImageView) rowView.findViewById(R.id.star_button);
+            button.setImageDrawable(activity.getResources().getDrawable(R.drawable.ic_star_blue));
         }
         return rowView;
 

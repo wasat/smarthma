@@ -142,11 +142,15 @@
     </style>
 
 
+
+
     <!-- Application theme. -->
     <style name="AppNoActionBarTheme" parent="android:Theme.Holo.Light.NoActionBar.Fullscreen">
         <!-- All customizations that are NOT specific to a particular API-level can go here. -->
 
     </style>
+
+
 
 
     <!-- INFOAPPS -->

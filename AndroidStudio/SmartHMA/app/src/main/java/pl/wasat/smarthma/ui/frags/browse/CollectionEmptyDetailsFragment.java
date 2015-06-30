@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import pl.wasat.smarthma.R;
 import pl.wasat.smarthma.helper.Const;
 import pl.wasat.smarthma.model.FedeoRequestParams;
 import pl.wasat.smarthma.model.osdd.OpenSearchDescription;
@@ -219,11 +220,9 @@ public class CollectionEmptyDetailsFragment extends
         for (int i = 0; i < osdd.getUrl().size(); i++) {
             if (!isSpinnersAdded && osdd.getUrl().get(i).getType().equalsIgnoreCase("application/atom+xml")) {
                 loadParametersToSpinner(osdd.getUrl().get(i));
-            }
-            //TODO - removed condition for last param url
-/*            else if (i == osdd.getUrl().size() - 1 && !osdd.getUrl().get(i).getParameters().isEmpty()) {
+            } else if (i == osdd.getUrl().size() - 1 && !osdd.getUrl().get(i).getParameters().isEmpty()) {
                 loadParametersToSpinner(osdd.getUrl().get(i));
-            }*/
+            }
         }
     }
 
@@ -233,7 +232,7 @@ public class CollectionEmptyDetailsFragment extends
             Spinner spinner = new Spinner(getActivity());
             spinner.setLayoutParams(new TableLayout.LayoutParams(
                     TableLayout.LayoutParams.WRAP_CONTENT, TableLayout.LayoutParams.WRAP_CONTENT, 1f));
-            spinner.setPadding(25, 2, 25, 2);
+            spinner.setPadding(25, 10, 25, 10);
             //spinner.setPrompt(param.getName());
 
             List<String> optList = new ArrayList<>();
@@ -242,7 +241,7 @@ public class CollectionEmptyDetailsFragment extends
                 optList.add(opt.getLabel());
             }
 
-            ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_item, optList);
+            ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<>(getActivity(), R.layout.custom_spinner_item /*android.R.layout.simple_spinner_item*/, optList);
             spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             spinner.setAdapter(spinnerAdapter);
 

@@ -11,6 +11,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.TableLayout;
+import pl.wasat.smarthma.R;
 
 import com.google.api.client.http.GenericUrl;
 import com.octo.android.robospice.persistence.exception.SpiceException;
@@ -122,7 +123,7 @@ public class CollectionDetailsFragment extends
                 mListener.onCollectionDetailsFragmentShowMetadata(displayedISOEntry);
             }
         });
-        //TODO !!!
+            //TODO !!!
         loadParamsSliderView(osddUrl);
 
         return rootView;
@@ -226,15 +227,14 @@ public class CollectionDetailsFragment extends
 
         // TODO - remove this loop and condition to fit to final version of OSDD based on geo.spacebel.be endpoint
         for (int i = 0; i < osdd.getUrl().size(); i++) {
-            String urlType = osdd.getUrl().get(i).getType();
-            if (urlType.equalsIgnoreCase("application/atom+xml")) {
+            if (osdd.getUrl().get(i).getType().equalsIgnoreCase("application/atom+xml")) {
 
                 for (final Parameter param : osdd.getUrl().get(i).getParameters()) {
 
                     Spinner spinner = new Spinner(getActivity());
                     spinner.setLayoutParams(new TableLayout.LayoutParams(
                             TableLayout.LayoutParams.WRAP_CONTENT, TableLayout.LayoutParams.WRAP_CONTENT, 1f));
-                    spinner.setPadding(25, 2, 25, 2);
+                    spinner.setPadding(25, 10, 25, 10);
                     spinner.setBackgroundColor(R.color.background_gray);
                     //android:background="@color/background_gray"
                     //spinner.setPrompt(param.getName());
@@ -245,7 +245,7 @@ public class CollectionDetailsFragment extends
                         optList.add(opt.getLabel());
                     }
 
-                    ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_spinner_item, optList);
+                    ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<>(getActivity(), R.layout.custom_spinner_item/*android.R.layout.simple_spinner_item*/, optList);
                     spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                     spinner.setAdapter(spinnerAdapter);
 

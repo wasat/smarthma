@@ -5,6 +5,7 @@ import android.app.SearchManager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
+import android.widget.TextView;
 
 import pl.wasat.smarthma.R;
 import pl.wasat.smarthma.adapter.SearchListAdapter;
@@ -43,7 +44,10 @@ public class SearchCollectionResultsActivity extends BaseSmartHMActivity
 
         // Enabling Back navigation on Action Bar icon
         assert actionBar != null;
-        // actionBar.setDisplayHomeAsUpEnabled(true);
+       // actionBar.setDisplayHomeAsUpEnabled(true);
+
+        TextView title = (TextView) findViewById(R.id.action_bar_title);
+        title.setText("Searched Collections");
 
         handleIntent(getIntent());
         dba = new EoDbAdapter(this);

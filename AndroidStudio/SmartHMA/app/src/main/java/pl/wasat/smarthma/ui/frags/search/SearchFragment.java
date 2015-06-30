@@ -10,6 +10,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AutoCompleteTextView;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.SearchView;
 
@@ -72,6 +74,8 @@ public class SearchFragment extends Fragment {
                 .findViewById(R.id.search_frag_searchview);
         searchView.setSearchableInfo(searchManager
                 .getSearchableInfo(getActivity().getComponentName()));
+
+
         searchView.setSubmitButtonEnabled(true);
         searchView.setFocusable(true);
         searchView.setIconified(false);
@@ -113,7 +117,8 @@ public class SearchFragment extends Fragment {
         LinearLayout linearLayout3 = (LinearLayout) linearLayout2.getChildAt(1);
         AutoCompleteTextView autoComplete = (AutoCompleteTextView) linearLayout3
                 .getChildAt(0);
-        autoComplete.setTextSize(32);
+        autoComplete.setTextSize(12);
+        autoComplete.setTextColor(getResources().getColor(R.color.text_black));
 
         SearchHistory searchHistory = new SearchHistory(getActivity());
         ArrayList<SearchParams> searchHistoryList = searchHistory.getSearchHistoryList(true);

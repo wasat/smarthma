@@ -12,6 +12,7 @@ import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
@@ -306,7 +307,7 @@ public class BaseMapFragment extends SupportMapFragment implements
     /**
      * Listener interface to tell when the map is ready
      */
-    public interface OnBaseMapFragmentListener {
+    public static interface OnBaseMapFragmentListener {
 
         void onBaseSupportMapReady();
     }
@@ -317,13 +318,13 @@ public class BaseMapFragment extends SupportMapFragment implements
 
     @Override
     public void onConnectionSuspended(int cause) {
-
+        // TODO Auto-generated method stub
 
     }
 
     @Override
     public void onConnectionFailed(ConnectionResult result) {
-
+        // TODO Auto-generated method stub
 
     }
 

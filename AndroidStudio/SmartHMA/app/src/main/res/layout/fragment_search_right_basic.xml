@@ -22,34 +22,34 @@
             android:background="@color/action_bar_background"
             android:textSize="@dimen/search_eo_data_text"
             android:textStyle="bold" />
-        <!--
-              <TextView
-                  android:id="@+id/search_frag_right_basic_tv_endpoint_title"
-                  style="?android:attr/textAppearanceLarge"
-                  android:layout_width="match_parent"
-                  android:layout_height="wrap_content"
-                  android:paddingBottom="2dp"
-                  android:paddingLeft="16dp"
-                  android:paddingRight="16dp"
-                  android:paddingTop="16dp"
-                  android:text="@string/endpoint"
-                  android:textSize="16sp"
-                  android:textStyle="bold" />
+  <!--
+        <TextView
+            android:id="@+id/search_frag_right_basic_tv_endpoint_title"
+            style="?android:attr/textAppearanceLarge"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="2dp"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:paddingTop="16dp"
+            android:text="@string/endpoint"
+            android:textSize="16sp"
+            android:textStyle="bold" />
 
-              <TextView
-                  android:id="@+id/search_frag_right_basic_tv_endpoint_name"
-                  style="?android:attr/textAppearanceLarge"
-                  android:layout_width="match_parent"
-                  android:layout_height="wrap_content"
-                  android:paddingBottom="16dp"
-                  android:paddingLeft="16dp"
-                  android:paddingRight="16dp"
-                  android:paddingTop="2dp"
-                  android:text="@string/fedeo_esa_int"
-                  android:textColor="#A9A9A9"
-                  android:textSize="14sp"
-                  android:textStyle="normal" />
-              -->
+        <TextView
+            android:id="@+id/search_frag_right_basic_tv_endpoint_name"
+            style="?android:attr/textAppearanceLarge"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="16dp"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:paddingTop="2dp"
+            android:text="@string/fedeo_esa_int"
+            android:textColor="#A9A9A9"
+            android:textSize="14sp"
+            android:textStyle="normal" />
+        -->
         <pl.wasat.smarthma.customviews.TextViewWithFont
             android:id="@+id/search_frag_right_basic_tv_catalog_title"
             style="?android:attr/textAppearanceLarge"
@@ -60,7 +60,8 @@
             android:background="@color/background_white"
             android:textColor="@color/text_blue"
             android:text="@string/catalogue"
-            android:textSize="@dimen/search_eo_data_text_medium" />
+            android:textSize="@dimen/search_eo_data_text_medium"
+             />
 
         <pl.wasat.smarthma.customviews.TextViewWithFont
             android:id="@+id/search_frag_right_basic_tv_catalog_name"
@@ -72,7 +73,8 @@
             android:text="@string/fedeo"
             android:textColor="@color/text_black"
             android:background="@color/background_white"
-            android:textSize="@dimen/search_eo_data_text_medium" />
+            android:textSize="@dimen/search_eo_data_text_medium"
+             />
 
         <LinearLayout
             android:id="@+id/search_frag_right_basic_layout_area"
@@ -92,7 +94,8 @@
                 android:background="@color/background_white"
                 android:text="@string/search_area"
                 android:textSize="@dimen/search_eo_data_text_medium"
-                android:textColor="@color/text_blue" />
+                android:textColor="@color/text_blue"
+                 />
 
             <LinearLayout
                 android:id="@+id/search_frag_right_basic_layout_area_sw"
@@ -108,11 +111,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingLeft="@dimen/search_eo_data_padding"
-                    android:paddingRight="@dimen/search_eo_data_padding"
+
                     android:paddingBottom="@dimen/search_eo_data_padding_small"
                     android:text="@string/sw_"
                     android:textColor="@color/text_black"
-                    android:textSize="@dimen/search_eo_data_text_medium" />
+                    android:textSize="@dimen/search_eo_data_text_medium"
+                     />
 
                 <pl.wasat.smarthma.customviews.TextViewWithFont
                     android:id="@+id/search_frag_right_basic_tv_area_sw_lat"
@@ -156,11 +160,13 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingLeft="@dimen/search_eo_data_padding"
-                    android:paddingRight="@dimen/search_eo_data_padding"
+
+                    android:paddingBottom="@dimen/search_eo_data_padding"
                     android:paddingTop="2dp"
                     android:text="@string/ne_"
                     android:textColor="@color/text_black"
-                    android:textSize="@dimen/search_eo_data_text_medium" />
+                    android:textSize="@dimen/search_eo_data_text_medium"
+                    />
 
                 <pl.wasat.smarthma.customviews.TextViewWithFont
                     android:id="@+id/search_frag_right_basic_tv_area_ne_lat"
@@ -203,7 +209,8 @@
             android:background="@color/background_white"
             android:text="@string/time_period"
             android:textColor="@color/text_blue"
-            android:textSize="@dimen/search_eo_data_text_medium" />
+            android:textSize="@dimen/search_eo_data_text_medium"
+             />
 
         <LinearLayout
             android:id="@+id/search_frag_right_basic_layout_dt"
@@ -224,27 +231,30 @@
                     style="?android:attr/textAppearanceLarge"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-
+                    android:layout_weight="1"
                     android:paddingLeft="@dimen/search_eo_data_padding"
-                    android:paddingRight="@dimen/search_eo_data_padding"
+
                     android:paddingBottom="@dimen/search_eo_data_padding"
                     android:paddingTop="@dimen/search_eo_data_padding"
                     android:text="@string/from_"
                     android:textColor="@color/text_black"
-                    android:textSize="@dimen/search_eo_data_text_medium" />
+                    android:textSize="@dimen/search_eo_data_text_medium"
+                     />
 
                 <pl.wasat.smarthma.customviews.TextViewWithFont
                     android:id="@+id/search_frag_right_basic_tv_time_to_title"
                     style="?android:attr/textAppearanceLarge"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:paddingBottom="@dimen/search_eo_data_padding"
                     android:paddingLeft="@dimen/search_eo_data_padding"
                     android:paddingRight="@dimen/search_eo_data_padding"
                     android:paddingTop="@dimen/search_eo_data_padding"
                     android:text="@string/to_"
                     android:textColor="@color/text_black"
-                    android:textSize="@dimen/search_eo_data_text_medium" />
+                    android:textSize="@dimen/search_eo_data_text_medium"
+                     />
             </LinearLayout>
 
             <LinearLayout
@@ -259,6 +269,7 @@
 
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:text="@string/date_time"
                     android:paddingLeft="@dimen/search_eo_data_padding"
                     android:paddingRight="@dimen/search_eo_data_padding"
@@ -269,7 +280,7 @@
 
                 <pl.wasat.smarthma.customviews.TextViewWithFont
                     android:id="@+id/search_frag_right_basic_button_time_to_date"
-
+                    android:layout_weight="1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingLeft="@dimen/search_eo_data_padding"
@@ -290,7 +301,7 @@
 
                 <pl.wasat.smarthma.customviews.TextViewWithFont
                     android:id="@+id/search_frag_right_basic_button_time_from_time"
-
+                    android:layout_weight="1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingLeft="@dimen/search_eo_data_padding"
@@ -303,7 +314,7 @@
 
                 <pl.wasat.smarthma.customviews.TextViewWithFont
                     android:id="@+id/search_frag_right_basic_button_time_to_time"
-
+                    android:layout_weight="1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingLeft="@dimen/search_eo_data_padding"
@@ -365,7 +376,6 @@
                     android:textStyle="normal" />
             </LinearLayout>
         </LinearLayout>
-
         <pl.wasat.smarthma.customviews.TextViewWithFont
             android:id="@+id/search_frag_right_basic_tv_org_header"
             style="?android:attr/textAppearanceLarge"

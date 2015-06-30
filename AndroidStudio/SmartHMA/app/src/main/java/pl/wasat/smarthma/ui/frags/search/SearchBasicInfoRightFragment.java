@@ -65,7 +65,7 @@ public class SearchBasicInfoRightFragment extends Fragment {
     private TextView tvAreaNELon;
 
     private static TextView tvCatalogName;
-    //  private static TextView tvEndpointName;
+  //  private static TextView tvEndpointName;
 
     private static Calendar calStart;
     private static Calendar calEnd;
@@ -124,15 +124,15 @@ public class SearchBasicInfoRightFragment extends Fragment {
         final View rootView = inflater.inflate(
                 R.layout.fragment_search_right_basic, container, false);
 
-        // tvEndpointName = (TextView) rootView
+       // tvEndpointName = (TextView) rootView
         //        .findViewById(R.id.search_frag_right_basic_tv_endpoint_name);
 
-        //  tvEndpointName.setOnClickListener(new OnClickListener() {
+      //  tvEndpointName.setOnClickListener(new OnClickListener() {
         //    @Override
         //    public void onClick(View v) {
-        //         showEndpointsListDialog();
-        //     }
-        //  });
+       //         showEndpointsListDialog();
+       //     }
+      //  });
 
         tvCatalogName = (TextView) rootView
                 .findViewById(R.id.search_frag_right_basic_tv_catalog_name);
@@ -425,7 +425,7 @@ public class SearchBasicInfoRightFragment extends Fragment {
 
             datePicker.init(year, month, day, new DatePicker.OnDateChangedListener() {
                 @Override
-                public void onDateChanged(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                public void onDateChanged(DatePicker view, int year, int monthOfYear,int dayOfMonth) {
                     dpYear = year;
                     dpMonth = monthOfYear;
                     dpDay = dayOfMonth;
@@ -577,7 +577,7 @@ public class SearchBasicInfoRightFragment extends Fragment {
                 default:
                     break;
             }
-            //  tvEndpointName.setText(endpointsList[which]);
+          //  tvEndpointName.setText(endpointsList[which]);
         }
     }
 

@@ -3,6 +3,7 @@ package pl.wasat.smarthma.ui.activities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
+import android.widget.TextView;
 
 import pl.wasat.smarthma.R;
 import pl.wasat.smarthma.adapter.DataSeriesListAdapter;
@@ -42,6 +43,7 @@ public class CollectionsBrowserActivity extends BaseCollectionsActivity implemen
         Intent intent = getIntent();
         String collectionName = intent
                 .getStringExtra(CollectionsListFragment.KEY_COLLECTIONS_NAME);
+
 
 
         SharedPrefs sharedPrefs = new SharedPrefs(getApplicationContext());

@@ -1,9 +1,14 @@
 package pl.wasat.smarthma.ui.activities;
 
+import android.app.ActionBar;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.app.Activity;
+import android.view.View;
+import android.widget.Button;
 
 import pl.wasat.smarthma.R;
 import pl.wasat.smarthma.ui.frags.common.StartFragment;
@@ -22,6 +27,8 @@ public class StartActivity extends FragmentActivity implements
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.container, startFrag).commit();
         }
+
+
 
 
     }
@@ -46,7 +53,7 @@ public class StartActivity extends FragmentActivity implements
 
 /*    @Override
     public void onStartFragmentConnectionSetup() {
-
+        // TODO Auto-generated method stub
 
     }*/
 

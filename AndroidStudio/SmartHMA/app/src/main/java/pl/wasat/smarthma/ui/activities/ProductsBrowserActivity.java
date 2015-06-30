@@ -181,7 +181,7 @@ public class ProductsBrowserActivity extends BaseSmartHMActivity implements
 
     @Override
     public void onBaseShowProductsListFragmentFootprintSend() {
-
+        // TODO Auto-generated method stub
 
     }
 
