@@ -18,26 +18,16 @@
             android:paddingRight="8dp"
             android:paddingTop="8dp"
             android:paddingBottom="8dp"
-            android:id="@+id/widget_go_to_news"
-            android:src="@drawable/ic_launcher" />
-
-        <ImageView
-            android:layout_width="40dp"
-            android:layout_height="match_parent"
-            android:paddingLeft="4dp"
-            android:paddingRight="4dp"
-            android:paddingTop="8dp"
-            android:paddingBottom="8dp"
             android:id="@+id/widget_refresh"
-            android:src="@drawable/refresh_button" />
+            android:src="@drawable/ic_action_refresh" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:paddingRight="90dp" >
+            android:paddingRight="56dp" >
 
-            <TextView
+            <pl.wasat.smarthma.customviews.TextViewWithFont
                 android:id="@+id/widget_title"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
@@ -61,7 +51,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
-    <TextView
+    <pl.wasat.smarthma.customviews.TextViewWithFont
         android:id="@+id/empty_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

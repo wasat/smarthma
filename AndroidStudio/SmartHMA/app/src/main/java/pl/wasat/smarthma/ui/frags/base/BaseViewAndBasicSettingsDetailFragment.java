@@ -378,7 +378,7 @@ public class BaseViewAndBasicSettingsDetailFragment extends BaseSpiceFragment {
 
             datePicker.init(year, month, day, new DatePicker.OnDateChangedListener() {
                 @Override
-                public void onDateChanged(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                public void onDateChanged(DatePicker view, int year, int monthOfYear,int dayOfMonth) {
                     dpYear = year;
                     dpMonth = monthOfYear;
                     dpDay = dayOfMonth;

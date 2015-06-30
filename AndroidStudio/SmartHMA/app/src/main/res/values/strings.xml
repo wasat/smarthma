@@ -88,7 +88,7 @@
     <string name="hello_user">You are logged as\n%1$s</string>
     <string name="share_quicklook">Share Quicklook</string>
     <string name="quicklook_img_desc">Quicklook Image</string>
-    <string name="search_eo_data">Search Products</string>
+    <string name="search_eo_data">Search EO Data</string>
     <string name="esa_mission_item">ESA MISSION ITEM</string>
     <string name="parameters">Parameters</string>
     <string name="bbox">BBox</string>
@@ -123,6 +123,7 @@
 
     <string name="copyright">Copyright © 2015 SmartHMA</string>
     <string name="action_bar_home">Home</string>
+
 
 
     <string-array name="sorting_modes">

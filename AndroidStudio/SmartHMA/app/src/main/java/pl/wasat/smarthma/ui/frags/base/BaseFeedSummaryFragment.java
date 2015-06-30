@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import pl.wasat.smarthma.R;
@@ -81,15 +82,15 @@ public class BaseFeedSummaryFragment extends Fragment {
         tvItemsTo = (TextView) rootView
                 .findViewById(R.id.search_frag_ds_intro_items_to_value);
 
-        btnFirst = rootView
+        btnFirst =  rootView
                 .findViewById(R.id.search_frag_ds_intro_button_first);
-        btnPrev = rootView
+        btnPrev =  rootView
                 .findViewById(R.id.search_frag_ds_intro_button_prev);
-        btnReload = rootView
+        btnReload =  rootView
                 .findViewById(R.id.search_frag_ds_intro_button_reload);
-        btnNext = rootView
+        btnNext =  rootView
                 .findViewById(R.id.search_frag_ds_intro_button_next);
-        btnLast = rootView
+        btnLast =  rootView
                 .findViewById(R.id.search_frag_ds_intro_button_last);
 
         //spnSortType = (Spinner) rootView.findViewById(R.id.search_frag_ds_intro_spinner_sort_type);

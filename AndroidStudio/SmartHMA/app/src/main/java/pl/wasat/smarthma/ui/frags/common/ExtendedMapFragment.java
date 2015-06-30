@@ -259,7 +259,7 @@ public class ExtendedMapFragment extends Fragment implements
 
     @Override
     public void onPrepareLoad(Drawable arg0) {
-
+        // TODO Auto-generated method stub
     }
 
     @Override
@@ -279,7 +279,7 @@ public class ExtendedMapFragment extends Fragment implements
 
     @Override
     public void onBitmapFailed(Drawable arg0) {
-
+        // TODO Auto-generated method stub
 
     }
 
@@ -303,19 +303,19 @@ public class ExtendedMapFragment extends Fragment implements
 
     @Override
     public void onStartTrackingTouch(SeekBar seekBar) {
-
+        // TODO Auto-generated method stub
 
     }
 
     @Override
     public void onStopTrackingTouch(SeekBar seekBar) {
-
+        // TODO Auto-generated method stub
 
     }
 
     @Override
     public String key() {
-
+        // TODO Auto-generated method stub
         return null;
     }
 

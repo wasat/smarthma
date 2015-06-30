@@ -14,4 +14,6 @@
 
     <item name="copyright_color" type="color">#3b3b3b</item>
     <item name="text_black" type="color">#3b3b3b</item>
+
+    <item name="row_selected" type="color">#e0e0e0</item>
 </resources>

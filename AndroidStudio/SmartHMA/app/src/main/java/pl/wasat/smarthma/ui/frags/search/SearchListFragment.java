@@ -82,6 +82,8 @@ public class SearchListFragment extends BaseSpiceListFragment {
             setActivatedPosition(savedInstanceState
                     .getInt(STATE_ACTIVATED_POSITION));
         }
+
+        getListView().setDivider(null);
     }
 
     @Override

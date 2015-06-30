@@ -4,12 +4,12 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent">
 
-    <!-- <ImageView
-         style="@style/styleImageBg"
-         android:layout_width="fill_parent"
-         android:layout_height="fill_parent"
-         android:contentDescription="@string/desc" />
-    -->
+   <!-- <ImageView
+        style="@style/styleImageBg"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:contentDescription="@string/desc" />
+   -->
     <LinearLayout
         android:id="@+id/menu_action_bar_layout"
         android:orientation="horizontal"
@@ -33,7 +33,7 @@
                 android:layout_centerHorizontal="true"
                 android:layout_centerVertical="true"
                 android:src="@drawable/actionbar_logo"
-                android:padding="@dimen/action_bar_logo_padding" />
+                android:padding="@dimen/action_bar_logo_padding"/>
         </RelativeLayout>
 
         <LinearLayout
@@ -51,8 +51,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_rec"
-                    android:layout_centerVertical="true" />
-
+                    android:layout_centerVertical="true"/>
                 <pl.wasat.smarthma.customviews.TextViewWithFont
                     android:id="@+id/action_bar_title"
                     android:layout_width="wrap_content"
@@ -80,7 +79,7 @@
                     android:src="@drawable/actionbar_menu"
                     android:layout_centerVertical="true"
                     android:layout_centerHorizontal="true"
-                    android:padding="@dimen/action_bar_logo_padding" />
+                    android:padding="@dimen/action_bar_logo_padding"/>
 
             </RelativeLayout>
 
@@ -113,7 +112,8 @@
             android:name="pl.wasat.smarthma.ui.frags.news.NewsListFragment"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="2" />
+            android:layout_weight="2"
+            />
         <FrameLayout
             android:id="@+id/article_detail_container"
             android:layout_width="0dp"
@@ -144,6 +144,7 @@
             />
 
     </RelativeLayout>
+
 
 
 </RelativeLayout>

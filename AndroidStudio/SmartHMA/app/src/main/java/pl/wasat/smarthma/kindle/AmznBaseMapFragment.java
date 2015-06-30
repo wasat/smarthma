@@ -351,14 +351,14 @@ public class AmznBaseMapFragment extends SupportMapFragment
 
     // @Override
     // public void onDisconnected() {
-    //
+    // // TODO Auto-generated method stub
     //
     // }
 
     /**
      * Listener interface to tell when the map is ready
      */
-    public interface OnBaseMapFragmentListener {
+    public static interface OnBaseMapFragmentListener {
 
         void onBaseSupportMapReady();
     }
@@ -376,7 +376,7 @@ public class AmznBaseMapFragment extends SupportMapFragment
 
     // @Override
     // public void onConnectionFailed(ConnectionResult result) {
-    //
+    // // TODO Auto-generated method stub
     //
     // }
 

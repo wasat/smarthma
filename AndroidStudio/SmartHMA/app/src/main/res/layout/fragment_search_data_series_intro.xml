@@ -6,6 +6,8 @@
     android:paddingLeft="@dimen/browse_eo_padding">
 
 
+
+
     <LinearLayout
         android:id="@+id/search_frag_right_basic_linear_id"
         android:layout_width="match_parent"
@@ -23,7 +25,8 @@
             android:paddingLeft="@dimen/browse_eo_padding_text"
             android:paddingBottom="@dimen/browse_eo_padding_medium"
             android:paddingTop="@dimen/browse_eo_padding_medium"
-            android:text="@string/collections_search_results" />
+            android:text="@string/collections_search_results"
+             />
 
         <pl.wasat.smarthma.customviews.TextViewWithFont
             android:id="@+id/search_frag_ds_intro_title"
@@ -31,7 +34,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingLeft="@dimen/browse_eo_padding_text"
-            android:textSize="@dimen/browse_eo_text" />
+            android:textSize="@dimen/browse_eo_text"
+             />
 
         <LinearLayout
             android:id="@+id/search_frag_ds_intro_layout_fields"
@@ -159,28 +163,28 @@
                     style="@style/text"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="1" />
+                    android:layout_weight="1"/>
 
                 <pl.wasat.smarthma.customviews.TextViewWithFont
                     android:id="@+id/search_frag_ds_intro_collection_value"
                     style="@style/text"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="1" />
+                    android:layout_weight="1"/>
 
                 <pl.wasat.smarthma.customviews.TextViewWithFont
                     android:id="@+id/search_frag_ds_intro_time_start_value"
                     style="@style/text"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="1" />
+                    android:layout_weight="1"/>
 
                 <pl.wasat.smarthma.customviews.TextViewWithFont
                     android:id="@+id/search_frag_ds_intro_time_end_value"
                     style="@style/text"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="1" />
+                    android:layout_weight="1"/>
 
                 <pl.wasat.smarthma.customviews.TextViewWithFont
                     android:id="@+id/search_frag_ds_intro_area_value"
@@ -188,23 +192,22 @@
                     android:textSize="@dimen/browse_eo_cell_text_size"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:layout_weight="1" />
+                    android:layout_weight="1"/>
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:orientation="horizontal">
-
                     <pl.wasat.smarthma.customviews.TextViewWithFont
                         android:id="@+id/search_frag_ds_intro_updated_value"
                         style="@style/text"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:layout_weight="1" />
+                        android:layout_weight="1"/>
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/ic_info" />
+                        android:src="@drawable/ic_info"/>
 
                 </LinearLayout>
                 <LinearLayout
@@ -212,16 +215,16 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:orientation="horizontal">
-
                     <pl.wasat.smarthma.customviews.TextViewWithFont
                         android:id="@+id/search_frag_ds_intro_total_value"
                         style="@style/text"
                         android:layout_width="wrap_content"
-                        android:layout_height="match_parent" />
+                        android:layout_height="match_parent"
+                        />
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:src="@drawable/ic_info" />
+                        android:src="@drawable/ic_info"/>
                 </LinearLayout>
             </LinearLayout>
 
@@ -307,8 +310,8 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_first" />
-
+                android:src="@drawable/ic_first"
+                />
             <pl.wasat.smarthma.customviews.TextViewWithFont
                 android:id="@+id/search_frag_ds_intro_button_first"
                 style="@style/textMainTitle"
@@ -319,8 +322,8 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_prev" />
-
+                android:src="@drawable/ic_prev"
+                />
             <pl.wasat.smarthma.customviews.TextViewWithFont
                 android:id="@+id/search_frag_ds_intro_button_prev"
                 style="@style/textMainTitle"
@@ -335,7 +338,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/reload"
-                android:padding="@dimen/esa_missions_padding_medium" />
+                android:padding="@dimen/esa_missions_padding_medium"
+                 />
 
             <pl.wasat.smarthma.customviews.TextViewWithFont
                 android:id="@+id/search_frag_ds_intro_button_next"
@@ -347,8 +351,8 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_next" />
-
+                android:src="@drawable/ic_next"
+                />
             <pl.wasat.smarthma.customviews.TextViewWithFont
                 android:id="@+id/search_frag_ds_intro_button_last"
                 style="@style/textMainTitle"
@@ -359,26 +363,29 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_last" />
+                android:src="@drawable/ic_last"
+                />
         </LinearLayout>
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal|center"
-            android:paddingTop="@dimen/browse_eo_padding_medium">
+            android:paddingTop="@dimen/browse_eo_padding_medium"
+            >
 
 
             <pl.wasat.smarthma.customviews.TextViewWithFont
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 style="@style/text"
-                android:text="Sort by" />
+                android:text="Sort by"
+                />
 
             <Spinner
                 android:layout_width="@dimen/spinner_width"
                 android:layout_height="@dimen/button_blue_height"
-                android:background="@drawable/edit_text">
+                android:background="@drawable/edit_text"
+                >
 
             </Spinner>
         </LinearLayout>

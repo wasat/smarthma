@@ -124,7 +124,7 @@ public class StartFragment extends Fragment {
         menu.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                // openMenu(v);
+               // openMenu(v);
 
                 int[] location = new int[2];
                 //currentRowId = position;
@@ -193,7 +193,7 @@ public class StartFragment extends Fragment {
         }
     }
 
-    private void openMenu(View menu) {
+    private void openMenu(View menu){
 
         PopupMenu popup = new PopupMenu(getActivity(), menu);
 
@@ -230,6 +230,7 @@ public class StartFragment extends Fragment {
         popup.show();//showing popup menu
 
 
+
     }
 
     private void showMenuPopup(final Activity context, Point p) {
@@ -247,8 +248,8 @@ public class StartFragment extends Fragment {
         changeStatusPopUp.setFocusable(true);
 
         // Some offset to align the popup a bit to the left, and a bit down, relative to button's position.
-        int OFFSET_X = -77;
-        int OFFSET_Y = 120;
+        int OFFSET_X = 0; //-77;
+        int OFFSET_Y = 0; //120;
 
         //Clear the default translucent background
         changeStatusPopUp.setBackgroundDrawable(new BitmapDrawable());

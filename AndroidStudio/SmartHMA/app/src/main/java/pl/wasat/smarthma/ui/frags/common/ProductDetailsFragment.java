@@ -284,7 +284,7 @@ public class ProductDetailsFragment extends Fragment implements Target {
 
     @Override
     public void onPrepareLoad(Drawable arg0) {
-
+        // TODO Auto-generated method stub
 
     }
 

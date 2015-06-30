@@ -82,11 +82,12 @@ public class MetadataISOFragment extends Fragment {
             setISOMetaDataViews("Metadata File ID ", entryItem.getMDMetadata()
                     .getFileIdentifier());
         }
-        if (!entryItem.getMDMetadata().getLanguage().getLanguageCode()
+        //TODO INFOAPPS
+/*        if (!entryItem.getMDMetadata().getLanguage().getLanguageCode()
                 .getText().isEmpty()) {
             setISOMetaDataViews("Metadata Language ", entryItem.getMDMetadata()
                     .getLanguage());
-        }
+        }*/
         if (entryItem.getMDMetadata().getHierarchyLevel().getMDScopeCode()
                 .getText().isEmpty()) {
             setISOMetaDataViews("Metadata Hierarchy Level ", entryItem

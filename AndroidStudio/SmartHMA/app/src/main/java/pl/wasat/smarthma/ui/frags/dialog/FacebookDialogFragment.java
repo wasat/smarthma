@@ -30,6 +30,7 @@ import com.facebook.model.GraphUser;
 import com.facebook.widget.FacebookDialog;
 import com.facebook.widget.LoginButton;
 import com.facebook.widget.ProfilePictureView;
+import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Picasso.LoadedFrom;
 import com.squareup.picasso.Target;
 
@@ -174,7 +175,7 @@ public class FacebookDialogFragment extends DialogFragment implements Target {
 
         Target quicklookTarget = this;
 
-        // Picasso.with(getActivity()).load(paramQLookUrl).into(quicklookTarget);
+       // Picasso.with(getActivity()).load(paramQLookUrl).into(quicklookTarget);
 
         return rootView;
     }
@@ -375,6 +376,8 @@ public class FacebookDialogFragment extends DialogFragment implements Target {
 
     @Override
     public void onBitmapFailed(Drawable arg0) {
+        // TODO Auto-generated method stub
+
     }
 
     @Override
@@ -388,6 +391,8 @@ public class FacebookDialogFragment extends DialogFragment implements Target {
 
     @Override
     public void onPrepareLoad(Drawable arg0) {
+        // TODO Auto-generated method stub
+
     }
 
 }

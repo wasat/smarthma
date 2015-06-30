@@ -5,7 +5,8 @@
             <corners android:radius="15dip" />
             <stroke android:width="1dip" android:color="@color/button_blue" />
             <gradient android:angle="-90" android:startColor="@color/button_blue" android:endColor="@color/button_blue" />
-            <size android:height="@dimen/menu_button_size" android:width="@dimen/menu_button_size" />
+            <size android:height="@dimen/menu_button_size"
+                android:width="@dimen/menu_button_size" />
         </shape>
     </item>
     <item android:state_focused="true">
@@ -13,7 +14,8 @@
             <corners android:radius="15dip" />
             <stroke android:width="1dip" android:color="@color/button_blue" />
             <solid android:color="@color/button_blue" />
-            <size android:height="@dimen/menu_button_size" android:width="@dimen/menu_button_size" />
+            <size android:height="@dimen/menu_button_size"
+                android:width="@dimen/menu_button_size" />
 
         </shape>
     </item>
@@ -22,7 +24,8 @@
             <corners android:radius="15dip" />
             <stroke android:width="1dip" android:color="#88918c" />
             <gradient android:angle="-90" android:startColor="#ffffff" android:endColor="#ffffff" />
-            <size android:height="@dimen/menu_button_size" android:width="@dimen/menu_button_size" />
+            <size android:height="@dimen/menu_button_size"
+                android:width="@dimen/menu_button_size" />
         </shape>
     </item>
 </selector>

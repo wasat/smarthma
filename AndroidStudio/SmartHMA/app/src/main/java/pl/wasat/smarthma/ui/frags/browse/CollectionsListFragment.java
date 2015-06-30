@@ -97,7 +97,7 @@ public class CollectionsListFragment extends BaseSpiceFragment {
      */
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
-
+        // TODO Auto-generated method stub
         super.onViewCreated(view, savedInstanceState);
         initList();
     }
@@ -126,6 +126,7 @@ public class CollectionsListFragment extends BaseSpiceFragment {
                                         int position, long id) {
                     collName = collections.get(position).getName();
                     //loadDataSeriesFeedsActivity(collName);
+
                     loadCollectionDetailFragment(collName);
 
                 }
