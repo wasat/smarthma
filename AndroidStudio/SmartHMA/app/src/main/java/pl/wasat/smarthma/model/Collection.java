@@ -105,7 +105,7 @@ public class Collection implements Parcelable, Comparator<Object> {
 
     @Override
     public int describeContents() {
-        // TODO Auto-generated method stub
+
         return 0;
     }
 

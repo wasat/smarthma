@@ -317,13 +317,13 @@ public class BaseMapFragment extends SupportMapFragment implements
 
     @Override
     public void onConnectionSuspended(int cause) {
-        // TODO Auto-generated method stub
+
 
     }
 
     @Override
     public void onConnectionFailed(ConnectionResult result) {
-        // TODO Auto-generated method stub
+
 
     }
 

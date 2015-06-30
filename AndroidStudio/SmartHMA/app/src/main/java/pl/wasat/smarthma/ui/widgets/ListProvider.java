@@ -1,16 +1,15 @@
 package pl.wasat.smarthma.ui.widgets;
 
-import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.widget.RemoteViews;
 import android.widget.RemoteViewsService.RemoteViewsFactory;
 
 import java.util.ArrayList;
 
 import pl.wasat.smarthma.R;
-import pl.wasat.smarthma.ui.activities.SearchActivity;
 
 /**
  * If you are familiar with Adapter of ListView,this is the same as adapter
@@ -64,11 +63,35 @@ class ListProvider implements RemoteViewsFactory {
                 context.getPackageName(), R.layout.widget_list_row);
         ListItem listItem = listItemList.get(position);
         remoteView.setTextViewText(R.id.widget_list_heading, listItem.heading);
-        remoteView.setTextViewText(R.id.widget_list_content, listItem.content);
+        remoteView.setTextViewText(R.id.widget_list_date_time, listItem.content);
 
+        /*
         Intent intent = new Intent(context, SearchActivity.class);
         PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
         remoteView.setOnClickPendingIntent(R.layout.widget_list_row, pendingIntent);
+        */
+        /*
+        Intent intent = new Intent(context, NewsActivity.class);
+        PendingIntent pendingIntent2 = PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        remoteView.setOnClickPendingIntent(R.id.widget_list_button, pendingIntent2);
+        */
+        /*
+        Intent onClickDone = new Intent(context, NewsActivity.class);
+        //onClickDone.putExtra("TASK_ID", eventInfo.getTaskEvent().getTaskId());
+        PendingIntent onClickPendingDone = PendingIntent.getActivity(context, 0, onClickDone, 0);
+        remoteView.setOnClickPendingIntent(R.id.widget_list_button, onClickPendingDone);
+        */
+
+        // Make it possible to distinguish the individual on-click action of a given item.
+        Bundle extras = new Bundle();
+        extras.putInt(RSSWidgetProvider.EXTRA_ITEM, position);
+        extras.putString(RSSWidgetProvider.ARTICLE_AUTHOR, listItem.author);
+        Intent fillInIntent = new Intent();
+        fillInIntent.putExtras(extras);
+        //remoteView.setOnClickFillInIntent(R.id.widget_list_button, fillInIntent);
+        remoteView.setOnClickFillInIntent(R.id.widget_list_heading, fillInIntent);
+        remoteView.setOnClickFillInIntent(R.id.widget_list_date_time, fillInIntent);
+        remoteView.setOnClickFillInIntent(R.id.widget_list_layout, fillInIntent);
 
         return remoteView;
     }

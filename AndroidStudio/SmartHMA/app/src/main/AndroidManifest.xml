@@ -25,7 +25,7 @@
         android:theme="@style/AppNoActionBarTheme">
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
-            android:value="AIzaSyCLym8YvRehneGdubErFObzSR1QNkUdL6c" />
+            android:value="AIzaSyCMZWIkdMS9FlyCt0eb_cMosMTFrt7FZxY" />
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/app_id" />
@@ -109,11 +109,14 @@
         <receiver
             android:label="SmartHMA RSS"
             android:name=".ui.widgets.RSSWidgetProvider">
-        <intent-filter>
+            <intent-filter>
                 <!-- This widget provider receives broadcast with following action name or simply onUpdate of AppWidgetProvider is called -->
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
                 <!-- To receive broadcast with this string name -->
-            <action android:name="com.wordpress.laaptu.DATA_FETCHED" />
+                <action android:name="pl.wasat.smarthma" />
+                <action android:name="pl.wasat.smarthma.TOAST_ACTION" />
+                <action android:name="pl.wasat.smarthma.EXTRA_ITEM" />
+                <action android:name="pl.wasat.smarthma.ARTICLE_AUTHOR" />
             </intent-filter>
             <meta-data
                 android:name="android.appwidget.provider"
@@ -124,7 +127,7 @@
             android:name=".ui.widgets.WidgetService"
             android:permission="android.permission.BIND_REMOTEVIEWS" />
         <activity android:name=".ui.widgets.WidgetConfigActivity">
-        <intent-filter>
+            <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_CONFIGURE" />
             </intent-filter>
         </activity>
