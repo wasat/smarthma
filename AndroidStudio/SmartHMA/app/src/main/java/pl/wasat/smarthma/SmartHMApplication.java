@@ -31,7 +31,7 @@ import pl.wasat.smarthma.model.explaindoc.ExplainData;
         //reportType = org.acra.sender.HttpSender.Type.JSON,
         //httpMethod = org.acra.sender.HttpSender.Method.POST,
         //formUriBasicAuthLogin = "llynorthclitedeshentsele",
-        //formUriBasicAuthPassword = "8TH1Rph6koNQ4nA6iGHR3ies"
+        //formUriBasicAuthPassword = "8TH1Rph6koNQ4nA6iGHR3ies" 
 )
 
 public class SmartHMApplication extends Application {
