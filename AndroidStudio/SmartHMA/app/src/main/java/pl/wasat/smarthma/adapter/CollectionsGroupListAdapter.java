@@ -17,11 +17,6 @@ import pl.wasat.smarthma.model.CollectionsGroup;
 public class CollectionsGroupListAdapter extends
         OkHttpSpiceArrayAdapter<CollectionsGroup> {
 
-
-    // --------------------------------------------------------------------------------------------
-    // CONSTRUCTOR
-    // --------------------------------------------------------------------------------------------
-
     public CollectionsGroupListAdapter(Context context,
                                        OkHttpBitmapSpiceManager spiceManagerBitmap,
                                        CollectionsGroup.List users) {

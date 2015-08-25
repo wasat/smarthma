@@ -68,7 +68,6 @@ public class TimePicker extends FrameLayout {
 
         @Override
         public String format(int value) {
-            // TODO Auto-generated method stub
             return String.format(Locale.UK, "%02d", value);
         }
     };
@@ -131,7 +130,6 @@ public class TimePicker extends FrameLayout {
                     @Override
                     public void onValueChange(NumberPicker picker, int oldVal,
                                               int newVal) {
-                        // TODO Auto-generated method stub
                         mCurrentHour = newVal;
                         if (!mIs24HourView) {
                             // adjust from [1-12] to [0-11] internally, with the

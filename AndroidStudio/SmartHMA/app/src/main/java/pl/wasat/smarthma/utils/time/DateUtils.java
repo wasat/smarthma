@@ -1,7 +1,9 @@
 package pl.wasat.smarthma.utils.time;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 
 import pl.wasat.smarthma.model.iso.EntryISO;
 
@@ -12,7 +14,6 @@ public class DateUtils {
         Calendar then = Calendar.getInstance();
         now.setTime(new Date());
         then.setTime(thenDate);
-
 
         // Get the represented date in milliseconds
         long nowMs = now.getTimeInMillis();
@@ -60,5 +61,29 @@ public class DateUtils {
             date = "1970-01-01";
         }
         return date;
+    }
+
+    /**
+     * @param cal - Calendar
+     * @return - String with date
+     */
+    public static String calendarToDateString(Calendar cal) {
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd", Locale.UK);
+        return df.format(cal.getTime());
+    }
+
+    /**
+     * @param cal - Calendar
+     * @return - String of time
+     */
+    public static String calendarToTimeString(Calendar cal) {
+        SimpleDateFormat dfTime = new SimpleDateFormat("HH:mm:ss", Locale.UK);
+        return dfTime.format(cal.getTime());
+    }
+
+    public static String calendarToISO(Calendar cal) {
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'",
+                Locale.UK);
+        return df.format(cal.getTime());
     }
 }

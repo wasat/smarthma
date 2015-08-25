@@ -66,7 +66,6 @@ public class BrowseCollectionFirstDetailFragment extends
                     .addToBackStack("AreaPickerMapFragment").commit();
         }
 
-
         changeViewsSizeAndVisibility();
 
         return rootView;

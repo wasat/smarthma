@@ -81,9 +81,6 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
         String missKey = this._listDataHeader.get(groupPosition).getName();
         List<MissionItemData> hsh = this._listDataChild.get(missKey);
         return hsh.size();
-
-        //return size;
-
     }
 
     @Override

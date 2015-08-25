@@ -50,7 +50,6 @@ public class MetadataFragment extends Fragment {
     }
 
     public MetadataFragment() {
-        // Required empty public constructor
     }
 
     @Override
@@ -64,7 +63,6 @@ public class MetadataFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_metadata, container,
                 false);
 
@@ -137,7 +135,6 @@ public class MetadataFragment extends Fragment {
             try {
                 value = field.get(eOMetaDataObject);
             } catch (IllegalAccessException | IllegalArgumentException e) {
-                // TODO Auto-generated catch block
                 e.printStackTrace();
             }
             if (value != null) {

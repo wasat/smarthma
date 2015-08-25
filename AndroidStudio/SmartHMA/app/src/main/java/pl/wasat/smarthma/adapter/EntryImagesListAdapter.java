@@ -16,10 +16,6 @@ import pl.wasat.smarthma.model.om.EntryOM;
 
 public class EntryImagesListAdapter extends OkHttpSpiceArrayAdapter<EntryOM> {
 
-    // --------------------------------------------------------------------------------------------
-    // CONSTRUCTOR
-    // --------------------------------------------------------------------------------------------
-
     public EntryImagesListAdapter(Context context,
                                   OkHttpBitmapSpiceManager spiceManagerBitmap, List<EntryOM> entryList) {
         super(context, spiceManagerBitmap, entryList);

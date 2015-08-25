@@ -15,7 +15,6 @@ public class MissionItemData implements Serializable {
     private String summary;
 
     public MissionItemData() {
-        // TODO Auto-generated constructor stub
     }
 
     public MissionItemData(String name) {

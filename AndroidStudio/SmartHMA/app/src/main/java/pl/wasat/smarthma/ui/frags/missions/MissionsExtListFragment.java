@@ -11,7 +11,6 @@ import android.widget.ExpandableListView.OnChildClickListener;
 import android.widget.ExpandableListView.OnGroupClickListener;
 import android.widget.ExpandableListView.OnGroupCollapseListener;
 import android.widget.ExpandableListView.OnGroupExpandListener;
-import android.widget.ImageView;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -48,47 +47,28 @@ public class MissionsExtListFragment extends Fragment {
      *
      * @return A new instance of fragment ExtendedListFragment.
      */
-    // TODO: Rename and change types and number of parameters
     public static MissionsExtListFragment newInstance() {
         return new MissionsExtListFragment();
     }
 
     public MissionsExtListFragment() {
-        // Required empty public constructor
     }
-
-/*    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-*//*        if (getArguments() != null) {
-            // mParam1 = getArguments().getString(ARG_PARAM1);
-            // mParam2 = getArguments().getString(ARG_PARAM2);
-        }*//*
-    }*/
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         final View rootView = inflater.inflate(R.layout.fragment_missions_extended_list,
                 container, false);
 
-        // get the listview
         ExpandableListView expListView = (ExpandableListView) rootView
                 .findViewById(R.id.missions_extended_listview);
         expListView.setGroupIndicator(null);
 
-
-        // preparing list data
         prepareListData();
 
         ExpandableListAdapter listAdapter = new ExpandableListAdapter(getActivity(), listDataHeader,
                 listDataChild);
-
-        // setting list adapter
         expListView.setAdapter(listAdapter);
-
-        // Listview Group click listener
         expListView.setOnGroupClickListener(new OnGroupClickListener() {
 
             @Override
@@ -98,7 +78,6 @@ public class MissionsExtListFragment extends Fragment {
             }
         });
 
-        // Listview Group expanded listener
         expListView.setOnGroupExpandListener(new OnGroupExpandListener() {
 
             @Override
@@ -107,16 +86,13 @@ public class MissionsExtListFragment extends Fragment {
             }
         });
 
-        // Listview Group collasped listener
         expListView.setOnGroupCollapseListener(new OnGroupCollapseListener() {
 
             @Override
             public void onGroupCollapse(int groupPosition) {
-
             }
         });
 
-        // Listview on child click listener
         expListView.setOnChildClickListener(new OnChildClickListener() {
 
             @Override
@@ -134,7 +110,6 @@ public class MissionsExtListFragment extends Fragment {
                         .replace(R.id.activity_base_details_container,
                                 missionsDetailNewFragment, "MissionsDetailNewFragment")
                         .commit();
-
                 return false;
             }
         });

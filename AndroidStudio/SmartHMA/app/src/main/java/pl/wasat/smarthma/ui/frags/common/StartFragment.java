@@ -1,29 +1,25 @@
 package pl.wasat.smarthma.ui.frags.common;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
-import android.graphics.Point;
-import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.support.v4.app.Fragment;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.LinearLayout;
 import android.widget.PopupMenu;
-import android.widget.PopupWindow;
 
 import pl.wasat.smarthma.R;
 import pl.wasat.smarthma.ui.activities.CollectionsDefinitionActivity;
 import pl.wasat.smarthma.ui.activities.MissionsActivity;
 import pl.wasat.smarthma.ui.activities.NewsActivity;
 import pl.wasat.smarthma.ui.activities.SearchActivity;
+import pl.wasat.smarthma.ui.menus.CommonMenuHandler;
+import pl.wasat.smarthma.ui.menus.MenuHandler;
 import pl.wasat.smarthma.utils.conn.ConnectionDetector;
 
 /**
@@ -43,7 +39,6 @@ public class StartFragment extends Fragment {
      *
      * @return A new instance of fragment FailureFragment.
      */
-    // TODO: Rename and change types and number of parameters
     public static StartFragment newInstance() {
         StartFragment fragment = new StartFragment();
         Bundle args = new Bundle();
@@ -52,18 +47,13 @@ public class StartFragment extends Fragment {
     }
 
     public StartFragment() {
-        // Required empty public constructor
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_start, container,
                 false);
-
-
-
         Button buttonStartSearch = (Button) rootView
                 .findViewById(R.id.start_frag_button_search);
         buttonStartSearch.setOnClickListener(new OnClickListener() {
@@ -75,7 +65,6 @@ public class StartFragment extends Fragment {
                             SearchActivity.class);
                     startActivity(startIntent);
                 }
-
             }
         });
 
@@ -120,27 +109,7 @@ public class StartFragment extends Fragment {
             }
         });
 
-        View menu = rootView.findViewById(R.id.menu_button);
-        menu.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-               // openMenu(v);
-
-                int[] location = new int[2];
-                //currentRowId = position;
-                //currentRow = v;
-                // Get the x, y location and store it in the location[] array
-                // location[0] = x, location[1] = y.
-                v.getLocationOnScreen(location);
-
-                //Initialize the Point with x, and y positions
-                Point point = new Point();
-                point.x = location[0];
-                point.y = location[1];
-                showMenuPopup(getActivity(), point);
-
-            }
-        });
+        MenuHandler menuHandler = new CommonMenuHandler(rootView, getActivity(), R.id.menu_button);
 
         return rootView;
     }
@@ -193,7 +162,7 @@ public class StartFragment extends Fragment {
         }
     }
 
-    private void openMenu(View menu){
+    private void openMenu(View menu) {
 
         PopupMenu popup = new PopupMenu(getActivity(), menu);
 
@@ -206,55 +175,19 @@ public class StartFragment extends Fragment {
 
                 switch (item.getItemId()) {
                     case R.id.sort:
-
                         break;
                     case R.id.favourite:
-
-
                         break;
-
                     case R.id.refresh:
-
-
                         break;
-
                     default:
                         break;
                 }
-
-
                 return true;
             }
         });
-
         popup.show();//showing popup menu
-
-
-
     }
 
-    private void showMenuPopup(final Activity context, Point p) {
 
-        // Inflate the popup_layout.xml
-        LinearLayout viewGroup = (LinearLayout) context.findViewById(R.id.popup_menu_layout);
-        LayoutInflater layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View layout = layoutInflater.inflate(R.layout.popup_menu, null);
-
-        // Creating the PopupWindow
-        PopupWindow changeStatusPopUp = new PopupWindow(context);
-        changeStatusPopUp.setContentView(layout);
-        changeStatusPopUp.setWidth(LinearLayout.LayoutParams.WRAP_CONTENT);
-        changeStatusPopUp.setHeight(LinearLayout.LayoutParams.WRAP_CONTENT);
-        changeStatusPopUp.setFocusable(true);
-
-        // Some offset to align the popup a bit to the left, and a bit down, relative to button's position.
-        int OFFSET_X = 0; //-77;
-        int OFFSET_Y = 0; //120;
-
-        //Clear the default translucent background
-        changeStatusPopUp.setBackgroundDrawable(new BitmapDrawable());
-
-        // Displaying the popup at the specified location, + offsets.
-        changeStatusPopUp.showAtLocation(layout, Gravity.NO_GRAVITY, p.x + OFFSET_X, p.y + OFFSET_Y);
-    }
 }

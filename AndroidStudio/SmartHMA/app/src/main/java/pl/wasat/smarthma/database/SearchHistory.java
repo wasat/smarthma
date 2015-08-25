@@ -2,6 +2,8 @@ package pl.wasat.smarthma.database;
 
 import android.content.Context;
 import android.util.Log;
+import android.view.Menu;
+import android.view.SubMenu;
 
 import java.util.ArrayList;
 
@@ -10,40 +12,36 @@ import pl.wasat.smarthma.SmartHMApplication;
 import pl.wasat.smarthma.helper.Const;
 
 /**
- * Created by Daniel Z. on 04.03.15.
- * Wasat Sp. z o.o.
+ * Used to manage user search history parameters stored in the database.
  */
 public class SearchHistory {
-    private Context context;
+    private final Context context;
 
     public SearchHistory(Context context) {
         this.context = context;
     }
 
-    public void setContext(Context context) {
-        this.context = context;
-    }
-
+    /**
+     * Insert user search history parameters into the database.
+     * @param parameters    a SearchParams object
+     */
     public void addSearchParameters(SearchParams parameters) {
         Log.d("ZX", "addSearchParameters()");
         HistoryDbAdapter dba = new HistoryDbAdapter(context);
         dba.openToWrite();
 
-        //TODO - ERROR to remove
         long dbaResult = dba.insertEntry(parameters);
-        Log.d("ZX", "Database result on inserting entry: "+dbaResult);
+        Log.d("ZX", "Database result on inserting entry: " + dbaResult);
         dba.reduceNumberOfEntries(Const.MAX_SEARCH_HISTORY_ENTRIES);
         dba.close();
 
         Log.d("ZX", "---");
         dba.openToRead();
         ArrayList<String[]> all = dba.getAll();
-        for (String[] s : all)
-        {
+        for (String[] s : all) {
             String tmp = "";
-            for (int i=0; i<s.length; i++)
-            {
-                tmp += s[i]+" ";
+            for (String value : s) {
+                tmp += value + " ";
             }
             Log.d("ZX", tmp);
         }
@@ -51,6 +49,11 @@ public class SearchHistory {
         Log.d("ZX", "---");
     }
 
+    /**
+     * Returns a list of recently used search history parameters stored in the database.
+     * @param reversedOrder if true, the list will be sorted in reversed order (newer items first)
+     * @return a list of SearchParams objects
+     */
     public ArrayList<SearchParams> getSearchHistoryList(boolean reversedOrder) {
         ArrayList<SearchParams> result = new ArrayList<>();
         HistoryDbAdapter dba = new HistoryDbAdapter(context);
@@ -69,6 +72,11 @@ public class SearchHistory {
         return result;
     }
 
+    /**
+     * Returns an array of recently used search history parameters stored in the database.
+     * @param reversedOrder if true, the list will be sorted in reversed order (newer items first)
+     * @return an array of String representations of SearchParams objects
+     */
     public String[] getSearchHistoryListAsStringArray(boolean reversedOrder) {
         String[] items;
         ArrayList<SearchParams> searchHistoryList = getSearchHistoryList(reversedOrder);
@@ -84,6 +92,9 @@ public class SearchHistory {
         return items;
     }
 
+    /**
+     * Removes all user search history parameters stored in the database.
+     */
     public void clearHistory() {
         HistoryDbAdapter dba = new HistoryDbAdapter(context);
         dba.openToWrite();
@@ -91,6 +102,11 @@ public class SearchHistory {
         dba.close();
     }
 
+    /**
+     * Returns a list of recently used user search queries stored in the database.
+     * @param reversedOrder if true, the list will be sorted in reversed order (newer items first)
+     * @return a list of String representations of search queries
+     */
     public ArrayList<String> getQueries(boolean reversedOrder) {
         ArrayList<SearchParams> searchHistoryList = getSearchHistoryList(reversedOrder);
         ArrayList<String> results = new ArrayList<>();
@@ -101,6 +117,11 @@ public class SearchHistory {
         return results;
     }
 
+    /**
+     * Returns a list of recently used catalogues stored in the database.
+     * @param reversedOrder if true, the list will be sorted in reversed order (newer items first)
+     * @return a list of catalogue names
+     */
     public ArrayList<String> getCatalogues(boolean reversedOrder) {
         ArrayList<SearchParams> searchHistoryList = getSearchHistoryList(reversedOrder);
         ArrayList<String> results = new ArrayList<>();
@@ -111,6 +132,11 @@ public class SearchHistory {
         return results;
     }
 
+    /**
+     * Returns a list of recently used bounding boxes describing user selected areas.
+     * @param reversedOrder if true, the list will be sorted in reversed order (newer items first)
+     * @return a list of String representations of bounding boxes
+     */
     public ArrayList<String> getBboxs(boolean reversedOrder) {
         ArrayList<SearchParams> searchHistoryList = getSearchHistoryList(reversedOrder);
         ArrayList<String> results = new ArrayList<>();
@@ -121,6 +147,11 @@ public class SearchHistory {
         return results;
     }
 
+    /**
+     * Returns a list of recently used start dates stored in the database.
+     * @param reversedOrder if true, the list will be sorted in reversed order (newer items first)
+     * @return a list of String representations of start dates
+     */
     public ArrayList<String> getStartDates(boolean reversedOrder) {
         ArrayList<SearchParams> searchHistoryList = getSearchHistoryList(reversedOrder);
         ArrayList<String> results = new ArrayList<>();
@@ -131,6 +162,11 @@ public class SearchHistory {
         return results;
     }
 
+    /**
+     * Returns a list of recently used end dates stored in the database.
+     * @param reversedOrder if true, the list will be sorted in reversed order (newer items first)
+     * @return a list of String representations of end dates
+     */
     public ArrayList<String> getEndDates(boolean reversedOrder) {
         ArrayList<SearchParams> searchHistoryList = getSearchHistoryList(reversedOrder);
         ArrayList<String> results = new ArrayList<>();
@@ -141,7 +177,11 @@ public class SearchHistory {
         return results;
     }
 
-    void removeDuplicates(ArrayList<String> list) {
+    /**
+     * Removes duplicate items from a given list.
+     * @param list  a list of String objects
+     */
+    private void removeDuplicates(ArrayList<String> list) {
         if (list.size() < 2) {
             return;
         }
@@ -193,4 +233,55 @@ public class SearchHistory {
         dba.close();
     }
     */
+
+    /**
+     * Adds search parameters items to the given menu.
+     * @param searchMenu            the menu item to which new items will be attached
+     * @param MENU_QUERY_IDS        ID used to distinguish query items
+     * @param MENU_CATALOGUE_IDS    ID used to distinguish catalogue items
+     * @param MENU_BBOX_IDS         ID used to distinguish bounding box items
+     * @param MENU_STARTDATE_IDS    ID used to distinguish start date items
+     * @param MENU_ENDDATE_IDS      ID used to distinguish end date items
+     * @param MENU_CLEAR_ID         ID used for the "Clear" item
+     */
+    public void createSearchMenu(SubMenu searchMenu, int MENU_QUERY_IDS, int MENU_CATALOGUE_IDS, int MENU_BBOX_IDS, int MENU_STARTDATE_IDS, int MENU_ENDDATE_IDS, int MENU_CLEAR_ID) {
+        //ArrayList<SearchParams> searchHistoryList = searchHistory.getSearchHistoryList(true);
+        ArrayList<String> queries = getQueries(true);
+        ArrayList<String> catalogues = getCatalogues(true);
+        ArrayList<String> bboxs = getBboxs(true);
+        ArrayList<String> startDates = getStartDates(true);
+        ArrayList<String> endDates = getEndDates(true);
+
+        //Log.d("ZX", "item: "+menu.getItem(0).getSubMenu().getItem(0).getTitle());
+        searchMenu.clear();
+
+        SubMenu pickQueriesMenu = searchMenu.addSubMenu(context.getString(R.string.search_history_pick_query));
+        for (String str : queries) {
+            pickQueriesMenu.add(MENU_QUERY_IDS, Menu.NONE, Menu.NONE, str);
+        }
+
+        SubMenu pickCataloguesMenu = searchMenu.addSubMenu(context.getString(R.string.search_history_pick_catalogue));
+        for (String str : catalogues) {
+            pickCataloguesMenu.add(MENU_CATALOGUE_IDS, Menu.NONE, Menu.NONE, str);
+        }
+
+        SubMenu pickBboxsMenu = searchMenu.addSubMenu(context.getString(R.string.search_history_pick_bbox));
+        for (String str : bboxs) {
+            pickBboxsMenu.add(MENU_BBOX_IDS, Menu.NONE, Menu.NONE, str);
+        }
+
+        SubMenu pickStartDatesMenu = searchMenu.addSubMenu(context.getString(R.string.search_history_pick_start_date));
+        for (String str : startDates) {
+            pickStartDatesMenu.add(MENU_STARTDATE_IDS, Menu.NONE, Menu.NONE, str);
+        }
+
+        SubMenu pickEndDatesMenu = searchMenu.addSubMenu(context.getString(R.string.search_history_pick_end_date));
+        for (String str : endDates) {
+            pickEndDatesMenu.add(MENU_ENDDATE_IDS, Menu.NONE, Menu.NONE, str);
+        }
+
+        searchMenu.add(MENU_CLEAR_ID, MENU_CLEAR_ID, Menu.NONE, R.string.search_history_clear);
+
+        //MenuItem clearItem = searchMenu.add(Menu.NONE, MENU_CLEAR_ID, Menu.NONE, getString(R.string.search_history_clear));
+    }
 }

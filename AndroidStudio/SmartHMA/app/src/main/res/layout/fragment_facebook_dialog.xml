@@ -17,7 +17,7 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             style="@style/dialogHeader"
-            android:text="Facebook Quicklook Share"/>
+            android:text="Facebook Quicklook Share" />
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -45,7 +45,7 @@
                     android:layout_height="wrap_content"
                     android:text="You are logged as"
                     android:layout_marginLeft="10dp"
-                    android:layout_marginTop="20dp"/>
+                    android:layout_marginTop="20dp" />
 
                 <pl.wasat.smarthma.customviews.TextViewWithFont
                     android:id="@+id/facebook_dialog_tv_user_info"
@@ -79,29 +79,32 @@
             android:layout_gravity="center_horizontal"
             android:layout_margin="10dp"
             android:contentDescription="@string/quicklook_img_desc" />
+
         <RelativeLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:paddingTop="15dp"
             android:background="@color/background_gray">
-        <RelativeLayout
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
 
-            android:background="@color/background_white">
-        <Button
-            android:id="@+id/facebook_dialog_btn_share_qlook"
-            android:layout_width="170dp"
-            style="@style/buttonBlue"
-            android:drawableLeft="@drawable/ic_share"
-            android:layout_centerVertical="true"
-            android:layout_centerHorizontal="true"
-            android:layout_height="@dimen/button_blue_height"
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+
+                android:background="@color/background_white">
+
+                <Button
+                    android:id="@+id/facebook_dialog_btn_share_qlook"
+                    android:layout_width="170dp"
+                    style="@style/buttonBlue"
+                    android:drawableLeft="@drawable/ic_share"
+                    android:layout_centerVertical="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_height="@dimen/button_blue_height"
             android:layout_gravity="center_horizontal"
             android:layout_margin="20dp"
             android:text="@string/share_quicklook" />
 
-        </RelativeLayout>
+            </RelativeLayout>
         </RelativeLayout>
     </LinearLayout>
 

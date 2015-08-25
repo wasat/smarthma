@@ -16,7 +16,6 @@
     </style>
 
 
-
     <!-- Application theme. -->
     <style name="AppTheme" parent="AppBaseTheme">
         <!-- All customizations that are NOT specific to a particular API-level can go here. -->
@@ -85,12 +84,12 @@
         <item name="android:padding">6dip</item>
     </style>
 
-    <style name="styleImageBg">
-        <item name="android:layout_gravity">left</item>
-        <item name="android:background">#FFFFFF</item>
-        <item name="android:scaleType">fitStart</item>
-        <item name="android:src">@drawable/earth_bg</item>
-    </style>
+    <!--    <style name="styleImageBg">
+            <item name="android:layout_gravity">left</item>
+            <item name="android:background">#FFFFFF</item>
+            <item name="android:scaleType">fitStart</item>
+            <item name="android:src">@drawable/earth_bg</item>
+        </style>-->
 
     <style name="styleDataseriesIntroTitles" parent="@android:style/TextAppearance.Large">
         <item name="android:paddingBottom">5dp</item>
@@ -142,15 +141,11 @@
     </style>
 
 
-
-
     <!-- Application theme. -->
     <style name="AppNoActionBarTheme" parent="android:Theme.Holo.Light.NoActionBar.Fullscreen">
         <!-- All customizations that are NOT specific to a particular API-level can go here. -->
 
     </style>
-
-
 
 
     <!-- INFOAPPS -->
@@ -167,7 +162,6 @@
     <style name="textMainTitle" parent="@android:style/TextAppearance.Large">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
-
         <item name="android:paddingTop">@dimen/browse_eo_padding_text</item>
         <item name="android:paddingBottom">@dimen/browse_eo_padding_text</item>
         <item name="android:textSize">@dimen/browse_eo_text</item>
@@ -181,6 +175,25 @@
         <item name="android:padding">@dimen/browse_eo_padding_text</item>
         <item name="android:textSize">@dimen/browse_eo_text</item>
         <item name="android:textColor">@color/text_black</item>
+    </style>
+
+    <style name="textBold" parent="@android:style/TextAppearance.Large">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:padding">@dimen/browse_eo_padding_text</item>
+        <item name="android:textSize">@dimen/browse_eo_text</item>
+        <item name="android:textColor">@color/text_black</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="textSearchParams" parent="@android:style/TextAppearance.Large">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/text_black</item>
+        <item name="android:paddingBottom">@dimen/search_eo_data_padding</item>
+        <item name="android:paddingLeft">@dimen/search_eo_data_padding</item>
+        <item name="android:paddingTop">@dimen/search_eo_data_padding_top</item>
+        <item name="android:textSize">@dimen/search_eo_data_text_medium</item>
     </style>
 
 
@@ -208,7 +221,6 @@
     </style>
 
     <!--<style name="customNumberPicker" parent="@android:style/Widget.Holo.NumberPicker">
-
 
     </style> -->
 

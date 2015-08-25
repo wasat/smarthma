@@ -15,7 +15,8 @@
     <dimen name="menu_logo_center_width">300dp</dimen>
     <dimen name="menu_logo_center_height">300dp</dimen>
     <dimen name="menu_button_margin">10dp</dimen>
-    <dimen name="menu_button_text_size">17sp</dimen>
+    <dimen name="menu_button_text_size">20sp</dimen>
+    <dimen name="menu_item_title_padding_top">18dp</dimen>
 
     <!-- MENU LAND -->
     <dimen name="menu_logo_center_width_land">180dp</dimen>
@@ -23,8 +24,9 @@
     <dimen name="menu_button_size_land">90dp</dimen>
     <dimen name="menu_copyright_padding_land">20dp</dimen>
     <dimen name="menu_button_text_size_land">12sp</dimen>
-    <dimen name="menu_padding_top_land">80dp</dimen>
+    <dimen name="menu_padding_top_land">85dp</dimen>
     <dimen name="layout_size_land">450dp</dimen>
+
 
     <!-- ACTION BAR -->
     <dimen name="action_bar_padding">30dp</dimen>
@@ -48,16 +50,19 @@
     <!-- SEARCH EO DATA -->
 
     <dimen name="search_eo_data_padding">12dp</dimen>
+    <dimen name="search_eo_data_padding_top">2dp</dimen>
     <dimen name="search_eo_data_padding_medium">8dp</dimen>
     <dimen name="search_eo_data_padding_small">2dp</dimen>
 
     <dimen name="search_eo_data_text_small">11sp</dimen>
-    <dimen name="search_eo_data_text_medium">15sp</dimen>
+    <dimen name="search_eo_data_text_medium">14sp</dimen>
     <dimen name="search_eo_data_text">18sp</dimen>
 
     <dimen name="search_eo_data_logo_size">330dp</dimen>
-    <dimen name="search_eo_data_edit_text_height">45dp</dimen>
-    <dimen name="search_eo_data_edit_text_width">400dp</dimen>
+    <dimen name="search_eo_data_search_view_height">45dp</dimen>
+    <dimen name="search_eo_data_search_view_width">450dp</dimen>
+    <dimen name="search_eo_data_params_edit_text_height">35dp</dimen>
+
 
     <!-- SEARCH EO DATA LAND -->
 
@@ -92,7 +97,7 @@
     <dimen name="browse_eo_padding_medium">8dp</dimen>
     <dimen name="browse_eo_padding_small">2dp</dimen>
     <dimen name="browse_eo_padding_text">5dp</dimen>
-    <dimen name="browse_eo_cell_text_size_large">14sp</dimen>
+    <dimen name="browse_eo_cell_text_size_large">16sp</dimen>
     <dimen name="browse_eo_cell_text_size">12sp</dimen>
     <dimen name="browse_eo_star_size">15dp</dimen>
     <dimen name="browse_eo_cell_padding_left">40dp</dimen>
@@ -106,9 +111,10 @@
 
     <dimen name="divider_size">20dp</dimen>
 
-    <dimen name="button_blue_text_size">10sp</dimen>
+    <dimen name="button_blue_text_size">16sp</dimen>
     <dimen name="button_blue_padding">7dp</dimen>
     <dimen name="button_blue_height">40dp</dimen>
 
     <dimen name="spinner_width">200dp</dimen>
+    <dimen name="right_padding_for_slider">40dp</dimen>
 </resources>

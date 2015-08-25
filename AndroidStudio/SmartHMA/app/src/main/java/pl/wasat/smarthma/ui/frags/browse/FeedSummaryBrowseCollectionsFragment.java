@@ -20,7 +20,6 @@ public class FeedSummaryBrowseCollectionsFragment extends BaseFeedSummaryFragmen
      * @param feedParam Parameter 1.
      * @return A new instance of fragment FeedSummaryFragment.
      */
-    // TODO: Rename and change types and number of parameters
     public static FeedSummaryBrowseCollectionsFragment newInstance(Feed feedParam) {
         FeedSummaryBrowseCollectionsFragment fragment = new FeedSummaryBrowseCollectionsFragment();
         Bundle args = new Bundle();
@@ -30,7 +29,6 @@ public class FeedSummaryBrowseCollectionsFragment extends BaseFeedSummaryFragmen
     }
 
     public FeedSummaryBrowseCollectionsFragment() {
-        // Required empty public constructor
     }
 
     /* (non-Javadoc)

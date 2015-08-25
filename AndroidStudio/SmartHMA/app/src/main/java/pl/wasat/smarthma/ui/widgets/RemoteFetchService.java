@@ -55,18 +55,18 @@ public class RemoteFetchService extends Service {
         {
             String title = article.getTitle();
             String date = article.getPubDate();
+            String author = article.getAuthor();
             if (title != null && date != null)
             {
-                /*
-                if (listItemList.size() > 10)
-                {
-                    break;
-                }
-                */
                 Log.d("ZX", title + " " + date);
                 ListItem listItem = new ListItem();
                 listItem.heading = title;
                 listItem.content = date;
+                if (author != null) {
+                    listItem.author = author;
+                } else {
+                    listItem.author = "NullAuthor";
+                }
                 listItemList.add(listItem);
             }
         }

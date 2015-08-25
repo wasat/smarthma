@@ -24,7 +24,7 @@ import pl.wasat.smarthma.model.feed.Feed;
 public class FedeoSearchRequest extends GoogleHttpClientSpiceRequest<Feed> {
 
     private final FedeoRequestParams fedeoRequestParams;
-    private int schemaMode;
+    private final int schemaMode;
 
     /**
      *
@@ -34,12 +34,6 @@ public class FedeoSearchRequest extends GoogleHttpClientSpiceRequest<Feed> {
         this.fedeoRequestParams = fedeoRequestParams;
         this.schemaMode = schema;
 
-    }
-
-    public FedeoSearchRequest(String fedeoUrl) {
-        super(null);
-        this.fedeoRequestParams = new FedeoRequestParams();
-        fedeoRequestParams.setUrl(fedeoUrl);
     }
 
     @Override

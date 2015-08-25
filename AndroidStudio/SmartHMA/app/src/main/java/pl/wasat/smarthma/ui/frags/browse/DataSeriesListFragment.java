@@ -172,12 +172,6 @@ public class DataSeriesListFragment extends BaseSpiceListFragment {
     private void refreshList() {
         loadDataSeriesFeedResponse(browseRequest);
         Toast.makeText(getActivity(), getActivity().getString(R.string.refreshing_list), Toast.LENGTH_LONG).show();
-        /*
-        if (adapter != null)
-        {
-            adapter.notifyDataSetChanged();
-        }
-        */
     }
 
     private void updateEOListViewContent(List<EntryISO> dataSeriesFeedList) {
@@ -252,7 +246,6 @@ public class DataSeriesListFragment extends BaseSpiceListFragment {
      */
 
     public interface OnDataSeriesListFragmentListener {
-        // TODO: Update argument type and name
         void onDataSeriesFragmentItemSelected(String id);
     }
 

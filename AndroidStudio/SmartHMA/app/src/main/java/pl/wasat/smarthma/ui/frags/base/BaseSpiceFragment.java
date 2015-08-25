@@ -51,13 +51,10 @@ public class BaseSpiceFragment extends Fragment {
 
     @Override
     public void onStop() {
-        if (smartHMASpiceManager.isStarted()) {
-            smartHMASpiceManager.shouldStop();
-        }
+        if (smartHMASpiceManager.isStarted()) smartHMASpiceManager.shouldStop();
 
-        if (spiceManagerBinary.isStarted()) {
-            spiceManagerBinary.shouldStop();
-        }
+        if (spiceManagerBinary.isStarted()) spiceManagerBinary.shouldStop();
+
         super.onStop();
     }
 
@@ -110,9 +107,6 @@ public class BaseSpiceFragment extends Fragment {
         } else {
             messTxt = "Probably a wide area of search or to long time span ";
         }
-
-        //Toast.makeText(getActivity(), messTxt, Toast.LENGTH_LONG).show();
-
         showDialog(messTxt);
 
     }

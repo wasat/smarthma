@@ -14,11 +14,11 @@
         android:id="@+id/view_cell_collection_search_row_background"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/background_white"
         android:orientation="vertical"
         android:paddingBottom="@dimen/esa_online_cell_height"
-        android:paddingTop="@dimen/esa_online_cell_height"
         android:paddingRight="@dimen/browse_eo_padding_medium"
-        android:background="@color/background_white">
+        android:paddingTop="@dimen/esa_online_cell_height">
 
         <ImageView
             android:id="@+id/star_button"
@@ -29,34 +29,29 @@
             android:contentDescription="@string/desc"
             android:src="@drawable/star_button" />
 
-    <pl.wasat.smarthma.customviews.TextViewWithFont
-        android:id="@+id/search_list_name"
+        <pl.wasat.smarthma.customviews.TextViewWithFont
+            android:id="@+id/search_list_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toLeftOf="@+id/star_button"
+            android:paddingLeft="15dip"
+            android:paddingRight="8dip"
+            android:text="Lorem"
+            android:textColor="@color/text_blue"
+            android:textSize="@dimen/browse_eo_cell_text_size_large" />
 
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingLeft="15dip"
-        android:paddingRight="8dip"
-        android:textColor="@color/text_blue"
-        android:layout_toLeftOf="@+id/star_button"
-        android:textSize="@dimen/browse_eo_cell_text_size_large"
-        android:text="Lorem"/>
+        <pl.wasat.smarthma.customviews.TextViewWithFont
+            android:id="@+id/search_listing_smallprint"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/search_list_name"
+            android:layout_toLeftOf="@+id/star_button"
+            android:paddingLeft="15dip"
+            android:paddingRight="8dip"
+            android:paddingTop="2dp"
+            android:text="lorem"
+            android:textColor="@color/text_black"
+            android:textSize="@dimen/browse_eo_cell_text_size" />
 
-    <pl.wasat.smarthma.customviews.TextViewWithFont
-        android:id="@+id/search_listing_smallprint"
-
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="lorem"
-        android:layout_below="@+id/search_list_name"
-        android:layout_toLeftOf="@+id/star_button"
-        android:paddingLeft="15dip"
-        android:paddingRight="8dip"
-        android:paddingTop="2dp"
-        android:textColor="@color/text_black"
-        android:textSize="@dimen/browse_eo_cell_text_size"
-         />
-
-
-
-        </RelativeLayout>
+    </RelativeLayout>
 </LinearLayout>

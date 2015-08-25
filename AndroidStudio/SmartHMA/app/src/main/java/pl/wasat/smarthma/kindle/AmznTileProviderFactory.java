@@ -14,11 +14,6 @@ import pl.wasat.smarthma.helper.Const;
 
 class AmznTileProviderFactory {
 
-/*    @Override
-    protected void finalize() throws Throwable {
-        super.finalize();
-    }*/
-
     private static final String URL_BASE_OSM = "http://a.tile.openstreetmap.org/{z}/{x}/{y}.png";
 
     public static AmznWMSTileProvider getWmsTileProvider(final String WMS_name,
@@ -38,7 +33,6 @@ class AmznTileProviderFactory {
                     ACRA.getErrorReporter().handleSilentException(e);
                     throw new AssertionError(e);
                 }
-
                 return url;
             }
         };

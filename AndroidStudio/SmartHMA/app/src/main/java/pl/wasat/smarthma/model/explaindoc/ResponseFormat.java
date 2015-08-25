@@ -15,7 +15,6 @@ public class ResponseFormat implements Serializable {
     private int id;
 
     public ResponseFormat() {
-        // TODO Auto-generated constructor stub
     }
 
     /**

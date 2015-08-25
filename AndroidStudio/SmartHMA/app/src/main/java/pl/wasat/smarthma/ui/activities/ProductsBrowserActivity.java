@@ -35,15 +35,10 @@ public class ProductsBrowserActivity extends BaseSmartHMActivity implements
         super.onCreate(savedInstanceState);
 
         Intent intent = getIntent();
-        //String parentId = intent.getStringExtra(Const.KEY_INTENT_PARENT_ID);
-
         TextView text = (TextView) findViewById(R.id.action_bar_title);
         text.setText("Products Browser");
 
         FedeoRequestParams fedeoRequestParams = (FedeoRequestParams) intent.getSerializableExtra(Const.KEY_INTENT_FEDEO_REQUEST_PARAMS);
-        //fedeoRequestParams.buildFromShared(this);
-        //fedeoRequestParams.setParentIdentifier();
-
 
         ProductsListFragment productsListFragment = ProductsListFragment
                 .newInstance(fedeoRequestParams);
@@ -64,6 +59,8 @@ public class ProductsBrowserActivity extends BaseSmartHMActivity implements
 
     @Override
     public void onBackPressed() {
+        if (dismissMenuOnBackPressed()) return;
+
         FragmentManager fm = getSupportFragmentManager();
         int bsec = fm.getBackStackEntryCount();
         if (bsec > 0) {
@@ -181,8 +178,6 @@ public class ProductsBrowserActivity extends BaseSmartHMActivity implements
 
     @Override
     public void onBaseShowProductsListFragmentFootprintSend() {
-        // TODO Auto-generated method stub
-
     }
 
 

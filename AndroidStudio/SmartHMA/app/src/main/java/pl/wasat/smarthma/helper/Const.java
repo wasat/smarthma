@@ -7,7 +7,7 @@ public class Const {
     private static final String HTTP_SMAAD_BASE_URL = "http://smaad.spacebel.be/opensearch/request/";
     private static final String HTTP_ESA_BASE_URL = "http://fedeo.esa.int/opensearch/request/";
 
-    public static String HTTP_BASE_URL = HTTP_SPACEBEL_BASE_URL;
+    public static String HTTP_BASE_URL = HTTP_ESA_BASE_URL;
 
     public static final String OSDD_BASE_URL = "http://fedeo.esa.int:80/opensearch/description.xml?";
 
@@ -15,25 +15,17 @@ public class Const {
     public static final String URL_ESA_NEWS_2 = "https://earth.esa.int/eodisp-portlets/eodisp-rss?tags=news";
     //public static final String URL_ESA_NEWS_2 = "http://www.esa.int/rssfeed/TopNews";
 
-/*
-    public static final String URL_PARM_QUERY = "&query=";
-    public static final String URL_PARM_END_DATE = "&endDate=";
-    public static final String URL_PARM_START_DATE = "&startDate=";
-    public static final String URL_PARM_MAX_REC = "&maximumRecords=";
-    public static final String URL_PARM_START_RECORD = "&startRecord=";
-    public static final String URL_PARM_TYPE = "&type=collection";
-    public static final String URL_PARM_HTTP_ACCEPT = "?httpAccept=application/atom%2Bxml";
-    public static final String URL_PARM_PARENT_ID = "&parentIdentifier=";
-    public static final String URL_PARM_BBOX = "&bbox=";
-*/
-
+    public static final String KEY_DATE_PICKER_DT_VIEW_TAG = "pl.wasat.smarthma.KEY_DATE_PICKER_DT_VIEW_TAG";
+    public static final String KEY_DATE_TIME_PICKER_CALENDAR = "pl.wasat.smarthma.KEY_DATE_TIME_PICKER_CALENDAR";
     public static final String KEY_MAP_SPINNER_INTENTFILTER_NOTIFICATION = "pl.wasat.smarthma.KEY_MAP_SPINNER_INTENTFILTER_NOTIFICATION";
     public static final String KEY_MAP_WMS_LOAD_STATE = "pl.wasat.smarthma.KEY_MAP_WMS_LOAD_STATE";
-    //public static final String KEY_INTENT_PARENT_ID = "pl.wasat.smarthma.KEY_INTENT_PARENT_ID";
     public static final String KEY_INTENT_RETURN_STOP_SEARCH = "pl.wasat.smarthma.KEY_INTENT_RETURN_STOP_SEARCH";
     public static final String KEY_INTENT_QUERY = "pl.wasat.smarthma.KEY_INTENT_QUERY";
-    public static String KEY_INTENT_FEDEO_REQUEST_PARAMS = "pl.wasat.smarthma.KEY_INTENT_FEDEO_REQUEST_PARAMS";
+    public static final String KEY_INTENT_FEDEO_REQUEST_PARAMS = "pl.wasat.smarthma.KEY_INTENT_FEDEO_REQUEST_PARAMS";
     public static final String KEY_ACTION_SEARCH_MISSION_DATA = "pl.wasat.smarthma.KEY_ACTION_SEARCH_MISSION_DATA";
+    public static final String KEY_ACTION_SEARCH_COLLECTIONS = "pl.wasat.smarthma.KEY_ACTION_SEARCH_COLLECTIONS";
+
+    public static final int REQUEST_CODE_GLOBAL_SETTINGS = 100;
 
     public static final String KEY_PREF_FILE = "SmartHMAPrefFile";
     public static final String KEY_PREF_DATETIME_START = "pl.wasat.smarthma.KEY_PREF_TIME_START";
@@ -53,6 +45,7 @@ public class Const {
     public static final String DATE_NULL = "0000-00-00T00:00:00Z";
 
     public static final int MAX_SEARCH_HISTORY_ENTRIES = 5;
+    public static final int MAX_WIDGET_ENTRIES = 10;
 
     public static boolean IS_KINDLE = false;
 

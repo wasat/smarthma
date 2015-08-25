@@ -2,7 +2,6 @@ package pl.wasat.smarthma.ui.frags.browse;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -50,6 +49,7 @@ public class CollectionEmptyDetailsFragment extends
     private FedeoRequestParams fedeoRequestParams;
     private HashMap<String, String> paramsMap;
     private boolean isSpinnersAdded;
+    private boolean isCollectionTypeChosen = false;
 
 
     /**
@@ -93,8 +93,6 @@ public class CollectionEmptyDetailsFragment extends
                              Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
 
-        //putParentIdToShared();
-
         loadDefaultFedeoParams();
 
         btnShowProducts.setEnabled(true);
@@ -105,8 +103,13 @@ public class CollectionEmptyDetailsFragment extends
                     //TODO !!!
                     //mListener.onCollectionDetailsFragmentShowProducts(parentID);
                     mSlidingLayer.closeLayer(true);
+                    //fedeoRequestParams.buildFromShared(getActivity());
                     fedeoRequestParams.setParentIdentifier(collectionName);
-                    mListener.onCollectionEmptyDetailsFragmentShowProducts(fedeoRequestParams);
+                    if (isCollectionTypeChosen) {
+                        mListener.onCollectionEmptyDetailsFragmentShowCollections(fedeoRequestParams);
+                    } else {
+                        mListener.onCollectionEmptyDetailsFragmentShowProducts(fedeoRequestParams);
+                    }
                 }
             }
         });
@@ -128,7 +131,6 @@ public class CollectionEmptyDetailsFragment extends
         mSlidingLayer.setOnInteractListener(new SlidingLayer.OnInteractListener() {
             @Override
             public void onOpen() {
-                Log.i("SLIDER", "onOpen");
                 if (waitForOsddLoad) {
                     startAsyncLoadOsddData(finalOsddUrl);
                 }
@@ -136,12 +138,10 @@ public class CollectionEmptyDetailsFragment extends
 
             @Override
             public void onShowPreview() {
-                Log.i("SLIDER", "onShowPreview");
             }
 
             @Override
             public void onClose() {
-                Log.i("SLIDER", "onClose");
                 if (paramsMap != null) {
                     fedeoRequestParams.setParamsExtra(paramsMap);
                     //mListener.onCollectionDetailsFragmentShowProducts(fedeoRequestParams);
@@ -150,24 +150,21 @@ public class CollectionEmptyDetailsFragment extends
 
             @Override
             public void onOpened() {
-                Log.i("SLIDER", "onOpened");
             }
 
             @Override
             public void onPreviewShowed() {
-                Log.i("SLIDER", "onPreviewShowed");
             }
 
             @Override
             public void onClosed() {
-                Log.i("SLIDER", "onClosed");
             }
         });
     }
 
     private void loadDefaultFedeoParams() {
         fedeoRequestParams = new FedeoRequestParams();
-        fedeoRequestParams.buildFromShared(getActivity().getApplicationContext());
+        //fedeoRequestParams.buildFromShared(getActivity().getApplicationContext());
     }
 
     @Override
@@ -220,9 +217,10 @@ public class CollectionEmptyDetailsFragment extends
         for (int i = 0; i < osdd.getUrl().size(); i++) {
             if (!isSpinnersAdded && osdd.getUrl().get(i).getType().equalsIgnoreCase("application/atom+xml")) {
                 loadParametersToSpinner(osdd.getUrl().get(i));
-            } else if (i == osdd.getUrl().size() - 1 && !osdd.getUrl().get(i).getParameters().isEmpty()) {
-                loadParametersToSpinner(osdd.getUrl().get(i));
             }
+/*            else if (i == osdd.getUrl().size() - 1 && !osdd.getUrl().get(i).getParameters().isEmpty()) {
+                loadParametersToSpinner(osdd.getUrl().get(i));
+            }*/
         }
     }
 
@@ -233,7 +231,6 @@ public class CollectionEmptyDetailsFragment extends
             spinner.setLayoutParams(new TableLayout.LayoutParams(
                     TableLayout.LayoutParams.WRAP_CONTENT, TableLayout.LayoutParams.WRAP_CONTENT, 1f));
             spinner.setPadding(25, 10, 25, 10);
-            //spinner.setPrompt(param.getName());
 
             List<String> optList = new ArrayList<>();
             optList.add("Choose " + param.getName() + "...");
@@ -249,11 +246,10 @@ public class CollectionEmptyDetailsFragment extends
                 @Override
                 public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                     if (l > 0) {
-                        paramsMap.put(param.getName(), param.getOption().get(i - 1).getValue());
-
-/*                                Toast.makeText(adapterView.getContext(),
-                                "Item Selected : " + adapterView.getItemAtPosition(i).toString() + " ID: " + l,
-                                Toast.LENGTH_LONG).show();*/
+                        String paramName = param.getName();
+                        String paramOption = param.getOption().get(i - 1).getValue();
+                        paramsMap.put(paramName, paramOption);
+                        validateChoosenOpt(paramOption);
                     } else {
                         paramsMap.put(param.getName(), "");
                     }
@@ -264,10 +260,20 @@ public class CollectionEmptyDetailsFragment extends
 
                 }
             });
-
             layoutSpinners.addView(spinner);
             isSpinnersAdded = true;
         }
+    }
+
+    private void validateChoosenOpt(String option) {
+        if (option.equalsIgnoreCase("collection")) {
+            btnShowProducts.setText(R.string.show_collections);
+            isCollectionTypeChosen = true;
+        } else {
+            btnShowProducts.setText(R.string.show_products);
+            isCollectionTypeChosen = false;
+        }
+
     }
 
     private void initFedeoReq(OpenSearchDescription osdd) {
@@ -294,6 +300,8 @@ public class CollectionEmptyDetailsFragment extends
         // public void onCollectionDetailsFragmentShowProducts(String parentID);
 
         void onCollectionEmptyDetailsFragmentShowProducts(FedeoRequestParams fedeoRequestParams);
+
+        void onCollectionEmptyDetailsFragmentShowCollections(FedeoRequestParams fedeoRequestParams);
 
     }
 

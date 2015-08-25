@@ -88,7 +88,6 @@ public class CollectionsGroupListFragment extends Fragment implements
     private void updateEOListViewContent(List collectGrList) {
         DataSorter sorter = new DataSorter();
         ArrayList<CollectionsGroup> collectionsGroupList = collectGrList.getCollectionsGroupList();
-        //sorter.sort(collectionsGroupList);
 
         ArrayList<Collection> collection;
         for (int i = 0; i < collectionsGroupList.size(); i++) {
@@ -135,10 +134,6 @@ public class CollectionsGroupListFragment extends Fragment implements
 
     }
 
-    // --------------------------------------------------------------------------------------------
-    // PRIVATE
-    // --------------------------------------------------------------------------------------------
-
     private void initUIList() {
         View view = getView();
         if (view != null) {
@@ -176,6 +171,5 @@ public class CollectionsGroupListFragment extends Fragment implements
         XMLParser xmlResult = new XMLParser();
         xmlResult.parseXml(result);
         updateEOListViewContent(SmartHMApplication.GlobalEODataList);
-
     }
 }

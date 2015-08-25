@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.widget.TextView;
 
+import java.util.Calendar;
+
 import pl.wasat.smarthma.R;
 import pl.wasat.smarthma.adapter.SearchListAdapter;
 import pl.wasat.smarthma.database.EoDbAdapter;
@@ -20,9 +22,11 @@ import pl.wasat.smarthma.ui.frags.base.BaseShowProductsListFragment.OnBaseShowPr
 import pl.wasat.smarthma.ui.frags.common.AreaPickerMapFragment.OnAreaPickerMapFragmentListener;
 import pl.wasat.smarthma.ui.frags.common.CollectionDetailsFragment;
 import pl.wasat.smarthma.ui.frags.common.CollectionDetailsFragment.OnCollectionDetailsFragmentListener;
+import pl.wasat.smarthma.ui.frags.common.DatePickerFragment.OnDatePickerFragmentListener;
 import pl.wasat.smarthma.ui.frags.common.ExtendedMapFragment;
 import pl.wasat.smarthma.ui.frags.common.MetadataISOFragment;
 import pl.wasat.smarthma.ui.frags.common.MetadataISOFragment.OnMetadataISOFragmentListener;
+import pl.wasat.smarthma.ui.frags.common.TimePickerFragment.OnTimePickerFragmentListener;
 import pl.wasat.smarthma.ui.frags.search.SearchListFragment;
 import pl.wasat.smarthma.ui.frags.search.SearchListFragment.OnSearchListFragmentListener;
 import pl.wasat.smarthma.utils.obj.LatLngBoundsExt;
@@ -31,20 +35,18 @@ public class SearchCollectionResultsActivity extends BaseSmartHMActivity
         implements OnSearchListFragmentListener,
         OnBaseShowProductsListFragmentListener,
         OnAreaPickerMapFragmentListener, OnAmznAreaPickerMapFragmentListener, OnMetadataISOFragmentListener,
-        OnCollectionDetailsFragmentListener {
+        OnCollectionDetailsFragmentListener, OnDatePickerFragmentListener, OnTimePickerFragmentListener {
 
     private EoDbAdapter dba;
+    private CollectionDetailsFragment collectionDetailsFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        // get the action bar
         ActionBar actionBar = getActionBar();
 
-        // Enabling Back navigation on Action Bar icon
         assert actionBar != null;
-       // actionBar.setDisplayHomeAsUpEnabled(true);
 
         TextView title = (TextView) findViewById(R.id.action_bar_title);
         title.setText("Searched Collections");
@@ -73,20 +75,12 @@ public class SearchCollectionResultsActivity extends BaseSmartHMActivity
     private void handleIntent(Intent intent) {
         if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
             String query = intent.getStringExtra(SearchManager.QUERY);
-            String value = intent.getStringExtra("title");
-
-
-            /**
-             * Use this query to display search results like 1. Getting the data
-             * from SQLite and showing in listview 2. Making web request and
-             * displaying the data For now we just display the query only
-             */
+            //String value = intent.getStringExtra("title");
 
             SharedPrefs sharedPrefs = new SharedPrefs(this);
             sharedPrefs.setQueryPrefs(query);
 
             FedeoRequestParams fedeoRequestParams = new FedeoRequestParams();
-            fedeoRequestParams.buildFromShared(this);
             fedeoRequestParams.setQuery(query);
 
             SearchListFragment searchListFragment = SearchListFragment
@@ -103,7 +97,16 @@ public class SearchCollectionResultsActivity extends BaseSmartHMActivity
             sharedPrefs.setQueryPrefs(query);
 
             FedeoRequestParams fedeoRequestParams = new FedeoRequestParams();
-            fedeoRequestParams.buildFromShared(this);
+
+            SearchListFragment searchListFragment = SearchListFragment
+                    .newInstance(fedeoRequestParams, stopNewSearch);
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.activity_base_list_container,
+                            searchListFragment).commit();
+        }
+        if (intent.getAction().equals(Const.KEY_ACTION_SEARCH_COLLECTIONS)) {
+            FedeoRequestParams fedeoRequestParams = (FedeoRequestParams) intent.getSerializableExtra(Const.KEY_INTENT_FEDEO_REQUEST_PARAMS);
 
             SearchListFragment searchListFragment = SearchListFragment
                     .newInstance(fedeoRequestParams, stopNewSearch);
@@ -121,6 +124,8 @@ public class SearchCollectionResultsActivity extends BaseSmartHMActivity
      */
     @Override
     public void onBackPressed() {
+        if (dismissMenuOnBackPressed()) return;
+
         FragmentManager fm = getSupportFragmentManager();
         int bsec = fm.getBackStackEntryCount();
         String bstEntry = fm.getBackStackEntryAt(bsec - 1).getName();
@@ -132,7 +137,6 @@ public class SearchCollectionResultsActivity extends BaseSmartHMActivity
         } else {
             finish();
             if (bstEntry.equalsIgnoreCase("FeedSummarySearchFragment")) {
-                // Restart SearchActivity.
                 Intent intent = new Intent(this, SearchActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
@@ -155,7 +159,6 @@ public class SearchCollectionResultsActivity extends BaseSmartHMActivity
                 .findFragmentById(R.id.activity_base_list_container))
                 .getListAdapter().getItem(Integer.parseInt(id));
 
-        // mark metadata as read
         dba.openToWrite();
         dba.markAsRead(selectedEntry.getGuid());
         dba.close();
@@ -165,23 +168,20 @@ public class SearchCollectionResultsActivity extends BaseSmartHMActivity
                 .getListAdapter();
         adapter.notifyDataSetChanged();
 
-        CollectionDetailsFragment searchResultCollectionDetailsFragment = CollectionDetailsFragment
+        collectionDetailsFragment = CollectionDetailsFragment
                 .newInstance(selectedEntry);
         getSupportFragmentManager()
                 .beginTransaction()
                 .replace(R.id.activity_base_details_container,
-                        searchResultCollectionDetailsFragment,
-                        "SearchResultCollectionDetailsFragment")
-                .addToBackStack("SearchResultCollectionDetailsFragment")
+                        collectionDetailsFragment,
+                        "CollectionDetailsFragment")
+                .addToBackStack("CollectionDetailsFragment")
                 .commit();
-
     }
 
     @Override
     public void onMapFragmentBoundsChange(LatLngBoundsExt bounds) {
-
         callUpdateCollectionsBounds(bounds);
-
     }
 
     @Override
@@ -226,7 +226,6 @@ public class SearchCollectionResultsActivity extends BaseSmartHMActivity
     public void onCollectionDetailsFragmentShowProducts(FedeoRequestParams fedeoSearchProductsParams) {
         Intent showProductsIntent = new Intent(this,
                 ProductsBrowserActivity.class);
-        //showProductsIntent.putExtra(Const.KEY_INTENT_PARENT_ID, parentID);
         showProductsIntent.putExtra(Const.KEY_INTENT_FEDEO_REQUEST_PARAMS, fedeoSearchProductsParams);
         startActivityForResult(showProductsIntent, REQUEST_NEW_SEARCH);
     }
@@ -240,8 +239,16 @@ public class SearchCollectionResultsActivity extends BaseSmartHMActivity
                 .replace(R.id.activity_base_details_container,
                         metadataISOFragment, "MetadataISOFragment")
                 .addToBackStack("MetadataISOFragment").commit();
-
     }
 
 
+    @Override
+    public void onDatePickerFragmentDateChoose(Calendar calendar, String viewTag) {
+        collectionDetailsFragment.setDateValues(calendar, viewTag);
+    }
+
+    @Override
+    public void onTimePickerFragmentTimeChoose(Calendar calendar, String viewTag) {
+        collectionDetailsFragment.setTimeValues(calendar, viewTag);
+    }
 }

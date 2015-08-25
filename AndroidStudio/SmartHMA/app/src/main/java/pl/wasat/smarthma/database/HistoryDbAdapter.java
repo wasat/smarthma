@@ -77,6 +77,16 @@ public class HistoryDbAdapter {
 
     public long insertEntry(SearchParams parameters) {
         ContentValues initialValues = new ContentValues();
+        String searchPhrase = parameters.getSearchPhrase();
+        String catalogue = parameters.getCatalogue();
+        String bbox = parameters.getBbox();
+        String startDate = parameters.getStartDate();
+        String endDate = parameters.getEndDate();
+        Log.d("ZX", searchPhrase);
+        Log.d("ZX", catalogue);
+        Log.d("ZX", bbox);
+        Log.d("ZX", startDate);
+        Log.d("ZX", endDate);
         initialValues.put(KEY_QUERY, parameters.getSearchPhrase());
         initialValues.put(KEY_CATALOGUE, parameters.getCatalogue());
         initialValues.put(KEY_BBOX, parameters.getBbox());

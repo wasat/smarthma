@@ -12,6 +12,7 @@ public class SharedPrefs {
         settings = context.getSharedPreferences(Const.KEY_PREF_FILE, 0);
     }
 
+
     public String getStartDateTimePrefs() {
         return settings.getString(Const.KEY_PREF_DATETIME_START,
                 "1970-01-01T00:00:00Z");
@@ -24,6 +25,12 @@ public class SharedPrefs {
 
     public String getParentIdPrefs() {
         return settings.getString(Const.KEY_PREF_PARENT_ID, "Fedeo");
+    }
+
+    public void setParentIdPrefs(String parentId) {
+        SharedPreferences.Editor editor = settings.edit();
+        editor.putString(Const.KEY_PREF_PARENT_ID, parentId);
+        editor.apply();
     }
 
     public float[] getBboxPrefs() {
@@ -50,12 +57,6 @@ public class SharedPrefs {
         SharedPreferences.Editor editor = settings.edit();
         editor.putString(Const.KEY_PREF_DATETIME_START, calStartStr);
         editor.putString(Const.KEY_PREF_DATETIME_END, calEndStr);
-        editor.apply();
-    }
-
-    public void setParentIdPrefs(String parentId) {
-        SharedPreferences.Editor editor = settings.edit();
-        editor.putString(Const.KEY_PREF_PARENT_ID, parentId);
         editor.apply();
     }
 

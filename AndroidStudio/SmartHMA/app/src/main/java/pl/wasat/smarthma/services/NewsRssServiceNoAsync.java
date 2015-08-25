@@ -40,10 +40,6 @@ public class NewsRssServiceNoAsync {
         onPreExecute();
         List<NewsArticle> art = doInBackground(Const.URL_ESA_NEWS_1);
         onPostExecute(art);
-
-/*        onPreExecute();
-        List<NewsArticle> art2 = doInBackground(Const.URL_ESA_NEWS_2);
-        onPostExecute(art2);*/
     }
 
     private void onPreExecute() {

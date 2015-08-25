@@ -30,7 +30,6 @@ import com.facebook.model.GraphUser;
 import com.facebook.widget.FacebookDialog;
 import com.facebook.widget.LoginButton;
 import com.facebook.widget.ProfilePictureView;
-import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Picasso.LoadedFrom;
 import com.squareup.picasso.Target;
 
@@ -46,8 +45,6 @@ import pl.wasat.smarthma.R;
 public class FacebookDialogFragment extends DialogFragment implements Target {
 
     private static final String ARG_PARAM_QUICKLOOK_URL = "pl.wasat.smarthma.ARG_PARAM_QUICKLOOK_URL";
-
-    private String paramQLookUrl;
 
     private Button postPhotoButton;
     private ImageView imgViewQLook;
@@ -113,7 +110,7 @@ public class FacebookDialogFragment extends DialogFragment implements Target {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            paramQLookUrl = getArguments().getString(ARG_PARAM_QUICKLOOK_URL);
+            String paramQLookUrl = getArguments().getString(ARG_PARAM_QUICKLOOK_URL);
         }
 
         if (savedInstanceState != null) {
@@ -175,7 +172,7 @@ public class FacebookDialogFragment extends DialogFragment implements Target {
 
         Target quicklookTarget = this;
 
-       // Picasso.with(getActivity()).load(paramQLookUrl).into(quicklookTarget);
+        // Picasso.with(getActivity()).load(paramQLookUrl).into(quicklookTarget);
 
         return rootView;
     }
@@ -376,8 +373,6 @@ public class FacebookDialogFragment extends DialogFragment implements Target {
 
     @Override
     public void onBitmapFailed(Drawable arg0) {
-        // TODO Auto-generated method stub
-
     }
 
     @Override
@@ -391,8 +386,6 @@ public class FacebookDialogFragment extends DialogFragment implements Target {
 
     @Override
     public void onPrepareLoad(Drawable arg0) {
-        // TODO Auto-generated method stub
-
     }
 
 }

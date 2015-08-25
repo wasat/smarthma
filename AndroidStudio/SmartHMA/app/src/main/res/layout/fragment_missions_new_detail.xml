@@ -24,21 +24,21 @@
             android:background="@color/background_gray"
             android:textStyle="bold" />
 
-     <!--   <TextView
-            android:id="@+id/missions_detail_frag_subtitle_tv"
-            style="?android:attr/textAppearanceLarge"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingBottom="@dimen/esa_missions_padding"
-            android:paddingLeft="@dimen/esa_missions_padding"
-            android:paddingRight="@dimen/esa_missions_padding"
-            android:background="@color/background_gray"
-            android:textColor="#A8A8A8"
-            android:textSize="12sp"
-            android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
-            android:textStyle="italic" />
+        <!--   <TextView
+               android:id="@+id/missions_detail_frag_subtitle_tv"
+               style="?android:attr/textAppearanceLarge"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:paddingBottom="@dimen/esa_missions_padding"
+               android:paddingLeft="@dimen/esa_missions_padding"
+               android:paddingRight="@dimen/esa_missions_padding"
+               android:background="@color/background_gray"
+               android:textColor="#A8A8A8"
+               android:textSize="12sp"
+               android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+               android:textStyle="italic" />
 
-            -->
+               -->
 
         <WebView
             android:id="@+id/missions_detail_frag_content_web"
@@ -68,8 +68,7 @@
 
                 android:layout_marginTop="@dimen/esa_missions_padding_small"
                 android:text="@string/search_eo_data"
-                android:textSize="@dimen/button_blue_text_size"
-                />
+                android:textSize="@dimen/button_blue_text_size" />
         </LinearLayout>
     </LinearLayout>
 

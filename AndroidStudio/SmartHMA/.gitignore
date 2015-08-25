@@ -14,13 +14,9 @@ gradle
 .idea/workspace.xml
 .idea/.name
 .idea/compiler.xml
-.idea/copyright/profiles_settings.xml
 .idea/encodings.xml
 .idea/misc.xml
 .idea/modules.xml
 .idea/vcs.xml
 *.iml
-/**/*.iml
-
 .idea/copyright
-SmartHMA.iml

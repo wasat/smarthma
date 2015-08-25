@@ -6,22 +6,21 @@
     android:paddingBottom="@dimen/browse_eo_cell_divider"
     android:background="@color/background_gray">
 
-   <!-- <LinearLayout
-        android:id="@+id/entry_item_collection_thumb_layout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_centerVertical="true"
-        android:layout_marginRight="5dip"
-        android:background="@drawable/image_bg"
-        android:padding="3dip">
-        -->
+    <!-- <LinearLayout
+         android:id="@+id/entry_item_collection_thumb_layout"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_alignParentLeft="true"
+         android:layout_centerVertical="true"
+         android:layout_marginRight="5dip"
+         android:background="@drawable/image_bg"
+         android:padding="3dip">
+         -->
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/background_white"
-        android:padding="@dimen/browse_eo_padding_medium"
-        >
+        android:padding="@dimen/browse_eo_padding_medium">
         <ImageView
             android:id="@+id/entry_item_thumb_imageview"
             android:layout_width="@dimen/browse_eo_image_size"
@@ -59,8 +58,7 @@
                 android:minLines="1"
                 android:textColor="@color/text_black"
                 android:textSize="@dimen/browse_eo_cell_text_size_large"
-                android:paddingRight="@dimen/browse_eo_padding_medium"
-                 />
+                android:paddingRight="@dimen/browse_eo_padding_medium" />
 
             <pl.wasat.smarthma.customviews.TextViewWithFont
                 android:id="@+id/entry_item_dates_textview"
@@ -72,8 +70,7 @@
                 android:textSize="@dimen/browse_eo_cell_text_size"
                 android:layout_toLeftOf="@id/star_button"
                 android:paddingRight="@dimen/browse_eo_padding_medium"
-                android:layout_alignLeft="@id/entry_item_title_textview"
-                />
+                android:layout_alignLeft="@id/entry_item_title_textview" />
 
         </LinearLayout>
     </RelativeLayout>

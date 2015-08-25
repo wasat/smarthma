@@ -61,12 +61,12 @@ public class Collection implements Parcelable, Comparator<Object> {
     }
 
 
-    public boolean isRead(){
+    public boolean isRead() {
         return read;
     }
 
 
-    public void setRead(){
+    public void setRead() {
         this.read = true;
     }
     /*
@@ -116,7 +116,6 @@ public class Collection implements Parcelable, Comparator<Object> {
 
     @Override
     public int describeContents() {
-        // TODO Auto-generated method stub
         return 0;
     }
 

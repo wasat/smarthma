@@ -6,8 +6,6 @@ import android.os.Bundle;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
-
 import pl.wasat.smarthma.R;
 import pl.wasat.smarthma.helper.Const;
 import pl.wasat.smarthma.model.mission.MissionItemData;
@@ -37,7 +35,7 @@ public class MissionsActivity extends BaseSmartHMActivity implements
                 .add(R.id.activity_base_list_container, extendedListFragment,
                         "ExtendedListFragment").commit();
 
-        String objective = "The objective and continuous views of our planet supplied by satellite images and data provide scientists and decision makers with the information they need to understand and protect our environment. Among their many applications are monitoring the air, seas and land; providing the basis for accurate weather reports; and supplying national and international relief agencies with data when disasters strike";
+        String objective = getString(R.string.mission_activity_objective);
         MissionItemData missionObjective = new MissionItemData(0,
                 "ESA Earth Observation Missions",
                 "https://earth.esa.int/web/guest/missions", "", objective);

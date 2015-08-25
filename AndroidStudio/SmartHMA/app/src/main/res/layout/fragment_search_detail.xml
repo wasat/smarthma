@@ -54,6 +54,7 @@
             android:gravity="center"
             android:layout_alignParentBottom="true"
             android:orientation="vertical">
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -80,13 +81,13 @@
                 android:drawableLeft="@drawable/ic_metadata"
                 android:layout_marginLeft="@dimen/browse_eo_padding_medium"
                 android:text="@string/show_metadata" />
-        </LinearLayout>
+            </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="@dimen/browse_eo_padding_small">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="@dimen/browse_eo_padding_small">
             <Button
                 android:id="@+id/search_detail_button_show_map"
                 style="@style/buttonBlue"
@@ -108,7 +109,7 @@
                 android:drawableLeft="@drawable/ic_share"
                 android:layout_marginLeft="@dimen/browse_eo_padding_medium"
                 android:text="@string/Share" />
-</LinearLayout>
+            </LinearLayout>
         </LinearLayout>
 
 

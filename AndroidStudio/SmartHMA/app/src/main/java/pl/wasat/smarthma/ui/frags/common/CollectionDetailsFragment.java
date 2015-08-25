@@ -2,7 +2,6 @@ package pl.wasat.smarthma.ui.frags.common;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -11,7 +10,6 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.TableLayout;
-import pl.wasat.smarthma.R;
 
 import com.google.api.client.http.GenericUrl;
 import com.octo.android.robospice.persistence.exception.SpiceException;
@@ -69,7 +67,6 @@ public class CollectionDetailsFragment extends
     }
 
     public CollectionDetailsFragment() {
-        // Required empty public constructor
     }
 
     /*
@@ -84,8 +81,6 @@ public class CollectionDetailsFragment extends
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
-
-        //putParentIdToShared();
 
         loadDefaultFedeoParams();
 
@@ -108,9 +103,8 @@ public class CollectionDetailsFragment extends
             public void onClick(View v) {
                 if (mListener != null) {
                     // TODO !!!
-                    //mListener.onCollectionDetailsFragmentShowProducts(parentID);
                     mSlidingLayer.closeLayer(true);
-                    fedeoRequestParams.buildFromShared(getActivity());
+                    //fedeoRequestParams.buildFromShared(getActivity());
                     fedeoRequestParams.setParentIdentifier(displayedISOEntry.getIdentifier());
                     mListener.onCollectionDetailsFragmentShowProducts(fedeoRequestParams);
                 }
@@ -123,7 +117,7 @@ public class CollectionDetailsFragment extends
                 mListener.onCollectionDetailsFragmentShowMetadata(displayedISOEntry);
             }
         });
-            //TODO !!!
+        //TODO !!!
         loadParamsSliderView(osddUrl);
 
         return rootView;
@@ -135,7 +129,6 @@ public class CollectionDetailsFragment extends
         mSlidingLayer.setOnInteractListener(new SlidingLayer.OnInteractListener() {
             @Override
             public void onOpen() {
-                Log.i("SLIDER", "onOpen");
                 if (waitForOsddLoad) {
                     startAsyncLoadOsddData(finalOsddUrl);
                 }
@@ -143,38 +136,32 @@ public class CollectionDetailsFragment extends
 
             @Override
             public void onShowPreview() {
-                Log.i("SLIDER", "onShowPreview");
             }
 
             @Override
             public void onClose() {
-                Log.i("SLIDER", "onClose");
                 if (paramsMap != null) {
                     fedeoRequestParams.setParamsExtra(paramsMap);
-                    //mListener.onCollectionDetailsFragmentShowProducts(fedeoRequestParams);
                 }
             }
 
             @Override
             public void onOpened() {
-                Log.i("SLIDER", "onOpened");
             }
 
             @Override
             public void onPreviewShowed() {
-                Log.i("SLIDER", "onPreviewShowed");
             }
 
             @Override
             public void onClosed() {
-                Log.i("SLIDER", "onClosed");
             }
         });
     }
 
     private void loadDefaultFedeoParams() {
         fedeoRequestParams = new FedeoRequestParams();
-        fedeoRequestParams.buildFromShared(getActivity().getApplicationContext());
+        //fedeoRequestParams.buildFromShared(getActivity().getApplicationContext());
     }
 
     @Override
@@ -194,16 +181,6 @@ public class CollectionDetailsFragment extends
         mListener = null;
     }
 
-/*    private void putParentIdToShared() {
-        final String parentID;
-        if (displayedISOEntry != null) {
-            parentID = displayedISOEntry.getIdentifier();
-        } else {
-            parentID = collectionName;
-        }
-        SharedPrefs sharedPrefs = new SharedPrefs(getActivity().getApplicationContext());
-        sharedPrefs.setParentIdPrefs(parentID);
-    }*/
 
     private void startAsyncLoadOsddData(GenericUrl fedeoDescUrl) {
         if (fedeoDescUrl != null) {
@@ -235,7 +212,7 @@ public class CollectionDetailsFragment extends
                     spinner.setLayoutParams(new TableLayout.LayoutParams(
                             TableLayout.LayoutParams.WRAP_CONTENT, TableLayout.LayoutParams.WRAP_CONTENT, 1f));
                     spinner.setPadding(25, 10, 25, 10);
-                    spinner.setBackgroundColor(R.color.background_gray);
+                    //spinner.setBackgroundColor(R.color.background_gray);
                     //android:background="@color/background_gray"
                     //spinner.setPrompt(param.getName());
 
@@ -245,7 +222,7 @@ public class CollectionDetailsFragment extends
                         optList.add(opt.getLabel());
                     }
 
-                    ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<>(getActivity(), R.layout.custom_spinner_item/*android.R.layout.simple_spinner_item*/, optList);
+                    ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<>(getActivity(), R.layout.custom_spinner_item, optList);
                     spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                     spinner.setAdapter(spinnerAdapter);
 
@@ -254,10 +231,6 @@ public class CollectionDetailsFragment extends
                         public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                             if (l > 0) {
                                 paramsMap.put(param.getName(), param.getOption().get(i - 1).getValue());
-
-/*                                Toast.makeText(adapterView.getContext(),
-                                        "Item Selected : " + adapterView.getItemAtPosition(i).toString() + " ID: " + l,
-                                        Toast.LENGTH_LONG).show();*/
                             } else {
                                 paramsMap.put(param.getName(), "");
                             }
@@ -265,7 +238,6 @@ public class CollectionDetailsFragment extends
 
                         @Override
                         public void onNothingSelected(AdapterView<?> adapterView) {
-
                         }
                     });
 
@@ -296,7 +268,6 @@ public class CollectionDetailsFragment extends
      * >Communicating with Other Fragments</a> for more information.
      */
     public interface OnCollectionDetailsFragmentListener {
-        // public void onCollectionDetailsFragmentShowProducts(String parentID);
 
         void onCollectionDetailsFragmentShowProducts(FedeoRequestParams fedeoRequestParams);
 

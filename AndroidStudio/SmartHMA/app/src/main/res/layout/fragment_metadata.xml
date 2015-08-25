@@ -33,14 +33,13 @@
             android:paddingTop="2dp"
             android:textColor="@color/text_black"
             android:text="lorem"
-            android:textSize="@dimen/search_eo_data_text_medium"
-             />
+            android:textSize="@dimen/search_eo_data_text_medium" />
 
         <View
             android:layout_width="fill_parent"
             android:layout_height="1dp"
             android:background="@color/action_bar_background"
-            android:layout_marginLeft="@dimen/browse_eo_padding"/>
+            android:layout_marginLeft="@dimen/browse_eo_padding" />
 
         <pl.wasat.smarthma.customviews.TextViewWithFont
             android:layout_width="wrap_content"
@@ -48,7 +47,7 @@
             style="@style/textMainTitle"
             android:paddingLeft="@dimen/browse_eo_padding"
             android:textSize="@dimen/search_eo_data_text"
-            android:text="Metadata File ID"/>
+            android:text="Metadata File ID" />
 
         <LinearLayout
             android:layout_width="fill_parent"
@@ -63,7 +62,7 @@
                 android:paddingLeft="@dimen/browse_eo_padding"
                 android:layout_weight="2"
                 android:textSize="@dimen/search_eo_data_text_medium"
-                android:text="lorem lorem"/>
+                android:text="lorem lorem" />
 
             <pl.wasat.smarthma.customviews.TextViewWithFont
                 android:layout_width="match_parent"
@@ -72,13 +71,14 @@
                 android:textSize="@dimen/search_eo_data_text_medium"
                 android:textColor="@color/action_bar_background"
                 android:text="lorem lorem lorem lorem
-                "/>
+                " />
         </LinearLayout>
+
         <View
             android:layout_width="fill_parent"
             android:layout_height="1dp"
             android:background="@color/action_bar_background"
-            android:layout_marginLeft="@dimen/browse_eo_padding"/>
+            android:layout_marginLeft="@dimen/browse_eo_padding" />
 
         <pl.wasat.smarthma.customviews.TextViewWithFont
             android:layout_width="wrap_content"
@@ -86,7 +86,7 @@
             style="@style/textMainTitle"
             android:paddingLeft="@dimen/browse_eo_padding"
             android:textSize="@dimen/search_eo_data_text"
-            android:text="Metadata Language"/>
+            android:text="Metadata Language" />
 
         <LinearLayout
             android:layout_width="fill_parent"
@@ -101,7 +101,7 @@
                 android:paddingLeft="@dimen/browse_eo_padding"
                 android:layout_weight="2"
                 android:textSize="@dimen/search_eo_data_text_medium"
-                android:text="Language"/>
+                android:text="Language" />
 
             <pl.wasat.smarthma.customviews.TextViewWithFont
                 android:layout_width="match_parent"
@@ -110,13 +110,14 @@
                 android:textSize="@dimen/search_eo_data_text_medium"
                 android:textColor="@color/action_bar_background"
                 android:text="lorem lorem lorem lorem
-                "/>
+                " />
         </LinearLayout>
+
         <View
             android:layout_width="fill_parent"
             android:layout_height="1dp"
             android:background="@color/action_bar_background"
-            android:layout_marginLeft="@dimen/browse_eo_padding"/>
+            android:layout_marginLeft="@dimen/browse_eo_padding" />
 
         <pl.wasat.smarthma.customviews.TextViewWithFont
             android:layout_width="wrap_content"
@@ -124,7 +125,7 @@
             style="@style/textMainTitle"
             android:paddingLeft="@dimen/browse_eo_padding"
             android:textSize="@dimen/search_eo_data_text"
-            android:text="Earth Observation Provider Contact"/>
+            android:text="Earth Observation Provider Contact" />
 
         <LinearLayout
             android:layout_width="fill_parent"
@@ -138,7 +139,7 @@
                 android:paddingLeft="@dimen/browse_eo_padding"
                 android:layout_weight="2"
                 android:textSize="@dimen/search_eo_data_text_medium"
-                android:text="Contact info"/>
+                android:text="Contact info" />
 
             <pl.wasat.smarthma.customviews.TextViewWithFont
                 android:layout_width="match_parent"
@@ -147,30 +148,7 @@
                 android:textSize="@dimen/search_eo_data_text_medium"
                 android:textColor="@color/action_bar_background"
                 android:text="lorem lorem lorem lorem
-                "/>
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <pl.wasat.smarthma.customviews.TextViewWithFont
-
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingLeft="@dimen/browse_eo_padding"
-                android:layout_weight="2"
-                android:textSize="@dimen/search_eo_data_text_medium"
-                android:text="lorem lorem"/>
-
-            <pl.wasat.smarthma.customviews.TextViewWithFont
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:textSize="@dimen/search_eo_data_text_medium"
-                android:textColor="@color/action_bar_background"
-                android:text="lorem lorem lorem lorem
-                "/>
+                " />
         </LinearLayout>
 
         <LinearLayout
@@ -185,7 +163,7 @@
                 android:paddingLeft="@dimen/browse_eo_padding"
                 android:layout_weight="2"
                 android:textSize="@dimen/search_eo_data_text_medium"
-                android:text="lorem lorem"/>
+                android:text="lorem lorem" />
 
             <pl.wasat.smarthma.customviews.TextViewWithFont
                 android:layout_width="match_parent"
@@ -194,7 +172,31 @@
                 android:textSize="@dimen/search_eo_data_text_medium"
                 android:textColor="@color/action_bar_background"
                 android:text="lorem lorem lorem lorem
-                "/>
+                " />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <pl.wasat.smarthma.customviews.TextViewWithFont
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="@dimen/browse_eo_padding"
+                android:layout_weight="2"
+                android:textSize="@dimen/search_eo_data_text_medium"
+                android:text="lorem lorem" />
+
+            <pl.wasat.smarthma.customviews.TextViewWithFont
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textSize="@dimen/search_eo_data_text_medium"
+                android:textColor="@color/action_bar_background"
+                android:text="lorem lorem lorem lorem
+                " />
         </LinearLayout>
 
         <LinearLayout
@@ -210,7 +212,7 @@
                 android:paddingLeft="@dimen/browse_eo_padding"
                 android:layout_weight="2"
                 android:textSize="@dimen/search_eo_data_text_medium"
-                android:text="lorem lorem"/>
+                android:text="lorem lorem" />
 
             <pl.wasat.smarthma.customviews.TextViewWithFont
                 android:layout_width="match_parent"
@@ -219,15 +221,14 @@
                 android:textSize="@dimen/search_eo_data_text_medium"
                 android:textColor="@color/action_bar_background"
                 android:text="lorem lorem lorem lorem
-                "/>
+                " />
         </LinearLayout>
 
         <View
             android:layout_width="fill_parent"
             android:layout_height="1dp"
             android:background="@color/action_bar_background"
-            android:layout_marginLeft="@dimen/browse_eo_padding"
-            />
+            android:layout_marginLeft="@dimen/browse_eo_padding" />
     </LinearLayout>
 
 </ScrollView>

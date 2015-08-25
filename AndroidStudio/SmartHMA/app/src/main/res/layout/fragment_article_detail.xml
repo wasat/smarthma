@@ -65,7 +65,7 @@
             android:layout_centerHorizontal="true"
             android:layout_marginRight="@dimen/esa_missions_padding"
             android:text="@string/more" />
-    </RelativeLayout>
+        </RelativeLayout>
     </LinearLayout>
 
 </ScrollView>

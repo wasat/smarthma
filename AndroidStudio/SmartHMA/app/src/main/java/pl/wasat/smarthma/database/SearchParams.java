@@ -5,8 +5,7 @@ import pl.wasat.smarthma.SmartHMApplication;
 import pl.wasat.smarthma.model.FedeoRequestParams;
 
 /**
- * Created by Dark Mark on 24/02/2015.
- * ETI
+ * A representation of user search parameters.
  */
 public class SearchParams {
     private final String searchPhrase;
@@ -32,50 +31,113 @@ public class SearchParams {
     }
 
     @Override
+    /**
+     * Returns values stored in this object in text form, separated by spaces.
+     */
     public String toString() {
         //return searchPhrase + " " +catalogue + " " + bbox + " " + startDate + " " + endDate;
-        return SmartHMApplication.appSingleton.getString(R.string.query) + ": " + searchPhrase + "; "
-                + SmartHMApplication.appSingleton.getString(R.string.catalogue) + ": " + catalogue + "; "
-                + "BBOX: " + bbox + "; "
-                + SmartHMApplication.appSingleton.getString(R.string.time_period) + ": " + startDate + " - " + endDate;
+        return getSearchPhraseWithPrefix() + "; "
+                + getCatalogueWithPrefix() + "; "
+                + getBboxWithPrefix() + "; "
+                + SmartHMApplication.appSingleton.getString(R.string.time_period) + ": " + getStartDate() + " - " + getEndDate();
     }
 
+    /**
+     * Returns user search query parameter stored in this object.
+     * @return a String representation of the search query
+     */
     public String getSearchPhrase() {
-        return searchPhrase;
+        if (searchPhrase != null) {
+            return searchPhrase;
+        } else {
+            return "NullSearchPhrase";
+        }
     }
 
+    /**
+     * Returns catalogue name parameter stored in this object.
+     * @return a String representation of the catalogue name
+     */
     public String getCatalogue() {
-        return catalogue;
+        if (catalogue != null) {
+            return catalogue;
+        } else {
+            return "NullCatalogue";
+        }
     }
 
+    /**
+     * Returns user selected bounding box parameter stored in this object.
+     * @return a String representation of the selected bounding box
+     */
     public String getBbox() {
-        return bbox;
+        if (catalogue != null) {
+            return bbox;
+        } else {
+            return "NullBbox";
+        }
     }
 
+    /**
+     * Returns the start date parameter stored in this object.
+     * @return a String representation of the start date
+     */
     public String getStartDate() {
-        return startDate;
+        if (catalogue != null) {
+            return startDate;
+        } else {
+            return "NullStartDate";
+        }
     }
 
+    /**
+     * Returns the end date parameter stored in this object.
+     * @return a String representation of the end date
+     */
     public String getEndDate() {
-        return endDate;
+        if (catalogue != null) {
+            return endDate;
+        } else {
+            return "NullEndDate";
+        }
     }
 
-    public String getSearchPhraseWithPrefix() {
+    /**
+     * Returns user search query parameter preceded by a short description.
+     * @return a String representation of the search query
+     */
+    private String getSearchPhraseWithPrefix() {
         return SmartHMApplication.appSingleton.getString(R.string.query) + ": " + getSearchPhrase();
     }
 
-    public String getCatalogueWithPrefix() {
+    /**
+     * Returns catalogue name parameter preceded by a short description.
+     * @return a String representation of the catalogue name
+     */
+    private String getCatalogueWithPrefix() {
         return SmartHMApplication.appSingleton.getString(R.string.catalogue) + ": " + getCatalogue();
     }
 
-    public String getBboxWithPrefix() {
+    /**
+     * Returns user selected bounding box preceded by a short description.
+     * @return a String representation of the selected bounding box
+     */
+    private String getBboxWithPrefix() {
         return SmartHMApplication.appSingleton.getString(R.string.bbox) + ": " + getBbox();
     }
 
+    /**
+     * Returns the start date parameter preceded by a short description.
+     * @return a String representation of the start date
+     */
     public String getStartDateWithPrefix() {
         return SmartHMApplication.appSingleton.getString(R.string.start_date) + ": " + getStartDate();
     }
 
+    /**
+     * Returns the end date parameter preceded by a short description.
+     * @return a String representation of the end date
+     */
     public String getEndDateWithPrefix() {
         return SmartHMApplication.appSingleton.getString(R.string.end_date) + ": " + getEndDate();
     }

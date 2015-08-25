@@ -65,9 +65,7 @@ public class CollectionsListFragment extends BaseSpiceFragment {
         return fragment;
     }
 
-
     public CollectionsListFragment() {
-        // Required empty public constructor
     }
 
     @Override
@@ -84,7 +82,6 @@ public class CollectionsListFragment extends BaseSpiceFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_collections_list, container,
                 false);
     }
@@ -97,17 +94,13 @@ public class CollectionsListFragment extends BaseSpiceFragment {
      */
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
-        // TODO Auto-generated method stub
         super.onViewCreated(view, savedInstanceState);
         initList();
     }
 
     private void initList() {
-        // noinspection ConstantConditions
         ListView list = (ListView) getView()
                 .findViewById(R.id.collections_list);
-
-        // Getting adapter by passing xml data ArrayList
 
         if (!SmartHMApplication.GlobalEODataList.getCollectionsGroupList()
                 .isEmpty()) {
@@ -118,30 +111,18 @@ public class CollectionsListFragment extends BaseSpiceFragment {
                     getActivity(), collections, selectGroupName);
             list.setAdapter(adapter);
 
-            // Click event for single list row
             list.setOnItemClickListener(new OnItemClickListener() {
 
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view,
                                         int position, long id) {
                     collName = collections.get(position).getName();
-                    //loadDataSeriesFeedsActivity(collName);
-
                     loadCollectionDetailFragment(collName);
-
                 }
             });
         }
     }
 
-
-/*
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed() {
-        if (mListener != null) {
-            mListener.onFragmentInteraction();
-        }
-    }*/
 
     @Override
     public void onAttach(Activity activity) {
@@ -170,21 +151,20 @@ public class CollectionsListFragment extends BaseSpiceFragment {
 
     private void loadCollectionDetailFragment(String collName) {
         FedeoRequestParams fedeoRequestParams = new FedeoRequestParams();
-        fedeoRequestParams.buildFromShared(getActivity());
-        HashMap<String, String> paramExtra = new HashMap();
+        //fedeoRequestParams.buildFromShared(getActivity());
+
+        HashMap<String, String> paramExtra = new HashMap<>();
         paramExtra.put("uid", "urn:ogc:def:" + collName);
         fedeoRequestParams.setParamsExtra(paramExtra);
-        if (fedeoRequestParams != null) {
-            getActivity().setProgressBarIndeterminateVisibility(true);
-            getSpiceManager().execute(new FedeoSearchRequest(fedeoRequestParams, 1),
-                    new FeedRequestListener());
-        }
+        getActivity().setProgressBarIndeterminateVisibility(true);
+        getSpiceManager().execute(new FedeoSearchRequest(fedeoRequestParams, 1),
+                new FeedRequestListener());
 
 
     }
 
     private void loadEntryToDetailsFrag(Feed searchedCollectionFeed) {
-        EntryISO entryISO = null;
+        EntryISO entryISO;
         if (searchedCollectionFeed == null) {
             searchedCollectionFeed = new Feed();
         }

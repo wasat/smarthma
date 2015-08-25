@@ -43,12 +43,6 @@ public class DataSeriesListAdapter extends ArrayAdapter<EntryISO> {
         }
 
         holder.textView.setText(dataSeriesItem.getTitle());
-/*        String dateStr = dataSeriesItem.getDate().toString();
-        if (dateStr.isEmpty()) {
-            dateStr = "1970-01-01T00:00:00.000Z";
-        } else {
-            dateStr = dataSeriesItem.getDate().getCIDate().getDateInCIDate().getDateGco().getText();
-        }*/
 
         String pubDate = "Date: " + DateUtils.getISOPubDate(dataSeriesItem)
                 + ", updated: " + dataSeriesItem.getUpdated();

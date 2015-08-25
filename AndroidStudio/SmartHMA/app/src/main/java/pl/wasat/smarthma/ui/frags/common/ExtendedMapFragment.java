@@ -71,19 +71,16 @@ public class ExtendedMapFragment extends Fragment implements
      *
      * @return A new instance of fragment MapExtendedFragment.
      */
-    // TODO: Rename and change types and number of parameters
     public static ExtendedMapFragment newInstance() {
         return new ExtendedMapFragment();
     }
 
     public ExtendedMapFragment() {
-        // Required empty public constructor
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_map_extended,
                 container, false);
 
@@ -259,7 +256,6 @@ public class ExtendedMapFragment extends Fragment implements
 
     @Override
     public void onPrepareLoad(Drawable arg0) {
-        // TODO Auto-generated method stub
     }
 
     @Override
@@ -279,8 +275,6 @@ public class ExtendedMapFragment extends Fragment implements
 
     @Override
     public void onBitmapFailed(Drawable arg0) {
-        // TODO Auto-generated method stub
-
     }
 
     @Override
@@ -303,19 +297,14 @@ public class ExtendedMapFragment extends Fragment implements
 
     @Override
     public void onStartTrackingTouch(SeekBar seekBar) {
-        // TODO Auto-generated method stub
-
     }
 
     @Override
     public void onStopTrackingTouch(SeekBar seekBar) {
-        // TODO Auto-generated method stub
-
     }
 
     @Override
     public String key() {
-        // TODO Auto-generated method stub
         return null;
     }
 

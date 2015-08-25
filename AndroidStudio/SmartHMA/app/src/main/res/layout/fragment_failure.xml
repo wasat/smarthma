@@ -14,6 +14,6 @@
         android:text="@string/failure_fragment_text"
         android:textSize="28sp"
         android:textStyle="bold"
-        android:background="@color/background_gray"/>
+        android:background="@color/background_gray" />
 
 </FrameLayout>

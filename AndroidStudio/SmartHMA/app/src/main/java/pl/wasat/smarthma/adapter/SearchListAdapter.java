@@ -1,7 +1,6 @@
 package pl.wasat.smarthma.adapter;
 
 import android.app.Activity;
-import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,8 +34,6 @@ public class SearchListAdapter extends ArrayAdapter<EntryISO> {
 
         TextView dateView = (TextView) rowView
                 .findViewById(R.id.search_listing_smallprint);
-        //String pubDate = "Date: " + searchItem.getDate().getCIDate().getDateInCIDate().getDateGco().getText() + ", updated: "
-        //        + searchItem.getUpdated();
 
         final String pubDate = "This data were published: "
                 + DateUtils.getISOPubDate(searchItem) + " and updated: "

@@ -6,10 +6,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.widget.Button;
+import android.widget.ListView;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+
 import pl.wasat.smarthma.R;
+import pl.wasat.smarthma.adapter.IntroGridAdapter;
 import pl.wasat.smarthma.model.feed.Feed;
 
 /**
@@ -29,15 +32,13 @@ public class BaseFeedSummaryFragment extends Fragment {
     private TextView tvTotal;
     private TextView tvItemsFrom;
     private TextView tvItemsTo;
+    private TextView tvItemsTotal;
 
     private View btnFirst;
     private View btnPrev;
     private View btnReload;
     private View btnNext;
     private View btnLast;
-
-    //private Spinner spnSortType;
-
 
     public BaseFeedSummaryFragment() {
     }
@@ -48,9 +49,6 @@ public class BaseFeedSummaryFragment extends Fragment {
         if (getArguments() != null) {
             resultFeed = (Feed) getArguments()
                     .getSerializable(KEY_FEED_SUMMARY);
-
-            //List<EntryOM> entries = resultFeed.getEntriesEO();
-            //sorter.sort(entries);
         }
     }
 
@@ -63,7 +61,7 @@ public class BaseFeedSummaryFragment extends Fragment {
 
         tvTitle = (TextView) rootView
                 .findViewById(R.id.search_frag_ds_intro_title);
-        tvSearchTerms = (TextView) rootView
+/*        tvSearchTerms = (TextView) rootView
                 .findViewById(R.id.search_frag_ds_intro_search_terms_value);
         tvParentName = (TextView) rootView
                 .findViewById(R.id.search_frag_ds_intro_collection_value);
@@ -76,28 +74,45 @@ public class BaseFeedSummaryFragment extends Fragment {
         tvUpdated = (TextView) rootView
                 .findViewById(R.id.search_frag_ds_intro_updated_value);
         tvTotal = (TextView) rootView
-                .findViewById(R.id.search_frag_ds_intro_total_value);
+                .findViewById(R.id.search_frag_ds_intro_total_value);*/
         tvItemsFrom = (TextView) rootView
                 .findViewById(R.id.search_frag_ds_intro_items_from_value);
         tvItemsTo = (TextView) rootView
                 .findViewById(R.id.search_frag_ds_intro_items_to_value);
+        tvItemsTotal = (TextView) rootView
+                .findViewById(R.id.search_frag_ds_intro_items_of_total_value);
 
-        btnFirst =  rootView
+        btnFirst = rootView
                 .findViewById(R.id.search_frag_ds_intro_button_first);
-        btnPrev =  rootView
+        btnPrev = rootView
                 .findViewById(R.id.search_frag_ds_intro_button_prev);
-        btnReload =  rootView
+        btnReload = rootView
                 .findViewById(R.id.search_frag_ds_intro_button_reload);
-        btnNext =  rootView
+        btnNext = rootView
                 .findViewById(R.id.search_frag_ds_intro_button_next);
-        btnLast =  rootView
+        btnLast = rootView
                 .findViewById(R.id.search_frag_ds_intro_button_last);
-
-        //spnSortType = (Spinner) rootView.findViewById(R.id.search_frag_ds_intro_spinner_sort_type);
-
 
         initUITexts();
         initUIButtons();
+
+        ArrayList<String> adapterNamesList = resultFeed.getQuery().getParamNameList();
+        ArrayList<String> adapterValuesList = resultFeed.getQuery().getParamValueList();
+        adapterNamesList.add("generated");
+        adapterValuesList.add("-  " + resultFeed.getUpdated());
+
+        IntroGridAdapter adapter = new IntroGridAdapter(getActivity(), adapterNamesList, adapterValuesList);
+        ListView gridView = (ListView) rootView.findViewById(R.id.intro_grid_layout);
+        gridView.setAdapter(adapter);
+/*        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view,
+                                    int position, long id) {
+                Toast.makeText(getActivity(), "You Clicked at " + resultFeed.getQuery().getParamValueList().get(position), Toast.LENGTH_SHORT).show();
+
+            }
+        });*/
 
         return rootView;
     }
@@ -107,13 +122,13 @@ public class BaseFeedSummaryFragment extends Fragment {
      */
     private void initUITexts() {
         tvTitle.setText(resultFeed.getTitle());
-        tvSearchTerms.setText(resultFeed.getQuery().getSearchTerms());
-        tvParentName.setText(resultFeed.getQuery().getDcSubject());
-        tvTimeStart.setText(resultFeed.getQuery().getTimeStart());
-        tvTimeEnd.setText(resultFeed.getQuery().getTimeEnd());
-        tvArea.setText(resultFeed.getQuery().getGeoBox());
-        tvUpdated.setText(resultFeed.getUpdated());
-        tvTotal.setText(resultFeed.getTotalResults().getText());
+        //tvSearchTerms.setText(resultFeed.getQuery().getSearchTerms());
+        //tvParentName.setText(resultFeed.getQuery().getDcSubject());
+        //tvTimeStart.setText(resultFeed.getQuery().getTimeStart());
+        //tvTimeEnd.setText(resultFeed.getQuery().getTimeEnd());
+        //tvArea.setText(resultFeed.getQuery().getGeoBox());
+        //tvUpdated.setText(resultFeed.getUpdated());
+        //tvTotal.setText(resultFeed.getTotalResults().getText());
         tvItemsFrom.setText(resultFeed.getStartIndex().getText());
         int toVal = Integer.valueOf(resultFeed.getStartIndex().getText())
                 + Integer.valueOf(resultFeed.getItemsPerPage().getText()) - 1;
@@ -121,6 +136,7 @@ public class BaseFeedSummaryFragment extends Fragment {
             toVal = Integer.valueOf(resultFeed.getTotalResults().getText());
         }
         tvItemsTo.setText(String.valueOf(toVal));
+        tvItemsTotal.setText(resultFeed.getTotalResults().getText());
     }
 
     private void initUIButtons() {
@@ -177,24 +193,6 @@ public class BaseFeedSummaryFragment extends Fragment {
                 });
             }
         }
-
-        /*
-        spnSortType.setSelection(SmartHMApplication.sortingType, false);
-        spnSortType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                if (position != SmartHMApplication.sortingType) {
-                    SmartHMApplication.sortingType = position;
-                    btnReload.performClick();
-                }
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
-        */
     }
 
     protected void loadNavSearch(String linkHref) {

@@ -134,7 +134,7 @@ public class SearchListFragment extends BaseSpiceListFragment {
                         : ListView.CHOICE_MODE_NONE);
     }
 
-    void setActivatedPosition(int position) {
+    private void setActivatedPosition(int position) {
         if (position == ListView.INVALID_POSITION) {
             getListView().setItemChecked(mActivatedPosition, false);
         } else {
@@ -177,7 +177,7 @@ public class SearchListFragment extends BaseSpiceListFragment {
         return true;
     }
 
-    void refreshList() {
+    private void refreshList() {
         loadSearchFeedResponse(searchRequest);
         Toast.makeText(getActivity(), getActivity().getString(R.string.refreshing_list), Toast.LENGTH_LONG).show();
     }
@@ -203,7 +203,6 @@ public class SearchListFragment extends BaseSpiceListFragment {
                         searchFeedList);
                 this.setListAdapter(adapter);
                 adapter.notifyDataSetChanged();
-                //SearchListAdapter adapter1 = adapter;
                 view.setVisibility(View.VISIBLE);
             }
         }

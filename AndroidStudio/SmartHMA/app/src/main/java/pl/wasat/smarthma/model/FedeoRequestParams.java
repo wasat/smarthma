@@ -3,13 +3,13 @@
  */
 package pl.wasat.smarthma.model;
 
-import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.Log;
 
 import java.io.Serializable;
 import java.util.HashMap;
 
+import pl.wasat.smarthma.SmartHMApplication;
 import pl.wasat.smarthma.helper.Const;
 import pl.wasat.smarthma.utils.obj.LatLngBoundsExt;
 import pl.wasat.smarthma.utils.obj.LatLngExt;
@@ -42,7 +42,7 @@ public class FedeoRequestParams implements Serializable {
      */
     public FedeoRequestParams() {
         this.params = new HashMap<>();
-        this.httpAccept = "application/atom%2Bxml";
+        setDefaultParams();
     }
 
     private void setDefaultParams() {
@@ -65,11 +65,10 @@ public class FedeoRequestParams implements Serializable {
 
     }
 
-    public void buildFromShared(Context context) {
-        SharedPreferences prefs = context.getSharedPreferences(
+    private void buildFromShared() {
+        SharedPreferences prefs = SmartHMApplication.getAppContext().getSharedPreferences(
                 Const.KEY_PREF_FILE, 0);
 
-        setDefaultParams();
         //setParentIdentifier(prefs.getString(Const.KEY_PREF_PARENT_ID, "EOP:ESA:FEDEO"));
         setStartDate(prefs.getString(Const.KEY_PREF_DATETIME_START, "0"));
         setEndDate(prefs.getString(Const.KEY_PREF_DATETIME_END, "0"));
@@ -81,6 +80,9 @@ public class FedeoRequestParams implements Serializable {
     }
 
     private void buildUrl() {
+
+        buildFromShared();
+
         String url;
         url = Const.HTTP_BASE_URL + "?";
         for (HashMap.Entry<String, String> entry : params.entrySet()) {
@@ -109,7 +111,7 @@ public class FedeoRequestParams implements Serializable {
      * @return String url
      */
     public String getUrl() {
-        buildUrl();
+        if (url == null) buildUrl();
         return url;
     }
 

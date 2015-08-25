@@ -4,22 +4,16 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent">
 
-   <!-- <ImageView
-        style="@style/styleImageBg"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:contentDescription="@string/desc" />
-   -->
     <LinearLayout
         android:id="@+id/menu_action_bar_layout"
-        android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/background_gray"
         android:layout_alignParentTop="true"
-        android:paddingTop="@dimen/action_bar_padding_top"
+        android:background="@color/background_gray"
+        android:orientation="horizontal"
+        android:paddingLeft="@dimen/action_bar_padding"
         android:paddingRight="@dimen/action_bar_padding"
-        android:paddingLeft="@dimen/action_bar_padding">
+        android:paddingTop="@dimen/action_bar_padding_top">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -32,59 +26,60 @@
                 android:layout_height="@dimen/action_bar_height_land"
                 android:layout_centerHorizontal="true"
                 android:layout_centerVertical="true"
-                android:src="@drawable/actionbar_logo"
-                android:padding="@dimen/action_bar_logo_padding"/>
+                android:padding="@dimen/action_bar_logo_padding"
+                android:src="@drawable/actionbar_logo" />
         </RelativeLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="horizontal"
             android:layout_weight="2"
-            android:background="@color/action_bar_background">
+            android:background="@color/action_bar_background"
+            android:orientation="horizontal">
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="2">
+
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/ic_rec"
-                    android:layout_centerVertical="true"/>
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/ic_rec" />
+
                 <pl.wasat.smarthma.customviews.TextViewWithFont
                     android:id="@+id/action_bar_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="@dimen/action_bar_title_size"
-                    android:textColor="@color/text_black"
-                    android:text="@string/action_bar_home"
-                    android:paddingLeft="@dimen/action_bar_title_padding"
-                    android:layout_centerVertical="true"
                     android:layout_alignParentLeft="true"
-                    android:layout_alignParentStart="true" />
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:paddingLeft="@dimen/action_bar_title_padding"
+                    android:text="@string/action_bar_home"
+                    android:textColor="@color/text_black"
+                    android:textSize="@dimen/action_bar_title_size" />
 
             </RelativeLayout>
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
                 android:layout_weight="8"
-                android:background="@color/action_bar_menu_background"
-                android:layout_alignParentRight="true">
+                android:background="@color/action_bar_menu_background">
 
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="@dimen/action_bar_height_land"
-                    android:src="@drawable/actionbar_menu"
-                    android:layout_centerVertical="true"
                     android:layout_centerHorizontal="true"
-                    android:padding="@dimen/action_bar_logo_padding"/>
+                    android:layout_centerVertical="true"
+                    android:padding="@dimen/action_bar_logo_padding"
+                    android:src="@drawable/actionbar_menu" />
 
             </RelativeLayout>
 
         </LinearLayout>
-
 
 
     </LinearLayout>
@@ -93,27 +88,27 @@
         android:id="@+id/a"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/background_gray"
+        android:layout_above="@+id/relativeLayout"
+        android:layout_below="@id/menu_action_bar_layout"
         android:layout_marginLeft="0dp"
         android:layout_marginRight="0dp"
+        android:background="@color/background_gray"
         android:baselineAligned="false"
         android:divider="?android:attr/dividerHorizontal"
         android:orientation="horizontal"
-        android:showDividers="middle"
-        android:layout_below="@id/menu_action_bar_layout"
-        android:paddingRight="@dimen/action_bar_padding"
         android:paddingLeft="@dimen/action_bar_padding"
+        android:paddingRight="@dimen/action_bar_padding"
         android:paddingTop="10dp"
 
-        android:layout_above="@+id/relativeLayout">
+        android:showDividers="middle">
 
         <fragment
             android:id="@+id/article_list"
             android:name="pl.wasat.smarthma.ui.frags.news.NewsListFragment"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="2"
-            />
+            android:layout_weight="2" />
+
         <FrameLayout
             android:id="@+id/article_detail_container"
             android:layout_width="0dp"
@@ -124,27 +119,26 @@
     </LinearLayout>
 
     <RelativeLayout
+        android:id="@+id/relativeLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:padding="@dimen/copyright_padding_land"
         android:background="@color/background_gray"
-        android:id="@+id/relativeLayout">
+        android:padding="@dimen/copyright_padding_land">
 
         <pl.wasat.smarthma.customviews.TextViewWithFont
             android:id="@+id/copyright_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
             android:text="@string/copyright"
             android:textColor="@color/copyright_color"
             android:textSize="@dimen/menu_copytight_size"
-            android:layout_centerInParent="true"
 
 
             />
 
     </RelativeLayout>
-
 
 
 </RelativeLayout>

@@ -75,8 +75,6 @@ public class ProductDetailsFragment extends Fragment implements Target {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-
         setHasOptionsMenu(true);
         View rootView = inflater.inflate(R.layout.fragment_product_details,
                 container, false);
@@ -167,7 +165,6 @@ public class ProductDetailsFragment extends Fragment implements Target {
             return true;
         } else if (id == R.id.actionbar_share) {
             startQLookTarget();
-            // sendIntentShareUrl();
             return true;
         } else {
             return super.onOptionsItemSelected(item);
@@ -284,8 +281,6 @@ public class ProductDetailsFragment extends Fragment implements Target {
 
     @Override
     public void onPrepareLoad(Drawable arg0) {
-        // TODO Auto-generated method stub
-
     }
 
 }

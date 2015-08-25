@@ -25,6 +25,10 @@ public class AcraExtension {
         mapState(checkInstance(map));
     }
 
+    /**
+     * @param map GoogleMap object
+     * @return String instance
+     */
     private static String checkInstance(GoogleMap map) {
         String instance;
         if (map != null) {

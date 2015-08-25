@@ -4,6 +4,7 @@
 package pl.wasat.smarthma;
 
 import android.app.Application;
+import android.content.Context;
 import android.os.Build;
 
 import org.acra.ACRA;
@@ -40,20 +41,24 @@ public class SmartHMApplication extends Application {
     public static ExplainData GlobalExplainData = new ExplainData();
     public static int sortingType = Const.SORT_BY_TITLE_ASCENDING;
     public static SmartHMApplication appSingleton;
+    private static Context context;
 
 
     @Override
     public void onCreate() {
         super.onCreate();
-        // The following line triggers the initialization of ACRA
+        context = getApplicationContext();
         ACRA.init(this);
         appSingleton = this;
         deviceCheck();
     }
 
-
     private void deviceCheck() {
         Const.IS_KINDLE = Build.MANUFACTURER.equalsIgnoreCase("Amazon");
+    }
+
+    public static Context getAppContext() {
+        return SmartHMApplication.context;
     }
 }
 

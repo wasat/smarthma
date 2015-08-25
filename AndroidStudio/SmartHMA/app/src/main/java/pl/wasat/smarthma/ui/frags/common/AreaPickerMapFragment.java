@@ -79,7 +79,6 @@ public class AreaPickerMapFragment extends BaseMapFragment implements OnBaseMapF
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
-        // TODO Auto-generated method stub
         super.onActivityCreated(savedInstanceState);
         Log.i("MAP", "onActivityCreated");
         AcraExtension.mapCustomLog("AreaMap.onActivityCreated", mMap);

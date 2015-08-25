@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="pl.wasat.smarthma"
-    android:versionCode="29"
-    android:versionName="1.0.29">
+    android:versionCode="30"
+    android:versionName="1.1.0">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
@@ -20,12 +20,12 @@
     <application
         android:name=".SmartHMApplication"
         android:allowBackup="true"
-        android:icon="@drawable/ic_launcher"
+        android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppNoActionBarTheme">
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
-            android:value="AIzaSyCLym8YvRehneGdubErFObzSR1QNkUdL6c" />
+            android:value="AIzaSyCMZWIkdMS9FlyCt0eb_cMosMTFrt7FZxY" />
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/app_id" />
@@ -60,6 +60,7 @@
                 android:name="android.app.default_searchable"
                 android:value="pl.wasat.smarthma.ui.activities.SearchCollectionResultsActivity" />
         </activity>
+
         <!-- Search results activity -->
         <activity
             android:name=".ui.activities.SearchCollectionResultsActivity"
@@ -84,6 +85,10 @@
             android:name="com.facebook.LoginActivity"
             android:label="@string/app_name"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+        <activity
+            android:name=".ui.activities.GlobalSettingsActivity"
+            android:label="@string/global_settings"
+            android:theme="@style/AppTheme" />
 
         <!-- ROBOSPICE SERVICES -->
 
@@ -100,21 +105,26 @@
             android:exported="false" />
 
         <receiver
-            android:name="pl.wasat.smarthma.receivers.SmartHmaFacebookBroadcastReceiver"
+            android:name=".receivers.SmartHmaFacebookBroadcastReceiver"
             android:exported="false">
             <intent-filter>
                 <action android:name="com.facebook.platform.AppCallResultBroadcast" />
             </intent-filter>
         </receiver>
         <receiver
-            android:label="SmartHMA RSS"
-            android:name=".ui.widgets.RSSWidgetProvider">
-        <intent-filter>
+            android:name=".ui.widgets.RSSWidgetProvider"
+            android:label="SmartHMA RSS">
+            <intent-filter>
+
                 <!-- This widget provider receives broadcast with following action name or simply onUpdate of AppWidgetProvider is called -->
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
                 <!-- To receive broadcast with this string name -->
-                <action android:name="com.wordpress.laaptu.DATA_FETCHED" />
+                <action android:name="pl.wasat.smarthma" />
+                <action android:name="pl.wasat.smarthma.TOAST_ACTION" />
+                <action android:name="pl.wasat.smarthma.EXTRA_ITEM" />
+                <action android:name="pl.wasat.smarthma.ARTICLE_AUTHOR" />
             </intent-filter>
+
             <meta-data
                 android:name="android.appwidget.provider"
                 android:resource="@xml/rss_widget_info" />
@@ -123,12 +133,15 @@
         <service
             android:name=".ui.widgets.WidgetService"
             android:permission="android.permission.BIND_REMOTEVIEWS" />
+
         <activity android:name=".ui.widgets.WidgetConfigActivity">
-        <intent-filter>
+            <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_CONFIGURE" />
             </intent-filter>
         </activity>
+
         <service android:name=".ui.widgets.RemoteFetchService" />
+
     </application>
 
 </manifest>

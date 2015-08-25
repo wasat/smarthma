@@ -13,6 +13,8 @@ import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.Calendar;
+
 import pl.wasat.smarthma.R;
 import pl.wasat.smarthma.helper.Const;
 import pl.wasat.smarthma.interfaces.OnCollectionsListSelectionListener;
@@ -27,18 +29,26 @@ import pl.wasat.smarthma.ui.frags.browse.CollectionsGroupListFragment;
 import pl.wasat.smarthma.ui.frags.browse.CollectionsListFragment.OnCollectionsListFragmentListener;
 import pl.wasat.smarthma.ui.frags.common.AreaPickerMapFragment.OnAreaPickerMapFragmentListener;
 import pl.wasat.smarthma.ui.frags.common.CollectionDetailsFragment.OnCollectionDetailsFragmentListener;
+import pl.wasat.smarthma.ui.frags.common.DatePickerFragment.OnDatePickerFragmentListener;
+import pl.wasat.smarthma.ui.frags.common.TimePickerFragment.OnTimePickerFragmentListener;
 import pl.wasat.smarthma.utils.obj.LatLngBoundsExt;
 import roboguice.util.temp.Ln;
 
 public class CollectionsDefinitionActivity extends BaseCollectionsActivity
         implements OnCollectionsListSelectionListener,
-        OnCollectionsListFragmentListener, OnCollectionDetailsFragmentListener, OnCollectionEmptyDetailsFragmentListener, OnAreaPickerMapFragmentListener, OnAmznAreaPickerMapFragmentListener {
+        OnCollectionsListFragmentListener,
+        OnCollectionDetailsFragmentListener,
+        OnCollectionEmptyDetailsFragmentListener,
+        OnAreaPickerMapFragmentListener,
+        OnAmznAreaPickerMapFragmentListener,
+        OnDatePickerFragmentListener, OnTimePickerFragmentListener {
 
     /**
      * Whether or not the activity is in two-pane mode, i.e. running on a tablet
      * device.
      */
     private static boolean TWO_PANEL_MODE;
+    private BrowseCollectionFirstDetailFragment browseCollectionFirstDetailFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,7 +67,6 @@ public class CollectionsDefinitionActivity extends BaseCollectionsActivity
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu_eo_map_twopane, menu);
 
@@ -91,6 +100,7 @@ public class CollectionsDefinitionActivity extends BaseCollectionsActivity
      */
     @Override
     public void onBackPressed() {
+        if (dismissMenuOnBackPressed()) return;
         FragmentManager fm = getSupportFragmentManager();
         int bsec = fm.getBackStackEntryCount();
         if (bsec > 1) {
@@ -115,7 +125,7 @@ public class CollectionsDefinitionActivity extends BaseCollectionsActivity
     }
 
     private void loadMapWithBasicSettingsView() {
-        BrowseCollectionFirstDetailFragment browseCollectionFirstDetailFragment = BrowseCollectionFirstDetailFragment
+        browseCollectionFirstDetailFragment = BrowseCollectionFirstDetailFragment
                 .newInstance();
 
         getSupportFragmentManager()
@@ -160,8 +170,6 @@ public class CollectionsDefinitionActivity extends BaseCollectionsActivity
             transaction.replace(R.id.activity_base_details_container, baseMapFrag);
             transaction.commit();
         }
-
-
     }
 
     @Override
@@ -173,7 +181,6 @@ public class CollectionsDefinitionActivity extends BaseCollectionsActivity
     @Override
     public void onAmznMapFragmentBoundsChange(LatLngBoundsExt bounds) {
         callUpdateFirstDetailFrag(bounds);
-
     }
 
     private void callUpdateFirstDetailFrag(LatLngBoundsExt bounds) {
@@ -195,9 +202,22 @@ public class CollectionsDefinitionActivity extends BaseCollectionsActivity
     }
 
     @Override
+    public void onCollectionEmptyDetailsFragmentShowCollections(FedeoRequestParams fedeoRequestParams) {
+        startSearchingCollectionsProcess(fedeoRequestParams);
+    }
+
+    @Override
     public void onCollectionDetailsFragmentShowMetadata(EntryISO displayedEntry) {
         loadIsoMetadataFragment(displayedEntry);
     }
 
+    @Override
+    public void onDatePickerFragmentDateChoose(Calendar calendar, String viewTag) {
+        browseCollectionFirstDetailFragment.setDateValues(calendar, viewTag);
+    }
 
+    @Override
+    public void onTimePickerFragmentTimeChoose(Calendar calendar, String viewTag) {
+        browseCollectionFirstDetailFragment.setTimeValues(calendar, viewTag);
+    }
 }

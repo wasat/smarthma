@@ -3,7 +3,6 @@ package pl.wasat.smarthma.ui.activities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
-import android.widget.TextView;
 
 import pl.wasat.smarthma.R;
 import pl.wasat.smarthma.adapter.DataSeriesListAdapter;
@@ -29,7 +28,6 @@ public class CollectionsBrowserActivity extends BaseCollectionsActivity implemen
         OnAreaPickerMapFragmentListener, OnAmznAreaPickerMapFragmentListener, OnSearchListFragmentListener,
         OnCollectionDetailsFragmentListener, OnMetadataISOFragmentListener {
 
-    // private boolean mTwoPane;
     private EoDbAdapter dba;
 
     public CollectionsBrowserActivity() {
@@ -45,13 +43,12 @@ public class CollectionsBrowserActivity extends BaseCollectionsActivity implemen
                 .getStringExtra(CollectionsListFragment.KEY_COLLECTIONS_NAME);
 
 
-
         SharedPrefs sharedPrefs = new SharedPrefs(getApplicationContext());
         sharedPrefs.setParentIdPrefs(collectionName);
         sharedPrefs.setQueryPrefs("");
 
         FedeoRequestParams fedeoRequestParams = new FedeoRequestParams();
-        fedeoRequestParams.buildFromShared(this);
+        //fedeoRequestParams.buildFromShared(this);
 
         dba = new EoDbAdapter(this);
 
@@ -86,6 +83,7 @@ public class CollectionsBrowserActivity extends BaseCollectionsActivity implemen
      */
     @Override
     public void onBackPressed() {
+        if (dismissMenuOnBackPressed()) return;
         FragmentManager fm = getSupportFragmentManager();
         int bsec = fm.getBackStackEntryCount();
         if (bsec > 1) {
@@ -192,7 +190,6 @@ public class CollectionsBrowserActivity extends BaseCollectionsActivity implemen
     public void onCollectionDetailsFragmentShowProducts(FedeoRequestParams fedeoSearchProductsParams) {
         startSearchingProductsProcess(fedeoSearchProductsParams);
     }
-
 
     @Override
     public void onCollectionDetailsFragmentShowMetadata(EntryISO displayedEntry) {

@@ -11,7 +11,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.SearchView;
 
@@ -45,15 +44,12 @@ public class SearchFragment extends Fragment {
     }
 
     public SearchFragment() {
-        // Required empty public constructor
     }
 
     @Override
     public void startActivity(Intent intent) {
-        // check if search intent
-        if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
-            searchIntent = intent;
-        }
+        if (Intent.ACTION_SEARCH.equals(intent.getAction())) searchIntent = intent;
+
         super.startActivity(searchIntent);
     }
 
@@ -61,12 +57,9 @@ public class SearchFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        //Log.d("ZX", "SearchFragment: onCreateView()");
-        // Inflate the layout for this fragment
         rootView = inflater.inflate(R.layout.fragment_search, container,
                 false);
 
-        // Associate searchable configuration with the SearchView
         SearchManager searchManager = (SearchManager) getActivity()
                 .getSystemService(Context.SEARCH_SERVICE);
 
@@ -75,49 +68,19 @@ public class SearchFragment extends Fragment {
         searchView.setSearchableInfo(searchManager
                 .getSearchableInfo(getActivity().getComponentName()));
 
-
         searchView.setSubmitButtonEnabled(true);
         searchView.setFocusable(true);
         searchView.setIconified(false);
         searchView.clearFocus();
 
-
-        //if (Intent.ACTION_SEARCH.equals(getActivity().getIntent().getAction())) {
         searchIntent = getActivity().getIntent();
-        //}
-
-        //Intent queryIntent=getActivity().getIntent();
-        /*
-        final Spinner spnParams = (Spinner) rootView.findViewById(R.id.search_frag_prev_params_list);
-        refreshSearchHistoryList(spnParams);
-        spnParams.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                performSearchHistoryListAction(position, searchView);
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-            }
-        });
-
-        Button btnParams = (Button) rootView.findViewById(R.id.search_frag_button_clear_history);
-        btnParams.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                SearchHistory searchHistory = new SearchHistory(getActivity());
-                searchHistory.clearHistory();
-                refreshSearchHistoryList(spnParams);
-            }
-        });
-        */
 
         LinearLayout linearLayout1 = (LinearLayout) searchView.getChildAt(0);
         LinearLayout linearLayout2 = (LinearLayout) linearLayout1.getChildAt(2);
         LinearLayout linearLayout3 = (LinearLayout) linearLayout2.getChildAt(1);
         AutoCompleteTextView autoComplete = (AutoCompleteTextView) linearLayout3
                 .getChildAt(0);
-        autoComplete.setTextSize(12);
+        autoComplete.setTextSize(20);
         autoComplete.setTextColor(getResources().getColor(R.color.text_black));
 
         SearchHistory searchHistory = new SearchHistory(getActivity());
@@ -126,6 +89,22 @@ public class SearchFragment extends Fragment {
             SearchParams searchParams = searchHistoryList.get(0);
             searchView.setQuery(searchParams.getSearchPhrase(), false);
         }
+
+        Button btnBasicParams = (Button) rootView.findViewById(R.id.search_frag_button_basic);
+        btnBasicParams.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mListener.onSearchFragmentBasicParamsChoose();
+            }
+        });
+
+        Button btnAdvanceParams = (Button) rootView.findViewById(R.id.search_frag_button_advance);
+        btnAdvanceParams.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mListener.onSearchFragmentAdvanceParamsChoose();
+            }
+        });
 
         return rootView;
     }
@@ -136,22 +115,11 @@ public class SearchFragment extends Fragment {
     }
 
     public void setQuery(String query) {
-        if (rootView == null) {
-            return;
-        }
+        if (rootView == null) return;
 
         SearchView searchView = (SearchView) rootView.findViewById(R.id.search_frag_searchview);
-        if (searchView != null) {
-            searchView.setQuery(query, false);
-        }
+        if (searchView != null) searchView.setQuery(query, false);
     }
-
-/*    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onSearchFragmentInteraction(uri);
-        }
-        Log.i("SEARCH_FRAG", "onButtonPressed");
-    }*/
 
     @Override
     public void onAttach(Activity activity) {
@@ -180,6 +148,10 @@ public class SearchFragment extends Fragment {
      * >Communicating with Other Fragments</a> for more information.
      */
     public interface OnSearchFragmentListener {
+        void onSearchFragmentBasicParamsChoose();
+
+        void onSearchFragmentAdvanceParamsChoose();
+
     }
 
 }

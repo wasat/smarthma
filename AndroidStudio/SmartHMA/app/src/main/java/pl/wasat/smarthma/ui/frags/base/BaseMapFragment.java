@@ -12,7 +12,6 @@ import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationServices;
-import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
@@ -24,11 +23,11 @@ import com.google.android.gms.maps.model.TileOverlayOptions;
 import com.google.android.gms.maps.model.TileProvider;
 
 import pl.wasat.smarthma.interfaces.OnBaseMapFragmentPublicListener;
+import pl.wasat.smarthma.preferences.GlobalPreferences;
 import pl.wasat.smarthma.utils.io.AcraExtension;
-import pl.wasat.smarthma.utils.loc.LocManager;
+import pl.wasat.smarthma.utils.loc.GoogleLocProviderImpl;
 import pl.wasat.smarthma.utils.wms.TileProviderFactory;
 
-//import com.google.android.gms.common.GooglePlayServicesClient;
 
 /**
  * A simple {@link android.support.v4.app.Fragment} subclass. Activities that
@@ -38,20 +37,14 @@ import pl.wasat.smarthma.utils.wms.TileProviderFactory;
  * an instance of this fragment.
  */
 public class BaseMapFragment extends SupportMapFragment implements
-        // GooglePlayServicesClient.ConnectionCallbacks,
         GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener {
-
-    protected static final String KEY_MAP_MODE = "pl.wasat.smarthma.KEY_MAP_MODE";
-    private static final String KEY_PARAM_PUBLIC_LISTENER = "pl.wasat.smarthma.KEY_PARAM_PUBLIC_LISTENER";
-
 
     /**
      * reference to Google Maps object
      */
     private SupportMapFragment supportMapFrag;
     protected GoogleMap mMap;
-    // private LocationClient mLocationClient;
 
     private GoogleApiClient mGoogleApiClient;
 
@@ -74,18 +67,8 @@ public class BaseMapFragment extends SupportMapFragment implements
             OnBaseMapFragmentPublicListener listener) {
         BaseMapFragment baseMapFragment = new BaseMapFragment();
         baseMapFragment.publicListener = listener;
-        // Bundle args = new Bundle();
-        //args.putSerializable(KEY_PARAM_PUBLIC_LISTENER, listener);
-        //baseMapFragment.setArguments(args);
         return baseMapFragment;
-        //return new BaseMapFragment(listener);
     }
-
-
-    // constructor
-    //public BaseMapFragment(OnBaseMapFragmentPublicListener ml) {
-    //	this.publicListener = ml;
-    //}
 
     private void callBaseMapFragment(OnBaseMapFragmentPublicListener ml) {
         this.publicListener = ml;
@@ -95,10 +78,6 @@ public class BaseMapFragment extends SupportMapFragment implements
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         AcraExtension.mapCustomLog("BaseMap.onCreate", mMap);
-
-/*        if (getArguments() != null) {
-            // mapMode = getArguments().getInt(KEY_MAP_MODE);
-        }*/
 
         mGoogleApiClient = new GoogleApiClient.Builder(getActivity())
                 .addApi(LocationServices.API).addConnectionCallbacks(this)
@@ -112,13 +91,11 @@ public class BaseMapFragment extends SupportMapFragment implements
         Log.i("BASE_MAP", "onActivityCreated");
 
         startCreateMap(savedInstanceState);
-        // sendSupportMapReady();
     }
 
     @Override
     public void onStart() {
         super.onStart();
-        // Connect the client.
         mGoogleApiClient.connect();
     }
 
@@ -133,8 +110,10 @@ public class BaseMapFragment extends SupportMapFragment implements
     public void onConnected(Bundle dataBundle) {
         AcraExtension.mapCustomLog("BaseMap.onConnected", mMap);
 
-        Location location = LocationServices.FusedLocationApi
-                .getLastLocation(mGoogleApiClient);
+        obtainGooglePosition();
+
+        //Location location = LocationServices.FusedLocationApi
+        //        .getLastLocation(mGoogleApiClient);
         //TODO INFOAPPS nullPointerException
        /* LatLng latLng = new LatLng(location.getLatitude(),
                 location.getLongitude());
@@ -143,14 +122,8 @@ public class BaseMapFragment extends SupportMapFragment implements
         mMap.animateCamera(cameraUpdate); */
     }
 
-    private void startCreateMap(Bundle savedInstanceState) {
-        // restore selected party if any
-        // NOTE: this doesn't work because if you use setRetainInstance(true) to
-        // let GoogleMaps
-        // retain internal state so it doesn't have to re-init so much:
-        // http://stackoverflow.com/questions/11353075/how-can-i-maintain-fragment-state-when-added-to-the-back-stack
-        // http://stackoverflow.com/questions/15545214/android-using-savedinstancestate-with-fragments
 
+    private void startCreateMap(Bundle savedInstanceState) {
         AcraExtension.mapCustomLog("BaseMap.startCreateMap", mMap);
 
         int status = GooglePlayServicesUtil
@@ -160,12 +133,6 @@ public class BaseMapFragment extends SupportMapFragment implements
 
             setUpMapIfNeeded();
             if (savedInstanceState != null) {
-                // Reincarnated activity. The obtained map is the same map
-                // instance in the previous activity life cycle.
-                // There is no need to reinitialize it if setRetainInstance
-                // is set.
-                // However, you still have to add all your listeners to it
-                // later.
                 mMap = supportMapFrag.getMap();
 
                 AcraExtension.mapCustomLog(
@@ -195,18 +162,15 @@ public class BaseMapFragment extends SupportMapFragment implements
 
     private void setUpMap() {
         AcraExtension.mapCustomLog("BaseMap.setUpMap", mMap);
-        mMap.setMapType(GoogleMap.MAP_TYPE_NONE);
-        mMap.setMyLocationEnabled(true);
 
+        mMap.setMyLocationEnabled(true);
         mMap.getUiSettings().setZoomControlsEnabled(true);
         mMap.getUiSettings().setZoomGesturesEnabled(true);
         mMap.getUiSettings().setRotateGesturesEnabled(true);
 
-        setupOSM();
+        obtainMapType();
 
-        if (targetBounds == null) {
-            animateToCurrentPosition();
-        }
+        if (targetBounds == null) obtainGooglePosition();
 
         sendSupportMapReadyCallback();
 
@@ -216,15 +180,7 @@ public class BaseMapFragment extends SupportMapFragment implements
                 animateToBounds();
             }
         });
-
     }
-
-	/*
-     * private void sendSupportMapReadyCallback() { Fragment fragment = this; if
-	 * (fragment != null) { if (fragment instanceof OnBaseMapFragmentListener) {
-	 * ((OnBaseMapFragmentListener) fragment).onBaseSupportMapReady();
-	 * Log.i("BASE_MAP", "onActivityCreated.Listener"); } } }
-	 */
 
     private void sendSupportMapReadyCallback() {
         Fragment fragment = this;
@@ -236,6 +192,32 @@ public class BaseMapFragment extends SupportMapFragment implements
         }
     }
 
+    private void obtainMapType() {
+        GlobalPreferences globalPreferences = new GlobalPreferences(getActivity());
+        int mapType = globalPreferences.getMapType();
+
+        switch (mapType) {
+            case 0:
+                mMap.setMapType(GoogleMap.MAP_TYPE_NONE);
+                break;
+            case 1:
+                mMap.setMapType(GoogleMap.MAP_TYPE_NONE);
+                setupOSM();
+                break;
+            case 2:
+                mMap.setMapType(GoogleMap.MAP_TYPE_SATELLITE);
+                break;
+            case 3:
+                mMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
+                break;
+            case 4:
+                mMap.setMapType(GoogleMap.MAP_TYPE_TERRAIN);
+                break;
+            default:
+                break;
+        }
+
+    }
     private void setupOSM() {
         AcraExtension.mapCustomLog("BaseMap.setupOSM", mMap);
 
@@ -260,11 +242,17 @@ public class BaseMapFragment extends SupportMapFragment implements
         return wmsTileOverlay;
     }
 
-    private void animateToCurrentPosition() {
+    private void obtainGooglePosition() {
+        GoogleLocProviderImpl googleLocProvider = new GoogleLocProviderImpl(getActivity()) {
+            @Override
+            public void onLocationReceived(Location receivedLoc) {
+                animateToCurrentPosition(receivedLoc);
+            }
+        };
+        googleLocProvider.start();
+    }
 
-        // ------------------Zooming camera to position user-----------------
-        LocManager locManager = new LocManager(getActivity());
-        Location location = locManager.getAvailableLocation();
+    private void animateToCurrentPosition(Location location) {
 
         if (location != null) {
             int mapZoom;
@@ -307,7 +295,7 @@ public class BaseMapFragment extends SupportMapFragment implements
     /**
      * Listener interface to tell when the map is ready
      */
-    public static interface OnBaseMapFragmentListener {
+    public interface OnBaseMapFragmentListener {
 
         void onBaseSupportMapReady();
     }
@@ -318,14 +306,10 @@ public class BaseMapFragment extends SupportMapFragment implements
 
     @Override
     public void onConnectionSuspended(int cause) {
-        // TODO Auto-generated method stub
-
     }
 
     @Override
     public void onConnectionFailed(ConnectionResult result) {
-        // TODO Auto-generated method stub
-
     }
 
 }

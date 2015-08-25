@@ -6,6 +6,7 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 import pl.wasat.smarthma.utils.text.SmartHMAStringStyle;
 
@@ -27,7 +28,8 @@ public class Query implements Serializable {
     private String timeStart;
     private String geoBox;
     private String geoUid;
-
+    private ArrayList<String> paramValueList;
+    private ArrayList<String> paramNameList;
 
     public String getPrefix() {
         return prefix;
@@ -145,6 +147,22 @@ public class Query implements Serializable {
 
     public void setGeoUid(String geoUid) {
         this.geoUid = geoUid;
+    }
+
+    public ArrayList<String> getParamValueList() {
+        return paramValueList;
+    }
+
+    public void setParamValueList(ArrayList<String> paramValueList) {
+        this.paramValueList = paramValueList;
+    }
+
+    public ArrayList<String> getParamNameList() {
+        return paramNameList;
+    }
+
+    public void setParamNameList(ArrayList<String> paramNameList) {
+        this.paramNameList = paramNameList;
     }
 
     @Override

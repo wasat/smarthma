@@ -66,7 +66,7 @@ public class CollectionsListAdapter extends BaseAdapter {
                     .findViewById(R.id.collection_image);
 
             convertView.setTag(holder);
-        }else {
+        } else {
             holder = (ViewHolder) convertView.getTag();
         }
 

@@ -27,8 +27,15 @@ public class BaseCollectionsActivity extends BaseSmartHMActivity {
     void startSearchingProductsProcess(FedeoRequestParams fedeoSearchProductsParams) {
         Intent showProductsIntent = new Intent(this,
                 ProductsBrowserActivity.class);
-        //showProductsIntent.putExtra(Const.KEY_INTENT_PARENT_ID, parentID);
         showProductsIntent.putExtra(Const.KEY_INTENT_FEDEO_REQUEST_PARAMS, fedeoSearchProductsParams);
         startActivityForResult(showProductsIntent, REQUEST_NEW_SEARCH);
+    }
+
+    void startSearchingCollectionsProcess(FedeoRequestParams fedeoSearchCollectionsParams) {
+        Intent showCollectionsIntent = new Intent(this,
+                SearchCollectionResultsActivity.class);
+        showCollectionsIntent.setAction(Const.KEY_ACTION_SEARCH_COLLECTIONS);
+        showCollectionsIntent.putExtra(Const.KEY_INTENT_FEDEO_REQUEST_PARAMS, fedeoSearchCollectionsParams);
+        startActivityForResult(showCollectionsIntent, REQUEST_NEW_SEARCH);
     }
 }

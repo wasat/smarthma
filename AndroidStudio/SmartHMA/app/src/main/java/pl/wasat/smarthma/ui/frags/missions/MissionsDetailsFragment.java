@@ -92,12 +92,6 @@ public class MissionsDetailsFragment extends Fragment {
         return rootView;
     }
 
- /*   public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onMissionsDetailNewFragmentSearchData("");
-        }
-    }*/
-
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
