@@ -38,5 +38,4 @@ public class TextViewWithFont extends TextView {
     }
 
 
-
 }

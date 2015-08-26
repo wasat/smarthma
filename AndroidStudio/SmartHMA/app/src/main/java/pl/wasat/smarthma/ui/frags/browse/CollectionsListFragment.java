@@ -46,6 +46,7 @@ public class CollectionsListFragment extends BaseSpiceFragment {
     private String selectGroupName;
     private String collName;
     private OnCollectionsListFragmentListener mListener;
+    private ListView list;
 
     /**
      * Use this factory method to create a new instance of this fragment using
@@ -99,7 +100,7 @@ public class CollectionsListFragment extends BaseSpiceFragment {
     }
 
     private void initList() {
-        ListView list = (ListView) getView()
+        list = (ListView) getView()
                 .findViewById(R.id.collections_list);
 
         if (!SmartHMApplication.GlobalEODataList.getCollectionsGroupList()
@@ -215,4 +216,8 @@ public class CollectionsListFragment extends BaseSpiceFragment {
         }
     }
 
+    public ListView getList()
+    {
+        return list;
+    }
 }

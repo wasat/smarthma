@@ -17,6 +17,7 @@ public class NewsActivity extends BaseSmartHMActivity implements
 
     private boolean mTwoPane;
     private EoDbAdapter dba;
+    private NewsListFragment newsListFragment;
 
     public NewsActivity() {
     }
@@ -48,7 +49,7 @@ public class NewsActivity extends BaseSmartHMActivity implements
     }
 
     private void loadNewsListPanel() {
-        NewsListFragment newsListFragment = new NewsListFragment();
+        newsListFragment = new NewsListFragment();
         getSupportFragmentManager()
                 .beginTransaction()
                 .replace(R.id.activity_base_list_container,
@@ -99,5 +100,10 @@ public class NewsActivity extends BaseSmartHMActivity implements
             finish();
             super.onBackPressed();
         }
+    }
+
+    public NewsListFragment getNewsListFragment()
+    {
+        return newsListFragment;
     }
 }

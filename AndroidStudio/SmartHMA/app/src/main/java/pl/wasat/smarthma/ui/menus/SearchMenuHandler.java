@@ -1,7 +1,6 @@
 package pl.wasat.smarthma.ui.menus;
 
 import android.content.Intent;
-import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 
@@ -32,8 +31,8 @@ public class SearchMenuHandler extends MenuHandler {
         LinearLayout searchHistoryLayout = (LinearLayout) layout.findViewById(R.id.popup_search_history_layout);
         clickableViews.add(searchHistoryLayout);
         searchHistoryLayout.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                Log.d("ZX", "Search layout");
+            public void onClick(View v)
+            {
                 SearchParametersDialog newFragment = new SearchParametersDialog();
                 newFragment.setActivity((SearchActivity) activity);
                 newFragment.show(activity.getSupportFragmentManager(), "Search_Parameters");
@@ -44,7 +43,6 @@ public class SearchMenuHandler extends MenuHandler {
 
         LinearLayout searchLayout = (LinearLayout) layout.findViewById(R.id.popup_search_layout);
         clickableViews.add(searchLayout);
-
         searchLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -55,7 +53,8 @@ public class SearchMenuHandler extends MenuHandler {
         LinearLayout settingsLayout = (LinearLayout) layout.findViewById(R.id.popup_menu_item_settings);
         clickableViews.add(settingsLayout);
         settingsLayout.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
+            public void onClick(View v)
+            {
                 Intent intent = new Intent();
                 intent.setClass(activity, GlobalSettingsActivity.class);
                 activity.startActivityForResult(intent, Const.REQUEST_CODE_GLOBAL_SETTINGS);

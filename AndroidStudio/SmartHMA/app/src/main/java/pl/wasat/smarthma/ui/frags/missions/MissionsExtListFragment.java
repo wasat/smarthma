@@ -40,6 +40,7 @@ public class MissionsExtListFragment extends Fragment {
     private HashMap<String, List<MissionItemData>> listDataChild;
 
     private OnExtendedListFragmentListener mListener;
+    private ExpandableListView expListView;
 
     /**
      * Use this factory method to create a new instance of this fragment using
@@ -60,7 +61,7 @@ public class MissionsExtListFragment extends Fragment {
         final View rootView = inflater.inflate(R.layout.fragment_missions_extended_list,
                 container, false);
 
-        ExpandableListView expListView = (ExpandableListView) rootView
+        expListView = (ExpandableListView) rootView
                 .findViewById(R.id.missions_extended_listview);
         expListView.setGroupIndicator(null);
 
@@ -389,5 +390,10 @@ public class MissionsExtListFragment extends Fragment {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public ExpandableListView getExpListView()
+    {
+        return expListView;
     }
 }

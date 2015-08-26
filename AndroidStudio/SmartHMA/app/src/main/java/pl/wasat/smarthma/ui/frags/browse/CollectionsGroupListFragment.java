@@ -45,6 +45,7 @@ public class CollectionsGroupListFragment extends Fragment implements
 
     private ListView collectionsGroupListView;
     private View loadingView;
+    private CollectionsListFragment collectionsListFragment;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -118,7 +119,7 @@ public class CollectionsGroupListFragment extends Fragment implements
     }
 
     private void loadCollectionsList(int listPosition) {
-        CollectionsListFragment collectionsListFragment = CollectionsListFragment
+        collectionsListFragment = CollectionsListFragment
                 .newInstance(listPosition);
         getActivity().getSupportFragmentManager().beginTransaction()
                 .replace(R.id.activity_base_list_container, collectionsListFragment).addToBackStack("CollectionsListFragment")
@@ -171,5 +172,15 @@ public class CollectionsGroupListFragment extends Fragment implements
         XMLParser xmlResult = new XMLParser();
         xmlResult.parseXml(result);
         updateEOListViewContent(SmartHMApplication.GlobalEODataList);
+    }
+
+    public ListView getCollectionsGroupListView()
+    {
+        return collectionsGroupListView;
+    }
+
+    public CollectionsListFragment getCollectionsListFragment()
+    {
+        return collectionsListFragment;
     }
 }

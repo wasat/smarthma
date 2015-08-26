@@ -186,10 +186,12 @@ public class BaseShowProductsListFragment extends BaseSpiceFragment {
 
                 // Click event for single list row
                 entryImagesListView
-                        .setOnItemClickListener(new OnItemClickListener() {
+                        .setOnItemClickListener(new OnItemClickListener()
+                        {
                             @Override
                             public void onItemClick(AdapterView<?> parent,
-                                                    View view, int position, long id) {
+                                                    View view, int position, long id)
+                            {
                                 loadProductItemDetails(entryList.get(position));
                             }
                         });
@@ -280,5 +282,4 @@ public class BaseShowProductsListFragment extends BaseSpiceFragment {
             loadRequestSuccess(feed);
         }
     }
-
 }

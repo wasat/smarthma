@@ -240,7 +240,7 @@ class OMDataHandler extends DefaultHandler {
             ArrayList<String> queryParamValues = new ArrayList<>();
             for (int i = 0; i < atts.getLength(); i++) {
                 queryParamNames.add(atts.getLocalName(i));
-                queryParamValues.add("-  "+atts.getValue(i));
+                queryParamValues.add("-  " + atts.getValue(i));
             }
             query.setParamNameList(queryParamNames);
             query.setParamValueList(queryParamValues);

@@ -17,6 +17,8 @@ import pl.wasat.smarthma.ui.frags.missions.MissionsExtListFragment.OnExtendedLis
 public class MissionsActivity extends BaseSmartHMActivity implements
         OnExtendedListFragmentListener, OnMissionsDetailNewFragmentListener {
 
+    private MissionsExtListFragment extendedListFragment;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,7 +29,7 @@ public class MissionsActivity extends BaseSmartHMActivity implements
         FrameLayout listLayout = (FrameLayout) findViewById(R.id.activity_base_list_container);
         listLayout.setBackgroundColor(Color.parseColor("#D9D9D9"));
 
-        MissionsExtListFragment extendedListFragment = MissionsExtListFragment
+        extendedListFragment = MissionsExtListFragment
                 .newInstance();
 
         getSupportFragmentManager()
@@ -59,4 +61,8 @@ public class MissionsActivity extends BaseSmartHMActivity implements
 
     }
 
+    public MissionsExtListFragment getExtendedListFragment()
+    {
+        return extendedListFragment;
+    }
 }

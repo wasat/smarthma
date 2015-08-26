@@ -49,6 +49,7 @@ public class CollectionsDefinitionActivity extends BaseCollectionsActivity
      */
     private static boolean TWO_PANEL_MODE;
     private BrowseCollectionFirstDetailFragment browseCollectionFirstDetailFragment;
+    private CollectionsGroupListFragment collectionsGroupListFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,7 +61,7 @@ public class CollectionsDefinitionActivity extends BaseCollectionsActivity
 
         if (findViewById(R.id.activity_base_details_container) != null) {
             TWO_PANEL_MODE = true;
-            loadRightListPanel();
+            loadLeftListPanel();
             loadMapWithBasicSettingsView();
         }
     }
@@ -114,8 +115,8 @@ public class CollectionsDefinitionActivity extends BaseCollectionsActivity
     /**
      *
      */
-    private void loadRightListPanel() {
-        CollectionsGroupListFragment collectionsGroupListFragment = new CollectionsGroupListFragment();
+    private void loadLeftListPanel() {
+        collectionsGroupListFragment = new CollectionsGroupListFragment();
         Bundle args = new Bundle();
         collectionsGroupListFragment.setArguments(args);
         getSupportFragmentManager()
@@ -219,5 +220,10 @@ public class CollectionsDefinitionActivity extends BaseCollectionsActivity
     @Override
     public void onTimePickerFragmentTimeChoose(Calendar calendar, String viewTag) {
         browseCollectionFirstDetailFragment.setTimeValues(calendar, viewTag);
+    }
+
+    public CollectionsGroupListFragment getCollectionsGroupListFragment()
+    {
+        return collectionsGroupListFragment;
     }
 }

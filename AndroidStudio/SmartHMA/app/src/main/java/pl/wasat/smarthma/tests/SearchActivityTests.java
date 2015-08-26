@@ -59,18 +59,19 @@ public class SearchActivityTests extends ActivityInstrumentationTestCase2<Search
                 tests[2] = true;
 
                 ArrayList<View> clickableViews = menuHandler.getClickableViews();
-                for (View view : clickableViews)
+                View view = clickableViews.get(0);
+                //for (View view : clickableViews)
                 {
                     if (view == null)
                     {
                         tests[3] = false;
-                        break;
+                        //break;
                     }
                     boolean viewClicked = view.performClick();
                     if (!viewClicked)
                     {
                         tests[4] = false;
-                        break;
+                        //break;
                     }
                 }
             }
@@ -92,22 +93,13 @@ public class SearchActivityTests extends ActivityInstrumentationTestCase2<Search
         assertEquals("At least one of clickable views is null.", true, tests[3]);
         assertEquals("Operation 'view.performClick()' failed (view has no click listener).", true, tests[4]);
 
-        /*
-        getInstrumentation().runOnMainSync(new Runnable() {
-            @Override
-            public void run() {
-                //nameEditText.requestFocus();
-            }
-        });
-        */
+        //getInstrumentation().runOnMainSync(new Runnable()
+        //{
+        //    @Override
+        //    public void run()
+        //    {
+        //        //nameEditText.requestFocus();
+        //    }
+        //});
     }
-
-    /*
-    public void testSum()
-    {
-        int actual = 2 + 2;
-        int expected = 5;
-        assertEquals("Operation '2 + 2' failed on purpose.", expected, actual, 0.001);
-    }
-    */
 }

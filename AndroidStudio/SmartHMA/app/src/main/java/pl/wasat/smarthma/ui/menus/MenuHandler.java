@@ -67,6 +67,9 @@ public abstract class MenuHandler {
         Point point = new Point();
         point.x = location[0];
         point.y = location[1];
+
+        // Some offset to align the popup a bit down, relative to button's position.
+        point.y += view.getHeight();
         showMenuPopup(point);
     }
 
@@ -90,15 +93,11 @@ public abstract class MenuHandler {
             popupWindow.setFocusable(false);
             //popupWindow.setOutsideTouchable(true);
 
-            // Some offset to align the popup a bit to the left, and a bit down, relative to button's position.
-            int OFFSET_X = 0;
-            int OFFSET_Y = 140;
-
             //Clear the default translucent background
             //popupWindow.setBackgroundDrawable(new BitmapDrawable());
 
             // Displaying the popup at the specified location, + offsets.
-            popupWindow.showAtLocation(layout, Gravity.NO_GRAVITY, p.x + OFFSET_X, p.y + OFFSET_Y);
+            popupWindow.showAtLocation(layout, Gravity.NO_GRAVITY, p.x, p.y);
 
             addListeners();
         } catch (Exception e) {
