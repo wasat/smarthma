@@ -26,6 +26,17 @@ import pl.wasat.smarthma.R;
 import pl.wasat.smarthma.customviews.ExpandableListAdapter;
 import pl.wasat.smarthma.model.mission.MissionHeaderData;
 import pl.wasat.smarthma.model.mission.MissionItemData;
+import pl.wasat.smarthma.parser.database.ParserDb;
+import pl.wasat.smarthma.parser.missions.EsaEoMissions.EsaEoMissions;
+import pl.wasat.smarthma.parser.missions.EsaEuemsat.EsaEuemsat;
+import pl.wasat.smarthma.parser.missions.EsaFutureMissions.Adm;
+import pl.wasat.smarthma.parser.missions.EsaFutureMissions.EarthCare;
+import pl.wasat.smarthma.parser.missions.EsaFutureMissions.EsaFutureMissions;
+import pl.wasat.smarthma.parser.missions.HistoricalMissions.HistoricalMissions;
+import pl.wasat.smarthma.parser.missions.PotentialMissions.PotentialMissions;
+import pl.wasat.smarthma.parser.missions.ThirdPartyMissions.ThirdPartyMissions;
+import pl.wasat.smarthma.parser.model.Category;
+import pl.wasat.smarthma.parser.model.Mission;
 
 /**
  * A simple {@link Fragment} subclass. Activities that contain this fragment
@@ -41,6 +52,7 @@ public class MissionsExtListFragment extends Fragment {
 
     private OnExtendedListFragmentListener mListener;
     private ExpandableListView expListView;
+    private ParserDb parserDb;
 
     /**
      * Use this factory method to create a new instance of this fragment using
@@ -48,6 +60,7 @@ public class MissionsExtListFragment extends Fragment {
      *
      * @return A new instance of fragment ExtendedListFragment.
      */
+
     public static MissionsExtListFragment newInstance() {
         return new MissionsExtListFragment();
     }
@@ -60,6 +73,10 @@ public class MissionsExtListFragment extends Fragment {
                              Bundle savedInstanceState) {
         final View rootView = inflater.inflate(R.layout.fragment_missions_extended_list,
                 container, false);
+
+        /*initialize database*/
+        parserDb = new ParserDb(getActivity());
+        parserDb.open();
 
         expListView = (ExpandableListView) rootView
                 .findViewById(R.id.missions_extended_listview);
@@ -188,73 +205,40 @@ public class MissionsExtListFragment extends Fragment {
                 "https://earth.esa.int/web/guest/missions/esaeumetsat"));
 
         // Adding child data
+
+        ArrayList<Mission> missionList = parserDb.getMissionsList(new Category(EsaEoMissions.CATEGORY_ID, "asd"));
         List<MissionItemData> esaEoMissions = new ArrayList<>();
-        esaEoMissions
+        for (Mission mission :
+                missionList) {
+            esaEoMissions.add(new MissionItemData(mission));
+        }
+        /*esaEoMissions
                 .add(new MissionItemData(
                         0,
                         "Sentinel-1",
                         "/web/guest/missions/esa-operational-eo-missions/sentinel-1",
                         "/image/image_gallery?uuid=23f73931-c1c7-4013-a7dc-fb506ff182e2&groupId=10174&t=1330440801857",
                         "With the objectives of Land and Ocean monitoring, Sentinel-1 will be composed of two polar-orbiting satellites operating day and night, and will perform Radar imaging, enabling them to acquire imagery regardless of the weather. The first Sentinel-1 satellite was launched on a Soyuz rocket from Europe&#39;s Spaceport in French Guiana on 03 April 2014."));
-        esaEoMissions
-                .add(new MissionItemData(
-                        1,
-                        "Swarm",
-                        "/web/guest/missions/esa-operational-eo-missions/swarm",
-                        "/image/image_gallery?img_id=121739&t=1331116303473",
-                        "A constellation of three satellites, the Swarm mission aims to provide the best survey of the Earth&#39;s geomagnetic field and its temporal evolution, as well as discovering new insights into our world&#39;s interior and climate."));
-        esaEoMissions
-                .add(new MissionItemData(
-                        2,
-                        "Proba-V",
-                        "/web/guest/missions/esa-operational-eo-missions/proba-v",
-                        "/documents/10174/428823/Proba-V_120/f5960be6-608c-4682-8840-3b1e15134591?t=1363175361821",
-                        "The Proba-V mission provides multispectral images to study the evolution of the vegetation cover on a daily and global basis. The &#39;V&#39; stands for Vegetation. This mission is extending the data set of the long-established Vegetation instrument, flown as a secondary payload aboard France&#39;s SPOT-4 and SPOT-5 satellites launched in 1998 and 2002 respectively."));
-        esaEoMissions
-                .add(new MissionItemData(
-                        3,
-                        "CryoSat",
-                        "/web/guest/missions/esa-operational-eo-missions/cryosat",
-                        "/image/image_gallery?img_id=16832",
-                        "ESA's Earth Explorer CryoSat is Europe's first ice mission. The aim of the mission is to determine variations in the thickness of the Earth's continental ice sheets and marine ice cover. Its primary objective is to test the prediction that Arctic sea ice is thinning due to global warming. In addition, it was important to discover the extent to which the Antarctic and Greenland ice sheets are contributing global sea level rise."));
-        esaEoMissions
-                .add(new MissionItemData(
-                        4,
-                        "SMOS",
-                        "/web/guest/missions/esa-operational-eo-missions/smos",
-                        "/image/image_gallery?img_id=17541",
-                        "ESA's Soil Moisture and Ocean Salinity (SMOS) mission has been designed to observe soil moisture over the Earth's landmasses and salinity over the oceans. Soil moisture data are urgently required for hydrological studies and data on ocean salinity are vital for improving our understanding of ocean circulation patterns."));
-        esaEoMissions
-                .add(new MissionItemData(
-                        5,
-                        "GOCE",
-                        "/web/guest/missions/esa-operational-eo-missions/goce",
-                        "/image/image_gallery?img_id=18333",
-                        "As part of ESA's Living Planet programme, the Gravity field and steady-state Ocean Circulation Explorer (GOCE) is the first of a series of Earth Explorer satellites in orbit, designed to provide information for understanding critical Earth system variables. It has been developed to bring about a whole new level of understanding of one of the Earth's most fundamental forces of nature - the gravity field."));
-        esaEoMissions
-                .add(new MissionItemData(
-                        6,
-                        "Envisat",
-                        "/web/guest/missions/esa-operational-eo-missions/envisat",
-                        "/image/image_gallery?img_id=117229&t=1330078690503",
-                        "Envisat (ENVIronmental SATellite) is an advanced polar-orbiting Earth observation satellite which provided measurements of the atmosphere, ocean, land, and ice over 10 years of operations. The Envisat satellite carried an ambitious and innovative payload that ensured the continuity of the data measurements from the ERS satellites. The archive of data received from the satellite supports Earth science research and aids in the long-term monitoring of environmental and climactic changes. Contact with Envisat was lost on 08 April 2012, and the mission was officially ended on 09 May 2012."));
-        esaEoMissions
-                .add(new MissionItemData(
-                        7,
-                        "Proba-1",
-                        "/web/guest/missions/esa-operational-eo-missions/proba",
-                        "/image/image_gallery?img_id=19399",
-                        "The PRoject for On-Board Autonomy (Proba) is a technology demonstration mission of the European Space Agency, The objectives of Proba are: in-orbit demonstration and evaluation of new hardware and software spacecraft technologies, onboard operational autonomy, and trial and demonstration of Earth observation and space environment instruments."));
-        esaEoMissions
-                .add(new MissionItemData(
-                        8,
-                        "ERS",
-                        "/web/guest/missions/esa-operational-eo-missions/ers",
-                        "/image/image_gallery?img_id=19410",
-                        "The European Remote Sensing satellite, ERS-1, launched in 1991, was ESA's first sun-synchronous polar orbiting remote sensing mission, operated until March 2000. ERS-1 carried a comprehensive payload including an imaging Synthetic Aperture Radar (SAR), a radar altimeter and other powerful instruments to measure ocean surface temperature and winds at sea. ERS-2, which overlapped with ERS-1, was launched in 1995 with an additional sensor for atmospheric ozone research. ERS-2 far exceeded its nominal lifetime and was retired on 04 July 2011."));
+*/
+
+        ArrayList<Mission> futureSentinelsmissionList = parserDb.getMissionsList(new Category(EsaFutureMissions.CATEGORY_ID, "asd"));
 
         List<MissionItemData> esaFutureSentinels = new ArrayList<>();
-        esaFutureSentinels
+        List<MissionItemData> esaFutureExplorers = new ArrayList<>();
+        List<MissionItemData> esaFutureCandidates = new ArrayList<>();
+
+
+        for (Mission mission :
+                futureSentinelsmissionList) {
+            if(mission.getId() == Adm.MISSION_ID || mission.getId() == EarthCare.MISSION_ID){
+                esaFutureExplorers.add(new MissionItemData(mission));
+
+            }
+            else{
+                esaFutureSentinels.add(new MissionItemData(mission));
+            }
+        }
+/*        esaFutureSentinels
                 .add(new MissionItemData(0, "Sentinel-2", "", "", ""));
         esaFutureSentinels
                 .add(new MissionItemData(1, "Sentinel-3", "", "", ""));
@@ -263,46 +247,33 @@ public class MissionsExtListFragment extends Fragment {
         esaFutureSentinels
                 .add(new MissionItemData(3, "Sentinel-5", "", "", ""));
         esaFutureSentinels
-                .add(new MissionItemData(4, "Sentinel-5P", "", "", ""));
+                .add(new MissionItemData(4, "Sentinel-5P", "", "", ""));*/
 
-        List<MissionItemData> esaFutureExplorers = new ArrayList<>();
-        esaFutureExplorers
+    /*    esaFutureExplorers
                 .add(new MissionItemData(0, "ADM-Aeolus", "", "", ""));
         esaFutureExplorers.add(new MissionItemData(1, "Earthcare", "", "", ""));
 
-        List<MissionItemData> esaFutureCandidates = new ArrayList<>();
         esaFutureCandidates.add(new MissionItemData(0, "BIOMASS", "", "", ""));
         esaFutureCandidates.add(new MissionItemData(1, "CoReH2O", "", "", ""));
-        esaFutureCandidates.add(new MissionItemData(2, "PREMIER", "", "", ""));
+        esaFutureCandidates.add(new MissionItemData(2, "PREMIER", "", "", ""));*/
+
+        ArrayList<Mission> thirdPartyCurrentList = parserDb.getMissionsList(new Category(ThirdPartyMissions.CATEGORY_ID, "asd"));
 
         List<MissionItemData> thirdPartCurrent = new ArrayList<>();
-        thirdPartCurrent
-                .add(new MissionItemData(0, "COSMO-SkyMed", "", "", ""));
-        thirdPartCurrent.add(new MissionItemData(1, "Deimos-1", "", "", ""));
-        thirdPartCurrent.add(new MissionItemData(2, "GOSAT", "", "", ""));
-        thirdPartCurrent.add(new MissionItemData(3, "GRACE", "", "", ""));
-        thirdPartCurrent.add(new MissionItemData(4, "Ikonos-2", "", "", ""));
-        thirdPartCurrent.add(new MissionItemData(5, "IRS-P6", "", "", ""));
-        thirdPartCurrent.add(new MissionItemData(6, "KOMPSAT-2", "", "", ""));
-        thirdPartCurrent.add(new MissionItemData(7, "Landsat OLI/TIRS", "", "",
-                ""));
-        thirdPartCurrent.add(new MissionItemData(8, "NOAA AVHRR", "", "", ""));
-        thirdPartCurrent.add(new MissionItemData(9, "Odin", "", "", ""));
-        thirdPartCurrent.add(new MissionItemData(10, "Proba-1", "", "", ""));
-        thirdPartCurrent.add(new MissionItemData(11, "Proba-V", "", "", ""));
-        thirdPartCurrent.add(new MissionItemData(12, "RADARSAT", "", "", ""));
-        thirdPartCurrent.add(new MissionItemData(13, "RapidEye", "", "", ""));
-        thirdPartCurrent
-                .add(new MissionItemData(14, "SciSat-1/ACE", "", "", ""));
-        thirdPartCurrent.add(new MissionItemData(15, "SeaWiFS", "", "", ""));
-        thirdPartCurrent.add(new MissionItemData(16, "SPOT-4", "", "", ""));
-        thirdPartCurrent.add(new MissionItemData(17, "SPOT-5", "", "", ""));
-        thirdPartCurrent.add(new MissionItemData(18, "Terra/Aqua MODIS", "",
-                "", ""));
-        thirdPartCurrent.add(new MissionItemData(19, "UK-DMC", "", "", ""));
+        for (Mission mission :
+                thirdPartyCurrentList) {
+            thirdPartCurrent.add(new MissionItemData(mission));
+        }
+
+        ArrayList<Mission> thirdPartyHistoricalList = parserDb.getMissionsList(new Category(HistoricalMissions.CATEGORY_ID, "asd"));
 
         List<MissionItemData> thirdPartHistorical = new ArrayList<>();
-        thirdPartHistorical.add(new MissionItemData(0, "ALOS", "", "", ""));
+
+        for (Mission mission :
+                thirdPartyHistoricalList) {
+            thirdPartHistorical.add(new MissionItemData(mission));
+        }
+      /*  thirdPartHistorical.add(new MissionItemData(0, "ALOS", "", "", ""));
         thirdPartHistorical.add(new MissionItemData(1, "IRS-P3", "", "", ""));
         thirdPartHistorical.add(new MissionItemData(2, "JERS-1", "", "", ""));
         thirdPartHistorical
@@ -313,10 +284,16 @@ public class MissionsExtListFragment extends Fragment {
                 "", ""));
         thirdPartHistorical.add(new MissionItemData(6, "Nimbus-7", "", "", ""));
         thirdPartHistorical.add(new MissionItemData(7, "QuikSCAT", "", "", ""));
-        thirdPartHistorical.add(new MissionItemData(8, "SeaSat", "", "", ""));
+        thirdPartHistorical.add(new MissionItemData(8, "SeaSat", "", "", ""));*/
+
+        ArrayList<Mission> thirdPartyPotentialList = parserDb.getMissionsList(new Category(PotentialMissions.CATEGORY_ID, "asd"));
 
         List<MissionItemData> thirdPartPotential = new ArrayList<>();
-        thirdPartPotential.add(new MissionItemData(0, "Aura OMI", "", "", ""));
+        for (Mission mission :
+                thirdPartyPotentialList) {
+            thirdPartPotential.add(new MissionItemData(mission));
+        }
+   /*     thirdPartPotential.add(new MissionItemData(0, "Aura OMI", "", "", ""));
         thirdPartPotential.add(new MissionItemData(1, "CBERS Satellite Series",
                 "", "", ""));
         thirdPartPotential
@@ -329,11 +306,17 @@ public class MissionsExtListFragment extends Fragment {
         thirdPartPotential
                 .add(new MissionItemData(6, "TerraSAR-X", "", "", ""));
         thirdPartPotential.add(new MissionItemData(7, "THEOS", "", "", ""));
+*/
+        ArrayList<Mission> esaEuemsatList = parserDb.getMissionsList(new Category(EsaEuemsat.CATEGORY_ID, "asd"));
 
         List<MissionItemData> esaEumetsat = new ArrayList<>();
-        esaEumetsat.add(new MissionItemData(0, "Meteosat Second Generation",
+        for (Mission mission :
+                esaEuemsatList) {
+            esaEumetsat.add(new MissionItemData(mission));
+        }
+    /*    esaEumetsat.add(new MissionItemData(0, "Meteosat Second Generation",
                 "", "", ""));
-        esaEumetsat.add(new MissionItemData(1, "MetOp", "", "", ""));
+        esaEumetsat.add(new MissionItemData(1, "MetOp", "", "", ""));*/
 
         // Header, Child data
         listDataChild.put(listDataHeader.get(0).getName(), esaEoMissions);
