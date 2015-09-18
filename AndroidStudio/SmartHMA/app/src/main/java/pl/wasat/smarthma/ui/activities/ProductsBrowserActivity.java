@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
+import android.util.Log;
 import android.widget.TextView;
 
 import pl.wasat.smarthma.R;
@@ -20,6 +21,8 @@ import pl.wasat.smarthma.ui.frags.common.MetadataFragment.OnMetadataFragmentList
 import pl.wasat.smarthma.ui.frags.common.ProductDetailsFragment.OnProductDetailsFragmentListener;
 import pl.wasat.smarthma.ui.frags.common.ProductsListFragment;
 import pl.wasat.smarthma.ui.frags.dialog.FacebookDialogFragment;
+import pl.wasat.smarthma.ui.menus.MenuHandler;
+import pl.wasat.smarthma.ui.menus.ProductsBrowserMenuHandler;
 
 public class ProductsBrowserActivity extends BaseSmartHMActivity implements
         OnProductDetailsFragmentListener, OnMetadataFragmentListener,
@@ -29,6 +32,8 @@ public class ProductsBrowserActivity extends BaseSmartHMActivity implements
     private AmznExtendedMapFragment amznExtendedMapFragment;
     private Footprint mFootprint;
     private String quicklookUrl;
+    private MenuHandler menuHandler;
+    ProductsListFragment productsListFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,16 +41,18 @@ public class ProductsBrowserActivity extends BaseSmartHMActivity implements
 
         Intent intent = getIntent();
         TextView text = (TextView) findViewById(R.id.action_bar_title);
-        text.setText("Products Browser");
+        text.setText(getString(R.string.activity_name_products_browser));
 
         FedeoRequestParams fedeoRequestParams = (FedeoRequestParams) intent.getSerializableExtra(Const.KEY_INTENT_FEDEO_REQUEST_PARAMS);
 
-        ProductsListFragment productsListFragment = ProductsListFragment
+        productsListFragment = ProductsListFragment
                 .newInstance(fedeoRequestParams);
         getSupportFragmentManager()
                 .beginTransaction()
                 .replace(R.id.activity_base_list_container,
                         productsListFragment).commit();
+
+        menuHandler = new ProductsBrowserMenuHandler(this, R.id.menu_button);
     }
 
     @Override
@@ -59,34 +66,55 @@ public class ProductsBrowserActivity extends BaseSmartHMActivity implements
 
     @Override
     public void onBackPressed() {
-        if (dismissMenuOnBackPressed()) return;
+        try {
+            Log.d("ZX", "ProductsBrowserActivity onBackPressed");
 
-        FragmentManager fm = getSupportFragmentManager();
-        int bsec = fm.getBackStackEntryCount();
-        if (bsec > 0) {
-            String bstEntry = fm.getBackStackEntryAt(bsec - 1).getName();
+            if (menuHandler.isPopupWindowVisible()) {
+                menuHandler.dismissPopupWindow();
+                return;
+            }
 
-            if (bstEntry.equalsIgnoreCase("MetadataFragment")) {
-                fm.popBackStackImmediate("MetadataFragment",
-                        FragmentManager.POP_BACK_STACK_INCLUSIVE);
-            } else if (bstEntry.equalsIgnoreCase("ExtendedMapFragment")) {
-                super.onBackPressed();
-            } else {
-                bsec = fm.getBackStackEntryCount();
-                if (bsec > 1) {
-                    while (bsec > 1) {
-                        fm.popBackStackImmediate();
-                        bsec = fm.getBackStackEntryCount();
-                    }
-                } else {
-                    Intent resultIntent = new Intent();
-                    resultIntent.putExtra(Const.KEY_INTENT_RETURN_STOP_SEARCH,
-                            true);
-                    setResult(Activity.RESULT_OK, resultIntent);
-                    finish();
+            if (dismissMenuOnBackPressed()) return;
+
+            Log.d("ZX", "1");
+            FragmentManager fm = getSupportFragmentManager();
+            Log.d("ZX", "2");
+            int bsec = fm.getBackStackEntryCount();
+            Log.d("ZX", "3");
+            if (bsec > 0) {
+                Log.d("ZX", "31");
+                String bstEntry = fm.getBackStackEntryAt(bsec - 1).getName();
+
+                Log.d("ZX", "32");
+                if (bstEntry.equalsIgnoreCase("MetadataFragment")) {
+                    Log.d("ZX", "321");
+                    fm.popBackStackImmediate("MetadataFragment",
+                            FragmentManager.POP_BACK_STACK_INCLUSIVE);
+                } else if (bstEntry.equalsIgnoreCase("ExtendedMapFragment")) {
+                    Log.d("ZX", "322");
                     super.onBackPressed();
+                } else {
+                    Log.d("ZX", "323");
+                    bsec = fm.getBackStackEntryCount();
+                    if (bsec > 1) {
+                        while (bsec > 1) {
+                            fm.popBackStackImmediate();
+                            bsec = fm.getBackStackEntryCount();
+                        }
+                    } else {
+                        Intent resultIntent = new Intent();
+                        resultIntent.putExtra(Const.KEY_INTENT_RETURN_STOP_SEARCH,
+                                true);
+                        setResult(Activity.RESULT_OK, resultIntent);
+                        finish();
+                        super.onBackPressed();
+                    }
                 }
             }
+            Log.d("ZX", "4");
+        } catch (Exception e) {
+            e.printStackTrace();
+            super.onBackPressed();
         }
     }
 
@@ -180,5 +208,7 @@ public class ProductsBrowserActivity extends BaseSmartHMActivity implements
     public void onBaseShowProductsListFragmentFootprintSend() {
     }
 
-
+    public ProductsListFragment getProductsListFragment() {
+        return productsListFragment;
+    }
 }

@@ -23,27 +23,7 @@
             android:layout_width="@dimen/search_eo_data_logo_size_land"
             android:layout_height="@dimen/search_eo_data_logo_size_land"
             android:src="@drawable/search_eo" />
-        <!--
-        <TextView
-            android:id="@+id/search_frag_tv_title_large"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:focusable="true"
-            android:focusableInTouchMode="true"
-            android:text="@string/smarthma"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:textSize="48sp" />
 
-        <TextView
-            android:id="@+id/search_frag_tv_subtitle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="70dp"
-            android:text="@string/fedeo_eo_data_series_search_engine"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:textSize="16sp" />
-            
-            -->
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
@@ -58,23 +38,40 @@
                 android:text="Search EO data"
                 android:textSize="16sp" />
 
-            <SearchView
-                android:id="@+id/search_frag_searchview"
+            <LinearLayout
+                android:id="@+id/search_frag_searchview_layout"
                 android:layout_width="@dimen/search_eo_data_search_view_width"
-                android:layout_height="@dimen/search_eo_data_search_view_height"
-                android:layout_below="@+id/s_text"
-                android:layout_marginLeft="3dp"
-                android:layout_marginRight="3dp"
-                android:background="@drawable/edit_text"
-                android:focusable="true"
-                android:focusableInTouchMode="true"
-                android:iconifiedByDefault="false"
-                android:visibility="visible" />
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_below="@id/s_text">
+
+                <SearchView
+                    android:id="@+id/search_frag_searchview"
+                    android:layout_width="400dp"
+                    android:layout_height="@dimen/search_eo_data_search_view_height"
+                    android:layout_marginLeft="3dp"
+                    android:layout_marginRight="1dp"
+                    android:background="@drawable/edit_text"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:iconifiedByDefault="false"
+                    android:visibility="visible" />
+
+                <Button
+                    android:id="@+id/search_frag_button_start"
+                    style="@style/buttonBlueGo"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/button_blue_height"
+                    android:layout_margin="1dp"
+                    android:layout_weight="1"
+                    android:text="@string/go"
+                    android:textSize="@dimen/button_blue_text_size" />
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="@dimen/search_eo_data_search_view_width"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/search_frag_searchview"
+                android:layout_below="@id/search_frag_searchview_layout"
                 android:paddingTop="@dimen/search_eo_data_padding_medium">
 
                 <Button

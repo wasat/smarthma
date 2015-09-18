@@ -1,6 +1,7 @@
 package pl.wasat.smarthma.ui.menus;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Point;
 import android.support.v4.app.FragmentActivity;
 import android.view.Gravity;
@@ -10,6 +11,10 @@ import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 
 import java.util.ArrayList;
+
+import pl.wasat.smarthma.R;
+import pl.wasat.smarthma.helper.Const;
+import pl.wasat.smarthma.ui.activities.GlobalSettingsActivity;
 
 /**
  * Used for handling ActionBar type menus.
@@ -146,5 +151,19 @@ public abstract class MenuHandler {
 
     public ArrayList<View> getClickableViews() {
         return clickableViews;
+    }
+
+    protected void addCommonListeners() {
+        LinearLayout settingsLayout = (LinearLayout) layout.findViewById(R.id.popup_menu_item_settings);
+        clickableViews.add(settingsLayout);
+        settingsLayout.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.setClass(activity, GlobalSettingsActivity.class);
+                activity.startActivityForResult(intent, Const.REQUEST_CODE_GLOBAL_SETTINGS);
+                popupWindow.dismiss();
+                popupWindow = null;
+            }
+        });
     }
 }

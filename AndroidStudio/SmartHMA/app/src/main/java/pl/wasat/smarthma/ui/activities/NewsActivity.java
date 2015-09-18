@@ -102,8 +102,7 @@ public class NewsActivity extends BaseSmartHMActivity implements
         }
     }
 
-    public NewsListFragment getNewsListFragment()
-    {
+    public NewsListFragment getNewsListFragment() {
         return newsListFragment;
     }
 }

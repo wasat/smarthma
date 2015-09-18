@@ -28,6 +28,18 @@ public class CollectionsGroupView extends RelativeLayout implements SpiceListIte
         this.groupNameTextView = (TextView) this.findViewById(R.id.entry_item_title_textview);
         this.groupContentTextView = (TextView) this.findViewById(R.id.entry_item_dates_textview);
         this.thumbImageView = (ImageView) this.findViewById(R.id.entry_item_thumb_imageview);
+
+        /*
+        final ImageView button = (ImageView) this.findViewById(R.id.star_button);
+        button.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                Log.d("ZX", "CollectionsGroupView onClick");
+            }
+        });
+        */
     }
 
     @Override

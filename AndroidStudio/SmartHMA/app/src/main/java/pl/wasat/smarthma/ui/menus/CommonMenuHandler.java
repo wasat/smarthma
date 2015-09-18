@@ -1,13 +1,9 @@
 package pl.wasat.smarthma.ui.menus;
 
-import android.content.Intent;
 import android.support.v4.app.FragmentActivity;
 import android.view.View;
-import android.widget.LinearLayout;
 
 import pl.wasat.smarthma.R;
-import pl.wasat.smarthma.helper.Const;
-import pl.wasat.smarthma.ui.activities.GlobalSettingsActivity;
 
 /**
  * Used for handling menu in the SearchActivity class.
@@ -32,17 +28,6 @@ public class CommonMenuHandler extends MenuHandler {
      * Creates on click listeners for specific buttons.
      */
     protected void addListeners() {
-        LinearLayout settingsLayout = (LinearLayout) layout.findViewById(R.id.popup_menu_item_settings);
-        clickableViews.add(settingsLayout);
-        settingsLayout.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                Intent intent = new Intent();
-                intent.setClass(activity, GlobalSettingsActivity.class);
-                activity.startActivityForResult(intent, Const.REQUEST_CODE_GLOBAL_SETTINGS);
-                popupWindow.dismiss();
-                popupWindow = null;
-            }
-        });
-
+        addCommonListeners();
     }
 }

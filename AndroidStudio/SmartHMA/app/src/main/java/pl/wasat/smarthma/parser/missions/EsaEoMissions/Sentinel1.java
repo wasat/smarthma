@@ -14,101 +14,102 @@ import pl.wasat.smarthma.parser.model.Page;
  * Created by marcel paduch on 2015-08-10.
  */
 public class Sentinel1 extends BaseParser implements MissionInterface {
-	final int ITEMS_COUNT = 2;
-	public final static int MISSION_ID = 0;
-	final static String TITLE = "SENTINEL-1";
-	final String NEWS = "";
-	final String MILESTONES = "https://earth.esa.int/web/guest/missions/esa-operational-eo-missions/sentinel-1/milestones";
-	public Sentinel1(String pageUrl, Context context) {
-		super(pageUrl, context);
-		parserDb.addMission(new Mission(MISSION_ID, EsaEoMissions.CATEGORY_ID, TITLE));
-	}
+    final int ITEMS_COUNT = 2;
+    public final static int MISSION_ID = 0;
+    final static String TITLE = "SENTINEL-1";
+    final String NEWS = "";
+    final String MILESTONES = "https://earth.esa.int/web/guest/missions/esa-operational-eo-missions/sentinel-1/milestones";
 
-	@Override
-	public void overview() {
+    public Sentinel1(String pageUrl, Context context) {
+        super(pageUrl, context);
+        parserDb.addMission(new Mission(MISSION_ID, EsaEoMissions.CATEGORY_ID, TITLE));
+    }
 
-	}
+    @Override
+    public void overview() {
 
-	@Override
-	public void objectives() {
+    }
 
-	}
+    @Override
+    public void objectives() {
 
-	@Override
-	public void satellite() {
+    }
 
-	}
+    @Override
+    public void satellite() {
 
-	@Override
-	public void groundSegment() {
+    }
 
-	}
+    @Override
+    public void groundSegment() {
 
-	@Override
-	public void instruments() {
+    }
 
-	}
+    @Override
+    public void instruments() {
 
-	@Override
-	public void history() {
+    }
 
-	}
+    @Override
+    public void history() {
 
-	@Override
-	public void industry() {
+    }
 
-	}
+    @Override
+    public void industry() {
 
-	@Override
-	public void science() {
+    }
 
-	}
+    @Override
+    public void science() {
 
-	@Override
-	public void applications() {
+    }
 
-	}
+    @Override
+    public void applications() {
 
-	@Override
-	public void scientificRequirements() {
+    }
 
-	}
+    @Override
+    public void scientificRequirements() {
 
-	@Override
-	public void operations() {
+    }
 
-	}
+    @Override
+    public void operations() {
 
-	@Override
-	public void mainContent() {
-		//final ArrayList<Integer> EXCLUDE_ITEM = new ArrayList<>(Arrays.asList(1,2));
+    }
 
-		ArrayList<Pair> list = super.getComplexPage(ITEMS_COUNT);
-		for(Pair item : list){
-			parserDb.addPage(new Page(EsaEoMissions.CATEGORY_ID, MISSION_ID, (String)item.title,  (String)item.content));
-		}
-	}
+    @Override
+    public void mainContent() {
+        //final ArrayList<Integer> EXCLUDE_ITEM = new ArrayList<>(Arrays.asList(1,2));
 
-	@Override
-	public void news() {
-		parserDb.addPage(new Page(EsaEoMissions.CATEGORY_ID, MISSION_ID, NEWS_TITLE,  NEWS ));
-	}
+        ArrayList<Pair> list = super.getComplexPage(ITEMS_COUNT);
+        for (Pair item : list) {
+            parserDb.addPage(new Page(EsaEoMissions.CATEGORY_ID, MISSION_ID, (String) item.title, (String) item.content));
+        }
+    }
 
-	@Override
-	public void milestones() {
-		parserDb.addPage(new Page(EsaEoMissions.CATEGORY_ID, MISSION_ID, MILESTONES_TITLE, MILESTONES ));
-	}
+    @Override
+    public void news() {
+        parserDb.addPage(new Page(EsaEoMissions.CATEGORY_ID, MISSION_ID, NEWS_TITLE, NEWS));
+    }
 
-	@Override
-	public void imageOfTheWeek() {
+    @Override
+    public void milestones() {
+        parserDb.addPage(new Page(EsaEoMissions.CATEGORY_ID, MISSION_ID, MILESTONES_TITLE, MILESTONES));
+    }
 
-	}
+    @Override
+    public void imageOfTheWeek() {
 
-	@Override
-	public void faq() {
-	}
+    }
 
-	@Override
-	public void other() {
-	}
+    @Override
+    public void faq() {
+    }
+
+    @Override
+    public void other() {
+    }
 }

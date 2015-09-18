@@ -34,6 +34,7 @@ public class EntryISO implements Serializable {
     private long dbId;
     private boolean read;
     private boolean offline;
+    private boolean isFavourite;
 
 
     /**
@@ -213,6 +214,13 @@ public class EntryISO implements Serializable {
         this.offline = offline;
     }
 
+    public boolean isFavourite() {
+        return isFavourite;
+    }
+
+    public void setFavourite(boolean favourite) {
+        this.isFavourite = favourite;
+    }
 
     @Override
     public String toString() {

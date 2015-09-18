@@ -13,25 +13,20 @@ import pl.wasat.smarthma.ui.frags.browse.CollectionsGroupListFragment;
 import pl.wasat.smarthma.ui.frags.browse.CollectionsListFragment;
 
 public class CollectionsDefinitionActivityTests extends ActivityInstrumentationTestCase2<CollectionsDefinitionActivity> {
-    public CollectionsDefinitionActivityTests()
-    {
+    public CollectionsDefinitionActivityTests() {
         super(CollectionsDefinitionActivity.class);
     }
 
-    public void testResults()
-    {
+    public void testResults() {
         final CollectionsDefinitionActivity activity = getActivity();
         assertNotNull("Null CollectionsDefinitionActivity.", activity);
 
         final boolean[] tests = {false, false, false, false, false, false};
 
-        activity.runOnUiThread(new Runnable()
-        {
+        activity.runOnUiThread(new Runnable() {
             @Override
-            public void run()
-            {
-                try
-                {
+            public void run() {
+                try {
                     CollectionsGroupListFragment fragment = activity.getCollectionsGroupListFragment();
                     tests[0] = true;
 
@@ -52,21 +47,16 @@ public class CollectionsDefinitionActivityTests extends ActivityInstrumentationT
                     //list2.performItemClick(list2.getAdapter().getView(position, null, null),
                     //        position, list2.getAdapter().getItemId(position));
                     //tests[5] = true;
-                }
-                catch (Exception e)
-                {
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
         });
 
         // Wait for the UI thread to finish.
-        try
-        {
+        try {
             Thread.sleep(2000);
-        }
-        catch (InterruptedException e)
-        {
+        } catch (InterruptedException e) {
             e.printStackTrace();
         }
 

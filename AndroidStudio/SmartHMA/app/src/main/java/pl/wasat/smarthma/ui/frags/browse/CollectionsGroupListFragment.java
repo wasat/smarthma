@@ -174,13 +174,11 @@ public class CollectionsGroupListFragment extends Fragment implements
         updateEOListViewContent(SmartHMApplication.GlobalEODataList);
     }
 
-    public ListView getCollectionsGroupListView()
-    {
+    public ListView getCollectionsGroupListView() {
         return collectionsGroupListView;
     }
 
-    public CollectionsListFragment getCollectionsListFragment()
-    {
+    public CollectionsListFragment getCollectionsListFragment() {
         return collectionsListFragment;
     }
 }

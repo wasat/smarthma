@@ -13,8 +13,8 @@ import android.os.Bundle;
  */
 class AndroidLocProviderImpl implements LocationListener {
     private static final int REQUEST_TIMEOUT = 30000;
-    private static final int ACCURACY_LEVEL = 151;
-    private static final long LOC_DEGRADATION_TIME = 300000;
+    private static final int ACCURACY_LEVEL = 500;
+    private static final long LOC_DEGRADATION_TIME = 1800000;
 
     private final Context context;
     private final LocationManager locationManager;
@@ -51,6 +51,7 @@ class AndroidLocProviderImpl implements LocationListener {
                 startLocationUpdates();
             } else {
                 //Log.i(AndroidLocProviderImpl.class.getName(), "initAndroidProvider - NULL:");
+                //calcDefaulfPosition();
                 buildAndSendBroadcast(false);
             }
         }

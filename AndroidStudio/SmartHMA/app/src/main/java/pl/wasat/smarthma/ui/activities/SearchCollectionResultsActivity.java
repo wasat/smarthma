@@ -5,6 +5,7 @@ import android.app.SearchManager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
+import android.util.Log;
 import android.widget.TextView;
 
 import java.util.Calendar;
@@ -29,6 +30,8 @@ import pl.wasat.smarthma.ui.frags.common.MetadataISOFragment.OnMetadataISOFragme
 import pl.wasat.smarthma.ui.frags.common.TimePickerFragment.OnTimePickerFragmentListener;
 import pl.wasat.smarthma.ui.frags.search.SearchListFragment;
 import pl.wasat.smarthma.ui.frags.search.SearchListFragment.OnSearchListFragmentListener;
+import pl.wasat.smarthma.ui.menus.MenuHandler;
+import pl.wasat.smarthma.ui.menus.SearchCollectionsMenuHandler;
 import pl.wasat.smarthma.utils.obj.LatLngBoundsExt;
 
 public class SearchCollectionResultsActivity extends BaseSmartHMActivity
@@ -39,6 +42,8 @@ public class SearchCollectionResultsActivity extends BaseSmartHMActivity
 
     private EoDbAdapter dba;
     private CollectionDetailsFragment collectionDetailsFragment;
+    private MenuHandler menuHandler;
+    private SearchListFragment searchListFrag;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,17 +54,20 @@ public class SearchCollectionResultsActivity extends BaseSmartHMActivity
         assert actionBar != null;
 
         TextView title = (TextView) findViewById(R.id.action_bar_title);
-        title.setText("Searched Collections");
+        title.setText(getString(R.string.activity_name_search_collections_results));
 
         handleIntent(getIntent());
         dba = new EoDbAdapter(this);
+
+        menuHandler = new SearchCollectionsMenuHandler(this, R.id.menu_button);
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        Log.d("ZX", "onActivityResult");
         stopNewSearch = resultCode == RESULT_OK && data.getBooleanExtra(Const.KEY_INTENT_RETURN_STOP_SEARCH, true);
 
-        SearchListFragment searchListFrag = (SearchListFragment) getSupportFragmentManager()
+        searchListFrag = (SearchListFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.activity_base_list_container);
         if (searchListFrag != null) {
             Bundle bundle = searchListFrag.getArguments();
@@ -74,8 +82,8 @@ public class SearchCollectionResultsActivity extends BaseSmartHMActivity
      */
     private void handleIntent(Intent intent) {
         if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
+
             String query = intent.getStringExtra(SearchManager.QUERY);
-            //String value = intent.getStringExtra("title");
 
             SharedPrefs sharedPrefs = new SharedPrefs(this);
             sharedPrefs.setQueryPrefs(query);
@@ -124,25 +132,47 @@ public class SearchCollectionResultsActivity extends BaseSmartHMActivity
      */
     @Override
     public void onBackPressed() {
-        if (dismissMenuOnBackPressed()) return;
+        try {
+            Log.d("ZX", "SearchCollectionResultsActivity onBackPressed");
 
-        FragmentManager fm = getSupportFragmentManager();
-        int bsec = fm.getBackStackEntryCount();
-        String bstEntry = fm.getBackStackEntryAt(bsec - 1).getName();
-        if (bsec > 1) {
-            while (bsec > 1) {
-                fm.popBackStackImmediate();
-                bsec = fm.getBackStackEntryCount();
+            if (menuHandler.isPopupWindowVisible()) {
+                menuHandler.dismissPopupWindow();
+                return;
             }
-        } else {
-            finish();
-            if (bstEntry.equalsIgnoreCase("FeedSummarySearchFragment")) {
-                Intent intent = new Intent(this, SearchActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(intent);
+
+            if (dismissMenuOnBackPressed()) return;
+
+            Log.d("ZX", "1");
+            FragmentManager fm = getSupportFragmentManager();
+            Log.d("ZX", "2");
+            int bsec = fm.getBackStackEntryCount();
+            Log.d("ZX", "3");
+            String bstEntry = fm.getBackStackEntryAt(bsec - 1).getName();
+            Log.d("ZX", "4");
+            if (bsec > 1) {
+                Log.d("ZX", "41");
+                while (bsec > 1) {
+                    fm.popBackStackImmediate();
+                    bsec = fm.getBackStackEntryCount();
+                }
             } else {
-                super.onBackPressed();
+                Log.d("ZX", "42");
+                finish();
+                Log.d("ZX", "43");
+                if (bstEntry.equalsIgnoreCase("FeedSummarySearchFragment")) {
+                    Log.d("ZX", "431");
+                    Intent intent = new Intent(this, SearchActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    startActivity(intent);
+                } else {
+                    Log.d("ZX", "432");
+                    super.onBackPressed();
+                }
             }
+            Log.d("ZX", "5");
+        } catch (Exception e) {
+            System.out.println(e);
+            super.onBackPressed();
         }
     }
 
@@ -190,10 +220,10 @@ public class SearchCollectionResultsActivity extends BaseSmartHMActivity
     }
 
     private void callUpdateCollectionsBounds(LatLngBoundsExt bounds) {
-        CollectionDetailsFragment searchResultCollectionDetailsFragment = (CollectionDetailsFragment) getSupportFragmentManager()
-                .findFragmentByTag("SearchResultCollectionDetailsFragment");
-        if (searchResultCollectionDetailsFragment != null) {
-            searchResultCollectionDetailsFragment.updateAreaBounds(bounds);
+        CollectionDetailsFragment collectionDetailsFragment = (CollectionDetailsFragment) getSupportFragmentManager()
+                .findFragmentByTag("CollectionDetailsFragment");
+        if (collectionDetailsFragment != null) {
+            collectionDetailsFragment.updateAreaBounds(bounds);
         }
     }
 
@@ -250,5 +280,16 @@ public class SearchCollectionResultsActivity extends BaseSmartHMActivity
     @Override
     public void onTimePickerFragmentTimeChoose(Calendar calendar, String viewTag) {
         collectionDetailsFragment.setTimeValues(calendar, viewTag);
+    }
+
+    public SearchListFragment getListFragment() {
+        return ((SearchListFragment) getSupportFragmentManager().findFragmentById(R.id.activity_base_list_container));
+    }
+
+    public void refreshList() {
+        SearchListAdapter adapter = (SearchListAdapter) ((SearchListFragment) getSupportFragmentManager()
+                .findFragmentById(R.id.activity_base_list_container))
+                .getListAdapter();
+        adapter.notifyDataSetChanged();
     }
 }

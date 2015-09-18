@@ -1,7 +1,6 @@
 package pl.wasat.smarthma.ui.activities;
 
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.AsyncTask;
@@ -10,7 +9,6 @@ import android.util.Log;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
-import bolts.Task;
 import pl.wasat.smarthma.R;
 import pl.wasat.smarthma.helper.Const;
 import pl.wasat.smarthma.model.mission.MissionItemData;
@@ -43,7 +41,7 @@ public class MissionsActivity extends BaseSmartHMActivity implements
         parserDb.open();
 
         //jesli jest w bazie 60 misji, to ladujemy fragment
-        if(parserDb.getMissionCount() == 60){
+        if (parserDb.getMissionCount() == 60) {
             extendedListFragment = MissionsExtListFragment
                     .newInstance();
 
@@ -85,8 +83,7 @@ public class MissionsActivity extends BaseSmartHMActivity implements
 
     }
 
-    public MissionsExtListFragment getExtendedListFragment()
-    {
+    public MissionsExtListFragment getExtendedListFragment() {
         return extendedListFragment;
     }
 
@@ -99,9 +96,13 @@ public class MissionsActivity extends BaseSmartHMActivity implements
             parserDb.open();
         }
 
-        /** progress dialog to show user that the backup is processing. */
+        /**
+         * progress dialog to show user that the backup is processing.
+         */
         private ProgressDialog dialog;
-        /** application context. */
+        /**
+         * application context.
+         */
         private MissionsActivity activity;
         private ParserDb parserDb;
         private MissionsExtListFragment extendedListFragment;

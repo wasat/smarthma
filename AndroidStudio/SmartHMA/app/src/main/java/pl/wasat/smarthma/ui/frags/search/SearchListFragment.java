@@ -2,9 +2,6 @@ package pl.wasat.smarthma.ui.frags.search;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -12,7 +9,6 @@ import android.widget.Toast;
 import java.util.List;
 
 import pl.wasat.smarthma.R;
-import pl.wasat.smarthma.SmartHMApplication;
 import pl.wasat.smarthma.adapter.SearchListAdapter;
 import pl.wasat.smarthma.database.SearchHistory;
 import pl.wasat.smarthma.database.SearchParams;
@@ -37,6 +33,7 @@ public class SearchListFragment extends BaseSpiceListFragment {
     private static final String STATE_ACTIVATED_POSITION = "activated_position";
 
     private FedeoRequestParams searchRequest;
+    private List<EntryISO> entries;
 
     private int mActivatedPosition = ListView.INVALID_POSITION;
 
@@ -143,6 +140,7 @@ public class SearchListFragment extends BaseSpiceListFragment {
         mActivatedPosition = position;
     }
 
+    /*
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.menu_list_refresh, menu);
@@ -154,19 +152,19 @@ public class SearchListFragment extends BaseSpiceListFragment {
         switch (id) {
             case R.id.action_sort_by_title_asc:
                 SmartHMApplication.sortingType = Const.SORT_BY_TITLE_ASCENDING;
-                refreshList();
+                ((SearchCollectionResultsActivity)getActivity()).refreshList();
                 break;
             case R.id.action_sort_by_title_desc:
                 SmartHMApplication.sortingType = Const.SORT_BY_TITLE_DESCENDING;
-                refreshList();
+                ((SearchCollectionResultsActivity)getActivity()).refreshList();
                 break;
             case R.id.action_sort_by_date_asc:
                 SmartHMApplication.sortingType = Const.SORT_BY_DATE_ASCENDING;
-                refreshList();
+                ((SearchCollectionResultsActivity)getActivity()).refreshList();
                 break;
             case R.id.action_sort_by_date_desc:
                 SmartHMApplication.sortingType = Const.SORT_BY_DATE_DESCENDING;
-                refreshList();
+                ((SearchCollectionResultsActivity)getActivity()).refreshList();
                 break;
             case R.id.actionbar_refresh:
                 loadSearchFeedResponse(searchRequest);
@@ -176,6 +174,7 @@ public class SearchListFragment extends BaseSpiceListFragment {
         }
         return true;
     }
+    */
 
     private void refreshList() {
         loadSearchFeedResponse(searchRequest);
@@ -249,7 +248,7 @@ public class SearchListFragment extends BaseSpiceListFragment {
 
     @Override
     public void onRequestSuccess(Feed searchFeeds) {
-        List<EntryISO> entries = searchFeeds.getEntriesISO();
+        entries = searchFeeds.getEntriesISO();
         DataSorter sorter = new DataSorter();
         sorter.sort(entries);
 
@@ -260,4 +259,7 @@ public class SearchListFragment extends BaseSpiceListFragment {
 
     }
 
+    public List<EntryISO> getEntries() {
+        return entries;
+    }
 }

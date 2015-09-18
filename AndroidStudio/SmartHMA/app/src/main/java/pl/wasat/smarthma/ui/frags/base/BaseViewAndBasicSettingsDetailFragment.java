@@ -175,7 +175,7 @@ public class BaseViewAndBasicSettingsDetailFragment extends BaseDateTimeAreaCont
 
         loadParentIdPrefs();
 
-        obtainGlobalSettings();
+        //obtainGlobalSettings();
 
         //loadBboxPrefs();
         //loadDateTimePrefs();
@@ -193,7 +193,5 @@ public class BaseViewAndBasicSettingsDetailFragment extends BaseDateTimeAreaCont
     private void loadParentIdPrefs() {
         tvParentId.setText(sharedPrefs.getParentIdPrefs());
     }
-
-
 
 }

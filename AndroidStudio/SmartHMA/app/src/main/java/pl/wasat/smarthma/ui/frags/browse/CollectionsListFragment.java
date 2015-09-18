@@ -216,8 +216,7 @@ public class CollectionsListFragment extends BaseSpiceFragment {
         }
     }
 
-    public ListView getList()
-    {
+    public ListView getList() {
         return list;
     }
 }

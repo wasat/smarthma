@@ -117,6 +117,7 @@
     <string name="value_osdd_parameter">Search parameter</string>
     <string name="organisation_header">Organisation</string>
     <string name="platform_header">Platform</string>
+    <string name="favourites">Favourites...</string>
 
 
     <!--  INFO APPS  -->
@@ -151,6 +152,7 @@
     <string name="mission_activity_objective">The objective and continuous views of our planet supplied by satellite images and data provide scientists and decision makers with the information they need to understand and protect our environment. Among their many applications are monitoring the air, seas and land; providing the basis for accurate weather reports; and supplying national and international relief agencies with data when disasters strike</string>
     <string name="menu_settings">Settings</string>
     <string name="of_total">of total</string>
+    <string name="go">Go</string>
 
 
 </resources>

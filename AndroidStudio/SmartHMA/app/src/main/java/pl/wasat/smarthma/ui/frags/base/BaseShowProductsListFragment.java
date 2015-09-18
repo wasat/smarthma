@@ -3,6 +3,7 @@ package pl.wasat.smarthma.ui.frags.base;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -46,6 +47,8 @@ public class BaseShowProductsListFragment extends BaseSpiceFragment {
 
     private static final String STATE_ACTIVATED_POSITION = "activated_position";
     private int mActivatedPosition = ListView.INVALID_POSITION;
+    protected EntryImagesListAdapter entryImagesListAdapter;
+    protected List<EntryOM> entryList;
 
     /**
      * Use this factory method to create a new instance of this fragment using
@@ -151,6 +154,7 @@ public class BaseShowProductsListFragment extends BaseSpiceFragment {
     }
 
     private void updateShowProductsListViewContent(final List<EntryOM> entryList) {
+        this.entryList = entryList;
         View view = getView();
         if (view != null) {
 
@@ -176,7 +180,7 @@ public class BaseShowProductsListFragment extends BaseSpiceFragment {
                     }
                 }
 
-                EntryImagesListAdapter entryImagesListAdapter = new EntryImagesListAdapter(getActivity()
+                entryImagesListAdapter = new EntryImagesListAdapter(getActivity()
                         .getBaseContext(), getBitmapSpiceManager(), entryList);
                 entryImagesListView.setAdapter(entryImagesListAdapter);
 
@@ -186,12 +190,10 @@ public class BaseShowProductsListFragment extends BaseSpiceFragment {
 
                 // Click event for single list row
                 entryImagesListView
-                        .setOnItemClickListener(new OnItemClickListener()
-                        {
+                        .setOnItemClickListener(new OnItemClickListener() {
                             @Override
                             public void onItemClick(AdapterView<?> parent,
-                                                    View view, int position, long id)
-                            {
+                                                    View view, int position, long id) {
                                 loadProductItemDetails(entryList.get(position));
                             }
                         });
@@ -281,5 +283,21 @@ public class BaseShowProductsListFragment extends BaseSpiceFragment {
         public void onRequestSuccess(Feed feed) {
             loadRequestSuccess(feed);
         }
+    }
+
+    public EntryImagesListAdapter getEntryImagesListAdapter() {
+        return entryImagesListAdapter;
+    }
+
+    public void refreshList() {
+        if (entryImagesListAdapter != null) {
+            entryImagesListAdapter.notifyDataSetChanged();
+        } else {
+            Log.d("ZX", "Warning: BaseShowProductsListFragment: refreshList(): entryImagesListAdapter is null.");
+        }
+    }
+
+    public List<EntryOM> getEntryList() {
+        return entryList;
     }
 }

@@ -5,25 +5,39 @@ package pl.wasat.smarthma.parser.missions;
  */
 public interface MissionInterface {
 
-	void mainContent();
-	void news();
-	void milestones();
-	void imageOfTheWeek();
-	void faq();
-	void other();
-	void overview();
-	void objectives();
-	void satellite();
-	void groundSegment();
-	void instruments();
-	void scientificRequirements();
-	void operations();
-	void applications();
-	void science();
-	void history();
-	void industry();
+    void mainContent();
 
+    void news();
 
+    void milestones();
+
+    void imageOfTheWeek();
+
+    void faq();
+
+    void other();
+
+    void overview();
+
+    void objectives();
+
+    void satellite();
+
+    void groundSegment();
+
+    void instruments();
+
+    void scientificRequirements();
+
+    void operations();
+
+    void applications();
+
+    void science();
+
+    void history();
+
+    void industry();
 
 
 }

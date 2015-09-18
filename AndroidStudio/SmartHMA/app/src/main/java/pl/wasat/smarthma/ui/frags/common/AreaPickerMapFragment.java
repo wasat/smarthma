@@ -97,7 +97,6 @@ public class AreaPickerMapFragment extends BaseMapFragment implements OnBaseMapF
     public void onBaseSupportMapReady() {
         AcraExtension.mapCustomLog("AreaMap.onBaseSupportMapReady", mMap);
         setMapListeners();
-
     }
 
     /**

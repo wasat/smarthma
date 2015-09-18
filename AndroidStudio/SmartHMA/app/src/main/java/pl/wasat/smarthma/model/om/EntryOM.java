@@ -38,6 +38,7 @@ public class EntryOM implements Serializable {
     private String date;
     private boolean read;
     private boolean offline;
+    private boolean isFavourite;
 
 
     public String getId() {
@@ -168,6 +169,14 @@ public class EntryOM implements Serializable {
 
     public void setOffline(boolean offline) {
         this.offline = offline;
+    }
+
+    public boolean isFavourite() {
+        return isFavourite;
+    }
+
+    public void setFavourite(boolean favourite) {
+        this.isFavourite = favourite;
     }
 
     @Override

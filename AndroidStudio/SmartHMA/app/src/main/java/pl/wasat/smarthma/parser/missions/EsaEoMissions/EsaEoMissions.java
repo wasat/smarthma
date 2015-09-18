@@ -21,142 +21,139 @@ import pl.wasat.smarthma.parser.model.Page;
  */
 public class EsaEoMissions extends BaseParser implements MissionInterface {
 
-	final int ITEMS_COUNT = 9;
-	public final static int CATEGORY_ID = 0;
+    final int ITEMS_COUNT = 9;
+    public final static int CATEGORY_ID = 0;
 
-	public EsaEoMissions(String pageUrl, Context context) {
-		super(pageUrl, context);
-	}
+    public EsaEoMissions(String pageUrl, Context context) {
+        super(pageUrl, context);
+    }
 
-	@Override
-	public void mainContent() {
-		Pair pair = super.getImageListPage(ITEMS_COUNT, false);
-		String contents = super.imageListToContentString(pair);
-		parserDb.addCategory(new Category(CATEGORY_ID, (String) pair.title, contents));
-		ArrayList<String> urlList = getImageList((ArrayList<String>) pair.content);
-		int mission_id = 0;
+    @Override
+    public void mainContent() {
+        Pair pair = super.getImageListPage(ITEMS_COUNT, false);
+        String contents = super.imageListToContentString(pair);
+        parserDb.addCategory(new Category(CATEGORY_ID, (String) pair.title, contents));
+        ArrayList<String> urlList = getImageList((ArrayList<String>) pair.content);
+        int mission_id = 0;
 
-		for (String url :
-				urlList) {
-			parserDb.addPage(new Page(CATEGORY_ID, mission_id, IMG_NAME, url));
-			mission_id++;
-		}
-	}
+        for (String url :
+                urlList) {
+            parserDb.addPage(new Page(CATEGORY_ID, mission_id, IMG_NAME, url));
+            mission_id++;
+        }
+    }
 
-	@Override
-	public void history() {
+    @Override
+    public void history() {
 
-	}
+    }
 
-	@Override
-	public void industry() {
+    @Override
+    public void industry() {
 
-	}
+    }
 
-	@Override
-	public void science() {
+    @Override
+    public void science() {
 
-	}
+    }
 
-	@Override
-	public void applications() {
+    @Override
+    public void applications() {
 
-	}
+    }
 
-	@Override
-	public void scientificRequirements() {
+    @Override
+    public void scientificRequirements() {
 
-	}
+    }
 
-	@Override
-	public void operations() {
+    @Override
+    public void operations() {
 
-	}
+    }
 
-	@Override
-	public void overview() {
+    @Override
+    public void overview() {
 
-	}
+    }
 
-	@Override
-	public void objectives() {
+    @Override
+    public void objectives() {
 
-	}
+    }
 
-	@Override
-	public void satellite() {
+    @Override
+    public void satellite() {
 
-	}
+    }
 
-	@Override
-	public void groundSegment() {
+    @Override
+    public void groundSegment() {
 
-	}
+    }
 
-	@Override
-	public void instruments() {
+    @Override
+    public void instruments() {
 
-	}
+    }
 
-	@Override
-	public void news() {
-	}
+    @Override
+    public void news() {
+    }
 
-	@Override
-	public void milestones() {
-	}
+    @Override
+    public void milestones() {
+    }
 
-	@Override
-	public void imageOfTheWeek() {
+    @Override
+    public void imageOfTheWeek() {
 
-	}
+    }
 
-	@Override
-	public void faq() {
-	}
+    @Override
+    public void faq() {
+    }
 
-	@Override
-	public void other() {
-	}
+    @Override
+    public void other() {
+    }
 
-	public Pair<String, ArrayList<String>> getImageListPage(String pageName, int maxItems,  boolean fullPage){
+    public Pair<String, ArrayList<String>> getImageListPage(String pageName, int maxItems, boolean fullPage) {
 
-		String title;
-		ArrayList<String> contentList = new ArrayList<>();
-		Document doc;
+        String title;
+        ArrayList<String> contentList = new ArrayList<>();
+        Document doc;
 
-		try{
-			if(pageName.equals("")){
-				if(fullPage){
-					doc = Jsoup.connect(pageUrl + "/" + getAll).get();
-				}
-				else{
-					doc = Jsoup.connect(pageUrl).get();
-				}
-			}
-			else{
-				if(fullPage){
-					doc = Jsoup.connect(pageUrl + "/" + pageName + getAll).get();
-				}
-				else{
-					doc = Jsoup.connect(pageUrl + "/" + pageName).get();
-				}
-			}
-			title = doc.select(titleClass).first().text();
-			Elements contents = doc.select(imageListClass);
-			Log.d("imgListSize", String.valueOf(contents.size()));
-			for(int i=1;i<contents.size();i+=2){
-				contentList.add(contents.get(i).html());
+        try {
+            if (pageName.equals("")) {
+                if (fullPage) {
+                    doc = Jsoup.connect(pageUrl + "/" + getAll).get();
+                } else {
+                    doc = Jsoup.connect(pageUrl).get();
+                }
+            } else {
+                if (fullPage) {
+                    doc = Jsoup.connect(pageUrl + "/" + pageName + getAll).get();
+                } else {
+                    doc = Jsoup.connect(pageUrl + "/" + pageName).get();
+                }
+            }
+            title = doc.select(titleClass).first().text();
+            Elements contents = doc.select(imageListClass);
+            Log.d("imgListSize", String.valueOf(contents.size()));
+            for (int i = 1; i < contents.size(); i += 2) {
+                contentList.add(contents.get(i).html());
 
-				//System.out.println(getImageSource(content.html()));
-				if(contentList.size() >= maxItems){
-					break;
-				}
-			}
-		}catch(IOException e){
-			Log.d(BaseParser.class.toString(), e.toString());
-			title = "";
-		}
-		return new Pair<>(title, contentList);
-	}
+                //System.out.println(getImageSource(content.html()));
+                if (contentList.size() >= maxItems) {
+                    break;
+                }
+            }
+        } catch (IOException e) {
+            Log.d(BaseParser.class.toString(), e.toString());
+            title = "";
+        }
+        return new Pair<>(title, contentList);
+    }
 }

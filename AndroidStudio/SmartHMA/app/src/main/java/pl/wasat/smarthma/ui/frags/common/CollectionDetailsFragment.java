@@ -83,6 +83,7 @@ public class CollectionDetailsFragment extends
         super.onCreateView(inflater, container, savedInstanceState);
 
         loadDefaultFedeoParams();
+        loadSharedData();
 
         String osddUrl = "";
         for (Link entityLink : displayedISOEntry.getLink()) {

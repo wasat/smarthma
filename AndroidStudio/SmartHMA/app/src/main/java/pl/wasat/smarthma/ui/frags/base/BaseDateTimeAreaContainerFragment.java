@@ -14,7 +14,7 @@ import pl.wasat.smarthma.utils.time.SimpleDate;
  */
 public class BaseDateTimeAreaContainerFragment extends BaseParametersPickerFragment {
 
-    void obtainGlobalSettings() {
+    protected void obtainGlobalSettings() {
         GlobalPreferences globalPreferences = new GlobalPreferences(getActivity());
         if (globalPreferences.getIsParamsSaved()) {
             loadSharedData();
@@ -24,7 +24,7 @@ public class BaseDateTimeAreaContainerFragment extends BaseParametersPickerFragm
         }
     }
 
-    private void loadSharedData() {
+    protected void loadSharedData() {
         loadDateTimePrefs();
         setDateTime();
 

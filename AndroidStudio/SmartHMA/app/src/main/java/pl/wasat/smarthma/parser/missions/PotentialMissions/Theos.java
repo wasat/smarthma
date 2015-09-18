@@ -14,22 +14,23 @@ import pl.wasat.smarthma.parser.model.Page;
  * Created by marcel on 2015-08-13.
  */
 public class Theos extends BaseParser implements SimpleMissionInterface {
-	public final static int MISSION_ID = 57;
-	public final static String TITLE = "THEOS";
+    public final static int MISSION_ID = 57;
+    public final static String TITLE = "THEOS";
 
-	final int ITEMS_COUNT = 2;
-	public Theos(String pageUrl, Context context) {
-		super(pageUrl, context);
-		parserDb.addMission(new Mission(MISSION_ID, PotentialMissions.CATEGORY_ID, TITLE));
+    final int ITEMS_COUNT = 2;
 
-	}
+    public Theos(String pageUrl, Context context) {
+        super(pageUrl, context);
+        parserDb.addMission(new Mission(MISSION_ID, PotentialMissions.CATEGORY_ID, TITLE));
 
-	@Override
-	public void mainContent() {
-		super.getComplexPage(ITEMS_COUNT);
-		ArrayList<Pair> list = super.getComplexPage(ITEMS_COUNT);
-		for(Pair item : list){
-			parserDb.addPage(new Page(PotentialMissions.CATEGORY_ID, MISSION_ID, (String)item.title,  (String)item.content ));
-		}
-	}
+    }
+
+    @Override
+    public void mainContent() {
+        super.getComplexPage(ITEMS_COUNT);
+        ArrayList<Pair> list = super.getComplexPage(ITEMS_COUNT);
+        for (Pair item : list) {
+            parserDb.addPage(new Page(PotentialMissions.CATEGORY_ID, MISSION_ID, (String) item.title, (String) item.content));
+        }
+    }
 }

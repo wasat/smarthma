@@ -111,15 +111,6 @@ public class BaseMapFragment extends SupportMapFragment implements
         AcraExtension.mapCustomLog("BaseMap.onConnected", mMap);
 
         obtainGooglePosition();
-
-        //Location location = LocationServices.FusedLocationApi
-        //        .getLastLocation(mGoogleApiClient);
-        //TODO INFOAPPS nullPointerException
-       /* LatLng latLng = new LatLng(location.getLatitude(),
-                location.getLongitude());
-        CameraUpdate cameraUpdate = CameraUpdateFactory
-                .newLatLngZoom(latLng, 4);
-        mMap.animateCamera(cameraUpdate); */
     }
 
 
@@ -196,6 +187,7 @@ public class BaseMapFragment extends SupportMapFragment implements
         GlobalPreferences globalPreferences = new GlobalPreferences(getActivity());
         int mapType = globalPreferences.getMapType();
 
+        //replace switch-case with mapType int
         switch (mapType) {
             case 0:
                 mMap.setMapType(GoogleMap.MAP_TYPE_NONE);

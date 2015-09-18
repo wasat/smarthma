@@ -268,6 +268,12 @@ public class SearchActivity extends BaseSmartHMActivity implements
         loadAdvancedParamsFragment();
     }
 
+    @Override
+    public void onSearchFragmentStartSearchingWithButton(Intent searchIntent) {
+        startActivityForResult(searchIntent, REQUEST_NEW_SEARCH);
+    }
+
+
     public MenuHandler getMenuHandler() {
         return menuHandler;
     }

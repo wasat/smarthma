@@ -14,21 +14,22 @@ import pl.wasat.smarthma.parser.model.Page;
  * Created by marcel paduch on 2015-08-11.
  */
 public class Grace extends BaseParser implements SimpleMissionInterface {
-	public final static int MISSION_ID = 20;
-	public final static String TITLE = "GRACE";
+    public final static int MISSION_ID = 20;
+    public final static String TITLE = "GRACE";
 
-	final int ITEMS_COUNT = 3;
-	public Grace(String pageUrl, Context context) {
-		super(pageUrl, context);
-		parserDb.addMission(new Mission(MISSION_ID, ThirdPartyMissions.CATEGORY_ID, TITLE));
+    final int ITEMS_COUNT = 3;
 
-	}
+    public Grace(String pageUrl, Context context) {
+        super(pageUrl, context);
+        parserDb.addMission(new Mission(MISSION_ID, ThirdPartyMissions.CATEGORY_ID, TITLE));
 
-	@Override
-	public void mainContent() {
-		ArrayList<Pair> list = super.getComplexPage(ITEMS_COUNT);
-		for(Pair item : list){
-			parserDb.addPage(new Page(ThirdPartyMissions.CATEGORY_ID, MISSION_ID, (String)item.title,  (String)item.content ));
-		}
-	}
+    }
+
+    @Override
+    public void mainContent() {
+        ArrayList<Pair> list = super.getComplexPage(ITEMS_COUNT);
+        for (Pair item : list) {
+            parserDb.addPage(new Page(ThirdPartyMissions.CATEGORY_ID, MISSION_ID, (String) item.title, (String) item.content));
+        }
+    }
 }

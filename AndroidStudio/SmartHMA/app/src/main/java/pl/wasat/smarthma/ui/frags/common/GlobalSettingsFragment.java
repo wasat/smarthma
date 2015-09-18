@@ -84,7 +84,7 @@ public class GlobalSettingsFragment extends PreferenceFragment implements
      * Update summary
      *
      * @param sharedPreferences SharedPreferences
-     * @param pref Preference
+     * @param pref              Preference
      */
     private void updatePrefsSummary(SharedPreferences sharedPreferences, Preference pref) {
 
@@ -139,7 +139,6 @@ public class GlobalSettingsFragment extends PreferenceFragment implements
 
         }
     }
-
 
 
 }

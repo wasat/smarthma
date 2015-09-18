@@ -230,11 +230,10 @@ public class MissionsExtListFragment extends Fragment {
 
         for (Mission mission :
                 futureSentinelsmissionList) {
-            if(mission.getId() == Adm.MISSION_ID || mission.getId() == EarthCare.MISSION_ID){
+            if (mission.getId() == Adm.MISSION_ID || mission.getId() == EarthCare.MISSION_ID) {
                 esaFutureExplorers.add(new MissionItemData(mission));
 
-            }
-            else{
+            } else {
                 esaFutureSentinels.add(new MissionItemData(mission));
             }
         }
@@ -375,8 +374,7 @@ public class MissionsExtListFragment extends Fragment {
         }
     }
 
-    public ExpandableListView getExpListView()
-    {
+    public ExpandableListView getExpListView() {
         return expListView;
     }
 }

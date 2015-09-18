@@ -24,6 +24,7 @@ import pl.wasat.smarthma.model.FedeoRequestParams;
 import pl.wasat.smarthma.model.iso.EntryISO;
 import pl.wasat.smarthma.ui.frags.base.BaseMapFragment;
 import pl.wasat.smarthma.ui.frags.browse.BrowseCollectionFirstDetailFragment;
+import pl.wasat.smarthma.ui.frags.browse.CollectionEmptyDetailsFragment;
 import pl.wasat.smarthma.ui.frags.browse.CollectionEmptyDetailsFragment.OnCollectionEmptyDetailsFragmentListener;
 import pl.wasat.smarthma.ui.frags.browse.CollectionsGroupListFragment;
 import pl.wasat.smarthma.ui.frags.browse.CollectionsListFragment.OnCollectionsListFragmentListener;
@@ -173,23 +174,29 @@ public class CollectionsDefinitionActivity extends BaseCollectionsActivity
         }
     }
 
-    @Override
-    public void onMapFragmentBoundsChange(LatLngBoundsExt bounds) {
-        callUpdateFirstDetailFrag(bounds);
-    }
-
-
-    @Override
-    public void onAmznMapFragmentBoundsChange(LatLngBoundsExt bounds) {
-        callUpdateFirstDetailFrag(bounds);
-    }
-
     private void callUpdateFirstDetailFrag(LatLngBoundsExt bounds) {
         BrowseCollectionFirstDetailFragment browseCollectionFirstDetailFragment = (BrowseCollectionFirstDetailFragment) getSupportFragmentManager()
                 .findFragmentByTag("BrowseCollectionFirstDetailFragment");
         if (browseCollectionFirstDetailFragment != null) {
             browseCollectionFirstDetailFragment.updateAreaBounds(bounds);
         }
+
+        //TODO - Make it more universal and differentiate from which fragment it is called
+        CollectionEmptyDetailsFragment collectionEmptyDetailsFragment = (CollectionEmptyDetailsFragment) getSupportFragmentManager()
+                .findFragmentByTag("CollectionEmptyDetailsFragment");
+        if (collectionEmptyDetailsFragment != null) {
+            collectionEmptyDetailsFragment.updateAreaBounds(bounds);
+        }
+    }
+
+    @Override
+    public void onMapFragmentBoundsChange(LatLngBoundsExt bounds) {
+        callUpdateFirstDetailFrag(bounds);
+    }
+
+    @Override
+    public void onAmznMapFragmentBoundsChange(LatLngBoundsExt bounds) {
+        callUpdateFirstDetailFrag(bounds);
     }
 
     @Override
@@ -222,8 +229,7 @@ public class CollectionsDefinitionActivity extends BaseCollectionsActivity
         browseCollectionFirstDetailFragment.setTimeValues(calendar, viewTag);
     }
 
-    public CollectionsGroupListFragment getCollectionsGroupListFragment()
-    {
+    public CollectionsGroupListFragment getCollectionsGroupListFragment() {
         return collectionsGroupListFragment;
     }
 }

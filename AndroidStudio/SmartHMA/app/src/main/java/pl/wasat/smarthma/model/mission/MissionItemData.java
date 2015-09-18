@@ -28,7 +28,7 @@ public class MissionItemData implements Serializable {
         this.summary = "summary";
     }
 
-    public MissionItemData(Mission mission){
+    public MissionItemData(Mission mission) {
         super();
         this.id = mission.getId();
         this.name = mission.getName();

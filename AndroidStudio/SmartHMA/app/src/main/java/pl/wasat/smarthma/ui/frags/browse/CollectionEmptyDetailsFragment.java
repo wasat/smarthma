@@ -95,6 +95,8 @@ public class CollectionEmptyDetailsFragment extends
 
         loadDefaultFedeoParams();
 
+        loadSharedData();
+
         btnShowProducts.setEnabled(true);
         btnShowProducts.setOnClickListener(new OnClickListener() {
             @Override

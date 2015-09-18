@@ -14,11 +14,8 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.SearchView;
 
-import java.util.ArrayList;
-
 import pl.wasat.smarthma.R;
-import pl.wasat.smarthma.database.SearchHistory;
-import pl.wasat.smarthma.database.SearchParams;
+import pl.wasat.smarthma.ui.activities.SearchCollectionResultsActivity;
 
 /**
  * A simple {@link android.support.v4.app.Fragment} subclass. Activities that
@@ -83,12 +80,12 @@ public class SearchFragment extends Fragment {
         autoComplete.setTextSize(20);
         autoComplete.setTextColor(getResources().getColor(R.color.text_black));
 
-        SearchHistory searchHistory = new SearchHistory(getActivity());
+/*        SearchHistory searchHistory = new SearchHistory(getActivity());
         ArrayList<SearchParams> searchHistoryList = searchHistory.getSearchHistoryList(true);
         if (!searchHistoryList.isEmpty()) {
             SearchParams searchParams = searchHistoryList.get(0);
             searchView.setQuery(searchParams.getSearchPhrase(), false);
-        }
+        }*/
 
         Button btnBasicParams = (Button) rootView.findViewById(R.id.search_frag_button_basic);
         btnBasicParams.setOnClickListener(new View.OnClickListener() {
@@ -106,7 +103,23 @@ public class SearchFragment extends Fragment {
             }
         });
 
+        Button btnGo = (Button) rootView.findViewById(R.id.search_frag_button_start);
+        btnGo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startSearchWithButton(searchView);
+            }
+        });
+
         return rootView;
+    }
+
+    private void startSearchWithButton(SearchView searchView) {
+        Intent intentBtnSearch = new Intent(getActivity(),
+                SearchCollectionResultsActivity.class);
+        intentBtnSearch.setAction("android.intent.action.SEARCH");
+        intentBtnSearch.putExtra(SearchManager.QUERY, searchView.getQuery().toString());
+        mListener.onSearchFragmentStartSearchingWithButton(intentBtnSearch);
     }
 
 
@@ -151,6 +164,8 @@ public class SearchFragment extends Fragment {
         void onSearchFragmentBasicParamsChoose();
 
         void onSearchFragmentAdvanceParamsChoose();
+
+        void onSearchFragmentStartSearchingWithButton(Intent intent);
 
     }
 

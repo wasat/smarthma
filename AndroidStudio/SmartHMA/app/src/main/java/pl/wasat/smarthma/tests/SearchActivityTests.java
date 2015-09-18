@@ -15,13 +15,11 @@ import pl.wasat.smarthma.ui.activities.SearchActivity;
 import pl.wasat.smarthma.ui.menus.MenuHandler;
 
 public class SearchActivityTests extends ActivityInstrumentationTestCase2<SearchActivity> {
-    public SearchActivityTests()
-    {
+    public SearchActivityTests() {
         super(SearchActivity.class);
     }
 
-    public void testSearchHistory()
-    {
+    public void testSearchHistory() {
         SearchActivity activity = getActivity();
         assertNotNull("Null SearchActivity.", activity);
 
@@ -37,18 +35,15 @@ public class SearchActivityTests extends ActivityInstrumentationTestCase2<Search
         assertEquals("Wrong result for operation 'searchHistory.getQueries()'.", expected, result);
     }
 
-    public void testSearchMenu()
-    {
+    public void testSearchMenu() {
         final SearchActivity activity = getActivity();
         assertNotNull("Null SearchActivity.", activity);
 
         final boolean[] tests = {false, false, false, true, true};
 
-        activity.runOnUiThread(new Runnable()
-        {
+        activity.runOnUiThread(new Runnable() {
             @Override
-            public void run()
-            {
+            public void run() {
                 MenuHandler menuHandler = activity.getMenuHandler();
                 tests[0] = true;
 
@@ -62,14 +57,12 @@ public class SearchActivityTests extends ActivityInstrumentationTestCase2<Search
                 View view = clickableViews.get(0);
                 //for (View view : clickableViews)
                 {
-                    if (view == null)
-                    {
+                    if (view == null) {
                         tests[3] = false;
                         //break;
                     }
                     boolean viewClicked = view.performClick();
-                    if (!viewClicked)
-                    {
+                    if (!viewClicked) {
                         tests[4] = false;
                         //break;
                     }
@@ -78,12 +71,9 @@ public class SearchActivityTests extends ActivityInstrumentationTestCase2<Search
         });
 
         // Wait for the UI thread to finish.
-        try
-        {
+        try {
             Thread.sleep(1000);
-        }
-        catch (InterruptedException e)
-        {
+        } catch (InterruptedException e) {
             e.printStackTrace();
         }
 

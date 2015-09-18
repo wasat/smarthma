@@ -9,27 +9,21 @@ import pl.wasat.smarthma.ui.frags.news.NewsListFragment;
 /**
  * Created by Dark Mark on 17/08/2015.
  */
-public class NewsActivityTests extends ActivityInstrumentationTestCase2<NewsActivity>
-{
-    public NewsActivityTests()
-    {
+public class NewsActivityTests extends ActivityInstrumentationTestCase2<NewsActivity> {
+    public NewsActivityTests() {
         super(NewsActivity.class);
     }
 
-    public void testItems()
-    {
+    public void testItems() {
         final NewsActivity activity = getActivity();
         assertNotNull("Null NewsActivity.", activity);
 
         final boolean[] tests = {false, false, false};
 
-        activity.runOnUiThread(new Runnable()
-        {
+        activity.runOnUiThread(new Runnable() {
             @Override
-            public void run()
-            {
-                try
-                {
+            public void run() {
+                try {
                     NewsListFragment fragment = activity.getNewsListFragment();
                     tests[0] = true;
 
@@ -40,21 +34,16 @@ public class NewsActivityTests extends ActivityInstrumentationTestCase2<NewsActi
                     list.performItemClick(list.getAdapter().getView(position, null, null),
                             position, list.getAdapter().getItemId(position));
                     tests[2] = true;
-                }
-                catch (Exception e)
-                {
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
         });
 
         // Wait for the UI thread to finish.
-        try
-        {
+        try {
             Thread.sleep(1000);
-        }
-        catch (InterruptedException e)
-        {
+        } catch (InterruptedException e) {
             e.printStackTrace();
         }
 

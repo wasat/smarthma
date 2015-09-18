@@ -206,13 +206,7 @@
                     android:layout_weight="1"
                     android:text="@string/date_time" />
             </LinearLayout>
-                <!--
-                                android:textColor="@color/text_black"
-                                android:textSize="@dimen/search_eo_data_text_small"
-                                android:paddingBottom="@dimen/search_eo_data_padding"
-                                android:paddingLeft="@dimen/search_eo_data_padding"
-                                android:paddingRight="@dimen/search_eo_data_padding"
-                                android:paddingTop="@dimen/search_eo_data_padding"-->
+
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"

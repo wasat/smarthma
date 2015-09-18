@@ -38,6 +38,10 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
+            android:paddingLeft="8dip"
+            android:paddingRight="8dip"
+            android:paddingTop="8dip"
+            android:paddingBottom="8dip"
             android:contentDescription="@string/desc"
             android:src="@drawable/star_button" />
 
@@ -57,7 +61,6 @@
                 android:layout_alignParentTop="true"
                 android:maxLines="1"
                 android:minLines="1"
-                android:paddingRight="@dimen/browse_eo_padding_medium"
                 android:text="@string/first_line_desc"
                 android:textColor="@color/text_black"
                 android:textSize="@dimen/browse_eo_cell_text_size_large" />
@@ -68,7 +71,6 @@
                 android:layout_height="wrap_content"
                 android:maxLines="1"
                 android:minLines="1"
-                android:paddingRight="@dimen/browse_eo_padding_medium"
                 android:text="@string/second_line_desc"
                 android:textColor="@color/text_black"
                 android:textSize="@dimen/browse_eo_cell_text_size" />

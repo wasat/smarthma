@@ -69,6 +69,13 @@ public class BaseSearchSideParametersFragment extends BaseDateTimeAreaContainerF
         tvAreaNELon = (TextView) rootView
                 .findViewById(R.id.search_frag_side_params_tv_area_ne_lon);
 
+        /*
+        tvAreaNELat.setText("54.84");
+        tvAreaNELon.setText("24.62");
+        tvAreaSWLat.setText("48.96");
+        tvAreaSWLon.setText("13.90");
+        */
+
         LinearLayout areaLayout = (LinearLayout) rootView
                 .findViewById(R.id.search_frag_side_params_layout_area);
         areaLayout.setOnClickListener(new OnClickListener() {
@@ -131,7 +138,6 @@ public class BaseSearchSideParametersFragment extends BaseDateTimeAreaContainerF
         }*/
         return rootView;
     }
-
 
 
     @Override

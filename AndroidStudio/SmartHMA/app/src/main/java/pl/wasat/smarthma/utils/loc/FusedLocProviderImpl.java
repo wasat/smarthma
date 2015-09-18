@@ -25,8 +25,8 @@ class FusedLocProviderImpl implements
 
     private final Context context;
     private static final int REQUEST_TIMEOUT = 30000;
-    private static final int ACCURACY_LEVEL = 100;
-    private static final long LOC_DEGRADATION_TIME = 300000;
+    private static final int ACCURACY_LEVEL = 300;
+    private static final long LOC_DEGRADATION_TIME = 900000;
     private GoogleApiClient mGoogleApiClient;
     private Location fusedLastLocation;
     private long updateStartTime;
@@ -109,8 +109,8 @@ class FusedLocProviderImpl implements
     private void stopLocationUpdates() {
         //Log.i(FusedLocProviderImpl.class.getName(), "stopLocationUpdates");
         if (mGoogleApiClient.isConnected())
-        LocationServices.FusedLocationApi.removeLocationUpdates(
-                mGoogleApiClient, this);
+            LocationServices.FusedLocationApi.removeLocationUpdates(
+                    mGoogleApiClient, this);
     }
 
     @Override
