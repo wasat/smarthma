@@ -18,6 +18,7 @@ public class ProbaV extends BaseParser implements MissionInterface {
 	final int IMG_OF_THE_WEEK_COUNT = 42;
 	final int ITEMS_COUNT = 3;
 	public final static int MISSION_ID = 2;
+	final int THIRD_PARTY_MISSION_ID = 29;
 	final static String TITLE = "Proba-V";
 
 	final String FAQ = "https://earth.esa.int/web/guest/missions/esa-operational-eo-missions/proba-v/faqs";
@@ -33,7 +34,7 @@ public class ProbaV extends BaseParser implements MissionInterface {
 
 	public void getImageOfTheWeek(){
 		Pair pair = super.getImageListPage(IMG_OF_THE_WEEK, IMG_OF_THE_WEEK_COUNT, true);
-		super.printImageList(pair);
+
 	}
 
 	@Override
@@ -58,13 +59,13 @@ public class ProbaV extends BaseParser implements MissionInterface {
 
 	@Override
 	public void mainContent() {
-/*
-		ArrayList<Integer> exclude = new ArrayList<>(Arrays.asList(1,2));
-*/
+
 		ArrayList<Pair> list = super.getComplexPage(ITEMS_COUNT/*, exclude*/);
 		for(Pair item : list){
 			parserDb.addPage(new Page(EsaEoMissions.CATEGORY_ID, MISSION_ID, (String)item.title,  (String)item.content ));
+			parserDb.addPage(new Page( ThirdPartyMissions.CATEGORY_ID, THIRD_PARTY_MISSION_ID, (String)item.title,  (String)item.content ));
 		}
+
 
 
 	}
@@ -120,6 +121,7 @@ public class ProbaV extends BaseParser implements MissionInterface {
 	@Override
 	public void faq() {
 		parserDb.addPage(new Page(EsaEoMissions.CATEGORY_ID, MISSION_ID, FAQ_TITLE,  FAQ ));
+		parserDb.addPage(new Page(ThirdPartyMissions.CATEGORY_ID, THIRD_PARTY_MISSION_ID, FAQ_TITLE,  FAQ ));
 	}
 
 	@Override
