@@ -20,12 +20,13 @@ public class Proba1 extends BaseParser implements MissionInterface {
 	final String NEWS = "";
 	final int ITEMS_COUNT = 1;
 	public final static int MISSION_ID = 7;
+	final int THIRD_PARTY_MISSION_ID = 28;
 	final static String TITLE = "Proba-1";
 
 
 	public Proba1(String pageUrl, Context context) {
 		super(pageUrl, context);
-		final int THIRD_PARTY_MISSION_ID = 28;
+
 
 		parserDb.addMission(new Mission(MISSION_ID, EsaEoMissions.CATEGORY_ID, TITLE));
 		parserDb.addMission(new Mission(THIRD_PARTY_MISSION_ID, ThirdPartyMissions.CATEGORY_ID, TITLE));
@@ -37,6 +38,7 @@ public class Proba1 extends BaseParser implements MissionInterface {
 		ArrayList<Pair> list = super.getComplexPage(ITEMS_COUNT);
 		for(Pair item : list){
 			parserDb.addPage(new Page(EsaEoMissions.CATEGORY_ID, MISSION_ID, (String)item.title,  (String)item.content ));
+			parserDb.addPage(new Page(ThirdPartyMissions.CATEGORY_ID, THIRD_PARTY_MISSION_ID, (String)item.title,  (String)item.content ));
 		}
 
 
@@ -80,12 +82,15 @@ public class Proba1 extends BaseParser implements MissionInterface {
 	public void satellite() {
 		Pair pair = super.getSimplePage(SATELLITE);
 		parserDb.addPage(new Page(EsaEoMissions.CATEGORY_ID, MISSION_ID,(String) pair.title, (String)pair.content));
+		parserDb.addPage(new Page(ThirdPartyMissions.CATEGORY_ID, THIRD_PARTY_MISSION_ID,(String) pair.title, (String)pair.content));
 	}
 
 	@Override
 	public void groundSegment() {
 		Pair pair = super.getSimplePage(GROUND_SEGMENT);
 		parserDb.addPage(new Page(EsaEoMissions.CATEGORY_ID, MISSION_ID,(String) pair.title, (String)pair.content));
+		parserDb.addPage(new Page(ThirdPartyMissions.CATEGORY_ID, THIRD_PARTY_MISSION_ID,(String) pair.title, (String)pair.content));
+
 
 	}
 
@@ -98,6 +103,11 @@ public class Proba1 extends BaseParser implements MissionInterface {
 
 		parserDb.addPage(new Page(EsaEoMissions.CATEGORY_ID, MISSION_ID,CHRIS_TITLE, CHRIS));
 		parserDb.addPage(new Page(EsaEoMissions.CATEGORY_ID, MISSION_ID,HRC_TITLE, HRC));
+
+		parserDb.addPage( new Page(ThirdPartyMissions.CATEGORY_ID, THIRD_PARTY_MISSION_ID,(String) pair.title, (String)pair.content));
+
+		parserDb.addPage(new Page(ThirdPartyMissions.CATEGORY_ID, THIRD_PARTY_MISSION_ID,CHRIS_TITLE, CHRIS));
+		parserDb.addPage(new Page(ThirdPartyMissions.CATEGORY_ID, THIRD_PARTY_MISSION_ID,HRC_TITLE, HRC));
 
 	}
 
@@ -125,6 +135,8 @@ public class Proba1 extends BaseParser implements MissionInterface {
 	public void history() {
 		Pair pair = super.getSimplePage(HISTORY);
 		parserDb.addPage(new Page(EsaEoMissions.CATEGORY_ID, MISSION_ID,(String) pair.title, (String)pair.content));
+		parserDb.addPage(new Page(ThirdPartyMissions.CATEGORY_ID, THIRD_PARTY_MISSION_ID,(String) pair.title, (String)pair.content));
+
 	}
 
 	@Override

@@ -12,12 +12,6 @@ import android.widget.ExpandableListView.OnGroupClickListener;
 import android.widget.ExpandableListView.OnGroupCollapseListener;
 import android.widget.ExpandableListView.OnGroupExpandListener;
 
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
-
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -183,10 +177,10 @@ public class MissionsExtListFragment extends Fragment {
                 .add(new MissionHeaderData(2,
                         "ESA Future Missions - Future Earth Explorers",
                         "https://earth.esa.int/web/guest/missions/esa-future-missions"));
-        listDataHeader
+     /*   listDataHeader
                 .add(new MissionHeaderData(3,
                         "ESA Future Missions - Candidate Earth Explorers",
-                        "https://earth.esa.int/web/guest/missions/esa-future-missions"));
+                        "https://earth.esa.int/web/guest/missions/esa-future-missions"));*/
         listDataHeader
                 .add(new MissionHeaderData(4,
                         "Third Party Missions - Current Missions",
@@ -322,58 +316,15 @@ public class MissionsExtListFragment extends Fragment {
         listDataChild.put(listDataHeader.get(0).getName(), esaEoMissions);
         listDataChild.put(listDataHeader.get(1).getName(), esaFutureSentinels);
         listDataChild.put(listDataHeader.get(2).getName(), esaFutureExplorers);
-        listDataChild.put(listDataHeader.get(3).getName(), esaFutureCandidates);
-        listDataChild.put(listDataHeader.get(4).getName(), thirdPartCurrent);
-        listDataChild.put(listDataHeader.get(5).getName(), thirdPartHistorical);
-        listDataChild.put(listDataHeader.get(6).getName(), thirdPartPotential);
-        listDataChild.put(listDataHeader.get(7).getName(), esaEumetsat);
+        listDataChild.put(listDataHeader.get(3).getName(), thirdPartCurrent);
+        listDataChild.put(listDataHeader.get(4).getName(), thirdPartHistorical);
+        listDataChild.put(listDataHeader.get(5).getName(), thirdPartPotential);
+        listDataChild.put(listDataHeader.get(6).getName(), esaEumetsat);
 
     }
 
 
-    private void getHtml(String url, int groupPos) {
-        Document doc;
-        try {
 
-            List<MissionItemData> missionsList = new ArrayList<>();
-            // need http protocol
-            doc = Jsoup.connect(url).userAgent("Mozilla").get();
-            Elements elementsByClass = doc.getElementsByClass("asset-abstract");
-            int id = 0;
-
-            for (int i = 0; i < elementsByClass.size(); i++) {
-                Element el = elementsByClass.get(i);
-                if (el.children().hasClass("asset-more")) {
-
-                    Element inCon = el.getElementsByClass("asset-content")
-                            .first().select("a").first();
-                    String name = inCon.text();
-                    String hrefLink = inCon.attr("href");
-
-                    Element imgEl = el
-                            .getElementsByClass("asset-abstract-imgLink")
-                            .first().select("img").first();
-                    String imgLink = imgEl.attr("src");
-
-                    String content = el.html();
-
-                    MissionItemData itemMission = new MissionItemData(id, name,
-                            hrefLink, imgLink, content);
-
-                    missionsList.add(itemMission);
-
-                    id = id + 1;
-
-                }
-            }
-
-            listDataChild.put(listDataHeader.get(groupPos).getName(),
-                    missionsList);
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
 
     public ExpandableListView getExpListView()
     {
