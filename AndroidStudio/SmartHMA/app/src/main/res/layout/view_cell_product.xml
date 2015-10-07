@@ -1,38 +1,67 @@
-<LinearLayout
-    android:id="@+id/view_cell_product_layout"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:background="@drawable/list_selector"
     style="?android:attr/textAppearanceLarge"
-    tools:context="">
+    android:id="@+id/view_cell_product_layout">
 
-    <pl.wasat.smarthma.customviews.TextViewWithFont
-        android:id="@+id/dataseries_list_name"
-
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@color/text_black"
-        android:paddingTop="5dip"
-        android:text="lorem"
-        android:paddingLeft="15dip"
-        android:paddingRight="8dip"
-        android:textSize="18sp" />
-
-
-    <pl.wasat.smarthma.customviews.TextViewWithFont
-
-        android:id="@+id/dataseries_listing_smallprint"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingTop="2dp"
-        android:paddingLeft="15dip"
-        android:paddingRight="8dip"
-        android:paddingBottom="15dip"
-        android:textSize="12sp"
-        android:text="lorem"
-        android:textColor="@color/text_black" />
+        android:layout_height="match_parent"
+        android:background="#ffffeb3b"
+        android:id="@+id/swipe_list_shareview"
+        android:orientation="horizontal" >
 
-</LinearLayout>
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#ff558b2f"
+        android:id="@+id/swipe_list_deleteview"
+        android:orientation="horizontal" >
+
+    </LinearLayout>
+
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/swipe_list_mainview"
+        android:background="@drawable/list_selector"
+        style="?android:attr/textAppearanceLarge"
+        tools:context="">
+
+
+        <pl.wasat.smarthma.customviews.TextViewWithFont
+            android:id="@+id/dataseries_list_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/text_black"
+            android:paddingTop="5dip"
+            android:text="lorem"
+            android:paddingLeft="15dip"
+            android:paddingRight="8dip"
+            android:textSize="18sp" />
+
+
+        <pl.wasat.smarthma.customviews.TextViewWithFont
+
+            android:id="@+id/dataseries_listing_smallprint"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="2dp"
+            android:paddingLeft="15dip"
+            android:paddingRight="8dip"
+            android:paddingBottom="15dip"
+            android:textSize="12sp"
+            android:text="lorem"
+            android:textColor="@color/text_black" />
+
+    </LinearLayout>
+
+</RelativeLayout>

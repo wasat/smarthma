@@ -3,6 +3,7 @@ package pl.wasat.smarthma.services;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.util.Log;
+import android.widget.Toast;
 
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
@@ -16,9 +17,11 @@ import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 
+import pl.wasat.smarthma.R;
 import pl.wasat.smarthma.adapter.NewsArticleListAdapter;
 import pl.wasat.smarthma.database.NewsDbAdapter;
 import pl.wasat.smarthma.helper.Const;
+import pl.wasat.smarthma.interfaces.OnSlideElementListener;
 import pl.wasat.smarthma.model.NewsArticle;
 import pl.wasat.smarthma.ui.frags.news.NewsListFragment;
 import pl.wasat.smarthma.utils.rss.NewsRssHandler;
@@ -72,8 +75,19 @@ public class NewsRssServiceNoAsync {
                         a.setRead(fetchedArticle.isRead());
                     }
                 }
-                NewsArticleListAdapter adapter = new NewsArticleListAdapter(
-                        articleListFrag.getActivity(), articles);
+                final NewsArticleListAdapter adapter = new NewsArticleListAdapter(
+                        articleListFrag.getActivity(), R.layout.view_cell_article, articles);
+                adapter.setListener(new OnSlideElementListener() {
+                    @Override
+                    public void Catch(boolean swipeRight, int position) {
+                        if (swipeRight)
+                            Toast.makeText(adapter.getContext(), "share " + position, Toast.LENGTH_SHORT).show();
+                        else
+                            Toast.makeText(adapter.getContext(), "delete " + position, Toast.LENGTH_SHORT).show();
+                    }
+                });
+                articleListFrag.setListAdapter(adapter);
+                adapter.notifyDataSetChanged();
                 articleListFrag.setListAdapter(adapter);
                 adapter.notifyDataSetChanged();
 

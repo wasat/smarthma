@@ -1,7 +1,10 @@
 package pl.wasat.smarthma.adapter;
 
 import android.content.Context;
+import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
+import android.widget.Toast;
 
 import com.octo.android.robospice.request.okhttp.simple.OkHttpBitmapRequest;
 import com.octo.android.robospice.spicelist.SpiceListItemView;
@@ -12,16 +15,26 @@ import java.io.File;
 
 import pl.wasat.smarthma.customviews.CollectionsGroupView;
 import pl.wasat.smarthma.helper.Const;
+import pl.wasat.smarthma.interfaces.OnSlideElementListener;
 import pl.wasat.smarthma.model.CollectionsGroup;
 
 public class CollectionsGroupListAdapter extends
         OkHttpSpiceArrayAdapter<CollectionsGroup> {
 
+
+    public OnSlideElementListener listener;
+
     public CollectionsGroupListAdapter(Context context,
                                        OkHttpBitmapSpiceManager spiceManagerBitmap,
-                                       CollectionsGroup.List users) {
+                                       CollectionsGroup.List users, ListView listView) {
         super(context, spiceManagerBitmap, users.getCollectionsGroupList());
     }
+
+
+    public void setOnClickListener(OnSlideElementListener listener) {
+        this.listener = listener;
+    }
+
 
     @Override
     public OkHttpBitmapRequest createRequest(CollectionsGroup group,
@@ -33,8 +46,19 @@ public class CollectionsGroupListAdapter extends
                 + ".jpeg";
 
         return new OkHttpBitmapRequest(url, requestImageWidth, requestImageHeight, tempFile);
-
     }
+
+
+
+    public View getView(int position, View convertView, ViewGroup parent)
+    {
+        View v = super.getView(position, convertView, parent);
+        SwipeDetector swipeDetector = new SwipeDetector(v, position, false);
+        swipeDetector.setOnClickListener(listener);
+        v.setOnTouchListener(swipeDetector);
+        return v;
+    }
+
 
     @Override
     public SpiceListItemView<CollectionsGroup> createView(Context context,

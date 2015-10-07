@@ -22,6 +22,7 @@ import pl.wasat.smarthma.R;
 import pl.wasat.smarthma.SmartHMApplication;
 import pl.wasat.smarthma.adapter.CollectionsGroupListAdapter;
 import pl.wasat.smarthma.helper.DataSorter;
+import pl.wasat.smarthma.interfaces.OnSlideElementListener;
 import pl.wasat.smarthma.model.Collection;
 import pl.wasat.smarthma.model.CollectionsGroup;
 import pl.wasat.smarthma.model.CollectionsGroup.List;
@@ -97,8 +98,19 @@ public class CollectionsGroupListFragment extends Fragment implements
         }
 
         CollectionsGroupListAdapter collectionsGroupListAdapter = new CollectionsGroupListAdapter(
-                getActivity(), spiceManagerBinary, collectGrList);
+                getActivity(), spiceManagerBinary, collectGrList, collectionsGroupListView);
         collectionsGroupListView.setAdapter(collectionsGroupListAdapter);
+        loadingView.setVisibility(View.GONE);
+        collectionsGroupListView.setVisibility(View.VISIBLE);
+        collectionsGroupListAdapter.setOnClickListener(new OnSlideElementListener() {
+            @Override
+            public void Catch(boolean swipeRight, int position) {
+                if (swipeRight)
+                    Toast.makeText(getActivity(), "share " + position, Toast.LENGTH_SHORT).show();
+                else
+                    Toast.makeText(getActivity(), "delete " + position, Toast.LENGTH_SHORT).show();
+            }
+        });
 
         loadingView.setVisibility(View.GONE);
         collectionsGroupListView.setVisibility(View.VISIBLE);
