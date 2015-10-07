@@ -25,6 +25,7 @@ import pl.wasat.smarthma.helper.DataSorter;
 import pl.wasat.smarthma.model.Collection;
 import pl.wasat.smarthma.model.CollectionsGroup;
 import pl.wasat.smarthma.model.CollectionsGroup.List;
+import pl.wasat.smarthma.preferences.SharedPrefs;
 import pl.wasat.smarthma.services.SmartHmaHttpSpiceService;
 import pl.wasat.smarthma.utils.http.ExplainDocRequest;
 import pl.wasat.smarthma.utils.xml.XMLParser;
@@ -44,6 +45,7 @@ public class CollectionsGroupListFragment extends Fragment implements
 
     private ListView collectionsGroupListView;
     private View loadingView;
+    private CollectionsListFragment collectionsListFragment;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -87,7 +89,6 @@ public class CollectionsGroupListFragment extends Fragment implements
     private void updateEOListViewContent(List collectGrList) {
         DataSorter sorter = new DataSorter();
         ArrayList<CollectionsGroup> collectionsGroupList = collectGrList.getCollectionsGroupList();
-        sorter.sort(collectionsGroupList);
 
         ArrayList<Collection> collection;
         for (int i = 0; i < collectionsGroupList.size(); i++) {
@@ -102,6 +103,9 @@ public class CollectionsGroupListFragment extends Fragment implements
         loadingView.setVisibility(View.GONE);
         collectionsGroupListView.setVisibility(View.VISIBLE);
 
+        SharedPrefs sharedPrefs = new SharedPrefs(getActivity());
+        sharedPrefs.setParentIdPrefs("EOP:ESA:FEDEO");
+
         // Click event for single list row
         collectionsGroupListView
                 .setOnItemClickListener(new OnItemClickListener() {
@@ -115,7 +119,7 @@ public class CollectionsGroupListFragment extends Fragment implements
     }
 
     private void loadCollectionsList(int listPosition) {
-        CollectionsListFragment collectionsListFragment = CollectionsListFragment
+        collectionsListFragment = CollectionsListFragment
                 .newInstance(listPosition);
         getActivity().getSupportFragmentManager().beginTransaction()
                 .replace(R.id.activity_base_list_container, collectionsListFragment).addToBackStack("CollectionsListFragment")
@@ -130,10 +134,6 @@ public class CollectionsGroupListFragment extends Fragment implements
         spiceManager.execute(new ExplainDocRequest(), this);
 
     }
-
-    // --------------------------------------------------------------------------------------------
-    // PRIVATE
-    // --------------------------------------------------------------------------------------------
 
     private void initUIList() {
         View view = getView();
@@ -172,6 +172,13 @@ public class CollectionsGroupListFragment extends Fragment implements
         XMLParser xmlResult = new XMLParser();
         xmlResult.parseXml(result);
         updateEOListViewContent(SmartHMApplication.GlobalEODataList);
+    }
 
+    public ListView getCollectionsGroupListView() {
+        return collectionsGroupListView;
+    }
+
+    public CollectionsListFragment getCollectionsListFragment() {
+        return collectionsListFragment;
     }
 }

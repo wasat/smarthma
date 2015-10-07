@@ -27,6 +27,9 @@ import pl.wasat.smarthma.utils.obj.LatLngBoundsExt;
  */
 public class AmznAreaPickerMapFragment extends AmznBaseMapFragment implements AmznBaseMapFragment.OnBaseMapFragmentListener {
 
+    public static final String SET_MAP_LISTENERS = "setMapListeners";
+    public static final String MAP = "MAP";
+    public static final String ON_ACTIVITY_CREATED = "onActivityCreated";
     private OnAmznAreaPickerMapFragmentListener mListener;
 
     private LatLngBounds areaBounds;
@@ -76,9 +79,8 @@ public class AmznAreaPickerMapFragment extends AmznBaseMapFragment implements Am
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
-        // TODO Auto-generated method stub
         super.onActivityCreated(savedInstanceState);
-        Log.i("MAP", "onActivityCreated");
+        Log.i(MAP, ON_ACTIVITY_CREATED);
         //AcraExtension.mapCustomLog("AreaMap.onActivityCreated", mMap);
 
     }
@@ -108,12 +110,12 @@ public class AmznAreaPickerMapFragment extends AmznBaseMapFragment implements Am
      * >Communicating with Other Fragments</a> for more information.
      */
     public interface OnAmznAreaPickerMapFragmentListener {
-        public void onAmznMapFragmentBoundsChange(LatLngBoundsExt bounds);
+        void onAmznMapFragmentBoundsChange(LatLngBoundsExt bounds);
     }
 
     private void setMapListeners() {
         //AcraExtension.mapCustomLog("AreaMap.setMapListeners", mMap);
-        Log.i("MAP", "setMapListeners");
+        Log.i(MAP, SET_MAP_LISTENERS);
         mMap.setOnCameraChangeListener(new OnCameraChangeListener() {
 
             @Override

@@ -4,6 +4,7 @@
 package pl.wasat.smarthma;
 
 import android.app.Application;
+import android.content.Context;
 import android.os.Build;
 
 import org.acra.ACRA;
@@ -25,6 +26,13 @@ import pl.wasat.smarthma.model.explaindoc.ExplainData;
         httpMethod = org.acra.sender.HttpSender.Method.POST,
         formUriBasicAuthLogin = "apabyetionedishouresseri",
         formUriBasicAuthPassword = "1koM7DkJ13AdkJFB2teSrtLJ"
+
+        // NAVIN
+        //formUri = "https://wasat.cloudant.com/acra-navin/_design/acra-storage/_update/report",
+        //reportType = org.acra.sender.HttpSender.Type.JSON,
+        //httpMethod = org.acra.sender.HttpSender.Method.POST,
+        //formUriBasicAuthLogin = "llynorthclitedeshentsele",
+        //formUriBasicAuthPassword = "8TH1Rph6koNQ4nA6iGHR3ies"
 )
 
 public class SmartHMApplication extends Application {
@@ -33,20 +41,24 @@ public class SmartHMApplication extends Application {
     public static ExplainData GlobalExplainData = new ExplainData();
     public static int sortingType = Const.SORT_BY_TITLE_ASCENDING;
     public static SmartHMApplication appSingleton;
+    private static Context context;
 
 
     @Override
     public void onCreate() {
         super.onCreate();
-        // The following line triggers the initialization of ACRA
+        context = getApplicationContext();
         ACRA.init(this);
         appSingleton = this;
         deviceCheck();
     }
 
-
     private void deviceCheck() {
         Const.IS_KINDLE = Build.MANUFACTURER.equalsIgnoreCase("Amazon");
+    }
+
+    public static Context getAppContext() {
+        return SmartHMApplication.context;
     }
 }
 

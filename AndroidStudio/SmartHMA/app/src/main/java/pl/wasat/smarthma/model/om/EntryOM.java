@@ -21,24 +21,23 @@ public class EntryOM implements Serializable {
     public static final String KEY_RSS_ENTRY = "KEY_RSS_ENTRY";
 
 
-    private String id;
-    private ArrayList<Link> links;
-    private String published;
-    private String title;
-    private String updated;
-    private String summary;
-    private EarthObservation earthObservation;
-    private Where where;
-    private Group group;
+    private String id="";
+    private ArrayList<Link> links = new ArrayList();
+    private String published="";
+    private String title="";
+    private String updated="";
+    private String summary="";
+    private EarthObservation earthObservation = new EarthObservation();
+    private Where where = new Where();
+    private Group group = new Group();
 
-
-    private String guid;
+    private String guid="";
     private long dbId;
-    private String identifier;
-    private String date;
+    private String identifier="";
+    private String date="";
     private boolean read;
     private boolean offline;
-
+    private boolean isFavourite;
 
     public String getId() {
         return id;
@@ -170,6 +169,14 @@ public class EntryOM implements Serializable {
         this.offline = offline;
     }
 
+    public boolean isFavourite() {
+        return isFavourite;
+    }
+
+    public void setFavourite(boolean favourite) {
+        this.isFavourite = favourite;
+    }
+
     @Override
     public String toString() {
         ToStringStyle style = new SmartHMAStringStyle();
@@ -188,6 +195,14 @@ public class EntryOM implements Serializable {
         return EqualsBuilder.reflectionEquals(this, other);
     }
 
+    public boolean simpleEquals(EntryOM o)
+    {
+        //return super.equals(other);
+        return title.equals(o.getTitle()) && id.equals(o.getId()) && identifier.equals(o.getIdentifier()) && guid.equals(o.getGuid()) &&
+                date.equals(o.getDate()) && updated.equals(o.getUpdated()) && dbId==o.getDbId() && earthObservation.equals(o.getEarthObservation()) &&
+                group.equals(o.getGroup()) && links.equals(o.getLinks()) && published.equals(o.getPublished()) && summary.equals(o.getSummary()) &&
+                where.equals(o.getWhere());
+    }
 
     private String extractCData(String data) {
         data = data.replaceAll("<!\\[CDATA\\[", "");

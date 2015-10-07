@@ -2,7 +2,7 @@
     xmlns:facebook="http://schemas.android.com/apk/res-auto"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:background="#FFF">
+    android:background="@color/action_bar_background">
 
     <LinearLayout
         android:id="@+id/facebook_dialog_layout_main_container"
@@ -10,14 +10,20 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_centerInParent="true"
-        android:background="#FFF"
+        android:background="@color/background_white"
         android:orientation="vertical">
+
+        <pl.wasat.smarthma.customviews.TextViewWithFont
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            style="@style/dialogHeader"
+            android:text="Facebook Quicklook Share" />
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="fill_parent"
             android:layout_gravity="center|top"
-            android:background="#FFF"
+            android:background="@color/background_white"
             android:orientation="horizontal">
 
             <com.facebook.widget.ProfilePictureView
@@ -31,23 +37,34 @@
             <LinearLayout
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
-                android:background="#FFF"
+                android:background="@color/background_white"
                 android:orientation="vertical">
 
-                <TextView
+                <pl.wasat.smarthma.customviews.TextViewWithFont
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="You are logged as"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="20dp" />
+
+                <pl.wasat.smarthma.customviews.TextViewWithFont
                     android:id="@+id/facebook_dialog_tv_user_info"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center|top"
-                    android:layout_margin="10dp"
-                    android:textColor="#333"
+                    android:layout_marginBottom="2dp"
+                    android:layout_marginLeft="10dp"
+                    android:textColor="@color/text_blue"
+                    android:text="lorem"
                     android:textSize="16sp" />
 
                 <com.facebook.widget.LoginButton
                     android:id="@+id/facebook_dialog_btn_login"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    style="@style/buttonBlue"
+                    android:layout_width="200dp"
+                    android:layout_height="@dimen/button_blue_height"
                     android:layout_gravity="left"
+                    android:drawableLeft="@drawable/ic_fb"
+
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
                     facebook:confirm_logout="false"
@@ -57,19 +74,38 @@
 
         <ImageView
             android:id="@+id/facebook_dialog_img_share_qlook"
-            android:layout_width="160dp"
-            android:layout_height="160dp"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
             android:layout_gravity="center_horizontal"
             android:layout_margin="10dp"
             android:contentDescription="@string/quicklook_img_desc" />
 
-        <Button
-            android:id="@+id/facebook_dialog_btn_share_qlook"
+        <RelativeLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
+            android:paddingTop="15dp"
+            android:background="@color/background_gray">
+
+            <RelativeLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+
+                android:background="@color/background_white">
+
+                <Button
+                    android:id="@+id/facebook_dialog_btn_share_qlook"
+                    android:layout_width="170dp"
+                    style="@style/buttonBlue"
+                    android:drawableLeft="@drawable/ic_share"
+                    android:layout_centerVertical="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_height="@dimen/button_blue_height"
             android:layout_gravity="center_horizontal"
             android:layout_margin="20dp"
             android:text="@string/share_quicklook" />
+
+            </RelativeLayout>
+        </RelativeLayout>
     </LinearLayout>
 
 </RelativeLayout>

@@ -3,6 +3,7 @@ package pl.wasat.smarthma.ui.frags.base;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -41,11 +42,13 @@ public class BaseShowProductsListFragment extends BaseSpiceFragment {
 
     private OnBaseShowProductsListFragmentListener mListener;
 
-    private ListView entryImagesListView;
-    private View loadingView;
+    protected ListView entryImagesListView;
+    protected View loadingView;
 
     private static final String STATE_ACTIVATED_POSITION = "activated_position";
     private int mActivatedPosition = ListView.INVALID_POSITION;
+    protected EntryImagesListAdapter entryImagesListAdapter;
+    protected List<EntryOM> entryList;
 
     /**
      * Use this factory method to create a new instance of this fragment using
@@ -141,7 +144,7 @@ public class BaseShowProductsListFragment extends BaseSpiceFragment {
                         : ListView.CHOICE_MODE_NONE);
     }
 
-    void setActivatedPosition(int position) {
+    private void setActivatedPosition(int position) {
         if (position == ListView.INVALID_POSITION) {
             entryImagesListView.setItemChecked(mActivatedPosition, false);
         } else {
@@ -151,6 +154,7 @@ public class BaseShowProductsListFragment extends BaseSpiceFragment {
     }
 
     private void updateShowProductsListViewContent(final List<EntryOM> entryList) {
+        this.entryList = entryList;
         View view = getView();
         if (view != null) {
 
@@ -176,7 +180,7 @@ public class BaseShowProductsListFragment extends BaseSpiceFragment {
                     }
                 }
 
-                EntryImagesListAdapter entryImagesListAdapter = new EntryImagesListAdapter(getActivity()
+                entryImagesListAdapter = new EntryImagesListAdapter(getActivity()
                         .getBaseContext(), getBitmapSpiceManager(), entryList);
                 entryImagesListView.setAdapter(entryImagesListAdapter);
 
@@ -187,7 +191,6 @@ public class BaseShowProductsListFragment extends BaseSpiceFragment {
                 // Click event for single list row
                 entryImagesListView
                         .setOnItemClickListener(new OnItemClickListener() {
-
                             @Override
                             public void onItemClick(AdapterView<?> parent,
                                                     View view, int position, long id) {
@@ -218,10 +221,11 @@ public class BaseShowProductsListFragment extends BaseSpiceFragment {
         if (fedeoRequestParams != null) {
             getActivity().setProgressBarIndeterminateVisibility(true);
 
-            getSpiceManager().execute(new FedeoSearchRequest(fedeoRequestParams, 2),
+            getSpiceManager().execute(new FedeoSearchRequest(getActivity(), fedeoRequestParams, 2),
                     new FeedRequestListener());
         }
     }
+
 
     /**
      * This interface must be implemented by activities that contain this
@@ -234,11 +238,11 @@ public class BaseShowProductsListFragment extends BaseSpiceFragment {
      */
     public interface OnBaseShowProductsListFragmentListener {
 
-        public void onBaseShowProductsListFragmentFootprintSend();
+        void onBaseShowProductsListFragmentFootprintSend();
     }
 
 
-    void loadRequestSuccess(Feed searchProductFeeds) {
+    private void loadRequestSuccess(Feed searchProductFeeds) {
         getActivity().setProgressBarIndeterminateVisibility(false);
         if (searchProductFeeds == null) {
             searchProductFeeds = new Feed();
@@ -249,8 +253,8 @@ public class BaseShowProductsListFragment extends BaseSpiceFragment {
 
         updateShowProductsListViewContent(searchProductFeeds.getEntriesEO());
         loadSearchResultProductsIntroDetailsFrag(searchProductFeeds);
-        ArrayList<Footprint> footPrints = getFootprints(searchProductFeeds
-                .getEntriesEO());
+/*        ArrayList<Footprint> footPrints = getFootprints(searchProductFeeds
+                .getEntriesEO());*/
         mListener.onBaseShowProductsListFragmentFootprintSend();
     }
 
@@ -278,8 +282,29 @@ public class BaseShowProductsListFragment extends BaseSpiceFragment {
 
         @Override
         public void onRequestSuccess(Feed feed) {
+            if (feed == null) {
+                parseRequestFailure(null);
+                return;
+            }
             loadRequestSuccess(feed);
+        }
+
+
+    }
+
+    public EntryImagesListAdapter getEntryImagesListAdapter() {
+        return entryImagesListAdapter;
+    }
+
+    public void refreshList() {
+        if (entryImagesListAdapter != null) {
+            entryImagesListAdapter.notifyDataSetChanged();
+        } else {
+            Log.d("ZX", "Warning: BaseShowProductsListFragment: refreshList(): entryImagesListAdapter is null.");
         }
     }
 
+    public List<EntryOM> getEntryList() {
+        return entryList;
+    }
 }

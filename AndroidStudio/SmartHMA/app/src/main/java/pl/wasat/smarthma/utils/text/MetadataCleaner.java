@@ -8,16 +8,23 @@ public class MetadataCleaner {
         super();
     }
 
-    public String getCleanValue(String value) {
+    public static String getCleanOMValue(String value) {
         String cleanValue;
-
-        cleanValue = removeUnnecessary(value);
+        cleanValue = removeUnnecessaryOMValues(value);
         cleanValue = changeUpperCase(cleanValue);
 
         return cleanValue;
     }
 
-    String removeUnnecessary(String value) {
+    public static String getCleanISOValue(String value) {
+        String cleanValue;
+        cleanValue = removeUnnecessaryISOValues(value);
+        cleanValue = changeUpperCase(cleanValue);
+
+        return cleanValue;
+    }
+
+    private static String removeUnnecessaryOMValues(String value) {
         String cleanedValue = value;
 
         String newLine = SystemUtils.LINE_SEPARATOR;
@@ -62,7 +69,7 @@ public class MetadataCleaner {
 
     }
 
-    String changeUpperCase(String inputString) {
+    private static String changeUpperCase(String inputString) {
         if (inputString.isEmpty()) {
             return inputString;
         }
@@ -80,5 +87,35 @@ public class MetadataCleaner {
         }
         return outputString;
     }
+
+    private static String removeUnnecessaryISOValues(String value) {
+        String cleanedValue = value;
+
+        String newLine = SystemUtils.LINE_SEPARATOR;
+        String doubleNewLine = SystemUtils.LINE_SEPARATOR
+                + SystemUtils.LINE_SEPARATOR;
+        String spaceTwoNewLine = SystemUtils.LINE_SEPARATOR + " "
+                + SystemUtils.LINE_SEPARATOR + " ";
+
+        cleanedValue = cleanedValue.replaceAll("CharacterString - Text - ", "");
+        cleanedValue = cleanedValue.replaceAll("CIDate - dateInCIDate - dateGco - Text - ", "");
+        cleanedValue = cleanedValue.replaceAll("Decimal - Text - ", "");
+        cleanedValue = cleanedValue.replaceAll("Text - ", "");
+        cleanedValue = cleanedValue.replaceAll("_abstract", "abstract");
+        cleanedValue = cleanedValue.replaceAll("CharacterString", "name");
+        cleanedValue = cleanedValue.replaceAll(doubleNewLine, newLine);
+        cleanedValue = cleanedValue.trim().replaceAll(" +", " ");
+        cleanedValue = cleanedValue.replaceAll("\\[", "");
+        cleanedValue = cleanedValue.replaceAll("\\]", "");
+        cleanedValue = cleanedValue.replaceAll(doubleNewLine, newLine);
+        cleanedValue = cleanedValue.replaceAll(" _", "");
+        cleanedValue = cleanedValue.replaceAll("_", "");
+        cleanedValue = cleanedValue.replaceAll(newLine + ", ", "," + newLine);
+        cleanedValue = cleanedValue.replaceAll(spaceTwoNewLine, "");
+        cleanedValue = cleanedValue.replaceAll(doubleNewLine, newLine);
+        cleanedValue = changeUpperCase(cleanedValue);
+        return cleanedValue;
+    }
+
 
 }

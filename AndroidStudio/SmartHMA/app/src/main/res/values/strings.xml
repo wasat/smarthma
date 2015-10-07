@@ -26,38 +26,37 @@
     <string name="sw_">SW: </string>
     <string name="ne_">NE: </string>
     <string name="search_products">Search Products</string>
-    <string name="dataset_series_search_results">Dataset Series Search Results</string>
+    <string name="collections_search_results">Collections Search Results</string>
     <string name="quicklook">Quicklook</string>
-    <string name="browse_products">Browse Products</string>
+    <string name="browse_eo_data">Browse Products</string>
     <string name="esa_missions">ESA Missions</string>
     <string name="esa_online">ESA Online</string>
     <string name="esa_news">ESA Online News</string>
     <string name="title_article_list">ESA EO News SmartHMA Reader</string>
-    <string name="more">More &gt;&gt;</string>
-    <string name="smarthma">SmartHMA</string>
+    <string name="more">More</string>
     <string name="fedeo_eo_data_series_search_engine">with ESA/FedEO Search Engine</string>
     <string name="search_history_empty">(search history is empty)</string>
     <string name="query">Query</string>
     <string name="basic_settings">Basic Settings</string>
     <string name="advanced_settings">Advanced Settings</string>
-    <string name="basic_search_settings">Basic Search Settings</string>
+    <string name="basic_search_settings">EO Dataset Series Search</string>
     <string name="search_area">Search Area</string>
     <string name="time_period">Time Period</string>
     <string name="from_">"From: "</string>
-    <string name="to_">"To:   "</string>
+    <string name="to_">"To:  "</string>
     <string name="date_time">Date/Time</string>
     <string name="time_set">Set time</string>
     <string name="cancel">Cancel</string>
     <string name="catalogue">Catalogue</string>
     <string name="eo_catalogue_list_title">EO Catalogues</string>
     <string name="fedeo">EOP:ESA:FEDEO</string>
-    <string name="zero">0</string>
+    <string name="zero">0.000000</string>
     <string name="alert_dialog_cancel">Cancel</string>
     <string name="alert_dialog_ok">OK</string>
     <string name="alert_dialog_response_error">Response Error</string>
     <string name="please_correct_your_query_">\n\nPlease go back and correct your query.</string>
     <string name="sep">" - "</string>
-    <string name="_first">&lt;&lt; first</string>
+    <string name="_first">first</string>
     <string name="search_term_">"SEARCH TERM "</string>
     <string name="collection_">"COLLECTION "</string>
     <string name="time_start_">"TIME START "</string>
@@ -65,12 +64,12 @@
     <string name="area_bounds_">"AREA BOUNDS "</string>
     <string name="updated_">"UPDATED "</string>
     <string name="total_results_">"TOTAL RESULTS "</string>
-    <string name="_prev">&lt; prev</string>
+    <string name="_prev">prev</string>
     <string name="reload">reload</string>
-    <string name="next_">next &gt;</string>
-    <string name="last_">last &gt;&gt;</string>
+    <string name="next_">next</string>
+    <string name="last_">last</string>
     <string name="items_from">Items from</string>
-    <string name="to">to</string>
+    <string name="to">/</string>
     <string name="collection_id">Collection ID: </string>
     <string name="show_products">Show Products</string>
     <string name="activity_name_collections_definition">Collections Definition</string>
@@ -78,6 +77,8 @@
     <string name="activity_name_products_browser">Products Browser</string>
     <string name="activity_name_search_eo_data">Search EO Data</string>
     <string name="activity_name_search_collections_results">Searched Collections</string>
+    <string name="activity_name_favourite_collections_results">Favourite Collections</string>
+    <string name="activity_name_favourite_products_results">Favourite Products</string>
     <string name="actionbar_share">Share</string>
     <string name="app_id">825236790862337</string>
     <string name="cancelled">Cancelled</string>
@@ -108,11 +109,31 @@
     <string name="action_sort_by_date_asc">By date ascending</string>
     <string name="action_sort_by_date_desc">By date descending</string>
     <string name="refreshing_list">Refreshing list…</string>
-    <string name="endpoint">ENDPOINT</string>
+    <string name="endpoint">Endpoint</string>
     <string name="fedeo_esa_int">fedeo.esa.int</string>
     <string name="endpoint_list_title">ENDPOINT LIST</string>
-    <string name="widget_empty_list">List is empty</string>
+    <string name="widget_empty_list">Could not download data</string>
     <string name="launch_widget">Launch widget</string>
+    <string name="title_parameter">Title</string>
+    <string name="title_osdd_parameter">Search Title Parameter</string>
+    <string name="value_osdd_parameter">Search parameter</string>
+    <string name="organisation_header">Organisation</string>
+    <string name="platform_header">Platform</string>
+    <string name="favourites">Favourites...</string>
+    <string name="saved_collections">Saved collections</string>
+    <string name="saved_products">Saved products</string>
+    <string name="collection_added_to_favourites">Collection added to favourites</string>
+    <string name="product_added_to_favourites">Product added to favourites</string>
+    <string name="empty_list">List is empty.</string>
+    <string name="remove_favourite_title">Item remove confirmation</string>
+    <string name="remove_favourite_message">Are you sure you want to remove this item from your favourites?</string>
+
+
+    <!--  INFO APPS  -->
+
+    <string name="copyright">Copyright © 2015 SmartHMA</string>
+    <string name="action_bar_home">Home</string>
+
 
     <string-array name="sorting_modes">
         <item>Title ascending</item>
@@ -120,5 +141,46 @@
         <item>Date ascending</item>
         <item>Date descending</item>
     </string-array>
+    <string name="title_activity_aaa">Map</string>
+    <string name="menu_sort">Sort</string>
+    <string name="menu_refresh">Refresh</string>
+    <string name="menu_favourite">Favourite</string>
+    <string name="show_collections">Show Collections</string>
+
+    <string-array name="search_modes">
+        <item>Pick query…</item>
+        <item>Pick catalogue…</item>
+        <item>Pick bounding box…</item>
+        <item>Pick start date…</item>
+        <item>Pick end date…</item>
+        <item>Clear history</item>
+    </string-array>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="mission_activity_objective">The objective and continuous views of our planet supplied by satellite images and data provide scientists and decision makers with the information they need to understand and protect our environment. Among their many applications are monitoring the air, seas and land; providing the basis for accurate weather reports; and supplying national and international relief agencies with data when disasters strike</string>
+    <string name="menu_settings">Settings</string>
+    <string name="of_total">of total</string>
+    <string name="go">Go</string>
+    <string name="share_options">Share Options</string>
+    <string name="alert_dialog_details">Details</string>
+    <string name="wide_area_or_timespan">"Probably you pick up too wide area of search or too long time span. "</string>
+    <string name="date_of_publication">"Date of publication: "</string>
+    <string name="eo_metadata">"Earth Observation Metadata "</string>
+    <string name="eo_observed_property">"Earth Observation Observed Property "</string>
+    <string name="eo_footprint">Earth Observation Footprint</string>
+    <string name="eo_equipment">"Earth Observation Equipment "</string>
+    <string name="eo_result">"Earth Observation Result "</string>
+    <string name="eo_phenomenon_time">"Earth Observation Phenomenon Time "</string>
+    <string name="eo_result_time">"Earth Observation Result Time "</string>
+    <string name="metadata_file_id">"Metadata File ID "</string>
+    <string name="metadata_language">"Metadata Language "</string>
+    <string name="metadata_hierarchy_level">"Metadata Hierarchy Level "</string>
+    <string name="eo_provider_contact">"Earth Observation Provider Contact "</string>
+    <string name="eo_image_date">"Earth Observation Image Date "</string>
+    <string name="metadata_standards">"Metadata Standards "</string>
+    <string name="metadata_identification">"Metadata Identification "</string>
+    <string name="metadata_quality">"Metadata Quality "</string>
+
 
 </resources>

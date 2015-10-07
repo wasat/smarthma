@@ -6,16 +6,19 @@ import android.os.Bundle;
 import android.provider.Settings;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.PopupMenu;
 
 import pl.wasat.smarthma.R;
 import pl.wasat.smarthma.ui.activities.CollectionsDefinitionActivity;
 import pl.wasat.smarthma.ui.activities.MissionsActivity;
 import pl.wasat.smarthma.ui.activities.NewsActivity;
 import pl.wasat.smarthma.ui.activities.SearchActivity;
+import pl.wasat.smarthma.ui.menus.CommonMenuHandler;
 import pl.wasat.smarthma.utils.conn.ConnectionDetector;
 
 /**
@@ -35,7 +38,6 @@ public class StartFragment extends Fragment {
      *
      * @return A new instance of fragment FailureFragment.
      */
-    // TODO: Rename and change types and number of parameters
     public static StartFragment newInstance() {
         StartFragment fragment = new StartFragment();
         Bundle args = new Bundle();
@@ -44,16 +46,13 @@ public class StartFragment extends Fragment {
     }
 
     public StartFragment() {
-        // Required empty public constructor
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_start, container,
                 false);
-
         Button buttonStartSearch = (Button) rootView
                 .findViewById(R.id.start_frag_button_search);
         buttonStartSearch.setOnClickListener(new OnClickListener() {
@@ -65,7 +64,6 @@ public class StartFragment extends Fragment {
                             SearchActivity.class);
                     startActivity(startIntent);
                 }
-
             }
         });
 
@@ -82,6 +80,7 @@ public class StartFragment extends Fragment {
                 }
             }
         });
+
         Button buttonStartMission = (Button) rootView
                 .findViewById(R.id.start_frag_button_mission);
         buttonStartMission.setOnClickListener(new OnClickListener() {
@@ -108,6 +107,9 @@ public class StartFragment extends Fragment {
                 }
             }
         });
+
+        //MenuHandler menuHandler =
+        new CommonMenuHandler(rootView, getActivity(), R.id.menu_button);
 
         return rootView;
     }
@@ -159,4 +161,33 @@ public class StartFragment extends Fragment {
             return false;
         }
     }
+
+    private void openMenu(View menu) {
+
+        PopupMenu popup = new PopupMenu(getActivity(), menu);
+
+        //Inflating the Popup using xml file
+        popup.getMenuInflater().inflate(R.menu.example_menu, popup.getMenu());
+
+        //registering popup with OnMenuItemClickListener
+        popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+            public boolean onMenuItemClick(MenuItem item) {
+
+                switch (item.getItemId()) {
+                    case R.id.sort:
+                        break;
+                    case R.id.favourite:
+                        break;
+                    case R.id.refresh:
+                        break;
+                    default:
+                        break;
+                }
+                return true;
+            }
+        });
+        popup.show();//showing popup menu
+    }
+
+
 }

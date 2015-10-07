@@ -71,19 +71,16 @@ public class ExtendedMapFragment extends Fragment implements
      *
      * @return A new instance of fragment MapExtendedFragment.
      */
-    // TODO: Rename and change types and number of parameters
     public static ExtendedMapFragment newInstance() {
         return new ExtendedMapFragment();
     }
 
     public ExtendedMapFragment() {
-        // Required empty public constructor
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_map_extended,
                 container, false);
 
@@ -138,7 +135,7 @@ public class ExtendedMapFragment extends Fragment implements
      * >Communicating with Other Fragments</a> for more information.
      */
     public interface OnExtendedMapFragmentListener {
-        public void onMapReady();
+        void onMapReady();
     }
 
     private void buildFootprintBounds(List<LatLng> footprintPoints) {
@@ -147,6 +144,9 @@ public class ExtendedMapFragment extends Fragment implements
             boundsBuilder.include(footprintPoints.get(j));
         }
         baseMapFragment.setTargetBounds(boundsBuilder.build());
+        baseMapFragment.animateWhenMapIsReady(75);
+
+
     }
 
     /**
@@ -213,11 +213,20 @@ public class ExtendedMapFragment extends Fragment implements
         double oneLng = footprintPoints.get(0).longitude;
         double twoLat = footprintPoints.get(1).latitude;
         double twoLng = footprintPoints.get(1).longitude;
+        double threeLat = footprintPoints.get(2).latitude;
+        double threeLng = footprintPoints.get(2).longitude;
         double fourLat = footprintPoints.get(3).latitude;
         double fourLng = footprintPoints.get(3).longitude;
         float[] results = new float[3];
 
-        qLookCenter = footprint.getCenterOf().getPoint().getPos().getLatLng().getGoogleLatLon();
+        if (footprint.getCenterOf() != null) {
+            qLookCenter = footprint.getCenterOf().getPoint().getPos().getLatLng().getGoogleLatLon();
+        } else {
+            double latCenter = (oneLat + twoLat + threeLat + fourLat) / 4;
+            double lngCenter = (oneLng + twoLng + threeLng + fourLng) / 4;
+            qLookCenter = new LatLng(latCenter, lngCenter);
+        }
+
 
         Location.distanceBetween(oneLat, oneLng, twoLat, twoLng, results);
         qLookHeight = results[0];
@@ -238,10 +247,12 @@ public class ExtendedMapFragment extends Fragment implements
         drawFootprint(footprintPoints);
 
         Target quicklookTarget = this;
-        Picasso.with(getActivity())
-                .load(url)
-                .transform(this)
-                .into(quicklookTarget);
+        if (!url.isEmpty()) {
+            Picasso.with(getActivity())
+                    .load(url)
+                    .transform(this)
+                    .into(quicklookTarget);
+        }
     }
 
 
@@ -256,7 +267,6 @@ public class ExtendedMapFragment extends Fragment implements
 
     @Override
     public void onPrepareLoad(Drawable arg0) {
-        // TODO Auto-generated method stub
     }
 
     @Override
@@ -276,8 +286,6 @@ public class ExtendedMapFragment extends Fragment implements
 
     @Override
     public void onBitmapFailed(Drawable arg0) {
-        // TODO Auto-generated method stub
-
     }
 
     @Override
@@ -300,20 +308,15 @@ public class ExtendedMapFragment extends Fragment implements
 
     @Override
     public void onStartTrackingTouch(SeekBar seekBar) {
-        // TODO Auto-generated method stub
-
     }
 
     @Override
     public void onStopTrackingTouch(SeekBar seekBar) {
-        // TODO Auto-generated method stub
-
     }
 
     @Override
     public String key() {
-        // TODO Auto-generated method stub
-        return null;
+        return "SmartHMA";
     }
 
     @Override

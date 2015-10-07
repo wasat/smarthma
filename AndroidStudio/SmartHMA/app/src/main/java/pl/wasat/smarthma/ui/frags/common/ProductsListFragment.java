@@ -66,13 +66,13 @@ public class ProductsListFragment extends BaseShowProductsListFragment {
      */
     @Override
     public void loadSearchResultProductsIntroDetailsFrag(Feed searchProductFeeds) {
-        FeedSummaryProductsFragment productsIntroFragment = FeedSummaryProductsFragment
+        FeedSummaryProductsFragment feedSummaryProductsFragment = FeedSummaryProductsFragment
                 .newInstance(searchProductFeeds);
         getActivity()
                 .getSupportFragmentManager()
                 .beginTransaction()
                 .add(R.id.activity_base_details_container,
-                        productsIntroFragment, "FeedSummaryProductsFragment")
+                        feedSummaryProductsFragment, "FeedSummaryProductsFragment")
                 .addToBackStack("FeedSummaryProductsFragment").commit();
         super.loadSearchResultProductsIntroDetailsFrag(searchProductFeeds);
     }

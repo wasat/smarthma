@@ -3,13 +3,13 @@
  */
 package pl.wasat.smarthma.model;
 
-import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.Log;
 
 import java.io.Serializable;
 import java.util.HashMap;
 
+import pl.wasat.smarthma.SmartHMApplication;
 import pl.wasat.smarthma.helper.Const;
 import pl.wasat.smarthma.utils.obj.LatLngBoundsExt;
 import pl.wasat.smarthma.utils.obj.LatLngExt;
@@ -42,10 +42,10 @@ public class FedeoRequestParams implements Serializable {
      */
     public FedeoRequestParams() {
         this.params = new HashMap<>();
-        this.httpAccept = "application/atom%2Bxml";
+        setDefaultParams();
     }
 
-    void setDefaultParams() {
+    private void setDefaultParams() {
         this.httpAccept = "application/atom%2Bxml";
         this.startRecord = "1";
         this.maximumRecords = "20";
@@ -65,29 +65,32 @@ public class FedeoRequestParams implements Serializable {
 
     }
 
-    public void buildFromShared(Context context) {
-        SharedPreferences prefs = context.getSharedPreferences(
+    private void buildFromShared() {
+        SharedPreferences prefs = SmartHMApplication.getAppContext().getSharedPreferences(
                 Const.KEY_PREF_FILE, 0);
 
-        setDefaultParams();
-        setParentIdentifier(prefs.getString(Const.KEY_PREF_PARENT_ID,
-                "EOP:ESA:FEDEO"));
+        //setParentIdentifier(prefs.getString(Const.KEY_PREF_PARENT_ID, "EOP:ESA:FEDEO"));
         setStartDate(prefs.getString(Const.KEY_PREF_DATETIME_START, "0"));
         setEndDate(prefs.getString(Const.KEY_PREF_DATETIME_END, "0"));
         setBbox(prefs.getFloat(Const.KEY_PREF_BBOX_WEST, -180),
                 prefs.getFloat(Const.KEY_PREF_BBOX_SOUTH, -90),
                 prefs.getFloat(Const.KEY_PREF_BBOX_EAST, 180),
                 prefs.getFloat(Const.KEY_PREF_BBOX_NORTH, 90));
-        setQuery(prefs.getString(Const.KEY_PREF_QUERY, ""));
+        //setQuery(prefs.getString(Const.KEY_PREF_QUERY, ""));
     }
 
     private void buildUrl() {
+
+        buildFromShared();
+
         String url;
         url = Const.HTTP_BASE_URL + "?";
         for (HashMap.Entry<String, String> entry : params.entrySet()) {
             String key = entry.getKey();
             String value = entry.getValue();
-            url = url + key + "=" + value + "&";
+            if (value != null) {
+                url = url + key + "=" + value + "&";
+            }
         }
         if (paramsExtra != null) {
             for (HashMap.Entry<String, String> entry : paramsExtra.entrySet()) {
@@ -108,7 +111,7 @@ public class FedeoRequestParams implements Serializable {
      * @return String url
      */
     public String getUrl() {
-        buildUrl();
+        if (url == null) buildUrl();
         return url;
     }
 
@@ -223,7 +226,7 @@ public class FedeoRequestParams implements Serializable {
     /**
      * @param startDate the startDate to set
      */
-    void setStartDate(String startDate) {
+    private void setStartDate(String startDate) {
         this.startDate = startDate;
         this.params.put("startDate", startDate);
     }
@@ -238,7 +241,7 @@ public class FedeoRequestParams implements Serializable {
     /**
      * @param endDate the endDate to set
      */
-    void setEndDate(String endDate) {
+    private void setEndDate(String endDate) {
         this.endDate = endDate;
         this.params.put("endDate", endDate);
     }
@@ -254,6 +257,7 @@ public class FedeoRequestParams implements Serializable {
      * @param parentIdentifier the parentIdentifier to set
      */
     public void setParentIdentifier(String parentIdentifier) {
+        if (parentIdentifier.isEmpty()) parentIdentifier = "EOP:ESA:FEDEO";
 
         String urn = parentIdentifier.substring(0, 4);
         String baseParentIdentifier = parentIdentifier;
@@ -274,7 +278,7 @@ public class FedeoRequestParams implements Serializable {
     /**
      * @param bbox the box to set
      */
-    void setBbox(String bbox) {
+    private void setBbox(String bbox) {
         this.bbox = bbox;
         this.params.put("bbox", bbox);
     }
@@ -285,7 +289,7 @@ public class FedeoRequestParams implements Serializable {
      * @param neLon - North East Longitude
      * @param neLat - North East Latitude
      */
-    void setBbox(Float swLon, Float swLat, Float neLon, Float neLat) {
+    private void setBbox(Float swLon, Float swLat, Float neLon, Float neLat) {
         String bbox = swLon + "," + swLat + "," + neLon + "," + neLat;
         setBbox(bbox);
     }
@@ -294,7 +298,7 @@ public class FedeoRequestParams implements Serializable {
      * @param southwest - South West Coordinates
      * @param northeast - North East Coordinates
      */
-    void setBbox(LatLngExt southwest, LatLngExt northeast) {
+    private void setBbox(LatLngExt southwest, LatLngExt northeast) {
         setBbox((float) southwest.longitude, (float) southwest.latitude,
                 (float) northeast.longitude, (float) northeast.latitude);
     }
@@ -316,7 +320,7 @@ public class FedeoRequestParams implements Serializable {
     /**
      * @param recordSchema the recordSchema to set
      */
-    public void setRecordSchema(String recordSchema) {
+    private void setRecordSchema(String recordSchema) {
         this.recordSchema = recordSchema;
         this.params.put("recordSchema", recordSchema);
     }
@@ -331,7 +335,7 @@ public class FedeoRequestParams implements Serializable {
     /**
      * @param query the query to set
      */
-    void setQuery(String query) {
+    public void setQuery(String query) {
         this.query = query;
         this.params.put("query", query);
     }

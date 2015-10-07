@@ -15,13 +15,13 @@ import pl.wasat.smarthma.services.NewsRssServiceNoAsync;
 public class NewsListFragment extends ListFragment {
 
     private static final String STATE_ACTIVATED_POSITION = "activated_position";
-    public static final String BLOG_URL = "http://www.esa.int/rssfeed/EOB";
+
 
     private Callbacks mCallbacks = sDummyCallbacks;
     private int mActivatedPosition = ListView.INVALID_POSITION;
 
     public interface Callbacks {
-        public void onItemSelected(String id);
+        void onItemSelected(String id);
     }
 
     private static final Callbacks sDummyCallbacks = new Callbacks() {
@@ -38,6 +38,7 @@ public class NewsListFragment extends ListFragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         refreshList();
+
     }
 
     @Override
@@ -46,6 +47,7 @@ public class NewsListFragment extends ListFragment {
         if (savedInstanceState != null && savedInstanceState.containsKey(STATE_ACTIVATED_POSITION)) {
             setActivatedPosition(savedInstanceState.getInt(STATE_ACTIVATED_POSITION));
         }
+        getListView().setDivider(null);
     }
 
     @Override
@@ -84,7 +86,7 @@ public class NewsListFragment extends ListFragment {
                 : ListView.CHOICE_MODE_NONE);
     }
 
-    void setActivatedPosition(int position) {
+    private void setActivatedPosition(int position) {
         if (position == ListView.INVALID_POSITION) {
             getListView().setItemChecked(mActivatedPosition, false);
         } else {

@@ -34,41 +34,14 @@ import pl.wasat.smarthma.utils.loc.LocManager;
  * events. Use the {@link AmznBaseMapFragment#newInstance} factory method to create
  * an instance of this fragment.
  */
-public class AmznBaseMapFragment extends SupportMapFragment
-// implements
-// GooglePlayServicesClient.ConnectionCallbacks,
-// GoogleApiClient.ConnectionCallbacks,
-// GoogleApiClient.OnConnectionFailedListener
-{
+public class AmznBaseMapFragment extends SupportMapFragment {
 
-    // protected static final String KEY_MAP_MODE = "pl.wasat.smarthma.KEY_MAP_MODE";
-
-    /**
-     * reference to Google Maps object
-     */
     private SupportMapFragment supportMapFrag;
-    // protected GoogleMap mMap;
     AmazonMap mMap;
-    // private LocationClient mLocationClient;
-
-    // private GoogleApiClient mGoogleApiClient;
-
-    /**
-     * broadcast receiver
-     */
     private BroadcastReceiver mReceiver;
-
     public OnBaseMapFragmentListener mListener;
     private OnBaseMapFragmentPublicListener publicListener;
-
-    // protected int mapMode;
-
     private LatLngBounds targetBounds;
-
-/*	public static BaseMapFragment newInstance(
-            OnBaseMapFragmentPublicListener listener) {
-		return new BaseMapFragment(listener);
-	}*/
 
     public AmznBaseMapFragment() {
     }
@@ -81,29 +54,6 @@ public class AmznBaseMapFragment extends SupportMapFragment
     }
 
 
-    // constructor
-    //public BaseMapFragment(OnBaseMapFragmentPublicListener ml) {
-    //	this.publicListener = ml;
-    //}
-
-/*    private void callBaseMapFragment(OnBaseMapFragmentPublicListener ml) {
-        this.publicListener = ml;
-    }*/
-
-/*    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        //AcraExtension.mapCustomLog("BaseMap.onCreate", mMap);
-
-*//*        if (getArguments() != null) {
-            // mapMode = getArguments().getInt(KEY_MAP_MODE);
-        }*//*
-
-        // mGoogleApiClient = new GoogleApiClient.Builder(getActivity())
-        // .addApi(LocationServices.API).addConnectionCallbacks(this)
-        // .addOnConnectionFailedListener(this).build();
-    }*/
-
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
@@ -111,65 +61,9 @@ public class AmznBaseMapFragment extends SupportMapFragment
         Log.i("BASE_MAP", "onActivityCreated");
 
         startCreateMap(savedInstanceState);
-        // sendSupportMapReady();
     }
 
-/*    @Override
-    public void onStart() {
-        super.onStart();
-        // Connect the client.
-        // mGoogleApiClient.connect();
-    }*/
-
-/*    @Override
-    public void onStop() {
-        // Disconnecting the client invalidates it.
-        // mGoogleApiClient.disconnect();
-        super.onStop();
-    }*/
-
-    // @Override
-    // public void onConnected(Bundle dataBundle) {
-    // AcraExtension.mapCustomLog("BaseMap.onConnected", mMap);
-    //
-    // Location location = LocationServices.FusedLocationApi
-    // .getLastLocation(mGoogleApiClient);
-    // LatLng latLng = new LatLng(location.getLatitude(),
-    // location.getLongitude());
-    // CameraUpdate cameraUpdate = CameraUpdateFactory
-    // .newLatLngZoom(latLng, 4);
-    // mMap.animateCamera(cameraUpdate);
-    // }
-
     private void startCreateMap(Bundle savedInstanceState) {
-        //AcraExtension.mapCustomLog("BaseMap.startCreateMap", mMap);
-
-        // if (checkForAmazonMaps()) {
-        // // Maps should be available. Code
-        // // to get a reference to the map and proceed
-        // // normally goes here...
-        //
-        // supportMapFrag = this;
-        //
-        // setUpMapIfNeeded();
-        // if (savedInstanceState != null) {
-        // mMap = supportMapFrag.getMap();
-        //
-        // AcraExtension.mapCustomLog(
-        // "BaseMap.startCreateMap.sIStNotNull", mMap);
-        // }
-        // } else {
-        // // Maps is not available. Get the exact result
-        // // code and write it in a log message
-        // int cr = AmazonMapsRuntimeUtil
-        // .isAmazonMapsRuntimeAvailable(getActivity());
-        // String msg = getString(R.string.no_maps) + " ConnectionResult = "
-        // + cr;
-        // Dialog dialog = AmazonMapsRuntimeUtil.getErrorDialog(status,
-        // getActivity(), 42);
-        // dialog.show();
-        // }
-
         int status = AmazonMapsRuntimeUtil
                 .isAmazonMapsRuntimeAvailable(getActivity());
         if (status == ConnectionResult.SUCCESS) {
@@ -178,8 +72,6 @@ public class AmznBaseMapFragment extends SupportMapFragment
             setUpMapIfNeeded();
             if (savedInstanceState != null) {
                 mMap = supportMapFrag.getMap();
-
-                //AcraExtension.mapCustomLog("BaseMap.startCreateMap.sIStNotNull", mMap);
             }
         } else {
             Dialog dialog = AmazonMapsRuntimeUtil.getErrorDialog(status,
@@ -228,20 +120,6 @@ public class AmznBaseMapFragment extends SupportMapFragment
 
     }
 
-//	private boolean checkForAmazonMaps() {
-//		// Check for the presence of Amazon Maps on the device
-//
-//		return AmazonMapsRuntimeUtil
-//				.isAmazonMapsRuntimeAvailable(getActivity()) == ConnectionResult.SUCCESS;
-//	}
-
-	/*
-     * private void sendSupportMapReadyCallback() { Fragment fragment = this; if
-	 * (fragment != null) { if (fragment instanceof OnBaseMapFragmentListener) {
-	 * ((OnBaseMapFragmentListener) fragment).onBaseSupportMapReady();
-	 * Log.i("BASE_MAP", "onActivityCreated.Listener"); } } }
-	 */
-
     private void sendSupportMapReadyCallback() {
         Fragment fragment = this;
         if (fragment instanceof OnBaseMapFragmentListener) {
@@ -277,8 +155,6 @@ public class AmznBaseMapFragment extends SupportMapFragment
     }
 
     private void findStartLocation() {
-
-        // Obtain the last known location
         final LocationManager locationManager = (LocationManager) getActivity()
                 .getSystemService(Context.LOCATION_SERVICE);
         Location bestLocation = null;
@@ -288,7 +164,6 @@ public class AmznBaseMapFragment extends SupportMapFragment
             if (location != null
                     && (bestLocation == null || location.getAccuracy() < bestLocation
                     .getAccuracy())) {
-                // Note: we might want to ignore 'stale' location readings
                 bestLocation = location;
             }
         }
@@ -342,42 +217,21 @@ public class AmznBaseMapFragment extends SupportMapFragment
         super.onPause();
 
         if (mReceiver != null) {
-            // unhook the receiver
             LocalBroadcastManager.getInstance(getActivity())
                     .unregisterReceiver(mReceiver);
             mReceiver = null;
         }
     }
 
-    // @Override
-    // public void onDisconnected() {
-    // // TODO Auto-generated method stub
-    //
-    // }
-
     /**
      * Listener interface to tell when the map is ready
      */
-    public static interface OnBaseMapFragmentListener {
-
+    public interface OnBaseMapFragmentListener {
         void onBaseSupportMapReady();
     }
 
     public void setTargetBounds(LatLngBounds bounds) {
         targetBounds = bounds;
     }
-
-	/*
-     * @Override public void onConnectionSuspended(int cause) { // TODO
-	 * Auto-generated method stub
-	 * 
-	 * }
-	 */
-
-    // @Override
-    // public void onConnectionFailed(ConnectionResult result) {
-    // // TODO Auto-generated method stub
-    //
-    // }
 
 }

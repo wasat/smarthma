@@ -1,18 +1,18 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 22
-    buildToolsVersion '22.0.1'
+    compileSdkVersion 23
+    buildToolsVersion '23.0.1'
     defaultConfig {
         applicationId "pl.wasat.smarthma"
-        minSdkVersion 14
-        targetSdkVersion 22
+        minSdkVersion 15
+        targetSdkVersion 23
     }
     buildTypes {
         release {
-            minifyEnabled true
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-smarthma.txt'
-            proguardFile 'proguard-smarthma.txt'
+            minifyEnabled false
+            proguardFile 'proguard-rules.pro'
+            //proguardFile 'proguard-smarthma.txt'
         }
         debug {
             minifyEnabled false
@@ -20,8 +20,8 @@ android {
         }
     }
     packagingOptions {
-        exclude 'META-INF/LICENSE.txt'
-        exclude 'META-INF/NOTICE.txt'
+        pickFirst 'META-INF/LICENSE.txt'
+        pickFirst 'META-INF/NOTICE.txt'
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_7
@@ -36,24 +36,29 @@ repositories {
 }
 
 dependencies {
-    // You must install or update the Support Repository through the SDK manager to use this dependency.
+    compile 'com.android.support:support-v4:23.0.1'
+    compile 'com.android.support:appcompat-v7:23.0.1'
+    compile 'com.google.android.gms:play-services-location:8.1.0'
+    compile 'com.amazon.android:amazon-maps-api:2.0'
+
+    compile 'com.octo.android.robospice:robospice:1.4.14'
+    compile 'com.octo.android.robospice:robospice-ui-spicelist:1.4.14'
+    compile 'com.octo.android.robospice:robospice-okhttp:1.4.14'
     compile('com.octo.android.robospice:robospice-google-http-client:1.4.14') {
         exclude group: 'org.apache.httpcomponents'
         exclude group: 'org.apache.commons', module: 'commons-io'
     }
-    compile('ch.acra:acra:4.6.1') {
-        exclude group: 'org.json'
-    }
-    compile 'com.android.support:support-v4:22.0.0'
-    compile 'com.android.support:appcompat-v7:22.0.0'
-    compile 'com.google.android.gms:play-services:6.5.87'
-    //compile 'com.google.android.gms:play-services:7.0.0'
-    compile 'com.amazon.android:amazon-maps-api:2.0'
-    compile 'com.octo.android.robospice:robospice:1.4.14'
-    compile 'com.octo.android.robospice:robospice-ui-spicelist:1.4.14'
-    compile 'com.octo.android.robospice:robospice-okhttp:1.4.14'
-    compile 'com.squareup.picasso:picasso:2.3.4'
+
+    compile 'com.squareup.picasso:picasso:2.5.2'
+    compile 'com.squareup.okhttp:okhttp:2.5.0'
+    compile 'com.squareup.okhttp:okhttp-urlconnection:2.5.0'
+    compile 'com.squareup.okio:okio:1.6.0'
+
     compile 'org.jsoup:jsoup:1.8.1'
     compile 'com.facebook.android:facebook-android-sdk:3.22.0'
     compile 'com.wunderlist:sliding-layer:1.1.1'
+    compile 'com.google.code.gson:gson:2.3'
+    compile('ch.acra:acra:4.6.1') {
+        exclude group: 'org.json'
+    }
 }

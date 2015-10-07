@@ -3,37 +3,17 @@
  */
 package pl.wasat.smarthma.ui.frags.base;
 
-import android.app.AlertDialog;
-import android.app.Dialog;
-import android.content.DialogInterface;
-import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.ListFragment;
-import android.util.Log;
-import android.widget.Toast;
 
-import com.google.api.client.http.HttpResponseException;
 import com.octo.android.robospice.SpiceManager;
 import com.octo.android.robospice.persistence.exception.SpiceException;
 import com.octo.android.robospice.request.listener.RequestListener;
 
-import org.xml.sax.InputSource;
-import org.xml.sax.SAXException;
-import org.xml.sax.XMLReader;
-
-import java.io.IOException;
-import java.io.StringReader;
-
-import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.parsers.SAXParser;
-import javax.xml.parsers.SAXParserFactory;
-
-import pl.wasat.smarthma.R;
 import pl.wasat.smarthma.model.feed.Feed;
 import pl.wasat.smarthma.services.SmartHmaHttpSpiceService;
-import pl.wasat.smarthma.ui.activities.BaseSmartHMActivity;
-import pl.wasat.smarthma.utils.rss.FedeoExceptionHandler;
+import pl.wasat.smarthma.ui.frags.dialog.ExceptionDialogFragment;
+import pl.wasat.smarthma.utils.rss.SpiceExceptionHandler;
 
 /**
  * @author Daniel Zinkiewicz Wasat Sp. z o.o 14-07-2014
@@ -74,11 +54,19 @@ public class BaseSpiceListFragment extends ListFragment implements
     @Override
     public void onRequestFailure(SpiceException spiceException) {
 
+        SpiceExceptionHandler sExc = new SpiceExceptionHandler(getActivity(), spiceException);
+        sExc.invoke();
+        showDialog(sExc.getExTextMessage(), sExc.getExRawMessage(), sExc.getExRawCause());
+/*
         String messTxt;
+        String exRawMessage = spiceException.getMessage();
+        String exRawCause = spiceException.getCause().getMessage();
 
         if (spiceException.getCause() instanceof HttpResponseException) {
             FedeoExceptionHandler fedHr = null;
             try {
+                //exRawMessage = spiceException.getMessage();
+                //exRawCause = spiceException.getCause().toString();
 
                 String inStr;
 
@@ -111,12 +99,10 @@ public class BaseSpiceListFragment extends ListFragment implements
                     .getException().getExceptionText().getText();
 
         } else {
-            messTxt = "Something wrong...";
+            messTxt = getString(R.string.wide_area_or_timespan);
         }
 
-        Toast.makeText(getActivity(), messTxt, Toast.LENGTH_LONG).show();
-
-        showDialog(messTxt);
+        showDialog(messTxt, exRawMessage, exRawCause);*/
 
     }
 
@@ -129,53 +115,12 @@ public class BaseSpiceListFragment extends ListFragment implements
      */
     @Override
     public void onRequestSuccess(Feed feed) {
-
     }
 
-    private void showDialog(String messText) {
-        DialogFragment newFragment = ExceptionDialogFragment.newInstance(
-                messText);
-        newFragment.show(getFragmentManager(), "dialog");
-    }
-
-    public static class ExceptionDialogFragment extends DialogFragment {
-
-        public static ExceptionDialogFragment newInstance(String message) {
-            ExceptionDialogFragment frag = new ExceptionDialogFragment();
-            Bundle args = new Bundle();
-            args.putInt("title", R.string.alert_dialog_response_error);
-            args.putString("Message", message);
-            frag.setArguments(args);
-            return frag;
-        }
-
-        @NonNull
-        @Override
-        public Dialog onCreateDialog(Bundle savedInstanceState) {
-            int title = getArguments().getInt("title");
-            String exMess = getArguments().getString("Message");
-
-            return new AlertDialog.Builder(getActivity())
-                    .setIcon(R.drawable.ic_action_name)
-                    .setTitle(title)
-                    .setMessage(exMess + getString(R.string.please_correct_your_query_))
-                    .setPositiveButton(R.string.alert_dialog_ok,
-                            new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog,
-                                                    int whichButton) {
-                                    ((BaseSmartHMActivity) getActivity())
-                                            .doPositiveClick();
-                                }
-                            })
-                    .setNegativeButton(R.string.alert_dialog_cancel,
-                            new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog,
-                                                    int whichButton) {
-                                    ((BaseSmartHMActivity) getActivity())
-                                            .doNegativeClick();
-                                }
-                            }).create();
-        }
+    private void showDialog(String messText, String exRawMessage, String exRawCause) {
+        DialogFragment exceptionDialogFragment = ExceptionDialogFragment.newInstance(
+                messText, exRawMessage, exRawCause);
+        exceptionDialogFragment.show(getFragmentManager(), "ExceptionDialogFragment");
     }
 
 }

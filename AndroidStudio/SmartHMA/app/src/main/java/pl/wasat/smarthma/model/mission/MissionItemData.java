@@ -2,6 +2,8 @@ package pl.wasat.smarthma.model.mission;
 
 import java.io.Serializable;
 
+import pl.wasat.smarthma.parser.model.Mission;
+
 public class MissionItemData implements Serializable {
 
     /**
@@ -15,7 +17,6 @@ public class MissionItemData implements Serializable {
     private String summary;
 
     public MissionItemData() {
-        // TODO Auto-generated constructor stub
     }
 
     public MissionItemData(String name) {
@@ -25,6 +26,15 @@ public class MissionItemData implements Serializable {
         this.contentLink = "http://";
         this.imgLink = "http://";
         this.summary = "summary";
+    }
+
+    public MissionItemData(Mission mission) {
+        super();
+        this.id = mission.getId();
+        this.name = mission.getName();
+        this.contentLink = "";
+        this.imgLink = mission.getImageUrl();
+        this.summary = mission.getData();
     }
 
     public MissionItemData(int id, String name, String contentLink,

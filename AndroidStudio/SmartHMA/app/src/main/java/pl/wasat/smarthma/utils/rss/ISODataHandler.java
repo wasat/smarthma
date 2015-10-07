@@ -126,6 +126,7 @@ class ISODataHandler extends DefaultHandler {
     private boolean isInCitation = false;
     private boolean isInCIDate = false;
     private boolean isInEXTemp = false;
+    private boolean isIdAdded = false;
 
     private TotalResults totalResults;
     private StartIndex startIndex;
@@ -293,6 +294,16 @@ class ISODataHandler extends DefaultHandler {
             itemsPerPage = new ItemsPerPage();
         } else if (localName.equalsIgnoreCase("query")) {
             query = new Query();
+
+            ArrayList<String> queryParamNames = new ArrayList<>();
+            ArrayList<String> queryParamValues = new ArrayList<>();
+            for (int i = 0; i < atts.getLength(); i++) {
+                queryParamNames.add(atts.getLocalName(i));
+                queryParamValues.add("-  " + atts.getValue(i));
+            }
+            query.setParamNameList(queryParamNames);
+            query.setParamValueList(queryParamValues);
+
             query.setCount(atts.getValue("count"));
             query.setDcSubject(atts.getValue("dc:subject"));
             query.setDcType(atts.getValue("dc:type"));
@@ -339,7 +350,8 @@ class ISODataHandler extends DefaultHandler {
             polygon = new Polygon();
 
             // MDMetadata declarations
-        } else if (localName.equalsIgnoreCase("MD_Metadata")) {
+            // MI_Metadata declarations
+        } else if (localName.equalsIgnoreCase("MD_Metadata")|| localName.equalsIgnoreCase("MI_Metadata")) {
             mdMetadata = new MDMetadata();
             isInMDMetadata = true;
             mdMetadata.setXmlnsGmd(atts.getValue("xmlns:gmd"));
@@ -642,6 +654,7 @@ class ISODataHandler extends DefaultHandler {
         if (isInEntry) {
             if (localName.equalsIgnoreCase("entry")) {
                 entry.setIdentifier(identifierEntry);
+                isIdAdded = false;
                 entry.setDate(date);
                 entry.setPolygon(polygon);
                 entry.setSummary(summary);
@@ -658,11 +671,12 @@ class ISODataHandler extends DefaultHandler {
                 } else {
                     entry.setTitle(chars.toString());
                 }
-            } else if (localName.equalsIgnoreCase("identifier")) {
+            } else if (localName.equalsIgnoreCase("identifier") && !isIdAdded) {
                 if (isInCitation) {
                     identifier.setRSIdentifier(RSIdentifier);
                 } else {
                     identifierEntry = chars.toString();
+                    isIdAdded = true;
                 }
             } else if (localName.equalsIgnoreCase("updated")) {
                 entry.setUpdated(chars.toString());
@@ -676,7 +690,7 @@ class ISODataHandler extends DefaultHandler {
 
             if (isInMDMetadata) {
                 // EO MetaData
-                if (localName.equalsIgnoreCase("MD_Metadata")) {
+                if (localName.equalsIgnoreCase("MD_Metadata") || localName.equalsIgnoreCase("MI_Metadata")) {
                     mdMetadata.setFileIdentifier(fileIdentifier);
                     mdMetadata.setLanguage(language);
                     mdMetadata.setHierarchyLevel(hierarchyLevel);

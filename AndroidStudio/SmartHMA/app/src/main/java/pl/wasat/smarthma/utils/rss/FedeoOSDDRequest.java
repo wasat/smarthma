@@ -24,11 +24,6 @@ public class FedeoOSDDRequest extends GoogleHttpClientSpiceRequest<OpenSearchDes
 
     private final GenericUrl osddUrl;
 
-/*    public FedeoOSDDRequest(String parentID) {
-        super(null);
-        this.osddUrl = buildOsddUrl(parentID);
-    }*/
-
     public FedeoOSDDRequest(GenericUrl genericOsddUrl) {
         super(null);
         osddUrl = genericOsddUrl;
@@ -43,8 +38,6 @@ public class FedeoOSDDRequest extends GoogleHttpClientSpiceRequest<OpenSearchDes
 
         OSDDHandler rh = null;
         try {
-            //HttpRequest request = getHttpRequestFactory().buildGetRequest(
-            //        new GenericUrl(fedeoRequest.getDescUrl()));
 
             Log.i("OSDD_URL", osddUrl.toString());
 
@@ -71,8 +64,7 @@ public class FedeoOSDDRequest extends GoogleHttpClientSpiceRequest<OpenSearchDes
         } catch (ParserConfigurationException e) {
             Log.e("RSS Parser Config", e.toString());
         }
-        //noinspection ConstantConditions
-        return rh.getOSDD();
+        return rh != null ? rh.getOSDD() : null;
     }
 
 }

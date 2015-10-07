@@ -12,6 +12,7 @@ import java.util.List;
 
 import pl.wasat.smarthma.R;
 import pl.wasat.smarthma.model.iso.EntryISO;
+import pl.wasat.smarthma.utils.time.DateUtils;
 
 public class DataSeriesListAdapter extends ArrayAdapter<EntryISO> {
 
@@ -42,7 +43,8 @@ public class DataSeriesListAdapter extends ArrayAdapter<EntryISO> {
         }
 
         holder.textView.setText(dataSeriesItem.getTitle());
-        String pubDate = "Date: " + dataSeriesItem.getDate().getCIDate().getDateInCIDate().getDateGco().getText()
+
+        String pubDate = "Date: " + DateUtils.getISOPubDate(dataSeriesItem)
                 + ", updated: " + dataSeriesItem.getUpdated();
         holder.dateView.setText(pubDate);
 

@@ -29,7 +29,6 @@ public class FeedSummarySearchCollectionFragment extends BaseFeedSummaryFragment
     }
 
     public FeedSummarySearchCollectionFragment() {
-        // Required empty public constructor
     }
 
 

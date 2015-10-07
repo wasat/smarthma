@@ -1,0 +1,34 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory android:title="@string/pref_category_title_search_params_settings">
+
+        <CheckBoxPreference
+            android:key="@string/pref_key_checkbox_search_params_save"
+            android:summary="@string/pref_summary_remember_search_params"
+            android:title="@string/pref_title_remember_search_params"
+            android:defaultValue="true" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="@string/pref_category_title_map_settings">
+
+        <ListPreference
+            android:key="@string/pref_key_global_map_list"
+            android:entries="@array/pref_entries_map_list"
+            android:entryValues="@array/pref_values_map_list"
+            android:defaultValue="1"
+            android:summary="@string/pref_summary_global_map_list"
+            android:title="@string/pref_title_global_map_list" />
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="@string/pref_category_title_debug_mode">
+
+        <CheckBoxPreference
+            android:key="@string/pref_key_checkbox_debug_mode"
+            android:summary="@string/pref_summary_show_debugging_info"
+            android:title="@string/pref_title_show_debugging_info"
+            android:defaultValue="false" />
+
+    </PreferenceCategory>
+
+</PreferenceScreen>

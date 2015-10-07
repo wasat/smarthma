@@ -2,43 +2,78 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/list_selector"
-    android:padding="5dp">
 
-    <LinearLayout
-        android:id="@+id/entry_item_collection_thumb_layout"
-        android:layout_width="wrap_content"
+    android:paddingBottom="@dimen/browse_eo_cell_divider"
+    android:background="@color/background_gray">
+
+    <!-- <LinearLayout
+         android:id="@+id/entry_item_collection_thumb_layout"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_alignParentLeft="true"
+         android:layout_centerVertical="true"
+         android:layout_marginRight="5dip"
+         android:background="@drawable/image_bg"
+         android:padding="3dip">
+         -->
+    <RelativeLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_centerVertical="true"
-        android:layout_marginRight="5dip"
-        android:background="@drawable/image_bg"
-        android:padding="3dip">
-
+        android:background="@color/background_white"
+        android:padding="@dimen/browse_eo_padding_medium">
         <ImageView
             android:id="@+id/entry_item_thumb_imageview"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:layout_marginRight="7dp"
+            android:layout_width="@dimen/browse_eo_image_size"
+            android:layout_height="@dimen/browse_eo_image_size"
+
             android:contentDescription="@string/content_picture"
             android:scaleType="fitXY"
             android:src="@android:drawable/picture_frame" />
-    </LinearLayout>
 
-    <TextView
-        android:id="@+id/entry_item_title_textview"
-        style="@android:style/TextAppearance.Medium"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_toRightOf="@id/entry_item_collection_thumb_layout" />
+        <ImageView
+            android:id="@+id/star_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:paddingLeft="8dip"
+            android:paddingRight="8dip"
+            android:paddingTop="8dip"
+            android:paddingBottom="8dip"
+            android:contentDescription="@string/desc"
+            android:src="@drawable/star_button" />
 
-    <TextView
-        android:id="@+id/entry_item_dates_textview"
-        style="@android:style/TextAppearance.Small"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@id/entry_item_title_textview"
-        android:layout_below="@id/entry_item_title_textview" />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="@dimen/browse_eo_padding_small"
+            android:layout_toLeftOf="@id/star_button"
+            android:layout_toRightOf="@id/entry_item_thumb_imageview">
 
+            <pl.wasat.smarthma.customviews.TextViewWithFont
+                android:id="@+id/entry_item_title_textview"
+                style="@android:style/TextAppearance.Medium"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="lorem ipsum"
+                android:maxLines="1"
+                android:minLines="1"
+                android:textColor="@color/text_black"
+                android:textSize="@dimen/browse_eo_cell_text_size_large" />
+
+            <pl.wasat.smarthma.customviews.TextViewWithFont
+                android:id="@+id/entry_item_dates_textview"
+                style="@android:style/TextAppearance.Small"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Lorem lorem"
+                android:textColor="@color/text_black"
+                android:textSize="@dimen/browse_eo_cell_text_size"
+                android:layout_toLeftOf="@id/star_button"
+                android:layout_alignLeft="@id/entry_item_title_textview" />
+
+        </LinearLayout>
+    </RelativeLayout>
 </RelativeLayout>

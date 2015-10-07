@@ -235,6 +235,16 @@ class OMDataHandler extends DefaultHandler {
             itemsPerPage = new ItemsPerPage();
         } else if (localName.equalsIgnoreCase("query")) {
             query = new Query();
+
+            ArrayList<String> queryParamNames = new ArrayList<>();
+            ArrayList<String> queryParamValues = new ArrayList<>();
+            for (int i = 0; i < atts.getLength(); i++) {
+                queryParamNames.add(atts.getLocalName(i));
+                queryParamValues.add("-  " + atts.getValue(i));
+            }
+            query.setParamNameList(queryParamNames);
+            query.setParamValueList(queryParamValues);
+
             query.setCount(atts.getValue("count"));
             query.setDcSubject(atts.getValue("dc:subject"));
             query.setEoParentIdentifier(atts.getValue("eo:parentIdentifier"));

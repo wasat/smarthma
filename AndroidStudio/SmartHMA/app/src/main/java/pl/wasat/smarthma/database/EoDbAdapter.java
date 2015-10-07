@@ -37,16 +37,14 @@ public class EoDbAdapter {
         context = c;
     }
 
-    public EoDbAdapter openToRead() throws android.database.SQLException {
+    public void openToRead() throws android.database.SQLException {
         sqLiteHelper = new SQLiteHelper(context, DATABASE_NAME, null, DATABASE_VERSION);
         sqLiteDatabase = sqLiteHelper.getReadableDatabase();
-        return this;
     }
 
-    public EoDbAdapter openToWrite() throws android.database.SQLException {
+    public void openToWrite() throws android.database.SQLException {
         sqLiteHelper = new SQLiteHelper(context, DATABASE_NAME, null, DATABASE_VERSION);
         sqLiteDatabase = sqLiteHelper.getWritableDatabase();
-        return this;
     }
 
     public void close() {
@@ -70,12 +68,12 @@ public class EoDbAdapter {
         }
     }
 
-    public long insertBlogListing(String guid) {
+    public void insertBlogListing(String guid) {
         ContentValues initialValues = new ContentValues();
         initialValues.put(KEY_GUID, guid);
         initialValues.put(KEY_READ, false);
         initialValues.put(KEY_OFFLINE, false);
-        return sqLiteDatabase.insert(DATABASE_TABLE, null, initialValues);
+        sqLiteDatabase.insert(DATABASE_TABLE, null, initialValues);
     }
 
     public EntryOM getBlogListing(String guid) throws SQLException {

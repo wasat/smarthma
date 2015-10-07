@@ -2,72 +2,94 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/list_selector"
+    android:background="@color/background_gray"
     android:orientation="horizontal"
-    android:padding="5dip">
+    android:paddingBottom="@dimen/browse_eo_cell_divider">
 
     <!-- ListRow Left sied Thumbnail image -->
 
-    <LinearLayout
-        android:id="@+id/collection_thumbnail"
-        android:layout_width="wrap_content"
+    <!-- <LinearLayout
+         android:id="@+id/collection_thumbnail"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:layout_alignParentLeft="true"
+         android:layout_marginRight="5dip"
+         android:background="@drawable/image_bg"
+         android:padding="3dip">
+     </LinearLayout> -->
+
+    <RelativeLayout
+        android:id="@+id/view_cell_collection_search_row_background"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_marginRight="5dip"
-        android:background="@drawable/image_bg"
-        android:padding="3dip">
+        android:background="@color/background_white"
+        android:padding="@dimen/browse_eo_padding_medium">
 
         <ImageView
             android:id="@+id/collection_image"
-            android:layout_width="72dip"
-            android:layout_height="72dip"
+            android:layout_width="@dimen/browse_eo_image_size"
+            android:layout_height="@dimen/browse_eo_image_size"
             android:contentDescription="@string/desc"
             android:src="@android:drawable/picture_frame" />
-    </LinearLayout>
 
-    <TextView
-        android:id="@+id/collection_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/collection_thumbnail"
-        android:layout_marginRight="40dip"
-        android:layout_toRightOf="@+id/collection_thumbnail"
-        android:text="@string/first_line_desc"
-        android:textColor="#040404"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        android:typeface="sans" />
+        <ImageView
+            android:id="@+id/star_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:paddingLeft="8dip"
+            android:paddingRight="8dip"
+            android:paddingTop="8dip"
+            android:paddingBottom="8dip"
+            android:contentDescription="@string/desc"
+            android:src="@drawable/star_button" />
 
-    <TextView
-        android:id="@+id/collection_desc"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/collection_name"
-        android:layout_marginTop="1dip"
-        android:layout_toRightOf="@+id/collection_thumbnail"
-        android:text="@string/second_line_desc"
-        android:textColor="#343434"
-        android:textSize="14sp" />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@+id/collection_image"
+            android:layout_toLeftOf="@id/star_button"
+            android:layout_toRightOf="@+id/collection_image"
+            android:orientation="vertical"
+            android:paddingLeft="@dimen/browse_eo_padding_small">
 
-    <TextView
-        android:id="@+id/collection_id"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_alignTop="@id/collection_name"
-        android:layout_marginRight="5dip"
-        android:gravity="right"
-        android:text="@string/right_side_desc"
-        android:textColor="#10bcc9"
-        android:textSize="12sp"
-        android:textStyle="bold" />
+            <pl.wasat.smarthma.customviews.TextViewWithFont
+                android:id="@+id/collection_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:maxLines="1"
+                android:minLines="1"
+                android:text="@string/first_line_desc"
+                android:textColor="@color/text_black"
+                android:textSize="@dimen/browse_eo_cell_text_size_large" />
 
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_centerVertical="true"
-        android:contentDescription="@string/desc"
-        android:src="@android:drawable/arrow_up_float" />
+            <pl.wasat.smarthma.customviews.TextViewWithFont
+                android:id="@+id/collection_desc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:maxLines="1"
+                android:minLines="1"
+                android:text="@string/second_line_desc"
+                android:textColor="@color/text_black"
+                android:textSize="@dimen/browse_eo_cell_text_size" />
 
+        </LinearLayout>
+        <!--
+            <TextView
+                android:id="@+id/collection_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_alignTop="@id/collection_name"
+                android:layout_marginRight="5dip"
+                android:gravity="right"
+                android:text="@string/right_side_desc"
+                android:textColor="#10bcc9"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+        -->
+
+    </RelativeLayout>
 </RelativeLayout>

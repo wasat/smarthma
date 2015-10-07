@@ -11,6 +11,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -29,7 +30,6 @@ import com.facebook.model.GraphUser;
 import com.facebook.widget.FacebookDialog;
 import com.facebook.widget.LoginButton;
 import com.facebook.widget.ProfilePictureView;
-import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Picasso.LoadedFrom;
 import com.squareup.picasso.Target;
 
@@ -45,8 +45,6 @@ import pl.wasat.smarthma.R;
 public class FacebookDialogFragment extends DialogFragment implements Target {
 
     private static final String ARG_PARAM_QUICKLOOK_URL = "pl.wasat.smarthma.ARG_PARAM_QUICKLOOK_URL";
-
-    private String paramQLookUrl;
 
     private Button postPhotoButton;
     private ImageView imgViewQLook;
@@ -111,9 +109,9 @@ public class FacebookDialogFragment extends DialogFragment implements Target {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            paramQLookUrl = getArguments().getString(ARG_PARAM_QUICKLOOK_URL);
-        }
+/*        if (getArguments() != null) {
+            String paramQLookUrl = getArguments().getString(ARG_PARAM_QUICKLOOK_URL);
+        }*/
 
         if (savedInstanceState != null) {
             String name = savedInstanceState
@@ -129,11 +127,14 @@ public class FacebookDialogFragment extends DialogFragment implements Target {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+        getDialog().getWindow().requestFeature(Window.FEATURE_NO_TITLE);
         View rootView = inflater.inflate(R.layout.fragment_facebook_dialog,
                 container, false);
 
+
         rootView.isInEditMode();
-        getDialog().setTitle("Facebook Quicklook Share");
+        //TODO INFOAPPS
+        //getDialog().setTitle("Facebook Quicklook Share");
 
         profilePictureView = (ProfilePictureView) rootView
                 .findViewById(R.id.facebook_dialog_img_user_profile);
@@ -169,8 +170,9 @@ public class FacebookDialogFragment extends DialogFragment implements Target {
         canPresentShareDialogWithPhotos = FacebookDialog.canPresentShareDialog(
                 getActivity(), FacebookDialog.ShareDialogFeature.PHOTOS);
 
-        Target quicklookTarget = this;
-        Picasso.with(getActivity()).load(paramQLookUrl).into(quicklookTarget);
+        //Target quicklookTarget = this;
+
+        // Picasso.with(getActivity()).load(paramQLookUrl).into(quicklookTarget);
 
         return rootView;
     }
@@ -371,8 +373,6 @@ public class FacebookDialogFragment extends DialogFragment implements Target {
 
     @Override
     public void onBitmapFailed(Drawable arg0) {
-        // TODO Auto-generated method stub
-
     }
 
     @Override
@@ -386,8 +386,6 @@ public class FacebookDialogFragment extends DialogFragment implements Target {
 
     @Override
     public void onPrepareLoad(Drawable arg0) {
-        // TODO Auto-generated method stub
-
     }
 
 }

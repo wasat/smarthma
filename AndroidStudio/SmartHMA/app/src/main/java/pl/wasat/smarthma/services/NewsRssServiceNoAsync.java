@@ -18,6 +18,7 @@ import javax.xml.parsers.SAXParserFactory;
 
 import pl.wasat.smarthma.adapter.NewsArticleListAdapter;
 import pl.wasat.smarthma.database.NewsDbAdapter;
+import pl.wasat.smarthma.helper.Const;
 import pl.wasat.smarthma.model.NewsArticle;
 import pl.wasat.smarthma.ui.frags.news.NewsListFragment;
 import pl.wasat.smarthma.utils.rss.NewsRssHandler;
@@ -37,16 +38,16 @@ public class NewsRssServiceNoAsync {
 
     public void exec() {
         onPreExecute();
-        List<NewsArticle> art = doInBackground(NewsListFragment.BLOG_URL);
+        List<NewsArticle> art = doInBackground(Const.URL_ESA_NEWS_1);
         onPostExecute(art);
     }
 
-    void onPreExecute() {
+    private void onPreExecute() {
         Log.e("ASYNC", "PRE EXECUTE");
         progress.show();
     }
 
-    void onPostExecute(final List<NewsArticle> articles) {
+    private void onPostExecute(final List<NewsArticle> articles) {
         Log.e("ASYNC", "POST EXECUTE");
         articleListFrag.getActivity().runOnUiThread(new Runnable() {
             @Override
@@ -81,7 +82,7 @@ public class NewsRssServiceNoAsync {
         progress.dismiss();
     }
 
-    List<NewsArticle> doInBackground(String... urls) {
+    private List<NewsArticle> doInBackground(String... urls) {
         String feed = urls[0];
 
         URL url;

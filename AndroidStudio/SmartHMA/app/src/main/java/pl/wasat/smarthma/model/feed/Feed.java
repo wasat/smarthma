@@ -9,6 +9,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import pl.wasat.smarthma.model.dc.EntryDC;
 import pl.wasat.smarthma.model.iso.EntryISO;
 import pl.wasat.smarthma.model.om.EntryOM;
 import pl.wasat.smarthma.utils.text.SmartHMAStringStyle;
@@ -30,8 +31,10 @@ public class Feed implements Serializable {
     private List<Link> link = new ArrayList<>();
     private EOPrefixes eoPrefixes;
     private ISOPrefixes isoPrefixes;
+    private DCPrefixes dcPrefixes;
     private List<EntryOM> entriesEO = new ArrayList<>();
     private List<EntryISO> entriesISO = new ArrayList<>();
+    private List<EntryDC> entriesDC = new ArrayList<>();
 
 
     public TotalResults getTotalResults() {
@@ -138,6 +141,14 @@ public class Feed implements Serializable {
         this.isoPrefixes = isoPrefixes;
     }
 
+    public DCPrefixes getDCPrefixes() {
+        return dcPrefixes;
+    }
+
+    public void setDCPrefixes(DCPrefixes dcPrefixes) {
+        this.dcPrefixes = dcPrefixes;
+    }
+
     public List<EntryOM> getEntriesEO() {
         return entriesEO;
     }
@@ -153,6 +164,22 @@ public class Feed implements Serializable {
     public void setEntriesISO(List<EntryISO> entriesISO) {
         this.entriesISO = entriesISO;
     }
+
+    /**
+     * @return The entry
+     */
+    public List<EntryDC> getEntryDC() {
+        return entriesDC;
+    }
+
+    /**
+     * @param entriesDC The entry
+     */
+    public void setEntryDC(List<EntryDC> entriesDC) {
+        this.entriesDC = entriesDC;
+    }
+
+
 
     @Override
     public String toString() {

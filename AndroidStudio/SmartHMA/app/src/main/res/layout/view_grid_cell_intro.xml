@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent"
+    android:layout_weight="1"
+    android:orientation="horizontal"
+    android:minHeight="20dp">
+
+    <pl.wasat.smarthma.customviews.TextViewWithBoldFont
+        android:id="@+id/intro_grid_cell_name"
+        style="@style/textBold"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="left"
+        android:gravity="left|start" />
+
+    <pl.wasat.smarthma.customviews.TextViewWithFont
+        android:id="@+id/intro_grid_cell_value"
+        style="@style/text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="left|start"
+        android:layout_gravity="left" />
+
+    <ImageView
+        android:id="@+id/intro_grid_cell_img_info"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_info"
+        android:layout_marginRight="25dp"
+        android:layout_gravity="left" />
+</LinearLayout>

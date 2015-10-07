@@ -2,7 +2,8 @@ package pl.wasat.smarthma.ui.activities;
 
 import android.os.Bundle;
 import android.os.StrictMode;
-import android.util.Log;
+import android.support.v4.app.FragmentManager;
+import android.widget.TextView;
 
 import pl.wasat.smarthma.R;
 import pl.wasat.smarthma.adapter.NewsArticleListAdapter;
@@ -16,6 +17,7 @@ public class NewsActivity extends BaseSmartHMActivity implements
 
     private boolean mTwoPane;
     private EoDbAdapter dba;
+    private NewsListFragment newsListFragment;
 
     public NewsActivity() {
     }
@@ -30,44 +32,77 @@ public class NewsActivity extends BaseSmartHMActivity implements
                     .permitAll().build();
             StrictMode.setThreadPolicy(policy);
         }
-        setContentView(R.layout.activity_news);
+        //setContentView(R.layout.activity_news);
+
+        TextView text = (TextView) findViewById(R.id.action_bar_title);
+        text.setText("ESA Online");
 
         dba = new EoDbAdapter(this);
 
-        if (findViewById(R.id.article_detail_container) != null) {
+        if (findViewById(R.id.activity_base_details_container) != null) {
             mTwoPane = true;
-            ((NewsListFragment) getSupportFragmentManager()
-                    .findFragmentById(R.id.article_list))
-                    .setActivateOnItemClick(true);
+            loadNewsListPanel();
+/*            ((NewsListFragment) getSupportFragmentManager()
+                    .findFragmentById(R.id.activity_base_list_container))
+                    .setActivateOnItemClick(true);*/
         }
     }
+
+    private void loadNewsListPanel() {
+        newsListFragment = new NewsListFragment();
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.activity_base_list_container,
+                        newsListFragment).commit();
+    }
+
 
     @Override
     public void onItemSelected(String id) {
         NewsArticle selected = (NewsArticle) ((NewsListFragment) getSupportFragmentManager()
-                .findFragmentById(R.id.article_list)).getListAdapter().getItem(
+                .findFragmentById(R.id.activity_base_list_container)).getListAdapter().getItem(
                 Integer.parseInt(id));
 
-        // mark article as read
         dba.openToWrite();
         dba.markAsRead(selected.getGuid());
         dba.close();
         selected.setRead(true);
         NewsArticleListAdapter adapter = (NewsArticleListAdapter) ((NewsListFragment) getSupportFragmentManager()
-                .findFragmentById(R.id.article_list)).getListAdapter();
+                .findFragmentById(R.id.activity_base_list_container)).getListAdapter();
         adapter.notifyDataSetChanged();
-        Log.e("CHANGE", "Changing to read: ");
 
         // load article details to main panel
         if (mTwoPane) {
             Bundle arguments = new Bundle();
             arguments.putSerializable(NewsArticle.KEY, selected);
 
-            NewsDetailFragment fragment = new NewsDetailFragment();
-            fragment.setArguments(arguments);
+            NewsDetailFragment newsDetailFragment = new NewsDetailFragment();
+            newsDetailFragment.setArguments(arguments);
             getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.article_detail_container, fragment).commit();
+                    .replace(R.id.activity_base_details_container, newsDetailFragment, "NewsDetailFragment").commit();
 
         }
+    }
+
+    /*
+ * (non-Javadoc)
+ *
+ * @see android.support.v4.app.FragmentActivity#onBackPressed()
+ */
+    @Override
+    public void onBackPressed() {
+        if (dismissMenuOnBackPressed()) return;
+        FragmentManager fm = getSupportFragmentManager();
+        int bsec = fm.getBackStackEntryCount();
+        if (bsec > 1) {
+            fm.popBackStack();
+        } else {
+            finish();
+            super.onBackPressed();
+        }
+    }
+
+    public NewsListFragment getNewsListFragment() {
+        return newsListFragment;
     }
 }

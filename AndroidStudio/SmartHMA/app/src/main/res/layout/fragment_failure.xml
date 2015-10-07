@@ -6,13 +6,14 @@
 
     <!-- TODO: Update blank fragment layout -->
 
-    <TextView
+    <pl.wasat.smarthma.customviews.TextViewWithFont
         android:id="@+id/failure_text"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
         android:text="@string/failure_fragment_text"
         android:textSize="28sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:background="@color/background_gray" />
 
 </FrameLayout>

@@ -143,7 +143,7 @@ public class AmznExtendedMapFragment extends Fragment implements
      * >Communicating with Other Fragments</a> for more information.
      */
     public interface OnAmznExtendedMapFragmentListener {
-        public void onAmznMapReady();
+        void onAmznMapReady();
     }
 
     private void buildFootprintBounds(List<LatLng> footprintPoints) {
@@ -245,31 +245,31 @@ public class AmznExtendedMapFragment extends Fragment implements
                 .into(quicklookTarget);
     }
 
-/*	// decodes image and scales it to reduce memory consumption
+/* // decodes image and scales it to reduce memory consumption
     private Bitmap decodeFile(File f) {
-		try {
-			// Decode image size
-			BitmapFactory.Options o = new BitmapFactory.Options();
-			o.inJustDecodeBounds = true;
-			BitmapFactory.decodeStream(new FileInputStream(f), null, o);
+  try {
+   // Decode image size
+   BitmapFactory.Options o = new BitmapFactory.Options();
+   o.inJustDecodeBounds = true;
+   BitmapFactory.decodeStream(new FileInputStream(f), null, o);
 
-			// The new size we want to scale to
-			final int REQUIRED_SIZE = 70;
+   // The new size we want to scale to
+   final int REQUIRED_SIZE = 70;
 
-			// Find the correct scale value. It should be the power of 2.
-			int scale = 1;
-			while (o.outWidth / scale / 2 >= REQUIRED_SIZE
-					&& o.outHeight / scale / 2 >= REQUIRED_SIZE)
-				scale *= 2;
+   // Find the correct scale value. It should be the power of 2.
+   int scale = 1;
+   while (o.outWidth / scale / 2 >= REQUIRED_SIZE
+     && o.outHeight / scale / 2 >= REQUIRED_SIZE)
+    scale *= 2;
 
-			// Decode with inSampleSize
-			BitmapFactory.Options o2 = new BitmapFactory.Options();
-			o2.inSampleSize = scale;
-			return BitmapFactory.decodeStream(new FileInputStream(f), null, o2);
-		} catch (FileNotFoundException e) {
-		}
-		return null;
-	}*/
+   // Decode with inSampleSize
+   BitmapFactory.Options o2 = new BitmapFactory.Options();
+   o2.inSampleSize = scale;
+   return BitmapFactory.decodeStream(new FileInputStream(f), null, o2);
+  } catch (FileNotFoundException e) {
+  }
+  return null;
+ }*/
 
     @Override
     public void onBaseSupportMapPublicReady() {
@@ -282,7 +282,6 @@ public class AmznExtendedMapFragment extends Fragment implements
 
     @Override
     public void onPrepareLoad(Drawable arg0) {
-        // TODO Auto-generated method stub
     }
 
     @Override
@@ -306,7 +305,6 @@ public class AmznExtendedMapFragment extends Fragment implements
 
     @Override
     public void onBitmapFailed(Drawable arg0) {
-        // TODO Auto-generated method stub
 
     }
 
@@ -330,19 +328,15 @@ public class AmznExtendedMapFragment extends Fragment implements
 
     @Override
     public void onStartTrackingTouch(SeekBar seekBar) {
-        // TODO Auto-generated method stub
-
     }
 
     @Override
     public void onStopTrackingTouch(SeekBar seekBar) {
-        // TODO Auto-generated method stub
 
     }
 
     @Override
     public String key() {
-        // TODO Auto-generated method stub
         return null;
     }
 

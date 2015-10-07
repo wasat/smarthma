@@ -3,7 +3,6 @@ package pl.wasat.smarthma.ui.frags.browse;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,13 +10,23 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
+import com.octo.android.robospice.persistence.exception.SpiceException;
+import com.octo.android.robospice.request.listener.RequestListener;
+
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import pl.wasat.smarthma.R;
 import pl.wasat.smarthma.SmartHMApplication;
 import pl.wasat.smarthma.adapter.CollectionsListAdapter;
 import pl.wasat.smarthma.model.Collection;
+import pl.wasat.smarthma.model.FedeoRequestParams;
+import pl.wasat.smarthma.model.feed.Feed;
+import pl.wasat.smarthma.model.iso.EntryISO;
 import pl.wasat.smarthma.ui.activities.CollectionsBrowserActivity;
+import pl.wasat.smarthma.ui.frags.base.BaseSpiceFragment;
+import pl.wasat.smarthma.ui.frags.common.CollectionDetailsFragment;
+import pl.wasat.smarthma.utils.rss.FedeoSearchRequest;
 
 /**
  * A simple {@link android.support.v4.app.Fragment} subclass. Activities that
@@ -27,7 +36,7 @@ import pl.wasat.smarthma.ui.activities.CollectionsBrowserActivity;
  * {@link CollectionsListFragment#newInstance} factory method to create an
  * instance of this fragment.
  */
-public class CollectionsListFragment extends Fragment {
+public class CollectionsListFragment extends BaseSpiceFragment {
 
     private static final String KEY_COLLECTIONS_GROUP_LIST_POSITION = "pl.wasat.smarthma.KEY_COLLECTIONS_GROUP_LIST_POSITION";
     private static final String KEY_COLLECTIONS_GROUP_NAME = "pl.wasat.smarthma.KEY_COLLECTIONS_GROUP_NAME";
@@ -35,7 +44,9 @@ public class CollectionsListFragment extends Fragment {
 
     private int parentListPos;
     private String selectGroupName;
+    private String collName;
     private OnCollectionsListFragmentListener mListener;
+    private ListView list;
 
     /**
      * Use this factory method to create a new instance of this fragment using
@@ -56,7 +67,6 @@ public class CollectionsListFragment extends Fragment {
     }
 
     public CollectionsListFragment() {
-        // Required empty public constructor
     }
 
     @Override
@@ -73,7 +83,6 @@ public class CollectionsListFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_collections_list, container,
                 false);
     }
@@ -86,17 +95,13 @@ public class CollectionsListFragment extends Fragment {
      */
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
-        // TODO Auto-generated method stub
         super.onViewCreated(view, savedInstanceState);
         initList();
     }
 
     private void initList() {
-        // noinspection ConstantConditions
-        ListView list = (ListView) getView()
+        list = (ListView) getView()
                 .findViewById(R.id.collections_list);
-
-        // Getting adapter by passing xml data ArrayList
 
         if (!SmartHMApplication.GlobalEODataList.getCollectionsGroupList()
                 .isEmpty()) {
@@ -107,26 +112,18 @@ public class CollectionsListFragment extends Fragment {
                     getActivity(), collections, selectGroupName);
             list.setAdapter(adapter);
 
-            // Click event for single list row
             list.setOnItemClickListener(new OnItemClickListener() {
 
                 @Override
                 public void onItemClick(AdapterView<?> parent, View view,
                                         int position, long id) {
-                    String collName = collections.get(position).getName();
-                    loadDataSeriesFeedsActivity(collName);
-
+                    collName = collections.get(position).getName();
+                    loadCollectionDetailFragment(collName);
                 }
             });
         }
     }
-/*
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed() {
-        if (mListener != null) {
-            mListener.onFragmentInteraction();
-        }
-    }*/
+
 
     @Override
     public void onAttach(Activity activity) {
@@ -152,6 +149,48 @@ public class CollectionsListFragment extends Fragment {
         startActivity(dsFeedsIntent);
     }
 
+
+    private void loadCollectionDetailFragment(String collName) {
+        FedeoRequestParams fedeoRequestParams = new FedeoRequestParams();
+        //fedeoRequestParams.buildFromShared(getActivity());
+
+        HashMap<String, String> paramExtra = new HashMap<>();
+        paramExtra.put("uid", "urn:ogc:def:" + collName);
+        fedeoRequestParams.setParamsExtra(paramExtra);
+        getActivity().setProgressBarIndeterminateVisibility(true);
+        getSpiceManager().execute(new FedeoSearchRequest(getActivity(), fedeoRequestParams, 1),
+                new FeedRequestListener());
+
+
+    }
+
+    private void loadEntryToDetailsFrag(Feed searchedCollectionFeed) {
+        EntryISO entryISO;
+        if (searchedCollectionFeed == null) {
+            searchedCollectionFeed = new Feed();
+        }
+        if (!searchedCollectionFeed.getTotalResults().getText().isEmpty()) {
+            entryISO = searchedCollectionFeed.getEntriesISO().get(0);
+            CollectionDetailsFragment collectionDetailsFragment = CollectionDetailsFragment
+                    .newInstance(entryISO);
+            getActivity()
+                    .getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.activity_base_details_container,
+                            collectionDetailsFragment, "CollectionDetailsFragment")
+                    .addToBackStack("CollectionDetailsFragment").commit();
+        } else {
+            CollectionEmptyDetailsFragment collectionEmptyDetailsFragment = CollectionEmptyDetailsFragment
+                    .newInstance(collName);
+            getActivity()
+                    .getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.activity_base_details_container,
+                            collectionEmptyDetailsFragment, "CollectionEmptyDetailsFragment")
+                    .addToBackStack("CollectionEmptyDetailsFragment").commit();
+        }
+    }
+
     /**
      * This interface must be implemented by activities that contain this
      * fragment to allow an interaction in this fragment to be communicated to
@@ -164,4 +203,24 @@ public class CollectionsListFragment extends Fragment {
     public interface OnCollectionsListFragmentListener {
     }
 
+    private final class FeedRequestListener implements RequestListener<Feed> {
+
+        @Override
+        public void onRequestFailure(SpiceException spiceException) {
+            parseRequestFailure(spiceException);
+        }
+
+        @Override
+        public void onRequestSuccess(Feed feed) {
+            if (feed == null) {
+                parseRequestFailure(null);
+                return;
+            }
+            loadEntryToDetailsFrag(feed);
+        }
+    }
+
+    public ListView getList() {
+        return list;
+    }
 }

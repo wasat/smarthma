@@ -2,9 +2,6 @@ package pl.wasat.smarthma.ui.frags.search;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -12,7 +9,6 @@ import android.widget.Toast;
 import java.util.List;
 
 import pl.wasat.smarthma.R;
-import pl.wasat.smarthma.SmartHMApplication;
 import pl.wasat.smarthma.adapter.SearchListAdapter;
 import pl.wasat.smarthma.database.SearchHistory;
 import pl.wasat.smarthma.database.SearchParams;
@@ -37,6 +33,7 @@ public class SearchListFragment extends BaseSpiceListFragment {
     private static final String STATE_ACTIVATED_POSITION = "activated_position";
 
     private FedeoRequestParams searchRequest;
+    private List<EntryISO> entries;
 
     private int mActivatedPosition = ListView.INVALID_POSITION;
 
@@ -82,6 +79,8 @@ public class SearchListFragment extends BaseSpiceListFragment {
             setActivatedPosition(savedInstanceState
                     .getInt(STATE_ACTIVATED_POSITION));
         }
+
+        getListView().setDivider(null);
     }
 
     @Override
@@ -132,7 +131,7 @@ public class SearchListFragment extends BaseSpiceListFragment {
                         : ListView.CHOICE_MODE_NONE);
     }
 
-    void setActivatedPosition(int position) {
+    private void setActivatedPosition(int position) {
         if (position == ListView.INVALID_POSITION) {
             getListView().setItemChecked(mActivatedPosition, false);
         } else {
@@ -141,6 +140,7 @@ public class SearchListFragment extends BaseSpiceListFragment {
         mActivatedPosition = position;
     }
 
+    /*
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.menu_list_refresh, menu);
@@ -152,19 +152,19 @@ public class SearchListFragment extends BaseSpiceListFragment {
         switch (id) {
             case R.id.action_sort_by_title_asc:
                 SmartHMApplication.sortingType = Const.SORT_BY_TITLE_ASCENDING;
-                refreshList();
+                ((SearchCollectionResultsActivity)getActivity()).refreshList();
                 break;
             case R.id.action_sort_by_title_desc:
                 SmartHMApplication.sortingType = Const.SORT_BY_TITLE_DESCENDING;
-                refreshList();
+                ((SearchCollectionResultsActivity)getActivity()).refreshList();
                 break;
             case R.id.action_sort_by_date_asc:
                 SmartHMApplication.sortingType = Const.SORT_BY_DATE_ASCENDING;
-                refreshList();
+                ((SearchCollectionResultsActivity)getActivity()).refreshList();
                 break;
             case R.id.action_sort_by_date_desc:
                 SmartHMApplication.sortingType = Const.SORT_BY_DATE_DESCENDING;
-                refreshList();
+                ((SearchCollectionResultsActivity)getActivity()).refreshList();
                 break;
             case R.id.actionbar_refresh:
                 loadSearchFeedResponse(searchRequest);
@@ -174,8 +174,9 @@ public class SearchListFragment extends BaseSpiceListFragment {
         }
         return true;
     }
+    */
 
-    void refreshList() {
+    private void refreshList() {
         loadSearchFeedResponse(searchRequest);
         Toast.makeText(getActivity(), getActivity().getString(R.string.refreshing_list), Toast.LENGTH_LONG).show();
     }
@@ -201,7 +202,6 @@ public class SearchListFragment extends BaseSpiceListFragment {
                         searchFeedList);
                 this.setListAdapter(adapter);
                 adapter.notifyDataSetChanged();
-                SearchListAdapter adapter1 = adapter;
                 view.setVisibility(View.VISIBLE);
             }
         }
@@ -214,7 +214,7 @@ public class SearchListFragment extends BaseSpiceListFragment {
         if (feedSearchRequest != null) {
             getActivity().setProgressBarIndeterminateVisibility(true);
             getSpiceManager().execute(
-                    new FedeoSearchRequest(feedSearchRequest, 1), this);
+                    new FedeoSearchRequest(getActivity(), feedSearchRequest, 1), this);
         }
     }
 
@@ -228,8 +228,8 @@ public class SearchListFragment extends BaseSpiceListFragment {
                 .getSupportFragmentManager()
                 .beginTransaction()
                 .replace(R.id.activity_base_details_container,
-                        feedSummarySearchCollectionFragment, "FeedSummarySearchFragment")
-                .addToBackStack("FeedSummarySearchFragment").commit();
+                        feedSummarySearchCollectionFragment, "FeedSummarySearchCollectionFragment")
+                .addToBackStack("FeedSummarySearchCollectionFragment").commit();
 
     }
 
@@ -243,12 +243,12 @@ public class SearchListFragment extends BaseSpiceListFragment {
      * >Communicating with Other Fragments</a> for more information.
      */
     public interface OnSearchListFragmentListener {
-        public void onSearchListFragmentItemSelected(String id);
+        void onSearchListFragmentItemSelected(String id);
     }
 
     @Override
     public void onRequestSuccess(Feed searchFeeds) {
-        List<EntryISO> entries = searchFeeds.getEntriesISO();
+        entries = searchFeeds.getEntriesISO();
         DataSorter sorter = new DataSorter();
         sorter.sort(entries);
 
@@ -259,4 +259,7 @@ public class SearchListFragment extends BaseSpiceListFragment {
 
     }
 
+    public List<EntryISO> getEntries() {
+        return entries;
+    }
 }

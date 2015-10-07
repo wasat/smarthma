@@ -21,6 +21,7 @@ public class Collection implements Parcelable, Comparator<Object> {
 
     private int id;
     private String name;
+    private boolean read;
 
     public Collection() {
     }
@@ -28,6 +29,7 @@ public class Collection implements Parcelable, Comparator<Object> {
     private Collection(Parcel source) {
         this.id = source.readInt();
         this.name = source.readString();
+
     }
 
     /**
@@ -58,6 +60,15 @@ public class Collection implements Parcelable, Comparator<Object> {
         this.name = name;
     }
 
+
+    public boolean isRead() {
+        return read;
+    }
+
+
+    public void setRead() {
+        this.read = true;
+    }
     /*
      * (non-Javadoc)
      *
@@ -105,7 +116,6 @@ public class Collection implements Parcelable, Comparator<Object> {
 
     @Override
     public int describeContents() {
-        // TODO Auto-generated method stub
         return 0;
     }
 

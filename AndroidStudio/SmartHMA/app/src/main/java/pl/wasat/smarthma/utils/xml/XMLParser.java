@@ -156,7 +156,7 @@ public class XMLParser {
         setDataGlobals();
     }
 
-    void setDataGlobals() {
+    private void setDataGlobals() {
         SmartHMApplication.GlobalEODataList = collectionGrList;
         SmartHMApplication.GlobalExplainData = expData;
     }

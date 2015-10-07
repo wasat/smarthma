@@ -10,46 +10,65 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.SearchView;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import java.util.Calendar;
 
 import pl.wasat.smarthma.R;
 import pl.wasat.smarthma.helper.Const;
 import pl.wasat.smarthma.interfaces.OnCollectionsListSelectionListener;
 import pl.wasat.smarthma.kindle.AmznAreaPickerMapFragment.OnAmznAreaPickerMapFragmentListener;
 import pl.wasat.smarthma.kindle.AmznBaseMapFragment;
-import pl.wasat.smarthma.ui.frags.base.BaseMapFragment;
+import pl.wasat.smarthma.model.FedeoRequestParams;
+import pl.wasat.smarthma.model.iso.EntryISO;
 import pl.wasat.smarthma.ui.frags.browse.BrowseCollectionFirstDetailFragment;
+import pl.wasat.smarthma.ui.frags.browse.CollectionEmptyDetailsFragment;
+import pl.wasat.smarthma.ui.frags.browse.CollectionEmptyDetailsFragment.OnCollectionEmptyDetailsFragmentListener;
 import pl.wasat.smarthma.ui.frags.browse.CollectionsGroupListFragment;
 import pl.wasat.smarthma.ui.frags.browse.CollectionsListFragment.OnCollectionsListFragmentListener;
+import pl.wasat.smarthma.ui.frags.common.AreaPickerMapFragment;
 import pl.wasat.smarthma.ui.frags.common.AreaPickerMapFragment.OnAreaPickerMapFragmentListener;
+import pl.wasat.smarthma.ui.frags.common.CollectionDetailsFragment.OnCollectionDetailsFragmentListener;
+import pl.wasat.smarthma.ui.frags.common.DatePickerFragment.OnDatePickerFragmentListener;
+import pl.wasat.smarthma.ui.frags.common.TimePickerFragment.OnTimePickerFragmentListener;
 import pl.wasat.smarthma.utils.obj.LatLngBoundsExt;
 import roboguice.util.temp.Ln;
 
-public class CollectionsDefinitionActivity extends BaseSmartHMActivity
+public class CollectionsDefinitionActivity extends BaseCollectionsActivity
         implements OnCollectionsListSelectionListener,
-        OnCollectionsListFragmentListener, OnAreaPickerMapFragmentListener, OnAmznAreaPickerMapFragmentListener {
+        OnCollectionsListFragmentListener,
+        OnCollectionDetailsFragmentListener,
+        OnCollectionEmptyDetailsFragmentListener,
+        OnAreaPickerMapFragmentListener,
+        OnAmznAreaPickerMapFragmentListener,
+        OnDatePickerFragmentListener, OnTimePickerFragmentListener {
 
     /**
      * Whether or not the activity is in two-pane mode, i.e. running on a tablet
      * device.
      */
     private static boolean TWO_PANEL_MODE;
+    private BrowseCollectionFirstDetailFragment browseCollectionFirstDetailFragment;
+    private CollectionsGroupListFragment collectionsGroupListFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Ln.getConfig().setLoggingLevel(Log.ERROR);
         super.onCreate(savedInstanceState);
 
+        TextView text = (TextView) findViewById(R.id.action_bar_title);
+        text.setText("Searched Collections");
+
         if (findViewById(R.id.activity_base_details_container) != null) {
             TWO_PANEL_MODE = true;
-            loadRightListPanel();
+            loadLeftListPanel();
             loadMapWithBasicSettingsView();
         }
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu_eo_map_twopane, menu);
 
@@ -83,21 +102,53 @@ public class CollectionsDefinitionActivity extends BaseSmartHMActivity
      */
     @Override
     public void onBackPressed() {
+        if (dismissMenuOnBackPressed()) return;
+
         FragmentManager fm = getSupportFragmentManager();
         int bsec = fm.getBackStackEntryCount();
-        if (bsec > 1) {
-            fm.popBackStack();
+        if (isBackStackEmpty(bsec)) return;
+
+        String bstEntryName = fm.getBackStackEntryAt(bsec - 1).getName();
+        if (bstEntryName.equalsIgnoreCase("CollectionEmptyDetailsFragment")
+                || bstEntryName.equalsIgnoreCase("CollectionDetailsFragment")) {
+            while (bsec > 0) {
+                fm.popBackStackImmediate();
+                bsec = fm.getBackStackEntryCount();
+/*                bstEntryName = fm.getBackStackEntryAt(bsec - 1).getName();
+                if (bstEntryName.equalsIgnoreCase("CollectionEmptyDetailsFragment")
+                        || bstEntryName.equalsIgnoreCase("CollectionDetailsFragment"))
+                    bsec = 1;*/
+            }
+        } else if (bstEntryName.equalsIgnoreCase("AreaPickerMapFragment")) {
+            while (bstEntryName.equalsIgnoreCase("AreaPickerMapFragment")) {
+                fm.popBackStackImmediate();
+                bsec = fm.getBackStackEntryCount();
+                if (isBackStackEmpty(bsec)) return;
+                bstEntryName = fm.getBackStackEntryAt(bsec - 1).getName();
+            }
+        } else if (bstEntryName.equalsIgnoreCase("CollectionsListFragment")) {
+            fm.popBackStackImmediate();
         } else {
             finish();
             super.onBackPressed();
         }
     }
 
+    private boolean isBackStackEmpty(int bsec) {
+        if (bsec == 0) {
+            finish();
+            super.onBackPressed();
+            return true;
+        }
+        return false;
+    }
+
+
     /**
      *
      */
-    private void loadRightListPanel() {
-        CollectionsGroupListFragment collectionsGroupListFragment = new CollectionsGroupListFragment();
+    private void loadLeftListPanel() {
+        collectionsGroupListFragment = new CollectionsGroupListFragment();
         Bundle args = new Bundle();
         collectionsGroupListFragment.setArguments(args);
         getSupportFragmentManager()
@@ -107,7 +158,7 @@ public class CollectionsDefinitionActivity extends BaseSmartHMActivity
     }
 
     private void loadMapWithBasicSettingsView() {
-        BrowseCollectionFirstDetailFragment browseCollectionFirstDetailFragment = BrowseCollectionFirstDetailFragment
+        browseCollectionFirstDetailFragment = BrowseCollectionFirstDetailFragment
                 .newInstance();
 
         getSupportFragmentManager()
@@ -144,28 +195,16 @@ public class CollectionsDefinitionActivity extends BaseSmartHMActivity
             transaction.replace(R.id.activity_base_details_container, amznBaseMapFrag);
             transaction.commit();
         } else {
-            BaseMapFragment baseMapFrag = new BaseMapFragment();
+            AreaPickerMapFragment areaPickerMapFragment = new AreaPickerMapFragment();
             Bundle args = new Bundle();
-            baseMapFrag.setArguments(args);
+            areaPickerMapFragment.setArguments(args);
             FragmentTransaction transaction = getSupportFragmentManager()
                     .beginTransaction();
-            transaction.replace(R.id.activity_base_details_container, baseMapFrag);
-            transaction.commit();
+            transaction.replace(R.id.activity_base_details_container, areaPickerMapFragment);
+            transaction
+                    .addToBackStack("AreaPickerMapFragment")
+                    .commit();
         }
-
-
-    }
-
-    @Override
-    public void onMapFragmentBoundsChange(LatLngBoundsExt bounds) {
-        callUpdateFirstDetailFrag(bounds);
-    }
-
-
-    @Override
-    public void onAmznMapFragmentBoundsChange(LatLngBoundsExt bounds) {
-        callUpdateFirstDetailFrag(bounds);
-
     }
 
     private void callUpdateFirstDetailFrag(LatLngBoundsExt bounds) {
@@ -174,6 +213,56 @@ public class CollectionsDefinitionActivity extends BaseSmartHMActivity
         if (browseCollectionFirstDetailFragment != null) {
             browseCollectionFirstDetailFragment.updateAreaBounds(bounds);
         }
+
+        //TODO - Make it more universal and differentiate from which fragment it is called
+        CollectionEmptyDetailsFragment collectionEmptyDetailsFragment = (CollectionEmptyDetailsFragment) getSupportFragmentManager()
+                .findFragmentByTag("CollectionEmptyDetailsFragment");
+        if (collectionEmptyDetailsFragment != null) {
+            collectionEmptyDetailsFragment.updateAreaBounds(bounds);
+        }
     }
 
+    @Override
+    public void onMapFragmentBoundsChange(LatLngBoundsExt bounds) {
+        callUpdateFirstDetailFrag(bounds);
+    }
+
+    @Override
+    public void onAmznMapFragmentBoundsChange(LatLngBoundsExt bounds) {
+        callUpdateFirstDetailFrag(bounds);
+    }
+
+    @Override
+    public void onCollectionDetailsFragmentShowProducts(FedeoRequestParams fedeoRequestParams) {
+        startSearchingProductsProcess(fedeoRequestParams);
+    }
+
+    @Override
+    public void onCollectionEmptyDetailsFragmentShowProducts(FedeoRequestParams fedeoRequestParams) {
+        startSearchingProductsProcess(fedeoRequestParams);
+    }
+
+    @Override
+    public void onCollectionEmptyDetailsFragmentShowCollections(FedeoRequestParams fedeoRequestParams) {
+        startSearchingCollectionsProcess(fedeoRequestParams);
+    }
+
+    @Override
+    public void onCollectionDetailsFragmentShowMetadata(EntryISO displayedEntry) {
+        loadIsoMetadataFragment(displayedEntry);
+    }
+
+    @Override
+    public void onDatePickerFragmentDateChoose(Calendar calendar, String viewTag) {
+        browseCollectionFirstDetailFragment.setDateValues(calendar, viewTag);
+    }
+
+    @Override
+    public void onTimePickerFragmentTimeChoose(Calendar calendar, String viewTag) {
+        browseCollectionFirstDetailFragment.setTimeValues(calendar, viewTag);
+    }
+
+    public CollectionsGroupListFragment getCollectionsGroupListFragment() {
+        return collectionsGroupListFragment;
+    }
 }

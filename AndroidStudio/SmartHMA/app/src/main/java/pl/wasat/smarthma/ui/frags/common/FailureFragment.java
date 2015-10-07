@@ -34,7 +34,6 @@ public class FailureFragment extends Fragment {
     }
 
     public FailureFragment() {
-        // Required empty public constructor
     }
 
     @Override
@@ -48,7 +47,6 @@ public class FailureFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_failure, container, false);
     }
 

@@ -4,6 +4,8 @@ package pl.wasat.smarthma.utils.time;
  * A simple class representing date and time.
  */
 
+import java.util.Calendar;
+
 public class SimpleDate {
     private final int year;
     private final int month;
@@ -30,25 +32,10 @@ public class SimpleDate {
         }
     }
 
-    public String toString() {
-        return year + "Y " + month + "M " + day + "D " + hours + ":" + minutes + ":" + seconds;
-    }
-
-    public int compareTo(SimpleDate another) {
-        if (year != another.year) {
-            return year - another.year;
-        } else if (month != another.month) {
-            return month - another.month;
-        } else if (day != another.day) {
-            return day - another.day;
-        } else if (hours != another.hours) {
-            return hours - another.hours;
-        } else if (minutes != another.minutes) {
-            return minutes - another.minutes;
-        } else if (seconds != another.seconds) {
-            return seconds - another.seconds;
-        }
-        return 0;
+    public Calendar getCalendar() {
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(year, month - 1, day, hours, minutes, seconds);
+        return calendar;
     }
 
     public int getYear() {
@@ -73,5 +60,26 @@ public class SimpleDate {
 
     public int getSeconds() {
         return seconds;
+    }
+
+    public int compareTo(SimpleDate another) {
+        if (year != another.year) {
+            return year - another.year;
+        } else if (month != another.month) {
+            return month - another.month;
+        } else if (day != another.day) {
+            return day - another.day;
+        } else if (hours != another.hours) {
+            return hours - another.hours;
+        } else if (minutes != another.minutes) {
+            return minutes - another.minutes;
+        } else if (seconds != another.seconds) {
+            return seconds - another.seconds;
+        }
+        return 0;
+    }
+
+    public String toString() {
+        return year + "Y " + month + "M " + day + "D " + hours + ":" + minutes + ":" + seconds;
     }
 }

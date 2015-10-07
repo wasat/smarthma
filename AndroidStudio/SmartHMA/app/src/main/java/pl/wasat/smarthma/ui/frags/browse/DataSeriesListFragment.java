@@ -126,7 +126,7 @@ public class DataSeriesListFragment extends BaseSpiceListFragment {
                         : ListView.CHOICE_MODE_NONE);
     }
 
-    void setActivatedPosition(int position) {
+    private void setActivatedPosition(int position) {
         if (position == ListView.INVALID_POSITION) {
             getListView().setItemChecked(mActivatedPosition, false);
         } else {
@@ -169,15 +169,9 @@ public class DataSeriesListFragment extends BaseSpiceListFragment {
         return true;
     }
 
-    void refreshList() {
+    private void refreshList() {
         loadDataSeriesFeedResponse(browseRequest);
         Toast.makeText(getActivity(), getActivity().getString(R.string.refreshing_list), Toast.LENGTH_LONG).show();
-        /*
-        if (adapter != null)
-        {
-            adapter.notifyDataSetChanged();
-        }
-        */
     }
 
     private void updateEOListViewContent(List<EntryISO> dataSeriesFeedList) {
@@ -202,7 +196,7 @@ public class DataSeriesListFragment extends BaseSpiceListFragment {
         if (browseRequest != null) {
 
             getActivity().setProgressBarIndeterminateVisibility(true);
-            getSpiceManager().execute(new FedeoSearchRequest(browseRequest, 1), this);
+            getSpiceManager().execute(new FedeoSearchRequest(getActivity(), browseRequest, 1), this);
         }
     }
 
@@ -252,8 +246,7 @@ public class DataSeriesListFragment extends BaseSpiceListFragment {
      */
 
     public interface OnDataSeriesListFragmentListener {
-        // TODO: Update argument type and name
-        public void onDataSeriesFragmentItemSelected(String id);
+        void onDataSeriesFragmentItemSelected(String id);
     }
 
 }

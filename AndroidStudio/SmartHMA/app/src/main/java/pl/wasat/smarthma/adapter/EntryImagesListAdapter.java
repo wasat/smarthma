@@ -16,9 +16,8 @@ import pl.wasat.smarthma.model.om.EntryOM;
 
 public class EntryImagesListAdapter extends OkHttpSpiceArrayAdapter<EntryOM> {
 
-    // --------------------------------------------------------------------------------------------
-    // CONSTRUCTOR
-    // --------------------------------------------------------------------------------------------
+    private static final String THUMB_ENTRY_IMG_TEMP = "THUMB_ENTRY_IMG_TEMP_";
+    private static final String TEMP_DEFAULT_IMG_URL = "http://acsspace.acsys.it/joomla/images/stories/slideshow/toscanamer_fr_20100628.jpg";
 
     public EntryImagesListAdapter(Context context,
                                   OkHttpBitmapSpiceManager spiceManagerBitmap, List<EntryOM> entryList) {
@@ -28,10 +27,8 @@ public class EntryImagesListAdapter extends OkHttpSpiceArrayAdapter<EntryOM> {
     @Override
     public OkHttpBitmapRequest createRequest(EntryOM entry, int imageIndex,
                                              int requestImageWidth, int requestImageHeight) {
-        File tempFile = new File(getContext().getCacheDir(),
-                "THUMB_ENTRY_IMG_TEMP_" + entry.getGuid());
-
-        String url = "http://daliis.spotimage.fr/wsTools/img/getImage.aspx?ST=C&amp;SN=12704197&amp;IT=QK&amp;CP=N&amp;SD=T&amp;FT=BMP&amp;CM=75";
+        File tempFile = new File(getContext().getCacheDir(), THUMB_ENTRY_IMG_TEMP + entry.getIdentifier());
+        String url = TEMP_DEFAULT_IMG_URL;
         if (entry.getGroup() != null) {
             for (int i = 0; i < entry.getGroup().getContent().size(); i++) {
                 if (entry.getGroup().getContent().get(i).getCategory()

@@ -1,12 +1,17 @@
 package pl.wasat.smarthma.ui.frags.common;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore.Images;
+import android.support.annotation.NonNull;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -45,6 +50,8 @@ public class ProductDetailsFragment extends Fragment implements Target {
 
     private OnProductDetailsFragmentListener mListener;
 
+    private static final CharSequence[] shareList = {"Facebook", "Other"};
+
     /**
      * Use this factory method to create a new instance of this fragment using
      * the provided parameters.
@@ -75,8 +82,6 @@ public class ProductDetailsFragment extends Fragment implements Target {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-
         setHasOptionsMenu(true);
         View rootView = inflater.inflate(R.layout.fragment_product_details,
                 container, false);
@@ -128,7 +133,8 @@ public class ProductDetailsFragment extends Fragment implements Target {
             shareQLookButton.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    openShareDialog();
+                    showShareListDialog();
+                    //openShareDialog();
                 }
             });
         }
@@ -167,7 +173,6 @@ public class ProductDetailsFragment extends Fragment implements Target {
             return true;
         } else if (id == R.id.actionbar_share) {
             startQLookTarget();
-            // sendIntentShareUrl();
             return true;
         } else {
             return super.onOptionsItemSelected(item);
@@ -204,18 +209,18 @@ public class ProductDetailsFragment extends Fragment implements Target {
     /**
      *
      */
-    void loadMetadataFrag() {
-        MetadataFragment metadataFragment = MetadataFragment
+    private void loadMetadataFrag() {
+        MetadataOMFragment metadataOMFragment = MetadataOMFragment
                 .newInstance(displayedEntry);
         getActivity()
                 .getSupportFragmentManager()
                 .beginTransaction()
                 .replace(R.id.activity_base_details_container,
-                        metadataFragment, "MetadataFragment")
+                        metadataOMFragment, "MetadataFragment")
                 .addToBackStack("MetadataFragment").commit();
     }
 
-    void showExtendedMap() {
+    private void showExtendedMap() {
         String url = getQuicklookUrl();
         Footprint footprint = displayedEntry.getEarthObservation()
                 .getFeatureOfInterest().getFootprint();
@@ -223,7 +228,7 @@ public class ProductDetailsFragment extends Fragment implements Target {
         mListener.onProductDetailsFragmentExtendedMapShow(url, footprint);
     }
 
-    void showQuicklookGallery() {
+    private void showQuicklookGallery() {
         String qLookUrl = getQuicklookUrl();
         mListener.onProductDetailsFragmentQuicklookShow(qLookUrl);
     }
@@ -249,6 +254,44 @@ public class ProductDetailsFragment extends Fragment implements Target {
         mListener.onProductDetailsFragmentShareDialogShow(qLookUrl);
     }
 
+    private void showShareListDialog() {
+        ShareListDialogFragment listDialFrag = new ShareListDialogFragment();
+        listDialFrag.show(getActivity().getSupportFragmentManager(),
+                "ShareListDialogFragment");
+    }
+
+    public static class ShareListDialogFragment extends DialogFragment {
+        @NonNull
+        @Override
+        public Dialog onCreateDialog(Bundle savedInstanceState) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+            builder.setTitle(R.string.share_options).setItems(
+                    shareList, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            //setCatalogue(which);
+                            ((ProductDetailsFragment) getActivity().getSupportFragmentManager()
+                                    .findFragmentByTag("ProductDetailsFragment")).chooseShareType(which);
+                        }
+                    });
+            return builder.create();
+        }
+
+
+    }
+
+    private void chooseShareType(int which) {
+        switch (which) {
+            case 0:
+                openShareDialog();
+                break;
+            case 1:
+                startQLookTarget();
+                break;
+            default:
+                break;
+        }
+    }
+
     /**
      * This interface must be implemented by activities that contain this
      * fragment to allow an interaction in this fragment to be communicated to
@@ -260,12 +303,12 @@ public class ProductDetailsFragment extends Fragment implements Target {
      */
     public interface OnProductDetailsFragmentListener {
 
-        public void onProductDetailsFragmentExtendedMapShow(String url,
-                                                            Footprint footprint);
+        void onProductDetailsFragmentExtendedMapShow(String url,
+                                                     Footprint footprint);
 
-        public void onProductDetailsFragmentQuicklookShow(String url);
+        void onProductDetailsFragmentQuicklookShow(String url);
 
-        public void onProductDetailsFragmentShareDialogShow(String url);
+        void onProductDetailsFragmentShareDialogShow(String url);
 
     }
 
@@ -284,8 +327,6 @@ public class ProductDetailsFragment extends Fragment implements Target {
 
     @Override
     public void onPrepareLoad(Drawable arg0) {
-        // TODO Auto-generated method stub
-
     }
 
 }

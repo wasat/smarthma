@@ -1,5 +1,7 @@
 package pl.wasat.smarthma.utils.rss;
 
+import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 
 import com.google.api.client.http.GenericUrl;
@@ -18,51 +20,57 @@ import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 
+import pl.wasat.smarthma.helper.Const;
 import pl.wasat.smarthma.model.FedeoRequestParams;
 import pl.wasat.smarthma.model.feed.Feed;
 
 public class FedeoSearchRequest extends GoogleHttpClientSpiceRequest<Feed> {
 
     private final FedeoRequestParams fedeoRequestParams;
-    private int schemaMode;
+    private final int schemaMode;
+    private final Context context;
 
     /**
      *
      */
-    public FedeoSearchRequest(FedeoRequestParams fedeoRequestParams, int schema) {
+    public FedeoSearchRequest(Context context, FedeoRequestParams fedeoRequestParams, int schema) {
         super(null);
         this.fedeoRequestParams = fedeoRequestParams;
         this.schemaMode = schema;
+        this.context = context;
 
-    }
-
-    public FedeoSearchRequest(String fedeoUrl) {
-        super(null);
-        this.fedeoRequestParams = new FedeoRequestParams();
-        fedeoRequestParams.setUrl(fedeoUrl);
     }
 
     @Override
     public Feed loadDataFromNetwork() throws Exception {
+        String url = fedeoRequestParams.getUrl();
+        sendFedeoUrlBroadcast(url);
 
         Feed feed = null;
         switch (schemaMode) {
             case 1:
-                feed = parseISOFeed();
+                feed = parseISOFeed(url);
                 break;
             case 2:
-                feed = parseOMFeed();
+                feed = parseOMFeed(url);
                 break;
         }
         return feed;
 
     }
 
-    private Feed parseOMFeed() throws IOException {
+    private void sendFedeoUrlBroadcast(String url) {
+        Intent intent = new Intent();
+        intent.setAction(Const.KEY_ACTION_BROADCAST_FEDEO_REQUEST);
+        intent.putExtra(Const.KEY_INTENT_FEDEO_REQUEST_URL, url);
+        context.sendBroadcast(intent);
+    }
+
+    private Feed parseOMFeed(String url) throws IOException {
         OMDataHandler rh = null;
         try {
             HttpRequest request = getHttpRequestFactory().buildGetRequest(
-                    new GenericUrl(fedeoRequestParams.getUrl()));
+                    new GenericUrl(url));
             HttpResponse response = request.execute();
 
             InputStream in;
@@ -88,11 +96,11 @@ public class FedeoSearchRequest extends GoogleHttpClientSpiceRequest<Feed> {
         return rh.getFeeds();
     }
 
-    private Feed parseISOFeed() throws IOException {
+    private Feed parseISOFeed(String url) throws IOException {
         ISODataHandler rh = null;
         try {
             HttpRequest request = getHttpRequestFactory().buildGetRequest(
-                    new GenericUrl(fedeoRequestParams.getUrl()));
+                    new GenericUrl(url));
             HttpResponse response = request.execute();
 
             InputStream in;
@@ -117,4 +125,5 @@ public class FedeoSearchRequest extends GoogleHttpClientSpiceRequest<Feed> {
         //noinspection ConstantConditions
         return rh.getFeeds();
     }
+
 }

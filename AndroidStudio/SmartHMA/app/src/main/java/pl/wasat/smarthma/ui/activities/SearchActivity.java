@@ -1,5 +1,6 @@
 package pl.wasat.smarthma.ui.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.util.Log;
@@ -8,26 +9,32 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.SubMenu;
 
-import java.util.ArrayList;
+import java.util.Calendar;
 
 import pl.wasat.smarthma.R;
 import pl.wasat.smarthma.database.SearchHistory;
-import pl.wasat.smarthma.database.SearchParams;
 import pl.wasat.smarthma.kindle.AmznAreaPickerMapFragment.OnAmznAreaPickerMapFragmentListener;
+import pl.wasat.smarthma.ui.frags.base.BaseSearchSideParametersFragment;
 import pl.wasat.smarthma.ui.frags.common.AreaPickerMapFragment.OnAreaPickerMapFragmentListener;
-import pl.wasat.smarthma.ui.frags.search.SearchBasicInfoRightFragment;
-import pl.wasat.smarthma.ui.frags.search.SearchBasicInfoRightFragment.OnSearchBasicInfoRightFragmentListener;
+import pl.wasat.smarthma.ui.frags.common.DatePickerFragment.OnDatePickerFragmentListener;
+import pl.wasat.smarthma.ui.frags.common.TimePickerFragment.OnTimePickerFragmentListener;
+import pl.wasat.smarthma.ui.frags.search.SearchAdvancedParametersFragment;
+import pl.wasat.smarthma.ui.frags.search.SearchAdvancedParametersFragment.OnSearchAdvancedParametersFragmentListener;
+import pl.wasat.smarthma.ui.frags.search.SearchBasicParametersFragment;
 import pl.wasat.smarthma.ui.frags.search.SearchFragment;
 import pl.wasat.smarthma.ui.frags.search.SearchFragment.OnSearchFragmentListener;
+import pl.wasat.smarthma.ui.menus.MenuHandler;
+import pl.wasat.smarthma.ui.menus.SearchMenuHandler;
 import pl.wasat.smarthma.utils.obj.LatLngBoundsExt;
 import roboguice.util.temp.Ln;
 
 public class SearchActivity extends BaseSmartHMActivity implements
-        OnSearchBasicInfoRightFragmentListener, OnSearchFragmentListener,
+        OnSearchAdvancedParametersFragmentListener, OnSearchFragmentListener, OnDatePickerFragmentListener, OnTimePickerFragmentListener,
         OnAreaPickerMapFragmentListener, OnAmznAreaPickerMapFragmentListener {
 
-    private SearchBasicInfoRightFragment rightPanel;
-    private SearchFragment leftPanel;
+    private BaseSearchSideParametersFragment sideParamsPanel;
+    private SearchFragment searchMainPanel;
+    private MenuHandler menuHandler;
     private static final int MENU_QUERY_IDS = 1000;
     private static final int MENU_CATALOGUE_IDS = 1100;
     private static final int MENU_BBOX_IDS = 1200;
@@ -41,10 +48,11 @@ public class SearchActivity extends BaseSmartHMActivity implements
         super.onCreate(savedInstanceState);
 
         if (findViewById(R.id.activity_base_list_container) != null) {
-
-            loadRightPanel();
-            loadLeftPanel();
+            loadBasicParamsFragment();
+            loadMainSearchPanel();
         }
+
+        menuHandler = new SearchMenuHandler(this, R.id.menu_button);
 
         //refreshParameters();
     }
@@ -59,57 +67,19 @@ public class SearchActivity extends BaseSmartHMActivity implements
 
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
+
+        //menuHandler.loadMenuView();
         SearchHistory searchHistory = new SearchHistory(this);
-        //ArrayList<SearchParams> searchHistoryList = searchHistory.getSearchHistoryList(true);
-        ArrayList<String> queries = searchHistory.getQueries(true);
-        ArrayList<String> catalogues = searchHistory.getCatalogues(true);
-        ArrayList<String> bboxs = searchHistory.getBboxs(true);
-        ArrayList<String> startDates = searchHistory.getStartDates(true);
-        ArrayList<String> endDates = searchHistory.getEndDates(true);
 
-        //Log.d("ZX", "item: "+menu.getItem(0).getSubMenu().getItem(0).getTitle());
         SubMenu searchMenu = menu.getItem(0).getSubMenu();
-        searchMenu.clear();
-
-        SubMenu pickQueriesMenu = searchMenu.addSubMenu(getString(R.string.search_history_pick_query));
-        for (String str : queries) {
-            pickQueriesMenu.add(MENU_QUERY_IDS, Menu.NONE, Menu.NONE, str);
-        }
-
-        SubMenu pickCataloguesMenu = searchMenu.addSubMenu(getString(R.string.search_history_pick_catalogue));
-        for (String str : catalogues) {
-            pickCataloguesMenu.add(MENU_CATALOGUE_IDS, Menu.NONE, Menu.NONE, str);
-        }
-
-        SubMenu pickBboxsMenu = searchMenu.addSubMenu(getString(R.string.search_history_pick_bbox));
-        for (String str : bboxs) {
-            pickBboxsMenu.add(MENU_BBOX_IDS, Menu.NONE, Menu.NONE, str);
-        }
-
-        SubMenu pickStartDatesMenu = searchMenu.addSubMenu(getString(R.string.search_history_pick_start_date));
-        for (String str : startDates) {
-            pickStartDatesMenu.add(MENU_STARTDATE_IDS, Menu.NONE, Menu.NONE, str);
-        }
-
-        SubMenu pickEndDatesMenu = searchMenu.addSubMenu(getString(R.string.search_history_pick_end_date));
-        for (String str : endDates) {
-            pickEndDatesMenu.add(MENU_ENDDATE_IDS, Menu.NONE, Menu.NONE, str);
-        }
-
-        MenuItem clearItem = searchMenu.add(Menu.NONE, MENU_CLEAR_ID, Menu.NONE, getString(R.string.search_history_clear));
+        searchHistory.createSearchMenu(searchMenu, MENU_QUERY_IDS, MENU_CATALOGUE_IDS, MENU_BBOX_IDS, MENU_STARTDATE_IDS, MENU_ENDDATE_IDS, MENU_CLEAR_ID);
 
         return super.onPrepareOptionsMenu(menu);
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        /*
-        String test = item.getMenuInfo().toString();
-        if (test != null)
-        {
-            Log.d("ZX", test);
-        }
-        */
+
         String value;
         switch (item.getItemId()) {
             case MENU_CLEAR_ID:
@@ -149,49 +119,41 @@ public class SearchActivity extends BaseSmartHMActivity implements
         return true;
     }
 
-    public void refreshParameters() {
-        try {
-            SearchHistory searchHistory = new SearchHistory(this);
-            SearchParams searchParams = searchHistory.getSearchHistoryList(true).get(0);
-            if (searchParams != null) {
-                setQuery(searchParams.getSearchPhrase());
-                setCatalogue(searchParams.getCatalogue());
-                setBbox(searchParams.getBbox());
-                setStartDate(searchParams.getStartDate());
-                setEndDate(searchParams.getEndDate());
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
+/*    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == Const.REQUEST_CODE_GLOBAL_SETTINGS) {
+            //sideParamsPanel.checkDeviceAndLoadMapPicker(R.id.activity_base_details_container);
+        }
+    }*/
+
+    public void setQuery(String query) {
+        if (searchMainPanel != null) {
+            searchMainPanel.setQuery(query);
         }
     }
 
-    private void setQuery(String query) {
-        if (leftPanel != null) {
-            leftPanel.setQuery(query);
+    public void setCatalogue(String catalogue) {
+        if (sideParamsPanel != null) {
+            sideParamsPanel.setCatalogue(catalogue);
         }
     }
 
-    private void setCatalogue(String catalogue) {
-        if (rightPanel != null) {
-            rightPanel.setCatalogue(catalogue);
+    public void setBbox(String boundingBox) {
+        if (sideParamsPanel != null) {
+            sideParamsPanel.setBounds(boundingBox);
         }
     }
 
-    private void setBbox(String boundingBox) {
-        if (rightPanel != null) {
-            rightPanel.setBbox(boundingBox);
+    public void setStartDate(String startDate) {
+        if (sideParamsPanel != null) {
+            sideParamsPanel.setStartCalendar(startDate);
         }
     }
 
-    private void setStartDate(String startDate) {
-        if (rightPanel != null) {
-            rightPanel.setStartDate(startDate);
-        }
-    }
-
-    private void setEndDate(String endDate) {
-        if (rightPanel != null) {
-            rightPanel.setEndDate(endDate);
+    public void setEndDate(String endDate) {
+        if (sideParamsPanel != null) {
+            sideParamsPanel.setEndCalendar(endDate);
         }
     }
 
@@ -202,7 +164,11 @@ public class SearchActivity extends BaseSmartHMActivity implements
      */
     @Override
     public void onBackPressed() {
-        Log.i("BACK", "Search back pressed");
+        if (menuHandler.isPopupWindowVisible()) {
+            menuHandler.dismissPopupWindow();
+            return;
+        }
+
         FragmentManager fm = getSupportFragmentManager();
         int bsec = fm.getBackStackEntryCount();
         if (bsec > 1) {
@@ -216,27 +182,37 @@ public class SearchActivity extends BaseSmartHMActivity implements
         }
     }
 
-    /**
-     *
-     */
-    private void loadRightPanel() {
-        SearchBasicInfoRightFragment rightInfoFragment = SearchBasicInfoRightFragment
-                .newInstance();
-        rightPanel = rightInfoFragment;
-        getSupportFragmentManager()
-                .beginTransaction()
-                .replace(R.id.activity_base_list_container, rightInfoFragment,
-                        "SearchBasicInfoRightFragment").commit();
-    }
-
-    private void loadLeftPanel() {
+    private void loadMainSearchPanel() {
         SearchFragment searchLeftFragment = SearchFragment.newInstance();
-        leftPanel = searchLeftFragment;
+        searchMainPanel = searchLeftFragment;
         getSupportFragmentManager()
                 .beginTransaction()
                 .replace(R.id.activity_base_details_container,
                         searchLeftFragment, "SearchFragment")
                 .addToBackStack("SearchFragment").commit();
+    }
+
+    /**
+     *
+     */
+    private void loadBasicParamsFragment() {
+        SearchBasicParametersFragment searchBasicParametersFragment = SearchBasicParametersFragment
+                .newInstance();
+        sideParamsPanel = searchBasicParametersFragment;
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.activity_base_list_container, searchBasicParametersFragment,
+                        "SearchBasicParametersFragment").commit();
+    }
+
+    private void loadAdvancedParamsFragment() {
+        SearchAdvancedParametersFragment searchAdvancedParametersFragment = SearchAdvancedParametersFragment
+                .newInstance();
+        sideParamsPanel = searchAdvancedParametersFragment;
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.activity_base_list_container, searchAdvancedParametersFragment,
+                        "SearchAdvancedParametersFragment").commit();
     }
 
     /*
@@ -258,12 +234,46 @@ public class SearchActivity extends BaseSmartHMActivity implements
     }
 
     private void callUpdateCollectionsBounds(LatLngBoundsExt bounds) {
-        SearchBasicInfoRightFragment searchBasicInfoRightFragment = (SearchBasicInfoRightFragment) getSupportFragmentManager()
-                .findFragmentByTag("SearchBasicInfoRightFragment");
-        if (searchBasicInfoRightFragment != null) {
-            searchBasicInfoRightFragment.updateCollectionsAreaBounds(bounds);
+        //    SearchBasicParametersFragment searchBasicParametersFragment = (SearchBasicParametersFragment) getSupportFragmentManager()
+        //           .findFragmentByTag("SearchBasicParametersFragment");
+        if (sideParamsPanel != null) {
+            sideParamsPanel.updateAreaBounds(bounds);
         }
     }
 
 
+    @Override
+    public void onSearchAdvancedParamsFragmentEditTextChange(String parameterKey, String parameterValue) {
+        searchMainPanel.setAdditionalParams(parameterKey, parameterValue);
+    }
+
+    @Override
+    public void onDatePickerFragmentDateChoose(Calendar calendar, String viewTag) {
+        sideParamsPanel.setDateValues(calendar, viewTag);
+    }
+
+    @Override
+    public void onTimePickerFragmentTimeChoose(Calendar calendar, String viewTag) {
+        sideParamsPanel.setTimeValues(calendar, viewTag);
+    }
+
+    @Override
+    public void onSearchFragmentBasicParamsChoose() {
+        loadBasicParamsFragment();
+    }
+
+    @Override
+    public void onSearchFragmentAdvanceParamsChoose() {
+        loadAdvancedParamsFragment();
+    }
+
+    @Override
+    public void onSearchFragmentStartSearchingWithButton(Intent searchIntent) {
+        startActivityForResult(searchIntent, REQUEST_NEW_SEARCH);
+    }
+
+
+    public MenuHandler getMenuHandler() {
+        return menuHandler;
+    }
 }

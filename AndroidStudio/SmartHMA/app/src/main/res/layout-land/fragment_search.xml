@@ -1,0 +1,100 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/search_frag_main_scroll_id"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="top"
+    android:layout_margin="10dp"
+    android:focusable="true"
+    android:focusableInTouchMode="true">
+
+    <LinearLayout
+        android:id="@+id/search_frag_layout_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:background="@color/background_gray"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:gravity="center_vertical|center_horizontal|center"
+        android:orientation="vertical"
+        android:paddingTop="@dimen/browse_eo_padding">
+
+        <ImageView
+            android:layout_width="@dimen/search_eo_data_logo_size_land"
+            android:layout_height="@dimen/search_eo_data_logo_size_land"
+            android:src="@drawable/search_eo" />
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <pl.wasat.smarthma.customviews.TextViewWithFont
+                android:id="@+id/s_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/search_eo_data_padding_medium"
+                android:layout_marginLeft="3dp"
+                android:layout_marginTop="@dimen/search_eo_data_padding_medium"
+                android:text="Search EO data"
+                android:textSize="16sp" />
+
+            <LinearLayout
+                android:id="@+id/search_frag_searchview_layout"
+                android:layout_width="@dimen/search_eo_data_search_view_width"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_below="@id/s_text">
+
+                <SearchView
+                    android:id="@+id/search_frag_searchview"
+                    android:layout_width="400dp"
+                    android:layout_height="@dimen/search_eo_data_search_view_height"
+                    android:layout_marginLeft="3dp"
+                    android:layout_marginRight="1dp"
+                    android:background="@drawable/edit_text"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:iconifiedByDefault="false"
+                    android:visibility="visible" />
+
+                <Button
+                    android:id="@+id/search_frag_button_start"
+                    style="@style/buttonBlueGo"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/button_blue_height"
+                    android:layout_margin="1dp"
+                    android:layout_weight="1"
+                    android:text="@string/go"
+                    android:textSize="@dimen/button_blue_text_size" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="@dimen/search_eo_data_search_view_width"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/search_frag_searchview_layout"
+                android:paddingTop="@dimen/search_eo_data_padding_medium">
+
+                <Button
+                    android:id="@+id/search_frag_button_basic"
+                    style="@style/buttonBlue"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/button_blue_height"
+                    android:layout_margin="3dp"
+                    android:layout_weight="1"
+                    android:text="@string/basic_settings"
+                    android:textSize="@dimen/button_blue_text_size" />
+
+                <Button
+                    android:id="@+id/search_frag_button_advance"
+                    style="@style/buttonBlue"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/button_blue_height"
+                    android:layout_margin="3dp"
+                    android:layout_weight="1"
+                    android:text="@string/advanced_settings"
+                    android:textSize="@dimen/button_blue_text_size" />
+
+            </LinearLayout>
+        </RelativeLayout>
+    </LinearLayout>
+</ScrollView>

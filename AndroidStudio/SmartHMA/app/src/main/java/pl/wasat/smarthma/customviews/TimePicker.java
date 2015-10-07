@@ -68,7 +68,6 @@ public class TimePicker extends FrameLayout {
 
         @Override
         public String format(int value) {
-            // TODO Auto-generated method stub
             return String.format(Locale.UK, "%02d", value);
         }
     };
@@ -131,7 +130,6 @@ public class TimePicker extends FrameLayout {
                     @Override
                     public void onValueChange(NumberPicker picker, int oldVal,
                                               int newVal) {
-                        // TODO Auto-generated method stub
                         mCurrentHour = newVal;
                         if (!mIs24HourView) {
                             // adjust from [1-12] to [0-11] internally, with the
@@ -199,7 +197,7 @@ public class TimePicker extends FrameLayout {
 
         mIsAm = (mCurrentHour < 12);
 
-		/* Get the localized am/pm strings and use them in the spinner */
+  /* Get the localized am/pm strings and use them in the spinner */
         DateFormatSymbols dfs = new DateFormatSymbols();
         String[] dfsAmPm = dfs.getAmPmStrings();
         mAmText = dfsAmPm[Calendar.AM];
