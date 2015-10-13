@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 
@@ -16,6 +17,8 @@ import java.util.HashMap;
 import java.util.List;
 
 import pl.wasat.smarthma.R;
+import pl.wasat.smarthma.adapter.SwipeDetector;
+import pl.wasat.smarthma.interfaces.OnSlideElementListener;
 import pl.wasat.smarthma.model.mission.MissionHeaderData;
 import pl.wasat.smarthma.model.mission.MissionItemData;
 
@@ -73,6 +76,17 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
                 .into(listItemImg);
 
         txtListChild.setText(childText);
+        SwipeDetector swipeDetector = new SwipeDetector(convertView, childPosition, true);
+        swipeDetector.setOnClickListener(new OnSlideElementListener() {
+            @Override
+            public void Catch(boolean swipeRight, int position) {
+                if (swipeRight)
+                    Toast.makeText(_context, "share " + position, Toast.LENGTH_SHORT).show();
+                else
+                    Toast.makeText(_context, "delete " + position, Toast.LENGTH_SHORT).show();
+            }
+        });
+        convertView.setOnTouchListener(swipeDetector);
         return convertView;
     }
 

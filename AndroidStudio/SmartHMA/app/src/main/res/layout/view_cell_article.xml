@@ -1,45 +1,66 @@
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/article_row_layout"
-    style="?android:attr/textAppearanceLarge"
-    android:layout_width="fill_parent"
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/background_gray"
-    android:orientation="vertical"
+    android:background="#ffebeff1"
+    android:orientation="horizontal"
     android:paddingBottom="@dimen/esa_mission_cell_divider"
-    android:paddingTop="@dimen/esa_mission_cell_divider"
-    tools:context=".NewsListFragment">
+    android:paddingTop="@dimen/esa_mission_cell_divider">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#ffffeb3b"
+        android:id="@+id/swipe_list_shareview"
+        android:orientation="horizontal" >
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#ff558b2f"
+        android:id="@+id/swipe_list_deleteview"
+        android:orientation="horizontal" >
+    </RelativeLayout>
 
     <LinearLayout
-        android:id="@+id/view_cell_article_row_background"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/background_white"
-        android:orientation="vertical"
-        android:paddingBottom="@dimen/esa_online_cell_height"
-        android:paddingTop="@dimen/esa_online_cell_height">
+        android:id="@+id/swipe_list_mainview"
+        android:orientation="vertical" >
 
-        <pl.wasat.smarthma.customviews.TextViewWithFont
-            android:id="@+id/article_title_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingLeft="15dip"
-            android:paddingRight="8dip"
-            android:text="Lorem ipsum lorem ipsum"
-            android:textColor="@color/text_blue"
-            android:textSize="@dimen/esa_online_cell_text_size_large" />
-
-        <pl.wasat.smarthma.customviews.TextViewWithFont
-            android:id="@+id/article_listing_smallprint"
+        <LinearLayout
+            android:id="@+id/view_cell_article_row_background"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingLeft="15dip"
-            android:paddingRight="8dip"
-            android:paddingTop="2dp"
-            android:text="Lorem ipsum lorem ipsum"
-            android:textColor="@color/text_black"
-            android:textSize="@dimen/esa_online_cell_text_size" />
+            android:background="@color/background_white"
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/esa_online_cell_height"
+            android:paddingTop="@dimen/esa_online_cell_height">
+
+            <pl.wasat.smarthma.customviews.TextViewWithFont
+                android:id="@+id/article_title_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="15dip"
+                android:paddingRight="8dip"
+                android:text="Lorem ipsum lorem ipsum"
+                android:textColor="@color/text_blue"
+                android:textSize="@dimen/esa_online_cell_text_size_large" />
+
+            <pl.wasat.smarthma.customviews.TextViewWithFont
+                android:id="@+id/article_listing_smallprint"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="15dip"
+                android:paddingRight="8dip"
+                android:paddingTop="2dp"
+                android:text="Lorem ipsum lorem ipsum"
+                android:textColor="@color/text_black"
+                android:textSize="@dimen/esa_online_cell_text_size" />
+
+        </LinearLayout>
 
     </LinearLayout>
-</LinearLayout>
+
+</RelativeLayout>

@@ -8,6 +8,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -18,20 +19,30 @@ import java.util.ArrayList;
 
 import pl.wasat.smarthma.R;
 import pl.wasat.smarthma.helper.Const;
+import pl.wasat.smarthma.interfaces.OnSlideElementListener;
 import pl.wasat.smarthma.model.Collection;
+import pl.wasat.smarthma.model.iso.EntryISO;
 
 /**
  * @author Wasat Sp. z o.o
  */
-public class CollectionsListAdapter extends BaseAdapter {
+public class CollectionsListAdapter extends ArrayAdapter<Collection> {
 
     private final Activity activity;
     private final ArrayList<Collection> collData;
     private final String groupName;
     private static LayoutInflater inflater = null;
+    private OnSlideElementListener listener;
+
+
+
+    public void setListener(OnSlideElementListener listener) {
+        this.listener = listener;
+    }
 
     public CollectionsListAdapter(Activity activ, ArrayList<Collection> data,
                                   String grName) {
+        super(activ, R.layout.view_cell_collection, data);
         activity = activ;
         collData = data;
         groupName = grName;
@@ -43,8 +54,8 @@ public class CollectionsListAdapter extends BaseAdapter {
         return collData.size();
     }
 
-    public Object getItem(int position) {
-        return position;
+    public Collection getItem(int position) {
+        return collData.get(position);
     }
 
     public long getItemId(int position) {
@@ -52,24 +63,32 @@ public class CollectionsListAdapter extends BaseAdapter {
     }
 
     public View getView(int position, View convertView, ViewGroup parent) {
-        //View vi = convertView;
-        ViewHolder holder;
 
-        if (convertView == null) {
-            convertView = inflater.inflate(R.layout.view_cell_collection, parent, false);
-            holder = new ViewHolder();
-            holder.title = (TextView) convertView.findViewById(R.id.collection_name);
-            holder.artist = (TextView) convertView.findViewById(R.id.collection_desc);
+        if(convertView == null) {
 
-            //TextView duration = (TextView) vi.findViewById(R.id.collection_id);
-            holder.thumb_image = (ImageView) convertView
-                    .findViewById(R.id.collection_image);
+            convertView = inflater.inflate(R.layout.view_cell_collection, null);
 
-            convertView.setTag(holder);
-        } else {
-            holder = (ViewHolder) convertView.getTag();
+            SwipeDetector swipeDetector = new SwipeDetector(convertView, position, false);
+            swipeDetector.setOnClickListener(listener);
+            convertView.setOnTouchListener(swipeDetector);
+
+
+        /*if(collection.isRead()){
+            holder.row = convertView.findViewById(R.id.view_cell_collection_search_row_background);
+            holder.row.setBackgroundColor(activity.getResources().getColor(R.color.row_selected));
+            holder.button = (ImageView) convertView.findViewById(R.id.star_button);
+            holder.button.setImageDrawable(activity.getResources().getDrawable(R.drawable.ic_star_blue));
+        }*/
         }
+        ViewHolder holder;
+        holder = new ViewHolder();
+        holder.title = (TextView) convertView.findViewById(R.id.collection_name);
+        holder.artist = (TextView) convertView.findViewById(R.id.collection_desc);
+        //TextView duration = (TextView) vi.findViewById(R.id.collection_id);
+        holder.thumb_image = (ImageView) convertView
+                .findViewById(R.id.collection_image);
 
+        convertView.setTag(holder);
 
         Collection collection;
         collection = collData.get(position);
@@ -82,16 +101,6 @@ public class CollectionsListAdapter extends BaseAdapter {
                 + ".jpeg";
         Picasso.with(activity).load(url).resize(72, 72).centerCrop()
                 .into(holder.thumb_image);
-
-        //TODO Infoapps style for row which has been read
-
-        /*if(collection.isRead()){
-            holder.row = convertView.findViewById(R.id.view_cell_collection_search_row_background);
-            holder.row.setBackgroundColor(activity.getResources().getColor(R.color.row_selected));
-            holder.button = (ImageView) convertView.findViewById(R.id.star_button);
-            holder.button.setImageDrawable(activity.getResources().getDrawable(R.drawable.ic_star_blue));
-        }*/
-
         return convertView;
     }
 
