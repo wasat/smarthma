@@ -24,9 +24,9 @@
             android:id="@+id/indicator" />
 
         <pl.wasat.smarthma.customviews.TextViewWithFont
-        android:id="@+id/missions_list_header"
+            android:id="@+id/missions_list_header"
             android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+            android:layout_height="wrap_content"
             android:textColor="@color/text_black"
             android:textSize="@dimen/esa_missions_cell_text_size"
             android:text="@string/esa_mission_item"

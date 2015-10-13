@@ -12,13 +12,23 @@ import android.widget.TextView;
 import java.util.List;
 
 import pl.wasat.smarthma.R;
+import pl.wasat.smarthma.interfaces.OnSlideElementListener;
 import pl.wasat.smarthma.model.NewsArticle;
 
 
 public class NewsArticleListAdapter extends ArrayAdapter<NewsArticle> {
 
-    public NewsArticleListAdapter(Activity activity, List<NewsArticle> articles) {
-        super(activity, 0, articles);
+
+
+    private OnSlideElementListener listener;
+
+
+    public void setListener(OnSlideElementListener listener) {
+        this.listener = listener;
+    }
+
+    public NewsArticleListAdapter(Activity activity, int layoutResource, List<NewsArticle> articles) {
+        super(activity, layoutResource, articles);
     }
 
 
@@ -27,25 +37,30 @@ public class NewsArticleListAdapter extends ArrayAdapter<NewsArticle> {
         Activity activity = (Activity) getContext();
         LayoutInflater inflater = activity.getLayoutInflater();
 
-        View rowView = inflater.inflate(R.layout.view_cell_article, parent, false);
+        convertView = inflater.inflate(R.layout.view_cell_article, null);
+
+        SwipeDetector swipeDetector = new SwipeDetector(convertView, position, false);;
+        swipeDetector.setOnClickListener(listener);
+        convertView.setOnTouchListener(swipeDetector);
+
         NewsArticle article = getItem(position);
 
 
-        TextView textView = (TextView) rowView.findViewById(R.id.article_title_text);
+        TextView textView = (TextView) convertView.findViewById(R.id.article_title_text);
         textView.setText(article.getTitle());
 
-        TextView dateView = (TextView) rowView.findViewById(R.id.article_listing_smallprint);
+        TextView dateView = (TextView) convertView.findViewById(R.id.article_listing_smallprint);
         String pubDate = article.getPubDate();
         dateView.setText(pubDate);
 
 
         if (article.isRead()) {
-            LinearLayout row = (LinearLayout) rowView.findViewById(R.id.view_cell_article_row_background);
+            LinearLayout row = (LinearLayout) convertView.findViewById(R.id.view_cell_article_row_background);
             row.setBackgroundColor(activity.getResources().getColor(R.color.row_selected));
 
             //textView.setTypeface(.DEFAULT_BOLD);
         }
-        return rowView;
+        return convertView;
 
     }
 }

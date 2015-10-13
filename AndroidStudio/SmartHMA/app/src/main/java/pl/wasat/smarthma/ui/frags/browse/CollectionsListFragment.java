@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.octo.android.robospice.persistence.exception.SpiceException;
 import com.octo.android.robospice.request.listener.RequestListener;
@@ -19,6 +20,7 @@ import java.util.HashMap;
 import pl.wasat.smarthma.R;
 import pl.wasat.smarthma.SmartHMApplication;
 import pl.wasat.smarthma.adapter.CollectionsListAdapter;
+import pl.wasat.smarthma.interfaces.OnSlideElementListener;
 import pl.wasat.smarthma.model.Collection;
 import pl.wasat.smarthma.model.FedeoRequestParams;
 import pl.wasat.smarthma.model.feed.Feed;
@@ -111,6 +113,15 @@ public class CollectionsListFragment extends BaseSpiceFragment {
             CollectionsListAdapter adapter = new CollectionsListAdapter(
                     getActivity(), collections, selectGroupName);
             list.setAdapter(adapter);
+            adapter.setListener(new OnSlideElementListener() {
+                @Override
+                public void Catch(boolean swipeRight, int position) {
+                    if (swipeRight)
+                        Toast.makeText(getActivity(), "share " + position, Toast.LENGTH_SHORT).show();
+                    else
+                        Toast.makeText(getActivity(), "delete " + position, Toast.LENGTH_SHORT).show();
+                }
+            });
 
             list.setOnItemClickListener(new OnItemClickListener() {
 
