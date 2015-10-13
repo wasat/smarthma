@@ -18,7 +18,6 @@ import pl.wasat.smarthma.ui.frags.browse.DataSeriesListFragment.OnDataSeriesList
 import pl.wasat.smarthma.ui.frags.common.AreaPickerMapFragment.OnAreaPickerMapFragmentListener;
 import pl.wasat.smarthma.ui.frags.common.CollectionDetailsFragment;
 import pl.wasat.smarthma.ui.frags.common.CollectionDetailsFragment.OnCollectionDetailsFragmentListener;
-import pl.wasat.smarthma.ui.frags.common.MetadataISOFragment.OnMetadataISOFragmentListener;
 import pl.wasat.smarthma.ui.frags.search.SearchListFragment.OnSearchListFragmentListener;
 import pl.wasat.smarthma.utils.obj.LatLngBoundsExt;
 
@@ -26,7 +25,7 @@ import pl.wasat.smarthma.utils.obj.LatLngBoundsExt;
 public class CollectionsBrowserActivity extends BaseCollectionsActivity implements
         OnDataSeriesListFragmentListener,
         OnAreaPickerMapFragmentListener, OnAmznAreaPickerMapFragmentListener, OnSearchListFragmentListener,
-        OnCollectionDetailsFragmentListener, OnMetadataISOFragmentListener {
+        OnCollectionDetailsFragmentListener {
 
     private EoDbAdapter dba;
 
@@ -37,11 +36,9 @@ public class CollectionsBrowserActivity extends BaseCollectionsActivity implemen
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-
         Intent intent = getIntent();
         String collectionName = intent
                 .getStringExtra(CollectionsListFragment.KEY_COLLECTIONS_NAME);
-
 
         SharedPrefs sharedPrefs = new SharedPrefs(getApplicationContext());
         sharedPrefs.setParentIdPrefs(collectionName);

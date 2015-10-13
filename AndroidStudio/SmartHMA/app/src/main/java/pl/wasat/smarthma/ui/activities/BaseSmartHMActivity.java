@@ -4,16 +4,23 @@
 package pl.wasat.smarthma.ui.activities;
 
 import android.app.Activity;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import pl.wasat.smarthma.R;
 import pl.wasat.smarthma.helper.Const;
+import pl.wasat.smarthma.preferences.GlobalPreferences;
+import pl.wasat.smarthma.preferences.SharedPrefs;
 import pl.wasat.smarthma.ui.menus.CommonMenuHandler;
 import pl.wasat.smarthma.ui.menus.MenuHandler;
+import pl.wasat.smarthma.utils.text.StringExt;
 
 /**
  * @author Daniel Zinkiewicz Wasat Sp. z o.o 14-07-2014
@@ -23,6 +30,10 @@ public class BaseSmartHMActivity extends FragmentActivity {
     static final int REQUEST_NEW_SEARCH = 0;
     boolean stopNewSearch = false;
     private MenuHandler commonMenuHandler;
+    private FedeoSearchRequestReceiver fedeoSearchRequestReceiver;
+
+    private final IntentFilter filter =
+            new IntentFilter(Const.KEY_ACTION_BROADCAST_FEDEO_REQUEST);
 
     public BaseSmartHMActivity() {
     }
@@ -33,6 +44,20 @@ public class BaseSmartHMActivity extends FragmentActivity {
         super.onCreate(savedInstanceState);
 
         commonMenuHandler = new CommonMenuHandler(this, R.id.menu_button);
+
+        fedeoSearchRequestReceiver = new FedeoSearchRequestReceiver();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        registerReceiver(fedeoSearchRequestReceiver, filter);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        unregisterReceiver(fedeoSearchRequestReceiver);
     }
 
     @Override
@@ -75,5 +100,20 @@ public class BaseSmartHMActivity extends FragmentActivity {
             return true;
         }
         return false;
+    }
+
+
+    private class FedeoSearchRequestReceiver extends BroadcastReceiver {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            GlobalPreferences globalPreferences = new GlobalPreferences(getApplicationContext());
+            if (globalPreferences.getIsDebugMode()) {
+                String url = intent.getStringExtra(Const.KEY_INTENT_FEDEO_REQUEST_URL);
+                String formattedUrl = StringExt.formatUrl(url);
+                SharedPrefs sharedPrefs = new SharedPrefs(getApplicationContext());
+                sharedPrefs.setUrlPrefs(formattedUrl);
+                Toast.makeText(context, formattedUrl, Toast.LENGTH_LONG).show();
+            }
+        }
     }
 }

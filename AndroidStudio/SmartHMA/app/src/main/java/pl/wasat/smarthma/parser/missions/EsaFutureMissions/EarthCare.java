@@ -11,11 +11,12 @@ import pl.wasat.smarthma.parser.model.Mission;
 import pl.wasat.smarthma.parser.model.Page;
 
 /**
- * Created by marcel paduch on 2015-08-11.
+ * Created by marcel paduch on 2015-08-11 00:09.
+ * Part of the project  SmartHMA
  */
 public class EarthCare extends BaseParser implements SimpleMissionInterface {
     public final static int MISSION_ID = 15;
-    public final static String TITLE = "EarthCare";
+    private final static String TITLE = "EarthCare";
 
     public EarthCare(String pageUrl, Context context) {
         super(pageUrl, context);

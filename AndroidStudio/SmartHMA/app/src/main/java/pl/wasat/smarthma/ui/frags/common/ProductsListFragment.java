@@ -4,8 +4,8 @@ import android.os.Bundle;
 
 import pl.wasat.smarthma.R;
 import pl.wasat.smarthma.model.FedeoRequestParams;
+import pl.wasat.smarthma.model.entry.Entry;
 import pl.wasat.smarthma.model.feed.Feed;
-import pl.wasat.smarthma.model.om.EntryOM;
 import pl.wasat.smarthma.ui.frags.base.BaseShowProductsListFragment;
 
 /**
@@ -43,7 +43,7 @@ public class ProductsListFragment extends BaseShowProductsListFragment {
      * loadProductItemDetails(pl.wasat.smarthma.model.eo.Entry)
      */
     @Override
-    public void loadProductItemDetails(EntryOM entry) {
+    public void loadProductItemDetails(Entry entry) {
         ProductDetailsFragment productDetailsFragment = ProductDetailsFragment
                 .newInstance(entry);
         getActivity()
@@ -66,13 +66,13 @@ public class ProductsListFragment extends BaseShowProductsListFragment {
      */
     @Override
     public void loadSearchResultProductsIntroDetailsFrag(Feed searchProductFeeds) {
-        FeedSummaryProductsFragment productsIntroFragment = FeedSummaryProductsFragment
+        FeedSummaryProductsFragment feedSummaryProductsFragment = FeedSummaryProductsFragment
                 .newInstance(searchProductFeeds);
         getActivity()
                 .getSupportFragmentManager()
                 .beginTransaction()
                 .add(R.id.activity_base_details_container,
-                        productsIntroFragment, "FeedSummaryProductsFragment")
+                        feedSummaryProductsFragment, "FeedSummaryProductsFragment")
                 .addToBackStack("FeedSummaryProductsFragment").commit();
         super.loadSearchResultProductsIntroDetailsFrag(searchProductFeeds);
     }

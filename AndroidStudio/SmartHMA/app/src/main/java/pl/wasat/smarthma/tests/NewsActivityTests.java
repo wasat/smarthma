@@ -7,7 +7,8 @@ import pl.wasat.smarthma.ui.activities.NewsActivity;
 import pl.wasat.smarthma.ui.frags.news.NewsListFragment;
 
 /**
- * Created by Dark Mark on 17/08/2015.
+ * Created by Dark Mark on 17/08/2015 00:09.
+ * Part of the project  SmartHMA
  */
 public class NewsActivityTests extends ActivityInstrumentationTestCase2<NewsActivity> {
     public NewsActivityTests() {

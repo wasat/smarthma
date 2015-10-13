@@ -15,6 +15,8 @@ import android.widget.LinearLayout;
 import android.widget.SearchView;
 
 import pl.wasat.smarthma.R;
+import pl.wasat.smarthma.preferences.GlobalPreferences;
+import pl.wasat.smarthma.preferences.SharedPrefs;
 import pl.wasat.smarthma.ui.activities.SearchCollectionResultsActivity;
 
 /**
@@ -70,6 +72,19 @@ public class SearchFragment extends Fragment {
         searchView.setIconified(false);
         searchView.clearFocus();
 
+/*        SearchHistory searchHistory = new SearchHistory(getActivity());
+        ArrayList<SearchParams> searchHistoryList = searchHistory.getSearchHistoryList(true);
+        if (!searchHistoryList.isEmpty()) {
+            SearchParams searchParams = searchHistoryList.get(0);
+            searchView.setQuery(searchParams.getSearchPhrase(), false);
+        }*/
+
+        GlobalPreferences globalPreferences = new GlobalPreferences(getActivity());
+        if (globalPreferences.getIsParamsSaved()) {
+            SharedPrefs sharedPrefs = new SharedPrefs(getActivity());
+            searchView.setQuery(sharedPrefs.getQueryPrefs(), false);
+        }
+
         searchIntent = getActivity().getIntent();
 
         LinearLayout linearLayout1 = (LinearLayout) searchView.getChildAt(0);
@@ -79,13 +94,6 @@ public class SearchFragment extends Fragment {
                 .getChildAt(0);
         autoComplete.setTextSize(20);
         autoComplete.setTextColor(getResources().getColor(R.color.text_black));
-
-/*        SearchHistory searchHistory = new SearchHistory(getActivity());
-        ArrayList<SearchParams> searchHistoryList = searchHistory.getSearchHistoryList(true);
-        if (!searchHistoryList.isEmpty()) {
-            SearchParams searchParams = searchHistoryList.get(0);
-            searchView.setQuery(searchParams.getSearchPhrase(), false);
-        }*/
 
         Button btnBasicParams = (Button) rootView.findViewById(R.id.search_frag_button_basic);
         btnBasicParams.setOnClickListener(new View.OnClickListener() {

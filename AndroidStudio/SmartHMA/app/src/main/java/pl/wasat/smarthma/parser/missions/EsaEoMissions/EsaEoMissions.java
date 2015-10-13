@@ -17,11 +17,11 @@ import pl.wasat.smarthma.parser.model.Category;
 import pl.wasat.smarthma.parser.model.Page;
 
 /**
- * Created by marcel paduch on 2015-08-10.
+ * Created by marcel paduch on 2015-08-10 00:09.
+ * Part of the project  SmartHMA
  */
 public class EsaEoMissions extends BaseParser implements MissionInterface {
 
-    final int ITEMS_COUNT = 9;
     public final static int CATEGORY_ID = 0;
 
     public EsaEoMissions(String pageUrl, Context context) {
@@ -30,10 +30,11 @@ public class EsaEoMissions extends BaseParser implements MissionInterface {
 
     @Override
     public void mainContent() {
-        Pair pair = super.getImageListPage(ITEMS_COUNT, false);
+        int ITEMS_COUNT = 9;
+        Pair<String, ArrayList<String>> pair = super.getImageListPage(ITEMS_COUNT, false);
         String contents = super.imageListToContentString(pair);
-        parserDb.addCategory(new Category(CATEGORY_ID, (String) pair.title, contents));
-        ArrayList<String> urlList = getImageList((ArrayList<String>) pair.content);
+        parserDb.addCategory(new Category(CATEGORY_ID, pair.title, contents));
+        ArrayList<String> urlList = getImageList(pair.content);
         int mission_id = 0;
 
         for (String url :
@@ -104,11 +105,6 @@ public class EsaEoMissions extends BaseParser implements MissionInterface {
 
     @Override
     public void milestones() {
-    }
-
-    @Override
-    public void imageOfTheWeek() {
-
     }
 
     @Override

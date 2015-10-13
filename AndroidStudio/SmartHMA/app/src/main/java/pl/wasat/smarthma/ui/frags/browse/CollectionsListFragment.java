@@ -158,7 +158,7 @@ public class CollectionsListFragment extends BaseSpiceFragment {
         paramExtra.put("uid", "urn:ogc:def:" + collName);
         fedeoRequestParams.setParamsExtra(paramExtra);
         getActivity().setProgressBarIndeterminateVisibility(true);
-        getSpiceManager().execute(new FedeoSearchRequest(fedeoRequestParams, 1),
+        getSpiceManager().execute(new FedeoSearchRequest(getActivity(), fedeoRequestParams, 1),
                 new FeedRequestListener());
 
 
@@ -212,6 +212,10 @@ public class CollectionsListFragment extends BaseSpiceFragment {
 
         @Override
         public void onRequestSuccess(Feed feed) {
+            if (feed == null) {
+                parseRequestFailure(null);
+                return;
+            }
             loadEntryToDetailsFrag(feed);
         }
     }

@@ -63,7 +63,8 @@ public class BrowseCollectionFirstDetailFragment extends
                     .beginTransaction()
                     .replace(R.id.frag_search_res_coll_det_layout_top,
                             areaPickerMapFragment)
-                    .addToBackStack("AreaPickerMapFragment").commit();
+                            //.addToBackStack("AreaPickerMapFragment")
+                    .commit();
         }
 
         obtainGlobalSettings();

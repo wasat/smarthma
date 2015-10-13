@@ -215,15 +215,15 @@ public class MissionsExtListFragment extends Fragment {
                         "With the objectives of Land and Ocean monitoring, Sentinel-1 will be composed of two polar-orbiting satellites operating day and night, and will perform Radar imaging, enabling them to acquire imagery regardless of the weather. The first Sentinel-1 satellite was launched on a Soyuz rocket from Europe&#39;s Spaceport in French Guiana on 03 April 2014."));
 */
 
-        ArrayList<Mission> futureSentinelsmissionList = parserDb.getMissionsList(new Category(EsaFutureMissions.CATEGORY_ID, "asd"));
+        ArrayList<Mission> futureSentinelsMissionList = parserDb.getMissionsList(new Category(EsaFutureMissions.CATEGORY_ID, "asd"));
 
         List<MissionItemData> esaFutureSentinels = new ArrayList<>();
         List<MissionItemData> esaFutureExplorers = new ArrayList<>();
-        List<MissionItemData> esaFutureCandidates = new ArrayList<>();
+        //List<MissionItemData> esaFutureCandidates = new ArrayList<>();
 
 
         for (Mission mission :
-                futureSentinelsmissionList) {
+                futureSentinelsMissionList) {
             if (mission.getId() == Adm.MISSION_ID || mission.getId() == EarthCare.MISSION_ID) {
                 esaFutureExplorers.add(new MissionItemData(mission));
 
@@ -321,8 +321,6 @@ public class MissionsExtListFragment extends Fragment {
         listDataChild.put(listDataHeader.get(6).getName(), esaEumetsat);
 
     }
-
-
 
 
     public ExpandableListView getExpListView() {

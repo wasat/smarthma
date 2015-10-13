@@ -38,9 +38,9 @@ public class DatePickerFragment extends DialogFragment implements
         }
 
         //final Calendar c = Calendar.getInstance();
-        dpYear = calendar.get(Calendar.YEAR);
-        dpMonth = calendar.get(Calendar.MONTH);
-        dpDay = calendar.get(Calendar.DAY_OF_MONTH);
+        dpYear = calendar != null ? calendar.get(Calendar.YEAR) : 0;
+        dpMonth = calendar != null ? calendar.get(Calendar.MONTH) : 0;
+        dpDay = calendar != null ? calendar.get(Calendar.DAY_OF_MONTH) : 0;
 
         final Dialog dialog = new Dialog(getActivity());
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);

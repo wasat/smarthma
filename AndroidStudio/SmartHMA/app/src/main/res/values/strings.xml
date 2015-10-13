@@ -77,6 +77,8 @@
     <string name="activity_name_products_browser">Products Browser</string>
     <string name="activity_name_search_eo_data">Search EO Data</string>
     <string name="activity_name_search_collections_results">Searched Collections</string>
+    <string name="activity_name_favourite_collections_results">Favourite Collections</string>
+    <string name="activity_name_favourite_products_results">Favourite Products</string>
     <string name="actionbar_share">Share</string>
     <string name="app_id">825236790862337</string>
     <string name="cancelled">Cancelled</string>
@@ -118,6 +120,13 @@
     <string name="organisation_header">Organisation</string>
     <string name="platform_header">Platform</string>
     <string name="favourites">Favourites...</string>
+    <string name="saved_collections">Saved collections</string>
+    <string name="saved_products">Saved products</string>
+    <string name="collection_added_to_favourites">Collection added to favourites</string>
+    <string name="product_added_to_favourites">Product added to favourites</string>
+    <string name="empty_list">List is empty.</string>
+    <string name="remove_favourite_title">Item remove confirmation</string>
+    <string name="remove_favourite_message">Are you sure you want to remove this item from your favourites?</string>
 
 
     <!--  INFO APPS  -->
@@ -153,6 +162,25 @@
     <string name="menu_settings">Settings</string>
     <string name="of_total">of total</string>
     <string name="go">Go</string>
+    <string name="share_options">Share Options</string>
+    <string name="alert_dialog_details">Details</string>
+    <string name="wide_area_or_timespan">"Probably you pick up too wide area of search or too long time span. "</string>
+    <string name="date_of_publication">"Date of publication: "</string>
+    <string name="eo_metadata">"Earth Observation Metadata "</string>
+    <string name="eo_observed_property">"Earth Observation Observed Property "</string>
+    <string name="eo_footprint">Earth Observation Footprint</string>
+    <string name="eo_equipment">"Earth Observation Equipment "</string>
+    <string name="eo_result">"Earth Observation Result "</string>
+    <string name="eo_phenomenon_time">"Earth Observation Phenomenon Time "</string>
+    <string name="eo_result_time">"Earth Observation Result Time "</string>
+    <string name="metadata_file_id">"Metadata File ID "</string>
+    <string name="metadata_language">"Metadata Language "</string>
+    <string name="metadata_hierarchy_level">"Metadata Hierarchy Level "</string>
+    <string name="eo_provider_contact">"Earth Observation Provider Contact "</string>
+    <string name="eo_image_date">"Earth Observation Image Date "</string>
+    <string name="metadata_standards">"Metadata Standards "</string>
+    <string name="metadata_identification">"Metadata Identification "</string>
+    <string name="metadata_quality">"Metadata Quality "</string>
 
 
 </resources>

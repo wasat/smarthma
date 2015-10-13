@@ -49,16 +49,20 @@ public class DateUtils {
 
     public static String getISOPubDate(EntryISO entry) {
         String date = "";
-        if (entry.getDate() != null) {
-            if (entry.getDate().getCIDate() != null) {
-                date = entry.getDate().getCIDate().getDateInCIDate().getDateGco().getText();
-            } else {
-                date = entry.getDate().toString();
+        try {
+            if (entry.getDate() != null) {
+                if (entry.getDate().getCIDate() != null) {
+                    date = entry.getDate().getCIDate().getDateInCIDate().getDateGco().getText();
+                } else {
+                    date = entry.getDate().toString();
+                }
+            } else if (entry.getMDMetadata().getDateStamp() != null) {
+                date = entry.getMDMetadata().getDateStamp().getDateGco().getText();
+            } else if (date.isEmpty()) {
+                date = "1970-01-01";
             }
-        } else if (entry.getMDMetadata().getDateStamp() != null) {
-            date = entry.getMDMetadata().getDateStamp().getDateGco().getText();
-        } else if (date.isEmpty()) {
-            date = "1970-01-01";
+        } catch (NullPointerException e) {
+            e.printStackTrace();
         }
         return date;
     }
@@ -85,5 +89,9 @@ public class DateUtils {
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'",
                 Locale.UK);
         return df.format(cal.getTime());
+    }
+
+    public static String timestampToDateTimeStr(long timestamp) {
+        return new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss", Locale.getDefault()).format(new Date(timestamp));
     }
 }

@@ -11,24 +11,14 @@ import pl.wasat.smarthma.parser.model.Mission;
 import pl.wasat.smarthma.parser.model.Page;
 
 /**
- * Created by marcel paduch on 2015-08-11.
+ * Created by marcel paduch on 2015-08-11 00:09.
+ * Part of the project  SmartHMA
  */
 public class Envisat extends BaseParser implements MissionInterface {
 
-    public String ASAR = "https://earth.esa.int/web/guest/missions/esa-operational-eo-missions/envisat/instruments/asar";
-    public String MERIS = "https://earth.esa.int/web/guest/missions/esa-operational-eo-missions/envisat/instruments/meris";
-    public String AATSR = "https://earth.esa.int/web/guest/missions/esa-operational-eo-missions/envisat/instruments/aatsr";
-    public String RA2 = "https://earth.esa.int/web/guest/missions/esa-operational-eo-missions/envisat/instruments/ra-2";
-    public String MWR = "https://earth.esa.int/web/guest/missions/esa-operational-eo-missions/envisat/instruments/mwr";
-    public String GOMOS = "https://earth.esa.int/web/guest/missions/esa-operational-eo-missions/envisat/instruments/gomos";
-    public String MIPAS = "https://earth.esa.int/web/guest/missions/esa-operational-eo-missions/envisat/instruments/mipas";
-    public String SCIAMACHY = "https://earth.esa.int/web/guest/missions/esa-operational-eo-missions/envisat/instruments/sciamachy";
-    public String DORIS = "https://earth.esa.int/web/guest/missions/esa-operational-eo-missions/envisat/instruments/doris";
-    public String LRR = "https://earth.esa.int/web/guest/missions/esa-operational-eo-missions/envisat/instruments/lrr";
-    final int JS_POSITION = 9;
-    public final static int MISSION_ID = 6;
-    final static String TITLE = "Envisat";
-    final int ITEMS_COUNT = 1;
+    private final int JS_POSITION = 9;
+    private final static int MISSION_ID = 6;
+    private final static String TITLE = "Envisat";
 
 
     public Envisat(String pageUrl, Context context) {
@@ -53,6 +43,7 @@ public class Envisat extends BaseParser implements MissionInterface {
 
     @Override
     public void mainContent() {
+        int ITEMS_COUNT = 1;
         ArrayList<Pair> list = super.getComplexPage(ITEMS_COUNT);
         for (Pair item : list) {
             parserDb.addPage(new Page(EsaEoMissions.CATEGORY_ID, MISSION_ID, (String) item.title, (String) item.content));
@@ -66,11 +57,6 @@ public class Envisat extends BaseParser implements MissionInterface {
 
     @Override
     public void milestones() {
-
-    }
-
-    @Override
-    public void imageOfTheWeek() {
 
     }
 
@@ -133,15 +119,25 @@ public class Envisat extends BaseParser implements MissionInterface {
         Pair pair = super.getSimplePage(INSTRUMENTS);
         parserDb.addPage(new Page(EsaEoMissions.CATEGORY_ID, MISSION_ID, (String) pair.title, (String) pair.content));
 
+        String ASAR = "https://earth.esa.int/web/guest/missions/esa-operational-eo-missions/envisat/instruments/asar";
         parserDb.addPage(new Page(EsaEoMissions.CATEGORY_ID, MISSION_ID, ASAR_NAME, ASAR));
+        String MERIS = "https://earth.esa.int/web/guest/missions/esa-operational-eo-missions/envisat/instruments/meris";
         parserDb.addPage(new Page(EsaEoMissions.CATEGORY_ID, MISSION_ID, MERIS_NAME, MERIS));
+        String AATSR = "https://earth.esa.int/web/guest/missions/esa-operational-eo-missions/envisat/instruments/aatsr";
         parserDb.addPage(new Page(EsaEoMissions.CATEGORY_ID, MISSION_ID, AATSR_NAME, AATSR));
+        String RA2 = "https://earth.esa.int/web/guest/missions/esa-operational-eo-missions/envisat/instruments/ra-2";
         parserDb.addPage(new Page(EsaEoMissions.CATEGORY_ID, MISSION_ID, RA2_NAME, RA2));
+        String MWR = "https://earth.esa.int/web/guest/missions/esa-operational-eo-missions/envisat/instruments/mwr";
         parserDb.addPage(new Page(EsaEoMissions.CATEGORY_ID, MISSION_ID, MWR_NAME, MWR));
+        String GOMOS = "https://earth.esa.int/web/guest/missions/esa-operational-eo-missions/envisat/instruments/gomos";
         parserDb.addPage(new Page(EsaEoMissions.CATEGORY_ID, MISSION_ID, GOMOS_NAME, GOMOS));
+        String MIPAS = "https://earth.esa.int/web/guest/missions/esa-operational-eo-missions/envisat/instruments/mipas";
         parserDb.addPage(new Page(EsaEoMissions.CATEGORY_ID, MISSION_ID, MIPAS_NAME, MIPAS));
+        String SCIAMACHY = "https://earth.esa.int/web/guest/missions/esa-operational-eo-missions/envisat/instruments/sciamachy";
         parserDb.addPage(new Page(EsaEoMissions.CATEGORY_ID, MISSION_ID, SCIAMACHY_NAME, SCIAMACHY));
+        String DORIS = "https://earth.esa.int/web/guest/missions/esa-operational-eo-missions/envisat/instruments/doris";
         parserDb.addPage(new Page(EsaEoMissions.CATEGORY_ID, MISSION_ID, DORIS_NAME, DORIS));
+        String LRR = "https://earth.esa.int/web/guest/missions/esa-operational-eo-missions/envisat/instruments/lrr";
         parserDb.addPage(new Page(EsaEoMissions.CATEGORY_ID, MISSION_ID, LRR_NAME, LRR));
     }
 

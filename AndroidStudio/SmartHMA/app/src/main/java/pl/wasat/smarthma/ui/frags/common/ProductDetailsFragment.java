@@ -1,12 +1,17 @@
 package pl.wasat.smarthma.ui.frags.common;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore.Images;
+import android.support.annotation.NonNull;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -27,9 +32,10 @@ import com.squareup.picasso.Target;
 import java.util.List;
 
 import pl.wasat.smarthma.R;
+import pl.wasat.smarthma.model.entry.Entry;
+import pl.wasat.smarthma.model.entry.SimpleMetadata;
 import pl.wasat.smarthma.model.om.Browse;
-import pl.wasat.smarthma.model.om.EntryOM;
-import pl.wasat.smarthma.model.om.Footprint;
+import pl.wasat.smarthma.model.om.Content;
 
 /**
  * A simple {@link android.support.v4.app.Fragment} subclass. Activities that
@@ -41,9 +47,11 @@ import pl.wasat.smarthma.model.om.Footprint;
 public class ProductDetailsFragment extends Fragment implements Target {
     private static final String KEY_PRODUCT_ENTRY = "pl.wasat.smarthma.KEY_PRODUCT_ENTRY";
 
-    private EntryOM displayedEntry;
+    private Entry displayedEntry;
 
     private OnProductDetailsFragmentListener mListener;
+
+    private static final CharSequence[] shareList = {"Facebook", "Other"};
 
     /**
      * Use this factory method to create a new instance of this fragment using
@@ -52,7 +60,7 @@ public class ProductDetailsFragment extends Fragment implements Target {
      * @param prodEntry Parameter 1.
      * @return A new instance of fragment ProductDetailsFragment.
      */
-    public static ProductDetailsFragment newInstance(EntryOM prodEntry) {
+    public static ProductDetailsFragment newInstance(Entry prodEntry) {
         ProductDetailsFragment fragment = new ProductDetailsFragment();
         Bundle args = new Bundle();
         args.putSerializable(KEY_PRODUCT_ENTRY, prodEntry);
@@ -67,7 +75,7 @@ public class ProductDetailsFragment extends Fragment implements Target {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            displayedEntry = (EntryOM) getArguments().getSerializable(
+            displayedEntry = (Entry) getArguments().getSerializable(
                     KEY_PRODUCT_ENTRY);
         }
     }
@@ -85,7 +93,7 @@ public class ProductDetailsFragment extends Fragment implements Target {
                     + displayedEntry.getPublished() + " and updated: "
                     + displayedEntry.getUpdated();
 
-            String content = displayedEntry.getSummary();
+            String content = displayedEntry.getSummary().getCdata();
             ((TextView) rootView.findViewById(R.id.product_frag_detail_name))
                     .setText(title);
             ((TextView) rootView.findViewById(R.id.product_frag_detail_dates))
@@ -126,7 +134,8 @@ public class ProductDetailsFragment extends Fragment implements Target {
             shareQLookButton.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    openShareDialog();
+                    showShareListDialog();
+                    //openShareDialog();
                 }
             });
         }
@@ -202,22 +211,23 @@ public class ProductDetailsFragment extends Fragment implements Target {
      *
      */
     private void loadMetadataFrag() {
-        MetadataFragment metadataFragment = MetadataFragment
+        MetadataOMFragment metadataOMFragment = MetadataOMFragment
                 .newInstance(displayedEntry);
         getActivity()
                 .getSupportFragmentManager()
                 .beginTransaction()
                 .replace(R.id.activity_base_details_container,
-                        metadataFragment, "MetadataFragment")
+                        metadataOMFragment, "MetadataFragment")
                 .addToBackStack("MetadataFragment").commit();
     }
 
     private void showExtendedMap() {
-        String url = getQuicklookUrl();
-        Footprint footprint = displayedEntry.getEarthObservation()
-                .getFeatureOfInterest().getFootprint();
+        //String url = getQuicklookUrl();
+        //Footprint footprint = displayedEntry.getEarthObservation()
+        //       .getFeatureOfInterest().getFootprint();
+        //ArrayList<LatLngExt> footprint = displayedEntry.getSimpleMetadata().getFootprint();
 
-        mListener.onProductDetailsFragmentExtendedMapShow(url, footprint);
+        mListener.onProductDetailsFragmentExtendedMapShow(displayedEntry.getSimpleMetadata());
     }
 
     private void showQuicklookGallery() {
@@ -227,6 +237,14 @@ public class ProductDetailsFragment extends Fragment implements Target {
 
     private String getQuicklookUrl() {
         String url = "";
+
+        List<Content> content = displayedEntry.getGroup().getContent();
+        for (Content cont : content) {
+            if (cont.getCategory().get_text().equalsIgnoreCase("QUICKLOOK")) {
+                url = cont.get_url();
+                return url;
+            }
+        }
 
         List<Browse> browseList = displayedEntry.getEarthObservation()
                 .getResult().getEarthObservationResult().getBrowseList();
@@ -246,6 +264,44 @@ public class ProductDetailsFragment extends Fragment implements Target {
         mListener.onProductDetailsFragmentShareDialogShow(qLookUrl);
     }
 
+    private void showShareListDialog() {
+        ShareListDialogFragment listDialFrag = new ShareListDialogFragment();
+        listDialFrag.show(getActivity().getSupportFragmentManager(),
+                "ShareListDialogFragment");
+    }
+
+    public static class ShareListDialogFragment extends DialogFragment {
+        @NonNull
+        @Override
+        public Dialog onCreateDialog(Bundle savedInstanceState) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+            builder.setTitle(R.string.share_options).setItems(
+                    shareList, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            //setCatalogue(which);
+                            ((ProductDetailsFragment) getActivity().getSupportFragmentManager()
+                                    .findFragmentByTag("ProductDetailsFragment")).chooseShareType(which);
+                        }
+                    });
+            return builder.create();
+        }
+
+
+    }
+
+    private void chooseShareType(int which) {
+        switch (which) {
+            case 0:
+                openShareDialog();
+                break;
+            case 1:
+                startQLookTarget();
+                break;
+            default:
+                break;
+        }
+    }
+
     /**
      * This interface must be implemented by activities that contain this
      * fragment to allow an interaction in this fragment to be communicated to
@@ -257,8 +313,7 @@ public class ProductDetailsFragment extends Fragment implements Target {
      */
     public interface OnProductDetailsFragmentListener {
 
-        void onProductDetailsFragmentExtendedMapShow(String url,
-                                                     Footprint footprint);
+        void onProductDetailsFragmentExtendedMapShow(SimpleMetadata simpleMetadata);
 
         void onProductDetailsFragmentQuicklookShow(String url);
 

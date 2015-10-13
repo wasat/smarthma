@@ -9,7 +9,7 @@ import pl.wasat.smarthma.model.exception.ExceptionReport;
 import pl.wasat.smarthma.model.exception.ExceptionText;
 import pl.wasat.smarthma.model.exception.Fedeo;
 
-public class FedeoExceptionHandler extends DefaultHandler {
+class FedeoExceptionHandler extends DefaultHandler {
     private StringBuffer chars = new StringBuffer();
     private ExceptionReport exceptionReport;
     private Exception exception;

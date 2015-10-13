@@ -33,9 +33,9 @@ import java.util.List;
 
 import pl.wasat.smarthma.R;
 import pl.wasat.smarthma.interfaces.OnBaseMapFragmentPublicListener;
-import pl.wasat.smarthma.model.om.Footprint;
-import pl.wasat.smarthma.model.om.Pos;
+import pl.wasat.smarthma.model.entry.SimpleMetadata;
 import pl.wasat.smarthma.ui.frags.base.BaseMapFragment;
+import pl.wasat.smarthma.utils.obj.LatLngExt;
 
 /**
  * A simple {@link Fragment} subclass. Activities that contain this fragment
@@ -144,19 +144,30 @@ public class ExtendedMapFragment extends Fragment implements
             boundsBuilder.include(footprintPoints.get(j));
         }
         baseMapFragment.setTargetBounds(boundsBuilder.build());
+        baseMapFragment.animateWhenMapIsReady(75);
+
+
     }
 
     /**
      * @param footprint - Footprint of EO data item
      */
-    public void showFootPrints(Footprint footprint) {
+    public void showFootPrints(ArrayList<LatLngExt> footprint) {
         ArrayList<LatLng> footprintPoints = extractLatLngFootprint(footprint);
         buildFootprintBounds(footprintPoints);
         drawFootprint(footprintPoints);
     }
 
-    private ArrayList<LatLng> extractLatLngFootprint(Footprint footprint) {
-        List<Pos> footprintPosList = footprint.getMultiExtentOf()
+    private ArrayList<LatLng> castToGoogleLatLonArray(ArrayList<LatLngExt> latLngExtArrayList) {
+        ArrayList<LatLng> latLngs = new ArrayList<>();
+        for (LatLngExt latLngExt : latLngExtArrayList) {
+            latLngs.add(latLngExt.getGoogleLatLon());
+        }
+        return latLngs;
+    }
+
+    private ArrayList<LatLng> extractLatLngFootprint(ArrayList<LatLngExt> footprint) {
+/*        List<Pos> footprintPosList = footprint.getMultiExtentOf()
                 .getMultiSurface().getSurfaceMembers().getPolygon()
                 .getExterior().getLinearRing().getPosList();
         if (footprintPosList.isEmpty()) {
@@ -166,16 +177,16 @@ public class ExtendedMapFragment extends Fragment implements
             footprintPosList = footprint.getMultiExtentOf().getMultiSurface()
                     .getSurfaceMembers().getPolygon().getExterior()
                     .getLinearRing().setPosList(posStr);
-        }
+        }*/
 
         ArrayList<LatLng> footprintPoints = new ArrayList<>();
         float prevBearing = 0;
 
-        for (int i = 0; i < footprintPosList.size() - 1; i++) {
-            double currLat = footprintPosList.get(i).getLatLng().latitude;
-            double currLng = footprintPosList.get(i).getLatLng().longitude;
-            double nextLat = footprintPosList.get(i + 1).getLatLng().latitude;
-            double nextLng = footprintPosList.get(i + 1).getLatLng().longitude;
+        for (int i = 0; i < footprint.size() - 1; i++) {
+            double currLat = footprint.get(i).latitude;
+            double currLng = footprint.get(i).longitude;
+            double nextLat = footprint.get(i + 1).latitude;
+            double nextLng = footprint.get(i + 1).longitude;
 
             float[] results = new float[3];
 
@@ -183,7 +194,7 @@ public class ExtendedMapFragment extends Fragment implements
                     results);
 
             if (Math.abs(results[2] - prevBearing) >= BEARING_LEVEL_VALUE) {
-                footprintPoints.add(footprintPosList.get(i).getLatLng().getGoogleLatLon());
+                footprintPoints.add(footprint.get(i).getGoogleLatLon());
             }
             prevBearing = results[2];
         }
@@ -204,18 +215,26 @@ public class ExtendedMapFragment extends Fragment implements
         }
     }
 
-    private void calcQuickLookParams(Footprint footprint,
+    private void calcQuickLookParams(LatLngExt footprintCenter,
                                      ArrayList<LatLng> footprintPoints) {
         double oneLat = footprintPoints.get(0).latitude;
         double oneLng = footprintPoints.get(0).longitude;
         double twoLat = footprintPoints.get(1).latitude;
         double twoLng = footprintPoints.get(1).longitude;
+        double threeLat = footprintPoints.get(2).latitude;
+        double threeLng = footprintPoints.get(2).longitude;
         double fourLat = footprintPoints.get(3).latitude;
         double fourLng = footprintPoints.get(3).longitude;
         float[] results = new float[3];
 
-        //TODO - Calculate center from boundary points
-        qLookCenter = footprint.getCenterOf().getPoint().getPos().getLatLng().getGoogleLatLon();
+
+        if (footprintCenter != null) {
+            qLookCenter = footprintCenter.getGoogleLatLon();
+        } else {
+            double latCenter = (oneLat + twoLat + threeLat + fourLat) / 4;
+            double lngCenter = (oneLng + twoLng + threeLng + fourLng) / 4;
+            qLookCenter = new LatLng(latCenter, lngCenter);
+        }
 
         Location.distanceBetween(oneLat, oneLng, twoLat, twoLng, results);
         qLookHeight = results[0];
@@ -226,13 +245,17 @@ public class ExtendedMapFragment extends Fragment implements
 
     }
 
-    public void showQuicklookOnMap(String url, Footprint footprint) {
+    public void showQuicklookOnMap(SimpleMetadata simpleMetadata) {
 
-        ArrayList<LatLng> footprintPoints = extractLatLngFootprint(footprint);
+        //ArrayList<LatLng> nowaLista = (ArrayList < LatLng >)(Object)footprint;
+
+        ArrayList<LatLng> footprintPoints = castToGoogleLatLonArray(simpleMetadata.getFootprint());
+        LatLngExt center = simpleMetadata.getFootprintCenter();
+        String url = simpleMetadata.getQuickLookUrl();
 
         buildFootprintBounds(footprintPoints);
 
-        calcQuickLookParams(footprint, footprintPoints);
+        calcQuickLookParams(center, footprintPoints);
         drawFootprint(footprintPoints);
 
         Target quicklookTarget = this;
@@ -305,7 +328,7 @@ public class ExtendedMapFragment extends Fragment implements
 
     @Override
     public String key() {
-        return null;
+        return "SmartHMA";
     }
 
     @Override

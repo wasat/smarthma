@@ -1,11 +1,21 @@
 package pl.wasat.smarthma.ui.frags.common;
 
+import android.graphics.Color;
 import android.os.Bundle;
+
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.PolygonOptions;
+
+import java.util.ArrayList;
 
 import pl.wasat.smarthma.R;
 import pl.wasat.smarthma.model.FedeoRequestParams;
+import pl.wasat.smarthma.model.entry.Entry;
 import pl.wasat.smarthma.model.feed.Feed;
 import pl.wasat.smarthma.ui.frags.base.BaseFeedSummaryFragment;
+import pl.wasat.smarthma.utils.draw.MapDrawings;
+import pl.wasat.smarthma.utils.obj.LatLngExt;
 
 /**
  * A simple {@link android.support.v4.app.Fragment} subclass. Use the {@link FeedSummaryProductsFragment#newInstance}
@@ -49,5 +59,59 @@ public class FeedSummaryProductsFragment extends BaseFeedSummaryFragment {
         super.loadNavSearch(linkHref);
     }
 
+    @Override
+    protected void setupMapObjects(GoogleMap googleMap) {
+        super.setupMapObjects(googleMap);
 
+        drawAllFootprint(googleMap);
+    }
+
+
+    private void drawAllFootprint(GoogleMap googleMap) {
+
+        MapDrawings mapDrawings = new MapDrawings();
+
+        for (Entry entry : resultFeed.getEntries()) {
+            //List<Pos> footprintPosList = obtainFootprintPoints(entry);
+
+
+            //ArrayList<LatLng> footprintPoints = (ArrayList<LatLng>) (Object) entry.getSimpleMetadata().getFootprint();
+            ArrayList<LatLng> footprintPoints = castToGoogleLatLonArray(entry.getSimpleMetadata().getFootprint());
+/*            for (int i = 0; i < footprintPosList.size() - 1; i++) {
+                footprintPoints.add(footprintPosList.get(i).getLatLng().getGoogleLatLon());
+            }*/
+            if (footprintPoints.size() > 0) {
+                PolygonOptions polygon = mapDrawings.drawArea(footprintPoints, Color.BLUE);
+                googleMap.addPolygon(polygon);
+            }
+        }
+    }
+
+    private ArrayList<LatLng> castToGoogleLatLonArray(ArrayList<LatLngExt> latLngExtArrayList) {
+        ArrayList<LatLng> latLngs = new ArrayList<>();
+        for (LatLngExt latLngExt : latLngExtArrayList) {
+            latLngs.add(latLngExt.getGoogleLatLon());
+        }
+        return latLngs;
+    }
+
+/*
+    private List<Pos> obtainFootprintPoints(Entry entry) {
+        List<Pos> footprintPosList = new ArrayList<>();
+        if (entry.getEarthObservation().getFeatureOfInterest() == null) return footprintPosList;
+        Footprint footprint = entry.getEarthObservation()
+                .getFeatureOfInterest().getFootprint();
+        footprintPosList = footprint.getMultiExtentOf()
+                .getMultiSurface().getSurfaceMembers().getPolygon()
+                .getExterior().getLinearRing().getPosList();
+        if (footprintPosList.isEmpty()) {
+            String posStr = footprint.getMultiExtentOf().getMultiSurface()
+                    .getSurfaceMembers().getPolygon().getExterior()
+                    .getLinearRing().getPosString().getPointsString();
+            footprintPosList = footprint.getMultiExtentOf().getMultiSurface()
+                    .getSurfaceMembers().getPolygon().getExterior()
+                    .getLinearRing().setPosList(posStr);
+        }
+        return footprintPosList;
+    }*/
 }

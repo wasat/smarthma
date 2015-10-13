@@ -43,6 +43,7 @@ public class RemoteFetchService extends Service {
      * format of data once fetched i.e. in which format the fetched data be
      * returned AjaxCallback = class to notify with data once it is fetched
      */
+    @SuppressWarnings("unchecked")
     private void fetchDataFromWeb() {
         RSSTask task = new RSSTask();
         task.execute(Const.URL_ESA_NEWS_1, this);

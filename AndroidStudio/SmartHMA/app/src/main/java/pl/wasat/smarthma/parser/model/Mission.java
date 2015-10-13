@@ -1,7 +1,8 @@
 package pl.wasat.smarthma.parser.model;
 
 /**
- * Created by marcel on 2015-08-04.
+ * Created by marcel on 2015-08-04 00:09.
+ * Part of the project  SmartHMA
  */
 public class Mission {
     private int id;

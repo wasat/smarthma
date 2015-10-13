@@ -89,7 +89,6 @@ public class SmHmaTimePickerDialog extends Dialog implements
      * @param is24HourView Whether this is a 24 hour view, or AM/PM.
      */
     @SuppressLint("InflateParams")
-    @SuppressWarnings("deprecation")
     private SmHmaTimePickerDialog(Context context, int theme,
                                   OnTimeSetListener callBack, int hourOfDay, int minute, int seconds,
                                   boolean is24HourView) {

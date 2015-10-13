@@ -11,13 +11,12 @@ import pl.wasat.smarthma.parser.model.Mission;
 import pl.wasat.smarthma.parser.model.Page;
 
 /**
- * Created by marcel on 2015-08-13.
+ * Created by marcel on 2015-08-13 00:09.
+ * Part of the project  SmartHMA
  */
 public class Theos extends BaseParser implements SimpleMissionInterface {
-    public final static int MISSION_ID = 57;
-    public final static String TITLE = "THEOS";
-
-    final int ITEMS_COUNT = 2;
+    private final static int MISSION_ID = 57;
+    private final static String TITLE = "THEOS";
 
     public Theos(String pageUrl, Context context) {
         super(pageUrl, context);
@@ -27,6 +26,7 @@ public class Theos extends BaseParser implements SimpleMissionInterface {
 
     @Override
     public void mainContent() {
+        int ITEMS_COUNT = 2;
         super.getComplexPage(ITEMS_COUNT);
         ArrayList<Pair> list = super.getComplexPage(ITEMS_COUNT);
         for (Pair item : list) {

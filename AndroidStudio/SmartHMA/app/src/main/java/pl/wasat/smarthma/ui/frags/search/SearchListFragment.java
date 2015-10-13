@@ -214,7 +214,7 @@ public class SearchListFragment extends BaseSpiceListFragment {
         if (feedSearchRequest != null) {
             getActivity().setProgressBarIndeterminateVisibility(true);
             getSpiceManager().execute(
-                    new FedeoSearchRequest(feedSearchRequest, 1), this);
+                    new FedeoSearchRequest(getActivity(), feedSearchRequest, 1), this);
         }
     }
 
@@ -228,8 +228,8 @@ public class SearchListFragment extends BaseSpiceListFragment {
                 .getSupportFragmentManager()
                 .beginTransaction()
                 .replace(R.id.activity_base_details_container,
-                        feedSummarySearchCollectionFragment, "FeedSummarySearchFragment")
-                .addToBackStack("FeedSummarySearchFragment").commit();
+                        feedSummarySearchCollectionFragment, "FeedSummarySearchCollectionFragment")
+                .addToBackStack("FeedSummarySearchCollectionFragment").commit();
 
     }
 

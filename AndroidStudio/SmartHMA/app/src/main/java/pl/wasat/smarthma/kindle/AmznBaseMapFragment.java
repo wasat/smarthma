@@ -8,7 +8,6 @@ import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.LocalBroadcastManager;
-import android.util.Log;
 import android.widget.Toast;
 
 import com.amazon.geo.mapsv2.AmazonMap;
@@ -58,7 +57,7 @@ public class AmznBaseMapFragment extends SupportMapFragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         //AcraExtension.mapCustomLog("BaseMap.onActivityCreated", mMap);
-        Log.i("BASE_MAP", "onActivityCreated");
+        //Log.i("BASE_MAP", "onActivityCreated");
 
         startCreateMap(savedInstanceState);
     }
@@ -124,7 +123,7 @@ public class AmznBaseMapFragment extends SupportMapFragment {
         Fragment fragment = this;
         if (fragment instanceof OnBaseMapFragmentListener) {
             ((OnBaseMapFragmentListener) fragment).onBaseSupportMapReady();
-            Log.i("BASE_MAP", "onActivityCreated.Listener");
+            //Log.i("BASE_MAP", "onActivityCreated.Listener");
         } else {
             publicListener.onBaseSupportMapPublicReady();
         }

@@ -6,7 +6,6 @@ import android.location.Location;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.LocalBroadcastManager;
-import android.util.Log;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
@@ -58,9 +57,10 @@ public class BaseMapFragment extends SupportMapFragment implements
 
     protected int mapMode;
 
-    private LatLngBounds targetBounds;
+    protected LatLngBounds targetBounds;
 
     public BaseMapFragment() {
+        AcraExtension.mapCustomLog("BaseMap.construct", mMap);
     }
 
     public static BaseMapFragment newInstance(
@@ -82,13 +82,14 @@ public class BaseMapFragment extends SupportMapFragment implements
         mGoogleApiClient = new GoogleApiClient.Builder(getActivity())
                 .addApi(LocationServices.API).addConnectionCallbacks(this)
                 .addOnConnectionFailedListener(this).build();
+
     }
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         AcraExtension.mapCustomLog("BaseMap.onActivityCreated", mMap);
-        Log.i("BASE_MAP", "onActivityCreated");
+        //Log.i("BASE_MAP", "onActivityCreated");
 
         startCreateMap(savedInstanceState);
     }
@@ -97,6 +98,7 @@ public class BaseMapFragment extends SupportMapFragment implements
     public void onStart() {
         super.onStart();
         mGoogleApiClient.connect();
+
     }
 
     @Override
@@ -110,9 +112,28 @@ public class BaseMapFragment extends SupportMapFragment implements
     public void onConnected(Bundle dataBundle) {
         AcraExtension.mapCustomLog("BaseMap.onConnected", mMap);
 
-        obtainGooglePosition();
+        //obtainGooglePosition();
     }
 
+    private void startCreateMap() {
+        AcraExtension.mapCustomLog("BaseMap.startCreateMap", mMap);
+
+        int status = GooglePlayServicesUtil
+                .isGooglePlayServicesAvailable(getActivity());
+        if (status == ConnectionResult.SUCCESS) {
+            supportMapFrag = this;
+            setUpMapIfNeeded();
+            mMap = supportMapFrag.getMap();
+
+            AcraExtension.mapCustomLog(
+                    "BaseMap.startCreateMap.sIStNotNull", mMap);
+
+        } else {
+            Dialog dialog = GooglePlayServicesUtil.getErrorDialog(status,
+                    getActivity(), 42);
+            dialog.show();
+        }
+    }
 
     private void startCreateMap(Bundle savedInstanceState) {
         AcraExtension.mapCustomLog("BaseMap.startCreateMap", mMap);
@@ -165,19 +186,19 @@ public class BaseMapFragment extends SupportMapFragment implements
 
         sendSupportMapReadyCallback();
 
-        mMap.setOnMapLoadedCallback(new GoogleMap.OnMapLoadedCallback() {
+/*        mMap.setOnMapLoadedCallback(new GoogleMap.OnMapLoadedCallback() {
             @Override
             public void onMapLoaded() {
                 animateToBounds();
             }
-        });
+        });*/
     }
 
     private void sendSupportMapReadyCallback() {
         Fragment fragment = this;
         if (fragment instanceof OnBaseMapFragmentListener) {
             ((OnBaseMapFragmentListener) fragment).onBaseSupportMapReady();
-            Log.i("BASE_MAP", "onActivityCreated.Listener");
+            //Log.i("BASE_MAP", "onActivityCreated.Listener");
         } else {
             publicListener.onBaseSupportMapPublicReady();
         }
@@ -187,7 +208,7 @@ public class BaseMapFragment extends SupportMapFragment implements
         GlobalPreferences globalPreferences = new GlobalPreferences(getActivity());
         int mapType = globalPreferences.getMapType();
 
-        //replace switch-case with mapType int
+        //TODO replace switch-case with mapType int
         switch (mapType) {
             case 0:
                 mMap.setMapType(GoogleMap.MAP_TYPE_NONE);
@@ -210,6 +231,7 @@ public class BaseMapFragment extends SupportMapFragment implements
         }
 
     }
+
     private void setupOSM() {
         AcraExtension.mapCustomLog("BaseMap.setupOSM", mMap);
 
@@ -265,11 +287,20 @@ public class BaseMapFragment extends SupportMapFragment implements
         }
     }
 
-    private void animateToBounds() {
+    private void animateToBounds(int padding) {
         if (targetBounds != null) {
             mMap.animateCamera(CameraUpdateFactory.newLatLngBounds(
-                    targetBounds, 75));
+                    targetBounds, padding));
         }
+    }
+
+    public void animateWhenMapIsReady(final int padding) {
+        mMap.setOnMapLoadedCallback(new GoogleMap.OnMapLoadedCallback() {
+            @Override
+            public void onMapLoaded() {
+                animateToBounds(padding);
+            }
+        });
     }
 
     @Override

@@ -10,7 +10,6 @@ import android.widget.ListView;
 
 import pl.wasat.smarthma.ui.activities.CollectionsDefinitionActivity;
 import pl.wasat.smarthma.ui.frags.browse.CollectionsGroupListFragment;
-import pl.wasat.smarthma.ui.frags.browse.CollectionsListFragment;
 
 public class CollectionsDefinitionActivityTests extends ActivityInstrumentationTestCase2<CollectionsDefinitionActivity> {
     public CollectionsDefinitionActivityTests() {
@@ -38,10 +37,10 @@ public class CollectionsDefinitionActivityTests extends ActivityInstrumentationT
                             position, list.getAdapter().getItemId(position));
                     tests[2] = true;
 
-                    CollectionsListFragment fragment2 = fragment.getCollectionsListFragment();
+                    //CollectionsListFragment fragment2 = fragment.getCollectionsListFragment();
                     tests[3] = true;
 
-                    ListView list2 = fragment2.getList();
+                    //ListView list2 = fragment2.getList();
                     tests[4] = true;
 
                     //list2.performItemClick(list2.getAdapter().getView(position, null, null),

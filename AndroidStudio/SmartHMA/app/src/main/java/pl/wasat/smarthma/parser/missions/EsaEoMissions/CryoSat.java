@@ -11,13 +11,12 @@ import pl.wasat.smarthma.parser.model.Mission;
 import pl.wasat.smarthma.parser.model.Page;
 
 /**
- * Created by marcel on 2015-08-10.
+ * Created by marcel on 2015-08-10 00:09.
+ * Part of the project  SmartHMA
  */
 public class CryoSat extends BaseParser implements MissionInterface {
-    final String siralUrl = "https://earth.esa.int/web/guest/missions/esa-operational-eo-missions/cryosat/instruments/siral";
-    public final static int MISSION_ID = 3;
-    final static String TITLE = "CryoSat";
-    final int ITEMS_COUNT = 1;
+    private final static int MISSION_ID = 3;
+    private final static String TITLE = "CryoSat";
 
     @Override
     public void history() {
@@ -47,6 +46,7 @@ public class CryoSat extends BaseParser implements MissionInterface {
 
     @Override
     public void mainContent() {
+        int ITEMS_COUNT = 1;
         ArrayList<Pair> list = super.getComplexPage(ITEMS_COUNT);
         for (Pair item : list) {
             parserDb.addPage(new Page(EsaEoMissions.CATEGORY_ID, MISSION_ID, (String) item.title, (String) item.content));
@@ -93,6 +93,7 @@ public class CryoSat extends BaseParser implements MissionInterface {
         final String SIRAL_NAME = "Siral";
         Pair pair = super.getSimplePage(INSTRUMENTS);
         parserDb.addPage(new Page(EsaEoMissions.CATEGORY_ID, MISSION_ID, (String) pair.title, (String) pair.content));
+        String siralUrl = "https://earth.esa.int/web/guest/missions/esa-operational-eo-missions/cryosat/instruments/siral";
         parserDb.addPage(new Page(EsaEoMissions.CATEGORY_ID, MISSION_ID, SIRAL_NAME, siralUrl));
     }
 
@@ -102,11 +103,6 @@ public class CryoSat extends BaseParser implements MissionInterface {
 
     @Override
     public void milestones() {
-    }
-
-    @Override
-    public void imageOfTheWeek() {
-
     }
 
     @Override

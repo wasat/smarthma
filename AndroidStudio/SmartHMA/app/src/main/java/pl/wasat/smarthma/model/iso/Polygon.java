@@ -1,3 +1,4 @@
+/*
 package pl.wasat.smarthma.model.iso;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
@@ -17,30 +18,38 @@ public class Polygon implements Serializable {
     private String Text;
 
 
-    /**
+    */
+/**
      * @return The Prefix
-     */
+ *//*
+
     public String getPrefix() {
         return Prefix;
     }
 
-    /**
+    */
+/**
      * @param Prefix The _prefix
-     */
+ *//*
+
     public void setPrefix(String Prefix) {
         this.Prefix = Prefix;
     }
 
-    /**
+    */
+/**
      * @return The Text
-     */
+ *//*
+
     public String getText() {
         return Text;
     }
 
-    /**
+    */
+/**
      * @param Text The _text
-     */
+ *//*
+
     public void setText(String Text) {
         this.Text = Text;
     }
@@ -64,3 +73,4 @@ public class Polygon implements Serializable {
     }
 
 }
+*/

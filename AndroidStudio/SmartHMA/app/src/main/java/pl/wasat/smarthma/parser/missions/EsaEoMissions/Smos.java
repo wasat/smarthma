@@ -11,14 +11,13 @@ import pl.wasat.smarthma.parser.model.Mission;
 import pl.wasat.smarthma.parser.model.Page;
 
 /**
- * Created by marcel paduch on 2015-08-11.
+ * Created by marcel paduch on 2015-08-11 00:09.
+ * Part of the project  SmartHMA
  */
 public class Smos extends BaseParser implements MissionInterface {
-    final int ITEMS_COUNT = 1;
-    final String INSTRUMENT = "instrument";
-    public final static int MISSION_ID = 4;
-    final static String TITLE = "Smos";
-    final String SPACE_SEGMENT = "space-segment";
+    private final static int MISSION_ID = 4;
+    private final static String TITLE = "Smos";
+    private final String SPACE_SEGMENT = "space-segment";
 
     public Smos(String pageUrl, Context context) {
         super(pageUrl, context);
@@ -28,6 +27,7 @@ public class Smos extends BaseParser implements MissionInterface {
 
     @Override
     public void mainContent() {
+        int ITEMS_COUNT = 1;
         ArrayList<Pair> list = super.getComplexPage(ITEMS_COUNT);
         for (Pair item : list) {
             parserDb.addPage(new Page(EsaEoMissions.CATEGORY_ID, MISSION_ID, (String) item.title, (String) item.content));
@@ -41,11 +41,6 @@ public class Smos extends BaseParser implements MissionInterface {
 
     @Override
     public void milestones() {
-
-    }
-
-    @Override
-    public void imageOfTheWeek() {
 
     }
 
@@ -83,6 +78,7 @@ public class Smos extends BaseParser implements MissionInterface {
 
     @Override
     public void instruments() {
+        String INSTRUMENT = "instrument";
         Pair pair = super.getSimplePage(SPACE_SEGMENT + "/" + INSTRUMENT);
         parserDb.addPage(new Page(EsaEoMissions.CATEGORY_ID, MISSION_ID, (String) pair.title, (String) pair.content));
     }

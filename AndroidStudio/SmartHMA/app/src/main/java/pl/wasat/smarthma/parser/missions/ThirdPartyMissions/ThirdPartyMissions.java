@@ -17,21 +17,18 @@ import pl.wasat.smarthma.parser.model.Category;
 import pl.wasat.smarthma.parser.model.Page;
 
 /**
- * Created by marcel paduch on 2015-08-11.
+ * Created by marcel paduch on 2015-08-11 00:09.
+ * Part of the project  SmartHMA
  */
 public class ThirdPartyMissions extends BaseParser implements SimpleMissionInterface {
-    final String CURRENT_MISSIONS = "current-missions";
-    final String HISTORICAL_MISSIONS = "historical-missions";
-    final String POTENTIAL_MISSIONS = "potential-missions";
-
-    final String TITLE = "3rd Party Missions";
-    final String CONTENT = "";
 
     public final static int CATEGORY_ID = 2;
 
 
     public ThirdPartyMissions(String pageUrl, Context context) {
         super(pageUrl, context);
+        String CONTENT = "";
+        String TITLE = "3rd Party Missions";
         parserDb.addCategory(new Category(CATEGORY_ID, TITLE, CONTENT));
 
     }
@@ -46,8 +43,11 @@ public class ThirdPartyMissions extends BaseParser implements SimpleMissionInter
         final String SPOT67_IMG = "/documents/10174/1822887/SPOT-6-7/f1669c60-3f29-4a0a-a6e0-10affd1b4509?t=1427894703559";
 
         final int NO_MISSION = -1;
+        String CURRENT_MISSIONS = "current-missions";
         Pair<String, ArrayList<String>> current = getImageListPage(CURRENT_MISSIONS, 21, false);
+        String HISTORICAL_MISSIONS = "historical-missions";
         Pair<String, ArrayList<String>> historical = super.getImageListPage(HISTORICAL_MISSIONS, 9, false);
+        String POTENTIAL_MISSIONS = "potential-missions";
         Pair<String, ArrayList<String>> potential = super.getImageListPage(POTENTIAL_MISSIONS, 6, false);
         parserDb.addPage(new Page(ThirdPartyMissions.CATEGORY_ID, NO_MISSION, current.title, super.imageListToContentString(current)));
         parserDb.addPage(new Page(ThirdPartyMissions.CATEGORY_ID, NO_MISSION, historical.title, super.imageListToContentString(historical)));
@@ -78,7 +78,7 @@ public class ThirdPartyMissions extends BaseParser implements SimpleMissionInter
         }
     }
 
-    public Pair<String, ArrayList<String>> getImageListPage(String pageName, int maxItems, boolean fullPage) {
+    protected Pair<String, ArrayList<String>> getImageListPage(String pageName, int maxItems, boolean fullPage) {
 
         String title;
         ArrayList<String> contentList = new ArrayList<>();

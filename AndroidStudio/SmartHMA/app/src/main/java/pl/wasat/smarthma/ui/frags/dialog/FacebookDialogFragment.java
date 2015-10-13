@@ -109,9 +109,9 @@ public class FacebookDialogFragment extends DialogFragment implements Target {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
+/*        if (getArguments() != null) {
             String paramQLookUrl = getArguments().getString(ARG_PARAM_QUICKLOOK_URL);
-        }
+        }*/
 
         if (savedInstanceState != null) {
             String name = savedInstanceState
@@ -170,7 +170,7 @@ public class FacebookDialogFragment extends DialogFragment implements Target {
         canPresentShareDialogWithPhotos = FacebookDialog.canPresentShareDialog(
                 getActivity(), FacebookDialog.ShareDialogFeature.PHOTOS);
 
-        Target quicklookTarget = this;
+        //Target quicklookTarget = this;
 
         // Picasso.with(getActivity()).load(paramQLookUrl).into(quicklookTarget);
 

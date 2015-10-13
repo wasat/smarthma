@@ -1,7 +1,8 @@
 package pl.wasat.smarthma.parser.missions;
 
 /**
- * Created by marcel paduch on 2015-08-10.
+ * Created by marcel paduch on 2015-08-10 00:09.
+ * Part of the project  SmartHMA
  */
 public interface MissionInterface {
 
@@ -10,8 +11,6 @@ public interface MissionInterface {
     void news();
 
     void milestones();
-
-    void imageOfTheWeek();
 
     void faq();
 

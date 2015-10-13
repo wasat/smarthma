@@ -12,19 +12,37 @@ public class SharedPrefs {
         settings = context.getSharedPreferences(Const.KEY_PREF_FILE, 0);
     }
 
-
     public String getStartDateTimePrefs() {
         return settings.getString(Const.KEY_PREF_DATETIME_START,
-                "1970-01-01T00:00:00Z");
+                "2000-01-01T00:00:00Z");
     }
 
     public String getEndDateTimePrefs() {
         return settings.getString(Const.KEY_PREF_DATETIME_END,
-                "1970-01-01T00:00:00Z");
+                "2015-01-01T00:00:00Z");
     }
 
     public String getParentIdPrefs() {
         return settings.getString(Const.KEY_PREF_PARENT_ID, "Fedeo");
+    }
+
+    public float[] getBboxPrefs() {
+        float[] bboxPrefs = new float[4];
+
+        bboxPrefs[3] = settings.getFloat(Const.KEY_PREF_BBOX_NORTH, Float.valueOf(Const.EU_BBOX_NORTH));
+        bboxPrefs[2] = settings.getFloat(Const.KEY_PREF_BBOX_EAST, Float.valueOf(Const.EU_BBOX_EAST));
+        bboxPrefs[1] = settings.getFloat(Const.KEY_PREF_BBOX_SOUTH, Float.valueOf(Const.EU_BBOX_SOUTH));
+        bboxPrefs[0] = settings.getFloat(Const.KEY_PREF_BBOX_WEST, Float.valueOf(Const.EU_BBOX_WEST));
+
+        return bboxPrefs;
+    }
+
+    public String getQueryPrefs() {
+        return settings.getString(Const.KEY_PREF_QUERY, "");
+    }
+
+    public String getUrlPrefs() {
+        return settings.getString(Const.KEY_PREF_URL, "");
     }
 
     public void setParentIdPrefs(String parentId) {
@@ -33,16 +51,6 @@ public class SharedPrefs {
         editor.apply();
     }
 
-    public float[] getBboxPrefs() {
-        float[] bboxPrefs = new float[4];
-
-        bboxPrefs[3] = settings.getFloat(Const.KEY_PREF_BBOX_NORTH, 0.0f);
-        bboxPrefs[2] = settings.getFloat(Const.KEY_PREF_BBOX_EAST, 0.0f);
-        bboxPrefs[1] = settings.getFloat(Const.KEY_PREF_BBOX_SOUTH, 0.0f);
-        bboxPrefs[0] = settings.getFloat(Const.KEY_PREF_BBOX_WEST, 0.0f);
-
-        return bboxPrefs;
-    }
 
     protected void setSharedPrefDefaultValue(String key, String value) {
         SharedPreferences.Editor editor = settings.edit();
@@ -74,7 +82,13 @@ public class SharedPrefs {
         SharedPreferences.Editor editor = settings.edit();
         editor.putString(Const.KEY_PREF_QUERY, query);
         editor.apply();
-
     }
+
+    public void setUrlPrefs(String url) {
+        SharedPreferences.Editor editor = settings.edit();
+        editor.putString(Const.KEY_PREF_URL, url);
+        editor.apply();
+    }
+
 
 }

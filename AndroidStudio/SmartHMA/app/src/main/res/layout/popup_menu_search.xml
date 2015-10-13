@@ -36,7 +36,7 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/popup_search_layout"
+        android:id="@+id/popup_favourite_collections_layout"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -45,22 +45,50 @@
         android:paddingTop="@dimen/browse_eo_padding">
 
         <pl.wasat.smarthma.customviews.TextViewWithFont
-            android:id="@+id/tv_search"
+            android:id="@+id/tv_favourite_collections"
             style="@style/text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="@dimen/browse_eo_padding"
             android:layout_weight="1"
-            android:text="@string/action_search"
+            android:text="@string/saved_collections"
             android:textColor="@color/text_black" />
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toEndOf="@+id/tv_search"
-            android:layout_toRightOf="@+id/tv_search"
+            android:layout_toEndOf="@+id/tv_favourite_collections"
+            android:layout_toRightOf="@+id/tv_favourite_collections"
             android:layout_weight="1"
-            android:src="@drawable/ic_refresh" />
+            android:src="@drawable/ic_sort" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/popup_favourite_products_layout"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingLeft="@dimen/browse_eo_padding"
+        android:paddingRight="@dimen/browse_eo_padding"
+        android:paddingTop="@dimen/browse_eo_padding">
+
+        <pl.wasat.smarthma.customviews.TextViewWithFont
+            android:id="@+id/tv_favourite_products"
+            style="@style/text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/browse_eo_padding"
+            android:layout_weight="1"
+            android:text="@string/saved_products"
+            android:textColor="@color/text_black" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@+id/tv_favourite_products"
+            android:layout_toRightOf="@+id/tv_favourite_products"
+            android:layout_weight="1"
+            android:src="@drawable/ic_sort" />
     </LinearLayout>
 
     <LinearLayout

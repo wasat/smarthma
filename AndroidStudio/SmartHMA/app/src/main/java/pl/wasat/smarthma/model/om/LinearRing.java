@@ -71,7 +71,7 @@ public class LinearRing implements Serializable {
             pos.setLatLng(ftPt);
             latLngPosList.add(pos);
             //tempStr = tempStr + coorStr[j] + "," + coorStr[j + 1] + ";"
-            //		+ SystemUtils.LINE_SEPARATOR;
+            //  + SystemUtils.LINE_SEPARATOR;
         }
         //Log.i("FOOT", tempStr);
 
@@ -80,12 +80,12 @@ public class LinearRing implements Serializable {
     }
 
 
-	/*
+ /*
      * public List<LatLng> getPosLatLngList() { return posLatLngList; }
-	 * 
-	 * public void setPosLatLngList(List<LatLng> posLatLngList) {
-	 * this.posLatLngList = posLatLngList; }
-	 */
+  * 
+  * public void setPosLatLngList(List<LatLng> posLatLngList) {
+  * this.posLatLngList = posLatLngList; }
+  */
 
     @Override
     public String toString() {

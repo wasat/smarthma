@@ -11,16 +11,14 @@ import pl.wasat.smarthma.parser.model.Mission;
 import pl.wasat.smarthma.parser.model.Page;
 
 /**
- * Created by marcel paduch on 2015-08-11.
+ * Created by marcel paduch on 2015-08-11 00:09.
+ * Part of the project  SmartHMA
  */
 public class Goce extends BaseParser implements MissionInterface {
-    final int ITEMS_COUNT = 1;
-    public final static int MISSION_ID = 5;
-    final static String TITLE = "Goce";
+    private final static int MISSION_ID = 5;
+    private final static String TITLE = "Goce";
 
-    final String EGG = "https://earth.esa.int/web/guest/missions/esa-operational-eo-missions/goce/instruments/egg";
-    final String SSTI = "https://earth.esa.int/web/guest/missions/esa-operational-eo-missions/goce/instruments/ssti";
-    final int JS_POSITION = 9;
+    private final int JS_POSITION = 9;
 
     public Goce(String pageUrl, Context context) {
         super(pageUrl, context);
@@ -30,6 +28,7 @@ public class Goce extends BaseParser implements MissionInterface {
 
     @Override
     public void mainContent() {
+        int ITEMS_COUNT = 1;
         ArrayList<Pair> list = super.getComplexPage(ITEMS_COUNT);
         for (Pair item : list) {
             parserDb.addPage(new Page(EsaEoMissions.CATEGORY_ID, MISSION_ID, (String) item.title, (String) item.content));
@@ -63,11 +62,6 @@ public class Goce extends BaseParser implements MissionInterface {
 
     @Override
     public void milestones() {
-
-    }
-
-    @Override
-    public void imageOfTheWeek() {
 
     }
 
@@ -118,7 +112,9 @@ public class Goce extends BaseParser implements MissionInterface {
         Pair pair = super.getSimplePage(INSTRUMENTS);
 
         parserDb.addPage(new Page(EsaEoMissions.CATEGORY_ID, MISSION_ID, (String) pair.title, (String) pair.content));
+        String EGG = "https://earth.esa.int/web/guest/missions/esa-operational-eo-missions/goce/instruments/egg";
         parserDb.addPage(new Page(EsaEoMissions.CATEGORY_ID, MISSION_ID, EEG_TITLE, EGG));
+        String SSTI = "https://earth.esa.int/web/guest/missions/esa-operational-eo-missions/goce/instruments/ssti";
         parserDb.addPage(new Page(EsaEoMissions.CATEGORY_ID, MISSION_ID, SSTI_TITLE, SSTI));
     }
 

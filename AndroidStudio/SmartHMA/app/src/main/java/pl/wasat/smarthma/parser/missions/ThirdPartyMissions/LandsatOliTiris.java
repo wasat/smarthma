@@ -11,12 +11,12 @@ import pl.wasat.smarthma.parser.model.Mission;
 import pl.wasat.smarthma.parser.model.Page;
 
 /**
- * Created by marcel on 2015-08-11.
+ * Created by marcel on 2015-08-11 00:09.
+ * Part of the project  SmartHMA
  */
 public class LandsatOliTiris extends BaseParser implements SimpleMissionInterface {
-    public final static int MISSION_ID = 24;
-    public final static String TITLE = "Landsat OLI-TIRS";
-    final int ITEMS_COUNT = 4;
+    private final static int MISSION_ID = 24;
+    private final static String TITLE = "Landsat OLI-TIRS";
 
     public LandsatOliTiris(String pageUrl, Context context) {
         super(pageUrl, context);
@@ -26,6 +26,7 @@ public class LandsatOliTiris extends BaseParser implements SimpleMissionInterfac
 
     @Override
     public void mainContent() {
+        int ITEMS_COUNT = 4;
         ArrayList<Pair> list = super.getComplexPage(ITEMS_COUNT);
         for (Pair item : list) {
             parserDb.addPage(new Page(ThirdPartyMissions.CATEGORY_ID, MISSION_ID, (String) item.title, (String) item.content));

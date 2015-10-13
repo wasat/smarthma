@@ -69,77 +69,16 @@ import pl.wasat.smarthma.parser.missions.ThirdPartyMissions.ThirdPartyMissions;
 import pl.wasat.smarthma.parser.missions.ThirdPartyMissions.UkDmc;
 
 /**
- * Created by marcel on 2015-08-04.
+ * Created by marcel on 2015-08-04 00:09.
+ * Part of the project  SmartHMA
  */
 public class Parser {
-    final String probaVurl = "https://earth.esa.int/web/guest/missions/esa-operational-eo-missions/proba-v";
-    final String esaEoMissionsUrl = "https://earth.esa.int/web/guest/missions/esa-operational-eo-missions";
-    final String sentinelUrl = "https://earth.esa.int/web/guest/missions/esa-operational-eo-missions/sentinel-1";
-    final String swarmUrl = "https://earth.esa.int/web/guest/missions/esa-operational-eo-missions/swarm";
-    final String cryoSatUrl = "https://earth.esa.int/web/guest/missions/esa-operational-eo-missions/cryosat";
-    final String smosUrl = "https://earth.esa.int/web/guest/missions/esa-operational-eo-missions/smos";
-    final String goceUrl = "https://earth.esa.int/web/guest/missions/esa-operational-eo-missions/goce";
-    final String envisatUrl = "https://earth.esa.int/web/guest/missions/esa-operational-eo-missions/envisat";
-    final String potentialMissionsUrl = "https://earth.esa.int/web/guest/missions/3rd-party-missions/potential-missions";
     final String sent3Url = "https://earth.esa.int/web/guest/missions/esa-future-missions/sentinel-3";
-    final String proba1Url = "https://earth.esa.int/web/guest/missions/esa-operational-eo-missions/proba";
-    final String ersUrl = "https://earth.esa.int/web/guest/missions/esa-operational-eo-missions/ers";
-    final String esaFutureMissionsUrl = "https://earth.esa.int/web/guest/missions/esa-future-missions";
-    final String sentinel2Url = "https://earth.esa.int/web/guest/missions/esa-future-missions/sentinel-2";
-    final String sentinel3Url = "https://earth.esa.int/web/guest/missions/esa-future-missions/sentinel-3";
-    final String sentinel4Url = "https://earth.esa.int/web/guest/missions/esa-future-missions/sentinel-4";
-    final String sentinel5Url = "https://earth.esa.int/web/guest/missions/esa-future-missions/sentinel-5";
-    final String sentinel5pUrl = "https://earth.esa.int/web/guest/missions/esa-future-missions/sentinel-5p";
-    final String admUrl = "https://earth.esa.int/web/guest/missions/esa-future-missions/adm-aeolus";
-    final String earthCareUrl = "https://earth.esa.int/web/guest/missions/esa-future-missions/earthcare";
-    final String thirdPartyUrl = "https://earth.esa.int/web/guest/missions/3rd-party-missions";
-    final String auraOmiUrl = "https://earth.esa.int/web/guest/missions/3rd-party-missions/current-missions/aura-omi";
-    final String cosmoSkyMedUrl = "https://earth.esa.int/web/guest/missions/3rd-party-missions/current-missions/cosmo-skymed";
-    final String deimos1Url = "https://earth.esa.int/web/guest/missions/3rd-party-missions/current-missions/deimos-1";
-    final String gosatUrl = "https://earth.esa.int/web/guest/missions/3rd-party-missions/current-missions/gosat";
-    final String graceUrl = "https://earth.esa.int/web/guest/missions/3rd-party-missions/current-missions/grace";
-    final String ikonos2Url = "https://earth.esa.int/web/guest/missions/3rd-party-missions/current-missions/ikonos-2";
-    final String irsP6Url = "https://earth.esa.int/web/guest/missions/3rd-party-missions/current-missions/irs-p6";
-    final String kompsat2Url = "https://earth.esa.int/web/guest/missions/3rd-party-missions/current-missions/kompsat-2";
-    final String landsatUrl = "https://earth.esa.int/web/guest/missions/3rd-party-missions/current-missions/landsat-oli-tirs";
-    final String novaAvhrrUrl = "https://earth.esa.int/web/guest/missions/3rd-party-missions/current-missions/noaa-avhrr";
-    final String odinUrl = "https://earth.esa.int/web/guest/missions/3rd-party-missions/current-missions/odin";
-    final String pleiadesUrl = "https://earth.esa.int/web/guest/missions/3rd-party-missions/current-missions/pleiades-hr";
-    final String radarsatUrl = "https://earth.esa.int/web/guest/missions/3rd-party-missions/current-missions/radarsat";
-    final String rapidEyeUrl = "https://earth.esa.int/web/guest/missions/3rd-party-missions/current-missions/rapideye";
-    final String sciSatUrl = "https://earth.esa.int/web/guest/missions/3rd-party-missions/current-missions/scisat";
-    final String seaWifsUrl = "https://earth.esa.int/web/guest/missions/3rd-party-missions/current-missions/seawifs";
-    final String spotUrl = "https://earth.esa.int/web/guest/missions/3rd-party-missions/current-missions/spot";
-    final String spot1Url = "https://earth.esa.int/web/guest/missions/3rd-party-missions/current-missions/spot-1";
-    final String spot2Url = "https://earth.esa.int/web/guest/missions/3rd-party-missions/current-missions/spot-2";
-    final String spot3Url = "https://earth.esa.int/web/guest/missions/3rd-party-missions/current-missions/spot-3";
-    final String spot4Url = "https://earth.esa.int/web/guest/missions/3rd-party-missions/current-missions/spot-4";
-    final String spot5Url = "https://earth.esa.int/web/guest/missions/3rd-party-missions/current-missions/spot-5";
-    final String spot67Url = "https://earth.esa.int/web/guest/missions/3rd-party-missions/current-missions/spot-6-7";
-    final String terraAruaModisUrl = "https://earth.esa.int/web/guest/missions/3rd-party-missions/current-missions/terraaqua-modis";
-    final String ukDmcUrl = "https://earth.esa.int/web/guest/missions/3rd-party-missions/current-missions/uk-dmc";
-    final String historicalMissionsUrl = "https://earth.esa.int/web/guest/missions/3rd-party-missions/historical-missions";
-    final String alosUrl = "https://earth.esa.int/web/guest/missions/3rd-party-missions/historical-missions/alos";
-    final String irsP3Url = "https://earth.esa.int/web/guest/missions/3rd-party-missions/historical-missions/irs-p3";
-    final String jers1Url = "https://earth.esa.int/web/guest/missions/3rd-party-missions/historical-missions/jers-1";
-    final String kompsat1Url = "https://earth.esa.int/web/guest/missions/3rd-party-missions/historical-missions/kompsat-1";
+    private final String landsatUrl = "https://earth.esa.int/web/guest/missions/3rd-party-missions/current-missions/landsat-oli-tirs";
     final String landsatRbvUrl = "https://earth.esa.int/web/guest/missions/3rd-party-missions/historical-missions/landsat-mssrbv";
-    final String landsatTmEtmUrl = "https://earth.esa.int/web/guest/missions/3rd-party-missions/historical-missions/landsat-tmetm";
-    final String nimbus7Url = "https://earth.esa.int/web/guest/missions/3rd-party-missions/historical-missions/nimbus-7";
-    final String quikScatUrl = "https://earth.esa.int/web/guest/missions/3rd-party-missions/historical-missions/quikscat";
-    final String seaSatUrl = "https://earth.esa.int/web/guest/missions/3rd-party-missions/historical-missions/seasat";
     final String potentialMissionUrl = "https://earth.esa.int/web/guest/missions/3rd-party-missions/potential-missions";
-    final String cbersUrl = "https://earth.esa.int/web/guest/missions/3rd-party-missions/potential-missions/cbers";
-    final String oceanSat2Url = "https://earth.esa.int/web/guest/missions/3rd-party-missions/potential-missions/oceansat-2";
-    final String quickBird2Url = "https://earth.esa.int/web/guest/missions/3rd-party-missions/potential-missions/quickbird-2";
-    final String saocomUrl = "https://earth.esa.int/web/guest/missions/3rd-party-missions/potential-missions/saocom";
-    final String terraSarXUrl = "https://earth.esa.int/web/guest/missions/3rd-party-missions/potential-missions/terrasar-x";
-    final String theosUrl = "https://earth.esa.int/web/guest/missions/3rd-party-missions/potential-missions/theos";
-    final String esaEumsatUrl = "https://earth.esa.int/web/guest/missions/esaeumetsat";
-    final String meteosatUrl = "https://earth.esa.int/web/guest/esaeumetsat/msg";
-    final String metOpUrl = "https://earth.esa.int/web/guest/esaeumetsat/metop";
 
-    private Context context;
+    private final Context context;
 
 
     public Parser(Context context) {
@@ -152,20 +91,24 @@ public class Parser {
     }
 
     public void cat0() {
+        String esaEoMissionsUrl = "https://earth.esa.int/web/guest/missions/esa-operational-eo-missions";
         EsaEoMissions esaEoMissions = new EsaEoMissions(esaEoMissionsUrl, context);
         esaEoMissions.mainContent();
 
+        String sentinelUrl = "https://earth.esa.int/web/guest/missions/esa-operational-eo-missions/sentinel-1";
         Sentinel1 sentinel1 = new Sentinel1(sentinelUrl, context);
         sentinel1.mainContent();
         sentinel1.news();
         sentinel1.milestones();
 
+        String swarmUrl = "https://earth.esa.int/web/guest/missions/esa-operational-eo-missions/swarm";
         Swarm swarm = new Swarm(swarmUrl, context);
         swarm.mainContent();
         swarm.faq();
         swarm.news();
         swarm.other();
 
+        String smosUrl = "https://earth.esa.int/web/guest/missions/esa-operational-eo-missions/smos";
         Smos smos = new Smos(smosUrl, context);
         smos.mainContent();
         smos.objectives();
@@ -174,11 +117,13 @@ public class Parser {
         smos.scientificRequirements();
         smos.operations();
 
+        String probaVurl = "https://earth.esa.int/web/guest/missions/esa-operational-eo-missions/proba-v";
         ProbaV probaV = new ProbaV(probaVurl, context);
-        probaV.imageOfTheWeek();
+        //probaV.imageOfTheWeek();
         probaV.mainContent();
         probaV.faq();
 
+        String proba1Url = "https://earth.esa.int/web/guest/missions/esa-operational-eo-missions/proba";
         Proba1 proba1 = new Proba1(proba1Url, context);
         proba1.mainContent();
         proba1.satellite();
@@ -186,6 +131,7 @@ public class Parser {
         proba1.instruments();
         proba1.history();
 
+        String goceUrl = "https://earth.esa.int/web/guest/missions/esa-operational-eo-missions/goce";
         Goce goce = new Goce(goceUrl, context);
         goce.mainContent();
         goce.science();
@@ -195,6 +141,7 @@ public class Parser {
         goce.instruments();
         goce.applications();
 
+        String cryoSatUrl = "https://earth.esa.int/web/guest/missions/esa-operational-eo-missions/cryosat";
         CryoSat cryoSat = new CryoSat(cryoSatUrl, context);
         cryoSat.mainContent();
         cryoSat.overview();
@@ -203,6 +150,7 @@ public class Parser {
         cryoSat.groundSegment();
         cryoSat.instruments();
 
+        String envisatUrl = "https://earth.esa.int/web/guest/missions/esa-operational-eo-missions/envisat";
         Envisat envisat = new Envisat(envisatUrl, context);
         envisat.history();
         envisat.industry();
@@ -214,6 +162,7 @@ public class Parser {
         envisat.operations();
         envisat.applications();
 
+        String ersUrl = "https://earth.esa.int/web/guest/missions/esa-operational-eo-missions/ers";
         Ers ers = new Ers(ersUrl, context);
         ers.mainContent();
         ers.instruments();
@@ -225,29 +174,37 @@ public class Parser {
     public void cat1() {
 
 
+        String esaFutureMissionsUrl = "https://earth.esa.int/web/guest/missions/esa-future-missions";
         EsaFutureMissions esaFutureMissions = new EsaFutureMissions(esaFutureMissionsUrl, context);
         esaFutureMissions.mainContent();
 
+        String sentinel2Url = "https://earth.esa.int/web/guest/missions/esa-future-missions/sentinel-2";
         Sentinel2 sentinel2 = new Sentinel2(sentinel2Url, context);
         sentinel2.mainContent();
 
+        String sentinel3Url = "https://earth.esa.int/web/guest/missions/esa-future-missions/sentinel-3";
         Sentinel3 sentinel3 = new Sentinel3(sentinel3Url, context);
         sentinel3.mainContent();
 
+        String sentinel4Url = "https://earth.esa.int/web/guest/missions/esa-future-missions/sentinel-4";
         Sentinel4 sentinel4 = new Sentinel4(sentinel4Url, context);
         sentinel4.mainContent();
 
+        String sentinel5Url = "https://earth.esa.int/web/guest/missions/esa-future-missions/sentinel-5";
         Sentinel5 sentinel5 = new Sentinel5(sentinel5Url, context);
         sentinel5.mainContent();
 
+        String sentinel5pUrl = "https://earth.esa.int/web/guest/missions/esa-future-missions/sentinel-5p";
         Sentinel5p sentinel5p = new Sentinel5p(sentinel5pUrl, context);
         sentinel5p.mainContent();
 
+        String admUrl = "https://earth.esa.int/web/guest/missions/esa-future-missions/adm-aeolus";
         Adm adm = new Adm(admUrl, context);
         adm.mainContent();
         adm.milestones();
         adm.objectives();
 
+        String earthCareUrl = "https://earth.esa.int/web/guest/missions/esa-future-missions/earthcare";
         EarthCare earthCare = new EarthCare(earthCareUrl, context);
         earthCare.mainContent();
     }
@@ -256,114 +213,148 @@ public class Parser {
     //CAT 2
 
     public void cat2() {
+        String thirdPartyUrl = "https://earth.esa.int/web/guest/missions/3rd-party-missions";
         ThirdPartyMissions thirdPartyMissions = new ThirdPartyMissions(thirdPartyUrl, context);
         thirdPartyMissions.mainContent();
 
+        String auraOmiUrl = "https://earth.esa.int/web/guest/missions/3rd-party-missions/current-missions/aura-omi";
         AuraOmi auraOmi = new AuraOmi(auraOmiUrl, context);
         auraOmi.mainContent();
 
+        String cosmoSkyMedUrl = "https://earth.esa.int/web/guest/missions/3rd-party-missions/current-missions/cosmo-skymed";
         CosmoSkyMed cosmoSkyMed = new CosmoSkyMed(cosmoSkyMedUrl, context);
         cosmoSkyMed.mainContent();
 
+        String deimos1Url = "https://earth.esa.int/web/guest/missions/3rd-party-missions/current-missions/deimos-1";
         Deimos1 deimos1 = new Deimos1(deimos1Url, context);
         deimos1.mainContent();
 
+        String gosatUrl = "https://earth.esa.int/web/guest/missions/3rd-party-missions/current-missions/gosat";
         Gosat gosat = new Gosat(gosatUrl, context);
         gosat.mainContent();
 
+        String graceUrl = "https://earth.esa.int/web/guest/missions/3rd-party-missions/current-missions/grace";
         Grace grace = new Grace(graceUrl, context);
         grace.mainContent();
 
+        String ikonos2Url = "https://earth.esa.int/web/guest/missions/3rd-party-missions/current-missions/ikonos-2";
         Ikonos2 ikonos2 = new Ikonos2(ikonos2Url, context);
         ikonos2.mainContent();
 
+        String irsP6Url = "https://earth.esa.int/web/guest/missions/3rd-party-missions/current-missions/irs-p6";
         IrsP6 irsP6 = new IrsP6(irsP6Url, context);
         irsP6.mainContent();
 
+        String kompsat2Url = "https://earth.esa.int/web/guest/missions/3rd-party-missions/current-missions/kompsat-2";
         Kompsat2 kompsat2 = new Kompsat2(kompsat2Url, context);
         kompsat2.mainContent();
 
         LandsatOliTiris landsatOliTiris = new LandsatOliTiris(landsatUrl, context);
         landsatOliTiris.mainContent();
 
+        String novaAvhrrUrl = "https://earth.esa.int/web/guest/missions/3rd-party-missions/current-missions/noaa-avhrr";
         NovaAvhrr novaAvhrr = new NovaAvhrr(novaAvhrrUrl, context);
         novaAvhrr.mainContent();
 
+        String odinUrl = "https://earth.esa.int/web/guest/missions/3rd-party-missions/current-missions/odin";
         Odin odin = new Odin(odinUrl, context);
         odin.mainContent();
 
+        String pleiadesUrl = "https://earth.esa.int/web/guest/missions/3rd-party-missions/current-missions/pleiades-hr";
         Pleiades pleiades = new Pleiades(pleiadesUrl, context);
         pleiades.mainContent();
 
+        String radarsatUrl = "https://earth.esa.int/web/guest/missions/3rd-party-missions/current-missions/radarsat";
         Radarsat radarsat = new Radarsat(radarsatUrl, context);
         radarsat.mainContent();
 
+        String rapidEyeUrl = "https://earth.esa.int/web/guest/missions/3rd-party-missions/current-missions/rapideye";
         RapidEye rapidEye = new RapidEye(rapidEyeUrl, context);
         rapidEye.mainContent();
 
+        String sciSatUrl = "https://earth.esa.int/web/guest/missions/3rd-party-missions/current-missions/scisat";
         SciSat sciSat = new SciSat(sciSatUrl, context);
         sciSat.mainContent();
 
+        String seaWifsUrl = "https://earth.esa.int/web/guest/missions/3rd-party-missions/current-missions/seawifs";
         SeaWifs seaWifs = new SeaWifs(seaWifsUrl, context);
         seaWifs.mainContent();
 
+        String spotUrl = "https://earth.esa.int/web/guest/missions/3rd-party-missions/current-missions/spot";
         Spot spot = new Spot(spotUrl, context);
         spot.mainContent();
 
+        String spot1Url = "https://earth.esa.int/web/guest/missions/3rd-party-missions/current-missions/spot-1";
         Spot1 spot1 = new Spot1(spot1Url, context);
         spot1.mainContent();
 
+        String spot2Url = "https://earth.esa.int/web/guest/missions/3rd-party-missions/current-missions/spot-2";
         Spot2 spot2 = new Spot2(spot2Url, context);
         spot2.mainContent();
 
+        String spot3Url = "https://earth.esa.int/web/guest/missions/3rd-party-missions/current-missions/spot-3";
         Spot3 spot3 = new Spot3(spot3Url, context);
         spot3.mainContent();
 
+        String spot4Url = "https://earth.esa.int/web/guest/missions/3rd-party-missions/current-missions/spot-4";
         Spot4 spot4 = new Spot4(spot4Url, context);
         spot4.mainContent();
 
+        String spot5Url = "https://earth.esa.int/web/guest/missions/3rd-party-missions/current-missions/spot-5";
         Spot5 spot5 = new Spot5(spot5Url, context);
         spot5.mainContent();
 
+        String spot67Url = "https://earth.esa.int/web/guest/missions/3rd-party-missions/current-missions/spot-6-7";
         Spot67 spot67 = new Spot67(spot67Url, context);
         spot67.mainContent();
 
+        String terraAruaModisUrl = "https://earth.esa.int/web/guest/missions/3rd-party-missions/current-missions/terraaqua-modis";
         TerraAquaModis terraAquaModis = new TerraAquaModis(terraAruaModisUrl, context);
         terraAquaModis.mainContent();
 
+        String ukDmcUrl = "https://earth.esa.int/web/guest/missions/3rd-party-missions/current-missions/uk-dmc";
         UkDmc ukDmc = new UkDmc(ukDmcUrl, context);
         ukDmc.mainContent();
     }
     //CAT 3
 
     public void cat3() {
+        String historicalMissionsUrl = "https://earth.esa.int/web/guest/missions/3rd-party-missions/historical-missions";
         HistoricalMissions historicalMissions = new HistoricalMissions(historicalMissionsUrl, context);
         historicalMissions.mainContent();
 
+        String alosUrl = "https://earth.esa.int/web/guest/missions/3rd-party-missions/historical-missions/alos";
         Alos alos = new Alos(alosUrl, context);
         alos.mainContent();
 
+        String irsP3Url = "https://earth.esa.int/web/guest/missions/3rd-party-missions/historical-missions/irs-p3";
         IrsP3 irsP3 = new IrsP3(irsP3Url, context);
         irsP3.mainContent();
 
+        String jers1Url = "https://earth.esa.int/web/guest/missions/3rd-party-missions/historical-missions/jers-1";
         Jers1 jers1 = new Jers1(jers1Url, context);
         jers1.mainContent();
 
+        String kompsat1Url = "https://earth.esa.int/web/guest/missions/3rd-party-missions/historical-missions/kompsat-1";
         Kompsat1 kompsat1 = new Kompsat1(kompsat1Url, context);
         kompsat1.mainContent();
 
         LandsatRbv landsatRbv = new LandsatRbv(landsatUrl, context);
         landsatRbv.mainContent();
 
+        String landsatTmEtmUrl = "https://earth.esa.int/web/guest/missions/3rd-party-missions/historical-missions/landsat-tmetm";
         LandsatTmEtm landsatTmEtm = new LandsatTmEtm(landsatTmEtmUrl, context);
         landsatTmEtm.mainContent();
 
+        String nimbus7Url = "https://earth.esa.int/web/guest/missions/3rd-party-missions/historical-missions/nimbus-7";
         Nimbus7 nimbus7 = new Nimbus7(nimbus7Url, context);
         nimbus7.mainContent();
 
+        String quikScatUrl = "https://earth.esa.int/web/guest/missions/3rd-party-missions/historical-missions/quikscat";
         QuickScat quickScat = new QuickScat(quikScatUrl, context);
         quickScat.mainContent();
 
+        String seaSatUrl = "https://earth.esa.int/web/guest/missions/3rd-party-missions/historical-missions/seasat";
         SeaSat seaSat = new SeaSat(seaSatUrl, context);
         seaSat.mainContent();
     }
@@ -371,36 +362,46 @@ public class Parser {
     //CAT 4
     public void cat4() {
 
+        String potentialMissionsUrl = "https://earth.esa.int/web/guest/missions/3rd-party-missions/potential-missions";
         PotentialMissions potentialMissions = new PotentialMissions(potentialMissionsUrl, context);
         potentialMissions.mainContent();
 
+        String cbersUrl = "https://earth.esa.int/web/guest/missions/3rd-party-missions/potential-missions/cbers";
         Cbers cbers = new Cbers(cbersUrl, context);
         cbers.mainContent();
 
+        String oceanSat2Url = "https://earth.esa.int/web/guest/missions/3rd-party-missions/potential-missions/oceansat-2";
         OceanSat2 oceanSat2 = new OceanSat2(oceanSat2Url, context);
         oceanSat2.mainContent();
 
+        String quickBird2Url = "https://earth.esa.int/web/guest/missions/3rd-party-missions/potential-missions/quickbird-2";
         QuickBird2 quickBird2 = new QuickBird2(quickBird2Url, context);
         quickBird2.mainContent();
 
+        String saocomUrl = "https://earth.esa.int/web/guest/missions/3rd-party-missions/potential-missions/saocom";
         Saocom saocom = new Saocom(saocomUrl, context);
         saocom.mainContent();
 
+        String terraSarXUrl = "https://earth.esa.int/web/guest/missions/3rd-party-missions/potential-missions/terrasar-x";
         TerraSarX terraSarX = new TerraSarX(terraSarXUrl, context);
         terraSarX.mainContent();
 
+        String theosUrl = "https://earth.esa.int/web/guest/missions/3rd-party-missions/potential-missions/theos";
         Theos theos = new Theos(theosUrl, context);
         theos.mainContent();
     }
     //CAT 5
 
     public void cat5() {
+        String esaEumsatUrl = "https://earth.esa.int/web/guest/missions/esaeumetsat";
         EsaEuemsat esaEuemsat = new EsaEuemsat(esaEumsatUrl, context);
         esaEuemsat.mainContent();
 
+        String meteosatUrl = "https://earth.esa.int/web/guest/esaeumetsat/msg";
         Meteosat meteosat = new Meteosat(meteosatUrl, context);
         meteosat.mainContent();
 
+        String metOpUrl = "https://earth.esa.int/web/guest/esaeumetsat/metop";
         MetOp metOp = new MetOp(metOpUrl, context);
         metOp.mainContent();
 

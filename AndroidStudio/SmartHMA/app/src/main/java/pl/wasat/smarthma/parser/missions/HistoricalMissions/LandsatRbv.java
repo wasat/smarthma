@@ -11,13 +11,12 @@ import pl.wasat.smarthma.parser.model.Mission;
 import pl.wasat.smarthma.parser.model.Page;
 
 /**
- * Created by marcel on 2015-08-13.
+ * Created by marcel on 2015-08-13 00:09.
+ * Part of the project  SmartHMA
  */
 public class LandsatRbv extends BaseParser implements SimpleMissionInterface {
-    public final static int MISSION_ID = 47;
-    public final static String TITLE = "Landsat RBV";
-
-    final int ITEMS_COUNT = 3;
+    private final static int MISSION_ID = 47;
+    private final static String TITLE = "Landsat RBV";
 
     public LandsatRbv(String pageUrl, Context context) {
         super(pageUrl, context);
@@ -27,6 +26,7 @@ public class LandsatRbv extends BaseParser implements SimpleMissionInterface {
 
     @Override
     public void mainContent() {
+        int ITEMS_COUNT = 3;
         ArrayList<Pair> list = super.getComplexPage(ITEMS_COUNT);
         for (Pair item : list) {
             parserDb.addPage(new Page(HistoricalMissions.CATEGORY_ID, MISSION_ID, (String) item.title, (String) item.content));

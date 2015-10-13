@@ -19,7 +19,6 @@ import pl.wasat.smarthma.ui.activities.MissionsActivity;
 import pl.wasat.smarthma.ui.activities.NewsActivity;
 import pl.wasat.smarthma.ui.activities.SearchActivity;
 import pl.wasat.smarthma.ui.menus.CommonMenuHandler;
-import pl.wasat.smarthma.ui.menus.MenuHandler;
 import pl.wasat.smarthma.utils.conn.ConnectionDetector;
 
 /**
@@ -109,7 +108,8 @@ public class StartFragment extends Fragment {
             }
         });
 
-        MenuHandler menuHandler = new CommonMenuHandler(rootView, getActivity(), R.id.menu_button);
+        //MenuHandler menuHandler =
+        new CommonMenuHandler(rootView, getActivity(), R.id.menu_button);
 
         return rootView;
     }

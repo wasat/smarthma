@@ -5,14 +5,18 @@ import com.google.android.gms.maps.GoogleMap;
 import org.acra.ACRA;
 
 public class AcraExtension {
+    public static final String NULL = "Null";
+    public static final String MAP_INSTANCE = "-map_instance";
+    public static final String MAP_CALLED = "-map_called";
+
     private static void mapLifeCycle(String place) {
         ACRA.getErrorReporter().putCustomData(
-                System.currentTimeMillis() + "-map_called", place);
+                System.currentTimeMillis() + MAP_CALLED, place);
     }
 
     private static void mapState(String instance) {
         ACRA.getErrorReporter().putCustomData(
-                System.currentTimeMillis() + "-map_instance", instance);
+                System.currentTimeMillis() + MAP_INSTANCE, instance);
     }
 
     public static void mapCustomLog(String place, GoogleMap map) {
@@ -34,7 +38,7 @@ public class AcraExtension {
         if (map != null) {
             instance = map.toString();
         } else {
-            instance = "Null";
+            instance = NULL;
         }
         return instance;
     }
@@ -44,7 +48,7 @@ public class AcraExtension {
         if (map != null) {
             instance = map.toString();
         } else {
-            instance = "Null";
+            instance = NULL;
         }
         return instance;
     }

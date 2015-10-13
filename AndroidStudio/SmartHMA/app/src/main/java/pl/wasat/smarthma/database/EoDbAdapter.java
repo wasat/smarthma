@@ -9,7 +9,7 @@ import android.database.sqlite.SQLiteDatabase.CursorFactory;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.provider.BaseColumns;
 
-import pl.wasat.smarthma.model.om.EntryOM;
+import pl.wasat.smarthma.model.entry.Entry;
 
 public class EoDbAdapter {
 
@@ -76,7 +76,7 @@ public class EoDbAdapter {
         sqLiteDatabase.insert(DATABASE_TABLE, null, initialValues);
     }
 
-    public EntryOM getBlogListing(String guid) throws SQLException {
+    public Entry getBlogListing(String guid) throws SQLException {
         Cursor mCursor =
                 sqLiteDatabase.query(true, DATABASE_TABLE, new String[]{
                                 KEY_ROWID,
@@ -92,7 +92,7 @@ public class EoDbAdapter {
                         null);
         if (mCursor != null && mCursor.getCount() > 0) {
             mCursor.moveToFirst();
-            EntryOM a = new EntryOM();
+            Entry a = new Entry();
             a.setGuid(mCursor.getString(mCursor.getColumnIndex(KEY_GUID)));
             a.setRead(mCursor.getInt(mCursor.getColumnIndex(KEY_READ)) > 0);
             a.setDbId(mCursor.getLong(mCursor.getColumnIndex(KEY_ROWID)));

@@ -17,12 +17,12 @@ import pl.wasat.smarthma.parser.model.Category;
 import pl.wasat.smarthma.parser.model.Page;
 
 /**
- * Created by marcel on 2015-08-13.
+ * Created by marcel on 2015-08-13 00:09.
+ * Part of the project  SmartHMA
  */
 public class PotentialMissions extends BaseParser implements SimpleMissionInterface {
 
     public final static int CATEGORY_ID = 4;
-    final int ITEMS_COUNT = 6;
 
     public PotentialMissions(String pageUrl, Context context) {
         super(pageUrl, context);
@@ -30,10 +30,11 @@ public class PotentialMissions extends BaseParser implements SimpleMissionInterf
 
     @Override
     public void mainContent() {
-        Pair pair = getImageListPage(ITEMS_COUNT, false);
+        int ITEMS_COUNT = 6;
+        Pair<String, ArrayList<String>> pair = getImageListPage(ITEMS_COUNT, false);
         String contents = super.imageListToContentString(pair);
-        parserDb.addCategory(new Category(CATEGORY_ID, (String) pair.title, contents));
-        ArrayList<String> urlList = super.getImageList((ArrayList<String>) pair.content);
+        parserDb.addCategory(new Category(CATEGORY_ID, pair.title, contents));
+        ArrayList<String> urlList = super.getImageList(pair.content);
         int mission_id = 52;
         String img_name = "MISSION_IMG";
         for (String url :

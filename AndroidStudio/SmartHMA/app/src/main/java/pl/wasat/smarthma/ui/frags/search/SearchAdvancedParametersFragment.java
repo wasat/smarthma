@@ -9,7 +9,6 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -188,7 +187,7 @@ public class SearchAdvancedParametersFragment extends BaseSearchSideParametersFr
 
         @Override
         public void afterTextChanged(Editable s) {
-            Log.i("PARAMS", s.toString());
+            //Log.i("PARAMS", s.toString());
             switch (choosenEditTv) {
                 case EDIT_TEXT_TITLE:
                     mListener.onSearchAdvancedParamsFragmentEditTextChange("title", s.toString());

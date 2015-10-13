@@ -197,7 +197,7 @@ public class TimePicker extends FrameLayout {
 
         mIsAm = (mCurrentHour < 12);
 
-		/* Get the localized am/pm strings and use them in the spinner */
+  /* Get the localized am/pm strings and use them in the spinner */
         DateFormatSymbols dfs = new DateFormatSymbols();
         String[] dfsAmPm = dfs.getAmPmStrings();
         mAmText = dfsAmPm[Calendar.AM];

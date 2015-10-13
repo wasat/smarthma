@@ -23,13 +23,11 @@ public class MissionsActivity extends BaseSmartHMActivity implements
         OnExtendedListFragmentListener, OnMissionsDetailNewFragmentListener {
 
 
-
     private MissionsExtListFragment extendedListFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
 
 
         TextView text = (TextView) findViewById(R.id.action_bar_title);
@@ -65,7 +63,8 @@ public class MissionsActivity extends BaseSmartHMActivity implements
 
         //w przeciwnym wypadku odpalamy async task
         else {
-            AsyncTask task = new ProgressTask(this).execute();
+            //AsyncTask task =
+            new ProgressTask(this).execute();
 
         }
 
@@ -99,12 +98,12 @@ public class MissionsActivity extends BaseSmartHMActivity implements
         /**
          * progress dialog to show user that the backup is processing.
          */
-        private ProgressDialog dialog;
+        private final ProgressDialog dialog;
         /**
          * application context.
          */
-        private MissionsActivity activity;
-        private ParserDb parserDb;
+        private final MissionsActivity activity;
+        private final ParserDb parserDb;
         private MissionsExtListFragment extendedListFragment;
 
         protected void onPreExecute() {
@@ -146,37 +145,36 @@ public class MissionsActivity extends BaseSmartHMActivity implements
         }
 
 
-
         protected Boolean doInBackground(final String... args) {
-            try{
+            try {
 
                 Parser parser = new Parser(activity);
-                publishProgress("Loading ESA EO MISSIONS, please wait...","2");
+                publishProgress("Loading ESA EO MISSIONS, please wait...", "2");
                 parser.cat0();
-                publishProgress("Loading ESA FUTURE MISSIONS, please wait...","9");
+                publishProgress("Loading ESA FUTURE MISSIONS, please wait...", "9");
 
                 parser.cat1();
-                publishProgress("Loading THIRD PARTY MISSIONS, please wait...","16");
+                publishProgress("Loading THIRD PARTY MISSIONS, please wait...", "16");
 
                 parser.cat2();
-                publishProgress("Loading HISTORICAL MISSIONS, please wait...","41");
+                publishProgress("Loading HISTORICAL MISSIONS, please wait...", "41");
 
                 parser.cat3();
-                publishProgress("Loading POTENTIAL MISSIONS, please wait...","50");
+                publishProgress("Loading POTENTIAL MISSIONS, please wait...", "50");
 
                 parser.cat4();
-                publishProgress("Loading OTHER MISSIONS, please wait...","56");
+                publishProgress("Loading OTHER MISSIONS, please wait...", "56");
 
                 parser.cat5();
                 return true;
-            } catch (Exception e){
+            } catch (Exception e) {
                 Log.e("tag", "error", e);
             }
             return false;
         }
 
         @Override
-        protected void onProgressUpdate(String... message){
+        protected void onProgressUpdate(String... message) {
             super.onProgressUpdate();
             dialog.setMessage(message[0]);
             dialog.setProgress(Integer.parseInt(message[1]));

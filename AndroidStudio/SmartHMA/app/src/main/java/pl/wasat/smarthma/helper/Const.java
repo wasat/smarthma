@@ -6,6 +6,10 @@ public class Const {
     public static final String HTTP_SPACEBEL_BASE_URL = "http://geo.spacebel.be/opensearch/request/";
     private static final String HTTP_SMAAD_BASE_URL = "http://smaad.spacebel.be/opensearch/request/";
     private static final String HTTP_ESA_BASE_URL = "http://fedeo.esa.int/opensearch/request/";
+    public static final String EU_BBOX_WEST = "-25.116961";
+    public static final String EU_BBOX_SOUTH = "35.538673";
+    public static final String EU_BBOX_EAST = "51.479717";
+    public static final String EU_BBOX_NORTH = "68.482834";
 
     public static String HTTP_BASE_URL = HTTP_ESA_BASE_URL;
 
@@ -22,8 +26,11 @@ public class Const {
     public static final String KEY_INTENT_RETURN_STOP_SEARCH = "pl.wasat.smarthma.KEY_INTENT_RETURN_STOP_SEARCH";
     public static final String KEY_INTENT_QUERY = "pl.wasat.smarthma.KEY_INTENT_QUERY";
     public static final String KEY_INTENT_FEDEO_REQUEST_PARAMS = "pl.wasat.smarthma.KEY_INTENT_FEDEO_REQUEST_PARAMS";
+    public static final String KEY_INTENT_FEDEO_REQUEST_URL = "pl.wasat.smarthma.KEY_INTENT_FEDEO_REQUEST_URL";
+
     public static final String KEY_ACTION_SEARCH_MISSION_DATA = "pl.wasat.smarthma.KEY_ACTION_SEARCH_MISSION_DATA";
     public static final String KEY_ACTION_SEARCH_COLLECTIONS = "pl.wasat.smarthma.KEY_ACTION_SEARCH_COLLECTIONS";
+    public static final String KEY_ACTION_BROADCAST_FEDEO_REQUEST = "pl.wasat.smarthma.KEY_ACTION_BROADCAST_FEDEO_REQUEST";
 
     public static final int REQUEST_CODE_GLOBAL_SETTINGS = 100;
 
@@ -36,6 +43,7 @@ public class Const {
     public static final String KEY_PREF_BBOX_EAST = "pl.wasat.smarthma.KEY_PREF_BBOX_EAST";
     public static final String KEY_PREF_BBOX_NORTH = "pl.wasat.smarthma.KEY_PREF_BBOX_NORTH";
     public static final String KEY_PREF_QUERY = "pl.wasat.smarthma.KEY_PREF_QUERY";
+    public static final String KEY_PREF_URL = "pl.wasat.smarthma.KEY_PREF_URL";
 
     public static final int SORT_BY_TITLE_ASCENDING = 0;
     public static final int SORT_BY_TITLE_DESCENDING = 1;

@@ -7,7 +7,8 @@ import pl.wasat.smarthma.ui.activities.MissionsActivity;
 import pl.wasat.smarthma.ui.frags.missions.MissionsExtListFragment;
 
 /**
- * Created by Dark Mark on 17/08/2015.
+ * Created by Dark Mark on 17/08/2015 00:09.
+ * Part of the project  SmartHMA
  */
 public class MissionsActivityTests extends ActivityInstrumentationTestCase2<MissionsActivity> {
     public MissionsActivityTests() {

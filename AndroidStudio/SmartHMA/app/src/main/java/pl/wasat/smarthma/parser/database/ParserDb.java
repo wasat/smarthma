@@ -1,7 +1,8 @@
 package pl.wasat.smarthma.parser.database;
 
 /**
- * Created by marcel on 2015-08-04.
+ * Created by marcel on 2015-08-04 00:09.
+ * Part of the project  SmartHMA
  */
 
 import android.content.ContentValues;
@@ -33,52 +34,52 @@ public class ParserDb {
     private static final String PAGES_TABLE = "pages";
 
 
-    public static final String KEY_ID = "_id";
-    public static final String ID_OPTIONS = "INTEGER PRIMARY KEY AUTOINCREMENT";
-    public static final int ID_COLUMN = 0;
+    private static final String KEY_ID = "_id";
+    private static final String ID_OPTIONS = "INTEGER PRIMARY KEY AUTOINCREMENT";
+    private static final int ID_COLUMN = 0;
 
     // stale do tabeli categories
 
-    public static final String KEY_CATEGORY_NAME = "name";
-    public static final String NAME_CATEGORY_OPTIONS = "TEXT NOT NULL";
+    private static final String KEY_CATEGORY_NAME = "name";
+    private static final String NAME_CATEGORY_OPTIONS = "TEXT NOT NULL";
     public static final int NAME_CATEGORY_COLUMN = 1;
 
-    public static final String KEY_CATEGORY_DATA = "data";
-    public static final String DATA_CATEGORY_OPTIONS = "TEXT";
+    private static final String KEY_CATEGORY_DATA = "data";
+    private static final String DATA_CATEGORY_OPTIONS = "TEXT";
     public static final int DATA_CATEGORY_COLUMN = 2;
 
 
     // stale do tabeli missions
 
-    public static final String KEY_MISSIONS_NAME = "name";
-    public static final String MISSIONS_NAME_OPTIONS = "TEXT NOT NULL";
-    public static final int MISIONS_NAME_COLUMN = 1;
+    private static final String KEY_MISSIONS_NAME = "name";
+    private static final String MISSIONS_NAME_OPTIONS = "TEXT NOT NULL";
+    private static final int MISIONS_NAME_COLUMN = 1;
 
-    public static final String KEY_MISSIONS_DATA = "data";
-    public static final String MISSIONS_DATA_OPTIONS = "TEXT";
-    public static final int MISSIONS_DATA_COLUMN = 2;
+    private static final String KEY_MISSIONS_DATA = "data";
+    private static final String MISSIONS_DATA_OPTIONS = "TEXT";
+    private static final int MISSIONS_DATA_COLUMN = 2;
 
-    public static final String KEY_MISSIONS_CATEGORY_ID = "category_id";
-    public static final String MISSIONS_CATEGORY_ID_OPTIONS = "INTEGER DEFAULT -1";
-    public static final int MISSIONS_CATEGORY_ID_COLUMN = 3;
+    private static final String KEY_MISSIONS_CATEGORY_ID = "category_id";
+    private static final String MISSIONS_CATEGORY_ID_OPTIONS = "INTEGER DEFAULT -1";
+    private static final int MISSIONS_CATEGORY_ID_COLUMN = 3;
 
     // stale do tabeli pages
 
-    public static final String KEY_PAGES_NAME = "name";
-    public static final String PAGES_NAME_OPTIONS = "TEXT NOT NULL";
-    public static final int PAGES_NAME_COLUMN = 1;
+    private static final String KEY_PAGES_NAME = "name";
+    private static final String PAGES_NAME_OPTIONS = "TEXT NOT NULL";
+    private static final int PAGES_NAME_COLUMN = 1;
 
-    public static final String KEY_PAGES_DATA = "data";
-    public static final String PAGES_DATA_OPTIONS = "TEXT";
-    public static final int PAGES_DATA_COLUMN = 2;
+    private static final String KEY_PAGES_DATA = "data";
+    private static final String PAGES_DATA_OPTIONS = "TEXT";
+    private static final int PAGES_DATA_COLUMN = 2;
 
-    public static final String KEY_PAGES_CATEGORY_ID = "category_id";
-    public static final String PAGES_CATEGORY_ID_OPTIONS = "INTEGER DEFAULT -1";
-    public static final int PAGES_CATEGORY_ID_COLUMN = 3;
+    private static final String KEY_PAGES_CATEGORY_ID = "category_id";
+    private static final String PAGES_CATEGORY_ID_OPTIONS = "INTEGER DEFAULT -1";
+    private static final int PAGES_CATEGORY_ID_COLUMN = 3;
 
-    public static final String KEY_PAGES_MISSION_ID = "mission_id";
-    public static final String PAGES_MISSION_ID_OPTIONS = "INTEGER DEFAULT -1";
-    public static final int PAGES_MISSION_ID_COLUMN = 4;
+    private static final String KEY_PAGES_MISSION_ID = "mission_id";
+    private static final String PAGES_MISSION_ID_OPTIONS = "INTEGER DEFAULT -1";
+    private static final int PAGES_MISSION_ID_COLUMN = 4;
 
     private static final String TRUNCATE_TABLE_CATEGORIES = "DELETE FROM CATEGORIES;";
     private static final String TRUNCATE_TABLE_MISSIONS = "DELETE FROM MISSIONS;";
@@ -116,7 +117,7 @@ public class ParserDb {
                     "," + PAGES_CREATE_TABLE;
 
     private SQLiteDatabase db;
-    private Context context;
+    private final Context context;
     private DatabaseHelper dbHelper;
 
 
@@ -294,7 +295,7 @@ public class ParserDb {
         return mission;
     }
 
-    public String getMissionImage(Mission mission) {
+    private String getMissionImage(Mission mission) {
         String results = "";
 
 
@@ -360,7 +361,7 @@ public class ParserDb {
         return count;
     }
 
-    public String getMainPageContentString(Mission mission) {
+    private String getMainPageContentString(Mission mission) {
         ArrayList<Page> list = new ArrayList<>();
         String[] columns = {KEY_ID, KEY_PAGES_NAME, KEY_PAGES_DATA, KEY_PAGES_CATEGORY_ID, KEY_PAGES_MISSION_ID};
         Cursor cursor = db.query(PAGES_TABLE, columns, KEY_PAGES_MISSION_ID + "=" + mission.getId() + " AND " + KEY_PAGES_NAME + " LIKE '[MAIN_INFO]%'", null, null, null, null);

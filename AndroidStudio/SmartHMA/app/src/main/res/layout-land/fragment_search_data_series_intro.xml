@@ -51,11 +51,10 @@
                 android:dividerHeight="0dp"
                 android:layout_gravity="left" />
 
-            <fragment
+            <FrameLayout
                 android:id="@+id/mapFromRegionDetails"
                 android:layout_width="300dp"
                 android:layout_height="300dp"
-                android:name="com.google.android.gms.maps.MapFragment"
                 android:layout_margin="10dp"
                 android:layout_marginLeft="25dp"
                 android:layout_gravity="center" />

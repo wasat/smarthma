@@ -35,7 +35,7 @@ class ListProvider implements RemoteViewsFactory {
 
     private void populateListItem() {
         if (RemoteFetchService.listItemList != null)
-            listItemList = (ArrayList<ListItem>) RemoteFetchService.listItemList
+            listItemList = (ArrayList) RemoteFetchService.listItemList
                     .clone();
         else
             listItemList = new ArrayList<>();

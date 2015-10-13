@@ -1,3 +1,4 @@
+/*
 package pl.wasat.smarthma.model.om;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
@@ -8,38 +9,34 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-import pl.wasat.smarthma.model.feed.Group;
+import pl.wasat.smarthma.model.entry.Group;
+import pl.wasat.smarthma.model.entry.Where;
 import pl.wasat.smarthma.model.feed.Link;
 import pl.wasat.smarthma.utils.text.SmartHMAStringStyle;
-
 
 public class EntryOM implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-
     public static final String KEY_RSS_ENTRY = "KEY_RSS_ENTRY";
 
+    private String id="";
+    private ArrayList<Link> links = new ArrayList();
+    private String published="";
+    private String title="";
+    private String updated="";
+    private String summary="";
+    private EarthObservation earthObservation = new EarthObservation();
+    private Where where = new Where();
+    private Group group = new Group();
 
-    private String id;
-    private ArrayList<Link> links;
-    private String published;
-    private String title;
-    private String updated;
-    private String summary;
-    private EarthObservation earthObservation;
-    private Where where;
-    private Group group;
-
-
-    private String guid;
+    private String guid="";
     private long dbId;
-    private String identifier;
-    private String date;
+    private String identifier="";
+    private String date="";
     private boolean read;
     private boolean offline;
     private boolean isFavourite;
-
 
     public String getId() {
         return id;
@@ -50,16 +47,20 @@ public class EntryOM implements Serializable {
     }
 
 
-    /**
+    */
+/**
      * @return the links
-     */
+ *//*
+
     public ArrayList<Link> getLinks() {
         return links;
     }
 
-    /**
+    */
+/**
      * @param links the links to set
-     */
+ *//*
+
     public void setLinks(ArrayList<Link> links) {
         this.links = links;
     }
@@ -197,6 +198,14 @@ public class EntryOM implements Serializable {
         return EqualsBuilder.reflectionEquals(this, other);
     }
 
+    public boolean simpleEquals(EntryOM o)
+    {
+        //return super.equals(other);
+        return title.equals(o.getTitle()) && id.equals(o.getId()) && identifier.equals(o.getIdentifier()) && guid.equals(o.getGuid()) &&
+                date.equals(o.getDate()) && updated.equals(o.getUpdated()) && dbId==o.getDbId() && earthObservation.equals(o.getEarthObservation()) &&
+                group.equals(o.getGroup()) && links.equals(o.getLinks()) && published.equals(o.getPublished()) && summary.equals(o.getSummary()) &&
+                where.equals(o.getWhere());
+    }
 
     private String extractCData(String data) {
         data = data.replaceAll("<!\\[CDATA\\[", "");
@@ -205,3 +214,4 @@ public class EntryOM implements Serializable {
     }
 
 }
+*/

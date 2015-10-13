@@ -11,12 +11,12 @@ import pl.wasat.smarthma.parser.model.Mission;
 import pl.wasat.smarthma.parser.model.Page;
 
 /**
- * Created by marcel paduch on 2015-08-11.
+ * Created by marcel paduch on 2015-08-11 00:09.
+ * Part of the project  SmartHMA
  */
 public class Sentinel2 extends BaseParser implements SimpleMissionInterface {
-    final int ITEMS_COUNT = 2;
-    public final static int MISSION_ID = 9;
-    public final static String TITLE = "Sentinel-2";
+    private final static int MISSION_ID = 9;
+    private final static String TITLE = "Sentinel-2";
 
     public Sentinel2(String pageUrl, Context context) {
         super(pageUrl, context);
@@ -25,6 +25,7 @@ public class Sentinel2 extends BaseParser implements SimpleMissionInterface {
 
     @Override
     public void mainContent() {
+        int ITEMS_COUNT = 2;
         ArrayList<Pair> list = super.getComplexPage(ITEMS_COUNT);
         for (Pair item : list) {
             parserDb.addPage(new Page(EsaFutureMissions.CATEGORY_ID, MISSION_ID, (String) item.title, (String) item.content));

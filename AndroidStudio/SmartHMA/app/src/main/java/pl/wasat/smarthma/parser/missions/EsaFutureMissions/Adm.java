@@ -11,12 +11,13 @@ import pl.wasat.smarthma.parser.model.Mission;
 import pl.wasat.smarthma.parser.model.Page;
 
 /**
- * Created by marcel paduch on 2015-08-11.
+ * Created by marcel paduch on 2015-08-11 00:09.
+ * Part of the project  SmartHMA
  */
 public class Adm extends BaseParser implements MissionInterface {
-    final int ITEMS_COUNT = 2;
     public final static int MISSION_ID = 14;
-    public final static String TITLE = "Adm-Aeolus";
+    private final static String TITLE = "Adm-Aeolus";
+    private static final String MISSION_OBJECTIVES = "mission-objectives";
 
     public Adm(String pageUrl, Context context) {
         super(pageUrl, context);
@@ -26,6 +27,7 @@ public class Adm extends BaseParser implements MissionInterface {
     @Override
     public void mainContent() {
         int except = 1;
+        int ITEMS_COUNT = 2;
         ArrayList<Pair> list = super.getComplexPage(ITEMS_COUNT, except);
         for (Pair item : list) {
             parserDb.addPage(new Page(EsaFutureMissions.CATEGORY_ID, MISSION_ID, (String) item.title, (String) item.content));
@@ -44,11 +46,6 @@ public class Adm extends BaseParser implements MissionInterface {
     }
 
     @Override
-    public void imageOfTheWeek() {
-
-    }
-
-    @Override
     public void faq() {
     }
 
@@ -63,7 +60,7 @@ public class Adm extends BaseParser implements MissionInterface {
 
     @Override
     public void objectives() {
-        final String OBJECTIVES = "mission-objectives";
+        final String OBJECTIVES = MISSION_OBJECTIVES;
         Pair pair = super.getSimplePage(OBJECTIVES);
         parserDb.addPage(new Page(EsaFutureMissions.CATEGORY_ID, MISSION_ID, (String) pair.title, (String) pair.content));
     }

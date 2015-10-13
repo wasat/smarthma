@@ -11,12 +11,12 @@ import pl.wasat.smarthma.parser.model.Mission;
 import pl.wasat.smarthma.parser.model.Page;
 
 /**
- * Created by marcel on 2015-08-13.
+ * Created by marcel on 2015-08-13 00:09.
+ * Part of the project  SmartHMA
  */
 public class SeaWifs extends BaseParser implements SimpleMissionInterface {
-    public final static int MISSION_ID = 33;
-    public final static String TITLE = "SeaWiFS";
-    final int ITEMS_COUNT = 3;
+    private final static int MISSION_ID = 33;
+    private final static String TITLE = "SeaWiFS";
 
     public SeaWifs(String pageUrl, Context context) {
         super(pageUrl, context);
@@ -25,6 +25,7 @@ public class SeaWifs extends BaseParser implements SimpleMissionInterface {
 
     @Override
     public void mainContent() {
+        int ITEMS_COUNT = 3;
         ArrayList<Pair> list = super.getComplexPage(ITEMS_COUNT);
         for (Pair item : list) {
             parserDb.addPage(new Page(ThirdPartyMissions.CATEGORY_ID, MISSION_ID, (String) item.title, (String) item.content));

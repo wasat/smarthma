@@ -26,19 +26,18 @@ import pl.wasat.smarthma.parser.database.ParserDb;
 public abstract class BaseParser {
 
 
-    protected ParserDb parserDb;
+    protected final ParserDb parserDb;
     protected String pageUrl;
-    public Whitelist whitelist;
+    private final Whitelist whitelist;
 
     /**
      * Html and css classes for parsing
      */
 
-    protected String contentClass = ".journal-content-article";
+    private String contentClass = ".journal-content-article";
     protected String titleClass = ".portlet-title";
-    protected String imageListClass = ".asset-abstract";
-    protected String getAll = "?_101_INSTANCE_oSgkQIfPm75k_delta=90";
-    protected String jsNavigationClass = ".tabbed-navigation";
+    protected final String imageListClass = ".asset-abstract";
+    protected final String getAll = "?_101_INSTANCE_oSgkQIfPm75k_delta=90";
 
     protected final int JS_POSITION = 9;
     protected final String NEWS_TITLE = "News";
@@ -67,9 +66,9 @@ public abstract class BaseParser {
 
     /**
      * @param pageUrl Full url of the webpage to parse
-     * @param context
+     * @param context context
      */
-    public BaseParser(String pageUrl, Context context) {
+    protected BaseParser(String pageUrl, Context context) {
         this.pageUrl = pageUrl;
         parserDb = new ParserDb(context);
         parserDb.open();
@@ -84,7 +83,7 @@ public abstract class BaseParser {
      * @param pageName Last part of webpage url, should be defined as constant
      * @return Pair<StringString> with title and contents
      */
-    public Pair<String, String> getSimplePage(String pageName) {
+    protected Pair<String, String> getSimplePage(String pageName) {
         String title;
         String content;
         Document doc;
@@ -111,9 +110,9 @@ public abstract class BaseParser {
      * Parse webpage containing several title - contents sections. Uses pageUrl as url
      *
      * @param itemsCount Number of sections on webpage
-     * @return ArrayList<Pair<StringString> list of pairs containing title - contents
+     * @return ArrayList<Pair> list of pairs containing title - contents
      */
-    public ArrayList<Pair> getComplexPage(int itemsCount) {
+    protected ArrayList<Pair> getComplexPage(int itemsCount) {
         ArrayList<String> contentList = new ArrayList<>();
         ArrayList<String> titleList = new ArrayList<>();
         ArrayList<Pair> finalList = new ArrayList<>();
@@ -142,7 +141,7 @@ public abstract class BaseParser {
      *
      * @param itemsCount  Number of sections on webpage
      * @param excludeList List of positions(starting with zero) of excluded items
-     * @return ArrayList<Pair<StringString> list of pairs containing title - contents
+     * @return ArrayList<Pair> list of pairs containing title - contents
      */
     public ArrayList<Pair> getComplexPage(int itemsCount, ArrayList<Integer> excludeList) {
         ArrayList<String> contentList = new ArrayList<>();
@@ -175,9 +174,9 @@ public abstract class BaseParser {
      *
      * @param itemsCount Number of sections on webpage
      * @param exclude    Position of one item to exclude
-     * @return ArrayList<Pair<StringString> list of pairs containing title - contents
+     * @return ArrayList<Pair> list of pairs containing title - contents
      */
-    public ArrayList<Pair> getComplexPage(int itemsCount, int exclude) {
+    protected ArrayList<Pair> getComplexPage(int itemsCount, int exclude) {
         ArrayList<String> contentList = new ArrayList<>();
         ArrayList<String> titleList = new ArrayList<>();
         ArrayList<Pair> finalList = new ArrayList<>();
@@ -213,7 +212,7 @@ public abstract class BaseParser {
      * @param fullPage Set to true if webpage has pagination and you want all pages, otherwise false
      * @return Pair containing title of the list and arraList containing items
      */
-    public Pair<String, ArrayList<String>> getImageListPage(String pageName, int maxItems, boolean fullPage) {
+    protected Pair<String, ArrayList<String>> getImageListPage(String pageName, int maxItems, boolean fullPage) {
 
         String title;
         ArrayList<String> contentList = new ArrayList<>();
@@ -255,7 +254,7 @@ public abstract class BaseParser {
      * @param fullPage Set to true if webpage has pagination and you want all pages, otherwise false
      * @return Pair containing title of the list and arraList containing items
      */
-    public Pair<String, ArrayList<String>> getImageListPage(int maxItems, boolean fullPage) {
+    protected Pair<String, ArrayList<String>> getImageListPage(int maxItems, boolean fullPage) {
         return getImageListPage("", maxItems, fullPage);
     }
 
@@ -268,7 +267,7 @@ public abstract class BaseParser {
      * @param arrayName Name of the array containing data
      * @return Pair<StringString> with title and contents
      */
-    public ArrayList<Pair> getJsPage(String pageName, int position, String arrayName) {
+    protected ArrayList<Pair> getJsPage(String pageName, int position, String arrayName) {
         final int PRECEDING_CHARS = 3;
         final int FOLLOWING_CHARS = 2;
         ArrayList<String> titleList = new ArrayList<>();
@@ -283,6 +282,7 @@ public abstract class BaseParser {
             }
             Element script = doc.select("script").get(position);
 
+            String jsNavigationClass = ".tabbed-navigation";
             Element nav = doc.select(jsNavigationClass).first();
             Elements li = nav.select("li");
             for (int i = 0; i < li.size(); i++) {
@@ -295,7 +295,7 @@ public abstract class BaseParser {
             while (m.find()) {
                 //	System.out.println(m.group().substring(m.group().indexOf("=") + 1));
                 /*String[] parts = m.group().split("=");
-				contentList.add(parts[1].substring(2, parts[1].length() - 1));*/
+                contentList.add(parts[1].substring(2, parts[1].length() - 1));*/
                 contentList.add(m.group().substring(m.group().indexOf("=") + PRECEDING_CHARS, m.group().length() - FOLLOWING_CHARS));
             }
         } catch (IOException e) {
@@ -315,7 +315,7 @@ public abstract class BaseParser {
      * @param arrayName Name of the array containing data
      * @return Pair<StringString> with title and contents
      */
-    public ArrayList<Pair> getJsPage(int position, String arrayName) {
+    protected ArrayList<Pair> getJsPage(int position, String arrayName) {
         return getJsPage("", position, arrayName);
     }
 
@@ -345,9 +345,9 @@ public abstract class BaseParser {
     }
 
 
-    public String imageListToContentString(Pair pair) {
+    protected String imageListToContentString(Pair pair) {
         StringBuilder stringBuilder = new StringBuilder();
-        ArrayList<String> list = (ArrayList<String>) pair.content;
+        ArrayList list = (ArrayList) pair.content;
         for (int i = 0; i < list.size(); i++) {
             stringBuilder.append(list.get(i));
         }
@@ -366,7 +366,7 @@ public abstract class BaseParser {
 
     public void printImageList(Pair pair) {
         System.out.println(pair.title);
-        ArrayList<String> list = (ArrayList<String>) pair.content;
+        ArrayList list = (ArrayList) pair.content;
         for (int i = 0; i < list.size(); i++) {
             System.out.println(list.get(i));
         }
@@ -387,7 +387,7 @@ public abstract class BaseParser {
      * @param contentsList list of webpage section previously parsed
      * @return list of images url, used for missions list thumbnails
      */
-    public ArrayList<String> getImageList(ArrayList<String> contentsList) {
+    protected ArrayList<String> getImageList(ArrayList<String> contentsList) {
         ArrayList<String> finalList = new ArrayList<>();
         for (String singleEl :
                 contentsList) {

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="pl.wasat.smarthma"
-    android:versionCode="30"
-    android:versionName="1.1.0">
+    android:versionCode="31"
+    android:versionName="1.1.1">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
@@ -89,6 +89,21 @@
             android:name=".ui.activities.GlobalSettingsActivity"
             android:label="@string/global_settings"
             android:theme="@style/AppTheme" />
+        <activity
+            android:name=".ui.activities.FavouriteCollectionsActivity"
+            android:label="@string/activity_name_favourite_collections_results"
+            android:launchMode="singleTop">
+            <intent-filter>
+                <action android:name="android.intent.action.SEARCH" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.app.searchable"
+                android:resource="@xml/searchable" />
+        </activity>
+        <activity
+            android:name=".ui.activities.FavouriteProductsActivity"
+            android:label="@string/activity_name_products_browser" />
 
         <!-- ROBOSPICE SERVICES -->
 

@@ -18,9 +18,9 @@
             android:paddingLeft="@dimen/browse_eo_padding"
             android:paddingRight="16dp"
             android:paddingTop="16dp"
+            android:text="Lorem"
             android:textColor="@color/text_blue"
-            android:textSize="@dimen/search_eo_data_text"
-            android:text="Lorem" />
+            android:textSize="@dimen/search_eo_data_text" />
 
         <pl.wasat.smarthma.customviews.TextViewWithFont
             android:id="@+id/metadata_frag_tv_prod_dates"
@@ -31,204 +31,194 @@
             android:paddingLeft="@dimen/browse_eo_padding"
             android:paddingRight="16dp"
             android:paddingTop="2dp"
-            android:textColor="@color/text_black"
             android:text="lorem"
+            android:textColor="@color/text_black"
             android:textSize="@dimen/search_eo_data_text_medium" />
 
         <View
             android:layout_width="fill_parent"
             android:layout_height="1dp"
-            android:background="@color/action_bar_background"
-            android:layout_marginLeft="@dimen/browse_eo_padding" />
+            android:layout_marginLeft="@dimen/browse_eo_padding"
+            android:background="@color/text_black" />
+        <!--
 
-        <pl.wasat.smarthma.customviews.TextViewWithFont
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            style="@style/textMainTitle"
-            android:paddingLeft="@dimen/browse_eo_padding"
-            android:textSize="@dimen/search_eo_data_text"
-            android:text="Metadata File ID" />
+                <pl.wasat.smarthma.customviews.TextViewWithFont
+                    style="@style/textMainTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="@dimen/browse_eo_padding"
+                    android:text="Metadata File ID"
+                    android:textSize="@dimen/search_eo_data_text" />
 
-        <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:paddingBottom="@dimen/search_eo_data_padding_medium">
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingBottom="@dimen/search_eo_data_padding_medium">
 
-            <pl.wasat.smarthma.customviews.TextViewWithFont
+                    <pl.wasat.smarthma.customviews.TextViewWithFont
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:paddingLeft="@dimen/browse_eo_padding"
+                        android:text="lorem lorem"
+                        android:textSize="@dimen/search_eo_data_text_medium" />
 
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingLeft="@dimen/browse_eo_padding"
-                android:layout_weight="2"
-                android:textSize="@dimen/search_eo_data_text_medium"
-                android:text="lorem lorem" />
+                    <pl.wasat.smarthma.customviews.TextViewWithFont
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="lorem lorem lorem lorem"
+                        android:textColor="@color/action_bar_background"
+                        android:textSize="@dimen/search_eo_data_text_medium" />
+                </LinearLayout>
 
-            <pl.wasat.smarthma.customviews.TextViewWithFont
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:textSize="@dimen/search_eo_data_text_medium"
-                android:textColor="@color/action_bar_background"
-                android:text="lorem lorem lorem lorem
-                " />
-        </LinearLayout>
+                <View
+                    android:layout_width="fill_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginLeft="@dimen/browse_eo_padding"
+                    android:background="@color/action_bar_background" />
 
-        <View
-            android:layout_width="fill_parent"
-            android:layout_height="1dp"
-            android:background="@color/action_bar_background"
-            android:layout_marginLeft="@dimen/browse_eo_padding" />
+                <pl.wasat.smarthma.customviews.TextViewWithFont
+                    style="@style/textMainTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="@dimen/browse_eo_padding"
+                    android:text="Metadata Language"
+                    android:textSize="@dimen/search_eo_data_text" />
 
-        <pl.wasat.smarthma.customviews.TextViewWithFont
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            style="@style/textMainTitle"
-            android:paddingLeft="@dimen/browse_eo_padding"
-            android:textSize="@dimen/search_eo_data_text"
-            android:text="Metadata Language" />
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingBottom="@dimen/search_eo_data_padding_medium">
 
-        <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:paddingBottom="@dimen/search_eo_data_padding_medium">
+                    <pl.wasat.smarthma.customviews.TextViewWithFont
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:paddingLeft="@dimen/browse_eo_padding"
+                        android:text="Language"
+                        android:textSize="@dimen/search_eo_data_text_medium" />
 
-            <pl.wasat.smarthma.customviews.TextViewWithFont
+                    <pl.wasat.smarthma.customviews.TextViewWithFont
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="lorem lorem lorem lorem"
+                        android:textColor="@color/action_bar_background"
+                        android:textSize="@dimen/search_eo_data_text_medium" />
+                </LinearLayout>
 
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingLeft="@dimen/browse_eo_padding"
-                android:layout_weight="2"
-                android:textSize="@dimen/search_eo_data_text_medium"
-                android:text="Language" />
+                <View
+                    android:layout_width="fill_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginLeft="@dimen/browse_eo_padding"
+                    android:background="@color/action_bar_background" />
 
-            <pl.wasat.smarthma.customviews.TextViewWithFont
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:textSize="@dimen/search_eo_data_text_medium"
-                android:textColor="@color/action_bar_background"
-                android:text="lorem lorem lorem lorem
-                " />
-        </LinearLayout>
+                <pl.wasat.smarthma.customviews.TextViewWithFont
+                    style="@style/textMainTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="@dimen/browse_eo_padding"
+                    android:text="Earth Observation Provider Contact"
+                    android:textSize="@dimen/search_eo_data_text" />
 
-        <View
-            android:layout_width="fill_parent"
-            android:layout_height="1dp"
-            android:background="@color/action_bar_background"
-            android:layout_marginLeft="@dimen/browse_eo_padding" />
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
 
-        <pl.wasat.smarthma.customviews.TextViewWithFont
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            style="@style/textMainTitle"
-            android:paddingLeft="@dimen/browse_eo_padding"
-            android:textSize="@dimen/search_eo_data_text"
-            android:text="Earth Observation Provider Contact" />
+                    <pl.wasat.smarthma.customviews.TextViewWithFont
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:paddingLeft="@dimen/browse_eo_padding"
+                        android:text="Contact info"
+                        android:textSize="@dimen/search_eo_data_text_medium" />
 
-        <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
+                    <pl.wasat.smarthma.customviews.TextViewWithFont
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="lorem lorem lorem lorem"
+                        android:textColor="@color/action_bar_background"
+                        android:textSize="@dimen/search_eo_data_text_medium" />
+                </LinearLayout>
 
-            <pl.wasat.smarthma.customviews.TextViewWithFont
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
 
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingLeft="@dimen/browse_eo_padding"
-                android:layout_weight="2"
-                android:textSize="@dimen/search_eo_data_text_medium"
-                android:text="Contact info" />
+                    <pl.wasat.smarthma.customviews.TextViewWithFont
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:paddingLeft="@dimen/browse_eo_padding"
+                        android:text="lorem lorem"
+                        android:textSize="@dimen/search_eo_data_text_medium" />
 
-            <pl.wasat.smarthma.customviews.TextViewWithFont
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:textSize="@dimen/search_eo_data_text_medium"
-                android:textColor="@color/action_bar_background"
-                android:text="lorem lorem lorem lorem
-                " />
-        </LinearLayout>
+                    <pl.wasat.smarthma.customviews.TextViewWithFont
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="lorem lorem lorem lorem"
+                        android:textColor="@color/action_bar_background"
+                        android:textSize="@dimen/search_eo_data_text_medium" />
+                </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
 
-            <pl.wasat.smarthma.customviews.TextViewWithFont
+                    <pl.wasat.smarthma.customviews.TextViewWithFont
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:paddingLeft="@dimen/browse_eo_padding"
+                        android:text="lorem lorem"
+                        android:textSize="@dimen/search_eo_data_text_medium" />
 
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingLeft="@dimen/browse_eo_padding"
-                android:layout_weight="2"
-                android:textSize="@dimen/search_eo_data_text_medium"
-                android:text="lorem lorem" />
+                    <pl.wasat.smarthma.customviews.TextViewWithFont
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="lorem lorem lorem lorem"
+                        android:textColor="@color/action_bar_background"
+                        android:textSize="@dimen/search_eo_data_text_medium" />
+                </LinearLayout>
 
-            <pl.wasat.smarthma.customviews.TextViewWithFont
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:textSize="@dimen/search_eo_data_text_medium"
-                android:textColor="@color/action_bar_background"
-                android:text="lorem lorem lorem lorem
-                " />
-        </LinearLayout>
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingBottom="@dimen/search_eo_data_padding_medium">
 
-        <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
+                    <pl.wasat.smarthma.customviews.TextViewWithFont
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:paddingLeft="@dimen/browse_eo_padding"
+                        android:text="lorem lorem"
+                        android:textSize="@dimen/search_eo_data_text_medium" />
 
-            <pl.wasat.smarthma.customviews.TextViewWithFont
+                    <pl.wasat.smarthma.customviews.TextViewWithFont
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="lorem lorem lorem lorem"
+                        android:textColor="@color/action_bar_background"
+                        android:textSize="@dimen/search_eo_data_text_medium" />
+                </LinearLayout>
 
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingLeft="@dimen/browse_eo_padding"
-                android:layout_weight="2"
-                android:textSize="@dimen/search_eo_data_text_medium"
-                android:text="lorem lorem" />
 
-            <pl.wasat.smarthma.customviews.TextViewWithFont
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:textSize="@dimen/search_eo_data_text_medium"
-                android:textColor="@color/action_bar_background"
-                android:text="lorem lorem lorem lorem
-                " />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:paddingBottom="@dimen/search_eo_data_padding_medium">
-
-            <pl.wasat.smarthma.customviews.TextViewWithFont
-
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingLeft="@dimen/browse_eo_padding"
-                android:layout_weight="2"
-                android:textSize="@dimen/search_eo_data_text_medium"
-                android:text="lorem lorem" />
-
-            <pl.wasat.smarthma.customviews.TextViewWithFont
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:textSize="@dimen/search_eo_data_text_medium"
-                android:textColor="@color/action_bar_background"
-                android:text="lorem lorem lorem lorem
-                " />
-        </LinearLayout>
-
-        <View
-            android:layout_width="fill_parent"
-            android:layout_height="1dp"
-            android:background="@color/action_bar_background"
-            android:layout_marginLeft="@dimen/browse_eo_padding" />
+                <View
+                    android:layout_width="fill_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginLeft="@dimen/browse_eo_padding"
+                    android:background="@color/action_bar_background" />-->
     </LinearLayout>
 
 </ScrollView>

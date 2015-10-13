@@ -13,7 +13,6 @@ import java.util.Calendar;
 
 import pl.wasat.smarthma.R;
 import pl.wasat.smarthma.database.SearchHistory;
-import pl.wasat.smarthma.helper.Const;
 import pl.wasat.smarthma.kindle.AmznAreaPickerMapFragment.OnAmznAreaPickerMapFragmentListener;
 import pl.wasat.smarthma.ui.frags.base.BaseSearchSideParametersFragment;
 import pl.wasat.smarthma.ui.frags.common.AreaPickerMapFragment.OnAreaPickerMapFragmentListener;
@@ -120,13 +119,13 @@ public class SearchActivity extends BaseSmartHMActivity implements
         return true;
     }
 
-    @Override
+/*    @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == Const.REQUEST_CODE_GLOBAL_SETTINGS) {
             //sideParamsPanel.checkDeviceAndLoadMapPicker(R.id.activity_base_details_container);
         }
-    }
+    }*/
 
     public void setQuery(String query) {
         if (searchMainPanel != null) {

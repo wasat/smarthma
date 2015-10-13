@@ -22,12 +22,12 @@ import pl.wasat.smarthma.kindle.AmznAreaPickerMapFragment.OnAmznAreaPickerMapFra
 import pl.wasat.smarthma.kindle.AmznBaseMapFragment;
 import pl.wasat.smarthma.model.FedeoRequestParams;
 import pl.wasat.smarthma.model.iso.EntryISO;
-import pl.wasat.smarthma.ui.frags.base.BaseMapFragment;
 import pl.wasat.smarthma.ui.frags.browse.BrowseCollectionFirstDetailFragment;
 import pl.wasat.smarthma.ui.frags.browse.CollectionEmptyDetailsFragment;
 import pl.wasat.smarthma.ui.frags.browse.CollectionEmptyDetailsFragment.OnCollectionEmptyDetailsFragmentListener;
 import pl.wasat.smarthma.ui.frags.browse.CollectionsGroupListFragment;
 import pl.wasat.smarthma.ui.frags.browse.CollectionsListFragment.OnCollectionsListFragmentListener;
+import pl.wasat.smarthma.ui.frags.common.AreaPickerMapFragment;
 import pl.wasat.smarthma.ui.frags.common.AreaPickerMapFragment.OnAreaPickerMapFragmentListener;
 import pl.wasat.smarthma.ui.frags.common.CollectionDetailsFragment.OnCollectionDetailsFragmentListener;
 import pl.wasat.smarthma.ui.frags.common.DatePickerFragment.OnDatePickerFragmentListener;
@@ -103,15 +103,46 @@ public class CollectionsDefinitionActivity extends BaseCollectionsActivity
     @Override
     public void onBackPressed() {
         if (dismissMenuOnBackPressed()) return;
+
         FragmentManager fm = getSupportFragmentManager();
         int bsec = fm.getBackStackEntryCount();
-        if (bsec > 1) {
-            fm.popBackStack();
+        if (isBackStackEmpty(bsec)) return;
+
+        String bstEntryName = fm.getBackStackEntryAt(bsec - 1).getName();
+        if (bstEntryName.equalsIgnoreCase("CollectionEmptyDetailsFragment")
+                || bstEntryName.equalsIgnoreCase("CollectionDetailsFragment")) {
+            while (bsec > 0) {
+                fm.popBackStackImmediate();
+                bsec = fm.getBackStackEntryCount();
+/*                bstEntryName = fm.getBackStackEntryAt(bsec - 1).getName();
+                if (bstEntryName.equalsIgnoreCase("CollectionEmptyDetailsFragment")
+                        || bstEntryName.equalsIgnoreCase("CollectionDetailsFragment"))
+                    bsec = 1;*/
+            }
+        } else if (bstEntryName.equalsIgnoreCase("AreaPickerMapFragment")) {
+            while (bstEntryName.equalsIgnoreCase("AreaPickerMapFragment")) {
+                fm.popBackStackImmediate();
+                bsec = fm.getBackStackEntryCount();
+                if (isBackStackEmpty(bsec)) return;
+                bstEntryName = fm.getBackStackEntryAt(bsec - 1).getName();
+            }
+        } else if (bstEntryName.equalsIgnoreCase("CollectionsListFragment")) {
+            fm.popBackStackImmediate();
         } else {
             finish();
             super.onBackPressed();
         }
     }
+
+    private boolean isBackStackEmpty(int bsec) {
+        if (bsec == 0) {
+            finish();
+            super.onBackPressed();
+            return true;
+        }
+        return false;
+    }
+
 
     /**
      *
@@ -164,13 +195,15 @@ public class CollectionsDefinitionActivity extends BaseCollectionsActivity
             transaction.replace(R.id.activity_base_details_container, amznBaseMapFrag);
             transaction.commit();
         } else {
-            BaseMapFragment baseMapFrag = new BaseMapFragment();
+            AreaPickerMapFragment areaPickerMapFragment = new AreaPickerMapFragment();
             Bundle args = new Bundle();
-            baseMapFrag.setArguments(args);
+            areaPickerMapFragment.setArguments(args);
             FragmentTransaction transaction = getSupportFragmentManager()
                     .beginTransaction();
-            transaction.replace(R.id.activity_base_details_container, baseMapFrag);
-            transaction.commit();
+            transaction.replace(R.id.activity_base_details_container, areaPickerMapFragment);
+            transaction
+                    .addToBackStack("AreaPickerMapFragment")
+                    .commit();
         }
     }
 

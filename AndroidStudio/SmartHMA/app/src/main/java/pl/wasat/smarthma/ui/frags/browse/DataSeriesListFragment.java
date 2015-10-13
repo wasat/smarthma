@@ -196,7 +196,7 @@ public class DataSeriesListFragment extends BaseSpiceListFragment {
         if (browseRequest != null) {
 
             getActivity().setProgressBarIndeterminateVisibility(true);
-            getSpiceManager().execute(new FedeoSearchRequest(browseRequest, 1), this);
+            getSpiceManager().execute(new FedeoSearchRequest(getActivity(), browseRequest, 1), this);
         }
     }
 

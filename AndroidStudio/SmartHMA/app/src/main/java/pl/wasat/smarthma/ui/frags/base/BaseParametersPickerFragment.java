@@ -136,7 +136,9 @@ public class BaseParametersPickerFragment extends BaseSpiceFragment {
                 .beginTransaction()
                 .replace(container_id,
                         areaPickerMapFragment)
-                .addToBackStack("AreaPickerMapFragment").commit();
+                .addToBackStack("AreaPickerMapFragment")
+                .commit();
+
     }
 
     void obtainGooglePosition() {
@@ -166,10 +168,11 @@ public class BaseParametersPickerFragment extends BaseSpiceFragment {
             bboxNorth = String.format(Locale.UK, "% 4f",
                     (float) location.getLatitude() + 0.5);
         } else {
-            bboxWest = "0.0";
-            bboxSouth = "0.0";
-            bboxEast = "0.0";
-            bboxNorth = "0.0";
+            //EUROPE
+            bboxWest = Const.EU_BBOX_WEST;
+            bboxSouth = Const.EU_BBOX_SOUTH;
+            bboxEast = Const.EU_BBOX_EAST;
+            bboxNorth = Const.EU_BBOX_NORTH;
         }
 
         tvAreaSWLat.setText(bboxSouth);

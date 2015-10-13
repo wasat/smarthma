@@ -153,7 +153,7 @@ public abstract class MenuHandler {
         return clickableViews;
     }
 
-    protected void addCommonListeners() {
+    void addCommonListeners() {
         LinearLayout settingsLayout = (LinearLayout) layout.findViewById(R.id.popup_menu_item_settings);
         clickableViews.add(settingsLayout);
         settingsLayout.setOnClickListener(new View.OnClickListener() {

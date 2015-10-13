@@ -2,6 +2,7 @@ package pl.wasat.smarthma.ui.frags.base;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -9,11 +10,20 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.LatLngBounds;
+
 import java.util.ArrayList;
 
 import pl.wasat.smarthma.R;
 import pl.wasat.smarthma.adapter.IntroGridAdapter;
 import pl.wasat.smarthma.model.feed.Feed;
+import pl.wasat.smarthma.preferences.SharedPrefs;
+import pl.wasat.smarthma.utils.draw.MapDrawings;
 
 /**
  * A simple {@link android.support.v4.app.Fragment} subclass.
@@ -21,15 +31,8 @@ import pl.wasat.smarthma.model.feed.Feed;
 public class BaseFeedSummaryFragment extends Fragment {
     protected static final String KEY_FEED_SUMMARY = "pl.wasat.smarthma.KEY_FEED_SUMMARY";
 
-    private Feed resultFeed;
+    protected Feed resultFeed;
     private TextView tvTitle;
-    private TextView tvSearchTerms;
-    private TextView tvParentName;
-    private TextView tvTimeStart;
-    private TextView tvTimeEnd;
-    private TextView tvArea;
-    private TextView tvUpdated;
-    private TextView tvTotal;
     private TextView tvItemsFrom;
     private TextView tvItemsTo;
     private TextView tvItemsTotal;
@@ -55,26 +58,11 @@ public class BaseFeedSummaryFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         View rootView = inflater.inflate(
                 R.layout.fragment_search_data_series_intro, container, false);
 
         tvTitle = (TextView) rootView
                 .findViewById(R.id.search_frag_ds_intro_title);
-/*        tvSearchTerms = (TextView) rootView
-                .findViewById(R.id.search_frag_ds_intro_search_terms_value);
-        tvParentName = (TextView) rootView
-                .findViewById(R.id.search_frag_ds_intro_collection_value);
-        tvTimeStart = (TextView) rootView
-                .findViewById(R.id.search_frag_ds_intro_time_start_value);
-        tvTimeEnd = (TextView) rootView
-                .findViewById(R.id.search_frag_ds_intro_time_end_value);
-        tvArea = (TextView) rootView
-                .findViewById(R.id.search_frag_ds_intro_area_value);
-        tvUpdated = (TextView) rootView
-                .findViewById(R.id.search_frag_ds_intro_updated_value);
-        tvTotal = (TextView) rootView
-                .findViewById(R.id.search_frag_ds_intro_total_value);*/
         tvItemsFrom = (TextView) rootView
                 .findViewById(R.id.search_frag_ds_intro_items_from_value);
         tvItemsTo = (TextView) rootView
@@ -96,6 +84,8 @@ public class BaseFeedSummaryFragment extends Fragment {
         initUITexts();
         initUIButtons();
 
+        setUpStaticMap();
+
         ArrayList<String> adapterNamesList = resultFeed.getQuery().getParamNameList();
         ArrayList<String> adapterValuesList = resultFeed.getQuery().getParamValueList();
         adapterNamesList.add("generated");
@@ -104,39 +94,82 @@ public class BaseFeedSummaryFragment extends Fragment {
         IntroGridAdapter adapter = new IntroGridAdapter(getActivity(), adapterNamesList, adapterValuesList);
         ListView gridView = (ListView) rootView.findViewById(R.id.intro_grid_layout);
         gridView.setAdapter(adapter);
-/*        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view,
-                                    int position, long id) {
-                Toast.makeText(getActivity(), "You Clicked at " + resultFeed.getQuery().getParamValueList().get(position), Toast.LENGTH_SHORT).show();
-
-            }
-        });*/
 
         return rootView;
+    }
+
+/*    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        Fragment fragment = (getChildFragmentManager().findFragmentById(R.id.mapFromRegionDetails));
+        FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+        ft.remove(fragment);
+        ft.commit();
+    }*/
+
+    private void setUpStaticMap() {
+        SupportMapFragment supportMapFragment = SupportMapFragment.newInstance();
+        FragmentTransaction fragmentTransaction =
+                getChildFragmentManager().beginTransaction();
+        fragmentTransaction.add(R.id.mapFromRegionDetails, supportMapFragment);
+        fragmentTransaction.commit();
+
+        supportMapFragment.getMapAsync(new OnMapReadyCallback() {
+            @Override
+            public void onMapReady(final GoogleMap googleMap) {
+                googleMap.setOnMapLoadedCallback(new GoogleMap.OnMapLoadedCallback() {
+                    @Override
+                    public void onMapLoaded() {
+                        setupMapObjects(googleMap);
+                    }
+                });
+            }
+        });
+    }
+
+    protected void setupMapObjects(GoogleMap googleMap) {
+        googleMap.getUiSettings().setAllGesturesEnabled(false);
+        googleMap.getUiSettings().setZoomControlsEnabled(false);
+
+        //Centre of EU
+        googleMap.moveCamera(CameraUpdateFactory.newLatLngBounds(obtainBoundsFromShared(), 30));
+
+        MapDrawings mapDrawings = new MapDrawings();
+        SharedPrefs sharedPrefs = new SharedPrefs(getActivity());
+        float[] bbox = sharedPrefs.getBboxPrefs();
+        googleMap.addPolygon(mapDrawings.drawArea(bbox));
+    }
+
+    private LatLngBounds obtainBoundsFromShared() {
+        SharedPrefs sharedPrefs = new SharedPrefs(getActivity());
+        float[] bbox = sharedPrefs.getBboxPrefs();
+
+        LatLngBounds.Builder boundsBuilder = new LatLngBounds.Builder();
+        boundsBuilder.include(new LatLng(bbox[1], bbox[0]));
+        boundsBuilder.include(new LatLng(bbox[3], bbox[2]));
+
+        return boundsBuilder.build();
+
     }
 
     /**
      *
      */
     private void initUITexts() {
-        tvTitle.setText(resultFeed.getTitle());
-        //tvSearchTerms.setText(resultFeed.getQuery().getSearchTerms());
-        //tvParentName.setText(resultFeed.getQuery().getDcSubject());
-        //tvTimeStart.setText(resultFeed.getQuery().getTimeStart());
-        //tvTimeEnd.setText(resultFeed.getQuery().getTimeEnd());
-        //tvArea.setText(resultFeed.getQuery().getGeoBox());
-        //tvUpdated.setText(resultFeed.getUpdated());
-        //tvTotal.setText(resultFeed.getTotalResults().getText());
-        tvItemsFrom.setText(resultFeed.getStartIndex().getText());
-        int toVal = Integer.valueOf(resultFeed.getStartIndex().getText())
-                + Integer.valueOf(resultFeed.getItemsPerPage().getText()) - 1;
-        if (toVal > Integer.valueOf(resultFeed.getTotalResults().getText())) {
-            toVal = Integer.valueOf(resultFeed.getTotalResults().getText());
+        int startIdx = castToInt(resultFeed.getStartIndex().getText());
+        int itemsPerPage = castToInt(resultFeed.getItemsPerPage().getText());
+        int totalRes = castToInt(resultFeed.getTotalResults().getText());
+
+        int toVal = startIdx + itemsPerPage - 1;
+        if (toVal > totalRes) toVal = totalRes;
+        if (totalRes == 0) {
+            toVal = totalRes;
+            startIdx = totalRes;
         }
+        tvTitle.setText(resultFeed.getTitle());
+        tvItemsFrom.setText(String.valueOf(startIdx));
         tvItemsTo.setText(String.valueOf(toVal));
-        tvItemsTotal.setText(resultFeed.getTotalResults().getText());
+        tvItemsTotal.setText(String.valueOf(totalRes));
     }
 
     private void initUIButtons() {
@@ -198,4 +231,12 @@ public class BaseFeedSummaryFragment extends Fragment {
     protected void loadNavSearch(String linkHref) {
     }
 
+    private int castToInt(String value) {
+        int resInt = 0;
+        if (!value.equals("") && value.matches("^\\d+$")) {
+            resInt = Integer.valueOf(value);
+        }
+        return resInt;
+    }
 }
+

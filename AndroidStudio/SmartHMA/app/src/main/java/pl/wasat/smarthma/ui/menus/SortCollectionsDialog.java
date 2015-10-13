@@ -4,8 +4,8 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
-import android.util.Log;
 
 import java.util.List;
 
@@ -27,6 +27,7 @@ public class SortCollectionsDialog extends DialogFragment {
         this.activity = activity;
     }
 
+    @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         // Use the Builder class for convenient dialog construction
@@ -35,7 +36,7 @@ public class SortCollectionsDialog extends DialogFragment {
         builder.setTitle(R.string.action_sort)
                 .setItems(R.array.sorting_modes, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
-                        Log.d("ZX", which + "");
+                        //Log.d("ZX", which + "");
                         try {
                             if (which == 0) {
                                 SmartHMApplication.sortingType = Const.SORT_BY_TITLE_ASCENDING;
@@ -47,7 +48,7 @@ public class SortCollectionsDialog extends DialogFragment {
                                 SmartHMApplication.sortingType = Const.SORT_BY_DATE_DESCENDING;
                             }
 
-                            Log.d("ZX", "Sorting entries.");
+                            //Log.d("ZX", "Sorting entries.");
                             DataSorter sorter = new DataSorter();
                             SearchListFragment searchListFrag = activity.getListFragment();
                             List<EntryISO> entries = searchListFrag.getEntries();

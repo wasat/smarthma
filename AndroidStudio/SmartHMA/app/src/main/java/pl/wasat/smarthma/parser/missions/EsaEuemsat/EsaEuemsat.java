@@ -17,10 +17,10 @@ import pl.wasat.smarthma.parser.model.Category;
 import pl.wasat.smarthma.parser.model.Page;
 
 /**
- * Created by marcel on 2015-08-13.
+ * Created by marcel on 2015-08-13 00:09.
+ * Part of the project  SmartHMA
  */
 public class EsaEuemsat extends BaseParser implements SimpleMissionInterface {
-    final int ITEMS_COUNT = 2;
     public final static int CATEGORY_ID = 5;
 
     public EsaEuemsat(String pageUrl, Context context) {
@@ -29,11 +29,12 @@ public class EsaEuemsat extends BaseParser implements SimpleMissionInterface {
 
     @Override
     public void mainContent() {
-        Pair pair = getImageListPage(ITEMS_COUNT, false);
+        int ITEMS_COUNT = 2;
+        Pair<String, ArrayList<String>> pair = getImageListPage(ITEMS_COUNT, false);
         String contents = super.imageListToContentString(pair);
-        parserDb.addCategory(new Category(CATEGORY_ID, (String) pair.title, contents));
+        parserDb.addCategory(new Category(CATEGORY_ID, pair.title, contents));
         System.out.println(contents);
-        ArrayList<String> urlList = super.getImageList((ArrayList<String>) pair.content);
+        ArrayList<String> urlList = super.getImageList(pair.content);
         System.out.println(urlList.size());
         int mission_id = 58;
         String img_name = "MISSION_IMG";

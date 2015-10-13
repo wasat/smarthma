@@ -29,7 +29,14 @@ public class BaseDateTimeAreaContainerFragment extends BaseParametersPickerFragm
         setDateTime();
 
         loadBboxPrefs();
+
+        // loadSearchQuery();
     }
+
+/*    private void loadSearchQuery()
+    {
+        String query = sharedPrefs.getQueryPrefs();
+    }*/
 
     private void loadDateTimePrefs() {
         String startDateTime = sharedPrefs.getStartDateTimePrefs();

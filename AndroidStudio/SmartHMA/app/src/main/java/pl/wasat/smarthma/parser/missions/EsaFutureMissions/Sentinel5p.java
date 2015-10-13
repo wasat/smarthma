@@ -11,11 +11,12 @@ import pl.wasat.smarthma.parser.model.Mission;
 import pl.wasat.smarthma.parser.model.Page;
 
 /**
- * Created by marcel paduch on 2015-08-11.
+ * Created by marcel paduch on 2015-08-11 00:09.
+ * Part of the project  SmartHMA
  */
 public class Sentinel5p extends BaseParser implements SimpleMissionInterface {
-    public final static int MISSION_ID = 13;
-    public final static String TITLE = "Sentinel-5p";
+    private final static int MISSION_ID = 13;
+    private final static String TITLE = "Sentinel-5p";
 
     public Sentinel5p(String pageUrl, Context context) {
         super(pageUrl, context);

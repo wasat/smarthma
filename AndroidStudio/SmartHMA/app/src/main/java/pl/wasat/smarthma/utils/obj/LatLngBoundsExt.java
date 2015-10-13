@@ -23,4 +23,11 @@ public class LatLngBoundsExt {
         northeast = latLngNE;
     }
 
+    @Override
+    public String toString() {
+        return "LatLngBoundsExt{" +
+                "southwest=" + southwest +
+                ", northeast=" + northeast +
+                '}';
+    }
 }

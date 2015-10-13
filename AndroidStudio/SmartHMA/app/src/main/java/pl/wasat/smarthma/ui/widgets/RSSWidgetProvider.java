@@ -6,6 +6,7 @@ import android.appwidget.AppWidgetProvider;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.support.annotation.NonNull;
 import android.util.Log;
 import android.widget.RemoteViews;
 
@@ -33,7 +34,7 @@ public class RSSWidgetProvider extends AppWidgetProvider {
     @Override
     public void onUpdate(Context context, AppWidgetManager appWidgetManager,
                          int[] appWidgetIds) {
-        final int N = appWidgetIds.length;
+        //final int N = appWidgetIds.length;
         for (int appWidgetId : appWidgetIds) {
             Intent serviceIntent = new Intent(context, RemoteFetchService.class);
             serviceIntent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID,
@@ -98,7 +99,7 @@ public class RSSWidgetProvider extends AppWidgetProvider {
      * listItemList as data
      */
     @Override
-    public void onReceive(Context context, Intent intent) {
+    public void onReceive(@NonNull Context context, @NonNull Intent intent) {
         super.onReceive(context, intent);
         if (intent.getAction().equals(DATA_FETCHED))
         {
@@ -111,8 +112,8 @@ public class RSSWidgetProvider extends AppWidgetProvider {
             appWidgetManager.updateAppWidget(appWidgetId, remoteViews);
         } else if (intent.getAction().equals(TOAST_ACTION)) {
             // Receive broadcast intent for each item in the list.
-            int appWidgetId = intent.getIntExtra(AppWidgetManager.EXTRA_APPWIDGET_ID,
-                    AppWidgetManager.INVALID_APPWIDGET_ID);
+/*            int appWidgetId = intent.getIntExtra(AppWidgetManager.EXTRA_APPWIDGET_ID,
+                    AppWidgetManager.INVALID_APPWIDGET_ID);*/
             int viewIndex = intent.getIntExtra(EXTRA_ITEM, 0);
             String viewAuthor = intent.getStringExtra(ARTICLE_AUTHOR);
             String message = "(" + viewIndex + ") " + viewAuthor;
@@ -132,8 +133,8 @@ public class RSSWidgetProvider extends AppWidgetProvider {
         else if (intent.getAction().equals(TOAST_ACTION))
         {
             // Receive broadcast intent for each item in the list.
-            int appWidgetId = intent.getIntExtra(AppWidgetManager.EXTRA_APPWIDGET_ID,
-                    AppWidgetManager.INVALID_APPWIDGET_ID);
+/*            int appWidgetId = intent.getIntExtra(AppWidgetManager.EXTRA_APPWIDGET_ID,
+                    AppWidgetManager.INVALID_APPWIDGET_ID);*/
             int viewIndex = intent.getIntExtra(EXTRA_ITEM, 0);
             String viewAuthor = intent.getStringExtra(ARTICLE_AUTHOR);
             String message = "("+viewIndex+") " + viewAuthor;

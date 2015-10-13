@@ -27,6 +27,11 @@ public class GlobalPreferences {
 
     public Boolean getIsParamsSaved() {
         String key = context.getString(R.string.pref_key_checkbox_search_params_save);
+        return globalSharedPreferences.getBoolean(key, true);
+    }
+
+    public Boolean getIsDebugMode() {
+        String key = context.getString(R.string.pref_key_checkbox_debug_mode);
         return globalSharedPreferences.getBoolean(key, false);
     }
 

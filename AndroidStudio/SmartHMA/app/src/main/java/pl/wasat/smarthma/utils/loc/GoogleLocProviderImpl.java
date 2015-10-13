@@ -17,8 +17,8 @@ public abstract class GoogleLocProviderImpl extends BroadcastReceiver implements
     public static final String GOOGLE_PROVIDER_TYPE = "GOOGLE_PROVIDER_TYPE";
     public static final String IS_SUCCESS = "IS_SUCCESS";
     public static final String GOOGLE_LOC_BROADCAST_SENT = "pl.wasat.navin.GOOGLE_LOC_BROADCAST_SENT";
-    public static final Double DEFAULT_LAT = 50.117286; //Centre of EU
-    public static final Double DEFAULT_LON = 9.247769;  //Centre of EU
+    private static final Double DEFAULT_LAT = 50.117286; //Centre of EU
+    private static final Double DEFAULT_LON = 9.247769;  //Centre of EU
 
     private final Context context;
     private FusedLocProviderImpl fusedLocProvider;
@@ -40,11 +40,20 @@ public abstract class GoogleLocProviderImpl extends BroadcastReceiver implements
         isStarted = true;
     }
 
-    private void initDefaulfPosition() {
-        calculatedPosition = new Location("GOOGLE_DEFAULT");
+    private void initDefaultPosition() {
         //Centre of EU
+        calculatedPosition = new Location("GOOGLE_DEFAULT");
         calculatedPosition.setLatitude(DEFAULT_LAT);
         calculatedPosition.setLongitude(DEFAULT_LON);
+    }
+
+    private void initNullPosition() {
+        try {
+            calculatedPosition = null;
+            throw new Exception("Start position is not possible to calculation");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private void onInitialise(String providerName) {
@@ -68,11 +77,7 @@ public abstract class GoogleLocProviderImpl extends BroadcastReceiver implements
             Log.i("SMARTHMA", "Start position is not possible to calculation. Start position is set on centre of EU");
             stop();
             //buildAndSendBroadcast(true);
-/*            try {
-                throw new Exception("Start position is not possible to calculation");
-            } catch (Exception e) {
-                e.printStackTrace();
-            }*/
+
         }
     }
 
@@ -97,9 +102,11 @@ public abstract class GoogleLocProviderImpl extends BroadcastReceiver implements
             onLocationReceived(calculatedPosition);
         } else {
             onInitialiseFailed(intentResult);
-            if (intentResult.equals(GOOGLE_ANDROID))
-                initDefaulfPosition();
+            if (intentResult.equals(GOOGLE_ANDROID)) {
+                //initDefaultPosition();
+                initNullPosition();
                 onLocationReceived(calculatedPosition);
+            }
         }
     }
 }

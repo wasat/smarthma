@@ -11,12 +11,12 @@ import pl.wasat.smarthma.parser.model.Mission;
 import pl.wasat.smarthma.parser.model.Page;
 
 /**
- * Created by marcel on 2015-08-13.
+ * Created by marcel on 2015-08-13 00:09.
+ * Part of the project  SmartHMA
  */
 public class QuickScat extends BaseParser implements SimpleMissionInterface {
-    public final static int MISSION_ID = 50;
-    public final static String TITLE = "QuikSCAT";
-    final int ITEMS_COUNT = 1;
+    private final static int MISSION_ID = 50;
+    private final static String TITLE = "QuikSCAT";
 
 
     public QuickScat(String pageUrl, Context context) {
@@ -27,6 +27,7 @@ public class QuickScat extends BaseParser implements SimpleMissionInterface {
 
     @Override
     public void mainContent() {
+        int ITEMS_COUNT = 1;
         ArrayList<Pair> list = super.getComplexPage(ITEMS_COUNT);
         for (Pair item : list) {
             parserDb.addPage(new Page(HistoricalMissions.CATEGORY_ID, MISSION_ID, (String) item.title, (String) item.content));

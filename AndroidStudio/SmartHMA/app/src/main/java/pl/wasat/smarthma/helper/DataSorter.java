@@ -7,9 +7,9 @@ import java.util.List;
 import pl.wasat.smarthma.SmartHMApplication;
 import pl.wasat.smarthma.model.Collection;
 import pl.wasat.smarthma.model.CollectionsGroup;
+import pl.wasat.smarthma.model.entry.Entry;
 import pl.wasat.smarthma.model.iso.EntryISO;
 import pl.wasat.smarthma.model.mission.MissionItemData;
-import pl.wasat.smarthma.model.om.EntryOM;
 import pl.wasat.smarthma.utils.time.SimpleDate;
 
 /**
@@ -32,7 +32,7 @@ public class DataSorter {
                 sortCollectionsGroups(list);
             } else if (o instanceof MissionItemData) {
                 sortMissionItemsData(list);
-            } else if (o instanceof EntryOM) {
+            } else if (o instanceof Entry) {
                 sortOMEntries(list);
             } else if (o instanceof EntryISO) {
                 sortISOEntries(list);
@@ -102,10 +102,10 @@ public class DataSorter {
     }
 
     /**
-     * Sorts lists of SmartHMA EntryOM objects.
+     * Sorts lists of SmartHMA Entry objects.
      * @param entries  a list of entries
      */
-    private void sortOMEntries(List<EntryOM> entries) {
+    private void sortOMEntries(List<Entry> entries) {
         if (!entries.isEmpty()) {
             if (SmartHMApplication.sortingType == Const.SORT_BY_TITLE_ASCENDING) {
                 sortOMEntriesByTitleAscending(entries);
@@ -128,12 +128,12 @@ public class DataSorter {
     }
 
     /**
-     * Sorts lists of SmartHMA EntryOM objects by their title in ascending order.
+     * Sorts lists of SmartHMA Entry objects by their title in ascending order.
      * @param list  a list of entries
      */
-    private void sortOMEntriesByTitleAscending(List<EntryOM> list) {
-        Comparator comparator = new Comparator<EntryOM>() {
-            public int compare(EntryOM c1, EntryOM c2) {
+    private void sortOMEntriesByTitleAscending(List<Entry> list) {
+        Comparator comparator = new Comparator<Entry>() {
+            public int compare(Entry c1, Entry c2) {
                 String str1 = c1.getTitle().trim();
                 String str2 = c2.getTitle().trim();
                 return str1.compareTo(str2);
@@ -143,12 +143,12 @@ public class DataSorter {
     }
 
     /**
-     * Sorts lists of SmartHMA EntryOM objects by their title in descending order.
+     * Sorts lists of SmartHMA Entry objects by their title in descending order.
      * @param list  a list of entries
      */
-    private void sortOMEntriesByTitleDescending(List<EntryOM> list) {
-        Comparator comparator = new Comparator<EntryOM>() {
-            public int compare(EntryOM c1, EntryOM c2) {
+    private void sortOMEntriesByTitleDescending(List<Entry> list) {
+        Comparator comparator = new Comparator<Entry>() {
+            public int compare(Entry c1, Entry c2) {
                 String str1 = c1.getTitle().trim();
                 String str2 = c2.getTitle().trim();
                 return str2.compareTo(str1);
@@ -158,12 +158,12 @@ public class DataSorter {
     }
 
     /**
-     * Sorts lists of SmartHMA EntryOM objects by their date in ascending order.
+     * Sorts lists of SmartHMA Entry objects by their date in ascending order.
      * @param list  a list of entries
      */
-    private void sortOMEntriesByDatePublishedAscending(List<EntryOM> list) {
-        Comparator comparator = new Comparator<EntryOM>() {
-            public int compare(EntryOM c1, EntryOM c2) {
+    private void sortOMEntriesByDatePublishedAscending(List<Entry> list) {
+        Comparator comparator = new Comparator<Entry>() {
+            public int compare(Entry c1, Entry c2) {
                 SimpleDate v1 = new SimpleDate(c1.getPublished());
                 SimpleDate v2 = new SimpleDate(c2.getPublished());
                 return v1.compareTo(v2);
@@ -173,12 +173,12 @@ public class DataSorter {
     }
 
     /**
-     * Sorts lists of SmartHMA EntryOM objects by their date in descending order.
+     * Sorts lists of SmartHMA Entry objects by their date in descending order.
      * @param list  a list of entries
      */
-    private void sortOMEntriesByDatePublishedDescending(List<EntryOM> list) {
-        Comparator comparator = new Comparator<EntryOM>() {
-            public int compare(EntryOM c1, EntryOM c2) {
+    private void sortOMEntriesByDatePublishedDescending(List<Entry> list) {
+        Comparator comparator = new Comparator<Entry>() {
+            public int compare(Entry c1, Entry c2) {
                 SimpleDate v1 = new SimpleDate(c1.getPublished());
                 SimpleDate v2 = new SimpleDate(c2.getPublished());
                 return v2.compareTo(v1);
@@ -188,12 +188,12 @@ public class DataSorter {
     }
 
     /**
-     * Sorts lists of SmartHMA EntryOM objects by their update time in ascending order.
+     * Sorts lists of SmartHMA Entry objects by their update time in ascending order.
      * @param list  a list of entries
      */
-    private void sortOMEntriesByDateUpdatedAscending(List<EntryOM> list) {
-        Comparator comparator = new Comparator<EntryOM>() {
-            public int compare(EntryOM c1, EntryOM c2) {
+    private void sortOMEntriesByDateUpdatedAscending(List<Entry> list) {
+        Comparator comparator = new Comparator<Entry>() {
+            public int compare(Entry c1, Entry c2) {
                 SimpleDate v1 = new SimpleDate(c1.getUpdated());
                 SimpleDate v2 = new SimpleDate(c2.getUpdated());
                 return v1.compareTo(v2);
@@ -203,12 +203,12 @@ public class DataSorter {
     }
 
     /**
-     * Sorts lists of SmartHMA EntryOM objects by their update time in descending order.
+     * Sorts lists of SmartHMA Entry objects by their update time in descending order.
      * @param list  a list of entries
      */
-    private void sortOMEntriesByDateUpdatedDescending(List<EntryOM> list) {
-        Comparator comparator = new Comparator<EntryOM>() {
-            public int compare(EntryOM c1, EntryOM c2) {
+    private void sortOMEntriesByDateUpdatedDescending(List<Entry> list) {
+        Comparator comparator = new Comparator<Entry>() {
+            public int compare(Entry c1, Entry c2) {
                 SimpleDate v1 = new SimpleDate(c1.getUpdated());
                 SimpleDate v2 = new SimpleDate(c2.getUpdated());
                 return v2.compareTo(v1);
@@ -238,7 +238,7 @@ public class DataSorter {
     }
 
     /**
-     * Sorts lists of SmartHMA EntryOM objects by their title in ascending order.
+     * Sorts lists of SmartHMA Entry objects by their title in ascending order.
      * @param list  a list of entries
      */
     private void sortISOEntriesByTitleAscending(List<EntryISO> list) {

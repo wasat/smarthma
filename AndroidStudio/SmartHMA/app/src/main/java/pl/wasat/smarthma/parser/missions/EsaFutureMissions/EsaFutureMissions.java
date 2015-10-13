@@ -17,15 +17,15 @@ import pl.wasat.smarthma.parser.model.Category;
 import pl.wasat.smarthma.parser.model.Page;
 
 /**
- * Created by marcel paduch on 2015-08-11.
+ * Created by marcel paduch on 2015-08-11 00:09.
+ * Part of the project  SmartHMA
  */
 public class EsaFutureMissions extends BaseParser implements SimpleMissionInterface {
-    final int ITEMS_COUNT = 1;
     public final static int CATEGORY_ID = 1;
-    final String TITLE = "ESA Future Missions";
 
     public EsaFutureMissions(String pageUrl, Context context) {
         super(pageUrl, context);
+        String TITLE = "ESA Future Missions";
         parserDb.addCategory(new Category(CATEGORY_ID, TITLE, ""));
 
     }
@@ -33,6 +33,7 @@ public class EsaFutureMissions extends BaseParser implements SimpleMissionInterf
     @Override
     public void mainContent() {
         final int NO_MISSION = -1;
+        int ITEMS_COUNT = 1;
         ArrayList<Pair> list = super.getComplexPage(ITEMS_COUNT);
         for (Pair item : list) {
             parserDb.addPage(new Page(CATEGORY_ID, NO_MISSION, (String) item.title, (String) item.content));
@@ -58,14 +59,14 @@ public class EsaFutureMissions extends BaseParser implements SimpleMissionInterf
         }
     }
 
-    public ArrayList<String> getImageList(Document document) {
-        ArrayList<String> contentList = new ArrayList<String>();
+    private ArrayList<String> getImageList(Document document) {
+        ArrayList<String> contentList = new ArrayList<>();
         Elements contents = document.select(imageListClass);
         for (Element content : contents) {
             contentList.add(content.html());
-        /*	if(contentList.size() >= maxItems){
-				break;
-			}*/
+        /* if(contentList.size() >= maxItems){
+                break;
+   }*/
         }
         ArrayList<String> finalList = new ArrayList<>();
         for (String singleEl :
@@ -81,7 +82,7 @@ public class EsaFutureMissions extends BaseParser implements SimpleMissionInterf
         }
         return finalList;
 /*
-		return contentList;
+  return contentList;
 */
     }
 
