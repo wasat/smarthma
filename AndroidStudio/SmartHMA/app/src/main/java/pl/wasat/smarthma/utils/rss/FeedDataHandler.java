@@ -194,6 +194,8 @@ public class FeedDataHandler extends DefaultHandler {
             startRawMetadata();
         } else if (localName.equalsIgnoreCase("EarthObservation")) {
             startRawMetadata();
+        } else if (localName.equalsIgnoreCase("dc")) {
+            startRawMetadata();
         }
     }
 
@@ -295,7 +297,7 @@ public class FeedDataHandler extends DefaultHandler {
             } else if (localName.equalsIgnoreCase("link")) {
                 linksEntry.add(link);
             }
-            //if (isInMDMetadata) {
+
             // EO MetaData
             else if (localName.equalsIgnoreCase("MD_Metadata")) {
                 endRawMetadata();
@@ -304,10 +306,13 @@ public class FeedDataHandler extends DefaultHandler {
                 endRawMetadata();
                 entry.setMetadataType(MetadataType.ISO);
             } else if (localName.equalsIgnoreCase("EarthObservation")) {
-                endRawMetadata();
+                int endLine = locator.getLineNumber();
+                rawMetadata = substringLineOM(inStrArrFeed, startLine - 1, endLine);
                 entry.setMetadataType(MetadataType.OM);
+            } else if (localName.equalsIgnoreCase("dc")) {
+                endRawMetadata();
+                entry.setMetadataType(MetadataType.DC);
             }
-            //}
         }
     }
 
@@ -319,17 +324,25 @@ public class FeedDataHandler extends DefaultHandler {
 
     private void startRawMetadata() {
         startLine = locator.getLineNumber();
-        //isInMDMetadata = true;
     }
 
     private void endRawMetadata() {
         int endLine = locator.getLineNumber();
         rawMetadata = substringLine(inStrArrFeed, startLine - 1, endLine);
-        //isInMDMetadata = false;
+    }
+
+    private String substringLineOM(String[] strArray, int startLine, int endLine) {
+        String[] subString = Arrays.copyOfRange(strArray, startLine, endLine);
+        return StringUtils.join(subString, "\n");
     }
 
     private String substringLine(String[] strArray, int startLine, int endLine) {
         String[] subString = Arrays.copyOfRange(strArray, startLine, endLine);
+        String[] feedLine = inStrArrFeed[1].split(" ");
+        String metaName = subString[0].split(" ")[0];
+        feedLine[0] = metaName;
+        String firstLine = StringUtils.join(feedLine, " ");
+        subString[0] = firstLine;
         return StringUtils.join(subString, "\n");
     }
 

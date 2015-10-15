@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="#ffebeff1"
-    android:orientation="horizontal" >
+    android:orientation="horizontal">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -19,7 +19,7 @@
         android:layout_height="match_parent"
         android:background="#ff558b2f"
         android:id="@+id/swipe_list_deleteview"
-        android:orientation="horizontal" >
+        android:orientation="horizontal">
 
     </RelativeLayout>
 
@@ -28,7 +28,7 @@
         android:layout_height="wrap_content"
         android:weightSum="1"
         android:id="@+id/swipe_list_mainview"
-        android:orientation="horizontal" >
+        android:orientation="horizontal">
 
         <RelativeLayout
             android:layout_width="fill_parent"

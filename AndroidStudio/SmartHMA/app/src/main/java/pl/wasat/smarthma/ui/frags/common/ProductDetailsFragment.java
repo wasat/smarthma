@@ -211,7 +211,7 @@ public class ProductDetailsFragment extends Fragment implements Target {
      *
      */
     private void loadMetadataFrag() {
-        MetadataOMFragment metadataOMFragment = MetadataOMFragment
+        MetadataFragment metadataOMFragment = MetadataFragment
                 .newInstance(displayedEntry);
         getActivity()
                 .getSupportFragmentManager()

@@ -1,3 +1,4 @@
+/*
 
 package pl.wasat.smarthma.model.dc;
 
@@ -14,30 +15,38 @@ public class Summary implements Serializable {
     private String Type;
     private String Cdata;
 
-    /**
+    */
+/**
      * @return The Type
-     */
+ *//*
+
     public String getType() {
         return Type;
     }
 
-    /**
+    */
+/**
      * @param Type The _type
-     */
+ *//*
+
     public void setType(String Type) {
         this.Type = Type;
     }
 
-    /**
+    */
+/**
      * @return The Cdata
-     */
+ *//*
+
     public String getCdata() {
         return Cdata;
     }
 
-    /**
+    */
+/**
      * @param Cdata The __cdata
-     */
+ *//*
+
     public void setCdata(String Cdata) {
         this.Cdata = Cdata;
     }
@@ -65,3 +74,4 @@ public class Summary implements Serializable {
     }
 
 }
+*/

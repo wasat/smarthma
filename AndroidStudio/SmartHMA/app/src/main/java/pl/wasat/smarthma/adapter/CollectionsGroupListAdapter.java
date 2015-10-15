@@ -4,7 +4,6 @@ import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.octo.android.robospice.request.okhttp.simple.OkHttpBitmapRequest;
 import com.octo.android.robospice.spicelist.SpiceListItemView;

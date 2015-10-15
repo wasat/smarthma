@@ -181,6 +181,7 @@
     <string name="metadata_standards">"Metadata Standards "</string>
     <string name="metadata_identification">"Metadata Identification "</string>
     <string name="metadata_quality">"Metadata Quality "</string>
+    <string name="metadata_dc_title">Dublin Core Metadata</string>
 
 
 </resources>

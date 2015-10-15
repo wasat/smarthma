@@ -67,6 +67,11 @@ public class MetadataISOFragment extends BaseMetadataFragment {
         ((TextView) rootView.findViewById(R.id.metadata_frag_tv_prod_dates))
                 .setText(MessageFormat.format("{0}{1}", getString(R.string.date_of_publication), DateUtils.getISOPubDate(entryItem)));
 
+        prepareISOMetadataView();
+        return rootView;
+    }
+
+    private void prepareISOMetadataView() {
         try {
             if (!entryItem.getMDMetadata().getFileIdentifier().getCharacterString()
                     .getText().isEmpty()) {
@@ -116,7 +121,6 @@ public class MetadataISOFragment extends BaseMetadataFragment {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return rootView;
     }
 
     @NonNull

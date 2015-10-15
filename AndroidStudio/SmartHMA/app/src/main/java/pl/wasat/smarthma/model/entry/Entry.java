@@ -49,9 +49,9 @@ public class Entry implements Serializable {
         this.links = new ArrayList<>();
         this.where = new Where();
         this.group = new Group();
-        this.MDMetadata = new MDMetadata();
+        //this.MDMetadata = new MDMetadata();
         //this.earthObservation = new EarthObservation();
-        this.dc = new Dc();
+        //this.dc = new Dc();
 
         this.guid = "";
         this.identifier = "";

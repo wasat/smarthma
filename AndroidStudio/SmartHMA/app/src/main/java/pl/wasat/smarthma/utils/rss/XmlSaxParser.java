@@ -6,6 +6,7 @@ import org.apache.commons.io.IOUtils;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 import org.xml.sax.XMLReader;
+import org.xml.sax.helpers.DefaultHandler;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -15,13 +16,15 @@ import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 
+import pl.wasat.smarthma.model.dc.Dc;
 import pl.wasat.smarthma.model.entry.Entry;
 import pl.wasat.smarthma.model.feed.Feed;
+import pl.wasat.smarthma.model.iso.MDMetadata;
 import pl.wasat.smarthma.model.om.EarthObservation;
 
 /**
  * Created by Daniel on 2015-10-12.
- * This file is a part of module SmartHMA NavIn project.
+ * This file is a part of module SmartHMA project.
  */
 public class XmlSaxParser {
 
@@ -63,14 +66,129 @@ public class XmlSaxParser {
     }
 
 
-    public Feed parseOMFeed(InputStream inputStreamFeed) throws IOException {
-        OMDataHandler dataHandler = null;
+    public Feed parseOMFeed(InputStream inputStreamFeed) {
+        OMDataHandler omDataHandler = new OMDataHandler();
+        omDataHandler = (OMDataHandler) processFeedHandler(inputStreamFeed, omDataHandler);
+        return omDataHandler.getFeeds();
+    }
+
+
+    public Feed parseISOFeed(InputStream inputStreamFeed) {
+        //parseISOMetadata("");
+
+        ISODataHandler isoDataHandler = new ISODataHandler();
+        isoDataHandler = (ISODataHandler) processFeedHandler(inputStreamFeed, isoDataHandler);
+        return isoDataHandler.getFeeds();
+    }
+
+    public Entry parseOMMetadata(Entry entry) {
+        Entry parsedEntry = entry;
+        EarthObservation eo = parseOMMetadata(entry.getRawMetadata());
+        parsedEntry.setEarthObservation(eo);
+        return parsedEntry;
+    }
+
+    private EarthObservation parseOMMetadata(String metadata) {
+        OMMetadataHandler omMetadataHandler = new OMMetadataHandler();
+        omMetadataHandler = (OMMetadataHandler) processMetadataHandler(metadata, omMetadataHandler);
+        return omMetadataHandler.getOMMetadata();
+    }
+
+    public Entry parseISOMetadata(Entry entry) {
+        Entry parsedEntry = entry;
+        MDMetadata mdMetadata = parseISOMetadata(entry.getRawMetadata());
+        parsedEntry.setMDMetadata(mdMetadata);
+        return parsedEntry;
+    }
+
+    private MDMetadata parseISOMetadata(String metadata) {
+        ISOMetadataHandler isoMetadataHandler = new ISOMetadataHandler();
+        isoMetadataHandler = (ISOMetadataHandler) processMetadataHandler(metadata, isoMetadataHandler);
+        return isoMetadataHandler.getMdMetadata();
+    }
+
+    public Entry parseDCMetadata(Entry entry) {
+        Entry parsedEntry = entry;
+        Dc dcMetadata = parseDCMetadata(entry.getRawMetadata());
+        parsedEntry.setDc(dcMetadata);
+        return parsedEntry;
+    }
+
+    private Dc parseDCMetadata(String metadata) {
+        DCMetadataHandler dcMetadataHandler = new DCMetadataHandler();
+        dcMetadataHandler = (DCMetadataHandler) processMetadataHandler(metadata, dcMetadataHandler);
+        return dcMetadataHandler.getDC();
+    }
+
+    private DefaultHandler processFeedHandler(InputStream inputStream, DefaultHandler feedHandler) {
         try {
+            long startTime = System.currentTimeMillis();
+            //String inputString = IOUtils.toString(inputStreamFeed);
+            //String inputString = StringExt.inStreamReaderToString(inStreamFeed);
+            //String inputString = StringExt.inStreamToIOUtilsString(inStreamFeed);
+            //String inputString = StringExt.inStreamToStringBuffer(inStreamFeed);
+            //String inputString = StringExt.inStreamToStringBuilder(inStreamFeed);
+            //String inputString = new String(ByteStreams.toByteArray(inStreamFeed));
+
+            XMLReader xr = defineXmlSaxParser();
+            xr.setContentHandler(feedHandler);
+
+            InputSource inSource = new InputSource(inputStream);
+            xr.parse(inSource);
+
+            Log.i("PARSE_FEED", String.valueOf(System.currentTimeMillis() - startTime));
+        } catch (SAXException e) {
+            Log.e("RSS Handler SAX", e.toString());
+            e.printStackTrace();
+        } catch (ParserConfigurationException e) {
+            Log.e("RSS Parser Config", e.toString());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return feedHandler;
+    }
+
+    private DefaultHandler processMetadataHandler(String metadata, DefaultHandler metadataHandler) {
+        try {
+            long startTime = System.currentTimeMillis();
             XMLReader xrFeed = defineXmlSaxParser();
 
-            dataHandler = new OMDataHandler();
-            InputSource inputSource = new InputSource(inputStreamFeed);
-            xrFeed.setContentHandler(dataHandler);
+            InputSource inputSource = new InputSource(new StringReader(metadata));
+            xrFeed.setContentHandler(metadataHandler);
+
+            xrFeed.parse(inputSource);
+            Log.i("PARSE_META", String.valueOf(System.currentTimeMillis() - startTime));
+        } catch (SAXException e) {
+            Log.e("RSS Handler SAX", e.toString());
+            e.printStackTrace();
+        } catch (ParserConfigurationException e) {
+            Log.e("RSS Parser Config", e.toString());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return metadataHandler;
+    }
+
+    private XMLReader defineXmlSaxParser() throws ParserConfigurationException, SAXException {
+        SAXParserFactory spfFeed = SAXParserFactory.newInstance();
+        SAXParser spFeed = spfFeed.newSAXParser();
+        return spFeed.getXMLReader();
+    }
+
+
+/*    private MDMetadata parseISOMetadata(String metadata) {
+        //long startTime = System.currentTimeMillis();
+        ISOMetadataHandler metadataHandler = null;
+        //metadataHandler = getIsoMetadataHandler(metadata, metadataHandler);
+        try {
+            //startTime = System.currentTimeMillis();
+            XMLReader xrFeed = defineXmlSaxParser();
+
+            InputSource inputSource = new InputSource(new StringReader(metadata));
+            metadataHandler = new ISOMetadataHandler();
+            xrFeed.setContentHandler(metadataHandler);
+
+            //startTime = System.currentTimeMillis();
             xrFeed.parse(inputSource);
 
         } catch (SAXException e) {
@@ -78,13 +196,49 @@ public class XmlSaxParser {
             e.printStackTrace();
         } catch (ParserConfigurationException e) {
             Log.e("RSS Parser Config", e.toString());
+        } catch (IOException e) {
+            e.printStackTrace();
         }
+        // Log.i("PARSE_ISO_META", String.valueOf(System.currentTimeMillis() - startTime));
+        //noinspection ConstantConditions
+        MDMetadata isoMdMetadata = metadataHandler.getMdMetadata();
+        return isoMdMetadata;
+    }*/
 
-        return dataHandler.getFeeds();
-    }
 
 
-    public Feed parseISOFeed(InputStream inputStreamFeed) throws IOException {
+
+
+/*    public EarthObservation parseOMMetadata(String metadata) {
+        long startTime = System.currentTimeMillis();
+        OMMetadataHandler metadataHandler = null;
+        try {
+            startTime = System.currentTimeMillis();
+            XMLReader xrFeed = defineXmlSaxParser();
+
+            InputSource inputSource = new InputSource(new StringReader(metadata));
+            metadataHandler = new OMMetadataHandler();
+            xrFeed.setContentHandler(metadataHandler);
+
+            startTime = System.currentTimeMillis();
+            xrFeed.parse(inputSource);
+
+        } catch (SAXException e) {
+            Log.e("RSS Handler SAX", e.toString());
+            e.printStackTrace();
+        } catch (ParserConfigurationException e) {
+            Log.e("RSS Parser Config", e.toString());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        Log.i("PARSE_OM_META", String.valueOf(System.currentTimeMillis() - startTime));
+        //noinspection ConstantConditions
+        EarthObservation eo = metadataHandler.getOMMetadata();
+        return eo;
+    }*/
+
+
+/*    public Feed parseISOFeed(InputStream inputStreamFeed) throws IOException {
         ISODataHandler dataHandler = null;
         try {
             long startTime = System.currentTimeMillis();
@@ -114,27 +268,17 @@ public class XmlSaxParser {
         }
         //noinspection ConstantConditions
         return dataHandler.getFeeds();
-    }
+    }*/
 
-    public Entry parseOMMetadata(Entry entry) {
-        Entry parsedEntry = entry;
-        EarthObservation eo = parseOMMetadata(entry.getRawMetadata());
-        parsedEntry.setEarthObservation(eo);
-        return parsedEntry;
-    }
 
-    public EarthObservation parseOMMetadata(String metadata) {
-        long startTime = System.currentTimeMillis();
-        OMMetadataHandler metadataHandler = null;
+    /*    public Feed parseOMFeed(InputStream inputStreamFeed) throws IOException {
+        OMDataHandler dataHandler = null;
         try {
-            startTime = System.currentTimeMillis();
             XMLReader xrFeed = defineXmlSaxParser();
 
-            InputSource inputSource = new InputSource(new StringReader(metadata));
-            metadataHandler = new OMMetadataHandler();
-            xrFeed.setContentHandler(metadataHandler);
-
-            startTime = System.currentTimeMillis();
+            dataHandler = new OMDataHandler();
+            InputSource inputSource = new InputSource(inputStreamFeed);
+            xrFeed.setContentHandler(dataHandler);
             xrFeed.parse(inputSource);
 
         } catch (SAXException e) {
@@ -142,18 +286,8 @@ public class XmlSaxParser {
             e.printStackTrace();
         } catch (ParserConfigurationException e) {
             Log.e("RSS Parser Config", e.toString());
-        } catch (IOException e) {
-            e.printStackTrace();
         }
-        Log.i("PARSE_OM_META", String.valueOf(System.currentTimeMillis() - startTime));
-        //noinspection ConstantConditions
-        EarthObservation eo = metadataHandler.getOMMetadata();
-        return eo;
-    }
 
-    private XMLReader defineXmlSaxParser() throws ParserConfigurationException, SAXException {
-        SAXParserFactory spfFeed = SAXParserFactory.newInstance();
-        SAXParser spFeed = spfFeed.newSAXParser();
-        return spFeed.getXMLReader();
-    }
+        return dataHandler.getFeeds();
+    }*/
 }

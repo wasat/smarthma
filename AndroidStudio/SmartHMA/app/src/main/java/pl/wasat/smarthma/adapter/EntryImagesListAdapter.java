@@ -27,9 +27,12 @@ public class EntryImagesListAdapter extends OkHttpSpiceArrayAdapter<Entry> {
     @Override
     public OkHttpBitmapRequest createRequest(Entry entry, int imageIndex,
                                              int requestImageWidth, int requestImageHeight) {
-        File tempFile = new File(getContext().getCacheDir(), THUMB_ENTRY_IMG_TEMP + entry.getIdentifier());
+        String tmpFileName = THUMB_ENTRY_IMG_TEMP;
         String url = TEMP_DEFAULT_IMG_URL;
+        File tempFile = null;
         try {
+            tmpFileName = tmpFileName + entry.getTitle().replaceAll("/", "");
+            tempFile = new File(getContext().getCacheDir(), tmpFileName);
             if (!entry.getSimpleMetadata().getThumbnailUrl().isEmpty())
                 url = entry.getSimpleMetadata().getThumbnailUrl();
         } catch (NullPointerException e) {

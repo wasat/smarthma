@@ -252,6 +252,7 @@ public class ExtendedMapFragment extends Fragment implements
         ArrayList<LatLng> footprintPoints = castToGoogleLatLonArray(simpleMetadata.getFootprint());
         LatLngExt center = simpleMetadata.getFootprintCenter();
         String url = simpleMetadata.getQuickLookUrl();
+        if (url == null) return;
 
         buildFootprintBounds(footprintPoints);
 

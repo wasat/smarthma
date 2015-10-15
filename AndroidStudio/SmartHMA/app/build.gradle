@@ -62,5 +62,4 @@ dependencies {
         exclude group: 'org.json'
     }
 
-    compile 'com.google.guava:guava:18.0'
 }

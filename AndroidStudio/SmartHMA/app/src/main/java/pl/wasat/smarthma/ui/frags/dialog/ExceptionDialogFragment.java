@@ -14,7 +14,7 @@ import pl.wasat.smarthma.ui.activities.BaseSmartHMActivity;
 
 /**
  * Created by Daniel on 2015-09-21.
- * This file is a part of module SmartHMA NavIn project.
+ * This file is a part of module SmartHMA project.
  */
 public class ExceptionDialogFragment extends DialogFragment {
 

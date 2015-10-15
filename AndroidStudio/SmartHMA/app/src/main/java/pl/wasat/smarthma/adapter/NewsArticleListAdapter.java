@@ -19,7 +19,6 @@ import pl.wasat.smarthma.model.NewsArticle;
 public class NewsArticleListAdapter extends ArrayAdapter<NewsArticle> {
 
 
-
     private OnSlideElementListener listener;
 
 
@@ -39,7 +38,7 @@ public class NewsArticleListAdapter extends ArrayAdapter<NewsArticle> {
 
         convertView = inflater.inflate(R.layout.view_cell_article, null);
 
-        SwipeDetector swipeDetector = new SwipeDetector(convertView, position, false);;
+        SwipeDetector swipeDetector = new SwipeDetector(convertView, position, false);
         swipeDetector.setOnClickListener(listener);
         convertView.setOnTouchListener(swipeDetector);
 

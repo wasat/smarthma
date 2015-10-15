@@ -3,30 +3,28 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#ffebeff1"
-    android:orientation="horizontal" >
+    android:orientation="horizontal">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#ffffeb3b"
         android:id="@+id/swipe_list_shareview"
-        android:orientation="horizontal" >
-    </RelativeLayout>
+        android:orientation="horizontal"></RelativeLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#ff558b2f"
         android:id="@+id/swipe_list_deleteview"
-        android:orientation="horizontal" >
-    </RelativeLayout>
+        android:orientation="horizontal"></RelativeLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:weightSum="1"
         android:id="@+id/swipe_list_mainview"
-        android:orientation="horizontal" >
+        android:orientation="horizontal">
 
         <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="fill_parent"
@@ -49,6 +47,7 @@
                 android:layout_height="wrap_content"
                 android:background="@color/background_white"
                 android:padding="@dimen/browse_eo_padding_medium">
+
                 <ImageView
                     android:id="@+id/entry_item_thumb_imageview"
                     android:layout_width="@dimen/browse_eo_image_size"
