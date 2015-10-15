@@ -33,7 +33,9 @@ public class EntryImagesListAdapter extends OkHttpSpiceArrayAdapter<Entry> {
         try {
             tmpFileName = tmpFileName + entry.getTitle().replaceAll("/", "");
             tempFile = new File(getContext().getCacheDir(), tmpFileName);
-            if (!entry.getSimpleMetadata().getThumbnailUrl().isEmpty())
+            if (entry.getSimpleMetadata().getThumbnailUrl() == null) {
+                url = TEMP_DEFAULT_IMG_URL;
+            } else if (!entry.getSimpleMetadata().getThumbnailUrl().isEmpty())
                 url = entry.getSimpleMetadata().getThumbnailUrl();
         } catch (NullPointerException e) {
             e.printStackTrace();

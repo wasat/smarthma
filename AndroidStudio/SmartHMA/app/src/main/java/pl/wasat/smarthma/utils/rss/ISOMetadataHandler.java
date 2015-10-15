@@ -235,8 +235,6 @@ public class ISOMetadataHandler extends DefaultHandler {
         super.startElement(uri, localName, qName, atts);
         chars = new StringBuffer();
 
-        Log.i("PARSE", localName);
-
         // MDMetadata declarations       // MI_Metadata declarations
         if (localName.equalsIgnoreCase("MD_Metadata") || localName.equalsIgnoreCase("MI_Metadata")) {
             mdMetadata = new MDMetadata();
@@ -350,13 +348,13 @@ public class ISOMetadataHandler extends DefaultHandler {
         } else if (localName.equalsIgnoreCase("CI_Citation")) {
             CICitation = new CICitation();
             isInCitation = true;
-            // } else if (localName.equalsIgnoreCase("date")) {
-            // date = new Date();
+        } else if (localName.equals("date") && !isInCIDate) {
+            date = new Date();
         } else if (localName.equalsIgnoreCase("CI_Date")) {
             CIDate = new CIDate();
             isInCIDate = true;
-            // } else if (localName.equalsIgnoreCase("date") && isInCIDate) {
-            // dateInCIDate = new DateInCIDate();
+        } else if (localName.equals("date") && isInCIDate) {
+            dateInCIDate = new DateInCIDate();
         } else if (localName.equals("Date")) {
             dateGco = new DateGco();
         } else if (localName.equals("dateType")) {
@@ -628,13 +626,11 @@ public class ISOMetadataHandler extends DefaultHandler {
             CIDate.setDateInCIDate(dateInCIDate);
             CIDate.setDateType(dateType);
             isInCIDate = false;
-        } else if (localName.equals("date")) {
-            if (isInCIDate) {
+        } else if (localName.equals("date")&& isInCIDate) {
                 dateInCIDate.setDateGco(dateGco);
-            } else {
+        } else if (localName.equals("date")&& !isInCIDate) {
                 date.setText(chars.toString());
                 date.setCIDate(CIDate);
-            }
         } else if (localName.equals("Date")) {
             dateGco.setText(chars.toString());
         } else if (localName.equals("dateType")) {

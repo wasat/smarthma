@@ -173,8 +173,7 @@ public class MetadataFragment extends BaseMetadataFragment {
                 setMetaDataViews(getString(R.string.metadata_file_id), entryItem.getMDMetadata()
                         .getFileIdentifier());
             }
-            if (!entryItem.getMDMetadata().getLanguage().getLanguageCode()
-                    .getText().isEmpty()) {
+            if (entryItem.getMDMetadata().getLanguage() != null) {
                 setMetaDataViews(getString(R.string.metadata_language), entryItem.getMDMetadata()
                         .getLanguage());
             }

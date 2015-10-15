@@ -300,17 +300,16 @@ public class FeedDataHandler extends DefaultHandler {
 
             // EO MetaData
             else if (localName.equalsIgnoreCase("MD_Metadata")) {
-                endRawMetadata();
+                rawMetadata = buildRawMetadata(inStrArrFeed, startLine - 1, locator.getLineNumber());
                 entry.setMetadataType(MetadataType.ISO);
             } else if (localName.equalsIgnoreCase("MI_Metadata")) {
-                endRawMetadata();
+                rawMetadata = buildRawMetadata(inStrArrFeed, startLine - 1, locator.getLineNumber());
                 entry.setMetadataType(MetadataType.ISO);
             } else if (localName.equalsIgnoreCase("EarthObservation")) {
-                int endLine = locator.getLineNumber();
-                rawMetadata = substringLineOM(inStrArrFeed, startLine - 1, endLine);
+                rawMetadata = buildRawMetadata(inStrArrFeed, startLine - 1, locator.getLineNumber());
                 entry.setMetadataType(MetadataType.OM);
             } else if (localName.equalsIgnoreCase("dc")) {
-                endRawMetadata();
+                rawMetadata = buildRawMetadata(inStrArrFeed, startLine - 1, locator.getLineNumber());
                 entry.setMetadataType(MetadataType.DC);
             }
         }
@@ -326,7 +325,7 @@ public class FeedDataHandler extends DefaultHandler {
         startLine = locator.getLineNumber();
     }
 
-    private void endRawMetadata() {
+/*    private void endRawMetadata() {
         int endLine = locator.getLineNumber();
         rawMetadata = substringLine(inStrArrFeed, startLine - 1, endLine);
     }
@@ -344,6 +343,44 @@ public class FeedDataHandler extends DefaultHandler {
         String firstLine = StringUtils.join(feedLine, " ");
         subString[0] = firstLine;
         return StringUtils.join(subString, "\n");
+    }*/
+
+    private String buildRawMetadata(String[] strArray, int startLine, int endLine) {
+        String[] metadataStrArr = Arrays.copyOfRange(strArray, startLine, endLine);
+        String metadataStart = metadataStrArr[0].replace(">", "");
+
+        int div = inStrArrFeed[1].indexOf(" ");
+        String feedDef = inStrArrFeed[1].substring(div);
+
+        String metadataFirstLine = metadataStart + feedDef;
+        metadataStrArr[0] = validateNamespace(metadataFirstLine);
+        return StringUtils.join(metadataStrArr, "\n");
+    }
+
+    public static String validateNamespace(String txt) {
+        boolean containAttr = false;
+        List<String> values = new ArrayList<>();
+        String[] splitTag = txt.split(" ");
+
+        values.add(splitTag[0]);
+
+        for (int i = 1; i < splitTag.length; ++i) {
+            String namespace = splitTag[i].split("=")[0];
+            for (String value : values) {
+                String valueNamespace = value.split("=")[0];
+                if (namespace.equalsIgnoreCase(valueNamespace)) {
+                    containAttr = true;
+                    break;
+                }
+            }
+            if (!containAttr) {
+                values.add(splitTag[i]);
+            }
+            containAttr = false;
+        }
+        String meta = StringUtils.join(values, " ");
+        return meta;
+
     }
 
 }
