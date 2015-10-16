@@ -7,10 +7,13 @@ import org.xml.sax.helpers.DefaultHandler;
 import java.util.ArrayList;
 import java.util.List;
 
+import pl.wasat.smarthma.model.entry.Entry;
+import pl.wasat.smarthma.model.entry.Group;
+import pl.wasat.smarthma.model.entry.Summary;
+import pl.wasat.smarthma.model.entry.Where;
 import pl.wasat.smarthma.model.feed.Author;
 import pl.wasat.smarthma.model.feed.EOPrefixes;
 import pl.wasat.smarthma.model.feed.Feed;
-import pl.wasat.smarthma.model.feed.Group;
 import pl.wasat.smarthma.model.feed.ItemsPerPage;
 import pl.wasat.smarthma.model.feed.Link;
 import pl.wasat.smarthma.model.feed.Query;
@@ -44,8 +47,8 @@ class OMDataHandler extends DefaultHandler {
     private String feedId;
     private String title;
     private String updated;
-    private List<EntryOM> entries;
-    private EntryOM entry;
+    private List<Entry> entries;
+    private Entry entry;
     private Link link;
     private ArrayList<Link> linksEntry;
     private ArrayList<Link> linksFeed;
@@ -57,6 +60,7 @@ class OMDataHandler extends DefaultHandler {
     private List<Pos> posList;
     private Group group;
     private Content content;
+    private Summary summary;
     private ArrayList<Content> contentList;
     private Category category;
 
@@ -258,7 +262,7 @@ class OMDataHandler extends DefaultHandler {
         } else if (localName.equalsIgnoreCase("author")) {
             author = new Author();
         } else if (localName.equalsIgnoreCase("entry")) {
-            entry = new EntryOM();
+            entry = new Entry();
             isInEntry = true;
             linksEntry = new ArrayList<>();
         } else if (localName.equalsIgnoreCase("link")) {
@@ -267,8 +271,8 @@ class OMDataHandler extends DefaultHandler {
             link.setRel(atts.getValue("rel"));
             link.setTitle(atts.getValue("title"));
             link.setType(atts.getValue("type"));
-            // } else if (localName.equalsIgnoreCase("summary")) {
-            // summary = new Summary();
+        } else if (localName.equalsIgnoreCase("summary")) {
+            summary = new Summary();
         } else if (localName.equalsIgnoreCase("where")) {
             where = new Where();
         } else if (localName.equalsIgnoreCase("Polygon")) {
@@ -727,11 +731,12 @@ class OMDataHandler extends DefaultHandler {
             } else if (localName.equalsIgnoreCase("updated")) {
                 entry.setUpdated(chars.toString());
             } else if (localName.equalsIgnoreCase("summary")) {
-                // summary.set_cdata(chars.toString());
-                entry.setSummary(chars.toString());
+                summary.setCdata(chars.toString());
+                entry.setSummary(summary);
             } else if (localName.equalsIgnoreCase("content")
                     && !qName.equalsIgnoreCase("media:content")) {
-                entry.setSummary(chars.toString());
+                summary.setCdata(chars.toString());
+                entry.setSummary(summary);
             } else if (localName.equalsIgnoreCase("identifier")) {
                 entry.setIdentifier(chars.toString());
             } else if (localName.equalsIgnoreCase("date")) {

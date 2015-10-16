@@ -15,8 +15,8 @@ import com.google.gson.reflect.TypeToken;
 
 import java.util.ArrayList;
 
+import pl.wasat.smarthma.model.entry.Entry;
 import pl.wasat.smarthma.model.iso.EntryISO;
-import pl.wasat.smarthma.model.om.EntryOM;
 
 public class FavouritesDbAdapter {
 
@@ -88,7 +88,7 @@ public class FavouritesDbAdapter {
         return sqLiteDatabase.insert(DATABASE_TABLE_COLLECTIONS, null, initialValues);
     }
 
-    public long insertEntry(EntryOM item) {
+    public long insertEntry(Entry item) {
         ContentValues initialValues = new ContentValues();
         Log.d("ZX", "Inserting product " + item.getTitle() + " into database.");
         Gson gson = new Gson();
@@ -97,8 +97,7 @@ public class FavouritesDbAdapter {
         return sqLiteDatabase.insert(DATABASE_TABLE_PRODUCTS, null, initialValues);
     }
 
-    public int removeEntry(EntryISO item)
-    {
+    public int removeEntry(EntryISO item) {
         int result = 0;
         Cursor res = sqLiteDatabase.rawQuery("select * from " + DATABASE_TABLE_COLLECTIONS, null);
         res.moveToFirst();
@@ -106,11 +105,9 @@ public class FavouritesDbAdapter {
             byte[] blob = res.getBlob(res.getColumnIndex(KEY_RAW_DATA));
             String json = new String(blob);
             Gson gson = new Gson();
-            EntryISO o = gson.fromJson(json, new TypeToken<EntryISO>()
-            {
+            EntryISO o = gson.fromJson(json, new TypeToken<EntryISO>() {
             }.getType());
-            if (o.simpleEquals(item))
-            {
+            if (o.simpleEquals(item)) {
                 // don't stop, keep looking for duplicates
                 result += sqLiteDatabase.delete(DATABASE_TABLE_COLLECTIONS, KEY_ROWID + " = ? ", new String[]{res.getString(res.getColumnIndex(KEY_ROWID))});
             }
@@ -119,8 +116,7 @@ public class FavouritesDbAdapter {
         return result;
     }
 
-    public int removeEntry(EntryOM item)
-    {
+    public int removeEntry(Entry item) {
         int result = 0;
         Cursor res = sqLiteDatabase.rawQuery("select * from " + DATABASE_TABLE_PRODUCTS, null);
         res.moveToFirst();
@@ -128,17 +124,20 @@ public class FavouritesDbAdapter {
             byte[] blob = res.getBlob(res.getColumnIndex(KEY_RAW_DATA));
             String json = new String(blob);
             Gson gson = new Gson();
-            EntryOM o = gson.fromJson(json, new TypeToken<EntryOM>()
-            {
+            Entry o = gson.fromJson(json, new TypeToken<Entry>() {
             }.getType());
-            if (o.simpleEquals(item))
-            {
+            if (o.simpleEquals(item)) {
                 // don't stop, keep looking for duplicates
                 result += sqLiteDatabase.delete(DATABASE_TABLE_PRODUCTS, KEY_ROWID + " = ? ", new String[]{res.getString(res.getColumnIndex(KEY_ROWID))});
             }
             res.moveToNext();
         }
         return result;
+    }
+
+    public void replaceEntry(EntryISO item) {
+        removeEntry(item);
+        insertEntry(item);
     }
 
     public void reduceNumberOfEntries(int newNumberOfEntries) {
@@ -167,15 +166,15 @@ public class FavouritesDbAdapter {
         return result;
     }
 
-    public ArrayList<EntryOM> getOMEntries() {
-        ArrayList<EntryOM> result = new ArrayList();
+    public ArrayList<Entry> getOMEntries() {
+        ArrayList<Entry> result = new ArrayList();
         Cursor res = sqLiteDatabase.rawQuery("select * from " + DATABASE_TABLE_PRODUCTS, null);
         res.moveToFirst();
         while (!res.isAfterLast()) {
             byte[] blob = res.getBlob(res.getColumnIndex(KEY_RAW_DATA));
             String json = new String(blob);
             Gson gson = new Gson();
-            EntryOM o = gson.fromJson(json, new TypeToken<EntryOM>() {
+            Entry o = gson.fromJson(json, new TypeToken<Entry>() {
             }.getType());
             result.add(o);
             res.moveToNext();

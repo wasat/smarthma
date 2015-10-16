@@ -12,7 +12,7 @@ import pl.wasat.smarthma.helper.Const;
 import pl.wasat.smarthma.kindle.AmznExtendedMapFragment;
 import pl.wasat.smarthma.kindle.AmznExtendedMapFragment.OnAmznExtendedMapFragmentListener;
 import pl.wasat.smarthma.model.FedeoRequestParams;
-import pl.wasat.smarthma.model.om.Footprint;
+import pl.wasat.smarthma.model.entry.SimpleMetadata;
 import pl.wasat.smarthma.ui.frags.base.BaseShowProductsListFragment.OnBaseShowProductsListFragmentListener;
 import pl.wasat.smarthma.ui.frags.common.ExtendedMapFragment;
 import pl.wasat.smarthma.ui.frags.common.ExtendedMapFragment.OnExtendedMapFragmentListener;
@@ -28,8 +28,9 @@ public class ProductsBrowserActivity extends BaseSmartHMActivity implements
 
     private ExtendedMapFragment extendedMapFragment;
     private AmznExtendedMapFragment amznExtendedMapFragment;
-    private Footprint mFootprint;
-    private String quicklookUrl;
+    //private ArrayList<LatLngExt> mFootprint;
+    //private String quicklookUrl;
+    private SimpleMetadata simpleMeta;
     private MenuHandler menuHandler;
     private ProductsListFragment productsListFragment;
 
@@ -143,10 +144,10 @@ public class ProductsBrowserActivity extends BaseSmartHMActivity implements
     }
 
     @Override
-    public void onProductDetailsFragmentExtendedMapShow(String url,
-                                                        Footprint footprint) {
-        quicklookUrl = url;
-        mFootprint = footprint;
+    public void onProductDetailsFragmentExtendedMapShow(SimpleMetadata simpleMetadata) {
+        //quicklookUrl = url;
+        //mFootprint = footprint;
+        simpleMeta = simpleMetadata;
 
         checkMapFragment();
 
@@ -179,14 +180,14 @@ public class ProductsBrowserActivity extends BaseSmartHMActivity implements
     @Override
     public void onMapReady() {
         if (extendedMapFragment != null) {
-            extendedMapFragment.showQuicklookOnMap(quicklookUrl, mFootprint);
+            extendedMapFragment.showQuicklookOnMap(simpleMeta);
         }
     }
 
     @Override
     public void onAmznMapReady() {
         if (amznExtendedMapFragment != null) {
-            amznExtendedMapFragment.showQuicklookOnMap(quicklookUrl, mFootprint);
+            amznExtendedMapFragment.showQuicklookOnMap(simpleMeta);
         }
     }
 

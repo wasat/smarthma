@@ -12,10 +12,9 @@ import java.util.Calendar;
 
 import pl.wasat.smarthma.R;
 import pl.wasat.smarthma.adapter.SearchListAdapter;
-import pl.wasat.smarthma.database.EoDbAdapter;
+import pl.wasat.smarthma.database.FavouritesDbAdapter;
 import pl.wasat.smarthma.helper.Const;
 import pl.wasat.smarthma.kindle.AmznAreaPickerMapFragment.OnAmznAreaPickerMapFragmentListener;
-import pl.wasat.smarthma.kindle.AmznExtendedMapFragment;
 import pl.wasat.smarthma.model.FedeoRequestParams;
 import pl.wasat.smarthma.model.iso.EntryISO;
 import pl.wasat.smarthma.preferences.SharedPrefs;
@@ -24,11 +23,12 @@ import pl.wasat.smarthma.ui.frags.common.AreaPickerMapFragment.OnAreaPickerMapFr
 import pl.wasat.smarthma.ui.frags.common.CollectionDetailsFragment;
 import pl.wasat.smarthma.ui.frags.common.CollectionDetailsFragment.OnCollectionDetailsFragmentListener;
 import pl.wasat.smarthma.ui.frags.common.DatePickerFragment.OnDatePickerFragmentListener;
-import pl.wasat.smarthma.ui.frags.common.ExtendedMapFragment;
 import pl.wasat.smarthma.ui.frags.common.MetadataISOFragment;
 import pl.wasat.smarthma.ui.frags.common.TimePickerFragment.OnTimePickerFragmentListener;
 import pl.wasat.smarthma.ui.frags.search.SearchListFragmentOffline;
 import pl.wasat.smarthma.ui.frags.search.SearchListFragmentOffline.OnSearchListFragmentListener;
+import pl.wasat.smarthma.ui.menus.MenuHandler;
+import pl.wasat.smarthma.ui.menus.SearchOfflineCollectionsMenuHandler;
 import pl.wasat.smarthma.utils.obj.LatLngBoundsExt;
 
 public class FavouriteCollectionsActivity extends BaseSmartHMActivity
@@ -37,9 +37,9 @@ public class FavouriteCollectionsActivity extends BaseSmartHMActivity
         OnAreaPickerMapFragmentListener, OnAmznAreaPickerMapFragmentListener,
         OnCollectionDetailsFragmentListener, OnDatePickerFragmentListener, OnTimePickerFragmentListener {
 
-    private EoDbAdapter dba;
+    private FavouritesDbAdapter dba;
     private CollectionDetailsFragment collectionDetailsFragment;
-    //private MenuHandler menuHandler;
+    private MenuHandler menuHandler;
     private SearchListFragmentOffline searchListFrag;
 
     @Override
@@ -52,12 +52,10 @@ public class FavouriteCollectionsActivity extends BaseSmartHMActivity
         TextView title = (TextView) findViewById(R.id.action_bar_title);
         title.setText(getString(R.string.activity_name_favourite_collections_results));
 
-        /*
-        handleIntent(getIntent());
-        dba = new EoDbAdapter(this);
-        */
+        //handleIntent(getIntent());
+        dba = new FavouritesDbAdapter(this);
 
-        //menuHandler = new SearchCollectionsMenuHandler(this, R.id.menu_button);
+        menuHandler = new SearchOfflineCollectionsMenuHandler(this, R.id.menu_button);
 
         /*
         searchListFrag = (SearchListFragmentOffline) getSupportFragmentManager()
@@ -147,12 +145,10 @@ public class FavouriteCollectionsActivity extends BaseSmartHMActivity
         try {
             Log.d("ZX", "SearchCollectionResultsActivity onBackPressed");
 
-            /*
             if (menuHandler.isPopupWindowVisible()) {
                 menuHandler.dismissPopupWindow();
                 return;
             }
-            */
 
             if (dismissMenuOnBackPressed()) return;
 
@@ -199,14 +195,20 @@ public class FavouriteCollectionsActivity extends BaseSmartHMActivity
      */
     @Override
     public void onSearchListFragmentItemSelected(String id) {
+        Log.d("ZX", "onSearchListFragmentItemSelected()");
         EntryISO selectedEntry = (EntryISO) ((SearchListFragmentOffline) getSupportFragmentManager()
                 .findFragmentById(R.id.activity_base_list_container))
                 .getListAdapter().getItem(Integer.parseInt(id));
 
-        dba.openToWrite();
-        dba.markAsRead(selectedEntry.getGuid());
-        dba.close();
-        selectedEntry.setRead(true);
+        if (selectedEntry.isNotRead()) {
+            selectedEntry.setRead(true);
+
+            dba.openToWrite();
+            //dba.markAsRead(selectedEntry.getGuid());
+            dba.replaceEntry(selectedEntry);
+            dba.close();
+        }
+
         SearchListAdapter adapter = (SearchListAdapter) ((SearchListFragmentOffline) getSupportFragmentManager()
                 .findFragmentById(R.id.activity_base_list_container))
                 .getListAdapter();
@@ -251,7 +253,7 @@ public class FavouriteCollectionsActivity extends BaseSmartHMActivity
      */
     @Override
     public void onBaseShowProductsListFragmentFootprintSend() {
-        if (Const.IS_KINDLE) {
+/*        if (Const.IS_KINDLE) {
             AmznExtendedMapFragment extendedMapFragment = (AmznExtendedMapFragment) getSupportFragmentManager()
                     .findFragmentByTag("ExtendedMapFragment");
             if (extendedMapFragment != null) {
@@ -263,7 +265,7 @@ public class FavouriteCollectionsActivity extends BaseSmartHMActivity
             if (extendedMapFragment != null) {
                 extendedMapFragment.showFootPrints(null);
             }
-        }
+        }*/
     }
 
     @Override

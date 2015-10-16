@@ -67,52 +67,60 @@ public class MetadataISOFragment extends BaseMetadataFragment {
         ((TextView) rootView.findViewById(R.id.metadata_frag_tv_prod_dates))
                 .setText(MessageFormat.format("{0}{1}", getString(R.string.date_of_publication), DateUtils.getISOPubDate(entryItem)));
 
-        if (!entryItem.getMDMetadata().getFileIdentifier().getCharacterString()
-                .getText().isEmpty()) {
-            setMetaDataViews(getString(R.string.metadata_file_id), entryItem.getMDMetadata()
-                    .getFileIdentifier());
-        }
-        if (!entryItem.getMDMetadata().getLanguage().getLanguageCode()
-                .getText().isEmpty()) {
-            setMetaDataViews(getString(R.string.metadata_language), entryItem.getMDMetadata()
-                    .getLanguage());
-        }
-        if (entryItem.getMDMetadata().getHierarchyLevel().getMDScopeCode()
-                .getText().isEmpty()) {
-            setMetaDataViews(getString(R.string.metadata_hierarchy_level), entryItem
-                    .getMDMetadata().getHierarchyLevel());
-        }
-        if (!entryItem.getMDMetadata().getContact().getCIResponsibleParty()
-                .getOrganisationName().getCharacterString().getText().isEmpty()) {
-            setMetaDataViews(getString(R.string.eo_provider_contact), entryItem
-                    .getMDMetadata().getContact().getCIResponsibleParty());
-        }
-        if (entryItem.getMDMetadata().getDateStamp().getDateGco().getText()
-                .isEmpty()) {
-            setMetaDataViews(getString(R.string.eo_image_date), entryItem
-                    .getMDMetadata().getDateStamp());
-        }
-        if (entryItem.getMDMetadata().getMetadataStandardName()
-                .getCharacterString().getText().isEmpty()) {
-            setMetaDataViews(getString(R.string.metadata_standards), entryItem.getMDMetadata()
-                    .getMetadataStandardName());
-        }
-        if (!entryItem.getMDMetadata().getMetadataStandardVersion()
-                .getCharacterString().getText().isEmpty()) {
-            setMetaDataViews(getString(R.string.metadata_standards), entryItem.getMDMetadata()
-                    .getMetadataStandardVersion());
-        }
-        if (entryItem.getMDMetadata().getIdentificationInfo()
-                .getMDDataIdentification() != null) {
-            setMetaDataViews(getString(R.string.metadata_identification), entryItem
-                    .getMDMetadata().getIdentificationInfo()
-                    .getMDDataIdentification());
-        }
-        if (entryItem.getMDMetadata().getDataQualityInfo().getDQDataQuality() != null) {
-            setMetaDataViews(getString(R.string.metadata_quality), entryItem
-                    .getMDMetadata().getDataQualityInfo().getDQDataQuality());
-        }
+        prepareISOMetadataView();
         return rootView;
+    }
+
+    private void prepareISOMetadataView() {
+        try {
+            if (!entryItem.getMDMetadata().getFileIdentifier().getCharacterString()
+                    .getText().isEmpty()) {
+                setMetaDataViews(getString(R.string.metadata_file_id), entryItem.getMDMetadata()
+                        .getFileIdentifier());
+            }
+            if (!entryItem.getMDMetadata().getLanguage().getLanguageCode()
+                    .getText().isEmpty()) {
+                setMetaDataViews(getString(R.string.metadata_language), entryItem.getMDMetadata()
+                        .getLanguage());
+            }
+            if (entryItem.getMDMetadata().getHierarchyLevel().getMDScopeCode()
+                    .getText().isEmpty()) {
+                setMetaDataViews(getString(R.string.metadata_hierarchy_level), entryItem
+                        .getMDMetadata().getHierarchyLevel());
+            }
+            if (!entryItem.getMDMetadata().getContact().getCIResponsibleParty()
+                    .getOrganisationName().getCharacterString().getText().isEmpty()) {
+                setMetaDataViews(getString(R.string.eo_provider_contact), entryItem
+                        .getMDMetadata().getContact().getCIResponsibleParty());
+            }
+            if (entryItem.getMDMetadata().getDateStamp().getDateGco().getText()
+                    .isEmpty()) {
+                setMetaDataViews(getString(R.string.eo_image_date), entryItem
+                        .getMDMetadata().getDateStamp());
+            }
+            if (entryItem.getMDMetadata().getMetadataStandardName()
+                    .getCharacterString().getText().isEmpty()) {
+                setMetaDataViews(getString(R.string.metadata_standards), entryItem.getMDMetadata()
+                        .getMetadataStandardName());
+            }
+            if (!entryItem.getMDMetadata().getMetadataStandardVersion()
+                    .getCharacterString().getText().isEmpty()) {
+                setMetaDataViews(getString(R.string.metadata_standards), entryItem.getMDMetadata()
+                        .getMetadataStandardVersion());
+            }
+            if (entryItem.getMDMetadata().getIdentificationInfo()
+                    .getMDDataIdentification() != null) {
+                setMetaDataViews(getString(R.string.metadata_identification), entryItem
+                        .getMDMetadata().getIdentificationInfo()
+                        .getMDDataIdentification());
+            }
+            if (entryItem.getMDMetadata().getDataQualityInfo().getDQDataQuality() != null) {
+                setMetaDataViews(getString(R.string.metadata_quality), entryItem
+                        .getMDMetadata().getDataQualityInfo().getDQDataQuality());
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @NonNull

@@ -12,7 +12,6 @@ public class MetadataCleaner {
         String cleanValue;
         cleanValue = removeUnnecessaryOMValues(value);
         cleanValue = changeUpperCase(cleanValue);
-
         return cleanValue;
     }
 
@@ -20,7 +19,13 @@ public class MetadataCleaner {
         String cleanValue;
         cleanValue = removeUnnecessaryISOValues(value);
         cleanValue = changeUpperCase(cleanValue);
+        return cleanValue;
+    }
 
+    public static String getCleanDCValue(String value) {
+        String cleanValue;
+        cleanValue = removeUnnecessaryDCValues(value);
+        cleanValue = changeUpperCase(cleanValue);
         return cleanValue;
     }
 
@@ -69,24 +74,6 @@ public class MetadataCleaner {
 
     }
 
-    private static String changeUpperCase(String inputString) {
-        if (inputString.isEmpty()) {
-            return inputString;
-        }
-        String outputString = String.valueOf(inputString.charAt(0));
-
-        for (int i = 1; i < inputString.length(); i++) {
-            char cThis = inputString.charAt(i);
-            char cPrev = inputString.charAt(i - 1);
-            if (Character.isUpperCase(cThis) && Character.isLowerCase(cPrev)) {
-                outputString = outputString + " "
-                        + Character.toLowerCase(cThis);
-            } else {
-                outputString = outputString + cThis;
-            }
-        }
-        return outputString;
-    }
 
     private static String removeUnnecessaryISOValues(String value) {
         String cleanedValue = value;
@@ -117,5 +104,40 @@ public class MetadataCleaner {
         return cleanedValue;
     }
 
+    private static String removeUnnecessaryDCValues(String value) {
+        String cleanedValue = value;
+
+        String newLine = SystemUtils.LINE_SEPARATOR;
+        String doubleNewLine = SystemUtils.LINE_SEPARATOR
+                + SystemUtils.LINE_SEPARATOR;
+        String spaceTwoNewLine = SystemUtils.LINE_SEPARATOR + " "
+                + SystemUtils.LINE_SEPARATOR + " ";
+
+        cleanedValue = cleanedValue.replaceAll(doubleNewLine, newLine);
+        cleanedValue = cleanedValue.replaceAll(spaceTwoNewLine, "");
+        cleanedValue = cleanedValue.replaceAll("Text - ", "");
+
+        return cleanedValue;
+
+    }
+
+    private static String changeUpperCase(String inputString) {
+        if (inputString.isEmpty()) {
+            return inputString;
+        }
+        String outputString = String.valueOf(inputString.charAt(0));
+
+        for (int i = 1; i < inputString.length(); i++) {
+            char cThis = inputString.charAt(i);
+            char cPrev = inputString.charAt(i - 1);
+            if (Character.isUpperCase(cThis) && Character.isLowerCase(cPrev)) {
+                outputString = outputString + " "
+                        + Character.toLowerCase(cThis);
+            } else {
+                outputString = outputString + cThis;
+            }
+        }
+        return outputString;
+    }
 
 }

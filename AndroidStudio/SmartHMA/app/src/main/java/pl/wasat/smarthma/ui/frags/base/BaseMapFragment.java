@@ -6,7 +6,6 @@ import android.location.Location;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.LocalBroadcastManager;
-import android.util.Log;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
@@ -90,7 +89,7 @@ public class BaseMapFragment extends SupportMapFragment implements
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         AcraExtension.mapCustomLog("BaseMap.onActivityCreated", mMap);
-        Log.i("BASE_MAP", "onActivityCreated");
+        //Log.i("BASE_MAP", "onActivityCreated");
 
         startCreateMap(savedInstanceState);
     }
@@ -199,7 +198,7 @@ public class BaseMapFragment extends SupportMapFragment implements
         Fragment fragment = this;
         if (fragment instanceof OnBaseMapFragmentListener) {
             ((OnBaseMapFragmentListener) fragment).onBaseSupportMapReady();
-            Log.i("BASE_MAP", "onActivityCreated.Listener");
+            //Log.i("BASE_MAP", "onActivityCreated.Listener");
         } else {
             publicListener.onBaseSupportMapPublicReady();
         }

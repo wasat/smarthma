@@ -1,7 +1,6 @@
 package pl.wasat.smarthma.adapter;
 
 import android.app.Activity;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -79,31 +78,27 @@ public class SearchListAdapter extends ArrayAdapter<EntryISO> {
                 Log.d("ZX", "-");
                 */
                 FavouritesDbAdapter dba = new FavouritesDbAdapter(activity);
-                if (searchItem.isFavourite())
-                {
+                if (searchItem.isFavourite()) {
                     dba.openToWrite();
                     //long dbaResult =
                     dba.insertEntry(searchItem);
                     dba.close();
                     Toast.makeText(activity, activity.getString(R.string.collection_added_to_favourites), Toast.LENGTH_LONG).show();
-                }
-                else
-                {
+                } else {
                     dba.openToWrite();
                     //long dbaResult =
                     int result = dba.removeEntry(searchItem);
-                    Log.d("ZX", "result: " + result);
+                    //Log.d("ZX", "result: " + result);
                     dba.close();
                 }
-                Log.d("ZX", "--");
+                //Log.d("ZX", "--");
                 dba.openToRead();
                 ArrayList<EntryISO> all = dba.getISOEntries();
-                for (EntryISO o : all)
-                {
-                    Log.d("ZX", " " + o.getTitle());
+                for (EntryISO o : all) {
+                    //Log.d("ZX", " " + o.getTitle());
                 }
                 dba.close();
-                Log.d("ZX", "---");
+                //Log.d("ZX", "---");
             }
         });
 

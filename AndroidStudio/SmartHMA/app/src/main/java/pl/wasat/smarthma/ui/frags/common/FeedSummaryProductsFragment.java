@@ -8,16 +8,14 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.PolygonOptions;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import pl.wasat.smarthma.R;
 import pl.wasat.smarthma.model.FedeoRequestParams;
+import pl.wasat.smarthma.model.entry.Entry;
 import pl.wasat.smarthma.model.feed.Feed;
-import pl.wasat.smarthma.model.om.EntryOM;
-import pl.wasat.smarthma.model.om.Footprint;
-import pl.wasat.smarthma.model.om.Pos;
 import pl.wasat.smarthma.ui.frags.base.BaseFeedSummaryFragment;
 import pl.wasat.smarthma.utils.draw.MapDrawings;
+import pl.wasat.smarthma.utils.obj.LatLngExt;
 
 /**
  * A simple {@link android.support.v4.app.Fragment} subclass. Use the {@link FeedSummaryProductsFragment#newInstance}
@@ -73,13 +71,15 @@ public class FeedSummaryProductsFragment extends BaseFeedSummaryFragment {
 
         MapDrawings mapDrawings = new MapDrawings();
 
-        for (EntryOM entry : resultFeed.getEntriesEO()) {
-            List<Pos> footprintPosList = obtainFootprintPoints(entry);
+        for (Entry entry : resultFeed.getEntries()) {
+            //List<Pos> footprintPosList = obtainFootprintPoints(entry);
 
-            ArrayList<LatLng> footprintPoints = new ArrayList<>();
-            for (int i = 0; i < footprintPosList.size() - 1; i++) {
+
+            //ArrayList<LatLng> footprintPoints = (ArrayList<LatLng>) (Object) entry.getSimpleMetadata().getFootprint();
+            ArrayList<LatLng> footprintPoints = castToGoogleLatLonArray(entry.getSimpleMetadata().getFootprint());
+/*            for (int i = 0; i < footprintPosList.size() - 1; i++) {
                 footprintPoints.add(footprintPosList.get(i).getLatLng().getGoogleLatLon());
-            }
+            }*/
             if (footprintPoints.size() > 0) {
                 PolygonOptions polygon = mapDrawings.drawArea(footprintPoints, Color.BLUE);
                 googleMap.addPolygon(polygon);
@@ -87,7 +87,16 @@ public class FeedSummaryProductsFragment extends BaseFeedSummaryFragment {
         }
     }
 
-    private List<Pos> obtainFootprintPoints(EntryOM entry) {
+    private ArrayList<LatLng> castToGoogleLatLonArray(ArrayList<LatLngExt> latLngExtArrayList) {
+        ArrayList<LatLng> latLngs = new ArrayList<>();
+        for (LatLngExt latLngExt : latLngExtArrayList) {
+            latLngs.add(latLngExt.getGoogleLatLon());
+        }
+        return latLngs;
+    }
+
+/*
+    private List<Pos> obtainFootprintPoints(Entry entry) {
         List<Pos> footprintPosList = new ArrayList<>();
         if (entry.getEarthObservation().getFeatureOfInterest() == null) return footprintPosList;
         Footprint footprint = entry.getEarthObservation()
@@ -104,5 +113,5 @@ public class FeedSummaryProductsFragment extends BaseFeedSummaryFragment {
                     .getLinearRing().setPosList(posStr);
         }
         return footprintPosList;
-    }
+    }*/
 }

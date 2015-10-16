@@ -10,8 +10,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import pl.wasat.smarthma.model.dc.EntryDC;
+import pl.wasat.smarthma.model.entry.Entry;
 import pl.wasat.smarthma.model.iso.EntryISO;
-import pl.wasat.smarthma.model.om.EntryOM;
 import pl.wasat.smarthma.utils.text.SmartHMAStringStyle;
 
 public class Feed implements Serializable {
@@ -32,7 +32,8 @@ public class Feed implements Serializable {
     private EOPrefixes eoPrefixes;
     private ISOPrefixes isoPrefixes;
     private DCPrefixes dcPrefixes;
-    private List<EntryOM> entriesEO = new ArrayList<>();
+    private List<Entry> entries = new ArrayList<>();
+    private List<Entry> entriesEO = new ArrayList<>();
     private List<EntryISO> entriesISO = new ArrayList<>();
     private List<EntryDC> entriesDC = new ArrayList<>();
 
@@ -149,11 +150,20 @@ public class Feed implements Serializable {
         this.dcPrefixes = dcPrefixes;
     }
 
-    public List<EntryOM> getEntriesEO() {
+    public List<Entry> getEntries() {
+        return entries;
+    }
+
+    public void setEntries(List<Entry> entries) {
+        this.entries = entries;
+    }
+
+
+    public List<Entry> getEntriesEO() {
         return entriesEO;
     }
 
-    public void setEntriesEO(List<EntryOM> entriesEO) {
+    public void setEntriesEO(List<Entry> entriesEO) {
         this.entriesEO = entriesEO;
     }
 
@@ -165,19 +175,15 @@ public class Feed implements Serializable {
         this.entriesISO = entriesISO;
     }
 
-    /**
-     * @return The entry
-     */
+
     public List<EntryDC> getEntryDC() {
         return entriesDC;
     }
 
-    /**
-     * @param entriesDC The entry
-     */
     public void setEntryDC(List<EntryDC> entriesDC) {
         this.entriesDC = entriesDC;
     }
+
 
 
 

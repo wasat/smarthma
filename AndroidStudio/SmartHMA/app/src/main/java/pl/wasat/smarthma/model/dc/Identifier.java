@@ -1,12 +1,14 @@
-
 package pl.wasat.smarthma.model.dc;
 
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
 
 import java.io.Serializable;
+
+import pl.wasat.smarthma.utils.text.SmartHMAStringStyle;
 
 
 public class Identifier implements Serializable {
@@ -44,9 +46,10 @@ public class Identifier implements Serializable {
 
     @Override
     public String toString() {
-        return ToStringBuilder.reflectionToString(this);
+        ToStringStyle style = new SmartHMAStringStyle();
+        ToStringBuilder.setDefaultStyle(style);
+        return ToStringBuilder.reflectionToString(this, style);
     }
-
     @Override
     public int hashCode() {
         return new HashCodeBuilder().append(Prefix).append(Text).toHashCode();

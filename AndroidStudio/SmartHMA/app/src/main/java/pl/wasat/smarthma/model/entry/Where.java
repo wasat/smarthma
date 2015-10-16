@@ -1,4 +1,4 @@
-package pl.wasat.smarthma.model.feed;
+package pl.wasat.smarthma.model.entry;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
@@ -6,19 +6,17 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
-import pl.wasat.smarthma.model.om.Content;
 import pl.wasat.smarthma.utils.text.SmartHMAStringStyle;
 
 
-public class Group implements Serializable {
+public class Where implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     private String _prefix;
-    private List<Content> content = new ArrayList<>();
+    private pl.wasat.smarthma.model.om.Polygon polygon;
+    private String _xmlns_gml;
 
 
     public String get_prefix() {
@@ -29,14 +27,23 @@ public class Group implements Serializable {
         this._prefix = _prefix;
     }
 
-    public List<Content> getContent() {
-        return content;
+
+    public pl.wasat.smarthma.model.om.Polygon getPolygon() {
+        return polygon;
     }
 
-    public void setContent(List<Content> content) {
-        this.content = content;
+    public void setPolygon(pl.wasat.smarthma.model.om.Polygon polygon) {
+        this.polygon = polygon;
     }
 
+
+    public String get_xmlns_gml() {
+        return _xmlns_gml;
+    }
+
+    public void set_xmlns_gml(String _xmlns_gml) {
+        this._xmlns_gml = _xmlns_gml;
+    }
 
     @Override
     public String toString() {

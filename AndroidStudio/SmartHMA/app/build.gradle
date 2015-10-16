@@ -61,4 +61,5 @@ dependencies {
     compile('ch.acra:acra:4.6.1') {
         exclude group: 'org.json'
     }
+
 }

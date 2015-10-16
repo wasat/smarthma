@@ -12,7 +12,7 @@
         android:layout_height="match_parent"
         android:background="#ffffeb3b"
         android:id="@+id/swipe_list_shareview"
-        android:orientation="horizontal" >
+        android:orientation="horizontal">
 
     </RelativeLayout>
 
@@ -21,12 +21,11 @@
         android:layout_height="match_parent"
         android:background="#ff558b2f"
         android:id="@+id/swipe_list_deleteview"
-        android:orientation="horizontal" >
+        android:orientation="horizontal">
 
     </LinearLayout>
 
-    <LinearLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:orientation="vertical"
         android:layout_width="fill_parent"

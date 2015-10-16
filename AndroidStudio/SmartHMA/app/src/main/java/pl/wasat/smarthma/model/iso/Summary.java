@@ -1,3 +1,4 @@
+/*
 package pl.wasat.smarthma.model.iso;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
@@ -17,30 +18,38 @@ public class Summary implements Serializable {
     private String Cdata;
 
 
-    /**
+    */
+/**
      * @return The Type
-     */
+ *//*
+
     public String getType() {
         return Type;
     }
 
-    /**
+    */
+/**
      * @param Type The _type
-     */
+ *//*
+
     public void setType(String Type) {
         this.Type = Type;
     }
 
-    /**
+    */
+/**
      * @return The Cdata
-     */
+ *//*
+
     public String getCdata() {
         return Cdata;
     }
 
-    /**
+    */
+/**
      * @param Cdata The _cdata
-     */
+ *//*
+
     public void setCdata(String Cdata) {
         this.Cdata = Cdata;
     }
@@ -64,3 +73,4 @@ public class Summary implements Serializable {
     }
 
 }
+*/

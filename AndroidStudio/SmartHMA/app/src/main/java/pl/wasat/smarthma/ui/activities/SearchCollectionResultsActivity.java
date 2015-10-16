@@ -5,7 +5,6 @@ import android.app.SearchManager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
-import android.util.Log;
 import android.widget.TextView;
 
 import java.util.Calendar;
@@ -15,7 +14,6 @@ import pl.wasat.smarthma.adapter.SearchListAdapter;
 import pl.wasat.smarthma.database.EoDbAdapter;
 import pl.wasat.smarthma.helper.Const;
 import pl.wasat.smarthma.kindle.AmznAreaPickerMapFragment.OnAmznAreaPickerMapFragmentListener;
-import pl.wasat.smarthma.kindle.AmznExtendedMapFragment;
 import pl.wasat.smarthma.model.FedeoRequestParams;
 import pl.wasat.smarthma.model.iso.EntryISO;
 import pl.wasat.smarthma.preferences.SharedPrefs;
@@ -24,7 +22,6 @@ import pl.wasat.smarthma.ui.frags.common.AreaPickerMapFragment.OnAreaPickerMapFr
 import pl.wasat.smarthma.ui.frags.common.CollectionDetailsFragment;
 import pl.wasat.smarthma.ui.frags.common.CollectionDetailsFragment.OnCollectionDetailsFragmentListener;
 import pl.wasat.smarthma.ui.frags.common.DatePickerFragment.OnDatePickerFragmentListener;
-import pl.wasat.smarthma.ui.frags.common.ExtendedMapFragment;
 import pl.wasat.smarthma.ui.frags.common.MetadataISOFragment;
 import pl.wasat.smarthma.ui.frags.common.TimePickerFragment.OnTimePickerFragmentListener;
 import pl.wasat.smarthma.ui.frags.search.SearchListFragment;
@@ -165,7 +162,7 @@ public class SearchCollectionResultsActivity extends BaseSmartHMActivity
                 }
             }
         } catch (Exception e) {
-            Log.e("onBackPressed", e.toString());
+            //Log.e("onBackPressed", e.toString());
             super.onBackPressed();
         }
     }
@@ -231,7 +228,7 @@ public class SearchCollectionResultsActivity extends BaseSmartHMActivity
      */
     @Override
     public void onBaseShowProductsListFragmentFootprintSend() {
-        if (Const.IS_KINDLE) {
+/*        if (Const.IS_KINDLE) {
             AmznExtendedMapFragment extendedMapFragment = (AmznExtendedMapFragment) getSupportFragmentManager()
                     .findFragmentByTag("ExtendedMapFragment");
             if (extendedMapFragment != null) {
@@ -243,7 +240,7 @@ public class SearchCollectionResultsActivity extends BaseSmartHMActivity
             if (extendedMapFragment != null) {
                 extendedMapFragment.showFootPrints(null);
             }
-        }
+        }*/
     }
 
     @Override

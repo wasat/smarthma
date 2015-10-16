@@ -11,12 +11,15 @@ import pl.wasat.smarthma.R;
 import pl.wasat.smarthma.helper.Const;
 import pl.wasat.smarthma.kindle.AmznExtendedMapFragment;
 import pl.wasat.smarthma.kindle.AmznExtendedMapFragment.OnAmznExtendedMapFragmentListener;
+import pl.wasat.smarthma.model.entry.SimpleMetadata;
 import pl.wasat.smarthma.model.om.Footprint;
 import pl.wasat.smarthma.ui.frags.base.BaseShowProductsListFragment.OnBaseShowProductsListFragmentListener;
 import pl.wasat.smarthma.ui.frags.common.ExtendedMapFragment;
 import pl.wasat.smarthma.ui.frags.common.ExtendedMapFragment.OnExtendedMapFragmentListener;
 import pl.wasat.smarthma.ui.frags.common.ProductDetailsFragment.OnProductDetailsFragmentListener;
 import pl.wasat.smarthma.ui.frags.common.ProductsListFragmentOffline;
+import pl.wasat.smarthma.ui.menus.MenuHandler;
+import pl.wasat.smarthma.ui.menus.OfflineProductsBrowserMenuHandler;
 
 public class FavouriteProductsActivity extends BaseSmartHMActivity implements
         OnProductDetailsFragmentListener,
@@ -26,7 +29,7 @@ public class FavouriteProductsActivity extends BaseSmartHMActivity implements
     private AmznExtendedMapFragment amznExtendedMapFragment;
     private Footprint mFootprint;
     private String quicklookUrl;
-    //private MenuHandler menuHandler;
+    private MenuHandler menuHandler;
     private ProductsListFragmentOffline productsListFragment;
 
     @Override
@@ -45,7 +48,7 @@ public class FavouriteProductsActivity extends BaseSmartHMActivity implements
                 .replace(R.id.activity_base_list_container,
                         productsListFragment).commit();
 
-        //menuHandler = new ProductsBrowserMenuHandler(this, R.id.menu_button);
+        menuHandler = new OfflineProductsBrowserMenuHandler(this, R.id.menu_button);
     }
 
     @Override
@@ -64,12 +67,10 @@ public class FavouriteProductsActivity extends BaseSmartHMActivity implements
         try {
             Log.d("ZX", "ProductsBrowserActivity onBackPressed");
 
-            /*
             if (menuHandler.isPopupWindowVisible()) {
                 menuHandler.dismissPopupWindow();
                 return;
             }
-            */
 
             if (dismissMenuOnBackPressed()) return;
 
@@ -158,8 +159,7 @@ public class FavouriteProductsActivity extends BaseSmartHMActivity implements
     }
 
     @Override
-    public void onProductDetailsFragmentExtendedMapShow(String url,
-                                                        Footprint footprint) {
+    public void onProductDetailsFragmentExtendedMapShow(SimpleMetadata simpleMetadata) {
         /*
         quicklookUrl = url;
         mFootprint = footprint;
@@ -196,7 +196,7 @@ public class FavouriteProductsActivity extends BaseSmartHMActivity implements
     @Override
     public void onMapReady() {
         if (extendedMapFragment != null) {
-            extendedMapFragment.showQuicklookOnMap(quicklookUrl, mFootprint);
+            //extendedMapFragment.showQuicklookOnMap(quicklookUrl, mFootprint);
         }
     }
 

@@ -1,3 +1,4 @@
+/*
 package pl.wasat.smarthma.model.om;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
@@ -55,3 +56,4 @@ public class Summary implements Serializable {
 
 
 }
+*/

@@ -10,8 +10,9 @@ import java.util.ArrayList;
 import pl.wasat.smarthma.R;
 import pl.wasat.smarthma.adapter.EntryImagesListAdapter;
 import pl.wasat.smarthma.database.FavouritesDbAdapter;
+import pl.wasat.smarthma.helper.DataSorter;
+import pl.wasat.smarthma.model.entry.Entry;
 import pl.wasat.smarthma.model.feed.Feed;
-import pl.wasat.smarthma.model.om.EntryOM;
 import pl.wasat.smarthma.ui.frags.base.BaseShowProductsListFragment;
 
 /**
@@ -58,7 +59,7 @@ public class ProductsListFragmentOffline extends BaseShowProductsListFragment {
         dba.close();
         if (entryList == null) {
             entryList = new ArrayList();
-            EntryOM testEntry = new EntryOM();
+            Entry testEntry = new Entry();
             testEntry.setTitle(getActivity().getString(R.string.empty_list));
             testEntry.setUpdated("");
             testEntry.setIdentifier("");
@@ -68,17 +69,17 @@ public class ProductsListFragmentOffline extends BaseShowProductsListFragment {
             entryList.add(0, testEntry);
         }
 
+        DataSorter sorter = new DataSorter();
+        sorter.sort(entryList);
+
         //View view = getView();
         //if (view != null) {
 
         if (entryList.isEmpty()) {
             //view.setVisibility(View.GONE);
             loadFailureFrag();
-        }
-        else
-        {
-            if (entryImagesListView != null)
-            {
+        } else {
+            if (entryImagesListView != null) {
                 entryImagesListAdapter = new EntryImagesListAdapter(getActivity()
                         .getBaseContext(), getBitmapSpiceManager(), entryList);
                 entryImagesListView.setAdapter(entryImagesListAdapter);
@@ -114,7 +115,7 @@ public class ProductsListFragmentOffline extends BaseShowProductsListFragment {
      * loadProductItemDetails(pl.wasat.smarthma.model.eo.Entry)
      */
     @Override
-    protected void loadProductItemDetails(EntryOM entry) {
+    protected void loadProductItemDetails(Entry entry) {
         ProductDetailsFragment productDetailsFragment = ProductDetailsFragment
                 .newInstance(entry);
         getActivity()

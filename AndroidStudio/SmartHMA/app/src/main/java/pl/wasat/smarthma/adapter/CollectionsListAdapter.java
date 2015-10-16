@@ -9,7 +9,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -21,7 +20,6 @@ import pl.wasat.smarthma.R;
 import pl.wasat.smarthma.helper.Const;
 import pl.wasat.smarthma.interfaces.OnSlideElementListener;
 import pl.wasat.smarthma.model.Collection;
-import pl.wasat.smarthma.model.iso.EntryISO;
 
 /**
  * @author Wasat Sp. z o.o
@@ -33,7 +31,6 @@ public class CollectionsListAdapter extends ArrayAdapter<Collection> {
     private final String groupName;
     private static LayoutInflater inflater = null;
     private OnSlideElementListener listener;
-
 
 
     public void setListener(OnSlideElementListener listener) {
@@ -64,7 +61,7 @@ public class CollectionsListAdapter extends ArrayAdapter<Collection> {
 
     public View getView(int position, View convertView, ViewGroup parent) {
 
-        if(convertView == null) {
+        if (convertView == null) {
 
             convertView = inflater.inflate(R.layout.view_cell_collection, null);
 

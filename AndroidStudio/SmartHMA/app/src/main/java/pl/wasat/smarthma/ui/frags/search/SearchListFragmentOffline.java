@@ -14,6 +14,7 @@ import pl.wasat.smarthma.R;
 import pl.wasat.smarthma.adapter.SearchListAdapter;
 import pl.wasat.smarthma.database.FavouritesDbAdapter;
 import pl.wasat.smarthma.helper.Const;
+import pl.wasat.smarthma.helper.DataSorter;
 import pl.wasat.smarthma.model.FedeoRequestParams;
 import pl.wasat.smarthma.model.feed.Feed;
 import pl.wasat.smarthma.model.iso.Date;
@@ -75,7 +76,7 @@ public class SearchListFragmentOffline extends BaseSpiceListFragment {
         dba.openToRead();
         ArrayList<EntryISO> entries = dba.getISOEntries();
         dba.close();
-        if (entries == null || entries.size()<=0) {
+        if (entries == null || entries.size() <= 0) {
             entries = new ArrayList<>();
             EntryISO testEntry = new EntryISO();
             testEntry.setTitle(getActivity().getString(R.string.empty_list));
@@ -86,18 +87,14 @@ public class SearchListFragmentOffline extends BaseSpiceListFragment {
             testEntry.setFavourite(false);
             entries.add(0, testEntry);
         }
-        /*
-        entries = searchFeeds.getEntriesISO();
+
         DataSorter sorter = new DataSorter();
         sorter.sort(entries);
-        */
 
         getActivity().setProgressBarIndeterminateVisibility(false);
         updateSearchListViewContent(entries);
 
         this.entries = entries;
-
-        //showDataSeriesIntro(searchFeeds);
     }
 
 
@@ -112,25 +109,28 @@ public class SearchListFragmentOffline extends BaseSpiceListFragment {
         }
 
         getListView().setDivider(null);
+
+        Feed searchFeeds = new Feed();
+        searchFeeds.setEntriesISO(entries);
+        showDataSeriesIntro(searchFeeds);
     }
 
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
-        /*
+
         try {
             mListener = (OnSearchListFragmentListener) activity;
         } catch (ClassCastException e) {
             throw new ClassCastException(activity.toString()
                     + " must implement OnSearchListFragmentListener");
         }
-        */
     }
 
     @Override
     public void onDetach() {
         super.onDetach();
-        //mListener = null;
+        mListener = null;
     }
 
     @Override
@@ -148,7 +148,7 @@ public class SearchListFragmentOffline extends BaseSpiceListFragment {
     public void onListItemClick(ListView listView, View view, int position,
                                 long id) {
         super.onListItemClick(listView, view, position, id);
-        //mListener.onSearchListFragmentItemSelected(String.valueOf(position));
+        mListener.onSearchListFragmentItemSelected(String.valueOf(position));
     }
 
     @Override
@@ -227,16 +227,17 @@ public class SearchListFragmentOffline extends BaseSpiceListFragment {
      * @param searchResultFeed - Dataseries Feed
      */
     private void showDataSeriesIntro(Feed searchResultFeed) {
-        /*
+        Log.d("ZX", "showDataSeriesIntro()");
         FeedSummarySearchCollectionFragment feedSummarySearchCollectionFragment = FeedSummarySearchCollectionFragment
                 .newInstance(searchResultFeed);
+        /*
         getActivity()
                 .getSupportFragmentManager()
                 .beginTransaction()
                 .replace(R.id.activity_base_details_container,
                         feedSummarySearchCollectionFragment, "FeedSummarySearchFragment")
                 .addToBackStack("FeedSummarySearchFragment").commit();
-        */
+                */
     }
 
     /**

@@ -211,6 +211,5 @@ public class EarthObservation implements Serializable {
     public boolean equals(Object other) {
         return EqualsBuilder.reflectionEquals(this, other);
     }
-
-
 }
+

@@ -33,8 +33,7 @@ import java.util.List;
 
 import pl.wasat.smarthma.R;
 import pl.wasat.smarthma.interfaces.OnBaseMapFragmentPublicListener;
-import pl.wasat.smarthma.model.om.Footprint;
-import pl.wasat.smarthma.model.om.Pos;
+import pl.wasat.smarthma.model.entry.SimpleMetadata;
 import pl.wasat.smarthma.utils.obj.LatLngExt;
 
 /**
@@ -154,14 +153,14 @@ public class AmznExtendedMapFragment extends Fragment implements
         baseMapFragment.setTargetBounds(boundsBuilder.build());
     }
 
-    public void showFootPrints(Footprint footprint) {
+    public void showFootPrints(ArrayList<LatLngExt> footprint) {
         ArrayList<LatLng> footprintPoints = extractLatLngFootprint(footprint);
         buildFootprintBounds(footprintPoints);
         drawFootprint(footprintPoints);
     }
 
-    private ArrayList<LatLng> extractLatLngFootprint(Footprint footprint) {
-        List<Pos> footprintPosList = footprint.getMultiExtentOf()
+    private ArrayList<LatLng> extractLatLngFootprint(ArrayList<LatLngExt> footprint) {
+/*        List<Pos> footprintPosList = footprint.getMultiExtentOf()
                 .getMultiSurface().getSurfaceMembers().getPolygon()
                 .getExterior().getLinearRing().getPosList();
         if (footprintPosList.isEmpty()) {
@@ -171,16 +170,16 @@ public class AmznExtendedMapFragment extends Fragment implements
             footprintPosList = footprint.getMultiExtentOf().getMultiSurface()
                     .getSurfaceMembers().getPolygon().getExterior()
                     .getLinearRing().setPosList(posStr);
-        }
+        }*/
 
         ArrayList<LatLng> footprintPoints = new ArrayList<>();
         float prevBearing = 0;
 
-        for (int i = 0; i < footprintPosList.size() - 1; i++) {
-            double currLat = footprintPosList.get(i).getLatLng().latitude;
-            double currLng = footprintPosList.get(i).getLatLng().longitude;
-            double nextLat = footprintPosList.get(i + 1).getLatLng().latitude;
-            double nextLng = footprintPosList.get(i + 1).getLatLng().longitude;
+        for (int i = 0; i < footprint.size() - 1; i++) {
+            double currLat = footprint.get(i).latitude;
+            double currLng = footprint.get(i).longitude;
+            double nextLat = footprint.get(i + 1).latitude;
+            double nextLng = footprint.get(i + 1).longitude;
 
             float[] results = new float[3];
 
@@ -188,7 +187,7 @@ public class AmznExtendedMapFragment extends Fragment implements
                     results);
 
             if (Math.abs(results[2] - prevBearing) >= BEARING_LEVEL_VALUE) {
-                footprintPoints.add(footprintPosList.get(i).getLatLng().getAmznLatLon());
+                footprintPoints.add(footprint.get(i).getAmznLatLon());
             }
             prevBearing = results[2];
         }
@@ -209,18 +208,25 @@ public class AmznExtendedMapFragment extends Fragment implements
         }
     }
 
-    private void calcQuickLookParams(Footprint footprint,
+    private void calcQuickLookParams(LatLng footprintCenter,
                                      ArrayList<LatLng> footprintPoints) {
         double oneLat = footprintPoints.get(0).latitude;
         double oneLng = footprintPoints.get(0).longitude;
         double twoLat = footprintPoints.get(1).latitude;
         double twoLng = footprintPoints.get(1).longitude;
+        double threeLat = footprintPoints.get(2).latitude;
+        double threeLng = footprintPoints.get(2).longitude;
         double fourLat = footprintPoints.get(3).latitude;
         double fourLng = footprintPoints.get(3).longitude;
         float[] results = new float[3];
 
-        LatLngExt latLngExt = footprint.getCenterOf().getPoint().getPos().getLatLng();
-        qLookCenter = latLngExt.getAmznLatLon();
+        if (footprintCenter != null) {
+            qLookCenter = footprintCenter;
+        } else {
+            double latCenter = (oneLat + twoLat + threeLat + fourLat) / 4;
+            double lngCenter = (oneLng + twoLng + threeLng + fourLng) / 4;
+            qLookCenter = new LatLng(latCenter, lngCenter);
+        }
 
         Location.distanceBetween(oneLat, oneLng, twoLat, twoLng, results);
         qLookHeight = results[0];
@@ -231,13 +237,17 @@ public class AmznExtendedMapFragment extends Fragment implements
 
     }
 
-    public void showQuicklookOnMap(String url, Footprint footprint) {
+    public void showQuicklookOnMap(SimpleMetadata simpleMetadata) {
 
-        ArrayList<LatLng> footprintPoints = extractLatLngFootprint(footprint);
+        ArrayList<LatLng> footprintPoints = (ArrayList<LatLng>) (Object) simpleMetadata.getFootprint();
+        LatLng center = simpleMetadata.getFootprintCenter().getAmznLatLon();
+        String url = simpleMetadata.getQuickLookUrl();
+
+        //ArrayList<LatLng> footprintPoints = extractLatLngFootprint(footprint);
 
         buildFootprintBounds(footprintPoints);
 
-        calcQuickLookParams(footprint, footprintPoints);
+        calcQuickLookParams(center, footprintPoints);
         drawFootprint(footprintPoints);
 
         Target quicklookTarget = this;

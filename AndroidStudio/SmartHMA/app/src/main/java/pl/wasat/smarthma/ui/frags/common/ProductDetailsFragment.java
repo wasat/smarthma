@@ -32,9 +32,10 @@ import com.squareup.picasso.Target;
 import java.util.List;
 
 import pl.wasat.smarthma.R;
+import pl.wasat.smarthma.model.entry.Entry;
+import pl.wasat.smarthma.model.entry.SimpleMetadata;
 import pl.wasat.smarthma.model.om.Browse;
-import pl.wasat.smarthma.model.om.EntryOM;
-import pl.wasat.smarthma.model.om.Footprint;
+import pl.wasat.smarthma.model.om.Content;
 
 /**
  * A simple {@link android.support.v4.app.Fragment} subclass. Activities that
@@ -46,7 +47,7 @@ import pl.wasat.smarthma.model.om.Footprint;
 public class ProductDetailsFragment extends Fragment implements Target {
     private static final String KEY_PRODUCT_ENTRY = "pl.wasat.smarthma.KEY_PRODUCT_ENTRY";
 
-    private EntryOM displayedEntry;
+    private Entry displayedEntry;
 
     private OnProductDetailsFragmentListener mListener;
 
@@ -59,7 +60,7 @@ public class ProductDetailsFragment extends Fragment implements Target {
      * @param prodEntry Parameter 1.
      * @return A new instance of fragment ProductDetailsFragment.
      */
-    public static ProductDetailsFragment newInstance(EntryOM prodEntry) {
+    public static ProductDetailsFragment newInstance(Entry prodEntry) {
         ProductDetailsFragment fragment = new ProductDetailsFragment();
         Bundle args = new Bundle();
         args.putSerializable(KEY_PRODUCT_ENTRY, prodEntry);
@@ -74,7 +75,7 @@ public class ProductDetailsFragment extends Fragment implements Target {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            displayedEntry = (EntryOM) getArguments().getSerializable(
+            displayedEntry = (Entry) getArguments().getSerializable(
                     KEY_PRODUCT_ENTRY);
         }
     }
@@ -92,7 +93,7 @@ public class ProductDetailsFragment extends Fragment implements Target {
                     + displayedEntry.getPublished() + " and updated: "
                     + displayedEntry.getUpdated();
 
-            String content = displayedEntry.getSummary();
+            String content = displayedEntry.getSummary().getCdata();
             ((TextView) rootView.findViewById(R.id.product_frag_detail_name))
                     .setText(title);
             ((TextView) rootView.findViewById(R.id.product_frag_detail_dates))
@@ -210,7 +211,7 @@ public class ProductDetailsFragment extends Fragment implements Target {
      *
      */
     private void loadMetadataFrag() {
-        MetadataOMFragment metadataOMFragment = MetadataOMFragment
+        MetadataFragment metadataOMFragment = MetadataFragment
                 .newInstance(displayedEntry);
         getActivity()
                 .getSupportFragmentManager()
@@ -221,11 +222,12 @@ public class ProductDetailsFragment extends Fragment implements Target {
     }
 
     private void showExtendedMap() {
-        String url = getQuicklookUrl();
-        Footprint footprint = displayedEntry.getEarthObservation()
-                .getFeatureOfInterest().getFootprint();
+        //String url = getQuicklookUrl();
+        //Footprint footprint = displayedEntry.getEarthObservation()
+        //       .getFeatureOfInterest().getFootprint();
+        //ArrayList<LatLngExt> footprint = displayedEntry.getSimpleMetadata().getFootprint();
 
-        mListener.onProductDetailsFragmentExtendedMapShow(url, footprint);
+        mListener.onProductDetailsFragmentExtendedMapShow(displayedEntry.getSimpleMetadata());
     }
 
     private void showQuicklookGallery() {
@@ -235,6 +237,14 @@ public class ProductDetailsFragment extends Fragment implements Target {
 
     private String getQuicklookUrl() {
         String url = "";
+
+        List<Content> content = displayedEntry.getGroup().getContent();
+        for (Content cont : content) {
+            if (cont.getCategory().get_text().equalsIgnoreCase("QUICKLOOK")) {
+                url = cont.get_url();
+                return url;
+            }
+        }
 
         List<Browse> browseList = displayedEntry.getEarthObservation()
                 .getResult().getEarthObservationResult().getBrowseList();
@@ -303,8 +313,7 @@ public class ProductDetailsFragment extends Fragment implements Target {
      */
     public interface OnProductDetailsFragmentListener {
 
-        void onProductDetailsFragmentExtendedMapShow(String url,
-                                                     Footprint footprint);
+        void onProductDetailsFragmentExtendedMapShow(SimpleMetadata simpleMetadata);
 
         void onProductDetailsFragmentQuicklookShow(String url);
 

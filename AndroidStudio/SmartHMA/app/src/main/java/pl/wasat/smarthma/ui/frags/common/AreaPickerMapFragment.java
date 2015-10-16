@@ -2,7 +2,6 @@ package pl.wasat.smarthma.ui.frags.common;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.util.Log;
 
 import com.google.android.gms.maps.GoogleMap.OnCameraChangeListener;
 import com.google.android.gms.maps.GoogleMap.OnMapLongClickListener;
@@ -116,7 +115,7 @@ public class AreaPickerMapFragment extends BaseMapFragment implements OnBaseMapF
 
     private void setMapListeners() {
         AcraExtension.mapCustomLog("AreaMap.setMapListeners", mMap);
-        Log.i("MAP", "setMapListeners");
+        //Log.i("MAP", "setMapListeners");
 
         mMap.setOnCameraChangeListener(new OnCameraChangeListener() {
 

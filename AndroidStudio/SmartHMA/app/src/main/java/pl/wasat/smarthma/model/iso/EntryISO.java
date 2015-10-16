@@ -9,27 +9,26 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import pl.wasat.smarthma.model.entry.Polygon;
+import pl.wasat.smarthma.model.entry.Summary;
 import pl.wasat.smarthma.model.feed.Link;
 import pl.wasat.smarthma.utils.text.SmartHMAStringStyle;
 
 public class EntryISO implements Serializable {
 
-    /**
-     *
-     */
     private static final long serialVersionUID = 1L;
-    private String id="";
-    private String title="";
-    private String identifier="";
-    private String updated="";
+    private String id = "";
+    private String title = "";
+    private String identifier = "";
+    private String updated = "";
     private Date date = new Date();
     private Polygon polygon = new Polygon();
     private Summary summary = new Summary();
     private List<Link> link = new ArrayList<>();
     private MDMetadata MDMetadata = new MDMetadata();
-    private String XmlLang="";
+    private String XmlLang = "";
 
-    private String guid="";
+    private String guid = "";
     private long dbId;
     private boolean read;
     private boolean offline;
@@ -238,11 +237,10 @@ public class EntryISO implements Serializable {
         return EqualsBuilder.reflectionEquals(this, other);
     }
 
-    public boolean simpleEquals(EntryISO o)
-    {
+    public boolean simpleEquals(EntryISO o) {
         //return super.equals(other);
         return title.equals(o.getTitle()) && id.equals(o.getId()) && identifier.equals(o.getIdentifier()) && guid.equals(o.getGuid()) &&
-                date.equals(o.getDate()) && updated.equals(o.getUpdated()) && dbId==o.getDbId() && MDMetadata.equals(o.getMDMetadata()) &&
+                date.equals(o.getDate()) && updated.equals(o.getUpdated()) && dbId == o.getDbId() && MDMetadata.equals(o.getMDMetadata()) &&
                 summary.equals(o.getSummary()) && XmlLang.equals(o.getXmlLang());
     }
 

@@ -1,14 +1,18 @@
 package pl.wasat.smarthma.utils.obj;
 
+import java.io.Serializable;
+
 import pl.wasat.smarthma.helper.Const;
 
 /**
  * Created by Daniel on 2015-03-03 15:39.
  * Part of the project  SmartHMA
  */
-public class LatLngExt {
-    public final double latitude;
-    public final double longitude;
+public class LatLngExt implements Serializable {
+    public transient double latitude;
+    public transient double longitude;
+
+    private static final long serialVersionUID = 1L;
 
     public LatLngExt(Double lat, Double lng) {
         latitude = lat;
@@ -46,5 +50,11 @@ public class LatLngExt {
         }
     }
 
+    @Override
+    public String toString() {
+        return "LatLngExt{" +
+                latitude + ", " +
+                longitude + "}";
+    }
 }
 

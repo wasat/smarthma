@@ -1,3 +1,4 @@
+/*
 package pl.wasat.smarthma.model.om;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
@@ -8,18 +9,16 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-import pl.wasat.smarthma.model.feed.Group;
+import pl.wasat.smarthma.model.entry.Group;
+import pl.wasat.smarthma.model.entry.Where;
 import pl.wasat.smarthma.model.feed.Link;
 import pl.wasat.smarthma.utils.text.SmartHMAStringStyle;
-
 
 public class EntryOM implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-
     public static final String KEY_RSS_ENTRY = "KEY_RSS_ENTRY";
-
 
     private String id="";
     private ArrayList<Link> links = new ArrayList();
@@ -48,16 +47,20 @@ public class EntryOM implements Serializable {
     }
 
 
-    /**
+    */
+/**
      * @return the links
-     */
+ *//*
+
     public ArrayList<Link> getLinks() {
         return links;
     }
 
-    /**
+    */
+/**
      * @param links the links to set
-     */
+ *//*
+
     public void setLinks(ArrayList<Link> links) {
         this.links = links;
     }
@@ -211,3 +214,4 @@ public class EntryOM implements Serializable {
     }
 
 }
+*/

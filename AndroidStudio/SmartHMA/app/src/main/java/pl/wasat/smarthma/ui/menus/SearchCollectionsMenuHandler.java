@@ -1,9 +1,12 @@
 package pl.wasat.smarthma.ui.menus;
 
+import android.content.Intent;
+import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 
 import pl.wasat.smarthma.R;
+import pl.wasat.smarthma.ui.activities.FavouriteCollectionsActivity;
 import pl.wasat.smarthma.ui.activities.SearchCollectionResultsActivity;
 
 /**
@@ -37,11 +40,17 @@ public class SearchCollectionsMenuHandler extends MenuHandler {
             }
         });
 
-        LinearLayout favouritesLayout = (LinearLayout) layout.findViewById(R.id.popup_favourites_layout);
-        clickableViews.add(favouritesLayout);
-        favouritesLayout.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                // nothing yet
+        LinearLayout favouriteCollectionsLayout = (LinearLayout) layout.findViewById(R.id.popup_favourites_layout);
+        clickableViews.add(favouriteCollectionsLayout);
+        favouriteCollectionsLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent();
+                intent.setClass(activity, FavouriteCollectionsActivity.class);
+                //intent.setClass(activity, GlobalSettingsActivity.class);
+                Log.d("ZX", "Starting FavouriteCollectionsActivity...");
+                activity.startActivity(intent);
+                //activity.startActivityForResult(intent, Const.REQUEST_CODE_GLOBAL_SETTINGS);
                 popupWindow.dismiss();
                 popupWindow = null;
             }

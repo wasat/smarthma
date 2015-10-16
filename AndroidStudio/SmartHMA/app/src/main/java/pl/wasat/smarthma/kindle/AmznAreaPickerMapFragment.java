@@ -3,7 +3,6 @@ package pl.wasat.smarthma.kindle;
 import android.app.Activity;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.util.Log;
 
 import com.amazon.geo.mapsv2.AmazonMap.OnCameraChangeListener;
 import com.amazon.geo.mapsv2.AmazonMap.OnMapLongClickListener;
@@ -80,7 +79,7 @@ public class AmznAreaPickerMapFragment extends AmznBaseMapFragment implements Am
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        Log.i(MAP, ON_ACTIVITY_CREATED);
+        //Log.i(MAP, ON_ACTIVITY_CREATED);
         //AcraExtension.mapCustomLog("AreaMap.onActivityCreated", mMap);
 
     }
@@ -115,7 +114,7 @@ public class AmznAreaPickerMapFragment extends AmznBaseMapFragment implements Am
 
     private void setMapListeners() {
         //AcraExtension.mapCustomLog("AreaMap.setMapListeners", mMap);
-        Log.i(MAP, SET_MAP_LISTENERS);
+        //Log.i(MAP, SET_MAP_LISTENERS);
         mMap.setOnCameraChangeListener(new OnCameraChangeListener() {
 
             @Override
