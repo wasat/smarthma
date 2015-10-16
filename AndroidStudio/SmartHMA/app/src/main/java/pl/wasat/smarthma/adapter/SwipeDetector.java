@@ -45,7 +45,7 @@ public class SwipeDetector implements View.OnTouchListener {
 
         ListView listView = (ListView)v.getParent();
         RelativeLayout.LayoutParams params;
-        if(position != -1) position = listView.getPositionForView(v);
+        if(position == -1) position = listView.getPositionForView(v);
 
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN: {
