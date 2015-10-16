@@ -1,7 +1,10 @@
 package pl.wasat.smarthma.adapter;
 
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.BaseAdapter;
+import android.widget.ExpandableListView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
@@ -22,11 +25,10 @@ public class SwipeDetector implements View.OnTouchListener {
     private RelativeLayout deleteView;
     private LinearLayout mainView;
     private int position;
-    boolean isExpandable;
 
 
-    public SwipeDetector(View v, int position, boolean isExpandable) {
-        this.isExpandable = isExpandable;
+    //set position -1 if list is expandable
+    public SwipeDetector(View v, int position) {
         deleteView = (RelativeLayout) v.findViewById(R.id.swipe_list_deleteview);
         mainView = (LinearLayout) v.findViewById(R.id.swipe_list_mainview);
         this.position = position;
@@ -37,22 +39,24 @@ public class SwipeDetector implements View.OnTouchListener {
         thrower.addThrowListener(listener);
     }
 
+
     @Override
     public boolean onTouch(View v, MotionEvent event) {
 
-        ListView listView = (ListView) v.getParent();
+        ListView listView = (ListView)v.getParent();
         RelativeLayout.LayoutParams params;
+        if(position != -1) position = listView.getPositionForView(v);
 
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN: {
                 downX = event.getX();
-                return true;
+                return true; // allow other events like Click to be processed
             }
             case MotionEvent.ACTION_MOVE: {
                 upX = event.getX();
                 float deltaX = downX - upX;
-                if (downX < upX && deltaX < -MIN_DISTANCE) deltaX = -MIN_DISTANCE;
-                if (downX > upX && deltaX > MIN_DISTANCE) deltaX = MIN_DISTANCE;
+                if(downX < upX && deltaX < -MIN_DISTANCE) deltaX = -MIN_DISTANCE;
+                if(downX > upX && deltaX > MIN_DISTANCE) deltaX = MIN_DISTANCE;
 
                 if (Math.abs(deltaX) > MIN_LOCK_DISTANCE && listView != null && !motionInterceptDisallowed) {
                     listView.requestDisallowInterceptTouchEvent(true);
@@ -62,11 +66,12 @@ public class SwipeDetector implements View.OnTouchListener {
                 if (deltaX > 0) {
                     deleteView.setVisibility(View.GONE);
                 } else {
+                    // if first swiped left and then swiped right
                     deleteView.setVisibility(View.VISIBLE);
                 }
 
                 swipe(-(int) deltaX);
-                return true;
+                return false;
             }
 
             case MotionEvent.ACTION_UP:
@@ -74,10 +79,15 @@ public class SwipeDetector implements View.OnTouchListener {
                 float deltaX = upX - downX;
                 if (deltaX >= MIN_DISTANCE) {
                     thrower.Throw(true, position);
-                } else if (deltaX <= (MIN_DISTANCE * -1)) {
+
+                }
+                else if (deltaX <= (MIN_DISTANCE * -1)){
                     thrower.Throw(false, position);
                 }
+
+
                 if (listView != null) {
+
                     listView.requestDisallowInterceptTouchEvent(false);
                     motionInterceptDisallowed = false;
                 }
@@ -86,14 +96,11 @@ public class SwipeDetector implements View.OnTouchListener {
                 params.rightMargin = 0;
                 params.leftMargin = 0;
                 mainView.setLayoutParams(params);
-                if (upX - downX < 10 && upX - downX > -10) {
-                    if (!isExpandable) {
-                        listView.performItemClick(v, position, listView.getAdapter().getItemId(position));
-                    } else {
-                        position = listView.getPositionForView(v);
-                        listView.performItemClick(v, position, listView.getAdapter().getItemId(position));
-                    }
+                if(upX - downX < 10 && upX - downX >-10)
+                {
+                    listView.performItemClick(v, position, listView.getAdapter().getItemId(position));
                 }
+
                 return false;
 
             case MotionEvent.ACTION_CANCEL:
@@ -107,7 +114,6 @@ public class SwipeDetector implements View.OnTouchListener {
         }
         return true;
     }
-
     private void swipe(int distance) {
         View animationView = mainView;
         RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) animationView.getLayoutParams();
