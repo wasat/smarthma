@@ -1,10 +1,7 @@
 package pl.wasat.smarthma.adapter;
 
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.BaseAdapter;
-import android.widget.ExpandableListView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
@@ -25,6 +22,7 @@ public class SwipeDetector implements View.OnTouchListener {
     private RelativeLayout deleteView;
     private LinearLayout mainView;
     private int position;
+    private boolean isExpandable;
 
 
     //set position -1 if list is expandable
@@ -32,6 +30,7 @@ public class SwipeDetector implements View.OnTouchListener {
         deleteView = (RelativeLayout) v.findViewById(R.id.swipe_list_deleteview);
         mainView = (LinearLayout) v.findViewById(R.id.swipe_list_mainview);
         this.position = position;
+        if(position == -1) isExpandable = true;
         thrower = new SwipeListEventThrower();
     }
 
@@ -45,7 +44,8 @@ public class SwipeDetector implements View.OnTouchListener {
 
         ListView listView = (ListView)v.getParent();
         RelativeLayout.LayoutParams params;
-        if(position == -1) position = listView.getPositionForView(v);
+        if(position == -1 || isExpandable) position = listView.getPositionForView(v);
+
 
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN: {
@@ -87,7 +87,6 @@ public class SwipeDetector implements View.OnTouchListener {
 
 
                 if (listView != null) {
-
                     listView.requestDisallowInterceptTouchEvent(false);
                     motionInterceptDisallowed = false;
                 }
