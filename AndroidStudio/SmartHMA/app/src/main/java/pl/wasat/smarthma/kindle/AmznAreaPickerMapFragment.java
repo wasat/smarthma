@@ -1,20 +1,18 @@
 package pl.wasat.smarthma.kindle;
 
 import android.app.Activity;
-import android.graphics.Color;
+import android.content.Context;
 import android.os.Bundle;
 
-import com.amazon.geo.mapsv2.AmazonMap.OnCameraChangeListener;
-import com.amazon.geo.mapsv2.AmazonMap.OnMapLongClickListener;
+import com.amazon.geo.mapsv2.AmazonMap;
 import com.amazon.geo.mapsv2.model.CameraPosition;
-import com.amazon.geo.mapsv2.model.CircleOptions;
 import com.amazon.geo.mapsv2.model.LatLng;
 import com.amazon.geo.mapsv2.model.LatLngBounds;
 import com.amazon.geo.mapsv2.model.Polygon;
-import com.amazon.geo.mapsv2.model.PolygonOptions;
 
 import java.util.ArrayList;
 
+import pl.wasat.smarthma.preferences.SharedPrefs;
 import pl.wasat.smarthma.utils.obj.LatLngBoundsExt;
 
 /**
@@ -26,9 +24,6 @@ import pl.wasat.smarthma.utils.obj.LatLngBoundsExt;
  */
 public class AmznAreaPickerMapFragment extends AmznBaseMapFragment implements AmznBaseMapFragment.OnBaseMapFragmentListener {
 
-    public static final String SET_MAP_LISTENERS = "setMapListeners";
-    public static final String MAP = "MAP";
-    public static final String ON_ACTIVITY_CREATED = "onActivityCreated";
     private OnAmznAreaPickerMapFragmentListener mListener;
 
     private LatLngBounds areaBounds;
@@ -51,9 +46,9 @@ public class AmznAreaPickerMapFragment extends AmznBaseMapFragment implements Am
     }
 
     @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-        //AcraExtension.mapCustomLog("AreaMap.onAttach", mMap);
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        Activity activity = context instanceof Activity ? (Activity) context : null;
         try {
             mListener = (OnAmznAreaPickerMapFragmentListener) activity;
         } catch (ClassCastException e) {
@@ -71,32 +66,22 @@ public class AmznAreaPickerMapFragment extends AmznBaseMapFragment implements Am
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //AcraExtension.mapCustomLog("AreaMap.onCreate", mMap);
+        obtainBoundsFromShared();
         prepareArea();
 
     }
 
-    @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        //Log.i(MAP, ON_ACTIVITY_CREATED);
-        //AcraExtension.mapCustomLog("AreaMap.onActivityCreated", mMap);
-
-    }
 
     @Override
     public void onPause() {
         postDrawArea();
-        //AcraExtension.mapCustomLog("AreaMap.onPause", mMap);
-
         super.onPause();
     }
 
     @Override
     public void onBaseSupportMapReady() {
-        //AcraExtension.mapCustomLog("AreaMap.onBaseSupportMapReady", mMap);
+        animateWhenMapIsReady(0);
         setMapListeners();
-
     }
 
     /**
@@ -113,9 +98,7 @@ public class AmznAreaPickerMapFragment extends AmznBaseMapFragment implements Am
     }
 
     private void setMapListeners() {
-        //AcraExtension.mapCustomLog("AreaMap.setMapListeners", mMap);
-        //Log.i(MAP, SET_MAP_LISTENERS);
-        mMap.setOnCameraChangeListener(new OnCameraChangeListener() {
+        mMap.setOnCameraChangeListener(new AmazonMap.OnCameraChangeListener() {
 
             @Override
             public void onCameraChange(CameraPosition arg0) {
@@ -127,7 +110,7 @@ public class AmznAreaPickerMapFragment extends AmznBaseMapFragment implements Am
             }
         });
 
-        mMap.setOnMapLongClickListener(new OnMapLongClickListener() {
+        mMap.setOnMapLongClickListener(new AmazonMap.OnMapLongClickListener() {
 
             @Override
             public void onMapLongClick(LatLng point) {
@@ -162,39 +145,23 @@ public class AmznAreaPickerMapFragment extends AmznBaseMapFragment implements Am
         if (areaPolygon != null) {
             areaPolygon.remove();
         }
-        drawArea();
-        drawPoints();
+        AmznMapDrawings mapDrawings = new AmznMapDrawings();
+        areaPolygon = mMap.addPolygon(mapDrawings.drawArea(markedPtList));
+        mMap.addCircle(mapDrawings.drawPoints(markedPtList));
+        //drawArea();
+        // drawPoints();
     }
 
-    private void drawArea() {
-        if (markedPtList.size() > 0) {
-            PolygonOptions rectOptions = new PolygonOptions();
-            rectOptions.addAll(markedPtList);
-            rectOptions.strokeColor(Color.RED);
-            rectOptions.strokeWidth(4);
-            rectOptions.fillColor(Color.TRANSPARENT);
-            rectOptions.zIndex(3);
 
-            areaPolygon = mMap.addPolygon(rectOptions);
-        }
+    private void obtainBoundsFromShared() {
+        SharedPrefs sharedPrefs = new SharedPrefs(getActivity());
+        float[] bbox = sharedPrefs.getBboxPrefs();
+
+        LatLngBounds.Builder boundsBuilder = new LatLngBounds.Builder();
+        boundsBuilder.include(new LatLng(bbox[1], bbox[0]));
+        boundsBuilder.include(new LatLng(bbox[3], bbox[2]));
+
+        targetBounds = boundsBuilder.build();
     }
-
-    private void drawPoints() {
-        int size = 0;
-        if (markedPtList != null) {
-            size = markedPtList.size();
-        }
-        for (int i = 0; i < size; i++) {
-
-            CircleOptions circle = new CircleOptions();
-            circle.center(markedPtList.get(i));
-            circle.radius(0.3);
-            circle.strokeColor(Color.YELLOW);
-            circle.fillColor(Color.GRAY);
-            circle.strokeWidth(7);
-            mMap.addCircle(circle);
-        }
-    }
-
 
 }

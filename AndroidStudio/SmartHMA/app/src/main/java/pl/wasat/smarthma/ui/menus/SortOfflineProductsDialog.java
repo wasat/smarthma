@@ -19,7 +19,7 @@ import pl.wasat.smarthma.ui.activities.FavouriteProductsActivity;
 import pl.wasat.smarthma.ui.frags.common.ProductsListFragmentOffline;
 
 /**
- * Handles user interaction related to search history management.
+ * Handles user interaction related to sorting data.
  */
 public class SortOfflineProductsDialog extends DialogFragment {
     private FavouriteProductsActivity activity;

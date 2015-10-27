@@ -34,7 +34,6 @@ public class SearchActivity extends BaseSmartHMActivity implements
 
     private BaseSearchSideParametersFragment sideParamsPanel;
     private SearchFragment searchMainPanel;
-    private MenuHandler menuHandler;
     private static final int MENU_QUERY_IDS = 1000;
     private static final int MENU_CATALOGUE_IDS = 1100;
     private static final int MENU_BBOX_IDS = 1200;
@@ -52,7 +51,7 @@ public class SearchActivity extends BaseSmartHMActivity implements
             loadMainSearchPanel();
         }
 
-        menuHandler = new SearchMenuHandler(this, R.id.menu_button);
+        commonMenuHandler = new SearchMenuHandler(this, R.id.menu_button);
 
         //refreshParameters();
     }
@@ -164,10 +163,7 @@ public class SearchActivity extends BaseSmartHMActivity implements
      */
     @Override
     public void onBackPressed() {
-        if (menuHandler.isPopupWindowVisible()) {
-            menuHandler.dismissPopupWindow();
-            return;
-        }
+        if (dismissMenuOnBackPressed()) return;
 
         FragmentManager fm = getSupportFragmentManager();
         int bsec = fm.getBackStackEntryCount();
@@ -274,6 +270,6 @@ public class SearchActivity extends BaseSmartHMActivity implements
 
 
     public MenuHandler getMenuHandler() {
-        return menuHandler;
+        return commonMenuHandler;
     }
 }

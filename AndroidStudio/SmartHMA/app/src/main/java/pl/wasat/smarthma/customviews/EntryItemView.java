@@ -55,20 +55,20 @@ public class EntryItemView extends RelativeLayout implements SpiceListItemView<E
                         setFavourite(!EntryItemView.this.entry.isFavourite());
 
                         FavouritesDbAdapter dba = new FavouritesDbAdapter(context);
-                        String title = EntryItemView.this.entry.getTitle();
+                        //String title = EntryItemView.this.entry.getTitle();
                         //Log.d("ZX", "title: " + title);
-                        String published = EntryItemView.this.entry.getPublished();
+                        //String published = EntryItemView.this.entry.getPublished();
                         //Log.d("ZX", "published: " + published);
-                        String updated = EntryItemView.this.entry.getUpdated();
+                        //String updated = EntryItemView.this.entry.getUpdated();
                         //Log.d("ZX", "updated: " + updated);
-                        String id = EntryItemView.this.entry.getId();
-                        String identifier = EntryItemView.this.entry.getIdentifier();
+                        //String id = EntryItemView.this.entry.getId();
+                        //String identifier = EntryItemView.this.entry.getIdentifier();
                         //Log.d("ZX", "id: " + id);
                         //Log.d("ZX", "identifier: " + identifier);
                         //Log.d("ZX", "-");
                         if (!EntryItemView.this.entry.isFavourite()) {
                             dba.openToWrite();
-                            int result = dba.removeEntry(EntryItemView.this.entry);
+                            dba.removeEntry(EntryItemView.this.entry);
                             //Log.d("ZX", "result: "+result);
                             dba.close();
                         } else {
@@ -81,16 +81,16 @@ public class EntryItemView extends RelativeLayout implements SpiceListItemView<E
                         //Log.d("ZX", "--");
                         dba.openToRead();
                         ArrayList<Entry> all = dba.getOMEntries();
-                        for (Entry o : all) {
+/*                        for (Entry o : all) {
                             //Log.d("ZX", " " + o.getTitle());
-                        }
+                        }*/
                         dba.close();
                         //Log.d("ZX", "---");
                     }
                 });
-            } else {
+            } /*else {
                 //Log.d("ZX", "Button is null.");
-            }
+            }*/
         } catch (Exception e) {
             e.printStackTrace();
         }

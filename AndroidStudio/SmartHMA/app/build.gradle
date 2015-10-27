@@ -36,11 +36,13 @@ repositories {
 }
 
 dependencies {
-    compile 'com.android.support:support-v4:23.0.1'
-    compile 'com.android.support:appcompat-v7:23.0.1'
-    compile 'com.google.android.gms:play-services-location:8.1.0'
-    compile 'com.amazon.android:amazon-maps-api:2.0'
+    compile project(':amazon-maps-libs-v2')
 
+    compile 'com.android.support:support-v4:23.1.0'
+    compile 'com.android.support:appcompat-v7:23.1.0'
+    compile 'com.google.android.gms:play-services-location:8.1.0'
+
+    //compile 'com.amazon.android:amazon-maps-api:2.0'
     compile 'com.octo.android.robospice:robospice:1.4.14'
     compile 'com.octo.android.robospice:robospice-ui-spicelist:1.4.14'
     compile 'com.octo.android.robospice:robospice-okhttp:1.4.14'
@@ -48,7 +50,6 @@ dependencies {
         exclude group: 'org.apache.httpcomponents'
         exclude group: 'org.apache.commons', module: 'commons-io'
     }
-
     compile 'com.squareup.picasso:picasso:2.5.2'
     compile 'com.squareup.okhttp:okhttp:2.5.0'
     compile 'com.squareup.okhttp:okhttp-urlconnection:2.5.0'

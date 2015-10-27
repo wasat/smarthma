@@ -61,8 +61,7 @@ public class XmlSaxParser {
         }
         Log.i("PARSE_FEED", String.valueOf(System.currentTimeMillis() - startTime));
         //noinspection ConstantConditions
-        Feed feed = feedDataHandler.getFeeds();
-        return feed;
+        return feedDataHandler.getFeeds();
     }
 
 
@@ -82,10 +81,9 @@ public class XmlSaxParser {
     }
 
     public Entry parseOMMetadata(Entry entry) {
-        Entry parsedEntry = entry;
         EarthObservation eo = parseOMMetadata(entry.getRawMetadata());
-        parsedEntry.setEarthObservation(eo);
-        return parsedEntry;
+        entry.setEarthObservation(eo);
+        return entry;
     }
 
     private EarthObservation parseOMMetadata(String metadata) {
@@ -95,10 +93,9 @@ public class XmlSaxParser {
     }
 
     public Entry parseISOMetadata(Entry entry) {
-        Entry parsedEntry = entry;
         MDMetadata mdMetadata = parseISOMetadata(entry.getRawMetadata());
-        parsedEntry.setMDMetadata(mdMetadata);
-        return parsedEntry;
+        entry.setMDMetadata(mdMetadata);
+        return entry;
     }
 
     private MDMetadata parseISOMetadata(String metadata) {
@@ -108,10 +105,9 @@ public class XmlSaxParser {
     }
 
     public Entry parseDCMetadata(Entry entry) {
-        Entry parsedEntry = entry;
         Dc dcMetadata = parseDCMetadata(entry.getRawMetadata());
-        parsedEntry.setDc(dcMetadata);
-        return parsedEntry;
+        entry.setDc(dcMetadata);
+        return entry;
     }
 
     private Dc parseDCMetadata(String metadata) {
