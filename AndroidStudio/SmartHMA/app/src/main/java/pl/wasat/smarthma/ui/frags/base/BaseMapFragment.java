@@ -23,6 +23,7 @@ import com.google.android.gms.maps.model.TileProvider;
 
 import pl.wasat.smarthma.interfaces.OnBaseMapFragmentPublicListener;
 import pl.wasat.smarthma.preferences.GlobalPreferences;
+import pl.wasat.smarthma.utils.io.AcraExtension;
 import pl.wasat.smarthma.utils.loc.GoogleLocProviderImpl;
 import pl.wasat.smarthma.utils.wms.TileProviderFactory;
 
@@ -59,7 +60,7 @@ public class BaseMapFragment extends SupportMapFragment implements
     protected LatLngBounds targetBounds;
 
     public BaseMapFragment() {
-        //AcraExtension.mapCustomLog("BaseMap.construct", mMap);
+        AcraExtension.mapCustomLog("BaseMap.construct", mMap);
     }
 
     public static BaseMapFragment newInstance(
@@ -76,7 +77,7 @@ public class BaseMapFragment extends SupportMapFragment implements
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //AcraExtension.mapCustomLog("BaseMap.onCreate", mMap);
+        AcraExtension.mapCustomLog("BaseMap.onCreate", mMap);
 
         mGoogleApiClient = new GoogleApiClient.Builder(getActivity())
                 .addApi(LocationServices.API).addConnectionCallbacks(this)
@@ -87,7 +88,7 @@ public class BaseMapFragment extends SupportMapFragment implements
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        //AcraExtension.mapCustomLog("BaseMap.onActivityCreated", mMap);
+        AcraExtension.mapCustomLog("BaseMap.onActivityCreated", mMap);
         //Log.i("BASE_MAP", "onActivityCreated");
 
         startCreateMap(savedInstanceState);
@@ -109,13 +110,13 @@ public class BaseMapFragment extends SupportMapFragment implements
 
     @Override
     public void onConnected(Bundle dataBundle) {
-        //AcraExtension.mapCustomLog("BaseMap.onConnected", mMap);
+        AcraExtension.mapCustomLog("BaseMap.onConnected", mMap);
 
         //obtainGooglePosition();
     }
 
     private void startCreateMap() {
-        //AcraExtension.mapCustomLog("BaseMap.startCreateMap", mMap);
+        AcraExtension.mapCustomLog("BaseMap.startCreateMap", mMap);
 
         int status = GooglePlayServicesUtil
                 .isGooglePlayServicesAvailable(getActivity());
@@ -124,8 +125,8 @@ public class BaseMapFragment extends SupportMapFragment implements
             setUpMapIfNeeded();
             mMap = supportMapFrag.getMap();
 
-            //AcraExtension.mapCustomLog(
-            //        "BaseMap.startCreateMap.sIStNotNull", mMap);
+            AcraExtension.mapCustomLog(
+                    "BaseMap.startCreateMap.sIStNotNull", mMap);
 
         } else {
             Dialog dialog = GooglePlayServicesUtil.getErrorDialog(status,
@@ -135,7 +136,7 @@ public class BaseMapFragment extends SupportMapFragment implements
     }
 
     private void startCreateMap(Bundle savedInstanceState) {
-        //AcraExtension.mapCustomLog("BaseMap.startCreateMap", mMap);
+        AcraExtension.mapCustomLog("BaseMap.startCreateMap", mMap);
 
         int status = GooglePlayServicesUtil
                 .isGooglePlayServicesAvailable(getActivity());
@@ -146,8 +147,8 @@ public class BaseMapFragment extends SupportMapFragment implements
             if (savedInstanceState != null) {
                 mMap = supportMapFrag.getMap();
 
-                //AcraExtension.mapCustomLog(
-                //        "BaseMap.startCreateMap.sIStNotNull", mMap);
+                AcraExtension.mapCustomLog(
+                        "BaseMap.startCreateMap.sIStNotNull", mMap);
             }
         } else {
             Dialog dialog = GooglePlayServicesUtil.getErrorDialog(status,
@@ -160,19 +161,19 @@ public class BaseMapFragment extends SupportMapFragment implements
         if (mMap == null) {
             mMap = supportMapFrag.getMap();
             // Check if we were successful in obtaining the map.
-            // AcraExtension
-            //         .mapCustomLog("BaseMap.setUpMapIfNeeded.mapNull", mMap);
+            AcraExtension
+                    .mapCustomLog("BaseMap.setUpMapIfNeeded.mapNull", mMap);
         }
         if (mMap != null) {
-            // AcraExtension.mapCustomLog("BaseMap.setUpMapIfNeeded.mapNotNull",
-            //        mMap);
+            AcraExtension.mapCustomLog("BaseMap.setUpMapIfNeeded.mapNotNull",
+                    mMap);
             setUpMap();
         }
 
     }
 
     private void setUpMap() {
-        //AcraExtension.mapCustomLog("BaseMap.setUpMap", mMap);
+        AcraExtension.mapCustomLog("BaseMap.setUpMap", mMap);
 
         mMap.setMyLocationEnabled(true);
         mMap.getUiSettings().setZoomControlsEnabled(true);
@@ -228,10 +229,11 @@ public class BaseMapFragment extends SupportMapFragment implements
             default:
                 break;
         }
+
     }
 
     private void setupOSM() {
-        //AcraExtension.mapCustomLog("BaseMap.setupOSM", mMap);
+        AcraExtension.mapCustomLog("BaseMap.setupOSM", mMap);
 
         TileProvider osmTileProvider = TileProviderFactory.getOSMTileProvider();
         mMap.addTileOverlay(new TileOverlayOptions().tileProvider(

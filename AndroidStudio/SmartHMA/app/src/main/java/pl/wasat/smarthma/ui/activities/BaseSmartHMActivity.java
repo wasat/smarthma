@@ -29,7 +29,7 @@ public class BaseSmartHMActivity extends FragmentActivity {
 
     static final int REQUEST_NEW_SEARCH = 0;
     boolean stopNewSearch = false;
-    protected MenuHandler commonMenuHandler;
+    private MenuHandler commonMenuHandler;
     private FedeoSearchRequestReceiver fedeoSearchRequestReceiver;
 
     private final IntentFilter filter =
@@ -94,7 +94,7 @@ public class BaseSmartHMActivity extends FragmentActivity {
         finish();
     }
 
-    protected boolean dismissMenuOnBackPressed() {
+    boolean dismissMenuOnBackPressed() {
         if (commonMenuHandler.isPopupWindowVisible()) {
             commonMenuHandler.dismissPopupWindow();
             return true;

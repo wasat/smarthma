@@ -19,7 +19,7 @@ import pl.wasat.smarthma.ui.activities.FavouriteCollectionsActivity;
 import pl.wasat.smarthma.ui.frags.search.SearchListFragmentOffline;
 
 /**
- * Handles user interaction related to sorting data.
+ * Handles user interaction related to search history management.
  */
 public class SortOfflineCollectionsDialog extends DialogFragment {
     private FavouriteCollectionsActivity activity;

@@ -33,6 +33,7 @@ public class Const {
     public static final String KEY_ACTION_BROADCAST_FEDEO_REQUEST = "pl.wasat.smarthma.KEY_ACTION_BROADCAST_FEDEO_REQUEST";
 
     public static final int REQUEST_CODE_GLOBAL_SETTINGS = 100;
+    public static final int REQUEST_CODE_DOWNLOAD = 101;
 
     public static final String KEY_PREF_FILE = "SmartHMAPrefFile";
     public static final String KEY_PREF_DATETIME_START = "pl.wasat.smarthma.KEY_PREF_TIME_START";

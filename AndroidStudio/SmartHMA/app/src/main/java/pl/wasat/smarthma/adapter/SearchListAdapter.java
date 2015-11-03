@@ -14,19 +14,10 @@ import java.util.List;
 
 import pl.wasat.smarthma.R;
 import pl.wasat.smarthma.database.FavouritesDbAdapter;
-import pl.wasat.smarthma.interfaces.OnSlideElementListener;
 import pl.wasat.smarthma.model.iso.EntryISO;
 import pl.wasat.smarthma.utils.time.DateUtils;
 
 public class SearchListAdapter extends ArrayAdapter<EntryISO> {
-
-
-    private OnSlideElementListener listener;
-
-
-    public void setListener(OnSlideElementListener listener) {
-        this.listener = listener;
-    }
 
     public SearchListAdapter(Activity activity, List<EntryISO> searchList) {
         super(activity, 0, searchList);
@@ -96,23 +87,21 @@ public class SearchListAdapter extends ArrayAdapter<EntryISO> {
                 } else {
                     dba.openToWrite();
                     //long dbaResult =
-                    dba.removeEntry(searchItem);
+                    int result = dba.removeEntry(searchItem);
                     //Log.d("ZX", "result: " + result);
                     dba.close();
                 }
                 //Log.d("ZX", "--");
                 dba.openToRead();
                 ArrayList<EntryISO> all = dba.getISOEntries();
-/*                for (EntryISO o : all) {
+                for (EntryISO o : all) {
                     //Log.d("ZX", " " + o.getTitle());
-                }*/
+                }
                 dba.close();
                 //Log.d("ZX", "---");
             }
         });
-        SwipeDetector swipeDetector = new SwipeDetector(rowView, position);
-        swipeDetector.setOnClickListener(listener);
-        rowView.setOnTouchListener(swipeDetector);
+
         return rowView;
     }
 

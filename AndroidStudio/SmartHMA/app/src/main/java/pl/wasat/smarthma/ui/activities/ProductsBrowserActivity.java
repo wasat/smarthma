@@ -19,6 +19,7 @@ import pl.wasat.smarthma.ui.frags.common.ExtendedMapFragment.OnExtendedMapFragme
 import pl.wasat.smarthma.ui.frags.common.ProductDetailsFragment.OnProductDetailsFragmentListener;
 import pl.wasat.smarthma.ui.frags.common.ProductsListFragment;
 import pl.wasat.smarthma.ui.frags.dialog.FacebookDialogFragment;
+import pl.wasat.smarthma.ui.menus.MenuHandler;
 import pl.wasat.smarthma.ui.menus.ProductsBrowserMenuHandler;
 
 public class ProductsBrowserActivity extends BaseSmartHMActivity implements
@@ -30,6 +31,7 @@ public class ProductsBrowserActivity extends BaseSmartHMActivity implements
     //private ArrayList<LatLngExt> mFootprint;
     //private String quicklookUrl;
     private SimpleMetadata simpleMeta;
+    private MenuHandler menuHandler;
     private ProductsListFragment productsListFragment;
 
     @Override
@@ -49,7 +51,7 @@ public class ProductsBrowserActivity extends BaseSmartHMActivity implements
                 .replace(R.id.activity_base_list_container,
                         productsListFragment).commit();
 
-        commonMenuHandler = new ProductsBrowserMenuHandler(this, R.id.menu_button);
+        menuHandler = new ProductsBrowserMenuHandler(this, R.id.menu_button);
     }
 
     @Override
@@ -64,6 +66,10 @@ public class ProductsBrowserActivity extends BaseSmartHMActivity implements
     @Override
     public void onBackPressed() {
         try {
+            if (menuHandler.isPopupWindowVisible()) {
+                menuHandler.dismissPopupWindow();
+                return;
+            }
             if (dismissMenuOnBackPressed()) return;
             FragmentManager fm = getSupportFragmentManager();
 

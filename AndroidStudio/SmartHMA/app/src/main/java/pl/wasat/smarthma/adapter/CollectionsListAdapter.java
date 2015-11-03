@@ -65,7 +65,7 @@ public class CollectionsListAdapter extends ArrayAdapter<Collection> {
 
             convertView = inflater.inflate(R.layout.view_cell_collection, null);
 
-            SwipeDetector swipeDetector = new SwipeDetector(convertView, position);
+            SwipeDetector swipeDetector = new SwipeDetector(convertView, position, false);
             swipeDetector.setOnClickListener(listener);
             convertView.setOnTouchListener(swipeDetector);
 

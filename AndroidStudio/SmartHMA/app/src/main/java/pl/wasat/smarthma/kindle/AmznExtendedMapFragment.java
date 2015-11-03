@@ -1,7 +1,6 @@
 package pl.wasat.smarthma.kindle;
 
 import android.app.Activity;
-import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
@@ -117,9 +116,8 @@ public class AmznExtendedMapFragment extends Fragment implements
     }
 
     @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        Activity activity = context instanceof Activity ? (Activity) context : null;
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
         try {
             mListener = (OnAmznExtendedMapFragmentListener) activity;
         } catch (ClassCastException e) {
@@ -153,21 +151,12 @@ public class AmznExtendedMapFragment extends Fragment implements
             boundsBuilder.include(footprintPoints.get(j));
         }
         baseMapFragment.setTargetBounds(boundsBuilder.build());
-        baseMapFragment.animateWhenMapIsReady(75);
     }
 
     public void showFootPrints(ArrayList<LatLngExt> footprint) {
         ArrayList<LatLng> footprintPoints = extractLatLngFootprint(footprint);
         buildFootprintBounds(footprintPoints);
         drawFootprint(footprintPoints);
-    }
-
-    private ArrayList<LatLng> castToAmznLatLonArray(ArrayList<LatLngExt> latLngExtArrayList) {
-        ArrayList<LatLng> latLngs = new ArrayList<>();
-        for (LatLngExt latLngExt : latLngExtArrayList) {
-            latLngs.add(latLngExt.getAmznLatLon());
-        }
-        return latLngs;
     }
 
     private ArrayList<LatLng> extractLatLngFootprint(ArrayList<LatLngExt> footprint) {
@@ -231,7 +220,7 @@ public class AmznExtendedMapFragment extends Fragment implements
         double fourLng = footprintPoints.get(3).longitude;
         float[] results = new float[3];
 
-        if (footprintCenter != null && (footprintCenter.latitude != 0 && footprintCenter.longitude != 0)) {
+        if (footprintCenter != null) {
             qLookCenter = footprintCenter;
         } else {
             double latCenter = (oneLat + twoLat + threeLat + fourLat) / 4;
@@ -250,7 +239,7 @@ public class AmznExtendedMapFragment extends Fragment implements
 
     public void showQuicklookOnMap(SimpleMetadata simpleMetadata) {
 
-        ArrayList<LatLng> footprintPoints = castToAmznLatLonArray(simpleMetadata.getFootprint());
+        ArrayList<LatLng> footprintPoints = (ArrayList<LatLng>) (Object) simpleMetadata.getFootprint();
         LatLng center = simpleMetadata.getFootprintCenter().getAmznLatLon();
         String url = simpleMetadata.getQuickLookUrl();
 
@@ -266,12 +255,39 @@ public class AmznExtendedMapFragment extends Fragment implements
                 .into(quicklookTarget);
     }
 
+/* // decodes image and scales it to reduce memory consumption
+    private Bitmap decodeFile(File f) {
+  try {
+   // Decode image size
+   BitmapFactory.Options o = new BitmapFactory.Options();
+   o.inJustDecodeBounds = true;
+   BitmapFactory.decodeStream(new FileInputStream(f), null, o);
+
+   // The new size we want to scale to
+   final int REQUIRED_SIZE = 70;
+
+   // Find the correct scale value. It should be the power of 2.
+   int scale = 1;
+   while (o.outWidth / scale / 2 >= REQUIRED_SIZE
+     && o.outHeight / scale / 2 >= REQUIRED_SIZE)
+    scale *= 2;
+
+   // Decode with inSampleSize
+   BitmapFactory.Options o2 = new BitmapFactory.Options();
+   o2.inSampleSize = scale;
+   return BitmapFactory.decodeStream(new FileInputStream(f), null, o2);
+  } catch (FileNotFoundException e) {
+  }
+  return null;
+ }*/
+
     @Override
     public void onBaseSupportMapPublicReady() {
         mMap = baseMapFragment.getMap();
         if (mListener != null) {
             mListener.onAmznMapReady();
         }
+
     }
 
     @Override
@@ -331,7 +347,7 @@ public class AmznExtendedMapFragment extends Fragment implements
 
     @Override
     public String key() {
-        return "SmartHMA";
+        return null;
     }
 
     @Override
@@ -345,6 +361,5 @@ public class AmznExtendedMapFragment extends Fragment implements
         }
         return result;
     }
-
 
 }

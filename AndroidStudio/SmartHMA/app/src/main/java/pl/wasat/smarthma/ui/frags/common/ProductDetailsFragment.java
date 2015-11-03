@@ -3,7 +3,6 @@ package pl.wasat.smarthma.ui.frags.common;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -30,9 +29,13 @@ import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Picasso.LoadedFrom;
 import com.squareup.picasso.Target;
 
+import java.util.List;
+
 import pl.wasat.smarthma.R;
 import pl.wasat.smarthma.model.entry.Entry;
 import pl.wasat.smarthma.model.entry.SimpleMetadata;
+import pl.wasat.smarthma.model.om.Browse;
+import pl.wasat.smarthma.model.om.Content;
 
 /**
  * A simple {@link android.support.v4.app.Fragment} subclass. Activities that
@@ -140,9 +143,8 @@ public class ProductDetailsFragment extends Fragment implements Target {
     }
 
     @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        Activity activity = context instanceof Activity ? (Activity) context : null;
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
         try {
             mListener = (OnProductDetailsFragmentListener) activity;
         } catch (ClassCastException e) {
@@ -234,10 +236,9 @@ public class ProductDetailsFragment extends Fragment implements Target {
     }
 
     private String getQuicklookUrl() {
-        String url = displayedEntry.getSimpleMetadata().getQuickLookUrl();
-        if (url == null) url = "";
+        String url = "";
 
-/*        List<Content> content = displayedEntry.getGroup().getContent();
+        List<Content> content = displayedEntry.getGroup().getContent();
         for (Content cont : content) {
             if (cont.getCategory().get_text().equalsIgnoreCase("QUICKLOOK")) {
                 url = cont.get_url();
@@ -254,7 +255,7 @@ public class ProductDetailsFragment extends Fragment implements Target {
                 url = browse.getBrowseInformation().getFileName()
                         .getServiceReference().get_xlink_href();
             }
-        }*/
+        }
         return url;
     }
 

@@ -1,7 +1,6 @@
 package pl.wasat.smarthma.ui.frags.common;
 
 import android.app.Activity;
-import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -167,9 +166,8 @@ public class CollectionDetailsFragment extends
     }
 
     @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        Activity activity = context instanceof Activity ? (Activity) context : null;
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
         try {
             mListener = (OnCollectionDetailsFragmentListener) activity;
         } catch (ClassCastException e) {

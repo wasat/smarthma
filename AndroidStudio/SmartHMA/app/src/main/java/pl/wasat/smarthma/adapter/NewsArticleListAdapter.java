@@ -38,7 +38,7 @@ public class NewsArticleListAdapter extends ArrayAdapter<NewsArticle> {
 
         convertView = inflater.inflate(R.layout.view_cell_article, null);
 
-        SwipeDetector swipeDetector = new SwipeDetector(convertView, position);
+        SwipeDetector swipeDetector = new SwipeDetector(convertView, position, false);
         swipeDetector.setOnClickListener(listener);
         convertView.setOnTouchListener(swipeDetector);
 

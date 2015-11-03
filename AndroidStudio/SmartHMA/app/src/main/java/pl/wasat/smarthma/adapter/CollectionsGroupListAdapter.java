@@ -52,7 +52,7 @@ public class CollectionsGroupListAdapter extends
     public View getView(int position, View convertView, ViewGroup parent)
     {
         View v = super.getView(position, convertView, parent);
-        SwipeDetector swipeDetector = new SwipeDetector(v, position);
+        SwipeDetector swipeDetector = new SwipeDetector(v, position, false);
         swipeDetector.setOnClickListener(listener);
         v.setOnTouchListener(swipeDetector);
         return v;

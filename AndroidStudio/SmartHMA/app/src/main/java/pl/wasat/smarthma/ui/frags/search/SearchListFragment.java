@@ -4,18 +4,21 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.List;
 
 import pl.wasat.smarthma.R;
+import pl.wasat.smarthma.adapter.SearchListAdapter;
 import pl.wasat.smarthma.database.SearchHistory;
 import pl.wasat.smarthma.database.SearchParams;
 import pl.wasat.smarthma.helper.Const;
 import pl.wasat.smarthma.helper.DataSorter;
-import pl.wasat.smarthma.interfaces.OnSlideElementListener;
 import pl.wasat.smarthma.model.FedeoRequestParams;
 import pl.wasat.smarthma.model.feed.Feed;
 import pl.wasat.smarthma.model.iso.EntryISO;
+import pl.wasat.smarthma.ui.frags.base.BaseSpiceListFragment;
+import pl.wasat.smarthma.ui.frags.common.FailureFragment;
 import pl.wasat.smarthma.utils.rss.FedeoSearchRequest;
 
 /**
@@ -25,9 +28,16 @@ import pl.wasat.smarthma.utils.rss.FedeoSearchRequest;
  * interaction events. Use the {@link SearchListFragment#newInstance} factory
  * method to create an instance of this fragment.
  */
-public class SearchListFragment extends SearchListFragmentBase {
+public class SearchListFragment extends BaseSpiceListFragment {
     private static final String KEY_PARAM_SEARCH_FEDEO_REQUEST = "pl.wasat.smarthma.KEY_PARAM_SEARCH_FEDEO_REQUEST";
+    private static final String STATE_ACTIVATED_POSITION = "activated_position";
+
+    private FedeoRequestParams searchRequest;
+    private List<EntryISO> entries;
+
     private int mActivatedPosition = ListView.INVALID_POSITION;
+
+    private OnSearchListFragmentListener mListener;
 
     /**
      * Use this factory method to create a new instance of this fragment using
@@ -58,6 +68,19 @@ public class SearchListFragment extends SearchListFragmentBase {
             SearchHistory searchHistory = new SearchHistory(getActivity());
             searchHistory.addSearchParameters(new SearchParams(searchRequest));
         }
+    }
+
+
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        if (savedInstanceState != null
+                && savedInstanceState.containsKey(STATE_ACTIVATED_POSITION)) {
+            setActivatedPosition(savedInstanceState
+                    .getInt(STATE_ACTIVATED_POSITION));
+        }
+
+        getListView().setDivider(null);
     }
 
     @Override
@@ -102,28 +125,83 @@ public class SearchListFragment extends SearchListFragmentBase {
         }
     }
 
+    public void setActivateOnItemClick(boolean activateOnItemClick) {
+        getListView().setChoiceMode(
+                activateOnItemClick ? ListView.CHOICE_MODE_SINGLE
+                        : ListView.CHOICE_MODE_NONE);
+    }
+
+    private void setActivatedPosition(int position) {
+        if (position == ListView.INVALID_POSITION) {
+            getListView().setItemChecked(mActivatedPosition, false);
+        } else {
+            getListView().setItemChecked(position, true);
+        }
+        mActivatedPosition = position;
+    }
+
+    /*
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.menu_list_refresh, menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        switch (id) {
+            case R.id.action_sort_by_title_asc:
+                SmartHMApplication.sortingType = Const.SORT_BY_TITLE_ASCENDING;
+                ((SearchCollectionResultsActivity)getActivity()).refreshList();
+                break;
+            case R.id.action_sort_by_title_desc:
+                SmartHMApplication.sortingType = Const.SORT_BY_TITLE_DESCENDING;
+                ((SearchCollectionResultsActivity)getActivity()).refreshList();
+                break;
+            case R.id.action_sort_by_date_asc:
+                SmartHMApplication.sortingType = Const.SORT_BY_DATE_ASCENDING;
+                ((SearchCollectionResultsActivity)getActivity()).refreshList();
+                break;
+            case R.id.action_sort_by_date_desc:
+                SmartHMApplication.sortingType = Const.SORT_BY_DATE_DESCENDING;
+                ((SearchCollectionResultsActivity)getActivity()).refreshList();
+                break;
+            case R.id.actionbar_refresh:
+                loadSearchFeedResponse(searchRequest);
+                break;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+        return true;
+    }
+    */
+
+    private void refreshList() {
+        loadSearchFeedResponse(searchRequest);
+        Toast.makeText(getActivity(), getActivity().getString(R.string.refreshing_list), Toast.LENGTH_LONG).show();
+    }
+
     private void updateSearchListViewContent(List<EntryISO> searchFeedList) {
         View view = getView();
         if (view != null) {
             if (searchFeedList.isEmpty()) {
                 view.setVisibility(View.GONE);
 
-                showFailureFragment();
+                String searchFail = getActivity().getString(
+                        R.string.nothing_to_display_please_search_again_);
+
+                FailureFragment failureFragment = FailureFragment
+                        .newInstance(searchFail);
+                getActivity()
+                        .getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.activity_base_details_container,
+                                failureFragment).commit();
             } else {
                 SearchListAdapter adapter = new SearchListAdapter(getActivity(),
                         searchFeedList);
                 this.setListAdapter(adapter);
                 adapter.notifyDataSetChanged();
-                adapter.setListener(new OnSlideElementListener() {
-                    @Override
-                    public void Catch(boolean swipeRight, int position) {
-                        if (swipeRight)
-                            Toast.makeText(getActivity(), "share " + position, Toast.LENGTH_SHORT).show();
-                        else
-                            Toast.makeText(getActivity(), "delete " + position, Toast.LENGTH_SHORT).show();
-                    }
-                });
-                attachListAdapter(searchFeedList);
                 view.setVisibility(View.VISIBLE);
             }
         }
@@ -143,14 +221,29 @@ public class SearchListFragment extends SearchListFragmentBase {
     /**
      * @param searchResultFeed - Dataseries Feed
      */
-    protected void showDataSeriesIntro(Feed searchResultFeed) {
-        super.showDataSeriesIntro(searchResultFeed);
+    private void showDataSeriesIntro(Feed searchResultFeed) {
+        FeedSummarySearchCollectionFragment feedSummarySearchCollectionFragment = FeedSummarySearchCollectionFragment
+                .newInstance(searchResultFeed);
         getActivity()
                 .getSupportFragmentManager()
                 .beginTransaction()
                 .replace(R.id.activity_base_details_container,
                         feedSummarySearchCollectionFragment, "FeedSummarySearchCollectionFragment")
                 .addToBackStack("FeedSummarySearchCollectionFragment").commit();
+
+    }
+
+    /**
+     * This interface must be implemented by activities that contain this
+     * fragment to allow an interaction in this fragment to be communicated to
+     * the activity and potentially other fragments contained in that activity.
+     * <p/>
+     * See the Android Training lesson <a href=
+     * "http://developer.android.com/training/basics/fragments/communicating.html"
+     * >Communicating with Other Fragments</a> for more information.
+     */
+    public interface OnSearchListFragmentListener {
+        void onSearchListFragmentItemSelected(String id);
     }
 
     @Override
@@ -163,5 +256,10 @@ public class SearchListFragment extends SearchListFragmentBase {
         updateSearchListViewContent(searchFeeds.getEntriesISO());
 
         showDataSeriesIntro(searchFeeds);
+
+    }
+
+    public List<EntryISO> getEntries() {
+        return entries;
     }
 }
