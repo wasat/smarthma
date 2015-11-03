@@ -18,7 +18,7 @@ import pl.wasat.smarthma.ui.activities.SearchCollectionResultsActivity;
 import pl.wasat.smarthma.ui.frags.search.SearchListFragment;
 
 /**
- * Handles user interaction related to search history management.
+ * Handles user interaction related to sorting data.
  */
 public class SortCollectionsDialog extends DialogFragment {
     private SearchCollectionResultsActivity activity;

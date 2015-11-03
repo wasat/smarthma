@@ -299,12 +299,12 @@ class ISODataHandler extends DefaultHandler {
             ArrayList<String> queryParamValues = new ArrayList<>();
             for (int i = 0; i < atts.getLength(); i++) {
                 queryParamNames.add(atts.getLocalName(i));
-                queryParamValues.add("-  " + atts.getValue(i));
+                queryParamValues.add("-  " + atts.getValue(i).replaceAll(",", ", "));
             }
             query.setParamNameList(queryParamNames);
             query.setParamValueList(queryParamValues);
 
-            query.setCount(atts.getValue("count"));
+/*            query.setCount(atts.getValue("count"));
             query.setDcSubject(atts.getValue("dc:subject"));
             query.setDcType(atts.getValue("dc:type"));
             query.setGeoUid(atts.getValue("geo:uid"));
@@ -314,7 +314,7 @@ class ISODataHandler extends DefaultHandler {
             query.setStartIndex(atts.getValue("startIndex"));
             query.setGeoBox(atts.getValue("geo:box"));
             query.setTimeEnd(atts.getValue("time:end"));
-            query.setTimeStart(atts.getValue("time:start"));
+            query.setTimeStart(atts.getValue("time:start"));*/
         } else if (localName.equalsIgnoreCase("author")) {
             author = new Author();
         } else if (localName.equalsIgnoreCase("identifier")) {

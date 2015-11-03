@@ -8,5 +8,6 @@ public enum MetadataType {
     OM,     //OM Metadata
     OM11,   //OM11 Metadata
     ISO,    //ISO Metadata
-    DC      //Dublin Core Metadata
+    DC,     //Dublin Core Metadata
+    NONE   //None or undefined Metadata
 }

@@ -44,7 +44,7 @@ public class StringExt {
     }
 
     public static String inStreamToStringBuffer(InputStream in) throws IOException {
-        StringBuffer out = new StringBuffer();
+        StringBuilder out = new StringBuilder();
         byte[] b = new byte[4096];
         for (int i; (i = in.read(b)) != -1; ) {
             out.append(new String(b, 0, i));

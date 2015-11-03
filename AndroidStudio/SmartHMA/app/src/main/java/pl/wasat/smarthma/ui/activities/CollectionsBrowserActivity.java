@@ -18,13 +18,12 @@ import pl.wasat.smarthma.ui.frags.browse.DataSeriesListFragment.OnDataSeriesList
 import pl.wasat.smarthma.ui.frags.common.AreaPickerMapFragment.OnAreaPickerMapFragmentListener;
 import pl.wasat.smarthma.ui.frags.common.CollectionDetailsFragment;
 import pl.wasat.smarthma.ui.frags.common.CollectionDetailsFragment.OnCollectionDetailsFragmentListener;
-import pl.wasat.smarthma.ui.frags.search.SearchListFragment.OnSearchListFragmentListener;
+import pl.wasat.smarthma.ui.frags.search.SearchListFragmentBase;
 import pl.wasat.smarthma.utils.obj.LatLngBoundsExt;
-
 
 public class CollectionsBrowserActivity extends BaseCollectionsActivity implements
         OnDataSeriesListFragmentListener,
-        OnAreaPickerMapFragmentListener, OnAmznAreaPickerMapFragmentListener, OnSearchListFragmentListener,
+        OnAreaPickerMapFragmentListener, OnAmznAreaPickerMapFragmentListener, SearchListFragmentBase.OnSearchListFragmentListener,
         OnCollectionDetailsFragmentListener {
 
     private EoDbAdapter dba;

@@ -96,16 +96,16 @@ public class SearchListAdapter extends ArrayAdapter<EntryISO> {
                 } else {
                     dba.openToWrite();
                     //long dbaResult =
-                    int result = dba.removeEntry(searchItem);
+                    dba.removeEntry(searchItem);
                     //Log.d("ZX", "result: " + result);
                     dba.close();
                 }
                 //Log.d("ZX", "--");
                 dba.openToRead();
                 ArrayList<EntryISO> all = dba.getISOEntries();
-                for (EntryISO o : all) {
+/*                for (EntryISO o : all) {
                     //Log.d("ZX", " " + o.getTitle());
-                }
+                }*/
                 dba.close();
                 //Log.d("ZX", "---");
             }

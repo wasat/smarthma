@@ -1,1 +1,1 @@
-include ':app'
+include ':app', ':amazon-maps-libs-v2'

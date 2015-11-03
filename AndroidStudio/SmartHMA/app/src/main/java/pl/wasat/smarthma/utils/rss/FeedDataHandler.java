@@ -133,7 +133,7 @@ public class FeedDataHandler extends DefaultHandler {
             ArrayList<String> queryParamValues = new ArrayList<>();
             for (int i = 0; i < atts.getLength(); i++) {
                 queryParamNames.add(atts.getLocalName(i));
-                queryParamValues.add("-  " + atts.getValue(i));
+                queryParamValues.add("-  " + atts.getValue(i).replaceAll(",", ", "));
             }
             query.setParamNameList(queryParamNames);
             query.setParamValueList(queryParamValues);
@@ -142,7 +142,7 @@ public class FeedDataHandler extends DefaultHandler {
             author = new Author();
             //} else if (localName.equalsIgnoreCase("identifier")) {
             //    identifierFeed = new Identifier();
-        } else if (localName.equalsIgnoreCase("title")) {
+            //} else if (localName.equalsIgnoreCase("title")) {
             //if (isInCitation) {
             //    citationTitle = new Title();
             //}
@@ -161,7 +161,7 @@ public class FeedDataHandler extends DefaultHandler {
             linksEntry = new ArrayList<>();
             //entry.setXmlLang(atts.getValue("xml:lang"));
 
-        } else if (localName.equals("date")) {
+            // } else if (localName.equals("date")) {
 /*            if (isInCIDate) {
                 dateInCIDate = new DateInCIDate();
             } else {
@@ -378,8 +378,7 @@ public class FeedDataHandler extends DefaultHandler {
             }
             containAttr = false;
         }
-        String meta = StringUtils.join(values, " ");
-        return meta;
+        return StringUtils.join(values, " ");
 
     }
 
