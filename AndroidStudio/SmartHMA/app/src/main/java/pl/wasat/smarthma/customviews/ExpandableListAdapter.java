@@ -76,7 +76,7 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
                 .into(listItemImg);
 
         txtListChild.setText(childText);
-        SwipeDetector swipeDetector = new SwipeDetector(convertView, childPosition, true);
+        SwipeDetector swipeDetector = new SwipeDetector(convertView, -1);
         swipeDetector.setOnClickListener(new OnSlideElementListener() {
             @Override
             public void Catch(boolean swipeRight, int position) {

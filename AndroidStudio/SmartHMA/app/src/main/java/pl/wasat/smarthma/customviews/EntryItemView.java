@@ -110,7 +110,7 @@ public class EntryItemView extends RelativeLayout implements SpiceListItemView<E
                         FavouritesDbAdapter dba = new FavouritesDbAdapter(context);
                         if (!EntryItemView.this.entry.isFavourite()) {
                             dba.openToWrite();
-                            dba.removeEntry(EntryItemView.this.entry);
+                            int result = dba.removeEntry(EntryItemView.this.entry);
                             dba.close();
                         } else {
                             dba.openToWrite();

@@ -53,7 +53,7 @@ public class MetadataFragment extends BaseMetadataFragment {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             entryItem = (Entry) getArguments().getSerializable(KEY_ENTRY_ITEM);
-            type = entryItem != null ? entryItem.getMetadataType() : null;
+            type = entryItem.getMetadataType();
         }
         chooseMetadataParser();
     }
@@ -90,8 +90,6 @@ public class MetadataFragment extends BaseMetadataFragment {
             case DC:
                 prepareDCMetadataView();
                 break;
-            case NONE:
-                break;
             default:
                 break;
         }
@@ -116,8 +114,6 @@ public class MetadataFragment extends BaseMetadataFragment {
                 if (entryItem.getDc() == null) {
                     xmlSaxParser.parseDCMetadata(entryItem);
                 }
-                break;
-            case NONE:
                 break;
             default:
                 break;
@@ -246,8 +242,6 @@ public class MetadataFragment extends BaseMetadataFragment {
                 break;
             case DC:
                 cleanValue = MetadataCleaner.getCleanDCValue(value);
-                break;
-            case NONE:
                 break;
             default:
                 break;

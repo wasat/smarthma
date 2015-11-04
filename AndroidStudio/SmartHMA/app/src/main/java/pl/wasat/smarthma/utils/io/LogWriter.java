@@ -34,11 +34,7 @@ public class LogWriter {
 
     public void appendToFile(String strToAppend, String fileName) {
 
-        File dir = new File(LOG_PATH);
-        //noinspection ResultOfMethodCallIgnored
-        dir.mkdirs();
-
-        File logFile = new File(dir, fileName);
+        File logFile = new File(LOG_PATH, fileName);
         if (!logFile.exists()) {
             try {
                 //noinspection ResultOfMethodCallIgnored

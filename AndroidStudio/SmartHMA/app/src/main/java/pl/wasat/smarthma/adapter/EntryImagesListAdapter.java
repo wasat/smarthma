@@ -13,7 +13,6 @@ import java.util.List;
 
 import pl.wasat.smarthma.customviews.EntryItemView;
 import pl.wasat.smarthma.model.entry.Entry;
-import pl.wasat.smarthma.utils.http.EntryBitmapRequest;
 
 public class EntryImagesListAdapter extends OkHttpSpiceArrayAdapter<Entry> {
 
@@ -32,10 +31,8 @@ public class EntryImagesListAdapter extends OkHttpSpiceArrayAdapter<Entry> {
         String url = TEMP_DEFAULT_IMG_URL;
         File tempFile = null;
         try {
-            tmpFileName = tmpFileName + entry.getTitle().replaceAll("/", "").replaceAll(":", "_");
-            //tmpFileName = tmpFileName + imageIndex + imageHeight + imageWidth;
+            tmpFileName = tmpFileName + entry.getTitle().replaceAll("/", "");
             tempFile = new File(getContext().getCacheDir(), tmpFileName);
-            //tempFile.createNewFile();
             if (entry.getSimpleMetadata().getThumbnailUrl() == null) {
                 url = TEMP_DEFAULT_IMG_URL;
             } else if (!entry.getSimpleMetadata().getThumbnailUrl().isEmpty())
@@ -43,7 +40,7 @@ public class EntryImagesListAdapter extends OkHttpSpiceArrayAdapter<Entry> {
         } catch (NullPointerException e) {
             e.printStackTrace();
         }
-        return new EntryBitmapRequest(getContext(), url, requestImageWidth,
+        return new OkHttpBitmapRequest(url, requestImageWidth,
                 requestImageHeight, tempFile);
     }
 
@@ -51,6 +48,5 @@ public class EntryImagesListAdapter extends OkHttpSpiceArrayAdapter<Entry> {
     public SpiceListItemView<Entry> createView(Context context, ViewGroup parent) {
         return new EntryItemView(getContext());
     }
-
 
 }

@@ -49,7 +49,6 @@ public class Entry implements Serializable {
         this.links = new ArrayList<>();
         this.where = new Where();
         this.group = new Group();
-        this.metadataType = MetadataType.NONE;
         //this.MDMetadata = new MDMetadata();
         //this.earthObservation = new EarthObservation();
         //this.dc = new Dc();
@@ -316,7 +315,7 @@ public class Entry implements Serializable {
     public boolean simpleEquals(Entry o) {
         //return super.equals(other);
         return title.equals(o.getTitle()) && id.equals(o.getId()) && identifier.equals(o.getIdentifier()) && guid.equals(o.getGuid()) &&
-                date.equals(o.getDate()) && updated.equals(o.getUpdated()) && dbId == o.getDbId() && /*earthObservation.equals(o.getEarthObservation()) &&*/
+                date.equals(o.getDate()) && updated.equals(o.getUpdated()) && dbId == o.getDbId() && earthObservation.equals(o.getEarthObservation()) &&
                 group.equals(o.getGroup()) && links.equals(o.getLinks()) && published.equals(o.getPublished()) && summary.equals(o.getSummary()) &&
                 where.equals(o.getWhere());
     }

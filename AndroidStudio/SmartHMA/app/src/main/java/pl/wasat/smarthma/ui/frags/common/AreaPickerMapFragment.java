@@ -16,6 +16,7 @@ import pl.wasat.smarthma.preferences.SharedPrefs;
 import pl.wasat.smarthma.ui.frags.base.BaseMapFragment;
 import pl.wasat.smarthma.ui.frags.base.BaseMapFragment.OnBaseMapFragmentListener;
 import pl.wasat.smarthma.utils.draw.MapDrawings;
+import pl.wasat.smarthma.utils.io.AcraExtension;
 import pl.wasat.smarthma.utils.obj.LatLngBoundsExt;
 
 /**
@@ -46,13 +47,13 @@ public class AreaPickerMapFragment extends BaseMapFragment implements OnBaseMapF
     }
 
     public AreaPickerMapFragment() {
-        //AcraExtension.mapCustomLog("AreaMap.construct", mMap);
+        AcraExtension.mapCustomLog("AreaMap.construct", mMap);
     }
 
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
-        //AcraExtension.mapCustomLog("AreaMap.onAttach", mMap);
+        AcraExtension.mapCustomLog("AreaMap.onAttach", mMap);
         try {
             mListener = (OnAreaPickerMapFragmentListener) activity;
         } catch (ClassCastException e) {
@@ -70,7 +71,7 @@ public class AreaPickerMapFragment extends BaseMapFragment implements OnBaseMapF
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //AcraExtension.mapCustomLog("AreaMap.onCreate", mMap);
+        AcraExtension.mapCustomLog("AreaMap.onCreate", mMap);
         obtainBoundsFromShared();
         prepareArea();
 
@@ -87,14 +88,14 @@ public class AreaPickerMapFragment extends BaseMapFragment implements OnBaseMapF
     @Override
     public void onPause() {
         postDrawArea();
-        //AcraExtension.mapCustomLog("AreaMap.onPause", mMap);
+        AcraExtension.mapCustomLog("AreaMap.onPause", mMap);
 
         super.onPause();
     }
 
     @Override
     public void onBaseSupportMapReady() {
-        //AcraExtension.mapCustomLog("AreaMap.onBaseSupportMapReady", mMap);
+        AcraExtension.mapCustomLog("AreaMap.onBaseSupportMapReady", mMap);
         animateWhenMapIsReady(0);
         setMapListeners();
     }
@@ -113,7 +114,7 @@ public class AreaPickerMapFragment extends BaseMapFragment implements OnBaseMapF
     }
 
     private void setMapListeners() {
-        //AcraExtension.mapCustomLog("AreaMap.setMapListeners", mMap);
+        AcraExtension.mapCustomLog("AreaMap.setMapListeners", mMap);
         //Log.i("MAP", "setMapListeners");
 
         mMap.setOnCameraChangeListener(new OnCameraChangeListener() {
@@ -180,5 +181,6 @@ public class AreaPickerMapFragment extends BaseMapFragment implements OnBaseMapF
         boundsBuilder.include(new LatLng(bbox[3], bbox[2]));
 
         targetBounds = boundsBuilder.build();
+
     }
 }
