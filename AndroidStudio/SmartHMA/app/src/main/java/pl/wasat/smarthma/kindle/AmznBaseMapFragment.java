@@ -2,19 +2,12 @@ package pl.wasat.smarthma.kindle;
 
 import android.app.Dialog;
 import android.content.BroadcastReceiver;
-import android.content.Context;
-import android.content.pm.PackageManager;
 import android.location.Location;
-import android.location.LocationManager;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.content.ContextCompat;
 import android.support.v4.content.LocalBroadcastManager;
-import android.widget.Toast;
 
 import com.amazon.geo.mapsv2.AmazonMap;
-import com.amazon.geo.mapsv2.CameraUpdate;
 import com.amazon.geo.mapsv2.CameraUpdateFactory;
 import com.amazon.geo.mapsv2.SupportMapFragment;
 import com.amazon.geo.mapsv2.model.CameraPosition;
@@ -200,36 +193,6 @@ public class AmznBaseMapFragment extends SupportMapFragment {
         return wmsTileOverlay;
     }
 
-    private void findStartLocation() {
-        if (Build.VERSION.SDK_INT >= 23 &&
-                ContextCompat.checkSelfPermission(getActivity(), android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
-                ContextCompat.checkSelfPermission(getActivity(), android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            return;
-        }
-        final LocationManager locationManager = (LocationManager) getActivity()
-                .getSystemService(Context.LOCATION_SERVICE);
-        Location bestLocation = null;
-        for (String provider : locationManager.getProviders(true)) {
-            final Location location = locationManager
-                    .getLastKnownLocation(provider);
-            if (location != null
-                    && (bestLocation == null || location.getAccuracy() < bestLocation
-                    .getAccuracy())) {
-                bestLocation = location;
-            }
-        }
-
-        if (bestLocation == null) {
-            Toast.makeText(getActivity(), "Could not obtain location",
-                    Toast.LENGTH_LONG).show();
-        } else {
-            final LatLng myLocation = new LatLng(bestLocation.getLatitude(),
-                    bestLocation.getLongitude());
-            CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(
-                    myLocation, 4);
-            mMap.animateCamera(cameraUpdate);
-        }
-    }
 
     private void obtainGooglePosition() {
         GoogleLocProviderImpl googleLocProvider = new GoogleLocProviderImpl(getActivity()) {

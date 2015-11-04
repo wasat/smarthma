@@ -8,23 +8,15 @@ import pl.wasat.smarthma.R;
 import pl.wasat.smarthma.adapter.DataSeriesListAdapter;
 import pl.wasat.smarthma.database.EoDbAdapter;
 import pl.wasat.smarthma.helper.Const;
-import pl.wasat.smarthma.kindle.AmznAreaPickerMapFragment.OnAmznAreaPickerMapFragmentListener;
 import pl.wasat.smarthma.model.FedeoRequestParams;
 import pl.wasat.smarthma.model.iso.EntryISO;
 import pl.wasat.smarthma.preferences.SharedPrefs;
+import pl.wasat.smarthma.ui.activities.base.ExtendedBaseCollectionsActivity;
 import pl.wasat.smarthma.ui.frags.browse.CollectionsListFragment;
 import pl.wasat.smarthma.ui.frags.browse.DataSeriesListFragment;
-import pl.wasat.smarthma.ui.frags.browse.DataSeriesListFragment.OnDataSeriesListFragmentListener;
-import pl.wasat.smarthma.ui.frags.common.AreaPickerMapFragment.OnAreaPickerMapFragmentListener;
 import pl.wasat.smarthma.ui.frags.common.CollectionDetailsFragment;
-import pl.wasat.smarthma.ui.frags.common.CollectionDetailsFragment.OnCollectionDetailsFragmentListener;
-import pl.wasat.smarthma.ui.frags.search.SearchListFragmentBase;
-import pl.wasat.smarthma.utils.obj.LatLngBoundsExt;
 
-public class CollectionsBrowserActivity extends BaseCollectionsActivity implements
-        OnDataSeriesListFragmentListener,
-        OnAreaPickerMapFragmentListener, OnAmznAreaPickerMapFragmentListener, SearchListFragmentBase.OnSearchListFragmentListener,
-        OnCollectionDetailsFragmentListener {
+public class CollectionsBrowserActivity extends ExtendedBaseCollectionsActivity {
 
     private EoDbAdapter dba;
 
@@ -69,28 +61,6 @@ public class CollectionsBrowserActivity extends BaseCollectionsActivity implemen
                     stopNewSearch);
         }
         super.onActivityResult(requestCode, resultCode, data);
-    }
-
-
-    /*
-     * (non-Javadoc)
-     *
-     * @see android.support.v4.app.FragmentActivity#onBackPressed()
-     */
-    @Override
-    public void onBackPressed() {
-        if (dismissMenuOnBackPressed()) return;
-        FragmentManager fm = getSupportFragmentManager();
-        int bsec = fm.getBackStackEntryCount();
-        if (bsec > 1) {
-            while (bsec > 1) {
-                fm.popBackStackImmediate();
-                bsec = fm.getBackStackEntryCount();
-            }
-        } else {
-            finish();
-            super.onBackPressed();
-        }
     }
 
     /*
@@ -153,44 +123,4 @@ public class CollectionsBrowserActivity extends BaseCollectionsActivity implemen
                 .addToBackStack("CollectionDetailsFragment").commit();
 
     }
-
-    @Override
-    public void onMapFragmentBoundsChange(LatLngBoundsExt bounds) {
-        callUpdateDetailFrag(bounds);
-    }
-
-    @Override
-    public void onAmznMapFragmentBoundsChange(LatLngBoundsExt bounds) {
-        callUpdateDetailFrag(bounds);
-    }
-
-    private void callUpdateDetailFrag(LatLngBoundsExt bounds) {
-        CollectionDetailsFragment collectionDetailsFragment = (CollectionDetailsFragment) getSupportFragmentManager()
-                .findFragmentByTag("CollectionDetailsFragment");
-
-        if (collectionDetailsFragment != null) {
-            collectionDetailsFragment.updateAreaBounds(bounds);
-        }
-    }
-
-    /*
-     * (non-Javadoc)
-     *
-     * @see
-     * pl.wasat.smarthma.ui.frags.search.SearchResultCollectionDetailsFragment
-     * .OnSearchResultCollectionDetailsFragmentListener
-     * #onSearchResultCollectionDetailsFragmentShowProducts
-     * (pl.wasat.smarthma.model.FedeoRequest)
-     */
-    @Override
-    public void onCollectionDetailsFragmentShowProducts(FedeoRequestParams fedeoSearchProductsParams) {
-        startSearchingProductsProcess(fedeoSearchProductsParams);
-    }
-
-    @Override
-    public void onCollectionDetailsFragmentShowMetadata(EntryISO displayedEntry) {
-        loadIsoMetadataFragment(displayedEntry);
-    }
-
-
 }

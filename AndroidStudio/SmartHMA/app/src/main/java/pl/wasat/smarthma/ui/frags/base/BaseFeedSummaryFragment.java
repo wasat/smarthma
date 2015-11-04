@@ -141,8 +141,9 @@ public class BaseFeedSummaryFragment extends Fragment {
     private LatLngBoundsExt obtainBoundsFromShared() {
         SharedPrefs sharedPrefs = new SharedPrefs(getActivity());
         float[] bbox = sharedPrefs.getBboxPrefs();
-        //LatLngExt sw = new LatLngExt(bbox[1], bbox[0]);
-        LatLngBoundsExt latLngBoundsExt = new LatLngBoundsExt(new LatLngExt(bbox[0], bbox[1]), new LatLngExt(bbox[2], bbox[3]));
+        LatLngExt sw = new LatLngExt(bbox[1], bbox[0]);
+        LatLngExt ne = new LatLngExt(bbox[3], bbox[2]);
+        LatLngBoundsExt latLngBoundsExt = new LatLngBoundsExt(sw, ne);
 
 
 

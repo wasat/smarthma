@@ -10,14 +10,14 @@
         android:layout_height="match_parent"
         android:background="#ffffeb3b"
         android:id="@+id/swipe_list_shareview"
-        android:orientation="horizontal"></RelativeLayout>
+        android:orientation="horizontal" />
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#ff558b2f"
         android:id="@+id/swipe_list_deleteview"
-        android:orientation="horizontal"></RelativeLayout>
+        android:orientation="horizontal" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -78,7 +78,7 @@
                     <pl.wasat.smarthma.customviews.TextViewWithFont
                         android:id="@+id/entry_item_title_textview"
                         style="@android:style/TextAppearance.Medium"
-                        android:layout_width="wrap_content"
+                        android:layout_width="3000dp"
                         android:layout_height="wrap_content"
                         android:text="lorem ipsum"
                         android:maxLines="1"

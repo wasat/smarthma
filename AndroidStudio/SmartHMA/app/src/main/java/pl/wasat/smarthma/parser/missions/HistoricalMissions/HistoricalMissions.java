@@ -36,7 +36,7 @@ public class HistoricalMissions extends BaseParser implements SimpleMissionInter
         String contents = super.imageListToContentString(pair);
         parserDb.addCategory(new Category(CATEGORY_ID, (String) pair.title, contents));
         ArrayList urlList = super.getImageList((ArrayList) pair.content);
-        System.out.println(urlList.size());
+        //System.out.println(urlList.size());
         int mission_id = 43;
         String img_name = "MISSION_IMG";
         for (String url :

@@ -108,6 +108,8 @@
     <string name="action_sort_by_title_desc">By title descending</string>
     <string name="action_sort_by_date_asc">By date ascending</string>
     <string name="action_sort_by_date_desc">By date descending</string>
+    <string name="action_clear_list">Clear list</string>
+    <string name="action_clear_list_confirmation">Are you sure you want to remove all the items from the list?</string>
     <string name="refreshing_list">Refreshing list…</string>
     <string name="endpoint">Endpoint</string>
     <string name="fedeo_esa_int">fedeo.esa.int</string>

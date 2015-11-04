@@ -17,7 +17,6 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 
 import pl.wasat.smarthma.R;
-import pl.wasat.smarthma.helper.Const;
 import pl.wasat.smarthma.interfaces.OnSlideElementListener;
 import pl.wasat.smarthma.model.Collection;
 
@@ -60,44 +59,33 @@ public class CollectionsListAdapter extends ArrayAdapter<Collection> {
     }
 
     public View getView(int position, View convertView, ViewGroup parent) {
+        //if (convertView == null) {
 
-        if (convertView == null) {
+        convertView = inflater.inflate(R.layout.view_cell_collection, parent, false);
 
-            convertView = inflater.inflate(R.layout.view_cell_collection, null);
+        SwipeDetector swipeDetector = new SwipeDetector(convertView, position, false);
+        swipeDetector.setOnClickListener(listener);
+        convertView.setOnTouchListener(swipeDetector);
+        // }
 
-            SwipeDetector swipeDetector = new SwipeDetector(convertView, position, false);
-            swipeDetector.setOnClickListener(listener);
-            convertView.setOnTouchListener(swipeDetector);
-
-
-        /*if(collection.isRead()){
-            holder.row = convertView.findViewById(R.id.view_cell_collection_search_row_background);
-            holder.row.setBackgroundColor(activity.getResources().getColor(R.color.row_selected));
-            holder.button = (ImageView) convertView.findViewById(R.id.star_button);
-            holder.button.setImageDrawable(activity.getResources().getDrawable(R.drawable.ic_star_blue));
-        }*/
-        }
-        ViewHolder holder;
-        holder = new ViewHolder();
+        Collection collection = collData.get(position);
+        ViewHolder holder = new ViewHolder();
         holder.title = (TextView) convertView.findViewById(R.id.collection_name);
         holder.artist = (TextView) convertView.findViewById(R.id.collection_desc);
-        //TextView duration = (TextView) vi.findViewById(R.id.collection_id);
-        holder.thumb_image = (ImageView) convertView
-                .findViewById(R.id.collection_image);
+        holder.thumb_image = (ImageView) convertView.findViewById(R.id.collection_image);
 
-        convertView.setTag(holder);
-
-        Collection collection;
-        collection = collData.get(position);
-
-        // Setting all values in listview
         holder.title.setText(collection.getName());
         holder.artist.setText(groupName);
-        //duration.setText("No: " + collection.getId());
-        String url = Const.IMG_URL + "sat" + mod(collection.getId(), 15)
-                + ".jpeg";
-        Picasso.with(activity).load(url).resize(72, 72).centerCrop()
+
+/*        String url = Const.IMG_URL + "sat" + mod(collection.getId(), 15)
+                + ".jpeg";*/
+
+
+        Picasso.with(activity).load(R.drawable.eo_coll_gr_03).resize(72, 72).centerCrop()
                 .into(holder.thumb_image);
+
+
+        convertView.setTag(holder);
         return convertView;
     }
 

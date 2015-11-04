@@ -73,51 +73,83 @@ public class MetadataISOFragment extends BaseMetadataFragment {
 
     private void prepareISOMetadataView() {
         try {
-            if (!entryItem.getMDMetadata().getFileIdentifier().getCharacterString()
-                    .getText().isEmpty()) {
-                setMetaDataViews(getString(R.string.metadata_file_id), entryItem.getMDMetadata()
-                        .getFileIdentifier());
-            }
-            if (!entryItem.getMDMetadata().getLanguage().getLanguageCode()
-                    .getText().isEmpty()) {
-                setMetaDataViews(getString(R.string.metadata_language), entryItem.getMDMetadata()
-                        .getLanguage());
-            }
-            if (entryItem.getMDMetadata().getHierarchyLevel().getMDScopeCode()
-                    .getText().isEmpty()) {
-                setMetaDataViews(getString(R.string.metadata_hierarchy_level), entryItem
-                        .getMDMetadata().getHierarchyLevel());
-            }
-            if (!entryItem.getMDMetadata().getContact().getCIResponsibleParty()
-                    .getOrganisationName().getCharacterString().getText().isEmpty()) {
-                setMetaDataViews(getString(R.string.eo_provider_contact), entryItem
-                        .getMDMetadata().getContact().getCIResponsibleParty());
-            }
-            if (entryItem.getMDMetadata().getDateStamp().getDateGco().getText()
-                    .isEmpty()) {
-                setMetaDataViews(getString(R.string.eo_image_date), entryItem
-                        .getMDMetadata().getDateStamp());
-            }
-            if (entryItem.getMDMetadata().getMetadataStandardName()
-                    .getCharacterString().getText().isEmpty()) {
-                setMetaDataViews(getString(R.string.metadata_standards), entryItem.getMDMetadata()
-                        .getMetadataStandardName());
-            }
-            if (!entryItem.getMDMetadata().getMetadataStandardVersion()
-                    .getCharacterString().getText().isEmpty()) {
-                setMetaDataViews(getString(R.string.metadata_standards), entryItem.getMDMetadata()
-                        .getMetadataStandardVersion());
-            }
-            if (entryItem.getMDMetadata().getIdentificationInfo()
-                    .getMDDataIdentification() != null) {
-                setMetaDataViews(getString(R.string.metadata_identification), entryItem
-                        .getMDMetadata().getIdentificationInfo()
-                        .getMDDataIdentification());
-            }
-            if (entryItem.getMDMetadata().getDataQualityInfo().getDQDataQuality() != null) {
-                setMetaDataViews(getString(R.string.metadata_quality), entryItem
-                        .getMDMetadata().getDataQualityInfo().getDQDataQuality());
-            }
+            //if (!entryItem.getMDMetadata().getFileIdentifier().getCharacterString()
+            //        .getText().isEmpty()) {
+            setMetaDataViews(getString(R.string.metadata_file_id), entryItem.getMDMetadata()
+                    .getFileIdentifier());
+            //}
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        try {
+            //if (!entryItem.getMDMetadata().getLanguage().getLanguageCode()
+            //        .getText().isEmpty()) {
+            setMetaDataViews(getString(R.string.metadata_language), entryItem.getMDMetadata()
+                    .getLanguage());
+            //}
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        try {
+            //if (entryItem.getMDMetadata().getHierarchyLevel().getMDScopeCode()
+            //       .getText().isEmpty()) {
+            setMetaDataViews(getString(R.string.metadata_hierarchy_level), entryItem
+                    .getMDMetadata().getHierarchyLevel());
+            //}
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        try {
+            // if (!entryItem.getMDMetadata().getContact().getCIResponsibleParty()
+            //         .getOrganisationName().getCharacterString().getText().isEmpty()) {
+            setMetaDataViews(getString(R.string.eo_provider_contact), entryItem
+                    .getMDMetadata().getContact().getCIResponsibleParty());
+            // }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        try {
+            //if (entryItem.getMDMetadata().getDateStamp().getDateGco().getText()
+            //        .isEmpty()) {
+            setMetaDataViews(getString(R.string.eo_image_date), entryItem
+                    .getMDMetadata().getDateStamp());
+            // }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        try {
+            // if (entryItem.getMDMetadata().getMetadataStandardName()
+            //         .getCharacterString().getText().isEmpty()) {
+            setMetaDataViews(getString(R.string.metadata_standards), entryItem.getMDMetadata()
+                    .getMetadataStandardName());
+            // }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        try {
+            // if (!entryItem.getMDMetadata().getMetadataStandardVersion()
+            //         .getCharacterString().getText().isEmpty()) {
+            setMetaDataViews(getString(R.string.metadata_standards), entryItem.getMDMetadata()
+                    .getMetadataStandardVersion());
+            // }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        try {
+            // if (entryItem.getMDMetadata().getIdentificationInfo()
+            //         .getMDDataIdentification() != null) {
+            setMetaDataViews(getString(R.string.metadata_identification), entryItem
+                    .getMDMetadata().getIdentificationInfo()
+                    .getMDDataIdentification());
+            // }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        try {
+            //  if (entryItem.getMDMetadata().getDataQualityInfo().getDQDataQuality() != null) {
+            setMetaDataViews(getString(R.string.metadata_quality), entryItem
+                    .getMDMetadata().getDataQualityInfo().getDQDataQuality());
+            // }
         } catch (Exception e) {
             e.printStackTrace();
         }

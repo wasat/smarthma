@@ -37,6 +37,18 @@ public class SearchOfflineCollectionsMenuHandler extends MenuHandler {
             }
         });
 
+        LinearLayout clearLayout = (LinearLayout) layout.findViewById(R.id.popup_removeall_layout);
+        clickableViews.add(clearLayout);
+        clearLayout.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                ClearOfflineCollectionsDialog newFragment = new ClearOfflineCollectionsDialog();
+                newFragment.setActivity((FavouriteCollectionsActivity) activity);
+                newFragment.show(activity.getSupportFragmentManager(), "Clear_list_confirmation");
+                popupWindow.dismiss();
+                popupWindow = null;
+            }
+        });
+
         addCommonListeners();
     }
 }

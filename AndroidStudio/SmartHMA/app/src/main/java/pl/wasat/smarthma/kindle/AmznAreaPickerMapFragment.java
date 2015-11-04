@@ -60,7 +60,7 @@ public class AmznAreaPickerMapFragment extends AmznBaseMapFragment implements Am
     @Override
     public void onDetach() {
         super.onDetach();
-        mListener = null;
+        // mListener = null;
     }
 
     @Override

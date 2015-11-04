@@ -3,6 +3,8 @@ package pl.wasat.smarthma.customviews;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.TranslateAnimation;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -10,13 +12,11 @@ import android.widget.Toast;
 
 import com.octo.android.robospice.spicelist.SpiceListItemView;
 
-import java.util.ArrayList;
-
 import pl.wasat.smarthma.R;
 import pl.wasat.smarthma.database.FavouritesDbAdapter;
 import pl.wasat.smarthma.model.entry.Entry;
 
-public class EntryItemView extends RelativeLayout implements SpiceListItemView<Entry> {
+public class EntryItemView extends RelativeLayout implements SpiceListItemView<Entry>, Animation.AnimationListener {
 
     private TextView tvEntryTitle;
     private TextView tvEntryDates;
@@ -24,6 +24,7 @@ public class EntryItemView extends RelativeLayout implements SpiceListItemView<E
     private Entry entry;
     private ImageView button;
     private Context context;
+
 
     public EntryItemView(Context context) {
         super(context);
@@ -45,56 +46,10 @@ public class EntryItemView extends RelativeLayout implements SpiceListItemView<E
         tvEntryTitle.setText(this.entry.getTitle());
         tvEntryDates.setText(this.entry.getPublished());
 
-        try {
-            if (button != null) {
-                updateFavourite(this.entry.isFavourite());
-
-                button.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        setFavourite(!EntryItemView.this.entry.isFavourite());
-
-                        FavouritesDbAdapter dba = new FavouritesDbAdapter(context);
-                        //String title = EntryItemView.this.entry.getTitle();
-                        //Log.d("ZX", "title: " + title);
-                        //String published = EntryItemView.this.entry.getPublished();
-                        //Log.d("ZX", "published: " + published);
-                        //String updated = EntryItemView.this.entry.getUpdated();
-                        //Log.d("ZX", "updated: " + updated);
-                        //String id = EntryItemView.this.entry.getId();
-                        //String identifier = EntryItemView.this.entry.getIdentifier();
-                        //Log.d("ZX", "id: " + id);
-                        //Log.d("ZX", "identifier: " + identifier);
-                        //Log.d("ZX", "-");
-                        if (!EntryItemView.this.entry.isFavourite()) {
-                            dba.openToWrite();
-                            dba.removeEntry(EntryItemView.this.entry);
-                            //Log.d("ZX", "result: "+result);
-                            dba.close();
-                        } else {
-                            dba.openToWrite();
-                            //long dbaResult =
-                            dba.insertEntry(EntryItemView.this.entry);
-                            dba.close();
-                            Toast.makeText(context, context.getString(R.string.product_added_to_favourites), Toast.LENGTH_LONG).show();
-                        }
-                        //Log.d("ZX", "--");
-                        dba.openToRead();
-                        ArrayList<Entry> all = dba.getOMEntries();
-/*                        for (Entry o : all) {
-                            //Log.d("ZX", " " + o.getTitle());
-                        }*/
-                        dba.close();
-                        //Log.d("ZX", "---");
-                    }
-                });
-            } /*else {
-                //Log.d("ZX", "Button is null.");
-            }*/
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        titleAnimation();
+        clickFavouriteStar();
     }
+
 
     @Override
     public ImageView getImageView(int imageIndex) {
@@ -127,4 +82,72 @@ public class EntryItemView extends RelativeLayout implements SpiceListItemView<E
         }
     }
 
+    @Override
+    public void onAnimationStart(Animation animation) {
+
+    }
+
+    @Override
+    public void onAnimationEnd(Animation animation) {
+
+    }
+
+    @Override
+    public void onAnimationRepeat(Animation animation) {
+        titleAnimation();
+    }
+
+    private void clickFavouriteStar() {
+        try {
+            if (button != null) {
+                updateFavourite(this.entry.isFavourite());
+
+                button.setOnClickListener(new OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        setFavourite(!EntryItemView.this.entry.isFavourite());
+
+                        FavouritesDbAdapter dba = new FavouritesDbAdapter(context);
+                        if (!EntryItemView.this.entry.isFavourite()) {
+                            dba.openToWrite();
+                            dba.removeEntry(EntryItemView.this.entry);
+                            dba.close();
+                        } else {
+                            dba.openToWrite();
+                            dba.insertEntry(EntryItemView.this.entry);
+                            dba.close();
+                            Toast.makeText(context, context.getString(R.string.product_added_to_favourites), Toast.LENGTH_LONG).show();
+                        }
+                        dba.openToRead();
+                        dba.close();
+                    }
+                });
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    private void titleAnimation() {
+        String title = this.entry.getTitle().replaceFirst("urn:ogc:def:", "");
+        if (title.length() < 30) {
+            tvEntryTitle.setText(title);
+            return;
+        }
+
+        int stopAnimPos = -1000;
+        int startAnimPos = 20;
+        int duration = 30000;
+
+        Animation animation = new TranslateAnimation(startAnimPos, stopAnimPos, 0, 0);
+        animation.setDuration(duration);
+        animation.setRepeatMode(Animation.RESTART);
+        animation.setRepeatCount(Animation.INFINITE);
+        animation.setAnimationListener(this);
+
+        tvEntryTitle.setText(title);
+        tvEntryTitle.measure(0, 0);
+        tvEntryTitle.setAnimation(animation);
+    }
 }

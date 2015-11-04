@@ -20,7 +20,6 @@ import pl.wasat.smarthma.model.CollectionsGroup;
 public class CollectionsGroupListAdapter extends
         OkHttpSpiceArrayAdapter<CollectionsGroup> {
 
-
     public OnSlideElementListener listener;
 
     public CollectionsGroupListAdapter(Context context,
@@ -28,7 +27,6 @@ public class CollectionsGroupListAdapter extends
                                        CollectionsGroup.List users, ListView listView) {
         super(context, spiceManagerBitmap, users.getCollectionsGroupList());
     }
-
 
     public void setOnClickListener(OnSlideElementListener listener) {
         this.listener = listener;
@@ -41,16 +39,15 @@ public class CollectionsGroupListAdapter extends
         File tempFile = new File(getContext().getCacheDir(),
                 "THUMB_IMAGE_TEMP_" + group.getId());
 
-        String url = Const.IMG_URL + "sat" + mod(group.getId(), 15)
-                + ".jpeg";
+        //String url = Const.IMG_URL + "eo_coll_gr_0" + mod(group.getId(), 6) + "_72x72.png";
+        String url = Const.IMG_URL + "eo_coll_gr_02_72x72.png";
 
         return new OkHttpBitmapRequest(url, requestImageWidth, requestImageHeight, tempFile);
+        //return null;
     }
 
 
-
-    public View getView(int position, View convertView, ViewGroup parent)
-    {
+    public View getView(int position, View convertView, ViewGroup parent) {
         View v = super.getView(position, convertView, parent);
         SwipeDetector swipeDetector = new SwipeDetector(v, position, false);
         swipeDetector.setOnClickListener(listener);
@@ -64,6 +61,7 @@ public class CollectionsGroupListAdapter extends
                                                           ViewGroup parent) {
         return new CollectionsGroupView(getContext());
     }
+
 
     private int mod(int x, int y) {
         int result = x % y;

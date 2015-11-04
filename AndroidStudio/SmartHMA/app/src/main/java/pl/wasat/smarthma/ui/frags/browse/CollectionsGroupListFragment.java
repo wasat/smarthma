@@ -16,15 +16,10 @@ import com.octo.android.robospice.persistence.exception.SpiceException;
 import com.octo.android.robospice.request.listener.RequestListener;
 import com.octo.android.robospice.spicelist.okhttp.OkHttpBitmapSpiceManager;
 
-import java.util.ArrayList;
-
 import pl.wasat.smarthma.R;
 import pl.wasat.smarthma.SmartHMApplication;
 import pl.wasat.smarthma.adapter.CollectionsGroupListAdapter;
-import pl.wasat.smarthma.helper.DataSorter;
 import pl.wasat.smarthma.interfaces.OnSlideElementListener;
-import pl.wasat.smarthma.model.Collection;
-import pl.wasat.smarthma.model.CollectionsGroup;
 import pl.wasat.smarthma.model.CollectionsGroup.List;
 import pl.wasat.smarthma.preferences.SharedPrefs;
 import pl.wasat.smarthma.services.SmartHmaHttpSpiceService;
@@ -88,14 +83,14 @@ public class CollectionsGroupListFragment extends Fragment implements
     }
 
     private void updateEOListViewContent(List collectGrList) {
-        DataSorter sorter = new DataSorter();
+/*        DataSorter sorter = new DataSorter();
         ArrayList<CollectionsGroup> collectionsGroupList = collectGrList.getCollectionsGroupList();
 
         ArrayList<Collection> collection;
         for (int i = 0; i < collectionsGroupList.size(); i++) {
             collection = collectionsGroupList.get(i).getCollections();
             sorter.sort(collection);
-        }
+        }*/
 
         CollectionsGroupListAdapter collectionsGroupListAdapter = new CollectionsGroupListAdapter(
                 getActivity(), spiceManagerBinary, collectGrList, collectionsGroupListView);

@@ -51,6 +51,7 @@ public class SmartHMApplication extends Application {
         ACRA.init(this);
         appSingleton = this;
         deviceCheck();
+        //SSLCertificateHandler.nuke();
     }
 
     private void deviceCheck() {

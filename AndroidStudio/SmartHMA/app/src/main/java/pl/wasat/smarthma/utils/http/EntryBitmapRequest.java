@@ -24,8 +24,10 @@ public class EntryBitmapRequest extends OkHttpBitmapRequest {
 
     @Override
     public Bitmap loadDataFromNetwork() {
+
         Bitmap bitmap = BitmapFactory.decodeResource(context.getResources(), R.mipmap.ic_launcher);
         try {
+            SSLCertificateHandler.nuke();
             bitmap = super.loadDataFromNetwork();
         } catch (Exception e) {
             //e.printStackTrace();

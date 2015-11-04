@@ -20,7 +20,7 @@ import pl.wasat.smarthma.model.entry.Summary;
  * instance of this fragment.
  */
 public class ProductsListFragmentOffline extends ProductsListFragmentBase {
-    private static final String KEY_PARAM_FEDEO_REQUEST = "pl.wasat.smarthma.KEY_PARAM_FEDEO_REQUEST";
+    protected Entry testEntry;
 
     /**
      * Use this factory method to create a new instance of this fragment using
@@ -45,6 +45,13 @@ public class ProductsListFragmentOffline extends ProductsListFragmentBase {
         loadProductItemDetails(entryList.get(0));
     }
 
+    @Override
+    public void loadProductItemDetails(Entry entry)
+    {
+        super.loadProductItemDetails(entry);
+        entryList.remove(testEntry);
+    }
+
     private void populateList() {
         FavouritesDbAdapter dba = new FavouritesDbAdapter(getActivity());
         dba.openToRead();
@@ -57,7 +64,7 @@ public class ProductsListFragmentOffline extends ProductsListFragmentBase {
         }
         if (entryList.size() <= 0)
         {
-            Entry testEntry = new Entry();
+            testEntry = new Entry();
             testEntry.setTitle(getActivity().getString(R.string.empty_list));
             testEntry.setUpdated("");
             testEntry.setIdentifier("");

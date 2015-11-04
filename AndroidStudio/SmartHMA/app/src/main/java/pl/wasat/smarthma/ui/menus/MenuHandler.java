@@ -2,7 +2,9 @@ package pl.wasat.smarthma.ui.menus;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.Point;
+import android.graphics.drawable.ColorDrawable;
 import android.support.v4.app.FragmentActivity;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -94,12 +96,12 @@ public abstract class MenuHandler {
             popupWindow.setContentView(layout);
             popupWindow.setWidth(LinearLayout.LayoutParams.WRAP_CONTENT);
             popupWindow.setHeight(LinearLayout.LayoutParams.WRAP_CONTENT);
-            //popupWindow.setFocusable(true);
-            popupWindow.setFocusable(false);
-            //popupWindow.setOutsideTouchable(true);
 
-            //Clear the default translucent background
-            //popupWindow.setBackgroundDrawable(new BitmapDrawable());
+            // Make the window disappear when clicked outside.
+            popupWindow.setTouchable(true);
+            popupWindow.setFocusable(true);
+            popupWindow.setOutsideTouchable(true);
+            popupWindow.setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
             // Displaying the popup at the specified location, + offsets.
             popupWindow.showAtLocation(layout, Gravity.NO_GRAVITY, p.x, p.y);

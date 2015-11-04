@@ -24,12 +24,16 @@ import com.amazon.geo.mapsv2.model.GroundOverlayOptions;
 import com.amazon.geo.mapsv2.model.LatLng;
 import com.amazon.geo.mapsv2.model.LatLngBounds;
 import com.amazon.geo.mapsv2.model.PolygonOptions;
+import com.squareup.okhttp.OkHttpClient;
+import com.squareup.okhttp.Protocol;
+import com.squareup.picasso.OkHttpDownloader;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Picasso.LoadedFrom;
 import com.squareup.picasso.Target;
 import com.squareup.picasso.Transformation;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import pl.wasat.smarthma.R;
@@ -262,6 +266,13 @@ public class AmznExtendedMapFragment extends Fragment implements
         drawFootprint(footprintPoints);
 
         Target quicklookTarget = this;
+
+        OkHttpClient client = new OkHttpClient();
+        client.setProtocols(Arrays.asList(Protocol.HTTP_1_1));
+        final Picasso picasso = new Picasso.Builder(getActivity())
+                .downloader(new OkHttpDownloader(client))
+                .build();
+
         Picasso.with(getActivity()).load(url).transform(this)
                 .into(quicklookTarget);
     }

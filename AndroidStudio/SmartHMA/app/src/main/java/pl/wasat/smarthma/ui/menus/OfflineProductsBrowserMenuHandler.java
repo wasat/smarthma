@@ -1,7 +1,5 @@
 package pl.wasat.smarthma.ui.menus;
 
-import android.content.Intent;
-import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 
@@ -39,6 +37,19 @@ public class OfflineProductsBrowserMenuHandler extends MenuHandler {
             }
         });
 
+        LinearLayout clearLayout = (LinearLayout) layout.findViewById(R.id.popup_removeall_layout);
+        clickableViews.add(clearLayout);
+        clearLayout.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                ClearOfflineProductsDialog newFragment = new ClearOfflineProductsDialog();
+                newFragment.setActivity((FavouriteProductsActivity) activity);
+                newFragment.show(activity.getSupportFragmentManager(), "Clear_list_confirmation");
+                popupWindow.dismiss();
+                popupWindow = null;
+            }
+        });
+
+        /*
         LinearLayout favouriteProductsLayout = (LinearLayout) layout.findViewById(R.id.popup_favourites_layout);
         clickableViews.add(favouriteProductsLayout);
         favouriteProductsLayout.setOnClickListener(new View.OnClickListener() {
@@ -54,6 +65,7 @@ public class OfflineProductsBrowserMenuHandler extends MenuHandler {
                 popupWindow = null;
             }
         });
+        */
 
         addCommonListeners();
     }

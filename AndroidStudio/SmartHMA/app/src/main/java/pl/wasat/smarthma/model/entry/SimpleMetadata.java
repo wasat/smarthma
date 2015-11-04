@@ -65,7 +65,7 @@ public class SimpleMetadata implements Serializable {
     }
 
     private void processGroupMedia(Entry entry) {
-        if (entry.getGroup() != null) {
+        if (entry.getGroup().getContent().size() > 0) {
             obtainUrlsFromEntry(entry);
         } else if (entry.getEarthObservation() != null) {
             obtainUrlsFromOMMetadata(entry);
@@ -76,6 +76,8 @@ public class SimpleMetadata implements Serializable {
         } else {
             obtainDataFromRawMetadata(entry);
         }
+        validateThumbsUrl();
+        validateURLsForming();
     }
 
 
@@ -95,7 +97,8 @@ public class SimpleMetadata implements Serializable {
     }
 
     private void processFootprintCenter(Entry entry) {
-        if (entry == null) {
+        if (footprintCenter != null) return;
+        else if (entry == null) {
             this.footprintCenter = new LatLngExt(null, null);
         } else if (entry.getEarthObservation() != null) {
             obtainFootprintCenterFromOMMetadata(entry);
@@ -106,16 +109,15 @@ public class SimpleMetadata implements Serializable {
         } else {
             obtainDataFromRawMetadata(entry);
         }
+        validateFootprintCenter();
     }
+
 
     private void obtainFootprintCenterFromOMMetadata(Entry entry) {
         if (entry.getEarthObservation().getFeatureOfInterest().getFootprint().getCenterOf() != null) {
             this.footprintCenter = entry.getEarthObservation().getFeatureOfInterest()
                     .getFootprint().getCenterOf().getPoint().getPos().getLatLng();
-        } else {
-            this.footprintCenter = new LatLngExt(0, 0);
         }
-
     }
 
     private void obtainFootprintCenterFromDCMetadata(Entry entry) {
@@ -126,6 +128,21 @@ public class SimpleMetadata implements Serializable {
 
     }
 
+    private void validateFootprintCenter() {
+        if (footprintCenter != null) return;
+        else if (footprintCenter == null && footprint.size() > 0) {
+            double lat = 0;
+            double lng = 0;
+            for (int i = 0; i < 4; i++) {
+                lat = lat + footprint.get(i).latitude;
+                lng = lng + footprint.get(i).longitude;
+            }
+            footprintCenter = new LatLngExt(lat / 4, lng / 4);
+        } else {
+            this.footprintCenter = new LatLngExt(0, 0);
+        }
+
+    }
 
     private void obtainUrlsFromOMMetadata(Entry entry) {
         List<Browse> browseList = entry.getEarthObservation().getResult().getEarthObservationResult().getBrowseList();
@@ -169,6 +186,21 @@ public class SimpleMetadata implements Serializable {
 
     }
 
+    private void validateThumbsUrl() {
+        if (thumbnailUrl == null && quickLookUrl != null)
+            thumbnailUrl = quickLookUrl;
+    }
+
+    private void validateURLsForming() {
+        try {
+            if (thumbnailUrl.startsWith("//")) thumbnailUrl = "http:" + thumbnailUrl;
+            if (quickLookUrl.startsWith("//")) quickLookUrl = "http:" + quickLookUrl;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
     private void obtainPolygonFromOMMetadata(Entry entry) {
         Footprint footprintRaw = entry.getEarthObservation()
                 .getFeatureOfInterest().getFootprint();
@@ -189,15 +221,20 @@ public class SimpleMetadata implements Serializable {
     }
 
     private void obtainPolygonFromEntry(Entry entry) {
-        String[] corrStrArr = entry.getPolygon().getText().split(" ");
+        String polygonStr = entry.getPolygon().getText().replaceAll("  ", " ");
+        String[] corrStrArr = polygonStr.split(" ");
         double lat = 0;
         double lon;
         for (int i = 0; i < corrStrArr.length; i++) {
-            if (i % 2 == 0) {
-                lat = Double.parseDouble(corrStrArr[i]);
-            } else {
-                lon = Double.parseDouble(corrStrArr[i]);
-                this.footprint.add(new LatLngExt(lat, lon));
+            try {
+                if (i % 2 == 0) {
+                    lat = Double.parseDouble(corrStrArr[i]);
+                } else {
+                    lon = Double.parseDouble(corrStrArr[i]);
+                    this.footprint.add(new LatLngExt(lat, lon));
+                }
+            } catch (NumberFormatException e) {
+                e.printStackTrace();
             }
         }
     }
@@ -215,6 +252,8 @@ public class SimpleMetadata implements Serializable {
         switch (entry.getMetadataType()) {
             case OM:
                 xmlSaxParser.parseOMMetadata(entry);
+                processGroupMedia(entry);
+                processPolygon(entry);
                 processFootprintCenter(entry);
                 break;
             case OM11:

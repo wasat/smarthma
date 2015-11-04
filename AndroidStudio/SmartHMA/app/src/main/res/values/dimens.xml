@@ -103,7 +103,7 @@
     <dimen name="browse_eo_cell_padding_left">40dp</dimen>
     <dimen name="browse_eo_cell_divider">8dp</dimen>
     <dimen name="browse_eo_cell_height">28dp</dimen>
-    <dimen name="browse_eo_image_size">65dp</dimen>
+    <dimen name="browse_eo_image_size">72dp</dimen>
     <dimen name="browse_eo_layout_bottom_height">250dp</dimen>
 
     <dimen name="browse_eo_text_large">14sp</dimen>

@@ -29,8 +29,37 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
-            android:layout_toEndOf="@+id/tv_search_history"
-            android:layout_toRightOf="@+id/tv_search_history"
+            android:layout_toEndOf="@+id/tv_sort"
+            android:layout_toRightOf="@+id/tv_sort"
+            android:layout_weight="1"
+            android:src="@drawable/ic_sort" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/popup_removeall_layout"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingLeft="@dimen/browse_eo_padding"
+        android:paddingRight="@dimen/browse_eo_padding"
+        android:paddingTop="@dimen/browse_eo_padding">
+
+        <pl.wasat.smarthma.customviews.TextViewWithFont
+            android:id="@+id/tv_removeall"
+            style="@style/text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="30dp"
+            android:layout_weight="1"
+            android:text="@string/action_clear_list"
+            android:textColor="@color/text_black" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_toEndOf="@+id/tv_removeall"
+            android:layout_toRightOf="@+id/tv_removeall"
             android:layout_weight="1"
             android:src="@drawable/ic_sort" />
     </LinearLayout>

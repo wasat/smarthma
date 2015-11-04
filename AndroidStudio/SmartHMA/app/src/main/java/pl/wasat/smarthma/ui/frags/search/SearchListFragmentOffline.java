@@ -26,6 +26,7 @@ import pl.wasat.smarthma.model.iso.EntryISO;
  */
 public class SearchListFragmentOffline extends SearchListFragmentBase {
 
+    protected EntryISO testEntry;
     /**
      * Use this factory method to create a new instance of this fragment using
      * the provided parameters.
@@ -60,11 +61,11 @@ public class SearchListFragmentOffline extends SearchListFragmentBase {
         }
         if (entries.size() <= 0)
         {
-            EntryISO testEntry = new EntryISO();
+            testEntry = new EntryISO();
             testEntry.setTitle(getActivity().getString(R.string.empty_list));
             testEntry.setDate(new Date());
-            testEntry.setId("ID");
-            testEntry.setIdentifier("Identifier");
+            testEntry.setId("");
+            testEntry.setIdentifier("");
             testEntry.setUpdated("");
             testEntry.setFavourite(true);
             entries.add(0, testEntry);
@@ -79,6 +80,10 @@ public class SearchListFragmentOffline extends SearchListFragmentBase {
         this.entries = entries;
     }
 
+    public void clearEntries()
+    {
+        this.entries.clear();
+    }
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
@@ -129,6 +134,7 @@ public class SearchListFragmentOffline extends SearchListFragmentBase {
             attachListAdapter(searchFeedList);
             //view.setVisibility(View.VISIBLE);
         }
+        //entries.remove(testEntry);
         //}
     }
 }

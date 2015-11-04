@@ -40,7 +40,7 @@ public class PotentialMissions extends BaseParser implements SimpleMissionInterf
         for (String url :
                 urlList) {
             parserDb.addPage(new Page(CATEGORY_ID, mission_id, img_name, url));
-            System.out.println(new Page(CATEGORY_ID, mission_id, img_name, url).toString());
+            //System.out.println(new Page(CATEGORY_ID, mission_id, img_name, url).toString());
             mission_id++;
         }
     }

@@ -3,39 +3,23 @@ package pl.wasat.smarthma.ui.activities;
 import android.app.ActionBar;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.FragmentManager;
 import android.util.Log;
 import android.widget.TextView;
-
-import java.util.Calendar;
 
 import pl.wasat.smarthma.R;
 import pl.wasat.smarthma.adapter.SearchListAdapter;
 import pl.wasat.smarthma.database.FavouritesDbAdapter;
 import pl.wasat.smarthma.helper.Const;
-import pl.wasat.smarthma.kindle.AmznAreaPickerMapFragment.OnAmznAreaPickerMapFragmentListener;
-import pl.wasat.smarthma.model.FedeoRequestParams;
 import pl.wasat.smarthma.model.iso.EntryISO;
-import pl.wasat.smarthma.ui.frags.base.BaseShowProductsListFragment.OnBaseShowProductsListFragmentListener;
-import pl.wasat.smarthma.ui.frags.common.AreaPickerMapFragment.OnAreaPickerMapFragmentListener;
+import pl.wasat.smarthma.ui.activities.base.ExtendedBaseCollectionsActivity;
 import pl.wasat.smarthma.ui.frags.common.CollectionDetailsFragment;
-import pl.wasat.smarthma.ui.frags.common.CollectionDetailsFragment.OnCollectionDetailsFragmentListener;
-import pl.wasat.smarthma.ui.frags.common.DatePickerFragment.OnDatePickerFragmentListener;
-import pl.wasat.smarthma.ui.frags.common.MetadataISOFragment;
-import pl.wasat.smarthma.ui.frags.common.TimePickerFragment.OnTimePickerFragmentListener;
-import pl.wasat.smarthma.ui.frags.search.SearchListFragmentBase;
 import pl.wasat.smarthma.ui.frags.search.SearchListFragmentOffline;
 import pl.wasat.smarthma.ui.menus.SearchOfflineCollectionsMenuHandler;
-import pl.wasat.smarthma.utils.obj.LatLngBoundsExt;
 
 /**
  * Activity used to browse and manage saved collections.
  */
-public class FavouriteCollectionsActivity extends BaseSmartHMActivity
-        implements SearchListFragmentBase.OnSearchListFragmentListener,
-        OnBaseShowProductsListFragmentListener,
-        OnAreaPickerMapFragmentListener, OnAmznAreaPickerMapFragmentListener,
-        OnCollectionDetailsFragmentListener, OnDatePickerFragmentListener, OnTimePickerFragmentListener {
+public class FavouriteCollectionsActivity extends ExtendedBaseCollectionsActivity {
 
     private FavouritesDbAdapter dba;
     private CollectionDetailsFragment collectionDetailsFragment;
@@ -89,27 +73,6 @@ public class FavouriteCollectionsActivity extends BaseSmartHMActivity
     /*
      * (non-Javadoc)
      *
-     * @see android.support.v4.app.FragmentActivity#onBackPressed()
-     */
-    @Override
-    public void onBackPressed() {
-        if (dismissMenuOnBackPressed()) return;
-        FragmentManager fm = getSupportFragmentManager();
-        int bsec = fm.getBackStackEntryCount();
-        if (bsec > 1) {
-            while (bsec > 1) {
-                fm.popBackStackImmediate();
-                bsec = fm.getBackStackEntryCount();
-            }
-        } else {
-            finish();
-            super.onBackPressed();
-        }
-    }
-
-    /*
-     * (non-Javadoc)
-     *
      * @see pl.wasat.smarthma.ui.fragments.SearchListFragment.
      * OnSearchListFragmentListener
      * #onSearchListFragmentItemSelected(java.lang.String)
@@ -146,66 +109,6 @@ public class FavouriteCollectionsActivity extends BaseSmartHMActivity
                 .commit();
     }
 
-    @Override
-    public void onMapFragmentBoundsChange(LatLngBoundsExt bounds) {
-        callUpdateCollectionsBounds(bounds);
-    }
-
-    @Override
-    public void onAmznMapFragmentBoundsChange(LatLngBoundsExt bounds) {
-        callUpdateCollectionsBounds(bounds);
-    }
-
-    private void callUpdateCollectionsBounds(LatLngBoundsExt bounds) {
-        CollectionDetailsFragment collectionDetailsFragment = (CollectionDetailsFragment) getSupportFragmentManager()
-                .findFragmentByTag("CollectionDetailsFragment");
-        if (collectionDetailsFragment != null) {
-            collectionDetailsFragment.updateAreaBounds(bounds);
-        }
-    }
-
-
-    /*
-     * (non-Javadoc)
-     *
-     * @see pl.wasat.smarthma.ui.frags.search.SearchProductsListFragment.
-     * OnSearchProductsListFragmentListener
-     * #onSearchProductsListFragmentFootprintSend(java.util.ArrayList)
-     */
-    @Override
-    public void onBaseShowProductsListFragmentFootprintSend() {
-    }
-
-    @Override
-    public void onCollectionDetailsFragmentShowProducts(FedeoRequestParams fedeoSearchProductsParams) {
-        Intent showProductsIntent = new Intent(this,
-                ProductsBrowserActivity.class);
-        showProductsIntent.putExtra(Const.KEY_INTENT_FEDEO_REQUEST_PARAMS, fedeoSearchProductsParams);
-        startActivityForResult(showProductsIntent, REQUEST_NEW_SEARCH);
-    }
-
-    @Override
-    public void onCollectionDetailsFragmentShowMetadata(EntryISO displayedEntry) {
-        MetadataISOFragment metadataISOFragment = MetadataISOFragment
-                .newInstance(displayedEntry);
-        getSupportFragmentManager()
-                .beginTransaction()
-                .replace(R.id.activity_base_details_container,
-                        metadataISOFragment, "MetadataISOFragment")
-                .addToBackStack("MetadataISOFragment").commit();
-    }
-
-
-    @Override
-    public void onDatePickerFragmentDateChoose(Calendar calendar, String viewTag) {
-        collectionDetailsFragment.setDateValues(calendar, viewTag);
-    }
-
-    @Override
-    public void onTimePickerFragmentTimeChoose(Calendar calendar, String viewTag) {
-        collectionDetailsFragment.setTimeValues(calendar, viewTag);
-    }
-
     /**
      * Returns the list fragment associated with this object.
      * @return A list fragment.
@@ -222,5 +125,14 @@ public class FavouriteCollectionsActivity extends BaseSmartHMActivity
                 .findFragmentById(R.id.activity_base_list_container))
                 .getListAdapter();
         adapter.notifyDataSetChanged();
+    }
+
+    public void clearList()
+    {
+        dba.openToWrite();
+        dba.clearCollections();
+        dba.close();
+        getListFragment().clearEntries();
+        refreshList();
     }
 }

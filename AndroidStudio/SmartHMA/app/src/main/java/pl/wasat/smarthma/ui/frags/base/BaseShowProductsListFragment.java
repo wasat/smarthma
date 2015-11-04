@@ -21,6 +21,7 @@ import java.util.List;
 import pl.wasat.smarthma.R;
 import pl.wasat.smarthma.adapter.EntryImagesListAdapter;
 import pl.wasat.smarthma.database.EoDbAdapter;
+import pl.wasat.smarthma.database.FavouritesDbAdapter;
 import pl.wasat.smarthma.helper.DataSorter;
 import pl.wasat.smarthma.model.FedeoRequestParams;
 import pl.wasat.smarthma.model.entry.Entry;
@@ -304,6 +305,21 @@ public class BaseShowProductsListFragment extends BaseSpiceFragment {
         } else {
             Log.d("ZX", "Warning: BaseShowProductsListFragment: refreshList(): entryImagesListAdapter is null.");
         }
+    }
+
+    protected void clearEntries()
+    {
+        this.entryList.clear();
+    }
+
+    public void clearList()
+    {
+        FavouritesDbAdapter dba = new FavouritesDbAdapter(getActivity());
+        dba.openToWrite();
+        dba.clearProducts();
+        dba.close();
+        clearEntries();
+        refreshList();
     }
 
     public List<Entry> getEntryList() {

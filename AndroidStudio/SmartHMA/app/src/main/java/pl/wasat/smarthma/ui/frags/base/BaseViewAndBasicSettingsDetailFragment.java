@@ -88,7 +88,7 @@ public class BaseViewAndBasicSettingsDetailFragment extends BaseDateTimeAreaCont
 
         if (displayedISOEntry != null) {
             final String title = displayedISOEntry.getTitle();
-            final String pubDate = "This data were published: "
+            final String pubDate = "These data were published: "
                     + DateUtils.getISOPubDate(displayedISOEntry) + " and updated: "
                     + displayedISOEntry.getUpdated();
             parentID = displayedISOEntry.getIdentifier();

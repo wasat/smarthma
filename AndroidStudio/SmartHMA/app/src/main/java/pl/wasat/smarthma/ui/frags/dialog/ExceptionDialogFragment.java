@@ -10,7 +10,7 @@ import android.support.v4.app.DialogFragment;
 import pl.wasat.smarthma.R;
 import pl.wasat.smarthma.preferences.GlobalPreferences;
 import pl.wasat.smarthma.preferences.SharedPrefs;
-import pl.wasat.smarthma.ui.activities.BaseSmartHMActivity;
+import pl.wasat.smarthma.ui.activities.base.BaseSmartHMActivity;
 
 /**
  * Created by Daniel on 2015-09-21.

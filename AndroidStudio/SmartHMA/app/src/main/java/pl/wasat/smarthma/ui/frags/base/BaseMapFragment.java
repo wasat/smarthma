@@ -87,9 +87,6 @@ public class BaseMapFragment extends SupportMapFragment implements
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        //AcraExtension.mapCustomLog("BaseMap.onActivityCreated", mMap);
-        //Log.i("BASE_MAP", "onActivityCreated");
-
         startCreateMap(savedInstanceState);
     }
 

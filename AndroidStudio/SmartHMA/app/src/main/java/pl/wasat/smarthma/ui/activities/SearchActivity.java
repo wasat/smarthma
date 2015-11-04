@@ -14,6 +14,7 @@ import java.util.Calendar;
 import pl.wasat.smarthma.R;
 import pl.wasat.smarthma.database.SearchHistory;
 import pl.wasat.smarthma.kindle.AmznAreaPickerMapFragment.OnAmznAreaPickerMapFragmentListener;
+import pl.wasat.smarthma.ui.activities.base.BaseSmartHMActivity;
 import pl.wasat.smarthma.ui.frags.base.BaseSearchSideParametersFragment;
 import pl.wasat.smarthma.ui.frags.common.AreaPickerMapFragment.OnAreaPickerMapFragmentListener;
 import pl.wasat.smarthma.ui.frags.common.DatePickerFragment.OnDatePickerFragmentListener;

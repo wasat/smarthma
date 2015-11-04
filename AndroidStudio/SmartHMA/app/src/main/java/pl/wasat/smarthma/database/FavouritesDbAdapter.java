@@ -15,6 +15,7 @@ import com.google.gson.reflect.TypeToken;
 
 import java.util.ArrayList;
 
+import pl.wasat.smarthma.R;
 import pl.wasat.smarthma.model.entry.Entry;
 import pl.wasat.smarthma.model.iso.EntryISO;
 
@@ -80,6 +81,10 @@ public class FavouritesDbAdapter {
     }
 
     public long insertEntry(EntryISO item) {
+        if (item.getTitle().equals(context.getString(R.string.empty_list)))
+        {
+            return -1;
+        }
         ContentValues initialValues = new ContentValues();
         Log.d("ZX", "Inserting collection " + item.getTitle() + " into database.");
         Gson gson = new Gson();
@@ -92,7 +97,10 @@ public class FavouritesDbAdapter {
         ContentValues initialValues = new ContentValues();
         Log.d("ZX", "Inserting product " + item.getTitle() + " into database.");
         Gson gson = new Gson();
-        byte[] bytes = gson.toJson(item).getBytes();
+        Entry testEntry = item.safeClone();
+        testEntry.setFavourite(true);
+
+        byte[] bytes = gson.toJson(testEntry).getBytes();
         initialValues.put(KEY_RAW_DATA, bytes);
         return sqLiteDatabase.insert(DATABASE_TABLE_PRODUCTS, null, initialValues);
     }
@@ -140,16 +148,6 @@ public class FavouritesDbAdapter {
         insertEntry(item);
     }
 
-    public void reduceNumberOfEntries(int newNumberOfEntries) {
-        int numberOfEntries = getISOEntries().size();
-        while (numberOfEntries > newNumberOfEntries) {
-            Cursor res = sqLiteDatabase.rawQuery("select * from " + DATABASE_TABLE_COLLECTIONS, null);
-            res.moveToFirst();
-            sqLiteDatabase.delete(DATABASE_TABLE_COLLECTIONS, KEY_ROWID + " = ? ", new String[]{res.getString(res.getColumnIndex(KEY_ROWID))});
-            numberOfEntries--;
-        }
-    }
-
     public ArrayList<EntryISO> getISOEntries() {
         ArrayList<EntryISO> result = new ArrayList();
         Cursor res = sqLiteDatabase.rawQuery("select * from " + DATABASE_TABLE_COLLECTIONS, null);
@@ -182,12 +180,22 @@ public class FavouritesDbAdapter {
         return result;
     }
 
-    public void recreateTable() {
+    public void clearCollections() {
         Log.d("ZX", "Recreating table");
         Cursor res = sqLiteDatabase.rawQuery("select * from " + DATABASE_TABLE_COLLECTIONS, null);
         res.moveToLast();
         while (!res.isBeforeFirst()) {
             sqLiteDatabase.delete(DATABASE_TABLE_COLLECTIONS, KEY_ROWID + " = ? ", new String[]{res.getString(res.getColumnIndex(KEY_ROWID))});
+            res.moveToPrevious();
+        }
+    }
+
+    public void clearProducts() {
+        Log.d("ZX", "Recreating table");
+        Cursor res = sqLiteDatabase.rawQuery("select * from " + DATABASE_TABLE_PRODUCTS, null);
+        res.moveToLast();
+        while (!res.isBeforeFirst()) {
+            sqLiteDatabase.delete(DATABASE_TABLE_PRODUCTS, KEY_ROWID + " = ? ", new String[]{res.getString(res.getColumnIndex(KEY_ROWID))});
             res.moveToPrevious();
         }
     }

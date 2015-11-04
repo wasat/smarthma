@@ -1,4 +1,4 @@
-package pl.wasat.smarthma.ui.activities;
+package pl.wasat.smarthma.ui.activities.base;
 
 import android.content.Intent;
 
@@ -6,6 +6,8 @@ import pl.wasat.smarthma.R;
 import pl.wasat.smarthma.helper.Const;
 import pl.wasat.smarthma.model.FedeoRequestParams;
 import pl.wasat.smarthma.model.iso.EntryISO;
+import pl.wasat.smarthma.ui.activities.ProductsBrowserActivity;
+import pl.wasat.smarthma.ui.activities.SearchCollectionResultsActivity;
 import pl.wasat.smarthma.ui.frags.common.MetadataISOFragment;
 
 /**
@@ -14,7 +16,7 @@ import pl.wasat.smarthma.ui.frags.common.MetadataISOFragment;
  */
 public class BaseCollectionsActivity extends BaseSmartHMActivity {
 
-    void loadIsoMetadataFragment(EntryISO displayedEntry) {
+    protected void loadIsoMetadataFragment(EntryISO displayedEntry) {
         MetadataISOFragment metadataISOFragment = MetadataISOFragment
                 .newInstance(displayedEntry);
         getSupportFragmentManager()
@@ -24,14 +26,14 @@ public class BaseCollectionsActivity extends BaseSmartHMActivity {
                 .addToBackStack("MetadataISOFragment").commit();
     }
 
-    void startSearchingProductsProcess(FedeoRequestParams fedeoSearchProductsParams) {
+    protected void startSearchingProductsProcess(FedeoRequestParams fedeoSearchProductsParams) {
         Intent showProductsIntent = new Intent(this,
                 ProductsBrowserActivity.class);
         showProductsIntent.putExtra(Const.KEY_INTENT_FEDEO_REQUEST_PARAMS, fedeoSearchProductsParams);
         startActivityForResult(showProductsIntent, REQUEST_NEW_SEARCH);
     }
 
-    void startSearchingCollectionsProcess(FedeoRequestParams fedeoSearchCollectionsParams) {
+    protected void startSearchingCollectionsProcess(FedeoRequestParams fedeoSearchCollectionsParams) {
         Intent showCollectionsIntent = new Intent(this,
                 SearchCollectionResultsActivity.class);
         showCollectionsIntent.setAction(Const.KEY_ACTION_SEARCH_COLLECTIONS);

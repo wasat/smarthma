@@ -29,7 +29,7 @@ public class BaseSearchSideParametersFragment extends BaseDateTimeAreaContainerF
 
     private static final CharSequence[] cataloguesList = {"EOP:ESA:FEDEO",
             "EOP:ESA:FEDEO:COLLECTIONS", "EOP:ESA:GPOD-EO", "EOP:ESA:EO-VIRTUAL-ARCHIVE4",
-            "EOP:ESA:REFERENCEDATA"};
+            "EOP:ESA:SMOS", "EOP:JAXA:CATS-I", "EOP:NASA:ECHO"};
 
     /**
      * Use this factory method to create a new instance of this fragment using

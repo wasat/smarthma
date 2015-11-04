@@ -26,9 +26,14 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.squareup.okhttp.OkHttpClient;
+import com.squareup.okhttp.Protocol;
+import com.squareup.picasso.OkHttpDownloader;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Picasso.LoadedFrom;
 import com.squareup.picasso.Target;
+
+import java.util.Arrays;
 
 import pl.wasat.smarthma.R;
 import pl.wasat.smarthma.model.entry.Entry;
@@ -86,7 +91,7 @@ public class ProductDetailsFragment extends Fragment implements Target {
 
         if (displayedEntry != null) {
             final String title = displayedEntry.getTitle();
-            final String pubDate = "This data were published: "
+            final String pubDate = "These data were published: "
                     + displayedEntry.getPublished() + " and updated: "
                     + displayedEntry.getUpdated();
 
@@ -180,6 +185,13 @@ public class ProductDetailsFragment extends Fragment implements Target {
 
     private void startQLookTarget() {
         Target quicklookTarget = this;
+
+        OkHttpClient client = new OkHttpClient();
+        client.setProtocols(Arrays.asList(Protocol.HTTP_1_1));
+        final Picasso picasso = new Picasso.Builder(getActivity())
+                .downloader(new OkHttpDownloader(client))
+                .build();
+
         Picasso.with(getActivity()).load(getQuicklookUrl())
                 .into(quicklookTarget);
     }

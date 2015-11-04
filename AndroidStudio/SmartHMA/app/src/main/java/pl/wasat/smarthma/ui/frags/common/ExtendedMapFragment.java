@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -263,6 +264,15 @@ public class ExtendedMapFragment extends Fragment implements
 
         Target quicklookTarget = this;
         if (!url.isEmpty()) {
+
+            //SSLCertificateHandler.nuke();
+
+/*           OkHttpClient client = new OkHttpClient();
+            client.setProtocols(Arrays.asList(Protocol.HTTP_1_1));
+            final Picasso picasso = new Picasso.Builder(getActivity())
+                    .downloader(new OkHttpDownloader(client))
+                    .build();*/
+
             Picasso.with(getActivity())
                     .load(url)
                     .transform(this)
@@ -282,10 +292,12 @@ public class ExtendedMapFragment extends Fragment implements
 
     @Override
     public void onPrepareLoad(Drawable arg0) {
+        Log.i("EXT_MAP", "onPrepareLoad");
     }
 
     @Override
     public void onBitmapLoaded(Bitmap bitmap, LoadedFrom arg1) {
+        Log.i("EXT_MAP", "onBitmapLoaded");
         qLookImage = BitmapDescriptorFactory.fromBitmap(bitmap);
 
         GroundOverlayOptions groundOverlayOpt = new GroundOverlayOptions()
@@ -301,6 +313,7 @@ public class ExtendedMapFragment extends Fragment implements
 
     @Override
     public void onBitmapFailed(Drawable arg0) {
+        Log.i("EXT_MAP", "onBitmapFailed");
     }
 
     @Override
@@ -336,6 +349,7 @@ public class ExtendedMapFragment extends Fragment implements
 
     @Override
     public Bitmap transform(Bitmap source) {
+        Log.i("EXT_MAP", "transform");
         int x = (int) ((source.getWidth()) / 1.5);
         int y = (int) ((source.getHeight()) / 1.5);
         Bitmap result = Bitmap.createScaledBitmap(source, x, y, false);

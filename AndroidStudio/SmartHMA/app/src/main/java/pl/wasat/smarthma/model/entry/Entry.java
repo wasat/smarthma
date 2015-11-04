@@ -321,6 +321,26 @@ public class Entry implements Serializable {
                 where.equals(o.getWhere());
     }
 
+    public Entry safeClone()
+    {
+        Entry testEntry = new Entry();
+        testEntry.setTitle(title);
+        testEntry.setId(id);
+        testEntry.setIdentifier(identifier);
+        testEntry.setGuid(guid);
+        testEntry.setDate(date);
+        testEntry.setUpdated(updated);
+        testEntry.setDbId(dbId);
+        testEntry.setGroup(group);
+        testEntry.setLinks(links);
+        testEntry.setPublished(published);
+        testEntry.setSummary(summary);
+        testEntry.setWhere(where);
+        testEntry.setEarthObservation(earthObservation);
+        testEntry.setFavourite(isFavourite);
+        return testEntry;
+    }
+
     private String extractCData(String data) {
         data = data.replaceAll("<!\\[CDATA\\[", "");
         data = data.replaceAll("\\]\\]>", "");

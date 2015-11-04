@@ -365,19 +365,19 @@ public abstract class BaseParser {
 
 
     public void printImageList(Pair pair) {
-        System.out.println(pair.title);
+        //System.out.println(pair.title);
         ArrayList list = (ArrayList) pair.content;
         for (int i = 0; i < list.size(); i++) {
-            System.out.println(list.get(i));
+            //System.out.println(list.get(i));
         }
 
-        System.out.println(list.size());
+        //System.out.println(list.size());
     }
 
     public void printComplexPage(ArrayList<Pair> list) {
         for (int i = 0; i < list.size(); i++) {
-            System.out.println(list.get(i).title);
-            System.out.println(list.get(i).content);
+            //System.out.println(list.get(i).title);
+            //System.out.println(list.get(i).content);
         }
     }
 

@@ -18,6 +18,7 @@ import pl.wasat.smarthma.R;
 import pl.wasat.smarthma.preferences.GlobalPreferences;
 import pl.wasat.smarthma.preferences.SharedPrefs;
 import pl.wasat.smarthma.ui.activities.SearchCollectionResultsActivity;
+import pl.wasat.smarthma.ui.tooltips.Tooltip;
 
 /**
  * A simple {@link android.support.v4.app.Fragment} subclass. Activities that
@@ -31,6 +32,8 @@ public class SearchFragment extends Fragment {
     private OnSearchFragmentListener mListener;
     private View rootView;
     private Intent searchIntent;
+
+    Tooltip tooltip;
 
     /**
      * Use this factory method to create a new instance of this fragment using
@@ -103,11 +106,16 @@ public class SearchFragment extends Fragment {
             }
         });
 
-        Button btnAdvanceParams = (Button) rootView.findViewById(R.id.search_frag_button_advance);
+        tooltip = new Tooltip(getContext(), Tooltip.TYPE_BELOW, "Greetings from below!");
+
+        final Button btnAdvanceParams = (Button) rootView.findViewById(R.id.search_frag_button_advance);
         btnAdvanceParams.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 mListener.onSearchFragmentAdvanceParamsChoose();
+
+                if(!tooltip.isShown())
+                    tooltip.show(btnAdvanceParams);
             }
         });
 

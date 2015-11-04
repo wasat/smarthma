@@ -33,15 +33,15 @@ public class EsaEuemsat extends BaseParser implements SimpleMissionInterface {
         Pair<String, ArrayList<String>> pair = getImageListPage(ITEMS_COUNT, false);
         String contents = super.imageListToContentString(pair);
         parserDb.addCategory(new Category(CATEGORY_ID, pair.title, contents));
-        System.out.println(contents);
+        //System.out.println(contents);
         ArrayList<String> urlList = super.getImageList(pair.content);
-        System.out.println(urlList.size());
+        //System.out.println(urlList.size());
         int mission_id = 58;
         String img_name = "MISSION_IMG";
         for (String url :
                 urlList) {
             parserDb.addPage(new Page(CATEGORY_ID, mission_id, img_name, url));
-            System.out.println(new Page(CATEGORY_ID, mission_id, img_name, url).toString());
+            //System.out.println(new Page(CATEGORY_ID, mission_id, img_name, url).toString());
             mission_id++;
         }
     }

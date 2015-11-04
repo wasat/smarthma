@@ -14,6 +14,7 @@ import pl.wasat.smarthma.helper.Const;
 import pl.wasat.smarthma.model.mission.MissionItemData;
 import pl.wasat.smarthma.parser.Parser.Parser;
 import pl.wasat.smarthma.parser.database.ParserDb;
+import pl.wasat.smarthma.ui.activities.base.BaseSmartHMActivity;
 import pl.wasat.smarthma.ui.frags.missions.MissionsDetailsFragment;
 import pl.wasat.smarthma.ui.frags.missions.MissionsDetailsFragment.OnMissionsDetailNewFragmentListener;
 import pl.wasat.smarthma.ui.frags.missions.MissionsExtListFragment;

@@ -9,6 +9,7 @@ import pl.wasat.smarthma.R;
 import pl.wasat.smarthma.adapter.NewsArticleListAdapter;
 import pl.wasat.smarthma.database.EoDbAdapter;
 import pl.wasat.smarthma.model.NewsArticle;
+import pl.wasat.smarthma.ui.activities.base.BaseSmartHMActivity;
 import pl.wasat.smarthma.ui.frags.news.NewsDetailFragment;
 import pl.wasat.smarthma.ui.frags.news.NewsListFragment;
 

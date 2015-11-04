@@ -1,7 +1,7 @@
 /**
  *
  */
-package pl.wasat.smarthma.ui.activities;
+package pl.wasat.smarthma.ui.activities.base;
 
 import android.app.Activity;
 import android.content.BroadcastReceiver;
@@ -18,6 +18,8 @@ import pl.wasat.smarthma.R;
 import pl.wasat.smarthma.helper.Const;
 import pl.wasat.smarthma.preferences.GlobalPreferences;
 import pl.wasat.smarthma.preferences.SharedPrefs;
+import pl.wasat.smarthma.ui.activities.GlobalSettingsActivity;
+import pl.wasat.smarthma.ui.activities.StartActivity;
 import pl.wasat.smarthma.ui.menus.CommonMenuHandler;
 import pl.wasat.smarthma.ui.menus.MenuHandler;
 import pl.wasat.smarthma.utils.text.StringExt;
@@ -27,8 +29,8 @@ import pl.wasat.smarthma.utils.text.StringExt;
  */
 public class BaseSmartHMActivity extends FragmentActivity {
 
-    static final int REQUEST_NEW_SEARCH = 0;
-    boolean stopNewSearch = false;
+    protected static final int REQUEST_NEW_SEARCH = 0;
+    protected boolean stopNewSearch = false;
     protected MenuHandler commonMenuHandler;
     private FedeoSearchRequestReceiver fedeoSearchRequestReceiver;
 

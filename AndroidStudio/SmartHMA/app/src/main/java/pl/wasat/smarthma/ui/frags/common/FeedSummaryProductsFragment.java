@@ -3,13 +3,14 @@ package pl.wasat.smarthma.ui.frags.common;
 import android.graphics.Color;
 import android.os.Bundle;
 
+import com.amazon.geo.mapsv2.AmazonMap;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.PolygonOptions;
 
 import java.util.ArrayList;
 
 import pl.wasat.smarthma.R;
+import pl.wasat.smarthma.kindle.AmznMapDrawings;
 import pl.wasat.smarthma.model.FedeoRequestParams;
 import pl.wasat.smarthma.model.entry.Entry;
 import pl.wasat.smarthma.model.feed.Feed;
@@ -63,11 +64,11 @@ public class FeedSummaryProductsFragment extends BaseFeedSummaryFragment {
     protected void setupGoogleMapObjects(GoogleMap googleMap) {
         super.setupGoogleMapObjects(googleMap);
 
-        drawAllFootprint(googleMap);
+        drawAllGoogleFootprint(googleMap);
     }
 
 
-    private void drawAllFootprint(GoogleMap googleMap) {
+    private void drawAllGoogleFootprint(GoogleMap googleMap) {
 
         MapDrawings mapDrawings = new MapDrawings();
 
@@ -81,7 +82,7 @@ public class FeedSummaryProductsFragment extends BaseFeedSummaryFragment {
                 footprintPoints.add(footprintPosList.get(i).getLatLng().getGoogleLatLon());
             }*/
             if (footprintPoints.size() > 0) {
-                PolygonOptions polygon = mapDrawings.drawArea(footprintPoints, Color.BLUE);
+                com.google.android.gms.maps.model.PolygonOptions polygon = mapDrawings.drawArea(footprintPoints, Color.BLUE);
                 googleMap.addPolygon(polygon);
             }
         }
@@ -95,7 +96,41 @@ public class FeedSummaryProductsFragment extends BaseFeedSummaryFragment {
         return latLngs;
     }
 
-/*
+    @Override
+    protected void setupAmazonMapObjects(AmazonMap amazonMap) {
+        super.setupAmazonMapObjects(amazonMap);
+        drawAllAmznFootprint(amazonMap);
+    }
+
+
+    private void drawAllAmznFootprint(AmazonMap amazonMap) {
+
+        AmznMapDrawings amznMapDrawings = new AmznMapDrawings();
+
+        for (Entry entry : resultFeed.getEntries()) {
+            //List<Pos> footprintPosList = obtainFootprintPoints(entry);
+
+
+            //ArrayList<LatLng> footprintPoints = (ArrayList<LatLng>) (Object) entry.getSimpleMetadata().getFootprint();
+            ArrayList<com.amazon.geo.mapsv2.model.LatLng> footprintPoints = castToAmazonLatLonArray(entry.getSimpleMetadata().getFootprint());
+/*            for (int i = 0; i < footprintPosList.size() - 1; i++) {
+                footprintPoints.add(footprintPosList.get(i).getLatLng().getGoogleLatLon());
+            }*/
+            if (footprintPoints.size() > 0) {
+                com.amazon.geo.mapsv2.model.PolygonOptions polygon = amznMapDrawings.drawArea(footprintPoints, Color.BLUE);
+                amazonMap.addPolygon(polygon);
+            }
+        }
+    }
+
+    private ArrayList<com.amazon.geo.mapsv2.model.LatLng> castToAmazonLatLonArray(ArrayList<LatLngExt> latLngExtArrayList) {
+        ArrayList<com.amazon.geo.mapsv2.model.LatLng> latLngs = new ArrayList<>();
+        for (LatLngExt latLngExt : latLngExtArrayList) {
+            latLngs.add(latLngExt.getAmznLatLon());
+        }
+        return latLngs;
+    }
+    /*
     private List<Pos> obtainFootprintPoints(Entry entry) {
         List<Pos> footprintPosList = new ArrayList<>();
         if (entry.getEarthObservation().getFeatureOfInterest() == null) return footprintPosList;
