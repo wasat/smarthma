@@ -23,10 +23,8 @@ public class SimpleMetadata implements Serializable {
     private String quickLookUrl;
     private String thumbnailUrl;
     private String cloudUrl;
-    private Entry entry;
 
     public SimpleMetadata(Entry entry) {
-        this.entry = entry;
         processGroupMedia(entry);
         processPolygon(entry);
     }
@@ -40,7 +38,6 @@ public class SimpleMetadata implements Serializable {
     }
 
     public LatLngExt getFootprintCenter() {
-        processFootprintCenter(entry);
         return footprintCenter;
     }
 
@@ -94,38 +91,6 @@ public class SimpleMetadata implements Serializable {
         }
     }
 
-    private void processFootprintCenter(Entry entry) {
-        if (entry == null) {
-            this.footprintCenter = new LatLngExt(null, null);
-        } else if (entry.getEarthObservation() != null) {
-            obtainFootprintCenterFromOMMetadata(entry);
-        } else if (entry.getMDMetadata() != null) {
-            obtainFootprintCenterFromISOMetadata(entry);
-        } else if (entry.getDc() != null) {
-            obtainFootprintCenterFromDCMetadata(entry);
-        } else {
-            obtainDataFromRawMetadata(entry);
-        }
-    }
-
-    private void obtainFootprintCenterFromOMMetadata(Entry entry) {
-        if (entry.getEarthObservation().getFeatureOfInterest().getFootprint().getCenterOf() != null) {
-            this.footprintCenter = entry.getEarthObservation().getFeatureOfInterest()
-                    .getFootprint().getCenterOf().getPoint().getPos().getLatLng();
-        } else {
-            this.footprintCenter = new LatLngExt(0, 0);
-        }
-
-    }
-
-    private void obtainFootprintCenterFromDCMetadata(Entry entry) {
-
-    }
-
-    private void obtainFootprintCenterFromISOMetadata(Entry entry) {
-
-    }
-
 
     private void obtainUrlsFromOMMetadata(Entry entry) {
         List<Browse> browseList = entry.getEarthObservation().getResult().getEarthObservationResult().getBrowseList();
@@ -159,12 +124,10 @@ public class SimpleMetadata implements Serializable {
         }
     }
 
-    //TODO - process DC metadata
     private void obtainUrlFromDCMetadata(Entry entry) {
 
     }
 
-    //TODO - process ISO metadata
     private void obtainUrlsFromISOMetadata(Entry entry) {
 
     }
@@ -191,7 +154,7 @@ public class SimpleMetadata implements Serializable {
     private void obtainPolygonFromEntry(Entry entry) {
         String[] corrStrArr = entry.getPolygon().getText().split(" ");
         double lat = 0;
-        double lon;
+        double lon = 0;
         for (int i = 0; i < corrStrArr.length; i++) {
             if (i % 2 == 0) {
                 lat = Double.parseDouble(corrStrArr[i]);
@@ -215,16 +178,12 @@ public class SimpleMetadata implements Serializable {
         switch (entry.getMetadataType()) {
             case OM:
                 xmlSaxParser.parseOMMetadata(entry);
-                processFootprintCenter(entry);
                 break;
             case OM11:
-                xmlSaxParser.parseOMMetadata(entry);
                 break;
             case ISO:
-                xmlSaxParser.parseISOMetadata(entry);
                 break;
             case DC:
-                xmlSaxParser.parseDCMetadata(entry);
                 break;
             default:
                 break;

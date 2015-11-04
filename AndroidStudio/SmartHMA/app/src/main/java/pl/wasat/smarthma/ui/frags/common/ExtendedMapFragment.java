@@ -1,7 +1,6 @@
 package pl.wasat.smarthma.ui.frags.common;
 
 import android.app.Activity;
-import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
@@ -110,9 +109,8 @@ public class ExtendedMapFragment extends Fragment implements
     }
 
     @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        Activity activity = context instanceof Activity ? (Activity) context : null;
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
         try {
             mListener = (OnExtendedMapFragmentListener) activity;
         } catch (ClassCastException e) {
@@ -230,7 +228,7 @@ public class ExtendedMapFragment extends Fragment implements
         float[] results = new float[3];
 
 
-        if (footprintCenter != null && (footprintCenter.latitude != 0 && footprintCenter.longitude != 0)) {
+        if (footprintCenter != null) {
             qLookCenter = footprintCenter.getGoogleLatLon();
         } else {
             double latCenter = (oneLat + twoLat + threeLat + fourLat) / 4;

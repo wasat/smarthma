@@ -9,7 +9,7 @@ import pl.wasat.smarthma.R;
 import pl.wasat.smarthma.ui.activities.FavouriteProductsActivity;
 
 /**
- * Used for handling menu in the FavouriteProductsActivity class.
+ * Used for handling menu in the SearchActivity class.
  */
 public class OfflineProductsBrowserMenuHandler extends MenuHandler {
     public OfflineProductsBrowserMenuHandler(FavouriteProductsActivity activity, int menuButtonID) {

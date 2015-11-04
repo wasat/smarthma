@@ -3,13 +3,10 @@ package pl.wasat.smarthma.kindle;
 import android.app.Dialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
-import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationManager;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.content.ContextCompat;
 import android.support.v4.content.LocalBroadcastManager;
 import android.widget.Toast;
 
@@ -27,8 +24,7 @@ import com.amazon.geo.mapsv2.util.AmazonMapsRuntimeUtil;
 import com.amazon.geo.mapsv2.util.ConnectionResult;
 
 import pl.wasat.smarthma.interfaces.OnBaseMapFragmentPublicListener;
-import pl.wasat.smarthma.preferences.GlobalPreferences;
-import pl.wasat.smarthma.utils.loc.GoogleLocProviderImpl;
+import pl.wasat.smarthma.utils.loc.LocManager;
 
 /**
  * A simple {@link android.support.v4.app.Fragment} subclass. Activities that
@@ -41,10 +37,10 @@ public class AmznBaseMapFragment extends SupportMapFragment {
 
     private SupportMapFragment supportMapFrag;
     AmazonMap mMap;
+    private BroadcastReceiver mReceiver;
     public OnBaseMapFragmentListener mListener;
     private OnBaseMapFragmentPublicListener publicListener;
-    protected LatLngBounds targetBounds;
-    private BroadcastReceiver mReceiver;
+    private LatLngBounds targetBounds;
 
     public AmznBaseMapFragment() {
     }
@@ -60,19 +56,10 @@ public class AmznBaseMapFragment extends SupportMapFragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        //AcraExtension.mapCustomLog("BaseMap.onActivityCreated", mMap);
+        //Log.i("BASE_MAP", "onActivityCreated");
 
         startCreateMap(savedInstanceState);
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-
-        if (mReceiver != null) {
-            LocalBroadcastManager.getInstance(getActivity())
-                    .unregisterReceiver(mReceiver);
-            mReceiver = null;
-        }
     }
 
     private void startCreateMap(Bundle savedInstanceState) {
@@ -107,20 +94,14 @@ public class AmznBaseMapFragment extends SupportMapFragment {
 
     private void setUpMap() {
         //AcraExtension.mapCustomLog("BaseMap.setUpMap", mMap);
-        //mMap.setMapType(AmazonMap.MAP_TYPE_NONE);
+        mMap.setMapType(AmazonMap.MAP_TYPE_NONE);
         mMap.setMyLocationEnabled(true);
 
         mMap.getUiSettings().setZoomControlsEnabled(true);
         mMap.getUiSettings().setZoomGesturesEnabled(true);
         mMap.getUiSettings().setRotateGesturesEnabled(true);
 
-        obtainMapType();
-
-        if (targetBounds == null) obtainGooglePosition();
-
-        sendSupportMapReadyCallback();
-
-/*        setupOSM();
+        setupOSM();
         findStartLocation();
 
         if (targetBounds == null) {
@@ -134,7 +115,7 @@ public class AmznBaseMapFragment extends SupportMapFragment {
             public void onMapLoaded() {
                 animateToBounds();
             }
-        });*/
+        });
 
     }
 
@@ -145,34 +126,6 @@ public class AmznBaseMapFragment extends SupportMapFragment {
             //Log.i("BASE_MAP", "onActivityCreated.Listener");
         } else {
             publicListener.onBaseSupportMapPublicReady();
-        }
-    }
-
-
-    private void obtainMapType() {
-        GlobalPreferences globalPreferences = new GlobalPreferences(getActivity());
-        int mapType = globalPreferences.getMapType();
-
-        //TODO replace switch-case with mapType int
-        switch (mapType) {
-            case 0:
-                mMap.setMapType(AmazonMap.MAP_TYPE_NONE);
-                break;
-            case 1:
-                mMap.setMapType(AmazonMap.MAP_TYPE_NONE);
-                setupOSM();
-                break;
-            case 2:
-                mMap.setMapType(AmazonMap.MAP_TYPE_SATELLITE);
-                break;
-            case 3:
-                mMap.setMapType(AmazonMap.MAP_TYPE_HYBRID);
-                break;
-            case 4:
-                mMap.setMapType(AmazonMap.MAP_TYPE_TERRAIN);
-                break;
-            default:
-                break;
         }
     }
 
@@ -201,11 +154,6 @@ public class AmznBaseMapFragment extends SupportMapFragment {
     }
 
     private void findStartLocation() {
-        if (Build.VERSION.SDK_INT >= 23 &&
-                ContextCompat.checkSelfPermission(getActivity(), android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
-                ContextCompat.checkSelfPermission(getActivity(), android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            return;
-        }
         final LocationManager locationManager = (LocationManager) getActivity()
                 .getSystemService(Context.LOCATION_SERVICE);
         Location bestLocation = null;
@@ -231,17 +179,11 @@ public class AmznBaseMapFragment extends SupportMapFragment {
         }
     }
 
-    private void obtainGooglePosition() {
-        GoogleLocProviderImpl googleLocProvider = new GoogleLocProviderImpl(getActivity()) {
-            @Override
-            public void onLocationReceived(Location receivedLoc) {
-                animateToCurrentPosition(receivedLoc);
-            }
-        };
-        googleLocProvider.start();
-    }
+    private void animateToCurrentPosition() {
 
-    private void animateToCurrentPosition(Location location) {
+        // ------------------Zooming camera to position user-----------------
+        LocManager locManager = new LocManager(getActivity());
+        Location location = locManager.getAvailableLocation();
 
         if (location != null) {
             int mapZoom;
@@ -262,20 +204,22 @@ public class AmznBaseMapFragment extends SupportMapFragment {
         }
     }
 
-    private void animateToBounds(int padding) {
+    private void animateToBounds() {
         if (targetBounds != null) {
             mMap.animateCamera(CameraUpdateFactory.newLatLngBounds(
-                    targetBounds, padding));
+                    targetBounds, 75));
         }
     }
 
-    public void animateWhenMapIsReady(final int padding) {
-        mMap.setOnMapLoadedCallback(new AmazonMap.OnMapLoadedCallback() {
-            @Override
-            public void onMapLoaded() {
-                animateToBounds(padding);
-            }
-        });
+    @Override
+    public void onPause() {
+        super.onPause();
+
+        if (mReceiver != null) {
+            LocalBroadcastManager.getInstance(getActivity())
+                    .unregisterReceiver(mReceiver);
+            mReceiver = null;
+        }
     }
 
     /**

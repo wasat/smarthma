@@ -18,7 +18,7 @@ import pl.wasat.smarthma.ui.activities.ProductsBrowserActivity;
 import pl.wasat.smarthma.ui.frags.common.ProductsListFragment;
 
 /**
- * Handles user interaction related to sorting data.
+ * Handles user interaction related to search history management.
  */
 public class SortProductsDialog extends DialogFragment {
     private ProductsBrowserActivity activity;

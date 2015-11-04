@@ -1,7 +1,6 @@
 package pl.wasat.smarthma.ui.frags.browse;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -138,9 +137,8 @@ public class CollectionsListFragment extends BaseSpiceFragment {
 
 
     @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        Activity activity = context instanceof Activity ? (Activity) context : null;
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
         try {
             mListener = (OnCollectionsListFragmentListener) activity;
         } catch (ClassCastException e) {

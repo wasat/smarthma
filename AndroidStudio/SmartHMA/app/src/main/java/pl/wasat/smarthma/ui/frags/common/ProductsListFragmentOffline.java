@@ -12,14 +12,15 @@ import pl.wasat.smarthma.adapter.EntryImagesListAdapter;
 import pl.wasat.smarthma.database.FavouritesDbAdapter;
 import pl.wasat.smarthma.helper.DataSorter;
 import pl.wasat.smarthma.model.entry.Entry;
-import pl.wasat.smarthma.model.entry.Summary;
+import pl.wasat.smarthma.model.feed.Feed;
+import pl.wasat.smarthma.ui.frags.base.BaseShowProductsListFragment;
 
 /**
  * A simple {@link android.support.v4.app.Fragment} subclass. Use the
  * {@link ProductsListFragmentOffline#newInstance} factory method to create an
  * instance of this fragment.
  */
-public class ProductsListFragmentOffline extends ProductsListFragmentBase {
+public class ProductsListFragmentOffline extends BaseShowProductsListFragment {
     private static final String KEY_PARAM_FEDEO_REQUEST = "pl.wasat.smarthma.KEY_PARAM_FEDEO_REQUEST";
 
     /**
@@ -37,12 +38,17 @@ public class ProductsListFragmentOffline extends ProductsListFragmentBase {
     }
 
     @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        //populateList();
+    }
+
+    @Override
     public void onViewCreated(View view, Bundle savedInstanceState)
     {
         super.onViewCreated(view, savedInstanceState);
         Log.d("ZX", "ProductsListFragmentOffline onViewCreated");
         populateList();
-        loadProductItemDetails(entryList.get(0));
     }
 
     private void populateList() {
@@ -51,12 +57,8 @@ public class ProductsListFragmentOffline extends ProductsListFragmentBase {
         entryList = null;
         entryList = dba.getOMEntries();
         dba.close();
-        if (entryList == null)
-        {
+        if (entryList == null) {
             entryList = new ArrayList();
-        }
-        if (entryList.size() <= 0)
-        {
             Entry testEntry = new Entry();
             testEntry.setTitle(getActivity().getString(R.string.empty_list));
             testEntry.setUpdated("");
@@ -64,11 +66,6 @@ public class ProductsListFragmentOffline extends ProductsListFragmentBase {
             testEntry.setId((""));
             testEntry.setDate("");
             testEntry.setPublished("");
-            Summary summary = new Summary();
-            summary.setCdata("");
-            summary.setType("");
-            testEntry.setSummary(summary);
-            testEntry.setFavourite(true);
             entryList.add(0, testEntry);
         }
 
@@ -110,4 +107,68 @@ public class ProductsListFragmentOffline extends ProductsListFragmentBase {
     public ProductsListFragmentOffline() {
         // Required empty public constructor
     }
+
+    /*
+     * (non-Javadoc)
+     *
+     * @see pl.wasat.smarthma.ui.frags.base.BaseShowProductsListFragment#
+     * loadProductItemDetails(pl.wasat.smarthma.model.eo.Entry)
+     */
+    @Override
+    protected void loadProductItemDetails(Entry entry) {
+        ProductDetailsFragment productDetailsFragment = ProductDetailsFragment
+                .newInstance(entry);
+        getActivity()
+                .getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.activity_base_details_container,
+                        productDetailsFragment,
+                        "ProductDetailsFragment")
+                .addToBackStack("ProductDetailsFragment").commit();
+
+        super.loadProductItemDetails(entry);
+    }
+
+    /*
+     * (non-Javadoc)
+     *
+     * @see pl.wasat.smarthma.ui.frags.base.BaseShowProductsListFragment#
+     * loadSearchResultProductsIntroDetailsFrag
+     * (pl.wasat.smarthma.model.feed.Feed)
+     */
+    @Override
+    public void loadSearchResultProductsIntroDetailsFrag(Feed searchProductFeeds) {
+        Log.d("ZX", "loadSearchResultProductsIntroDetailsFrag");
+        FeedSummaryProductsFragment feedSummaryProductsFragment = FeedSummaryProductsFragment
+                .newInstance(searchProductFeeds);
+        getActivity()
+                .getSupportFragmentManager()
+                .beginTransaction()
+                .add(R.id.activity_base_details_container,
+                        feedSummaryProductsFragment, "FeedSummaryProductsFragment")
+                .addToBackStack("FeedSummaryProductsFragment").commit();
+        super.loadSearchResultProductsIntroDetailsFrag(searchProductFeeds);
+    }
+
+    /*
+     * (non-Javadoc)
+     *
+     * @see
+     * pl.wasat.smarthma.ui.frags.base.BaseShowProductsListFragment#loadFailureFrag
+     * ()
+     */
+    @Override
+    protected void loadFailureFrag() {
+        String searchFail = getActivity().getString(
+                R.string.empty_list);
+
+        FailureFragment failureFragment = FailureFragment
+                .newInstance(searchFail);
+
+        getActivity().getSupportFragmentManager().beginTransaction()
+                .replace(R.id.activity_base_list_container, failureFragment)
+                .commit();
+        super.loadFailureFrag();
+    }
+
 }
