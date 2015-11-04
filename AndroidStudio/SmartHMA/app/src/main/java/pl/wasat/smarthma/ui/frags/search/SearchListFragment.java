@@ -14,6 +14,7 @@ import pl.wasat.smarthma.database.SearchHistory;
 import pl.wasat.smarthma.database.SearchParams;
 import pl.wasat.smarthma.helper.Const;
 import pl.wasat.smarthma.helper.DataSorter;
+import pl.wasat.smarthma.interfaces.OnSlideElementListener;
 import pl.wasat.smarthma.model.FedeoRequestParams;
 import pl.wasat.smarthma.model.feed.Feed;
 import pl.wasat.smarthma.model.iso.EntryISO;
@@ -202,6 +203,15 @@ public class SearchListFragment extends BaseSpiceListFragment {
                         searchFeedList);
                 this.setListAdapter(adapter);
                 adapter.notifyDataSetChanged();
+                adapter.setListener(new OnSlideElementListener() {
+                    @Override
+                    public void Catch(boolean swipeRight, int position) {
+                        if (swipeRight)
+                            Toast.makeText(getActivity(), "share " + position, Toast.LENGTH_SHORT).show();
+                        else
+                            Toast.makeText(getActivity(), "delete " + position, Toast.LENGTH_SHORT).show();
+                    }
+                });
                 view.setVisibility(View.VISIBLE);
             }
         }
