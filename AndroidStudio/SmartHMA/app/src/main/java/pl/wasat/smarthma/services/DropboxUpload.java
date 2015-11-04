@@ -1,19 +1,12 @@
 package pl.wasat.smarthma.services;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-
 import android.app.NotificationManager;
-import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.preference.PreferenceManager;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.dropbox.client2.DropboxAPI;
 import com.dropbox.client2.ProgressListener;
@@ -27,6 +20,10 @@ import com.dropbox.client2.exception.DropboxServerException;
 import com.dropbox.client2.exception.DropboxUnlinkedException;
 import com.dropbox.client2.session.AccessTokenPair;
 import com.dropbox.client2.session.AppKeyPair;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 
 import pl.wasat.smarthma.R;
 
@@ -93,7 +90,6 @@ public class DropboxUpload extends AsyncTask<Void, Long, Boolean> {
             session.setAccessTokenPair(new AccessTokenPair(key, secret));
         }
     }
-
 
 
     @Override
@@ -165,7 +161,7 @@ public class DropboxUpload extends AsyncTask<Void, Long, Boolean> {
 
     @Override
     protected void onProgressUpdate(Long... progress) {
-        int percent = (int)(100.0*(double)progress[0]/mFileLen + 0.5);
+        int percent = (int) (100.0 * (double) progress[0] / mFileLen + 0.5);
         mBuilder.setProgress(100, percent, false);
         mNotifyManager.notify(1, mBuilder.build());
     }

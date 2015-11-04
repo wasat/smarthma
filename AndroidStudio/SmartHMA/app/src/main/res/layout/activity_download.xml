@@ -1,6 +1,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent" tools:context=".MainActivity"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
     android:orientation="vertical"
     android:layout_gravity="center"
     android:gravity="center_horizontal">
@@ -20,7 +22,7 @@
             android:layout_height="wrap_content"
             android:text="Dropbox"
             android:id="@+id/dropbox"
-            android:checked="true"/>
+            android:checked="true" />
 
         <RadioButton
             android:layout_width="wrap_content"
@@ -28,10 +30,11 @@
             android:text="Google Drive"
             android:id="@+id/googleDrive" />
     </RadioGroup>
+
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/buttonChooseDownload"
-        android:text="Pobierz"/>
+        android:text="Pobierz" />
 
 </LinearLayout>

@@ -23,7 +23,7 @@
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppNoActionBarTheme" >
+        android:theme="@style/AppNoActionBarTheme">
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
             android:value="AIzaSyCMZWIkdMS9FlyCt0eb_cMosMTFrt7FZxY" />
@@ -34,7 +34,7 @@
         <activity
             android:name=".ui.activities.StartActivity"
             android:label="@string/app_name"
-            android:theme="@style/AppNoActionBarTheme" >
+            android:theme="@style/AppNoActionBarTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -43,7 +43,7 @@
         </activity>
         <activity
             android:name=".ui.activities.CollectionsDefinitionActivity"
-            android:label="@string/activity_name_collections_definition" >
+            android:label="@string/activity_name_collections_definition">
             <meta-data
                 android:name="android.app.default_searchable"
                 android:value="pl.wasat.smarthma.ui.activities.SearchCollectionResultsActivity" />
@@ -56,7 +56,7 @@
             android:label="@string/activity_name_products_browser" />
         <activity
             android:name=".ui.activities.SearchActivity"
-            android:label="@string/activity_name_search_eo_data" >
+            android:label="@string/activity_name_search_eo_data">
             <meta-data
                 android:name="android.app.default_searchable"
                 android:value="pl.wasat.smarthma.ui.activities.SearchCollectionResultsActivity" />
@@ -66,7 +66,7 @@
         <activity
             android:name=".ui.activities.SearchCollectionResultsActivity"
             android:label="@string/activity_name_search_collections_results"
-            android:launchMode="singleTop" >
+            android:launchMode="singleTop">
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH" />
             </intent-filter>
@@ -93,7 +93,7 @@
         <activity
             android:name=".ui.activities.FavouriteCollectionsActivity"
             android:label="@string/activity_name_favourite_collections_results"
-            android:launchMode="singleTop" >
+            android:launchMode="singleTop">
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH" />
             </intent-filter>
@@ -115,7 +115,8 @@
                 <!-- Change this to be db- followed by your app key -->
                 <data android:scheme="db-" />
                 <action android:name="android.intent.action.VIEW" />
-                <category android:name="android.intent.category.BROWSABLE"/>
+
+                <category android:name="android.intent.category.BROWSABLE" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
@@ -136,14 +137,14 @@
 
         <receiver
             android:name=".receivers.SmartHmaFacebookBroadcastReceiver"
-            android:exported="false" >
+            android:exported="false">
             <intent-filter>
                 <action android:name="com.facebook.platform.AppCallResultBroadcast" />
             </intent-filter>
         </receiver>
         <receiver
             android:name=".ui.widgets.RSSWidgetProvider"
-            android:label="SmartHMA RSS" >
+            android:label="SmartHMA RSS">
             <intent-filter>
 
                 <!-- This widget provider receives broadcast with following action name or simply onUpdate of AppWidgetProvider is called -->
@@ -164,7 +165,7 @@
             android:name=".ui.widgets.WidgetService"
             android:permission="android.permission.BIND_REMOTEVIEWS" />
 
-        <activity android:name=".ui.widgets.WidgetConfigActivity" >
+        <activity android:name=".ui.widgets.WidgetConfigActivity">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_CONFIGURE" />
             </intent-filter>
@@ -174,13 +175,11 @@
 
         <activity
             android:name=".ui.activities.DownloadActivity"
-            android:label="@string/title_activity_download" >
-        </activity>
+            android:label="@string/title_activity_download"></activity>
 
         <service
             android:name=".services.DownloadService"
-            android:exported="false" >
-        </service>
+            android:exported="false"></service>
     </application>
 
 </manifest>

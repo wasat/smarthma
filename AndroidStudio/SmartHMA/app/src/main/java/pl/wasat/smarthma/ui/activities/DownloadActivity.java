@@ -10,8 +10,8 @@ import android.content.pm.PackageManager;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
-import android.preference.PreferenceManager;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -36,15 +36,14 @@ import java.util.Arrays;
 import pl.wasat.smarthma.R;
 import pl.wasat.smarthma.services.DownloadService;
 
-public class DownloadActivity extends Activity
-{
+public class DownloadActivity extends Activity {
     GoogleAccountCredential mCredential;
 
     static final int REQUEST_ACCOUNT_PICKER = 1000;
     static final int REQUEST_AUTHORIZATION = 1001;
     static final int REQUEST_GOOGLE_PLAY_SERVICES = 1002;
     private static final String PREF_ACCOUNT_NAME = "accountName";
-    private static final String[] SCOPES = { DriveScopes.DRIVE_FILE };
+    private static final String[] SCOPES = {DriveScopes.DRIVE_FILE};
 
 
     private static final String ACCESS_KEY_NAME = "ACCESS_KEY";
@@ -63,8 +62,8 @@ public class DownloadActivity extends Activity
         super.onCreate(savedInstanceState);
         downloadDropbox = false;
         setContentView(R.layout.activity_download);
-        buttonChooseDownload = (Button)findViewById(R.id.buttonChooseDownload);
-        radioGroup = (RadioGroup)findViewById(R.id.radiogroup);
+        buttonChooseDownload = (Button) findViewById(R.id.buttonChooseDownload);
+        radioGroup = (RadioGroup) findViewById(R.id.radiogroup);
         buttonChooseDownload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -79,9 +78,7 @@ public class DownloadActivity extends Activity
                         if (radioGroup.getCheckedRadioButtonId() == R.id.dropbox) {
                             downloadDropbox = true;
                             startDownloadDropbox();
-                        }
-                        else
-                        {
+                        } else {
                             Toast.makeText(getApplicationContext(),
                                     "Wybrano Google Drive", Toast.LENGTH_LONG).show();
                             SharedPreferences settings = getPreferences(Context.MODE_PRIVATE);
@@ -92,15 +89,14 @@ public class DownloadActivity extends Activity
                             chooseAccount();
                         }
                     }
-                } catch (Exception e)
-                {
+                } catch (Exception e) {
                     Log.e("exception", e.toString());
                 }
             }
         });
     }
 
-    public void startDownloadDropbox(){
+    public void startDownloadDropbox() {
         Toast.makeText(getApplicationContext(),
                 "Wybrano Dropbox", Toast.LENGTH_LONG).show();
         AndroidAuthSession session = buildSession();
@@ -123,15 +119,12 @@ public class DownloadActivity extends Activity
         }
         setLoggedIn(mApi.getSession().isLinked());
         // Start the remote authentication
-        if (mLoggedIn)
-        {
+        if (mLoggedIn) {
             downloadDropbox = false;
             Intent downloadIntent = new Intent(getApplication(), DownloadService.class);
             downloadIntent.putExtra("action", 1);
             startService(downloadIntent);
-        }
-        else
-        {
+        } else {
             mApi.getSession().startOAuth2Authentication(DownloadActivity.this);
         }
     }
@@ -171,8 +164,7 @@ public class DownloadActivity extends Activity
     }
 
     @Override
-    public void onResume()
-    {
+    public void onResume() {
         super.onResume();
         if (downloadDropbox && mApi != null && mApi.getSession().authenticationSuccessful()) {
             startDownloadDropbox();
@@ -188,12 +180,10 @@ public class DownloadActivity extends Activity
         return session;
     }
 
-    private void storeAuth(AndroidAuthSession session)
-    {
+    private void storeAuth(AndroidAuthSession session) {
         // Store the OAuth 2 access token, if there is one.
         String oauth2AccessToken = session.getOAuth2AccessToken();
-        if (oauth2AccessToken != null)
-        {
+        if (oauth2AccessToken != null) {
             SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
             SharedPreferences.Editor edit = prefs.edit();
             edit.putString(ACCESS_KEY_NAME, "oauth2:");
@@ -204,8 +194,7 @@ public class DownloadActivity extends Activity
         // Store the OAuth 1 access token, if there is one.  This is only necessary if
         // you're still using OAuth 1.
         AccessTokenPair oauth1AccessToken = session.getAccessTokenPair();
-        if (oauth1AccessToken != null)
-        {
+        if (oauth1AccessToken != null) {
             SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
             SharedPreferences.Editor edit = prefs.edit();
             edit.putString(ACCESS_KEY_NAME, oauth1AccessToken.key);
@@ -219,6 +208,7 @@ public class DownloadActivity extends Activity
         Toast error = Toast.makeText(this, msg, Toast.LENGTH_LONG);
         error.show();
     }
+
     private void loadAuth(AndroidAuthSession session) {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
         String key = prefs.getString(ACCESS_KEY_NAME, null);
@@ -233,6 +223,7 @@ public class DownloadActivity extends Activity
             session.setAccessTokenPair(new AccessTokenPair(key, secret));
         }
     }
+
     private void checkAppKeySetup() {
         // Check to make sure that we have a valid app key
         if (getString(R.string.APP_KEY).startsWith("CHANGE") ||
@@ -256,11 +247,12 @@ public class DownloadActivity extends Activity
             finish();
         }
     }
+
     @Override
     protected void onActivityResult(
             int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        switch(requestCode) {
+        switch (requestCode) {
             case REQUEST_GOOGLE_PLAY_SERVICES:
                 if (resultCode != RESULT_OK) {
                     isGooglePlayServicesAvailable();
@@ -300,11 +292,12 @@ public class DownloadActivity extends Activity
         if (GooglePlayServicesUtil.isUserRecoverableError(connectionStatusCode)) {
             showGooglePlayServicesAvailabilityErrorDialog(connectionStatusCode);
             return false;
-        } else if (connectionStatusCode != ConnectionResult.SUCCESS ) {
+        } else if (connectionStatusCode != ConnectionResult.SUCCESS) {
             return false;
         }
         return true;
     }
+
     void showGooglePlayServicesAvailabilityErrorDialog(
             final int connectionStatusCode) {
         Dialog dialog = GooglePlayServicesUtil.getErrorDialog(

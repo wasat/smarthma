@@ -6,7 +6,7 @@ import android.view.View;
 import pl.wasat.smarthma.R;
 
 /**
- * Used for handling menu in the SearchActivity class.
+ * Used for handling menu in the FragmentActivity class.
  */
 public class CommonMenuHandler extends MenuHandler {
     public CommonMenuHandler(FragmentActivity activity, int menuButtonID) {

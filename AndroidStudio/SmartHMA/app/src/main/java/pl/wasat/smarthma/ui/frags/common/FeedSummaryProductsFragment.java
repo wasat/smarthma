@@ -61,8 +61,8 @@ public class FeedSummaryProductsFragment extends BaseFeedSummaryFragment {
     }
 
     @Override
-    protected void setupMapObjects(GoogleMap googleMap) {
-        super.setupMapObjects(googleMap);
+    protected void setupGoogleMapObjects(GoogleMap googleMap) {
+        super.setupGoogleMapObjects(googleMap);
 
         drawAllGoogleFootprint(googleMap);
     }

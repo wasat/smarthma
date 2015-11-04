@@ -3,9 +3,10 @@
  */
 package pl.wasat.smarthma;
 
-import android.app.Application;
 import android.content.Context;
 import android.os.Build;
+import android.support.multidex.MultiDex;
+import android.support.multidex.MultiDexApplication;
 
 import org.acra.ACRA;
 import org.acra.annotation.ReportsCrashes;
@@ -35,7 +36,7 @@ import pl.wasat.smarthma.model.explaindoc.ExplainData;
         //formUriBasicAuthPassword = "8TH1Rph6koNQ4nA6iGHR3ies"
 )
 
-public class SmartHMApplication extends Application {
+public class SmartHMApplication extends MultiDexApplication {
 
     public static CollectionsGroup.List GlobalEODataList = new List();
     public static ExplainData GlobalExplainData = new ExplainData();
@@ -43,6 +44,10 @@ public class SmartHMApplication extends Application {
     public static SmartHMApplication appSingleton;
     private static Context context;
 
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(base);
+        MultiDex.install(this);
+    }
 
     @Override
     public void onCreate() {

@@ -63,25 +63,13 @@ public class CollectionsListAdapter extends ArrayAdapter<Collection> {
 
         convertView = inflater.inflate(R.layout.view_cell_collection, parent, false);
 
-        SwipeDetector swipeDetector = new SwipeDetector(convertView, position, false);
+        SwipeDetector swipeDetector = new SwipeDetector(convertView, position);
         swipeDetector.setOnClickListener(listener);
         convertView.setOnTouchListener(swipeDetector);
         // }
 
-            SwipeDetector swipeDetector = new SwipeDetector(convertView, position);
-            swipeDetector.setOnClickListener(listener);
-            convertView.setOnTouchListener(swipeDetector);
-
-
-        /*if(collection.isRead()){
-            holder.row = convertView.findViewById(R.id.view_cell_collection_search_row_background);
-            holder.row.setBackgroundColor(activity.getResources().getColor(R.color.row_selected));
-            holder.button = (ImageView) convertView.findViewById(R.id.star_button);
-            holder.button.setImageDrawable(activity.getResources().getDrawable(R.drawable.ic_star_blue));
-        }*/
-        }
-        ViewHolder holder;
-        holder = new ViewHolder();
+        Collection collection = collData.get(position);
+        ViewHolder holder = new ViewHolder();
         holder.title = (TextView) convertView.findViewById(R.id.collection_name);
         holder.artist = (TextView) convertView.findViewById(R.id.collection_desc);
         holder.thumb_image = (ImageView) convertView.findViewById(R.id.collection_image);

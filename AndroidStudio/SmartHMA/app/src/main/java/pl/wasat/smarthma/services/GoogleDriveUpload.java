@@ -1,7 +1,6 @@
 package pl.wasat.smarthma.services;
 
 
-
 import android.app.NotificationManager;
 import android.content.Context;
 import android.os.AsyncTask;
@@ -38,8 +37,7 @@ public class GoogleDriveUpload extends AsyncTask<Void, Void, Boolean> {
     private Context context;
 
 
-    public GoogleDriveUpload(GoogleAccountCredential credential, Context context)
-    {
+    public GoogleDriveUpload(GoogleAccountCredential credential, Context context) {
         super();
         this.context = context;
         String fileName = "file";
@@ -81,32 +79,29 @@ public class GoogleDriveUpload extends AsyncTask<Void, Void, Boolean> {
         body.setId(null);
         body.setMimeType(file_type);
 
-        try
-        {
+        try {
             body.setParents(Arrays.asList(new ParentReference().setId(getRootId())));
             FileContent mediaContent = new FileContent(file_type, file);
             FileRtr = mService.files().insert(body, mediaContent).execute();
 
-            if ( FileRtr != null)
-            {
-                System.out.println("File uploaded: " +  FileRtr.getTitle());
+            if (FileRtr != null) {
+                System.out.println("File uploaded: " + FileRtr.getTitle());
             }
-        }
-        catch(Exception e)
-        {
+        } catch (Exception e) {
             Log.e("", e.toString());
             return false;
         }
         return true;
     }
+
     /**
      * Fetch a list of up to 10 file names and IDs.
+     *
      * @return List of Strings describing files, or an empty list if no files
-     *         found.
+     * found.
      * @throws IOException
      */
-    private String getRootId() throws IOException
-    {
+    private String getRootId() throws IOException {
         About about = mService.about().get().execute();
         // Get a list of up to 10 files.
         List<String> fileInfo = new ArrayList<String>();

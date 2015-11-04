@@ -26,7 +26,12 @@ public class BaseSpiceFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
+        if (smartHMASpiceManager.getPendingRequestCount() > 0)
+            smartHMASpiceManager.cancelAllRequests();
         smartHMASpiceManager.start(getActivity());
+
+        if (spiceManagerBinary.getPendingRequestCount() > 0)
+            spiceManagerBinary.cancelAllRequests();
         spiceManagerBinary.start(getActivity());
     }
 
@@ -58,7 +63,6 @@ public class BaseSpiceFragment extends Fragment {
                 messText, exRawMessage, exRawCause);
         exceptionDialogFragment.show(getFragmentManager(), "ExceptionDialogFragment");
     }
-
 
 
 }

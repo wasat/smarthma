@@ -26,13 +26,13 @@ import pl.wasat.smarthma.ui.frags.common.DatePickerFragment.OnDatePickerFragment
 import pl.wasat.smarthma.ui.frags.common.MetadataISOFragment;
 import pl.wasat.smarthma.ui.frags.common.TimePickerFragment.OnTimePickerFragmentListener;
 import pl.wasat.smarthma.ui.frags.search.SearchListFragment;
-import pl.wasat.smarthma.ui.frags.search.SearchListFragment.OnSearchListFragmentListener;
+import pl.wasat.smarthma.ui.frags.search.SearchListFragmentBase;
 import pl.wasat.smarthma.ui.menus.MenuHandler;
 import pl.wasat.smarthma.ui.menus.SearchCollectionsMenuHandler;
 import pl.wasat.smarthma.utils.obj.LatLngBoundsExt;
 
 public class SearchCollectionResultsActivity extends BaseSmartHMActivity
-        implements OnSearchListFragmentListener,
+        implements SearchListFragmentBase.OnSearchListFragmentListener,
         OnBaseShowProductsListFragmentListener,
         OnAreaPickerMapFragmentListener, OnAmznAreaPickerMapFragmentListener,
         OnCollectionDetailsFragmentListener, OnDatePickerFragmentListener, OnTimePickerFragmentListener {

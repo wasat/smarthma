@@ -2,16 +2,16 @@ package pl.wasat.smarthma.services;
 
 import android.app.IntentService;
 import android.app.NotificationManager;
-import android.content.Intent;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Environment;
 import android.os.StatFs;
 import android.preference.PreferenceManager;
 import android.support.v4.app.NotificationCompat;
-import android.util.Log;
 import android.support.v4.app.NotificationCompat.Builder;
+import android.util.Log;
 
 import com.google.api.client.googleapis.extensions.android.gms.auth.GoogleAccountCredential;
 import com.google.api.client.util.ExponentialBackOff;
@@ -37,7 +37,7 @@ public class DownloadService extends IntentService {
 
 
     private static final String PREF_ACCOUNT_NAME = "accountName";
-    private static final String[] SCOPES = { DriveScopes.DRIVE_FILE };
+    private static final String[] SCOPES = {DriveScopes.DRIVE_FILE};
     private Builder mBuilder;
     private int action;
     private NotificationManager mNotifyManager;
@@ -58,18 +58,16 @@ public class DownloadService extends IntentService {
         }
     }
 
-    private void downloadFile()
-    {
+    private void downloadFile() {
         mNotifyManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
         mBuilder = new NotificationCompat.Builder(this);
         mBuilder.setContentTitle("Download")
                 .setContentText("Download in progress")
-            .setSmallIcon(R.drawable.actionbar_logo);
+                .setSmallIcon(R.drawable.actionbar_logo);
         new DownloadFileAsync(action).execute();
     }
 
-    class DownloadFileAsync extends AsyncTask<String, String, Boolean>
-    {
+    class DownloadFileAsync extends AsyncTask<String, String, Boolean> {
         public static final String LOG_TAG = "DOWNLOAD FILE";
         private File rootDir = Environment.getExternalStorageDirectory();
         private String fileName = "file";
@@ -77,8 +75,7 @@ public class DownloadService extends IntentService {
         private File file;
         private int action;
 
-        public DownloadFileAsync(int action)
-        {
+        public DownloadFileAsync(int action) {
             this.action = action;
         }
 
@@ -92,10 +89,8 @@ public class DownloadService extends IntentService {
 
 
         @Override
-        protected Boolean doInBackground(String ... aurl)
-        {
-            try
-            {
+        protected Boolean doInBackground(String... aurl) {
+            try {
                 StatFs stat = new StatFs(Environment.getExternalStorageDirectory().getPath());
                 long avaibleBlocks = stat.getAvailableBlocks();
                 int blockSizeInBytes = stat.getBlockSize();
@@ -109,7 +104,7 @@ public class DownloadService extends IntentService {
                 c.connect();
 
                 int lenghtOfFile = c.getContentLength();
-                if(lenghtOfFile > freeSpaceInMegabytes) return false;
+                if (lenghtOfFile > freeSpaceInMegabytes) return false;
                 checkAndCreateDirectory("/smartHMA");
                 file = new File(rootDir + "/smartHMA", fileName);
                 File file = new File(rootDir + "/smartHMA", fileName);
@@ -126,7 +121,7 @@ public class DownloadService extends IntentService {
 
                     total += len1; //total = total + len1
 
-                    if(progress != (int)((total*100)/lenghtOfFile)) {
+                    if (progress != (int) ((total * 100) / lenghtOfFile)) {
                         progress = (int) ((total * 100) / lenghtOfFile);
                         publishProgress("" + progress);
                     }
@@ -141,27 +136,24 @@ public class DownloadService extends IntentService {
             return true;
         }
 
-        public void checkAndCreateDirectory(String dirName)
-        {
-            File new_dir = new File( rootDir + dirName );
-            if(!new_dir.exists()) {
+        public void checkAndCreateDirectory(String dirName) {
+            File new_dir = new File(rootDir + dirName);
+            if (!new_dir.exists()) {
                 new_dir.mkdirs();
             }
         }
 
 
-        protected void onProgressUpdate(String ... progress)
-        {
+        protected void onProgressUpdate(String... progress) {
             super.onProgressUpdate(progress);
             mBuilder.setProgress(100, Integer.parseInt(progress[0]), false);
             mNotifyManager.notify(1, mBuilder.build());
         }
 
         @Override
-        protected void onPostExecute(Boolean success)
-        {
+        protected void onPostExecute(Boolean success) {
             super.onPostExecute(success);
-            if(success) {
+            if (success) {
 
                 GoogleAccountCredential mCredential;
                 SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(DownloadService.this);
@@ -169,17 +161,15 @@ public class DownloadService extends IntentService {
                 mCredential = GoogleAccountCredential.usingOAuth2(
                         getApplicationContext(), Arrays.asList(SCOPES))
                         .setBackOff(new ExponentialBackOff())
-                        .setSelectedAccountName( settings.getString(PREF_ACCOUNT_NAME, null));
+                        .setSelectedAccountName(settings.getString(PREF_ACCOUNT_NAME, null));
                 mBuilder.setContentText(getResources().getString(R.string.download_completed));
                 mBuilder.setProgress(0, 0, false);
                 mNotifyManager.notify(1, mBuilder.build());
 
-                if(action == 0)
-                new GoogleDriveUpload(mCredential, DownloadService.this).execute();
+                if (action == 0)
+                    new GoogleDriveUpload(mCredential, DownloadService.this).execute();
                 else new DropboxUpload(DownloadService.this, DROPBOX_DIR, file).execute();
-            }
-            else
-            {
+            } else {
                 mBuilder.setContentText(getResources().getString(R.string.not_enough_memory));
                 mBuilder.setProgress(0, 0, false);
                 mNotifyManager.notify(1, mBuilder.build());

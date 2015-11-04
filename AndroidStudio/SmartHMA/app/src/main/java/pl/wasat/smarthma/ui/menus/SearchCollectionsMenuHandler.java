@@ -10,7 +10,7 @@ import pl.wasat.smarthma.ui.activities.FavouriteCollectionsActivity;
 import pl.wasat.smarthma.ui.activities.SearchCollectionResultsActivity;
 
 /**
- * Used for handling menu in the SearchActivity class.
+ * Used for handling menu in the SearchCollectionResultsActivity class.
  */
 public class SearchCollectionsMenuHandler extends MenuHandler {
     public SearchCollectionsMenuHandler(SearchCollectionResultsActivity activity, int menuButtonID) {
