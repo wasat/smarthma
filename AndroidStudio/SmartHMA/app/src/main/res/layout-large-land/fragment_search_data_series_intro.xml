@@ -1,0 +1,187 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ScrollView"
+    android:layout_width="fill_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_gray"
+    android:paddingLeft="@dimen/browse_eo_padding">
+
+    <LinearLayout
+        android:id="@+id/search_frag_right_basic_linear_id"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/search_frag_ds_intro_layout_items_navi"
+        android:background="@color/background_gray"
+        android:orientation="vertical">
+
+        <pl.wasat.smarthma.customviews.TextViewWithFont
+            android:id="@+id/search_ds_intro_header"
+            style="@style/textMainTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="@dimen/browse_eo_padding_medium"
+            android:paddingLeft="@dimen/browse_eo_padding_text"
+            android:paddingTop="@dimen/browse_eo_padding_medium"
+            android:text="@string/collections_search_results"
+            android:textSize="@dimen/browse_eo_text_large" />
+
+        <pl.wasat.smarthma.customviews.TextViewWithFont
+            android:id="@+id/search_frag_ds_intro_title"
+            style="@style/textMainTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/browse_eo_padding_text"
+            android:textSize="@dimen/browse_eo_text" />
+
+        <LinearLayout
+            android:id="@+id/search_frag_ds_intro_layout_list_map"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="left"
+            android:gravity="left"
+            android:orientation="horizontal">
+
+            <ListView
+                android:id="@+id/intro_grid_layout"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="left"
+                android:layout_weight="1"
+                android:divider="@null"
+                android:dividerHeight="0dp"
+                android:gravity="left"
+                android:horizontalSpacing="15dp"
+                android:minHeight="12dp" />
+
+            <FrameLayout
+                android:id="@+id/mapFromRegionDetails"
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:layout_gravity="top|center"
+                android:layout_margin="10dp"
+                android:layout_marginLeft="25dp" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/search_frag_ds_intro_layout_items_navi"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:layout_alignParentBottom="true"
+        android:orientation="vertical"
+        android:layout_alignEnd="@id/search_frag_right_basic_linear_id"
+        android:layout_alignRight="@id/search_frag_right_basic_linear_id">
+
+        <LinearLayout
+            android:id="@+id/search_frag_ds_intro_layout_items_from_to"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal|center"
+            android:orientation="horizontal">
+
+            <pl.wasat.smarthma.customviews.TextViewWithFont
+                style="@style/text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/items_from" />
+
+            <pl.wasat.smarthma.customviews.TextViewWithFont
+                android:id="@+id/search_frag_ds_intro_items_from_value"
+                style="@style/text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <pl.wasat.smarthma.customviews.TextViewWithFont
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/to" />
+
+            <pl.wasat.smarthma.customviews.TextViewWithFont
+                android:id="@+id/search_frag_ds_intro_items_to_value"
+                style="@style/text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <pl.wasat.smarthma.customviews.TextViewWithFont
+                style="@style/text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/of_total" />
+
+            <pl.wasat.smarthma.customviews.TextViewWithFont
+                android:id="@+id/search_frag_ds_intro_items_of_total_value"
+                style="@style/text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/search_frag_ds_intro_layout_buttons"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/menu_button_margin"
+            android:gravity="center_horizontal|center"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_first" />
+
+            <pl.wasat.smarthma.customviews.TextViewWithFont
+                android:id="@+id/search_frag_ds_intro_button_first"
+                style="@style/textMainTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/esa_missions_padding_medium"
+                android:text="@string/_first" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_prev" />
+
+            <pl.wasat.smarthma.customviews.TextViewWithFont
+                android:id="@+id/search_frag_ds_intro_button_prev"
+                style="@style/textMainTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/esa_missions_padding_medium"
+                android:text="@string/_prev" />
+
+            <pl.wasat.smarthma.customviews.TextViewWithFont
+                android:id="@+id/search_frag_ds_intro_button_reload"
+                style="@style/textMainTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/esa_missions_padding_medium"
+                android:text="@string/reload" />
+
+            <pl.wasat.smarthma.customviews.TextViewWithFont
+                android:id="@+id/search_frag_ds_intro_button_next"
+                style="@style/textMainTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/esa_missions_padding_medium"
+                android:text="@string/next_" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_next" />
+
+            <pl.wasat.smarthma.customviews.TextViewWithFont
+                android:id="@+id/search_frag_ds_intro_button_last"
+                style="@style/textMainTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/esa_missions_padding_medium"
+                android:text="@string/last_" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_last" />
+        </LinearLayout>
+    </LinearLayout>
+</RelativeLayout>

@@ -71,6 +71,17 @@
                 android:text="@string/quicklook" />
 
             <Button
+                android:id="@+id/product_frag_detail_button_download"
+                style="@style/buttonBlue"
+                android:layout_width="140dp"
+                android:layout_height="@dimen/button_blue_height"
+                android:layout_weight="1"
+                android:layout_gravity="center"
+                android:drawableLeft="@drawable/ic_metadata"
+                android:layout_marginLeft="@dimen/browse_eo_padding_medium"
+                android:text="@string/download" />
+
+            <Button
                 android:id="@+id/product_frag_detail_button_show_meta"
                 style="@style/buttonBlue"
                 android:layout_width="140dp"
@@ -96,6 +107,17 @@
                 android:layout_gravity="center"
                 android:drawableLeft="@drawable/ic_showmap"
                 android:text="@string/show_map" />
+
+            <Button
+                android:id="@+id/product_frag_detail_button_save_cloud"
+                style="@style/buttonBlue"
+                android:layout_width="140dp"
+                android:layout_height="@dimen/button_blue_height"
+                android:layout_weight="1"
+                android:layout_gravity="center"
+                android:drawableLeft="@drawable/ic_share"
+                android:layout_marginLeft="@dimen/browse_eo_padding_medium"
+                android:text="@string/save_to_cloud" />
 
             <Button
                 android:id="@+id/product_frag_detail_button_share"

@@ -34,7 +34,7 @@
         <activity
             android:name=".ui.activities.StartActivity"
             android:label="@string/app_name"
-            android:theme="@style/AppNoActionBarTheme">
+            android:theme="@style/AppFullScreenTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -113,7 +113,7 @@
             android:configChanges="orientation|keyboard">
             <intent-filter>
                 <!-- Change this to be db- followed by your app key -->
-                <data android:scheme="db-" />
+                <data android:scheme="db-dscp3uh0qqd1o29" />
                 <action android:name="android.intent.action.VIEW" />
 
                 <category android:name="android.intent.category.BROWSABLE" />
@@ -175,11 +175,11 @@
 
         <activity
             android:name=".ui.activities.DownloadActivity"
-            android:label="@string/title_activity_download"></activity>
+            android:label="@string/title_activity_download"/>
 
         <service
             android:name=".services.DownloadService"
-            android:exported="false"></service>
+            android:exported="false"/>
     </application>
 
 </manifest>

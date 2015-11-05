@@ -4,10 +4,12 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import pl.wasat.smarthma.SmartHMApplication;
 import pl.wasat.smarthma.model.om.Browse;
 import pl.wasat.smarthma.model.om.Content;
 import pl.wasat.smarthma.model.om.Footprint;
 import pl.wasat.smarthma.model.om.Pos;
+import pl.wasat.smarthma.preferences.GlobalPreferences;
 import pl.wasat.smarthma.utils.obj.LatLngExt;
 import pl.wasat.smarthma.utils.rss.XmlSaxParser;
 
@@ -17,12 +19,14 @@ import pl.wasat.smarthma.utils.rss.XmlSaxParser;
  */
 public class SimpleMetadata implements Serializable {
     private static final long serialVersionUID = 1L;
+    private static final String URL_TEST_ZIP = "http://67.20.63.5/test.zip";
 
     private ArrayList<LatLngExt> footprint;
     private LatLngExt footprintCenter;
     private String quickLookUrl;
     private String thumbnailUrl;
     private String cloudUrl;
+    private String binaryUrl;
     private Entry entry;
 
     public SimpleMetadata(Entry entry) {
@@ -62,6 +66,24 @@ public class SimpleMetadata implements Serializable {
 
     public void setThumbnailUrl(String thumbnailUrl) {
         this.thumbnailUrl = thumbnailUrl;
+    }
+
+    public String getCloudUrl() {
+        return cloudUrl;
+    }
+
+    public void setCloudUrl(String cloudUrl) {
+        this.cloudUrl = cloudUrl;
+    }
+
+    public String getBinaryUrl() {
+        GlobalPreferences globalPreferences = new GlobalPreferences(SmartHMApplication.getAppContext());
+        if (globalPreferences.getIsDebugMode()) binaryUrl = URL_TEST_ZIP;
+        return binaryUrl;
+    }
+
+    public void setBinaryUrl(String binaryUrl) {
+        this.binaryUrl = binaryUrl;
     }
 
     private void processGroupMedia(Entry entry) {
@@ -193,12 +215,13 @@ public class SimpleMetadata implements Serializable {
 
     private void validateURLsForming() {
         try {
-            if (thumbnailUrl.startsWith("//")) thumbnailUrl = "http:" + thumbnailUrl;
-            if (quickLookUrl.startsWith("//")) quickLookUrl = "http:" + quickLookUrl;
+            if (thumbnailUrl != null && thumbnailUrl.startsWith("//"))
+                thumbnailUrl = "http:" + thumbnailUrl;
+            if (quickLookUrl != null && quickLookUrl.startsWith("//"))
+                quickLookUrl = "http:" + quickLookUrl;
         } catch (Exception e) {
             e.printStackTrace();
         }
-
     }
 
     private void obtainPolygonFromOMMetadata(Entry entry) {

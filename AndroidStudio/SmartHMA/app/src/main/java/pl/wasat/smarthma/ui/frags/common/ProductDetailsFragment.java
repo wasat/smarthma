@@ -54,6 +54,7 @@ public class ProductDetailsFragment extends Fragment implements Target {
     private OnProductDetailsFragmentListener mListener;
 
     private static final CharSequence[] shareList = {"Facebook", "Other"};
+    private static final CharSequence[] cloudSaveList = {"Google Drive", "DropBox"};
 
     /**
      * Use this factory method to create a new instance of this fragment using
@@ -113,6 +114,14 @@ public class ProductDetailsFragment extends Fragment implements Target {
                 }
             });
 
+            Button downloadButton = (Button) rootView.findViewById(R.id.product_frag_detail_button_download);
+            downloadButton.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    //TODO - Download process
+                }
+            });
+
             Button metaButton = (Button) rootView
                     .findViewById(R.id.product_frag_detail_button_show_meta);
             metaButton.setOnClickListener(new OnClickListener() {
@@ -131,6 +140,14 @@ public class ProductDetailsFragment extends Fragment implements Target {
                 }
             });
 
+            Button cloudSaveButton = (Button) rootView.findViewById(R.id.product_frag_detail_button_save_cloud);
+            cloudSaveButton.setOnClickListener(new OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    showCloudServicesListDialog();
+                }
+            });
+
             Button shareQLookButton = (Button) rootView
                     .findViewById(R.id.product_frag_detail_button_share);
             shareQLookButton.setOnClickListener(new OnClickListener() {
@@ -143,6 +160,7 @@ public class ProductDetailsFragment extends Fragment implements Target {
         }
         return rootView;
     }
+
 
     @Override
     public void onAttach(Context context) {
@@ -192,7 +210,7 @@ public class ProductDetailsFragment extends Fragment implements Target {
                 .downloader(new OkHttpDownloader(client))
                 .build();
 
-        Picasso.with(getActivity()).load(getQuicklookUrl())
+        picasso.with(getActivity()).load(getQuicklookUrl())
                 .into(quicklookTarget);
     }
 
@@ -232,11 +250,6 @@ public class ProductDetailsFragment extends Fragment implements Target {
     }
 
     private void showExtendedMap() {
-        //String url = getQuicklookUrl();
-        //Footprint footprint = displayedEntry.getEarthObservation()
-        //       .getFeatureOfInterest().getFootprint();
-        //ArrayList<LatLngExt> footprint = displayedEntry.getSimpleMetadata().getFootprint();
-
         mListener.onProductDetailsFragmentExtendedMapShow(displayedEntry.getSimpleMetadata());
     }
 
@@ -248,25 +261,6 @@ public class ProductDetailsFragment extends Fragment implements Target {
     private String getQuicklookUrl() {
         String url = displayedEntry.getSimpleMetadata().getQuickLookUrl();
         if (url == null) url = "";
-
-/*        List<Content> content = displayedEntry.getGroup().getContent();
-        for (Content cont : content) {
-            if (cont.getCategory().get_text().equalsIgnoreCase("QUICKLOOK")) {
-                url = cont.get_url();
-                return url;
-            }
-        }
-
-        List<Browse> browseList = displayedEntry.getEarthObservation()
-                .getResult().getEarthObservationResult().getBrowseList();
-
-        for (Browse browse : browseList) {
-            if (browse.getBrowseInformation().getType().get_text()
-                    .equalsIgnoreCase("QUICKLOOK")) {
-                url = browse.getBrowseInformation().getFileName()
-                        .getServiceReference().get_xlink_href();
-            }
-        }*/
         return url;
     }
 
@@ -289,15 +283,12 @@ public class ProductDetailsFragment extends Fragment implements Target {
             builder.setTitle(R.string.share_options).setItems(
                     shareList, new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
-                            //setCatalogue(which);
                             ((ProductDetailsFragment) getActivity().getSupportFragmentManager()
                                     .findFragmentByTag("ProductDetailsFragment")).chooseShareType(which);
                         }
                     });
             return builder.create();
         }
-
-
     }
 
     private void chooseShareType(int which) {
@@ -310,6 +301,28 @@ public class ProductDetailsFragment extends Fragment implements Target {
                 break;
             default:
                 break;
+        }
+    }
+
+    private void showCloudServicesListDialog() {
+        CloudSaveListDialogFragment listDialFrag = new CloudSaveListDialogFragment();
+        listDialFrag.show(getActivity().getSupportFragmentManager(),
+                "CloudSaveListDialogFragment");
+    }
+
+    public static class CloudSaveListDialogFragment extends DialogFragment {
+        @NonNull
+        @Override
+        public Dialog onCreateDialog(Bundle savedInstanceState) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+            builder.setTitle(R.string.choose_save_cloud_service).setItems(
+                    cloudSaveList, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            ((ProductDetailsFragment) getActivity().getSupportFragmentManager()
+                                    .findFragmentByTag("ProductDetailsFragment")).chooseShareType(which);
+                        }
+                    });
+            return builder.create();
         }
     }
 

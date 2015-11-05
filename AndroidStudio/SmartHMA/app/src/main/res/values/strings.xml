@@ -193,6 +193,9 @@
     <string name="title_activity_download">DownloadActivity</string>
 
     <string name="hello_world">Hello world!</string>
+    <string name="download">Download</string>
+    <string name="save_to_cloud">Save to Cloud</string>
+    <string name="choose_save_cloud_service">Choose Cloud Service to upload</string>
 
 
 </resources>
