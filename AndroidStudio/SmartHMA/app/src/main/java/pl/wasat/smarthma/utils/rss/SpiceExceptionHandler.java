@@ -20,7 +20,7 @@ import javax.xml.parsers.SAXParserFactory;
 import pl.wasat.smarthma.R;
 import pl.wasat.smarthma.preferences.GlobalPreferences;
 import pl.wasat.smarthma.preferences.SharedPrefs;
-import pl.wasat.smarthma.utils.io.LogWriter;
+import pl.wasat.smarthma.utils.io.FilesWriter;
 import pl.wasat.smarthma.utils.time.DateUtils;
 
 /**
@@ -91,8 +91,8 @@ public class SpiceExceptionHandler {
     private void writeExceptionToLog() {
         GlobalPreferences globalPreferences = new GlobalPreferences(context);
         if (globalPreferences.getIsDebugMode()) {
-            LogWriter logWriter = new LogWriter();
-            logWriter.appendToFile(buildExceptionLog(), "log_errors.txt");
+            FilesWriter filesWriter = new FilesWriter();
+            filesWriter.appendLogToFile(buildExceptionLog(), "log_errors.txt");
         }
     }
 

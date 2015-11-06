@@ -25,6 +25,8 @@ import java.net.URL;
 import java.util.Arrays;
 
 import pl.wasat.smarthma.R;
+import pl.wasat.smarthma.helper.Const;
+import pl.wasat.smarthma.utils.io.FilesWriter;
 
 /**
  * An {@link IntentService} subclass for handling asynchronous task requests in
@@ -42,6 +44,10 @@ public class DownloadService extends IntentService {
     private int action;
     private NotificationManager mNotifyManager;
 
+    private String filename;
+    private String urlData;
+    private String metadata;
+
     // TODO: Rename parameters
     private static String FILE_URL = "http://67.20.63.5/test.zip";
 
@@ -53,7 +59,10 @@ public class DownloadService extends IntentService {
     @Override
     protected void onHandleIntent(Intent intent) {
         if (intent != null) {
-            action = intent.getIntExtra("action", 0);
+            action = intent.getIntExtra(Const.KEY_ACTION_CLOUD_DOWNLOAD_SERVICE, 0);
+            filename = intent.getStringExtra(Const.KEY_INTENT_CLOUD_PRODUCT_NAME);
+            urlData = intent.getStringExtra(Const.KEY_INTENT_CLOUD_PRODUCT_URL);
+            metadata = intent.getStringExtra(Const.KEY_INTENT_CLOUD_PRODUCT_METADATA);
             downloadFile();
         }
     }
@@ -64,19 +73,24 @@ public class DownloadService extends IntentService {
         mBuilder.setContentTitle("Download")
                 .setContentText("Download in progress")
                 .setSmallIcon(R.drawable.actionbar_logo);
-        new DownloadFileAsync(action).execute();
+        new DownloadFileAsync(action, filename, urlData, metadata).execute();
     }
 
     class DownloadFileAsync extends AsyncTask<String, String, Boolean> {
         public static final String LOG_TAG = "DOWNLOAD FILE";
-        private File rootDir = Environment.getExternalStorageDirectory();
-        private String fileName = "file";
+        //private File rootDir = Environment.getExternalStorageDirectory();
+        private String fileName;
+        private String urlData;
+        private String metadata;
         private final String DROPBOX_DIR = "/SMARTHMA/";
-        private File file;
+        private File dataFile;
         private int action;
 
-        public DownloadFileAsync(int action) {
+        public DownloadFileAsync(int action, String fileName, String urlData, String metadata) {
             this.action = action;
+            this.fileName = fileName;
+            this.urlData = urlData;
+            this.metadata = metadata;
         }
 
 
@@ -97,7 +111,7 @@ public class DownloadService extends IntentService {
                 long freeSpaceInMegabytes = avaibleBlocks * (blockSizeInBytes);
 
                 //connecting to url
-                URL u = new URL(FILE_URL);
+                URL u = new URL(urlData);
                 HttpURLConnection c = (HttpURLConnection) u.openConnection();
                 c.setRequestMethod("GET");
                 c.setDoOutput(true);
@@ -105,11 +119,8 @@ public class DownloadService extends IntentService {
 
                 int lenghtOfFile = c.getContentLength();
                 if (lenghtOfFile > freeSpaceInMegabytes) return false;
-                checkAndCreateDirectory("/smartHMA");
-                file = new File(rootDir + "/smartHMA", fileName);
-                File file = new File(rootDir + "/smartHMA", fileName);
-                FileOutputStream f = new FileOutputStream(file);
-
+                dataFile = new File(buildPath(Const.SMARTHMA_PATH_TEMP), fileName);
+                FileOutputStream f = new FileOutputStream(dataFile);
 
                 InputStream in = c.getInputStream();
 
@@ -130,19 +141,12 @@ public class DownloadService extends IntentService {
                 f.close();
 
             } catch (Exception e) {
+                e.printStackTrace();
                 Log.d(LOG_TAG, e.getMessage());
             }
 
             return true;
         }
-
-        public void checkAndCreateDirectory(String dirName) {
-            File new_dir = new File(rootDir + dirName);
-            if (!new_dir.exists()) {
-                new_dir.mkdirs();
-            }
-        }
-
 
         protected void onProgressUpdate(String... progress) {
             super.onProgressUpdate(progress);
@@ -168,12 +172,25 @@ public class DownloadService extends IntentService {
 
                 if (action == 0)
                     new GoogleDriveUpload(mCredential, DownloadService.this).execute();
-                else new DropboxUpload(DownloadService.this, DROPBOX_DIR, file).execute();
+                else {
+                    new DropboxUpload(DownloadService.this, buildPath(DROPBOX_DIR), dataFile).execute();
+
+                    FilesWriter filesWriter = new FilesWriter();
+                    File metaFile = filesWriter.writeToFile(metadata,"metadata.xml", Const.SMARTHMA_PATH_TEMP);
+                    new DropboxUpload(DownloadService.this, buildPath(DROPBOX_DIR), metaFile).execute();
+
+                    File urlFile = filesWriter.writeToFile(urlData,"eo.url", Const.SMARTHMA_PATH_TEMP);
+                    new DropboxUpload(DownloadService.this, buildPath(DROPBOX_DIR), urlFile).execute();
+                }
             } else {
                 mBuilder.setContentText(getResources().getString(R.string.not_enough_memory));
                 mBuilder.setProgress(0, 0, false);
                 mNotifyManager.notify(1, mBuilder.build());
             }
+        }
+
+        private String buildPath(String dir) {
+            return dir + fileName.replaceFirst("urn:ogc:def:", "").replace(":", "_") + "/";
         }
     }
 }

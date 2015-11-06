@@ -1,6 +1,9 @@
 package pl.wasat.smarthma.helper;
 
 public class Const {
+    public static final String SMARTHMA_PATH = android.os.Environment.getExternalStorageDirectory().getAbsolutePath() + "/SMARTHMA";
+    public static final String SMARTHMA_PATH_LOGS = android.os.Environment.getExternalStorageDirectory().getAbsolutePath() + "/SMARTHMA/LOGS";
+    public static final String SMARTHMA_PATH_TEMP = android.os.Environment.getExternalStorageDirectory().getAbsolutePath() + "/SMARTHMA/TEMP";
 
     public static final String IMG_URL = "http://89.250.194.14/smarthma/img/";
     public static final String HTTP_SPACEBEL_BASE_URL = "http://geo.spacebel.be/opensearch/request/";
@@ -27,10 +30,14 @@ public class Const {
     public static final String KEY_INTENT_QUERY = "pl.wasat.smarthma.KEY_INTENT_QUERY";
     public static final String KEY_INTENT_FEDEO_REQUEST_PARAMS = "pl.wasat.smarthma.KEY_INTENT_FEDEO_REQUEST_PARAMS";
     public static final String KEY_INTENT_FEDEO_REQUEST_URL = "pl.wasat.smarthma.KEY_INTENT_FEDEO_REQUEST_URL";
+    public static final String KEY_INTENT_CLOUD_PRODUCT_NAME = "pl.wasat.smarthma.KEY_INTENT_CLOUD_PRODUCT_NAME";
+    public static final String KEY_INTENT_CLOUD_PRODUCT_URL = "pl.wasat.smarthma.KEY_INTENT_CLOUD_PRODUCT_URL";
+    public static final String KEY_INTENT_CLOUD_PRODUCT_METADATA = "pl.wasat.smarthma.KEY_INTENT_CLOUD_PRODUCT_METADATA";
 
     public static final String KEY_ACTION_SEARCH_MISSION_DATA = "pl.wasat.smarthma.KEY_ACTION_SEARCH_MISSION_DATA";
     public static final String KEY_ACTION_SEARCH_COLLECTIONS = "pl.wasat.smarthma.KEY_ACTION_SEARCH_COLLECTIONS";
     public static final String KEY_ACTION_BROADCAST_FEDEO_REQUEST = "pl.wasat.smarthma.KEY_ACTION_BROADCAST_FEDEO_REQUEST";
+    public static final String KEY_ACTION_CLOUD_DOWNLOAD_SERVICE = "pl.wasat.smarthma.KEY_ACTION_CLOUD_DOWNLOAD_SERVICE";
 
     public static final int REQUEST_CODE_GLOBAL_SETTINGS = 100;
     public static final int REQUEST_CODE_DOWNLOAD = 101;

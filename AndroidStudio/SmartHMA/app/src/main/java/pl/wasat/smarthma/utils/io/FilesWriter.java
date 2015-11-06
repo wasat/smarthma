@@ -7,17 +7,19 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-public class LogWriter {
+import pl.wasat.smarthma.helper.Const;
 
-    private static final String LOG_PATH = android.os.Environment.getExternalStorageDirectory().getAbsolutePath() + "/SMARTHMA_LOGS";
+public class FilesWriter {
 
-    public void writeToFile(String strToWrite, String fileName) {
+    public File writeToFile(String strToWrite, String fileName, String path) {
 
-        //File root = android.os.Environment.getExternalStorageDirectory();
+        if (path == null) path = Const.SMARTHMA_PATH_TEMP;
 
-        File dir = new File(LOG_PATH);
-        //noinspection ResultOfMethodCallIgnored
-        dir.mkdirs();
+        File dir = new File(path);
+        if (!dir.exists()) {
+            //noinspection ResultOfMethodCallIgnored
+            dir.mkdirs();
+        }
         File file = new File(dir, fileName);
 
         try {
@@ -30,11 +32,12 @@ public class LogWriter {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        return file;
     }
 
-    public void appendToFile(String strToAppend, String fileName) {
+    public void appendLogToFile(String strToAppend, String fileName) {
 
-        File dir = new File(LOG_PATH);
+        File dir = new File(Const.SMARTHMA_PATH_LOGS);
         //noinspection ResultOfMethodCallIgnored
         dir.mkdirs();
 

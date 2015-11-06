@@ -10,9 +10,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import pl.wasat.smarthma.helper.enums.MetadataType;
 import pl.wasat.smarthma.model.entry.Entry;
 import pl.wasat.smarthma.model.entry.Group;
-import pl.wasat.smarthma.model.entry.MetadataType;
 import pl.wasat.smarthma.model.entry.Polygon;
 import pl.wasat.smarthma.model.entry.Summary;
 import pl.wasat.smarthma.model.entry.Where;

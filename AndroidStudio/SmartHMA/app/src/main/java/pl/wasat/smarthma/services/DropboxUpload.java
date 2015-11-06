@@ -99,7 +99,8 @@ public class DropboxUpload extends AsyncTask<Void, Long, Boolean> {
             // so we can cancel it later if we want to
             FileInputStream fis = new FileInputStream(mFile);
             String path = mPath + mFile.getName();
-            mRequest = mApi.putFileOverwriteRequest(mFile.getPath(), fis, mFile.length(),
+            //String path1 = mFile.getPath();
+            mRequest = mApi.putFileOverwriteRequest(path, fis, mFile.length(),
                     new ProgressListener() {
                         @Override
                         public long progressInterval() {

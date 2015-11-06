@@ -40,10 +40,13 @@ public class ProductsBrowserActivity extends BaseProductsBrowserActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+
+        FragmentManager manager = getSupportFragmentManager();
+
         try {
-            FragmentManager manager = getSupportFragmentManager();
             FacebookDialogFragment facebookDialogFragment = (FacebookDialogFragment) manager
                     .findFragmentByTag("FacebookDialogFragment");
+            if (facebookDialogFragment == null) return;
             facebookDialogFragment.postOnActivityResult(requestCode, resultCode, data);
         } catch (Exception e) {
             e.printStackTrace();

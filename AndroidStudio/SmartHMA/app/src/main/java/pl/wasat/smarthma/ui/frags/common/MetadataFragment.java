@@ -12,8 +12,8 @@ import java.text.MessageFormat;
 
 import pl.wasat.smarthma.R;
 import pl.wasat.smarthma.customviews.TextViewWithFont;
+import pl.wasat.smarthma.helper.enums.MetadataType;
 import pl.wasat.smarthma.model.entry.Entry;
-import pl.wasat.smarthma.model.entry.MetadataType;
 import pl.wasat.smarthma.ui.frags.base.BaseMetadataFragment;
 import pl.wasat.smarthma.utils.rss.XmlSaxParser;
 import pl.wasat.smarthma.utils.text.MetadataCleaner;

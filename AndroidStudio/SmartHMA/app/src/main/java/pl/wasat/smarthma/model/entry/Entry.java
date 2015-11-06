@@ -9,6 +9,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import pl.wasat.smarthma.helper.enums.MetadataType;
 import pl.wasat.smarthma.model.dc.Dc;
 import pl.wasat.smarthma.model.feed.Link;
 import pl.wasat.smarthma.model.iso.MDMetadata;

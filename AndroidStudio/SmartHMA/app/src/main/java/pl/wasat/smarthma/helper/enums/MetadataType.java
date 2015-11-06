@@ -1,4 +1,4 @@
-package pl.wasat.smarthma.model.entry;
+package pl.wasat.smarthma.helper.enums;
 
 /**
  * Created by Daniel on 2015-10-12 01:24.

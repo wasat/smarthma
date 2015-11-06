@@ -196,6 +196,13 @@
     <string name="download">Download</string>
     <string name="save_to_cloud">Save to Cloud</string>
     <string name="choose_save_cloud_service">Choose Cloud Service to upload</string>
+    <string name="these_data_published">"These data were published: "</string>
+    <string name="these_data_updated">" and updated: "</string>
+    <string name="metadata_saved_offline">This metadata has been saved offline.</string>
+    <string name="you_choose_dropbox">You choose DropBox to save file</string>
+    <string name="couldnt_authenticate">Couldn\'t authenticate with Dropbox:</string>
+    <string name="you_must_apply_for_key">You must apply for an app key and secret from developers.dropbox.com, and add them to the DBRoulette ap before trying it.</string>
+    <string name="url_scheme_in_your_apps">"URL scheme in your app's manifest is not set up correctly. You should have a com.dropbox.client2.android.AuthActivity with the scheme: "</string>
 
 
 </resources>

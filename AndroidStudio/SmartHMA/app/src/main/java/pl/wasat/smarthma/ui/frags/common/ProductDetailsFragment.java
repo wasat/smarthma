@@ -36,8 +36,11 @@ import com.squareup.picasso.Target;
 import java.util.Arrays;
 
 import pl.wasat.smarthma.R;
+import pl.wasat.smarthma.helper.enums.CloudType;
 import pl.wasat.smarthma.model.entry.Entry;
 import pl.wasat.smarthma.model.entry.SimpleMetadata;
+import pl.wasat.smarthma.utils.conn.ConnectionDetector;
+import pl.wasat.smarthma.utils.io.CloudSavingManager;
 
 /**
  * A simple {@link android.support.v4.app.Fragment} subclass. Activities that
@@ -53,8 +56,11 @@ public class ProductDetailsFragment extends Fragment implements Target {
 
     private OnProductDetailsFragmentListener mListener;
 
+    private CloudSavingManager cloudSavingManager;
+
     private static final CharSequence[] shareList = {"Facebook", "Other"};
-    private static final CharSequence[] cloudSaveList = {"Google Drive", "DropBox"};
+    //private static final CharSequence[] cloudSaveList = {"Google Drive", "DropBox"};
+
 
     /**
      * Use this factory method to create a new instance of this fragment using
@@ -81,6 +87,7 @@ public class ProductDetailsFragment extends Fragment implements Target {
             displayedEntry = (Entry) getArguments().getSerializable(
                     KEY_PRODUCT_ENTRY);
         }
+        cloudSavingManager = new CloudSavingManager(getActivity());
     }
 
     @Override
@@ -92,8 +99,8 @@ public class ProductDetailsFragment extends Fragment implements Target {
 
         if (displayedEntry != null) {
             final String title = displayedEntry.getTitle();
-            final String pubDate = "These data were published: "
-                    + displayedEntry.getPublished() + " and updated: "
+            final String pubDate = getResources().getString(R.string.these_data_published)
+                    + displayedEntry.getPublished() + getResources().getString(R.string.these_data_updated)
                     + displayedEntry.getUpdated();
 
             String content = displayedEntry.getSummary().getCdata();
@@ -144,6 +151,7 @@ public class ProductDetailsFragment extends Fragment implements Target {
             cloudSaveButton.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    obtainProductSaveData();
                     showCloudServicesListDialog();
                 }
             });
@@ -181,6 +189,19 @@ public class ProductDetailsFragment extends Fragment implements Target {
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        cloudSavingManager.resumeDropboxService();
+    }
+
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        cloudSavingManager.postActivityResult(requestCode, resultCode, data);
+    }
+
+    @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.menu_detail_twopane, menu);
     }
@@ -190,7 +211,7 @@ public class ProductDetailsFragment extends Fragment implements Target {
         int id = item.getItemId();
         if (id == R.id.actionbar_saveoffline) {
             Toast.makeText(getActivity().getApplicationContext(),
-                    "This metadata has been saved offline.", Toast.LENGTH_LONG)
+                    R.string.metadata_saved_offline, Toast.LENGTH_LONG)
                     .show();
             return true;
         } else if (id == R.id.actionbar_share) {
@@ -201,39 +222,6 @@ public class ProductDetailsFragment extends Fragment implements Target {
         }
     }
 
-    private void startQLookTarget() {
-        Target quicklookTarget = this;
-
-        OkHttpClient client = new OkHttpClient();
-        client.setProtocols(Arrays.asList(Protocol.HTTP_1_1));
-        final Picasso picasso = new Picasso.Builder(getActivity())
-                .downloader(new OkHttpDownloader(client))
-                .build();
-
-        picasso.with(getActivity()).load(getQuicklookUrl())
-                .into(quicklookTarget);
-    }
-
-    private void sendIntentShareUrl() {
-        Intent shareIntent = new Intent(Intent.ACTION_SEND);
-        shareIntent.setType("text/plain");
-        shareIntent.putExtra(Intent.EXTRA_TEXT, getQuicklookUrl());
-        startActivity(Intent.createChooser(shareIntent, "Share Quicklook"));
-    }
-
-    private void sendIntentShareImg(Bitmap bitmapImg) {
-        String path = Images.Media.insertImage(getActivity()
-                .getContentResolver(), bitmapImg, "title", null);
-        Uri qlookUri = Uri.parse(path);
-
-        final Intent shareIntent = new Intent(
-                android.content.Intent.ACTION_SEND);
-        shareIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        shareIntent.putExtra(Intent.EXTRA_STREAM, qlookUri);
-        shareIntent.setType("image/*");
-
-        startActivity(Intent.createChooser(shareIntent, "Share Quicklook"));
-    }
 
     /**
      *
@@ -264,6 +252,7 @@ public class ProductDetailsFragment extends Fragment implements Target {
         return url;
     }
 
+    //region SHARING
     private void openShareDialog() {
         String qLookUrl = getQuicklookUrl();
         mListener.onProductDetailsFragmentShareDialogShow(qLookUrl);
@@ -304,6 +293,50 @@ public class ProductDetailsFragment extends Fragment implements Target {
         }
     }
 
+    private void startQLookTarget() {
+        Target quicklookTarget = this;
+
+        OkHttpClient client = new OkHttpClient();
+        client.setProtocols(Arrays.asList(Protocol.HTTP_1_1));
+        final Picasso picasso = new Picasso.Builder(getActivity())
+                .downloader(new OkHttpDownloader(client))
+                .build();
+
+        Picasso.with(getActivity()).load(getQuicklookUrl())
+                .into(quicklookTarget);
+    }
+
+    private void sendIntentShareUrl() {
+        Intent shareIntent = new Intent(Intent.ACTION_SEND);
+        shareIntent.setType("text/plain");
+        shareIntent.putExtra(Intent.EXTRA_TEXT, getQuicklookUrl());
+        startActivity(Intent.createChooser(shareIntent, getResources().getString(R.string.share_quicklook)));
+    }
+
+    private void sendIntentShareImg(Bitmap bitmapImg) {
+        String path = Images.Media.insertImage(getActivity()
+                .getContentResolver(), bitmapImg, "title", null);
+        Uri qlookUri = Uri.parse(path);
+
+        final Intent shareIntent = new Intent(
+                android.content.Intent.ACTION_SEND);
+        shareIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        shareIntent.putExtra(Intent.EXTRA_STREAM, qlookUri);
+        shareIntent.setType("image/*");
+
+        startActivity(Intent.createChooser(shareIntent, getResources().getString(R.string.share_quicklook)));
+    }
+    //endregion
+
+    //region CLOUD SERVICE
+
+    private void obtainProductSaveData() {
+        String name = displayedEntry.getTitle();
+        String url = displayedEntry.getSimpleMetadata().getQuickLookUrl();
+        String meta = displayedEntry.getRawMetadata();
+        cloudSavingManager.setCloudSaveParameters(name, url, meta);
+    }
+
     private void showCloudServicesListDialog() {
         CloudSaveListDialogFragment listDialFrag = new CloudSaveListDialogFragment();
         listDialFrag.show(getActivity().getSupportFragmentManager(),
@@ -316,15 +349,26 @@ public class ProductDetailsFragment extends Fragment implements Target {
         public Dialog onCreateDialog(Bundle savedInstanceState) {
             AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
             builder.setTitle(R.string.choose_save_cloud_service).setItems(
-                    cloudSaveList, new DialogInterface.OnClickListener() {
+                    CloudType.toList(),
+                    new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int which) {
-                            ((ProductDetailsFragment) getActivity().getSupportFragmentManager()
-                                    .findFragmentByTag("ProductDetailsFragment")).chooseShareType(which);
+                            startCloudSaver(which);
                         }
                     });
             return builder.create();
         }
+
+        private void startCloudSaver(int which) {
+            ConnectionDetector detect = new ConnectionDetector(getActivity());
+            if (detect.isWifiConnected()) {
+                CloudSavingManager cloudMngr = ((ProductDetailsFragment) getActivity().getSupportFragmentManager()
+                        .findFragmentByTag("ProductDetailsFragment")).cloudSavingManager;
+                cloudMngr.chooseCloudProvider(CloudType.getEnum(which));
+            }
+        }
     }
+
+//endregion
 
     /**
      * This interface must be implemented by activities that contain this
@@ -352,10 +396,8 @@ public class ProductDetailsFragment extends Fragment implements Target {
 
     @Override
     public void onBitmapLoaded(Bitmap image, LoadedFrom arg1) {
-
         Bitmap scaled = Bitmap.createScaledBitmap(image, 480, 480, true);
         sendIntentShareImg(scaled);
-
     }
 
     @Override
