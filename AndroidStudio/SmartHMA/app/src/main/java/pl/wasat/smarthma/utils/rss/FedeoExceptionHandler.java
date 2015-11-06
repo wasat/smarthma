@@ -69,7 +69,7 @@ class FedeoExceptionHandler extends DefaultHandler {
     @Override
     public void characters(char[] ch, int start, int length)
             throws SAXException {
-        chars.append(new String(ch, start, length));
+        chars.append(new String(ch, start, length).trim());
         super.characters(ch, start, length);
     }
 

@@ -14,6 +14,7 @@ import android.provider.MediaStore.Images;
 import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -332,8 +333,9 @@ public class ProductDetailsFragment extends Fragment implements Target {
 
     private void obtainProductSaveData() {
         String name = displayedEntry.getTitle();
-        String url = displayedEntry.getSimpleMetadata().getQuickLookUrl();
+        String url = displayedEntry.getSimpleMetadata().getBinaryUrl();
         String meta = displayedEntry.getRawMetadata();
+        Log.d("BINARY_DATA", "NAME: " + name + "; URL:" + url);
         cloudSavingManager.setCloudSaveParameters(name, url, meta);
     }
 

@@ -82,8 +82,9 @@ public class DownloadService extends IntentService {
         private String fileName;
         private String urlData;
         private String metadata;
-        private final String DROPBOX_DIR = "/SMARTHMA/";
+        private final String DROPBOX_DIR = "/EO_DATA/";
         private File dataFile;
+        private String dataPath;
         private int action;
 
         public DownloadFileAsync(int action, String fileName, String urlData, String metadata) {
@@ -117,9 +118,11 @@ public class DownloadService extends IntentService {
                 c.setDoOutput(true);
                 c.connect();
 
-                int lenghtOfFile = c.getContentLength();
-                if (lenghtOfFile > freeSpaceInMegabytes) return false;
-                dataFile = new File(buildPath(Const.SMARTHMA_PATH_TEMP), fileName);
+                int lengthOfFile = c.getContentLength();
+                if (lengthOfFile > freeSpaceInMegabytes) return false;
+                dataPath = buildPath(Const.SMARTHMA_PATH_TEMP);
+                checkAndCreateDirectory(dataPath);
+                dataFile = new File(dataPath, fileName);
                 FileOutputStream f = new FileOutputStream(dataFile);
 
                 InputStream in = c.getInputStream();
@@ -132,8 +135,8 @@ public class DownloadService extends IntentService {
 
                     total += len1; //total = total + len1
 
-                    if (progress != (int) ((total * 100) / lenghtOfFile)) {
-                        progress = (int) ((total * 100) / lenghtOfFile);
+                    if (progress != (int) ((total * 100) / lengthOfFile)) {
+                        progress = (int) ((total * 100) / lengthOfFile);
                         publishProgress("" + progress);
                     }
                     f.write(buffer, 0, len1);
@@ -176,10 +179,11 @@ public class DownloadService extends IntentService {
                     new DropboxUpload(DownloadService.this, buildPath(DROPBOX_DIR), dataFile).execute();
 
                     FilesWriter filesWriter = new FilesWriter();
-                    File metaFile = filesWriter.writeToFile(metadata,"metadata.xml", Const.SMARTHMA_PATH_TEMP);
+
+                    File metaFile = filesWriter.writeToFile(metadata, "metadata.xml", dataPath);
                     new DropboxUpload(DownloadService.this, buildPath(DROPBOX_DIR), metaFile).execute();
 
-                    File urlFile = filesWriter.writeToFile(urlData,"eo.url", Const.SMARTHMA_PATH_TEMP);
+                    File urlFile = filesWriter.writeToFile(urlData, "eo.url", dataPath);
                     new DropboxUpload(DownloadService.this, buildPath(DROPBOX_DIR), urlFile).execute();
                 }
             } else {
@@ -190,7 +194,19 @@ public class DownloadService extends IntentService {
         }
 
         private String buildPath(String dir) {
-            return dir + fileName.replaceFirst("urn:ogc:def:", "").replace(":", "_") + "/";
+            return dir + fileName
+                    .replaceFirst("urn:ogc:def:", "")
+                    .replaceAll(":", "_")
+                    .replaceAll("\\.", "_")
+                    .replaceAll(" ", "_")
+                    + "/";
+        }
+
+        public void checkAndCreateDirectory(String path) {
+            File new_dir = new File(path);
+            if (!new_dir.exists()) {
+                new_dir.mkdirs();
+            }
         }
     }
 }

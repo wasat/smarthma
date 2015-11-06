@@ -69,8 +69,8 @@ public class DropboxUpload extends AsyncTask<Void, Long, Boolean> {
         super.onPreExecute();
         mNotifyManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
         mBuilder = new NotificationCompat.Builder(context);
-        mBuilder.setContentTitle("Upload to dropbox")
-                .setContentText("Upload to dropbox in progress")
+        mBuilder.setContentTitle("Upload file to dropbox - " + mFile.getName())
+                .setContentText("Upload to dropbox in progress. File: " + mFile.getName())
                 .setSmallIcon(R.drawable.actionbar_logo);
         mBuilder.setProgress(100, 0, false);
         mNotifyManager.notify(1, mBuilder.build());
@@ -99,7 +99,7 @@ public class DropboxUpload extends AsyncTask<Void, Long, Boolean> {
             // so we can cancel it later if we want to
             FileInputStream fis = new FileInputStream(mFile);
             String path = mPath + mFile.getName();
-            //String path1 = mFile.getPath();
+            //Log.d("UPLOAD_DATA", "NAME: " + mFile.getName() + "; PATH:" + mPath);
             mRequest = mApi.putFileOverwriteRequest(path, fis, mFile.length(),
                     new ProgressListener() {
                         @Override
@@ -116,6 +116,7 @@ public class DropboxUpload extends AsyncTask<Void, Long, Boolean> {
 
             if (mRequest != null) {
                 mRequest.upload();
+                Log.d("UPLOAD_DATA", "FILE_PATH:" + mPath + mFile.getName());
                 return true;
             }
 
@@ -173,7 +174,7 @@ public class DropboxUpload extends AsyncTask<Void, Long, Boolean> {
             //   mFile.delete();
         } else {
         }
-        mBuilder.setContentText("Upload to dropbox completed");
+        mBuilder.setContentText("Upload file " + mFile.getName() + " to dropbox completed");
         mBuilder.setProgress(0, 0, false);
         mNotifyManager.notify(1, mBuilder.build());
     }

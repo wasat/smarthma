@@ -1229,6 +1229,6 @@ class OMDataHandler extends DefaultHandler {
      * @see org.xml.sax.helpers.DefaultHandler#characters(char[], int, int)
      */
     public void characters(char ch[], int start, int length) {
-        chars.append(new String(ch, start, length));
+        chars.append(new String(ch, start, length).trim());
     }
 }

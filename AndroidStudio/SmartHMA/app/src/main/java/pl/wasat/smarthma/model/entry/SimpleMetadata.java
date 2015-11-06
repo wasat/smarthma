@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import pl.wasat.smarthma.SmartHMApplication;
+import pl.wasat.smarthma.model.feed.Link;
 import pl.wasat.smarthma.model.om.Browse;
 import pl.wasat.smarthma.model.om.Content;
 import pl.wasat.smarthma.model.om.Footprint;
@@ -32,8 +33,10 @@ public class SimpleMetadata implements Serializable {
     public SimpleMetadata(Entry entry) {
         this.entry = entry;
         processGroupMedia(entry);
+        processBinaryFileUrl(entry);
         processPolygon(entry);
     }
+
 
     public ArrayList<LatLngExt> getFootprint() {
         return footprint;
@@ -77,8 +80,6 @@ public class SimpleMetadata implements Serializable {
     }
 
     public String getBinaryUrl() {
-        GlobalPreferences globalPreferences = new GlobalPreferences(SmartHMApplication.getAppContext());
-        if (globalPreferences.getIsDebugMode()) binaryUrl = URL_TEST_ZIP;
         return binaryUrl;
     }
 
@@ -102,6 +103,28 @@ public class SimpleMetadata implements Serializable {
         validateURLsForming();
     }
 
+
+    private void processBinaryFileUrl(Entry entry) {
+        if (entry.getLinks() != null && !entry.getLinks().isEmpty()) {
+            for (Link link : entry.getLinks()) {
+                if (link.getType().equalsIgnoreCase("application/x-binary")
+                        || link.getTitle().equalsIgnoreCase("Download")) {
+                    binaryUrl = link.getHref();
+                }
+            }
+        } else {
+            obtainUrlsFromISOMetadata(entry);
+        }
+        validateBinaryUrl();
+    }
+
+    private void validateBinaryUrl() {
+
+        GlobalPreferences globalPreferences = new GlobalPreferences(SmartHMApplication.getAppContext());
+        if (binaryUrl != null) return;
+        else if (quickLookUrl != null) binaryUrl = quickLookUrl;
+        else if (globalPreferences.getIsDebugMode()) binaryUrl = URL_TEST_ZIP;
+    }
 
     private void processPolygon(Entry entry) {
         footprint = new ArrayList<>();
