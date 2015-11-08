@@ -17,6 +17,7 @@ import pl.wasat.smarthma.SmartHMApplication;
 import pl.wasat.smarthma.adapter.DataSeriesListAdapter;
 import pl.wasat.smarthma.helper.Const;
 import pl.wasat.smarthma.helper.DataSorter;
+import pl.wasat.smarthma.interfaces.OnSlideElementListener;
 import pl.wasat.smarthma.model.FedeoRequestParams;
 import pl.wasat.smarthma.model.feed.Feed;
 import pl.wasat.smarthma.model.iso.EntryISO;
@@ -184,6 +185,15 @@ public class DataSeriesListFragment extends BaseSpiceListFragment {
             } else {
                 DataSeriesListAdapter adapter = new DataSeriesListAdapter(
                         getActivity(), dataSeriesFeedList);
+                adapter.setListener(new OnSlideElementListener() {
+                    @Override
+                    public void Catch(boolean swipeRight, int position) {
+                        if (swipeRight)
+                            Toast.makeText(getContext(), "share " + position, Toast.LENGTH_SHORT).show();
+                        else
+                            Toast.makeText(getContext(), "delete " + position, Toast.LENGTH_SHORT).show();
+                    }
+                });
                 this.setListAdapter(adapter);
                 adapter.notifyDataSetChanged();
                 view.setVisibility(View.VISIBLE);

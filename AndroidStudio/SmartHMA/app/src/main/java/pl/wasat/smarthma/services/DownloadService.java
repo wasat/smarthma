@@ -13,9 +13,16 @@ import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.NotificationCompat.Builder;
 import android.util.Log;
 
+import com.google.api.client.extensions.android.http.AndroidHttp;
 import com.google.api.client.googleapis.extensions.android.gms.auth.GoogleAccountCredential;
+import com.google.api.client.googleapis.extensions.android.gms.auth.UserRecoverableAuthIOException;
+import com.google.api.client.http.HttpTransport;
+import com.google.api.client.json.JsonFactory;
+import com.google.api.client.json.jackson2.JacksonFactory;
 import com.google.api.client.util.ExponentialBackOff;
+import com.google.api.services.drive.Drive;
 import com.google.api.services.drive.DriveScopes;
+import com.google.api.services.drive.model.About;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -42,7 +49,9 @@ public class DownloadService extends IntentService {
     private static final String[] SCOPES = {DriveScopes.DRIVE_FILE};
     private Builder mBuilder;
     private int action;
+    private GoogleAccountCredential mCredential;
     private NotificationManager mNotifyManager;
+    private boolean notEnoughSpace;
 
     private String filename;
     private String urlData;
@@ -87,6 +96,7 @@ public class DownloadService extends IntentService {
         private String dataPath;
         private int action;
 
+
         public DownloadFileAsync(int action, String fileName, String urlData, String metadata) {
             this.action = action;
             this.fileName = fileName;
@@ -106,6 +116,20 @@ public class DownloadService extends IntentService {
         @Override
         protected Boolean doInBackground(String... aurl) {
             try {
+                if(action == 0) {
+                    SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(DownloadService.this);
+                    mCredential = GoogleAccountCredential.usingOAuth2(
+                            getApplicationContext(), Arrays.asList(SCOPES))
+                            .setBackOff(new ExponentialBackOff())
+                            .setSelectedAccountName(settings.getString(PREF_ACCOUNT_NAME, null));
+                    HttpTransport transport = AndroidHttp.newCompatibleTransport();
+                    JsonFactory jsonFactory = JacksonFactory.getDefaultInstance();
+                    Drive mService = new com.google.api.services.drive.Drive.Builder(
+                            transport, jsonFactory, mCredential)
+                            .setApplicationName("GoogleDriveSample")
+                            .build();
+                    mService.about().get().execute();
+                }
                 StatFs stat = new StatFs(Environment.getExternalStorageDirectory().getPath());
                 long avaibleBlocks = stat.getAvailableBlocks();
                 int blockSizeInBytes = stat.getBlockSize();
@@ -119,7 +143,10 @@ public class DownloadService extends IntentService {
                 c.connect();
 
                 int lengthOfFile = c.getContentLength();
-                if (lengthOfFile > freeSpaceInMegabytes) return false;
+                if (lengthOfFile > freeSpaceInMegabytes) {
+                    notEnoughSpace = true;
+                    return false;
+                }
                 dataPath = buildPath(Const.SMARTHMA_PATH_TEMP);
                 checkAndCreateDirectory(dataPath);
                 dataFile = new File(dataPath, fileName);
@@ -143,9 +170,17 @@ public class DownloadService extends IntentService {
                 }
                 f.close();
 
-            } catch (Exception e) {
+            }
+            catch (UserRecoverableAuthIOException e) {
+                Intent userIntent = e.getIntent();
+                userIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                getBaseContext().startActivity(userIntent);
+                return false;
+            }
+            catch (Exception e) {
                 e.printStackTrace();
                 Log.d(LOG_TAG, e.getMessage());
+                return false;
             }
 
             return true;
@@ -187,9 +222,16 @@ public class DownloadService extends IntentService {
                     new DropboxUpload(DownloadService.this, buildPath(DROPBOX_DIR), urlFile).execute();
                 }
             } else {
-                mBuilder.setContentText(getResources().getString(R.string.not_enough_memory));
-                mBuilder.setProgress(0, 0, false);
-                mNotifyManager.notify(1, mBuilder.build());
+                if(notEnoughSpace) {
+                    mBuilder.setContentText(getResources().getString(R.string.not_enough_memory));
+                    mBuilder.setProgress(0, 0, false);
+                    mNotifyManager.notify(1, mBuilder.build());
+                }
+                else{
+                    mBuilder.setContentText(getResources().getString(R.string.error_downloading));
+                    mBuilder.setProgress(0, 0, false);
+                    mNotifyManager.notify(1, mBuilder.build());
+                }
             }
         }
 

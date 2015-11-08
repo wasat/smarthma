@@ -135,6 +135,7 @@
     <string name="connect_to_wifi">Downloading possible when connected to wifi</string>
     <string name="upload_to_google_drive_completed">Upload to google drive completed</string>
     <string name="upload_to_google_drive_in_progress">Upload to google drive in progress</string>
+    <string name="error_downloading">Error while downloading. Please try again</string>
 
 
     <!--  INFO APPS  -->
