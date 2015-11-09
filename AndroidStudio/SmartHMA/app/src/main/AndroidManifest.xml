@@ -26,7 +26,7 @@
         android:theme="@style/AppNoActionBarTheme">
         <meta-data
             android:name="com.google.android.maps.v2.API_KEY"
-            android:value="AIzaSyCH4l80wOGE8J9zH8_ZLxViE-7QwjgkSJ0" />
+            android:value="AIzaSyCMZWIkdMS9FlyCt0eb_cMosMTFrt7FZxY" />
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/app_id" />
