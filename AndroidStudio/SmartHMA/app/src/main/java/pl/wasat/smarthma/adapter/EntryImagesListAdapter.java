@@ -12,6 +12,7 @@ import java.io.File;
 import java.util.List;
 
 import pl.wasat.smarthma.customviews.EntryItemView;
+import pl.wasat.smarthma.interfaces.OnSlideElementListener;
 import pl.wasat.smarthma.model.entry.Entry;
 import pl.wasat.smarthma.utils.http.EntryBitmapRequest;
 
@@ -19,10 +20,16 @@ public class EntryImagesListAdapter extends OkHttpSpiceArrayAdapter<Entry> {
 
     private static final String THUMB_ENTRY_IMG_TEMP = "THUMB_ENTRY_IMG_TEMP_";
     private static final String TEMP_DEFAULT_IMG_URL = "http://acsspace.acsys.it/joomla/images/stories/slideshow/toscanamer_fr_20100628.jpg";
+    private OnSlideElementListener listener;
+
 
     public EntryImagesListAdapter(Context context,
                                   OkHttpBitmapSpiceManager spiceManagerBitmap, List<Entry> entryList) {
         super(context, spiceManagerBitmap, entryList);
+    }
+
+    public void setListener(OnSlideElementListener listener) {
+        this.listener = listener;
     }
 
     @Override
@@ -49,7 +56,7 @@ public class EntryImagesListAdapter extends OkHttpSpiceArrayAdapter<Entry> {
 
     @Override
     public SpiceListItemView<Entry> createView(Context context, ViewGroup parent) {
-        return new EntryItemView(getContext());
+        return new EntryItemView(getContext(), listener);
     }
 
 
