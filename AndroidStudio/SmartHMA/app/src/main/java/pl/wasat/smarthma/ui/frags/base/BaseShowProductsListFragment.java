@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.octo.android.robospice.persistence.exception.SpiceException;
 import com.octo.android.robospice.request.listener.RequestListener;
@@ -23,6 +24,7 @@ import pl.wasat.smarthma.adapter.EntryImagesListAdapter;
 import pl.wasat.smarthma.database.EoDbAdapter;
 import pl.wasat.smarthma.database.FavouritesDbAdapter;
 import pl.wasat.smarthma.helper.DataSorter;
+import pl.wasat.smarthma.interfaces.OnSlideElementListener;
 import pl.wasat.smarthma.model.FedeoRequestParams;
 import pl.wasat.smarthma.model.entry.Entry;
 import pl.wasat.smarthma.model.feed.Feed;
@@ -185,6 +187,15 @@ public class BaseShowProductsListFragment extends BaseSpiceFragment {
 
                 entryImagesListAdapter = new EntryImagesListAdapter(getActivity()
                         .getBaseContext(), getBitmapSpiceManager(), entryList);
+                entryImagesListAdapter.setListener(new OnSlideElementListener() {
+                    @Override
+                    public void Catch(boolean swipeRight, int position) {
+                        if (swipeRight)
+                            Toast.makeText(getContext(), "share " + position, Toast.LENGTH_SHORT).show();
+                        else
+                            Toast.makeText(getContext(), "delete " + position, Toast.LENGTH_SHORT).show();
+                    }
+                });
                 entryImagesListView.setAdapter(entryImagesListAdapter);
 
                 loadingView.setVisibility(View.GONE);

@@ -13,7 +13,9 @@ import android.widget.Toast;
 import com.octo.android.robospice.spicelist.SpiceListItemView;
 
 import pl.wasat.smarthma.R;
+import pl.wasat.smarthma.adapter.SwipeDetector;
 import pl.wasat.smarthma.database.FavouritesDbAdapter;
+import pl.wasat.smarthma.interfaces.OnSlideElementListener;
 import pl.wasat.smarthma.model.entry.Entry;
 
 public class EntryItemView extends RelativeLayout implements SpiceListItemView<Entry>, Animation.AnimationListener {
@@ -24,10 +26,12 @@ public class EntryItemView extends RelativeLayout implements SpiceListItemView<E
     private Entry entry;
     private ImageView button;
     private Context context;
+    private OnSlideElementListener listener;
 
 
-    public EntryItemView(Context context) {
+    public EntryItemView(Context context, OnSlideElementListener listener) {
         super(context);
+        this.listener = listener;
         inflateView(context);
     }
 
@@ -45,7 +49,9 @@ public class EntryItemView extends RelativeLayout implements SpiceListItemView<E
         this.entry = entry;
         tvEntryTitle.setText(this.entry.getTitle());
         tvEntryDates.setText(this.entry.getPublished());
-
+        SwipeDetector swipeDetector = new SwipeDetector(this);
+        swipeDetector.setOnClickListener(listener);
+        setOnTouchListener(swipeDetector);
         titleAnimation();
         clickFavouriteStar();
     }

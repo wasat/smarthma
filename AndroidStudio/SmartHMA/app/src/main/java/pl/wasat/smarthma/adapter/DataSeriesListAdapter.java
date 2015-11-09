@@ -11,13 +11,20 @@ import android.widget.TextView;
 import java.util.List;
 
 import pl.wasat.smarthma.R;
+import pl.wasat.smarthma.interfaces.OnSlideElementListener;
 import pl.wasat.smarthma.model.iso.EntryISO;
 import pl.wasat.smarthma.utils.time.DateUtils;
 
 public class DataSeriesListAdapter extends ArrayAdapter<EntryISO> {
 
+    private OnSlideElementListener listener;
+
     public DataSeriesListAdapter(Activity activity, List<EntryISO> dataSeriesList) {
         super(activity, 0, dataSeriesList);
+    }
+
+    public void setListener(OnSlideElementListener listener) {
+        this.listener = listener;
     }
 
     @Override
@@ -30,6 +37,10 @@ public class DataSeriesListAdapter extends ArrayAdapter<EntryISO> {
 
         if (convertView == null) {
             convertView = inflater.inflate(R.layout.view_cell_product, parent, false);
+
+            SwipeDetector swipeDetector = new SwipeDetector(convertView, position);
+            swipeDetector.setOnClickListener(listener);
+            convertView.setOnTouchListener(swipeDetector);
 
             holder = new ViewHolder();
             holder.textView = (TextView) convertView
