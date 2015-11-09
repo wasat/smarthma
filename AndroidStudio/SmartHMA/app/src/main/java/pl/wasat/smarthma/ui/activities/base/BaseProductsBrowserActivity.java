@@ -38,6 +38,9 @@ public class BaseProductsBrowserActivity extends BaseSmartHMActivity implements
             FragmentManager fm = getSupportFragmentManager();
 
             int bsec = fm.getBackStackEntryCount();
+            if (bsec == 0) {
+                super.onBackPressed();
+            }
 
             if (bsec > 0) {
                 String bstEntry = fm.getBackStackEntryAt(bsec - 1).getName();

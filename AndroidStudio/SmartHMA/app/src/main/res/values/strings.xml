@@ -203,6 +203,13 @@
     <string name="couldnt_authenticate">Couldn\'t authenticate with Dropbox:</string>
     <string name="you_must_apply_for_key">You must apply for an app key and secret from developers.dropbox.com, and add them to the DBRoulette ap before trying it.</string>
     <string name="url_scheme_in_your_apps">"URL scheme in your app's manifest is not set up correctly. You should have a com.dropbox.client2.android.AuthActivity with the scheme: "</string>
+    <string name="eo_dataset">"EO Dataset: "</string>
+    <string name="file_is_downloading">File %1$s is downloading</string>
+    <string name="successful">"Download file %1$s successfully completed"</string>
+    <string name="failed">"FAILED: "</string>
+    <string name="paused">"PAUSED: "</string>
+    <string name="pending">PENDING!</string>
+    <string name="running">RUNNING!</string>
 
 
 </resources>

@@ -69,14 +69,12 @@ public class FedeoRequestParams implements Serializable {
         SharedPreferences prefs = SmartHMApplication.getAppContext().getSharedPreferences(
                 Const.KEY_PREF_FILE, 0);
 
-        //setParentIdentifier(prefs.getString(Const.KEY_PREF_PARENT_ID, "EOP:ESA:FEDEO"));
         setStartDate(prefs.getString(Const.KEY_PREF_DATETIME_START, "0"));
         setEndDate(prefs.getString(Const.KEY_PREF_DATETIME_END, "0"));
         setBbox(prefs.getFloat(Const.KEY_PREF_BBOX_WEST, -180),
                 prefs.getFloat(Const.KEY_PREF_BBOX_SOUTH, -90),
                 prefs.getFloat(Const.KEY_PREF_BBOX_EAST, 180),
                 prefs.getFloat(Const.KEY_PREF_BBOX_NORTH, 90));
-        //setQuery(prefs.getString(Const.KEY_PREF_QUERY, ""));
     }
 
     private void buildUrl() {

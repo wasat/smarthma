@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,7 +15,10 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.SearchView;
 
+import java.util.HashMap;
+
 import pl.wasat.smarthma.R;
+import pl.wasat.smarthma.helper.Const;
 import pl.wasat.smarthma.preferences.GlobalPreferences;
 import pl.wasat.smarthma.preferences.SharedPrefs;
 import pl.wasat.smarthma.ui.activities.SearchCollectionResultsActivity;
@@ -32,8 +36,8 @@ public class SearchFragment extends Fragment {
     private OnSearchFragmentListener mListener;
     private View rootView;
     private Intent searchIntent;
-
-    Tooltip tooltip;
+    private Tooltip tooltip;
+    private HashMap extraParams;
 
     /**
      * Use this factory method to create a new instance of this fragment using
@@ -50,10 +54,14 @@ public class SearchFragment extends Fragment {
 
     @Override
     public void startActivity(Intent intent) {
-        if (Intent.ACTION_SEARCH.equals(intent.getAction())) searchIntent = intent;
-
+        Log.i("START_ACTV", "SearchFragment");
+        if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
+            searchIntent = intent;
+            searchIntent.putExtra(Const.KEY_INTENT_FEDEO_REQUEST_PARAMS_EXTRA, extraParams);
+        }
         super.startActivity(searchIntent);
     }
+
 
 
     @Override
@@ -74,13 +82,6 @@ public class SearchFragment extends Fragment {
         searchView.setFocusable(true);
         searchView.setIconified(false);
         searchView.clearFocus();
-
-/*        SearchHistory searchHistory = new SearchHistory(getActivity());
-        ArrayList<SearchParams> searchHistoryList = searchHistory.getSearchHistoryList(true);
-        if (!searchHistoryList.isEmpty()) {
-            SearchParams searchParams = searchHistoryList.get(0);
-            searchView.setQuery(searchParams.getSearchPhrase(), false);
-        }*/
 
         GlobalPreferences globalPreferences = new GlobalPreferences(getActivity());
         if (globalPreferences.getIsParamsSaved()) {
@@ -105,6 +106,18 @@ public class SearchFragment extends Fragment {
                 mListener.onSearchFragmentBasicParamsChoose();
             }
         });
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String s) {
+                mListener.onSearchFragmentSendExtraParams(extraParams);
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String s) {
+                return false;
+            }
+        });
 
         tooltip = new Tooltip(getContext(), Tooltip.TYPE_BELOW, "Greetings from below!");
 
@@ -113,9 +126,9 @@ public class SearchFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 mListener.onSearchFragmentAdvanceParamsChoose();
-
-                if(!tooltip.isShown())
-                    tooltip.show(btnAdvanceParams);
+/*
+                if (!tooltip.isShown())
+                    tooltip.show(btnAdvanceParams);*/
             }
         });
 
@@ -127,32 +140,36 @@ public class SearchFragment extends Fragment {
             }
         });
 
+        extraParams = new HashMap();
         return rootView;
     }
+
 
     private void startSearchWithButton(SearchView searchView) {
         Intent intentBtnSearch = new Intent(getActivity(),
                 SearchCollectionResultsActivity.class);
         intentBtnSearch.setAction("android.intent.action.SEARCH");
         intentBtnSearch.putExtra(SearchManager.QUERY, searchView.getQuery().toString());
+        intentBtnSearch.putExtra(Const.KEY_INTENT_FEDEO_REQUEST_PARAMS_EXTRA, extraParams);
+
         mListener.onSearchFragmentStartSearchingWithButton(intentBtnSearch);
     }
 
 
     public void setAdditionalParams(String parameterKey, String parameterValue) {
-        searchIntent.putExtra(parameterKey, parameterValue);
+        extraParams.put(parameterKey, parameterValue);
     }
 
     public void setQuery(String query) {
         if (rootView == null) return;
-
         SearchView searchView = (SearchView) rootView.findViewById(R.id.search_frag_searchview);
         if (searchView != null) searchView.setQuery(query, false);
     }
 
     @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        Activity activity = context instanceof Activity ? (Activity) context : null;
         try {
             mListener = (OnSearchFragmentListener) activity;
         } catch (ClassCastException e) {
@@ -180,6 +197,8 @@ public class SearchFragment extends Fragment {
         void onSearchFragmentBasicParamsChoose();
 
         void onSearchFragmentAdvanceParamsChoose();
+
+        void onSearchFragmentSendExtraParams(HashMap extra);
 
         void onSearchFragmentStartSearchingWithButton(Intent intent);
 

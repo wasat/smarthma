@@ -69,13 +69,6 @@ public class BaseSearchSideParametersFragment extends BaseDateTimeAreaContainerF
         tvAreaNELon = (TextView) rootView
                 .findViewById(R.id.search_frag_side_params_tv_area_ne_lon);
 
-        /*
-        tvAreaNELat.setText("54.84");
-        tvAreaNELon.setText("24.62");
-        tvAreaSWLat.setText("48.96");
-        tvAreaSWLon.setText("13.90");
-        */
-
         LinearLayout areaLayout = (LinearLayout) rootView
                 .findViewById(R.id.search_frag_side_params_layout_area);
         areaLayout.setOnClickListener(new OnClickListener() {
@@ -126,16 +119,6 @@ public class BaseSearchSideParametersFragment extends BaseDateTimeAreaContainerF
         });
 
         obtainGlobalSettings();
-
-/*        SearchHistory searchHistory = new SearchHistory(getActivity());
-        ArrayList<SearchParams> searchHistoryList = searchHistory.getSearchHistoryList(true);
-        if (!searchHistoryList.isEmpty()) {
-            SearchParams searchParams = searchHistoryList.get(0);
-            setCatalogue(searchParams.getCatalogue());
-            setBbox(searchParams.getBbox());
-            setStartDate(searchParams.getStartDate());
-            setEndDate(searchParams.getEndDate());
-        }*/
         return rootView;
     }
 
@@ -145,14 +128,6 @@ public class BaseSearchSideParametersFragment extends BaseDateTimeAreaContainerF
         sharedPrefs.setParentIdPrefs(tvCatalogName.getText().toString());
         super.onResume();
     }
-
-/*    private static Calendar getCalStart() {
-        return calStart;
-    }
-
-    private static Calendar getCalEnd() {
-        return calEnd;
-    }*/
 
     private void showCatalogueListDialog() {
         CatalogueListDialogFragment listDialFrag = new CatalogueListDialogFragment();
@@ -179,13 +154,6 @@ public class BaseSearchSideParametersFragment extends BaseDateTimeAreaContainerF
         tvCatalogName.setText(cataloguesList[which]);
         sharedPrefs.setParentIdPrefs(cataloguesList[which].toString());
     }
-
-/*    private void setDateTime(Calendar calStart, Calendar calEnd) {
-        BaseSearchSideParametersFragment.calStart = calStart;
-        BaseSearchSideParametersFragment.calEnd = calEnd;
-
-        setDateTime();
-    }*/
 
     public void setCatalogue(String catalogue) {
         CharSequence[] cataloguesList = getCataloguesList();

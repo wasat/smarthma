@@ -107,8 +107,10 @@ public class SimpleMetadata implements Serializable {
     private void processBinaryFileUrl(Entry entry) {
         if (entry.getLinks() != null && !entry.getLinks().isEmpty()) {
             for (Link link : entry.getLinks()) {
-                if (link.getType().equalsIgnoreCase("application/x-binary")
-                        || link.getTitle().equalsIgnoreCase("Download")) {
+                if (link.getType().equalsIgnoreCase("application/x-binary")) {
+                    binaryUrl = link.getHref();
+                    return;
+                } else if (binaryUrl == null && link.getTitle().equalsIgnoreCase("Download")) {
                     binaryUrl = link.getHref();
                 }
             }

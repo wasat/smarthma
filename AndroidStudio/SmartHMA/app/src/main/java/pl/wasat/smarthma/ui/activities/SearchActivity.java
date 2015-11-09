@@ -10,9 +10,11 @@ import android.view.MenuItem;
 import android.view.SubMenu;
 
 import java.util.Calendar;
+import java.util.HashMap;
 
 import pl.wasat.smarthma.R;
 import pl.wasat.smarthma.database.SearchHistory;
+import pl.wasat.smarthma.helper.Const;
 import pl.wasat.smarthma.kindle.AmznAreaPickerMapFragment.OnAmznAreaPickerMapFragmentListener;
 import pl.wasat.smarthma.ui.activities.base.BaseSmartHMActivity;
 import pl.wasat.smarthma.ui.frags.base.BaseSearchSideParametersFragment;
@@ -35,6 +37,7 @@ public class SearchActivity extends BaseSmartHMActivity implements
 
     private BaseSearchSideParametersFragment sideParamsPanel;
     private SearchFragment searchMainPanel;
+    private HashMap extraSearchParams;
     private static final int MENU_QUERY_IDS = 1000;
     private static final int MENU_CATALOGUE_IDS = 1100;
     private static final int MENU_BBOX_IDS = 1200;
@@ -43,9 +46,21 @@ public class SearchActivity extends BaseSmartHMActivity implements
     private static final int MENU_CLEAR_ID = 2000;
 
     @Override
+    public void startActivity(Intent intent) {
+        if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
+            intent.putExtra(Const.KEY_INTENT_FEDEO_REQUEST_PARAMS_EXTRA, extraSearchParams);
+        }
+        super.startActivity(intent);
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         Ln.getConfig().setLoggingLevel(Log.ERROR);
         super.onCreate(savedInstanceState);
+
+        if (Intent.ACTION_SEARCH.equals(getIntent().getAction())) {
+            Log.i("MY_LOG", "onCreate");
+        }
 
         if (findViewById(R.id.activity_base_list_container) != null) {
             loadBasicParamsFragment();
@@ -53,8 +68,6 @@ public class SearchActivity extends BaseSmartHMActivity implements
         }
 
         commonMenuHandler = new SearchMenuHandler(this, R.id.menu_button);
-
-        //refreshParameters();
     }
 
     @Override
@@ -68,7 +81,6 @@ public class SearchActivity extends BaseSmartHMActivity implements
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
 
-        //menuHandler.loadMenuView();
         SearchHistory searchHistory = new SearchHistory(this);
 
         SubMenu searchMenu = menu.getItem(0).getSubMenu();
@@ -118,14 +130,6 @@ public class SearchActivity extends BaseSmartHMActivity implements
         }
         return true;
     }
-
-/*    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == Const.REQUEST_CODE_GLOBAL_SETTINGS) {
-            //sideParamsPanel.checkDeviceAndLoadMapPicker(R.id.activity_base_details_container);
-        }
-    }*/
 
     public void setQuery(String query) {
         if (searchMainPanel != null) {
@@ -231,8 +235,6 @@ public class SearchActivity extends BaseSmartHMActivity implements
     }
 
     private void callUpdateCollectionsBounds(LatLngBoundsExt bounds) {
-        //    SearchBasicParametersFragment searchBasicParametersFragment = (SearchBasicParametersFragment) getSupportFragmentManager()
-        //           .findFragmentByTag("SearchBasicParametersFragment");
         if (sideParamsPanel != null) {
             sideParamsPanel.updateAreaBounds(bounds);
         }
@@ -265,10 +267,14 @@ public class SearchActivity extends BaseSmartHMActivity implements
     }
 
     @Override
+    public void onSearchFragmentSendExtraParams(HashMap extra) {
+        this.extraSearchParams = extra;
+    }
+
+    @Override
     public void onSearchFragmentStartSearchingWithButton(Intent searchIntent) {
         startActivityForResult(searchIntent, REQUEST_NEW_SEARCH);
     }
-
 
     public MenuHandler getMenuHandler() {
         return commonMenuHandler;

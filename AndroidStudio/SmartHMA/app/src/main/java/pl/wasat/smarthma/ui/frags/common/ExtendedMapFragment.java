@@ -220,6 +220,7 @@ public class ExtendedMapFragment extends Fragment implements
 
     private void calcQuickLookParams(LatLngExt footprintCenter,
                                      ArrayList<LatLng> footprintPoints) {
+        //TODO - process quicklook if points > 5
         double oneLat = footprintPoints.get(0).latitude;
         double oneLng = footprintPoints.get(0).longitude;
         double twoLat = footprintPoints.get(1).latitude;

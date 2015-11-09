@@ -118,9 +118,9 @@ public class CollectionsListFragment extends BaseSpiceFragment {
                 @Override
                 public void Catch(boolean swipeRight, int position) {
                     if (swipeRight)
-                        Toast.makeText(getActivity(), "share " + position, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity(), "share CollectionsListAdapter" + position, Toast.LENGTH_SHORT).show();
                     else
-                        Toast.makeText(getActivity(), "delete " + position, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity(), "delete CollectionsListAdapter" + position, Toast.LENGTH_SHORT).show();
                 }
             });
 

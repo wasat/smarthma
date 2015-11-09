@@ -12,6 +12,7 @@ import android.preference.PreferenceManager;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.NotificationCompat.Builder;
 import android.util.Log;
+import android.webkit.URLUtil;
 
 import com.google.api.client.googleapis.extensions.android.gms.auth.GoogleAccountCredential;
 import com.google.api.client.util.ExponentialBackOff;
@@ -27,6 +28,7 @@ import java.util.Arrays;
 import pl.wasat.smarthma.R;
 import pl.wasat.smarthma.helper.Const;
 import pl.wasat.smarthma.utils.io.FilesWriter;
+import pl.wasat.smarthma.utils.text.StringExt;
 
 /**
  * An {@link IntentService} subclass for handling asynchronous task requests in
@@ -44,7 +46,7 @@ public class DownloadService extends IntentService {
     private int action;
     private NotificationManager mNotifyManager;
 
-    private String filename;
+    private String productName;
     private String urlData;
     private String metadata;
 
@@ -60,7 +62,7 @@ public class DownloadService extends IntentService {
     protected void onHandleIntent(Intent intent) {
         if (intent != null) {
             action = intent.getIntExtra(Const.KEY_ACTION_CLOUD_DOWNLOAD_SERVICE, 0);
-            filename = intent.getStringExtra(Const.KEY_INTENT_CLOUD_PRODUCT_NAME);
+            productName = intent.getStringExtra(Const.KEY_INTENT_CLOUD_PRODUCT_NAME);
             urlData = intent.getStringExtra(Const.KEY_INTENT_CLOUD_PRODUCT_URL);
             metadata = intent.getStringExtra(Const.KEY_INTENT_CLOUD_PRODUCT_METADATA);
             downloadFile();
@@ -72,14 +74,15 @@ public class DownloadService extends IntentService {
         mBuilder = new NotificationCompat.Builder(this);
         mBuilder.setContentTitle("Download")
                 .setContentText("Download in progress")
-                .setSmallIcon(R.drawable.actionbar_logo);
-        new DownloadFileAsync(action, filename, urlData, metadata).execute();
+                        //.setSmallIcon(R.drawable.actionbar_logo);
+                .setSmallIcon(R.mipmap.ic_launcher_circle);
+        new DownloadFileAsync(action, productName, urlData, metadata).execute();
     }
 
     class DownloadFileAsync extends AsyncTask<String, String, Boolean> {
         public static final String LOG_TAG = "DOWNLOAD FILE";
         //private File rootDir = Environment.getExternalStorageDirectory();
-        private String fileName;
+        private String productName;
         private String urlData;
         private String metadata;
         private final String DROPBOX_DIR = "/EO_DATA/";
@@ -87,9 +90,9 @@ public class DownloadService extends IntentService {
         private String dataPath;
         private int action;
 
-        public DownloadFileAsync(int action, String fileName, String urlData, String metadata) {
+        public DownloadFileAsync(int action, String productName, String urlData, String metadata) {
             this.action = action;
-            this.fileName = fileName;
+            this.productName = productName;
             this.urlData = urlData;
             this.metadata = metadata;
         }
@@ -121,7 +124,8 @@ public class DownloadService extends IntentService {
                 int lengthOfFile = c.getContentLength();
                 if (lengthOfFile > freeSpaceInMegabytes) return false;
                 dataPath = buildPath(Const.SMARTHMA_PATH_TEMP);
-                checkAndCreateDirectory(dataPath);
+                FilesWriter.validateDir(dataPath);
+                String fileName = URLUtil.guessFileName(urlData, null, null);
                 dataFile = new File(dataPath, fileName);
                 FileOutputStream f = new FileOutputStream(dataFile);
 
@@ -176,15 +180,15 @@ public class DownloadService extends IntentService {
                 if (action == 0)
                     new GoogleDriveUpload(mCredential, DownloadService.this).execute();
                 else {
-                    new DropboxUpload(DownloadService.this, buildPath(DROPBOX_DIR), dataFile).execute();
-
                     FilesWriter filesWriter = new FilesWriter();
+
+                    File urlFile = filesWriter.writeToFile(urlData, "eo.url", dataPath);
+                    new DropboxUpload(DownloadService.this, buildPath(DROPBOX_DIR), urlFile).execute();
 
                     File metaFile = filesWriter.writeToFile(metadata, "metadata.xml", dataPath);
                     new DropboxUpload(DownloadService.this, buildPath(DROPBOX_DIR), metaFile).execute();
 
-                    File urlFile = filesWriter.writeToFile(urlData, "eo.url", dataPath);
-                    new DropboxUpload(DownloadService.this, buildPath(DROPBOX_DIR), urlFile).execute();
+                    new DropboxUpload(DownloadService.this, buildPath(DROPBOX_DIR), dataFile).execute();
                 }
             } else {
                 mBuilder.setContentText(getResources().getString(R.string.not_enough_memory));
@@ -194,19 +198,14 @@ public class DownloadService extends IntentService {
         }
 
         private String buildPath(String dir) {
-            return dir + fileName
-                    .replaceFirst("urn:ogc:def:", "")
-                    .replaceAll(":", "_")
-                    .replaceAll("\\.", "_")
-                    .replaceAll(" ", "_")
-                    + "/";
+            return dir + StringExt.cleanDirName(productName) + "/";
         }
 
-        public void checkAndCreateDirectory(String path) {
+/*        public void checkAndCreateDirectory(String path) {
             File new_dir = new File(path);
             if (!new_dir.exists()) {
                 new_dir.mkdirs();
             }
-        }
+        }*/
     }
 }

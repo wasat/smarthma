@@ -2,6 +2,7 @@ package pl.wasat.smarthma.helper;
 
 public class Const {
     public static final String SMARTHMA_PATH = android.os.Environment.getExternalStorageDirectory().getAbsolutePath() + "/SMARTHMA/";
+    public static final String SMARTHMA_PATH_EO_DATA = android.os.Environment.getExternalStorageDirectory().getAbsolutePath() + "/SMARTHMA/EO_DATA/";
     public static final String SMARTHMA_PATH_LOGS = android.os.Environment.getExternalStorageDirectory().getAbsolutePath() + "/SMARTHMA/LOGS/";
     public static final String SMARTHMA_PATH_TEMP = android.os.Environment.getExternalStorageDirectory().getAbsolutePath() + "/SMARTHMA/TEMP/";
 
@@ -13,6 +14,7 @@ public class Const {
     public static final String EU_BBOX_SOUTH = "35.538673";
     public static final String EU_BBOX_EAST = "51.479717";
     public static final String EU_BBOX_NORTH = "68.482834";
+
 
     public static String HTTP_BASE_URL = HTTP_ESA_BASE_URL;
 
@@ -29,6 +31,7 @@ public class Const {
     public static final String KEY_INTENT_RETURN_STOP_SEARCH = "pl.wasat.smarthma.KEY_INTENT_RETURN_STOP_SEARCH";
     public static final String KEY_INTENT_QUERY = "pl.wasat.smarthma.KEY_INTENT_QUERY";
     public static final String KEY_INTENT_FEDEO_REQUEST_PARAMS = "pl.wasat.smarthma.KEY_INTENT_FEDEO_REQUEST_PARAMS";
+    public static final String KEY_INTENT_FEDEO_REQUEST_PARAMS_EXTRA = "pl.wasat.smarthma.KEY_INTENT_FEDEO_REQUEST_PARAMS_EXTRA";
     public static final String KEY_INTENT_FEDEO_REQUEST_URL = "pl.wasat.smarthma.KEY_INTENT_FEDEO_REQUEST_URL";
     public static final String KEY_INTENT_CLOUD_PRODUCT_NAME = "pl.wasat.smarthma.KEY_INTENT_CLOUD_PRODUCT_NAME";
     public static final String KEY_INTENT_CLOUD_PRODUCT_URL = "pl.wasat.smarthma.KEY_INTENT_CLOUD_PRODUCT_URL";

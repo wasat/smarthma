@@ -118,11 +118,11 @@ public class SearchListFragment extends SearchListFragmentBase {
     /**
      *
      */
-    private void loadSearchFeedResponse(FedeoRequestParams feedSearchRequest) {
-        if (feedSearchRequest != null) {
+    private void loadSearchFeedResponse(FedeoRequestParams fedeoRequestParams) {
+        if (fedeoRequestParams != null) {
             getActivity().setProgressBarIndeterminateVisibility(true);
-            getSpiceManager().execute(
-                    new FedeoSearchRequest(getActivity(), feedSearchRequest, 1), this);
+            FedeoSearchRequest fedeoSearchRequest = new FedeoSearchRequest(getActivity(), fedeoRequestParams, 1);
+            getSpiceManager().execute(fedeoSearchRequest, this);
         }
     }
 

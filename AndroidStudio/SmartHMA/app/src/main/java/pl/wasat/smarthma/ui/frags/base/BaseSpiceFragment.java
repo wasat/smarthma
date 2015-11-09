@@ -37,12 +37,37 @@ public class BaseSpiceFragment extends Fragment {
 
     @Override
     public void onStop() {
-        if (smartHMASpiceManager.isStarted()) smartHMASpiceManager.shouldStop();
-
-        if (spiceManagerBinary.isStarted()) spiceManagerBinary.shouldStop();
+        if (smartHMASpiceManager.isStarted())
+            smartHMASpiceManager.shouldStop();
+        if (spiceManagerBinary.isStarted())
+            spiceManagerBinary.shouldStop();
 
         super.onStop();
     }
+
+/*
+
+    @Override
+    public void onResume() {
+        if (smartHMASpiceManager.getPendingRequestCount() > 0)
+            smartHMASpiceManager.cancelAllRequests();
+        smartHMASpiceManager.start(getActivity());
+
+        if (spiceManagerBinary.getPendingRequestCount() > 0)
+            spiceManagerBinary.cancelAllRequests();
+        spiceManagerBinary.start(getActivity());
+        super.onResume();
+    }
+
+    @Override
+    public void onPause() {
+        if (smartHMASpiceManager.isStarted())
+            smartHMASpiceManager.shouldStop();
+        if (spiceManagerBinary.isStarted())
+            spiceManagerBinary.shouldStop();
+        super.onPause();
+    }
+*/
 
     protected SpiceManager getSpiceManager() {
         return smartHMASpiceManager;

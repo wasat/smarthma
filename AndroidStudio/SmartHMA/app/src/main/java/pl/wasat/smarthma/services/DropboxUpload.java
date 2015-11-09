@@ -71,7 +71,7 @@ public class DropboxUpload extends AsyncTask<Void, Long, Boolean> {
         mBuilder = new NotificationCompat.Builder(context);
         mBuilder.setContentTitle("Upload file to dropbox - " + mFile.getName())
                 .setContentText("Upload to dropbox in progress. File: " + mFile.getName())
-                .setSmallIcon(R.drawable.actionbar_logo);
+                .setSmallIcon(R.mipmap.ic_launcher_circle);
         mBuilder.setProgress(100, 0, false);
         mNotifyManager.notify(1, mBuilder.build());
     }

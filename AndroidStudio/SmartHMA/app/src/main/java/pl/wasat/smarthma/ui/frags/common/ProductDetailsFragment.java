@@ -42,6 +42,7 @@ import pl.wasat.smarthma.model.entry.Entry;
 import pl.wasat.smarthma.model.entry.SimpleMetadata;
 import pl.wasat.smarthma.utils.conn.ConnectionDetector;
 import pl.wasat.smarthma.utils.io.CloudSavingManager;
+import pl.wasat.smarthma.utils.io.EODataDownloadManager;
 
 /**
  * A simple {@link android.support.v4.app.Fragment} subclass. Activities that
@@ -58,6 +59,7 @@ public class ProductDetailsFragment extends Fragment implements Target {
     private OnProductDetailsFragmentListener mListener;
 
     private CloudSavingManager cloudSavingManager;
+    private EODataDownloadManager eoDataDownloadManager;
 
     private static final CharSequence[] shareList = {"Facebook", "Other"};
     //private static final CharSequence[] cloudSaveList = {"Google Drive", "DropBox"};
@@ -89,6 +91,7 @@ public class ProductDetailsFragment extends Fragment implements Target {
                     KEY_PRODUCT_ENTRY);
         }
         cloudSavingManager = new CloudSavingManager(getActivity());
+        eoDataDownloadManager = new EODataDownloadManager(getActivity());
     }
 
     @Override
@@ -126,7 +129,7 @@ public class ProductDetailsFragment extends Fragment implements Target {
             downloadButton.setOnClickListener(new OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    //TODO - Download process
+                    startEoDataDownloading();
                 }
             });
 
@@ -193,8 +196,15 @@ public class ProductDetailsFragment extends Fragment implements Target {
     public void onResume() {
         super.onResume();
         cloudSavingManager.resumeDropboxService();
+        eoDataDownloadManager.resumeDownloadManager();
+
     }
 
+    @Override
+    public void onPause() {
+        super.onPause();
+        eoDataDownloadManager.unregisterReceivers();
+    }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -252,6 +262,16 @@ public class ProductDetailsFragment extends Fragment implements Target {
         if (url == null) url = "";
         return url;
     }
+
+    //region DOWNLOAD
+
+    private void startEoDataDownloading() {
+        String url = displayedEntry.getSimpleMetadata().getBinaryUrl();
+        String productName = displayedEntry.getTitle();
+        eoDataDownloadManager.startDownload(productName, url);
+    }
+
+    //endregion
 
     //region SHARING
     private void openShareDialog() {

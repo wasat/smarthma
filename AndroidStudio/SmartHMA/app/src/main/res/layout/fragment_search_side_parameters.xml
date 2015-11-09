@@ -213,38 +213,6 @@
                 android:background="@color/background_white" />
         </LinearLayout>
 
-        <LinearLayout
-            android:id="@+id/search_frag_side_params_layout_endpoint"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:paddingBottom="@dimen/search_eo_data_padding"
-            android:visibility="invisible">
-
-            <pl.wasat.smarthma.customviews.TextViewWithFont
-                style="?android:attr/textAppearanceLarge"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/background_white"
-                android:paddingBottom="@dimen/search_eo_data_padding_small"
-                android:paddingLeft="@dimen/search_eo_data_padding"
-                android:text="@string/endpoint"
-                android:textColor="@color/text_blue"
-                android:textSize="@dimen/search_eo_data_text_medium" />
-
-            <pl.wasat.smarthma.customviews.TextViewWithFont
-                android:id="@+id/search_frag_side_params_tv_endpoint"
-                style="?android:attr/textAppearanceLarge"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/background_white"
-                android:padding="@dimen/search_eo_data_padding"
-                android:paddingBottom="@dimen/search_eo_data_padding_small"
-                android:text="@string/fedeo_esa_int"
-                android:textColor="@color/text_black"
-                android:textSize="@dimen/search_eo_data_text_medium" />
-        </LinearLayout>
-
         <pl.wasat.smarthma.customviews.TextViewWithFont
             android:id="@+id/search_frag_side_params_tv_title_header"
             style="?android:attr/textAppearanceLarge"
@@ -386,6 +354,39 @@
                     android:textSize="@dimen/search_eo_data_text_medium"
                     android:textStyle="normal" />
             </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/search_frag_side_params_layout_endpoint"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/search_eo_data_padding"
+            android:visibility="invisible">
+
+            <pl.wasat.smarthma.customviews.TextViewWithFont
+                style="?android:attr/textAppearanceLarge"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/background_white"
+                android:paddingBottom="@dimen/search_eo_data_padding_small"
+                android:paddingLeft="@dimen/search_eo_data_padding"
+                android:text="@string/endpoint"
+                android:textColor="@color/text_blue"
+                android:textSize="@dimen/search_eo_data_text_medium" />
+
+            <pl.wasat.smarthma.customviews.TextViewWithFont
+                android:id="@+id/search_frag_side_params_tv_endpoint"
+                style="?android:attr/textAppearanceLarge"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/background_white"
+                android:padding="@dimen/search_eo_data_padding"
+                android:paddingBottom="@dimen/search_eo_data_padding_small"
+                android:text="@string/fedeo_esa_int"
+                android:textColor="@color/text_black"
+                android:textSize="@dimen/search_eo_data_text_medium" />
         </LinearLayout>
     </LinearLayout>
 </ScrollView>

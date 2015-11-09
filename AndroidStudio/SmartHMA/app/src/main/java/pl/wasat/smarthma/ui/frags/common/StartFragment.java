@@ -49,6 +49,8 @@ public class StartFragment extends Fragment {
     public StartFragment() {
     }
 
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {

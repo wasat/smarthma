@@ -8,6 +8,7 @@ import android.support.v4.app.FragmentManager;
 import android.widget.TextView;
 
 import java.util.Calendar;
+import java.util.HashMap;
 
 import pl.wasat.smarthma.R;
 import pl.wasat.smarthma.adapter.SearchListAdapter;
@@ -79,6 +80,7 @@ public class SearchCollectionResultsActivity extends BaseSmartHMActivity
         if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
 
             String query = intent.getStringExtra(SearchManager.QUERY);
+            HashMap extraParams = (HashMap) intent.getSerializableExtra(Const.KEY_INTENT_FEDEO_REQUEST_PARAMS_EXTRA);
 
             SharedPrefs sharedPrefs = new SharedPrefs(this);
             sharedPrefs.setQueryPrefs(query);
@@ -87,6 +89,7 @@ public class SearchCollectionResultsActivity extends BaseSmartHMActivity
             FedeoRequestParams fedeoRequestParams = new FedeoRequestParams();
             fedeoRequestParams.setQuery(query);
             fedeoRequestParams.setParentIdentifier(parentID);
+            if (extraParams != null) fedeoRequestParams.setParamsExtra(extraParams);
 
             SearchListFragment searchListFragment = SearchListFragment
                     .newInstance(fedeoRequestParams, stopNewSearch);
@@ -163,7 +166,6 @@ public class SearchCollectionResultsActivity extends BaseSmartHMActivity
                 }
             }
         } catch (Exception e) {
-            //Log.e("onBackPressed", e.toString());
             super.onBackPressed();
         }
     }
@@ -229,19 +231,6 @@ public class SearchCollectionResultsActivity extends BaseSmartHMActivity
      */
     @Override
     public void onBaseShowProductsListFragmentFootprintSend() {
-/*        if (Const.IS_KINDLE) {
-            AmznExtendedMapFragment extendedMapFragment = (AmznExtendedMapFragment) getSupportFragmentManager()
-                    .findFragmentByTag("ExtendedMapFragment");
-            if (extendedMapFragment != null) {
-                extendedMapFragment.showFootPrints(null);
-            }
-        } else {
-            ExtendedMapFragment extendedMapFragment = (ExtendedMapFragment) getSupportFragmentManager()
-                    .findFragmentByTag("ExtendedMapFragment");
-            if (extendedMapFragment != null) {
-                extendedMapFragment.showFootPrints(null);
-            }
-        }*/
     }
 
     @Override

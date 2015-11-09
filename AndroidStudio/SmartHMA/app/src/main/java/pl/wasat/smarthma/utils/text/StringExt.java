@@ -33,6 +33,13 @@ public class StringExt {
         //return formattedUrl;
     }
 
+    public static String cleanDirName(String dirName) {
+        return dirName
+                .replaceFirst("urn:ogc:def:", "")
+                .replaceAll(":", "_")
+                .replaceAll("\\.", "_")
+                .replaceAll(" ", "_");
+    }
 
     public static String inStreamReaderToString(InputStream stream) throws IOException {
         int n = 0;

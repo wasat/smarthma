@@ -3,6 +3,7 @@ package pl.wasat.smarthma.ui.frags.search;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -99,23 +100,14 @@ public class SearchAdvancedParametersFragment extends BaseSearchSideParametersFr
         edtPlatform.setVisibility(View.VISIBLE);
         edtPlatform.addTextChangedListener(new EditTextViewInputWatcher(EDIT_TEXT_PLATFORM));
 
-/*        SearchHistory searchHistory = new SearchHistory(getActivity());
-        ArrayList<SearchParams> searchHistoryList = searchHistory.getSearchHistoryList(true);
-        if (!searchHistoryList.isEmpty()) {
-            SearchParams searchParams = searchHistoryList.get(0);
-            setCatalogue(searchParams.getCatalogue());
-            setBbox(searchParams.getBbox());
-            setStartDate(searchParams.getStartDate());
-            setEndDate(searchParams.getEndDate());
-        }*/
-
         return rootView;
     }
 
 
     @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        Activity activity = context instanceof Activity ? (Activity) context : null;
         try {
             mListener = (OnSearchAdvancedParametersFragmentListener) activity;
         } catch (ClassCastException e) {
@@ -187,16 +179,19 @@ public class SearchAdvancedParametersFragment extends BaseSearchSideParametersFr
 
         @Override
         public void afterTextChanged(Editable s) {
-            //Log.i("PARAMS", s.toString());
             switch (choosenEditTv) {
                 case EDIT_TEXT_TITLE:
                     mListener.onSearchAdvancedParamsFragmentEditTextChange("title", s.toString());
+                    break;
                 case EDIT_TEXT_ORGANISATION:
                     mListener.onSearchAdvancedParamsFragmentEditTextChange("organisation", s.toString());
+                    break;
                 case EDIT_TEXT_PLATFORM:
                     mListener.onSearchAdvancedParamsFragmentEditTextChange("platform", s.toString());
+                    break;
                 default:
                     mListener.onSearchAdvancedParamsFragmentEditTextChange("", "");
+                    break;
             }
         }
     }
