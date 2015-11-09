@@ -34,6 +34,13 @@ public class SwipeDetector implements View.OnTouchListener {
         thrower = new SwipeListEventThrower();
     }
 
+    public SwipeDetector(View v) {
+        deleteView = (RelativeLayout) v.findViewById(R.id.swipe_list_deleteview);
+        mainView = (LinearLayout) v.findViewById(R.id.swipe_list_mainview);
+        thrower = new SwipeListEventThrower();
+        position = -1;
+    }
+
     public void setOnClickListener(OnSlideElementListener listener) {
         thrower.addThrowListener(listener);
     }

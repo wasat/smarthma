@@ -70,6 +70,7 @@ dependencies {
         exclude group: 'org.json'
     }
 
+    compile files('google-api-services-drive-v2-rev168-1.18.0-rc.jar')
     compile files('libs/dropbox-android-sdk-1.6.3.jar')
     compile files('libs/httpmime-4.0.3.jar')
     compile files('libs/json_simple-1.1.jar')

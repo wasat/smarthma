@@ -247,6 +247,7 @@ public class CloudSavingManager {
                         SharedPreferences.Editor editor = settings.edit();
                         editor.putString(PREF_ACCOUNT_NAME, accountName);
                         editor.apply();
+
                         Intent downloadIntent = new Intent(context, DownloadService.class);
                         downloadIntent.putExtra(Const.KEY_ACTION_CLOUD_DOWNLOAD_SERVICE, 0);
                         downloadIntent.putExtra(Const.KEY_INTENT_CLOUD_PRODUCT_NAME, productName.toString());

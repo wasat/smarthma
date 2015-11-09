@@ -3,12 +3,14 @@ package pl.wasat.smarthma.ui.frags.search;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.List;
 
 import pl.wasat.smarthma.R;
 import pl.wasat.smarthma.adapter.SearchListAdapter;
 import pl.wasat.smarthma.helper.Const;
+import pl.wasat.smarthma.interfaces.OnSlideElementListener;
 import pl.wasat.smarthma.model.FedeoRequestParams;
 import pl.wasat.smarthma.model.feed.Feed;
 import pl.wasat.smarthma.model.iso.EntryISO;
@@ -86,6 +88,15 @@ public abstract class SearchListFragmentBase extends BaseSpiceListFragment {
     {
         SearchListAdapter adapter = new SearchListAdapter(getActivity(),
                 searchFeedList);
+        adapter.setListener(new OnSlideElementListener() {
+            @Override
+            public void Catch(boolean swipeRight, int position) {
+                if (swipeRight)
+                    Toast.makeText(getContext(), "share " + position, Toast.LENGTH_SHORT).show();
+                else
+                    Toast.makeText(getContext(), "delete " + position, Toast.LENGTH_SHORT).show();
+            }
+        });
         this.setListAdapter(adapter);
         adapter.notifyDataSetChanged();
     }

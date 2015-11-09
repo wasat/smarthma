@@ -1,8 +1,10 @@
 package pl.wasat.smarthma.services;
 
 
+
 import android.app.NotificationManager;
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Environment;
 import android.support.v4.app.NotificationCompat;
@@ -10,6 +12,7 @@ import android.util.Log;
 
 import com.google.api.client.extensions.android.http.AndroidHttp;
 import com.google.api.client.googleapis.extensions.android.gms.auth.GoogleAccountCredential;
+import com.google.api.client.googleapis.extensions.android.gms.auth.UserRecoverableAuthIOException;
 import com.google.api.client.http.FileContent;
 import com.google.api.client.http.HttpTransport;
 import com.google.api.client.json.JsonFactory;
@@ -28,16 +31,14 @@ import pl.wasat.smarthma.R;
 
 public class GoogleDriveUpload extends AsyncTask<Void, Void, Boolean> {
     private com.google.api.services.drive.Drive mService = null;
-    private Exception mLastError = null;
-    private File file;
     private NotificationCompat.Builder mBuilder;
-    GoogleAccountCredential mCredential;
     java.io.File rootDir = Environment.getExternalStorageDirectory();
     private NotificationManager mNotifyManager;
     private Context context;
 
 
-    public GoogleDriveUpload(GoogleAccountCredential credential, Context context) {
+    public GoogleDriveUpload(GoogleAccountCredential credential, Context context)
+    {
         super();
         this.context = context;
         String fileName = "file";
@@ -79,45 +80,55 @@ public class GoogleDriveUpload extends AsyncTask<Void, Void, Boolean> {
         body.setId(null);
         body.setMimeType(file_type);
 
-        try {
+        try
+        {
             body.setParents(Arrays.asList(new ParentReference().setId(getRootId())));
             FileContent mediaContent = new FileContent(file_type, file);
             FileRtr = mService.files().insert(body, mediaContent).execute();
 
-            if (FileRtr != null) {
-                System.out.println("File uploaded: " + FileRtr.getTitle());
+            if ( FileRtr != null)
+            {
+                System.out.println("File uploaded: " +  FileRtr.getTitle());
             }
-        } catch (Exception e) {
+        }
+        catch(Exception e)
+        {
             Log.e("", e.toString());
             return false;
         }
         return true;
     }
-
     /**
      * Fetch a list of up to 10 file names and IDs.
-     *
      * @return List of Strings describing files, or an empty list if no files
-     * found.
+     *         found.
      * @throws IOException
      */
     private String getRootId() throws IOException {
-        About about = mService.about().get().execute();
-        // Get a list of up to 10 files.
-        List<String> fileInfo = new ArrayList<String>();
-        FileList result = mService.files().list()
-                .setMaxResults(10)
-                .execute();
+        try {
+            About about = mService.about().get().execute();
+            // Get a list of up to 10 files.
+            List<String> fileInfo = new ArrayList<String>();
+            FileList result = mService.files().list()
+                    .setMaxResults(10)
+                    .execute();
 
 
-        List<com.google.api.services.drive.model.File> files = result.getItems();
-        if (files != null) {
-            for (com.google.api.services.drive.model.File file : files) {
-                fileInfo.add(String.format("%s (%s)\n",
-                        file.getTitle(), file.getId()));
+            List<com.google.api.services.drive.model.File> files = result.getItems();
+            if (files != null) {
+                for (com.google.api.services.drive.model.File file : files) {
+                    fileInfo.add(String.format("%s (%s)\n",
+                            file.getTitle(), file.getId()));
+                }
             }
+            return about.getRootFolderId();
         }
-        return about.getRootFolderId();
+        catch (UserRecoverableAuthIOException e) {
+            Intent userIntent = e.getIntent();
+            userIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            context.startActivity(userIntent);
+        }
+        return null;
     }
 
 
