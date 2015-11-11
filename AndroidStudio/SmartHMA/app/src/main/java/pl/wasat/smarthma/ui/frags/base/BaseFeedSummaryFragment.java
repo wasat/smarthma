@@ -91,7 +91,13 @@ public class BaseFeedSummaryFragment extends Fragment {
         adapterNamesList.add("generated");
         adapterValuesList.add("-  " + resultFeed.getUpdated());
 
-        IntroGridAdapter adapter = new IntroGridAdapter(getActivity(), adapterNamesList, adapterValuesList);
+        ArrayList<String> adapterTooltipsList = new ArrayList<>();
+        for (int i=0; i<adapterNamesList.size(); i++)
+        {
+            adapterTooltipsList.add("Greetings from "+i);
+        }
+
+        IntroGridAdapter adapter = new IntroGridAdapter(getActivity(), adapterNamesList, adapterValuesList, adapterTooltipsList);
         ListView gridView = (ListView) rootView.findViewById(R.id.intro_grid_layout);
         gridView.setAdapter(adapter);
 

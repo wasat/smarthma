@@ -23,7 +23,6 @@ import com.google.api.client.json.jackson2.JacksonFactory;
 import com.google.api.client.util.ExponentialBackOff;
 import com.google.api.services.drive.Drive;
 import com.google.api.services.drive.DriveScopes;
-import com.google.api.services.drive.model.About;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -118,7 +117,7 @@ public class DownloadService extends IntentService {
         @Override
         protected Boolean doInBackground(String... aurl) {
             try {
-                if(action == 0) {
+                if (action == 0) {
                     SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(DownloadService.this);
                     mCredential = GoogleAccountCredential.usingOAuth2(
                             getApplicationContext(), Arrays.asList(SCOPES))
@@ -173,14 +172,12 @@ public class DownloadService extends IntentService {
                 }
                 f.close();
 
-            }
-            catch (UserRecoverableAuthIOException e) {
+            } catch (UserRecoverableAuthIOException e) {
                 Intent userIntent = e.getIntent();
                 userIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 getBaseContext().startActivity(userIntent);
                 return false;
-            }
-            catch (Exception e) {
+            } catch (Exception e) {
                 e.printStackTrace();
                 Log.d(LOG_TAG, e.getMessage());
                 return false;
@@ -225,12 +222,11 @@ public class DownloadService extends IntentService {
                     new DropboxUpload(DownloadService.this, buildPath(DROPBOX_DIR), dataFile).execute();
                 }
             } else {
-                if(notEnoughSpace) {
+                if (notEnoughSpace) {
                     mBuilder.setContentText(getResources().getString(R.string.not_enough_memory));
                     mBuilder.setProgress(0, 0, false);
                     mNotifyManager.notify(1, mBuilder.build());
-                }
-                else{
+                } else {
                     mBuilder.setContentText(getResources().getString(R.string.error_downloading));
                     mBuilder.setProgress(0, 0, false);
                     mNotifyManager.notify(1, mBuilder.build());

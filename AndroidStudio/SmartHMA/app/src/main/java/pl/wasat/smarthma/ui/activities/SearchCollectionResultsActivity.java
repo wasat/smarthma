@@ -89,7 +89,9 @@ public class SearchCollectionResultsActivity extends BaseSmartHMActivity
             FedeoRequestParams fedeoRequestParams = new FedeoRequestParams();
             fedeoRequestParams.setQuery(query);
             fedeoRequestParams.setParentIdentifier(parentID);
-            if (extraParams != null) fedeoRequestParams.setParamsExtra(extraParams);
+            extraParams.put("recordSchema", "ISO");
+            //if (extraParams != null)
+            fedeoRequestParams.setParamsExtra(extraParams);
 
             SearchListFragment searchListFragment = SearchListFragment
                     .newInstance(fedeoRequestParams, stopNewSearch);

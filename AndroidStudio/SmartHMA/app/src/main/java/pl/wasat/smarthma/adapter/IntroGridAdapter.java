@@ -10,21 +10,26 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 
 import pl.wasat.smarthma.R;
+import pl.wasat.smarthma.ui.tooltips.Tooltip;
 
 public class IntroGridAdapter extends BaseAdapter {
     private final Context mContext;
     private ArrayList<String> adapterNamesList = null;
     private ArrayList<String> adapterValuesList = null;
+    private ArrayList<String> adapterTooltipsList = null;
+    private Tooltip tooltip = null;
 
-    public IntroGridAdapter(Context c, ArrayList<String> adapterNamesList, ArrayList<String> adapterValuesList) {
+    public IntroGridAdapter(Context c, ArrayList<String> adapterNamesList, ArrayList<String> adapterValuesList, ArrayList<String> adapterTooltipsList) {
         this.mContext = c;
         this.adapterNamesList = adapterNamesList;
         this.adapterValuesList = adapterValuesList;
+        this.adapterTooltipsList = adapterTooltipsList;
     }
 
     @Override
@@ -46,8 +51,8 @@ public class IntroGridAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-        View grid;
+    public View getView(final int position, View convertView, ViewGroup parent) {
+        final View grid;
         LayoutInflater inflater = (LayoutInflater) mContext
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
@@ -60,6 +65,26 @@ public class IntroGridAdapter extends BaseAdapter {
 
             TextView tvValues = (TextView) grid.findViewById(R.id.intro_grid_cell_value);
             tvValues.setText(adapterValuesList.get(position));
+
+            final String tmp1 = adapterNamesList.get(position);
+            final String tmp2 = adapterValuesList.get(position);
+            final ImageView tvImages = (ImageView) grid.findViewById(R.id.intro_grid_cell_img_info);
+            tvImages.setOnClickListener(new View.OnClickListener()
+            {
+                @Override
+                public void onClick(View v)
+                {
+                    if (tooltip != null)
+                    {
+                        tooltip.dismiss();
+                    }
+                    tooltip = new Tooltip(grid.getContext(), Tooltip.TYPE_ABOVE, adapterTooltipsList.get(position));
+                    if (!tooltip.isShown())
+                    {
+                        tooltip.show(tvImages);
+                    }
+                }
+            });
 
         } else {
             grid = convertView;
