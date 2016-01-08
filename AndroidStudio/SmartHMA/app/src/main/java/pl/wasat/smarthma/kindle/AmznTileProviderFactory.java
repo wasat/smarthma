@@ -1,4 +1,3 @@
-
 package pl.wasat.smarthma.kindle;
 
 import android.content.Context;
@@ -36,6 +35,13 @@ class AmznTileProviderFactory {
                 return url;
             }
         };
+    }
+
+    private static void sendWmsLoadState(Context con) {
+        Intent intent = new Intent(
+                Const.KEY_MAP_SPINNER_INTENTFILTER_NOTIFICATION);
+        intent.putExtra(Const.KEY_MAP_WMS_LOAD_STATE, true);
+        con.sendBroadcast(intent);
     }
 
     public static AmznWMSTileProvider getOsmWmsTileProvider(final String WMS_name) {
@@ -76,13 +82,6 @@ class AmznTileProviderFactory {
             }
         };
 
-    }
-
-    private static void sendWmsLoadState(Context con) {
-        Intent intent = new Intent(
-                Const.KEY_MAP_SPINNER_INTENTFILTER_NOTIFICATION);
-        intent.putExtra(Const.KEY_MAP_WMS_LOAD_STATE, true);
-        con.sendBroadcast(intent);
     }
 }
 

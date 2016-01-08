@@ -9,10 +9,9 @@ import pl.wasat.smarthma.helper.Const;
  * Part of the project  SmartHMA
  */
 public class LatLngExt implements Serializable {
-    public transient double latitude;
-    public transient double longitude;
-
     private static final long serialVersionUID = 1L;
+    public final transient double latitude;
+    public final transient double longitude;
 
     public LatLngExt(Double lat, Double lng) {
         latitude = lat;

@@ -33,19 +33,15 @@ public class NewsActivity extends BaseSmartHMActivity implements
                     .permitAll().build();
             StrictMode.setThreadPolicy(policy);
         }
-        //setContentView(R.layout.activity_news);
 
         TextView text = (TextView) findViewById(R.id.action_bar_title);
-        text.setText("ESA Online");
+        text.setText(getString(R.string.esa_online));
 
         dba = new EoDbAdapter(this);
 
         if (findViewById(R.id.activity_base_details_container) != null) {
             mTwoPane = true;
             loadNewsListPanel();
-/*            ((NewsListFragment) getSupportFragmentManager()
-                    .findFragmentById(R.id.activity_base_list_container))
-                    .setActivateOnItemClick(true);*/
         }
     }
 
@@ -57,6 +53,23 @@ public class NewsActivity extends BaseSmartHMActivity implements
                         newsListFragment).commit();
     }
 
+    /*
+ * (non-Javadoc)
+ *
+ * @see android.support.v4.app.FragmentActivity#onBackPressed()
+ */
+    @Override
+    public void onBackPressed() {
+        if (dismissMenuOnBackPressed()) return;
+        FragmentManager fm = getSupportFragmentManager();
+        int bsec = fm.getBackStackEntryCount();
+        if (bsec > 1) {
+            fm.popBackStack();
+        } else {
+            finish();
+            super.onBackPressed();
+        }
+    }
 
     @Override
     public void onItemSelected(String id) {
@@ -80,26 +93,10 @@ public class NewsActivity extends BaseSmartHMActivity implements
             NewsDetailFragment newsDetailFragment = new NewsDetailFragment();
             newsDetailFragment.setArguments(arguments);
             getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.activity_base_details_container, newsDetailFragment, "NewsDetailFragment").commit();
+                    .replace(R.id.activity_base_details_container, newsDetailFragment,
+                            NewsDetailFragment.class.getSimpleName())
+                    .commit();
 
-        }
-    }
-
-    /*
- * (non-Javadoc)
- *
- * @see android.support.v4.app.FragmentActivity#onBackPressed()
- */
-    @Override
-    public void onBackPressed() {
-        if (dismissMenuOnBackPressed()) return;
-        FragmentManager fm = getSupportFragmentManager();
-        int bsec = fm.getBackStackEntryCount();
-        if (bsec > 1) {
-            fm.popBackStack();
-        } else {
-            finish();
-            super.onBackPressed();
         }
     }
 

@@ -33,9 +33,7 @@ public class Mission {
     }
 
     public Mission() {
-
     }
-
 
     public int getId() {
         return id;

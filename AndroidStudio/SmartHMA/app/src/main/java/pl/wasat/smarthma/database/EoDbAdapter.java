@@ -27,11 +27,9 @@ public class EoDbAdapter {
             KEY_GUID + " text not null, " +
             KEY_READ + " boolean not null, " +
             KEY_OFFLINE + " boolean not null);";
-
-
+    private final Context context;
     private SQLiteHelper sqLiteHelper;
     private SQLiteDatabase sqLiteDatabase;
-    private final Context context;
 
     public EoDbAdapter(Context c) {
         context = c;
@@ -49,23 +47,6 @@ public class EoDbAdapter {
 
     public void close() {
         sqLiteHelper.close();
-    }
-
-    public class SQLiteHelper extends SQLiteOpenHelper {
-        public SQLiteHelper(Context context, String name, CursorFactory factory, int version) {
-            super(context, name, factory, version);
-        }
-
-        @Override
-        public void onCreate(SQLiteDatabase db) {
-            db.execSQL(DATABASE_CREATE_LIST_TABLE);
-        }
-
-        @Override
-        public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-            db.execSQL("DROP TABLE IF EXISTS " + DATABASE_TABLE);
-            onCreate(db);
-        }
     }
 
     public void insertBlogListing(String guid) {
@@ -118,5 +99,22 @@ public class EoDbAdapter {
         ContentValues args = new ContentValues();
         args.put(KEY_OFFLINE, true);
         return sqLiteDatabase.update(DATABASE_TABLE, args, KEY_GUID + "='" + guid + "'", null) > 0;
+    }
+
+    public class SQLiteHelper extends SQLiteOpenHelper {
+        public SQLiteHelper(Context context, String name, CursorFactory factory, int version) {
+            super(context, name, factory, version);
+        }
+
+        @Override
+        public void onCreate(SQLiteDatabase db) {
+            db.execSQL(DATABASE_CREATE_LIST_TABLE);
+        }
+
+        @Override
+        public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+            db.execSQL("DROP TABLE IF EXISTS " + DATABASE_TABLE);
+            onCreate(db);
+        }
     }
 }

@@ -35,38 +35,25 @@ public class SearchActivity extends BaseSmartHMActivity implements
         OnSearchAdvancedParametersFragmentListener, OnSearchFragmentListener, OnDatePickerFragmentListener, OnTimePickerFragmentListener,
         OnAreaPickerMapFragmentListener, OnAmznAreaPickerMapFragmentListener {
 
-    private BaseSearchSideParametersFragment sideParamsPanel;
-    private SearchFragment searchMainPanel;
-    private HashMap extraSearchParams;
     private static final int MENU_QUERY_IDS = 1000;
     private static final int MENU_CATALOGUE_IDS = 1100;
     private static final int MENU_BBOX_IDS = 1200;
     private static final int MENU_STARTDATE_IDS = 1300;
     private static final int MENU_ENDDATE_IDS = 1400;
     private static final int MENU_CLEAR_ID = 2000;
-
-    @Override
-    public void startActivity(Intent intent) {
-        if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
-            intent.putExtra(Const.KEY_INTENT_FEDEO_REQUEST_PARAMS_EXTRA, extraSearchParams);
-        }
-        super.startActivity(intent);
-    }
+    private BaseSearchSideParametersFragment sideParamsPanel;
+    private SearchFragment searchMainPanel;
+    private HashMap extraSearchParams;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Ln.getConfig().setLoggingLevel(Log.ERROR);
         super.onCreate(savedInstanceState);
 
-        if (Intent.ACTION_SEARCH.equals(getIntent().getAction())) {
-            Log.i("MY_LOG", "onCreate");
-        }
-
         if (findViewById(R.id.activity_base_list_container) != null) {
             loadBasicParamsFragment();
             loadMainSearchPanel();
         }
-
         commonMenuHandler = new SearchMenuHandler(this, R.id.menu_button);
     }
 
@@ -76,17 +63,6 @@ public class SearchActivity extends BaseSmartHMActivity implements
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu_eo_map_twopane, menu);
         return super.onCreateOptionsMenu(menu);
-    }
-
-    @Override
-    public boolean onPrepareOptionsMenu(Menu menu) {
-
-        SearchHistory searchHistory = new SearchHistory(this);
-
-        SubMenu searchMenu = menu.getItem(0).getSubMenu();
-        searchHistory.createSearchMenu(searchMenu, MENU_QUERY_IDS, MENU_CATALOGUE_IDS, MENU_BBOX_IDS, MENU_STARTDATE_IDS, MENU_ENDDATE_IDS, MENU_CLEAR_ID);
-
-        return super.onPrepareOptionsMenu(menu);
     }
 
     @Override
@@ -161,6 +137,31 @@ public class SearchActivity extends BaseSmartHMActivity implements
         }
     }
 
+    /**
+     *
+     */
+    private void loadBasicParamsFragment() {
+        SearchBasicParametersFragment searchBasicParametersFragment = SearchBasicParametersFragment
+                .newInstance();
+        sideParamsPanel = searchBasicParametersFragment;
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.activity_base_list_container, searchBasicParametersFragment,
+                        SearchBasicParametersFragment.class.getSimpleName())
+                .commit();
+    }
+
+    private void loadMainSearchPanel() {
+        SearchFragment searchLeftFragment = SearchFragment.newInstance();
+        searchMainPanel = searchLeftFragment;
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.activity_base_details_container,
+                        searchLeftFragment, SearchFragment.class.getSimpleName())
+                .addToBackStack(SearchFragment.class.getSimpleName())
+                .commit();
+    }
+
     /*
      * (non-Javadoc)
      *
@@ -183,37 +184,22 @@ public class SearchActivity extends BaseSmartHMActivity implements
         }
     }
 
-    private void loadMainSearchPanel() {
-        SearchFragment searchLeftFragment = SearchFragment.newInstance();
-        searchMainPanel = searchLeftFragment;
-        getSupportFragmentManager()
-                .beginTransaction()
-                .replace(R.id.activity_base_details_container,
-                        searchLeftFragment, "SearchFragment")
-                .addToBackStack("SearchFragment").commit();
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        SearchHistory searchHistory = new SearchHistory(this);
+
+        SubMenu searchMenu = menu.getItem(0).getSubMenu();
+        searchHistory.createSearchMenu(searchMenu, MENU_QUERY_IDS, MENU_CATALOGUE_IDS, MENU_BBOX_IDS, MENU_STARTDATE_IDS, MENU_ENDDATE_IDS, MENU_CLEAR_ID);
+
+        return super.onPrepareOptionsMenu(menu);
     }
 
-    /**
-     *
-     */
-    private void loadBasicParamsFragment() {
-        SearchBasicParametersFragment searchBasicParametersFragment = SearchBasicParametersFragment
-                .newInstance();
-        sideParamsPanel = searchBasicParametersFragment;
-        getSupportFragmentManager()
-                .beginTransaction()
-                .replace(R.id.activity_base_list_container, searchBasicParametersFragment,
-                        "SearchBasicParametersFragment").commit();
-    }
-
-    private void loadAdvancedParamsFragment() {
-        SearchAdvancedParametersFragment searchAdvancedParametersFragment = SearchAdvancedParametersFragment
-                .newInstance();
-        sideParamsPanel = searchAdvancedParametersFragment;
-        getSupportFragmentManager()
-                .beginTransaction()
-                .replace(R.id.activity_base_list_container, searchAdvancedParametersFragment,
-                        "SearchAdvancedParametersFragment").commit();
+    @Override
+    public void startActivity(Intent intent) {
+        if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
+            intent.putExtra(Const.KEY_INTENT_FEDEO_REQUEST_PARAMS_EXTRA, extraSearchParams);
+        }
+        super.startActivity(intent);
     }
 
     /*
@@ -229,17 +215,16 @@ public class SearchActivity extends BaseSmartHMActivity implements
         callUpdateCollectionsBounds(bounds);
     }
 
-    @Override
-    public void onAmznMapFragmentBoundsChange(LatLngBoundsExt bounds) {
-        callUpdateCollectionsBounds(bounds);
-    }
-
     private void callUpdateCollectionsBounds(LatLngBoundsExt bounds) {
         if (sideParamsPanel != null) {
             sideParamsPanel.updateAreaBounds(bounds);
         }
     }
 
+    @Override
+    public void onAmznMapFragmentBoundsChange(LatLngBoundsExt bounds) {
+        callUpdateCollectionsBounds(bounds);
+    }
 
     @Override
     public void onSearchAdvancedParamsFragmentEditTextChange(String parameterKey, String parameterValue) {
@@ -264,6 +249,16 @@ public class SearchActivity extends BaseSmartHMActivity implements
     @Override
     public void onSearchFragmentAdvanceParamsChoose() {
         loadAdvancedParamsFragment();
+    }
+
+    private void loadAdvancedParamsFragment() {
+        SearchAdvancedParametersFragment searchAdvancedParametersFragment = SearchAdvancedParametersFragment
+                .newInstance();
+        sideParamsPanel = searchAdvancedParametersFragment;
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.activity_base_list_container, searchAdvancedParametersFragment,
+                        SearchAdvancedParametersFragment.class.getSimpleName()).commit();
     }
 
     @Override

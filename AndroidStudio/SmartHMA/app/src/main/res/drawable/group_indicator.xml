@@ -3,12 +3,12 @@
 
     <item
 
-        android:state_empty="true" android:drawable="@drawable/ic_find_next_holo_light">
+        android:drawable="@drawable/ic_find_next_holo_light" android:state_empty="true">
 
     </item>
     <item
 
-        android:state_expanded="true" android:drawable="@drawable/ic_find_previous_holo_light">
+        android:drawable="@drawable/ic_find_previous_holo_light" android:state_expanded="true">
 
     </item>
     <item android:drawable="@drawable/ic_find_next_holo_light">

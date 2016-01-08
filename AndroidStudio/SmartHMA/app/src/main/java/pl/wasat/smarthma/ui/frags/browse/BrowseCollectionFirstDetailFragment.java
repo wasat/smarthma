@@ -21,6 +21,10 @@ import pl.wasat.smarthma.ui.frags.common.AreaPickerMapFragment;
 public class BrowseCollectionFirstDetailFragment extends
         BaseViewAndBasicSettingsDetailFragment {
 
+    public BrowseCollectionFirstDetailFragment() {
+        // Required empty public constructor
+    }
+
     /**
      * Use this factory method to create a new instance of this fragment using
      * the provided parameters.
@@ -29,10 +33,6 @@ public class BrowseCollectionFirstDetailFragment extends
      */
     public static BrowseCollectionFirstDetailFragment newInstance() {
         return new BrowseCollectionFirstDetailFragment();
-    }
-
-    public BrowseCollectionFirstDetailFragment() {
-        // Required empty public constructor
     }
 
     /*
@@ -54,7 +54,8 @@ public class BrowseCollectionFirstDetailFragment extends
                     .beginTransaction()
                     .replace(R.id.frag_search_res_coll_det_layout_top,
                             areaPickerMapFragment)
-                    .addToBackStack("AreaPickerMapFragment").commit();
+                    .addToBackStack(AreaPickerMapFragment.class.getSimpleName())
+                    .commit();
         } else {
             AreaPickerMapFragment areaPickerMapFragment = AreaPickerMapFragment
                     .newInstance();

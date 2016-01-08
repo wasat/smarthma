@@ -31,53 +31,17 @@ public class BaseParametersPickerFragment extends BaseSpiceFragment {
     static TextView tvStartTime;
     static TextView tvEndDate;
     static TextView tvEndTime;
-
+    static SharedPrefs sharedPrefs;
     TextView tvAreaSWLat;
     TextView tvAreaSWLon;
     TextView tvAreaNELat;
     TextView tvAreaNELon;
-
-    static SharedPrefs sharedPrefs;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         sharedPrefs = new SharedPrefs(getActivity());
-    }
-
-    void setInitDateTime() {
-
-        calStart = Calendar.getInstance();
-        calStart.roll(Calendar.MONTH, -1);
-        tvStartDate.setText(DateUtils.calendarToDateString(calStart));
-        tvStartTime.setText(DateUtils.calendarToTimeString(calStart));
-
-        calEnd = Calendar.getInstance();
-        tvEndDate.setText(DateUtils.calendarToDateString(calEnd));
-        tvEndTime.setText(DateUtils.calendarToTimeString(calEnd));
-
-        sharedPrefs.setDateTimePrefs(DateUtils.calendarToISO(calStart), DateUtils.calendarToISO(calEnd));
-    }
-
-    void showDatePickerDialog(Calendar calendar, View v) {
-        DialogFragment newFragment = new DatePickerFragment();
-        Bundle args = new Bundle();
-        args.putString(Const.KEY_DATE_PICKER_DT_VIEW_TAG, (String) v.getTag());
-        args.putSerializable(Const.KEY_DATE_TIME_PICKER_CALENDAR, calendar);
-        newFragment.setArguments(args);
-        newFragment.show(getActivity().getSupportFragmentManager(),
-                "datePicker");
-    }
-
-    void showTimePickerDialog(Calendar calendar, View v) {
-        DialogFragment newFragment = new TimePickerFragment();
-        Bundle args = new Bundle();
-        args.putString(Const.KEY_DATE_PICKER_DT_VIEW_TAG, (String) v.getTag());
-        args.putSerializable(Const.KEY_DATE_TIME_PICKER_CALENDAR, calendar);
-        newFragment.setArguments(args);
-        newFragment.show(getActivity().getSupportFragmentManager(),
-                "timePicker");
     }
 
     public void setDateValues(Calendar calendar, String viewTag) {
@@ -109,6 +73,40 @@ public class BaseParametersPickerFragment extends BaseSpiceFragment {
         sharedPrefs.setDateTimePrefs(DateUtils.calendarToISO(calStart), DateUtils.calendarToISO(calEnd));
     }
 
+    void setInitDateTime() {
+
+        calStart = Calendar.getInstance();
+        calStart.roll(Calendar.MONTH, -1);
+        tvStartDate.setText(DateUtils.calendarToDateString(calStart));
+        tvStartTime.setText(DateUtils.calendarToTimeString(calStart));
+
+        calEnd = Calendar.getInstance();
+        tvEndDate.setText(DateUtils.calendarToDateString(calEnd));
+        tvEndTime.setText(DateUtils.calendarToTimeString(calEnd));
+
+        sharedPrefs.setDateTimePrefs(DateUtils.calendarToISO(calStart), DateUtils.calendarToISO(calEnd));
+    }
+
+    void showDatePickerDialog(Calendar calendar, View v) {
+        DialogFragment newFragment = new DatePickerFragment();
+        Bundle args = new Bundle();
+        args.putString(Const.KEY_DATE_PICKER_DT_VIEW_TAG, (String) v.getTag());
+        args.putSerializable(Const.KEY_DATE_TIME_PICKER_CALENDAR, calendar);
+        newFragment.setArguments(args);
+        newFragment.show(getActivity().getSupportFragmentManager(),
+                DatePickerFragment.class.getSimpleName());
+    }
+
+    void showTimePickerDialog(Calendar calendar, View v) {
+        DialogFragment newFragment = new TimePickerFragment();
+        Bundle args = new Bundle();
+        args.putString(Const.KEY_DATE_PICKER_DT_VIEW_TAG, (String) v.getTag());
+        args.putSerializable(Const.KEY_DATE_TIME_PICKER_CALENDAR, calendar);
+        newFragment.setArguments(args);
+        newFragment.show(getActivity().getSupportFragmentManager(),
+                TimePickerFragment.class.getSimpleName());
+    }
+
     void checkDeviceAndLoadMapPicker(int container_id) {
         if (Const.IS_KINDLE) {
             openAreaPickerAmazonMapFragment(container_id);
@@ -124,8 +122,8 @@ public class BaseParametersPickerFragment extends BaseSpiceFragment {
                 .getSupportFragmentManager()
                 .beginTransaction()
                 .replace(container_id,
-                        areaPickerMapFragment)
-                .addToBackStack("AreaPickerMapFragment").commit();
+                        areaPickerMapFragment, AreaPickerMapFragment.class.getSimpleName())
+                .addToBackStack(AreaPickerMapFragment.class.getSimpleName()).commit();
     }
 
     private void openAreaPickerGoogleMapFragment(int container_id) {
@@ -136,9 +134,8 @@ public class BaseParametersPickerFragment extends BaseSpiceFragment {
                 .beginTransaction()
                 .replace(container_id,
                         areaPickerMapFragment)
-                .addToBackStack("AreaPickerMapFragment")
+                .addToBackStack(AreaPickerMapFragment.class.getSimpleName())
                 .commit();
-
     }
 
     void obtainGooglePosition() {
@@ -181,8 +178,5 @@ public class BaseParametersPickerFragment extends BaseSpiceFragment {
         tvAreaNELon.setText(bboxEast);
 
         sharedPrefs.setBboxPrefs(bboxWest, bboxSouth, bboxEast, bboxNorth);
-
-        //areaBoundsUpdated = true;
     }
-
 }

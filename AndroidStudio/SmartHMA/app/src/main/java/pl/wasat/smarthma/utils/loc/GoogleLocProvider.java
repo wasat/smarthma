@@ -14,5 +14,4 @@ interface GoogleLocProvider {
 
     void stop();
 
-
 }

@@ -60,10 +60,6 @@ public class WidgetConfigActivity extends Activity implements OnClickListener {
         serviceIntent
                 .putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId);
         startService(serviceIntent);
-
-        // finish this activity
         this.finish();
-
     }
-
 }

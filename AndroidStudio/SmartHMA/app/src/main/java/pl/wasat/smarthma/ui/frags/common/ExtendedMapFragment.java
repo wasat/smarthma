@@ -10,7 +10,6 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -49,6 +48,8 @@ import pl.wasat.smarthma.utils.obj.LatLngExt;
 public class ExtendedMapFragment extends Fragment implements
         OnBaseMapFragmentPublicListener, Target, Transformation,
         OnSeekBarChangeListener {
+    private static final int BEARING_LEVEL_VALUE = 0;
+    private static final int START_OPACITY = 25;
 
     private BaseMapFragment baseMapFragment;
     private GoogleMap mMap;
@@ -56,16 +57,15 @@ public class ExtendedMapFragment extends Fragment implements
     private SeekBar seekBarOpacity;
 
     private BitmapDescriptor qLookImage;
-
-    private static final int BEARING_LEVEL_VALUE = 0;
-    private static final int START_OPACITY = 25;
-
     private OnExtendedMapFragmentListener mListener;
 
     private LatLng qLookCenter;
     private float qLookWidth;
     private float qLookHeight;
     private float qLookBearing;
+
+    public ExtendedMapFragment() {
+    }
 
     /**
      * Use this factory method to create a new instance of this fragment using
@@ -77,7 +77,17 @@ public class ExtendedMapFragment extends Fragment implements
         return new ExtendedMapFragment();
     }
 
-    public ExtendedMapFragment() {
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        Activity activity = context instanceof Activity ? (Activity) context : null;
+        try {
+            mListener = (OnExtendedMapFragmentListener) activity;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(activity.toString()
+                    + activity.getString(R.string.must_implement)
+                    + OnExtendedMapFragmentListener.class.getSimpleName());
+        }
     }
 
     @Override
@@ -111,176 +121,10 @@ public class ExtendedMapFragment extends Fragment implements
     }
 
     @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        Activity activity = context instanceof Activity ? (Activity) context : null;
-        try {
-            mListener = (OnExtendedMapFragmentListener) activity;
-        } catch (ClassCastException e) {
-            throw new ClassCastException(activity.toString()
-                    + " must implement OnExtendedMapFragmentListener");
-        }
-    }
-
-    @Override
     public void onDetach() {
         super.onDetach();
         mListener = null;
     }
-
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated to
-     * the activity and potentially other fragments contained in that activity.
-     * <p/>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
-    public interface OnExtendedMapFragmentListener {
-        void onMapReady();
-    }
-
-    private void buildFootprintBounds(List<LatLng> footprintPoints) {
-        LatLngBounds.Builder boundsBuilder = new LatLngBounds.Builder();
-        for (int j = 0; j < footprintPoints.size(); j++) {
-            boundsBuilder.include(footprintPoints.get(j));
-        }
-        baseMapFragment.setTargetBounds(boundsBuilder.build());
-        baseMapFragment.animateWhenMapIsReady(75);
-
-
-    }
-
-    /**
-     * @param footprint - Footprint of EO data item
-     */
-    public void showFootPrints(ArrayList<LatLngExt> footprint) {
-        ArrayList<LatLng> footprintPoints = extractLatLngFootprint(footprint);
-        buildFootprintBounds(footprintPoints);
-        drawFootprint(footprintPoints);
-    }
-
-    private ArrayList<LatLng> castToGoogleLatLonArray(ArrayList<LatLngExt> latLngExtArrayList) {
-        ArrayList<LatLng> latLngs = new ArrayList<>();
-        for (LatLngExt latLngExt : latLngExtArrayList) {
-            latLngs.add(latLngExt.getGoogleLatLon());
-        }
-        return latLngs;
-    }
-
-    private ArrayList<LatLng> extractLatLngFootprint(ArrayList<LatLngExt> footprint) {
-/*        List<Pos> footprintPosList = footprint.getMultiExtentOf()
-                .getMultiSurface().getSurfaceMembers().getPolygon()
-                .getExterior().getLinearRing().getPosList();
-        if (footprintPosList.isEmpty()) {
-            String posStr = footprint.getMultiExtentOf().getMultiSurface()
-                    .getSurfaceMembers().getPolygon().getExterior()
-                    .getLinearRing().getPosString().getPointsString();
-            footprintPosList = footprint.getMultiExtentOf().getMultiSurface()
-                    .getSurfaceMembers().getPolygon().getExterior()
-                    .getLinearRing().setPosList(posStr);
-        }*/
-
-        ArrayList<LatLng> footprintPoints = new ArrayList<>();
-        float prevBearing = 0;
-
-        for (int i = 0; i < footprint.size() - 1; i++) {
-            double currLat = footprint.get(i).latitude;
-            double currLng = footprint.get(i).longitude;
-            double nextLat = footprint.get(i + 1).latitude;
-            double nextLng = footprint.get(i + 1).longitude;
-
-            float[] results = new float[3];
-
-            Location.distanceBetween(currLat, currLng, nextLat, nextLng,
-                    results);
-
-            if (Math.abs(results[2] - prevBearing) >= BEARING_LEVEL_VALUE) {
-                footprintPoints.add(footprint.get(i).getGoogleLatLon());
-            }
-            prevBearing = results[2];
-        }
-
-        return footprintPoints;
-    }
-
-    private void drawFootprint(ArrayList<LatLng> footprintPoints) {
-        if (footprintPoints.size() > 0) {
-            PolygonOptions rectOptions = new PolygonOptions();
-            rectOptions.addAll(footprintPoints);
-            rectOptions.strokeColor(Color.HSVToColor(new float[]{
-                    179 + (9 * 4), 1, 1})); // change 4 to variable;
-            rectOptions.strokeWidth(4);
-            rectOptions.geodesic(true);
-            rectOptions.zIndex(1);
-            mMap.addPolygon(rectOptions);
-        }
-    }
-
-    private void calcQuickLookParams(LatLngExt footprintCenter,
-                                     ArrayList<LatLng> footprintPoints) {
-        //TODO - process quicklook if points > 5
-        double oneLat = footprintPoints.get(0).latitude;
-        double oneLng = footprintPoints.get(0).longitude;
-        double twoLat = footprintPoints.get(1).latitude;
-        double twoLng = footprintPoints.get(1).longitude;
-        double threeLat = footprintPoints.get(2).latitude;
-        double threeLng = footprintPoints.get(2).longitude;
-        double fourLat = footprintPoints.get(3).latitude;
-        double fourLng = footprintPoints.get(3).longitude;
-        float[] results = new float[3];
-
-
-        if (footprintCenter != null && (footprintCenter.latitude != 0 && footprintCenter.longitude != 0)) {
-            qLookCenter = footprintCenter.getGoogleLatLon();
-        } else {
-            double latCenter = (oneLat + twoLat + threeLat + fourLat) / 4;
-            double lngCenter = (oneLng + twoLng + threeLng + fourLng) / 4;
-            qLookCenter = new LatLng(latCenter, lngCenter);
-        }
-
-        Location.distanceBetween(oneLat, oneLng, twoLat, twoLng, results);
-        qLookHeight = results[0];
-
-        Location.distanceBetween(oneLat, oneLng, fourLat, fourLng, results);
-        qLookWidth = results[0];
-        qLookBearing = ((results[1] + results[2]) / 2) - 90;
-
-    }
-
-    public void showQuicklookOnMap(SimpleMetadata simpleMetadata) {
-
-        //ArrayList<LatLng> nowaLista = (ArrayList < LatLng >)(Object)footprint;
-
-        ArrayList<LatLng> footprintPoints = castToGoogleLatLonArray(simpleMetadata.getFootprint());
-        LatLngExt center = simpleMetadata.getFootprintCenter();
-        String url = simpleMetadata.getQuickLookUrl();
-        if (url == null) return;
-
-        buildFootprintBounds(footprintPoints);
-
-        calcQuickLookParams(center, footprintPoints);
-        drawFootprint(footprintPoints);
-
-        Target quicklookTarget = this;
-        if (!url.isEmpty()) {
-
-            //SSLCertificateHandler.nuke();
-
-/*           OkHttpClient client = new OkHttpClient();
-            client.setProtocols(Arrays.asList(Protocol.HTTP_1_1));
-            final Picasso picasso = new Picasso.Builder(getActivity())
-                    .downloader(new OkHttpDownloader(client))
-                    .build();*/
-
-            Picasso.with(getActivity())
-                    .load(url)
-                    .transform(this)
-                    .into(quicklookTarget);
-        }
-    }
-
 
     @Override
     public void onBaseSupportMapPublicReady() {
@@ -292,13 +136,7 @@ public class ExtendedMapFragment extends Fragment implements
     }
 
     @Override
-    public void onPrepareLoad(Drawable arg0) {
-        Log.i("EXT_MAP", "onPrepareLoad");
-    }
-
-    @Override
     public void onBitmapLoaded(Bitmap bitmap, LoadedFrom arg1) {
-        Log.i("EXT_MAP", "onBitmapLoaded");
         qLookImage = BitmapDescriptorFactory.fromBitmap(bitmap);
 
         GroundOverlayOptions groundOverlayOpt = new GroundOverlayOptions()
@@ -308,13 +146,15 @@ public class ExtendedMapFragment extends Fragment implements
                 .transparency((float) START_OPACITY / 100);
 
         groundOverlay = mMap.addGroundOverlay(groundOverlayOpt);
-
         seekBarOpacity.setProgress(START_OPACITY);
     }
 
     @Override
     public void onBitmapFailed(Drawable arg0) {
-        Log.i("EXT_MAP", "onBitmapFailed");
+    }
+
+    @Override
+    public void onPrepareLoad(Drawable arg0) {
     }
 
     @Override
@@ -344,13 +184,7 @@ public class ExtendedMapFragment extends Fragment implements
     }
 
     @Override
-    public String key() {
-        return "SmartHMA";
-    }
-
-    @Override
     public Bitmap transform(Bitmap source) {
-        Log.i("EXT_MAP", "transform");
         int x = (int) ((source.getWidth()) / 1.5);
         int y = (int) ((source.getHeight()) / 1.5);
         Bitmap result = Bitmap.createScaledBitmap(source, x, y, false);
@@ -358,6 +192,139 @@ public class ExtendedMapFragment extends Fragment implements
             source.recycle();
         }
         return result;
+    }
+
+    @Override
+    public String key() {
+        return "SmartHMA";
+    }
+
+    /**
+     * @param footprint - Footprint of EO data item
+     */
+    public void showFootPrints(ArrayList<LatLngExt> footprint) {
+        ArrayList<LatLng> footprintPoints = extractLatLngFootprint(footprint);
+        buildFootprintBounds(footprintPoints);
+        drawFootprint(footprintPoints);
+    }
+
+    private ArrayList<LatLng> extractLatLngFootprint(ArrayList<LatLngExt> footprint) {
+        ArrayList<LatLng> footprintPoints = new ArrayList<>();
+        float prevBearing = 0;
+
+        for (int i = 0; i < footprint.size() - 1; i++) {
+            double currLat = footprint.get(i).latitude;
+            double currLng = footprint.get(i).longitude;
+            double nextLat = footprint.get(i + 1).latitude;
+            double nextLng = footprint.get(i + 1).longitude;
+
+            float[] results = new float[3];
+
+            Location.distanceBetween(currLat, currLng, nextLat, nextLng,
+                    results);
+
+            if (Math.abs(results[2] - prevBearing) >= BEARING_LEVEL_VALUE) {
+                footprintPoints.add(footprint.get(i).getGoogleLatLon());
+            }
+            prevBearing = results[2];
+        }
+        return footprintPoints;
+    }
+
+    private void buildFootprintBounds(List<LatLng> footprintPoints) {
+        LatLngBounds.Builder boundsBuilder = new LatLngBounds.Builder();
+        for (int j = 0; j < footprintPoints.size(); j++) {
+            boundsBuilder.include(footprintPoints.get(j));
+        }
+        baseMapFragment.setTargetBounds(boundsBuilder.build());
+        baseMapFragment.animateWhenMapIsReady(75);
+
+
+    }
+
+    private void drawFootprint(ArrayList<LatLng> footprintPoints) {
+        if (footprintPoints.size() > 0) {
+            PolygonOptions rectOptions = new PolygonOptions();
+            rectOptions.addAll(footprintPoints);
+            rectOptions.strokeColor(Color.HSVToColor(new float[]{
+                    179 + (9 * 4), 1, 1})); // change 4 to variable;
+            rectOptions.strokeWidth(4);
+            rectOptions.geodesic(true);
+            rectOptions.zIndex(1);
+            mMap.addPolygon(rectOptions);
+        }
+    }
+
+    public void showQuicklookOnMap(SimpleMetadata simpleMetadata) {
+
+        ArrayList<LatLng> footprintPoints = castToGoogleLatLonArray(simpleMetadata.getFootprint());
+        LatLngExt center = simpleMetadata.getFootprintCenter();
+        String url = simpleMetadata.getQuickLookUrl();
+        if (url == null) return;
+
+        buildFootprintBounds(footprintPoints);
+
+        calcQuickLookParams(center, footprintPoints);
+        drawFootprint(footprintPoints);
+
+        Target quicklookTarget = this;
+        if (!url.isEmpty()) {
+            Picasso.with(getActivity())
+                    .load(url)
+                    .transform(this)
+                    .into(quicklookTarget);
+        }
+    }
+
+    private ArrayList<LatLng> castToGoogleLatLonArray(ArrayList<LatLngExt> latLngExtArrayList) {
+        ArrayList<LatLng> latLngs = new ArrayList<>();
+        for (LatLngExt latLngExt : latLngExtArrayList) {
+            latLngs.add(latLngExt.getGoogleLatLon());
+        }
+        return latLngs;
+    }
+
+    private void calcQuickLookParams(LatLngExt footprintCenter,
+                                     ArrayList<LatLng> footprintPoints) {
+        //TODO - process quicklook if points > 5
+        double oneLat = footprintPoints.get(0).latitude;
+        double oneLng = footprintPoints.get(0).longitude;
+        double twoLat = footprintPoints.get(1).latitude;
+        double twoLng = footprintPoints.get(1).longitude;
+        double threeLat = footprintPoints.get(2).latitude;
+        double threeLng = footprintPoints.get(2).longitude;
+        double fourLat = footprintPoints.get(3).latitude;
+        double fourLng = footprintPoints.get(3).longitude;
+        float[] results = new float[3];
+
+        if (footprintCenter != null && (footprintCenter.latitude != 0 && footprintCenter.longitude != 0)) {
+            qLookCenter = footprintCenter.getGoogleLatLon();
+        } else {
+            double latCenter = (oneLat + twoLat + threeLat + fourLat) / 4;
+            double lngCenter = (oneLng + twoLng + threeLng + fourLng) / 4;
+            qLookCenter = new LatLng(latCenter, lngCenter);
+        }
+
+        Location.distanceBetween(oneLat, oneLng, twoLat, twoLng, results);
+        qLookHeight = results[0];
+
+        Location.distanceBetween(oneLat, oneLng, fourLat, fourLng, results);
+        qLookWidth = results[0];
+        qLookBearing = ((results[1] + results[2]) / 2) - 90;
+
+    }
+
+    /**
+     * This interface must be implemented by activities that contain this
+     * fragment to allow an interaction in this fragment to be communicated to
+     * the activity and potentially other fragments contained in that activity.
+     * <p/>
+     * See the Android Training lesson <a href=
+     * "http://developer.android.com/training/basics/fragments/communicating.html"
+     * >Communicating with Other Fragments</a> for more information.
+     */
+    public interface OnExtendedMapFragmentListener {
+        void onMapReady();
     }
 
 }

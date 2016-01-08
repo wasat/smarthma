@@ -15,20 +15,6 @@ public class MetadataCleaner {
         return cleanValue;
     }
 
-    public static String getCleanISOValue(String value) {
-        String cleanValue;
-        cleanValue = removeUnnecessaryISOValues(value);
-        cleanValue = changeUpperCase(cleanValue);
-        return cleanValue;
-    }
-
-    public static String getCleanDCValue(String value) {
-        String cleanValue;
-        cleanValue = removeUnnecessaryDCValues(value);
-        cleanValue = changeUpperCase(cleanValue);
-        return cleanValue;
-    }
-
     private static String removeUnnecessaryOMValues(String value) {
         String cleanedValue = value;
 
@@ -71,9 +57,33 @@ public class MetadataCleaner {
         cleanedValue = cleanedValue.replaceAll(" - value - ", " -> ");
         cleanedValue = cleanedValue.replaceAll("value - ", "");
         return cleanedValue;
-
     }
 
+    private static String changeUpperCase(String inputString) {
+        if (inputString.isEmpty()) {
+            return inputString;
+        }
+        String outputString = String.valueOf(inputString.charAt(0));
+
+        for (int i = 1; i < inputString.length(); i++) {
+            char cThis = inputString.charAt(i);
+            char cPrev = inputString.charAt(i - 1);
+            if (Character.isUpperCase(cThis) && Character.isLowerCase(cPrev)) {
+                outputString = outputString + " "
+                        + Character.toLowerCase(cThis);
+            } else {
+                outputString = outputString + cThis;
+            }
+        }
+        return outputString;
+    }
+
+    public static String getCleanISOValue(String value) {
+        String cleanValue;
+        cleanValue = removeUnnecessaryISOValues(value);
+        cleanValue = changeUpperCase(cleanValue);
+        return cleanValue;
+    }
 
     private static String removeUnnecessaryISOValues(String value) {
         String cleanedValue = value;
@@ -104,6 +114,13 @@ public class MetadataCleaner {
         return cleanedValue;
     }
 
+    public static String getCleanDCValue(String value) {
+        String cleanValue;
+        cleanValue = removeUnnecessaryDCValues(value);
+        cleanValue = changeUpperCase(cleanValue);
+        return cleanValue;
+    }
+
     private static String removeUnnecessaryDCValues(String value) {
         String cleanedValue = value;
 
@@ -118,26 +135,5 @@ public class MetadataCleaner {
         cleanedValue = cleanedValue.replaceAll("Text - ", "");
 
         return cleanedValue;
-
     }
-
-    private static String changeUpperCase(String inputString) {
-        if (inputString.isEmpty()) {
-            return inputString;
-        }
-        String outputString = String.valueOf(inputString.charAt(0));
-
-        for (int i = 1; i < inputString.length(); i++) {
-            char cThis = inputString.charAt(i);
-            char cPrev = inputString.charAt(i - 1);
-            if (Character.isUpperCase(cThis) && Character.isLowerCase(cPrev)) {
-                outputString = outputString + " "
-                        + Character.toLowerCase(cThis);
-            } else {
-                outputString = outputString + cThis;
-            }
-        }
-        return outputString;
-    }
-
 }

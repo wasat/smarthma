@@ -38,8 +38,8 @@ public class BaseViewAndBasicSettingsDetailFragment extends BaseDateTimeAreaCont
     protected EntryISO displayedISOEntry;
     protected String collectionName;
 
-    // private LatLngBoundsExt geoBounds = null;
-
+    public BaseViewAndBasicSettingsDetailFragment() {
+    }
 
     /**
      * Use this factory method to create a new instance of this fragment using
@@ -56,9 +56,6 @@ public class BaseViewAndBasicSettingsDetailFragment extends BaseDateTimeAreaCont
         args.putSerializable(KEY_COLLECTION_ENTRY, collectionEntry);
         fragment.setArguments(args);
         return fragment;
-    }
-
-    public BaseViewAndBasicSettingsDetailFragment() {
     }
 
     @Override
@@ -80,7 +77,6 @@ public class BaseViewAndBasicSettingsDetailFragment extends BaseDateTimeAreaCont
         rootView = inflater.inflate(
                 R.layout.fragment_map_and_basic_settings_detail, container,
                 false);
-        //TODO INFOAPPS
         mSlidingLayer = (SlidingLayer) rootView.findViewById(R.id.sliding_layer_with_params);
 
         tvParentId = (TextView) rootView
@@ -88,9 +84,11 @@ public class BaseViewAndBasicSettingsDetailFragment extends BaseDateTimeAreaCont
 
         if (displayedISOEntry != null) {
             final String title = displayedISOEntry.getTitle();
-            final String pubDate = "These data were published: "
-                    + DateUtils.getISOPubDate(displayedISOEntry) + " and updated: "
-                    + displayedISOEntry.getUpdated();
+            final String pubDate = String.format(getString(R.string.these_data_are_published_and_updated),
+                    DateUtils.getISOPubDate(displayedISOEntry),
+                    displayedISOEntry.getUpdated());
+/*                    + DateUtils.getISOPubDate(displayedISOEntry) + " and updated: "
+                    + displayedISOEntry.getUpdated();*/
             parentID = displayedISOEntry.getIdentifier();
 
             String content = displayedISOEntry.getSummary().getCdata();
@@ -175,11 +173,6 @@ public class BaseViewAndBasicSettingsDetailFragment extends BaseDateTimeAreaCont
 
         loadParentIdPrefs();
 
-        //obtainGlobalSettings();
-
-        //loadBboxPrefs();
-        //loadDateTimePrefs();
-
         layoutSpinners = (LinearLayout) rootView.findViewById(R.id.layout_param_sliders);
 
         btnShowProducts = (Button) rootView
@@ -189,9 +182,7 @@ public class BaseViewAndBasicSettingsDetailFragment extends BaseDateTimeAreaCont
         return rootView;
     }
 
-
     private void loadParentIdPrefs() {
         tvParentId.setText(sharedPrefs.getParentIdPrefs());
     }
-
 }

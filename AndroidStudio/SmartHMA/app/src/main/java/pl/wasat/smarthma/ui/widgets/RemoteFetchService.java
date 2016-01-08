@@ -4,7 +4,6 @@ import android.app.Service;
 import android.appwidget.AppWidgetManager;
 import android.content.Intent;
 import android.os.IBinder;
-import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,14 +13,8 @@ import pl.wasat.smarthma.model.NewsArticle;
 
 public class RemoteFetchService extends Service {
 
-    private int appWidgetId = AppWidgetManager.INVALID_APPWIDGET_ID;
-
     public static ArrayList<ListItem> listItemList;
-
-    @Override
-    public IBinder onBind(Intent arg0) {
-        return null;
-    }
+    private int appWidgetId = AppWidgetManager.INVALID_APPWIDGET_ID;
 
     /*
      * Retrieve appwidget id from intent it is needed to update widget later
@@ -37,6 +30,11 @@ public class RemoteFetchService extends Service {
         return super.onStartCommand(intent, flags, startId);
     }
 
+    @Override
+    public IBinder onBind(Intent arg0) {
+        return null;
+    }
+
     /**
      * method which fetches data(json) from web aquery takes params
      * remoteJsonUrl = from where data to be fetched String.class = return
@@ -50,16 +48,12 @@ public class RemoteFetchService extends Service {
     }
 
     public void refreshList(List<NewsArticle> articles) {
-        Log.d("ZX", "articles:");
         listItemList = new ArrayList<>();
-        for (NewsArticle article : articles)
-        {
+        for (NewsArticle article : articles) {
             String title = article.getTitle();
             String date = article.getPubDate();
             String author = article.getAuthor();
-            if (title != null && date != null)
-            {
-                Log.d("ZX", title + " " + date);
+            if (title != null && date != null) {
                 ListItem listItem = new ListItem();
                 listItem.heading = title;
                 listItem.content = date;
@@ -80,7 +74,6 @@ public class RemoteFetchService extends Service {
      * and here action == RSSWidgetProvider.DATA_FETCHED
      */
     private void populateWidget() {
-
         Intent widgetUpdateIntent = new Intent();
         widgetUpdateIntent.setAction(RSSWidgetProvider.DATA_FETCHED);
         widgetUpdateIntent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID,

@@ -14,12 +14,6 @@ public class FilesWriter {
     public File writeToFile(String strToWrite, String fileName, String path) {
 
         if (path == null) path = Const.SMARTHMA_PATH_TEMP;
-
-/*        File dir = new File(path);
-        if (!dir.exists()) {
-            //noinspection ResultOfMethodCallIgnored
-            dir.mkdirs();
-        }*/
         File file = new File(validateDir(path), fileName);
 
         try {
@@ -35,11 +29,16 @@ public class FilesWriter {
         return file;
     }
 
-    public void appendLogToFile(String strToAppend, String fileName) {
+    public static File validateDir(String path) {
+        File dir = new File(path);
+        if (!dir.exists()) {
+            //noinspection ResultOfMethodCallIgnored
+            dir.mkdirs();
+        }
+        return dir;
+    }
 
-        //File dir = new File(Const.SMARTHMA_PATH_LOGS);
-        //noinspection ResultOfMethodCallIgnored
-        //dir.mkdirs();
+    public void appendLogToFile(String strToAppend, String fileName) {
 
         File logFile = new File(validateDir(Const.SMARTHMA_PATH_LOGS), fileName);
         if (!logFile.exists()) {
@@ -55,20 +54,10 @@ public class FilesWriter {
             BufferedWriter buf = new BufferedWriter(new FileWriter(logFile,
                     true));
             buf.append(strToAppend);
-            //buf.newLine();
             buf.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
-
-    public static File validateDir(String path) {
-        File dir = new File(path);
-        if (!dir.exists()) {
-            //noinspection ResultOfMethodCallIgnored
-            dir.mkdirs();
-        }
-        return dir;
     }
 
 }

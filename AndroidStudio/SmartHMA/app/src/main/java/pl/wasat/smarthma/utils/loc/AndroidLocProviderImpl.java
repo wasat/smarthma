@@ -30,70 +30,15 @@ class AndroidLocProviderImpl implements LocationListener {
         locationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
     }
 
-    public void start() {
-        initAndroidProvider();
-    }
-
-    private void initAndroidProvider() {
-
-        if (Build.VERSION.SDK_INT >= 23 &&
-                ContextCompat.checkSelfPermission(context, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
-                ContextCompat.checkSelfPermission(context, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            return;
-        }
-
-        Location lastKnownLocation = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
-        if (lastKnownLocation == null)
-            lastKnownLocation = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-
-        if (lastKnownLocation != null) {
-            long timeDiff = System.currentTimeMillis() - lastKnownLocation.getTime();
-            if (timeDiff > LOC_DEGRADATION_TIME || lastKnownLocation.getAccuracy() > ACCURACY_LEVEL) {
-                startLocationUpdates();
-            } else {
-                cachedLastLocation = lastKnownLocation;
-                buildAndSendBroadcast(true);
-            }
-            //Log.i(AndroidLocProviderImpl.class.getName(), "initAndroidProvider" + lastKnownLocation.toString());
-        } else {
-            if (locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)
-                    || locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)) {
-                startLocationUpdates();
-            } else {
-                //Log.i(AndroidLocProviderImpl.class.getName(), "initAndroidProvider - NULL:");
-                //calcDefaultPosition();
-                buildAndSendBroadcast(false);
-            }
-        }
-        updateStartTime = System.currentTimeMillis();
-    }
-
-
-    private void startLocationUpdates() {
-        if (Build.VERSION.SDK_INT >= 23 &&
-                ContextCompat.checkSelfPermission(context, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
-                ContextCompat.checkSelfPermission(context, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            return;
-        }
-        this.locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
-        this.locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, this);
-    }
-
-    private void stopLocationUpdates() {
-        if (Build.VERSION.SDK_INT >= 23 &&
-                ContextCompat.checkSelfPermission(context, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
-                ContextCompat.checkSelfPermission(context, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            return;
-        }
-        locationManager.removeUpdates(this);
+    @Override
+    public void onLocationChanged(Location location) {
+        determineBestLocation(location);
     }
 
     private void determineBestLocation(Location newLocation) {
         if (newLocation != null) {
-            //Log.i(AndroidLocProviderImpl.class.getName(), newLocation.toString());
             long timeDiff = System.currentTimeMillis() - updateStartTime;
             if (isBetterLocation(newLocation, cachedLastLocation)) cachedLastLocation = newLocation;
-            //Log.i(AndroidLocProviderImpl.class.getName(), cachedLastLocation.toString());
             if (timeDiff > REQUEST_TIMEOUT) {
                 buildAndSendBroadcast(true);
                 stopLocationUpdates();
@@ -148,27 +93,6 @@ class AndroidLocProviderImpl implements LocationListener {
         return provider1.equals(provider2);
     }
 
-    public void stop() {
-        stopLocationUpdates();
-    }
-
-    public Location getCalculatedPosition() {
-        if (cachedLastLocation != null) {
-            Location location = new Location("Android_Location");
-            location.setLatitude(cachedLastLocation.getLatitude());
-            location.setLongitude(cachedLastLocation.getLongitude());
-            return location;
-        } else {
-            return null;
-        }
-    }
-
-    @Override
-    public void onLocationChanged(Location location) {
-        //Log.i(AndroidLocProviderImpl.class.getName(), "onLocationChanged");
-        determineBestLocation(location);
-    }
-
     @Override
     public void onStatusChanged(String s, int i, Bundle bundle) {
     }
@@ -181,11 +105,81 @@ class AndroidLocProviderImpl implements LocationListener {
     public void onProviderDisabled(String s) {
     }
 
+    public void start() {
+        initAndroidProvider();
+    }
+
+    private void initAndroidProvider() {
+
+        if (Build.VERSION.SDK_INT >= 23 &&
+                ContextCompat.checkSelfPermission(context, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
+                ContextCompat.checkSelfPermission(context, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            return;
+        }
+
+        Location lastKnownLocation = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+        if (lastKnownLocation == null)
+            lastKnownLocation = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+
+        if (lastKnownLocation != null) {
+            long timeDiff = System.currentTimeMillis() - lastKnownLocation.getTime();
+            if (timeDiff > LOC_DEGRADATION_TIME || lastKnownLocation.getAccuracy() > ACCURACY_LEVEL) {
+                startLocationUpdates();
+            } else {
+                cachedLastLocation = lastKnownLocation;
+                buildAndSendBroadcast(true);
+            }
+        } else {
+            if (locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)
+                    || locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)) {
+                startLocationUpdates();
+            } else {
+                //calcDefaultPosition();
+                buildAndSendBroadcast(false);
+            }
+        }
+        updateStartTime = System.currentTimeMillis();
+    }
+
+    private void startLocationUpdates() {
+        if (Build.VERSION.SDK_INT >= 23 &&
+                ContextCompat.checkSelfPermission(context, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
+                ContextCompat.checkSelfPermission(context, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            return;
+        }
+        this.locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
+        this.locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, this);
+    }
+
     private void buildAndSendBroadcast(Boolean isSuccess) {
         Intent intent = new Intent();
         intent.setAction(GoogleLocProviderImpl.GOOGLE_LOC_BROADCAST_SENT);
         intent.putExtra(GoogleLocProviderImpl.IS_SUCCESS, isSuccess);
         intent.putExtra(GoogleLocProviderImpl.GOOGLE_PROVIDER_TYPE, GoogleLocProviderImpl.GOOGLE_ANDROID);
         context.sendBroadcast(intent);
+    }
+
+    public void stop() {
+        stopLocationUpdates();
+    }
+
+    private void stopLocationUpdates() {
+        if (Build.VERSION.SDK_INT >= 23 &&
+                ContextCompat.checkSelfPermission(context, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
+                ContextCompat.checkSelfPermission(context, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            return;
+        }
+        locationManager.removeUpdates(this);
+    }
+
+    public Location getCalculatedPosition() {
+        if (cachedLastLocation != null) {
+            Location location = new Location("Android_Location");
+            location.setLatitude(cachedLastLocation.getLatitude());
+            location.setLongitude(cachedLastLocation.getLongitude());
+            return location;
+        } else {
+            return null;
+        }
     }
 }

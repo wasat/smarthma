@@ -196,10 +196,6 @@ class OMDataHandler extends DefaultHandler {
     private Status status;
     private StatusSubType statusSubType;
 
-    public Feed getFeeds() {
-        return feed;
-    }
-
     /*
      * This method is called everytime a start element is found (an opening XML
      * marker) here we always reset the characters StringBuffer as we are only
@@ -1111,10 +1107,8 @@ class OMDataHandler extends DefaultHandler {
                     archivingCenter.set_text(chars.toString());
                 } else if (localName.equalsIgnoreCase("archivingDate")) {
                     archivingDate.set_text(chars.toString());
-                    //} else if (localName.equalsIgnoreCase("composedOf")) {
                 } else if (localName.equalsIgnoreCase("creationDate")) {
                     creationDate.set_text(chars.toString());
-                    //} else if (localName.equalsIgnoreCase("derivedFrom")) {
                 } else if (localName.equalsIgnoreCase("downlinkedTo")) {
                     downlinkedTo.setDownlinkInformation(downlinkInformation);
                 } else if (localName.equalsIgnoreCase("downlinkInformation")) {
@@ -1147,7 +1141,6 @@ class OMDataHandler extends DefaultHandler {
                     groundTrackUncertainty.set_text(chars.toString());
                 } else if (localName.equalsIgnoreCase("method")) {
                     method.set_text(chars.toString());
-                    // } else if (localName.equalsIgnoreCase("processingCenter")) {
                 } else if (localName.equalsIgnoreCase("processingDate")) {
                     processingDate.set_text(chars.toString());
                 } else if (localName.equalsIgnoreCase("processingMode")) {
@@ -1212,9 +1205,7 @@ class OMDataHandler extends DefaultHandler {
                 // Lets check if we've hit our limit on number of entries
                 entryAdded++;
                 isInEntry = false;
-
             }
-
         }
     }
 
@@ -1230,5 +1221,9 @@ class OMDataHandler extends DefaultHandler {
      */
     public void characters(char ch[], int start, int length) {
         chars.append(new String(ch, start, length).trim());
+    }
+
+    public Feed getFeeds() {
+        return feed;
     }
 }

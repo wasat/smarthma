@@ -16,21 +16,16 @@ import java.util.Locale;
 public class StringExt {
     private static final String NEW_LINE = System.getProperty("line.separator");
 
-
     public static String formatXY(Double value) {
-
         return String.format(Locale.US, "%.2f", value);
     }
 
     public static String formatLatLng(Double value) {
-        //if (Double.isNaN(value)) return "null";
         return String.format(Locale.US, "%.6f", value);
     }
 
     public static String formatUrl(String url) {
-        //String formattedUrl = "";
         return url.replaceAll("&", NEW_LINE + "&").replaceAll("\\?", NEW_LINE + "?");
-        //return formattedUrl;
     }
 
     public static String cleanDirName(String dirName) {
@@ -42,7 +37,7 @@ public class StringExt {
     }
 
     public static String inStreamReaderToString(InputStream stream) throws IOException {
-        int n = 0;
+        int n;
         char[] buffer = new char[1024 * 4];
         InputStreamReader reader = new InputStreamReader(stream, "UTF8");
         StringWriter writer = new StringWriter();
@@ -51,7 +46,7 @@ public class StringExt {
     }
 
     public static String inStreamToStringBuffer(InputStream in) throws IOException {
-        StringBuffer out = new StringBuffer();
+        StringBuilder out = new StringBuilder();
         byte[] b = new byte[4096];
         for (int i; (i = in.read(b)) != -1; ) {
             out.append(new String(b, 0, i));
@@ -80,5 +75,4 @@ public class StringExt {
         }
         return inputStringBuilder.toString();
     }
-
 }

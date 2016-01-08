@@ -50,17 +50,12 @@ public class DownloadService extends IntentService {
     private static final String[] SCOPES = {DriveScopes.DRIVE_FILE};
     private Builder mBuilder;
     private int action;
-    private GoogleAccountCredential mCredential;
     private NotificationManager mNotifyManager;
     private boolean notEnoughSpace;
 
     private String productName;
     private String urlData;
     private String metadata;
-
-    // TODO: Rename parameters
-    private static String FILE_URL = "http://67.20.63.5/test.zip";
-
 
     public DownloadService() {
         super("DownloadService");
@@ -80,23 +75,21 @@ public class DownloadService extends IntentService {
     private void downloadFile() {
         mNotifyManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
         mBuilder = new NotificationCompat.Builder(this);
-        mBuilder.setContentTitle("Download")
-                .setContentText("Download in progress")
-                        //.setSmallIcon(R.drawable.actionbar_logo);
+        mBuilder.setContentTitle(getString(R.string.download))
+                .setContentText(getString(R.string.download_in_progress))
                 .setSmallIcon(R.mipmap.ic_launcher_circle);
         new DownloadFileAsync(action, productName, urlData, metadata).execute();
     }
 
     class DownloadFileAsync extends AsyncTask<String, String, Boolean> {
         public static final String LOG_TAG = "DOWNLOAD FILE";
-        //private File rootDir = Environment.getExternalStorageDirectory();
-        private String productName;
-        private String urlData;
-        private String metadata;
+        private final String productName;
+        private final String urlData;
+        private final String metadata;
         private final String DROPBOX_DIR = "/EO_DATA/";
+        private final int action;
         private File dataFile;
         private String dataPath;
-        private int action;
 
         public DownloadFileAsync(int action, String productName, String urlData, String metadata) {
             this.action = action;
@@ -105,21 +98,12 @@ public class DownloadService extends IntentService {
             this.metadata = metadata;
         }
 
-
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-            mBuilder.setProgress(100, 0, false);
-            mNotifyManager.notify(1, mBuilder.build());
-        }
-
-
         @Override
         protected Boolean doInBackground(String... aurl) {
             try {
                 if (action == 0) {
                     SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(DownloadService.this);
-                    mCredential = GoogleAccountCredential.usingOAuth2(
+                    GoogleAccountCredential mCredential = GoogleAccountCredential.usingOAuth2(
                             getApplicationContext(), Arrays.asList(SCOPES))
                             .setBackOff(new ExponentialBackOff())
                             .setSelectedAccountName(settings.getString(PREF_ACCOUNT_NAME, null));
@@ -132,9 +116,11 @@ public class DownloadService extends IntentService {
                     mService.about().get().execute();
                 }
                 StatFs stat = new StatFs(Environment.getExternalStorageDirectory().getPath());
-                long avaibleBlocks = stat.getAvailableBlocks();
-                int blockSizeInBytes = stat.getBlockSize();
-                long freeSpaceInMegabytes = avaibleBlocks * (blockSizeInBytes);
+                //noinspection deprecation
+                long availableBlocks = stat.getAvailableBlocks();
+                //noinspection deprecation
+                long blockSizeInBytes = stat.getBlockSize();
+                long freeSpaceInMegabytes = availableBlocks * (blockSizeInBytes);
 
                 //connecting to url
                 URL u = new URL(urlData);
@@ -157,13 +143,11 @@ public class DownloadService extends IntentService {
                 InputStream in = c.getInputStream();
 
                 byte[] buffer = new byte[1024];
-                int len1 = 0;
+                int len1;
                 long total = 0;
                 int progress = 0;
                 while ((len1 = in.read(buffer)) > 0) {
-
-                    total += len1; //total = total + len1
-
+                    total += len1;
                     if (progress != (int) ((total * 100) / lengthOfFile)) {
                         progress = (int) ((total * 100) / lengthOfFile);
                         publishProgress("" + progress);
@@ -182,13 +166,13 @@ public class DownloadService extends IntentService {
                 Log.d(LOG_TAG, e.getMessage());
                 return false;
             }
-
             return true;
         }
 
-        protected void onProgressUpdate(String... progress) {
-            super.onProgressUpdate(progress);
-            mBuilder.setProgress(100, Integer.parseInt(progress[0]), false);
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            mBuilder.setProgress(100, 0, false);
             mNotifyManager.notify(1, mBuilder.build());
         }
 
@@ -234,15 +218,14 @@ public class DownloadService extends IntentService {
             }
         }
 
+        protected void onProgressUpdate(String... progress) {
+            super.onProgressUpdate(progress);
+            mBuilder.setProgress(100, Integer.parseInt(progress[0]), false);
+            mNotifyManager.notify(1, mBuilder.build());
+        }
+
         private String buildPath(String dir) {
             return dir + StringExt.cleanDirName(productName) + "/";
         }
-
-/*        public void checkAndCreateDirectory(String path) {
-            File new_dir = new File(path);
-            if (!new_dir.exists()) {
-                new_dir.mkdirs();
-            }
-        }*/
     }
 }

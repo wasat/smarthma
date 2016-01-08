@@ -13,7 +13,6 @@ import com.amazon.geo.mapsv2.SupportMapFragment;
 import com.amazon.geo.mapsv2.model.CameraPosition;
 import com.amazon.geo.mapsv2.model.LatLng;
 import com.amazon.geo.mapsv2.model.LatLngBounds;
-import com.amazon.geo.mapsv2.model.TileOverlay;
 import com.amazon.geo.mapsv2.model.TileOverlayOptions;
 import com.amazon.geo.mapsv2.model.TileProvider;
 import com.amazon.geo.mapsv2.util.AmazonMapsRuntimeUtil;
@@ -32,11 +31,11 @@ import pl.wasat.smarthma.utils.loc.GoogleLocProviderImpl;
  */
 public class AmznBaseMapFragment extends SupportMapFragment {
 
-    private SupportMapFragment supportMapFrag;
-    AmazonMap mMap;
     public OnBaseMapFragmentListener mListener;
+    AmazonMap mMap;
+    LatLngBounds targetBounds;
+    private SupportMapFragment supportMapFrag;
     private OnBaseMapFragmentPublicListener publicListener;
-    protected LatLngBounds targetBounds;
     private BroadcastReceiver mReceiver;
 
     public AmznBaseMapFragment() {
@@ -55,17 +54,6 @@ public class AmznBaseMapFragment extends SupportMapFragment {
         super.onActivityCreated(savedInstanceState);
 
         startCreateMap(savedInstanceState);
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-
-        if (mReceiver != null) {
-            LocalBroadcastManager.getInstance(getActivity())
-                    .unregisterReceiver(mReceiver);
-            mReceiver = null;
-        }
     }
 
     private void startCreateMap(Bundle savedInstanceState) {
@@ -88,21 +76,14 @@ public class AmznBaseMapFragment extends SupportMapFragment {
     private void setUpMapIfNeeded() {
         if (mMap == null) {
             mMap = supportMapFrag.getMap();
-            // Check if we were successful in obtaining the map.
-            //AcraExtension.mapCustomLog("BaseMap.setUpMapIfNeeded.mapNull", mMap);
         }
         if (mMap != null) {
-            //AcraExtension.mapCustomLog("BaseMap.setUpMapIfNeeded.mapNotNull",mMap);
             setUpMap();
         }
-
     }
 
     private void setUpMap() {
-        //AcraExtension.mapCustomLog("BaseMap.setUpMap", mMap);
-        //mMap.setMapType(AmazonMap.MAP_TYPE_NONE);
         mMap.setMyLocationEnabled(true);
-
         mMap.getUiSettings().setZoomControlsEnabled(true);
         mMap.getUiSettings().setZoomGesturesEnabled(true);
         mMap.getUiSettings().setRotateGesturesEnabled(true);
@@ -112,35 +93,7 @@ public class AmznBaseMapFragment extends SupportMapFragment {
         if (targetBounds == null) obtainGooglePosition();
 
         sendSupportMapReadyCallback();
-
-/*        setupOSM();
-        findStartLocation();
-
-        if (targetBounds == null) {
-            animateToCurrentPosition();
-        }
-
-        sendSupportMapReadyCallback();
-
-        mMap.setOnMapLoadedCallback(new AmazonMap.OnMapLoadedCallback() {
-            @Override
-            public void onMapLoaded() {
-                animateToBounds();
-            }
-        });*/
-
     }
-
-    private void sendSupportMapReadyCallback() {
-        Fragment fragment = this;
-        if (fragment instanceof OnBaseMapFragmentListener) {
-            ((OnBaseMapFragmentListener) fragment).onBaseSupportMapReady();
-            //Log.i("BASE_MAP", "onActivityCreated.Listener");
-        } else {
-            publicListener.onBaseSupportMapPublicReady();
-        }
-    }
-
 
     private void obtainMapType() {
         GlobalPreferences globalPreferences = new GlobalPreferences(getActivity());
@@ -169,31 +122,6 @@ public class AmznBaseMapFragment extends SupportMapFragment {
         }
     }
 
-    private void setupOSM() {
-        //AcraExtension.mapCustomLog("BaseMap.setupOSM", mMap);
-
-        TileProvider osmTileProvider = AmznTileProviderFactory.getOSMTileProvider();
-        mMap.addTileOverlay(new TileOverlayOptions().tileProvider(
-                osmTileProvider).zIndex(0));
-    }
-
-    public TileOverlay setupWMS(String wmsUrl) {
-
-        com.amazon.geo.mapsv2.model.TileOverlay wmsTileOverlay = null;
-        if (wmsUrl != null) {
-            if (!wmsUrl.isEmpty()) {
-
-                TileProvider wmsTileProvider;
-                wmsTileProvider = AmznTileProviderFactory.getWmsTileProvider(
-                        wmsUrl, getActivity());
-                wmsTileOverlay = mMap.addTileOverlay(new TileOverlayOptions()
-                        .tileProvider(wmsTileProvider));
-            }
-        }
-        return wmsTileOverlay;
-    }
-
-
     private void obtainGooglePosition() {
         GoogleLocProviderImpl googleLocProvider = new GoogleLocProviderImpl(getActivity()) {
             @Override
@@ -202,6 +130,21 @@ public class AmznBaseMapFragment extends SupportMapFragment {
             }
         };
         googleLocProvider.start();
+    }
+
+    private void sendSupportMapReadyCallback() {
+        Fragment fragment = this;
+        if (fragment instanceof OnBaseMapFragmentListener) {
+            ((OnBaseMapFragmentListener) fragment).onBaseSupportMapReady();
+        } else {
+            publicListener.onBaseSupportMapPublicReady();
+        }
+    }
+
+    private void setupOSM() {
+        TileProvider osmTileProvider = AmznTileProviderFactory.getOSMTileProvider();
+        mMap.addTileOverlay(new TileOverlayOptions().tileProvider(
+                osmTileProvider).zIndex(0));
     }
 
     private void animateToCurrentPosition(Location location) {
@@ -225,10 +168,14 @@ public class AmznBaseMapFragment extends SupportMapFragment {
         }
     }
 
-    private void animateToBounds(int padding) {
-        if (targetBounds != null) {
-            mMap.animateCamera(CameraUpdateFactory.newLatLngBounds(
-                    targetBounds, padding));
+    @Override
+    public void onPause() {
+        super.onPause();
+
+        if (mReceiver != null) {
+            LocalBroadcastManager.getInstance(getActivity())
+                    .unregisterReceiver(mReceiver);
+            mReceiver = null;
         }
     }
 
@@ -241,15 +188,22 @@ public class AmznBaseMapFragment extends SupportMapFragment {
         });
     }
 
+    private void animateToBounds(int padding) {
+        if (targetBounds != null) {
+            mMap.animateCamera(CameraUpdateFactory.newLatLngBounds(
+                    targetBounds, padding));
+        }
+    }
+
+    public void setTargetBounds(LatLngBounds bounds) {
+        targetBounds = bounds;
+    }
+
     /**
      * Listener interface to tell when the map is ready
      */
     public interface OnBaseMapFragmentListener {
         void onBaseSupportMapReady();
-    }
-
-    public void setTargetBounds(LatLngBounds bounds) {
-        targetBounds = bounds;
     }
 
 }

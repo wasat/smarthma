@@ -25,7 +25,7 @@ public class MissionsActivityTests extends ActivityInstrumentationTestCase2<Miss
             @Override
             public void run() {
                 try {
-                    MissionsExtListFragment fragment = activity.getExtendedListFragment();
+                    MissionsExtListFragment fragment = activity.getMissionsExtListFragment();
                     tests[0] = true;
 
                     ExpandableListView list = fragment.getExpListView();
@@ -43,12 +43,12 @@ public class MissionsActivityTests extends ActivityInstrumentationTestCase2<Miss
 
         // Wait for the UI thread to finish.
         try {
-            Thread.sleep(1000);
+            Thread.sleep(20000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
 
-        assertEquals("Operation 'activity.getExtendedListFragment()' returned null.", true, tests[0]);
+        assertEquals("Operation 'activity.getMissionsExtListFragment()' returned null.", true, tests[0]);
         assertEquals("Operation 'fragment.getExpListView()' returned null.", true, tests[1]);
         assertEquals("Operation 'list.performItemClick()' failed.", true, tests[2]);
     }

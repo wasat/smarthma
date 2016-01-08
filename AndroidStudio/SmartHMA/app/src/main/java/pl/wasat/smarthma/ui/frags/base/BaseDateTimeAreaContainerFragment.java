@@ -14,6 +14,35 @@ import pl.wasat.smarthma.utils.time.SimpleDate;
  */
 public class BaseDateTimeAreaContainerFragment extends BaseParametersPickerFragment {
 
+    public void setBounds(String boundingBox) {
+        String[] bbox = boundingBox.split(",");
+        if (bbox.length >= 4) {
+            setBounds(bbox[0], bbox[1], bbox[2], bbox[3]);
+        }
+    }
+
+    /**
+     * @param bounds - Bounding Box
+     */
+    public void updateAreaBounds(LatLngBoundsExt bounds) {
+
+        String bboxWest = String.format(Locale.UK, "% 4f",
+                (float) bounds.southwest.longitude);
+        String bboxSouth = String.format(Locale.UK, "% 4f",
+                (float) bounds.southwest.latitude);
+        String bboxEast = String.format(Locale.UK, "% 4f",
+                (float) bounds.northeast.longitude);
+        String bboxNorth = String.format(Locale.UK, "% 4f",
+                (float) bounds.northeast.latitude);
+
+        tvAreaSWLat.setText(bboxSouth);
+        tvAreaSWLon.setText(bboxWest);
+        tvAreaNELat.setText(bboxNorth);
+        tvAreaNELon.setText(bboxEast);
+
+        sharedPrefs.setBboxPrefs(bboxWest, bboxSouth, bboxEast, bboxNorth);
+    }
+
     protected void obtainGlobalSettings() {
         GlobalPreferences globalPreferences = new GlobalPreferences(getActivity());
         if (globalPreferences.getIsParamsSaved()) {
@@ -27,16 +56,8 @@ public class BaseDateTimeAreaContainerFragment extends BaseParametersPickerFragm
     protected void loadSharedData() {
         loadDateTimePrefs();
         setDateTime();
-
         loadBboxPrefs();
-
-        // loadSearchQuery();
     }
-
-/*    private void loadSearchQuery()
-    {
-        String query = sharedPrefs.getQueryPrefs();
-    }*/
 
     private void loadDateTimePrefs() {
         String startDateTime = sharedPrefs.getStartDateTimePrefs();
@@ -44,6 +65,31 @@ public class BaseDateTimeAreaContainerFragment extends BaseParametersPickerFragm
 
         String endDateTime = sharedPrefs.getEndDateTimePrefs();
         setEndCalendar(endDateTime);
+    }
+
+    private void setDateTime() {
+        String startDateToSet = DateUtils.calendarToDateString(calStart);
+        tvStartDate.setText(startDateToSet);
+        String startTimeToSet = DateUtils.calendarToTimeString(calStart);
+        tvStartTime.setText(startTimeToSet);
+
+        String endDateToSet = DateUtils.calendarToDateString(calEnd);
+        tvEndDate.setText(endDateToSet);
+        String endTimeToSet = DateUtils.calendarToTimeString(calEnd);
+        tvEndTime.setText(endTimeToSet);
+
+        sharedPrefs.setDateTimePrefs(DateUtils.calendarToISO(calStart), DateUtils.calendarToISO(calEnd));
+    }
+
+    //Area BBOX Container
+    private void loadBboxPrefs() {
+
+        float west = sharedPrefs.getBboxPrefs()[0];
+        float south = sharedPrefs.getBboxPrefs()[1];
+        float east = sharedPrefs.getBboxPrefs()[2];
+        float north = sharedPrefs.getBboxPrefs()[3];
+
+        setBounds(west, south, east, north);
     }
 
     //Date and Time Container
@@ -69,52 +115,6 @@ public class BaseDateTimeAreaContainerFragment extends BaseParametersPickerFragm
         }
     }
 
-    private void setDateTime() {
-        String startDateToSet = DateUtils.calendarToDateString(calStart);
-        tvStartDate.setText(startDateToSet);
-        String startTimeToSet = DateUtils.calendarToTimeString(calStart);
-        tvStartTime.setText(startTimeToSet);
-
-        String endDateToSet = DateUtils.calendarToDateString(calEnd);
-        tvEndDate.setText(endDateToSet);
-        String endTimeToSet = DateUtils.calendarToTimeString(calEnd);
-        tvEndTime.setText(endTimeToSet);
-
-        sharedPrefs.setDateTimePrefs(DateUtils.calendarToISO(calStart), DateUtils.calendarToISO(calEnd));
-    }
-
-    //This function is more read but not made all stuff
-/*    protected void loadDateTimePrefs() {
-        SimpleDate simpleStartDateTime = new SimpleDate(sharedPrefs.getStartDateTimePrefs());
-        String startDateToSet = DateUtils.calendarToDateString(simpleStartDateTime.getCalendar());
-        String startTimeToSet = DateUtils.calendarToTimeString(simpleStartDateTime.getCalendar());
-        tvStartDate.setText(startDateToSet);
-        tvStartTime.setText(startTimeToSet);
-
-        SimpleDate simpleEndDateTime = new SimpleDate(sharedPrefs.getEndDateTimePrefs());
-        String endDateToSet = DateUtils.calendarToDateString(simpleEndDateTime.getCalendar());
-        String endTimeToSet = DateUtils.calendarToTimeString(simpleEndDateTime.getCalendar());
-        tvEndDate.setText(endDateToSet);
-        tvEndTime.setText(endTimeToSet);
-    }*/
-
-
-    //Area BBOX Container
-    private void loadBboxPrefs() {
-
-        float west = sharedPrefs.getBboxPrefs()[0];
-        float south = sharedPrefs.getBboxPrefs()[1];
-        float east = sharedPrefs.getBboxPrefs()[2];
-        float north = sharedPrefs.getBboxPrefs()[3];
-
-        setBounds(west, south, east, north);
-
-/*        tvAreaNELat.setText(String.format(Locale.UK, "% 4f", north));
-        tvAreaNELon.setText(String.format(Locale.UK, "% 4f", east));
-        tvAreaSWLat.setText(String.format(Locale.UK, "% 4f", south));
-        tvAreaSWLon.setText(String.format(Locale.UK, "% 4f", west));*/
-    }
-
     private void setBounds(float west, float south, float east, float north) {
         String westStr = String.valueOf(west);
         String southStr = String.valueOf(south);
@@ -122,21 +122,6 @@ public class BaseDateTimeAreaContainerFragment extends BaseParametersPickerFragm
         String northStr = String.valueOf(north);
 
         setBounds(westStr, southStr, eastStr, northStr);
-    }
-
-    public void setBounds(String boundingBox) {
-        String[] bbox = boundingBox.split(",");
-        if (bbox.length >= 4) {
-            setBounds(bbox[0], bbox[1], bbox[2], bbox[3]);
-        }
-    }
-
-    protected void setBounds(float[] bbox) {
-        String bboxWest = String.valueOf(bbox[0]);
-        String bboxSouth = String.valueOf(bbox[1]);
-        String bboxEast = String.valueOf(bbox[2]);
-        String bboxNorth = String.valueOf(bbox[3]);
-        setBounds(bboxWest, bboxSouth, bboxEast, bboxNorth);
     }
 
     private void setBounds(String bboxWest, String bboxSouth, String bboxEast, String bboxNorth) {
@@ -148,26 +133,13 @@ public class BaseDateTimeAreaContainerFragment extends BaseParametersPickerFragm
         sharedPrefs.setBboxPrefs(bboxWest, bboxSouth, bboxEast, bboxNorth);
     }
 
-    /**
-     * @param bounds - Bounding Box
-     */
-    public void updateAreaBounds(LatLngBoundsExt bounds) {
+    protected void setBounds(float[] bbox) {
+        String bboxWest = String.valueOf(bbox[0]);
+        String bboxSouth = String.valueOf(bbox[1]);
+        String bboxEast = String.valueOf(bbox[2]);
+        String bboxNorth = String.valueOf(bbox[3]);
 
-        String bboxWest = String.format(Locale.UK, "% 4f",
-                (float) bounds.southwest.longitude);
-        String bboxSouth = String.format(Locale.UK, "% 4f",
-                (float) bounds.southwest.latitude);
-        String bboxEast = String.format(Locale.UK, "% 4f",
-                (float) bounds.northeast.longitude);
-        String bboxNorth = String.format(Locale.UK, "% 4f",
-                (float) bounds.northeast.latitude);
-
-        tvAreaSWLat.setText(bboxSouth);
-        tvAreaSWLon.setText(bboxWest);
-        tvAreaNELat.setText(bboxNorth);
-        tvAreaNELon.setText(bboxEast);
-
-        sharedPrefs.setBboxPrefs(bboxWest, bboxSouth, bboxEast, bboxNorth);
+        setBounds(bboxWest, bboxSouth, bboxEast, bboxNorth);
     }
 
 }

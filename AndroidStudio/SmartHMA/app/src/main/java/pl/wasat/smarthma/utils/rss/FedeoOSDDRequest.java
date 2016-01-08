@@ -29,10 +29,6 @@ public class FedeoOSDDRequest extends GoogleHttpClientSpiceRequest<OpenSearchDes
         osddUrl = genericOsddUrl;
     }
 
-    private GenericUrl buildOsddUrl(String parentID) {
-        return new GenericUrl(Const.OSDD_BASE_URL + "parentIdentifier=" + parentID);
-    }
-
     @Override
     public OpenSearchDescription loadDataFromNetwork() throws Exception {
 
@@ -67,6 +63,9 @@ public class FedeoOSDDRequest extends GoogleHttpClientSpiceRequest<OpenSearchDes
         return rh != null ? rh.getOSDD() : null;
     }
 
+    private GenericUrl buildOsddUrl(String parentID) {
+        return new GenericUrl(Const.OSDD_BASE_URL + "parentIdentifier=" + parentID);
+    }
 }
 
 

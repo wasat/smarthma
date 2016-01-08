@@ -36,26 +36,6 @@ public class Goce extends BaseParser implements MissionInterface {
     }
 
     @Override
-    public void history() {
-
-    }
-
-    @Override
-    public void industry() {
-
-    }
-
-    @Override
-    public void science() {
-        String arrayName = "_56_INSTANCE_4yXL_tempArray";
-        ArrayList<Pair> list = super.getJsPage(SCIENCE, JS_POSITION, arrayName);
-        for (Pair pair : list) {
-            parserDb.addPage(new Page(EsaEoMissions.CATEGORY_ID, MISSION_ID, (String) pair.title, (String) pair.content));
-        }
-
-    }
-
-    @Override
     public void news() {
 
     }
@@ -135,5 +115,25 @@ public class Goce extends BaseParser implements MissionInterface {
         for (Pair pair : list) {
             parserDb.addPage(new Page(EsaEoMissions.CATEGORY_ID, MISSION_ID, (String) pair.title, (String) pair.content));
         }
+    }
+
+    @Override
+    public void science() {
+        String arrayName = "_56_INSTANCE_4yXL_tempArray";
+        ArrayList<Pair> list = super.getJsPage(SCIENCE, JS_POSITION, arrayName);
+        for (Pair pair : list) {
+            parserDb.addPage(new Page(EsaEoMissions.CATEGORY_ID, MISSION_ID, (String) pair.title, (String) pair.content));
+        }
+
+    }
+
+    @Override
+    public void history() {
+
+    }
+
+    @Override
+    public void industry() {
+
     }
 }

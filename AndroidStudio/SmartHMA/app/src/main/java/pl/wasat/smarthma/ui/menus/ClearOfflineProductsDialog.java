@@ -17,10 +17,6 @@ import pl.wasat.smarthma.ui.frags.common.ProductsListFragmentOffline;
 public class ClearOfflineProductsDialog extends DialogFragment {
     private FavouriteProductsActivity activity;
 
-    public void setActivity(FavouriteProductsActivity activity) {
-        this.activity = activity;
-    }
-
     @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -29,22 +25,22 @@ public class ClearOfflineProductsDialog extends DialogFragment {
 
         builder.setTitle(R.string.action_clear_list)
                 .setMessage(R.string.action_clear_list_confirmation)
-                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener()
-                {
-                    public void onClick(DialogInterface dialog, int which)
-                    {
+                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
                         ProductsListFragmentOffline productsListFragment = activity.getProductsListFragment();
                         productsListFragment.clearList();
                     }
                 })
-                .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener()
-                {
-                    public void onClick(DialogInterface dialog, int which)
-                    {
+                .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
                         // do nothing
                     }
                 });
         // Create the AlertDialog object and return it
         return builder.create();
+    }
+
+    public void setActivity(FavouriteProductsActivity activity) {
+        this.activity = activity;
     }
 }

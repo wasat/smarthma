@@ -45,30 +45,6 @@ public class BaseSpiceFragment extends Fragment {
         super.onStop();
     }
 
-/*
-
-    @Override
-    public void onResume() {
-        if (smartHMASpiceManager.getPendingRequestCount() > 0)
-            smartHMASpiceManager.cancelAllRequests();
-        smartHMASpiceManager.start(getActivity());
-
-        if (spiceManagerBinary.getPendingRequestCount() > 0)
-            spiceManagerBinary.cancelAllRequests();
-        spiceManagerBinary.start(getActivity());
-        super.onResume();
-    }
-
-    @Override
-    public void onPause() {
-        if (smartHMASpiceManager.isStarted())
-            smartHMASpiceManager.shouldStop();
-        if (spiceManagerBinary.isStarted())
-            spiceManagerBinary.shouldStop();
-        super.onPause();
-    }
-*/
-
     protected SpiceManager getSpiceManager() {
         return smartHMASpiceManager;
     }
@@ -86,8 +62,6 @@ public class BaseSpiceFragment extends Fragment {
     private void showDialog(String messText, String exRawMessage, String exRawCause) {
         DialogFragment exceptionDialogFragment = ExceptionDialogFragment.newInstance(
                 messText, exRawMessage, exRawCause);
-        exceptionDialogFragment.show(getFragmentManager(), "ExceptionDialogFragment");
+        exceptionDialogFragment.show(getFragmentManager(), ExceptionDialogFragment.class.getSimpleName());
     }
-
-
 }

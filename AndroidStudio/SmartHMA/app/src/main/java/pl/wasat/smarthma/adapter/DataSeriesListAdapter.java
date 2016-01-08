@@ -23,16 +23,11 @@ public class DataSeriesListAdapter extends ArrayAdapter<EntryISO> {
         super(activity, 0, dataSeriesList);
     }
 
-    public void setListener(OnSlideElementListener listener) {
-        this.listener = listener;
-    }
-
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         ViewHolder holder;
         Activity activity = (Activity) getContext();
         LayoutInflater inflater = activity.getLayoutInflater();
-
         EntryISO dataSeriesItem = getItem(position);
 
         if (convertView == null) {
@@ -55,8 +50,9 @@ public class DataSeriesListAdapter extends ArrayAdapter<EntryISO> {
 
         holder.textView.setText(dataSeriesItem.getTitle());
 
-        String pubDate = "Date: " + DateUtils.getISOPubDate(dataSeriesItem)
-                + ", updated: " + dataSeriesItem.getUpdated();
+        String pubDate = String.format(activity.getString(R.string.pub_date_and_updated),
+                DateUtils.getISOPubDate(dataSeriesItem), dataSeriesItem.getUpdated());
+        //String pubDate = "Date: " + DateUtils.getISOPubDate(dataSeriesItem) + ", updated: " + dataSeriesItem.getUpdated();
         holder.dateView.setText(pubDate);
 
         if (dataSeriesItem.isNotRead()) {
@@ -64,7 +60,10 @@ public class DataSeriesListAdapter extends ArrayAdapter<EntryISO> {
         }
 
         return convertView;
+    }
 
+    public void setListener(OnSlideElementListener listener) {
+        this.listener = listener;
     }
 
     private static class ViewHolder {

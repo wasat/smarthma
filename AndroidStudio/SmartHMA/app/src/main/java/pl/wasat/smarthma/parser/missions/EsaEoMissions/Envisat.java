@@ -16,29 +16,14 @@ import pl.wasat.smarthma.parser.model.Page;
  */
 public class Envisat extends BaseParser implements MissionInterface {
 
-    private final int JS_POSITION = 9;
     private final static int MISSION_ID = 6;
     private final static String TITLE = "Envisat";
+    private final int JS_POSITION = 9;
 
 
     public Envisat(String pageUrl, Context context) {
         super(pageUrl, context);
         parserDb.addMission(new Mission(MISSION_ID, EsaEoMissions.CATEGORY_ID, TITLE));
-    }
-
-    @Override
-    public void history() {
-        Pair pair = super.getSimplePage(HISTORY);
-        parserDb.addPage(new Page(EsaEoMissions.CATEGORY_ID, MISSION_ID, (String) pair.title, (String) pair.content));
-    }
-
-    @Override
-    public void industry() {
-        String arrayName = "_56_INSTANCE_Vji5_tempArray";
-        ArrayList<Pair> list = super.getJsPage(INDUSTRY, JS_POSITION, arrayName);
-        for (Pair pair : list) {
-            parserDb.addPage(new Page(EsaEoMissions.CATEGORY_ID, MISSION_ID, (String) pair.title, (String) pair.content));
-        }
     }
 
     @Override
@@ -164,5 +149,20 @@ public class Envisat extends BaseParser implements MissionInterface {
     @Override
     public void science() {
 
+    }
+
+    @Override
+    public void history() {
+        Pair pair = super.getSimplePage(HISTORY);
+        parserDb.addPage(new Page(EsaEoMissions.CATEGORY_ID, MISSION_ID, (String) pair.title, (String) pair.content));
+    }
+
+    @Override
+    public void industry() {
+        String arrayName = "_56_INSTANCE_Vji5_tempArray";
+        ArrayList<Pair> list = super.getJsPage(INDUSTRY, JS_POSITION, arrayName);
+        for (Pair pair : list) {
+            parserDb.addPage(new Page(EsaEoMissions.CATEGORY_ID, MISSION_ID, (String) pair.title, (String) pair.content));
+        }
     }
 }

@@ -16,6 +16,8 @@ import pl.wasat.smarthma.parser.model.Page;
  */
 public class Ers extends BaseParser implements MissionInterface {
 
+    private final static int MISSION_ID = 8;
+    private final static String TITLE = "Ers";
     final String RA = "https://earth.esa.int/web/guest/missions/esa-operational-eo-missions/ers/instruments/ra";
     final String ATSR = "https://earth.esa.int/web/guest/missions/esa-operational-eo-missions/ers/instruments/atsr";
     final String GOME = "https://earth.esa.int/web/guest/missions/esa-operational-eo-missions/ers/instruments/gome";
@@ -23,8 +25,6 @@ public class Ers extends BaseParser implements MissionInterface {
     final String SAR = "https://earth.esa.int/web/guest/missions/esa-operational-eo-missions/ers/instruments/sar";
     final String WS = "https://earth.esa.int/web/guest/missions/esa-operational-eo-missions/ers/instruments/ws";
     final String PRARE = "https://earth.esa.int/web/guest/missions/esa-operational-eo-missions/ers/instruments/prare";
-    private final static int MISSION_ID = 8;
-    private final static String TITLE = "Ers";
 
     public Ers(String pageUrl, Context context) {
         super(pageUrl, context);

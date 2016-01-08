@@ -24,25 +24,17 @@ import pl.wasat.smarthma.ui.activities.GlobalSettingsActivity;
  */
 public abstract class MenuHandler {
     final FragmentActivity activity;
+    final ArrayList<View> clickableViews;
     private final View menu;
     PopupWindow popupWindow;
     LayoutInflater layoutInflater;
     View layout;
-    final ArrayList<View> clickableViews;
 
     MenuHandler(FragmentActivity activity, int menuButtonID) {
         this.activity = activity;
         clickableViews = new ArrayList<>();
 
         menu = activity.findViewById(menuButtonID);
-        createMainListener();
-    }
-
-    MenuHandler(View rootView, FragmentActivity activity, int menuButtonID) {
-        this.activity = activity;
-        clickableViews = new ArrayList<>();
-
-        menu = rootView.findViewById(menuButtonID);
         createMainListener();
     }
 
@@ -125,6 +117,14 @@ public abstract class MenuHandler {
     void addListeners() {
     }
 
+    MenuHandler(View rootView, FragmentActivity activity, int menuButtonID) {
+        this.activity = activity;
+        clickableViews = new ArrayList<>();
+
+        menu = rootView.findViewById(menuButtonID);
+        createMainListener();
+    }
+
     /**
      * Hides the popup window.
      */
@@ -158,11 +158,11 @@ public abstract class MenuHandler {
 
     void addCommonListeners() {
         LinearLayout settingsLayout = (LinearLayout) layout.findViewById(R.id.popup_menu_item_settings);
-        LinearLayout downloadLayout = (LinearLayout) layout.findViewById(R.id.popup_menu_download);
         clickableViews.add(settingsLayout);
-        clickableViews.add(downloadLayout);
-        settingsLayout.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
+        settingsLayout.setOnClickListener(new View.OnClickListener()
+        {
+            public void onClick(View v)
+            {
                 Intent intent = new Intent();
                 intent.setClass(activity, GlobalSettingsActivity.class);
                 activity.startActivityForResult(intent, Const.REQUEST_CODE_GLOBAL_SETTINGS);
@@ -170,6 +170,9 @@ public abstract class MenuHandler {
                 popupWindow = null;
             }
         });
+
+        LinearLayout downloadLayout = (LinearLayout) layout.findViewById(R.id.popup_menu_download);
+        clickableViews.add(downloadLayout);
         downloadLayout.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent intent = new Intent();

@@ -21,7 +21,7 @@ import pl.wasat.smarthma.utils.text.StringExt;
  */
 public class EODataDownloadManager {
 
-    private Context context;
+    private final Context context;
     private DownloadManager downloadManager;
     private long myDownloadReference;
     private BroadcastReceiver receiverDownloadComplete;
@@ -42,9 +42,6 @@ public class EODataDownloadManager {
             DownloadManager.Request request = new DownloadManager.Request(uri);
             request.setTitle(context.getString(R.string.eo_dataset) + fileName)
                     .setDescription(String.format(context.getString(R.string.file_is_downloading), fileName));
-            //request.setDestinationInExternalPublicDir(Environment.
-            //        DIRECTORY_DOWNLOADS, getSubPath(productName, fileName,0));
-            //request.setDestinationInExternalFilesDir(context, null, getSubPath(productName, fileName, 1));
             request.setDestinationInExternalPublicDir(getRelativePath(Const.SMARTHMA_PATH_EO_DATA), getSubPath(productName, fileName, 1));
             request.setVisibleInDownloadsUi(true);
             request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
@@ -55,10 +52,56 @@ public class EODataDownloadManager {
         }
     }
 
+    private String getRelativePath(String path) {
+        return path.replaceFirst(android.os.Environment.getExternalStorageDirectory().getAbsolutePath(), "");
+    }
+
+    @NonNull
+    private String getSubPath(String productName, String fileName, int rootType) {
+        String pathDir = "";
+        String subDir = StringExt.cleanDirName(productName) + "/";
+        switch (rootType) {
+            case 0:
+                subDir = "/" + subDir;
+                pathDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).getAbsolutePath()
+                        + subDir;
+                break;
+            case 1:
+                pathDir = Const.SMARTHMA_PATH_EO_DATA + subDir;
+                break;
+            default:
+                break;
+        }
+        FilesWriter.validateDir(pathDir);
+        return subDir + fileName;
+    }
+
     public void resumeDownloadManager() {
         downloadManager = (DownloadManager) context.getSystemService(Context.DOWNLOAD_SERVICE);
         initReceiverNotificationClicked();
         initReceiverDownloadComplete();
+    }
+
+    private void initReceiverNotificationClicked() {
+        IntentFilter filter = new IntentFilter(DownloadManager
+                .ACTION_NOTIFICATION_CLICKED);
+
+        receiverNotificationClicked = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                String extraId = DownloadManager
+                        .EXTRA_NOTIFICATION_CLICK_DOWNLOAD_IDS;
+                long[] references = intent.getLongArrayExtra(extraId);
+                for (long reference : references) {
+                    //noinspection StatementWithEmptyBody
+                    if (reference == myDownloadReference) {
+//                        do something with the download file
+                    }
+                }
+            }
+        };
+
+        context.registerReceiver(receiverNotificationClicked, filter);
     }
 
     private void initReceiverDownloadComplete() {
@@ -82,11 +125,6 @@ public class EODataDownloadManager {
                     int columnIndex = cursor.getColumnIndex(DownloadManager
                             .COLUMN_STATUS);
                     int status = cursor.getInt(columnIndex);
-
-                    //int fileNameIndex = cursor.getColumnIndex(DownloadManager
-                    //        .COLUMN_LOCAL_FILENAME);
-                    //String savedFilePath = cursor.getString(fileNameIndex);
-//                        get the reason - more detail on the status
                     int columnReason = cursor.getColumnIndex(DownloadManager
                             .COLUMN_REASON);
                     int reason = cursor.getInt(columnReason);
@@ -130,52 +168,8 @@ public class EODataDownloadManager {
         }
     }
 
-    private void initReceiverNotificationClicked() {
-        IntentFilter filter = new IntentFilter(DownloadManager
-                .ACTION_NOTIFICATION_CLICKED);
-
-        receiverNotificationClicked = new BroadcastReceiver() {
-            @Override
-            public void onReceive(Context context, Intent intent) {
-                String extraId = DownloadManager
-                        .EXTRA_NOTIFICATION_CLICK_DOWNLOAD_IDS;
-                long[] references = intent.getLongArrayExtra(extraId);
-                for (long reference : references) {
-                    if (reference == myDownloadReference) {
-//                        do something with the download file
-                    }
-                }
-            }
-        };
-
-        context.registerReceiver(receiverNotificationClicked, filter);
-    }
-
     public void unregisterReceivers() {
         context.unregisterReceiver(receiverDownloadComplete);
         context.unregisterReceiver(receiverNotificationClicked);
-    }
-
-    @NonNull
-    private String getSubPath(String productName, String fileName, int rootType) {
-        String pathDir = "";
-        String subDir = StringExt.cleanDirName(productName) + "/";
-        switch (rootType) {
-            case 0:
-                subDir = "/" + subDir;
-                pathDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).getAbsolutePath() + subDir;
-                break;
-            case 1:
-                pathDir = Const.SMARTHMA_PATH_EO_DATA + subDir;
-                break;
-            default:
-                break;
-        }
-        FilesWriter.validateDir(pathDir);
-        return subDir + fileName;
-    }
-
-    private String getRelativePath(String path) {
-        return path.replaceFirst(android.os.Environment.getExternalStorageDirectory().getAbsolutePath(), "");
     }
 }

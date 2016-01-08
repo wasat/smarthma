@@ -34,7 +34,6 @@ public class RecursiveToStringStyle extends ToStringStyle {
         buffer.append(value);
     }
 
-
     @Override
     protected void appendDetail(StringBuffer buffer, String fieldName, @SuppressWarnings("rawtypes") Map map) {
         buffer.append(getArrayStart());

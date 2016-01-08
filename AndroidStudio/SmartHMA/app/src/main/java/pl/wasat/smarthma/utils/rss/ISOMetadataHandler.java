@@ -102,7 +102,7 @@ import pl.wasat.smarthma.model.iso.UseLimitation;
 import pl.wasat.smarthma.model.iso.Voice;
 import pl.wasat.smarthma.model.iso.WestBoundLongitude;
 
-public class ISOMetadataHandler extends DefaultHandler {
+class ISOMetadataHandler extends DefaultHandler {
 
     // Current characters being accumulated
     private StringBuffer chars = new StringBuffer();
@@ -212,11 +212,6 @@ public class ISOMetadataHandler extends DefaultHandler {
     private Level level;
     private CIDateTypeCode CIDateTypeCode;
 
-
-    public MDMetadata getMdMetadata() {
-        return mdMetadata;
-    }
-
     /*
      * This method is called everytime a start element is found (an opening XML
      * marker) here we always reset the characters StringBuffer as we are only
@@ -236,7 +231,6 @@ public class ISOMetadataHandler extends DefaultHandler {
         // MDMetadata declarations       // MI_Metadata declarations
         if (localName.equalsIgnoreCase("MD_Metadata") || localName.equalsIgnoreCase("MI_Metadata")) {
             mdMetadata = new MDMetadata();
-            //isInMDMetadata = true;
             mdMetadata.setXmlnsGmd(atts.getValue("xmlns:gmd"));
             mdMetadata.setXmlns(atts.getValue("xmlns"));
             mdMetadata.setXmlnsGco(atts.getValue("xmlns:gco"));
@@ -624,11 +618,11 @@ public class ISOMetadataHandler extends DefaultHandler {
             CIDate.setDateInCIDate(dateInCIDate);
             CIDate.setDateType(dateType);
             isInCIDate = false;
-        } else if (localName.equals("date")&& isInCIDate) {
-                dateInCIDate.setDateGco(dateGco);
-        } else if (localName.equals("date")&& !isInCIDate) {
-                date.setText(chars.toString());
-                date.setCIDate(CIDate);
+        } else if (localName.equals("date") && isInCIDate) {
+            dateInCIDate.setDateGco(dateGco);
+        } else if (localName.equals("date") && !isInCIDate) {
+            date.setText(chars.toString());
+            date.setCIDate(CIDate);
         } else if (localName.equals("Date")) {
             dateGco.setText(chars.toString());
         } else if (localName.equals("dateType")) {
@@ -780,5 +774,9 @@ public class ISOMetadataHandler extends DefaultHandler {
     public void characters(char[] ch, int start, int length) throws SAXException {
         super.characters(ch, start, length);
         chars.append(new String(ch, start, length).trim());
+    }
+
+    public MDMetadata getMdMetadata() {
+        return mdMetadata;
     }
 }

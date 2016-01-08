@@ -1,6 +1,7 @@
 package pl.wasat.smarthma.ui.frags.common;
 
 import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 
 import com.google.android.gms.maps.GoogleMap.OnCameraChangeListener;
@@ -12,6 +13,7 @@ import com.google.android.gms.maps.model.Polygon;
 
 import java.util.ArrayList;
 
+import pl.wasat.smarthma.R;
 import pl.wasat.smarthma.preferences.SharedPrefs;
 import pl.wasat.smarthma.ui.frags.base.BaseMapFragment;
 import pl.wasat.smarthma.ui.frags.base.BaseMapFragment.OnBaseMapFragmentListener;
@@ -35,6 +37,9 @@ public class AreaPickerMapFragment extends BaseMapFragment implements OnBaseMapF
 
     private Polygon areaPolygon;
 
+    public AreaPickerMapFragment() {
+    }
+
     /**
      * Use this factory method to create a new instance of this fragment using
      * the provided parameters.
@@ -45,19 +50,16 @@ public class AreaPickerMapFragment extends BaseMapFragment implements OnBaseMapF
         return new AreaPickerMapFragment();
     }
 
-    public AreaPickerMapFragment() {
-        //AcraExtension.mapCustomLog("AreaMap.construct", mMap);
-    }
-
     @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-        //AcraExtension.mapCustomLog("AreaMap.onAttach", mMap);
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        Activity activity = context instanceof Activity ? (Activity) context : null;
         try {
             mListener = (OnAreaPickerMapFragmentListener) activity;
         } catch (ClassCastException e) {
             throw new ClassCastException(activity.toString()
-                    + " must implement OnAreaPickerMapFragmentListener");
+                    + activity.getString(R.string.must_implement)
+                    + OnAreaPickerMapFragmentListener.class.getSimpleName());
         }
     }
 
@@ -70,52 +72,48 @@ public class AreaPickerMapFragment extends BaseMapFragment implements OnBaseMapF
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //AcraExtension.mapCustomLog("AreaMap.onCreate", mMap);
         obtainBoundsFromShared();
         prepareArea();
 
     }
 
-/*    @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        Log.i("MAP", "onActivityCreated");
-        AcraExtension.mapCustomLog("AreaMap.onActivityCreated", mMap);
-
-    }*/
-
     @Override
     public void onPause() {
         postDrawArea();
-        //AcraExtension.mapCustomLog("AreaMap.onPause", mMap);
-
         super.onPause();
+    }
+
+    private void postDrawArea() {
+        if (!markedPtList.isEmpty()) {
+            areaBounds = areaBoundsBuilder.build();
+            LatLngBoundsExt areaBoundsExt = new LatLngBoundsExt(areaBounds);
+            mListener.onMapFragmentBoundsChange(areaBoundsExt);
+        }
+    }
+
+    private void obtainBoundsFromShared() {
+        SharedPrefs sharedPrefs = new SharedPrefs(getActivity());
+        float[] bbox = sharedPrefs.getBboxPrefs();
+
+        LatLngBounds.Builder boundsBuilder = new LatLngBounds.Builder();
+        boundsBuilder.include(new LatLng(bbox[1], bbox[0]));
+        boundsBuilder.include(new LatLng(bbox[3], bbox[2]));
+
+        targetBounds = boundsBuilder.build();
+    }
+
+    private void prepareArea() {
+        markedPtList = new ArrayList<>();
+        areaBoundsBuilder = new LatLngBounds.Builder();
     }
 
     @Override
     public void onBaseSupportMapReady() {
-        //AcraExtension.mapCustomLog("AreaMap.onBaseSupportMapReady", mMap);
         animateWhenMapIsReady(0);
         setMapListeners();
     }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated to
-     * the activity and potentially other fragments contained in that activity.
-     * <p/>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
-    public interface OnAreaPickerMapFragmentListener {
-        void onMapFragmentBoundsChange(LatLngBoundsExt bounds);
-    }
-
     private void setMapListeners() {
-        //AcraExtension.mapCustomLog("AreaMap.setMapListeners", mMap);
-        //Log.i("MAP", "setMapListeners");
-
         mMap.setOnCameraChangeListener(new OnCameraChangeListener() {
 
             @Override
@@ -139,19 +137,6 @@ public class AreaPickerMapFragment extends BaseMapFragment implements OnBaseMapF
         });
     }
 
-    private void prepareArea() {
-        markedPtList = new ArrayList<>();
-        areaBoundsBuilder = new LatLngBounds.Builder();
-    }
-
-    private void postDrawArea() {
-        if (!markedPtList.isEmpty()) {
-            areaBounds = areaBoundsBuilder.build();
-            LatLngBoundsExt areaBoundsExt = new LatLngBoundsExt(areaBounds);
-            mListener.onMapFragmentBoundsChange(areaBoundsExt);
-        }
-    }
-
     private void addLatLng(LatLng pressPt) {
         if (pressPt != null) {
             markedPtList.add(pressPt);
@@ -166,19 +151,19 @@ public class AreaPickerMapFragment extends BaseMapFragment implements OnBaseMapF
         MapDrawings mapDrawings = new MapDrawings();
         areaPolygon = mMap.addPolygon(mapDrawings.drawArea(markedPtList));
         mMap.addCircle(mapDrawings.drawPoints(markedPtList));
-        //drawArea();
-        // drawPoints();
     }
 
 
-    private void obtainBoundsFromShared() {
-        SharedPrefs sharedPrefs = new SharedPrefs(getActivity());
-        float[] bbox = sharedPrefs.getBboxPrefs();
-
-        LatLngBounds.Builder boundsBuilder = new LatLngBounds.Builder();
-        boundsBuilder.include(new LatLng(bbox[1], bbox[0]));
-        boundsBuilder.include(new LatLng(bbox[3], bbox[2]));
-
-        targetBounds = boundsBuilder.build();
+    /**
+     * This interface must be implemented by activities that contain this
+     * fragment to allow an interaction in this fragment to be communicated to
+     * the activity and potentially other fragments contained in that activity.
+     * <p/>
+     * See the Android Training lesson <a href=
+     * "http://developer.android.com/training/basics/fragments/communicating.html"
+     * >Communicating with Other Fragments</a> for more information.
+     */
+    public interface OnAreaPickerMapFragmentListener {
+        void onMapFragmentBoundsChange(LatLngBoundsExt bounds);
     }
 }

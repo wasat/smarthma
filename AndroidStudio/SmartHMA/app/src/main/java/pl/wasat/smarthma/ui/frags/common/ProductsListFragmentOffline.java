@@ -1,7 +1,6 @@
 package pl.wasat.smarthma.ui.frags.common;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 
@@ -20,7 +19,11 @@ import pl.wasat.smarthma.model.entry.Summary;
  * instance of this fragment.
  */
 public class ProductsListFragmentOffline extends ProductsListFragmentBase {
-    protected Entry testEntry;
+    private Entry testEntry;
+
+    public ProductsListFragmentOffline() {
+        // Required empty public constructor
+    }
 
     /**
      * Use this factory method to create a new instance of this fragment using
@@ -29,27 +32,14 @@ public class ProductsListFragmentOffline extends ProductsListFragmentBase {
      * @return A new instance of fragment SearchProductsFeedsFragment.
      */
     public static ProductsListFragmentOffline newInstance() {
-        ProductsListFragmentOffline fragment = new ProductsListFragmentOffline();
-        Bundle args = new Bundle();
-        //args.putSerializable(KEY_PARAM_FEDEO_REQUEST, fedeoRequestParams);
-        fragment.setArguments(args);
-        return fragment;
+        return new ProductsListFragmentOffline();
     }
 
     @Override
-    public void onViewCreated(View view, Bundle savedInstanceState)
-    {
+    public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        Log.d("ZX", "ProductsListFragmentOffline onViewCreated");
         populateList();
         loadProductItemDetails(entryList.get(0));
-    }
-
-    @Override
-    public void loadProductItemDetails(Entry entry)
-    {
-        super.loadProductItemDetails(entry);
-        entryList.remove(testEntry);
     }
 
     private void populateList() {
@@ -58,12 +48,10 @@ public class ProductsListFragmentOffline extends ProductsListFragmentBase {
         entryList = null;
         entryList = dba.getOMEntries();
         dba.close();
-        if (entryList == null)
-        {
+        if (entryList == null) {
             entryList = new ArrayList();
         }
-        if (entryList.size() <= 0)
-        {
+        if (entryList.size() <= 0) {
             testEntry = new Entry();
             testEntry.setTitle(getActivity().getString(R.string.empty_list));
             testEntry.setUpdated("");
@@ -82,11 +70,7 @@ public class ProductsListFragmentOffline extends ProductsListFragmentBase {
         DataSorter sorter = new DataSorter();
         sorter.sort(entryList);
 
-        //View view = getView();
-        //if (view != null) {
-
         if (entryList.isEmpty()) {
-            //view.setVisibility(View.GONE);
             loadFailureFrag();
         } else {
             if (entryImagesListView != null) {
@@ -100,21 +84,20 @@ public class ProductsListFragmentOffline extends ProductsListFragmentBase {
 
                 // Click event for single list row
                 entryImagesListView
-                        .setOnItemClickListener(new AdapterView.OnItemClickListener()
-                        {
+                        .setOnItemClickListener(new AdapterView.OnItemClickListener() {
                             @Override
                             public void onItemClick(AdapterView<?> parent,
-                                                    View view, int position, long id)
-                            {
+                                                    View view, int position, long id) {
                                 loadProductItemDetails(entryList.get(position));
                             }
                         });
             }
         }
-        //}
     }
 
-    public ProductsListFragmentOffline() {
-        // Required empty public constructor
+    @Override
+    protected void loadProductItemDetails(Entry entry) {
+        super.loadProductItemDetails(entry);
+        entryList.remove(testEntry);
     }
 }

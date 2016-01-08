@@ -23,10 +23,6 @@ import pl.wasat.smarthma.ui.frags.search.SearchListFragment;
 public class SortCollectionsDialog extends DialogFragment {
     private SearchCollectionResultsActivity activity;
 
-    public void setActivity(SearchCollectionResultsActivity activity) {
-        this.activity = activity;
-    }
-
     @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -48,7 +44,6 @@ public class SortCollectionsDialog extends DialogFragment {
                                 SmartHMApplication.sortingType = Const.SORT_BY_DATE_DESCENDING;
                             }
 
-                            //Log.d("ZX", "Sorting entries.");
                             DataSorter sorter = new DataSorter();
                             SearchListFragment searchListFrag = activity.getListFragment();
                             List<EntryISO> entries = searchListFrag.getEntries();
@@ -59,21 +54,10 @@ public class SortCollectionsDialog extends DialogFragment {
                         }
                     }
                 });
-
-            /*
-            builder.setMessage(R.string.search_history_item)
-                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        // FIRE ZE MISSILES!
-                    }
-                })
-                .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        // User cancelled the dialog
-                    }
-                });
-            */
-        // Create the AlertDialog object and return it
         return builder.create();
+    }
+
+    public void setActivity(SearchCollectionResultsActivity activity) {
+        this.activity = activity;
     }
 }

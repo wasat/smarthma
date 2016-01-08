@@ -14,7 +14,6 @@ import android.provider.MediaStore.Images;
 import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -27,14 +26,9 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.squareup.okhttp.OkHttpClient;
-import com.squareup.okhttp.Protocol;
-import com.squareup.picasso.OkHttpDownloader;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Picasso.LoadedFrom;
 import com.squareup.picasso.Target;
-
-import java.util.Arrays;
 
 import pl.wasat.smarthma.R;
 import pl.wasat.smarthma.helper.enums.CloudType;
@@ -53,17 +47,14 @@ import pl.wasat.smarthma.utils.io.EODataDownloadManager;
  */
 public class ProductDetailsFragment extends Fragment implements Target {
     private static final String KEY_PRODUCT_ENTRY = "pl.wasat.smarthma.KEY_PRODUCT_ENTRY";
-
+    private static final CharSequence[] shareList = {"Facebook", "Other"};
     private Entry displayedEntry;
-
     private OnProductDetailsFragmentListener mListener;
-
     private CloudSavingManager cloudSavingManager;
     private EODataDownloadManager eoDataDownloadManager;
 
-    private static final CharSequence[] shareList = {"Facebook", "Other"};
-    //private static final CharSequence[] cloudSaveList = {"Google Drive", "DropBox"};
-
+    public ProductDetailsFragment() {
+    }
 
     /**
      * Use this factory method to create a new instance of this fragment using
@@ -80,7 +71,23 @@ public class ProductDetailsFragment extends Fragment implements Target {
         return fragment;
     }
 
-    public ProductDetailsFragment() {
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        cloudSavingManager.postActivityResult(requestCode, resultCode, data);
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        Activity activity = context instanceof Activity ? (Activity) context : null;
+        try {
+            mListener = (OnProductDetailsFragmentListener) activity;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(activity.toString()
+                    + activity.getString(R.string.must_implement)
+                    + OnProductDetailsFragmentListener.class.getSimpleName());
+        }
     }
 
     @Override
@@ -166,30 +173,10 @@ public class ProductDetailsFragment extends Fragment implements Target {
                 @Override
                 public void onClick(View v) {
                     showShareListDialog();
-                    //openShareDialog();
                 }
             });
         }
         return rootView;
-    }
-
-
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        Activity activity = context instanceof Activity ? (Activity) context : null;
-        try {
-            mListener = (OnProductDetailsFragmentListener) activity;
-        } catch (ClassCastException e) {
-            throw new ClassCastException(activity.toString()
-                    + " must implement OnProductDetailsFragmentListener");
-        }
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        mListener = null;
     }
 
     @Override
@@ -197,7 +184,6 @@ public class ProductDetailsFragment extends Fragment implements Target {
         super.onResume();
         cloudSavingManager.resumeDropboxService();
         eoDataDownloadManager.resumeDownloadManager();
-
     }
 
     @Override
@@ -207,9 +193,9 @@ public class ProductDetailsFragment extends Fragment implements Target {
     }
 
     @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        cloudSavingManager.postActivityResult(requestCode, resultCode, data);
+    public void onDetach() {
+        super.onDetach();
+        mListener = null;
     }
 
     @Override
@@ -233,6 +219,30 @@ public class ProductDetailsFragment extends Fragment implements Target {
         }
     }
 
+    private void startQLookTarget() {
+        Target quicklookTarget = this;
+/*
+        OkHttpClient client = new OkHttpClient();
+        client.setProtocols(Collections.singletonList(Protocol.HTTP_1_1));
+        final Picasso picasso = new Picasso.Builder(getActivity())
+                .downloader(new OkHttpDownloader(client))
+                .build();*/
+
+        Picasso.with(getActivity()).load(getQuicklookUrl())
+                .into(quicklookTarget);
+    }
+
+    private void showQuicklookGallery() {
+        String qLookUrl = getQuicklookUrl();
+        mListener.onProductDetailsFragmentQuicklookShow(qLookUrl);
+    }
+
+    //region DOWNLOAD
+    private void startEoDataDownloading() {
+        String url = displayedEntry.getSimpleMetadata().getBinaryUrl();
+        String productName = displayedEntry.getTitle();
+        eoDataDownloadManager.startDownload(productName, url);
+    }
 
     /**
      *
@@ -244,17 +254,34 @@ public class ProductDetailsFragment extends Fragment implements Target {
                 .getSupportFragmentManager()
                 .beginTransaction()
                 .replace(R.id.activity_base_details_container,
-                        metadataOMFragment, "MetadataFragment")
-                .addToBackStack("MetadataFragment").commit();
+                        metadataOMFragment, MetadataFragment.class.getSimpleName())
+                .addToBackStack(MetadataFragment.class.getSimpleName())
+                .commit();
     }
 
     private void showExtendedMap() {
         mListener.onProductDetailsFragmentExtendedMapShow(displayedEntry.getSimpleMetadata());
     }
+    //endregion
 
-    private void showQuicklookGallery() {
-        String qLookUrl = getQuicklookUrl();
-        mListener.onProductDetailsFragmentQuicklookShow(qLookUrl);
+    //region CLOUD SERVICE
+    private void obtainProductSaveData() {
+        String name = displayedEntry.getTitle();
+        String url = displayedEntry.getSimpleMetadata().getBinaryUrl();
+        String meta = displayedEntry.getRawMetadata();
+        cloudSavingManager.setCloudSaveParameters(name, url, meta);
+    }
+
+    private void showCloudServicesListDialog() {
+        CloudSaveListDialogFragment listDialFrag = new CloudSaveListDialogFragment();
+        listDialFrag.show(getActivity().getSupportFragmentManager(),
+                CloudSaveListDialogFragment.class.getSimpleName());
+    }
+
+    private void showShareListDialog() {
+        ShareListDialogFragment listDialFrag = new ShareListDialogFragment();
+        listDialFrag.show(getActivity().getSupportFragmentManager(),
+                ShareListDialogFragment.class.getSimpleName());
     }
 
     private String getQuicklookUrl() {
@@ -263,75 +290,10 @@ public class ProductDetailsFragment extends Fragment implements Target {
         return url;
     }
 
-    //region DOWNLOAD
-
-    private void startEoDataDownloading() {
-        String url = displayedEntry.getSimpleMetadata().getBinaryUrl();
-        String productName = displayedEntry.getTitle();
-        eoDataDownloadManager.startDownload(productName, url);
-    }
-
-    //endregion
-
-    //region SHARING
-    private void openShareDialog() {
-        String qLookUrl = getQuicklookUrl();
-        mListener.onProductDetailsFragmentShareDialogShow(qLookUrl);
-    }
-
-    private void showShareListDialog() {
-        ShareListDialogFragment listDialFrag = new ShareListDialogFragment();
-        listDialFrag.show(getActivity().getSupportFragmentManager(),
-                "ShareListDialogFragment");
-    }
-
-    public static class ShareListDialogFragment extends DialogFragment {
-        @NonNull
-        @Override
-        public Dialog onCreateDialog(Bundle savedInstanceState) {
-            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-            builder.setTitle(R.string.share_options).setItems(
-                    shareList, new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int which) {
-                            ((ProductDetailsFragment) getActivity().getSupportFragmentManager()
-                                    .findFragmentByTag("ProductDetailsFragment")).chooseShareType(which);
-                        }
-                    });
-            return builder.create();
-        }
-    }
-
-    private void chooseShareType(int which) {
-        switch (which) {
-            case 0:
-                openShareDialog();
-                break;
-            case 1:
-                startQLookTarget();
-                break;
-            default:
-                break;
-        }
-    }
-
-    private void startQLookTarget() {
-        Target quicklookTarget = this;
-
-        OkHttpClient client = new OkHttpClient();
-        client.setProtocols(Arrays.asList(Protocol.HTTP_1_1));
-        final Picasso picasso = new Picasso.Builder(getActivity())
-                .downloader(new OkHttpDownloader(client))
-                .build();
-
-        Picasso.with(getActivity()).load(getQuicklookUrl())
-                .into(quicklookTarget);
-    }
-
-    private void sendIntentShareUrl() {
-        Intent shareIntent = new Intent(Intent.ACTION_SEND);
-        shareIntent.setType("text/plain");
-        shareIntent.putExtra(Intent.EXTRA_TEXT, getQuicklookUrl());
-        startActivity(Intent.createChooser(shareIntent, getResources().getString(R.string.share_quicklook)));
+    @Override
+    public void onBitmapLoaded(Bitmap image, LoadedFrom arg1) {
+        Bitmap scaled = Bitmap.createScaledBitmap(image, 480, 480, true);
+        sendIntentShareImg(scaled);
     }
 
     private void sendIntentShareImg(Bitmap bitmapImg) {
@@ -347,22 +309,78 @@ public class ProductDetailsFragment extends Fragment implements Target {
 
         startActivity(Intent.createChooser(shareIntent, getResources().getString(R.string.share_quicklook)));
     }
+
+    @Override
+    public void onBitmapFailed(Drawable arg0) {
+        sendIntentShareUrl();
+    }
     //endregion
 
-    //region CLOUD SERVICE
-
-    private void obtainProductSaveData() {
-        String name = displayedEntry.getTitle();
-        String url = displayedEntry.getSimpleMetadata().getBinaryUrl();
-        String meta = displayedEntry.getRawMetadata();
-        Log.d("BINARY_DATA", "NAME: " + name + "; URL:" + url);
-        cloudSavingManager.setCloudSaveParameters(name, url, meta);
+    private void sendIntentShareUrl() {
+        Intent shareIntent = new Intent(Intent.ACTION_SEND);
+        shareIntent.setType("text/plain");
+        shareIntent.putExtra(Intent.EXTRA_TEXT, getQuicklookUrl());
+        startActivity(Intent.createChooser(shareIntent, getResources().getString(R.string.share_quicklook)));
     }
 
-    private void showCloudServicesListDialog() {
-        CloudSaveListDialogFragment listDialFrag = new CloudSaveListDialogFragment();
-        listDialFrag.show(getActivity().getSupportFragmentManager(),
-                "CloudSaveListDialogFragment");
+    @Override
+    public void onPrepareLoad(Drawable arg0) {
+    }
+
+    private void chooseShareType(int which) {
+        switch (which) {
+            case 0:
+                openShareDialog();
+                break;
+            case 1:
+                startQLookTarget();
+                break;
+            default:
+                break;
+        }
+    }
+//endregion
+
+    //region SHARING
+    private void openShareDialog() {
+        String qLookUrl = getQuicklookUrl();
+        mListener.onProductDetailsFragmentShareDialogShow(qLookUrl);
+    }
+
+    /**
+     * This interface must be implemented by activities that contain this
+     * fragment to allow an interaction in this fragment to be communicated to
+     * the activity and potentially other fragments contained in that activity.
+     * <p/>
+     * See the Android Training lesson <a href=
+     * "http://developer.android.com/training/basics/fragments/communicating.html"
+     * >Communicating with Other Fragments</a> for more information.
+     */
+    public interface OnProductDetailsFragmentListener {
+
+        void onProductDetailsFragmentExtendedMapShow(SimpleMetadata simpleMetadata);
+
+        void onProductDetailsFragmentQuicklookShow(String url);
+
+        void onProductDetailsFragmentShareDialogShow(String url);
+
+    }
+
+    public static class ShareListDialogFragment extends DialogFragment {
+        @NonNull
+        @Override
+        public Dialog onCreateDialog(Bundle savedInstanceState) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+            builder.setTitle(R.string.share_options).setItems(
+                    shareList, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            ((ProductDetailsFragment) getActivity().getSupportFragmentManager()
+                                    .findFragmentByTag(ProductDetailsFragment.class.getSimpleName()))
+                                    .chooseShareType(which);
+                        }
+                    });
+            return builder.create();
+        }
     }
 
     public static class CloudSaveListDialogFragment extends DialogFragment {
@@ -384,46 +402,10 @@ public class ProductDetailsFragment extends Fragment implements Target {
             ConnectionDetector detect = new ConnectionDetector(getActivity());
             if (detect.isWifiConnected()) {
                 CloudSavingManager cloudMngr = ((ProductDetailsFragment) getActivity().getSupportFragmentManager()
-                        .findFragmentByTag("ProductDetailsFragment")).cloudSavingManager;
+                        .findFragmentByTag(ProductDetailsFragment.class.getSimpleName()))
+                        .cloudSavingManager;
                 cloudMngr.chooseCloudProvider(CloudType.getEnum(which));
             }
         }
     }
-
-//endregion
-
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated to
-     * the activity and potentially other fragments contained in that activity.
-     * <p/>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
-    public interface OnProductDetailsFragmentListener {
-
-        void onProductDetailsFragmentExtendedMapShow(SimpleMetadata simpleMetadata);
-
-        void onProductDetailsFragmentQuicklookShow(String url);
-
-        void onProductDetailsFragmentShareDialogShow(String url);
-
-    }
-
-    @Override
-    public void onBitmapFailed(Drawable arg0) {
-        sendIntentShareUrl();
-    }
-
-    @Override
-    public void onBitmapLoaded(Bitmap image, LoadedFrom arg1) {
-        Bitmap scaled = Bitmap.createScaledBitmap(image, 480, 480, true);
-        sendIntentShareImg(scaled);
-    }
-
-    @Override
-    public void onPrepareLoad(Drawable arg0) {
-    }
-
 }

@@ -199,7 +199,7 @@ public class EntryISO implements Serializable {
         return !read;
     }
 
-    public void setRead(boolean read) {
+    public void setRead() {
         this.read = true;
     }
 

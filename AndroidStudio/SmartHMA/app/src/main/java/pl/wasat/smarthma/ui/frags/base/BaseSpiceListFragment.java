@@ -21,10 +21,9 @@ import pl.wasat.smarthma.utils.rss.SpiceExceptionHandler;
 public class BaseSpiceListFragment extends ListFragment implements
         RequestListener<Feed> {
 
-    protected Boolean stopSearch = false;
-
     private final SpiceManager smartHMASpiceManager = new SpiceManager(
             SmartHmaHttpSpiceService.class);
+    protected Boolean stopSearch = false;
 
     @Override
     public void onStart() {
@@ -40,10 +39,6 @@ public class BaseSpiceListFragment extends ListFragment implements
         super.onStop();
     }
 
-    protected SpiceManager getSpiceManager() {
-        return smartHMASpiceManager;
-    }
-
     /*
      * (non-Javadoc)
      *
@@ -57,53 +52,6 @@ public class BaseSpiceListFragment extends ListFragment implements
         SpiceExceptionHandler sExc = new SpiceExceptionHandler(getActivity(), spiceException);
         sExc.invoke();
         showDialog(sExc.getExTextMessage(), sExc.getExRawMessage(), sExc.getExRawCause());
-/*
-        String messTxt;
-        String exRawMessage = spiceException.getMessage();
-        String exRawCause = spiceException.getCause().getMessage();
-
-        if (spiceException.getCause() instanceof HttpResponseException) {
-            FedeoExceptionHandler fedHr = null;
-            try {
-                //exRawMessage = spiceException.getMessage();
-                //exRawCause = spiceException.getCause().toString();
-
-                String inStr;
-
-                HttpResponseException exception = (HttpResponseException) spiceException
-                        .getCause();
-                inStr = exception.getContent();
-
-                SAXParserFactory spf = SAXParserFactory.newInstance();
-                SAXParser sp = spf.newSAXParser();
-                XMLReader xr = sp.getXMLReader();
-
-                fedHr = new FedeoExceptionHandler();
-
-                xr.setContentHandler(fedHr);
-                InputSource inputSource = new InputSource(new StringReader(
-                        inStr));
-                xr.parse(inputSource);
-
-            } catch (IOException e) {
-                Log.e("RSS Handler IO", e.toString());
-            } catch (SAXException e) {
-                Log.e("RSS Handler SAX", e.toString());
-                e.printStackTrace();
-            } catch (ParserConfigurationException e) {
-                Log.e("RSS Parser Config", e.toString());
-            }
-
-            assert fedHr != null;
-            messTxt = fedHr.getFedeoException().getExceptionReport()
-                    .getException().getExceptionText().getText();
-
-        } else {
-            messTxt = getString(R.string.wide_area_or_timespan);
-        }
-
-        showDialog(messTxt, exRawMessage, exRawCause);*/
-
     }
 
     /*
@@ -120,7 +68,11 @@ public class BaseSpiceListFragment extends ListFragment implements
     private void showDialog(String messText, String exRawMessage, String exRawCause) {
         DialogFragment exceptionDialogFragment = ExceptionDialogFragment.newInstance(
                 messText, exRawMessage, exRawCause);
-        exceptionDialogFragment.show(getFragmentManager(), "ExceptionDialogFragment");
+        exceptionDialogFragment.show(getFragmentManager(), ExceptionDialogFragment.class.getSimpleName());
+    }
+
+    protected SpiceManager getSpiceManager() {
+        return smartHMASpiceManager;
     }
 
 }

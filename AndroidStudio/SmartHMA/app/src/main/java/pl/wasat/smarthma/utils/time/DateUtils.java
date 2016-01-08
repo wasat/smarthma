@@ -5,6 +5,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
+import pl.wasat.smarthma.R;
+import pl.wasat.smarthma.SmartHMApplication;
 import pl.wasat.smarthma.model.iso.EntryISO;
 
 public class DateUtils {
@@ -29,21 +31,21 @@ public class DateUtils {
 
         if (diffMinutes < 60) {
             if (diffMinutes == 1)
-                return diffMinutes + " minute ago";
+                return diffMinutes + SmartHMApplication.getAppContext().getString(R.string.minute_ago);
             else
-                return diffMinutes + " minutes ago";
+                return diffMinutes + SmartHMApplication.getAppContext().getString(R.string.minutes_ago);
         } else if (diffHours < 24) {
             if (diffHours == 1)
-                return diffHours + " hour ago";
+                return diffHours + SmartHMApplication.getAppContext().getString(R.string.hour_ago);
             else
-                return diffHours + " hours ago";
+                return diffHours + SmartHMApplication.getAppContext().getString(R.string.hours_ago);
         } else if (diffDays < 30) {
             if (diffDays == 1)
-                return diffDays + " day ago";
+                return diffDays + SmartHMApplication.getAppContext().getString(R.string.day_ago);
             else
-                return diffDays + " days ago";
+                return diffDays + SmartHMApplication.getAppContext().getString(R.string.days_ago);
         } else {
-            return "a long time ago..";
+            return SmartHMApplication.getAppContext().getString(R.string.long_time_ago);
         }
     }
 
@@ -56,7 +58,7 @@ public class DateUtils {
                 } else {
                     date = entry.getDate().toString();
                 }
-            } else if (entry.getMDMetadata().getDateStamp() != null) {
+            } else if (entry.getMDMetadata() != null) {
                 date = entry.getMDMetadata().getDateStamp().getDateGco().getText();
             } else if (date.isEmpty()) {
                 date = "1970-01-01";

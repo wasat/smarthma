@@ -41,7 +41,6 @@ public class CollectionsGroupListFragment extends Fragment implements
 
     private ListView collectionsGroupListView;
     private View loadingView;
-    private CollectionsListFragment collectionsListFragment;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -82,57 +81,6 @@ public class CollectionsGroupListFragment extends Fragment implements
         super.onStop();
     }
 
-    private void updateEOListViewContent(List collectGrList) {
-/*        DataSorter sorter = new DataSorter();
-        ArrayList<CollectionsGroup> collectionsGroupList = collectGrList.getCollectionsGroupList();
-
-        ArrayList<Collection> collection;
-        for (int i = 0; i < collectionsGroupList.size(); i++) {
-            collection = collectionsGroupList.get(i).getCollections();
-            sorter.sort(collection);
-        }*/
-
-        CollectionsGroupListAdapter collectionsGroupListAdapter = new CollectionsGroupListAdapter(
-                getActivity(), spiceManagerBinary, collectGrList, collectionsGroupListView);
-        collectionsGroupListView.setAdapter(collectionsGroupListAdapter);
-        loadingView.setVisibility(View.GONE);
-        collectionsGroupListView.setVisibility(View.VISIBLE);
-        collectionsGroupListAdapter.setOnClickListener(new OnSlideElementListener() {
-            @Override
-            public void Catch(boolean swipeRight, int position) {
-                if (swipeRight)
-                    Toast.makeText(getActivity(), "share " + position, Toast.LENGTH_SHORT).show();
-                else
-                    Toast.makeText(getActivity(), "delete " + position, Toast.LENGTH_SHORT).show();
-            }
-        });
-
-        loadingView.setVisibility(View.GONE);
-        collectionsGroupListView.setVisibility(View.VISIBLE);
-
-        SharedPrefs sharedPrefs = new SharedPrefs(getActivity());
-        sharedPrefs.setParentIdPrefs("EOP:ESA:FEDEO");
-
-        // Click event for single list row
-        collectionsGroupListView
-                .setOnItemClickListener(new OnItemClickListener() {
-
-                    @Override
-                    public void onItemClick(AdapterView<?> parent, View view,
-                                            int position, long id) {
-                        loadCollectionsList(position);
-                    }
-                });
-    }
-
-    private void loadCollectionsList(int listPosition) {
-        collectionsListFragment = CollectionsListFragment
-                .newInstance(listPosition);
-        getActivity().getSupportFragmentManager().beginTransaction()
-                .replace(R.id.activity_base_list_container, collectionsListFragment).addToBackStack("CollectionsListFragment")
-                .commit();
-    }
-
     /**
      *
      */
@@ -161,7 +109,7 @@ public class CollectionsGroupListFragment extends Fragment implements
     @Override
     public void onRequestFailure(SpiceException arg0) {
         getActivity().setProgressBarIndeterminateVisibility(false);
-        Toast.makeText(getActivity(), "Impossible to get the list of users",
+        Toast.makeText(getActivity(), R.string.impossible_to_get_the_list,
                 Toast.LENGTH_SHORT).show();
 
     }
@@ -181,11 +129,54 @@ public class CollectionsGroupListFragment extends Fragment implements
         updateEOListViewContent(SmartHMApplication.GlobalEODataList);
     }
 
-    public ListView getCollectionsGroupListView() {
-        return collectionsGroupListView;
+    private void updateEOListViewContent(List collectGrList) {
+        CollectionsGroupListAdapter collectionsGroupListAdapter = new CollectionsGroupListAdapter(
+                getActivity(), spiceManagerBinary, collectGrList, collectionsGroupListView);
+        collectionsGroupListView.setAdapter(collectionsGroupListAdapter);
+        loadingView.setVisibility(View.GONE);
+        collectionsGroupListView.setVisibility(View.VISIBLE);
+        collectionsGroupListAdapter.setOnClickListener(new OnSlideElementListener() {
+            @Override
+            public void Catch(boolean swipeRight, int position) {
+                if (swipeRight)
+                    Toast.makeText(getContext(),
+                            getContext().getString(R.string.swipe_right)
+                                    + position, Toast.LENGTH_SHORT).show();
+                else
+                    Toast.makeText(getContext(),
+                            getContext().getString(R.string.swipe_left)
+                                    + position, Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        loadingView.setVisibility(View.GONE);
+        collectionsGroupListView.setVisibility(View.VISIBLE);
+
+        SharedPrefs sharedPrefs = new SharedPrefs(getActivity());
+        sharedPrefs.setParentIdPrefs("EOP:ESA:FEDEO");
+
+        // Click event for single list row
+        collectionsGroupListView
+                .setOnItemClickListener(new OnItemClickListener() {
+
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view,
+                                            int position, long id) {
+                        loadCollectionsList(position);
+                    }
+                });
     }
 
-    public CollectionsListFragment getCollectionsListFragment() {
-        return collectionsListFragment;
+    private void loadCollectionsList(int listPosition) {
+        CollectionsListFragment collectionsListFragment = CollectionsListFragment
+                .newInstance(listPosition);
+        getActivity().getSupportFragmentManager().beginTransaction()
+                .replace(R.id.activity_base_list_container, collectionsListFragment)
+                .addToBackStack(CollectionsListFragment.class.getSimpleName())
+                .commit();
+    }
+
+    public ListView getCollectionsGroupListView() {
+        return collectionsGroupListView;
     }
 }

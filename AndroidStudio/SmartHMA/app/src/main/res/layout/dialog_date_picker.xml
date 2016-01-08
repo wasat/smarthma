@@ -17,25 +17,25 @@
 */
 -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
-    android:minWidth="400dp"
-    android:layout_height="wrap_content"
-    android:gravity="center_horizontal"
-    android:orientation="vertical"
-    android:background="@color/background_white">
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:background="@color/background_white"
+              android:gravity="center_horizontal"
+              android:minWidth="400dp"
+              android:orientation="vertical">
 
     <pl.wasat.smarthma.customviews.TextViewWithFont
+        style="@style/dialogHeader"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        style="@style/dialogHeader"
-        android:text="Choose the date" />
+        android:text="Choose the date"/>
 
     <DatePicker
         android:id="@+id/dialog_date_picker_datePicker"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:padding="@dimen/search_eo_data_padding" />
+        android:padding="@dimen/search_eo_data_padding"/>
 
     <LinearLayout
         android:layout_width="fill_parent"
@@ -46,26 +46,26 @@
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
+            android:background="@color/background_white"
             android:orientation="horizontal"
-            android:padding="@dimen/search_eo_data_padding"
-            android:background="@color/background_white">
+            android:padding="@dimen/search_eo_data_padding">
 
             <Button
                 android:id="@+id/dialog_date_picker_cancel"
+                style="@style/buttonBlue"
                 android:layout_width="fill_parent"
                 android:layout_height="@dimen/button_blue_height"
                 android:layout_weight="1"
-                android:text="Cancel"
-                style="@style/buttonBlue" />
+                android:text="Cancel"/>
 
             <Button
                 android:id="@+id/dialog_date_picker_choose"
+                style="@style/buttonBlue"
                 android:layout_width="fill_parent"
                 android:layout_height="@dimen/button_blue_height"
+                android:layout_marginLeft="@dimen/search_eo_data_padding_small"
                 android:layout_weight="1"
-                style="@style/buttonBlue"
-                android:text="Choose"
-                android:layout_marginLeft="@dimen/search_eo_data_padding_small" />
+                android:text="Choose"/>
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>

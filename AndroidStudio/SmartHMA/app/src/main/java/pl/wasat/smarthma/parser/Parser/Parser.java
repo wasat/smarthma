@@ -13,7 +13,7 @@ import pl.wasat.smarthma.parser.missions.EsaEoMissions.ProbaV;
 import pl.wasat.smarthma.parser.missions.EsaEoMissions.Sentinel1;
 import pl.wasat.smarthma.parser.missions.EsaEoMissions.Smos;
 import pl.wasat.smarthma.parser.missions.EsaEoMissions.Swarm;
-import pl.wasat.smarthma.parser.missions.EsaEuemsat.EsaEuemsat;
+import pl.wasat.smarthma.parser.missions.EsaEuemsat.EsaEumetsat;
 import pl.wasat.smarthma.parser.missions.EsaEuemsat.MetOp;
 import pl.wasat.smarthma.parser.missions.EsaEuemsat.Meteosat;
 import pl.wasat.smarthma.parser.missions.EsaFutureMissions.Adm;
@@ -49,7 +49,7 @@ import pl.wasat.smarthma.parser.missions.ThirdPartyMissions.Grace;
 import pl.wasat.smarthma.parser.missions.ThirdPartyMissions.Ikonos2;
 import pl.wasat.smarthma.parser.missions.ThirdPartyMissions.IrsP6;
 import pl.wasat.smarthma.parser.missions.ThirdPartyMissions.Kompsat2;
-import pl.wasat.smarthma.parser.missions.ThirdPartyMissions.LandsatOliTiris;
+import pl.wasat.smarthma.parser.missions.ThirdPartyMissions.LandsatOliTirs;
 import pl.wasat.smarthma.parser.missions.ThirdPartyMissions.NovaAvhrr;
 import pl.wasat.smarthma.parser.missions.ThirdPartyMissions.Odin;
 import pl.wasat.smarthma.parser.missions.ThirdPartyMissions.Pleiades;
@@ -74,15 +74,12 @@ import pl.wasat.smarthma.parser.missions.ThirdPartyMissions.UkDmc;
  */
 public class Parser {
     final String sent3Url = "https://earth.esa.int/web/guest/missions/esa-future-missions/sentinel-3";
-    private final String landsatUrl = "https://earth.esa.int/web/guest/missions/3rd-party-missions/current-missions/landsat-oli-tirs";
     final String landsatRbvUrl = "https://earth.esa.int/web/guest/missions/3rd-party-missions/historical-missions/landsat-mssrbv";
     final String potentialMissionUrl = "https://earth.esa.int/web/guest/missions/3rd-party-missions/potential-missions";
-
+    private final String landsatUrl = "https://earth.esa.int/web/guest/missions/3rd-party-missions/current-missions/landsat-oli-tirs";
     private final Context context;
 
-
     public Parser(Context context) {
-
         this.context = context;
         ParserDb parserDb = new ParserDb(context);
         parserDb.open();
@@ -136,7 +133,6 @@ public class Parser {
         try {
             String probaVurl = "https://earth.esa.int/web/guest/missions/esa-operational-eo-missions/proba-v";
             ProbaV probaV = new ProbaV(probaVurl, context);
-            //probaV.imageOfTheWeek();
             probaV.mainContent();
             probaV.faq();
         } catch (Exception e) {
@@ -212,8 +208,6 @@ public class Parser {
 
     //CAT 1
     public void cat1() {
-
-
         try {
             String esaFutureMissionsUrl = "https://earth.esa.int/web/guest/missions/esa-future-missions";
             EsaFutureMissions esaFutureMissions = new EsaFutureMissions(esaFutureMissionsUrl, context);
@@ -281,9 +275,7 @@ public class Parser {
         }
     }
 
-
     //CAT 2
-
     public void cat2() {
         try {
             String thirdPartyUrl = "https://earth.esa.int/web/guest/missions/3rd-party-missions";
@@ -358,8 +350,8 @@ public class Parser {
         }
 
         try {
-            LandsatOliTiris landsatOliTiris = new LandsatOliTiris(landsatUrl, context);
-            landsatOliTiris.mainContent();
+            LandsatOliTirs landsatOliTirs = new LandsatOliTirs(landsatUrl, context);
+            landsatOliTirs.mainContent();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -492,8 +484,8 @@ public class Parser {
             e.printStackTrace();
         }
     }
-    //CAT 3
 
+    //CAT 3
     public void cat3() {
         try {
             String historicalMissionsUrl = "https://earth.esa.int/web/guest/missions/3rd-party-missions/historical-missions";
@@ -634,13 +626,13 @@ public class Parser {
             e.printStackTrace();
         }
     }
-    //CAT 5
 
+    //CAT 5
     public void cat5() {
         try {
             String esaEumsatUrl = "https://earth.esa.int/web/guest/missions/esaeumetsat";
-            EsaEuemsat esaEuemsat = new EsaEuemsat(esaEumsatUrl, context);
-            esaEuemsat.mainContent();
+            EsaEumetsat esaEumetsat = new EsaEumetsat(esaEumsatUrl, context);
+            esaEumetsat.mainContent();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -660,8 +652,5 @@ public class Parser {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
     }
-
-
 }

@@ -44,13 +44,14 @@ import pl.wasat.smarthma.utils.rss.FedeoOSDDRequest;
 public class CollectionDetailsFragment extends
         BaseViewAndBasicSettingsDetailFragment {
 
-
     private OnCollectionDetailsFragmentListener mListener;
     private boolean waitForOsddLoad = true;
 
     private FedeoRequestParams fedeoRequestParams;
     private HashMap<String, String> paramsMap;
 
+    public CollectionDetailsFragment() {
+    }
 
     /**
      * Use this factory method to create a new instance of this fragment using
@@ -67,7 +68,23 @@ public class CollectionDetailsFragment extends
         return fragment;
     }
 
-    public CollectionDetailsFragment() {
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        Activity activity = context instanceof Activity ? (Activity) context : null;
+        try {
+            mListener = (OnCollectionDetailsFragmentListener) activity;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(activity.toString()
+                    + activity.getString(R.string.must_implement)
+                    + OnCollectionDetailsFragmentListener.class.getSimpleName());
+        }
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        mListener = null;
     }
 
     /*
@@ -106,7 +123,6 @@ public class CollectionDetailsFragment extends
                 if (mListener != null) {
                     // TODO !!!
                     mSlidingLayer.closeLayer(true);
-                    //fedeoRequestParams.buildFromShared(getActivity());
                     fedeoRequestParams.setParentIdentifier(displayedISOEntry.getIdentifier());
                     mListener.onCollectionDetailsFragmentShowProducts(fedeoRequestParams);
                 }
@@ -123,6 +139,10 @@ public class CollectionDetailsFragment extends
         loadParamsSliderView(osddUrl);
 
         return rootView;
+    }
+
+    private void loadDefaultFedeoParams() {
+        fedeoRequestParams = new FedeoRequestParams();
     }
 
     private void loadParamsSliderView(String osddUrl) {
@@ -161,30 +181,6 @@ public class CollectionDetailsFragment extends
         });
     }
 
-    private void loadDefaultFedeoParams() {
-        fedeoRequestParams = new FedeoRequestParams();
-        //fedeoRequestParams.buildFromShared(getActivity().getApplicationContext());
-    }
-
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        Activity activity = context instanceof Activity ? (Activity) context : null;
-        try {
-            mListener = (OnCollectionDetailsFragmentListener) activity;
-        } catch (ClassCastException e) {
-            throw new ClassCastException(activity.toString()
-                    + " must implement OnCollectionDetailsFragmentListener");
-        }
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        mListener = null;
-    }
-
-
     private void startAsyncLoadOsddData(GenericUrl fedeoDescUrl) {
         if (fedeoDescUrl != null) {
             getActivity().setProgressBarIndeterminateVisibility(true);
@@ -201,6 +197,17 @@ public class CollectionDetailsFragment extends
         }
     }
 
+    private void initFedeoReq(OpenSearchDescription osdd) {
+        loadDefaultFedeoParams();
+        String tmpltUrl = "";
+        for (Url url : osdd.getUrl()) {
+            if (url.getType().equalsIgnoreCase("application/atom+xml")) {
+                tmpltUrl = url.getTemplate();
+            }
+        }
+        fedeoRequestParams.setTemplateUrl(tmpltUrl);
+    }
+
     private void addParameterSpinners(OpenSearchDescription osdd) {
 
         paramsMap = new HashMap<>();
@@ -215,12 +222,9 @@ public class CollectionDetailsFragment extends
                     spinner.setLayoutParams(new TableLayout.LayoutParams(
                             TableLayout.LayoutParams.WRAP_CONTENT, TableLayout.LayoutParams.WRAP_CONTENT, 1f));
                     spinner.setPadding(25, 10, 25, 10);
-                    //spinner.setBackgroundColor(R.color.background_gray);
-                    //android:background="@color/background_gray"
-                    //spinner.setPrompt(param.getName());
 
                     List<String> optList = new ArrayList<>();
-                    optList.add("Choose " + param.getName() + "...");
+                    optList.add(String.format(getContext().getString(R.string.choose_osdd_param), param.getName()));
                     for (Option opt : param.getOption()) {
                         optList.add(opt.getLabel());
                     }
@@ -248,17 +252,6 @@ public class CollectionDetailsFragment extends
                 }
             }
         }
-    }
-
-    private void initFedeoReq(OpenSearchDescription osdd) {
-        loadDefaultFedeoParams();
-        String tmpltUrl = "";
-        for (Url url : osdd.getUrl()) {
-            if (url.getType().equalsIgnoreCase("application/atom+xml")) {
-                tmpltUrl = url.getTemplate();
-            }
-        }
-        fedeoRequestParams.setTemplateUrl(tmpltUrl);
     }
 
     /**

@@ -10,17 +10,22 @@ import pl.wasat.smarthma.model.exception.ExceptionText;
 import pl.wasat.smarthma.model.exception.Fedeo;
 
 class FedeoExceptionHandler extends DefaultHandler {
+    private final Fedeo fedeo;
     private StringBuffer chars = new StringBuffer();
     private ExceptionReport exceptionReport;
     private Exception exception;
     private ExceptionText exceptionText;
-    private final Fedeo fedeo;
 
     public FedeoExceptionHandler() {
         super();
         fedeo = new Fedeo();
     }
 
+    @Override
+    public void endDocument() throws SAXException {
+        fedeo.setExceptionReport(exceptionReport);
+        super.endDocument();
+    }
 
     @Override
     public void startElement(String uri, String localName, String qName,
@@ -58,12 +63,6 @@ class FedeoExceptionHandler extends DefaultHandler {
         } else if (localName.equalsIgnoreCase("exceptionText")) {
             exceptionText.setText(chars.toString());
         }
-    }
-
-    @Override
-    public void endDocument() throws SAXException {
-        fedeo.setExceptionReport(exceptionReport);
-        super.endDocument();
     }
 
     @Override

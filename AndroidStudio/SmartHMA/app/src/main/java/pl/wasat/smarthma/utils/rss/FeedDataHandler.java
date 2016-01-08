@@ -34,19 +34,17 @@ import pl.wasat.smarthma.model.om.Content;
  * Created by Daniel on 2015-10-08 00:15.
  * Part of the project  SmartHMA
  */
-public class FeedDataHandler extends DefaultHandler {
+class FeedDataHandler extends DefaultHandler {
 
+    private final String[] inStrArrFeed;
     // Current characters being accumulated
     private StringBuffer chars = new StringBuffer();
-    private String[] inStrArrFeed;
     private Locator locator;
     private int startLine;
 
     // Feed and ISO data objects to use for temporary storage
     private boolean isInFeed = false;
     private boolean isInEntry = false;
-    //private boolean isInMDMetadata = false;
-    private boolean isInCitation = false;
     private boolean isInCIDate = false;
     private boolean isIdAdded = false;
 
@@ -72,7 +70,6 @@ public class FeedDataHandler extends DefaultHandler {
     private Polygon polygon;
     private Date date;
     private DateInCIDate dateInCIDate;
-    private Where where;
     private Group group;
     private Content content;
     private ArrayList<Content> contentList;
@@ -88,10 +85,6 @@ public class FeedDataHandler extends DefaultHandler {
 
     public void setDocumentLocator(Locator locator) {
         this.locator = locator;
-    }
-
-    public Feed getFeeds() {
-        return feed;
     }
 
     @Override
@@ -173,7 +166,7 @@ public class FeedDataHandler extends DefaultHandler {
         } else if (localName.equalsIgnoreCase("Polygon")) {
             polygon = new Polygon();
         } else if (localName.equalsIgnoreCase("where")) {
-            where = new Where();
+            Where where = new Where();
         } else if (localName.equalsIgnoreCase("group")) {
             group = new Group();
             contentList = new ArrayList<>();
@@ -198,7 +191,6 @@ public class FeedDataHandler extends DefaultHandler {
             startRawMetadata();
         }
     }
-
 
     @Override
     public void endElement(String uri, String localName, String qName) throws SAXException {
@@ -244,6 +236,7 @@ public class FeedDataHandler extends DefaultHandler {
             }
         }
         if (isInEntry) {
+            boolean isInCitation = false;
             if (localName.equalsIgnoreCase("entry")) {
                 entry.setIdentifier(identifierEntry);
                 isIdAdded = false;
@@ -321,30 +314,6 @@ public class FeedDataHandler extends DefaultHandler {
         chars.append(new String(ch, start, length).trim());
     }
 
-    private void startRawMetadata() {
-        startLine = locator.getLineNumber();
-    }
-
-/*    private void endRawMetadata() {
-        int endLine = locator.getLineNumber();
-        rawMetadata = substringLine(inStrArrFeed, startLine - 1, endLine);
-    }
-
-    private String substringLineOM(String[] strArray, int startLine, int endLine) {
-        String[] subString = Arrays.copyOfRange(strArray, startLine, endLine);
-        return StringUtils.join(subString, "\n");
-    }
-
-    private String substringLine(String[] strArray, int startLine, int endLine) {
-        String[] subString = Arrays.copyOfRange(strArray, startLine, endLine);
-        String[] feedLine = inStrArrFeed[1].split(" ");
-        String metaName = subString[0].split(" ")[0];
-        feedLine[0] = metaName;
-        String firstLine = StringUtils.join(feedLine, " ");
-        subString[0] = firstLine;
-        return StringUtils.join(subString, "\n");
-    }*/
-
     private String buildRawMetadata(String[] strArray, int startLine, int endLine) {
         String[] metadataStrArr = Arrays.copyOfRange(strArray, startLine, endLine);
         String metadataStart = metadataStrArr[0].replace(">", "");
@@ -357,7 +326,7 @@ public class FeedDataHandler extends DefaultHandler {
         return StringUtils.join(metadataStrArr, "\n");
     }
 
-    public static String validateNamespace(String txt) {
+    private static String validateNamespace(String txt) {
         boolean containAttr = false;
         List<String> values = new ArrayList<>();
         String[] splitTag = txt.split(" ");
@@ -379,7 +348,13 @@ public class FeedDataHandler extends DefaultHandler {
             containAttr = false;
         }
         return StringUtils.join(values, " ");
-
     }
 
+    private void startRawMetadata() {
+        startLine = locator.getLineNumber();
+    }
+
+    public Feed getFeeds() {
+        return feed;
+    }
 }

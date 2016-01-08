@@ -22,8 +22,9 @@ public class BaseCollectionsActivity extends BaseSmartHMActivity {
         getSupportFragmentManager()
                 .beginTransaction()
                 .replace(R.id.activity_base_details_container,
-                        metadataISOFragment, "MetadataISOFragment")
-                .addToBackStack("MetadataISOFragment").commit();
+                        metadataISOFragment, MetadataISOFragment.class.getSimpleName())
+                .addToBackStack(MetadataISOFragment.class.getSimpleName())
+                .commit();
     }
 
     protected void startSearchingProductsProcess(FedeoRequestParams fedeoSearchProductsParams) {

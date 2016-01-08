@@ -17,6 +17,7 @@ import pl.wasat.smarthma.model.om.EarthObservation;
 import pl.wasat.smarthma.utils.text.SmartHMAStringStyle;
 
 
+@SuppressWarnings("WeakerAccess")
 public class Entry implements Serializable {
 
     private static final long serialVersionUID = 1L;

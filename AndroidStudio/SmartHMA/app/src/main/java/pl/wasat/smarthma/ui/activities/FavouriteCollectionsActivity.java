@@ -3,7 +3,6 @@ package pl.wasat.smarthma.ui.activities;
 import android.app.ActionBar;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.TextView;
 
 import pl.wasat.smarthma.R;
@@ -22,8 +21,6 @@ import pl.wasat.smarthma.ui.menus.SearchOfflineCollectionsMenuHandler;
 public class FavouriteCollectionsActivity extends ExtendedBaseCollectionsActivity {
 
     private FavouritesDbAdapter dba;
-    private CollectionDetailsFragment collectionDetailsFragment;
-    private SearchListFragmentOffline searchListFrag;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,17 +32,10 @@ public class FavouriteCollectionsActivity extends ExtendedBaseCollectionsActivit
         TextView title = (TextView) findViewById(R.id.action_bar_title);
         title.setText(getString(R.string.activity_name_favourite_collections_results));
 
-        //handleIntent(getIntent());
         dba = new FavouritesDbAdapter(this);
 
         commonMenuHandler = new SearchOfflineCollectionsMenuHandler(this, R.id.menu_button);
 
-        /*
-        searchListFrag = (SearchListFragmentOffline) getSupportFragmentManager()
-                .findFragmentById(R.id.activity_base_list_container);
-        */
-
-        Log.d("ZX", "Creating SearchListFragmentOffline.");
         SearchListFragmentOffline searchListFragment = SearchListFragmentOffline
                 .newInstance(stopNewSearch);
 
@@ -57,10 +47,9 @@ public class FavouriteCollectionsActivity extends ExtendedBaseCollectionsActivit
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        Log.d("ZX", "onActivityResult");
         stopNewSearch = resultCode == RESULT_OK && data.getBooleanExtra(Const.KEY_INTENT_RETURN_STOP_SEARCH, true);
 
-        searchListFrag = (SearchListFragmentOffline) getSupportFragmentManager()
+        SearchListFragmentOffline searchListFrag = (SearchListFragmentOffline) getSupportFragmentManager()
                 .findFragmentById(R.id.activity_base_list_container);
         if (searchListFrag != null) {
             Bundle bundle = searchListFrag.getArguments();
@@ -79,16 +68,13 @@ public class FavouriteCollectionsActivity extends ExtendedBaseCollectionsActivit
      */
     @Override
     public void onSearchListFragmentItemSelected(String id) {
-        Log.d("ZX", "onSearchListFragmentItemSelected()");
         EntryISO selectedEntry = (EntryISO) ((SearchListFragmentOffline) getSupportFragmentManager()
                 .findFragmentById(R.id.activity_base_list_container))
                 .getListAdapter().getItem(Integer.parseInt(id));
 
         if (selectedEntry.isNotRead()) {
-            selectedEntry.setRead(true);
-
+            selectedEntry.setRead();
             dba.openToWrite();
-            //dba.markAsRead(selectedEntry.getGuid());
             dba.replaceEntry(selectedEntry);
             dba.close();
         }
@@ -98,19 +84,39 @@ public class FavouriteCollectionsActivity extends ExtendedBaseCollectionsActivit
                 .getListAdapter();
         adapter.notifyDataSetChanged();
 
-        collectionDetailsFragment = CollectionDetailsFragment
+        CollectionDetailsFragment collectionDetailsFragment = CollectionDetailsFragment
                 .newInstance(selectedEntry);
+        String fragmentTag = CollectionDetailsFragment.class.getSimpleName();
         getSupportFragmentManager()
                 .beginTransaction()
                 .replace(R.id.activity_base_details_container,
                         collectionDetailsFragment,
-                        "CollectionDetailsFragment")
-                .addToBackStack("CollectionDetailsFragment")
+                        fragmentTag)
+                .addToBackStack(fragmentTag)
                 .commit();
+    }
+
+    @Override
+    public void onSearchListFragmentRightSwipeItem(EntryISO selectedEntry) {
+
+    }
+
+    @Override
+    public void onSearchListFragmentLeftSwipeItem(EntryISO selectedEntry) {
+
+    }
+
+    public void clearList() {
+        dba.openToWrite();
+        dba.clearCollections();
+        dba.close();
+        getListFragment().clearEntries();
+        refreshList();
     }
 
     /**
      * Returns the list fragment associated with this object.
+     *
      * @return A list fragment.
      */
     public SearchListFragmentOffline getListFragment() {
@@ -125,14 +131,5 @@ public class FavouriteCollectionsActivity extends ExtendedBaseCollectionsActivit
                 .findFragmentById(R.id.activity_base_list_container))
                 .getListAdapter();
         adapter.notifyDataSetChanged();
-    }
-
-    public void clearList()
-    {
-        dba.openToWrite();
-        dba.clearCollections();
-        dba.close();
-        getListFragment().clearEntries();
-        refreshList();
     }
 }

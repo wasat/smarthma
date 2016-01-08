@@ -2,12 +2,14 @@ package pl.wasat.smarthma.ui.frags.common;
 
 import android.app.Activity;
 import android.app.Dialog;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
 
 import java.util.Calendar;
 
+import pl.wasat.smarthma.R;
 import pl.wasat.smarthma.customviews.SmHmaTimePickerDialog;
 import pl.wasat.smarthma.customviews.TimePicker;
 import pl.wasat.smarthma.helper.Const;
@@ -23,6 +25,19 @@ public class TimePickerFragment extends DialogFragment implements
     private Calendar calendar;
     private OnTimePickerFragmentListener mListener;
 
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        Activity activity = context instanceof Activity ? (Activity) context : null;
+        try {
+            mListener = (OnTimePickerFragmentListener) activity;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(activity.toString()
+                    + activity.getString(R.string.must_implement)
+                    + OnTimePickerFragmentListener.class.getSimpleName());
+        }
+    }
+
     @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -31,7 +46,6 @@ public class TimePickerFragment extends DialogFragment implements
             timeViewTag = getArguments().getString(Const.KEY_DATE_PICKER_DT_VIEW_TAG);
             calendar = (Calendar) getArguments().getSerializable(Const.KEY_DATE_TIME_PICKER_CALENDAR);
         }
-        //final Calendar c = Calendar.getInstance();
         assert calendar != null;
         int hour = calendar.get(Calendar.HOUR_OF_DAY);
         int minute = calendar.get(Calendar.MINUTE);
@@ -53,22 +67,8 @@ public class TimePickerFragment extends DialogFragment implements
     @Override
     public void onTimeSet(TimePicker view, int hourOfDay, int minute,
                           int seconds) {
-
-        //Calendar calendar = Calendar.getInstance();
         calendar.set(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH), hourOfDay, minute, seconds);
         mListener.onTimePickerFragmentTimeChoose(calendar, timeViewTag);
-    }
-
-    @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-        try {
-            mListener = (OnTimePickerFragmentListener) activity;
-        } catch (ClassCastException e) {
-            throw new ClassCastException(activity.toString()
-                    + " must implement OnTimePickerFragmentListener");
-        }
-
     }
 
     public interface OnTimePickerFragmentListener {

@@ -1,7 +1,6 @@
 package pl.wasat.smarthma.ui.menus;
 
 import android.content.Intent;
-import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 
@@ -47,10 +46,7 @@ public class ProductsBrowserMenuHandler extends MenuHandler {
             public void onClick(View view) {
                 Intent intent = new Intent();
                 intent.setClass(activity, FavouriteProductsActivity.class);
-                //intent.setClass(activity, GlobalSettingsActivity.class);
-                Log.d("ZX", "Starting FavouriteProductsActivity...");
                 activity.startActivity(intent);
-                //activity.startActivityForResult(intent, Const.REQUEST_CODE_GLOBAL_SETTINGS);
                 popupWindow.dismiss();
                 popupWindow = null;
             }

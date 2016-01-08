@@ -9,7 +9,6 @@ import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 
@@ -39,55 +38,8 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
     }
 
     @Override
-    public Object getChild(int groupPosition, int childPosition) {
-        return this._listDataChild.get(this._listDataHeader.get(groupPosition).getName())
-                .get(childPosition);
-    }
-
-    @Override
-    public long getChildId(int groupPosition, int childPosition) {
-        return childPosition;
-    }
-
-    @Override
-    public View getChildView(int groupPosition, final int childPosition,
-                             boolean isLastChild, View convertView, ViewGroup parent) {
-
-        MissionItemData childItem = (MissionItemData) getChild(groupPosition, childPosition);
-
-
-        if (convertView == null) {
-            LayoutInflater infalInflater = (LayoutInflater) this._context
-                    .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            convertView = infalInflater.inflate(R.layout.view_cell_missions_list_item, null);
-        }
-        final String childText = childItem.getName();
-        TextView txtListChild = (TextView) convertView
-                .findViewById(R.id.mission_child_list_item_tv);
-
-        ImageView listItemImg = (ImageView) convertView
-                .findViewById(R.id.mission_child_list_item_thmb_imgview);
-        String childImgUrl = EARTH_ESA_URL + childItem.getImgLink();
-
-        Picasso.with(_context)
-                .load(childImgUrl)
-                .resize(50, 50)
-                .centerInside()
-                .into(listItemImg);
-
-        txtListChild.setText(childText);
-        SwipeDetector swipeDetector = new SwipeDetector(convertView, -1);
-        swipeDetector.setOnClickListener(new OnSlideElementListener() {
-            @Override
-            public void Catch(boolean swipeRight, int position) {
-                if (swipeRight)
-                    Toast.makeText(_context, "share " + position, Toast.LENGTH_SHORT).show();
-                else
-                    Toast.makeText(_context, "delete " + position, Toast.LENGTH_SHORT).show();
-            }
-        });
-        convertView.setOnTouchListener(swipeDetector);
-        return convertView;
+    public int getGroupCount() {
+        return this._listDataHeader.size();
     }
 
     @Override
@@ -103,13 +55,24 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
     }
 
     @Override
-    public int getGroupCount() {
-        return this._listDataHeader.size();
+    public Object getChild(int groupPosition, int childPosition) {
+        return this._listDataChild.get(this._listDataHeader.get(groupPosition).getName())
+                .get(childPosition);
     }
 
     @Override
     public long getGroupId(int groupPosition) {
         return groupPosition;
+    }
+
+    @Override
+    public long getChildId(int groupPosition, int childPosition) {
+        return childPosition;
+    }
+
+    @Override
+    public boolean hasStableIds() {
+        return false;
     }
 
     @Override
@@ -133,13 +96,60 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
     }
 
     @Override
-    public boolean hasStableIds() {
-        return false;
+    public View getChildView(int groupPosition, final int childPosition,
+                             boolean isLastChild, View convertView, ViewGroup parent) {
+
+        MissionItemData childItem = (MissionItemData) getChild(groupPosition, childPosition);
+
+        if (convertView == null) {
+            LayoutInflater infalInflater = (LayoutInflater) this._context
+                    .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            convertView = infalInflater.inflate(R.layout.view_cell_missions_list_item, null);
+        }
+        final String missionName = childItem.getName();
+        TextView txtListChild = (TextView) convertView
+                .findViewById(R.id.mission_child_list_item_tv);
+
+        ImageView listItemImg = (ImageView) convertView
+                .findViewById(R.id.mission_child_list_item_thmb_imgview);
+        String childImgUrl = EARTH_ESA_URL + childItem.getImgLink();
+
+        Picasso.with(_context)
+                .load(childImgUrl)
+                .resize(50, 50)
+                .centerInside()
+                .into(listItemImg);
+
+        txtListChild.setText(missionName);
+
+        SwipeDetector swipeDetector = new SwipeDetector(convertView, -1);
+        swipeDetector.setOnClickListener(new OnSlideElementListener() {
+            @Override
+            public void Catch(boolean swipeRight, int position) {
+                onDetectSwipe(swipeRight, missionName);
+            }
+        });
+        convertView.setOnTouchListener(swipeDetector);
+        return convertView;
+    }
+
+    private void onDetectSwipe(boolean swipeRight, String missionName) {
+        try {
+            OnSwipeListItemListener onSwipeListItemListener = (OnSwipeListItemListener) _context;
+            onSwipeListItemListener.onSwipeChildItem(swipeRight, missionName);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
     public boolean isChildSelectable(int groupPosition, int childPosition) {
         return true;
+    }
+
+
+    public interface OnSwipeListItemListener {
+        void onSwipeChildItem(boolean swipeRight, String missionName);
     }
 
 }

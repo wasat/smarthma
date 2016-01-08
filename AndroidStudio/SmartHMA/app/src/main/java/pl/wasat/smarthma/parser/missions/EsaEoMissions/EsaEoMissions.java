@@ -45,33 +45,19 @@ public class EsaEoMissions extends BaseParser implements MissionInterface {
     }
 
     @Override
-    public void history() {
-
+    public void news() {
     }
 
     @Override
-    public void industry() {
-
+    public void milestones() {
     }
 
     @Override
-    public void science() {
-
+    public void faq() {
     }
 
     @Override
-    public void applications() {
-
-    }
-
-    @Override
-    public void scientificRequirements() {
-
-    }
-
-    @Override
-    public void operations() {
-
+    public void other() {
     }
 
     @Override
@@ -100,19 +86,33 @@ public class EsaEoMissions extends BaseParser implements MissionInterface {
     }
 
     @Override
-    public void news() {
+    public void scientificRequirements() {
+
     }
 
     @Override
-    public void milestones() {
+    public void operations() {
+
     }
 
     @Override
-    public void faq() {
+    public void applications() {
+
     }
 
     @Override
-    public void other() {
+    public void science() {
+
+    }
+
+    @Override
+    public void history() {
+
+    }
+
+    @Override
+    public void industry() {
+
     }
 
     public Pair<String, ArrayList<String>> getImageListPage(String pageName, int maxItems, boolean fullPage) {

@@ -45,7 +45,7 @@ public class ProductsBrowserActivity extends BaseProductsBrowserActivity {
 
         try {
             FacebookDialogFragment facebookDialogFragment = (FacebookDialogFragment) manager
-                    .findFragmentByTag("FacebookDialogFragment");
+                    .findFragmentByTag(FacebookDialogFragment.class.getSimpleName());
             if (facebookDialogFragment == null) return;
             facebookDialogFragment.postOnActivityResult(requestCode, resultCode, data);
         } catch (Exception e) {

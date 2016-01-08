@@ -40,6 +40,9 @@ public class SearchAdvancedParametersFragment extends BaseSearchSideParametersFr
 
     private OnSearchAdvancedParametersFragmentListener mListener;
 
+    public SearchAdvancedParametersFragment() {
+    }
+
     /**
      * Use this factory method to create a new instance of this fragment using
      * the provided parameters.
@@ -50,7 +53,23 @@ public class SearchAdvancedParametersFragment extends BaseSearchSideParametersFr
         return new SearchAdvancedParametersFragment();
     }
 
-    public SearchAdvancedParametersFragment() {
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        Activity activity = context instanceof Activity ? (Activity) context : null;
+        try {
+            mListener = (OnSearchAdvancedParametersFragmentListener) activity;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(activity.toString()
+                    + activity.getString(R.string.must_implement)
+                    + OnSearchAdvancedParametersFragmentListener.class.getSimpleName());
+        }
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        mListener = null;
     }
 
     @Override
@@ -103,30 +122,23 @@ public class SearchAdvancedParametersFragment extends BaseSearchSideParametersFr
         return rootView;
     }
 
-
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        Activity activity = context instanceof Activity ? (Activity) context : null;
-        try {
-            mListener = (OnSearchAdvancedParametersFragmentListener) activity;
-        } catch (ClassCastException e) {
-            throw new ClassCastException(activity.toString()
-                    + " must implement OnSearchAdvancedParametersFragmentListener");
-        }
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        mListener = null;
-    }
-
-
     private void showEndpointsListDialog() {
         EndpointsListDialogFragment endpointslistDialFrag = new EndpointsListDialogFragment();
         endpointslistDialFrag.show(getActivity().getSupportFragmentManager(),
-                "EndpointsListDialogFragment");
+                EndpointsListDialogFragment.class.getSimpleName());
+    }
+
+    /**
+     * This interface must be implemented by activities that contain this
+     * fragment to allow an interaction in this fragment to be communicated to
+     * the activity and potentially other fragments contained in that activity.
+     * <p/>
+     * See the Android Training lesson <a href=
+     * "http://developer.android.com/training/basics/fragments/communicating.html"
+     * >Communicating with Other Fragments</a> for more information.
+     */
+    public interface OnSearchAdvancedParametersFragmentListener {
+        void onSearchAdvancedParamsFragmentEditTextChange(String parameterKey, String parameterValue);
     }
 
     public static class EndpointsListDialogFragment extends DialogFragment {
@@ -184,7 +196,7 @@ public class SearchAdvancedParametersFragment extends BaseSearchSideParametersFr
                     mListener.onSearchAdvancedParamsFragmentEditTextChange("title", s.toString());
                     break;
                 case EDIT_TEXT_ORGANISATION:
-                    mListener.onSearchAdvancedParamsFragmentEditTextChange("organisation", s.toString());
+                    mListener.onSearchAdvancedParamsFragmentEditTextChange("publisher", s.toString());
                     break;
                 case EDIT_TEXT_PLATFORM:
                     mListener.onSearchAdvancedParamsFragmentEditTextChange("platform", s.toString());
@@ -195,18 +207,4 @@ public class SearchAdvancedParametersFragment extends BaseSearchSideParametersFr
             }
         }
     }
-
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated to
-     * the activity and potentially other fragments contained in that activity.
-     * <p/>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
-    public interface OnSearchAdvancedParametersFragmentListener {
-        void onSearchAdvancedParamsFragmentEditTextChange(String parameterKey, String parameterValue);
-    }
-
 }

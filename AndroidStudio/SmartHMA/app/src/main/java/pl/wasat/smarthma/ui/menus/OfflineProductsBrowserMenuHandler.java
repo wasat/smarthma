@@ -49,24 +49,6 @@ public class OfflineProductsBrowserMenuHandler extends MenuHandler {
             }
         });
 
-        /*
-        LinearLayout favouriteProductsLayout = (LinearLayout) layout.findViewById(R.id.popup_favourites_layout);
-        clickableViews.add(favouriteProductsLayout);
-        favouriteProductsLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent();
-                intent.setClass(activity, FavouriteProductsActivity.class);
-                //intent.setClass(activity, GlobalSettingsActivity.class);
-                Log.d("ZX", "Starting FavouriteProductsActivity...");
-                activity.startActivity(intent);
-                //activity.startActivityForResult(intent, Const.REQUEST_CODE_GLOBAL_SETTINGS);
-                popupWindow.dismiss();
-                popupWindow = null;
-            }
-        });
-        */
-
         addCommonListeners();
     }
 }

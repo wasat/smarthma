@@ -32,16 +32,21 @@ public class TileProviderFactory {
                     ACRA.getErrorReporter().handleSilentException(e);
                     throw new AssertionError(e);
                 }
-
                 return url;
             }
         };
     }
 
+    private static void sendWmsLoadState(Context con) {
+        Intent intent = new Intent(
+                Const.KEY_MAP_SPINNER_INTENTFILTER_NOTIFICATION);
+        intent.putExtra(Const.KEY_MAP_WMS_LOAD_STATE, true);
+        con.sendBroadcast(intent);
+    }
+
     public static WMSTileProvider getOsmWmsTileProvider(final String WMS_name) {
 
         return new WMSTileProvider(256, 256) {
-
             @Override
             public synchronized URL getTileUrl(int x, int y, int zoom) {
                 double[] bbox = getBoundingBox(x, y, zoom);
@@ -76,12 +81,5 @@ public class TileProviderFactory {
             }
         };
 
-    }
-
-    private static void sendWmsLoadState(Context con) {
-        Intent intent = new Intent(
-                Const.KEY_MAP_SPINNER_INTENTFILTER_NOTIFICATION);
-        intent.putExtra(Const.KEY_MAP_WMS_LOAD_STATE, true);
-        con.sendBroadcast(intent);
     }
 }

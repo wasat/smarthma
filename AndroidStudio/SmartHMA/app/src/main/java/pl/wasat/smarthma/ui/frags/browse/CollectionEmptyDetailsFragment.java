@@ -52,6 +52,9 @@ public class CollectionEmptyDetailsFragment extends
     private boolean isSpinnersAdded;
     private boolean isCollectionTypeChosen = false;
 
+    public CollectionEmptyDetailsFragment() {
+        // Required empty public constructor
+    }
 
     /**
      * Use this factory method to create a new instance of this fragment using
@@ -68,10 +71,23 @@ public class CollectionEmptyDetailsFragment extends
         return fragment;
     }
 
-    public CollectionEmptyDetailsFragment() {
-        // Required empty public constructor
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        Activity activity = context instanceof Activity ? (Activity) context : null;
+        try {
+            mListener = (OnCollectionEmptyDetailsFragmentListener) activity;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(activity.toString()
+                    + " must implement OnCollectionEmptyDetailsFragmentListener");
+        }
     }
 
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        mListener = null;
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -95,7 +111,6 @@ public class CollectionEmptyDetailsFragment extends
         super.onCreateView(inflater, container, savedInstanceState);
 
         loadDefaultFedeoParams();
-
         loadSharedData();
 
         btnShowProducts.setEnabled(true);
@@ -103,10 +118,7 @@ public class CollectionEmptyDetailsFragment extends
             @Override
             public void onClick(View v) {
                 if (mListener != null) {
-                    //TODO !!!
-                    //mListener.onCollectionDetailsFragmentShowProducts(parentID);
                     mSlidingLayer.closeLayer(true);
-                    //fedeoRequestParams.buildFromShared(getActivity());
                     fedeoRequestParams.setParentIdentifier(collectionName);
                     if (isCollectionTypeChosen) {
                         mListener.onCollectionEmptyDetailsFragmentShowCollections(fedeoRequestParams);
@@ -120,12 +132,14 @@ public class CollectionEmptyDetailsFragment extends
         btnShowMetadata.setEnabled(false);
 
         tvParentId.setText(collectionName);
-
         String osddUrl = Const.OSDD_BASE_URL + "parentIdentifier=" + collectionName;
-        //TODO !!!
         loadParamsSliderView(osddUrl);
 
         return rootView;
+    }
+
+    private void loadDefaultFedeoParams() {
+        fedeoRequestParams = new FedeoRequestParams();
     }
 
     private void loadParamsSliderView(String osddUrl) {
@@ -165,27 +179,12 @@ public class CollectionEmptyDetailsFragment extends
         });
     }
 
-    private void loadDefaultFedeoParams() {
-        fedeoRequestParams = new FedeoRequestParams();
-        //fedeoRequestParams.buildFromShared(getActivity().getApplicationContext());
-    }
-
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        Activity activity = context instanceof Activity ? (Activity) context : null;
-        try {
-            mListener = (OnCollectionEmptyDetailsFragmentListener) activity;
-        } catch (ClassCastException e) {
-            throw new ClassCastException(activity.toString()
-                    + " must implement OnCollectionEmptyDetailsFragmentListener");
+    private void startAsyncLoadOsddData(GenericUrl fedeoDescUrl) {
+        if (fedeoDescUrl != null) {
+            getActivity().setProgressBarIndeterminateVisibility(true);
+            getSpiceManager().execute(new FedeoOSDDRequest(fedeoDescUrl),
+                    new OsddRequestListener());
         }
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        mListener = null;
     }
 
     private void putParentIdToShared() {
@@ -197,20 +196,23 @@ public class CollectionEmptyDetailsFragment extends
         sharedPrefs.setParentIdPrefs(parentID);
     }
 
-    private void startAsyncLoadOsddData(GenericUrl fedeoDescUrl) {
-        if (fedeoDescUrl != null) {
-            getActivity().setProgressBarIndeterminateVisibility(true);
-            getSpiceManager().execute(new FedeoOSDDRequest(fedeoDescUrl),
-                    new OsddRequestListener());
-        }
-    }
-
     private void loadRequestSuccess(OpenSearchDescription osdd) {
         getActivity().setProgressBarIndeterminateVisibility(false);
         if (osdd != null) {
             initFedeoReq(osdd);
             addParameterSpinners(osdd);
         }
+    }
+
+    private void initFedeoReq(OpenSearchDescription osdd) {
+        loadDefaultFedeoParams();
+        String tmpltUrl = "";
+        for (Url url : osdd.getUrl()) {
+            if (url.getType().equalsIgnoreCase("application/atom+xml")) {
+                tmpltUrl = url.getTemplate();
+            }
+        }
+        fedeoRequestParams.setTemplateUrl(tmpltUrl);
     }
 
     private void addParameterSpinners(OpenSearchDescription osdd) {
@@ -277,18 +279,6 @@ public class CollectionEmptyDetailsFragment extends
             btnShowProducts.setText(R.string.show_products);
             isCollectionTypeChosen = false;
         }
-
-    }
-
-    private void initFedeoReq(OpenSearchDescription osdd) {
-        loadDefaultFedeoParams();
-        String tmpltUrl = "";
-        for (Url url : osdd.getUrl()) {
-            if (url.getType().equalsIgnoreCase("application/atom+xml")) {
-                tmpltUrl = url.getTemplate();
-            }
-        }
-        fedeoRequestParams.setTemplateUrl(tmpltUrl);
     }
 
     /**
@@ -301,7 +291,6 @@ public class CollectionEmptyDetailsFragment extends
      * >Communicating with Other Fragments</a> for more information.
      */
     public interface OnCollectionEmptyDetailsFragmentListener {
-        // public void onCollectionDetailsFragmentShowProducts(String parentID);
 
         void onCollectionEmptyDetailsFragmentShowProducts(FedeoRequestParams fedeoRequestParams);
 

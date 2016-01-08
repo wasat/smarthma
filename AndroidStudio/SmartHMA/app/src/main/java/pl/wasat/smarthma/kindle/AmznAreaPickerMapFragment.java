@@ -12,6 +12,7 @@ import com.amazon.geo.mapsv2.model.Polygon;
 
 import java.util.ArrayList;
 
+import pl.wasat.smarthma.R;
 import pl.wasat.smarthma.preferences.SharedPrefs;
 import pl.wasat.smarthma.utils.obj.LatLngBoundsExt;
 
@@ -32,6 +33,9 @@ public class AmznAreaPickerMapFragment extends AmznBaseMapFragment implements Am
 
     private Polygon areaPolygon;
 
+    public AmznAreaPickerMapFragment() {
+    }
+
     /**
      * Use this factory method to create a new instance of this fragment using
      * the provided parameters.
@@ -42,9 +46,6 @@ public class AmznAreaPickerMapFragment extends AmznBaseMapFragment implements Am
         return new AmznAreaPickerMapFragment();
     }
 
-    public AmznAreaPickerMapFragment() {
-    }
-
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
@@ -53,14 +54,9 @@ public class AmznAreaPickerMapFragment extends AmznBaseMapFragment implements Am
             mListener = (OnAmznAreaPickerMapFragmentListener) activity;
         } catch (ClassCastException e) {
             throw new ClassCastException(activity.toString()
-                    + " must implement OnAmznAreaPickerMapFragmentListener");
+                    + activity.getString(R.string.must_implement)
+                    + OnAmznAreaPickerMapFragmentListener.class.getSimpleName());
         }
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        // mListener = null;
     }
 
     @Override
@@ -71,6 +67,21 @@ public class AmznAreaPickerMapFragment extends AmznBaseMapFragment implements Am
 
     }
 
+    private void obtainBoundsFromShared() {
+        SharedPrefs sharedPrefs = new SharedPrefs(getActivity());
+        float[] bbox = sharedPrefs.getBboxPrefs();
+
+        LatLngBounds.Builder boundsBuilder = new LatLngBounds.Builder();
+        boundsBuilder.include(new LatLng(bbox[1], bbox[0]));
+        boundsBuilder.include(new LatLng(bbox[3], bbox[2]));
+
+        targetBounds = boundsBuilder.build();
+    }
+
+    private void prepareArea() {
+        markedPtList = new ArrayList<>();
+        areaBoundsBuilder = new LatLngBounds.Builder();
+    }
 
     @Override
     public void onPause() {
@@ -78,23 +89,18 @@ public class AmznAreaPickerMapFragment extends AmznBaseMapFragment implements Am
         super.onPause();
     }
 
+    private void postDrawArea() {
+        if (!markedPtList.isEmpty()) {
+            areaBounds = areaBoundsBuilder.build();
+            LatLngBoundsExt areaBoundsExt = new LatLngBoundsExt(areaBounds);
+            mListener.onAmznMapFragmentBoundsChange(areaBoundsExt);
+        }
+    }
+
     @Override
     public void onBaseSupportMapReady() {
         animateWhenMapIsReady(0);
         setMapListeners();
-    }
-
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated to
-     * the activity and potentially other fragments contained in that activity.
-     * <p/>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
-    public interface OnAmznAreaPickerMapFragmentListener {
-        void onAmznMapFragmentBoundsChange(LatLngBoundsExt bounds);
     }
 
     private void setMapListeners() {
@@ -121,19 +127,6 @@ public class AmznAreaPickerMapFragment extends AmznBaseMapFragment implements Am
         });
     }
 
-    private void prepareArea() {
-        markedPtList = new ArrayList<>();
-        areaBoundsBuilder = new LatLngBounds.Builder();
-    }
-
-    private void postDrawArea() {
-        if (!markedPtList.isEmpty()) {
-            areaBounds = areaBoundsBuilder.build();
-            LatLngBoundsExt areaBoundsExt = new LatLngBoundsExt(areaBounds);
-            mListener.onAmznMapFragmentBoundsChange(areaBoundsExt);
-        }
-    }
-
     private void addLatLng(LatLng pressPt) {
         if (pressPt != null) {
             markedPtList.add(pressPt);
@@ -148,20 +141,20 @@ public class AmznAreaPickerMapFragment extends AmznBaseMapFragment implements Am
         AmznMapDrawings mapDrawings = new AmznMapDrawings();
         areaPolygon = mMap.addPolygon(mapDrawings.drawArea(markedPtList));
         mMap.addCircle(mapDrawings.drawPoints(markedPtList));
-        //drawArea();
-        // drawPoints();
     }
 
 
-    private void obtainBoundsFromShared() {
-        SharedPrefs sharedPrefs = new SharedPrefs(getActivity());
-        float[] bbox = sharedPrefs.getBboxPrefs();
-
-        LatLngBounds.Builder boundsBuilder = new LatLngBounds.Builder();
-        boundsBuilder.include(new LatLng(bbox[1], bbox[0]));
-        boundsBuilder.include(new LatLng(bbox[3], bbox[2]));
-
-        targetBounds = boundsBuilder.build();
+    /**
+     * This interface must be implemented by activities that contain this
+     * fragment to allow an interaction in this fragment to be communicated to
+     * the activity and potentially other fragments contained in that activity.
+     * <p/>
+     * See the Android Training lesson <a href=
+     * "http://developer.android.com/training/basics/fragments/communicating.html"
+     * >Communicating with Other Fragments</a> for more information.
+     */
+    public interface OnAmznAreaPickerMapFragmentListener {
+        void onAmznMapFragmentBoundsChange(LatLngBoundsExt bounds);
     }
 
 }

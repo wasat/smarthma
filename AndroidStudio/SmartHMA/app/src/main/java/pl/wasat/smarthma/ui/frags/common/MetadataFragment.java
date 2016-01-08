@@ -30,6 +30,9 @@ public class MetadataFragment extends BaseMetadataFragment {
     private MetadataType type;
 
 
+    public MetadataFragment() {
+    }
+
     /**
      * Use this factory method to create a new instance of this fragment using
      * the provided parameters.
@@ -43,9 +46,6 @@ public class MetadataFragment extends BaseMetadataFragment {
         args.putSerializable(KEY_ENTRY_ITEM, entryItm);
         fragment.setArguments(args);
         return fragment;
-    }
-
-    public MetadataFragment() {
     }
 
     @Override
@@ -89,33 +89,6 @@ public class MetadataFragment extends BaseMetadataFragment {
                 break;
             case DC:
                 prepareDCMetadataView();
-                break;
-            case NONE:
-                break;
-            default:
-                break;
-        }
-    }
-
-    private void chooseMetadataParser() {
-        XmlSaxParser xmlSaxParser = new XmlSaxParser();
-        switch (type) {
-            case OM:
-                if (entryItem.getEarthObservation() == null) {
-                    xmlSaxParser.parseOMMetadata(entryItem);
-                }
-                break;
-            case ISO:
-                if (entryItem.getMDMetadata() == null) {
-                    xmlSaxParser.parseISOMetadata(entryItem);
-                }
-                break;
-            case OM11:
-                break;
-            case DC:
-                if (entryItem.getDc() == null) {
-                    xmlSaxParser.parseDCMetadata(entryItem);
-                }
                 break;
             case NONE:
                 break;
@@ -232,6 +205,40 @@ public class MetadataFragment extends BaseMetadataFragment {
 
     }
 
+    private void chooseMetadataParser() {
+        XmlSaxParser xmlSaxParser = new XmlSaxParser();
+        switch (type) {
+            case OM:
+                if (entryItem.getEarthObservation() == null) {
+                    xmlSaxParser.parseOMMetadata(entryItem);
+                }
+                break;
+            case ISO:
+                if (entryItem.getMDMetadata() == null) {
+                    xmlSaxParser.parseISOMetadata(entryItem);
+                }
+                break;
+            case OM11:
+                break;
+            case DC:
+                if (entryItem.getDc() == null) {
+                    xmlSaxParser.parseDCMetadata(entryItem);
+                }
+                break;
+            case NONE:
+                break;
+            default:
+                break;
+        }
+    }
+
+    @NonNull
+    @Override
+    protected TextViewWithFont defValueItemView(String value) {
+        value = obtainCleanMetadata(value);
+        return super.defValueItemView(value);
+    }
+
     private String obtainCleanMetadata(String value) {
         String cleanValue = "";
         switch (type) {
@@ -254,13 +261,4 @@ public class MetadataFragment extends BaseMetadataFragment {
         }
         return cleanValue;
     }
-
-    @NonNull
-    @Override
-    protected TextViewWithFont defValueItemView(String value) {
-        value = obtainCleanMetadata(value);
-        return super.defValueItemView(value);
-    }
-
-
 }

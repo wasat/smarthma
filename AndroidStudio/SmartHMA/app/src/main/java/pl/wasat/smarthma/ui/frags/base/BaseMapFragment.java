@@ -38,28 +38,22 @@ public class BaseMapFragment extends SupportMapFragment implements
         GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener {
 
+    public OnBaseMapFragmentListener mListener;
+    protected GoogleMap mMap;
+    protected int mapMode;
+    protected LatLngBounds targetBounds;
     /**
      * reference to Google Maps object
      */
     private SupportMapFragment supportMapFrag;
-    protected GoogleMap mMap;
-
     private GoogleApiClient mGoogleApiClient;
-
     /**
      * broadcast receiver
      */
     private BroadcastReceiver mReceiver;
-
-    public OnBaseMapFragmentListener mListener;
     private OnBaseMapFragmentPublicListener publicListener;
 
-    protected int mapMode;
-
-    protected LatLngBounds targetBounds;
-
     public BaseMapFragment() {
-        //AcraExtension.mapCustomLog("BaseMap.construct", mMap);
     }
 
     public static BaseMapFragment newInstance(
@@ -69,19 +63,25 @@ public class BaseMapFragment extends SupportMapFragment implements
         return baseMapFragment;
     }
 
-    private void callBaseMapFragment(OnBaseMapFragmentPublicListener ml) {
-        this.publicListener = ml;
-    }
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //AcraExtension.mapCustomLog("BaseMap.onCreate", mMap);
 
         mGoogleApiClient = new GoogleApiClient.Builder(getActivity())
                 .addApi(LocationServices.API).addConnectionCallbacks(this)
                 .addOnConnectionFailedListener(this).build();
+    }
 
+    @Override
+    public void onPause() {
+        super.onPause();
+
+        if (mReceiver != null) {
+            // unhook the receiver
+            LocalBroadcastManager.getInstance(getActivity())
+                    .unregisterReceiver(mReceiver);
+            mReceiver = null;
+        }
     }
 
     @Override
@@ -90,50 +90,7 @@ public class BaseMapFragment extends SupportMapFragment implements
         startCreateMap(savedInstanceState);
     }
 
-    @Override
-    public void onStart() {
-        super.onStart();
-        mGoogleApiClient.connect();
-
-    }
-
-    @Override
-    public void onStop() {
-        // Disconnecting the client invalidates it.
-        mGoogleApiClient.disconnect();
-        super.onStop();
-    }
-
-    @Override
-    public void onConnected(Bundle dataBundle) {
-        //AcraExtension.mapCustomLog("BaseMap.onConnected", mMap);
-
-        //obtainGooglePosition();
-    }
-
-    private void startCreateMap() {
-        //AcraExtension.mapCustomLog("BaseMap.startCreateMap", mMap);
-
-        int status = GooglePlayServicesUtil
-                .isGooglePlayServicesAvailable(getActivity());
-        if (status == ConnectionResult.SUCCESS) {
-            supportMapFrag = this;
-            setUpMapIfNeeded();
-            mMap = supportMapFrag.getMap();
-
-            //AcraExtension.mapCustomLog(
-            //        "BaseMap.startCreateMap.sIStNotNull", mMap);
-
-        } else {
-            Dialog dialog = GooglePlayServicesUtil.getErrorDialog(status,
-                    getActivity(), 42);
-            dialog.show();
-        }
-    }
-
     private void startCreateMap(Bundle savedInstanceState) {
-        //AcraExtension.mapCustomLog("BaseMap.startCreateMap", mMap);
-
         int status = GooglePlayServicesUtil
                 .isGooglePlayServicesAvailable(getActivity());
         if (status == ConnectionResult.SUCCESS) {
@@ -142,9 +99,6 @@ public class BaseMapFragment extends SupportMapFragment implements
             setUpMapIfNeeded();
             if (savedInstanceState != null) {
                 mMap = supportMapFrag.getMap();
-
-                //AcraExtension.mapCustomLog(
-                //        "BaseMap.startCreateMap.sIStNotNull", mMap);
             }
         } else {
             Dialog dialog = GooglePlayServicesUtil.getErrorDialog(status,
@@ -156,21 +110,14 @@ public class BaseMapFragment extends SupportMapFragment implements
     private void setUpMapIfNeeded() {
         if (mMap == null) {
             mMap = supportMapFrag.getMap();
-            // Check if we were successful in obtaining the map.
-            // AcraExtension
-            //         .mapCustomLog("BaseMap.setUpMapIfNeeded.mapNull", mMap);
         }
         if (mMap != null) {
-            // AcraExtension.mapCustomLog("BaseMap.setUpMapIfNeeded.mapNotNull",
-            //        mMap);
             setUpMap();
         }
 
     }
 
     private void setUpMap() {
-        //AcraExtension.mapCustomLog("BaseMap.setUpMap", mMap);
-
         mMap.setMyLocationEnabled(true);
         mMap.getUiSettings().setZoomControlsEnabled(true);
         mMap.getUiSettings().setZoomGesturesEnabled(true);
@@ -181,23 +128,6 @@ public class BaseMapFragment extends SupportMapFragment implements
         if (targetBounds == null) obtainGooglePosition();
 
         sendSupportMapReadyCallback();
-
-/*        mMap.setOnMapLoadedCallback(new GoogleMap.OnMapLoadedCallback() {
-            @Override
-            public void onMapLoaded() {
-                animateToBounds();
-            }
-        });*/
-    }
-
-    private void sendSupportMapReadyCallback() {
-        Fragment fragment = this;
-        if (fragment instanceof OnBaseMapFragmentListener) {
-            ((OnBaseMapFragmentListener) fragment).onBaseSupportMapReady();
-            //Log.i("BASE_MAP", "onActivityCreated.Listener");
-        } else {
-            publicListener.onBaseSupportMapPublicReady();
-        }
     }
 
     private void obtainMapType() {
@@ -227,30 +157,6 @@ public class BaseMapFragment extends SupportMapFragment implements
         }
     }
 
-    private void setupOSM() {
-        //AcraExtension.mapCustomLog("BaseMap.setupOSM", mMap);
-
-        TileProvider osmTileProvider = TileProviderFactory.getOSMTileProvider();
-        mMap.addTileOverlay(new TileOverlayOptions().tileProvider(
-                osmTileProvider).zIndex(0));
-    }
-
-    public TileOverlay setupWMS(String wmsUrl) {
-
-        TileOverlay wmsTileOverlay = null;
-        if (wmsUrl != null) {
-            if (!wmsUrl.isEmpty()) {
-
-                TileProvider wmsTileProvider;
-                wmsTileProvider = TileProviderFactory.getWmsTileProvider(
-                        wmsUrl, getActivity());
-                wmsTileOverlay = mMap.addTileOverlay(new TileOverlayOptions()
-                        .tileProvider(wmsTileProvider));
-            }
-        }
-        return wmsTileOverlay;
-    }
-
     private void obtainGooglePosition() {
         GoogleLocProviderImpl googleLocProvider = new GoogleLocProviderImpl(getActivity()) {
             @Override
@@ -259,6 +165,21 @@ public class BaseMapFragment extends SupportMapFragment implements
             }
         };
         googleLocProvider.start();
+    }
+
+    private void sendSupportMapReadyCallback() {
+        Fragment fragment = this;
+        if (fragment instanceof OnBaseMapFragmentListener) {
+            ((OnBaseMapFragmentListener) fragment).onBaseSupportMapReady();
+        } else {
+            publicListener.onBaseSupportMapPublicReady();
+        }
+    }
+
+    private void setupOSM() {
+        TileProvider osmTileProvider = TileProviderFactory.getOSMTileProvider();
+        mMap.addTileOverlay(new TileOverlayOptions().tileProvider(
+                osmTileProvider).zIndex(0));
     }
 
     private void animateToCurrentPosition(Location location) {
@@ -282,11 +203,44 @@ public class BaseMapFragment extends SupportMapFragment implements
         }
     }
 
-    private void animateToBounds(int padding) {
-        if (targetBounds != null) {
-            mMap.animateCamera(CameraUpdateFactory.newLatLngBounds(
-                    targetBounds, padding));
+    @Override
+    public void onStart() {
+        super.onStart();
+        mGoogleApiClient.connect();
+
+    }
+
+    @Override
+    public void onStop() {
+        mGoogleApiClient.disconnect();
+        super.onStop();
+    }
+
+    @Override
+    public void onConnected(Bundle dataBundle) {
+    }
+
+    @Override
+    public void onConnectionSuspended(int cause) {
+    }
+
+    @Override
+    public void onConnectionFailed(ConnectionResult result) {
+    }
+
+    public TileOverlay setupWMS(String wmsUrl) {
+        TileOverlay wmsTileOverlay = null;
+        if (wmsUrl != null) {
+            if (!wmsUrl.isEmpty()) {
+
+                TileProvider wmsTileProvider;
+                wmsTileProvider = TileProviderFactory.getWmsTileProvider(
+                        wmsUrl, getActivity());
+                wmsTileOverlay = mMap.addTileOverlay(new TileOverlayOptions()
+                        .tileProvider(wmsTileProvider));
+            }
         }
+        return wmsTileOverlay;
     }
 
     public void animateWhenMapIsReady(final int padding) {
@@ -298,17 +252,34 @@ public class BaseMapFragment extends SupportMapFragment implements
         });
     }
 
-    @Override
-    public void onPause() {
-        super.onPause();
-
-        if (mReceiver != null) {
-            // unhook the receiver
-            LocalBroadcastManager.getInstance(getActivity())
-                    .unregisterReceiver(mReceiver);
-            mReceiver = null;
+    private void animateToBounds(int padding) {
+        if (targetBounds != null) {
+            mMap.animateCamera(CameraUpdateFactory.newLatLngBounds(
+                    targetBounds, padding));
         }
     }
+
+    public void setTargetBounds(LatLngBounds bounds) {
+        targetBounds = bounds;
+    }
+
+/*    private void callBaseMapFragment(OnBaseMapFragmentPublicListener ml) {
+        this.publicListener = ml;
+    }
+
+    private void startCreateMap() {
+        int status = GooglePlayServicesUtil
+                .isGooglePlayServicesAvailable(getActivity());
+        if (status == ConnectionResult.SUCCESS) {
+            supportMapFrag = this;
+            setUpMapIfNeeded();
+            mMap = supportMapFrag.getMap();
+        } else {
+            Dialog dialog = GooglePlayServicesUtil.getErrorDialog(status,
+                    getActivity(), 42);
+            dialog.show();
+        }
+    }*/
 
     /**
      * Listener interface to tell when the map is ready
@@ -317,17 +288,4 @@ public class BaseMapFragment extends SupportMapFragment implements
 
         void onBaseSupportMapReady();
     }
-
-    public void setTargetBounds(LatLngBounds bounds) {
-        targetBounds = bounds;
-    }
-
-    @Override
-    public void onConnectionSuspended(int cause) {
-    }
-
-    @Override
-    public void onConnectionFailed(ConnectionResult result) {
-    }
-
 }

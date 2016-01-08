@@ -14,6 +14,16 @@ import java.util.ArrayList;
  */
 public class AmznMapDrawings {
 
+    public PolygonOptions drawArea(float[] bbox) {
+        ArrayList<LatLng> polygonPtsList = new ArrayList<>();
+        polygonPtsList.add(new LatLng(bbox[1], bbox[0]));
+        polygonPtsList.add(new LatLng(bbox[1], bbox[2]));
+        polygonPtsList.add(new LatLng(bbox[3], bbox[2]));
+        polygonPtsList.add(new LatLng(bbox[3], bbox[0]));
+
+        return drawArea(polygonPtsList);
+    }
+
     public PolygonOptions drawArea(ArrayList markedPtList) {
         return drawArea(markedPtList, Color.RED);
     }
@@ -31,16 +41,6 @@ public class AmznMapDrawings {
         return rectOptions;
     }
 
-    public PolygonOptions drawArea(float[] bbox) {
-        ArrayList<LatLng> polygonPtsList = new ArrayList<>();
-        polygonPtsList.add(new LatLng(bbox[1], bbox[0]));
-        polygonPtsList.add(new LatLng(bbox[1], bbox[2]));
-        polygonPtsList.add(new LatLng(bbox[3], bbox[2]));
-        polygonPtsList.add(new LatLng(bbox[3], bbox[0]));
-
-        return drawArea(polygonPtsList);
-    }
-
     public CircleOptions drawPoints(ArrayList<LatLng> markedPtList) {
         CircleOptions circle = new CircleOptions();
         int size = 0;
@@ -53,7 +53,6 @@ public class AmznMapDrawings {
             circle.strokeColor(Color.YELLOW);
             circle.fillColor(Color.GRAY);
             circle.strokeWidth(7);
-
         }
         return circle;
     }

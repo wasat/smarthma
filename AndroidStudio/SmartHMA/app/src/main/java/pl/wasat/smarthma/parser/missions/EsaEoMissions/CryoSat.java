@@ -18,26 +18,6 @@ public class CryoSat extends BaseParser implements MissionInterface {
     private final static int MISSION_ID = 3;
     private final static String TITLE = "CryoSat";
 
-    @Override
-    public void history() {
-
-    }
-
-    @Override
-    public void industry() {
-
-    }
-
-    @Override
-    public void science() {
-
-    }
-
-    @Override
-    public void applications() {
-
-    }
-
     public CryoSat(String pageUrl, Context context) {
         super(pageUrl, context);
         parserDb.addMission(new Mission(MISSION_ID, EsaEoMissions.CATEGORY_ID, TITLE));
@@ -54,6 +34,22 @@ public class CryoSat extends BaseParser implements MissionInterface {
     }
 
     @Override
+    public void news() {
+    }
+
+    @Override
+    public void milestones() {
+    }
+
+    @Override
+    public void faq() {
+    }
+
+    @Override
+    public void other() {
+    }
+
+    @Override
     public void overview() {
         Pair pair = super.getSimplePage(OVERVIEW);
         parserDb.addPage(new Page(EsaEoMissions.CATEGORY_ID, MISSION_ID, (String) pair.title, (String) pair.content));
@@ -63,16 +59,6 @@ public class CryoSat extends BaseParser implements MissionInterface {
     public void objectives() {
         Pair pair = super.getSimplePage(OBJECTIVES);
         parserDb.addPage(new Page(EsaEoMissions.CATEGORY_ID, MISSION_ID, (String) pair.title, (String) pair.content));
-
-    }
-
-    @Override
-    public void scientificRequirements() {
-
-    }
-
-    @Override
-    public void operations() {
 
     }
 
@@ -98,18 +84,32 @@ public class CryoSat extends BaseParser implements MissionInterface {
     }
 
     @Override
-    public void news() {
+    public void scientificRequirements() {
+
     }
 
     @Override
-    public void milestones() {
+    public void operations() {
+
     }
 
     @Override
-    public void faq() {
+    public void applications() {
+
     }
 
     @Override
-    public void other() {
+    public void science() {
+
+    }
+
+    @Override
+    public void history() {
+
+    }
+
+    @Override
+    public void industry() {
+
     }
 }

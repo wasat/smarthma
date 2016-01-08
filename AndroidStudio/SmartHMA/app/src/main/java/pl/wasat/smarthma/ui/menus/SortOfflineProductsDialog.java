@@ -6,7 +6,6 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
-import android.util.Log;
 
 import java.util.List;
 
@@ -24,10 +23,6 @@ import pl.wasat.smarthma.ui.frags.common.ProductsListFragmentOffline;
 public class SortOfflineProductsDialog extends DialogFragment {
     private FavouriteProductsActivity activity;
 
-    public void setActivity(FavouriteProductsActivity activity) {
-        this.activity = activity;
-    }
-
     @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -37,7 +32,6 @@ public class SortOfflineProductsDialog extends DialogFragment {
         builder.setTitle(R.string.action_sort)
                 .setItems(R.array.sorting_modes, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
-                        Log.d("ZX", which + "");
                         try {
                             if (which == 0) {
                                 SmartHMApplication.sortingType = Const.SORT_BY_TITLE_ASCENDING;
@@ -48,8 +42,6 @@ public class SortOfflineProductsDialog extends DialogFragment {
                             } else if (which == 3) {
                                 SmartHMApplication.sortingType = Const.SORT_BY_DATE_DESCENDING;
                             }
-
-                            Log.d("ZX", "Sorting entries.");
                             DataSorter sorter = new DataSorter();
                             ProductsListFragmentOffline productsListFragment = activity.getProductsListFragment();
                             List<Entry> entryList = productsListFragment.getEntryList();
@@ -60,21 +52,11 @@ public class SortOfflineProductsDialog extends DialogFragment {
                         }
                     }
                 });
-
-            /*
-            builder.setMessage(R.string.search_history_item)
-                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        // FIRE ZE MISSILES!
-                    }
-                })
-                .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        // User cancelled the dialog
-                    }
-                });
-            */
         // Create the AlertDialog object and return it
         return builder.create();
+    }
+
+    public void setActivity(FavouriteProductsActivity activity) {
+        this.activity = activity;
     }
 }

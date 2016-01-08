@@ -84,6 +84,23 @@ public class Smos extends BaseParser implements MissionInterface {
     }
 
     @Override
+    public void scientificRequirements() {
+        Pair pair = super.getSimplePage(SCIENTIFIC_REQUIREMENTS);
+        parserDb.addPage(new Page(EsaEoMissions.CATEGORY_ID, MISSION_ID, (String) pair.title, (String) pair.content));
+    }
+
+    @Override
+    public void operations() {
+        Pair pair = super.getSimplePage(OPERATIONS);
+        parserDb.addPage(new Page(EsaEoMissions.CATEGORY_ID, MISSION_ID, (String) pair.title, (String) pair.content));
+    }
+
+    @Override
+    public void applications() {
+
+    }
+
+    @Override
     public void science() {
 
     }
@@ -96,22 +113,5 @@ public class Smos extends BaseParser implements MissionInterface {
     @Override
     public void industry() {
 
-    }
-
-    @Override
-    public void applications() {
-
-    }
-
-    @Override
-    public void scientificRequirements() {
-        Pair pair = super.getSimplePage(SCIENTIFIC_REQUIREMENTS);
-        parserDb.addPage(new Page(EsaEoMissions.CATEGORY_ID, MISSION_ID, (String) pair.title, (String) pair.content));
-    }
-
-    @Override
-    public void operations() {
-        Pair pair = super.getSimplePage(OPERATIONS);
-        parserDb.addPage(new Page(EsaEoMissions.CATEGORY_ID, MISSION_ID, (String) pair.title, (String) pair.content));
     }
 }

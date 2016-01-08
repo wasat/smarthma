@@ -15,7 +15,7 @@ import pl.wasat.smarthma.R;
  * Part of the project  SmartHMA_home
  */
 public class EntryBitmapRequest extends OkHttpBitmapRequest {
-    Context context;
+    private final Context context;
 
     public EntryBitmapRequest(Context context, String url, int width, int height, File cacheFile) {
         super(url, width, height, cacheFile);
@@ -30,7 +30,7 @@ public class EntryBitmapRequest extends OkHttpBitmapRequest {
             SSLCertificateHandler.nuke();
             bitmap = super.loadDataFromNetwork();
         } catch (Exception e) {
-            //e.printStackTrace();
+            e.printStackTrace();
         }
         return bitmap;
     }

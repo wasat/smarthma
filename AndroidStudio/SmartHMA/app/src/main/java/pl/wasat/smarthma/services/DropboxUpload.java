@@ -7,6 +7,7 @@ import android.os.AsyncTask;
 import android.preference.PreferenceManager;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.dropbox.client2.DropboxAPI;
 import com.dropbox.client2.ProgressListener;
@@ -27,20 +28,17 @@ import java.io.FileNotFoundException;
 
 import pl.wasat.smarthma.R;
 
-public class DropboxUpload extends AsyncTask<Void, Long, Boolean> {
+class DropboxUpload extends AsyncTask<Void, Long, Boolean> {
 
-    private DropboxAPI<?> mApi;
-    private String mPath;
-    private File mFile;
-    private Context context;
-    private long mFileLen;
-    private DropboxAPI.UploadRequest mRequest;
-    private String mErrorMsg;
-    private NotificationCompat.Builder mBuilder;
-    private NotificationManager mNotifyManager;
     private static final String ACCESS_KEY_NAME = "ACCESS_KEY";
     private static final String ACCESS_SECRET_NAME = "ACCESS_SECRET";
-
+    private final String mPath;
+    private final File mFile;
+    private final Context context;
+    private final long mFileLen;
+    private DropboxAPI<?> mApi;
+    private NotificationCompat.Builder mBuilder;
+    private NotificationManager mNotifyManager;
 
     public DropboxUpload(Context context, String dropboxPath, File file) {
         super();
@@ -51,31 +49,17 @@ public class DropboxUpload extends AsyncTask<Void, Long, Boolean> {
         buildSession();
     }
 
-    private AndroidAuthSession buildSession() {
+    private void buildSession() {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
         String secret = prefs.getString(ACCESS_SECRET_NAME, null);
         AppKeyPair appKeyPair = new AppKeyPair(context.getString(R.string.APP_KEY), context.getString(R.string.APP_SECRET));
 
         AndroidAuthSession session = new AndroidAuthSession(appKeyPair);
+        assert secret != null;
         session.setOAuth2AccessToken(secret);
-        mApi = new DropboxAPI<AndroidAuthSession>(session);
+        mApi = new DropboxAPI<>(session);
         loadAuth(session);
-        return session;
     }
-
-
-    @Override
-    protected void onPreExecute() {
-        super.onPreExecute();
-        mNotifyManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
-        mBuilder = new NotificationCompat.Builder(context);
-        mBuilder.setContentTitle("Upload file to dropbox - " + mFile.getName())
-                .setContentText("Upload to dropbox in progress. File: " + mFile.getName())
-                .setSmallIcon(R.mipmap.ic_launcher_circle);
-        mBuilder.setProgress(100, 0, false);
-        mNotifyManager.notify(1, mBuilder.build());
-    }
-
 
     private void loadAuth(AndroidAuthSession session) {
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(context);
@@ -91,26 +75,25 @@ public class DropboxUpload extends AsyncTask<Void, Long, Boolean> {
         }
     }
 
-
     @Override
     protected Boolean doInBackground(Void... params) {
+        String mErrorMsg;
         try {
             // By creating a request, we get a handle to the putFile operation,
             // so we can cancel it later if we want to
             FileInputStream fis = new FileInputStream(mFile);
             String path = mPath + mFile.getName();
-            //Log.d("UPLOAD_DATA", "NAME: " + mFile.getName() + "; PATH:" + mPath);
-            mRequest = mApi.putFileOverwriteRequest(path, fis, mFile.length(),
+            DropboxAPI.UploadRequest mRequest = mApi.putFileOverwriteRequest(path, fis, mFile.length(),
                     new ProgressListener() {
+                        @Override
+                        public void onProgress(long bytes, long total) {
+                            publishProgress(bytes);
+                        }
+
                         @Override
                         public long progressInterval() {
                             // Update the progress bar every half-second or so
                             return 500;
-                        }
-
-                        @Override
-                        public void onProgress(long bytes, long total) {
-                            publishProgress(bytes);
                         }
                     });
 
@@ -122,43 +105,74 @@ public class DropboxUpload extends AsyncTask<Void, Long, Boolean> {
 
         } catch (DropboxUnlinkedException e) {
             // This session wasn't authenticated properly or user unlinked
-            mErrorMsg = "This app wasn't authenticated properly.";
+            mErrorMsg = context.getString(R.string.this_app_wasnt_auth);
+            showToast(mErrorMsg);
         } catch (DropboxFileSizeException e) {
             // File size too big to upload via the API
-            mErrorMsg = "This file is too big to upload";
+            mErrorMsg = context.getString(R.string.file_is_too_big);
+            showToast(mErrorMsg);
         } catch (DropboxPartialFileException e) {
             // We canceled the operation
-            mErrorMsg = "Upload canceled";
+            mErrorMsg = context.getString(R.string.upload_canceled);
+            showToast(mErrorMsg);
         } catch (DropboxServerException e) {
             if (e.error == DropboxServerException._401_UNAUTHORIZED) {
+                showToast(getDropboxServerError(e));
+                showToast(e.reason);
             } else if (e.error == DropboxServerException._403_FORBIDDEN) {
                 // Not allowed to access this
+                showToast(getDropboxServerError(e));
+                showToast(e.reason);
             } else if (e.error == DropboxServerException._404_NOT_FOUND) {
                 // path not found (or if it was the thumbnail, can't be
                 // thumbnailed)
+                showToast(getDropboxServerError(e));
+                showToast(e.reason);
             } else if (e.error == DropboxServerException._507_INSUFFICIENT_STORAGE) {
                 // user is over quota
+                showToast(getDropboxServerError(e));
+                showToast(e.reason);
             } else {
                 // Something else
+                showToast(getDropboxServerError(e));
+                showToast(e.reason);
             }
-            // This gets the Dropbox error, translated into the user's language
-            mErrorMsg = e.body.userError;
-            if (mErrorMsg == null) {
-                mErrorMsg = e.body.error;
-            }
+
         } catch (DropboxIOException e) {
             // Happens all the time, probably want to retry automatically.
-            mErrorMsg = "Network error.  Try again.";
+            mErrorMsg = context.getString(R.string.network_error);
+            showToast(mErrorMsg);
         } catch (DropboxParseException e) {
             // Probably due to Dropbox server restarting, should retry
-            mErrorMsg = "Dropbox error.  Try again.";
+            mErrorMsg = context.getString(R.string.dropbox_error);
+            showToast(mErrorMsg);
         } catch (DropboxException e) {
             // Unknown error
-            mErrorMsg = "Unknown error.  Try again.";
+            mErrorMsg = context.getString(R.string.unknown_error);
+            showToast(mErrorMsg);
         } catch (FileNotFoundException e) {
             Log.e("", e.toString());
         }
         return false;
+    }
+
+    @Override
+    protected void onPreExecute() {
+        super.onPreExecute();
+        mNotifyManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+        mBuilder = new NotificationCompat.Builder(context);
+        mBuilder.setContentTitle(context.getString(R.string.upload_file_to_dropbox) + mFile.getName())
+                .setContentText(context.getString(R.string.upload_to_dropbox_in_progress) + mFile.getName())
+                .setSmallIcon(R.mipmap.ic_launcher_circle);
+        mBuilder.setProgress(100, 0, false);
+        mNotifyManager.notify(1, mBuilder.build());
+    }
+
+    @Override
+    protected void onPostExecute(Boolean result) {
+        mBuilder.setContentText(String.format(context.getString(R.string.upload_file_to_dropbox_completed), mFile.getName()));
+        mBuilder.setProgress(0, 0, false);
+        mNotifyManager.notify(1, mBuilder.build());
     }
 
     @Override
@@ -168,14 +182,16 @@ public class DropboxUpload extends AsyncTask<Void, Long, Boolean> {
         mNotifyManager.notify(1, mBuilder.build());
     }
 
-    @Override
-    protected void onPostExecute(Boolean result) {
-        if (result) {
-            //   mFile.delete();
-        } else {
+    private void showToast(String toastMsg) {
+        Toast.makeText(context, toastMsg, Toast.LENGTH_LONG).show();
+    }
+
+    private String getDropboxServerError(DropboxServerException e) {
+        String mErrorMsg;// This gets the Dropbox error, translated into the user's language
+        mErrorMsg = e.body.userError;
+        if (mErrorMsg == null) {
+            mErrorMsg = e.body.error;
         }
-        mBuilder.setContentText("Upload file " + mFile.getName() + " to dropbox completed");
-        mBuilder.setProgress(0, 0, false);
-        mNotifyManager.notify(1, mBuilder.build());
+        return mErrorMsg;
     }
 }

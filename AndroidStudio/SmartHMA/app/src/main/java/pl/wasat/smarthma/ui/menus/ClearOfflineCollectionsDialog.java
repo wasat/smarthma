@@ -16,10 +16,6 @@ import pl.wasat.smarthma.ui.activities.FavouriteCollectionsActivity;
 public class ClearOfflineCollectionsDialog extends DialogFragment {
     private FavouriteCollectionsActivity activity;
 
-    public void setActivity(FavouriteCollectionsActivity activity) {
-        this.activity = activity;
-    }
-
     @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -40,5 +36,9 @@ public class ClearOfflineCollectionsDialog extends DialogFragment {
                 });
         // Create the AlertDialog object and return it
         return builder.create();
+    }
+
+    public void setActivity(FavouriteCollectionsActivity activity) {
+        this.activity = activity;
     }
 }

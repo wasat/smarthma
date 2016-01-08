@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -70,10 +69,8 @@ public class NewsDetailFragment extends Fragment {
                     Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri
                             .parse(displayedArticle.getAuthor()));
                     startActivity(browserIntent);
-
                 }
             });
-
         }
         return rootView;
     }
@@ -86,10 +83,9 @@ public class NewsDetailFragment extends Fragment {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-        Log.d("item ID : ", "onOptionsItemSelected Item ID" + id);
         if (id == R.id.actionbar_saveoffline) {
             Toast.makeText(getActivity().getApplicationContext(),
-                    "This article has been saved of offline reading.",
+                    R.string.saved_to_offline_reading,
                     Toast.LENGTH_LONG).show();
             return true;
         } else if (id == R.id.actionbar_markunread) {

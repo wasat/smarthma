@@ -42,33 +42,24 @@ public class Swarm extends BaseParser implements MissionInterface {
     }
 
     @Override
-    public void history() {
-
+    public void milestones() {
     }
 
     @Override
-    public void industry() {
-
+    public void faq() {
+        String FAQ = "https://earth.esa.int/web/guest/missions/esa-operational-eo-missions/swarm/faqs";
+        parserDb.addPage(new Page(EsaEoMissions.CATEGORY_ID, MISSION_ID, FAQ_TITLE, FAQ));
     }
 
     @Override
-    public void science() {
+    public void other() {
+        final String DATA_HANDBOOK_TITLE = "Product Data Handbook";
+        final String DATA_ACCESS_TITLE = "Data Access";
 
-    }
-
-    @Override
-    public void applications() {
-
-    }
-
-    @Override
-    public void scientificRequirements() {
-
-    }
-
-    @Override
-    public void operations() {
-
+        String DATA_HANDBOOK = "http://swarm-wiki.spacecenter.dk/mediawiki-1.21.1/index.php/Main_Page";
+        parserDb.addPage(new Page(EsaEoMissions.CATEGORY_ID, MISSION_ID, DATA_HANDBOOK_TITLE, DATA_HANDBOOK));
+        String DATA_ACCESS = "https://earth.esa.int/web/guest/swarm/data-access";
+        parserDb.addPage(new Page(EsaEoMissions.CATEGORY_ID, MISSION_ID, DATA_ACCESS_TITLE, DATA_ACCESS));
     }
 
     @Override
@@ -97,23 +88,32 @@ public class Swarm extends BaseParser implements MissionInterface {
     }
 
     @Override
-    public void milestones() {
+    public void scientificRequirements() {
+
     }
 
     @Override
-    public void faq() {
-        String FAQ = "https://earth.esa.int/web/guest/missions/esa-operational-eo-missions/swarm/faqs";
-        parserDb.addPage(new Page(EsaEoMissions.CATEGORY_ID, MISSION_ID, FAQ_TITLE, FAQ));
+    public void operations() {
+
     }
 
     @Override
-    public void other() {
-        final String DATA_HANDBOOK_TITLE = "Product Data Handbook";
-        final String DATA_ACCESS_TITLE = "Data Access";
+    public void applications() {
 
-        String DATA_HANDBOOK = "http://swarm-wiki.spacecenter.dk/mediawiki-1.21.1/index.php/Main_Page";
-        parserDb.addPage(new Page(EsaEoMissions.CATEGORY_ID, MISSION_ID, DATA_HANDBOOK_TITLE, DATA_HANDBOOK));
-        String DATA_ACCESS = "https://earth.esa.int/web/guest/swarm/data-access";
-        parserDb.addPage(new Page(EsaEoMissions.CATEGORY_ID, MISSION_ID, DATA_ACCESS_TITLE, DATA_ACCESS));
+    }
+
+    @Override
+    public void science() {
+
+    }
+
+    @Override
+    public void history() {
+
+    }
+
+    @Override
+    public void industry() {
+
     }
 }

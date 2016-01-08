@@ -247,11 +247,6 @@ class ISODataHandler extends DefaultHandler {
     private Level level;
     private CIDateTypeCode CIDateTypeCode;
 
-
-    public Feed getFeeds() {
-        return feed;
-    }
-
     /*
      * This method is called everytime a start element is found (an opening XML
      * marker) here we always reset the characters StringBuffer as we are only
@@ -303,18 +298,6 @@ class ISODataHandler extends DefaultHandler {
             }
             query.setParamNameList(queryParamNames);
             query.setParamValueList(queryParamValues);
-
-/*            query.setCount(atts.getValue("count"));
-            query.setDcSubject(atts.getValue("dc:subject"));
-            query.setDcType(atts.getValue("dc:type"));
-            query.setGeoUid(atts.getValue("geo:uid"));
-            query.setRole(atts.getValue("role"));
-            query.setSearchTerms(atts.getValue("searchTerms"));
-            query.setSruRecordSchema(atts.getValue("sru:recordSchema"));
-            query.setStartIndex(atts.getValue("startIndex"));
-            query.setGeoBox(atts.getValue("geo:box"));
-            query.setTimeEnd(atts.getValue("time:end"));
-            query.setTimeStart(atts.getValue("time:start"));*/
         } else if (localName.equalsIgnoreCase("author")) {
             author = new Author();
         } else if (localName.equalsIgnoreCase("identifier")) {
@@ -351,7 +334,7 @@ class ISODataHandler extends DefaultHandler {
 
             // MDMetadata declarations
             // MI_Metadata declarations
-        } else if (localName.equalsIgnoreCase("MD_Metadata")|| localName.equalsIgnoreCase("MI_Metadata")) {
+        } else if (localName.equalsIgnoreCase("MD_Metadata") || localName.equalsIgnoreCase("MI_Metadata")) {
             mdMetadata = new MDMetadata();
             isInMDMetadata = true;
             mdMetadata.setXmlnsGmd(atts.getValue("xmlns:gmd"));
@@ -975,5 +958,9 @@ class ISODataHandler extends DefaultHandler {
      */
     public void characters(char ch[], int start, int length) {
         chars.append(new String(ch, start, length).trim());
+    }
+
+    public Feed getFeeds() {
+        return feed;
     }
 }

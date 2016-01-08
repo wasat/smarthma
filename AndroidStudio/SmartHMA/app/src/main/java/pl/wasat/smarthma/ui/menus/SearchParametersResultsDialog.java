@@ -20,11 +20,6 @@ public class SearchParametersResultsDialog extends DialogFragment {
     private SearchActivity activity;
     private int type = 0;
 
-    public void setParameters(SearchActivity activity, int type) {
-        this.activity = activity;
-        this.type = type;
-    }
-
     @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -83,5 +78,10 @@ public class SearchParametersResultsDialog extends DialogFragment {
                 });
         // Create the AlertDialog object and return it
         return builder.create();
+    }
+
+    public void setParameters(SearchActivity activity, int type) {
+        this.activity = activity;
+        this.type = type;
     }
 }

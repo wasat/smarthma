@@ -33,24 +33,6 @@ public class ExceptionDialogFragment extends DialogFragment {
         return frag;
     }
 
-    private void showDialog(String messText, String exRawMessage, String exRawCause) {
-        DialogFragment exceptionDialogFragment = ExceptionDialogFragment
-                .newInstance(messText, exRawMessage, exRawCause);
-        exceptionDialogFragment.show(getFragmentManager(), "ExceptionDialogFragment");
-    }
-
-    private String formatDetailMessage(String rawMess, String rawCause) {
-
-        String NEW_LINE = System.getProperty("line.separator");
-        String url = obtainFormattedUrl();
-        return "URL:" + NEW_LINE +
-                url + NEW_LINE + NEW_LINE +
-                "EXCEPTION:" + NEW_LINE +
-                rawMess + NEW_LINE + NEW_LINE +
-                "CAUSE:" + NEW_LINE +
-                rawCause + NEW_LINE;
-    }
-
     @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -93,11 +75,30 @@ public class ExceptionDialogFragment extends DialogFragment {
             });
         }
         return exceptionAlertDialog.create();
+    }
 
+    private String formatDetailMessage(String rawMess, String rawCause) {
+
+        String NEW_LINE = System.getProperty("line.separator");
+        String url = obtainFormattedUrl();
+        return "URL:" + NEW_LINE +
+                url + NEW_LINE + NEW_LINE +
+                "EXCEPTION:" + NEW_LINE +
+                rawMess + NEW_LINE + NEW_LINE +
+                "CAUSE:" + NEW_LINE +
+                rawCause + NEW_LINE;
+    }
+
+    private void showDialog(String messText, String exRawMessage, String exRawCause) {
+        DialogFragment exceptionDialogFragment = ExceptionDialogFragment
+                .newInstance(messText, exRawMessage, exRawCause);
+        exceptionDialogFragment.show(getFragmentManager(), ExceptionDialogFragment.class.getSimpleName());
     }
 
     private String obtainFormattedUrl() {
         SharedPrefs sharedPrefs = new SharedPrefs(getActivity());
         return sharedPrefs.getUrlPrefs();
     }
+
+
 }

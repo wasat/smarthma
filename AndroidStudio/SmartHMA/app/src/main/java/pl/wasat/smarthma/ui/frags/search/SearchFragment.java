@@ -6,7 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
+import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,7 +22,6 @@ import pl.wasat.smarthma.helper.Const;
 import pl.wasat.smarthma.preferences.GlobalPreferences;
 import pl.wasat.smarthma.preferences.SharedPrefs;
 import pl.wasat.smarthma.ui.activities.SearchCollectionResultsActivity;
-import pl.wasat.smarthma.ui.tooltips.Tooltip;
 
 /**
  * A simple {@link android.support.v4.app.Fragment} subclass. Activities that
@@ -36,8 +35,10 @@ public class SearchFragment extends Fragment {
     private OnSearchFragmentListener mListener;
     private View rootView;
     private Intent searchIntent;
-    private Tooltip tooltip;
     private HashMap extraParams;
+
+    public SearchFragment() {
+    }
 
     /**
      * Use this factory method to create a new instance of this fragment using
@@ -49,12 +50,8 @@ public class SearchFragment extends Fragment {
         return new SearchFragment();
     }
 
-    public SearchFragment() {
-    }
-
     @Override
     public void startActivity(Intent intent) {
-        Log.i("START_ACTV", "SearchFragment");
         if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
             searchIntent = intent;
             searchIntent.putExtra(Const.KEY_INTENT_FEDEO_REQUEST_PARAMS_EXTRA, extraParams);
@@ -62,7 +59,18 @@ public class SearchFragment extends Fragment {
         super.startActivity(searchIntent);
     }
 
-
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        Activity activity = context instanceof Activity ? (Activity) context : null;
+        try {
+            mListener = (OnSearchFragmentListener) activity;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(activity.toString()
+                    + activity.getString(R.string.must_implement)
+                    + OnSearchFragmentListener.class.getSimpleName());
+        }
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -97,7 +105,7 @@ public class SearchFragment extends Fragment {
         AutoCompleteTextView autoComplete = (AutoCompleteTextView) linearLayout3
                 .getChildAt(0);
         autoComplete.setTextSize(20);
-        autoComplete.setTextColor(getResources().getColor(R.color.text_black));
+        autoComplete.setTextColor(ContextCompat.getColor(getActivity(), R.color.text_black));
 
         Button btnBasicParams = (Button) rootView.findViewById(R.id.search_frag_button_basic);
         btnBasicParams.setOnClickListener(new View.OnClickListener() {
@@ -119,16 +127,11 @@ public class SearchFragment extends Fragment {
             }
         });
 
-        tooltip = new Tooltip(getContext(), Tooltip.TYPE_BELOW, "Greetings from below!");
-
         final Button btnAdvanceParams = (Button) rootView.findViewById(R.id.search_frag_button_advance);
         btnAdvanceParams.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 mListener.onSearchFragmentAdvanceParamsChoose();
-/*
-                if (!tooltip.isShown())
-                    tooltip.show(btnAdvanceParams);*/
             }
         });
 
@@ -144,7 +147,6 @@ public class SearchFragment extends Fragment {
         return rootView;
     }
 
-
     private void startSearchWithButton(SearchView searchView) {
         Intent intentBtnSearch = new Intent(getActivity(),
                 SearchCollectionResultsActivity.class);
@@ -155,33 +157,24 @@ public class SearchFragment extends Fragment {
         mListener.onSearchFragmentStartSearchingWithButton(intentBtnSearch);
     }
 
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        mListener = null;
+    }
 
     public void setAdditionalParams(String parameterKey, String parameterValue) {
-        extraParams.put(parameterKey, parameterValue);
+        try {
+            extraParams.put(parameterKey, parameterValue);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public void setQuery(String query) {
         if (rootView == null) return;
         SearchView searchView = (SearchView) rootView.findViewById(R.id.search_frag_searchview);
         if (searchView != null) searchView.setQuery(query, false);
-    }
-
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        Activity activity = context instanceof Activity ? (Activity) context : null;
-        try {
-            mListener = (OnSearchFragmentListener) activity;
-        } catch (ClassCastException e) {
-            throw new ClassCastException(activity.toString()
-                    + " must implement OnSearchFragmentListener");
-        }
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        mListener = null;
     }
 
     /**
@@ -201,7 +194,6 @@ public class SearchFragment extends Fragment {
         void onSearchFragmentSendExtraParams(HashMap extra);
 
         void onSearchFragmentStartSearchingWithButton(Intent intent);
-
     }
 
 }

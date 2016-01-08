@@ -25,18 +25,12 @@ import pl.wasat.smarthma.model.om.PosString;
  * Created by Daniel on 2015-10-08 00:16.
  * Part of the project  SmartHMA
  */
-public class EntryDataHandler extends DefaultHandler {
-    private StringBuffer chars = new StringBuffer();
+class EntryDataHandler extends DefaultHandler {
+    private final StringBuffer chars = new StringBuffer();
     private Entry entry;
     private Link link;
     private ArrayList<Link> linksEntry;
     private ArrayList<Link> linksFeed;
-    private Where where;
-    private Polygon polygon;
-    private Exterior exterior;
-    private LinearRing linearRing;
-    private PosString posString;
-    private List<Pos> posList;
     private Group group;
     private Content content;
     private Summary summary;
@@ -44,10 +38,6 @@ public class EntryDataHandler extends DefaultHandler {
     private Category category;
 
     private EarthObservation earthObservation;
-
-    public Entry getEntry() {
-        return entry;
-    }
 
     @Override
     public void startElement(String uri, String localName, String qName, Attributes atts) throws SAXException {
@@ -65,18 +55,18 @@ public class EntryDataHandler extends DefaultHandler {
         } else if (localName.equalsIgnoreCase("summary")) {
             summary = new Summary();
         } else if (localName.equalsIgnoreCase("where")) {
-            where = new Where();
+            Where where = new Where();
         } else if (localName.equalsIgnoreCase("Polygon")) {
-            polygon = new Polygon();
+            Polygon polygon = new Polygon();
             polygon.set_gml_id(atts.getValue("gml:id"));
             polygon.set_srsName(atts.getValue("srsName"));
         } else if (localName.equalsIgnoreCase("exterior")) {
-            exterior = new Exterior();
+            Exterior exterior = new Exterior();
         } else if (localName.equalsIgnoreCase("LinearRing")) {
-            linearRing = new LinearRing();
-            posList = new ArrayList<>();
+            LinearRing linearRing = new LinearRing();
+            List<Pos> posList = new ArrayList<>();
         } else if (localName.equalsIgnoreCase("poslist")) {
-            posString = new PosString();
+            PosString posString = new PosString();
         } else if (localName.equalsIgnoreCase("group")) {
             group = new Group();
             contentList = new ArrayList<>();
@@ -131,5 +121,9 @@ public class EntryDataHandler extends DefaultHandler {
     public void characters(char[] ch, int start, int length) throws SAXException {
         super.characters(ch, start, length);
         chars.append(new String(ch, start, length).trim());
+    }
+
+    public Entry getEntry() {
+        return entry;
     }
 }

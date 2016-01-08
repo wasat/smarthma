@@ -17,8 +17,8 @@ import pl.wasat.smarthma.parser.model.Page;
  */
 public class ProbaV extends BaseParser implements MissionInterface {
     private final static int MISSION_ID = 2;
-    private final int THIRD_PARTY_MISSION_ID = 29;
     private final static String TITLE = "Proba-V";
+    private final int THIRD_PARTY_MISSION_ID = 29;
 
     public ProbaV(String pageUrl, Context context) {
         super(pageUrl, context);
@@ -26,33 +26,6 @@ public class ProbaV extends BaseParser implements MissionInterface {
         parserDb.addMission(new Mission(MISSION_ID, EsaEoMissions.CATEGORY_ID, TITLE));
         parserDb.addMission(new Mission(THIRD_PARTY_MISSION_ID, ThirdPartyMissions.CATEGORY_ID, TITLE));
 
-
-    }
-
-    public void getImageOfTheWeek() {
-        int IMG_OF_THE_WEEK_COUNT = 42;
-        //Pair pair =
-        super.getImageListPage(IMG_OF_THE_WEEK, IMG_OF_THE_WEEK_COUNT, true);
-
-    }
-
-    @Override
-    public void history() {
-
-    }
-
-    @Override
-    public void industry() {
-
-    }
-
-    @Override
-    public void science() {
-
-    }
-
-    @Override
-    public void applications() {
 
     }
 
@@ -78,13 +51,14 @@ public class ProbaV extends BaseParser implements MissionInterface {
     }
 
     @Override
-    public void scientificRequirements() {
-
+    public void faq() {
+        String FAQ = "https://earth.esa.int/web/guest/missions/esa-operational-eo-missions/proba-v/faqs";
+        parserDb.addPage(new Page(EsaEoMissions.CATEGORY_ID, MISSION_ID, FAQ_TITLE, FAQ));
+        parserDb.addPage(new Page(ThirdPartyMissions.CATEGORY_ID, THIRD_PARTY_MISSION_ID, FAQ_TITLE, FAQ));
     }
 
     @Override
-    public void operations() {
-
+    public void other() {
     }
 
     @Override
@@ -113,13 +87,39 @@ public class ProbaV extends BaseParser implements MissionInterface {
     }
 
     @Override
-    public void faq() {
-        String FAQ = "https://earth.esa.int/web/guest/missions/esa-operational-eo-missions/proba-v/faqs";
-        parserDb.addPage(new Page(EsaEoMissions.CATEGORY_ID, MISSION_ID, FAQ_TITLE, FAQ));
-        parserDb.addPage(new Page(ThirdPartyMissions.CATEGORY_ID, THIRD_PARTY_MISSION_ID, FAQ_TITLE, FAQ));
+    public void scientificRequirements() {
+
     }
 
     @Override
-    public void other() {
+    public void operations() {
+
+    }
+
+    @Override
+    public void applications() {
+
+    }
+
+    @Override
+    public void science() {
+
+    }
+
+    @Override
+    public void history() {
+
+    }
+
+    @Override
+    public void industry() {
+
+    }
+
+    public void getImageOfTheWeek() {
+        int IMG_OF_THE_WEEK_COUNT = 42;
+        //Pair pair =
+        super.getImageListPage(IMG_OF_THE_WEEK, IMG_OF_THE_WEEK_COUNT, true);
+
     }
 }

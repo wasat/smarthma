@@ -32,7 +32,6 @@ public class FedeoSearchRequest extends GoogleHttpClientSpiceRequest<Feed> {
         this.context = context;
     }
 
-
     @Override
     public Feed loadDataFromNetwork() throws Exception {
         String url = fedeoRequestParams.getUrl();
@@ -59,6 +58,13 @@ public class FedeoSearchRequest extends GoogleHttpClientSpiceRequest<Feed> {
         return Feed.class;
     }
 
+    private void sendFedeoUrlBroadcast(String url) {
+        Intent intent = new Intent();
+        intent.setAction(Const.KEY_ACTION_BROADCAST_FEDEO_REQUEST);
+        intent.putExtra(Const.KEY_INTENT_FEDEO_REQUEST_URL, url);
+        context.sendBroadcast(intent);
+    }
+
     private InputStream obtainInputStreamResponse(String url) throws IOException {
         long startTime = System.currentTimeMillis();
         HttpRequest request = getHttpRequestFactory().buildGetRequest(
@@ -71,13 +77,4 @@ public class FedeoSearchRequest extends GoogleHttpClientSpiceRequest<Feed> {
         Log.i("REQUEST_TIME", String.valueOf(System.currentTimeMillis() - startTime));
         return inStreamFeed;
     }
-
-    private void sendFedeoUrlBroadcast(String url) {
-        Intent intent = new Intent();
-        intent.setAction(Const.KEY_ACTION_BROADCAST_FEDEO_REQUEST);
-        intent.putExtra(Const.KEY_INTENT_FEDEO_REQUEST_URL, url);
-        context.sendBroadcast(intent);
-    }
-
-
 }

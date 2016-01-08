@@ -26,6 +26,12 @@ public class SharedPrefs {
         return settings.getString(Const.KEY_PREF_PARENT_ID, "Fedeo");
     }
 
+    public void setParentIdPrefs(String parentId) {
+        SharedPreferences.Editor editor = settings.edit();
+        editor.putString(Const.KEY_PREF_PARENT_ID, parentId);
+        editor.apply();
+    }
+
     public float[] getBboxPrefs() {
         float[] bboxPrefs = new float[4];
 
@@ -37,24 +43,33 @@ public class SharedPrefs {
         return bboxPrefs;
     }
 
+    public void setBboxPrefs(String bboxWest, String bboxSouth,
+                             String bboxEast, String bboxNorth) {
+        SharedPreferences.Editor editor = settings.edit();
+        editor.putFloat(Const.KEY_PREF_BBOX_WEST, Float.valueOf(bboxWest));
+        editor.putFloat(Const.KEY_PREF_BBOX_SOUTH, Float.valueOf(bboxSouth));
+        editor.putFloat(Const.KEY_PREF_BBOX_EAST, Float.valueOf(bboxEast));
+        editor.putFloat(Const.KEY_PREF_BBOX_NORTH, Float.valueOf(bboxNorth));
+        editor.apply();
+    }
+
     public String getQueryPrefs() {
         return settings.getString(Const.KEY_PREF_QUERY, "");
+    }
+
+    public void setQueryPrefs(String query) {
+        SharedPreferences.Editor editor = settings.edit();
+        editor.putString(Const.KEY_PREF_QUERY, query);
+        editor.apply();
     }
 
     public String getUrlPrefs() {
         return settings.getString(Const.KEY_PREF_URL, "");
     }
 
-    public void setParentIdPrefs(String parentId) {
+    public void setUrlPrefs(String url) {
         SharedPreferences.Editor editor = settings.edit();
-        editor.putString(Const.KEY_PREF_PARENT_ID, parentId);
-        editor.apply();
-    }
-
-
-    protected void setSharedPrefDefaultValue(String key, String value) {
-        SharedPreferences.Editor editor = settings.edit();
-        editor.putString(key, value);
+        editor.putString(Const.KEY_PREF_URL, url);
         editor.apply();
     }
 
@@ -68,27 +83,9 @@ public class SharedPrefs {
         editor.apply();
     }
 
-    public void setBboxPrefs(String bboxWest, String bboxSouth,
-                             String bboxEast, String bboxNorth) {
+    protected void setSharedPrefDefaultValue(String key, String value) {
         SharedPreferences.Editor editor = settings.edit();
-        editor.putFloat(Const.KEY_PREF_BBOX_WEST, Float.valueOf(bboxWest));
-        editor.putFloat(Const.KEY_PREF_BBOX_SOUTH, Float.valueOf(bboxSouth));
-        editor.putFloat(Const.KEY_PREF_BBOX_EAST, Float.valueOf(bboxEast));
-        editor.putFloat(Const.KEY_PREF_BBOX_NORTH, Float.valueOf(bboxNorth));
+        editor.putString(key, value);
         editor.apply();
     }
-
-    public void setQueryPrefs(String query) {
-        SharedPreferences.Editor editor = settings.edit();
-        editor.putString(Const.KEY_PREF_QUERY, query);
-        editor.apply();
-    }
-
-    public void setUrlPrefs(String url) {
-        SharedPreferences.Editor editor = settings.edit();
-        editor.putString(Const.KEY_PREF_URL, url);
-        editor.apply();
-    }
-
-
 }

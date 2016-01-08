@@ -3,6 +3,7 @@ package pl.wasat.smarthma.ui.frags.common;
 import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
@@ -29,6 +30,20 @@ public class DatePickerFragment extends DialogFragment implements
 
     private OnDatePickerFragmentListener mListener;
 
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        Activity activity = context instanceof Activity ? (Activity) context : null;
+        try {
+            mListener = (OnDatePickerFragmentListener) activity;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(activity.toString()
+                    + activity.getString(R.string.must_implement)
+                    + OnDatePickerFragmentListener.class.getSimpleName());
+        }
+
+    }
+
     @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -37,7 +52,6 @@ public class DatePickerFragment extends DialogFragment implements
             calendar = (Calendar) getArguments().getSerializable(Const.KEY_DATE_TIME_PICKER_CALENDAR);
         }
 
-        //final Calendar c = Calendar.getInstance();
         dpYear = calendar != null ? calendar.get(Calendar.YEAR) : 0;
         dpMonth = calendar != null ? calendar.get(Calendar.MONTH) : 0;
         dpDay = calendar != null ? calendar.get(Calendar.DAY_OF_MONTH) : 0;
@@ -76,23 +90,8 @@ public class DatePickerFragment extends DialogFragment implements
         return dialog;
     }
 
-    @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-        try {
-            mListener = (OnDatePickerFragmentListener) activity;
-        } catch (ClassCastException e) {
-            throw new ClassCastException(activity.toString()
-                    + " must implement OnDatePickerFragmentListener");
-        }
-
-    }
-
     public void onDateSet(DatePicker view, int year, int month, int day) {
-
-        //Calendar calendar = Calendar.getInstance();
         calendar.set(year, month, day);
-
         mListener.onDatePickerFragmentDateChoose(calendar, textViewTag);
     }
 

@@ -25,7 +25,6 @@ import pl.wasat.smarthma.parser.database.ParserDb;
 
 public abstract class BaseParser {
 
-
     protected final ParserDb parserDb;
     protected String pageUrl;
     private final Whitelist whitelist;
@@ -63,7 +62,6 @@ public abstract class BaseParser {
     protected final String MILESTONES = "milestones";
     protected final String INDUSTRY = "industry";
 
-
     /**
      * @param pageUrl Full url of the webpage to parse
      * @param context context
@@ -73,9 +71,7 @@ public abstract class BaseParser {
         parserDb = new ParserDb(context);
         parserDb.open();
         whitelist = Whitelist.basic().addTags("table", "tbody", "td", "tfoot", "th", "thead", "tr");
-
     }
-
 
     /**
      * Parse simple page(one title - contents section)
@@ -90,10 +86,8 @@ public abstract class BaseParser {
         try {
             if (pageName.equals("")) {
                 doc = Jsoup.connect(pageUrl).get();
-
             } else {
                 doc = Jsoup.connect(pageUrl + "/" + pageName).get();
-
             }
             title = doc.select(titleClass).first().text();
             content = doc.select(contentClass).first().html();
@@ -192,7 +186,6 @@ public abstract class BaseParser {
             }
             for (int i = 0; i < itemsCount; i++) {
                 if (i != exclude) {
-
                     finalList.add(new Pair<>(titleList.get(i), contentList.get(i)));
                 }
             }
@@ -213,7 +206,6 @@ public abstract class BaseParser {
      * @return Pair containing title of the list and arraList containing items
      */
     protected Pair<String, ArrayList<String>> getImageListPage(String pageName, int maxItems, boolean fullPage) {
-
         String title;
         ArrayList<String> contentList = new ArrayList<>();
         Document doc;
@@ -291,11 +283,7 @@ public abstract class BaseParser {
             Pattern p = Pattern.compile(arrayName + "\\[\"[0-9]\"\\] = \".+?\";");
             Matcher m = p.matcher(script.html());
 
-
             while (m.find()) {
-                //	System.out.println(m.group().substring(m.group().indexOf("=") + 1));
-                /*String[] parts = m.group().split("=");
-                contentList.add(parts[1].substring(2, parts[1].length() - 1));*/
                 contentList.add(m.group().substring(m.group().indexOf("=") + PRECEDING_CHARS, m.group().length() - FOLLOWING_CHARS));
             }
         } catch (IOException e) {
@@ -318,7 +306,6 @@ public abstract class BaseParser {
     protected ArrayList<Pair> getJsPage(int position, String arrayName) {
         return getJsPage("", position, arrayName);
     }
-
 
     public String getPageUrl() {
         return pageUrl;
@@ -344,7 +331,6 @@ public abstract class BaseParser {
         this.titleClass = titleClass;
     }
 
-
     protected String imageListToContentString(Pair pair) {
         StringBuilder stringBuilder = new StringBuilder();
         ArrayList list = (ArrayList) pair.content;
@@ -363,24 +349,6 @@ public abstract class BaseParser {
         return stringBuilder.toString();
     }
 
-
-    public void printImageList(Pair pair) {
-        //System.out.println(pair.title);
-        ArrayList list = (ArrayList) pair.content;
-        for (int i = 0; i < list.size(); i++) {
-            //System.out.println(list.get(i));
-        }
-
-        //System.out.println(list.size());
-    }
-
-    public void printComplexPage(ArrayList<Pair> list) {
-        for (int i = 0; i < list.size(); i++) {
-            //System.out.println(list.get(i).title);
-            //System.out.println(list.get(i).content);
-        }
-    }
-
     /**
      * Gets urls of images from html
      *
@@ -391,7 +359,6 @@ public abstract class BaseParser {
         ArrayList<String> finalList = new ArrayList<>();
         for (String singleEl :
                 contentsList) {
-
             Document doc = Jsoup.parseBodyFragment(singleEl);
             Element el = doc.select("a img").first();
             finalList.add(/*MAIN_PAGE_URL +*/ el.attr("src"));
@@ -412,5 +379,4 @@ public abstract class BaseParser {
         javascript = Jsoup.clean(javascript, whitelist);
         return javascript;
     }
-
 }

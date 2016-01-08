@@ -1,30 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="#ffebeff1"
-    android:orientation="horizontal"
-    android:paddingBottom="@dimen/esa_mission_cell_divider"
-    android:paddingTop="@dimen/esa_mission_cell_divider">
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#ffebeff1"
+                android:orientation="horizontal"
+                android:paddingBottom="@dimen/esa_mission_cell_divider"
+                android:paddingTop="@dimen/esa_mission_cell_divider">
 
     <RelativeLayout
+        android:id="@+id/swipe_list_shareview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#ffffeb3b"
-        android:id="@+id/swipe_list_shareview"
-        android:orientation="horizontal"></RelativeLayout>
+        android:orientation="horizontal"/>
 
     <RelativeLayout
+        android:id="@+id/swipe_list_deleteview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#ff558b2f"
-        android:id="@+id/swipe_list_deleteview"
-        android:orientation="horizontal"></RelativeLayout>
+        android:orientation="horizontal"/>
 
     <LinearLayout
+        android:id="@+id/swipe_list_mainview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/swipe_list_mainview"
         android:orientation="vertical">
 
         <LinearLayout
@@ -42,9 +42,9 @@
                 android:layout_height="wrap_content"
                 android:paddingLeft="15dip"
                 android:paddingRight="8dip"
-                android:text="Lorem ipsum lorem ipsum"
+                android:text="@string/lorem_ipsum_dolor"
                 android:textColor="@color/text_blue"
-                android:textSize="@dimen/esa_online_cell_text_size_large" />
+                android:textSize="@dimen/esa_online_cell_text_size_large"/>
 
             <pl.wasat.smarthma.customviews.TextViewWithFont
                 android:id="@+id/article_listing_smallprint"
@@ -53,12 +53,9 @@
                 android:paddingLeft="15dip"
                 android:paddingRight="8dip"
                 android:paddingTop="2dp"
-                android:text="Lorem ipsum lorem ipsum"
+                android:text="@string/lorem_ipsum_dolor"
                 android:textColor="@color/text_black"
-                android:textSize="@dimen/esa_online_cell_text_size" />
-
+                android:textSize="@dimen/esa_online_cell_text_size"/>
         </LinearLayout>
-
     </LinearLayout>
-
 </RelativeLayout>

@@ -27,9 +27,11 @@ import pl.wasat.smarthma.ui.frags.browse.BrowseCollectionFirstDetailFragment;
 import pl.wasat.smarthma.ui.frags.browse.CollectionEmptyDetailsFragment;
 import pl.wasat.smarthma.ui.frags.browse.CollectionEmptyDetailsFragment.OnCollectionEmptyDetailsFragmentListener;
 import pl.wasat.smarthma.ui.frags.browse.CollectionsGroupListFragment;
+import pl.wasat.smarthma.ui.frags.browse.CollectionsListFragment;
 import pl.wasat.smarthma.ui.frags.browse.CollectionsListFragment.OnCollectionsListFragmentListener;
 import pl.wasat.smarthma.ui.frags.common.AreaPickerMapFragment;
 import pl.wasat.smarthma.ui.frags.common.AreaPickerMapFragment.OnAreaPickerMapFragmentListener;
+import pl.wasat.smarthma.ui.frags.common.CollectionDetailsFragment;
 import pl.wasat.smarthma.ui.frags.common.CollectionDetailsFragment.OnCollectionDetailsFragmentListener;
 import pl.wasat.smarthma.ui.frags.common.DatePickerFragment.OnDatePickerFragmentListener;
 import pl.wasat.smarthma.ui.frags.common.TimePickerFragment.OnTimePickerFragmentListener;
@@ -59,7 +61,7 @@ public class CollectionsDefinitionActivity extends BaseCollectionsActivity
         super.onCreate(savedInstanceState);
 
         TextView text = (TextView) findViewById(R.id.action_bar_title);
-        text.setText("Searched Collections");
+        text.setText(R.string.searched_collections);
 
         if (findViewById(R.id.activity_base_details_container) != null) {
             TWO_PANEL_MODE = true;
@@ -96,55 +98,6 @@ public class CollectionsDefinitionActivity extends BaseCollectionsActivity
         return true;
     }
 
-    /*
-     * (non-Javadoc)
-     *
-     * @see android.support.v4.app.FragmentActivity#onBackPressed()
-     */
-    @Override
-    public void onBackPressed() {
-        if (dismissMenuOnBackPressed()) return;
-
-        FragmentManager fm = getSupportFragmentManager();
-        int bsec = fm.getBackStackEntryCount();
-        if (isBackStackEmpty(bsec)) return;
-
-        String bstEntryName = fm.getBackStackEntryAt(bsec - 1).getName();
-        if (bstEntryName.equalsIgnoreCase("CollectionEmptyDetailsFragment")
-                || bstEntryName.equalsIgnoreCase("CollectionDetailsFragment")) {
-            while (bsec > 0) {
-                fm.popBackStackImmediate();
-                bsec = fm.getBackStackEntryCount();
-/*                bstEntryName = fm.getBackStackEntryAt(bsec - 1).getName();
-                if (bstEntryName.equalsIgnoreCase("CollectionEmptyDetailsFragment")
-                        || bstEntryName.equalsIgnoreCase("CollectionDetailsFragment"))
-                    bsec = 1;*/
-            }
-        } else if (bstEntryName.equalsIgnoreCase("AreaPickerMapFragment")) {
-            while (bstEntryName.equalsIgnoreCase("AreaPickerMapFragment")) {
-                fm.popBackStackImmediate();
-                bsec = fm.getBackStackEntryCount();
-                if (isBackStackEmpty(bsec)) return;
-                bstEntryName = fm.getBackStackEntryAt(bsec - 1).getName();
-            }
-        } else if (bstEntryName.equalsIgnoreCase("CollectionsListFragment")) {
-            fm.popBackStackImmediate();
-        } else {
-            finish();
-            super.onBackPressed();
-        }
-    }
-
-    private boolean isBackStackEmpty(int bsec) {
-        if (bsec == 0) {
-            finish();
-            super.onBackPressed();
-            return true;
-        }
-        return false;
-    }
-
-
     /**
      *
      */
@@ -161,20 +114,55 @@ public class CollectionsDefinitionActivity extends BaseCollectionsActivity
     private void loadMapWithBasicSettingsView() {
         browseCollectionFirstDetailFragment = BrowseCollectionFirstDetailFragment
                 .newInstance();
-
         getSupportFragmentManager()
                 .beginTransaction()
                 .replace(R.id.activity_base_details_container,
                         browseCollectionFirstDetailFragment,
-                        "BrowseCollectionFirstDetailFragment").commit();
+                        BrowseCollectionFirstDetailFragment.class.getSimpleName()).commit();
     }
 
-    /**
-     * for fragment to find out if activity is in two-pane mode
+    /*
+     * (non-Javadoc)
+     *
+     * @see android.support.v4.app.FragmentActivity#onBackPressed()
      */
     @Override
-    public boolean isTwoPaneMode() {
-        return TWO_PANEL_MODE;
+    public void onBackPressed() {
+        if (dismissMenuOnBackPressed()) return;
+
+        FragmentManager fm = getSupportFragmentManager();
+        int bsec = fm.getBackStackEntryCount();
+        if (isBackStackEmpty(bsec)) return;
+
+        String bstEntryName = fm.getBackStackEntryAt(bsec - 1).getName();
+        if (bstEntryName.equalsIgnoreCase(CollectionEmptyDetailsFragment.class.getSimpleName())
+                || bstEntryName.equalsIgnoreCase(CollectionDetailsFragment.class.getSimpleName())) {
+            while (bsec > 0) {
+                fm.popBackStackImmediate();
+                bsec = fm.getBackStackEntryCount();
+            }
+        } else if (bstEntryName.equalsIgnoreCase(AreaPickerMapFragment.class.getSimpleName())) {
+            while (bstEntryName.equalsIgnoreCase(AreaPickerMapFragment.class.getSimpleName())) {
+                fm.popBackStackImmediate();
+                bsec = fm.getBackStackEntryCount();
+                if (isBackStackEmpty(bsec)) return;
+                bstEntryName = fm.getBackStackEntryAt(bsec - 1).getName();
+            }
+        } else if (bstEntryName.equalsIgnoreCase(CollectionsListFragment.class.getSimpleName())) {
+            fm.popBackStackImmediate();
+        } else {
+            finish();
+            super.onBackPressed();
+        }
+    }
+
+    private boolean isBackStackEmpty(int bsec) {
+        if (bsec == 0) {
+            finish();
+            super.onBackPressed();
+            return true;
+        }
+        return false;
     }
 
     @Override
@@ -201,31 +189,40 @@ public class CollectionsDefinitionActivity extends BaseCollectionsActivity
             areaPickerMapFragment.setArguments(args);
             FragmentTransaction transaction = getSupportFragmentManager()
                     .beginTransaction();
-            transaction.replace(R.id.activity_base_details_container, areaPickerMapFragment);
+            transaction.replace(R.id.activity_base_details_container,
+                    areaPickerMapFragment, AreaPickerMapFragment.class.getSimpleName());
             transaction
-                    .addToBackStack("AreaPickerMapFragment")
+                    .addToBackStack(AreaPickerMapFragment.class.getSimpleName())
                     .commit();
         }
     }
 
+    /**
+     * for fragment to find out if activity is in two-pane mode
+     */
+    @Override
+    public boolean isTwoPaneMode() {
+        return TWO_PANEL_MODE;
+    }
+
+    @Override
+    public void onMapFragmentBoundsChange(LatLngBoundsExt bounds) {
+        callUpdateFirstDetailFrag(bounds);
+    }
+
     private void callUpdateFirstDetailFrag(LatLngBoundsExt bounds) {
         BrowseCollectionFirstDetailFragment browseCollectionFirstDetailFragment = (BrowseCollectionFirstDetailFragment) getSupportFragmentManager()
-                .findFragmentByTag("BrowseCollectionFirstDetailFragment");
+                .findFragmentByTag(BrowseCollectionFirstDetailFragment.class.getSimpleName());
         if (browseCollectionFirstDetailFragment != null) {
             browseCollectionFirstDetailFragment.updateAreaBounds(bounds);
         }
 
         //TODO - Make it more universal and differentiate from which fragment it is called
         CollectionEmptyDetailsFragment collectionEmptyDetailsFragment = (CollectionEmptyDetailsFragment) getSupportFragmentManager()
-                .findFragmentByTag("CollectionEmptyDetailsFragment");
+                .findFragmentByTag(CollectionEmptyDetailsFragment.class.getSimpleName());
         if (collectionEmptyDetailsFragment != null) {
             collectionEmptyDetailsFragment.updateAreaBounds(bounds);
         }
-    }
-
-    @Override
-    public void onMapFragmentBoundsChange(LatLngBoundsExt bounds) {
-        callUpdateFirstDetailFrag(bounds);
     }
 
     @Override
@@ -239,6 +236,11 @@ public class CollectionsDefinitionActivity extends BaseCollectionsActivity
     }
 
     @Override
+    public void onCollectionDetailsFragmentShowMetadata(EntryISO displayedEntry) {
+        loadIsoMetadataFragment(displayedEntry);
+    }
+
+    @Override
     public void onCollectionEmptyDetailsFragmentShowProducts(FedeoRequestParams fedeoRequestParams) {
         startSearchingProductsProcess(fedeoRequestParams);
     }
@@ -246,11 +248,6 @@ public class CollectionsDefinitionActivity extends BaseCollectionsActivity
     @Override
     public void onCollectionEmptyDetailsFragmentShowCollections(FedeoRequestParams fedeoRequestParams) {
         startSearchingCollectionsProcess(fedeoRequestParams);
-    }
-
-    @Override
-    public void onCollectionDetailsFragmentShowMetadata(EntryISO displayedEntry) {
-        loadIsoMetadataFragment(displayedEntry);
     }
 
     @Override

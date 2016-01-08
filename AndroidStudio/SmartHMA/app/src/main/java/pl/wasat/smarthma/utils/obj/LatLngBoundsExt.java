@@ -37,14 +37,6 @@ public class LatLngBoundsExt {
         }
     }
 
-/*    public com.google.android.gms.maps.model.LatLngBounds getGoogleLatLngBoundsExt()
-    {
-        com.google.android.gms.maps.model.LatLngBounds.Builder boundsBuilder = new com.google.android.gms.maps.model.LatLngBounds.Builder();
-        boundsBuilder.include(new LatLng(bbox[1], bbox[0]));
-        boundsBuilder.include(new LatLng(bbox[3], bbox[2]));
-        return null;
-    }*/
-
     @Override
     public String toString() {
         return "LatLngBoundsExt{" +

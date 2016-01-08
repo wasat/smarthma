@@ -1,6 +1,7 @@
 package pl.wasat.smarthma.adapter;
 
 import android.app.Activity;
+import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,7 +10,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import pl.wasat.smarthma.R;
@@ -20,13 +20,7 @@ import pl.wasat.smarthma.utils.time.DateUtils;
 
 public class SearchListAdapter extends ArrayAdapter<EntryISO> {
 
-
     private OnSlideElementListener listener;
-
-
-    public void setListener(OnSlideElementListener listener) {
-        this.listener = listener;
-    }
 
     public SearchListAdapter(Activity activity, List<EntryISO> searchList) {
         super(activity, 0, searchList);
@@ -47,67 +41,38 @@ public class SearchListAdapter extends ArrayAdapter<EntryISO> {
         TextView dateView = (TextView) rowView
                 .findViewById(R.id.search_listing_smallprint);
 
-        final String pubDate = "These data were published: "
+/*        final String pubDate = "These data were published: %1$s  and updated: %1$s"
                 + DateUtils.getISOPubDate(searchItem) + " and updated: "
-                + searchItem.getUpdated();
-
+                + searchItem.getUpdated();*/
+        final String pubDate = String.format(activity.getString(R.string.these_data_are_published_and_updated),
+                DateUtils.getISOPubDate(searchItem), searchItem.getUpdated());
         dateView.setText(pubDate);
 
         if (!searchItem.isNotRead()) {
-            //textView.setTypeface(Typeface.DEFAULT_BOLD);
             View row = rowView.findViewById(R.id.view_cell_collection_search_row_background);
-            row.setBackgroundColor(activity.getResources().getColor(R.color.row_selected));
+            row.setBackgroundColor(ContextCompat.getColor(activity, R.color.row_selected));
         }
 
         final ImageView button = (ImageView) rowView.findViewById(R.id.star_button);
-        updateFavourite(searchItem.isFavourite(), button, activity, searchItem);
+        updateFavourite(searchItem.isFavourite(), button, activity);
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 setFavourite(!searchItem.isFavourite(), button, activity, searchItem);
-                /*
-                String title = searchItem.getTitle();
-                Log.d("ZX", "title: "+title);
-                Date date = searchItem.getDate();
-                Log.d("ZX", "date: "+date.toString());
-                String updated = searchItem.getUpdated();
-                Log.d("ZX", "updated: "+updated);
-                Polygon polygon = searchItem.getPolygon();
-                Log.d("ZX", "polygon: "+polygon.toString());
-                List<Link> links = searchItem.getLink();
-                for (Link l : links)
-                {
-                    Log.d("ZX", "link href: "+l.getHref());
-                }
-                String id = searchItem.getId();
-                String identifier = searchItem.getIdentifier();
-                Log.d("ZX", "id: "+id);
-                Log.d("ZX", "identifier: " + identifier);
-                Log.d("ZX", "-");
-                */
                 FavouritesDbAdapter dba = new FavouritesDbAdapter(activity);
                 if (searchItem.isFavourite()) {
                     dba.openToWrite();
-                    //long dbaResult =
                     dba.insertEntry(searchItem);
                     dba.close();
                     Toast.makeText(activity, activity.getString(R.string.collection_added_to_favourites), Toast.LENGTH_LONG).show();
                 } else {
                     dba.openToWrite();
-                    //long dbaResult =
-                    int result = dba.removeEntry(searchItem);
-                    //Log.d("ZX", "result: " + result);
+                    dba.removeEntry(searchItem);
                     dba.close();
                 }
-                //Log.d("ZX", "--");
                 dba.openToRead();
-                ArrayList<EntryISO> all = dba.getISOEntries();
-                for (EntryISO o : all) {
-                    //Log.d("ZX", " " + o.getTitle());
-                }
                 dba.close();
-                //Log.d("ZX", "---");
             }
         });
         SwipeDetector swipeDetector = new SwipeDetector(rowView, position);
@@ -116,16 +81,21 @@ public class SearchListAdapter extends ArrayAdapter<EntryISO> {
         return rowView;
     }
 
-    private void setFavourite(boolean favourite, ImageView button, Activity activity, EntryISO searchItem) {
-        searchItem.setFavourite(favourite);
-        updateFavourite(searchItem.isFavourite(), button, activity, searchItem);
-    }
-
-    private void updateFavourite(boolean favourite, ImageView button, Activity activity, EntryISO searchItem) {
+    private void updateFavourite(boolean favourite, ImageView button, Activity activity) {
         if (favourite) {
-            button.setImageDrawable(activity.getResources().getDrawable(R.drawable.ic_star_blue));
+            button.setImageDrawable(ContextCompat.getDrawable(activity, R.drawable.ic_star_blue));
         } else {
-            button.setImageDrawable(activity.getResources().getDrawable(R.drawable.ic_star));
+            button.setImageDrawable(ContextCompat.getDrawable(activity, R.drawable.ic_star));
         }
     }
+
+    private void setFavourite(boolean favourite, ImageView button, Activity activity, EntryISO searchItem) {
+        searchItem.setFavourite(favourite);
+        updateFavourite(searchItem.isFavourite(), button, activity);
+    }
+
+    public void setListener(OnSlideElementListener listener) {
+        this.listener = listener;
+    }
+
 }

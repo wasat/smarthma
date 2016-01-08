@@ -12,6 +12,9 @@ import pl.wasat.smarthma.ui.frags.base.BaseSearchSideParametersFragment;
  */
 public class SearchBasicParametersFragment extends BaseSearchSideParametersFragment {
 
+    public SearchBasicParametersFragment() {
+    }
+
     /**
      * Use this factory method to create a new instance of this fragment using
      * the provided parameters.
@@ -20,9 +23,6 @@ public class SearchBasicParametersFragment extends BaseSearchSideParametersFragm
      */
     public static SearchBasicParametersFragment newInstance() {
         return new SearchBasicParametersFragment();
-    }
-
-    public SearchBasicParametersFragment() {
     }
 
 }

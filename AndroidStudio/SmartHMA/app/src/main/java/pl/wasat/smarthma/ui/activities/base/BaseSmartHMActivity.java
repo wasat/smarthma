@@ -30,12 +30,11 @@ import pl.wasat.smarthma.utils.text.StringExt;
 public class BaseSmartHMActivity extends FragmentActivity {
 
     protected static final int REQUEST_NEW_SEARCH = 0;
+    private final IntentFilter filter =
+            new IntentFilter(Const.KEY_ACTION_BROADCAST_FEDEO_REQUEST);
     protected boolean stopNewSearch = false;
     protected MenuHandler commonMenuHandler;
     private FedeoSearchRequestReceiver fedeoSearchRequestReceiver;
-
-    private final IntentFilter filter =
-            new IntentFilter(Const.KEY_ACTION_BROADCAST_FEDEO_REQUEST);
 
     public BaseSmartHMActivity() {
     }
@@ -51,15 +50,15 @@ public class BaseSmartHMActivity extends FragmentActivity {
     }
 
     @Override
-    protected void onResume() {
-        super.onResume();
-        registerReceiver(fedeoSearchRequestReceiver, filter);
-    }
-
-    @Override
     protected void onPause() {
         super.onPause();
         unregisterReceiver(fedeoSearchRequestReceiver);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        registerReceiver(fedeoSearchRequestReceiver, filter);
     }
 
     @Override

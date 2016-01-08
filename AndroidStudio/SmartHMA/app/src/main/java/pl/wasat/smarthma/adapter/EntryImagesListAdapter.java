@@ -22,14 +22,14 @@ public class EntryImagesListAdapter extends OkHttpSpiceArrayAdapter<Entry> {
     private static final String TEMP_DEFAULT_IMG_URL = "http://acsspace.acsys.it/joomla/images/stories/slideshow/toscanamer_fr_20100628.jpg";
     private OnSlideElementListener listener;
 
-
     public EntryImagesListAdapter(Context context,
                                   OkHttpBitmapSpiceManager spiceManagerBitmap, List<Entry> entryList) {
         super(context, spiceManagerBitmap, entryList);
     }
 
-    public void setListener(OnSlideElementListener listener) {
-        this.listener = listener;
+    @Override
+    public SpiceListItemView<Entry> createView(Context context, ViewGroup parent) {
+        return new EntryItemView(getContext(), listener);
     }
 
     @Override
@@ -40,9 +40,7 @@ public class EntryImagesListAdapter extends OkHttpSpiceArrayAdapter<Entry> {
         File tempFile = null;
         try {
             tmpFileName = tmpFileName + entry.getTitle().replaceAll("/", "").replaceAll(":", "_");
-            //tmpFileName = tmpFileName + imageIndex + imageHeight + imageWidth;
             tempFile = new File(getContext().getCacheDir(), tmpFileName);
-            //tempFile.createNewFile();
             if (entry.getSimpleMetadata().getThumbnailUrl() == null) {
                 url = TEMP_DEFAULT_IMG_URL;
             } else if (!entry.getSimpleMetadata().getThumbnailUrl().isEmpty())
@@ -54,9 +52,8 @@ public class EntryImagesListAdapter extends OkHttpSpiceArrayAdapter<Entry> {
                 requestImageHeight, tempFile);
     }
 
-    @Override
-    public SpiceListItemView<Entry> createView(Context context, ViewGroup parent) {
-        return new EntryItemView(getContext(), listener);
+    public void setListener(OnSlideElementListener listener) {
+        this.listener = listener;
     }
 
 

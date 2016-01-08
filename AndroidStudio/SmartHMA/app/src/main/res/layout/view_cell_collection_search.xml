@@ -1,38 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="#ffebeff1"
-    android:orientation="horizontal"
-    android:paddingBottom="@dimen/esa_mission_cell_divider"
-    android:paddingTop="@dimen/esa_mission_cell_divider">
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#ffebeff1"
+                android:orientation="horizontal"
+                android:paddingBottom="@dimen/esa_mission_cell_divider"
+                android:paddingTop="@dimen/esa_mission_cell_divider">
 
     <RelativeLayout
+        android:id="@+id/swipe_list_shareview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#ffffeb3b"
-        android:id="@+id/swipe_list_shareview"
-        android:orientation="horizontal" >
-    </RelativeLayout>
+        android:orientation="horizontal"/>
 
     <RelativeLayout
+        android:id="@+id/swipe_list_deleteview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#ff558b2f"
-        android:id="@+id/swipe_list_deleteview"
-        android:orientation="horizontal" >
-    </RelativeLayout>
+        android:orientation="horizontal"/>
 
     <LinearLayout
+        android:id="@+id/swipe_list_mainview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/swipe_list_mainview"
-        android:orientation="vertical" >
+        android:orientation="vertical">
 
-        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:tools="http://schemas.android.com/tools"
+        <LinearLayout
             android:id="@+id/search_list_frag_layout"
             style="?android:attr/textAppearanceLarge"
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:background="@color/background_gray"
@@ -58,7 +57,7 @@
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
                     android:contentDescription="@string/desc"
-                    android:src="@drawable/star_button" />
+                    android:src="@drawable/star_button"/>
 
                 <pl.wasat.smarthma.customviews.TextViewWithFont
                     android:id="@+id/search_list_name"
@@ -67,9 +66,9 @@
                     android:layout_toLeftOf="@+id/star_button"
                     android:paddingLeft="15dip"
                     android:paddingRight="8dip"
-                    android:text="Lorem"
+                    android:text="@string/lorem"
                     android:textColor="@color/text_blue"
-                    android:textSize="@dimen/browse_eo_cell_text_size_large" />
+                    android:textSize="@dimen/browse_eo_cell_text_size_large"/>
 
                 <pl.wasat.smarthma.customviews.TextViewWithFont
                     android:id="@+id/search_listing_smallprint"
@@ -80,13 +79,10 @@
                     android:paddingLeft="15dip"
                     android:paddingRight="8dip"
                     android:paddingTop="2dp"
-                    android:text="lorem"
+                    android:text="@string/lorem"
                     android:textColor="@color/text_black"
-                    android:textSize="@dimen/browse_eo_cell_text_size" />
-
+                    android:textSize="@dimen/browse_eo_cell_text_size"/>
             </RelativeLayout>
         </LinearLayout>
-
     </LinearLayout>
-
 </RelativeLayout>

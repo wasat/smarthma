@@ -41,15 +41,17 @@ import pl.wasat.smarthma.utils.rss.FedeoSearchRequest;
  */
 public class CollectionsListFragment extends BaseSpiceFragment {
 
+    public static final String KEY_COLLECTIONS_NAME = "pl.wasat.smarthma.KEY_COLLECTIONS_NAME";
     private static final String KEY_COLLECTIONS_GROUP_LIST_POSITION = "pl.wasat.smarthma.KEY_COLLECTIONS_GROUP_LIST_POSITION";
     private static final String KEY_COLLECTIONS_GROUP_NAME = "pl.wasat.smarthma.KEY_COLLECTIONS_GROUP_NAME";
-    public static final String KEY_COLLECTIONS_NAME = "pl.wasat.smarthma.KEY_COLLECTIONS_NAME";
-
     private int parentListPos;
     private String selectGroupName;
     private String collName;
     private OnCollectionsListFragmentListener mListener;
     private ListView list;
+
+    public CollectionsListFragment() {
+    }
 
     /**
      * Use this factory method to create a new instance of this fragment using
@@ -69,7 +71,17 @@ public class CollectionsListFragment extends BaseSpiceFragment {
         return fragment;
     }
 
-    public CollectionsListFragment() {
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        Activity activity = context instanceof Activity ? (Activity) context : null;
+        try {
+            mListener = (OnCollectionsListFragmentListener) activity;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(activity.toString()
+                    + activity.getString(R.string.must_implement)
+                    + OnCollectionsListFragmentListener.class.getSimpleName());
+        }
     }
 
     @Override
@@ -103,8 +115,8 @@ public class CollectionsListFragment extends BaseSpiceFragment {
     }
 
     private void initList() {
-        list = (ListView) getView()
-                .findViewById(R.id.collections_list);
+        //noinspection ConstantConditions
+        list = (ListView) getView().findViewById(R.id.collections_list);
 
         if (!SmartHMApplication.GlobalEODataList.getCollectionsGroupList()
                 .isEmpty()) {
@@ -118,9 +130,13 @@ public class CollectionsListFragment extends BaseSpiceFragment {
                 @Override
                 public void Catch(boolean swipeRight, int position) {
                     if (swipeRight)
-                        Toast.makeText(getActivity(), "share CollectionsListAdapter" + position, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(),
+                                getContext().getString(R.string.swipe_right)
+                                        + position, Toast.LENGTH_SHORT).show();
                     else
-                        Toast.makeText(getActivity(), "delete CollectionsListAdapter" + position, Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(),
+                                getContext().getString(R.string.swipe_left)
+                                        + position, Toast.LENGTH_SHORT).show();
                 }
             });
 
@@ -136,17 +152,15 @@ public class CollectionsListFragment extends BaseSpiceFragment {
         }
     }
 
+    private void loadCollectionDetailFragment(String collName) {
+        FedeoRequestParams fedeoRequestParams = new FedeoRequestParams();
 
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        Activity activity = context instanceof Activity ? (Activity) context : null;
-        try {
-            mListener = (OnCollectionsListFragmentListener) activity;
-        } catch (ClassCastException e) {
-            throw new ClassCastException(activity.toString()
-                    + " must implement OnCollectionsListFragmentListener");
-        }
+        HashMap<String, String> paramExtra = new HashMap<>();
+        paramExtra.put("uid", "urn:ogc:def:" + collName);
+        fedeoRequestParams.setParamsExtra(paramExtra);
+        getActivity().setProgressBarIndeterminateVisibility(true);
+        getSpiceManager().execute(new FedeoSearchRequest(getActivity(), fedeoRequestParams, 1),
+                new FeedRequestListener());
     }
 
     @Override
@@ -155,26 +169,15 @@ public class CollectionsListFragment extends BaseSpiceFragment {
         mListener = null;
     }
 
+    public ListView getList() {
+        return list;
+    }
+
     private void loadDataSeriesFeedsActivity(String collName) {
         Intent dsFeedsIntent = new Intent(getActivity(),
                 CollectionsBrowserActivity.class);
         dsFeedsIntent.putExtra(KEY_COLLECTIONS_NAME, collName);
         startActivity(dsFeedsIntent);
-    }
-
-
-    private void loadCollectionDetailFragment(String collName) {
-        FedeoRequestParams fedeoRequestParams = new FedeoRequestParams();
-        //fedeoRequestParams.buildFromShared(getActivity());
-
-        HashMap<String, String> paramExtra = new HashMap<>();
-        paramExtra.put("uid", "urn:ogc:def:" + collName);
-        fedeoRequestParams.setParamsExtra(paramExtra);
-        getActivity().setProgressBarIndeterminateVisibility(true);
-        getSpiceManager().execute(new FedeoSearchRequest(getActivity(), fedeoRequestParams, 1),
-                new FeedRequestListener());
-
-
     }
 
     private void loadEntryToDetailsFrag(Feed searchedCollectionFeed) {
@@ -190,8 +193,9 @@ public class CollectionsListFragment extends BaseSpiceFragment {
                     .getSupportFragmentManager()
                     .beginTransaction()
                     .replace(R.id.activity_base_details_container,
-                            collectionDetailsFragment, "CollectionDetailsFragment")
-                    .addToBackStack("CollectionDetailsFragment").commit();
+                            collectionDetailsFragment, CollectionDetailsFragment.class.getSimpleName())
+                    .addToBackStack(CollectionDetailsFragment.class.getSimpleName())
+                    .commit();
         } else {
             CollectionEmptyDetailsFragment collectionEmptyDetailsFragment = CollectionEmptyDetailsFragment
                     .newInstance(collName);
@@ -199,8 +203,9 @@ public class CollectionsListFragment extends BaseSpiceFragment {
                     .getSupportFragmentManager()
                     .beginTransaction()
                     .replace(R.id.activity_base_details_container,
-                            collectionEmptyDetailsFragment, "CollectionEmptyDetailsFragment")
-                    .addToBackStack("CollectionEmptyDetailsFragment").commit();
+                            collectionEmptyDetailsFragment, CollectionEmptyDetailsFragment.class.getSimpleName())
+                    .addToBackStack(CollectionEmptyDetailsFragment.class.getSimpleName())
+                    .commit();
         }
     }
 
@@ -231,9 +236,5 @@ public class CollectionsListFragment extends BaseSpiceFragment {
             }
             loadEntryToDetailsFrag(feed);
         }
-    }
-
-    public ListView getList() {
-        return list;
     }
 }

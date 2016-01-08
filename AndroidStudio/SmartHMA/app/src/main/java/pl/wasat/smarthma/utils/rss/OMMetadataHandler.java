@@ -14,26 +14,14 @@ import pl.wasat.smarthma.model.om.*;
  * Created by Daniel on 2015-10-08 00:18.
  * Part of the project  SmartHMA
  */
-public class OMMetadataHandler extends DefaultHandler {
-    public OMMetadataHandler() {
-    }
-
-    public OMMetadataHandler(Entry entry) {
-        this.entry = entry;
-    }
-
+class OMMetadataHandler extends DefaultHandler {
     private Entry entry;
-
     private StringBuffer chars = new StringBuffer();
-    //private int entryAdded = 0;
-    //private boolean isInEntry = false;
-    //private boolean isInEarthObservation = false;
     private int instrumentLevel = 1;
     private int platformLevel = 1;
     private int sensorLevel = 1;
     private int curveMemberLevel = 1;
     private int pointMemberLevel = 1;
-
     private EarthObservation earthObservation;
     private PhenomenonTime phenomenonTime;
     private ResultTime resultTime;
@@ -165,7 +153,6 @@ public class OMMetadataHandler extends DefaultHandler {
     private ProductType productType;
     private Status status;
     private StatusSubType statusSubType;
-
     //private Where where;
     private Polygon polygon;
     private Exterior exterior;
@@ -173,6 +160,12 @@ public class OMMetadataHandler extends DefaultHandler {
     private PosString posString;
     private List<Pos> posList;
 
+    public OMMetadataHandler() {
+    }
+
+    public OMMetadataHandler(Entry entry) {
+        this.entry = entry;
+    }
 
     @Override
     public void startElement(String uri, String localName, String qName, Attributes atts) throws SAXException {
@@ -195,8 +188,6 @@ public class OMMetadataHandler extends DefaultHandler {
             earthObservation.set_xmlns_xsi(atts.getValue("xmlns:xsi"));
             earthObservation.set_xsi_schemaLocation(atts
                     .getValue("xsi:schemaLocation"));
-
-            //isInEarthObservation = true;
         }
         // PhenomenonTime markup
         else if (localName.equalsIgnoreCase("PhenomenonTime")) {
@@ -570,8 +561,6 @@ public class OMMetadataHandler extends DefaultHandler {
             earthObservation.setProcedure(procedure);
             earthObservation.setResult(result);
             earthObservation.setResultTime(resultTime);
-            //entry.setEarthObservation(earthObservation);
-            //isInEarthObservation = false;
         }
         // PhenomenonTime markup
         else if (localName.equalsIgnoreCase("beginPosition")) {
@@ -820,7 +809,6 @@ public class OMMetadataHandler extends DefaultHandler {
             fileName.setServiceReference(serviceReference);
         } else if (localName.equalsIgnoreCase("serviceReference")) {
             serviceReference.setRequestMessage(requestMessage);
-            //} else if (localName.equalsIgnoreCase("requestMessage")) {
         } else if (localName
                 .equalsIgnoreCase("referenceSystemIdentifier")) {
             referenceSystemIdentifier.set_text(chars.toString());
@@ -856,7 +844,6 @@ public class OMMetadataHandler extends DefaultHandler {
             phenomenon.setName(name);
         } else if (localName.equalsIgnoreCase("name")) {
             name.set_text(chars.toString());
-            // } else if (localName.equalsIgnoreCase("unitOfMeasure")) {
         } else if (localName.equalsIgnoreCase("product")) {
             product.setProductInformation(productInformation);
         } else if (localName.equalsIgnoreCase("productInformation")) {
@@ -920,10 +907,8 @@ public class OMMetadataHandler extends DefaultHandler {
             archivingCenter.set_text(chars.toString());
         } else if (localName.equalsIgnoreCase("archivingDate")) {
             archivingDate.set_text(chars.toString());
-            //} else if (localName.equalsIgnoreCase("composedOf")) {
         } else if (localName.equalsIgnoreCase("creationDate")) {
             creationDate.set_text(chars.toString());
-            //} else if (localName.equalsIgnoreCase("derivedFrom")) {
         } else if (localName.equalsIgnoreCase("downlinkedTo")) {
             downlinkedTo.setDownlinkInformation(downlinkInformation);
         } else if (localName.equalsIgnoreCase("downlinkInformation")) {
@@ -956,7 +941,6 @@ public class OMMetadataHandler extends DefaultHandler {
             groundTrackUncertainty.set_text(chars.toString());
         } else if (localName.equalsIgnoreCase("method")) {
             method.set_text(chars.toString());
-            // } else if (localName.equalsIgnoreCase("processingCenter")) {
         } else if (localName.equalsIgnoreCase("processingDate")) {
             processingDate.set_text(chars.toString());
         } else if (localName.equalsIgnoreCase("processingMode")) {
@@ -1009,7 +993,6 @@ public class OMMetadataHandler extends DefaultHandler {
         } else if (localName.equalsIgnoreCase("poslist")) {
             posString.setPointsString(chars.toString());
         }
-
     }
 
     @Override

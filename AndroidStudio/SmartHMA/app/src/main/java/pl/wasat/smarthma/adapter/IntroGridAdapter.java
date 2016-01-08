@@ -34,19 +34,16 @@ public class IntroGridAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        // TODO Auto-generated method stub
         return adapterValuesList.size();
     }
 
     @Override
     public Object getItem(int position) {
-        // TODO Auto-generated method stub
         return null;
     }
 
     @Override
     public long getItemId(int position) {
-        // TODO Auto-generated method stub
         return 0;
     }
 
@@ -57,7 +54,6 @@ public class IntroGridAdapter extends BaseAdapter {
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
         if (convertView == null) {
-            //grid = new View(mContext);
             grid = inflater.inflate(R.layout.view_grid_cell_intro, null);
 
             TextView tvNames = (TextView) grid.findViewById(R.id.intro_grid_cell_name);
@@ -66,30 +62,22 @@ public class IntroGridAdapter extends BaseAdapter {
             TextView tvValues = (TextView) grid.findViewById(R.id.intro_grid_cell_value);
             tvValues.setText(adapterValuesList.get(position));
 
-            final String tmp1 = adapterNamesList.get(position);
-            final String tmp2 = adapterValuesList.get(position);
             final ImageView tvImages = (ImageView) grid.findViewById(R.id.intro_grid_cell_img_info);
-            tvImages.setOnClickListener(new View.OnClickListener()
-            {
+            tvImages.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public void onClick(View v)
-                {
-                    if (tooltip != null)
-                    {
+                public void onClick(View v) {
+                    if (tooltip != null) {
                         tooltip.dismiss();
                     }
                     tooltip = new Tooltip(grid.getContext(), Tooltip.TYPE_ABOVE, adapterTooltipsList.get(position));
-                    if (!tooltip.isShown())
-                    {
+                    if (tooltip.isDisabled()) {
                         tooltip.show(tvImages);
                     }
                 }
             });
-
         } else {
             grid = convertView;
         }
-
         return grid;
     }
 }

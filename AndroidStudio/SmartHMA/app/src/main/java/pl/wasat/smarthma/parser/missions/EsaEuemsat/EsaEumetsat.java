@@ -20,10 +20,10 @@ import pl.wasat.smarthma.parser.model.Page;
  * Created by marcel on 2015-08-13 00:09.
  * Part of the project  SmartHMA
  */
-public class EsaEuemsat extends BaseParser implements SimpleMissionInterface {
+public class EsaEumetsat extends BaseParser implements SimpleMissionInterface {
     public final static int CATEGORY_ID = 5;
 
-    public EsaEuemsat(String pageUrl, Context context) {
+    public EsaEumetsat(String pageUrl, Context context) {
         super(pageUrl, context);
     }
 

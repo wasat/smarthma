@@ -19,7 +19,6 @@ public class Page {
         this.data = data;
     }
 
-
     public Page(int category_id, int mission_id, String name, String data) {
         this.category_id = category_id;
         this.mission_id = mission_id;
@@ -28,7 +27,6 @@ public class Page {
     }
 
     public Page() {
-
     }
 
     public int getId() {
@@ -81,5 +79,4 @@ public class Page {
                 ", data='" + data + '\'' +
                 '}';
     }
-
 }

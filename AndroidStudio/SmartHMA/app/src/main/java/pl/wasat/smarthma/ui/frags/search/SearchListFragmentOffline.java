@@ -1,8 +1,8 @@
 package pl.wasat.smarthma.ui.frags.search;
 
 import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ListView;
 
@@ -26,7 +26,10 @@ import pl.wasat.smarthma.model.iso.EntryISO;
  */
 public class SearchListFragmentOffline extends SearchListFragmentBase {
 
-    protected EntryISO testEntry;
+    public SearchListFragmentOffline() {
+        setHasOptionsMenu(true);
+    }
+
     /**
      * Use this factory method to create a new instance of this fragment using
      * the provided parameters.
@@ -36,32 +39,38 @@ public class SearchListFragmentOffline extends SearchListFragmentBase {
     public static SearchListFragmentOffline newInstance(Boolean stopNewSearch) {
         SearchListFragmentOffline fragment = new SearchListFragmentOffline();
         Bundle args = new Bundle();
-        //args.putSerializable(KEY_PARAM_SEARCH_FEDEO_REQUEST, fedeoRequestParams);
         args.putBoolean(Const.KEY_INTENT_RETURN_STOP_SEARCH, stopNewSearch);
         fragment.setArguments(args);
         return fragment;
     }
 
-    public SearchListFragmentOffline() {
-        setHasOptionsMenu(true);
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        Activity activity = context instanceof Activity ? (Activity) context : null;
+
+        try {
+            mListener = (OnSearchListFragmentListener) activity;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(activity.toString()
+                    + activity.getString(R.string.must_implement)
+                    + OnSearchListFragmentListener.class.getSimpleName());
+        }
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Log.d("ZX", "SearchListFragmentOffline onCreate()");
 
         FavouritesDbAdapter dba = new FavouritesDbAdapter(getActivity());
         dba.openToRead();
         ArrayList<EntryISO> entries = dba.getISOEntries();
         dba.close();
-        if (entries == null)
-        {
+        if (entries == null) {
             entries = new ArrayList<>();
         }
-        if (entries.size() <= 0)
-        {
-            testEntry = new EntryISO();
+        if (entries.size() <= 0) {
+            EntryISO testEntry = new EntryISO();
             testEntry.setTitle(getActivity().getString(R.string.empty_list));
             testEntry.setDate(new Date());
             testEntry.setId("");
@@ -80,9 +89,18 @@ public class SearchListFragmentOffline extends SearchListFragmentBase {
         this.entries = entries;
     }
 
-    public void clearEntries()
-    {
-        this.entries.clear();
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        mListener = null;
+    }
+
+    private void updateSearchListViewContent(List<EntryISO> searchFeedList) {
+        if (searchFeedList.isEmpty()) {
+            showFailureFragment();
+        } else {
+            attachListAdapter(searchFeedList);
+        }
     }
 
     @Override
@@ -97,44 +115,13 @@ public class SearchListFragmentOffline extends SearchListFragmentBase {
     }
 
     @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-
-        try {
-            mListener = (OnSearchListFragmentListener) activity;
-        } catch (ClassCastException e) {
-            throw new ClassCastException(activity.toString()
-                    + " must implement OnSearchListFragmentListener");
-        }
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        mListener = null;
-    }
-
-    @Override
     public void onListItemClick(ListView listView, View view, int position,
                                 long id) {
         super.onListItemClick(listView, view, position, id);
         mListener.onSearchListFragmentItemSelected(String.valueOf(position));
     }
 
-    private void updateSearchListViewContent(List<EntryISO> searchFeedList) {
-        Log.d("ZX", "updateSearchListViewContent()");
-        //View view = getView();
-        //if (view != null) {
-        if (searchFeedList.isEmpty()) {
-            Log.d("ZX", "searchFeedList empty");
-            //view.setVisibility(View.GONE);
-            showFailureFragment();
-        } else {
-            Log.d("ZX", "searchFeedList not empty");
-            attachListAdapter(searchFeedList);
-            //view.setVisibility(View.VISIBLE);
-        }
-        //entries.remove(testEntry);
-        //}
+    public void clearEntries() {
+        this.entries.clear();
     }
 }

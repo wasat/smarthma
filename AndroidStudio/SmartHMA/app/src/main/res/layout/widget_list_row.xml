@@ -2,33 +2,33 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="horizontal"
-                android:background="#aaffffff" >
+                android:background="#aaffffff"
+                android:orientation="horizontal">
 
     <LinearLayout
         android:id="@+id/widget_list_layout"
-        android:orientation="horizontal"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent">
+        android:layout_height="fill_parent"
+        android:orientation="horizontal">
 
         <LinearLayout
-            android:orientation="vertical"
             android:layout_width="fill_parent"
-            android:layout_height="fill_parent">
+            android:layout_height="fill_parent"
+            android:orientation="vertical">
 
             <TextView
                 android:id="@+id/widget_list_heading"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
-                android:singleLine="false"
                 android:paddingLeft="16dp"
                 android:paddingRight="16dp"
                 android:paddingTop="16dp"
+                android:singleLine="false"
+                android:text="@string/heading"
                 android:textColor="#38b4ea"
                 android:textSize="16sp"
-                android:textStyle="bold"
-                android:text="Heading" />
+                android:textStyle="bold"/>
 
             <TextView
                 android:id="@+id/widget_list_date_time"
@@ -40,12 +40,10 @@
                 android:paddingLeft="16dp"
                 android:paddingRight="16dp"
                 android:paddingTop="2dp"
+                android:text="@string/content"
                 android:textColor="#A8A8A8"
                 android:textSize="12sp"
-                android:textStyle="italic"
-                android:text="Content" />
-
+                android:textStyle="italic"/>
         </LinearLayout>
     </LinearLayout>
-
 </RelativeLayout>

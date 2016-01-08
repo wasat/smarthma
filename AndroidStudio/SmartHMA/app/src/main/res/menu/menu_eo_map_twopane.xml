@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+      xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
         android:id="@+id/action_search_history"
@@ -9,10 +9,10 @@
         <menu>
             <item
                 android:id="@+id/action_search_pick"
-                android:title="@string/search_history_pick_query" />
+                android:title="@string/search_history_pick_query"/>
             <item
                 android:id="@+id/sction_search_clear"
-                android:title="@string/search_history_clear" />
+                android:title="@string/search_history_clear"/>
         </menu>
     </item>
 
@@ -20,8 +20,8 @@
         android:id="@+id/action_search"
         android:actionViewClass="android.widget.SearchView"
         android:icon="@android:drawable/ic_menu_search"
-        app:showAsAction="always"
-        android:title="@string/action_search" />
+        android:title="@string/action_search"
+        app:showAsAction="always"/>
 
     <!--     <group android:id="@+id/menu_group_gis" >
             <item
@@ -57,8 +57,8 @@
     <item
         android:id="@+id/action_exit"
         android:icon="@android:drawable/ic_notification_clear_all"
-        app:showAsAction="ifRoom"
         android:title="@string/action_exit"
-        android:titleCondensed="@string/action_exit" />
+        android:titleCondensed="@string/action_exit"
+        app:showAsAction="ifRoom"/>
 
 </menu>

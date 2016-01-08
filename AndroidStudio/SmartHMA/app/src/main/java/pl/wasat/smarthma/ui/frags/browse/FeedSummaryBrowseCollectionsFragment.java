@@ -13,6 +13,9 @@ import pl.wasat.smarthma.ui.frags.base.BaseFeedSummaryFragment;
  */
 public class FeedSummaryBrowseCollectionsFragment extends BaseFeedSummaryFragment {
 
+    public FeedSummaryBrowseCollectionsFragment() {
+    }
+
     /**
      * Use this factory method to create a new instance of this fragment using
      * the provided parameters.
@@ -26,9 +29,6 @@ public class FeedSummaryBrowseCollectionsFragment extends BaseFeedSummaryFragmen
         args.putSerializable(BaseFeedSummaryFragment.KEY_FEED_SUMMARY, feedParam);
         fragment.setArguments(args);
         return fragment;
-    }
-
-    public FeedSummaryBrowseCollectionsFragment() {
     }
 
     /* (non-Javadoc)
@@ -48,6 +48,4 @@ public class FeedSummaryBrowseCollectionsFragment extends BaseFeedSummaryFragmen
                 .commit();
         super.loadNavSearch(linkHref);
     }
-
-
 }

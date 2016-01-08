@@ -28,7 +28,7 @@ public class SimpleMetadata implements Serializable {
     private String thumbnailUrl;
     private String cloudUrl;
     private String binaryUrl;
-    private Entry entry;
+    private final Entry entry;
 
     public SimpleMetadata(Entry entry) {
         this.entry = entry;
@@ -123,9 +123,10 @@ public class SimpleMetadata implements Serializable {
     private void validateBinaryUrl() {
 
         GlobalPreferences globalPreferences = new GlobalPreferences(SmartHMApplication.getAppContext());
-        if (binaryUrl != null) return;
-        else if (quickLookUrl != null) binaryUrl = quickLookUrl;
-        else if (globalPreferences.getIsDebugMode()) binaryUrl = URL_TEST_ZIP;
+        if (binaryUrl == null) {
+            if (quickLookUrl != null) binaryUrl = quickLookUrl;
+            else if (globalPreferences.getIsDebugMode()) binaryUrl = URL_TEST_ZIP;
+        }
     }
 
     private void processPolygon(Entry entry) {
@@ -167,26 +168,29 @@ public class SimpleMetadata implements Serializable {
         }
     }
 
+    @SuppressWarnings({"EmptyMethod", "UnusedParameters"})
     private void obtainFootprintCenterFromDCMetadata(Entry entry) {
 
     }
 
+    @SuppressWarnings({"EmptyMethod", "UnusedParameters"})
     private void obtainFootprintCenterFromISOMetadata(Entry entry) {
 
     }
 
     private void validateFootprintCenter() {
-        if (footprintCenter != null) return;
-        else if (footprintCenter == null && footprint.size() > 0) {
-            double lat = 0;
-            double lng = 0;
-            for (int i = 0; i < 4; i++) {
-                lat = lat + footprint.get(i).latitude;
-                lng = lng + footprint.get(i).longitude;
+        if (footprintCenter == null) {
+            if (footprint.size() > 0) {
+                double lat = 0;
+                double lng = 0;
+                for (int i = 0; i < 4; i++) {
+                    lat = lat + footprint.get(i).latitude;
+                    lng = lng + footprint.get(i).longitude;
+                }
+                footprintCenter = new LatLngExt(lat / 4, lng / 4);
+            } else {
+                this.footprintCenter = new LatLngExt(0, 0);
             }
-            footprintCenter = new LatLngExt(lat / 4, lng / 4);
-        } else {
-            this.footprintCenter = new LatLngExt(0, 0);
         }
 
     }
@@ -224,11 +228,13 @@ public class SimpleMetadata implements Serializable {
     }
 
     //TODO - process DC metadata
+    @SuppressWarnings({"EmptyMethod", "UnusedParameters"})
     private void obtainUrlFromDCMetadata(Entry entry) {
 
     }
 
     //TODO - process ISO metadata
+    @SuppressWarnings({"EmptyMethod", "UnusedParameters"})
     private void obtainUrlsFromISOMetadata(Entry entry) {
 
     }
@@ -287,10 +293,12 @@ public class SimpleMetadata implements Serializable {
         }
     }
 
+    @SuppressWarnings({"EmptyMethod", "UnusedParameters"})
     private void obtainPolygonFromDCMetadata(Entry entry) {
 
     }
 
+    @SuppressWarnings({"EmptyMethod", "UnusedParameters"})
     private void obtainPolygonFromISOMetadata(Entry entry) {
 
     }

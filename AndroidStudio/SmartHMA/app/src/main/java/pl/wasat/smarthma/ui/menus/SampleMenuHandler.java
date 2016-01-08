@@ -16,6 +16,4 @@ class SampleMenuHandler extends MenuHandler {
     protected void inflateLayout() {
         layout = layoutInflater.inflate(R.layout.popup_menu, null);
     }
-
-
 }

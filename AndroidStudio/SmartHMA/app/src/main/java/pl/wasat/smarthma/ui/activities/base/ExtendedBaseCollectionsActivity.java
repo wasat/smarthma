@@ -19,7 +19,6 @@ public abstract class ExtendedBaseCollectionsActivity extends BaseCollectionsAct
         DataSeriesListFragment.OnDataSeriesListFragmentListener,
         OnAreaPickerMapFragmentListener, OnAmznAreaPickerMapFragmentListener, SearchListFragmentBase.OnSearchListFragmentListener,
         OnCollectionDetailsFragmentListener {
-    //private SearchListFragmentOffline searchListFrag;
 
     /*
      * (non-Javadoc)
@@ -58,18 +57,18 @@ public abstract class ExtendedBaseCollectionsActivity extends BaseCollectionsAct
         callUpdateDetailFrag(bounds);
     }
 
-    @Override
-    public void onAmznMapFragmentBoundsChange(LatLngBoundsExt bounds) {
-        callUpdateDetailFrag(bounds);
-    }
-
-    protected void callUpdateDetailFrag(LatLngBoundsExt bounds) {
+    private void callUpdateDetailFrag(LatLngBoundsExt bounds) {
         CollectionDetailsFragment collectionDetailsFragment = (CollectionDetailsFragment) getSupportFragmentManager()
-                .findFragmentByTag("CollectionDetailsFragment");
+                .findFragmentByTag(CollectionDetailsFragment.class.getSimpleName());
 
         if (collectionDetailsFragment != null) {
             collectionDetailsFragment.updateAreaBounds(bounds);
         }
+    }
+
+    @Override
+    public void onAmznMapFragmentBoundsChange(LatLngBoundsExt bounds) {
+        callUpdateDetailFrag(bounds);
     }
 
     /*
@@ -92,7 +91,6 @@ public abstract class ExtendedBaseCollectionsActivity extends BaseCollectionsAct
     }
 
     @Override
-    public void onDataSeriesFragmentItemSelected(String id)
-    {
+    public void onDataSeriesFragmentItemSelected(String id) {
     }
 }

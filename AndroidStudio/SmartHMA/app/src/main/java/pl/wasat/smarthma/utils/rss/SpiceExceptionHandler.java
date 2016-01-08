@@ -41,16 +41,15 @@ public class SpiceExceptionHandler {
 
     public void invoke() {
         if (spiceException == null) {
-            exTextMessage = "Unknown Exception. Please see exception details.";
-            exRawMessage = "Exception with wrong body";
-            exRawCause = "Probably a wrong exception request status";
+            exTextMessage = context.getString(R.string.unknown_exception);
+            exRawMessage = context.getString(R.string.wrong_body);
+            exRawCause = context.getString(R.string.wrong_request_status);
         } else if (spiceException.getCause() instanceof HttpResponseException) {
             exRawMessage = spiceException.getMessage();
             exRawCause = spiceException.getCause().toString();
             FedeoExceptionHandler fedHr = null;
             try {
                 String inStr;
-
                 HttpResponseException exception = (HttpResponseException) spiceException
                         .getCause();
                 inStr = exception.getContent();
@@ -84,7 +83,6 @@ public class SpiceExceptionHandler {
             exRawMessage = spiceException.getMessage();
             exRawCause = spiceException.getCause().toString();
         }
-
         writeExceptionToLog();
     }
 
@@ -101,8 +99,8 @@ public class SpiceExceptionHandler {
         String timestamp = DateUtils.timestampToDateTimeStr(System.currentTimeMillis());
         String url = obtainFormattedUrl().replaceAll(NEW_LINE, "");
         if (exRawCause == null) exRawCause = "";
-        return timestamp + " URL: " + url + NEW_LINE +
-                timestamp + " EXCEPTION: " + exRawCause.replaceAll(NEW_LINE + NEW_LINE, NEW_LINE) +
+        return timestamp + context.getString(R.string.url) + url + NEW_LINE +
+                timestamp + context.getString(R.string.exception) + exRawCause.replaceAll(NEW_LINE + NEW_LINE, NEW_LINE) +
                 NEW_LINE + NEW_LINE;
     }
 
@@ -110,7 +108,6 @@ public class SpiceExceptionHandler {
         SharedPrefs sharedPrefs = new SharedPrefs(context);
         return sharedPrefs.getUrlPrefs();
     }
-
 
     public String getExTextMessage() {
         return exTextMessage;

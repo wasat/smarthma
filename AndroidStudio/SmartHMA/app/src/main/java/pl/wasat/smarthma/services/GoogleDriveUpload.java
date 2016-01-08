@@ -1,7 +1,6 @@
 package pl.wasat.smarthma.services;
 
 
-
 import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
@@ -18,30 +17,30 @@ import com.google.api.client.http.HttpTransport;
 import com.google.api.client.json.JsonFactory;
 import com.google.api.client.json.jackson2.JacksonFactory;
 import com.google.api.services.drive.model.About;
+import com.google.api.services.drive.model.File;
 import com.google.api.services.drive.model.FileList;
 import com.google.api.services.drive.model.ParentReference;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import pl.wasat.smarthma.R;
 
-public class GoogleDriveUpload extends AsyncTask<Void, Void, Boolean> {
+class GoogleDriveUpload extends AsyncTask<Void, Void, Boolean> {
+    final java.io.File rootDir = Environment.getExternalStorageDirectory();
+    private final NotificationCompat.Builder mBuilder;
+    private final NotificationManager mNotifyManager;
+    private final Context context;
     private com.google.api.services.drive.Drive mService = null;
-    private NotificationCompat.Builder mBuilder;
-    java.io.File rootDir = Environment.getExternalStorageDirectory();
-    private NotificationManager mNotifyManager;
-    private Context context;
 
 
-    public GoogleDriveUpload(GoogleAccountCredential credential, Context context)
-    {
+    public GoogleDriveUpload(GoogleAccountCredential credential, Context context) {
         super();
         this.context = context;
-        String fileName = "file";
-        java.io.File file = new java.io.File(rootDir + "/smartHMA", fileName);
+        //String fileName = "file";
+        //java.io.File file = new java.io.File(rootDir + "/smartHMA", fileName);
         HttpTransport transport = AndroidHttp.newCompatibleTransport();
         JsonFactory jsonFactory = JacksonFactory.getDefaultInstance();
         mService = new com.google.api.services.drive.Drive.Builder(
@@ -50,7 +49,7 @@ public class GoogleDriveUpload extends AsyncTask<Void, Void, Boolean> {
                 .build();
         mNotifyManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
         mBuilder = new NotificationCompat.Builder(context);
-        mBuilder.setContentTitle("Upload")
+        mBuilder.setContentTitle(context.getString(R.string.upload))
                 .setContentText(context.getResources().getString(R.string.upload_to_google_drive_in_progress))
                 .setSmallIcon(R.drawable.actionbar_logo);
         mNotifyManager.notify(1, mBuilder.build());
@@ -74,44 +73,41 @@ public class GoogleDriveUpload extends AsyncTask<Void, Void, Boolean> {
 
         com.google.api.services.drive.model.File body = new com.google.api.services.drive.model.File();
 
-        com.google.api.services.drive.model.File FileRtr = null;
+        File FileRtr;
         body.setTitle(file.getName());
         body.setId(null);
         body.setMimeType(file_type);
 
-        try
-        {
-            body.setParents(Arrays.asList(new ParentReference().setId(getRootId())));
+        try {
+            body.setParents(Collections.singletonList(new ParentReference().setId(getRootId())));
             FileContent mediaContent = new FileContent(file_type, file);
             FileRtr = mService.files().insert(body, mediaContent).execute();
 
-            if ( FileRtr != null)
-            {
-                System.out.println("File uploaded: " +  FileRtr.getTitle());
+            if (FileRtr != null) {
+                System.out.println(context.getString(R.string.file_uploaded) + FileRtr.getTitle());
             }
-        }
-        catch(Exception e)
-        {
+        } catch (Exception e) {
             Log.e("", e.toString());
             return false;
         }
         return true;
     }
+
     /**
      * Fetch a list of up to 10 file names and IDs.
+     *
      * @return List of Strings describing files, or an empty list if no files
-     *         found.
+     * found.
      * @throws IOException
      */
     private String getRootId() throws IOException {
         try {
             About about = mService.about().get().execute();
             // Get a list of up to 10 files.
-            List<String> fileInfo = new ArrayList<String>();
+            List<String> fileInfo = new ArrayList<>();
             FileList result = mService.files().list()
                     .setMaxResults(10)
                     .execute();
-
 
             List<com.google.api.services.drive.model.File> files = result.getItems();
             if (files != null) {
@@ -121,8 +117,7 @@ public class GoogleDriveUpload extends AsyncTask<Void, Void, Boolean> {
                 }
             }
             return about.getRootFolderId();
-        }
-        catch (UserRecoverableAuthIOException e) {
+        } catch (UserRecoverableAuthIOException e) {
             Intent userIntent = e.getIntent();
             userIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             context.startActivity(userIntent);

@@ -20,7 +20,7 @@ public class Meteosat extends BaseParser implements SimpleMissionInterface {
 
     public Meteosat(String pageUrl, Context context) {
         super(pageUrl, context);
-        parserDb.addMission(new Mission(MISSION_ID, EsaEuemsat.CATEGORY_ID, TITLE));
+        parserDb.addMission(new Mission(MISSION_ID, EsaEumetsat.CATEGORY_ID, TITLE));
 
     }
 
@@ -30,7 +30,7 @@ public class Meteosat extends BaseParser implements SimpleMissionInterface {
         super.getComplexPage(ITEMS_COUNT);
         ArrayList<Pair> list = super.getComplexPage(ITEMS_COUNT);
         for (Pair item : list) {
-            parserDb.addPage(new Page(EsaEuemsat.CATEGORY_ID, MISSION_ID, (String) item.title, (String) item.content));
+            parserDb.addPage(new Page(EsaEumetsat.CATEGORY_ID, MISSION_ID, (String) item.title, (String) item.content));
         }
     }
 }

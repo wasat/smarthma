@@ -10,9 +10,9 @@ class ObjectUtils {
     private ObjectUtils() {
     }
 
-    public static Map<String, Object> getFieldNamesAndValues(final Object obj,
-                                                             boolean publicOnly) throws IllegalArgumentException,
-            IllegalAccessException {
+    public static Map<String, Object> getFieldNamesAndValues(final Object obj, boolean publicOnly)
+            throws IllegalArgumentException, IllegalAccessException {
+
         Class<?> c1 = obj.getClass();
         Map<String, Object> map = new HashMap<>();
         Field[] fields = c1.getDeclaredFields();

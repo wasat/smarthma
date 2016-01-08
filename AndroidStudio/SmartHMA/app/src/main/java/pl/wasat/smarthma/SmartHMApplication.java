@@ -21,19 +21,11 @@ import pl.wasat.smarthma.model.explaindoc.ExplainData;
  */
 
 @ReportsCrashes(
-        //formKey = "",
         formUri = "https://geodoplaty.cloudant.com/acra-smarthma/_design/acra-storage/_update/report",
         reportType = org.acra.sender.HttpSender.Type.JSON,
         httpMethod = org.acra.sender.HttpSender.Method.POST,
         formUriBasicAuthLogin = "apabyetionedishouresseri",
         formUriBasicAuthPassword = "1koM7DkJ13AdkJFB2teSrtLJ"
-
-        // NAVIN
-        //formUri = "https://wasat.cloudant.com/acra-navin/_design/acra-storage/_update/report",
-        //reportType = org.acra.sender.HttpSender.Type.JSON,
-        //httpMethod = org.acra.sender.HttpSender.Method.POST,
-        //formUriBasicAuthLogin = "llynorthclitedeshentsele",
-        //formUriBasicAuthPassword = "8TH1Rph6koNQ4nA6iGHR3ies"
 )
 
 public class SmartHMApplication extends MultiDexApplication {
@@ -44,11 +36,6 @@ public class SmartHMApplication extends MultiDexApplication {
     public static SmartHMApplication appSingleton;
     private static Context context;
 
-    protected void attachBaseContext(Context base) {
-        super.attachBaseContext(base);
-        MultiDex.install(this);
-    }
-
     @Override
     public void onCreate() {
         super.onCreate();
@@ -56,11 +43,15 @@ public class SmartHMApplication extends MultiDexApplication {
         ACRA.init(this);
         appSingleton = this;
         deviceCheck();
-        //SSLCertificateHandler.nuke();
     }
 
     private void deviceCheck() {
         Const.IS_KINDLE = Build.MANUFACTURER.equalsIgnoreCase("Amazon");
+    }
+
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(base);
+        MultiDex.install(this);
     }
 
     public static Context getAppContext() {

@@ -36,7 +36,6 @@ public class CollectionsBrowserActivity extends ExtendedBaseCollectionsActivity 
         sharedPrefs.setQueryPrefs("");
 
         FedeoRequestParams fedeoRequestParams = new FedeoRequestParams();
-        //fedeoRequestParams.buildFromShared(this);
 
         dba = new EoDbAdapter(this);
 
@@ -80,12 +79,11 @@ public class CollectionsBrowserActivity extends ExtendedBaseCollectionsActivity 
         dba.openToWrite();
         dba.markAsRead(selectedEntry.getGuid());
         dba.close();
-        selectedEntry.setRead(true);
+        selectedEntry.setRead();
         DataSeriesListAdapter adapter = (DataSeriesListAdapter) ((DataSeriesListFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.activity_base_list_container))
                 .getListAdapter();
         adapter.notifyDataSetChanged();
-
     }
 
     /*
@@ -108,7 +106,7 @@ public class CollectionsBrowserActivity extends ExtendedBaseCollectionsActivity 
         dba.openToWrite();
         dba.markAsRead(selectedEntry.getGuid());
         dba.close();
-        selectedEntry.setRead(true);
+        selectedEntry.setRead();
         DataSeriesListAdapter adapter = (DataSeriesListAdapter) ((DataSeriesListFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.activity_base_list_container))
                 .getListAdapter();
@@ -116,11 +114,21 @@ public class CollectionsBrowserActivity extends ExtendedBaseCollectionsActivity 
 
         CollectionDetailsFragment collectionDetailsFragment = CollectionDetailsFragment
                 .newInstance(selectedEntry);
+        String fragmentTag = CollectionDetailsFragment.class.getSimpleName();
         getSupportFragmentManager()
                 .beginTransaction()
                 .replace(R.id.activity_base_details_container,
-                        collectionDetailsFragment, "CollectionDetailsFragment")
-                .addToBackStack("CollectionDetailsFragment").commit();
+                        collectionDetailsFragment, fragmentTag)
+                .addToBackStack(fragmentTag).commit();
+    }
+
+    @Override
+    public void onSearchListFragmentRightSwipeItem(EntryISO selectedEntry) {
+
+    }
+
+    @Override
+    public void onSearchListFragmentLeftSwipeItem(EntryISO selectedEntry) {
 
     }
 }

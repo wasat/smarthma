@@ -1,9 +1,9 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:background="@color/background_gray"
-    android:focusable="false"
-    android:focusableInTouchMode="false">
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:background="@color/background_gray"
+            android:focusable="false"
+            android:focusableInTouchMode="false">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -20,7 +20,7 @@
             android:paddingLeft="@dimen/search_eo_data_padding"
             android:text="@string/catalogue"
             android:textColor="@color/text_blue"
-            android:textSize="@dimen/search_eo_data_text_medium" />
+            android:textSize="@dimen/search_eo_data_text_medium"/>
 
         <pl.wasat.smarthma.customviews.TextViewWithFont
             android:id="@+id/search_frag_side_params_tv_catalog_name"
@@ -32,7 +32,7 @@
             android:paddingBottom="@dimen/search_eo_data_padding_small"
             android:text="@string/fedeo"
             android:textColor="@color/text_black"
-            android:textSize="@dimen/search_eo_data_text_medium" />
+            android:textSize="@dimen/search_eo_data_text_medium"/>
 
         <LinearLayout
             android:id="@+id/search_frag_side_params_layout_area"
@@ -51,7 +51,7 @@
                 android:paddingLeft="@dimen/search_eo_data_padding"
                 android:text="@string/search_area"
                 android:textColor="@color/text_blue"
-                android:textSize="@dimen/search_eo_data_text_medium" />
+                android:textSize="@dimen/search_eo_data_text_medium"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -69,13 +69,13 @@
                         style="@style/textSearchParams"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/ne_" />
+                        android:text="@string/ne_"/>
 
                     <pl.wasat.smarthma.customviews.TextViewWithFont
                         style="@style/textSearchParams"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/sw_" />
+                        android:text="@string/sw_"/>
                 </LinearLayout>
 
                 <LinearLayout
@@ -89,14 +89,14 @@
                         style="@style/textSearchParams"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/zero" />
+                        android:text="@string/zero"/>
 
                     <pl.wasat.smarthma.customviews.TextViewWithFont
                         android:id="@+id/search_frag_side_params_tv_area_sw_lat"
                         style="@style/textSearchParams"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/zero" />
+                        android:text="@string/zero"/>
                 </LinearLayout>
 
                 <LinearLayout
@@ -110,14 +110,14 @@
                         style="@style/textSearchParams"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/zero" />
+                        android:text="@string/zero"/>
 
                     <pl.wasat.smarthma.customviews.TextViewWithFont
                         android:id="@+id/search_frag_side_params_tv_area_sw_lon"
                         style="@style/textSearchParams"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/zero" />
+                        android:text="@string/zero"/>
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>
@@ -131,7 +131,7 @@
             android:paddingTop="@dimen/search_eo_data_padding_small"
             android:text="@string/time_period"
             android:textColor="@color/text_blue"
-            android:textSize="@dimen/search_eo_data_text_medium" />
+            android:textSize="@dimen/search_eo_data_text_medium"/>
 
         <LinearLayout
             android:id="@+id/search_frag_side_params_layout_dt"
@@ -151,14 +151,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="@string/from_" />
+                    android:text="@string/from_"/>
 
                 <pl.wasat.smarthma.customviews.TextViewWithFont
                     style="@style/textSearchParams"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="@string/to_" />
+                    android:text="@string/to_"/>
             </LinearLayout>
 
             <LinearLayout
@@ -173,7 +173,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="@string/date_time" />
+                    android:text="@string/date_time"/>
 
                 <pl.wasat.smarthma.customviews.TextViewWithFont
                     android:id="@+id/search_frag_side_params_tv_end_date"
@@ -181,7 +181,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="@string/date_time" />
+                    android:text="@string/date_time"/>
             </LinearLayout>
 
             <LinearLayout
@@ -196,7 +196,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="@string/date_time" />
+                    android:text="@string/date_time"/>
 
                 <pl.wasat.smarthma.customviews.TextViewWithFont
                     android:id="@+id/search_frag_side_params_tv_end_time"
@@ -204,13 +204,13 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="@string/date_time" />
+                    android:text="@string/date_time"/>
             </LinearLayout>
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@color/background_white" />
+                android:background="@color/background_white"/>
         </LinearLayout>
 
         <pl.wasat.smarthma.customviews.TextViewWithFont
@@ -226,7 +226,7 @@
             android:text="@string/title_parameter"
             android:textColor="@color/text_blue"
             android:textSize="@dimen/search_eo_data_text_medium"
-            android:visibility="invisible" />
+            android:visibility="invisible"/>
 
         <LinearLayout
             android:id="@+id/search_frag_side_params_layout_title"
@@ -258,7 +258,7 @@
                     android:textColor="#A9A9A9"
                     android:textColorHint="#A9A9A9"
                     android:textSize="@dimen/search_eo_data_text_medium"
-                    android:textStyle="normal" />
+                    android:textStyle="normal"/>
             </LinearLayout>
         </LinearLayout>
 
@@ -274,7 +274,7 @@
             android:text="@string/organisation_header"
             android:textColor="@color/text_blue"
             android:textSize="@dimen/search_eo_data_text_medium"
-            android:visibility="invisible" />
+            android:visibility="invisible"/>
 
         <LinearLayout
             android:id="@+id/search_frag_side_params_layout_org"
@@ -305,7 +305,7 @@
                     android:textColor="#A9A9A9"
                     android:textColorHint="#A9A9A9"
                     android:textSize="@dimen/search_eo_data_text_medium"
-                    android:textStyle="normal" />
+                    android:textStyle="normal"/>
             </LinearLayout>
         </LinearLayout>
 
@@ -321,7 +321,7 @@
             android:text="@string/platform_header"
             android:textColor="@color/text_blue"
             android:textSize="@dimen/search_eo_data_text_medium"
-            android:visibility="invisible" />
+            android:visibility="invisible"/>
 
         <LinearLayout
             android:id="@+id/search_frag_side_params_layout_platform"
@@ -352,9 +352,8 @@
                     android:textColor="#A9A9A9"
                     android:textColorHint="#A9A9A9"
                     android:textSize="@dimen/search_eo_data_text_medium"
-                    android:textStyle="normal" />
+                    android:textStyle="normal"/>
             </LinearLayout>
-
         </LinearLayout>
 
         <LinearLayout
@@ -374,7 +373,7 @@
                 android:paddingLeft="@dimen/search_eo_data_padding"
                 android:text="@string/endpoint"
                 android:textColor="@color/text_blue"
-                android:textSize="@dimen/search_eo_data_text_medium" />
+                android:textSize="@dimen/search_eo_data_text_medium"/>
 
             <pl.wasat.smarthma.customviews.TextViewWithFont
                 android:id="@+id/search_frag_side_params_tv_endpoint"
@@ -386,7 +385,7 @@
                 android:paddingBottom="@dimen/search_eo_data_padding_small"
                 android:text="@string/fedeo_esa_int"
                 android:textColor="@color/text_black"
-                android:textSize="@dimen/search_eo_data_text_medium" />
+                android:textSize="@dimen/search_eo_data_text_medium"/>
         </LinearLayout>
     </LinearLayout>
 </ScrollView>

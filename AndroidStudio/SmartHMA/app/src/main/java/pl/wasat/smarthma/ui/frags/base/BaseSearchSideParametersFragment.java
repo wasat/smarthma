@@ -24,12 +24,14 @@ import pl.wasat.smarthma.R;
  * instance of this fragment.
  */
 public class BaseSearchSideParametersFragment extends BaseDateTimeAreaContainerFragment {
-    protected View rootView;
-    private static TextView tvCatalogName;
-
     private static final CharSequence[] cataloguesList = {"EOP:ESA:FEDEO",
             "EOP:ESA:FEDEO:COLLECTIONS", "EOP:ESA:GPOD-EO", "EOP:ESA:EO-VIRTUAL-ARCHIVE4",
             "EOP:ESA:SMOS", "EOP:JAXA:CATS-I", "EOP:NASA:ECHO"};
+    private static TextView tvCatalogName;
+    protected View rootView;
+
+    public BaseSearchSideParametersFragment() {
+    }
 
     /**
      * Use this factory method to create a new instance of this fragment using
@@ -39,9 +41,6 @@ public class BaseSearchSideParametersFragment extends BaseDateTimeAreaContainerF
      */
     public static BaseSearchSideParametersFragment newInstance() {
         return new BaseSearchSideParametersFragment();
-    }
-
-    public BaseSearchSideParametersFragment() {
     }
 
     @Override
@@ -132,27 +131,7 @@ public class BaseSearchSideParametersFragment extends BaseDateTimeAreaContainerF
     private void showCatalogueListDialog() {
         CatalogueListDialogFragment listDialFrag = new CatalogueListDialogFragment();
         listDialFrag.show(getActivity().getSupportFragmentManager(),
-                "CatalogueListDialogFragment");
-    }
-
-    public static class CatalogueListDialogFragment extends DialogFragment {
-        @NonNull
-        @Override
-        public Dialog onCreateDialog(Bundle savedInstanceState) {
-            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-            builder.setTitle(R.string.eo_catalogue_list_title).setItems(
-                    cataloguesList, new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int which) {
-                            setCatalogue(which);
-                        }
-                    });
-            return builder.create();
-        }
-    }
-
-    private static void setCatalogue(int which) {
-        tvCatalogName.setText(cataloguesList[which]);
-        sharedPrefs.setParentIdPrefs(cataloguesList[which].toString());
+                CatalogueListDialogFragment.class.getSimpleName());
     }
 
     public void setCatalogue(String catalogue) {
@@ -169,4 +148,24 @@ public class BaseSearchSideParametersFragment extends BaseDateTimeAreaContainerF
         return cataloguesList;
     }
 
+    private static void setCatalogue(int which) {
+        tvCatalogName.setText(cataloguesList[which]);
+        sharedPrefs.setParentIdPrefs(cataloguesList[which].toString());
+    }
+
+    public static class CatalogueListDialogFragment extends DialogFragment {
+        @NonNull
+        @Override
+        public Dialog onCreateDialog(Bundle savedInstanceState) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+            builder.setTitle(R.string.eo_catalogue_list_title)
+                    .setItems(
+                    cataloguesList, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int which) {
+                            setCatalogue(which);
+                        }
+                    });
+            return builder.create();
+        }
+    }
 }

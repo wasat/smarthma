@@ -141,7 +141,6 @@ public class XMLParser {
                             }
                         }
                         break;
-
                     default:
                         break;
                 }
@@ -152,7 +151,6 @@ public class XMLParser {
             e.printStackTrace();
             ACRA.getErrorReporter().handleSilentException(e);
         }
-
         setDataGlobals();
     }
 

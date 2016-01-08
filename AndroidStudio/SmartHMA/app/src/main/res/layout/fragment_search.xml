@@ -1,5 +1,6 @@
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
     android:id="@+id/search_frag_main_scroll_id"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:layout_gravity="top"
@@ -22,7 +23,8 @@
         <ImageView
             android:layout_width="@dimen/search_eo_data_logo_size"
             android:layout_height="@dimen/search_eo_data_logo_size"
-            android:src="@drawable/search_eo" />
+            android:contentDescription="@string/desc"
+            android:src="@drawable/search_eo"/>
 
         <RelativeLayout
             android:layout_width="wrap_content"
@@ -35,15 +37,15 @@
                 android:layout_marginBottom="@dimen/search_eo_data_padding_medium"
                 android:layout_marginLeft="3dp"
                 android:layout_marginTop="@dimen/search_eo_data_padding_medium"
-                android:text="Search EO data"
-                android:textSize="16sp" />
+                android:text="@string/search_eo_data"
+                android:textSize="16sp"/>
 
             <LinearLayout
                 android:id="@+id/search_frag_searchview_layout"
                 android:layout_width="@dimen/search_eo_data_search_view_width"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_below="@id/s_text">
+                android:layout_below="@id/s_text"
+                android:orientation="horizontal">
 
                 <SearchView
                     android:id="@+id/search_frag_searchview"
@@ -55,7 +57,7 @@
                     android:focusable="true"
                     android:focusableInTouchMode="true"
                     android:iconifiedByDefault="false"
-                    android:visibility="visible" />
+                    android:visibility="visible"/>
 
                 <Button
                     android:id="@+id/search_frag_button_start"
@@ -65,7 +67,7 @@
                     android:layout_margin="1dp"
                     android:layout_weight="1"
                     android:text="@string/go"
-                    android:textSize="@dimen/button_blue_text_size" />
+                    android:textSize="@dimen/button_blue_text_size"/>
             </LinearLayout>
 
             <LinearLayout
@@ -82,7 +84,7 @@
                     android:layout_margin="3dp"
                     android:layout_weight="1"
                     android:text="@string/basic_settings"
-                    android:textSize="@dimen/button_blue_text_size" />
+                    android:textSize="@dimen/button_blue_text_size"/>
 
                 <Button
                     android:id="@+id/search_frag_button_advance"
@@ -92,10 +94,8 @@
                     android:layout_margin="3dp"
                     android:layout_weight="1"
                     android:text="@string/advanced_settings"
-                    android:textSize="@dimen/button_blue_text_size" />
-
+                    android:textSize="@dimen/button_blue_text_size"/>
             </LinearLayout>
         </RelativeLayout>
     </LinearLayout>
-
 </ScrollView>

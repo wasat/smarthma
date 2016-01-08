@@ -10,10 +10,9 @@ import pl.wasat.smarthma.helper.Const;
 import pl.wasat.smarthma.kindle.AmznExtendedMapFragment;
 import pl.wasat.smarthma.kindle.AmznExtendedMapFragment.OnAmznExtendedMapFragmentListener;
 import pl.wasat.smarthma.model.entry.SimpleMetadata;
-import pl.wasat.smarthma.model.om.Footprint;
-import pl.wasat.smarthma.ui.frags.base.BaseShowProductsListFragment.OnBaseShowProductsListFragmentListener;
 import pl.wasat.smarthma.ui.frags.common.ExtendedMapFragment;
 import pl.wasat.smarthma.ui.frags.common.ExtendedMapFragment.OnExtendedMapFragmentListener;
+import pl.wasat.smarthma.ui.frags.common.MetadataFragment;
 import pl.wasat.smarthma.ui.frags.common.ProductDetailsFragment.OnProductDetailsFragmentListener;
 import pl.wasat.smarthma.ui.frags.dialog.FacebookDialogFragment;
 
@@ -22,14 +21,13 @@ import pl.wasat.smarthma.ui.frags.dialog.FacebookDialogFragment;
  */
 public class BaseProductsBrowserActivity extends BaseSmartHMActivity implements
         OnProductDetailsFragmentListener,
-        OnExtendedMapFragmentListener, OnAmznExtendedMapFragmentListener, OnBaseShowProductsListFragmentListener {
+        OnExtendedMapFragmentListener, OnAmznExtendedMapFragmentListener {
 
-    protected ExtendedMapFragment extendedMapFragment;
-    protected AmznExtendedMapFragment amznExtendedMapFragment;
-    protected Footprint mFootprint;
-    protected String quicklookUrl;
-    protected SimpleMetadata simpleMeta;
-    //private ProductsListFragmentOffline productsListFragment;
+    //protected Footprint mFootprint;
+    //protected String quicklookUrl;
+    private ExtendedMapFragment extendedMapFragment;
+    private AmznExtendedMapFragment amznExtendedMapFragment;
+    private SimpleMetadata simpleMeta;
 
     @Override
     public void onBackPressed() {
@@ -44,10 +42,10 @@ public class BaseProductsBrowserActivity extends BaseSmartHMActivity implements
 
             if (bsec > 0) {
                 String bstEntry = fm.getBackStackEntryAt(bsec - 1).getName();
-                if (bstEntry.equalsIgnoreCase("MetadataFragment")) {
-                    fm.popBackStackImmediate("MetadataFragment",
+                if (bstEntry.equalsIgnoreCase(MetadataFragment.class.getSimpleName())) {
+                    fm.popBackStackImmediate(MetadataFragment.class.getSimpleName(),
                             FragmentManager.POP_BACK_STACK_INCLUSIVE);
-                } else if (bstEntry.equalsIgnoreCase("ExtendedMapFragment")) {
+                } else if (bstEntry.equalsIgnoreCase(ExtendedMapFragment.class.getSimpleName())) {
                     super.onBackPressed();
                 } else {
                     bsec = fm.getBackStackEntryCount();
@@ -72,7 +70,36 @@ public class BaseProductsBrowserActivity extends BaseSmartHMActivity implements
         }
     }
 
-    protected void checkMapFragment() {
+    @Override
+    public void onProductDetailsFragmentExtendedMapShow(SimpleMetadata simpleMetadata) {
+        //quicklookUrl = url;
+        //mFootprint = footprint;
+        simpleMeta = simpleMetadata;
+
+        checkMapFragment();
+
+        if (Const.IS_KINDLE) {
+            amznExtendedMapFragment = AmznExtendedMapFragment.newInstance();
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .add(R.id.activity_base_details_container, amznExtendedMapFragment,
+                            ExtendedMapFragment.class.getSimpleName())
+                    .addToBackStack(ExtendedMapFragment.class.getSimpleName())
+                    .commit();
+        } else {
+
+            extendedMapFragment = ExtendedMapFragment.newInstance();
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .add(R.id.activity_base_details_container, extendedMapFragment,
+                            ExtendedMapFragment.class.getSimpleName())
+                    .addToBackStack(ExtendedMapFragment.class.getSimpleName())
+                    .commit();
+        }
+
+    }
+
+    private void checkMapFragment() {
         try {
             if (!Const.IS_KINDLE && extendedMapFragment != null) {
                 getSupportFragmentManager().beginTransaction()
@@ -115,36 +142,9 @@ public class BaseProductsBrowserActivity extends BaseSmartHMActivity implements
     }
 
     @Override
-    public void onProductDetailsFragmentExtendedMapShow(SimpleMetadata simpleMetadata) {
-        //quicklookUrl = url;
-        //mFootprint = footprint;
-        simpleMeta = simpleMetadata;
-
-        checkMapFragment();
-
-        if (Const.IS_KINDLE) {
-            amznExtendedMapFragment = AmznExtendedMapFragment.newInstance();
-            getSupportFragmentManager()
-                    .beginTransaction()
-                    .add(R.id.activity_base_details_container, amznExtendedMapFragment,
-                            "ExtendedMapFragment")
-                    .addToBackStack("ExtendedMapFragment").commit();
-        } else {
-
-            extendedMapFragment = ExtendedMapFragment.newInstance();
-            getSupportFragmentManager()
-                    .beginTransaction()
-                    .add(R.id.activity_base_details_container, extendedMapFragment,
-                            "ExtendedMapFragment")
-                    .addToBackStack("ExtendedMapFragment").commit();
-        }
-
-    }
-
-    @Override
     public void onProductDetailsFragmentShareDialogShow(String url) {
         FacebookDialogFragment dFragment = FacebookDialogFragment.newInstance(url);
-        dFragment.show(getSupportFragmentManager(), "FacebookDialogFragment");
+        dFragment.show(getSupportFragmentManager(), FacebookDialogFragment.class.getSimpleName());
 
     }
 
@@ -162,7 +162,4 @@ public class BaseProductsBrowserActivity extends BaseSmartHMActivity implements
         }
     }
 
-    @Override
-    public void onBaseShowProductsListFragmentFootprintSend() {
-    }
 }

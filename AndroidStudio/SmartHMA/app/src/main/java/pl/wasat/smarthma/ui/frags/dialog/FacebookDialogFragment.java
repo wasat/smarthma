@@ -45,27 +45,28 @@ import pl.wasat.smarthma.R;
 public class FacebookDialogFragment extends DialogFragment implements Target {
 
     private static final String ARG_PARAM_QUICKLOOK_URL = "pl.wasat.smarthma.ARG_PARAM_QUICKLOOK_URL";
+    private static final String PERMISSION = "publish_actions";
+    private final String PENDING_ACTION_BUNDLE_KEY = "pl.wasat.smarthma:PendingAction";
+    private final FacebookDialog.Callback dialogCallback = new FacebookDialog.Callback() {
+        @Override
+        public void onComplete(FacebookDialog.PendingCall pendingCall,
+                               Bundle data) {
+        }
 
+        @Override
+        public void onError(FacebookDialog.PendingCall pendingCall,
+                            Exception error, Bundle data) {
+        }
+    };
     private Button postPhotoButton;
     private ImageView imgViewQLook;
-
     private Bitmap quicklookImg;
-
     private boolean canPresentShareDialogWithPhotos;
     private GraphUser graphUser;
     private ProfilePictureView profilePictureView;
     private TextView userInfo;
-
     private UiLifecycleHelper uiHelper;
     private PendingAction pendingAction = PendingAction.NONE;
-
-    private final String PENDING_ACTION_BUNDLE_KEY = "pl.wasat.smarthma:PendingAction";
-    private static final String PERMISSION = "publish_actions";
-
-    private enum PendingAction {
-        NONE, POST_PHOTO
-    }
-
     private final Session.StatusCallback callback = new Session.StatusCallback() {
 
         @Override
@@ -75,17 +76,9 @@ public class FacebookDialogFragment extends DialogFragment implements Target {
         }
     };
 
-    private final FacebookDialog.Callback dialogCallback = new FacebookDialog.Callback() {
-        @Override
-        public void onError(FacebookDialog.PendingCall pendingCall,
-                            Exception error, Bundle data) {
-        }
-
-        @Override
-        public void onComplete(FacebookDialog.PendingCall pendingCall,
-                               Bundle data) {
-        }
-    };
+    public FacebookDialogFragment() {
+        // Required empty public constructor
+    }
 
     /**
      * Use this factory method to create a new instance of this fragment using
@@ -102,16 +95,9 @@ public class FacebookDialogFragment extends DialogFragment implements Target {
         return fragment;
     }
 
-    public FacebookDialogFragment() {
-        // Required empty public constructor
-    }
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-/*        if (getArguments() != null) {
-            String paramQLookUrl = getArguments().getString(ARG_PARAM_QUICKLOOK_URL);
-        }*/
 
         if (savedInstanceState != null) {
             String name = savedInstanceState
@@ -124,17 +110,21 @@ public class FacebookDialogFragment extends DialogFragment implements Target {
     }
 
     @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        uiHelper.onSaveInstanceState(outState);
+
+        outState.putString(PENDING_ACTION_BUNDLE_KEY, pendingAction.name());
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         getDialog().getWindow().requestFeature(Window.FEATURE_NO_TITLE);
         View rootView = inflater.inflate(R.layout.fragment_facebook_dialog,
                 container, false);
-
-
         rootView.isInEditMode();
-        //TODO INFOAPPS
-        //getDialog().setTitle("Facebook Quicklook Share");
 
         profilePictureView = (ProfilePictureView) rootView
                 .findViewById(R.id.facebook_dialog_img_user_profile);
@@ -171,8 +161,7 @@ public class FacebookDialogFragment extends DialogFragment implements Target {
                 getActivity(), FacebookDialog.ShareDialogFeature.PHOTOS);
 
         //Target quicklookTarget = this;
-
-        // Picasso.with(getActivity()).load(paramQLookUrl).into(quicklookTarget);
+        //Picasso.with(getActivity()).load(paramQLookUrl).into(quicklookTarget);
 
         return rootView;
     }
@@ -192,14 +181,6 @@ public class FacebookDialogFragment extends DialogFragment implements Target {
     }
 
     @Override
-    public void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-        uiHelper.onSaveInstanceState(outState);
-
-        outState.putString(PENDING_ACTION_BUNDLE_KEY, pendingAction.name());
-    }
-
-    @Override
     public void onPause() {
         super.onPause();
         uiHelper.onPause();
@@ -215,6 +196,39 @@ public class FacebookDialogFragment extends DialogFragment implements Target {
     public void onDestroy() {
         super.onDestroy();
         uiHelper.onDestroy();
+    }
+
+    private void updateUI() {
+        Session session = Session.getActiveSession();
+        boolean enableButtons = (session != null && session.isOpened());
+
+        postPhotoButton.setEnabled(enableButtons
+                || canPresentShareDialogWithPhotos);
+
+        if (enableButtons && graphUser != null) {
+            profilePictureView.setProfileId(graphUser.getId());
+            userInfo.setText(getString(R.string.hello_user,
+                    graphUser.getFirstName()));
+        } else {
+            profilePictureView.setProfileId(null);
+            userInfo.setText(null);
+        }
+    }
+
+    @Override
+    public void onBitmapLoaded(Bitmap image, LoadedFrom arg1) {
+        quicklookImg = image;
+
+        Bitmap scaled = Bitmap.createScaledBitmap(image, 160, 160, true);
+        imgViewQLook.setImageBitmap(scaled);
+    }
+
+    @Override
+    public void onBitmapFailed(Drawable arg0) {
+    }
+
+    @Override
+    public void onPrepareLoad(Drawable arg0) {
     }
 
     public void postOnActivityResult(int requestCode, int resultCode,
@@ -237,11 +251,6 @@ public class FacebookDialogFragment extends DialogFragment implements Target {
             handlePendingAction();
         }
         updateUI();
-    }
-
-    private void onClickPostPhoto() {
-        performPublish(
-                canPresentShareDialogWithPhotos);
     }
 
     private void handlePendingAction() {
@@ -296,46 +305,6 @@ public class FacebookDialogFragment extends DialogFragment implements Target {
                 && session.getPermissions().contains("publish_actions");
     }
 
-    private void updateUI() {
-        Session session = Session.getActiveSession();
-        boolean enableButtons = (session != null && session.isOpened());
-
-        postPhotoButton.setEnabled(enableButtons
-                || canPresentShareDialogWithPhotos);
-
-        if (enableButtons && graphUser != null) {
-            profilePictureView.setProfileId(graphUser.getId());
-            userInfo.setText(getString(R.string.hello_user,
-                    graphUser.getFirstName()));
-        } else {
-            profilePictureView.setProfileId(null);
-            userInfo.setText(null);
-        }
-    }
-
-    private void performPublish(boolean allowNoSession) {
-        Session session = Session.getActiveSession();
-        if (session != null) {
-            pendingAction = PendingAction.POST_PHOTO;
-            if (hasPublishPermission()) {
-                // We can do the action right away.
-                handlePendingAction();
-                return;
-            } else if (session.isOpened()) {
-                // We need to get new permissions, then complete the action when
-                // we get called back.
-                session.requestNewPublishPermissions(new Session.NewPermissionsRequest(
-                        this, PERMISSION));
-                return;
-            }
-        }
-
-        if (allowNoSession) {
-            pendingAction = PendingAction.POST_PHOTO;
-            handlePendingAction();
-        }
-    }
-
     private void showPublishResult(String message, GraphObject result,
                                    FacebookRequestError error) {
         String title;
@@ -367,25 +336,39 @@ public class FacebookDialogFragment extends DialogFragment implements Target {
                         }).show();
     }
 
+    private void onClickPostPhoto() {
+        performPublish(
+                canPresentShareDialogWithPhotos);
+    }
+
+    private void performPublish(boolean allowNoSession) {
+        Session session = Session.getActiveSession();
+        if (session != null) {
+            pendingAction = PendingAction.POST_PHOTO;
+            if (hasPublishPermission()) {
+                // We can do the action right away.
+                handlePendingAction();
+                return;
+            } else if (session.isOpened()) {
+                // We need to get new permissions, then complete the action when
+                // we get called back.
+                session.requestNewPublishPermissions(new Session.NewPermissionsRequest(
+                        this, PERMISSION));
+                return;
+            }
+        }
+
+        if (allowNoSession) {
+            pendingAction = PendingAction.POST_PHOTO;
+            handlePendingAction();
+        }
+    }
+
+    private enum PendingAction {
+        NONE, POST_PHOTO
+    }
+
     private interface GraphObjectWithId extends GraphObject {
         String getId();
     }
-
-    @Override
-    public void onBitmapFailed(Drawable arg0) {
-    }
-
-    @Override
-    public void onBitmapLoaded(Bitmap image, LoadedFrom arg1) {
-        quicklookImg = image;
-
-        Bitmap scaled = Bitmap.createScaledBitmap(image, 160, 160, true);
-        imgViewQLook.setImageBitmap(scaled);
-
-    }
-
-    @Override
-    public void onPrepareLoad(Drawable arg0) {
-    }
-
 }

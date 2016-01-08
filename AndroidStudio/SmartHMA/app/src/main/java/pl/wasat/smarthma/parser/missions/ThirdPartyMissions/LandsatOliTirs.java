@@ -14,11 +14,11 @@ import pl.wasat.smarthma.parser.model.Page;
  * Created by marcel on 2015-08-11 00:09.
  * Part of the project  SmartHMA
  */
-public class LandsatOliTiris extends BaseParser implements SimpleMissionInterface {
+public class LandsatOliTirs extends BaseParser implements SimpleMissionInterface {
     private final static int MISSION_ID = 24;
     private final static String TITLE = "Landsat OLI-TIRS";
 
-    public LandsatOliTiris(String pageUrl, Context context) {
+    public LandsatOliTirs(String pageUrl, Context context) {
         super(pageUrl, context);
         parserDb.addMission(new Mission(MISSION_ID, ThirdPartyMissions.CATEGORY_ID, TITLE));
 

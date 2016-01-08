@@ -59,7 +59,7 @@ public class LinearRing implements Serializable {
     }
 
     public List<Pos> setPosList(String pointsString) {
-        String[] coorStr = pointsString.split(" ");
+        String[] coorStr = pointsString.replaceAll("  ", " ").split(" ");
         List<Pos> latLngPosList = new ArrayList<>();
 
         //String tempStr = "";

@@ -11,14 +11,11 @@ class ParserThread extends Thread {
 
     public ParserThread(Context context) {
         mContext = context;
-
     }
 
     @Override
     public void run() {
-        //Parser parser =
         new Parser(mContext);
-
     }
 
 

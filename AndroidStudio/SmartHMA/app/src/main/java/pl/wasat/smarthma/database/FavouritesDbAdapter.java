@@ -8,7 +8,6 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteDatabase.CursorFactory;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.provider.BaseColumns;
-import android.util.Log;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -36,10 +35,9 @@ public class FavouritesDbAdapter {
     private static final String DATABASE_CREATE_TABLE_PRODUCTS = "create table " + DATABASE_TABLE_PRODUCTS + " (" +
             KEY_ROWID + " integer primary key autoincrement, " +
             KEY_RAW_DATA + " blob not null);";
-
+    private final Context context;
     private SQLiteHelper sqLiteHelper;
     private SQLiteDatabase sqLiteDatabase;
-    private final Context context;
 
     public FavouritesDbAdapter(Context c) {
         context = c;
@@ -61,41 +59,8 @@ public class FavouritesDbAdapter {
         sqLiteHelper.close();
     }
 
-    public class SQLiteHelper extends SQLiteOpenHelper {
-        public SQLiteHelper(Context context, String name, CursorFactory factory, int version) {
-            super(context, name, factory, version);
-        }
-
-        @Override
-        public void onCreate(SQLiteDatabase db) {
-            db.execSQL(DATABASE_CREATE_TABLE_COLLECTIONS);
-            db.execSQL(DATABASE_CREATE_TABLE_PRODUCTS);
-        }
-
-        @Override
-        public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-            db.execSQL("DROP TABLE IF EXISTS " + DATABASE_TABLE_COLLECTIONS);
-            db.execSQL("DROP TABLE IF EXISTS " + DATABASE_TABLE_PRODUCTS);
-            onCreate(db);
-        }
-    }
-
-    public long insertEntry(EntryISO item) {
-        if (item.getTitle().equals(context.getString(R.string.empty_list)))
-        {
-            return -1;
-        }
-        ContentValues initialValues = new ContentValues();
-        Log.d("ZX", "Inserting collection " + item.getTitle() + " into database.");
-        Gson gson = new Gson();
-        byte[] bytes = gson.toJson(item).getBytes();
-        initialValues.put(KEY_RAW_DATA, bytes);
-        return sqLiteDatabase.insert(DATABASE_TABLE_COLLECTIONS, null, initialValues);
-    }
-
     public long insertEntry(Entry item) {
         ContentValues initialValues = new ContentValues();
-        Log.d("ZX", "Inserting product " + item.getTitle() + " into database.");
         Gson gson = new Gson();
         Entry testEntry = item.safeClone();
         testEntry.setFavourite(true);
@@ -103,25 +68,6 @@ public class FavouritesDbAdapter {
         byte[] bytes = gson.toJson(testEntry).getBytes();
         initialValues.put(KEY_RAW_DATA, bytes);
         return sqLiteDatabase.insert(DATABASE_TABLE_PRODUCTS, null, initialValues);
-    }
-
-    public int removeEntry(EntryISO item) {
-        int result = 0;
-        Cursor res = sqLiteDatabase.rawQuery("select * from " + DATABASE_TABLE_COLLECTIONS, null);
-        res.moveToFirst();
-        while (!res.isAfterLast()) {
-            byte[] blob = res.getBlob(res.getColumnIndex(KEY_RAW_DATA));
-            String json = new String(blob);
-            Gson gson = new Gson();
-            EntryISO o = gson.fromJson(json, new TypeToken<EntryISO>() {
-            }.getType());
-            if (o.simpleEquals(item)) {
-                // don't stop, keep looking for duplicates
-                result += sqLiteDatabase.delete(DATABASE_TABLE_COLLECTIONS, KEY_ROWID + " = ? ", new String[]{res.getString(res.getColumnIndex(KEY_ROWID))});
-            }
-            res.moveToNext();
-        }
-        return result;
     }
 
     public int removeEntry(Entry item) {
@@ -146,6 +92,36 @@ public class FavouritesDbAdapter {
     public void replaceEntry(EntryISO item) {
         removeEntry(item);
         insertEntry(item);
+    }
+
+    public int removeEntry(EntryISO item) {
+        int result = 0;
+        Cursor res = sqLiteDatabase.rawQuery("select * from " + DATABASE_TABLE_COLLECTIONS, null);
+        res.moveToFirst();
+        while (!res.isAfterLast()) {
+            byte[] blob = res.getBlob(res.getColumnIndex(KEY_RAW_DATA));
+            String json = new String(blob);
+            Gson gson = new Gson();
+            EntryISO o = gson.fromJson(json, new TypeToken<EntryISO>() {
+            }.getType());
+            if (o.simpleEquals(item)) {
+                // don't stop, keep looking for duplicates
+                result += sqLiteDatabase.delete(DATABASE_TABLE_COLLECTIONS, KEY_ROWID + " = ? ", new String[]{res.getString(res.getColumnIndex(KEY_ROWID))});
+            }
+            res.moveToNext();
+        }
+        return result;
+    }
+
+    public long insertEntry(EntryISO item) {
+        if (item.getTitle().equals(context.getString(R.string.empty_list))) {
+            return -1;
+        }
+        ContentValues initialValues = new ContentValues();
+        Gson gson = new Gson();
+        byte[] bytes = gson.toJson(item).getBytes();
+        initialValues.put(KEY_RAW_DATA, bytes);
+        return sqLiteDatabase.insert(DATABASE_TABLE_COLLECTIONS, null, initialValues);
     }
 
     public ArrayList<EntryISO> getISOEntries() {
@@ -181,7 +157,6 @@ public class FavouritesDbAdapter {
     }
 
     public void clearCollections() {
-        Log.d("ZX", "Recreating table");
         Cursor res = sqLiteDatabase.rawQuery("select * from " + DATABASE_TABLE_COLLECTIONS, null);
         res.moveToLast();
         while (!res.isBeforeFirst()) {
@@ -191,12 +166,30 @@ public class FavouritesDbAdapter {
     }
 
     public void clearProducts() {
-        Log.d("ZX", "Recreating table");
         Cursor res = sqLiteDatabase.rawQuery("select * from " + DATABASE_TABLE_PRODUCTS, null);
         res.moveToLast();
         while (!res.isBeforeFirst()) {
             sqLiteDatabase.delete(DATABASE_TABLE_PRODUCTS, KEY_ROWID + " = ? ", new String[]{res.getString(res.getColumnIndex(KEY_ROWID))});
             res.moveToPrevious();
+        }
+    }
+
+    public class SQLiteHelper extends SQLiteOpenHelper {
+        public SQLiteHelper(Context context, String name, CursorFactory factory, int version) {
+            super(context, name, factory, version);
+        }
+
+        @Override
+        public void onCreate(SQLiteDatabase db) {
+            db.execSQL(DATABASE_CREATE_TABLE_COLLECTIONS);
+            db.execSQL(DATABASE_CREATE_TABLE_PRODUCTS);
+        }
+
+        @Override
+        public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+            db.execSQL("DROP TABLE IF EXISTS " + DATABASE_TABLE_COLLECTIONS);
+            db.execSQL("DROP TABLE IF EXISTS " + DATABASE_TABLE_PRODUCTS);
+            onCreate(db);
         }
     }
 }

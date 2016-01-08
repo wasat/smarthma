@@ -24,6 +24,9 @@ import pl.wasat.smarthma.utils.obj.LatLngExt;
  */
 public class FeedSummaryProductsFragment extends BaseFeedSummaryFragment {
 
+    public FeedSummaryProductsFragment() {
+    }
+
     /**
      * Use this factory method to create a new instance of this fragment using
      * the provided parameters.
@@ -37,9 +40,6 @@ public class FeedSummaryProductsFragment extends BaseFeedSummaryFragment {
         args.putSerializable(BaseFeedSummaryFragment.KEY_FEED_SUMMARY, feedParam);
         fragment.setArguments(args);
         return fragment;
-    }
-
-    public FeedSummaryProductsFragment() {
     }
 
     /* (non-Javadoc)
@@ -61,26 +61,23 @@ public class FeedSummaryProductsFragment extends BaseFeedSummaryFragment {
     }
 
     @Override
-    protected void setupGoogleMapObjects(GoogleMap googleMap) {
-        super.setupGoogleMapObjects(googleMap);
-
-        drawAllGoogleFootprint(googleMap);
+    protected void setupAmazonMapObjects(AmazonMap amazonMap) {
+        super.setupAmazonMapObjects(amazonMap);
+        drawAllAmznFootprint(amazonMap);
     }
 
+    @Override
+    protected void setupGoogleMapObjects(GoogleMap googleMap) {
+        super.setupGoogleMapObjects(googleMap);
+        drawAllGoogleFootprint(googleMap);
+    }
 
     private void drawAllGoogleFootprint(GoogleMap googleMap) {
 
         MapDrawings mapDrawings = new MapDrawings();
 
         for (Entry entry : resultFeed.getEntries()) {
-            //List<Pos> footprintPosList = obtainFootprintPoints(entry);
-
-
-            //ArrayList<LatLng> footprintPoints = (ArrayList<LatLng>) (Object) entry.getSimpleMetadata().getFootprint();
             ArrayList<LatLng> footprintPoints = castToGoogleLatLonArray(entry.getSimpleMetadata().getFootprint());
-/*            for (int i = 0; i < footprintPosList.size() - 1; i++) {
-                footprintPoints.add(footprintPosList.get(i).getLatLng().getGoogleLatLon());
-            }*/
             if (footprintPoints.size() > 0) {
                 com.google.android.gms.maps.model.PolygonOptions polygon = mapDrawings.drawArea(footprintPoints, Color.BLUE);
                 googleMap.addPolygon(polygon);
@@ -96,26 +93,12 @@ public class FeedSummaryProductsFragment extends BaseFeedSummaryFragment {
         return latLngs;
     }
 
-    @Override
-    protected void setupAmazonMapObjects(AmazonMap amazonMap) {
-        super.setupAmazonMapObjects(amazonMap);
-        drawAllAmznFootprint(amazonMap);
-    }
-
-
     private void drawAllAmznFootprint(AmazonMap amazonMap) {
 
         AmznMapDrawings amznMapDrawings = new AmznMapDrawings();
 
         for (Entry entry : resultFeed.getEntries()) {
-            //List<Pos> footprintPosList = obtainFootprintPoints(entry);
-
-
-            //ArrayList<LatLng> footprintPoints = (ArrayList<LatLng>) (Object) entry.getSimpleMetadata().getFootprint();
             ArrayList<com.amazon.geo.mapsv2.model.LatLng> footprintPoints = castToAmazonLatLonArray(entry.getSimpleMetadata().getFootprint());
-/*            for (int i = 0; i < footprintPosList.size() - 1; i++) {
-                footprintPoints.add(footprintPosList.get(i).getLatLng().getGoogleLatLon());
-            }*/
             if (footprintPoints.size() > 0) {
                 com.amazon.geo.mapsv2.model.PolygonOptions polygon = amznMapDrawings.drawArea(footprintPoints, Color.BLUE);
                 amazonMap.addPolygon(polygon);
@@ -130,23 +113,4 @@ public class FeedSummaryProductsFragment extends BaseFeedSummaryFragment {
         }
         return latLngs;
     }
-    /*
-    private List<Pos> obtainFootprintPoints(Entry entry) {
-        List<Pos> footprintPosList = new ArrayList<>();
-        if (entry.getEarthObservation().getFeatureOfInterest() == null) return footprintPosList;
-        Footprint footprint = entry.getEarthObservation()
-                .getFeatureOfInterest().getFootprint();
-        footprintPosList = footprint.getMultiExtentOf()
-                .getMultiSurface().getSurfaceMembers().getPolygon()
-                .getExterior().getLinearRing().getPosList();
-        if (footprintPosList.isEmpty()) {
-            String posStr = footprint.getMultiExtentOf().getMultiSurface()
-                    .getSurfaceMembers().getPolygon().getExterior()
-                    .getLinearRing().getPosString().getPointsString();
-            footprintPosList = footprint.getMultiExtentOf().getMultiSurface()
-                    .getSurfaceMembers().getPolygon().getExterior()
-                    .getLinearRing().setPosList(posStr);
-        }
-        return footprintPosList;
-    }*/
 }

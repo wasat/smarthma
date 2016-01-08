@@ -31,16 +31,6 @@ public class CollectionsGroupView extends RelativeLayout implements SpiceListIte
     }
 
     @Override
-    public void update(CollectionsGroup collectionGroup) {
-        this.group = collectionGroup;
-        groupNameTextView.setText(collectionGroup.getGroupName());
-        groupContentTextView.setText(String.valueOf(collectionGroup.getStandard()));
-        //thumbImageView.setImageResource(R.drawable.eo_coll_group);
-
-        //Picasso.with(getContext()).load(R.drawable.eo_coll_group).resize(72, 72).centerCrop().into(thumbImageView);
-    }
-
-    @Override
     public CollectionsGroup getData() {
         return group;
     }
@@ -53,5 +43,12 @@ public class CollectionsGroupView extends RelativeLayout implements SpiceListIte
     @Override
     public int getImageViewCount() {
         return 1;
+    }
+
+    @Override
+    public void update(CollectionsGroup collectionGroup) {
+        this.group = collectionGroup;
+        groupNameTextView.setText(collectionGroup.getGroupName());
+        groupContentTextView.setText(String.valueOf(collectionGroup.getStandard()));
     }
 }

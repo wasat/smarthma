@@ -1,6 +1,7 @@
 package pl.wasat.smarthma.ui.frags.missions;
 
 import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -34,6 +35,10 @@ public class MissionsDetailsFragment extends Fragment {
 
     private OnMissionsDetailNewFragmentListener mListener;
 
+    public MissionsDetailsFragment() {
+        setHasOptionsMenu(true);
+    }
+
     /**
      * Use this factory method to create a new instance of this fragment using
      * the provided parameters.
@@ -49,8 +54,16 @@ public class MissionsDetailsFragment extends Fragment {
         return fragment;
     }
 
-    public MissionsDetailsFragment() {
-        setHasOptionsMenu(true);
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        Activity activity = context instanceof Activity ? (Activity) context : null;
+        try {
+            mListener = (OnMissionsDetailNewFragmentListener) activity;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(activity.toString()
+                    + " must implement OnMissionsDetailFragmentListener");
+        }
     }
 
     @Override
@@ -84,23 +97,11 @@ public class MissionsDetailsFragment extends Fragment {
 
             @Override
             public void onClick(View arg0) {
-
                 mListener.onMissionsDetailNewFragmentSearchData(missionName);
             }
         });
 
         return rootView;
-    }
-
-    @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-        try {
-            mListener = (OnMissionsDetailNewFragmentListener) activity;
-        } catch (ClassCastException e) {
-            throw new ClassCastException(activity.toString()
-                    + " must implement OnMissionsDetailFragmentListener");
-        }
     }
 
     @Override

@@ -1,10 +1,7 @@
 package pl.wasat.smarthma.ui.frags.base;
 
-import android.app.Activity;
-import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,27 +29,22 @@ import pl.wasat.smarthma.model.om.Footprint;
 import pl.wasat.smarthma.utils.rss.FedeoSearchRequest;
 
 /**
- * A simple {@link android.support.v4.app.Fragment} subclass. Activities that
- * contain this fragment must implement the
- * {@link BaseShowProductsListFragment.OnBaseShowProductsListFragmentListener}
- * interface to handle interaction events. Use the
+ * A simple {@link android.support.v4.app.Fragment} subclass. Use the
  * {@link BaseShowProductsListFragment#newInstance} factory method to create an
  * instance of this fragment.
  */
 public class BaseShowProductsListFragment extends BaseSpiceFragment {
     private static final String KEY_PARAM_FEDEO_REQUEST = "pl.wasat.smarthma.KEY_PARAM_FEDEO_REQUEST";
-
-    private FedeoRequestParams fedeoRequestParams;
-
-    private OnBaseShowProductsListFragmentListener mListener;
-
+    private static final String STATE_ACTIVATED_POSITION = "activated_position";
     protected ListView entryImagesListView;
     protected View loadingView;
-
-    private static final String STATE_ACTIVATED_POSITION = "activated_position";
-    private int mActivatedPosition = ListView.INVALID_POSITION;
     protected EntryImagesListAdapter entryImagesListAdapter;
     protected List<Entry> entryList;
+    private FedeoRequestParams fedeoRequestParams;
+    private int mActivatedPosition = ListView.INVALID_POSITION;
+
+    public BaseShowProductsListFragment() {
+    }
 
     /**
      * Use this factory method to create a new instance of this fragment using
@@ -68,10 +60,6 @@ public class BaseShowProductsListFragment extends BaseSpiceFragment {
         args.putSerializable(KEY_PARAM_FEDEO_REQUEST, fedeoRequestParams);
         fragment.setArguments(args);
         return fragment;
-    }
-
-    public BaseShowProductsListFragment() {
-        // Required empty public constructor
     }
 
     @Override
@@ -114,25 +102,6 @@ public class BaseShowProductsListFragment extends BaseSpiceFragment {
         if (fedeoRequestParams != null) {
             loadSearchProductsFeedResponse(fedeoRequestParams);
         }
-
-    }
-
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        Activity activity = context instanceof Activity ? (Activity) context : null;
-        try {
-            mListener = (OnBaseShowProductsListFragmentListener) activity;
-        } catch (ClassCastException e) {
-            throw new ClassCastException(activity.toString()
-                    + " must implement OnBaseShowProductsListFragmentListener");
-        }
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        mListener = null;
     }
 
     @Override
@@ -143,12 +112,6 @@ public class BaseShowProductsListFragment extends BaseSpiceFragment {
         }
     }
 
-    public void setActivateOnItemClick(boolean activateOnItemClick) {
-        entryImagesListView
-                .setChoiceMode(activateOnItemClick ? ListView.CHOICE_MODE_SINGLE
-                        : ListView.CHOICE_MODE_NONE);
-    }
-
     private void setActivatedPosition(int position) {
         if (position == ListView.INVALID_POSITION) {
             entryImagesListView.setItemChecked(mActivatedPosition, false);
@@ -156,6 +119,64 @@ public class BaseShowProductsListFragment extends BaseSpiceFragment {
             entryImagesListView.setItemChecked(position, true);
         }
         mActivatedPosition = position;
+    }
+
+    /**
+     *
+     */
+    private void loadSearchProductsFeedResponse(FedeoRequestParams fedeoRequestParams) {
+        if (fedeoRequestParams != null) {
+            getActivity().setProgressBarIndeterminateVisibility(true);
+
+            getSpiceManager().execute(new FedeoSearchRequest(getActivity(), fedeoRequestParams, 2),
+                    new FeedRequestListener());
+        }
+    }
+
+    public void setActivateOnItemClick(boolean activateOnItemClick) {
+        entryImagesListView
+                .setChoiceMode(activateOnItemClick ? ListView.CHOICE_MODE_SINGLE
+                        : ListView.CHOICE_MODE_NONE);
+    }
+
+    public EntryImagesListAdapter getEntryImagesListAdapter() {
+        return entryImagesListAdapter;
+    }
+
+    public void clearList() {
+        FavouritesDbAdapter dba = new FavouritesDbAdapter(getActivity());
+        dba.openToWrite();
+        dba.clearProducts();
+        dba.close();
+        clearEntries();
+        refreshList();
+    }
+
+    private void clearEntries() {
+        this.entryList.clear();
+    }
+
+    public void refreshList() {
+        if (entryImagesListAdapter != null) {
+            entryImagesListAdapter.notifyDataSetChanged();
+        }
+    }
+
+    public List<Entry> getEntryList() {
+        return entryList;
+    }
+
+    private void loadRequestSuccess(Feed searchProductFeeds) {
+        getActivity().setProgressBarIndeterminateVisibility(false);
+        if (searchProductFeeds == null) {
+            searchProductFeeds = new Feed();
+        }
+        List<Entry> entries = searchProductFeeds.getEntries();
+        DataSorter sorter = new DataSorter();
+        sorter.sort(entries);
+
+        updateShowProductsListViewContent(searchProductFeeds.getEntries());
+        loadSearchResultProductsIntroDetailsFrag(searchProductFeeds);
     }
 
     private void updateShowProductsListViewContent(final List<Entry> entryList) {
@@ -191,9 +212,13 @@ public class BaseShowProductsListFragment extends BaseSpiceFragment {
                     @Override
                     public void Catch(boolean swipeRight, int position) {
                         if (swipeRight)
-                            Toast.makeText(getContext(), "share " + position, Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getContext(),
+                                    getContext().getString(R.string.swipe_right)
+                                            + position, Toast.LENGTH_SHORT).show();
                         else
-                            Toast.makeText(getContext(), "delete " + position, Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getContext(),
+                                    getContext().getString(R.string.swipe_left)
+                                            + position, Toast.LENGTH_SHORT).show();
                     }
                 });
                 entryImagesListView.setAdapter(entryImagesListAdapter);
@@ -215,12 +240,6 @@ public class BaseShowProductsListFragment extends BaseSpiceFragment {
         }
     }
 
-    protected void loadFailureFrag() {
-    }
-
-    protected void loadProductItemDetails(Entry entry) {
-    }
-
     /**
      * @param searchProductFeeds searched Feed
      */
@@ -228,48 +247,10 @@ public class BaseShowProductsListFragment extends BaseSpiceFragment {
             Feed searchProductFeeds) {
     }
 
-    /**
-     *
-     */
-    private void loadSearchProductsFeedResponse(FedeoRequestParams fedeoRequestParams) {
-        if (fedeoRequestParams != null) {
-            getActivity().setProgressBarIndeterminateVisibility(true);
-
-            getSpiceManager().execute(new FedeoSearchRequest(getActivity(), fedeoRequestParams, 2),
-                    new FeedRequestListener());
-        }
+    protected void loadFailureFrag() {
     }
 
-
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated to
-     * the activity and potentially other fragments contained in that activity.
-     * <p/>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
-    public interface OnBaseShowProductsListFragmentListener {
-
-        void onBaseShowProductsListFragmentFootprintSend();
-    }
-
-
-    private void loadRequestSuccess(Feed searchProductFeeds) {
-        getActivity().setProgressBarIndeterminateVisibility(false);
-        if (searchProductFeeds == null) {
-            searchProductFeeds = new Feed();
-        }
-        List<Entry> entries = searchProductFeeds.getEntries();
-        DataSorter sorter = new DataSorter();
-        sorter.sort(entries);
-
-        updateShowProductsListViewContent(searchProductFeeds.getEntries());
-        loadSearchResultProductsIntroDetailsFrag(searchProductFeeds);
-/*        ArrayList<Footprint> footPrints = getFootprints(searchProductFeeds
-                .getEntriesEO());*/
-        mListener.onBaseShowProductsListFragmentFootprintSend();
+    protected void loadProductItemDetails(Entry entry) {
     }
 
     /**
@@ -302,38 +283,5 @@ public class BaseShowProductsListFragment extends BaseSpiceFragment {
             }
             loadRequestSuccess(feed);
         }
-
-
-    }
-
-    public EntryImagesListAdapter getEntryImagesListAdapter() {
-        return entryImagesListAdapter;
-    }
-
-    public void refreshList() {
-        if (entryImagesListAdapter != null) {
-            entryImagesListAdapter.notifyDataSetChanged();
-        } else {
-            Log.d("ZX", "Warning: BaseShowProductsListFragment: refreshList(): entryImagesListAdapter is null.");
-        }
-    }
-
-    protected void clearEntries()
-    {
-        this.entryList.clear();
-    }
-
-    public void clearList()
-    {
-        FavouritesDbAdapter dba = new FavouritesDbAdapter(getActivity());
-        dba.openToWrite();
-        dba.clearProducts();
-        dba.close();
-        clearEntries();
-        refreshList();
-    }
-
-    public List<Entry> getEntryList() {
-        return entryList;
     }
 }

@@ -22,9 +22,7 @@ public class GlobalSettingsFragment extends PreferenceFragment implements
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        // TODO Auto-generated method stub
         super.onCreate(savedInstanceState);
-
         // Load the preferences from an XML resource
         addPreferencesFromResource(R.xml.preferences);
     }
@@ -32,18 +30,15 @@ public class GlobalSettingsFragment extends PreferenceFragment implements
     @Override
     public void onResume() {
         super.onResume();
-
         // Set up a listener whenever a key changes
         getPreferenceScreen().getSharedPreferences()
                 .registerOnSharedPreferenceChangeListener(this);
-
         initSummary();
     }
 
     @Override
     public void onPause() {
         super.onPause();
-
         // Unregister the listener whenever a key changes
         getPreferenceScreen().getSharedPreferences()
                 .unregisterOnSharedPreferenceChangeListener(this);
@@ -54,30 +49,6 @@ public class GlobalSettingsFragment extends PreferenceFragment implements
                                           String key) {
         // Update summary
         updatePrefsSummary(sharedPreferences, findPreference(key));
-    }
-
-    /*
- * Init summary
- */
-    private void initSummary() {
-        int pcsCount = getPreferenceScreen().getPreferenceCount();
-        for (int i = 0; i < pcsCount; i++) {
-            initPrefsSummary(getPreferenceManager().getSharedPreferences(),
-                    getPreferenceScreen().getPreference(i));
-        }
-    }
-
-    private void initPrefsSummary(SharedPreferences sharedPreferences,
-                                  Preference p) {
-        if (p instanceof PreferenceCategory) {
-            PreferenceCategory pCat = (PreferenceCategory) p;
-            int pcCatCount = pCat.getPreferenceCount();
-            for (int i = 0; i < pcCatCount; i++) {
-                initPrefsSummary(sharedPreferences, pCat.getPreference(i));
-            }
-        } else {
-            updatePrefsSummary(sharedPreferences, p);
-        }
     }
 
     /**
@@ -136,9 +107,30 @@ public class GlobalSettingsFragment extends PreferenceFragment implements
 
                 pref.setSummary(ringtone.getTitle(getActivity()));
             }
-
         }
     }
 
+    /*
+ * Init summary
+ */
+    private void initSummary() {
+        int pcsCount = getPreferenceScreen().getPreferenceCount();
+        for (int i = 0; i < pcsCount; i++) {
+            initPrefsSummary(getPreferenceManager().getSharedPreferences(),
+                    getPreferenceScreen().getPreference(i));
+        }
+    }
 
+    private void initPrefsSummary(SharedPreferences sharedPreferences,
+                                  Preference p) {
+        if (p instanceof PreferenceCategory) {
+            PreferenceCategory pCat = (PreferenceCategory) p;
+            int pcCatCount = pCat.getPreferenceCount();
+            for (int i = 0; i < pcCatCount; i++) {
+                initPrefsSummary(sharedPreferences, pCat.getPreference(i));
+            }
+        } else {
+            updatePrefsSummary(sharedPreferences, p);
+        }
+    }
 }

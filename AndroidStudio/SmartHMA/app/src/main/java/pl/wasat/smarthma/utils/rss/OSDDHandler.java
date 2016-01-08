@@ -19,10 +19,6 @@ class OSDDHandler extends DefaultHandler {
     // Current characters being accumulated
     private StringBuffer chars = new StringBuffer();
 
-    // Number of rss entry added so far
-    // private int entryAdded = 0;
-    private boolean isInFeed = false;
-
     private OpenSearchDescription openSearchDescription;
     private String shortName;
     private String longName;
@@ -45,10 +41,6 @@ class OSDDHandler extends DefaultHandler {
     private String language;
     private String outputEncoding;
     private String inputEncoding;
-
-    public OpenSearchDescription getOSDD() {
-        return openSearchDescription;
-    }
 
     /*
      * This method is called everytime a start element is found (an opening XML
@@ -74,13 +66,8 @@ class OSDDHandler extends DefaultHandler {
             openSearchDescription.setXmlnsTime(atts.getValue("xmlns:time"));
 
             urls = new ArrayList<>();
-            //parameters = new ArrayList<>();
             queries = new ArrayList<>();
             images = new ArrayList<>();
-
-            //} else if (localName.equalsIgnoreCase("ShortName")) {
-            //} else if (localName.equalsIgnoreCase("LongName")) {
-            // } else if (localName.equalsIgnoreCase("Description")) {
 
         } else if (localName.equalsIgnoreCase("Url")) {
             url = new Url();
@@ -211,5 +198,9 @@ class OSDDHandler extends DefaultHandler {
      */
     public void characters(char ch[], int start, int length) {
         chars.append(new String(ch, start, length).trim());
+    }
+
+    public OpenSearchDescription getOSDD() {
+        return openSearchDescription;
     }
 }

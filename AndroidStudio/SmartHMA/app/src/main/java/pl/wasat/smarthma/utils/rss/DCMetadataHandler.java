@@ -21,7 +21,7 @@ import pl.wasat.smarthma.model.dc.Subject;
 import pl.wasat.smarthma.model.dc.Title;
 import pl.wasat.smarthma.model.dc.Type;
 
-public class DCMetadataHandler extends DefaultHandler {
+class DCMetadataHandler extends DefaultHandler {
 
     // Current characters being accumulated
     private StringBuffer chars = new StringBuffer();
@@ -43,10 +43,6 @@ public class DCMetadataHandler extends DefaultHandler {
     private Relation relation;
     private Coverage coverage;
     private Rights rights;
-
-    public Dc getDC() {
-        return dc;
-    }
 
     /*
      * This method is called everytime a start element is found (an opening XML
@@ -172,7 +168,6 @@ public class DCMetadataHandler extends DefaultHandler {
         } else if (localName.equalsIgnoreCase("rights")) {
             rights.setText(chars.toString());
         }
-
     }
 
     /*
@@ -189,5 +184,9 @@ public class DCMetadataHandler extends DefaultHandler {
     public void characters(char[] ch, int start, int length) throws SAXException {
         super.characters(ch, start, length);
         chars.append(new String(ch, start, length).trim());
+    }
+
+    public Dc getDC() {
+        return dc;
     }
 }

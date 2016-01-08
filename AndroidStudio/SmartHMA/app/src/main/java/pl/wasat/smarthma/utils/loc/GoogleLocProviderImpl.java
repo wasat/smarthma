@@ -7,6 +7,8 @@ import android.content.IntentFilter;
 import android.location.Location;
 import android.util.Log;
 
+import pl.wasat.smarthma.R;
+
 /**
  * Created by Daniel on 2015-06-19.
  * This file is a part of SmartHMA project.
@@ -40,47 +42,6 @@ public abstract class GoogleLocProviderImpl extends BroadcastReceiver implements
         isStarted = true;
     }
 
-    private void initDefaultPosition() {
-        //Centre of EU
-        calculatedPosition = new Location("GOOGLE_DEFAULT");
-        calculatedPosition.setLatitude(DEFAULT_LAT);
-        calculatedPosition.setLongitude(DEFAULT_LON);
-    }
-
-    private void initNullPosition() {
-        try {
-            calculatedPosition = null;
-            throw new Exception("Start position is not possible to calculation");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    private void onInitialise(String providerName) {
-        if (providerName.equals(GOOGLE_FUSED)) {
-            calculatedPosition = fusedLocProvider.getCalculatedPosition();
-            stop();
-        } else if (providerName.equals(GOOGLE_ANDROID)) {
-            calculatedPosition = androidLocProvider.getCalculatedPosition();
-            stop();
-        }
-        //Log.i(GoogleLocProviderImpl.class.getName(), "onInitialise - " + calculatedPosition.toString());
-    }
-
-
-    private void onInitialiseFailed(String providerName) {
-        if (providerName.equals(GOOGLE_FUSED)) {
-            androidLocProvider = new AndroidLocProviderImpl(context);
-            androidLocProvider.start();
-        } else if (providerName.equals(GOOGLE_ANDROID)) {
-            //Log.i(GoogleLocProviderImpl.class.getName(), "onInitialiseFailed");
-            Log.i("SMARTHMA", "Start position is not possible to calculation. Start position is set on centre of EU");
-            stop();
-            //buildAndSendBroadcast(true);
-
-        }
-    }
-
     @Override
     public void stop() {
         if (fusedLocProvider != null) {
@@ -95,7 +56,6 @@ public abstract class GoogleLocProviderImpl extends BroadcastReceiver implements
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        //Log.i(GoogleLocProviderImpl.class.getName(), "onReceive");
         String intentResult = intent.getStringExtra(GOOGLE_PROVIDER_TYPE);
         if (intent.getBooleanExtra(IS_SUCCESS, true)) {
             onInitialise(intentResult);
@@ -108,5 +68,42 @@ public abstract class GoogleLocProviderImpl extends BroadcastReceiver implements
                 onLocationReceived(calculatedPosition);
             }
         }
+    }
+
+    private void onInitialise(String providerName) {
+        if (providerName.equals(GOOGLE_FUSED)) {
+            calculatedPosition = fusedLocProvider.getCalculatedPosition();
+            stop();
+        } else if (providerName.equals(GOOGLE_ANDROID)) {
+            calculatedPosition = androidLocProvider.getCalculatedPosition();
+            stop();
+        }
+    }
+
+
+    private void onInitialiseFailed(String providerName) {
+        if (providerName.equals(GOOGLE_FUSED)) {
+            androidLocProvider = new AndroidLocProviderImpl(context);
+            androidLocProvider.start();
+        } else if (providerName.equals(GOOGLE_ANDROID)) {
+            Log.i("SMARTHMA", context.getString(R.string.start_pos_is_not_possible_to_calc));
+            stop();
+        }
+    }
+
+    private void initNullPosition() {
+        try {
+            calculatedPosition = null;
+            throw new Exception("Start position is not possible to calculation");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void initDefaultPosition() {
+        //Centre of EU
+        calculatedPosition = new Location("GOOGLE_DEFAULT");
+        calculatedPosition.setLatitude(DEFAULT_LAT);
+        calculatedPosition.setLongitude(DEFAULT_LON);
     }
 }

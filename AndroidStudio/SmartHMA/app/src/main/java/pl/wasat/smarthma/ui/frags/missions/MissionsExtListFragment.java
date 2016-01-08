@@ -1,6 +1,7 @@
 package pl.wasat.smarthma.ui.frags.missions;
 
 import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -22,7 +23,7 @@ import pl.wasat.smarthma.model.mission.MissionHeaderData;
 import pl.wasat.smarthma.model.mission.MissionItemData;
 import pl.wasat.smarthma.parser.database.ParserDb;
 import pl.wasat.smarthma.parser.missions.EsaEoMissions.EsaEoMissions;
-import pl.wasat.smarthma.parser.missions.EsaEuemsat.EsaEuemsat;
+import pl.wasat.smarthma.parser.missions.EsaEuemsat.EsaEumetsat;
 import pl.wasat.smarthma.parser.missions.EsaFutureMissions.Adm;
 import pl.wasat.smarthma.parser.missions.EsaFutureMissions.EarthCare;
 import pl.wasat.smarthma.parser.missions.EsaFutureMissions.EsaFutureMissions;
@@ -48,6 +49,9 @@ public class MissionsExtListFragment extends Fragment {
     private ExpandableListView expListView;
     private ParserDb parserDb;
 
+    public MissionsExtListFragment() {
+    }
+
     /**
      * Use this factory method to create a new instance of this fragment using
      * the provided parameters.
@@ -59,7 +63,17 @@ public class MissionsExtListFragment extends Fragment {
         return new MissionsExtListFragment();
     }
 
-    public MissionsExtListFragment() {
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        Activity activity = context instanceof Activity ? (Activity) context : null;
+        try {
+            mListener = (OnExtendedListFragmentListener) activity;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(activity.toString()
+                    + activity.getString(R.string.must_implement)
+                    + OnExtendedListFragmentListener.class.getSimpleName());
+        }
     }
 
     @Override
@@ -90,6 +104,7 @@ public class MissionsExtListFragment extends Fragment {
             }
         });
 
+        //expListView.
         expListView.setOnGroupExpandListener(new OnGroupExpandListener() {
 
             @Override
@@ -110,18 +125,7 @@ public class MissionsExtListFragment extends Fragment {
             @Override
             public boolean onChildClick(ExpandableListView parent, View v,
                                         int groupPosition, int childPosition, long id) {
-                String listDataHeaderName = listDataHeader.get(groupPosition)
-                        .getName();
-                MissionItemData missionItem = listDataChild.get(listDataHeaderName)
-                        .get(childPosition);
-
-                MissionsDetailsFragment missionsDetailNewFragment = MissionsDetailsFragment
-                        .newInstance(missionItem);
-                getActivity().getSupportFragmentManager()
-                        .beginTransaction()
-                        .replace(R.id.activity_base_details_container,
-                                missionsDetailNewFragment, "MissionsDetailNewFragment")
-                        .commit();
+                startMissionDetailFragment(getMissionItemData(groupPosition, childPosition));
                 return false;
             }
         });
@@ -130,32 +134,9 @@ public class MissionsExtListFragment extends Fragment {
     }
 
     @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-        try {
-            mListener = (OnExtendedListFragmentListener) activity;
-        } catch (ClassCastException e) {
-            throw new ClassCastException(activity.toString()
-                    + " must implement OnFragmentInteractionListener");
-        }
-    }
-
-    @Override
     public void onDetach() {
         super.onDetach();
         mListener = null;
-    }
-
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated to
-     * the activity and potentially other fragments contained in that activity.
-     * <p/>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
-    public interface OnExtendedListFragmentListener {
     }
 
     /*
@@ -167,33 +148,29 @@ public class MissionsExtListFragment extends Fragment {
 
         // Adding child data
         listDataHeader
-                .add(new MissionHeaderData(0, "ESA EO Missions",
+                .add(new MissionHeaderData(0, getActivity().getString(R.string.esa_eo_missions),
                         "https://earth.esa.int/web/guest/missions/esa-operational-eo-missions"));
         listDataHeader
                 .add(new MissionHeaderData(1,
-                        "ESA Future Missions - Sentinels",
+                        getActivity().getString(R.string.esa_future_missions_sentinels),
                         "https://earth.esa.int/web/guest/missions/esa-future-missions"));
         listDataHeader
                 .add(new MissionHeaderData(2,
-                        "ESA Future Missions - Future Earth Explorers",
+                        getActivity().getString(R.string.esa_future_missions_explorers),
                         "https://earth.esa.int/web/guest/missions/esa-future-missions"));
-     /*   listDataHeader
-                .add(new MissionHeaderData(3,
-                        "ESA Future Missions - Candidate Earth Explorers",
-                        "https://earth.esa.int/web/guest/missions/esa-future-missions"));*/
         listDataHeader
                 .add(new MissionHeaderData(4,
-                        "Third Party Missions - Current Missions",
+                        getActivity().getString(R.string.third_party_missions_current),
                         "https://earth.esa.int/web/guest/missions/3rd-party-missions/current-missions"));
         listDataHeader
                 .add(new MissionHeaderData(
                         5,
-                        "Third Party Missions - Historical Missions",
+                        getActivity().getString(R.string.third_party_missions_historical),
                         "https://earth.esa.int/web/guest/missions/3rd-party-missions/historical-missions"));
         listDataHeader
                 .add(new MissionHeaderData(
                         6,
-                        "Third Party Missions - Potential Third Party Missions",
+                        getActivity().getString(R.string.third_party_missions_potential),
                         "https://earth.esa.int/web/guest/missions/3rd-party-missions/potential-missions"));
         listDataHeader.add(new MissionHeaderData(7, "ESA / EUMETSAT",
                 "https://earth.esa.int/web/guest/missions/esaeumetsat"));
@@ -206,21 +183,11 @@ public class MissionsExtListFragment extends Fragment {
                 missionList) {
             esaEoMissions.add(new MissionItemData(mission));
         }
-        /*esaEoMissions
-                .add(new MissionItemData(
-                        0,
-                        "Sentinel-1",
-                        "/web/guest/missions/esa-operational-eo-missions/sentinel-1",
-                        "/image/image_gallery?uuid=23f73931-c1c7-4013-a7dc-fb506ff182e2&groupId=10174&t=1330440801857",
-                        "With the objectives of Land and Ocean monitoring, Sentinel-1 will be composed of two polar-orbiting satellites operating day and night, and will perform Radar imaging, enabling them to acquire imagery regardless of the weather. The first Sentinel-1 satellite was launched on a Soyuz rocket from Europe&#39;s Spaceport in French Guiana on 03 April 2014."));
-*/
 
         ArrayList<Mission> futureSentinelsMissionList = parserDb.getMissionsList(new Category(EsaFutureMissions.CATEGORY_ID, "asd"));
 
         List<MissionItemData> esaFutureSentinels = new ArrayList<>();
         List<MissionItemData> esaFutureExplorers = new ArrayList<>();
-        //List<MissionItemData> esaFutureCandidates = new ArrayList<>();
-
 
         for (Mission mission :
                 futureSentinelsMissionList) {
@@ -231,25 +198,6 @@ public class MissionsExtListFragment extends Fragment {
                 esaFutureSentinels.add(new MissionItemData(mission));
             }
         }
-/*        esaFutureSentinels
-                .add(new MissionItemData(0, "Sentinel-2", "", "", ""));
-        esaFutureSentinels
-                .add(new MissionItemData(1, "Sentinel-3", "", "", ""));
-        esaFutureSentinels
-                .add(new MissionItemData(2, "Sentinel-4", "", "", ""));
-        esaFutureSentinels
-                .add(new MissionItemData(3, "Sentinel-5", "", "", ""));
-        esaFutureSentinels
-                .add(new MissionItemData(4, "Sentinel-5P", "", "", ""));*/
-
-    /*    esaFutureExplorers
-                .add(new MissionItemData(0, "ADM-Aeolus", "", "", ""));
-        esaFutureExplorers.add(new MissionItemData(1, "Earthcare", "", "", ""));
-
-        esaFutureCandidates.add(new MissionItemData(0, "BIOMASS", "", "", ""));
-        esaFutureCandidates.add(new MissionItemData(1, "CoReH2O", "", "", ""));
-        esaFutureCandidates.add(new MissionItemData(2, "PREMIER", "", "", ""));*/
-
         ArrayList<Mission> thirdPartyCurrentList = parserDb.getMissionsList(new Category(ThirdPartyMissions.CATEGORY_ID, "asd"));
 
         List<MissionItemData> thirdPartCurrent = new ArrayList<>();
@@ -259,25 +207,12 @@ public class MissionsExtListFragment extends Fragment {
         }
 
         ArrayList<Mission> thirdPartyHistoricalList = parserDb.getMissionsList(new Category(HistoricalMissions.CATEGORY_ID, "asd"));
-
         List<MissionItemData> thirdPartHistorical = new ArrayList<>();
 
         for (Mission mission :
                 thirdPartyHistoricalList) {
             thirdPartHistorical.add(new MissionItemData(mission));
         }
-      /*  thirdPartHistorical.add(new MissionItemData(0, "ALOS", "", "", ""));
-        thirdPartHistorical.add(new MissionItemData(1, "IRS-P3", "", "", ""));
-        thirdPartHistorical.add(new MissionItemData(2, "JERS-1", "", "", ""));
-        thirdPartHistorical
-                .add(new MissionItemData(3, "KOMPSAT-1", "", "", ""));
-        thirdPartHistorical.add(new MissionItemData(4, "Landsat RBV", "", "",
-                ""));
-        thirdPartHistorical.add(new MissionItemData(5, "Landsat TM/ETM", "",
-                "", ""));
-        thirdPartHistorical.add(new MissionItemData(6, "Nimbus-7", "", "", ""));
-        thirdPartHistorical.add(new MissionItemData(7, "QuikSCAT", "", "", ""));
-        thirdPartHistorical.add(new MissionItemData(8, "SeaSat", "", "", ""));*/
 
         ArrayList<Mission> thirdPartyPotentialList = parserDb.getMissionsList(new Category(PotentialMissions.CATEGORY_ID, "asd"));
 
@@ -286,30 +221,14 @@ public class MissionsExtListFragment extends Fragment {
                 thirdPartyPotentialList) {
             thirdPartPotential.add(new MissionItemData(mission));
         }
-   /*     thirdPartPotential.add(new MissionItemData(0, "Aura OMI", "", "", ""));
-        thirdPartPotential.add(new MissionItemData(1, "CBERS Satellite Series",
-                "", "", ""));
-        thirdPartPotential
-                .add(new MissionItemData(2, "OceanSat-2", "", "", ""));
-        thirdPartPotential
-                .add(new MissionItemData(3, "Pleiades-HR", "", "", ""));
-        thirdPartPotential
-                .add(new MissionItemData(4, "QuickBird-2", "", "", ""));
-        thirdPartPotential.add(new MissionItemData(5, "SAOCOM", "", "", ""));
-        thirdPartPotential
-                .add(new MissionItemData(6, "TerraSAR-X", "", "", ""));
-        thirdPartPotential.add(new MissionItemData(7, "THEOS", "", "", ""));
-*/
-        ArrayList<Mission> esaEuemsatList = parserDb.getMissionsList(new Category(EsaEuemsat.CATEGORY_ID, "asd"));
+
+        ArrayList<Mission> esaEuemsatList = parserDb.getMissionsList(new Category(EsaEumetsat.CATEGORY_ID, "asd"));
 
         List<MissionItemData> esaEumetsat = new ArrayList<>();
         for (Mission mission :
                 esaEuemsatList) {
             esaEumetsat.add(new MissionItemData(mission));
         }
-    /*    esaEumetsat.add(new MissionItemData(0, "Meteosat Second Generation",
-                "", "", ""));
-        esaEumetsat.add(new MissionItemData(1, "MetOp", "", "", ""));*/
 
         // Header, Child data
         listDataChild.put(listDataHeader.get(0).getName(), esaEoMissions);
@@ -319,11 +238,38 @@ public class MissionsExtListFragment extends Fragment {
         listDataChild.put(listDataHeader.get(4).getName(), thirdPartHistorical);
         listDataChild.put(listDataHeader.get(5).getName(), thirdPartPotential);
         listDataChild.put(listDataHeader.get(6).getName(), esaEumetsat);
-
     }
 
+    private void startMissionDetailFragment(MissionItemData missionItem) {
+        MissionsDetailsFragment missionsDetailsFragment = MissionsDetailsFragment
+                .newInstance(missionItem);
+        getActivity().getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.activity_base_details_container,
+                        missionsDetailsFragment, MissionsDetailsFragment.class.getSimpleName())
+                .commit();
+    }
+
+    private MissionItemData getMissionItemData(int groupPosition, int childPosition) {
+        String listDataHeaderName = listDataHeader.get(groupPosition)
+                .getName();
+        return listDataChild.get(listDataHeaderName)
+                .get(childPosition);
+    }
 
     public ExpandableListView getExpListView() {
         return expListView;
+    }
+
+    /**
+     * This interface must be implemented by activities that contain this
+     * fragment to allow an interaction in this fragment to be communicated to
+     * the activity and potentially other fragments contained in that activity.
+     * <p/>
+     * See the Android Training lesson <a href=
+     * "http://developer.android.com/training/basics/fragments/communicating.html"
+     * >Communicating with Other Fragments</a> for more information.
+     */
+    public interface OnExtendedListFragmentListener {
     }
 }

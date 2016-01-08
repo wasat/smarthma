@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:orientation="vertical">
+              android:layout_width="fill_parent"
+              android:layout_height="fill_parent"
+              android:orientation="vertical">
 
     <LinearLayout
         android:id="@+id/loading_layout"
@@ -16,7 +16,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
-            android:indeterminate="true" />
+            android:indeterminate="true"/>
 
         <pl.wasat.smarthma.customviews.TextViewWithFont
             style="@android:style/TextAppearance.Large"
@@ -25,13 +25,13 @@
             android:gravity="center"
             android:text="@string/loading_please_wait"
             android:textColor="@color/text_black"
-            android:textSize="20sp" />
+            android:textSize="20sp"/>
     </LinearLayout>
 
     <com.octo.android.robospice.spicelist.SpiceListView
         android:id="@+id/listview_collections_group"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:visibility="gone" />
+        android:visibility="gone"/>
 
 </LinearLayout>

@@ -1,6 +1,7 @@
 package pl.wasat.smarthma.ui.frags.search;
 
 import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ListView;
@@ -26,7 +27,10 @@ import pl.wasat.smarthma.utils.rss.FedeoSearchRequest;
  */
 public class SearchListFragment extends SearchListFragmentBase {
     private static final String KEY_PARAM_SEARCH_FEDEO_REQUEST = "pl.wasat.smarthma.KEY_PARAM_SEARCH_FEDEO_REQUEST";
-    private int mActivatedPosition = ListView.INVALID_POSITION;
+
+    public SearchListFragment() {
+        setHasOptionsMenu(true);
+    }
 
     /**
      * Use this factory method to create a new instance of this fragment using
@@ -44,8 +48,17 @@ public class SearchListFragment extends SearchListFragmentBase {
         return fragment;
     }
 
-    public SearchListFragment() {
-        setHasOptionsMenu(true);
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        Activity activity = context instanceof Activity ? (Activity) context : null;
+        try {
+            mListener = (OnSearchListFragmentListener) activity;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(activity.toString()
+                    + activity.getString(R.string.must_implement)
+                    + OnSearchListFragmentListener.class.getSimpleName());
+        }
     }
 
     @Override
@@ -59,16 +72,14 @@ public class SearchListFragment extends SearchListFragmentBase {
         }
     }
 
-    @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-        try {
-            mListener = (OnSearchListFragmentListener) activity;
-        } catch (ClassCastException e) {
-            throw new ClassCastException(activity.toString()
-                    + " must implement OnSearchListFragmentListener");
+/*    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        int mActivatedPosition = ListView.INVALID_POSITION;
+        if (mActivatedPosition != ListView.INVALID_POSITION) {
+            outState.putInt(STATE_ACTIVATED_POSITION, mActivatedPosition);
         }
-    }
+    }*/
 
     @Override
     public void onDetach() {
@@ -86,35 +97,6 @@ public class SearchListFragment extends SearchListFragmentBase {
         }
     }
 
-    @Override
-    public void onListItemClick(ListView listView, View view, int position,
-                                long id) {
-        super.onListItemClick(listView, view, position, id);
-        mListener.onSearchListFragmentItemSelected(String.valueOf(position));
-    }
-
-    @Override
-    public void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-        if (mActivatedPosition != ListView.INVALID_POSITION) {
-            outState.putInt(STATE_ACTIVATED_POSITION, mActivatedPosition);
-        }
-    }
-
-    private void updateSearchListViewContent(List<EntryISO> searchFeedList) {
-        View view = getView();
-        if (view != null) {
-            if (searchFeedList.isEmpty()) {
-                view.setVisibility(View.GONE);
-
-                showFailureFragment();
-            } else {
-                attachListAdapter(searchFeedList);
-                view.setVisibility(View.VISIBLE);
-            }
-        }
-    }
-
     /**
      *
      */
@@ -126,17 +108,39 @@ public class SearchListFragment extends SearchListFragmentBase {
         }
     }
 
+    @Override
+    public void onListItemClick(ListView listView, View view, int position,
+                                long id) {
+        super.onListItemClick(listView, view, position, id);
+        mListener.onSearchListFragmentItemSelected(String.valueOf(position));
+    }
+
+    private void updateSearchListViewContent(List<EntryISO> searchFeedList) {
+        View view = getView();
+        if (view != null) {
+            if (searchFeedList.isEmpty()) {
+                view.setVisibility(View.GONE);
+                showFailureFragment();
+            } else {
+                attachListAdapter(searchFeedList);
+                view.setVisibility(View.VISIBLE);
+            }
+        }
+    }
+
+
     /**
      * @param searchResultFeed - Dataseries Feed
      */
-    protected void showDataSeriesIntro(Feed searchResultFeed) {
+    void showDataSeriesIntro(Feed searchResultFeed) {
         super.showDataSeriesIntro(searchResultFeed);
         getActivity()
                 .getSupportFragmentManager()
                 .beginTransaction()
                 .replace(R.id.activity_base_details_container,
-                        feedSummarySearchCollectionFragment, "FeedSummarySearchCollectionFragment")
-                .addToBackStack("FeedSummarySearchCollectionFragment").commit();
+                        feedSummarySearchCollectionFragment, FeedSummarySearchCollectionFragment.class.getSimpleName())
+                .addToBackStack(FeedSummarySearchCollectionFragment.class.getSimpleName())
+                .commit();
     }
 
     @Override

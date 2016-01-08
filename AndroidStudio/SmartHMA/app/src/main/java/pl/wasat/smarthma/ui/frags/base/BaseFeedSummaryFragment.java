@@ -92,9 +92,8 @@ public class BaseFeedSummaryFragment extends Fragment {
         adapterValuesList.add("-  " + resultFeed.getUpdated());
 
         ArrayList<String> adapterTooltipsList = new ArrayList<>();
-        for (int i=0; i<adapterNamesList.size(); i++)
-        {
-            adapterTooltipsList.add("Greetings from "+i);
+        for (int i = 0; i < adapterNamesList.size(); i++) {
+            adapterTooltipsList.add("Greetings from " + i);
         }
 
         IntroGridAdapter adapter = new IntroGridAdapter(getActivity(), adapterNamesList, adapterValuesList, adapterTooltipsList);
@@ -102,99 +101,6 @@ public class BaseFeedSummaryFragment extends Fragment {
         gridView.setAdapter(adapter);
 
         return rootView;
-    }
-
-    private void setUpStaticMap() {
-        if (Const.IS_KINDLE) setUpStaticAmazonMap();
-        else setUpStaticGoogleMap();
-    }
-
-
-    private void setUpStaticGoogleMap() {
-        com.google.android.gms.maps.SupportMapFragment supportMapFragment = com.google.android.gms.maps.SupportMapFragment.newInstance();
-        FragmentTransaction fragmentTransaction =
-                getChildFragmentManager().beginTransaction();
-        fragmentTransaction.add(R.id.mapFromRegionDetails, supportMapFragment);
-        fragmentTransaction.commit();
-
-        supportMapFragment.getMapAsync(new com.google.android.gms.maps.OnMapReadyCallback() {
-            @Override
-            public void onMapReady(final GoogleMap googleMap) {
-                googleMap.setOnMapLoadedCallback(new GoogleMap.OnMapLoadedCallback() {
-                    @Override
-                    public void onMapLoaded() {
-                        setupGoogleMapObjects(googleMap);
-                    }
-                });
-            }
-        });
-    }
-
-    protected void setupGoogleMapObjects(GoogleMap googleMap) {
-        googleMap.getUiSettings().setAllGesturesEnabled(false);
-        googleMap.getUiSettings().setZoomControlsEnabled(false);
-
-        //Centre of EU
-        LatLngBoundsExt latLngBoundsExt = obtainBoundsFromShared();
-        googleMap.moveCamera(com.google.android.gms.maps.CameraUpdateFactory.newLatLngBounds(latLngBoundsExt.googleLatLngBounds, 30));
-
-        MapDrawings mapDrawings = new MapDrawings();
-        SharedPrefs sharedPrefs = new SharedPrefs(getActivity());
-        float[] bbox = sharedPrefs.getBboxPrefs();
-        googleMap.addPolygon(mapDrawings.drawArea(bbox));
-    }
-
-    private LatLngBoundsExt obtainBoundsFromShared() {
-        SharedPrefs sharedPrefs = new SharedPrefs(getActivity());
-        float[] bbox = sharedPrefs.getBboxPrefs();
-        LatLngExt sw = new LatLngExt(bbox[1], bbox[0]);
-        LatLngExt ne = new LatLngExt(bbox[3], bbox[2]);
-        LatLngBoundsExt latLngBoundsExt = new LatLngBoundsExt(sw, ne);
-
-
-
-/*        LatLngBounds.Builder boundsBuilder = new LatLngBounds.Builder();
-        boundsBuilder.include(new LatLng(bbox[1], bbox[0]));
-        boundsBuilder.include(new LatLng(bbox[3], bbox[2]));
-
-        return boundsBuilder.build();*/
-        return latLngBoundsExt;
-    }
-
-
-    private void setUpStaticAmazonMap() {
-        com.amazon.geo.mapsv2.SupportMapFragment supportMapFragment = com.amazon.geo.mapsv2.SupportMapFragment.newInstance();
-        FragmentTransaction fragmentTransaction =
-                getChildFragmentManager().beginTransaction();
-        fragmentTransaction.add(R.id.mapFromRegionDetails, supportMapFragment);
-        fragmentTransaction.commit();
-
-        supportMapFragment.getMapAsync(new com.amazon.geo.mapsv2.OnMapReadyCallback() {
-            @Override
-            public void onMapReady(final AmazonMap amazonMap) {
-                amazonMap.setOnMapLoadedCallback(new AmazonMap.OnMapLoadedCallback() {
-                    @Override
-                    public void onMapLoaded() {
-                        setupAmazonMapObjects(amazonMap);
-                    }
-                });
-            }
-        });
-
-    }
-
-    protected void setupAmazonMapObjects(AmazonMap amazonMap) {
-        amazonMap.getUiSettings().setAllGesturesEnabled(false);
-        amazonMap.getUiSettings().setZoomControlsEnabled(false);
-
-        //Centre of EU
-        LatLngBoundsExt latLngBoundsExt = obtainBoundsFromShared();
-        amazonMap.moveCamera(com.amazon.geo.mapsv2.CameraUpdateFactory.newLatLngBounds(latLngBoundsExt.amznLatLngBounds, 30));
-
-        AmznMapDrawings amznMapDrawings = new AmznMapDrawings();
-        SharedPrefs sharedPrefs = new SharedPrefs(getActivity());
-        float[] bbox = sharedPrefs.getBboxPrefs();
-        amazonMap.addPolygon(amznMapDrawings.drawArea(bbox));
     }
 
     /**
@@ -224,7 +130,7 @@ public class BaseFeedSummaryFragment extends Fragment {
             String linkRel = resultFeed.getLink().get(i).getRel();
             final int incFinal = i;
 
-            if (linkRel.equalsIgnoreCase("first")) {
+            if (linkRel.equalsIgnoreCase(getContext().getString(R.string.first))) {
                 btnFirst.setOnClickListener(new OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -233,7 +139,7 @@ public class BaseFeedSummaryFragment extends Fragment {
                         loadNavSearch(linkHref);
                     }
                 });
-            } else if (linkRel.equalsIgnoreCase("previous")) {
+            } else if (linkRel.equalsIgnoreCase(getContext().getString(R.string.previous))) {
                 btnPrev.setOnClickListener(new OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -242,7 +148,7 @@ public class BaseFeedSummaryFragment extends Fragment {
                         loadNavSearch(linkHref);
                     }
                 });
-            } else if (linkRel.equalsIgnoreCase("self")) {
+            } else if (linkRel.equalsIgnoreCase(getContext().getString(R.string.self))) {
                 btnReload.setOnClickListener(new OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -251,7 +157,7 @@ public class BaseFeedSummaryFragment extends Fragment {
                         loadNavSearch(linkHref);
                     }
                 });
-            } else if (linkRel.equalsIgnoreCase("next")) {
+            } else if (linkRel.equalsIgnoreCase(getContext().getString(R.string.next))) {
                 btnNext.setOnClickListener(new OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -260,7 +166,7 @@ public class BaseFeedSummaryFragment extends Fragment {
                         loadNavSearch(linkHref);
                     }
                 });
-            } else if (linkRel.equalsIgnoreCase("last")) {
+            } else if (linkRel.equalsIgnoreCase(getContext().getString(R.string.last))) {
                 btnLast.setOnClickListener(new OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -273,7 +179,9 @@ public class BaseFeedSummaryFragment extends Fragment {
         }
     }
 
-    protected void loadNavSearch(String linkHref) {
+    private void setUpStaticMap() {
+        if (Const.IS_KINDLE) setUpStaticAmazonMap();
+        else setUpStaticGoogleMap();
     }
 
     private int castToInt(String value) {
@@ -282,6 +190,87 @@ public class BaseFeedSummaryFragment extends Fragment {
             resInt = Integer.valueOf(value);
         }
         return resInt;
+    }
+
+    protected void loadNavSearch(String linkHref) {
+    }
+
+    private void setUpStaticAmazonMap() {
+        com.amazon.geo.mapsv2.SupportMapFragment supportMapFragment = com.amazon.geo.mapsv2.SupportMapFragment.newInstance();
+        FragmentTransaction fragmentTransaction =
+                getChildFragmentManager().beginTransaction();
+        fragmentTransaction.add(R.id.mapFromRegionDetails, supportMapFragment);
+        fragmentTransaction.commit();
+
+        supportMapFragment.getMapAsync(new com.amazon.geo.mapsv2.OnMapReadyCallback() {
+            @Override
+            public void onMapReady(final AmazonMap amazonMap) {
+                amazonMap.setOnMapLoadedCallback(new AmazonMap.OnMapLoadedCallback() {
+                    @Override
+                    public void onMapLoaded() {
+                        setupAmazonMapObjects(amazonMap);
+                    }
+                });
+            }
+        });
+
+    }
+
+    private void setUpStaticGoogleMap() {
+        com.google.android.gms.maps.SupportMapFragment supportMapFragment = com.google.android.gms.maps.SupportMapFragment.newInstance();
+        FragmentTransaction fragmentTransaction =
+                getChildFragmentManager().beginTransaction();
+        fragmentTransaction.add(R.id.mapFromRegionDetails, supportMapFragment);
+        fragmentTransaction.commit();
+
+        supportMapFragment.getMapAsync(new com.google.android.gms.maps.OnMapReadyCallback() {
+            @Override
+            public void onMapReady(final GoogleMap googleMap) {
+                googleMap.setOnMapLoadedCallback(new GoogleMap.OnMapLoadedCallback() {
+                    @Override
+                    public void onMapLoaded() {
+                        setupGoogleMapObjects(googleMap);
+                    }
+                });
+            }
+        });
+    }
+
+    protected void setupAmazonMapObjects(AmazonMap amazonMap) {
+        amazonMap.getUiSettings().setAllGesturesEnabled(false);
+        amazonMap.getUiSettings().setZoomControlsEnabled(false);
+
+        //Centre of EU
+        LatLngBoundsExt latLngBoundsExt = obtainBoundsFromShared();
+        amazonMap.moveCamera(com.amazon.geo.mapsv2.CameraUpdateFactory.newLatLngBounds(latLngBoundsExt.amznLatLngBounds, 30));
+
+        AmznMapDrawings amznMapDrawings = new AmznMapDrawings();
+        SharedPrefs sharedPrefs = new SharedPrefs(getActivity());
+        float[] bbox = sharedPrefs.getBboxPrefs();
+        amazonMap.addPolygon(amznMapDrawings.drawArea(bbox));
+    }
+
+    protected void setupGoogleMapObjects(GoogleMap googleMap) {
+        googleMap.getUiSettings().setAllGesturesEnabled(false);
+        googleMap.getUiSettings().setZoomControlsEnabled(false);
+
+        //Centre of EU
+        LatLngBoundsExt latLngBoundsExt = obtainBoundsFromShared();
+        googleMap.moveCamera(com.google.android.gms.maps.CameraUpdateFactory.newLatLngBounds(latLngBoundsExt.googleLatLngBounds, 30));
+
+        MapDrawings mapDrawings = new MapDrawings();
+        SharedPrefs sharedPrefs = new SharedPrefs(getActivity());
+        float[] bbox = sharedPrefs.getBboxPrefs();
+        googleMap.addPolygon(mapDrawings.drawArea(bbox));
+    }
+
+    private LatLngBoundsExt obtainBoundsFromShared() {
+        SharedPrefs sharedPrefs = new SharedPrefs(getActivity());
+        float[] bbox = sharedPrefs.getBboxPrefs();
+        LatLngExt sw = new LatLngExt(bbox[1], bbox[0]);
+        LatLngExt ne = new LatLngExt(bbox[3], bbox[2]);
+
+        return new LatLngBoundsExt(sw, ne);
     }
 }
 

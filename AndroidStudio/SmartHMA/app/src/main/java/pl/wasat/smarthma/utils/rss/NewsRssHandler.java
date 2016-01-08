@@ -11,22 +11,15 @@ import pl.wasat.smarthma.model.NewsArticle;
 
 public class NewsRssHandler extends DefaultHandler {
 
-    // Feed and Article objects to use for temporary storage
-    private NewsArticle currentArticle = new NewsArticle();
-    private final List<NewsArticle> articleList = new ArrayList<>();
-
-    // Number of articles added so far
-    private int articlesAdded = 0;
-
     // Number of articles to download
     private static final int ARTICLES_LIMIT = 15;
-
+    private final List<NewsArticle> articleList = new ArrayList<>();
+    // Feed and Article objects to use for temporary storage
+    private NewsArticle currentArticle = new NewsArticle();
+    // Number of articles added so far
+    private int articlesAdded = 0;
     // Current characters being accumulated
     private StringBuffer chars = new StringBuffer();
-
-    public List<NewsArticle> getArticleList() {
-        return articleList;
-    }
 
     /*
      * This method is called everytime a start element is found (an opening XML
@@ -77,16 +70,10 @@ public class NewsRssHandler extends DefaultHandler {
 
         // Check if looking for article, and if article is complete
         if (localName.equalsIgnoreCase("item")) {
-
             articleList.add(currentArticle);
-
             currentArticle = new NewsArticle();
-
             // Lets check if we've hit our limit on number of articles
             articlesAdded++;
-/*            if (articlesAdded >= ARTICLES_LIMIT) {
-                // throw new SAXException();
-            }*/
         }
     }
 
@@ -102,5 +89,9 @@ public class NewsRssHandler extends DefaultHandler {
      */
     public void characters(char ch[], int start, int length) {
         chars.append(new String(ch, start, length).trim());
+    }
+
+    public List<NewsArticle> getArticleList() {
+        return articleList;
     }
 }

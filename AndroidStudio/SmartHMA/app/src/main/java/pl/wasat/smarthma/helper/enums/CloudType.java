@@ -5,22 +5,18 @@ import java.util.List;
 
 /**
  * Created by Daniel on 2015-11-05 23:26.
- * Part of the project  SmartHMA_home
+ * Part of the project  SmartHMA
  */
 public enum CloudType {
     GOOGLE_DRIVE("Google Drive", 0),
     DROPBOX("Dropbox", 1);
 
-    private String name;
-    private int position;
+    private final String name;
+    private final int position;
 
     CloudType(String name, int pos) {
         this.name = name;
         this.position = pos;
-    }
-
-    public int getPosition() {
-        return position;
     }
 
     public static CloudType getEnum(int position) {
@@ -33,12 +29,15 @@ public enum CloudType {
     }
 
     public static CharSequence[] toList() {
-        CharSequence[] sequences = new CharSequence[2];
         List<String> cloudTypeList = new ArrayList<>();
         for (CloudType cloud : CloudType.values()) {
             cloudTypeList.add(cloud.name);
         }
         return cloudTypeList.toArray(new CharSequence[cloudTypeList.size()]);
+    }
+
+    public int getPosition() {
+        return position;
     }
 
     @Override

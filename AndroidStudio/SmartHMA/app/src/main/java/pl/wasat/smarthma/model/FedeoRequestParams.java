@@ -17,9 +17,11 @@ import pl.wasat.smarthma.utils.obj.LatLngExt;
 /**
  * @author Daniel Zinkiewicz Wasat Sp. z o.o 18-07-2014
  */
+@SuppressWarnings("WeakerAccess")
 public class FedeoRequestParams implements Serializable {
 
     private static final long serialVersionUID = 1L;
+    public static boolean IS_BUILD_FROM_SHARED;
     private HashMap<String, String> params;
     private HashMap<String, String> paramsExtra;
     private String url;
@@ -43,26 +45,33 @@ public class FedeoRequestParams implements Serializable {
     public FedeoRequestParams() {
         this.params = new HashMap<>();
         setDefaultParams();
+        buildFromShared();
+    }
+
+    public FedeoRequestParams(boolean initAreaTime) {
+        this.params = new HashMap<>();
+        setDefaultParams();
+        if (initAreaTime) buildFromShared();
     }
 
     private void setDefaultParams() {
+        IS_BUILD_FROM_SHARED = true;
         this.httpAccept = "application/atom%2Bxml";
         this.startRecord = "1";
         this.maximumRecords = "20";
-        this.startDate = "2011-07-23T00:00:00Z";
-        this.endDate = "2014-07-23T00:00:00Z";
-        this.bbox = "20,50,21,51";
+        //this.startDate = "2011-07-23T00:00:00Z";
+        //this.endDate = "2014-07-23T00:00:00Z";
+        //this.bbox = "20,50,21,51";
         this.recordSchema = "server-choice";
         //this.recordSchema = "om";
         this.params.put("httpAccept", httpAccept);
         this.params.put("startRecord", startRecord);
         this.params.put("maximumRecords", maximumRecords);
-        this.params.put("startDate", startDate);
-        this.params.put("endDate", endDate);
-        this.params.put("bbox", bbox);
+        //this.params.put("startDate", startDate);
+        //this.params.put("endDate", endDate);
+        //this.params.put("bbox", bbox);
         this.params.put("recordSchema", recordSchema);
         this.params.put("query", query);
-
     }
 
     private void buildFromShared() {
@@ -79,7 +88,7 @@ public class FedeoRequestParams implements Serializable {
 
     private void buildUrl() {
 
-        buildFromShared();
+        if (IS_BUILD_FROM_SHARED) buildFromShared();
 
         String url;
         url = Const.HTTP_BASE_URL + "?";
@@ -224,7 +233,7 @@ public class FedeoRequestParams implements Serializable {
     /**
      * @param startDate the startDate to set
      */
-    private void setStartDate(String startDate) {
+    public void setStartDate(String startDate) {
         this.startDate = startDate;
         this.params.put("startDate", startDate);
     }
@@ -239,7 +248,7 @@ public class FedeoRequestParams implements Serializable {
     /**
      * @param endDate the endDate to set
      */
-    private void setEndDate(String endDate) {
+    public void setEndDate(String endDate) {
         this.endDate = endDate;
         this.params.put("endDate", endDate);
     }

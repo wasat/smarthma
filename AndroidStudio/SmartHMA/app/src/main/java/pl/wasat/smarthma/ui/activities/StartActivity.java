@@ -5,10 +5,8 @@ import android.support.v4.app.FragmentActivity;
 
 import pl.wasat.smarthma.R;
 import pl.wasat.smarthma.ui.frags.common.StartFragment;
-import pl.wasat.smarthma.ui.frags.common.StartFragment.OnStartFragmentListener;
 
-public class StartActivity extends FragmentActivity implements
-        OnStartFragmentListener {
+public class StartActivity extends FragmentActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

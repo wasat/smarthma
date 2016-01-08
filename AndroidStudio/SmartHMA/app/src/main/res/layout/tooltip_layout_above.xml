@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
-              android:orientation="vertical" >
+              android:orientation="vertical">
 
     <TextView
         android:id="@+id/tooltip_text"
@@ -11,16 +11,16 @@
         android:background="@drawable/tooltip_bg"
         android:gravity="center"
         android:padding="10dp"
-        android:text="Tooltip above"
+        android:text="@string/tooltip_above"
         android:textColor="@android:color/white"
-        android:textSize="20dp"
-        android:textStyle="bold" />
+        android:textSize="16sp"
+        android:textStyle="bold"/>
 
     <ImageView
         android:id="@+id/tooltip_nav_up"
         android:layout_width="25dp"
         android:layout_height="25dp"
         android:layout_gravity="center"
-        android:background="@drawable/nav_down" />
-
+        android:background="@drawable/nav_down"
+        android:contentDescription="@string/desc"/>
 </LinearLayout>

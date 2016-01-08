@@ -7,21 +7,18 @@ import java.net.URLEncoder;
 
 public abstract class AmznWMSTileProvider extends UrlTileProvider {
 
-    // Web Mercator n/w corner of the map.
-    private static final double[] TILE_ORIGIN = {-20037508.34789244, 20037508.34789244};
-    //array indexes for that data
-    private static final int ORIG_X = 0;
-    private static final int ORIG_Y = 1; // "
-
-    // Size of square world map in meters, using Web Mercator projection.
-    private static final double MAP_SIZE = 20037508.34789244 * 2;
-
     // array indexes for array to hold bounding boxes.
     static final int MINX = 0;
     static final int MAXX = 1;
     static final int MINY = 2;
     static final int MAXY = 3;
-
+    // Web Mercator n/w corner of the map.
+    private static final double[] TILE_ORIGIN = {-20037508.34789244, 20037508.34789244};
+    //array indexes for that data
+    private static final int ORIG_X = 0;
+    private static final int ORIG_Y = 1; // "
+    // Size of square world map in meters, using Web Mercator projection.
+    private static final double MAP_SIZE = 20037508.34789244 * 2;
     // cql filters
     private String cqlString = "";
 

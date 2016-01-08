@@ -25,16 +25,12 @@ import pl.wasat.smarthma.model.Collection;
  */
 public class CollectionsListAdapter extends ArrayAdapter<Collection> {
 
+    private static LayoutInflater inflater = null;
     private final Activity activity;
     private final ArrayList<Collection> collData;
     private final String groupName;
-    private static LayoutInflater inflater = null;
     private OnSlideElementListener listener;
 
-
-    public void setListener(OnSlideElementListener listener) {
-        this.listener = listener;
-    }
 
     public CollectionsListAdapter(Activity activ, ArrayList<Collection> data,
                                   String grName) {
@@ -59,14 +55,11 @@ public class CollectionsListAdapter extends ArrayAdapter<Collection> {
     }
 
     public View getView(int position, View convertView, ViewGroup parent) {
-        //if (convertView == null) {
-
         convertView = inflater.inflate(R.layout.view_cell_collection, parent, false);
 
         SwipeDetector swipeDetector = new SwipeDetector(convertView, position);
         swipeDetector.setOnClickListener(listener);
         convertView.setOnTouchListener(swipeDetector);
-        // }
 
         Collection collection = collData.get(position);
         ViewHolder holder = new ViewHolder();
@@ -77,21 +70,15 @@ public class CollectionsListAdapter extends ArrayAdapter<Collection> {
         holder.title.setText(collection.getName());
         holder.artist.setText(groupName);
 
-/*        String url = Const.IMG_URL + "sat" + mod(collection.getId(), 15)
-                + ".jpeg";*/
-
-
         Picasso.with(activity).load(R.drawable.eo_coll_gr_03).resize(72, 72).centerCrop()
                 .into(holder.thumb_image);
-
 
         convertView.setTag(holder);
         return convertView;
     }
 
-    private int mod(int x, int y) {
-        int result = x % y;
-        return result < 0 ? result + y : result;
+    public void setListener(OnSlideElementListener listener) {
+        this.listener = listener;
     }
 
     private static class ViewHolder {

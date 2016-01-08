@@ -14,7 +14,7 @@ import javax.net.ssl.X509TrustManager;
  * Created by Daniel on 2015-11-03.
  * This file is a part of module SmartHMA NavIn project.
  */
-public class SSLCertificateHandler {
+class SSLCertificateHandler {
 
     protected static final String TAG = "NukeSSLCerts";
 
@@ -24,17 +24,16 @@ public class SSLCertificateHandler {
     public static void nuke() {
         try {
             TrustManager[] trustAllCerts = new TrustManager[]{new X509TrustManager() {
-                public X509Certificate[] getAcceptedIssuers() {
-                    X509Certificate[] myTrustedAnchors = new X509Certificate[0];
-                    return myTrustedAnchors;
-                }
-
                 @Override
                 public void checkClientTrusted(X509Certificate[] certs, String authType) {
                 }
 
                 @Override
                 public void checkServerTrusted(X509Certificate[] certs, String authType) {
+                }
+
+                public X509Certificate[] getAcceptedIssuers() {
+                    return new X509Certificate[0];
                 }
             }};
 
@@ -48,7 +47,7 @@ public class SSLCertificateHandler {
                 }
             });
         } catch (Exception e) {
+            e.printStackTrace();
         }
     }
-
 }

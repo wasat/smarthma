@@ -1,34 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="#ffebeff1"
-    android:orientation="horizontal">
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#ffebeff1"
+                android:orientation="horizontal">
 
     <RelativeLayout
+        android:id="@+id/swipe_list_shareview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#ffffeb3b"
-        android:id="@+id/swipe_list_shareview"
-        android:orientation="horizontal">
-
-    </RelativeLayout>
+        android:orientation="horizontal"/>
 
     <RelativeLayout
+        android:id="@+id/swipe_list_deleteview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#ff558b2f"
-        android:id="@+id/swipe_list_deleteview"
-        android:orientation="horizontal">
-
-    </RelativeLayout>
+        android:orientation="horizontal"/>
 
     <LinearLayout
+        android:id="@+id/swipe_list_mainview"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:weightSum="1"
-        android:id="@+id/swipe_list_mainview"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:weightSum="1">
 
         <RelativeLayout
             android:layout_width="fill_parent"
@@ -36,69 +32,42 @@
             android:background="@color/background_white"
             android:padding="@dimen/esa_missions_padding_medium">
 
-
-            <!-- <LinearLayout
-                 android:id="@+id/mission_list_item_thumb_layout"
-                 android:layout_width="wrap_content"
-                 android:layout_height="wrap_content"
-                 android:layout_alignParentLeft="true"
-                 android:layout_centerVertical="true"
-                 android:layout_marginRight="5dip"
-                 android:background="@drawable/image_bg"
-                 android:padding="3dip">
-                         -->
-
             <ImageView
                 android:id="@+id/mission_child_list_item_thmb_imgview"
                 android:layout_width="@dimen/esa_missions_image_size"
                 android:layout_height="@dimen/esa_missions_image_size"
-                android:contentDescription="@string/content_picture"
-                android:scaleType="fitXY"
-                android:padding="@dimen/esa_missions_padding_small"
-                android:background="@color/background_gray"
                 android:layout_centerVertical="true"
-                android:src="@android:drawable/picture_frame" />
-            <!-- </LinearLayout>  -->
-
-            <!--  <LinearLayout
-                  android:layout_width="match_parent"
-                  android:layout_height="55dip"
-                  android:orientation="vertical"
-                  android:layout_centerVertical="true"
-                  android:layout_toRightOf="@+id/mission_child_list_item_thmb_imgview"
-                  android:layout_toEndOf="@+id/mission_child_list_item_thmb_imgview">
-                -->
+                android:background="@color/background_gray"
+                android:contentDescription="@string/content_picture"
+                android:padding="@dimen/esa_missions_padding_small"
+                android:scaleType="fitXY"
+                android:src="@android:drawable/picture_frame"/>
 
             <pl.wasat.smarthma.customviews.TextViewWithFont
                 android:id="@+id/mission_child_list_item_tv"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:text="Lorem ipsum lorem"
-                android:paddingTop="@dimen/esa_missions_padding_small"
-                android:paddingLeft="@dimen/esa_missions_padding_small"
-                android:textColor="@color/text_black"
-                android:textSize="@dimen/esa_missions_cell_text_size_large"
                 android:layout_alignParentTop="true"
+                android:layout_toRightOf="@+id/mission_child_list_item_thmb_imgview"
                 android:maxLines="1"
                 android:minLines="1"
-                android:layout_toRightOf="@+id/mission_child_list_item_thmb_imgview" />
+                android:paddingLeft="@dimen/esa_missions_padding_small"
+                android:paddingTop="@dimen/esa_missions_padding_small"
+                android:text="@string/lorem_ipsum_dolor"
+                android:textColor="@color/text_black"
+                android:textSize="@dimen/esa_missions_cell_text_size_large"/>
 
             <pl.wasat.smarthma.customviews.TextViewWithFont
                 android:id="@+id/mission_child_list_item_tv_2"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:text="Lorem"
-                android:paddingLeft="@dimen/esa_missions_padding_small"
-                android:paddingBottom="@dimen/esa_missions_padding_small"
-                android:textSize="@dimen/esa_missions_cell_text_size"
                 android:layout_alignBottom="@+id/mission_child_list_item_thmb_imgview"
-                android:layout_toRightOf="@+id/mission_child_list_item_thmb_imgview" />
-            <!-- </LinearLayout>   -->
-            <!-- android:paddingLeft="?android:attr/expandableListPreferredChildPaddingLeft" -->
-
+                android:layout_toRightOf="@+id/mission_child_list_item_thmb_imgview"
+                android:paddingBottom="@dimen/esa_missions_padding_small"
+                android:paddingLeft="@dimen/esa_missions_padding_small"
+                android:text="@string/lorem"
+                android:textSize="@dimen/esa_missions_cell_text_size"/>
         </RelativeLayout>
-
     </LinearLayout>
-
 </RelativeLayout>
 

@@ -24,16 +24,12 @@ import com.amazon.geo.mapsv2.model.GroundOverlayOptions;
 import com.amazon.geo.mapsv2.model.LatLng;
 import com.amazon.geo.mapsv2.model.LatLngBounds;
 import com.amazon.geo.mapsv2.model.PolygonOptions;
-import com.squareup.okhttp.OkHttpClient;
-import com.squareup.okhttp.Protocol;
-import com.squareup.picasso.OkHttpDownloader;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Picasso.LoadedFrom;
 import com.squareup.picasso.Target;
 import com.squareup.picasso.Transformation;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import pl.wasat.smarthma.R;
@@ -52,22 +48,22 @@ public class AmznExtendedMapFragment extends Fragment implements
         OnBaseMapFragmentPublicListener, Target, Transformation,
         OnSeekBarChangeListener {
 
+    private static final int BEARING_LEVEL_VALUE = 0;
+    private static final int START_OPACITY = 25;
     private AmznBaseMapFragment baseMapFragment;
     private AmazonMap mMap;
     private GroundOverlay groundOverlay;
     private SeekBar seekBarOpacity;
-
     private BitmapDescriptor qLookImage;
-
-    private static final int BEARING_LEVEL_VALUE = 0;
-    private static final int START_OPACITY = 25;
-
     private OnAmznExtendedMapFragmentListener mListener;
 
     private LatLng qLookCenter;
     private float qLookWidth;
     private float qLookHeight;
     private float qLookBearing;
+
+    public AmznExtendedMapFragment() {
+    }
 
     /**
      * Use this factory method to create a new instance of this fragment using
@@ -80,14 +76,18 @@ public class AmznExtendedMapFragment extends Fragment implements
         return new AmznExtendedMapFragment();
     }
 
-    public AmznExtendedMapFragment() {
-        // Required empty public constructor
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        Activity activity = context instanceof Activity ? (Activity) context : null;
+        try {
+            mListener = (OnAmznExtendedMapFragmentListener) activity;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(activity.toString()
+                    + activity.getString(R.string.must_implement)
+                    + OnAmznExtendedMapFragmentListener.class.getSimpleName());
+        }
     }
-
-/*    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }*/
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -121,43 +121,88 @@ public class AmznExtendedMapFragment extends Fragment implements
     }
 
     @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        Activity activity = context instanceof Activity ? (Activity) context : null;
-        try {
-            mListener = (OnAmznExtendedMapFragmentListener) activity;
-        } catch (ClassCastException e) {
-            throw new ClassCastException(activity.toString()
-                    + " must implement OnAmznExtendedMapFragmentListener");
-        }
-    }
-
-    @Override
     public void onDetach() {
         super.onDetach();
         mListener = null;
     }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated to
-     * the activity and potentially other fragments contained in that activity.
-     * <p/>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
-    public interface OnAmznExtendedMapFragmentListener {
-        void onAmznMapReady();
+    @Override
+    public void onBaseSupportMapPublicReady() {
+        mMap = baseMapFragment.getMap();
+        if (mListener != null) {
+            mListener.onAmznMapReady();
+        }
     }
 
-    private void buildFootprintBounds(List<LatLng> footprintPoints) {
-        LatLngBounds.Builder boundsBuilder = new LatLngBounds.Builder();
-        for (int j = 0; j < footprintPoints.size(); j++) {
-            boundsBuilder.include(footprintPoints.get(j));
+    @Override
+    public void onBitmapLoaded(Bitmap bitmap, LoadedFrom arg1) {
+        qLookImage = BitmapDescriptorFactory.fromBitmap(bitmap);
+
+        GroundOverlayOptions groundOverlayOpt = new GroundOverlayOptions()
+                .image(qLookImage)
+                .position(qLookCenter, qLookWidth, qLookHeight)
+                .bearing(qLookBearing).zIndex(2)
+                .transparency((float) START_OPACITY / 100);
+
+        try {
+            groundOverlay = mMap.addGroundOverlay(groundOverlayOpt);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        baseMapFragment.setTargetBounds(boundsBuilder.build());
-        baseMapFragment.animateWhenMapIsReady(75);
+
+        seekBarOpacity.setProgress(START_OPACITY);
+    }
+
+    @Override
+    public void onBitmapFailed(Drawable arg0) {
+
+    }
+
+    @Override
+    public void onPrepareLoad(Drawable arg0) {
+    }
+
+    @Override
+    public void onProgressChanged(SeekBar seekBar, int progress,
+                                  boolean fromUser) {
+        if (groundOverlay != null) {
+            int opacity = seekBarOpacity.getProgress();
+            groundOverlay.remove();
+
+            GroundOverlayOptions groundOverlayOpt = new GroundOverlayOptions()
+                    .image(qLookImage)
+                    .position(qLookCenter, qLookWidth, qLookHeight)
+                    .bearing(qLookBearing).zIndex(2)
+                    .transparency((float) opacity / 100);
+
+            groundOverlay = mMap.addGroundOverlay(groundOverlayOpt);
+        }
+
+    }
+
+    @Override
+    public void onStartTrackingTouch(SeekBar seekBar) {
+    }
+
+    @Override
+    public void onStopTrackingTouch(SeekBar seekBar) {
+
+    }
+
+    @Override
+    public Bitmap transform(Bitmap source) {
+        int x = (int) ((source.getWidth()) / 1.5);
+        int y = (int) ((source.getHeight()) / 1.5);
+        Bitmap result = Bitmap.createScaledBitmap(source, x, y, false);
+        if (result != source) {
+            source.recycle();
+        }
+        return result;
+    }
+
+    @Override
+    public String key() {
+        return "SmartHMA";
     }
 
     public void showFootPrints(ArrayList<LatLngExt> footprint) {
@@ -166,27 +211,7 @@ public class AmznExtendedMapFragment extends Fragment implements
         drawFootprint(footprintPoints);
     }
 
-    private ArrayList<LatLng> castToAmznLatLonArray(ArrayList<LatLngExt> latLngExtArrayList) {
-        ArrayList<LatLng> latLngs = new ArrayList<>();
-        for (LatLngExt latLngExt : latLngExtArrayList) {
-            latLngs.add(latLngExt.getAmznLatLon());
-        }
-        return latLngs;
-    }
-
     private ArrayList<LatLng> extractLatLngFootprint(ArrayList<LatLngExt> footprint) {
-/*        List<Pos> footprintPosList = footprint.getMultiExtentOf()
-                .getMultiSurface().getSurfaceMembers().getPolygon()
-                .getExterior().getLinearRing().getPosList();
-        if (footprintPosList.isEmpty()) {
-            String posStr = footprint.getMultiExtentOf().getMultiSurface()
-                    .getSurfaceMembers().getPolygon().getExterior()
-                    .getLinearRing().getPosString().getPointsString();
-            footprintPosList = footprint.getMultiExtentOf().getMultiSurface()
-                    .getSurfaceMembers().getPolygon().getExterior()
-                    .getLinearRing().setPosList(posStr);
-        }*/
-
         ArrayList<LatLng> footprintPoints = new ArrayList<>();
         float prevBearing = 0;
 
@@ -206,8 +231,16 @@ public class AmznExtendedMapFragment extends Fragment implements
             }
             prevBearing = results[2];
         }
-
         return footprintPoints;
+    }
+
+    private void buildFootprintBounds(List<LatLng> footprintPoints) {
+        LatLngBounds.Builder boundsBuilder = new LatLngBounds.Builder();
+        for (int j = 0; j < footprintPoints.size(); j++) {
+            boundsBuilder.include(footprintPoints.get(j));
+        }
+        baseMapFragment.setTargetBounds(boundsBuilder.build());
+        baseMapFragment.animateWhenMapIsReady(75);
     }
 
     private void drawFootprint(ArrayList<LatLng> footprintPoints) {
@@ -221,6 +254,37 @@ public class AmznExtendedMapFragment extends Fragment implements
             rectOptions.zIndex(1);
             mMap.addPolygon(rectOptions);
         }
+    }
+
+    public void showQuicklookOnMap(SimpleMetadata simpleMetadata) {
+
+        ArrayList<LatLng> footprintPoints = castToAmznLatLonArray(simpleMetadata.getFootprint());
+        LatLng center = simpleMetadata.getFootprintCenter().getAmznLatLon();
+        String url = simpleMetadata.getQuickLookUrl();
+
+        buildFootprintBounds(footprintPoints);
+
+        calcQuickLookParams(center, footprintPoints);
+        drawFootprint(footprintPoints);
+
+        Target quicklookTarget = this;
+
+/*        OkHttpClient client = new OkHttpClient();
+        client.setProtocols(Collections.singletonList(Protocol.HTTP_1_1));
+        final Picasso picasso = new Picasso.Builder(getActivity())
+                .downloader(new OkHttpDownloader(client))
+                .build();*/
+
+        Picasso.with(getActivity()).load(url).transform(this)
+                .into(quicklookTarget);
+    }
+
+    private ArrayList<LatLng> castToAmznLatLonArray(ArrayList<LatLngExt> latLngExtArrayList) {
+        ArrayList<LatLng> latLngs = new ArrayList<>();
+        for (LatLngExt latLngExt : latLngExtArrayList) {
+            latLngs.add(latLngExt.getAmznLatLon());
+        }
+        return latLngs;
     }
 
     private void calcQuickLookParams(LatLng footprintCenter,
@@ -252,110 +316,16 @@ public class AmznExtendedMapFragment extends Fragment implements
 
     }
 
-    public void showQuicklookOnMap(SimpleMetadata simpleMetadata) {
-
-        ArrayList<LatLng> footprintPoints = castToAmznLatLonArray(simpleMetadata.getFootprint());
-        LatLng center = simpleMetadata.getFootprintCenter().getAmznLatLon();
-        String url = simpleMetadata.getQuickLookUrl();
-
-        //ArrayList<LatLng> footprintPoints = extractLatLngFootprint(footprint);
-
-        buildFootprintBounds(footprintPoints);
-
-        calcQuickLookParams(center, footprintPoints);
-        drawFootprint(footprintPoints);
-
-        Target quicklookTarget = this;
-
-        OkHttpClient client = new OkHttpClient();
-        client.setProtocols(Arrays.asList(Protocol.HTTP_1_1));
-        final Picasso picasso = new Picasso.Builder(getActivity())
-                .downloader(new OkHttpDownloader(client))
-                .build();
-
-        Picasso.with(getActivity()).load(url).transform(this)
-                .into(quicklookTarget);
+    /**
+     * This interface must be implemented by activities that contain this
+     * fragment to allow an interaction in this fragment to be communicated to
+     * the activity and potentially other fragments contained in that activity.
+     * <p/>
+     * See the Android Training lesson <a href=
+     * "http://developer.android.com/training/basics/fragments/communicating.html"
+     * >Communicating with Other Fragments</a> for more information.
+     */
+    public interface OnAmznExtendedMapFragmentListener {
+        void onAmznMapReady();
     }
-
-    @Override
-    public void onBaseSupportMapPublicReady() {
-        mMap = baseMapFragment.getMap();
-        if (mListener != null) {
-            mListener.onAmznMapReady();
-        }
-    }
-
-    @Override
-    public void onPrepareLoad(Drawable arg0) {
-    }
-
-    @Override
-    public void onBitmapLoaded(Bitmap bitmap, LoadedFrom arg1) {
-        qLookImage = BitmapDescriptorFactory.fromBitmap(bitmap);
-
-        GroundOverlayOptions groundOverlayOpt = new GroundOverlayOptions()
-                .image(qLookImage)
-                .position(qLookCenter, qLookWidth, qLookHeight)
-                .bearing(qLookBearing).zIndex(2)
-                .transparency((float) START_OPACITY / 100);
-
-        try {
-            groundOverlay = mMap.addGroundOverlay(groundOverlayOpt);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        seekBarOpacity.setProgress(START_OPACITY);
-    }
-
-    @Override
-    public void onBitmapFailed(Drawable arg0) {
-
-    }
-
-    @Override
-    public void onProgressChanged(SeekBar seekBar, int progress,
-                                  boolean fromUser) {
-        if (groundOverlay != null) {
-            int opacity = seekBarOpacity.getProgress();
-            groundOverlay.remove();
-
-            GroundOverlayOptions groundOverlayOpt = new GroundOverlayOptions()
-                    .image(qLookImage)
-                    .position(qLookCenter, qLookWidth, qLookHeight)
-                    .bearing(qLookBearing).zIndex(2)
-                    .transparency((float) opacity / 100);
-
-            groundOverlay = mMap.addGroundOverlay(groundOverlayOpt);
-        }
-
-    }
-
-    @Override
-    public void onStartTrackingTouch(SeekBar seekBar) {
-    }
-
-    @Override
-    public void onStopTrackingTouch(SeekBar seekBar) {
-
-    }
-
-    @Override
-    public String key() {
-        return "SmartHMA";
-    }
-
-    @Override
-    public Bitmap transform(Bitmap source) {
-        //int size = Math.min(source.getWidth(), source.getHeight());
-        int x = (int) ((source.getWidth()) / 1.5);
-        int y = (int) ((source.getHeight()) / 1.5);
-        Bitmap result = Bitmap.createScaledBitmap(source, x, y, false);
-        if (result != source) {
-            source.recycle();
-        }
-        return result;
-    }
-
-
 }

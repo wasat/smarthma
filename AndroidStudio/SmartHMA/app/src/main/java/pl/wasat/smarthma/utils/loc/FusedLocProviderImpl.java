@@ -22,18 +22,90 @@ class FusedLocProviderImpl implements
         GoogleApiClient.OnConnectionFailedListener,
         LocationListener {
 
-
-    private final Context context;
     private static final int REQUEST_TIMEOUT = 30000;
     private static final int ACCURACY_LEVEL = 300;
     private static final long LOC_DEGRADATION_TIME = 900000;
+    private final Context context;
     private GoogleApiClient mGoogleApiClient;
     private Location fusedLastLocation;
     private long updateStartTime;
 
-
     public FusedLocProviderImpl(Context context) {
         this.context = context;
+    }
+
+    @Override
+    public void onConnected(Bundle bundle) {
+        Location mLastLocation = LocationServices.FusedLocationApi.getLastLocation(
+                mGoogleApiClient);
+        if (mLastLocation != null) {
+            long timeDiff = System.currentTimeMillis() - mLastLocation.getTime();
+            if (timeDiff < LOC_DEGRADATION_TIME && mLastLocation.getAccuracy() < ACCURACY_LEVEL) {
+                fusedLastLocation = mLastLocation;
+                buildAndSendBroadcast(true);
+            } else {
+                startLocationUpdates();
+            }
+        } else {
+            buildAndSendBroadcast(false);
+        }
+    }
+
+    @Override
+    public void onConnectionSuspended(int i) {
+        if (fusedLastLocation == null) {
+            buildAndSendBroadcast(false);
+        }
+    }
+
+    private void buildAndSendBroadcast(Boolean isSuccess) {
+        Intent intent = new Intent();
+        intent.setAction(GoogleLocProviderImpl.GOOGLE_LOC_BROADCAST_SENT);
+        intent.putExtra(GoogleLocProviderImpl.IS_SUCCESS, isSuccess);
+        intent.putExtra(GoogleLocProviderImpl.GOOGLE_PROVIDER_TYPE, GoogleLocProviderImpl.GOOGLE_FUSED);
+        context.sendBroadcast(intent);
+    }
+
+    private void startLocationUpdates() {
+        LocationServices.FusedLocationApi.requestLocationUpdates(
+                mGoogleApiClient, createLocationRequest(), this);
+        updateStartTime = System.currentTimeMillis();
+    }
+
+    private LocationRequest createLocationRequest() {
+        LocationRequest mLocationRequest = new LocationRequest();
+        mLocationRequest.setInterval(1000);
+        mLocationRequest.setFastestInterval(300);
+        mLocationRequest.setPriority(LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY);
+        mLocationRequest.setNumUpdates(20);
+        mLocationRequest.setExpirationDuration(60000);
+
+        return mLocationRequest;
+    }
+
+    @Override
+    public void onConnectionFailed(ConnectionResult connectionResult) {
+        Log.e(FusedLocProviderImpl.class.getName(), "onConnectionFailed");
+        buildAndSendBroadcast(false);
+    }
+
+    @Override
+    public void onLocationChanged(Location location) {
+        if (location != null) {
+            Log.i(FusedLocProviderImpl.class.getName(), location.toString());
+            long timeDiff = System.currentTimeMillis() - updateStartTime;
+            if (location.getAccuracy() < ACCURACY_LEVEL || timeDiff > REQUEST_TIMEOUT) {
+                fusedLastLocation = location;
+                buildAndSendBroadcast(true);
+                stopLocationUpdates();
+            }
+        }
+    }
+
+    private void stopLocationUpdates() {
+        if (mGoogleApiClient.isConnected())
+            LocationServices.FusedLocationApi.removeLocationUpdates(
+                    mGoogleApiClient, this);
     }
 
     public void start() {
@@ -53,80 +125,6 @@ class FusedLocProviderImpl implements
                 .build();
     }
 
-    @Override
-    public void onConnected(Bundle bundle) {
-        Location mLastLocation = LocationServices.FusedLocationApi.getLastLocation(
-                mGoogleApiClient);
-        if (mLastLocation != null) {
-            long timeDiff = System.currentTimeMillis() - mLastLocation.getTime();
-            if (timeDiff < LOC_DEGRADATION_TIME && mLastLocation.getAccuracy() < ACCURACY_LEVEL) {
-                //Log.i(FusedLocProviderImpl.class.getName(), "onConnected - onInitialise()");
-                fusedLastLocation = mLastLocation;
-                buildAndSendBroadcast(true);
-            } else {
-                //Log.i(FusedLocProviderImpl.class.getName(), "onConnected - startLocationUpdates");
-                startLocationUpdates();
-            }
-            //Log.i(FusedLocProviderImpl.class.getName(), mLastLocation.toString());
-        } else {
-            //Log.i(FusedLocProviderImpl.class.getName(), " InitialiseFailed()");
-            buildAndSendBroadcast(false);
-        }
-    }
-
-    @Override
-    public void onConnectionSuspended(int i) {
-        if (fusedLastLocation == null) {
-            buildAndSendBroadcast(false);
-        }
-    }
-
-    @Override
-    public void onConnectionFailed(ConnectionResult connectionResult) {
-        Log.e(FusedLocProviderImpl.class.getName(), "onConnectionFailed");
-        buildAndSendBroadcast(false);
-    }
-
-
-    private void startLocationUpdates() {
-        LocationServices.FusedLocationApi.requestLocationUpdates(
-                mGoogleApiClient, createLocationRequest(), this);
-        updateStartTime = System.currentTimeMillis();
-    }
-
-    private LocationRequest createLocationRequest() {
-        LocationRequest mLocationRequest = new LocationRequest();
-        mLocationRequest.setInterval(1000);
-        mLocationRequest.setFastestInterval(300);
-        mLocationRequest.setPriority(LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY);
-        mLocationRequest.setNumUpdates(20);
-        mLocationRequest.setExpirationDuration(60000);
-
-        return mLocationRequest;
-    }
-
-
-    private void stopLocationUpdates() {
-        //Log.i(FusedLocProviderImpl.class.getName(), "stopLocationUpdates");
-        if (mGoogleApiClient.isConnected())
-            LocationServices.FusedLocationApi.removeLocationUpdates(
-                    mGoogleApiClient, this);
-    }
-
-    @Override
-    public void onLocationChanged(Location location) {
-        //Log.i(FusedLocProviderImpl.class.getName(), "onLocationChanged");
-        if (location != null) {
-            Log.i(FusedLocProviderImpl.class.getName(), location.toString());
-            long timeDiff = System.currentTimeMillis() - updateStartTime;
-            if (location.getAccuracy() < ACCURACY_LEVEL || timeDiff > REQUEST_TIMEOUT) {
-                fusedLastLocation = location;
-                buildAndSendBroadcast(true);
-                stopLocationUpdates();
-            }
-        }
-    }
-
     public Location getCalculatedPosition() {
         if (fusedLastLocation != null) {
             Location location = new Location("Fused_Location");
@@ -136,15 +134,6 @@ class FusedLocProviderImpl implements
         } else {
             return null;
         }
-
-    }
-
-    private void buildAndSendBroadcast(Boolean isSuccess) {
-        Intent intent = new Intent();
-        intent.setAction(GoogleLocProviderImpl.GOOGLE_LOC_BROADCAST_SENT);
-        intent.putExtra(GoogleLocProviderImpl.IS_SUCCESS, isSuccess);
-        intent.putExtra(GoogleLocProviderImpl.GOOGLE_PROVIDER_TYPE, GoogleLocProviderImpl.GOOGLE_FUSED);
-        context.sendBroadcast(intent);
     }
 
     public void stop() {

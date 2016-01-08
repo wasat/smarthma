@@ -33,14 +33,16 @@ import pl.wasat.smarthma.utils.rss.FedeoSearchRequest;
  */
 public class DataSeriesListFragment extends BaseSpiceListFragment {
 
-    private FedeoRequestParams browseRequest;
-
     private static final String STATE_ACTIVATED_POSITION = "activated_position";
-
     private static final String KEY_PARAM_BROWSE_FEDEO_REQUEST = "pl.wasat.smarthma.KEY_PARAM_BROWSE_FEDEO_REQUEST";
+    private FedeoRequestParams browseRequest;
     private int mActivatedPosition = ListView.INVALID_POSITION;
 
     private OnDataSeriesListFragmentListener mListener;
+
+    public DataSeriesListFragment() {
+        setHasOptionsMenu(true);
+    }
 
     /**
      * Use this factory method to create a new instance of this fragment using
@@ -58,8 +60,17 @@ public class DataSeriesListFragment extends BaseSpiceListFragment {
         return fragment;
     }
 
-    public DataSeriesListFragment() {
-        setHasOptionsMenu(true);
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        Activity activity = context instanceof Activity ? (Activity) context : null;
+        try {
+            mListener = (OnDataSeriesListFragmentListener) activity;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(activity.toString()
+                    + activity.getString(R.string.must_implement)
+                    + OnDataSeriesListFragmentListener.class.getSimpleName());
+        }
     }
 
     @Override
@@ -71,51 +82,6 @@ public class DataSeriesListFragment extends BaseSpiceListFragment {
     }
 
     @Override
-    public void onViewCreated(View view, Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        if (savedInstanceState != null
-                && savedInstanceState.containsKey(STATE_ACTIVATED_POSITION)) {
-            setActivatedPosition(savedInstanceState
-                    .getInt(STATE_ACTIVATED_POSITION));
-        }
-    }
-
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        Activity activity = context instanceof Activity ? (Activity) context : null;
-        try {
-            mListener = (OnDataSeriesListFragmentListener) activity;
-        } catch (ClassCastException e) {
-            throw new ClassCastException(activity.toString()
-                    + " must implement OnDataSeriesListFragmentListener");
-        }
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        mListener = null;
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
-        // TODO: Find solution - why fragment is called twice
-        stopSearch = getArguments().getBoolean(Const.KEY_INTENT_RETURN_STOP_SEARCH);
-        if (browseRequest != null && !stopSearch) {
-            loadDataSeriesFeedResponse(browseRequest);
-        }
-    }
-
-    @Override
-    public void onListItemClick(ListView listView, View view, int position,
-                                long id) {
-        super.onListItemClick(listView, view, position, id);
-        mListener.onDataSeriesFragmentItemSelected(String.valueOf(position));
-    }
-
-    @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         if (mActivatedPosition != ListView.INVALID_POSITION) {
@@ -123,19 +89,10 @@ public class DataSeriesListFragment extends BaseSpiceListFragment {
         }
     }
 
-    public void setActivateOnItemClick(boolean activateOnItemClick) {
-        getListView().setChoiceMode(
-                activateOnItemClick ? ListView.CHOICE_MODE_SINGLE
-                        : ListView.CHOICE_MODE_NONE);
-    }
-
-    private void setActivatedPosition(int position) {
-        if (position == ListView.INVALID_POSITION) {
-            getListView().setItemChecked(mActivatedPosition, false);
-        } else {
-            getListView().setItemChecked(position, true);
-        }
-        mActivatedPosition = position;
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        mListener = null;
     }
 
     @Override
@@ -177,27 +134,13 @@ public class DataSeriesListFragment extends BaseSpiceListFragment {
         Toast.makeText(getActivity(), getActivity().getString(R.string.refreshing_list), Toast.LENGTH_LONG).show();
     }
 
-    private void updateEOListViewContent(List<EntryISO> dataSeriesFeedList) {
-        View view = getView();
-        if (view != null) {
-            if (dataSeriesFeedList.isEmpty()) {
-                view.setVisibility(View.GONE);
-            } else {
-                DataSeriesListAdapter adapter = new DataSeriesListAdapter(
-                        getActivity(), dataSeriesFeedList);
-                adapter.setListener(new OnSlideElementListener() {
-                    @Override
-                    public void Catch(boolean swipeRight, int position) {
-                        if (swipeRight)
-                            Toast.makeText(getContext(), "share " + position, Toast.LENGTH_SHORT).show();
-                        else
-                            Toast.makeText(getContext(), "delete " + position, Toast.LENGTH_SHORT).show();
-                    }
-                });
-                this.setListAdapter(adapter);
-                adapter.notifyDataSetChanged();
-                view.setVisibility(View.VISIBLE);
-            }
+    @Override
+    public void onStart() {
+        super.onStart();
+        // TODO: Find solution - why fragment is called twice
+        stopSearch = getArguments().getBoolean(Const.KEY_INTENT_RETURN_STOP_SEARCH);
+        if (browseRequest != null && !stopSearch) {
+            loadDataSeriesFeedResponse(browseRequest);
         }
     }
 
@@ -228,8 +171,35 @@ public class DataSeriesListFragment extends BaseSpiceListFragment {
         sorter.sort(entries);
 
         updateEOListViewContent(dataSeriesFeeds.getEntriesISO());
-
         loadIntroFeedInfo(dataSeriesFeeds);
+    }
+
+    private void updateEOListViewContent(List<EntryISO> dataSeriesFeedList) {
+        View view = getView();
+        if (view != null) {
+            if (dataSeriesFeedList.isEmpty()) {
+                view.setVisibility(View.GONE);
+            } else {
+                DataSeriesListAdapter adapter = new DataSeriesListAdapter(
+                        getActivity(), dataSeriesFeedList);
+                adapter.setListener(new OnSlideElementListener() {
+                    @Override
+                    public void Catch(boolean swipeRight, int position) {
+                        if (swipeRight)
+                            Toast.makeText(getContext(),
+                                    getContext().getString(R.string.swipe_right)
+                                            + position, Toast.LENGTH_SHORT).show();
+                        else
+                            Toast.makeText(getContext(),
+                                    getContext().getString(R.string.swipe_left)
+                                            + position, Toast.LENGTH_SHORT).show();
+                    }
+                });
+                this.setListAdapter(adapter);
+                adapter.notifyDataSetChanged();
+                view.setVisibility(View.VISIBLE);
+            }
+        }
     }
 
     /**
@@ -243,8 +213,41 @@ public class DataSeriesListFragment extends BaseSpiceListFragment {
                 .beginTransaction()
                 .replace(R.id.activity_base_details_container,
                         feedSummaryBrowseCollectionsFragment)
-                .addToBackStack("FeedSummaryBrowseCollectionsFragment").commit();
+                .addToBackStack(FeedSummaryBrowseCollectionsFragment.class.getSimpleName())
+                .commit();
 
+    }
+
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        if (savedInstanceState != null
+                && savedInstanceState.containsKey(STATE_ACTIVATED_POSITION)) {
+            setActivatedPosition(savedInstanceState
+                    .getInt(STATE_ACTIVATED_POSITION));
+        }
+    }
+
+    @Override
+    public void onListItemClick(ListView listView, View view, int position,
+                                long id) {
+        super.onListItemClick(listView, view, position, id);
+        mListener.onDataSeriesFragmentItemSelected(String.valueOf(position));
+    }
+
+    private void setActivatedPosition(int position) {
+        if (position == ListView.INVALID_POSITION) {
+            getListView().setItemChecked(mActivatedPosition, false);
+        } else {
+            getListView().setItemChecked(position, true);
+        }
+        mActivatedPosition = position;
+    }
+
+    public void setActivateOnItemClick(boolean activateOnItemClick) {
+        getListView().setChoiceMode(
+                activateOnItemClick ? ListView.CHOICE_MODE_SINGLE
+                        : ListView.CHOICE_MODE_NONE);
     }
 
     /**
@@ -260,5 +263,4 @@ public class DataSeriesListFragment extends BaseSpiceListFragment {
     public interface OnDataSeriesListFragmentListener {
         void onDataSeriesFragmentItemSelected(String id);
     }
-
 }

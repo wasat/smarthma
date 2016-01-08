@@ -35,7 +35,7 @@ public class NewsRssServiceNoAsync {
         Context context = articleListFragment.getActivity();
         articleListFrag = articleListFragment;
         progress = new ProgressDialog(context);
-        progress.setMessage("Loading...");
+        progress.setMessage(context.getString(R.string.loading));
 
     }
 
@@ -46,25 +46,47 @@ public class NewsRssServiceNoAsync {
     }
 
     private void onPreExecute() {
-        Log.e("ASYNC", "PRE EXECUTE");
         progress.show();
     }
 
+    private List<NewsArticle> doInBackground(String... urls) {
+        String feed = urls[0];
+
+        URL url;
+        try {
+            SAXParserFactory spf = SAXParserFactory.newInstance();
+            SAXParser sp = spf.newSAXParser();
+            XMLReader xr = sp.getXMLReader();
+
+            url = new URL(feed);
+            NewsRssHandler rh = new NewsRssHandler();
+
+            xr.setContentHandler(rh);
+            xr.parse(new InputSource(url.openStream()));
+
+            return rh.getArticleList();
+        } catch (IOException e) {
+            Log.e("RSS Handler IO", e.getMessage() + " >> " + e.toString());
+        } catch (SAXException e) {
+            Log.e("RSS Handler SAX", e.toString());
+            e.printStackTrace();
+        } catch (ParserConfigurationException e) {
+            Log.e("RSS Parser Config", e.toString());
+        }
+        return null;
+    }
+
     private void onPostExecute(final List<NewsArticle> articles) {
-        Log.e("ASYNC", "POST EXECUTE");
         articleListFrag.getActivity().runOnUiThread(new Runnable() {
             @Override
             public void run() {
                 for (NewsArticle a : articles) {
-                    Log.d("DB", "Searching DB for GUID: " + a.getGuid());
                     NewsDbAdapter dba = new NewsDbAdapter(articleListFrag
                             .getActivity());
                     dba.openToRead();
                     NewsArticle fetchedArticle = dba.getBlogListing(a.getGuid());
                     dba.close();
                     if (fetchedArticle == null) {
-                        Log.d("DB",
-                                "Found entry for first time: " + a.getTitle());
                         dba = new NewsDbAdapter(articleListFrag.getActivity());
                         dba.openToWrite();
                         dba.insertBlogListing(a.getGuid());
@@ -81,9 +103,13 @@ public class NewsRssServiceNoAsync {
                     @Override
                     public void Catch(boolean swipeRight, int position) {
                         if (swipeRight)
-                            Toast.makeText(adapter.getContext(), "share " + position, Toast.LENGTH_SHORT).show();
+                            Toast.makeText(adapter.getContext(),
+                                    adapter.getContext().getString(R.string.swipe_right)
+                                            + position, Toast.LENGTH_SHORT).show();
                         else
-                            Toast.makeText(adapter.getContext(), "delete " + position, Toast.LENGTH_SHORT).show();
+                            Toast.makeText(adapter.getContext(),
+                                    adapter.getContext().getString(R.string.swipe_left)
+                                            + position, Toast.LENGTH_SHORT).show();
                     }
                 });
                 articleListFrag.setListAdapter(adapter);
@@ -94,37 +120,5 @@ public class NewsRssServiceNoAsync {
             }
         });
         progress.dismiss();
-    }
-
-    private List<NewsArticle> doInBackground(String... urls) {
-        String feed = urls[0];
-
-        URL url;
-        try {
-
-            SAXParserFactory spf = SAXParserFactory.newInstance();
-            SAXParser sp = spf.newSAXParser();
-            XMLReader xr = sp.getXMLReader();
-
-            url = new URL(feed);
-            NewsRssHandler rh = new NewsRssHandler();
-
-            xr.setContentHandler(rh);
-            xr.parse(new InputSource(url.openStream()));
-
-            Log.e("ASYNC", "PARSING FINISHED");
-            return rh.getArticleList();
-
-        } catch (IOException e) {
-            Log.e("RSS Handler IO", e.getMessage() + " >> " + e.toString());
-        } catch (SAXException e) {
-            Log.e("RSS Handler SAX", e.toString());
-            e.printStackTrace();
-        } catch (ParserConfigurationException e) {
-            Log.e("RSS Parser Config", e.toString());
-        }
-
-        return null;
-
     }
 }

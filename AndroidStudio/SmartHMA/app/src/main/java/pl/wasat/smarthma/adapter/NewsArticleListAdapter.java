@@ -2,6 +2,7 @@ package pl.wasat.smarthma.adapter;
 
 
 import android.app.Activity;
+import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,21 +16,13 @@ import pl.wasat.smarthma.R;
 import pl.wasat.smarthma.interfaces.OnSlideElementListener;
 import pl.wasat.smarthma.model.NewsArticle;
 
-
 public class NewsArticleListAdapter extends ArrayAdapter<NewsArticle> {
 
-
     private OnSlideElementListener listener;
-
-
-    public void setListener(OnSlideElementListener listener) {
-        this.listener = listener;
-    }
 
     public NewsArticleListAdapter(Activity activity, int layoutResource, List<NewsArticle> articles) {
         super(activity, layoutResource, articles);
     }
-
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
@@ -44,7 +37,6 @@ public class NewsArticleListAdapter extends ArrayAdapter<NewsArticle> {
 
         NewsArticle article = getItem(position);
 
-
         TextView textView = (TextView) convertView.findViewById(R.id.article_title_text);
         textView.setText(article.getTitle());
 
@@ -52,14 +44,14 @@ public class NewsArticleListAdapter extends ArrayAdapter<NewsArticle> {
         String pubDate = article.getPubDate();
         dateView.setText(pubDate);
 
-
         if (article.isRead()) {
             LinearLayout row = (LinearLayout) convertView.findViewById(R.id.view_cell_article_row_background);
-            row.setBackgroundColor(activity.getResources().getColor(R.color.row_selected));
-
-            //textView.setTypeface(.DEFAULT_BOLD);
+            row.setBackgroundColor(ContextCompat.getColor(activity, R.color.row_selected));
         }
         return convertView;
+    }
 
+    public void setListener(OnSlideElementListener listener) {
+        this.listener = listener;
     }
 }

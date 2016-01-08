@@ -23,13 +23,10 @@ import pl.wasat.smarthma.utils.rss.NewsRssHandler;
  * Created by Dark Mark on 17/04/2015 01:33.
  * Part of the project  SmartHMA
  */
-class RSSTask extends AsyncTask
-{
+class RSSTask extends AsyncTask {
     @Override
-    protected Object doInBackground(Object[] objects)
-    {
-        Log.d("ZX", "doInBackground()");
-        String feed = (String)objects[0];
+    protected Object doInBackground(Object[] objects) {
+        String feed = (String) objects[0];
         URL url;
         try {
             SAXParserFactory spf = SAXParserFactory.newInstance();
@@ -37,17 +34,14 @@ class RSSTask extends AsyncTask
             XMLReader xr = sp.getXMLReader();
 
             url = new URL(feed);
-            Log.d("ZX", url.toString());
             NewsRssHandler rh = new NewsRssHandler();
 
             xr.setContentHandler(rh);
             xr.parse(new InputSource(url.openStream()));
 
-            Log.i("ASYNC", "PARSING FINISHED");
             List<NewsArticle> articles = rh.getArticleList();
             articles = articles.subList(0, Const.MAX_WIDGET_ENTRIES);
-            ((RemoteFetchService)objects[1]).refreshList(articles);
-
+            ((RemoteFetchService) objects[1]).refreshList(articles);
             return articles;
 
         } catch (IOException e) {
@@ -58,7 +52,6 @@ class RSSTask extends AsyncTask
         } catch (ParserConfigurationException e) {
             Log.e("RSS Parser Config", e.toString());
         }
-
         return null;
     }
 }

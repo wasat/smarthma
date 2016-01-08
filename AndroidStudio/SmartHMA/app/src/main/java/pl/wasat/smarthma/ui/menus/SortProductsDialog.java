@@ -23,10 +23,6 @@ import pl.wasat.smarthma.ui.frags.common.ProductsListFragment;
 public class SortProductsDialog extends DialogFragment {
     private ProductsBrowserActivity activity;
 
-    public void setActivity(ProductsBrowserActivity activity) {
-        this.activity = activity;
-    }
-
     @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -36,7 +32,6 @@ public class SortProductsDialog extends DialogFragment {
         builder.setTitle(R.string.action_sort)
                 .setItems(R.array.sorting_modes, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
-                        //Log.d("ZX", which + "");
                         try {
                             if (which == 0) {
                                 SmartHMApplication.sortingType = Const.SORT_BY_TITLE_ASCENDING;
@@ -48,7 +43,6 @@ public class SortProductsDialog extends DialogFragment {
                                 SmartHMApplication.sortingType = Const.SORT_BY_DATE_DESCENDING;
                             }
 
-                            // Log.d("ZX", "Sorting entries.");
                             DataSorter sorter = new DataSorter();
                             ProductsListFragment productsListFragment = activity.getProductsListFragment();
                             List<Entry> entryList = productsListFragment.getEntryList();
@@ -59,21 +53,11 @@ public class SortProductsDialog extends DialogFragment {
                         }
                     }
                 });
-
-            /*
-            builder.setMessage(R.string.search_history_item)
-                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        // FIRE ZE MISSILES!
-                    }
-                })
-                .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        // User cancelled the dialog
-                    }
-                });
-            */
         // Create the AlertDialog object and return it
         return builder.create();
+    }
+
+    public void setActivity(ProductsBrowserActivity activity) {
+        this.activity = activity;
     }
 }

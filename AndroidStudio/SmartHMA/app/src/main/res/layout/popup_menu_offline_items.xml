@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
     android:id="@+id/popup_menu_layout"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:background="@color/background_white"
@@ -23,7 +24,7 @@
             android:layout_marginRight="30dp"
             android:layout_weight="1"
             android:text="@string/action_sort"
-            android:textColor="@color/text_black" />
+            android:textColor="@color/text_black"/>
 
         <ImageView
             android:layout_width="wrap_content"
@@ -32,7 +33,8 @@
             android:layout_toEndOf="@+id/tv_sort"
             android:layout_toRightOf="@+id/tv_sort"
             android:layout_weight="1"
-            android:src="@drawable/ic_sort" />
+            android:contentDescription="@string/desc"
+            android:src="@drawable/ic_sort"/>
     </LinearLayout>
 
     <LinearLayout
@@ -52,7 +54,7 @@
             android:layout_marginRight="30dp"
             android:layout_weight="1"
             android:text="@string/action_clear_list"
-            android:textColor="@color/text_black" />
+            android:textColor="@color/text_black"/>
 
         <ImageView
             android:layout_width="wrap_content"
@@ -61,7 +63,8 @@
             android:layout_toEndOf="@+id/tv_removeall"
             android:layout_toRightOf="@+id/tv_removeall"
             android:layout_weight="1"
-            android:src="@drawable/ic_sort" />
+            android:contentDescription="@string/desc"
+            android:src="@drawable/ic_sort"/>
     </LinearLayout>
 
     <LinearLayout
@@ -82,7 +85,7 @@
             android:layout_marginRight="@dimen/browse_eo_padding"
             android:layout_weight="1"
             android:text="@string/menu_settings"
-            android:textColor="@color/text_black" />
+            android:textColor="@color/text_black"/>
 
         <ImageView
             android:layout_width="wrap_content"
@@ -90,7 +93,7 @@
             android:layout_toEndOf="@+id/tv_menu_settings"
             android:layout_toRightOf="@+id/tv_menu_settings"
             android:layout_weight="1"
-            android:src="@drawable/ic_settings" />
+            android:contentDescription="@string/desc"
+            android:src="@drawable/ic_settings"/>
     </LinearLayout>
-
 </LinearLayout>
