@@ -1,0 +1,77 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 23
+    buildToolsVersion '23.0.2'
+    defaultConfig {
+        applicationId "pl.wasat.smarthma"
+        minSdkVersion 15
+        targetSdkVersion 23
+        multiDexEnabled = true
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFile 'proguard-rules.pro'
+            //proguardFile 'proguard-smarthma.txt'
+        }
+        debug {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-smarthma.txt'
+        }
+    }
+    packagingOptions {
+        pickFirst 'META-INF/LICENSE.txt'
+        pickFirst 'META-INF/NOTICE.txt'
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_7
+        targetCompatibility JavaVersion.VERSION_1_7
+    }
+}
+
+repositories {
+    jcenter()
+    mavenLocal()
+    mavenCentral()
+}
+
+dependencies {
+    compile project(':amazon-maps-libs-v2')
+
+    compile 'com.android.support:multidex:1.0.1'
+    compile 'com.android.support:support-v4:23.1.1'
+    compile 'com.android.support:appcompat-v7:23.1.1'
+    compile 'com.google.android.gms:play-services-location:8.3.0'
+    compile 'com.google.android.gms:play-services-identity:8.3.0'
+    compile('com.google.api-client:google-api-client-android:1.20.0') {
+        exclude group: 'org.apache.httpcomponents'
+    }
+    compile('com.google.apis:google-api-services-drive:v2-rev170-1.20.0') {
+        exclude group: 'org.apache.httpcomponents'
+    }
+
+    compile 'com.octo.android.robospice:robospice:1.4.14'
+    compile 'com.octo.android.robospice:robospice-ui-spicelist:1.4.14'
+    compile 'com.octo.android.robospice:robospice-okhttp:1.4.14'
+    compile('com.octo.android.robospice:robospice-google-http-client:1.4.14') {
+        exclude group: 'org.apache.httpcomponents'
+        exclude group: 'org.apache.commons', module: 'commons-io'
+    }
+    compile 'com.squareup.picasso:picasso:2.5.2'
+    compile 'com.squareup.okhttp:okhttp:2.5.0'
+    compile 'com.squareup.okhttp:okhttp-urlconnection:2.5.0'
+    compile 'com.squareup.okio:okio:1.6.0'
+    compile 'org.jsoup:jsoup:1.8.1'
+    compile 'com.facebook.android:facebook-android-sdk:3.22.0'
+    compile 'com.wunderlist:sliding-layer:1.1.1'
+    compile 'com.google.code.gson:gson:2.4'
+    compile('ch.acra:acra:4.6.1') {
+        exclude group: 'org.json'
+    }
+
+    compile files('google-api-services-drive-v2-rev168-1.18.0-rc.jar')
+    compile files('libs/dropbox-android-sdk-1.6.3.jar')
+    compile files('libs/httpmime-4.0.3.jar')
+    compile files('libs/json_simple-1.1.jar')
+}

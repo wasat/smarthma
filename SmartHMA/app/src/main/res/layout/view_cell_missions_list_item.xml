@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#ffebeff1"
+                android:orientation="horizontal">
+
+    <RelativeLayout
+        android:id="@+id/swipe_list_shareview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#ffffeb3b"
+        android:orientation="horizontal"/>
+
+    <RelativeLayout
+        android:id="@+id/swipe_list_deleteview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#ff558b2f"
+        android:orientation="horizontal"/>
+
+    <LinearLayout
+        android:id="@+id/swipe_list_mainview"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="1">
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/background_white"
+            android:padding="@dimen/esa_missions_padding_medium">
+
+            <ImageView
+                android:id="@+id/mission_child_list_item_thmb_imgview"
+                android:layout_width="@dimen/esa_missions_image_size"
+                android:layout_height="@dimen/esa_missions_image_size"
+                android:layout_centerVertical="true"
+                android:background="@color/background_gray"
+                android:contentDescription="@string/content_picture"
+                android:padding="@dimen/esa_missions_padding_small"
+                android:scaleType="fitXY"
+                android:src="@android:drawable/picture_frame"/>
+
+            <pl.wasat.smarthma.customviews.TextViewWithFont
+                android:id="@+id/mission_child_list_item_tv"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_toRightOf="@+id/mission_child_list_item_thmb_imgview"
+                android:maxLines="1"
+                android:minLines="1"
+                android:paddingLeft="@dimen/esa_missions_padding_small"
+                android:paddingTop="@dimen/esa_missions_padding_small"
+                android:text="@string/lorem_ipsum_dolor"
+                android:textColor="@color/text_black"
+                android:textSize="@dimen/esa_missions_cell_text_size_large"/>
+
+            <pl.wasat.smarthma.customviews.TextViewWithFont
+                android:id="@+id/mission_child_list_item_tv_2"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/mission_child_list_item_thmb_imgview"
+                android:layout_toRightOf="@+id/mission_child_list_item_thmb_imgview"
+                android:paddingBottom="@dimen/esa_missions_padding_small"
+                android:paddingLeft="@dimen/esa_missions_padding_small"
+                android:text="@string/lorem"
+                android:textSize="@dimen/esa_missions_cell_text_size"/>
+        </RelativeLayout>
+    </LinearLayout>
+</RelativeLayout>
+

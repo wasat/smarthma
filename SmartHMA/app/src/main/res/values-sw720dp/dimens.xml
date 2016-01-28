@@ -1,0 +1,24 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<resources>
+
+    <!--
+         Customize dimensions originally defined in res/values/dimens.xml (such as
+         screen margins) for sw720dp devices (e.g. 10" tablets) in landscape here.
+    -->
+    <dimen name="activity_horizontal_margin">128dp</dimen>
+
+    <!-- MENU LAND -->
+    <dimen name="menu_logo_center_width_land">260dp</dimen>
+    <dimen name="menu_logo_center_height_land">260dp</dimen>
+    <dimen name="menu_button_size_land">120dp</dimen>
+    <dimen name="menu_copyright_padding_land">20dp</dimen>
+    <dimen name="menu_button_text_size_land">18sp</dimen>
+    <dimen name="menu_padding_top_land">115dp</dimen>
+    <dimen name="layout_size_land">650dp</dimen>
+
+
+    <!-- SEARCH EO DATA LAND -->
+
+    <dimen name="search_eo_data_logo_size_land">300dp</dimen>
+
+</resources>

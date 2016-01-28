@@ -1,0 +1,135 @@
+<RelativeLayout
+    android:id="@+id/product_detail_fragment_scrollView"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/background_gray"
+    android:paddingLeft="@dimen/browse_eo_padding">
+
+    <LinearLayout
+        android:id="@+id/product_frag_detail_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/background_gray"
+        android:orientation="vertical">
+
+        <pl.wasat.smarthma.customviews.TextViewWithFont
+            android:id="@+id/product_frag_detail_name"
+            style="@style/textMainTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="@dimen/browse_eo_padding_medium"
+            android:paddingTop="@dimen/browse_eo_padding_medium"
+            android:text="@string/lorem"
+            android:textSize="@dimen/browse_eo_text_large"
+            tools:context="pl.wasat.smarthma.ui.frags.common.ProductDetailsFragment"/>
+
+        <pl.wasat.smarthma.customviews.TextViewWithFont
+            android:id="@+id/product_frag_detail_dates"
+            style="@style/textMainTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/text_black"
+            android:textSize="@dimen/browse_eo_text"
+            tools:context="pl.wasat.smarthma.ui.frags.common.ProductDetailsFragment"/>
+
+        <WebView
+            android:id="@+id/product_frag_detail_content"
+            style="?android:attr/textAppearanceLarge"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="200dp"
+            android:padding="16dp"
+            android:textSize="16sp"
+            tools:context="pl.wasat.smarthma.ui.frags.common.ProductDetailsFragment"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/product_frag_detail_buttons"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@color/background_gray"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="@dimen/browse_eo_padding_small">
+
+            <Button
+                android:id="@+id/product_frag_detail_button_quicklook"
+                style="@style/buttonBlue"
+                android:layout_width="140dp"
+                android:layout_height="@dimen/button_blue_height"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:drawableLeft="@drawable/ic_quicklook"
+                android:text="@string/quicklook"/>
+
+            <Button
+                android:id="@+id/product_frag_detail_button_download"
+                style="@style/buttonBlue"
+                android:layout_width="140dp"
+                android:layout_height="@dimen/button_blue_height"
+                android:layout_gravity="center"
+                android:layout_marginLeft="@dimen/browse_eo_padding_medium"
+                android:layout_weight="1"
+                android:drawableLeft="@drawable/ic_metadata"
+                android:text="@string/download"/>
+
+            <Button
+                android:id="@+id/product_frag_detail_button_show_meta"
+                style="@style/buttonBlue"
+                android:layout_width="140dp"
+                android:layout_height="@dimen/button_blue_height"
+                android:layout_gravity="center"
+                android:layout_marginLeft="@dimen/browse_eo_padding_medium"
+                android:layout_weight="1"
+                android:drawableLeft="@drawable/ic_metadata"
+                android:text="@string/show_metadata"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="@dimen/browse_eo_padding_small">
+
+            <Button
+                android:id="@+id/product_frag_detail_button_show_map"
+                style="@style/buttonBlue"
+                android:layout_width="140dp"
+                android:layout_height="@dimen/button_blue_height"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:drawableLeft="@drawable/ic_showmap"
+                android:text="@string/show_map"/>
+
+            <Button
+                android:id="@+id/product_frag_detail_button_save_cloud"
+                style="@style/buttonBlue"
+                android:layout_width="140dp"
+                android:layout_height="@dimen/button_blue_height"
+                android:layout_gravity="center"
+                android:layout_marginLeft="@dimen/browse_eo_padding_medium"
+                android:layout_weight="1"
+                android:drawableLeft="@drawable/ic_share"
+                android:text="@string/save_to_cloud"/>
+
+            <Button
+                android:id="@+id/product_frag_detail_button_share"
+                style="@style/buttonBlue"
+                android:layout_width="140dp"
+                android:layout_height="@dimen/button_blue_height"
+                android:layout_gravity="center"
+                android:layout_marginLeft="@dimen/browse_eo_padding_medium"
+                android:layout_weight="1"
+                android:drawableLeft="@drawable/ic_share"
+                android:text="@string/Share"/>
+        </LinearLayout>
+    </LinearLayout>
+</RelativeLayout>

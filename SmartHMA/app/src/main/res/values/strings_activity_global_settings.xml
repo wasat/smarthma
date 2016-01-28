@@ -1,0 +1,23 @@
+<resources>
+    <!-- Global settings for strings -->
+
+    <string name="global_settings">SmartHMA Global Settings</string>
+
+    <string name="pref_category_title_map_settings">MAP SETTINGS</string>
+    <string name="pref_category_title_search_params_settings">FEDEO PARAMETERS SETTINGS</string>
+    <string name="pref_category_title_debug_mode">DEBUG MODE</string>
+
+    <string name="pref_title_remember_search_params">Remember search parameters</string>
+    <string name="pref_title_global_map_list">Default map type</string>
+    <string name="pref_title_show_debugging_info">Show debugging information</string>
+
+    <string name="pref_summary_remember_search_params">Save basic FedEO search parameters and load it at start</string>
+    <string name="pref_summary_global_map_list">Choose map type as a default map background</string>
+    <string name="pref_summary_show_debugging_info">Turn on this options to show and log additional information</string>
+
+    <string name="pref_key_checkbox_search_params_save">pref_key_checkbox_search_params_save</string>
+    <string name="pref_key_global_map_list">pref_key_global_map_list</string>
+    <string name="pref_key_checkbox_debug_mode">pref_key_checkbox_debug_mode</string>
+
+
+</resources>

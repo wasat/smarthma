@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/background_gray"
+                android:paddingLeft="@dimen/browse_eo_padding">
+
+    <FrameLayout
+        android:id="@+id/frag_support_map_base"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/seekBar_opacity_overlay"/>
+
+    <SeekBar
+        android:id="@+id/seekBar_opacity_overlay"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:paddingBottom="15dp"
+        android:paddingLeft="70dp"
+        android:paddingRight="70dp"/>
+
+</RelativeLayout>

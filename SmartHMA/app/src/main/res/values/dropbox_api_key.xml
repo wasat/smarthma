@@ -1,0 +1,8 @@
+<resources>
+    <string name="APP_KEY" templateMergeStrategy="preserve" translatable="false">
+        dscp3uh0qqd1o29
+    </string>
+     <string name="APP_SECRET" templateMergeStrategy="preserve" translatable="false">
+        qn0nibu4r30kg12
+    </string>
+</resources>
