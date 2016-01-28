@@ -1,37 +1,37 @@
 # Built application files
 /*/build
-AndroidStudio/SmartHMA/build
+SmartHMA/build
  
 # Crashlytics configuations
 com_crashlytics_export_strings.xml
  
 # Local configuration file (sdk path, etc)
-AndroidStudio/SmartHMA/local.properties
+SmartHMA/local.properties
  
 # Gradle generated files
-AndroidStudio/SmartHMA/.gradle
-AndroidStudio/SmartHMA/gradle
-AndroidStudio/SmartHMA/gradlew
+SmartHMA/.gradle
+SmartHMA/gradle
+SmartHMA/gradlew
  
 # Signing files
 .signing
  
 # User-specific configurations
-AndroidStudio/SmartHMA/.idea/gradle.xml
-AndroidStudio/SmartHMA/.idea/libraries
-AndroidStudio/SmartHMA/.idea/workspace.xml
-AndroidStudio/SmartHMA/.idea/tasks.xml
-AndroidStudio/SmartHMA/.idea/.name
-AndroidStudio/SmartHMA/.idea/compiler.xml
-AndroidStudio/SmartHMA/.idea/copyright/profiles_settings.xml
-AndroidStudio/SmartHMA/.idea/encodings.xml
-AndroidStudio/SmartHMA/.idea/misc.xml
-AndroidStudio/SmartHMA/.idea/modules.xml
-AndroidStudio/SmartHMA/.idea/scopes/scope_settings.xml
-AndroidStudio/SmartHMA/.idea/vcs.xml
-AndroidStudio/SmartHMA/.idea/inspectionProfiles
-AndroidStudio/SmartHMA/*.iml
-AndroidStudio/SmartHMA/app/app.iml
+SmartHMA/.idea/gradle.xml
+SmartHMA/.idea/libraries
+SmartHMA/.idea/workspace.xml
+SmartHMA/.idea/tasks.xml
+SmartHMA/.idea/.name
+SmartHMA/.idea/compiler.xml
+SmartHMA/.idea/copyright/profiles_settings.xml
+SmartHMA/.idea/encodings.xml
+SmartHMA/.idea/misc.xml
+SmartHMA/.idea/modules.xml
+SmartHMA/.idea/scopes/scope_settings.xml
+SmartHMA/.idea/vcs.xml
+SmartHMA/.idea/inspectionProfiles
+SmartHMA/*.iml
+SmartHMA/app/app.iml
  
 /**/*.iml
  
@@ -42,5 +42,5 @@ AndroidStudio/SmartHMA/app/app.iml
 .Spotlight-V100
 .Trashes
 
-/AndroidStudio/SmartHMA/.idea/inspectionProfiles
-/AndroidStudio/SmartHMA/.idea/inspectionProfiles
+SmartHMA/.idea/inspectionProfiles
+SmartHMA/.idea/inspectionProfiles
