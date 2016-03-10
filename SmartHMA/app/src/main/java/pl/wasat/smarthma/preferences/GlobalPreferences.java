@@ -35,4 +35,8 @@ public class GlobalPreferences {
         return globalSharedPreferences.getBoolean(key, false);
     }
 
+    public long getMissionSyncTime() {
+        String key = context.getString(R.string.pref_key_list_mission_sync_time);
+        return Long.valueOf(globalSharedPreferences.getString(key, "7"));
+    }
 }

@@ -15,7 +15,7 @@ import pl.wasat.smarthma.parser.model.Page;
  * Part of the project  SmartHMA
  */
 public class QuickScat extends BaseParser implements SimpleMissionInterface {
-    private final static int MISSION_ID = 50;
+    private final static int MISSION_ID = 51;
     private final static String TITLE = "QuikSCAT";
 
 

@@ -9,8 +9,8 @@ import pl.wasat.smarthma.R;
 import pl.wasat.smarthma.helper.Const;
 import pl.wasat.smarthma.model.FedeoRequestParams;
 import pl.wasat.smarthma.ui.activities.base.BaseProductsBrowserActivity;
+import pl.wasat.smarthma.ui.dialogs.FacebookDialogFragment;
 import pl.wasat.smarthma.ui.frags.common.ProductsListFragment;
-import pl.wasat.smarthma.ui.frags.dialog.FacebookDialogFragment;
 import pl.wasat.smarthma.ui.menus.ProductsBrowserMenuHandler;
 
 public class ProductsBrowserActivity extends BaseProductsBrowserActivity {
@@ -26,9 +26,10 @@ public class ProductsBrowserActivity extends BaseProductsBrowserActivity {
         text.setText(getString(R.string.activity_name_products_browser));
 
         FedeoRequestParams fedeoRequestParams = (FedeoRequestParams) intent.getSerializableExtra(Const.KEY_INTENT_FEDEO_REQUEST_PARAMS);
+        String osddUrl = intent.getStringExtra(Const.KEY_INTENT_FEDEO_OSDD_URL);
 
         productsListFragment = ProductsListFragment
-                .newInstance(fedeoRequestParams);
+                .newInstance(fedeoRequestParams, osddUrl);
         getSupportFragmentManager()
                 .beginTransaction()
                 .replace(R.id.activity_base_list_container,

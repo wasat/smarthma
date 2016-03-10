@@ -16,7 +16,7 @@ import pl.wasat.smarthma.parser.model.Page;
  */
 public class Ers extends BaseParser implements MissionInterface {
 
-    private final static int MISSION_ID = 8;
+    private final static int MISSION_ID = 9;
     private final static String TITLE = "Ers";
     final String RA = "https://earth.esa.int/web/guest/missions/esa-operational-eo-missions/ers/instruments/ra";
     final String ATSR = "https://earth.esa.int/web/guest/missions/esa-operational-eo-missions/ers/instruments/atsr";

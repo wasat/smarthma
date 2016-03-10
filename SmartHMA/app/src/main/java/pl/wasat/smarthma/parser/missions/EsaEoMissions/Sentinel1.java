@@ -15,7 +15,7 @@ import pl.wasat.smarthma.parser.model.Page;
  * Part of the project  SmartHMA
  */
 public class Sentinel1 extends BaseParser implements MissionInterface {
-    private final static int MISSION_ID = 0;
+    private final static int MISSION_ID = 1;
     private final static String TITLE = "SENTINEL-1";
 
     public Sentinel1(String pageUrl, Context context) {
@@ -36,7 +36,7 @@ public class Sentinel1 extends BaseParser implements MissionInterface {
 
     @Override
     public void news() {
-        String NEWS = "";
+        String NEWS = "https://earth.esa.int/web/guest/missions/esa-operational-eo-missions/sentinel-1/news";
         parserDb.addPage(new Page(EsaEoMissions.CATEGORY_ID, MISSION_ID, NEWS_TITLE, NEWS));
     }
 

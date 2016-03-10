@@ -7,17 +7,16 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 import java.util.ArrayList;
 import java.util.List;
 
-
 public class OpenSearchDescription {
 
     private String ShortName;
     private String LongName;
     private String Description;
-    private List<pl.wasat.smarthma.model.osdd.Url> Url = new ArrayList<>();
+    private List<Url> Url = new ArrayList<>();
     //private List<pl.wasat.smarthma.model.osdd.Parameter> Parameter = new ArrayList<>();
-    private List<pl.wasat.smarthma.model.osdd.Query> Query = new ArrayList<>();
+    private List<Query> Query = new ArrayList<>();
     private String Tags;
-    private List<pl.wasat.smarthma.model.osdd.Image> Image = new ArrayList<>();
+    private List<Image> Image = new ArrayList<>();
     private String Developer;
     private String Attribution;
     private String SyndicationRight;

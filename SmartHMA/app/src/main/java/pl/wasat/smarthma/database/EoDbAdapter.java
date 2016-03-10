@@ -71,6 +71,7 @@ public class EoDbAdapter {
                         null,
                         null,
                         null);
+
         if (mCursor != null && mCursor.getCount() > 0) {
             mCursor.moveToFirst();
             Entry a = new Entry();
@@ -78,6 +79,7 @@ public class EoDbAdapter {
             a.setRead(mCursor.getInt(mCursor.getColumnIndex(KEY_READ)) > 0);
             a.setDbId(mCursor.getLong(mCursor.getColumnIndex(KEY_ROWID)));
             a.setOffline(mCursor.getInt(mCursor.getColumnIndex(KEY_OFFLINE)) > 0);
+            sqLiteDatabase.close();
             return a;
         }
         return null;

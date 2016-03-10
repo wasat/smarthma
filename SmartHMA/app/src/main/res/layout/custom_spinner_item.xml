@@ -6,6 +6,11 @@
     android:layout_height="wrap_content"
     android:background="@drawable/custom_spinner_background"
     android:ellipsize="marquee"
-    android:padding="10dp"
+    android:paddingLeft="20dp"
+    android:paddingStart="20dp"
+    android:paddingRight="20dp"
+    android:paddingEnd="20dp"
     android:singleLine="true"
-    android:text="@string/lorem"/>
+    android:text="@string/lorem"
+    android:gravity="start|clip_vertical|fill_vertical"
+    android:paddingBottom="5dp"/>

@@ -15,10 +15,9 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.SearchView;
 
-import java.util.HashMap;
-
 import pl.wasat.smarthma.R;
 import pl.wasat.smarthma.helper.Const;
+import pl.wasat.smarthma.model.FedeoRequestParams;
 import pl.wasat.smarthma.preferences.GlobalPreferences;
 import pl.wasat.smarthma.preferences.SharedPrefs;
 import pl.wasat.smarthma.ui.activities.SearchCollectionResultsActivity;
@@ -34,8 +33,8 @@ public class SearchFragment extends Fragment {
 
     private OnSearchFragmentListener mListener;
     private View rootView;
-    private Intent searchIntent;
-    private HashMap extraParams;
+    //private Intent searchIntent;
+    private FedeoRequestParams fedeoRequestParams;
 
     public SearchFragment() {
     }
@@ -48,15 +47,6 @@ public class SearchFragment extends Fragment {
      */
     public static SearchFragment newInstance() {
         return new SearchFragment();
-    }
-
-    @Override
-    public void startActivity(Intent intent) {
-        if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
-            searchIntent = intent;
-            searchIntent.putExtra(Const.KEY_INTENT_FEDEO_REQUEST_PARAMS_EXTRA, extraParams);
-        }
-        super.startActivity(searchIntent);
     }
 
     @Override
@@ -97,7 +87,7 @@ public class SearchFragment extends Fragment {
             searchView.setQuery(sharedPrefs.getQueryPrefs(), false);
         }
 
-        searchIntent = getActivity().getIntent();
+        //searchIntent = getActivity().getIntent();
 
         LinearLayout linearLayout1 = (LinearLayout) searchView.getChildAt(0);
         LinearLayout linearLayout2 = (LinearLayout) linearLayout1.getChildAt(2);
@@ -117,7 +107,7 @@ public class SearchFragment extends Fragment {
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String s) {
-                mListener.onSearchFragmentSendExtraParams(extraParams);
+                mListener.onSearchFragmentSendFedeoParams(fedeoRequestParams);
                 return false;
             }
 
@@ -142,8 +132,6 @@ public class SearchFragment extends Fragment {
                 startSearchWithButton(searchView);
             }
         });
-
-        extraParams = new HashMap();
         return rootView;
     }
 
@@ -152,7 +140,7 @@ public class SearchFragment extends Fragment {
                 SearchCollectionResultsActivity.class);
         intentBtnSearch.setAction("android.intent.action.SEARCH");
         intentBtnSearch.putExtra(SearchManager.QUERY, searchView.getQuery().toString());
-        intentBtnSearch.putExtra(Const.KEY_INTENT_FEDEO_REQUEST_PARAMS_EXTRA, extraParams);
+        intentBtnSearch.putExtra(Const.KEY_INTENT_FEDEO_REQUEST_PARAMS_OSDD, fedeoRequestParams);
 
         mListener.onSearchFragmentStartSearchingWithButton(intentBtnSearch);
     }
@@ -163,12 +151,8 @@ public class SearchFragment extends Fragment {
         mListener = null;
     }
 
-    public void setAdditionalParams(String parameterKey, String parameterValue) {
-        try {
-            extraParams.put(parameterKey, parameterValue);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+    public void setFedeoRequestParams(FedeoRequestParams fedeoRequestParams) {
+        this.fedeoRequestParams = fedeoRequestParams;
     }
 
     public void setQuery(String query) {
@@ -191,9 +175,9 @@ public class SearchFragment extends Fragment {
 
         void onSearchFragmentAdvanceParamsChoose();
 
-        void onSearchFragmentSendExtraParams(HashMap extra);
-
         void onSearchFragmentStartSearchingWithButton(Intent intent);
+
+        void onSearchFragmentSendFedeoParams(FedeoRequestParams fedeoRequestParams);
     }
 
 }

@@ -28,7 +28,7 @@
         style="@style/dialogHeader"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="Choose the date"/>
+        android:text="@string/choose_the_date"/>
 
     <DatePicker
         android:id="@+id/dialog_date_picker_datePicker"
@@ -56,7 +56,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="@dimen/button_blue_height"
                 android:layout_weight="1"
-                android:text="Cancel"/>
+                android:text="@android:string/cancel"/>
 
             <Button
                 android:id="@+id/dialog_date_picker_choose"
@@ -65,7 +65,7 @@
                 android:layout_height="@dimen/button_blue_height"
                 android:layout_marginLeft="@dimen/search_eo_data_padding_small"
                 android:layout_weight="1"
-                android:text="Choose"/>
+                android:text="@string/choose"/>
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>

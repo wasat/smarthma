@@ -131,4 +131,7 @@ public class CollectionsBrowserActivity extends ExtendedBaseCollectionsActivity 
     public void onSearchListFragmentLeftSwipeItem(EntryISO selectedEntry) {
 
     }
+
+
+
 }

@@ -15,7 +15,7 @@ import pl.wasat.smarthma.parser.model.Page;
  * Part of the project  SmartHMA
  */
 public class LandsatRbv extends BaseParser implements SimpleMissionInterface {
-    private final static int MISSION_ID = 47;
+    private final static int MISSION_ID = 48;
     private final static String TITLE = "Landsat RBV";
 
     public LandsatRbv(String pageUrl, Context context) {

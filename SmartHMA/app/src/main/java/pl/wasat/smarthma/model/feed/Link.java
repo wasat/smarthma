@@ -12,6 +12,13 @@ import pl.wasat.smarthma.utils.text.SmartHMAStringStyle;
 
 public class Link implements Serializable {
 
+    public static final String REL_ALTERNATE = "alternate";
+    public static final String REL_SEARCH = "search";
+    public static final String REL_RESULTS = "results";
+    public static final String REL_COLLECTION = "collection";
+    public static final String TYPE_ATOM_XML = "application/atom+xml";
+    public static final String TYPE_OSDD_XML = "application/opensearchdescription+xml";
+
     private static final long serialVersionUID = 1L;
 
     private String href;
@@ -21,6 +28,7 @@ public class Link implements Serializable {
 
 
     public String getHref() {
+        validateHref();
         return href;
     }
 
@@ -52,6 +60,10 @@ public class Link implements Serializable {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    private void validateHref() {
+        this.href = this.href.replaceAll("\\+", "%2B");
     }
 
 

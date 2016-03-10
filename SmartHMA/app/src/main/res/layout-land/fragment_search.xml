@@ -37,7 +37,7 @@
                 android:layout_marginBottom="@dimen/search_eo_data_padding_medium"
                 android:layout_marginLeft="3dp"
                 android:layout_marginTop="@dimen/search_eo_data_padding_medium"
-                android:text="Search EO data"
+                android:text="@string/search_eo_data"
                 android:textSize="16sp"/>
 
             <LinearLayout

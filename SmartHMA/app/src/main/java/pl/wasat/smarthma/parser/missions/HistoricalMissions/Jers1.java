@@ -15,7 +15,7 @@ import pl.wasat.smarthma.parser.model.Page;
  * Part of the project  SmartHMA
  */
 public class Jers1 extends BaseParser implements SimpleMissionInterface {
-    private final static int MISSION_ID = 45;
+    private final static int MISSION_ID = 46;
     private final static String TITLE = "JERS-1";
 
     public Jers1(String pageUrl, Context context) {

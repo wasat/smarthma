@@ -22,19 +22,19 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:checked="true"
-            android:text="Dropbox"/>
+            android:text="@string/dropbox"/>
 
         <RadioButton
             android:id="@+id/googleDrive"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Google Drive"/>
+            android:text="@string/google_drive"/>
     </RadioGroup>
 
     <Button
         android:id="@+id/buttonChooseDownload"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Pobierz"/>
+        android:text="@string/download"/>
 
 </LinearLayout>

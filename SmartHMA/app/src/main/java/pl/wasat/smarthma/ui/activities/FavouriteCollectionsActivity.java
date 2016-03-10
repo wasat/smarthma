@@ -14,6 +14,7 @@ import pl.wasat.smarthma.ui.activities.base.ExtendedBaseCollectionsActivity;
 import pl.wasat.smarthma.ui.frags.common.CollectionDetailsFragment;
 import pl.wasat.smarthma.ui.frags.search.SearchListFragmentOffline;
 import pl.wasat.smarthma.ui.menus.SearchOfflineCollectionsMenuHandler;
+import pl.wasat.smarthma.utils.obj.LatLngExt;
 
 /**
  * Activity used to browse and manage saved collections.
@@ -131,5 +132,15 @@ public class FavouriteCollectionsActivity extends ExtendedBaseCollectionsActivit
                 .findFragmentById(R.id.activity_base_list_container))
                 .getListAdapter();
         adapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void onMapFragmentAreaInputChange(int areaType) {
+
+    }
+
+    @Override
+    public void onMapFragmentPointAndRadiusSend(LatLngExt center, float radius) {
+
     }
 }

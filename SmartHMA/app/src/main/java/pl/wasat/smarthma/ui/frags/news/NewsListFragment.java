@@ -3,7 +3,6 @@ package pl.wasat.smarthma.ui.frags.news;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
-import android.support.v4.app.ListFragment;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -11,17 +10,16 @@ import android.view.View;
 import android.widget.ListView;
 
 import pl.wasat.smarthma.R;
+import pl.wasat.smarthma.model.FedeoRequestParams;
+import pl.wasat.smarthma.model.feed.Feed;
 import pl.wasat.smarthma.services.NewsRssServiceNoAsync;
+import pl.wasat.smarthma.ui.frags.base.BaseSpiceListFragment;
+import pl.wasat.smarthma.utils.rss.FedeoSearchRequest;
 
-public class NewsListFragment extends ListFragment {
+public class NewsListFragment extends BaseSpiceListFragment {
 
     private static final String STATE_ACTIVATED_POSITION = "activated_position";
-    private static final Callbacks sDummyCallbacks = new Callbacks() {
-        @Override
-        public void onItemSelected(String id) {
-        }
-    };
-    private Callbacks mCallbacks = sDummyCallbacks;
+    private static OnNewsListFragListener mListener;
     private int mActivatedPosition = ListView.INVALID_POSITION;
 
     public NewsListFragment() {
@@ -32,19 +30,35 @@ public class NewsListFragment extends ListFragment {
     public void onAttach(Context context) {
         super.onAttach(context);
         Activity activity = context instanceof Activity ? (Activity) context : null;
-        if (!(activity instanceof Callbacks)) {
+        try {
+            mListener = (OnNewsListFragListener) activity;
+        } catch (ClassCastException e) {
             throw new ClassCastException(activity.toString()
                     + activity.getString(R.string.must_implement)
-                    + Callbacks.class.getSimpleName());
+                    + OnNewsListFragListener.class.getSimpleName());
         }
-        mCallbacks = (Callbacks) activity;
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        mListener = null;
+    }
+
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        if (savedInstanceState != null && savedInstanceState.containsKey(STATE_ACTIVATED_POSITION)) {
+            setActivatedPosition(savedInstanceState.getInt(STATE_ACTIVATED_POSITION));
+        }
+        getListView().setDivider(null);
+        mListener.onItemSelected(String.valueOf(0));
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        refreshList();
-
+        refreshListAsync();
     }
 
     @Override
@@ -56,12 +70,6 @@ public class NewsListFragment extends ListFragment {
     }
 
     @Override
-    public void onDetach() {
-        super.onDetach();
-        mCallbacks = sDummyCallbacks;
-    }
-
-    @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.news_refreshmenu, menu);
     }
@@ -70,30 +78,21 @@ public class NewsListFragment extends ListFragment {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.actionbar_refresh) {
-            refreshList();
+            refreshListAsync();
             return true;
         }
         return false;
     }
 
-    private void refreshList() {
-        NewsRssServiceNoAsync rssService = new NewsRssServiceNoAsync(this);
-        rssService.exec();
-    }
-
-    @Override
-    public void onViewCreated(View view, Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        if (savedInstanceState != null && savedInstanceState.containsKey(STATE_ACTIVATED_POSITION)) {
-            setActivatedPosition(savedInstanceState.getInt(STATE_ACTIVATED_POSITION));
-        }
-        getListView().setDivider(null);
-    }
-
     @Override
     public void onListItemClick(ListView listView, View view, int position, long id) {
         super.onListItemClick(listView, view, position, id);
-        mCallbacks.onItemSelected(String.valueOf(position));
+        mListener.onItemSelected(String.valueOf(position));
+    }
+
+    @Override
+    public void onRequestSuccess(Feed feed) {
+        super.onRequestSuccess(feed);
     }
 
     private void setActivatedPosition(int position) {
@@ -112,7 +111,19 @@ public class NewsListFragment extends ListFragment {
                 : ListView.CHOICE_MODE_NONE);
     }
 
-    public interface Callbacks {
+    private void refreshListAsync() {
+        NewsRssServiceNoAsync rssService = new NewsRssServiceNoAsync(this);
+        rssService.exec();
+    }
+
+    private void loadDataSeriesFeedResponse(FedeoRequestParams browseRequest) {
+        if (browseRequest != null) {
+            getActivity().setProgressBarIndeterminateVisibility(true);
+            getSpiceManager().execute(new FedeoSearchRequest(getActivity(), browseRequest, 1), this);
+        }
+    }
+
+    public interface OnNewsListFragListener {
         void onItemSelected(String id);
     }
 }

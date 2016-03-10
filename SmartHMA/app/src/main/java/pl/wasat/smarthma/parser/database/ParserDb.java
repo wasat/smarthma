@@ -112,7 +112,7 @@ public class ParserDb {
 
     // METODA OTWIERAJACA BAZE
     public ParserDb open() {
-        dbHelper = new DatabaseHelper(context, DB_NAME, null, DB_VERSION);
+        dbHelper = DatabaseHelper.getInstance(context);
         try {
             db = dbHelper.getWritableDatabase();
         } catch (SQLException e) {
@@ -312,10 +312,27 @@ public class ParserDb {
 
     private static class DatabaseHelper extends SQLiteOpenHelper {
 
-        public DatabaseHelper(Context context, String name,
+        private static DatabaseHelper mInstance = null;
+
+        public static DatabaseHelper getInstance(Context context) {
+
+            // Use the application context, which will ensure that you
+            // don't accidentally leak an Activity's context.
+            // See this article for more information: http://bit.ly/6LRzfx
+            if (mInstance == null) {
+                mInstance = new DatabaseHelper(context.getApplicationContext());
+            }
+            return mInstance;
+        }
+
+        private DatabaseHelper(Context ctx) {
+            super(ctx, DB_NAME, null, DB_VERSION);
+        }
+
+/*        public DatabaseHelper(Context context, String name,
                               SQLiteDatabase.CursorFactory factory, int version) {
             super(context, name, factory, version);
-        }
+        }*/
 
         @Override
         public void onCreate(SQLiteDatabase db) {

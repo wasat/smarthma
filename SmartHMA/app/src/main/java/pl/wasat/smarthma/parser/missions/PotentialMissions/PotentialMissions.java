@@ -30,12 +30,12 @@ public class PotentialMissions extends BaseParser implements SimpleMissionInterf
 
     @Override
     public void mainContent() {
-        int ITEMS_COUNT = 6;
+        int ITEMS_COUNT = 5;
         Pair<String, ArrayList<String>> pair = getImageListPage(ITEMS_COUNT, false);
         String contents = super.imageListToContentString(pair);
         parserDb.addCategory(new Category(CATEGORY_ID, pair.title, contents));
         ArrayList<String> urlList = super.getImageList(pair.content);
-        int mission_id = 52;
+        int mission_id = 53;
         String img_name = "MISSION_IMG";
         for (String url :
                 urlList) {

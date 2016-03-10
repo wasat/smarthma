@@ -36,7 +36,6 @@ public class NewsRssServiceNoAsync {
         articleListFrag = articleListFragment;
         progress = new ProgressDialog(context);
         progress.setMessage(context.getString(R.string.loading));
-
     }
 
     public void exec() {

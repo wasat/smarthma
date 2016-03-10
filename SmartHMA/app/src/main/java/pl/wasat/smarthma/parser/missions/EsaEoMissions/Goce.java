@@ -15,7 +15,7 @@ import pl.wasat.smarthma.parser.model.Page;
  * Part of the project  SmartHMA
  */
 public class Goce extends BaseParser implements MissionInterface {
-    private final static int MISSION_ID = 5;
+    private final static int MISSION_ID = 6;
     private final static String TITLE = "Goce";
 
     private final int JS_POSITION = 9;

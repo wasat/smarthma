@@ -4,7 +4,7 @@ import com.google.android.gms.maps.GoogleMap;
 
 import org.acra.ACRA;
 
-public class AcraExtension {
+class AcraExtension {
     private static final String NULL = "Null";
     private static final String MAP_INSTANCE = "-map_instance";
     private static final String MAP_CALLED = "-map_called";

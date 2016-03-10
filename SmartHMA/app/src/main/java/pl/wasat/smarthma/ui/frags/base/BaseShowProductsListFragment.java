@@ -34,13 +34,13 @@ import pl.wasat.smarthma.utils.rss.FedeoSearchRequest;
  * instance of this fragment.
  */
 public class BaseShowProductsListFragment extends BaseSpiceFragment {
-    private static final String KEY_PARAM_FEDEO_REQUEST = "pl.wasat.smarthma.KEY_PARAM_FEDEO_REQUEST";
+    protected static final String KEY_PARAM_FEDEO_REQUEST = "pl.wasat.smarthma.KEY_PARAM_FEDEO_REQUEST";
     private static final String STATE_ACTIVATED_POSITION = "activated_position";
     protected ListView entryImagesListView;
     protected View loadingView;
     protected EntryImagesListAdapter entryImagesListAdapter;
     protected List<Entry> entryList;
-    private FedeoRequestParams fedeoRequestParams;
+    protected FedeoRequestParams fedeoRequestParams;
     private int mActivatedPosition = ListView.INVALID_POSITION;
 
     public BaseShowProductsListFragment() {
@@ -54,7 +54,7 @@ public class BaseShowProductsListFragment extends BaseSpiceFragment {
      * @return A new instance of fragment SearchProductsFeedsFragment.
      */
     public static BaseShowProductsListFragment newInstance(
-            FedeoRequestParams fedeoRequestParams) {
+            FedeoRequestParams fedeoRequestParams, String osddUrl) {
         BaseShowProductsListFragment fragment = new BaseShowProductsListFragment();
         Bundle args = new Bundle();
         args.putSerializable(KEY_PARAM_FEDEO_REQUEST, fedeoRequestParams);
@@ -99,9 +99,7 @@ public class BaseShowProductsListFragment extends BaseSpiceFragment {
                 R.id.listview_collections_group);
         loadingView = view.findViewById(R.id.loading_layout);
 
-        if (fedeoRequestParams != null) {
-            loadSearchProductsFeedResponse(fedeoRequestParams);
-        }
+
     }
 
     @Override
@@ -124,7 +122,7 @@ public class BaseShowProductsListFragment extends BaseSpiceFragment {
     /**
      *
      */
-    private void loadSearchProductsFeedResponse(FedeoRequestParams fedeoRequestParams) {
+    protected void startFedeoProductSearchRequest(FedeoRequestParams fedeoRequestParams) {
         if (fedeoRequestParams != null) {
             getActivity().setProgressBarIndeterminateVisibility(true);
 

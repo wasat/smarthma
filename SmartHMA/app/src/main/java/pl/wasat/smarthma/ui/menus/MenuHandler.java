@@ -16,7 +16,6 @@ import java.util.ArrayList;
 
 import pl.wasat.smarthma.R;
 import pl.wasat.smarthma.helper.Const;
-import pl.wasat.smarthma.ui.activities.DownloadActivity;
 import pl.wasat.smarthma.ui.activities.GlobalSettingsActivity;
 
 /**
@@ -171,7 +170,7 @@ public abstract class MenuHandler {
             }
         });
 
-        LinearLayout downloadLayout = (LinearLayout) layout.findViewById(R.id.popup_menu_download);
+/*        LinearLayout downloadLayout = (LinearLayout) layout.findViewById(R.id.popup_menu_download);
         clickableViews.add(downloadLayout);
         downloadLayout.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -181,6 +180,6 @@ public abstract class MenuHandler {
                 popupWindow.dismiss();
                 popupWindow = null;
             }
-        });
+        });*/
     }
 }

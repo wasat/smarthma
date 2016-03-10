@@ -15,7 +15,7 @@ import pl.wasat.smarthma.parser.model.Page;
  * Part of the project  SmartHMA
  */
 public class OceanSat2 extends BaseParser implements SimpleMissionInterface {
-    private final static int MISSION_ID = 53;
+    private final static int MISSION_ID = 54;
     private final static String TITLE = "OceanSat-2";
 
     public OceanSat2(String pageUrl, Context context) {

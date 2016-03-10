@@ -11,24 +11,24 @@ import java.util.List;
 
 public class Parameter {
 
-    private List<pl.wasat.smarthma.model.osdd.Option> Option = new ArrayList<>();
+    private List<pl.wasat.smarthma.model.osdd.Option> Options = new ArrayList<>();
     private String Name;
     private String Value;
     private String Prefix;
 
 
     /**
-     * @return The Option
+     * @return The Options
      */
-    public List<pl.wasat.smarthma.model.osdd.Option> getOption() {
-        return Option;
+    public List<pl.wasat.smarthma.model.osdd.Option> getOptions() {
+        return Options;
     }
 
     /**
-     * @param Option The Option
+     * @param Option The Options
      */
-    public void setOption(List<pl.wasat.smarthma.model.osdd.Option> Option) {
-        this.Option = Option;
+    public void setOptions(List<pl.wasat.smarthma.model.osdd.Option> Option) {
+        this.Options = Option;
     }
 
     /**
@@ -81,7 +81,7 @@ public class Parameter {
 
     @Override
     public int hashCode() {
-        return new HashCodeBuilder().append(Option).append(Name).append(Value).append(Prefix).toHashCode();
+        return new HashCodeBuilder().append(Options).append(Name).append(Value).append(Prefix).toHashCode();
     }
 
     @Override
@@ -93,7 +93,7 @@ public class Parameter {
             return false;
         }
         Parameter rhs = ((Parameter) other);
-        return new EqualsBuilder().append(Option, rhs.Option).append(Name, rhs.Name).append(Value, rhs.Value).append(Prefix, rhs.Prefix).isEquals();
+        return new EqualsBuilder().append(Options, rhs.Options).append(Name, rhs.Name).append(Value, rhs.Value).append(Prefix, rhs.Prefix).isEquals();
     }
 
 }

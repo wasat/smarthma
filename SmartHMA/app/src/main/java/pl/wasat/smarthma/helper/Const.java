@@ -32,6 +32,8 @@ public class Const {
     public static final String KEY_INTENT_MISSION_PARAM = "pl.wasat.smarthma.KEY_INTENT_MISSION_PARAM";
     public static final String KEY_INTENT_FEDEO_REQUEST_PARAMS = "pl.wasat.smarthma.KEY_INTENT_FEDEO_REQUEST_PARAMS";
     public static final String KEY_INTENT_FEDEO_REQUEST_PARAMS_EXTRA = "pl.wasat.smarthma.KEY_INTENT_FEDEO_REQUEST_PARAMS_EXTRA";
+    public static final String KEY_INTENT_FEDEO_REQUEST_PARAMS_OSDD = "pl.wasat.smarthma.KEY_INTENT_FEDEO_REQUEST_PARAMS_OSDD";
+    public static final String KEY_INTENT_FEDEO_OSDD_URL = "pl.wasat.smarthma.KEY_INTENT_FEDEO_OSDD_URL";
     public static final String KEY_INTENT_FEDEO_REQUEST_URL = "pl.wasat.smarthma.KEY_INTENT_FEDEO_REQUEST_URL";
     public static final String KEY_INTENT_CLOUD_PRODUCT_NAME = "pl.wasat.smarthma.KEY_INTENT_CLOUD_PRODUCT_NAME";
     public static final String KEY_INTENT_CLOUD_PRODUCT_URL = "pl.wasat.smarthma.KEY_INTENT_CLOUD_PRODUCT_URL";
@@ -46,6 +48,7 @@ public class Const {
     public static final int REQUEST_CODE_DOWNLOAD = 101;
 
     public static final String KEY_PREF_FILE = "SmartHMAPrefFile";
+    public static final String KEY_PREF_CATALOGUE = "pl.wasat.smarthma.KEY_PREF_CATALOGUE";
     public static final String KEY_PREF_DATETIME_START = "pl.wasat.smarthma.KEY_PREF_TIME_START";
     public static final String KEY_PREF_DATETIME_END = "pl.wasat.smarthma.KEY_PREF_TIME_END";
     public static final String KEY_PREF_PARENT_ID = "pl.wasat.smarthma.KEY_PREF_PARENT_ID";
@@ -55,6 +58,16 @@ public class Const {
     public static final String KEY_PREF_BBOX_NORTH = "pl.wasat.smarthma.KEY_PREF_BBOX_NORTH";
     public static final String KEY_PREF_QUERY = "pl.wasat.smarthma.KEY_PREF_QUERY";
     public static final String KEY_PREF_URL = "pl.wasat.smarthma.KEY_PREF_URL";
+    public static final String KEY_PREF_AREA_TYPE = "pl.wasat.smarthma.KEY_PREF_AREA_TYPE";
+    public static final String KEY_PREF_AREA_USE = "pl.wasat.smarthma.KEY_PREF_AREA_USE";
+    public static final String KEY_PREF_TIME_USE = "pl.wasat.smarthma.KEY_PREF_TIME_USE";
+    public static final String KEY_PREF_CENTER_LAT = "pl.wasat.smarthma.KEY_PREF_CENTER_LAT";
+    public static final String KEY_PREF_CENTER_LNG = "pl.wasat.smarthma.KEY_PREF_CENTER_LNG";
+    public static final String KEY_PREF_RADIUS = "pl.wasat.smarthma.KEY_PREF_RADIUS";
+    public static final String KEY_PREF_LOGIN = "pl.wasat.smarthma.KEY_PREF_LOGIN";
+    public static final String KEY_PREF_PASSWORD = "pl.wasat.smarthma.KEY_PREF_PASSWORD";
+
+    public static final String KEY_PREF_GLOBAL_LAST_SYNC_TIME = "pl.wasat.smarthma.KEY_PREF_GLOBAL_LAST_SYNC_TIME";
 
     public static final int SORT_BY_TITLE_ASCENDING = 0;
     public static final int SORT_BY_TITLE_DESCENDING = 1;

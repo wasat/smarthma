@@ -7,6 +7,7 @@ import android.widget.LinearLayout;
 import pl.wasat.smarthma.R;
 import pl.wasat.smarthma.ui.activities.FavouriteProductsActivity;
 import pl.wasat.smarthma.ui.activities.ProductsBrowserActivity;
+import pl.wasat.smarthma.ui.dialogs.SortProductsDialog;
 
 /**
  * Used for handling menu in the ProductsBrowserActivity class.

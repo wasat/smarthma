@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -15,6 +16,8 @@ import pl.wasat.smarthma.helper.Const;
 import pl.wasat.smarthma.model.mission.MissionItemData;
 import pl.wasat.smarthma.parser.Parser.Parser;
 import pl.wasat.smarthma.parser.database.ParserDb;
+import pl.wasat.smarthma.preferences.GlobalPreferences;
+import pl.wasat.smarthma.preferences.SharedPrefs;
 import pl.wasat.smarthma.ui.activities.base.BaseSmartHMActivity;
 import pl.wasat.smarthma.ui.frags.missions.MissionsDetailsFragment;
 import pl.wasat.smarthma.ui.frags.missions.MissionsDetailsFragment.OnMissionsDetailNewFragmentListener;
@@ -22,9 +25,14 @@ import pl.wasat.smarthma.ui.frags.missions.MissionsExtListFragment;
 import pl.wasat.smarthma.ui.frags.missions.MissionsExtListFragment.OnExtendedListFragmentListener;
 
 public class MissionsActivity extends BaseSmartHMActivity implements
-        OnExtendedListFragmentListener, OnMissionsDetailNewFragmentListener, ExpandableListAdapter.OnSwipeListItemListener {
+        OnExtendedListFragmentListener, OnMissionsDetailNewFragmentListener, ExpandableListAdapter.OnSwipeListItemListener, Parser.OnParserListener {
 
     private MissionsExtListFragment missionsExtListFragment;
+    private ProgressTask progressTask;
+    private Handler myHandler;
+    private int taskCount;
+    private String taskMsg;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +47,8 @@ public class MissionsActivity extends BaseSmartHMActivity implements
         parserDb.open();
 
         //jesli jest w bazie 60 misji, to ladujemy fragment
-        if (parserDb.getMissionCount() == 60) {
+        int count = parserDb.getMissionCount();
+        if (parserDb.getMissionCount() == 60 && !isSyncRequired()) {
             missionsExtListFragment = MissionsExtListFragment
                     .newInstance();
             getSupportFragmentManager()
@@ -60,9 +69,25 @@ public class MissionsActivity extends BaseSmartHMActivity implements
                             missionsDetailNewFragment, MissionsDetailsFragment.class.getSimpleName())
                     .commit();
         } else {
-            new ProgressTask(this).execute();
-
+            progressTask = new ProgressTask(this);
+            progressTask.execute();
         }
+    }
+
+    @Override
+    public void onParserItemFinish(int taskCount) {
+        this.taskCount = taskCount;
+        progressTask.onProgressUpdate(taskMsg, String.valueOf(taskCount));
+    }
+
+    private boolean isSyncRequired() {
+        GlobalPreferences globalPreferences = new GlobalPreferences(this);
+        long syncPeriod = globalPreferences.getMissionSyncTime() * 3600000;
+        SharedPrefs sharedPrefs = new SharedPrefs(this);
+        long lastSync = sharedPrefs.getLastSyncPrefs();
+        long currTime = System.currentTimeMillis();
+        long syncDiff = currTime - lastSync;
+        return syncDiff > syncPeriod;
     }
 
     @Override
@@ -104,6 +129,7 @@ public class MissionsActivity extends BaseSmartHMActivity implements
         private final ParserDb parserDb;
         private MissionsExtListFragment extendedListFragment;
 
+
         public ProgressTask(MissionsActivity activity) {
             this.activity = activity;
             dialog = new ProgressDialog(activity);
@@ -114,22 +140,29 @@ public class MissionsActivity extends BaseSmartHMActivity implements
         protected Boolean doInBackground(final String... args) {
             try {
                 Parser parser = new Parser(activity);
-                publishProgress(getString(R.string.loading_esa_eo_missions), "2");
+
+                //publishProgress(getString(R.string.loading_esa_eo_missions), "2");
+                taskMsg = getString(R.string.loading_esa_eo_missions);
                 parser.cat0();
-                publishProgress(getString(R.string.loading_esa_future_missions), "9");
 
+                //publishProgress(getString(R.string.loading_esa_future_missions), "9");
+                taskMsg = getString(R.string.loading_esa_future_missions);
                 parser.cat1();
-                publishProgress(getString(R.string.loading_third_party_missions), "16");
 
+                //publishProgress(getString(R.string.loading_third_party_missions), "16");
+                taskMsg = getString(R.string.loading_third_party_missions);
                 parser.cat2();
-                publishProgress(getString(R.string.loading_historical_missions), "41");
 
+                //publishProgress(getString(R.string.loading_historical_missions), "41");
+                taskMsg = getString(R.string.loading_historical_missions);
                 parser.cat3();
-                publishProgress(getString(R.string.loading_potential_missions), "50");
 
+                //publishProgress(getString(R.string.loading_potential_missions), "50");
+                taskMsg = getString(R.string.loading_potential_missions);
                 parser.cat4();
-                publishProgress(getString(R.string.loading_other_missions), "56");
 
+                //publishProgress(getString(R.string.loading_other_missions), "56");
+                taskMsg = getString(R.string.loading_other_missions);
                 parser.cat5();
                 return true;
             } catch (Exception e) {
@@ -139,8 +172,9 @@ public class MissionsActivity extends BaseSmartHMActivity implements
         }
 
         protected void onPreExecute() {
+            myHandler = new Handler();
             dialog.setMessage(getString(R.string.loading_esa_eo_missions));
-            dialog.setMax(60);
+            dialog.setMax(58);
             dialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
             dialog.setCancelable(false);
             dialog.show();
@@ -172,13 +206,24 @@ public class MissionsActivity extends BaseSmartHMActivity implements
                     .commit();
 
             parserDb.close();
+
+            SharedPrefs sharedPrefs = new SharedPrefs(getApplicationContext());
+            sharedPrefs.setLastSyncPrefs(System.currentTimeMillis());
         }
 
         @Override
-        protected void onProgressUpdate(String... message) {
+        protected void onProgressUpdate(final String... message) {
             super.onProgressUpdate();
-            dialog.setMessage(message[0]);
-            dialog.setProgress(Integer.parseInt(message[1]));
+            if (message != null && message.length > 0) {
+                myHandler.post(new Runnable() {
+                    public void run() {
+                        dialog.setMessage(message[0]);
+                        dialog.setProgress(Integer.parseInt(message[1]));
+                    }
+                });
+            }
+            //dialog.setMessage(message[0]);
+            //dialog.setProgress(Integer.parseInt(message[1]));
         }
     }
 }

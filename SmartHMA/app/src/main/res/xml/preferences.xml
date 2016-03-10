@@ -1,17 +1,24 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <PreferenceCategory android:title="@string/pref_category_title_search_params_settings">
+    <PreferenceCategory android:title="@string/pref_category_title_general_settings">
+        <ListPreference
+            android:defaultValue="720"
+            android:entries="@array/pref_entries_list_mission_sync"
+            android:entryValues="@array/pref_values_list_mission_sync"
+            android:key="@string/pref_key_list_mission_sync_time"
+            android:summary="@string/pref_summary_mission_sync_time"
+            android:title="@string/pref_title_mission_sync_time"/>
+    </PreferenceCategory>
 
+    <PreferenceCategory android:title="@string/pref_category_title_search_params_settings">
         <CheckBoxPreference
             android:defaultValue="true"
             android:key="@string/pref_key_checkbox_search_params_save"
             android:summary="@string/pref_summary_remember_search_params"
             android:title="@string/pref_title_remember_search_params"/>
-
     </PreferenceCategory>
 
     <PreferenceCategory android:title="@string/pref_category_title_map_settings">
-
         <ListPreference
             android:defaultValue="1"
             android:entries="@array/pref_entries_map_list"
@@ -22,13 +29,11 @@
     </PreferenceCategory>
 
     <PreferenceCategory android:title="@string/pref_category_title_debug_mode">
-
         <CheckBoxPreference
             android:defaultValue="false"
             android:key="@string/pref_key_checkbox_debug_mode"
             android:summary="@string/pref_summary_show_debugging_info"
             android:title="@string/pref_title_show_debugging_info"/>
-
     </PreferenceCategory>
 
 </PreferenceScreen>

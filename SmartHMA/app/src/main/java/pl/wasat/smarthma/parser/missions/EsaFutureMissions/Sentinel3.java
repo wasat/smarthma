@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 import pl.wasat.smarthma.parser.Parser.BaseParser;
 import pl.wasat.smarthma.parser.Parser.Pair;
-import pl.wasat.smarthma.parser.missions.SimpleMissionInterface;
+import pl.wasat.smarthma.parser.missions.MissionInterface;
 import pl.wasat.smarthma.parser.model.Mission;
 import pl.wasat.smarthma.parser.model.Page;
 
@@ -14,7 +14,7 @@ import pl.wasat.smarthma.parser.model.Page;
  * Created by marcel paduch on 2015-08-11 00:09.
  * Part of the project  SmartHMA
  */
-public class Sentinel3 extends BaseParser implements SimpleMissionInterface {
+public class Sentinel3 extends BaseParser implements MissionInterface {
     private final static int MISSION_ID = 10;
     private final static String TITLE = "Sentinel-3";
 
@@ -26,12 +26,87 @@ public class Sentinel3 extends BaseParser implements SimpleMissionInterface {
 
     @Override
     public void mainContent() {
-        String arrayName = "_56_INSTANCE_S2Pl_tempArray";
-        ArrayList<Pair> list = super.getJsPage(JS_POSITION, arrayName);
-        for (int i = 0; i < list.size(); i++) {
-            if (i == 0) {
-                parserDb.addPage(new Page(EsaFutureMissions.CATEGORY_ID, MISSION_ID, MAIN_INFO + list.get(i).title, sanitizeJsContents((String) list.get(i).content)));
-            }
+        int ITEMS_COUNT = 2;
+        ArrayList<Pair> list = super.getComplexPage(ITEMS_COUNT);
+        for (Pair item : list) {
+            parserDb.addPage(new Page(EsaFutureMissions.CATEGORY_ID, MISSION_ID, (String) item.title, (String) item.content));
         }
+    }
+
+    @Override
+    public void news() {
+        String NEWS = "https://earth.esa.int/web/guest/missions/esa-future-missions/sentinel-3/news";
+        parserDb.addPage(new Page(EsaFutureMissions.CATEGORY_ID, MISSION_ID, NEWS_TITLE, NEWS));
+    }
+
+    @Override
+    public void milestones() {
+        String MILESTONES = "https://earth.esa.int/web/guest/missions/esa-future-missions/sentinel-3/milestones";
+        parserDb.addPage(new Page(EsaFutureMissions.CATEGORY_ID, MISSION_ID, MILESTONES_TITLE, MILESTONES));
+    }
+
+    @Override
+    public void faq() {
+
+    }
+
+    @Override
+    public void other() {
+
+    }
+
+    @Override
+    public void overview() {
+
+    }
+
+    @Override
+    public void objectives() {
+
+    }
+
+    @Override
+    public void satellite() {
+
+    }
+
+    @Override
+    public void groundSegment() {
+
+    }
+
+    @Override
+    public void instruments() {
+
+    }
+
+    @Override
+    public void scientificRequirements() {
+
+    }
+
+    @Override
+    public void operations() {
+
+    }
+
+    @Override
+    public void applications() {
+
+    }
+
+    @Override
+    public void science() {
+
+    }
+
+    @Override
+    public void history() {
+
+    }
+
+    @Override
+    public void industry() {
+
     }
 }

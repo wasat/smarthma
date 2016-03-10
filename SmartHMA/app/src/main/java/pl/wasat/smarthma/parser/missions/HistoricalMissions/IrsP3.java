@@ -15,7 +15,7 @@ import pl.wasat.smarthma.parser.model.Page;
  * Part of the project  SmartHMA
  */
 public class IrsP3 extends BaseParser implements SimpleMissionInterface {
-    private final static int MISSION_ID = 44;
+    private final static int MISSION_ID = 45;
     private final static String TITLE = "Irs-P3";
 
     public IrsP3(String pageUrl, Context context) {

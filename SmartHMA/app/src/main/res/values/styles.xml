@@ -18,6 +18,7 @@
 
     <!-- Application theme. -->
     <style name="AppTheme" parent="AppBaseTheme">
+        <item name="android:screenOrientation">landscape</item>
         <!-- All customizations that are NOT specific to a particular API-level can go here. -->
     </style>
 
@@ -143,10 +144,12 @@
 
     <!-- Application theme. -->
     <style name="AppNoActionBarTheme" parent="android:Theme.Holo.Light.NoActionBar">
+        <item name="android:screenOrientation">landscape</item>
         <!-- All customizations that are NOT specific to a particular API-level can go here. -->
     </style>
 
     <style name="AppFullScreenTheme" parent="android:Theme.Holo.Light.NoActionBar.Fullscreen">
+        <item name="android:screenOrientation">landscape</item>
         <!-- All customizations that are NOT specific to a particular API-level can go here. -->
     </style>
 
@@ -177,7 +180,7 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:padding">@dimen/browse_eo_padding_text</item>
         <item name="android:textSize">@dimen/browse_eo_text</item>
-        <item name="android:textColor">@color/text_black</item>
+        <item name="android:textColor">@color/text_view_font</item>
     </style>
 
     <style name="textBold" parent="@android:style/TextAppearance.Large">
@@ -185,7 +188,7 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:padding">@dimen/browse_eo_padding_text</item>
         <item name="android:textSize">@dimen/browse_eo_text</item>
-        <item name="android:textColor">@color/text_black</item>
+        <item name="android:textColor">@color/text_view_font</item>
         <item name="android:textStyle">bold</item>
     </style>
 
@@ -218,7 +221,7 @@
     <style name="textSearchParams" parent="@android:style/TextAppearance.Large">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:textColor">@color/text_black</item>
+        <item name="android:textColor">@color/text_view_font</item>
         <item name="android:paddingBottom">@dimen/search_eo_data_padding</item>
         <item name="android:paddingLeft">@dimen/search_eo_data_padding</item>
         <item name="android:paddingTop">@dimen/search_eo_data_padding_top</item>

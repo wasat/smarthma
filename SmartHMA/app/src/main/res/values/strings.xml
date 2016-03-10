@@ -122,7 +122,7 @@
     <string name="value_osdd_parameter">Search parameter</string>
     <string name="organisation_header">Organisation</string>
     <string name="platform_header">Platform</string>
-    <string name="favourites">Favourites...</string>
+    <string name="favourites">Favourites…</string>
     <string name="saved_collections">Saved collections</string>
     <string name="saved_products">Saved products</string>
     <string name="collection_added_to_favourites">Collection added to favourites</string>
@@ -236,24 +236,24 @@
     <string name="upload_file_to_dropbox_completed">Upload file %s to dropbox completed</string>
     <string name="upload">Upload</string>
     <string name="file_uploaded">"File uploaded: "</string>
-    <string name="loading">Loading...</string>
+    <string name="loading">Loading…</string>
     <string name="swipe_right">swipe right</string>
     <string name="swipe_left">swipe left</string>
     <string name="searched_collections">Searched Collections</string>
     <string name="start_search_of">"Start search of: "</string>
-    <string name="loading_esa_eo_missions">Loading ESA EO MISSIONS, please wait...</string>
-    <string name="loading_esa_future_missions">Loading ESA FUTURE MISSIONS, please wait...</string>
-    <string name="loading_third_party_missions">Loading THIRD PARTY MISSIONS, please wait...</string>
-    <string name="loading_historical_missions">Loading HISTORICAL MISSIONS, please wait...</string>
-    <string name="loading_potential_missions">Loading POTENTIAL MISSIONS, please wait...</string>
-    <string name="loading_other_missions">Loading OTHER MISSIONS, please wait...</string>
+    <string name="loading_esa_eo_missions">Loading ESA EO MISSIONS, please wait…</string>
+    <string name="loading_esa_future_missions">Loading ESA FUTURE MISSIONS, please wait…</string>
+    <string name="loading_third_party_missions">Loading THIRD PARTY MISSIONS, please wait…</string>
+    <string name="loading_historical_missions">Loading HISTORICAL MISSIONS, please wait…</string>
+    <string name="loading_potential_missions">Loading POTENTIAL MISSIONS, please wait…</string>
+    <string name="loading_other_missions">Loading OTHER MISSIONS, please wait…</string>
     <string name="first">first</string>
     <string name="previous">previous</string>
     <string name="self">self</string>
     <string name="next">next</string>
     <string name="last">last</string>
     <string name="impossible_to_get_the_list">Impossible to get the list of item</string>
-    <string name="choose_osdd_param">Choose %s...</string>
+    <string name="choose_osdd_param">Choose %s…</string>
     <string name="minute_ago">" minute ago"</string>
     <string name="minutes_ago">" minutes ago"</string>
     <string name="hour_ago">" hour ago"</string>
@@ -274,6 +274,25 @@
     <string name="third_party_missions_current">Third Party Missions - Current Missions</string>
     <string name="third_party_missions_historical">Third Party Missions - Historical Missions</string>
     <string name="third_party_missions_potential">Third Party Missions - Potential Third Party Missions</string>
+    <string name="lorem_lorem">lorem lorem</string>
+    <string name="dropbox">Dropbox</string>
+    <string name="google_drive">Google Drive</string>
+    <string name="choose_the_date">Choose the date</string>
+    <string name="sort">Sort</string>
+    <string name="refresh">Refresh</string>
+    <string name="favourite">Favourite</string>
+    <string name="set_">Set %s</string>
+    <string name="dev_size_warning">Device Screen Warning</string>
+    <string name="dev_size_warning_message">Your device is not tablet size. SmartHMA application is designed to large screen device.\n\nPlease use an online Fedeo service for EO data search:\nhttps://eoportal.org/web/eoportal/fedeo\n</string>
+    <string name="action_export_ompl">Export as OMPL</string>
+    <string name="export_opml_favourites">Export OPML favourites entry are saved on internal memory</string>
 
+    <string name="center">Center: </string>
+    <string name="radius">Radius: </string>
+    <string name="km">km</string>
+    <string name="signin">Sign In</string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="sign_in_sso">Sign In SSO</string>
 
 </resources>

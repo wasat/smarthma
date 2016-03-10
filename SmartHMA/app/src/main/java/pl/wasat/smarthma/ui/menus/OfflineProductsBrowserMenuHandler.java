@@ -5,6 +5,9 @@ import android.widget.LinearLayout;
 
 import pl.wasat.smarthma.R;
 import pl.wasat.smarthma.ui.activities.FavouriteProductsActivity;
+import pl.wasat.smarthma.ui.dialogs.ClearOfflineProductsDialog;
+import pl.wasat.smarthma.ui.dialogs.ExportProductsDialogFragment;
+import pl.wasat.smarthma.ui.dialogs.SortOfflineProductsDialog;
 
 /**
  * Used for handling menu in the FavouriteProductsActivity class.
@@ -31,7 +34,7 @@ public class OfflineProductsBrowserMenuHandler extends MenuHandler {
             public void onClick(View v) {
                 SortOfflineProductsDialog newFragment = new SortOfflineProductsDialog();
                 newFragment.setActivity((FavouriteProductsActivity) activity);
-                newFragment.show(activity.getSupportFragmentManager(), "Sorting_Options");
+                newFragment.show(activity.getSupportFragmentManager(), SortOfflineProductsDialog.class.getSimpleName());
                 popupWindow.dismiss();
                 popupWindow = null;
             }
@@ -43,7 +46,19 @@ public class OfflineProductsBrowserMenuHandler extends MenuHandler {
             public void onClick(View v) {
                 ClearOfflineProductsDialog newFragment = new ClearOfflineProductsDialog();
                 newFragment.setActivity((FavouriteProductsActivity) activity);
-                newFragment.show(activity.getSupportFragmentManager(), "Clear_list_confirmation");
+                newFragment.show(activity.getSupportFragmentManager(), ClearOfflineProductsDialog.class.getSimpleName());
+                popupWindow.dismiss();
+                popupWindow = null;
+            }
+        });
+
+        LinearLayout exportLayout = (LinearLayout) layout.findViewById(R.id.popup_export_layout);
+        clickableViews.add(exportLayout);
+        exportLayout.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                ExportProductsDialogFragment exportProductsDialogFrag = ExportProductsDialogFragment.newInstance();
+                exportProductsDialogFrag.show(activity.getSupportFragmentManager(),
+                        ExportProductsDialogFragment.class.getSimpleName());
                 popupWindow.dismiss();
                 popupWindow = null;
             }

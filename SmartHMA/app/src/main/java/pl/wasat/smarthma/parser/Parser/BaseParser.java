@@ -357,11 +357,13 @@ public abstract class BaseParser {
      */
     protected ArrayList<String> getImageList(ArrayList<String> contentsList) {
         ArrayList<String> finalList = new ArrayList<>();
-        for (String singleEl :
-                contentsList) {
-            Document doc = Jsoup.parseBodyFragment(singleEl);
-            Element el = doc.select("a img").first();
-            finalList.add(/*MAIN_PAGE_URL +*/ el.attr("src"));
+        for (String singleEl : contentsList) {
+            try {
+                Document doc = Jsoup.parseBodyFragment(singleEl);
+                Element el = doc.select("a img").first();
+                finalList.add(/*MAIN_PAGE_URL +*/ el.attr("src"));
+            } catch (Exception ignored) {
+            }
         }
         return finalList;
     }

@@ -67,19 +67,16 @@ public class SearchListFragment extends SearchListFragmentBase {
         if (getArguments() != null) {
             searchRequest = (FedeoRequestParams) getArguments().getSerializable(
                     KEY_PARAM_SEARCH_FEDEO_REQUEST);
+
+            stopSearch = getArguments().getBoolean(Const.KEY_INTENT_RETURN_STOP_SEARCH);
+            if (searchRequest != null && !stopSearch) {
+                loadSearchFeedResponse(searchRequest);
+            }
+
             SearchHistory searchHistory = new SearchHistory(getActivity());
             searchHistory.addSearchParameters(new SearchParams(searchRequest));
         }
     }
-
-/*    @Override
-    public void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-        int mActivatedPosition = ListView.INVALID_POSITION;
-        if (mActivatedPosition != ListView.INVALID_POSITION) {
-            outState.putInt(STATE_ACTIVATED_POSITION, mActivatedPosition);
-        }
-    }*/
 
     @Override
     public void onDetach() {
@@ -90,16 +87,8 @@ public class SearchListFragment extends SearchListFragmentBase {
     @Override
     public void onStart() {
         super.onStart();
-        // TODO: Find solution - why fragment is called twice
-        stopSearch = getArguments().getBoolean(Const.KEY_INTENT_RETURN_STOP_SEARCH);
-        if (searchRequest != null && !stopSearch) {
-            loadSearchFeedResponse(searchRequest);
-        }
     }
 
-    /**
-     *
-     */
     private void loadSearchFeedResponse(FedeoRequestParams fedeoRequestParams) {
         if (fedeoRequestParams != null) {
             getActivity().setProgressBarIndeterminateVisibility(true);
@@ -109,8 +98,7 @@ public class SearchListFragment extends SearchListFragmentBase {
     }
 
     @Override
-    public void onListItemClick(ListView listView, View view, int position,
-                                long id) {
+    public void onListItemClick(ListView listView, View view, int position, long id) {
         super.onListItemClick(listView, view, position, id);
         mListener.onSearchListFragmentItemSelected(String.valueOf(position));
     }

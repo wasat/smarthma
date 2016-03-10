@@ -16,7 +16,7 @@ import pl.wasat.smarthma.parser.model.Page;
  * Part of the project  SmartHMA
  */
 public class ProbaV extends BaseParser implements MissionInterface {
-    private final static int MISSION_ID = 2;
+    private final static int MISSION_ID = 3;
     private final static String TITLE = "Proba-V";
     private final int THIRD_PARTY_MISSION_ID = 29;
 
@@ -25,8 +25,6 @@ public class ProbaV extends BaseParser implements MissionInterface {
         final int THIRD_PARTY_MISSION_ID = 29;
         parserDb.addMission(new Mission(MISSION_ID, EsaEoMissions.CATEGORY_ID, TITLE));
         parserDb.addMission(new Mission(THIRD_PARTY_MISSION_ID, ThirdPartyMissions.CATEGORY_ID, TITLE));
-
-
     }
 
     @Override
@@ -38,8 +36,6 @@ public class ProbaV extends BaseParser implements MissionInterface {
             parserDb.addPage(new Page(EsaEoMissions.CATEGORY_ID, MISSION_ID, (String) item.title, (String) item.content));
             parserDb.addPage(new Page(ThirdPartyMissions.CATEGORY_ID, THIRD_PARTY_MISSION_ID, (String) item.title, (String) item.content));
         }
-
-
     }
 
     @Override

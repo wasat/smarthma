@@ -60,7 +60,7 @@
             android:orientation="horizontal">
 
             <fragment
-                android:id="@+id/mapFromRegionDetails"
+                android:id="@+id/map_area_bounds"
                 android:name="com.google.android.gms.maps.MapFragment"
                 android:layout_width="match_parent"
                 android:layout_height="300dp"

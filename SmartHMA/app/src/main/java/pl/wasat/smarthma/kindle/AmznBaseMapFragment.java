@@ -4,7 +4,6 @@ import android.app.Dialog;
 import android.content.BroadcastReceiver;
 import android.location.Location;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v4.content.LocalBroadcastManager;
 
 import com.amazon.geo.mapsv2.AmazonMap;
@@ -133,7 +132,7 @@ public class AmznBaseMapFragment extends SupportMapFragment {
     }
 
     private void sendSupportMapReadyCallback() {
-        Fragment fragment = this;
+        AmznBaseMapFragment fragment = this;
         if (fragment instanceof OnBaseMapFragmentListener) {
             ((OnBaseMapFragmentListener) fragment).onBaseSupportMapReady();
         } else {

@@ -15,7 +15,7 @@ import pl.wasat.smarthma.parser.model.Page;
  * Part of the project  SmartHMA
  */
 public class QuickBird2 extends BaseParser implements SimpleMissionInterface {
-    private final static int MISSION_ID = 54;
+    private final static int MISSION_ID = 55;
     private final static String TITLE = "QuickBird-2";
 
     public QuickBird2(String pageUrl, Context context) {

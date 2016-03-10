@@ -1,9 +1,14 @@
 package pl.wasat.smarthma.utils.draw;
 
 import android.graphics.Color;
+import android.location.Location;
+import android.support.annotation.NonNull;
 
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.model.Circle;
 import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Polygon;
 import com.google.android.gms.maps.model.PolygonOptions;
 
 import java.util.ArrayList;
@@ -41,19 +46,58 @@ public class MapDrawings {
         return rectOptions;
     }
 
-    public CircleOptions drawPoints(ArrayList<LatLng> markedPtList) {
-        CircleOptions circle = new CircleOptions();
-        int size = 0;
+    public GoogleMap drawPoints(ArrayList<LatLng> markedPtList, GoogleMap mMap) {
         if (markedPtList != null) {
-            size = markedPtList.size();
+            for (LatLng point : markedPtList) {
+                mMap.addCircle(drawPoint(point));
+            }
         }
-        for (int i = 0; i < size; i++) {
-            circle.center(markedPtList.get(i));
-            circle.radius(0.3);
-            circle.strokeColor(Color.YELLOW);
-            circle.fillColor(Color.GRAY);
-            circle.strokeWidth(7);
-        }
+        return mMap;
+    }
+
+    public CircleOptions drawPoint(LatLng point) {
+        CircleOptions circle = new CircleOptions();
+        circle.center(point);
+        circle.radius(5);
+        circle.strokeColor(Color.YELLOW);
+        circle.fillColor(Color.GRAY);
+        circle.strokeWidth(7);
+        circle.zIndex(5);
         return circle;
+    }
+
+    public CircleOptions drawPointAndRadiusArea(ArrayList<LatLng> markedPtList) {
+        LatLng center = markedPtList.get(0);
+        LatLng secPt = markedPtList.get(1);
+        float[] res = new float[3];
+        Location.distanceBetween(center.latitude, center.longitude, secPt.latitude, secPt.longitude, res);
+        double radiusInMeters = res[0];
+        return drawPointAndRadiusArea(center, radiusInMeters);
+    }
+
+    @NonNull
+    public CircleOptions drawPointAndRadiusArea(LatLng center, double radiusInMeters) {
+        int strokeColor = 0xFF0000FF; //red outline
+        int shadeColor = 0x110000FF; //opaque red fill
+
+        return new CircleOptions()
+                .center(center)
+                .radius(radiusInMeters)
+                .fillColor(shadeColor)
+                .strokeColor(strokeColor)
+                .strokeWidth(6)
+                .zIndex(4);
+    }
+
+    public void removeCircles(ArrayList<Circle> circleList) {
+        if (circleList != null) {
+            for (Circle circle : circleList) {
+                circle.remove();
+            }
+        }
+    }
+
+    public void removePolygon(Polygon areaPolygon) {
+        if (areaPolygon != null) areaPolygon.remove();
     }
 }

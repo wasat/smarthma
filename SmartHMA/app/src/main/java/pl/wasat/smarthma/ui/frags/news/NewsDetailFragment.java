@@ -1,6 +1,7 @@
 package pl.wasat.smarthma.ui.frags.news;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -59,6 +60,7 @@ public class NewsDetailFragment extends Fragment {
                     .setText(pubDate);
             final WebView webArticleDetail = (WebView) rootView
                     .findViewById(R.id.article_web_detail);
+            webArticleDetail.setBackgroundColor(Color.TRANSPARENT);
             webArticleDetail.loadData(content, "text/html", "UTF-8");
             Button buttonMore = (Button) rootView
                     .findViewById(R.id.button_more);

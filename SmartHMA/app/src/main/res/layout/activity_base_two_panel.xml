@@ -25,7 +25,8 @@
                 android:layout_centerHorizontal="true"
                 android:layout_centerVertical="true"
                 android:padding="@dimen/action_bar_logo_padding"
-                android:src="@drawable/actionbar_logo"/>
+                android:src="@drawable/actionbar_logo"
+                android:contentDescription="@string/desc"/>
         </RelativeLayout>
 
         <LinearLayout
@@ -44,7 +45,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:src="@drawable/ic_rec"/>
+                    android:src="@drawable/ic_rec"
+                    android:contentDescription="@string/desc"/>
 
                 <pl.wasat.smarthma.customviews.TextViewWithFont
                     android:id="@+id/action_bar_title"
@@ -73,7 +75,8 @@
                     android:layout_centerHorizontal="true"
                     android:layout_centerVertical="true"
                     android:padding="@dimen/action_bar_logo_padding"
-                    android:src="@drawable/actionbar_menu"/>
+                    android:src="@drawable/actionbar_menu"
+                    android:contentDescription="@string/desc"/>
 
             </RelativeLayout>
         </LinearLayout>

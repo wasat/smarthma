@@ -1,7 +1,6 @@
 package pl.wasat.smarthma.ui.activities;
 
 import android.os.Bundle;
-import android.os.StrictMode;
 import android.support.v4.app.FragmentManager;
 import android.widget.TextView;
 
@@ -14,7 +13,7 @@ import pl.wasat.smarthma.ui.frags.news.NewsDetailFragment;
 import pl.wasat.smarthma.ui.frags.news.NewsListFragment;
 
 public class NewsActivity extends BaseSmartHMActivity implements
-        NewsListFragment.Callbacks {
+        NewsListFragment.OnNewsListFragListener {
 
     private boolean mTwoPane;
     private EoDbAdapter dba;
@@ -28,11 +27,11 @@ public class NewsActivity extends BaseSmartHMActivity implements
 
         super.onCreate(savedInstanceState);
 
-        if (android.os.Build.VERSION.SDK_INT > 9) {
+/*        if (android.os.Build.VERSION.SDK_INT > 9) {
             StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder()
                     .permitAll().build();
             StrictMode.setThreadPolicy(policy);
-        }
+        }*/
 
         TextView text = (TextView) findViewById(R.id.action_bar_title);
         text.setText(getString(R.string.esa_online));
@@ -96,7 +95,6 @@ public class NewsActivity extends BaseSmartHMActivity implements
                     .replace(R.id.activity_base_details_container, newsDetailFragment,
                             NewsDetailFragment.class.getSimpleName())
                     .commit();
-
         }
     }
 

@@ -15,7 +15,7 @@ import pl.wasat.smarthma.parser.model.Page;
  * Part of the project  SmartHMA
  */
 public class Nimbus7 extends BaseParser implements SimpleMissionInterface {
-    private final static int MISSION_ID = 49;
+    private final static int MISSION_ID = 50;
     private final static String TITLE = "Nimbus-7";
 
     public Nimbus7(String pageUrl, Context context) {

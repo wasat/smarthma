@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="@dimen/search_eo_data_padding"
+    android:background="@color/background_white">
+
+    <ImageView
+        android:id="@+id/view_cell_catalogue_icon"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_gravity="start"
+        android:contentDescription="@string/desc"/>
+
+    <pl.wasat.smarthma.customviews.TextViewWithFont
+        android:id="@+id/view_cell_catalogue_title"
+        style="?android:attr/textAppearanceLarge"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/background_white"
+        android:padding="@dimen/search_eo_data_padding"
+        android:paddingBottom="@dimen/search_eo_data_padding_small"
+        android:textColor="@color/text_black"
+        android:textSize="@dimen/search_eo_data_text_medium"/>
+
+</LinearLayout>

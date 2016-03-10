@@ -2,14 +2,42 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@color/background_gray"
-                android:paddingLeft="@dimen/browse_eo_padding">
+                android:background="@color/background_gray">
 
     <FrameLayout
         android:id="@+id/frag_support_map_base"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/seekBar_opacity_overlay"/>
+        android:layout_above="@+id/seekBar_opacity_overlay">
+    </FrameLayout>
+
+    <ImageButton
+        android:id="@+id/frag_map_ext_btn_ic_rotate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_gravity="end"
+        android:layout_marginEnd="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="60dp"
+        android:background="@drawable/ic_qlook_rotate"
+        android:contentDescription="@string/desc"/>
+
+    <ImageButton
+        android:id="@+id/frag_map_ext_btn_ic_fit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/frag_map_ext_btn_ic_rotate"
+        android:layout_gravity="end"
+        android:layout_marginEnd="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/ic_qlook_fit_left"
+        android:contentDescription="@string/desc"/>
+
 
     <SeekBar
         android:id="@+id/seekBar_opacity_overlay"

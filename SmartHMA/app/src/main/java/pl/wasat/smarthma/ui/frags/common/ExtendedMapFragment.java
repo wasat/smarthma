@@ -13,6 +13,7 @@ import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.SeekBar;
 import android.widget.SeekBar.OnSeekBarChangeListener;
 
@@ -36,6 +37,7 @@ import pl.wasat.smarthma.R;
 import pl.wasat.smarthma.interfaces.OnBaseMapFragmentPublicListener;
 import pl.wasat.smarthma.model.entry.SimpleMetadata;
 import pl.wasat.smarthma.ui.frags.base.BaseMapFragment;
+import pl.wasat.smarthma.utils.geo.FootprintGeometry;
 import pl.wasat.smarthma.utils.obj.LatLngExt;
 
 /**
@@ -55,14 +57,16 @@ public class ExtendedMapFragment extends Fragment implements
     private GoogleMap mMap;
     private GroundOverlay groundOverlay;
     private SeekBar seekBarOpacity;
-
     private BitmapDescriptor qLookImage;
+
     private OnExtendedMapFragmentListener mListener;
 
     private LatLng qLookCenter;
     private float qLookWidth;
     private float qLookHeight;
     private float qLookBearing;
+    private float[] qlookBearingsArray;
+    private int qlookBearingIdx = 0;
 
     public ExtendedMapFragment() {
     }
@@ -95,13 +99,29 @@ public class ExtendedMapFragment extends Fragment implements
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_map_extended,
                 container, false);
-
+        qlookBearingIdx = 0;
         seekBarOpacity = (SeekBar) rootView
                 .findViewById(R.id.seekBar_opacity_overlay);
         seekBarOpacity.setOnSeekBarChangeListener(this);
 
-        return rootView;
+        ImageButton imgBtnRotate = (ImageButton) rootView.findViewById(R.id.frag_map_ext_btn_ic_rotate);
+        imgBtnRotate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                rotateQuickLook();
+            }
+        });
 
+        final ImageButton imgBtnFit = (ImageButton) rootView.findViewById(R.id.frag_map_ext_btn_ic_fit);
+        imgBtnFit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                fitQuicklook();
+                changeFitIcon(imgBtnFit);
+            }
+        });
+
+        return rootView;
     }
 
     @Override
@@ -117,7 +137,6 @@ public class ExtendedMapFragment extends Fragment implements
                     .replace(R.id.frag_support_map_base, baseMapFragment)
                     .commit();
         }
-
     }
 
     @Override
@@ -132,7 +151,6 @@ public class ExtendedMapFragment extends Fragment implements
         if (mListener != null) {
             mListener.onMapReady();
         }
-
     }
 
     @Override
@@ -160,19 +178,7 @@ public class ExtendedMapFragment extends Fragment implements
     @Override
     public void onProgressChanged(SeekBar seekBar, int progress,
                                   boolean fromUser) {
-        if (groundOverlay != null) {
-            int opacity = seekBarOpacity.getProgress();
-            groundOverlay.remove();
-
-            GroundOverlayOptions groundOverlayOpt = new GroundOverlayOptions()
-                    .image(qLookImage)
-                    .position(qLookCenter, qLookWidth, qLookHeight)
-                    .bearing(qLookBearing).zIndex(2)
-                    .transparency((float) opacity / 100);
-
-            groundOverlay = mMap.addGroundOverlay(groundOverlayOpt);
-        }
-
+        loadModifiedGroundOverlay();
     }
 
     @Override
@@ -197,6 +203,17 @@ public class ExtendedMapFragment extends Fragment implements
     @Override
     public String key() {
         return "SmartHMA";
+    }
+
+    private void changeFitIcon(ImageButton imgBtnFit) {
+        if (qlookBearingIdx == 0 || qlookBearingIdx == 1)
+            imgBtnFit.setBackgroundResource(R.drawable.ic_qlook_fit_left);
+        else if (qlookBearingIdx == 2 || qlookBearingIdx == 3)
+            imgBtnFit.setBackgroundResource(R.drawable.ic_qlook_fit_bottom);
+        else if (qlookBearingIdx == 4 || qlookBearingIdx == 5)
+            imgBtnFit.setBackgroundResource(R.drawable.ic_qlook_fit_right);
+        else if (qlookBearingIdx == 6 || qlookBearingIdx == 7)
+            imgBtnFit.setBackgroundResource(R.drawable.ic_qlook_fit_top);
     }
 
     /**
@@ -238,8 +255,6 @@ public class ExtendedMapFragment extends Fragment implements
         }
         baseMapFragment.setTargetBounds(boundsBuilder.build());
         baseMapFragment.animateWhenMapIsReady(75);
-
-
     }
 
     private void drawFootprint(ArrayList<LatLng> footprintPoints) {
@@ -284,34 +299,66 @@ public class ExtendedMapFragment extends Fragment implements
         return latLngs;
     }
 
+    private ArrayList<LatLngExt> castToLatLngExtArray(ArrayList<LatLng> latLngs) {
+        ArrayList<LatLngExt> latLngExtArray = new ArrayList<>();
+        for (LatLng latLng : latLngs) {
+            latLngExtArray.add(new LatLngExt(latLng));
+        }
+        return latLngExtArray;
+    }
+
     private void calcQuickLookParams(LatLngExt footprintCenter,
                                      ArrayList<LatLng> footprintPoints) {
         //TODO - process quicklook if points > 5
-        double oneLat = footprintPoints.get(0).latitude;
-        double oneLng = footprintPoints.get(0).longitude;
-        double twoLat = footprintPoints.get(1).latitude;
-        double twoLng = footprintPoints.get(1).longitude;
-        double threeLat = footprintPoints.get(2).latitude;
-        double threeLng = footprintPoints.get(2).longitude;
-        double fourLat = footprintPoints.get(3).latitude;
-        double fourLng = footprintPoints.get(3).longitude;
-        float[] results = new float[3];
+        FootprintGeometry footprintGeometry = new FootprintGeometry(castToLatLngExtArray(footprintPoints), footprintCenter).invoke();
+        qLookCenter = footprintGeometry.getCenter().getGoogleLatLon();
+        qlookBearingsArray = footprintGeometry.getBearingsArray();
+        qLookWidth = footprintGeometry.getWidth();
+        qLookHeight = footprintGeometry.getHeight();
+        qLookBearing = footprintGeometry.getInitBearing();
 
-        if (footprintCenter != null && (footprintCenter.latitude != 0 && footprintCenter.longitude != 0)) {
-            qLookCenter = footprintCenter.getGoogleLatLon();
-        } else {
-            double latCenter = (oneLat + twoLat + threeLat + fourLat) / 4;
-            double lngCenter = (oneLng + twoLng + threeLng + fourLng) / 4;
-            qLookCenter = new LatLng(latCenter, lngCenter);
+/*        for (int i = 0; i < qlookBearingsArray.length; i++) {
+            float b = qlookBearingsArray[i];
+            Log.i("BEAR_ALL", i + " - " + String.valueOf(b));
+        }*/
+    }
+
+
+    @SuppressWarnings("SuspiciousNameCombination")
+    private void rotateQuickLook() {
+        qLookBearing = qLookBearing + 90;
+        float modQLWidth = qLookWidth;
+        qLookWidth = qLookHeight;
+        qLookHeight = modQLWidth;
+        loadModifiedGroundOverlay();
+    }
+
+
+    private void fitQuicklook() {
+        qLookBearing = qlookBearingsArray[qlookBearingIdx];
+        //Log.i("FIT", String.valueOf(qLookBearing));
+        loadModifiedGroundOverlay();
+        if (qlookBearingIdx <= 6)
+            qlookBearingIdx = qlookBearingIdx + 1;
+        else
+            qlookBearingIdx = 0;
+    }
+
+    private void loadModifiedGroundOverlay() {
+        if (groundOverlay != null) {
+            int opacity = seekBarOpacity.getProgress();
+            groundOverlay.remove();
+
+            GroundOverlayOptions groundOverlayOpt = new GroundOverlayOptions()
+                    .image(qLookImage)
+                    .position(qLookCenter, qLookWidth, qLookHeight)
+                    .bearing(qLookBearing)
+                    .zIndex(2)
+                    .anchor(0.5f, 0.5f)
+                    .transparency((float) opacity / 100);
+
+            groundOverlay = mMap.addGroundOverlay(groundOverlayOpt);
         }
-
-        Location.distanceBetween(oneLat, oneLng, twoLat, twoLng, results);
-        qLookHeight = results[0];
-
-        Location.distanceBetween(oneLat, oneLng, fourLat, fourLng, results);
-        qLookWidth = results[0];
-        qLookBearing = ((results[1] + results[2]) / 2) - 90;
-
     }
 
     /**

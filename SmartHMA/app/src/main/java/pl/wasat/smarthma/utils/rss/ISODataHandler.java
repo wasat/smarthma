@@ -641,7 +641,7 @@ class ISODataHandler extends DefaultHandler {
                 entry.setDate(date);
                 entry.setPolygon(polygon);
                 entry.setSummary(summary);
-                entry.setLink(linksEntry);
+                entry.setLinks(linksEntry);
                 entry.setMDMetadata(mdMetadata);
                 entries.add(entry);
                 isInEntry = false;

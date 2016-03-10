@@ -8,6 +8,7 @@ import pl.wasat.smarthma.R;
 import pl.wasat.smarthma.ui.activities.FavouriteCollectionsActivity;
 import pl.wasat.smarthma.ui.activities.FavouriteProductsActivity;
 import pl.wasat.smarthma.ui.activities.SearchActivity;
+import pl.wasat.smarthma.ui.dialogs.SearchParametersDialog;
 
 /**
  * Used for handling menu in the SearchActivity class.

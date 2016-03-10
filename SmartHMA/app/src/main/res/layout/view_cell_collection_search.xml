@@ -2,7 +2,6 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#ffebeff1"
                 android:orientation="horizontal"
                 android:paddingBottom="@dimen/esa_mission_cell_divider"
                 android:paddingTop="@dimen/esa_mission_cell_divider">
@@ -11,14 +10,12 @@
         android:id="@+id/swipe_list_shareview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#ffffeb3b"
         android:orientation="horizontal"/>
 
     <RelativeLayout
         android:id="@+id/swipe_list_deleteview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#ff558b2f"
         android:orientation="horizontal"/>
 
     <LinearLayout

@@ -15,7 +15,7 @@ import pl.wasat.smarthma.parser.model.Page;
  * Part of the project  SmartHMA
  */
 public class Kompsat1 extends BaseParser implements SimpleMissionInterface {
-    private final static int MISSION_ID = 46;
+    private final static int MISSION_ID = 47;
     private final static String TITLE = "Kompsat-1";
 
     public Kompsat1(String pageUrl, Context context) {

@@ -48,14 +48,28 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <pl.wasat.smarthma.customviews.TextViewWithFont
-                    android:id="@+id/frag_search_res_coll_det_tv_area"
-                    style="@style/textTitle"
-                    android:layout_width="match_parent"
+                <LinearLayout
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/search_area"/>
+                    android:orientation="horizontal">
+
+                    <CheckBox
+                        android:id="@+id/frag_search_res_coll_det_checkbox_area"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="true"/>
+
+                    <pl.wasat.smarthma.customviews.TextViewWithFont
+                        android:id="@+id/frag_search_res_coll_det_tv_area"
+                        style="@style/textTitle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/search_area"/>
+
+                </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/frag_search_res_coll_det_layout_area_values"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:background="@color/action_bar_background"
@@ -68,12 +82,14 @@
                         android:orientation="vertical">
 
                         <pl.wasat.smarthma.customviews.TextViewWithFont
+                            android:id="@+id/frag_search_res_coll_det_tv_area_title_ne_pt"
                             style="@style/text"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="@string/ne_"/>
 
                         <pl.wasat.smarthma.customviews.TextViewWithFont
+                            android:id="@+id/frag_search_res_coll_det_tv_area_title_sw_rad"
                             style="@style/text"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -130,13 +146,26 @@
                 android:background="@color/action_bar_background"
                 android:orientation="vertical">
 
-                <pl.wasat.smarthma.customviews.TextViewWithFont
-                    style="@style/textTitle"
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/time_period"/>
+                    android:orientation="horizontal">
+
+                    <CheckBox
+                        android:id="@+id/frag_search_res_coll_det_checkbox_time"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="true"/>
+
+                    <pl.wasat.smarthma.customviews.TextViewWithFont
+                        style="@style/textTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/time_period"/>
+                </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/frag_search_res_coll_det_layout_time_values"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:background="@color/action_bar_background"
@@ -228,7 +257,7 @@
                 android:layout_gravity="center_vertical|center_horizontal|center"
                 android:layout_weight="1"
                 android:drawableLeft="@drawable/ic_show_products"
-                android:enabled="true"
+                android:enabled="false"
                 android:text="@string/show_products"/>
 
             <Button
@@ -308,13 +337,13 @@
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/wunderlist_background">
+            android:background="@drawable/wunderlist_background_small">
 
             <LinearLayout
                 android:id="@+id/layout_param_sliders"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/wunderlist_background"
+                android:background="@drawable/wunderlist_background_small"
                 android:orientation="vertical">
 
                 <pl.wasat.smarthma.customviews.TextViewWithFont

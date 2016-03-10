@@ -15,7 +15,7 @@ import pl.wasat.smarthma.parser.model.Page;
  * Part of the project  SmartHMA
  */
 public class Cbers extends BaseParser implements SimpleMissionInterface {
-    private final static int MISSION_ID = 52;
+    private final static int MISSION_ID = 53;
     private final static String TITLE = "CBERS";
 
     public Cbers(String pageUrl, Context context) {

@@ -1,12 +1,20 @@
 package pl.wasat.smarthma.ui.frags.base;
 
+import android.widget.LinearLayout;
+
 import java.util.Calendar;
 import java.util.Locale;
 
+import pl.wasat.smarthma.R;
+import pl.wasat.smarthma.helper.enums.Opts;
 import pl.wasat.smarthma.preferences.GlobalPreferences;
 import pl.wasat.smarthma.utils.obj.LatLngBoundsExt;
+import pl.wasat.smarthma.utils.obj.LatLngExt;
+import pl.wasat.smarthma.utils.text.StringExt;
 import pl.wasat.smarthma.utils.time.DateUtils;
 import pl.wasat.smarthma.utils.time.SimpleDate;
+
+import static pl.wasat.smarthma.helper.enums.Opts.AREA_PT_RADIUS;
 
 /**
  * Created by Daniel on 2015-07-23 00:44.
@@ -35,10 +43,38 @@ public class BaseDateTimeAreaContainerFragment extends BaseParametersPickerFragm
         String bboxNorth = String.format(Locale.UK, "% 4f",
                 (float) bounds.northeast.latitude);
 
-        tvAreaSWLat.setText(bboxSouth);
-        tvAreaSWLon.setText(bboxWest);
-        tvAreaNELat.setText(bboxNorth);
-        tvAreaNELon.setText(bboxEast);
+        tvAreaSWRadLat.setText(bboxSouth);
+        tvAreaSWKmLon.setText(bboxWest);
+        tvAreaNEPtLat.setText(bboxNorth);
+        tvAreaNEPtLon.setText(bboxEast);
+
+        sharedPrefs.setBboxPrefs(bboxWest, bboxSouth, bboxEast, bboxNorth);
+    }
+
+    public void updateAreaPtAndRadius(LatLngExt center, float radius) {
+
+        String centerLat = StringExt.formatLatLng(center.latitude);
+        String centerLng = StringExt.formatLatLng(center.longitude);
+        String radiusStr = StringExt.formatDist(radius / 1000);
+
+        tvAreaNEPtLat.setText(centerLat);
+        tvAreaNEPtLon.setText(centerLng);
+        tvAreaSWRadLat.setText(radiusStr);
+        tvAreaSWKmLon.setText(R.string.km);
+
+        LatLngBoundsExt circleAreaBounds = convertPtAndRadiusToBounds(center, radius);
+        putBoundsToShared(circleAreaBounds);
+
+        sharedPrefs.setCenterPrefs((float) center.latitude, (float) center.longitude);
+        sharedPrefs.setRadiusPrefs(radius);
+    }
+
+
+    protected void putBoundsToShared(LatLngBoundsExt bounds) {
+        String bboxWest = String.valueOf(bounds.southwest.longitude);
+        String bboxSouth = String.valueOf(bounds.southwest.latitude);
+        String bboxEast = String.valueOf(bounds.northeast.longitude);
+        String bboxNorth = String.valueOf(bounds.northeast.latitude);
 
         sharedPrefs.setBboxPrefs(bboxWest, bboxSouth, bboxEast, bboxNorth);
     }
@@ -56,7 +92,8 @@ public class BaseDateTimeAreaContainerFragment extends BaseParametersPickerFragm
     protected void loadSharedData() {
         loadDateTimePrefs();
         setDateTime();
-        loadBboxPrefs();
+        loadAreaView();
+
     }
 
     private void loadDateTimePrefs() {
@@ -81,6 +118,28 @@ public class BaseDateTimeAreaContainerFragment extends BaseParametersPickerFragm
         sharedPrefs.setDateTimePrefs(DateUtils.calendarToISO(calStart), DateUtils.calendarToISO(calEnd));
     }
 
+    private void loadAreaView() {
+        loadProperAreaView(sharedPrefs.getAreaType());
+    }
+
+    public void loadProperAreaView(int areaType) {
+        switch (areaType) {
+            case Opts.AREA_POLYGON:
+                tvAreaTitleNEPt.setText(getResources().getText(R.string.ne_));
+                tvAreaTitleSWRad.setText(getResources().getText(R.string.sw_));
+                loadBboxPrefs();
+                break;
+            case AREA_PT_RADIUS:
+                tvAreaTitleNEPt.setText(getResources().getString(R.string.center));
+                tvAreaTitleSWRad.setText(getResources().getString(R.string.radius));
+                loadPointRadiusPrefs();
+                break;
+            default:
+                break;
+        }
+        sharedPrefs.setAreaType(areaType);
+    }
+
     //Area BBOX Container
     private void loadBboxPrefs() {
 
@@ -90,6 +149,12 @@ public class BaseDateTimeAreaContainerFragment extends BaseParametersPickerFragm
         float north = sharedPrefs.getBboxPrefs()[3];
 
         setBounds(west, south, east, north);
+    }
+
+    private void loadPointRadiusPrefs() {
+        float[] center = sharedPrefs.getCenterPrefs();
+        float radius = sharedPrefs.getRadiusPrefs();
+        updateAreaPtAndRadius(new LatLngExt(center[0], center[1]), radius);
     }
 
     //Date and Time Container
@@ -125,21 +190,27 @@ public class BaseDateTimeAreaContainerFragment extends BaseParametersPickerFragm
     }
 
     private void setBounds(String bboxWest, String bboxSouth, String bboxEast, String bboxNorth) {
-        tvAreaSWLat.setText(bboxSouth);
-        tvAreaSWLon.setText(bboxWest);
-        tvAreaNELat.setText(bboxNorth);
-        tvAreaNELon.setText(bboxEast);
+        tvAreaSWRadLat.setText(bboxSouth);
+        tvAreaSWKmLon.setText(bboxWest);
+        tvAreaNEPtLat.setText(bboxNorth);
+        tvAreaNEPtLon.setText(bboxEast);
 
         sharedPrefs.setBboxPrefs(bboxWest, bboxSouth, bboxEast, bboxNorth);
     }
 
-    protected void setBounds(float[] bbox) {
-        String bboxWest = String.valueOf(bbox[0]);
-        String bboxSouth = String.valueOf(bbox[1]);
-        String bboxEast = String.valueOf(bbox[2]);
-        String bboxNorth = String.valueOf(bbox[3]);
+    protected void setTimeViewParameters(LinearLayout timeValuesLayout, boolean enabled) {
+        //boolean checkValue = checkBoxTime.isChecked();
+        checkBoxTime.setChecked(enabled);
+        enableDisableView(timeValuesLayout, enabled);
+        sharedPrefs.setTimeUse(enabled);
+    }
 
-        setBounds(bboxWest, bboxSouth, bboxEast, bboxNorth);
+    protected void setAreaViewParameters(LinearLayout areaValuesLayout, LinearLayout areaLayout, boolean enabled) {
+        //boolean checkValue = sharedPrefs.getAreaUse();
+        checkBoxArea.setChecked(enabled);
+        enableDisableView(areaValuesLayout, enabled);
+        areaLayout.setClickable(enabled);
+        sharedPrefs.setAreaUse(enabled);
     }
 
 }

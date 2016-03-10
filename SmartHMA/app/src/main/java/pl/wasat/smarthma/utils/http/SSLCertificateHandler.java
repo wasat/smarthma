@@ -12,7 +12,7 @@ import javax.net.ssl.X509TrustManager;
 
 /**
  * Created by Daniel on 2015-11-03.
- * This file is a part of module SmartHMA NavIn project.
+ * This file is a part of module SmartHMA project.
  */
 class SSLCertificateHandler {
 

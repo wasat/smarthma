@@ -1,16 +1,21 @@
 package pl.wasat.smarthma.kindle;
 
 import android.graphics.Color;
+import android.location.Location;
+import android.support.annotation.NonNull;
 
+import com.amazon.geo.mapsv2.AmazonMap;
+import com.amazon.geo.mapsv2.model.Circle;
 import com.amazon.geo.mapsv2.model.CircleOptions;
 import com.amazon.geo.mapsv2.model.LatLng;
+import com.amazon.geo.mapsv2.model.Polygon;
 import com.amazon.geo.mapsv2.model.PolygonOptions;
 
 import java.util.ArrayList;
 
 /**
  * Created by Daniel on 2015-10-21 00:05.
- * Part of the project  SmartHMA_home
+ * Part of the project SmartHMA
  */
 public class AmznMapDrawings {
 
@@ -41,21 +46,58 @@ public class AmznMapDrawings {
         return rectOptions;
     }
 
-    public CircleOptions drawPoints(ArrayList<LatLng> markedPtList) {
-        CircleOptions circle = new CircleOptions();
-        int size = 0;
+    public AmazonMap drawPoints(ArrayList<LatLng> markedPtList, AmazonMap mMap) {
         if (markedPtList != null) {
-            size = markedPtList.size();
+            for (LatLng point : markedPtList) {
+                mMap.addCircle(drawPoint(point));
+            }
         }
-        for (int i = 0; i < size; i++) {
-            circle.center(markedPtList.get(i));
-            circle.radius(0.3);
-            circle.strokeColor(Color.YELLOW);
-            circle.fillColor(Color.GRAY);
-            circle.strokeWidth(7);
-        }
+        return mMap;
+    }
+
+    public CircleOptions drawPoint(LatLng point) {
+        CircleOptions circle = new CircleOptions();
+        circle.center(point);
+        circle.radius(5);
+        circle.strokeColor(Color.YELLOW);
+        circle.fillColor(Color.GRAY);
+        circle.strokeWidth(7);
+        circle.zIndex(5);
         return circle;
     }
 
+    public CircleOptions drawPointAndRadiusArea(ArrayList<LatLng> markedPtList) {
+        LatLng center = markedPtList.get(0);
+        LatLng secPt = markedPtList.get(1);
+        float[] res = new float[3];
+        Location.distanceBetween(center.latitude, center.longitude, secPt.latitude, secPt.longitude, res);
+        double radiusInMeters = res[0];
+        return drawPointAndRadiusArea(center, radiusInMeters);
+    }
 
+    @NonNull
+    public CircleOptions drawPointAndRadiusArea(LatLng center, double radiusInMeters) {
+        int strokeColor = 0xFF0000FF; //red outline
+        int shadeColor = 0x110000FF; //opaque red fill
+
+        return new CircleOptions()
+                .center(center)
+                .radius(radiusInMeters)
+                .fillColor(shadeColor)
+                .strokeColor(strokeColor)
+                .strokeWidth(6)
+                .zIndex(4);
+    }
+
+    public void removeCircles(ArrayList<Circle> circleList) {
+        if (circleList != null) {
+            for (Circle circle : circleList) {
+                circle.remove();
+            }
+        }
+    }
+
+    public void removePolygon(Polygon areaPolygon) {
+        if (areaPolygon != null) areaPolygon.remove();
+    }
 }

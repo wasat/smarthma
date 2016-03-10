@@ -46,12 +46,12 @@ public class BaseMetadataFragment extends Fragment {
 
     @NonNull
     private TextViewWithFont defMetadataHeader(String headerText) {
-        int leftTopPad = (int) getResources().getDimension(R.dimen.browse_eo_padding);
+        int topPad = (int) getResources().getDimension(R.dimen.browse_eo_padding);
         int pad = (int) getResources().getDimension(R.dimen.browse_eo_padding_text);
         TextViewWithFont tvMetaHeader = new TextViewWithFont(getActivity(), null, R.style.textMetaHeader);
         //noinspection deprecation
         tvMetaHeader.setTextAppearance(getActivity(), R.style.textMetaHeader);
-        tvMetaHeader.setPadding(leftTopPad, (int) (leftTopPad * 1.5), pad, pad);
+        tvMetaHeader.setPadding(pad, (int) (topPad * 1.5), pad, pad);
         tvMetaHeader.setText(headerText);
         return tvMetaHeader;
     }
@@ -62,7 +62,7 @@ public class BaseMetadataFragment extends Fragment {
                 && !title.equalsIgnoreCase("serialVersionUID")
                 && !value.isEmpty()) {
 
-            int leftPad = (int) getResources().getDimension(R.dimen.browse_eo_padding);
+            int leftPad = (int) getResources().getDimension(R.dimen.browse_eo_padding_text);
 
             TextViewWithFont itemTvTitle = defTitleItemView(title, leftPad);
             TextViewWithFont itemTvValue = defValueItemView(value);
@@ -79,7 +79,7 @@ public class BaseMetadataFragment extends Fragment {
 
     @NonNull
     private View defSeparatorLine(int rgbColor) {
-        int leftPad = (int) getResources().getDimension(R.dimen.browse_eo_padding);
+        int leftPad = (int) getResources().getDimension(R.dimen.browse_eo_padding_text);
         View viewSepLine = new View(getActivity());
         TableLayout.LayoutParams viewLp = new TableLayout.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT, 1);
         viewLp.setMargins(leftPad, 0, 0, 0);

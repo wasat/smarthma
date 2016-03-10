@@ -15,7 +15,7 @@ import pl.wasat.smarthma.parser.model.Page;
  * Part of the project  SmartHMA
  */
 public class Saocom extends BaseParser implements SimpleMissionInterface {
-    private final static int MISSION_ID = 55;
+    private final static int MISSION_ID = 56;
     private final static String TITLE = "SAOCOM";
 
     public Saocom(String pageUrl, Context context) {

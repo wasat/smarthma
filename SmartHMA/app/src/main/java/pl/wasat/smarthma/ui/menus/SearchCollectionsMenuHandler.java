@@ -7,6 +7,7 @@ import android.widget.LinearLayout;
 import pl.wasat.smarthma.R;
 import pl.wasat.smarthma.ui.activities.FavouriteCollectionsActivity;
 import pl.wasat.smarthma.ui.activities.SearchCollectionResultsActivity;
+import pl.wasat.smarthma.ui.dialogs.SortCollectionsDialog;
 
 /**
  * Used for handling menu in the SearchCollectionResultsActivity class.

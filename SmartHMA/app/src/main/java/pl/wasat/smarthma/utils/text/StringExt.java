@@ -16,11 +16,19 @@ import java.util.Locale;
 public class StringExt {
     private static final String NEW_LINE = System.getProperty("line.separator");
 
+    public static String formatDist(Float value) {
+        return String.format(Locale.US, "%.3f", value);
+    }
+
     public static String formatXY(Double value) {
         return String.format(Locale.US, "%.2f", value);
     }
 
     public static String formatLatLng(Double value) {
+        return String.format(Locale.US, "%.6f", value);
+    }
+
+    public static String formatLatLng(Float value) {
         return String.format(Locale.US, "%.6f", value);
     }
 

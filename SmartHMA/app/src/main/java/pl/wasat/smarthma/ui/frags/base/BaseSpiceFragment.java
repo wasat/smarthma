@@ -11,7 +11,7 @@ import com.octo.android.robospice.persistence.exception.SpiceException;
 import com.octo.android.robospice.spicelist.okhttp.OkHttpBitmapSpiceManager;
 
 import pl.wasat.smarthma.services.SmartHmaHttpSpiceService;
-import pl.wasat.smarthma.ui.frags.dialog.ExceptionDialogFragment;
+import pl.wasat.smarthma.ui.dialogs.ExceptionDialogFragment;
 import pl.wasat.smarthma.utils.rss.SpiceExceptionHandler;
 
 /**
@@ -37,11 +37,13 @@ public class BaseSpiceFragment extends Fragment {
 
     @Override
     public void onStop() {
-        if (smartHMASpiceManager.isStarted())
+        if (smartHMASpiceManager.isStarted()) {
+            smartHMASpiceManager.cancelAllRequests();
+            smartHMASpiceManager.dontNotifyAnyRequestListeners();
             smartHMASpiceManager.shouldStop();
+        }
         if (spiceManagerBinary.isStarted())
             spiceManagerBinary.shouldStop();
-
         super.onStop();
     }
 

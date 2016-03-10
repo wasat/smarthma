@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.CheckBox;
 import android.widget.TextView;
 
 import java.util.Calendar;
@@ -17,6 +19,8 @@ import pl.wasat.smarthma.ui.frags.common.AreaPickerMapFragment;
 import pl.wasat.smarthma.ui.frags.common.DatePickerFragment;
 import pl.wasat.smarthma.ui.frags.common.TimePickerFragment;
 import pl.wasat.smarthma.utils.loc.GoogleLocProviderImpl;
+import pl.wasat.smarthma.utils.obj.LatLngBoundsExt;
+import pl.wasat.smarthma.utils.obj.LatLngExt;
 import pl.wasat.smarthma.utils.time.DateUtils;
 
 /**
@@ -32,16 +36,32 @@ public class BaseParametersPickerFragment extends BaseSpiceFragment {
     static TextView tvEndDate;
     static TextView tvEndTime;
     static SharedPrefs sharedPrefs;
-    TextView tvAreaSWLat;
-    TextView tvAreaSWLon;
-    TextView tvAreaNELat;
-    TextView tvAreaNELon;
+    CheckBox checkBoxArea;
+    CheckBox checkBoxTime;
+    TextView tvAreaTitleNEPt;
+    TextView tvAreaNEPtLat;
+    TextView tvAreaNEPtLon;
+    TextView tvAreaTitleSWRad;
+    TextView tvAreaSWRadLat;
+    TextView tvAreaSWKmLon;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         sharedPrefs = new SharedPrefs(getActivity());
+    }
+
+    public void enableDisableView(View view, boolean enabled) {
+        view.setEnabled(enabled);
+
+        if (view instanceof ViewGroup) {
+            ViewGroup group = (ViewGroup) view;
+
+            for (int idx = 0; idx < group.getChildCount(); idx++) {
+                enableDisableView(group.getChildAt(idx), enabled);
+            }
+        }
     }
 
     public void setDateValues(Calendar calendar, String viewTag) {
@@ -172,11 +192,31 @@ public class BaseParametersPickerFragment extends BaseSpiceFragment {
             bboxNorth = Const.EU_BBOX_NORTH;
         }
 
-        tvAreaSWLat.setText(bboxSouth);
-        tvAreaSWLon.setText(bboxWest);
-        tvAreaNELat.setText(bboxNorth);
-        tvAreaNELon.setText(bboxEast);
+        tvAreaSWRadLat.setText(bboxSouth);
+        tvAreaSWKmLon.setText(bboxWest);
+        tvAreaNEPtLat.setText(bboxNorth);
+        tvAreaNEPtLon.setText(bboxEast);
 
         sharedPrefs.setBboxPrefs(bboxWest, bboxSouth, bboxEast, bboxNorth);
+    }
+
+    protected LatLngBoundsExt convertPtAndRadiusToBounds(LatLngExt center, double radius) {
+        LatLngExt southwest = computeOffset(center, radius * Math.sqrt(2.0), 225);
+        LatLngExt northeast = computeOffset(center, radius * Math.sqrt(2.0), 45);
+        return new LatLngBoundsExt(southwest, northeast);
+    }
+
+    protected LatLngExt computeOffset(LatLngExt from, double distance, double heading) {
+        distance /= 6371009.0D;
+        heading = Math.toRadians(heading);
+        double fromLat = Math.toRadians(from.latitude);
+        double fromLng = Math.toRadians(from.longitude);
+        double cosDistance = Math.cos(distance);
+        double sinDistance = Math.sin(distance);
+        double sinFromLat = Math.sin(fromLat);
+        double cosFromLat = Math.cos(fromLat);
+        double sinLat = cosDistance * sinFromLat + sinDistance * cosFromLat * Math.cos(heading);
+        double dLng = Math.atan2(sinDistance * cosFromLat * Math.sin(heading), cosDistance - sinFromLat * sinLat);
+        return new LatLngExt(Math.toDegrees(Math.asin(sinLat)), Math.toDegrees(fromLng + dLng));
     }
 }

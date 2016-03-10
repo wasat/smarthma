@@ -11,6 +11,7 @@ import pl.wasat.smarthma.ui.frags.common.CollectionDetailsFragment;
 import pl.wasat.smarthma.ui.frags.common.CollectionDetailsFragment.OnCollectionDetailsFragmentListener;
 import pl.wasat.smarthma.ui.frags.search.SearchListFragmentBase;
 import pl.wasat.smarthma.utils.obj.LatLngBoundsExt;
+import pl.wasat.smarthma.utils.obj.LatLngExt;
 
 /**
  * Activity used to browse and manage saved collections.
@@ -57,19 +58,31 @@ public abstract class ExtendedBaseCollectionsActivity extends BaseCollectionsAct
         callUpdateDetailFrag(bounds);
     }
 
-    private void callUpdateDetailFrag(LatLngBoundsExt bounds) {
-        CollectionDetailsFragment collectionDetailsFragment = (CollectionDetailsFragment) getSupportFragmentManager()
-                .findFragmentByTag(CollectionDetailsFragment.class.getSimpleName());
-
-        if (collectionDetailsFragment != null) {
-            collectionDetailsFragment.updateAreaBounds(bounds);
-        }
-    }
-
     @Override
     public void onAmznMapFragmentBoundsChange(LatLngBoundsExt bounds) {
         callUpdateDetailFrag(bounds);
     }
+
+    @Override
+    public void onAmznMapFragmentAreaInputChange(int areaType) {
+        changeAreaInputView(areaType);
+    }
+
+    @Override
+    public void onAmznMapFragmentPointAndRadiusSend(LatLngExt center, float radius) {
+        updatePointAndRadiusValues(center, radius);
+    }
+
+    @Override
+    public void onMapFragmentAreaInputChange(int areaType) {
+        changeAreaInputView(areaType);
+    }
+
+    @Override
+    public void onMapFragmentPointAndRadiusSend(LatLngExt center, float radius) {
+        updatePointAndRadiusValues(center, radius);
+    }
+
 
     /*
      * (non-Javadoc)
@@ -92,5 +105,31 @@ public abstract class ExtendedBaseCollectionsActivity extends BaseCollectionsAct
 
     @Override
     public void onDataSeriesFragmentItemSelected(String id) {
+    }
+
+    private void callUpdateDetailFrag(LatLngBoundsExt bounds) {
+        CollectionDetailsFragment collectionDetailsFragment = (CollectionDetailsFragment) getSupportFragmentManager()
+                .findFragmentByTag(CollectionDetailsFragment.class.getSimpleName());
+
+        if (collectionDetailsFragment != null) {
+            collectionDetailsFragment.updateAreaBounds(bounds);
+        }
+    }
+
+    private void changeAreaInputView(int areaType) {
+        CollectionDetailsFragment collectionDetailsFragment = (CollectionDetailsFragment) getSupportFragmentManager()
+                .findFragmentByTag(CollectionDetailsFragment.class.getSimpleName());
+        if (collectionDetailsFragment != null) {
+            collectionDetailsFragment.loadProperAreaView(areaType);
+        }
+    }
+
+
+    private void updatePointAndRadiusValues(LatLngExt center, float radius) {
+        CollectionDetailsFragment collectionDetailsFragment = (CollectionDetailsFragment) getSupportFragmentManager()
+                .findFragmentByTag(CollectionDetailsFragment.class.getSimpleName());
+        if (collectionDetailsFragment != null) {
+            collectionDetailsFragment.updateAreaPtAndRadius(center, radius);
+        }
     }
 }

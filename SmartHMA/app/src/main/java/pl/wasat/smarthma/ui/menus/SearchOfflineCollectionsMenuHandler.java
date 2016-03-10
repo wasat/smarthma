@@ -5,6 +5,8 @@ import android.widget.LinearLayout;
 
 import pl.wasat.smarthma.R;
 import pl.wasat.smarthma.ui.activities.FavouriteCollectionsActivity;
+import pl.wasat.smarthma.ui.dialogs.ClearOfflineCollectionsDialog;
+import pl.wasat.smarthma.ui.dialogs.SortOfflineCollectionsDialog;
 
 /**
  * Used for handling menu in the FavouriteCollectionsActivity class.

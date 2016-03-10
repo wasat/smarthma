@@ -54,7 +54,7 @@
                 android:minHeight="12dp"/>
 
             <FrameLayout
-                android:id="@+id/mapFromRegionDetails"
+                android:id="@+id/map_area_bounds"
                 android:layout_width="200dp"
                 android:layout_height="200dp"
                 android:layout_gravity="top|center"

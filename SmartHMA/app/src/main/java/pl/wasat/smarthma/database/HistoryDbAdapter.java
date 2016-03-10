@@ -57,12 +57,17 @@ public class HistoryDbAdapter {
 
     public long insertEntry(SearchParams parameters) {
         ContentValues initialValues = new ContentValues();
-        initialValues.put(KEY_QUERY, parameters.getSearchPhrase());
-        initialValues.put(KEY_CATALOGUE, parameters.getCatalogue());
-        initialValues.put(KEY_BBOX, parameters.getBbox());
-        initialValues.put(KEY_START_DATE, parameters.getStartDate());
-        initialValues.put(KEY_END_DATE, parameters.getEndDate());
+        initialValues.put(KEY_QUERY, validValue(parameters.getSearchPhrase()));
+        initialValues.put(KEY_CATALOGUE, validValue(parameters.getCatalogue()));
+        initialValues.put(KEY_BBOX, validValue(parameters.getBbox()));
+        initialValues.put(KEY_START_DATE, validValue(parameters.getStartDate()));
+        initialValues.put(KEY_END_DATE, validValue(parameters.getEndDate()));
         return sqLiteDatabase.insert(DATABASE_TABLE, null, initialValues);
+    }
+
+    private String validValue(String parameter) {
+        if (parameter == null) return "";
+        return parameter;
     }
 
     public void reduceNumberOfEntries(int newNumberOfEntries) {

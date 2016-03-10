@@ -12,7 +12,7 @@ import android.support.v4.content.ContextCompat;
 
 /**
  * Created by Daniel on 2015-06-15.
- * This file is a part of NavIn project.
+ * This file is a part of SmartHMA project.
  */
 class AndroidLocProviderImpl implements LocationListener {
     private static final int REQUEST_TIMEOUT = 30000;

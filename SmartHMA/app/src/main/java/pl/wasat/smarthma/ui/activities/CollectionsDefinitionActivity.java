@@ -36,6 +36,7 @@ import pl.wasat.smarthma.ui.frags.common.CollectionDetailsFragment.OnCollectionD
 import pl.wasat.smarthma.ui.frags.common.DatePickerFragment.OnDatePickerFragmentListener;
 import pl.wasat.smarthma.ui.frags.common.TimePickerFragment.OnTimePickerFragmentListener;
 import pl.wasat.smarthma.utils.obj.LatLngBoundsExt;
+import pl.wasat.smarthma.utils.obj.LatLngExt;
 import roboguice.util.temp.Ln;
 
 public class CollectionsDefinitionActivity extends BaseCollectionsActivity
@@ -210,24 +211,29 @@ public class CollectionsDefinitionActivity extends BaseCollectionsActivity
         callUpdateFirstDetailFrag(bounds);
     }
 
-    private void callUpdateFirstDetailFrag(LatLngBoundsExt bounds) {
-        BrowseCollectionFirstDetailFragment browseCollectionFirstDetailFragment = (BrowseCollectionFirstDetailFragment) getSupportFragmentManager()
-                .findFragmentByTag(BrowseCollectionFirstDetailFragment.class.getSimpleName());
-        if (browseCollectionFirstDetailFragment != null) {
-            browseCollectionFirstDetailFragment.updateAreaBounds(bounds);
-        }
+    @Override
+    public void onMapFragmentAreaInputChange(int areaType) {
+        changeAreaInputView(areaType);
+    }
 
-        //TODO - Make it more universal and differentiate from which fragment it is called
-        CollectionEmptyDetailsFragment collectionEmptyDetailsFragment = (CollectionEmptyDetailsFragment) getSupportFragmentManager()
-                .findFragmentByTag(CollectionEmptyDetailsFragment.class.getSimpleName());
-        if (collectionEmptyDetailsFragment != null) {
-            collectionEmptyDetailsFragment.updateAreaBounds(bounds);
-        }
+    @Override
+    public void onMapFragmentPointAndRadiusSend(LatLngExt center, float radius) {
+        updatePointAndRadiusValues(center, radius);
     }
 
     @Override
     public void onAmznMapFragmentBoundsChange(LatLngBoundsExt bounds) {
         callUpdateFirstDetailFrag(bounds);
+    }
+
+    @Override
+    public void onAmznMapFragmentAreaInputChange(int areaType) {
+        changeAreaInputView(areaType);
+    }
+
+    @Override
+    public void onAmznMapFragmentPointAndRadiusSend(LatLngExt center, float radius) {
+        updatePointAndRadiusValues(center, radius);
     }
 
     @Override
@@ -262,5 +268,50 @@ public class CollectionsDefinitionActivity extends BaseCollectionsActivity
 
     public CollectionsGroupListFragment getCollectionsGroupListFragment() {
         return collectionsGroupListFragment;
+    }
+
+    private void callUpdateFirstDetailFrag(LatLngBoundsExt bounds) {
+        BrowseCollectionFirstDetailFragment browseCollectionFirstDetailFragment = (BrowseCollectionFirstDetailFragment) getSupportFragmentManager()
+                .findFragmentByTag(BrowseCollectionFirstDetailFragment.class.getSimpleName());
+        if (browseCollectionFirstDetailFragment != null) {
+            browseCollectionFirstDetailFragment.updateAreaBounds(bounds);
+        }
+
+        //TODO - Make it more universal and differentiate from which fragment it is called
+        CollectionEmptyDetailsFragment collectionEmptyDetailsFragment = (CollectionEmptyDetailsFragment) getSupportFragmentManager()
+                .findFragmentByTag(CollectionEmptyDetailsFragment.class.getSimpleName());
+        if (collectionEmptyDetailsFragment != null) {
+            collectionEmptyDetailsFragment.updateAreaBounds(bounds);
+        }
+    }
+
+    private void changeAreaInputView(int areaType) {
+        BrowseCollectionFirstDetailFragment browseCollectionFirstDetailFragment = (BrowseCollectionFirstDetailFragment) getSupportFragmentManager()
+                .findFragmentByTag(BrowseCollectionFirstDetailFragment.class.getSimpleName());
+        if (browseCollectionFirstDetailFragment != null) {
+            browseCollectionFirstDetailFragment.loadProperAreaView(areaType);
+        }
+
+        //TODO - Make it more universal and differentiate from which fragment it is called
+        CollectionEmptyDetailsFragment collectionEmptyDetailsFragment = (CollectionEmptyDetailsFragment) getSupportFragmentManager()
+                .findFragmentByTag(CollectionEmptyDetailsFragment.class.getSimpleName());
+        if (collectionEmptyDetailsFragment != null) {
+            collectionEmptyDetailsFragment.loadProperAreaView(areaType);
+        }
+    }
+
+    private void updatePointAndRadiusValues(LatLngExt center, float radius) {
+        BrowseCollectionFirstDetailFragment browseCollectionFirstDetailFragment = (BrowseCollectionFirstDetailFragment) getSupportFragmentManager()
+                .findFragmentByTag(BrowseCollectionFirstDetailFragment.class.getSimpleName());
+        if (browseCollectionFirstDetailFragment != null) {
+            browseCollectionFirstDetailFragment.updateAreaPtAndRadius(center, radius);
+        }
+
+        //TODO - Make it more universal and differentiate from which fragment it is called
+        CollectionEmptyDetailsFragment collectionEmptyDetailsFragment = (CollectionEmptyDetailsFragment) getSupportFragmentManager()
+                .findFragmentByTag(CollectionEmptyDetailsFragment.class.getSimpleName());
+        if (collectionEmptyDetailsFragment != null) {
+            collectionEmptyDetailsFragment.updateAreaPtAndRadius(center, radius);
+        }
     }
 }

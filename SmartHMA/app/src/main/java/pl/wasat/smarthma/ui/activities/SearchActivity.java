@@ -10,29 +10,30 @@ import android.view.MenuItem;
 import android.view.SubMenu;
 
 import java.util.Calendar;
-import java.util.HashMap;
 
 import pl.wasat.smarthma.R;
 import pl.wasat.smarthma.database.SearchHistory;
 import pl.wasat.smarthma.helper.Const;
 import pl.wasat.smarthma.kindle.AmznAreaPickerMapFragment.OnAmznAreaPickerMapFragmentListener;
+import pl.wasat.smarthma.model.FedeoRequestParams;
 import pl.wasat.smarthma.ui.activities.base.BaseSmartHMActivity;
 import pl.wasat.smarthma.ui.frags.base.BaseSearchSideParametersFragment;
+import pl.wasat.smarthma.ui.frags.base.BaseSearchSideParametersFragment.OnBaseSearchSideParametersFragmentListener;
 import pl.wasat.smarthma.ui.frags.common.AreaPickerMapFragment.OnAreaPickerMapFragmentListener;
 import pl.wasat.smarthma.ui.frags.common.DatePickerFragment.OnDatePickerFragmentListener;
 import pl.wasat.smarthma.ui.frags.common.TimePickerFragment.OnTimePickerFragmentListener;
 import pl.wasat.smarthma.ui.frags.search.SearchAdvancedParametersFragment;
-import pl.wasat.smarthma.ui.frags.search.SearchAdvancedParametersFragment.OnSearchAdvancedParametersFragmentListener;
 import pl.wasat.smarthma.ui.frags.search.SearchBasicParametersFragment;
 import pl.wasat.smarthma.ui.frags.search.SearchFragment;
 import pl.wasat.smarthma.ui.frags.search.SearchFragment.OnSearchFragmentListener;
 import pl.wasat.smarthma.ui.menus.MenuHandler;
 import pl.wasat.smarthma.ui.menus.SearchMenuHandler;
 import pl.wasat.smarthma.utils.obj.LatLngBoundsExt;
+import pl.wasat.smarthma.utils.obj.LatLngExt;
 import roboguice.util.temp.Ln;
 
-public class SearchActivity extends BaseSmartHMActivity implements
-        OnSearchAdvancedParametersFragmentListener, OnSearchFragmentListener, OnDatePickerFragmentListener, OnTimePickerFragmentListener,
+public class SearchActivity extends BaseSmartHMActivity implements OnBaseSearchSideParametersFragmentListener,
+        OnSearchFragmentListener, OnDatePickerFragmentListener, OnTimePickerFragmentListener,
         OnAreaPickerMapFragmentListener, OnAmznAreaPickerMapFragmentListener {
 
     private static final int MENU_QUERY_IDS = 1000;
@@ -43,7 +44,15 @@ public class SearchActivity extends BaseSmartHMActivity implements
     private static final int MENU_CLEAR_ID = 2000;
     private BaseSearchSideParametersFragment sideParamsPanel;
     private SearchFragment searchMainPanel;
-    private HashMap extraSearchParams;
+    private FedeoRequestParams fedeoRequestParams;
+
+    @Override
+    public void startActivity(Intent intent) {
+        if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
+            intent.putExtra(Const.KEY_INTENT_FEDEO_REQUEST_PARAMS_OSDD, fedeoRequestParams);
+        }
+        super.startActivity(intent);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -137,6 +146,7 @@ public class SearchActivity extends BaseSmartHMActivity implements
         }
     }
 
+
     /**
      *
      */
@@ -194,14 +204,6 @@ public class SearchActivity extends BaseSmartHMActivity implements
         return super.onPrepareOptionsMenu(menu);
     }
 
-    @Override
-    public void startActivity(Intent intent) {
-        if (Intent.ACTION_SEARCH.equals(intent.getAction())) {
-            intent.putExtra(Const.KEY_INTENT_FEDEO_REQUEST_PARAMS_EXTRA, extraSearchParams);
-        }
-        super.startActivity(intent);
-    }
-
     /*
      * (non-Javadoc)
      *
@@ -215,10 +217,14 @@ public class SearchActivity extends BaseSmartHMActivity implements
         callUpdateCollectionsBounds(bounds);
     }
 
-    private void callUpdateCollectionsBounds(LatLngBoundsExt bounds) {
-        if (sideParamsPanel != null) {
-            sideParamsPanel.updateAreaBounds(bounds);
-        }
+    @Override
+    public void onMapFragmentAreaInputChange(int areaType) {
+        changeAreaInputView(areaType);
+    }
+
+    @Override
+    public void onMapFragmentPointAndRadiusSend(LatLngExt center, float radius) {
+        updatePointAndRadiusValues(center, radius);
     }
 
     @Override
@@ -227,8 +233,37 @@ public class SearchActivity extends BaseSmartHMActivity implements
     }
 
     @Override
-    public void onSearchAdvancedParamsFragmentEditTextChange(String parameterKey, String parameterValue) {
-        searchMainPanel.setAdditionalParams(parameterKey, parameterValue);
+    public void onAmznMapFragmentAreaInputChange(int areaType) {
+        changeAreaInputView(areaType);
+    }
+
+    @Override
+    public void onAmznMapFragmentPointAndRadiusSend(LatLngExt center, float radius) {
+        updatePointAndRadiusValues(center, radius);
+    }
+
+    private void updatePointAndRadiusValues(LatLngExt center, float radius) {
+        if (sideParamsPanel != null) {
+            sideParamsPanel.updateAreaPtAndRadius(center, radius);
+        }
+    }
+
+    private void callUpdateCollectionsBounds(LatLngBoundsExt bounds) {
+        if (sideParamsPanel != null) {
+            sideParamsPanel.updateAreaBounds(bounds);
+        }
+    }
+
+    private void changeAreaInputView(int areaType) {
+        if (sideParamsPanel != null) {
+            sideParamsPanel.loadProperAreaView(areaType);
+        }
+    }
+
+
+    @Override
+    public void onBaseSearchSideParametersFragmentFedeoRequestParamsOsddChange(FedeoRequestParams fedeoRequestParams) {
+        searchMainPanel.setFedeoRequestParams(fedeoRequestParams);
     }
 
     @Override
@@ -262,13 +297,13 @@ public class SearchActivity extends BaseSmartHMActivity implements
     }
 
     @Override
-    public void onSearchFragmentSendExtraParams(HashMap extra) {
-        this.extraSearchParams = extra;
+    public void onSearchFragmentStartSearchingWithButton(Intent searchIntent) {
+        startActivityForResult(searchIntent, REQUEST_NEW_SEARCH);
     }
 
     @Override
-    public void onSearchFragmentStartSearchingWithButton(Intent searchIntent) {
-        startActivityForResult(searchIntent, REQUEST_NEW_SEARCH);
+    public void onSearchFragmentSendFedeoParams(FedeoRequestParams fedeoRequestParams) {
+        this.fedeoRequestParams = fedeoRequestParams;
     }
 
     public MenuHandler getMenuHandler() {

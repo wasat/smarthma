@@ -30,7 +30,7 @@ public class EsaEoMissions extends BaseParser implements MissionInterface {
 
     @Override
     public void mainContent() {
-        int ITEMS_COUNT = 9;
+        int ITEMS_COUNT = 10;
         Pair<String, ArrayList<String>> pair = super.getImageListPage(ITEMS_COUNT, false);
         String contents = super.imageListToContentString(pair);
         parserDb.addCategory(new Category(CATEGORY_ID, pair.title, contents));

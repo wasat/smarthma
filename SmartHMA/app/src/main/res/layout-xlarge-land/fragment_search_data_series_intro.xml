@@ -3,8 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="match_parent"
-    android:background="@color/background_gray"
-    android:paddingLeft="@dimen/browse_eo_padding">
+    android:background="@color/background_gray">
 
     <LinearLayout
         android:id="@+id/search_frag_right_basic_linear_id"
@@ -54,7 +53,7 @@
                 android:minHeight="20dp"/>
 
             <FrameLayout
-                android:id="@+id/mapFromRegionDetails"
+                android:id="@+id/map_area_bounds"
                 android:layout_width="300dp"
                 android:layout_height="300dp"
                 android:layout_gravity="top|center"

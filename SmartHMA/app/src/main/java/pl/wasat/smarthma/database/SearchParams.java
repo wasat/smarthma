@@ -3,6 +3,7 @@ package pl.wasat.smarthma.database;
 import pl.wasat.smarthma.R;
 import pl.wasat.smarthma.SmartHMApplication;
 import pl.wasat.smarthma.model.FedeoRequestParams;
+import pl.wasat.smarthma.model.osdd.OSDDMatcher;
 
 /**
  * A representation of user search parameters.
@@ -15,7 +16,7 @@ public class SearchParams {
     private final String endDate;
 
     public SearchParams(FedeoRequestParams request) {
-        searchPhrase = request.getQuery();
+        searchPhrase = request.getParams().get(OSDDMatcher.PARAM_KEY_QUERY);
         catalogue = request.getParams().get("parentIdentifier");
         bbox = request.getBbox();
         startDate = request.getStartDate();

@@ -157,7 +157,7 @@ class OSDDHandler extends DefaultHandler {
             url.setParameters(parameters);
             urls.add(url);
         } else if (localName.equalsIgnoreCase("Parameter")) {
-            parameter.setOption(options);
+            parameter.setOptions(options);
             parameters.add(parameter);
         } else if (localName.equalsIgnoreCase("Option")) {
             options.add(option);

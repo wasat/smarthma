@@ -51,7 +51,7 @@ public class FeedSummaryProductsFragment extends BaseFeedSummaryFragment {
         request.setUrl(linkHref);
 
         ProductsListFragment productsListFragment = ProductsListFragment
-                .newInstance(request);
+                .newInstance(request, null);
         getActivity()
                 .getSupportFragmentManager()
                 .beginTransaction()

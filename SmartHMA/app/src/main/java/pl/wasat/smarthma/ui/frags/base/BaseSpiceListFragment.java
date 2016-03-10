@@ -12,7 +12,7 @@ import com.octo.android.robospice.request.listener.RequestListener;
 
 import pl.wasat.smarthma.model.feed.Feed;
 import pl.wasat.smarthma.services.SmartHmaHttpSpiceService;
-import pl.wasat.smarthma.ui.frags.dialog.ExceptionDialogFragment;
+import pl.wasat.smarthma.ui.dialogs.ExceptionDialogFragment;
 import pl.wasat.smarthma.utils.rss.SpiceExceptionHandler;
 
 /**

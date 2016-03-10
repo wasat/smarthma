@@ -15,14 +15,13 @@ import pl.wasat.smarthma.parser.model.Page;
  * Part of the project  SmartHMA
  */
 public class Smos extends BaseParser implements MissionInterface {
-    private final static int MISSION_ID = 4;
+    private final static int MISSION_ID = 5;
     private final static String TITLE = "Smos";
     private final String SPACE_SEGMENT = "space-segment";
 
     public Smos(String pageUrl, Context context) {
         super(pageUrl, context);
         parserDb.addMission(new Mission(MISSION_ID, EsaEoMissions.CATEGORY_ID, TITLE));
-
     }
 
     @Override

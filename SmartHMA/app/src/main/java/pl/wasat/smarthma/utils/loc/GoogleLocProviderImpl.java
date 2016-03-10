@@ -18,7 +18,7 @@ public abstract class GoogleLocProviderImpl extends BroadcastReceiver implements
     public static final String GOOGLE_ANDROID = "GOOGLE_ANDROID";
     public static final String GOOGLE_PROVIDER_TYPE = "GOOGLE_PROVIDER_TYPE";
     public static final String IS_SUCCESS = "IS_SUCCESS";
-    public static final String GOOGLE_LOC_BROADCAST_SENT = "pl.wasat.navin.GOOGLE_LOC_BROADCAST_SENT";
+    public static final String GOOGLE_LOC_BROADCAST_SENT = "pl.wasat.smarthma.GOOGLE_LOC_BROADCAST_SENT";
     private static final Double DEFAULT_LAT = 50.117286; //Centre of EU
     private static final Double DEFAULT_LON = 9.247769;  //Centre of EU
 

@@ -24,7 +24,7 @@ public class EntryISO implements Serializable {
     private Date date = new Date();
     private Polygon polygon = new Polygon();
     private Summary summary = new Summary();
-    private List<Link> link = new ArrayList<>();
+    private List<Link> links = new ArrayList<>();
     private MDMetadata MDMetadata = new MDMetadata();
     private String XmlLang = "";
 
@@ -137,17 +137,26 @@ public class EntryISO implements Serializable {
     }
 
     /**
-     * @return The link
+     * @return The links
      */
-    public List<Link> getLink() {
-        return link;
+    public List<Link> getLinks() {
+        return links;
     }
 
     /**
-     * @param link The link
+     * @param links The links
      */
-    public void setLink(List<Link> link) {
-        this.link = link;
+    public void setLinks(List<Link> links) {
+        this.links = links;
+    }
+
+    public String getSpecLink(String linkRel, String linkType) {
+        for (Link link : links) {
+            if (link.getRel().equalsIgnoreCase(linkRel)
+                    && link.getType().equalsIgnoreCase(linkType))
+                return link.getHref();
+        }
+        return "";
     }
 
     /**
@@ -177,7 +186,6 @@ public class EntryISO implements Serializable {
     public void setXmlLang(String XmlLang) {
         this.XmlLang = XmlLang;
     }
-
 
     public String getGuid() {
         return guid;

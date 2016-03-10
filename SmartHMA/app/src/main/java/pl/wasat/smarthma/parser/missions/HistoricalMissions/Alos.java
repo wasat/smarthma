@@ -15,7 +15,7 @@ import pl.wasat.smarthma.parser.model.Page;
  * Part of the project  SmartHMA
  */
 public class Alos extends BaseParser implements SimpleMissionInterface {
-    private final static int MISSION_ID = 43;
+    private final static int MISSION_ID = 44;
     private final static String TITLE = "Alos";
 
     //final String CVGC = "https://earth.esa.int/web/guest/missions/3rd-party-missions/historical-missions/alos/calibration-validation-quality-control";

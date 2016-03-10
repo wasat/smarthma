@@ -2,6 +2,7 @@ package pl.wasat.smarthma.ui.frags.missions;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -89,6 +90,7 @@ public class MissionsDetailsFragment extends Fragment {
 
         WebView detailWebView = (WebView) rootView
                 .findViewById(R.id.missions_detail_frag_content_web);
+        detailWebView.setBackgroundColor(Color.TRANSPARENT);
         detailWebView.loadData(missionData.getSummary(), "text/html", "UTF-8");
 
         Button btnSearchData = (Button) rootView

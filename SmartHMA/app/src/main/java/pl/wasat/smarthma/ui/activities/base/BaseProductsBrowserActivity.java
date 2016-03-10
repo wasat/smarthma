@@ -10,11 +10,11 @@ import pl.wasat.smarthma.helper.Const;
 import pl.wasat.smarthma.kindle.AmznExtendedMapFragment;
 import pl.wasat.smarthma.kindle.AmznExtendedMapFragment.OnAmznExtendedMapFragmentListener;
 import pl.wasat.smarthma.model.entry.SimpleMetadata;
+import pl.wasat.smarthma.ui.dialogs.FacebookDialogFragment;
 import pl.wasat.smarthma.ui.frags.common.ExtendedMapFragment;
 import pl.wasat.smarthma.ui.frags.common.ExtendedMapFragment.OnExtendedMapFragmentListener;
 import pl.wasat.smarthma.ui.frags.common.MetadataFragment;
 import pl.wasat.smarthma.ui.frags.common.ProductDetailsFragment.OnProductDetailsFragmentListener;
-import pl.wasat.smarthma.ui.frags.dialog.FacebookDialogFragment;
 
 /**
  * Activity used to browse ans manage saved products.
@@ -37,6 +37,7 @@ public class BaseProductsBrowserActivity extends BaseSmartHMActivity implements
 
             int bsec = fm.getBackStackEntryCount();
             if (bsec == 0) {
+                backToCollectionViewWithoutNewSearch();
                 super.onBackPressed();
             }
 
@@ -55,11 +56,7 @@ public class BaseProductsBrowserActivity extends BaseSmartHMActivity implements
                             bsec = fm.getBackStackEntryCount();
                         }
                     } else {
-                        Intent resultIntent = new Intent();
-                        resultIntent.putExtra(Const.KEY_INTENT_RETURN_STOP_SEARCH,
-                                true);
-                        setResult(Activity.RESULT_OK, resultIntent);
-                        finish();
+                        backToCollectionViewWithoutNewSearch();
                         super.onBackPressed();
                     }
                 }
@@ -68,6 +65,13 @@ public class BaseProductsBrowserActivity extends BaseSmartHMActivity implements
             e.printStackTrace();
             super.onBackPressed();
         }
+    }
+
+    private void backToCollectionViewWithoutNewSearch() {
+        Intent resultIntent = new Intent();
+        resultIntent.putExtra(Const.KEY_INTENT_RETURN_STOP_SEARCH, true);
+        setResult(Activity.RESULT_OK, resultIntent);
+        this.finish();
     }
 
     @Override

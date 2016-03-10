@@ -39,17 +39,6 @@ public abstract class SearchListFragmentBase extends BaseSpiceListFragment {
         getListView().setDivider(null);
     }
 
-/*    @Override
-    public void onStart() {
-        super.onStart();
-
-        // TODO: Find solution - why fragment is called twice
-        stopSearch = getArguments().getBoolean(Const.KEY_INTENT_RETURN_STOP_SEARCH);
-        if (searchRequest != null && !stopSearch) {
-            //loadSearchFeedResponse(searchRequest);
-        }
-    }*/
-
     private void setActivatedPosition(int position) {
         if (position == ListView.INVALID_POSITION) {
             getListView().setItemChecked(mActivatedPosition, false);
@@ -67,8 +56,6 @@ public abstract class SearchListFragmentBase extends BaseSpiceListFragment {
         return entries;
     }
 
-/*    private void loadSearchFeedResponse(FedeoRequestParams feedSearchRequest) {
-    }*/
 
     void showFailureFragment() {
         String searchFail = getActivity().getString(

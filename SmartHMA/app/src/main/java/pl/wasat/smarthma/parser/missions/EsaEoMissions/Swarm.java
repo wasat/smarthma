@@ -16,9 +16,7 @@ import pl.wasat.smarthma.parser.model.Page;
  */
 public class Swarm extends BaseParser implements MissionInterface {
     private final static String TITLE = "Swarm";
-
-
-    private final static int MISSION_ID = 1;
+    private final static int MISSION_ID = 2;
 
     public Swarm(String pageUrl, Context context) {
         super(pageUrl, context);

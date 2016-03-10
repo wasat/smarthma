@@ -3,7 +3,6 @@
  */
 package pl.wasat.smarthma.model;
 
-import android.content.SharedPreferences;
 import android.util.Log;
 
 import java.io.Serializable;
@@ -11,32 +10,31 @@ import java.util.HashMap;
 
 import pl.wasat.smarthma.SmartHMApplication;
 import pl.wasat.smarthma.helper.Const;
+import pl.wasat.smarthma.helper.enums.Opts;
+import pl.wasat.smarthma.model.feed.Link;
+import pl.wasat.smarthma.model.osdd.OSDDMatcher;
+import pl.wasat.smarthma.preferences.SharedPrefs;
 import pl.wasat.smarthma.utils.obj.LatLngBoundsExt;
 import pl.wasat.smarthma.utils.obj.LatLngExt;
+import pl.wasat.smarthma.utils.text.StringExt;
 
 /**
  * @author Daniel Zinkiewicz Wasat Sp. z o.o 18-07-2014
  */
 @SuppressWarnings("WeakerAccess")
-public class FedeoRequestParams implements Serializable {
+public class FedeoRequestParams extends OSDDMatcher implements Serializable {
 
     private static final long serialVersionUID = 1L;
+
     public static boolean IS_BUILD_FROM_SHARED;
+    private static boolean IS_URL_TEMPLATE;
     private HashMap<String, String> params;
-    private HashMap<String, String> paramsExtra;
     private String url;
-    private String httpAccept;
-    private String type;
-    private String startRecord;
-    private String maximumRecords;
     private String startDate;
     private String endDate;
     private String parentIdentifier;
     private String bbox;
-    private String recordSchema;
-    private String query;
 
-    private String descUrl;
     private String templateUrl;
 
     /**
@@ -44,88 +42,103 @@ public class FedeoRequestParams implements Serializable {
      */
     public FedeoRequestParams() {
         this.params = new HashMap<>();
+        IS_URL_TEMPLATE = true;
         setDefaultParams();
-        buildFromShared();
+        //buildFromShared();
     }
 
-    public FedeoRequestParams(boolean initAreaTime) {
+    public FedeoRequestParams(boolean initAreaTime, boolean isUrlTemplate) {
         this.params = new HashMap<>();
+        IS_URL_TEMPLATE = isUrlTemplate;
         setDefaultParams();
         if (initAreaTime) buildFromShared();
     }
 
     private void setDefaultParams() {
         IS_BUILD_FROM_SHARED = true;
-        this.httpAccept = "application/atom%2Bxml";
-        this.startRecord = "1";
-        this.maximumRecords = "20";
-        //this.startDate = "2011-07-23T00:00:00Z";
-        //this.endDate = "2014-07-23T00:00:00Z";
-        //this.bbox = "20,50,21,51";
-        this.recordSchema = "server-choice";
-        //this.recordSchema = "om";
-        this.params.put("httpAccept", httpAccept);
-        this.params.put("startRecord", startRecord);
-        this.params.put("maximumRecords", maximumRecords);
-        //this.params.put("startDate", startDate);
-        //this.params.put("endDate", endDate);
-        //this.params.put("bbox", bbox);
-        this.params.put("recordSchema", recordSchema);
-        this.params.put("query", query);
+        this.params.put(PARAM_KEY_START_RECORD, "1");
+        this.params.put(PARAM_KEY_MAX_RECORDS, "30");
+        this.params.put(PARAM_KEY_START_PAGE, "1");
+        this.params.put(PARAM_KEY_RECORD_SCHEMA, PARAM_VALUE_SERVER_CHOICE);
     }
 
     private void buildFromShared() {
-        SharedPreferences prefs = SmartHMApplication.getAppContext().getSharedPreferences(
-                Const.KEY_PREF_FILE, 0);
+        SharedPrefs sharedPrefs = new SharedPrefs(SmartHMApplication.getAppContext());
 
-        setStartDate(prefs.getString(Const.KEY_PREF_DATETIME_START, "0"));
-        setEndDate(prefs.getString(Const.KEY_PREF_DATETIME_END, "0"));
-        setBbox(prefs.getFloat(Const.KEY_PREF_BBOX_WEST, -180),
-                prefs.getFloat(Const.KEY_PREF_BBOX_SOUTH, -90),
-                prefs.getFloat(Const.KEY_PREF_BBOX_EAST, 180),
-                prefs.getFloat(Const.KEY_PREF_BBOX_NORTH, 90));
-    }
+        if (sharedPrefs.getTimeUse()) {
+            setStartDate(sharedPrefs.getStartDateTimePrefs());
+            setEndDate(sharedPrefs.getEndDateTimePrefs());
+        }
 
-    private void buildUrl() {
+        if (sharedPrefs.getAreaUse()) {
+            switch (sharedPrefs.getAreaType()) {
+                case Opts.AREA_POLYGON:
+                    float[] bbox = sharedPrefs.getBboxPrefs();
+                    setBbox(bbox[0], bbox[1], bbox[2], bbox[3]);
+                    break;
+                case Opts.AREA_PT_RADIUS:
+                    float[] center = sharedPrefs.getCenterPrefs();
+                    float radius = sharedPrefs.getRadiusPrefs();
+                    String centerLat = StringExt.formatLatLng(center[0]);
+                    String centerLng = StringExt.formatLatLng(center[1]);
+                    String radiusStr = StringExt.formatDist(radius);
 
-        if (IS_BUILD_FROM_SHARED) buildFromShared();
-
-        String url;
-        url = Const.HTTP_BASE_URL + "?";
-        for (HashMap.Entry<String, String> entry : params.entrySet()) {
-            String key = entry.getKey();
-            String value = entry.getValue();
-            if (value != null) {
-                url = url + key + "=" + value + "&";
+                    this.params.put(PARAM_KEY_LAT, centerLat);
+                    this.params.put(PARAM_KEY_LNG, centerLng);
+                    this.params.put(PARAM_KEY_RADIUS, radiusStr);
+                    break;
             }
         }
-        if (paramsExtra != null) {
-            for (HashMap.Entry<String, String> entry : paramsExtra.entrySet()) {
-                String key = entry.getKey();
+    }
+
+
+    private void buildUrl() {
+        if (IS_BUILD_FROM_SHARED) buildFromShared();
+
+        if (IS_URL_TEMPLATE) {
+            String tmpUrl = templateUrl.replaceAll("[?]\\}", "\\}");
+            for (String osddKey : params.keySet()) {
+                tmpUrl = tmpUrl.replace(osddKey, params.get(osddKey));
+            }
+            tmpUrl = tmpUrl.replaceAll("\\{.*?\\}", "");
+
+            String[] partsUrl = tmpUrl.split("&");
+            String finalUrl = partsUrl[0];
+            for (int i = 1; i < partsUrl.length; i++) {
+                if (!partsUrl[i].endsWith("=")) finalUrl = finalUrl + "&" + partsUrl[i];
+            }
+            this.url = finalUrl;
+        } else {
+            params.put("httpAccept", Link.TYPE_ATOM_XML);
+            String url = Const.HTTP_BASE_URL + "?";
+            for (HashMap.Entry<String, String> entry : params.entrySet()) {
+                String key = getParamName(entry.getKey());
                 String value = entry.getValue();
-                if (!value.isEmpty()) {
+                if (value != null) {
                     url = url + key + "=" + value + "&";
                 }
             }
+            url = url.substring(0, url.length() - 1);
+            this.url = url;
         }
-        url = url.substring(0, url.length() - 1);
-
-        Log.i("URL", url);
-        this.url = url;
     }
 
-    /**
-     * @return String url
-     */
+
+    private void validateUrl() {
+        this.url = this.url.replaceAll("\\+", "%2B");
+        this.url = this.url.replaceAll(" ", "%2B");
+    }
+
     public String getUrl() {
-        if (url == null) buildUrl();
+        buildUrl();
+        validateUrl();
+        Log.i("URL", url);
         return url;
     }
 
     public void setUrl(String url) {
         this.url = url;
     }
-
 
     public String getTemplateUrl() {
         return templateUrl;
@@ -135,92 +148,22 @@ public class FedeoRequestParams implements Serializable {
         this.templateUrl = templateUrl;
     }
 
-    /**
-     * @return the params
-     */
     public HashMap<String, String> getParams() {
         return params;
     }
 
-    /**
-     * @param params the params to set
-     */
     public void setParams(HashMap<String, String> params) {
-        this.params = params;
+        if (this.params == null) this.params = params;
+        else {
+            for (String key : params.keySet()) {
+                addOsddValue(key, params.get(key));
+            }
+        }
     }
 
-    public HashMap<String, String> getParamsExtra() {
-        return paramsExtra;
-    }
-
-    public void setParamsExtra(HashMap<String, String> paramsExtra) {
-        this.paramsExtra = paramsExtra;
-        this.setRecordSchema(paramsExtra.get("recordSchema"));
-        cleanExtraParams("recordSchema");
-    }
-
-    private void cleanExtraParams(String valueToRemove) {
-        paramsExtra.remove(valueToRemove);
-    }
-
-    /**
-     * @return the httpAccept
-     */
-    public String getHttpAccept() {
-        return httpAccept;
-    }
-
-    /**
-     * @param httpAccept the httpAccept to set
-     */
-    public void setHttpAccept(String httpAccept) {
-        this.httpAccept = httpAccept;
-        this.params.put("httpAccept", httpAccept);
-    }
-
-    /**
-     * @return the type
-     */
-    public String getType() {
-        return type;
-    }
-
-    /**
-     * @param type the type to set
-     */
-    public void setType(String type) {
-        this.type = type;
-        this.params.put("type", type);
-    }
-
-    /**
-     * @return the startRecord
-     */
-    public String getStartRecord() {
-        return startRecord;
-    }
-
-    /**
-     * @param startRecord the startRecord to set
-     */
-    public void setStartRecord(String startRecord) {
-        this.startRecord = startRecord;
-        this.params.put("startRecord", startRecord);
-    }
-
-    /**
-     * @return the maximumRecords
-     */
-    public String getMaximumRecords() {
-        return maximumRecords;
-    }
-
-    /**
-     * @param maximumRecords the maximumRecords to set
-     */
-    public void setMaximumRecords(String maximumRecords) {
-        this.maximumRecords = maximumRecords;
-        this.params.put("maximumRecords", maximumRecords);
+    public void addOsddValue(String key, String value) {
+        if (this.params == null) this.params = new HashMap<>();
+        this.params.put(key, value);
     }
 
     /**
@@ -235,7 +178,7 @@ public class FedeoRequestParams implements Serializable {
      */
     public void setStartDate(String startDate) {
         this.startDate = startDate;
-        this.params.put("startDate", startDate);
+        addOsddValue(PARAM_KEY_START_DATE, startDate);
     }
 
     /**
@@ -250,7 +193,7 @@ public class FedeoRequestParams implements Serializable {
      */
     public void setEndDate(String endDate) {
         this.endDate = endDate;
-        this.params.put("endDate", endDate);
+        addOsddValue(PARAM_KEY_END_DATE, endDate);
     }
 
     /**
@@ -272,7 +215,7 @@ public class FedeoRequestParams implements Serializable {
             baseParentIdentifier = getParetnId(parentIdentifier);
         }
         this.parentIdentifier = baseParentIdentifier;
-        this.params.put("parentIdentifier", baseParentIdentifier);
+        //this.params.put("parentIdentifier", baseParentIdentifier);
     }
 
     /**
@@ -287,7 +230,7 @@ public class FedeoRequestParams implements Serializable {
      */
     private void setBbox(String bbox) {
         this.bbox = bbox;
-        this.params.put("bbox", bbox);
+        addOsddValue(PARAM_KEY_BBOX, bbox);
     }
 
     /**
@@ -315,45 +258,6 @@ public class FedeoRequestParams implements Serializable {
      */
     public void setBbox(LatLngBoundsExt bbox) {
         setBbox(bbox.southwest, bbox.northeast);
-    }
-
-    /**
-     * @return the recordSchema
-     */
-    public String getRecordSchema() {
-        return recordSchema;
-    }
-
-    /**
-     * @param recordSchema the recordSchema to set
-     */
-    private void setRecordSchema(String recordSchema) {
-        this.recordSchema = recordSchema;
-        this.params.put("recordSchema", recordSchema);
-    }
-
-    /**
-     * @return the query
-     */
-    public String getQuery() {
-        return query;
-    }
-
-    /**
-     * @param query the query to set
-     */
-    public void setQuery(String query) {
-        this.query = query;
-        this.params.put("query", query);
-    }
-
-
-    public String getDescUrl() {
-        return descUrl;
-    }
-
-    public void setDescUrl(String descUrl) {
-        this.descUrl = descUrl;
     }
 
     /**

@@ -16,10 +16,9 @@
             style="@style/textMainTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingLeft="@dimen/browse_eo_padding"
             android:paddingRight="16dp"
             android:paddingTop="16dp"
-            android:text="Lorem"
+            android:text="@string/lorem"
             android:textColor="@color/text_blue"
             android:textSize="@dimen/search_eo_data_text"/>
 
@@ -29,17 +28,15 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingBottom="16dp"
-            android:paddingLeft="@dimen/browse_eo_padding"
             android:paddingRight="16dp"
             android:paddingTop="2dp"
-            android:text="lorem"
+            android:text="@string/lorem"
             android:textColor="@color/text_black"
             android:textSize="@dimen/search_eo_data_text_medium"/>
 
         <View
             android:layout_width="fill_parent"
             android:layout_height="1dp"
-            android:layout_marginLeft="@dimen/browse_eo_padding"
             android:background="@color/text_black"/>
     </LinearLayout>
 

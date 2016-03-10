@@ -30,7 +30,7 @@ import pl.wasat.smarthma.services.DownloadService;
 
 /**
  * Created by Daniel on 2015-11-05.
- * This file is a part of module SmartHMA NavIn project.
+ * This file is a part of module SmartHMA project.
  */
 public class CloudSavingManager {
 

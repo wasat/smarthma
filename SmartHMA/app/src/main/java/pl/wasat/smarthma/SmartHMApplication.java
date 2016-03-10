@@ -21,11 +21,11 @@ import pl.wasat.smarthma.model.explaindoc.ExplainData;
  */
 
 @ReportsCrashes(
-        formUri = "https://geodoplaty.cloudant.com/acra-smarthma/_design/acra-storage/_update/report",
+        formUri = "https://wasat.cloudant.com/acra-smarthma/_design/acra-storage/_update/report",
         reportType = org.acra.sender.HttpSender.Type.JSON,
         httpMethod = org.acra.sender.HttpSender.Method.POST,
-        formUriBasicAuthLogin = "apabyetionedishouresseri",
-        formUriBasicAuthPassword = "1koM7DkJ13AdkJFB2teSrtLJ"
+        formUriBasicAuthLogin = "otherveastabingendledind",
+        formUriBasicAuthPassword = "YwuhGQ7EdnyqxvtVYqtpldsL"
 )
 
 public class SmartHMApplication extends MultiDexApplication {

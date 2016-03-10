@@ -1,10 +1,13 @@
 package pl.wasat.smarthma.utils.loc;
 
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
 import android.util.Log;
 
 import com.google.android.gms.common.ConnectionResult;
@@ -15,7 +18,7 @@ import com.google.android.gms.location.LocationServices;
 
 /**
  * Created by Daniel on 2015-05-27 00:15.
- * Part of the NavIn project
+ * Part of the SmartHMA project
  */
 class FusedLocProviderImpl implements
         GoogleApiClient.ConnectionCallbacks,
@@ -36,6 +39,12 @@ class FusedLocProviderImpl implements
 
     @Override
     public void onConnected(Bundle bundle) {
+        if (ActivityCompat.checkSelfPermission(context,
+                Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
+                && ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_COARSE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED) {
+            return;
+        }
         Location mLastLocation = LocationServices.FusedLocationApi.getLastLocation(
                 mGoogleApiClient);
         if (mLastLocation != null) {
@@ -67,6 +76,12 @@ class FusedLocProviderImpl implements
     }
 
     private void startLocationUpdates() {
+        if (ActivityCompat.checkSelfPermission(context,
+                Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
+                && ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_COARSE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED) {
+            return;
+        }
         LocationServices.FusedLocationApi.requestLocationUpdates(
                 mGoogleApiClient, createLocationRequest(), this);
         updateStartTime = System.currentTimeMillis();

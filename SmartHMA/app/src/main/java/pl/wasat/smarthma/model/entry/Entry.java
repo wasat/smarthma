@@ -193,6 +193,7 @@ public class Entry implements Serializable {
     }
 
     public SimpleMetadata getSimpleMetadata() {
+        if (simpleMetadata == null) simpleMetadata = new SimpleMetadata(this);
         return simpleMetadata;
     }
 
@@ -323,8 +324,8 @@ public class Entry implements Serializable {
                 where.equals(o.getWhere());
     }
 
-    public Entry safeClone()
-    {
+    public Entry safeClone() {
+
         Entry testEntry = new Entry();
         testEntry.setTitle(title);
         testEntry.setId(id);
@@ -338,8 +339,15 @@ public class Entry implements Serializable {
         testEntry.setPublished(published);
         testEntry.setSummary(summary);
         testEntry.setWhere(where);
-        testEntry.setEarthObservation(earthObservation);
         testEntry.setFavourite(isFavourite);
+
+        testEntry.setMetadataType(metadataType);
+        testEntry.setRawMetadata(rawMetadata);
+        //testEntry.setSimpleMetadata(simpleMetadata);
+        testEntry.setDc(dc);
+        testEntry.setMDMetadata(getMDMetadata());
+        testEntry.setEarthObservation(earthObservation);
+
         return testEntry;
     }
 

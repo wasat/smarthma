@@ -163,13 +163,11 @@ public class MissionsExtListFragment extends Fragment {
                         getActivity().getString(R.string.third_party_missions_current),
                         "https://earth.esa.int/web/guest/missions/3rd-party-missions/current-missions"));
         listDataHeader
-                .add(new MissionHeaderData(
-                        5,
+                .add(new MissionHeaderData(5,
                         getActivity().getString(R.string.third_party_missions_historical),
                         "https://earth.esa.int/web/guest/missions/3rd-party-missions/historical-missions"));
         listDataHeader
-                .add(new MissionHeaderData(
-                        6,
+                .add(new MissionHeaderData(6,
                         getActivity().getString(R.string.third_party_missions_potential),
                         "https://earth.esa.int/web/guest/missions/3rd-party-missions/potential-missions"));
         listDataHeader.add(new MissionHeaderData(7, "ESA / EUMETSAT",
@@ -179,27 +177,24 @@ public class MissionsExtListFragment extends Fragment {
 
         ArrayList<Mission> missionList = parserDb.getMissionsList(new Category(EsaEoMissions.CATEGORY_ID, "asd"));
         List<MissionItemData> esaEoMissions = new ArrayList<>();
-        for (Mission mission :
-                missionList) {
+        for (Mission mission : missionList) {
             esaEoMissions.add(new MissionItemData(mission));
         }
 
         ArrayList<Mission> futureSentinelsMissionList = parserDb.getMissionsList(new Category(EsaFutureMissions.CATEGORY_ID, "asd"));
-
         List<MissionItemData> esaFutureSentinels = new ArrayList<>();
         List<MissionItemData> esaFutureExplorers = new ArrayList<>();
-
         for (Mission mission :
                 futureSentinelsMissionList) {
             if (mission.getId() == Adm.MISSION_ID || mission.getId() == EarthCare.MISSION_ID) {
                 esaFutureExplorers.add(new MissionItemData(mission));
-
             } else {
                 esaFutureSentinels.add(new MissionItemData(mission));
             }
         }
-        ArrayList<Mission> thirdPartyCurrentList = parserDb.getMissionsList(new Category(ThirdPartyMissions.CATEGORY_ID, "asd"));
 
+
+        ArrayList<Mission> thirdPartyCurrentList = parserDb.getMissionsList(new Category(ThirdPartyMissions.CATEGORY_ID, "asd"));
         List<MissionItemData> thirdPartCurrent = new ArrayList<>();
         for (Mission mission :
                 thirdPartyCurrentList) {
@@ -208,14 +203,12 @@ public class MissionsExtListFragment extends Fragment {
 
         ArrayList<Mission> thirdPartyHistoricalList = parserDb.getMissionsList(new Category(HistoricalMissions.CATEGORY_ID, "asd"));
         List<MissionItemData> thirdPartHistorical = new ArrayList<>();
-
         for (Mission mission :
                 thirdPartyHistoricalList) {
             thirdPartHistorical.add(new MissionItemData(mission));
         }
 
         ArrayList<Mission> thirdPartyPotentialList = parserDb.getMissionsList(new Category(PotentialMissions.CATEGORY_ID, "asd"));
-
         List<MissionItemData> thirdPartPotential = new ArrayList<>();
         for (Mission mission :
                 thirdPartyPotentialList) {
@@ -223,7 +216,6 @@ public class MissionsExtListFragment extends Fragment {
         }
 
         ArrayList<Mission> esaEuemsatList = parserDb.getMissionsList(new Category(EsaEumetsat.CATEGORY_ID, "asd"));
-
         List<MissionItemData> esaEumetsat = new ArrayList<>();
         for (Mission mission :
                 esaEuemsatList) {

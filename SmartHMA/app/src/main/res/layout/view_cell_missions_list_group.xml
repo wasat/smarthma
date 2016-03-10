@@ -21,7 +21,10 @@
             android:layout_height="@dimen/esa_missions_indicator_size"
             android:layout_centerVertical="true"
             android:contentDescription="@string/desc"
-            android:paddingLeft="@dimen/esa_missions_padding_medium"
+            android:layout_marginLeft="@dimen/esa_missions_padding_medium"
+            android:layout_marginStart="@dimen/esa_missions_padding_medium"
+            android:layout_marginRight="@dimen/esa_missions_padding_medium"
+            android:layout_marginEnd="@dimen/esa_missions_padding_medium"
             android:src="@drawable/ic_indicator_up"/>
 
         <pl.wasat.smarthma.customviews.TextViewWithFont
@@ -31,20 +34,25 @@
             android:layout_centerVertical="true"
             android:layout_toEndOf="@+id/indicator"
             android:layout_toLeftOf="@id/button"
+            android:layout_toStartOf="@id/button"
             android:layout_toRightOf="@+id/indicator"
             android:paddingLeft="@dimen/esa_missions_padding_medium"
+            android:paddingStart="@dimen/esa_missions_padding_medium"
             android:paddingRight="@dimen/esa_missions_padding"
+            android:paddingEnd="@dimen/esa_missions_padding"
             android:text="@string/esa_mission_item"
-            android:textColor="@color/text_black"
-            android:textSize="@dimen/esa_missions_cell_text_size"/>
+            android:textColor="@color/text_blue"
+            android:textSize="@dimen/browse_eo_cell_text_size_large"/>
 
         <ImageView
             android:id="@+id/button"
             android:layout_width="@dimen/esa_missions_star_size"
             android:layout_height="@dimen/esa_missions_star_size"
             android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
             android:layout_marginRight="@dimen/esa_missions_padding_medium"
+            android:layout_marginEnd="@dimen/esa_missions_padding_medium"
             android:background="@drawable/star_button"
             android:contentDescription="@string/desc"/>
     </RelativeLayout>

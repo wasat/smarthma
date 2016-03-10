@@ -15,7 +15,7 @@ import pl.wasat.smarthma.parser.model.Page;
  * Part of the project  SmartHMA
  */
 public class CryoSat extends BaseParser implements MissionInterface {
-    private final static int MISSION_ID = 3;
+    private final static int MISSION_ID = 4;
     private final static String TITLE = "CryoSat";
 
     public CryoSat(String pageUrl, Context context) {

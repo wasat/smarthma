@@ -1,9 +1,7 @@
 package pl.wasat.smarthma.ui.frags.search;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -19,12 +17,12 @@ import android.widget.TextView;
 
 import pl.wasat.smarthma.R;
 import pl.wasat.smarthma.helper.Const;
+import pl.wasat.smarthma.model.osdd.OSDDMatcher;
 import pl.wasat.smarthma.ui.frags.base.BaseSearchSideParametersFragment;
 
 /**
  * A simple {@link android.support.v4.app.Fragment} subclass. Activities that
  * contain this fragment must implement the
- * {@link OnSearchAdvancedParametersFragmentListener}
  * interface to handle interaction events. Use the
  * {@link SearchAdvancedParametersFragment#newInstance} factory method to create an
  * instance of this fragment.
@@ -38,8 +36,6 @@ public class SearchAdvancedParametersFragment extends BaseSearchSideParametersFr
             "geo.spacebel.be", "smaad.spacebel.be"};
     private static TextView tvEndpointName;
 
-    private OnSearchAdvancedParametersFragmentListener mListener;
-
     public SearchAdvancedParametersFragment() {
     }
 
@@ -51,25 +47,6 @@ public class SearchAdvancedParametersFragment extends BaseSearchSideParametersFr
      */
     public static SearchAdvancedParametersFragment newInstance() {
         return new SearchAdvancedParametersFragment();
-    }
-
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        Activity activity = context instanceof Activity ? (Activity) context : null;
-        try {
-            mListener = (OnSearchAdvancedParametersFragmentListener) activity;
-        } catch (ClassCastException e) {
-            throw new ClassCastException(activity.toString()
-                    + activity.getString(R.string.must_implement)
-                    + OnSearchAdvancedParametersFragmentListener.class.getSimpleName());
-        }
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        mListener = null;
     }
 
     @Override
@@ -128,18 +105,6 @@ public class SearchAdvancedParametersFragment extends BaseSearchSideParametersFr
                 EndpointsListDialogFragment.class.getSimpleName());
     }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated to
-     * the activity and potentially other fragments contained in that activity.
-     * <p/>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
-    public interface OnSearchAdvancedParametersFragmentListener {
-        void onSearchAdvancedParamsFragmentEditTextChange(String parameterKey, String parameterValue);
-    }
 
     public static class EndpointsListDialogFragment extends DialogFragment {
         @NonNull
@@ -193,16 +158,15 @@ public class SearchAdvancedParametersFragment extends BaseSearchSideParametersFr
         public void afterTextChanged(Editable s) {
             switch (choosenEditTv) {
                 case EDIT_TEXT_TITLE:
-                    mListener.onSearchAdvancedParamsFragmentEditTextChange("title", s.toString());
+                    fedeoRequestParams.addOsddValue(OSDDMatcher.PARAM_KEY_TITLE, s.toString());
                     break;
                 case EDIT_TEXT_ORGANISATION:
-                    mListener.onSearchAdvancedParamsFragmentEditTextChange("publisher", s.toString());
+                    fedeoRequestParams.addOsddValue(OSDDMatcher.PARAM_KEY_ORGANISATION, s.toString());
                     break;
                 case EDIT_TEXT_PLATFORM:
-                    mListener.onSearchAdvancedParamsFragmentEditTextChange("platform", s.toString());
+                    fedeoRequestParams.addOsddValue(OSDDMatcher.PARAM_KEY_PLATFORM, s.toString());
                     break;
                 default:
-                    mListener.onSearchAdvancedParamsFragmentEditTextChange("", "");
                     break;
             }
         }

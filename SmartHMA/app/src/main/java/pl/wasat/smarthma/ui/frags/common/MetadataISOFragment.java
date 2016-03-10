@@ -71,6 +71,7 @@ public class MetadataISOFragment extends BaseMetadataFragment {
     }
 
     private void prepareISOMetadataView() {
+        if (entryItem.getMDMetadata()==null) return;
         try {
             setMetaDataViews(getString(R.string.metadata_file_id), entryItem.getMDMetadata()
                     .getFileIdentifier());

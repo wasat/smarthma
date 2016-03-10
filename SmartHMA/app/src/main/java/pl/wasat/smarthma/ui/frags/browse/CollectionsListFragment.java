@@ -152,17 +152,6 @@ public class CollectionsListFragment extends BaseSpiceFragment {
         }
     }
 
-    private void loadCollectionDetailFragment(String collName) {
-        FedeoRequestParams fedeoRequestParams = new FedeoRequestParams();
-
-        HashMap<String, String> paramExtra = new HashMap<>();
-        paramExtra.put("uid", "urn:ogc:def:" + collName);
-        fedeoRequestParams.setParamsExtra(paramExtra);
-        getActivity().setProgressBarIndeterminateVisibility(true);
-        getSpiceManager().execute(new FedeoSearchRequest(getActivity(), fedeoRequestParams, 1),
-                new FeedRequestListener());
-    }
-
     @Override
     public void onDetach() {
         super.onDetach();
@@ -172,6 +161,18 @@ public class CollectionsListFragment extends BaseSpiceFragment {
     public ListView getList() {
         return list;
     }
+
+    private void loadCollectionDetailFragment(String collName) {
+        FedeoRequestParams fedeoRequestParams = new FedeoRequestParams(true, false);
+        HashMap<String, String> params = new HashMap<>();
+        params.put("uid", "urn:ogc:def:" + collName);
+        fedeoRequestParams.setParams(params);
+
+        getActivity().setProgressBarIndeterminateVisibility(true);
+        getSpiceManager().execute(new FedeoSearchRequest(getActivity(), fedeoRequestParams, 1),
+                new FeedRequestListener());
+    }
+
 
     private void loadDataSeriesFeedsActivity(String collName) {
         Intent dsFeedsIntent = new Intent(getActivity(),

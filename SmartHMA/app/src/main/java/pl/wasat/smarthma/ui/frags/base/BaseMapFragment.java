@@ -1,9 +1,12 @@
 package pl.wasat.smarthma.ui.frags.base;
 
+import android.Manifest;
 import android.app.Dialog;
 import android.content.BroadcastReceiver;
+import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.LocalBroadcastManager;
 
@@ -114,10 +117,15 @@ public class BaseMapFragment extends SupportMapFragment implements
         if (mMap != null) {
             setUpMap();
         }
-
     }
 
     private void setUpMap() {
+        if (ActivityCompat.checkSelfPermission(getActivity(),
+                Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
+                && ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED) {
+            return;
+        }
         mMap.setMyLocationEnabled(true);
         mMap.getUiSettings().setZoomControlsEnabled(true);
         mMap.getUiSettings().setZoomGesturesEnabled(true);
@@ -262,24 +270,6 @@ public class BaseMapFragment extends SupportMapFragment implements
     public void setTargetBounds(LatLngBounds bounds) {
         targetBounds = bounds;
     }
-
-/*    private void callBaseMapFragment(OnBaseMapFragmentPublicListener ml) {
-        this.publicListener = ml;
-    }
-
-    private void startCreateMap() {
-        int status = GooglePlayServicesUtil
-                .isGooglePlayServicesAvailable(getActivity());
-        if (status == ConnectionResult.SUCCESS) {
-            supportMapFrag = this;
-            setUpMapIfNeeded();
-            mMap = supportMapFrag.getMap();
-        } else {
-            Dialog dialog = GooglePlayServicesUtil.getErrorDialog(status,
-                    getActivity(), 42);
-            dialog.show();
-        }
-    }*/
 
     /**
      * Listener interface to tell when the map is ready

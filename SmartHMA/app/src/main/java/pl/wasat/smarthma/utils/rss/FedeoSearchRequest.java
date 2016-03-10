@@ -15,6 +15,7 @@ import java.io.InputStream;
 import pl.wasat.smarthma.helper.Const;
 import pl.wasat.smarthma.model.FedeoRequestParams;
 import pl.wasat.smarthma.model.feed.Feed;
+import pl.wasat.smarthma.preferences.SharedPrefs;
 
 public class FedeoSearchRequest extends GoogleHttpClientSpiceRequest<Feed> {
 
@@ -34,6 +35,10 @@ public class FedeoSearchRequest extends GoogleHttpClientSpiceRequest<Feed> {
 
     @Override
     public Feed loadDataFromNetwork() throws Exception {
+        SharedPrefs sharedPrefs = new SharedPrefs(context);
+        sharedPrefs.setUrlPrefs("");
+
+        //String url = fedeoRequestParams.getUrlWithoutTemplate();
         String url = fedeoRequestParams.getUrl();
         sendFedeoUrlBroadcast(url);
 

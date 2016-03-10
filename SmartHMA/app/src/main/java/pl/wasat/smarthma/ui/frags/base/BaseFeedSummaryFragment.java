@@ -12,12 +12,15 @@ import android.widget.TextView;
 
 import com.amazon.geo.mapsv2.AmazonMap;
 import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.LatLng;
 
 import java.util.ArrayList;
 
 import pl.wasat.smarthma.R;
 import pl.wasat.smarthma.adapter.IntroGridAdapter;
 import pl.wasat.smarthma.helper.Const;
+import pl.wasat.smarthma.helper.enums.Opts;
 import pl.wasat.smarthma.kindle.AmznMapDrawings;
 import pl.wasat.smarthma.model.feed.Feed;
 import pl.wasat.smarthma.preferences.SharedPrefs;
@@ -88,8 +91,8 @@ public class BaseFeedSummaryFragment extends Fragment {
 
         ArrayList<String> adapterNamesList = resultFeed.getQuery().getParamNameList();
         ArrayList<String> adapterValuesList = resultFeed.getQuery().getParamValueList();
-        adapterNamesList.add("generated");
-        adapterValuesList.add("-  " + resultFeed.getUpdated());
+/*        adapterNamesList.add("generated");
+        adapterValuesList.add("-  " + resultFeed.getUpdated());*/
 
         ArrayList<String> adapterTooltipsList = new ArrayList<>();
         for (int i = 0; i < adapterNamesList.size(); i++) {
@@ -199,7 +202,7 @@ public class BaseFeedSummaryFragment extends Fragment {
         com.amazon.geo.mapsv2.SupportMapFragment supportMapFragment = com.amazon.geo.mapsv2.SupportMapFragment.newInstance();
         FragmentTransaction fragmentTransaction =
                 getChildFragmentManager().beginTransaction();
-        fragmentTransaction.add(R.id.mapFromRegionDetails, supportMapFragment);
+        fragmentTransaction.add(R.id.map_area_bounds, supportMapFragment);
         fragmentTransaction.commit();
 
         supportMapFragment.getMapAsync(new com.amazon.geo.mapsv2.OnMapReadyCallback() {
@@ -217,10 +220,10 @@ public class BaseFeedSummaryFragment extends Fragment {
     }
 
     private void setUpStaticGoogleMap() {
-        com.google.android.gms.maps.SupportMapFragment supportMapFragment = com.google.android.gms.maps.SupportMapFragment.newInstance();
+        SupportMapFragment supportMapFragment = SupportMapFragment.newInstance();
         FragmentTransaction fragmentTransaction =
                 getChildFragmentManager().beginTransaction();
-        fragmentTransaction.add(R.id.mapFromRegionDetails, supportMapFragment);
+        fragmentTransaction.add(R.id.map_area_bounds, supportMapFragment);
         fragmentTransaction.commit();
 
         supportMapFragment.getMapAsync(new com.google.android.gms.maps.OnMapReadyCallback() {
@@ -240,28 +243,66 @@ public class BaseFeedSummaryFragment extends Fragment {
         amazonMap.getUiSettings().setAllGesturesEnabled(false);
         amazonMap.getUiSettings().setZoomControlsEnabled(false);
 
-        //Centre of EU
-        LatLngBoundsExt latLngBoundsExt = obtainBoundsFromShared();
-        amazonMap.moveCamera(com.amazon.geo.mapsv2.CameraUpdateFactory.newLatLngBounds(latLngBoundsExt.amznLatLngBounds, 30));
-
-        AmznMapDrawings amznMapDrawings = new AmznMapDrawings();
         SharedPrefs sharedPrefs = new SharedPrefs(getActivity());
-        float[] bbox = sharedPrefs.getBboxPrefs();
-        amazonMap.addPolygon(amznMapDrawings.drawArea(bbox));
+        if (sharedPrefs.getAreaUse()) {
+            //Centre of EU
+            LatLngBoundsExt latLngBoundsExt = obtainBoundsFromShared();
+            amazonMap.moveCamera(com.amazon.geo.mapsv2.CameraUpdateFactory.newLatLngBounds(latLngBoundsExt.amznLatLngBounds, 30));
+
+/*            AmznMapDrawings amznMapDrawings = new AmznMapDrawings();
+            float[] bbox = sharedPrefs.getBboxPrefs();
+            amazonMap.addPolygon(amznMapDrawings.drawArea(bbox));*/
+
+            drawBounds(amazonMap, sharedPrefs);
+        }
     }
 
     protected void setupGoogleMapObjects(GoogleMap googleMap) {
         googleMap.getUiSettings().setAllGesturesEnabled(false);
         googleMap.getUiSettings().setZoomControlsEnabled(false);
 
-        //Centre of EU
-        LatLngBoundsExt latLngBoundsExt = obtainBoundsFromShared();
-        googleMap.moveCamera(com.google.android.gms.maps.CameraUpdateFactory.newLatLngBounds(latLngBoundsExt.googleLatLngBounds, 30));
-
-        MapDrawings mapDrawings = new MapDrawings();
         SharedPrefs sharedPrefs = new SharedPrefs(getActivity());
-        float[] bbox = sharedPrefs.getBboxPrefs();
-        googleMap.addPolygon(mapDrawings.drawArea(bbox));
+        if (sharedPrefs.getAreaUse()) {
+            //Centre of EU
+            LatLngBoundsExt latLngBoundsExt = obtainBoundsFromShared();
+            googleMap.moveCamera(com.google.android.gms.maps.CameraUpdateFactory.newLatLngBounds(latLngBoundsExt.googleLatLngBounds, 30));
+
+            drawBounds(googleMap, sharedPrefs);
+        }
+    }
+
+    private void drawBounds(GoogleMap googleMap, SharedPrefs sharedPrefs) {
+        MapDrawings mapDrawings = new MapDrawings();
+        switch (sharedPrefs.getAreaType()) {
+            case Opts.AREA_POLYGON:
+                float[] bbox = sharedPrefs.getBboxPrefs();
+                googleMap.addPolygon(mapDrawings.drawArea(bbox));
+                break;
+            case Opts.AREA_PT_RADIUS:
+                float[] center = sharedPrefs.getCenterPrefs();
+                float radius = sharedPrefs.getRadiusPrefs();
+                googleMap.addCircle(mapDrawings.drawPointAndRadiusArea(new LatLng(center[0], center[1]), radius));
+                break;
+            default:
+                break;
+        }
+    }
+
+    private void drawBounds(AmazonMap amazonMap, SharedPrefs sharedPrefs) {
+        AmznMapDrawings mapDrawings = new AmznMapDrawings();
+        switch (sharedPrefs.getAreaType()) {
+            case Opts.AREA_POLYGON:
+                float[] bbox = sharedPrefs.getBboxPrefs();
+                amazonMap.addPolygon(mapDrawings.drawArea(bbox));
+                break;
+            case Opts.AREA_PT_RADIUS:
+                float[] center = sharedPrefs.getCenterPrefs();
+                float radius = sharedPrefs.getRadiusPrefs();
+                amazonMap.addCircle(mapDrawings.drawPointAndRadiusArea(new com.amazon.geo.mapsv2.model.LatLng(center[0], center[1]), radius));
+                break;
+            default:
+                break;
+        }
     }
 
     private LatLngBoundsExt obtainBoundsFromShared() {

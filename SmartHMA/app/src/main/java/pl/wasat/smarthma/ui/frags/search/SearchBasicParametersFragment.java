@@ -1,5 +1,6 @@
 package pl.wasat.smarthma.ui.frags.search;
 
+import pl.wasat.smarthma.model.osdd.OpenSearchDescription;
 import pl.wasat.smarthma.ui.frags.base.BaseSearchSideParametersFragment;
 
 /**
@@ -25,4 +26,9 @@ public class SearchBasicParametersFragment extends BaseSearchSideParametersFragm
         return new SearchBasicParametersFragment();
     }
 
+    @Override
+    public void onRequestSuccess(OpenSearchDescription openSearchDescription) {
+        super.onRequestSuccess(openSearchDescription);
+
+    }
 }
