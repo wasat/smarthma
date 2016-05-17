@@ -3,7 +3,7 @@
     <dimen name="shadow_size">25dp</dimen>
     <dimen name="layer_size">350dp</dimen>
     <dimen name="preview_offset_distance">150dp</dimen>
-    <dimen name="offset_distance">35dp</dimen>
+    <!--    <dimen name="offset_distance">35dp</dimen>-->
 
     <!-- INFO APPS -->
 
@@ -33,8 +33,8 @@
     <dimen name="action_bar_logo_padding">10dp</dimen>
     <dimen name="action_bar_title_size">23sp</dimen>
     <dimen name="action_bar_title_padding">30dp</dimen>
-    <dimen name="action_bar_logo_width">100dp</dimen>
-    <dimen name="action_bar_logo_height">130dp</dimen>
+    <!--    <dimen name="action_bar_logo_width">100dp</dimen>-->
+    <!--    <dimen name="action_bar_logo_height">130dp</dimen>-->
 
     <!-- ACTION BAR LAND-->
 
@@ -54,7 +54,7 @@
     <dimen name="search_eo_data_padding_medium">8dp</dimen>
     <dimen name="search_eo_data_padding_small">2dp</dimen>
 
-    <dimen name="search_eo_data_text_small">11sp</dimen>
+    <!--    <dimen name="search_eo_data_text_small">11sp</dimen>-->
     <dimen name="search_eo_data_text_medium">14sp</dimen>
     <dimen name="search_eo_data_text">18sp</dimen>
 
@@ -78,9 +78,9 @@
 
     <dimen name="esa_missions_image_size">60dp</dimen>
     <dimen name="esa_missions_cell_text_size_large">16sp</dimen>
-    <dimen name="esa_missions_cell_text_size">12sp</dimen>
+    <!--    <dimen name="esa_missions_cell_text_size">12sp</dimen>-->
     <dimen name="esa_missions_star_size">15dp</dimen>
-    <dimen name="esa_missions_cell_padding_left">40dp</dimen>
+    <!--    <dimen name="esa_missions_cell_padding_left">40dp</dimen>-->
     <dimen name="esa_mission_cell_divider">4dp</dimen>
     <dimen name="esa_missions_cell_height">28dp</dimen>
 
@@ -89,7 +89,7 @@
     <dimen name="esa_online_cell_height">24dp</dimen>
 
     <!-- FACEBOOK DIALOG -->
-    <dimen name="facebook_header_height">100dp</dimen>
+    <!--    <dimen name="facebook_header_height">100dp</dimen>-->
 
     <!-- BROWSE EO DATA -->
 
@@ -99,34 +99,34 @@
     <dimen name="browse_eo_padding_text">5dp</dimen>
     <dimen name="browse_eo_cell_text_size_large">16sp</dimen>
     <dimen name="browse_eo_cell_text_size">12sp</dimen>
-    <dimen name="browse_eo_star_size">15dp</dimen>
-    <dimen name="browse_eo_cell_padding_left">40dp</dimen>
+    <!--    <dimen name="browse_eo_star_size">15dp</dimen>-->
+    <!--    <dimen name="browse_eo_cell_padding_left">40dp</dimen>-->
     <dimen name="browse_eo_cell_divider">8dp</dimen>
-    <dimen name="browse_eo_cell_height">28dp</dimen>
+    <!--    <dimen name="browse_eo_cell_height">28dp</dimen>-->
     <dimen name="browse_eo_image_size">72dp</dimen>
-    <dimen name="browse_eo_layout_bottom_height">250dp</dimen>
+    <!--    <dimen name="browse_eo_layout_bottom_height">250dp</dimen>-->
 
     <dimen name="browse_eo_text_large">14sp</dimen>
     <dimen name="browse_eo_text">13sp</dimen>
 
-    <dimen name="divider_size">20dp</dimen>
+    <!--    <dimen name="divider_size">20dp</dimen>-->
 
     <dimen name="button_blue_text_size">16sp</dimen>
-    <dimen name="button_blue_padding">7dp</dimen>
+    <!--    <dimen name="button_blue_padding">7dp</dimen>-->
     <dimen name="button_blue_height">40dp</dimen>
 
-    <dimen name="spinner_width">200dp</dimen>
+    <!--    <dimen name="spinner_width">200dp</dimen>-->
     <dimen name="right_padding_for_slider">40dp</dimen>
     <!-- Default screen margins, per the Android Design guidelines. -->
-    <dimen name="activity_horizontal_margin">16dp</dimen>
-    <dimen name="activity_vertical_margin">16dp</dimen>
+    <!--    <dimen name="activity_horizontal_margin">16dp</dimen>-->
+    <!--    <dimen name="activity_vertical_margin">16dp</dimen>-->
 
     <!-- PLACE AUTOCOMPLETE SEARCH VIEW -->
     <dimen name="margin_tiny">4dp</dimen>
     <dimen name="margin_small">8dp</dimen>
     <dimen name="margin_medium">16dp</dimen>
-    <dimen name="margin_large">32dp</dimen>
-    <dimen name="margin_huge">64dp</dimen>
+    <!--    <dimen name="margin_large">32dp</dimen>-->
+    <!--    <dimen name="margin_huge">64dp</dimen>-->
     <dimen name="horizontal_page_margin">@dimen/margin_medium</dimen>
     <dimen name="vertical_page_margin">@dimen/margin_small</dimen>
 </resources>

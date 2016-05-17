@@ -13,7 +13,7 @@ import pl.wasat.smarthma.model.mission.MissionItemData;
 import pl.wasat.smarthma.utils.time.SimpleDate;
 
 /**
- * Used for sorting collections containing metadata downloaded from ESA servers.
+ *  Used for sorting collections containing metadata downloaded from ESA servers.
  */
 public class DataSorter {
 
@@ -21,7 +21,7 @@ public class DataSorter {
      * Sorts lists and collections. In case of ISO and OM entries, the given list will be sorted
      * using the most recently picked sorting type specified in the SmartHMApplication class.
      *
-     * @param list a collection of objects compatible with this class
+     * @param list  a collection of objects compatible with this class
      */
     public void sort(List list) {
         if (!list.isEmpty()) {
@@ -41,9 +41,24 @@ public class DataSorter {
     }
 
     /**
+     * Used by most methods in this class.
+     * @param list          a collection of entries
+     * @param comparator    the comparator describing how to sort given list
+     */
+    private void sortCollection(List list, Comparator comparator) {
+        if (list == null || comparator == null) {
+            return;
+        }
+        try {
+            Collections.sort(list, comparator);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
      * Sorts lists of SmartHMA Collection objects.
-     *
-     * @param list a list of collections
+     * @param list  a list of collections
      */
     private void sortCollections(List<Collection> list) {
         Comparator comparator = new Comparator<Collection>() {
@@ -58,8 +73,7 @@ public class DataSorter {
 
     /**
      * Sorts lists of SmartHMA CollectionsGroup objects.
-     *
-     * @param list a list of groups
+     * @param list  a list of groups
      */
     private void sortCollectionsGroups(List<CollectionsGroup> list) {
         Comparator comparator = new Comparator<CollectionsGroup>() {
@@ -74,8 +88,7 @@ public class DataSorter {
 
     /**
      * Sorts lists of SmartHMA MissionItemData objects.
-     *
-     * @param list a list of items
+     * @param list  a list of items
      */
     private void sortMissionItemsData(List<MissionItemData> list) {
         Comparator comparator = new Comparator<MissionItemData>() {
@@ -90,8 +103,7 @@ public class DataSorter {
 
     /**
      * Sorts lists of SmartHMA Entry objects.
-     *
-     * @param entries a list of entries
+     * @param entries  a list of entries
      */
     private void sortOMEntries(List<Entry> entries) {
         if (!entries.isEmpty()) {
@@ -116,45 +128,8 @@ public class DataSorter {
     }
 
     /**
-     * Sorts lists of SmartHMA EntryISO objects.
-     *
-     * @param entries a list of entries
-     */
-    private void sortISOEntries(List<EntryISO> entries) {
-        if (!entries.isEmpty()) {
-            if (SmartHMApplication.sortingType == Const.SORT_BY_TITLE_ASCENDING) {
-                sortISOEntriesByTitleAscending(entries);
-            } else if (SmartHMApplication.sortingType == Const.SORT_BY_TITLE_DESCENDING) {
-                sortISOEntriesByTitleDescending(entries);
-            } else if (SmartHMApplication.sortingType == Const.SORT_BY_DATE_ASCENDING) {
-                sortISOEntriesByDateUpdatedAscending(entries);
-            } else {
-                sortISOEntriesByDateUpdatedDescending(entries);
-            }
-        }
-    }
-
-    /**
-     * Used by most methods in this class.
-     *
-     * @param list       a collection of entries
-     * @param comparator the comparator describing how to sort given list
-     */
-    private void sortCollection(List list, Comparator comparator) {
-        if (list == null || comparator == null) {
-            return;
-        }
-        try {
-            Collections.sort(list, comparator);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    /**
      * Sorts lists of SmartHMA Entry objects by their title in ascending order.
-     *
-     * @param list a list of entries
+     * @param list  a list of entries
      */
     private void sortOMEntriesByTitleAscending(List<Entry> list) {
         Comparator comparator = new Comparator<Entry>() {
@@ -169,8 +144,7 @@ public class DataSorter {
 
     /**
      * Sorts lists of SmartHMA Entry objects by their title in descending order.
-     *
-     * @param list a list of entries
+     * @param list  a list of entries
      */
     private void sortOMEntriesByTitleDescending(List<Entry> list) {
         Comparator comparator = new Comparator<Entry>() {
@@ -185,8 +159,7 @@ public class DataSorter {
 
     /**
      * Sorts lists of SmartHMA Entry objects by their date in ascending order.
-     *
-     * @param list a list of entries
+     * @param list  a list of entries
      */
     private void sortOMEntriesByDatePublishedAscending(List<Entry> list) {
         Comparator comparator = new Comparator<Entry>() {
@@ -200,25 +173,8 @@ public class DataSorter {
     }
 
     /**
-     * Sorts lists of SmartHMA Entry objects by their update time in ascending order.
-     *
-     * @param list a list of entries
-     */
-    private void sortOMEntriesByDateUpdatedAscending(List<Entry> list) {
-        Comparator comparator = new Comparator<Entry>() {
-            public int compare(Entry c1, Entry c2) {
-                SimpleDate v1 = new SimpleDate(c1.getUpdated());
-                SimpleDate v2 = new SimpleDate(c2.getUpdated());
-                return v1.compareTo(v2);
-            }
-        };
-        sortCollection(list, comparator);
-    }
-
-    /**
      * Sorts lists of SmartHMA Entry objects by their date in descending order.
-     *
-     * @param list a list of entries
+     * @param list  a list of entries
      */
     private void sortOMEntriesByDatePublishedDescending(List<Entry> list) {
         Comparator comparator = new Comparator<Entry>() {
@@ -232,9 +188,23 @@ public class DataSorter {
     }
 
     /**
+     * Sorts lists of SmartHMA Entry objects by their update time in ascending order.
+     * @param list  a list of entries
+     */
+    private void sortOMEntriesByDateUpdatedAscending(List<Entry> list) {
+        Comparator comparator = new Comparator<Entry>() {
+            public int compare(Entry c1, Entry c2) {
+                SimpleDate v1 = new SimpleDate(c1.getUpdated());
+                SimpleDate v2 = new SimpleDate(c2.getUpdated());
+                return v1.compareTo(v2);
+            }
+        };
+        sortCollection(list, comparator);
+    }
+
+    /**
      * Sorts lists of SmartHMA Entry objects by their update time in descending order.
-     *
-     * @param list a list of entries
+     * @param list  a list of entries
      */
     private void sortOMEntriesByDateUpdatedDescending(List<Entry> list) {
         Comparator comparator = new Comparator<Entry>() {
@@ -248,9 +218,28 @@ public class DataSorter {
     }
 
     /**
+     * Sorts lists of SmartHMA EntryISO objects.
+     * @param entries  a list of entries
+     */
+    private void sortISOEntries(List<EntryISO> entries) {
+        if (!entries.isEmpty()) {
+            if (SmartHMApplication.sortingType == Const.SORT_BY_TITLE_ASCENDING) {
+                sortISOEntriesByTitleAscending(entries);
+            } else if (SmartHMApplication.sortingType == Const.SORT_BY_TITLE_DESCENDING) {
+                sortISOEntriesByTitleDescending(entries);
+            } else if (SmartHMApplication.sortingType == Const.SORT_BY_DATE_ASCENDING) {
+                //sortISOEntriesByDateAscending(entries);
+                sortISOEntriesByDateUpdatedAscending(entries);
+            } else {
+                //sortISOEntriesByDateDescending(entries);
+                sortISOEntriesByDateUpdatedDescending(entries);
+            }
+        }
+    }
+
+    /**
      * Sorts lists of SmartHMA Entry objects by their title in ascending order.
-     *
-     * @param list a list of entries
+     * @param list  a list of entries
      */
     private void sortISOEntriesByTitleAscending(List<EntryISO> list) {
         Comparator comparator = new Comparator<EntryISO>() {
@@ -265,8 +254,7 @@ public class DataSorter {
 
     /**
      * Sorts lists of SmartHMA EntryISO objects by their title in descending order.
-     *
-     * @param list a list of entries
+     * @param list  a list of entries
      */
     private void sortISOEntriesByTitleDescending(List<EntryISO> list) {
         Comparator comparator = new Comparator<EntryISO>() {
@@ -280,41 +268,8 @@ public class DataSorter {
     }
 
     /**
-     * Sorts lists of SmartHMA EntryISO objects by their update time in ascending order.
-     *
-     * @param list a list of entries
-     */
-    private void sortISOEntriesByDateUpdatedAscending(List<EntryISO> list) {
-        Comparator comparator = new Comparator<EntryISO>() {
-            public int compare(EntryISO c1, EntryISO c2) {
-                SimpleDate v1 = new SimpleDate(c1.getUpdated());
-                SimpleDate v2 = new SimpleDate(c2.getUpdated());
-                return v1.compareTo(v2);
-            }
-        };
-        sortCollection(list, comparator);
-    }
-
-    /**
-     * Sorts lists of SmartHMA EntryISO objects by their update time in descending order.
-     *
-     * @param list a list of entries
-     */
-    private void sortISOEntriesByDateUpdatedDescending(List<EntryISO> list) {
-        Comparator comparator = new Comparator<EntryISO>() {
-            public int compare(EntryISO c1, EntryISO c2) {
-                SimpleDate v1 = new SimpleDate(c1.getUpdated());
-                SimpleDate v2 = new SimpleDate(c2.getUpdated());
-                return v2.compareTo(v1);
-            }
-        };
-        sortCollection(list, comparator);
-    }
-
-    /**
      * Sorts lists of SmartHMA EntryISO objects by their date in ascending order.
-     *
-     * @param list a list of entries
+     * @param list  a list of entries
      */
     void sortISOEntriesByDateAscending(List<EntryISO> list) {
         Comparator comparator = new Comparator<EntryISO>() {
@@ -329,14 +284,43 @@ public class DataSorter {
 
     /**
      * Sorts lists of SmartHMA EntryISO objects by their date in descending order.
-     *
-     * @param list a list of entries
+     * @param list  a list of entries
      */
     void sortISOEntriesByDateDescending(List<EntryISO> list) {
         Comparator comparator = new Comparator<EntryISO>() {
             public int compare(EntryISO c1, EntryISO c2) {
                 SimpleDate v1 = new SimpleDate(c1.getDate().getCIDate().getDateInCIDate().getDateGco().getText());
                 SimpleDate v2 = new SimpleDate(c2.getDate().getCIDate().getDateInCIDate().getDateGco().getText());
+                return v2.compareTo(v1);
+            }
+        };
+        sortCollection(list, comparator);
+    }
+
+    /**
+     * Sorts lists of SmartHMA EntryISO objects by their update time in ascending order.
+     * @param list  a list of entries
+     */
+    private void sortISOEntriesByDateUpdatedAscending(List<EntryISO> list) {
+        Comparator comparator = new Comparator<EntryISO>() {
+            public int compare(EntryISO c1, EntryISO c2) {
+                SimpleDate v1 = new SimpleDate(c1.getUpdated());
+                SimpleDate v2 = new SimpleDate(c2.getUpdated());
+                return v1.compareTo(v2);
+            }
+        };
+        sortCollection(list, comparator);
+    }
+
+    /**
+     * Sorts lists of SmartHMA EntryISO objects by their update time in descending order.
+     * @param list  a list of entries
+     */
+    private void sortISOEntriesByDateUpdatedDescending(List<EntryISO> list) {
+        Comparator comparator = new Comparator<EntryISO>() {
+            public int compare(EntryISO c1, EntryISO c2) {
+                SimpleDate v1 = new SimpleDate(c1.getUpdated());
+                SimpleDate v2 = new SimpleDate(c2.getUpdated());
                 return v2.compareTo(v1);
             }
         };

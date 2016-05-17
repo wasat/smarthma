@@ -77,8 +77,10 @@ public class OSDDMatcher {
 
 
     public static Parameter findParentIdParam(List<Parameter> osddParams) {
-        for (Parameter param : osddParams) {
-            if (param.getName().equalsIgnoreCase(PARAM_NAME_PARENT_IDENTIFIER)) return param;
+        if (osddParams != null) {
+            for (Parameter param : osddParams) {
+                if (param.getName().equalsIgnoreCase(PARAM_NAME_PARENT_IDENTIFIER)) return param;
+            }
         }
         return null;
     }
@@ -98,6 +100,15 @@ public class OSDDMatcher {
                 break;
             case PARAM_KEY_END_DATE:
                 paramName = PARAM_NAME_END_DATE;
+                break;
+            case PARAM_KEY_LAT:
+                paramName = PARAM_NAME_LAT;
+                break;
+            case PARAM_KEY_LNG:
+                paramName = PARAM_NAME_LNG;
+                break;
+            case PARAM_KEY_RADIUS:
+                paramName = PARAM_NAME_RADIUS;
                 break;
             case PARAM_KEY_MAX_RECORDS:
                 paramName = PARAM_NAME_MAX_RECORDS;

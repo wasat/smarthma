@@ -1,7 +1,9 @@
 package pl.wasat.smarthma.ui.frags.search;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -33,7 +35,7 @@ public class SearchAdvancedParametersFragment extends BaseSearchSideParametersFr
     private static final int EDIT_TEXT_ORGANISATION = 2;
     private static final int EDIT_TEXT_PLATFORM = 3;
     private static final CharSequence[] endpointsList = {"fedeo.esa.int",
-            "geo.spacebel.be", "smaad.spacebel.be"};
+            "geo.spacebel.be", "smaad.spacebel.be", "obeos.spacebel.be"};
     private static TextView tvEndpointName;
 
     public SearchAdvancedParametersFragment() {
@@ -107,6 +109,23 @@ public class SearchAdvancedParametersFragment extends BaseSearchSideParametersFr
 
 
     public static class EndpointsListDialogFragment extends DialogFragment {
+
+        OnEndpointsListDialogFragListener mListener;
+
+        @Override
+        public void onAttach(Context context) {
+            super.onAttach(context);
+
+            Activity activity = context instanceof Activity ? (Activity) context : null;
+            try {
+                mListener = (OnEndpointsListDialogFragListener) activity;
+            } catch (ClassCastException e) {
+                throw new ClassCastException(activity.toString()
+                        + activity.getString(R.string.must_implement)
+                        + OnEndpointsListDialogFragListener.class.getSimpleName());
+            }
+        }
+
         @NonNull
         @Override
         public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -131,10 +150,19 @@ public class SearchAdvancedParametersFragment extends BaseSearchSideParametersFr
                 case 2:
                     Const.setHttpSmaadBaseUrl();
                     break;
+                case 3:
+                    Const.setHttpObeosBaseUrl();
+                    break;
                 default:
                     break;
             }
+            mListener.OnEndpointsListDialogFragClose();
+
             tvEndpointName.setText(endpointsList[which]);
+        }
+
+        public interface OnEndpointsListDialogFragListener {
+            void OnEndpointsListDialogFragClose();
         }
     }
 

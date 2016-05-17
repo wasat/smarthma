@@ -14,7 +14,8 @@ import pl.wasat.smarthma.model.FedeoRequestParams;
 import pl.wasat.smarthma.model.feed.Feed;
 import pl.wasat.smarthma.services.NewsRssServiceNoAsync;
 import pl.wasat.smarthma.ui.frags.base.BaseSpiceListFragment;
-import pl.wasat.smarthma.utils.rss.FedeoSearchRequest;
+import pl.wasat.smarthma.utils.request.FedeoSearchRequest;
+
 
 public class NewsListFragment extends BaseSpiceListFragment {
 

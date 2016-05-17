@@ -11,5 +11,5 @@
     <item name="menu_gis_map" type="menu">@menu/menu_gis_map_land</item>
 -->
 
-    <item name="activity_article_list" type="layout">@layout/activity_news</item>
+    <!--    <item type="layout" name="activity_article_list">@layout/activity_news</item>-->
 </resources>

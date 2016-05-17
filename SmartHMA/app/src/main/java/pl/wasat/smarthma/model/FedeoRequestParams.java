@@ -27,7 +27,7 @@ public class FedeoRequestParams extends OSDDMatcher implements Serializable {
     private static final long serialVersionUID = 1L;
 
     public static boolean IS_BUILD_FROM_SHARED;
-    private static boolean IS_URL_TEMPLATE;
+    private static Boolean IS_URL_TEMPLATE;
     private HashMap<String, String> params;
     private String url;
     private String startDate;
@@ -44,7 +44,12 @@ public class FedeoRequestParams extends OSDDMatcher implements Serializable {
         this.params = new HashMap<>();
         IS_URL_TEMPLATE = true;
         setDefaultParams();
-        //buildFromShared();
+    }
+
+    public FedeoRequestParams(Boolean isUrlTemplate) {
+        this.params = new HashMap<>();
+        IS_URL_TEMPLATE = isUrlTemplate;
+        setDefaultParams();
     }
 
     public FedeoRequestParams(boolean initAreaTime, boolean isUrlTemplate) {
@@ -93,6 +98,8 @@ public class FedeoRequestParams extends OSDDMatcher implements Serializable {
 
 
     private void buildUrl() {
+        if (IS_URL_TEMPLATE == null) return;
+
         if (IS_BUILD_FROM_SHARED) buildFromShared();
 
         if (IS_URL_TEMPLATE) {
@@ -110,7 +117,7 @@ public class FedeoRequestParams extends OSDDMatcher implements Serializable {
             this.url = finalUrl;
         } else {
             params.put("httpAccept", Link.TYPE_ATOM_XML);
-            String url = Const.HTTP_BASE_URL + "?";
+            String url = Const.FEDEO_SEARCH_BASE_URL + "?";
             for (HashMap.Entry<String, String> entry : params.entrySet()) {
                 String key = getParamName(entry.getKey());
                 String value = entry.getValue();
@@ -215,7 +222,6 @@ public class FedeoRequestParams extends OSDDMatcher implements Serializable {
             baseParentIdentifier = getParetnId(parentIdentifier);
         }
         this.parentIdentifier = baseParentIdentifier;
-        //this.params.put("parentIdentifier", baseParentIdentifier);
     }
 
     /**

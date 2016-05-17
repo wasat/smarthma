@@ -1,13 +1,14 @@
 package pl.wasat.smarthma.ui.activities;
 
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.support.v4.app.FragmentManager;
 import android.widget.TextView;
 
 import pl.wasat.smarthma.R;
 import pl.wasat.smarthma.adapter.NewsArticleListAdapter;
 import pl.wasat.smarthma.database.EoDbAdapter;
-import pl.wasat.smarthma.model.NewsArticle;
+import pl.wasat.smarthma.model.news.NewsArticle;
 import pl.wasat.smarthma.ui.activities.base.BaseSmartHMActivity;
 import pl.wasat.smarthma.ui.frags.news.NewsDetailFragment;
 import pl.wasat.smarthma.ui.frags.news.NewsListFragment;
@@ -27,11 +28,11 @@ public class NewsActivity extends BaseSmartHMActivity implements
 
         super.onCreate(savedInstanceState);
 
-/*        if (android.os.Build.VERSION.SDK_INT > 9) {
+        if (android.os.Build.VERSION.SDK_INT > 9) {
             StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder()
                     .permitAll().build();
             StrictMode.setThreadPolicy(policy);
-        }*/
+        }
 
         TextView text = (TextView) findViewById(R.id.action_bar_title);
         text.setText(getString(R.string.esa_online));

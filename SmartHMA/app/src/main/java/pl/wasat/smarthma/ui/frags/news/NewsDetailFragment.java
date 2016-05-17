@@ -20,7 +20,7 @@ import android.widget.Toast;
 import pl.wasat.smarthma.R;
 import pl.wasat.smarthma.adapter.NewsArticleListAdapter;
 import pl.wasat.smarthma.database.EoDbAdapter;
-import pl.wasat.smarthma.model.NewsArticle;
+import pl.wasat.smarthma.model.news.NewsArticle;
 
 public class NewsDetailFragment extends Fragment {
 
@@ -69,7 +69,7 @@ public class NewsDetailFragment extends Fragment {
                 @Override
                 public void onClick(View v) {
                     Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri
-                            .parse(displayedArticle.getAuthor()));
+                            .parse(displayedArticle.getLink().getHref()));
                     startActivity(browserIntent);
                 }
             });
@@ -96,8 +96,9 @@ public class NewsDetailFragment extends Fragment {
             db.close();
             displayedArticle.setRead(false);
             NewsArticleListAdapter adapter = (NewsArticleListAdapter) ((NewsListFragment) getActivity()
-                    .getSupportFragmentManager().findFragmentById(
-                            R.id.article_list)).getListAdapter();
+                    .getSupportFragmentManager().findFragmentByTag(NewsListFragment.class.getSimpleName()))
+                    .getListAdapter();
+            //R.id.article_list)).getListAdapter();
             adapter.notifyDataSetChanged();
             return true;
         } else {

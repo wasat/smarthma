@@ -1,4 +1,4 @@
-package pl.wasat.smarthma.utils.rss;
+package pl.wasat.smarthma.utils.request;
 
 import android.util.Log;
 
@@ -19,6 +19,7 @@ import javax.xml.parsers.SAXParserFactory;
 
 import pl.wasat.smarthma.helper.Const;
 import pl.wasat.smarthma.model.osdd.OpenSearchDescription;
+import pl.wasat.smarthma.utils.rss.OSDDHandler;
 
 public class FedeoOSDDRequest extends GoogleHttpClientSpiceRequest<OpenSearchDescription> {
 
@@ -29,16 +30,19 @@ public class FedeoOSDDRequest extends GoogleHttpClientSpiceRequest<OpenSearchDes
         osddUrl = genericOsddUrl;
     }
 
+    public FedeoOSDDRequest(String stringOsddUrl) {
+        super(null);
+        osddUrl = new GenericUrl(stringOsddUrl);
+    }
+
     @Override
     public OpenSearchDescription loadDataFromNetwork() throws Exception {
 
         OSDDHandler rh = null;
         try {
-
             Log.i("OSDD_URL", osddUrl.toString());
 
             HttpRequest request = getHttpRequestFactory().buildGetRequest(osddUrl);
-
             HttpResponse response = request.execute();
 
             InputStream in;
@@ -67,8 +71,4 @@ public class FedeoOSDDRequest extends GoogleHttpClientSpiceRequest<OpenSearchDes
         return new GenericUrl(Const.OSDD_BASE_URL + "parentIdentifier=" + parentID);
     }
 }
-
-
-
-
 

@@ -33,7 +33,8 @@ import pl.wasat.smarthma.model.osdd.OSDDMatcher;
 import pl.wasat.smarthma.model.osdd.OpenSearchDescription;
 import pl.wasat.smarthma.model.osdd.Option;
 import pl.wasat.smarthma.model.osdd.Parameter;
-import pl.wasat.smarthma.utils.rss.FedeoOSDDRequest;
+import pl.wasat.smarthma.utils.request.FedeoOSDDRequest;
+
 
 /**
  * A simple {@link android.support.v4.app.Fragment} subclass. Activities that
@@ -240,7 +241,6 @@ public class BaseSearchSideParametersFragment extends BaseDateTimeAreaContainerF
         public Dialog onCreateDialog(Bundle savedInstanceState) {
 
             final Parameter parentIdParam = OSDDMatcher.findParentIdParam(osddParams);
-            ;
 
             AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
             builder.setTitle(R.string.eo_catalogue_list_title)
@@ -276,10 +276,10 @@ public class BaseSearchSideParametersFragment extends BaseDateTimeAreaContainerF
         void onBaseSearchSideParametersFragmentFedeoRequestParamsOsddChange(FedeoRequestParams fedeoRequestParams);
     }
 
-    private void startAsyncLoadOsddData(GenericUrl fedeoDescUrl) {
+    public void startAsyncLoadOsddData(GenericUrl fedeoDescUrl) {
         if (fedeoDescUrl != null) {
             getActivity().setProgressBarIndeterminateVisibility(true);
-            getSpiceManager().execute(new FedeoOSDDRequest(fedeoDescUrl),
+            getSpiceManager().execute(new FedeoOSDDRequest(fedeoDescUrl.toString()),
                     this);
         }
     }

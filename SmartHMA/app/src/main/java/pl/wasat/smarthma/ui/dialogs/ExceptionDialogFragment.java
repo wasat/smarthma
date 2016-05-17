@@ -49,7 +49,7 @@ public class ExceptionDialogFragment extends DialogFragment {
                 .setMessage(
                         exMess
                                 + getString(R.string.please_correct_your_query_))
-                .setPositiveButton(R.string.alert_dialog_ok,
+                .setPositiveButton(android.R.string.ok,
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog,
                                                 int whichButton) {
@@ -57,7 +57,7 @@ public class ExceptionDialogFragment extends DialogFragment {
                                         .doPositiveClick();
                             }
                         })
-                .setNegativeButton(R.string.alert_dialog_cancel,
+                .setNegativeButton(android.R.string.cancel,
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog,
                                                 int whichButton) {

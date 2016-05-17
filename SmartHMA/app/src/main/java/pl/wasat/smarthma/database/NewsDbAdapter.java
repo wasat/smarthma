@@ -9,7 +9,7 @@ import android.database.sqlite.SQLiteDatabase.CursorFactory;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.provider.BaseColumns;
 
-import pl.wasat.smarthma.model.NewsArticle;
+import pl.wasat.smarthma.model.news.NewsArticle;
 
 public class NewsDbAdapter {
 

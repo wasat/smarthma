@@ -23,7 +23,7 @@ import pl.wasat.smarthma.interfaces.OnSlideElementListener;
 import pl.wasat.smarthma.model.CollectionsGroup.List;
 import pl.wasat.smarthma.preferences.SharedPrefs;
 import pl.wasat.smarthma.services.SmartHmaHttpSpiceService;
-import pl.wasat.smarthma.utils.http.ExplainDocRequest;
+import pl.wasat.smarthma.utils.request.ExplainDocRequest;
 import pl.wasat.smarthma.utils.xml.XMLParser;
 
 public class CollectionsGroupListFragment extends Fragment implements

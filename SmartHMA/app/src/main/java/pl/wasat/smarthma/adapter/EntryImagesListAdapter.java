@@ -14,7 +14,7 @@ import java.util.List;
 import pl.wasat.smarthma.customviews.EntryItemView;
 import pl.wasat.smarthma.interfaces.OnSlideElementListener;
 import pl.wasat.smarthma.model.entry.Entry;
-import pl.wasat.smarthma.utils.http.EntryBitmapRequest;
+import pl.wasat.smarthma.utils.request.EntryBitmapRequest;
 
 public class EntryImagesListAdapter extends OkHttpSpiceArrayAdapter<Entry> {
 

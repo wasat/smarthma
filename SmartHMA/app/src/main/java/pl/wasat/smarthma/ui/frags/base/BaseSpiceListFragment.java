@@ -5,6 +5,7 @@ package pl.wasat.smarthma.ui.frags.base;
 
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.ListFragment;
+import android.util.Log;
 
 import com.octo.android.robospice.SpiceManager;
 import com.octo.android.robospice.persistence.exception.SpiceException;
@@ -14,6 +15,7 @@ import pl.wasat.smarthma.model.feed.Feed;
 import pl.wasat.smarthma.services.SmartHmaHttpSpiceService;
 import pl.wasat.smarthma.ui.dialogs.ExceptionDialogFragment;
 import pl.wasat.smarthma.utils.rss.SpiceExceptionHandler;
+import roboguice.util.temp.Ln;
 
 /**
  * @author Daniel Zinkiewicz Wasat Sp. z o.o 14-07-2014
@@ -28,6 +30,7 @@ public class BaseSpiceListFragment extends ListFragment implements
     @Override
     public void onStart() {
         super.onStart();
+        Ln.getConfig().setLoggingLevel(Log.ERROR);
         smartHMASpiceManager.start(getActivity());
     }
 
@@ -74,5 +77,6 @@ public class BaseSpiceListFragment extends ListFragment implements
     protected SpiceManager getSpiceManager() {
         return smartHMASpiceManager;
     }
+
 
 }

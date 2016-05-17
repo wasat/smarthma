@@ -3,7 +3,6 @@ package pl.wasat.smarthma.ui.frags.common;
 import android.os.Bundle;
 import android.view.View;
 
-import com.google.api.client.http.GenericUrl;
 import com.octo.android.robospice.persistence.exception.SpiceException;
 import com.octo.android.robospice.request.listener.RequestListener;
 
@@ -11,7 +10,8 @@ import pl.wasat.smarthma.model.FedeoRequestParams;
 import pl.wasat.smarthma.model.feed.Link;
 import pl.wasat.smarthma.model.osdd.OpenSearchDescription;
 import pl.wasat.smarthma.model.osdd.Url;
-import pl.wasat.smarthma.utils.rss.FedeoOSDDRequest;
+import pl.wasat.smarthma.utils.request.FedeoOSDDRequest;
+
 
 /**
  * A simple {@link android.support.v4.app.Fragment} subclass. Use the
@@ -62,9 +62,9 @@ public class ProductsListFragment extends ProductsListFragmentBase {
 
     private void startAsyncLoadOsddData(String osddUrl) {
         if (!osddUrl.isEmpty()) {
-            GenericUrl fedeoDescUrl = new GenericUrl(osddUrl);
+            //GenericUrl fedeoDescUrl = new GenericUrl(osddUrl);
             getActivity().setProgressBarIndeterminateVisibility(true);
-            getSpiceManager().execute(new FedeoOSDDRequest(fedeoDescUrl),
+            getSpiceManager().execute(new FedeoOSDDRequest(osddUrl),
                     new FeedRequestListener());
         }
     }

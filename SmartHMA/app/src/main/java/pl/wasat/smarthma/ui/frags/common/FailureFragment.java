@@ -18,9 +18,6 @@ public class FailureFragment extends Fragment {
 
     private String failureTextParam;
 
-    public FailureFragment() {
-    }
-
     /**
      * Use this factory method to create a new instance of this fragment using
      * the provided parameters.
@@ -34,6 +31,9 @@ public class FailureFragment extends Fragment {
         args.putString(KEY_FAILURE_TEXT, failureText);
         fragment.setArguments(args);
         return fragment;
+    }
+
+    public FailureFragment() {
     }
 
     @Override

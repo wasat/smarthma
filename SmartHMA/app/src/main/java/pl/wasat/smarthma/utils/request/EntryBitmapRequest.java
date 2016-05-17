@@ -1,4 +1,4 @@
-package pl.wasat.smarthma.utils.http;
+package pl.wasat.smarthma.utils.request;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -9,6 +9,7 @@ import com.octo.android.robospice.request.okhttp.simple.OkHttpBitmapRequest;
 import java.io.File;
 
 import pl.wasat.smarthma.R;
+import pl.wasat.smarthma.utils.http.SSLCertificateHandler;
 
 /**
  * Created by Daniel on 2015-10-22 01:31.

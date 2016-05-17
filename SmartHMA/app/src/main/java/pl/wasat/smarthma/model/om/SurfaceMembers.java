@@ -15,7 +15,7 @@ public class SurfaceMembers implements Serializable {
 
     private String _prefix;
     private Polygon polygon;
-
+    private String posString;
 
     public String get_prefix() {
         return _prefix;
@@ -25,13 +25,20 @@ public class SurfaceMembers implements Serializable {
         this._prefix = _prefix;
     }
 
-
     public Polygon getPolygon() {
         return polygon;
     }
 
     public void setPolygon(Polygon polygon) {
         this.polygon = polygon;
+    }
+
+    public String getPosString() {
+        return posString;
+    }
+
+    public void setPosString(String posString) {
+        this.posString = posString;
     }
 
     @Override

@@ -1,4 +1,5 @@
-package pl.wasat.smarthma.utils.http;
+
+package pl.wasat.smarthma.utils.request;
 
 import com.google.api.client.http.GenericUrl;
 import com.google.api.client.http.HttpRequest;
@@ -21,7 +22,7 @@ public class ExplainDocRequest extends GoogleHttpClientSpiceRequest<String> {
     public String loadDataFromNetwork() throws Exception {
         HttpRequest request = getHttpRequestFactory()
                 .buildGetRequest(
-                        new GenericUrl(Const.HTTP_BASE_URL));
+                        new GenericUrl(Const.FEDEO_SEARCH_BASE_URL));
         HttpResponse response = request.execute();
 
         InputStream in = null;
@@ -37,3 +38,4 @@ public class ExplainDocRequest extends GoogleHttpClientSpiceRequest<String> {
         }
     }
 }
+

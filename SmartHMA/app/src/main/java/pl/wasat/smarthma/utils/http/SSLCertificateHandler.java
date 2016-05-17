@@ -14,7 +14,7 @@ import javax.net.ssl.X509TrustManager;
  * Created by Daniel on 2015-11-03.
  * This file is a part of module SmartHMA project.
  */
-class SSLCertificateHandler {
+public class SSLCertificateHandler {
 
     protected static final String TAG = "NukeSSLCerts";
 

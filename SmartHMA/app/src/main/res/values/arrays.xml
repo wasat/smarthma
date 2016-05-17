@@ -37,6 +37,18 @@
         <item name="7">720</item>
         <item name="8">-1</item>
     </string-array>
-
-    <string-array name="empty_array"/>
+    <string-array name="sorting_modes">
+        <item>Title ascending</item>
+        <item>Title descending</item>
+        <item>Date ascending</item>
+        <item>Date descending</item>
+    </string-array>
+    <string-array name="search_modes">
+        <item>Pick query…</item>
+        <item>Pick catalogue…</item>
+        <item>Pick bounding box…</item>
+        <item>Pick start date…</item>
+        <item>Pick end date…</item>
+        <item>Clear history</item>
+    </string-array>
 </resources>

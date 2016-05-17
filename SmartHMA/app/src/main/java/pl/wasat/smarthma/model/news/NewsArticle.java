@@ -1,7 +1,8 @@
-package pl.wasat.smarthma.model;
+package pl.wasat.smarthma.model.news;
 
 import java.io.Serializable;
-import java.net.URL;
+
+import pl.wasat.smarthma.model.feed.Link;
 
 public class NewsArticle implements Serializable {
 
@@ -13,9 +14,11 @@ public class NewsArticle implements Serializable {
     private String title;
     private String description;
     private String pubDate;
+    private Link link;
+
     private String author;
-    private URL url;
     private String encodedContent;
+
     private boolean read;
     private boolean offline;
     private long dbId;
@@ -36,12 +39,12 @@ public class NewsArticle implements Serializable {
         this.title = title;
     }
 
-    public URL getUrl() {
-        return url;
+    public Link getLink() {
+        return link;
     }
 
-    public void setUrl(URL url) {
-        this.url = url;
+    public void setLink(Link link) {
+        this.link = link;
     }
 
     public void setDescription(String description) {

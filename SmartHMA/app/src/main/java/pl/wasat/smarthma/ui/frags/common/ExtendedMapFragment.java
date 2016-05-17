@@ -5,7 +5,6 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
-import android.location.Location;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -116,8 +115,10 @@ public class ExtendedMapFragment extends Fragment implements
         imgBtnFit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                fitQuicklook();
-                changeFitIcon(imgBtnFit);
+                if (qlookBearingsArray != null) {
+                    fitQuicklook();
+                    changeFitIcon(imgBtnFit);
+                }
             }
         });
 
@@ -216,16 +217,13 @@ public class ExtendedMapFragment extends Fragment implements
             imgBtnFit.setBackgroundResource(R.drawable.ic_qlook_fit_top);
     }
 
-    /**
-     * @param footprint - Footprint of EO data item
-     */
-    public void showFootPrints(ArrayList<LatLngExt> footprint) {
+/*    public void showFootPrints(ArrayList<LatLngExt> footprint) {
         ArrayList<LatLng> footprintPoints = extractLatLngFootprint(footprint);
         buildFootprintBounds(footprintPoints);
         drawFootprint(footprintPoints);
-    }
+    }*/
 
-    private ArrayList<LatLng> extractLatLngFootprint(ArrayList<LatLngExt> footprint) {
+/*    private ArrayList<LatLng> extractLatLngFootprint(ArrayList<LatLngExt> footprint) {
         ArrayList<LatLng> footprintPoints = new ArrayList<>();
         float prevBearing = 0;
 
@@ -246,7 +244,7 @@ public class ExtendedMapFragment extends Fragment implements
             prevBearing = results[2];
         }
         return footprintPoints;
-    }
+    }*/
 
     private void buildFootprintBounds(List<LatLng> footprintPoints) {
         LatLngBounds.Builder boundsBuilder = new LatLngBounds.Builder();
@@ -273,14 +271,14 @@ public class ExtendedMapFragment extends Fragment implements
     public void showQuicklookOnMap(SimpleMetadata simpleMetadata) {
 
         ArrayList<LatLng> footprintPoints = castToGoogleLatLonArray(simpleMetadata.getFootprint());
-        LatLngExt center = simpleMetadata.getFootprintCenter();
+        drawFootprint(footprintPoints);
+        buildFootprintBounds(footprintPoints);
+
         String url = simpleMetadata.getQuickLookUrl();
         if (url == null) return;
 
-        buildFootprintBounds(footprintPoints);
-
+        LatLngExt center = simpleMetadata.getFootprintCenter();
         calcQuickLookParams(center, footprintPoints);
-        drawFootprint(footprintPoints);
 
         Target quicklookTarget = this;
         if (!url.isEmpty()) {

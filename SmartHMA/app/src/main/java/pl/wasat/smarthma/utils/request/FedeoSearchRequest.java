@@ -1,4 +1,4 @@
-package pl.wasat.smarthma.utils.rss;
+package pl.wasat.smarthma.utils.request;
 
 import android.content.Context;
 import android.content.Intent;
@@ -16,6 +16,7 @@ import pl.wasat.smarthma.helper.Const;
 import pl.wasat.smarthma.model.FedeoRequestParams;
 import pl.wasat.smarthma.model.feed.Feed;
 import pl.wasat.smarthma.preferences.SharedPrefs;
+import pl.wasat.smarthma.utils.rss.XmlSaxParser;
 
 public class FedeoSearchRequest extends GoogleHttpClientSpiceRequest<Feed> {
 
@@ -23,15 +24,30 @@ public class FedeoSearchRequest extends GoogleHttpClientSpiceRequest<Feed> {
     private final int schemaMode;
     private final Context context;
 
-    /**
-     *
-     */
+
     public FedeoSearchRequest(Context context, FedeoRequestParams fedeoRequestParams, int schema) {
         super(null);
         this.fedeoRequestParams = fedeoRequestParams;
         this.schemaMode = schema;
         this.context = context;
+        this.setRetryPolicy(new CustomRetryPolicy());
     }
+/*
+    @Override
+    public HttpRequestFactory getHttpRequestFactory() {
+        HttpRequestFactory httpRequestFactory = super.getHttpRequestFactory();
+        try {
+            HttpRequest httpRequest = httpRequestFactory.buildGetRequest(new GenericUrl("http://fedeo.esa.int"));
+            httpRequest.setReadTimeout(0);
+            httpRequest.setConnectTimeout(0);
+            httpRequest.setNumberOfRetries(4);
+            //setHttpRequestFactory(httpRequestFactory);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return httpRequestFactory;
+    }*/
+
 
     @Override
     public Feed loadDataFromNetwork() throws Exception {
@@ -74,6 +90,13 @@ public class FedeoSearchRequest extends GoogleHttpClientSpiceRequest<Feed> {
         long startTime = System.currentTimeMillis();
         HttpRequest request = getHttpRequestFactory().buildGetRequest(
                 new GenericUrl(url));
+        request.setConnectTimeout(0);
+        request.setReadTimeout(0);
+        request.setNumberOfRetries(4);
+        Log.i("REQUEST", request.getRequestMethod() + " - " +
+                request.getConnectTimeout() + " - " +
+                request.getReadTimeout() + " - " +
+                request.getNumberOfRetries());
         HttpResponse response = request.execute();
 
         InputStream inStreamFeed;

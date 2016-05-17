@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import pl.wasat.smarthma.helper.Const;
-import pl.wasat.smarthma.model.NewsArticle;
+import pl.wasat.smarthma.model.news.NewsArticle;
 
 public class RemoteFetchService extends Service {
 

@@ -16,7 +16,7 @@ import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 
 import pl.wasat.smarthma.helper.Const;
-import pl.wasat.smarthma.model.NewsArticle;
+import pl.wasat.smarthma.model.news.NewsArticle;
 import pl.wasat.smarthma.utils.rss.NewsRssHandler;
 
 /**
@@ -39,7 +39,7 @@ class RSSTask extends AsyncTask {
             xr.setContentHandler(rh);
             xr.parse(new InputSource(url.openStream()));
 
-            List<NewsArticle> articles = rh.getArticleList();
+            List<NewsArticle> articles = rh.getRssNews().getChannel().getItems();
             articles = articles.subList(0, Const.MAX_WIDGET_ENTRIES);
             ((RemoteFetchService) objects[1]).refreshList(articles);
             return articles;

@@ -740,6 +740,7 @@ class OMMetadataHandler extends DefaultHandler {
             multiSurface.setSurfaceMembers(surfaceMembers);
         } else if (localName.equalsIgnoreCase("surfaceMembers")) {
             surfaceMembers.setPolygon(polygon);
+            surfaceMembers.setPosString(chars.toString());
         } else if (localName.equalsIgnoreCase("nominalTrack")) {
             nominalTrack.setMultiCurve(multiCurve);
         } else if (localName.equalsIgnoreCase("multiCurve")) {

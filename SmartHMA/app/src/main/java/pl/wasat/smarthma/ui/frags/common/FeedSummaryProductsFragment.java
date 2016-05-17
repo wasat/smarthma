@@ -47,7 +47,8 @@ public class FeedSummaryProductsFragment extends BaseFeedSummaryFragment {
      */
     @Override
     public void loadNavSearch(String linkHref) {
-        FedeoRequestParams request = new FedeoRequestParams();
+        super.loadNavSearch(linkHref);
+        FedeoRequestParams request = new FedeoRequestParams(null);
         request.setUrl(linkHref);
 
         ProductsListFragment productsListFragment = ProductsListFragment
@@ -57,7 +58,7 @@ public class FeedSummaryProductsFragment extends BaseFeedSummaryFragment {
                 .beginTransaction()
                 .replace(R.id.activity_base_list_container, productsListFragment)
                 .commit();
-        super.loadNavSearch(linkHref);
+
     }
 
     @Override

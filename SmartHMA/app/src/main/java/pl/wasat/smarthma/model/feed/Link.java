@@ -18,6 +18,11 @@ public class Link implements Serializable {
     public static final String REL_COLLECTION = "collection";
     public static final String TYPE_ATOM_XML = "application/atom+xml";
     public static final String TYPE_OSDD_XML = "application/opensearchdescription+xml";
+    public static final String REL_SELF = "self";
+    public static final String REL_FIRST = "first";
+    public static final String REL_NEXT = "next";
+    public static final String REL_LAST = "last";
+    public static final String REL_PREVIOUS = "previous";
 
     private static final long serialVersionUID = 1L;
 
@@ -25,7 +30,6 @@ public class Link implements Serializable {
     private String rel;
     private String title;
     private String type;
-
 
     public String getHref() {
         validateHref();
@@ -35,7 +39,6 @@ public class Link implements Serializable {
     public void setHref(String href) {
         this.href = href;
     }
-
 
     public String getRel() {
         return rel;
@@ -65,7 +68,6 @@ public class Link implements Serializable {
     private void validateHref() {
         this.href = this.href.replaceAll("\\+", "%2B");
     }
-
 
     @Override
     public String toString() {

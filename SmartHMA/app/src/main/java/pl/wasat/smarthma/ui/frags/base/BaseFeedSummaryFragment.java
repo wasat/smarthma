@@ -23,6 +23,7 @@ import pl.wasat.smarthma.helper.Const;
 import pl.wasat.smarthma.helper.enums.Opts;
 import pl.wasat.smarthma.kindle.AmznMapDrawings;
 import pl.wasat.smarthma.model.feed.Feed;
+import pl.wasat.smarthma.model.feed.Link;
 import pl.wasat.smarthma.preferences.SharedPrefs;
 import pl.wasat.smarthma.utils.draw.MapDrawings;
 import pl.wasat.smarthma.utils.obj.LatLngBoundsExt;
@@ -130,51 +131,46 @@ public class BaseFeedSummaryFragment extends Fragment {
         int linkSize = resultFeed.getLink().size();
 
         for (int i = 0; i < linkSize; i++) {
-            String linkRel = resultFeed.getLink().get(i).getRel();
-            final int incFinal = i;
+            final Link link = resultFeed.getLink().get(i);
+            String linkRel = link.getRel();
 
-            if (linkRel.equalsIgnoreCase(getContext().getString(R.string.first))) {
+            if (linkRel.equalsIgnoreCase(Link.REL_FIRST)) {
                 btnFirst.setOnClickListener(new OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        String linkHref = resultFeed.getLink().get(incFinal)
-                                .getHref();
+                        String linkHref = link.getHref();
                         loadNavSearch(linkHref);
                     }
                 });
-            } else if (linkRel.equalsIgnoreCase(getContext().getString(R.string.previous))) {
+            } else if (linkRel.equalsIgnoreCase(Link.REL_PREVIOUS)) {
                 btnPrev.setOnClickListener(new OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        String linkHref = resultFeed.getLink().get(incFinal)
-                                .getHref();
+                        String linkHref = link.getHref();
                         loadNavSearch(linkHref);
                     }
                 });
-            } else if (linkRel.equalsIgnoreCase(getContext().getString(R.string.self))) {
+            } else if (linkRel.equalsIgnoreCase(Link.REL_SELF)) {
                 btnReload.setOnClickListener(new OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        String linkHref = resultFeed.getLink().get(incFinal)
-                                .getHref();
+                        String linkHref = link.getHref();
                         loadNavSearch(linkHref);
                     }
                 });
-            } else if (linkRel.equalsIgnoreCase(getContext().getString(R.string.next))) {
+            } else if (linkRel.equalsIgnoreCase(Link.REL_NEXT)) {
                 btnNext.setOnClickListener(new OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        String linkHref = resultFeed.getLink().get(incFinal)
-                                .getHref();
+                        String linkHref = link.getHref();
                         loadNavSearch(linkHref);
                     }
                 });
-            } else if (linkRel.equalsIgnoreCase(getContext().getString(R.string.last))) {
+            } else if (linkRel.equalsIgnoreCase(Link.REL_LAST)) {
                 btnLast.setOnClickListener(new OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        String linkHref = resultFeed.getLink().get(incFinal)
-                                .getHref();
+                        String linkHref = link.getHref();
                         loadNavSearch(linkHref);
                     }
                 });

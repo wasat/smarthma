@@ -22,7 +22,9 @@ import pl.wasat.smarthma.adapter.NewsArticleListAdapter;
 import pl.wasat.smarthma.database.NewsDbAdapter;
 import pl.wasat.smarthma.helper.Const;
 import pl.wasat.smarthma.interfaces.OnSlideElementListener;
-import pl.wasat.smarthma.model.NewsArticle;
+import pl.wasat.smarthma.model.news.Channel;
+import pl.wasat.smarthma.model.news.NewsArticle;
+import pl.wasat.smarthma.model.news.Rss;
 import pl.wasat.smarthma.ui.frags.news.NewsListFragment;
 import pl.wasat.smarthma.utils.rss.NewsRssHandler;
 
@@ -40,15 +42,30 @@ public class NewsRssServiceNoAsync {
 
     public void exec() {
         onPreExecute();
-        List<NewsArticle> art = doInBackground(Const.URL_ESA_NEWS_1);
-        onPostExecute(art);
+        Rss mainRss = doInBackground(Const.URL_ESA_NEWS_1);
+        Channel mainChannel = mainRss != null ? mainRss.getChannel() : null;
+        List<NewsArticle> mainArtList = mainChannel != null ? mainChannel.getItems() : null;
+        List<NewsArticle> mainArtList2 = getNewsListFromUrl(Const.URL_ESA_NEWS_USER_SRV);
+        List<NewsArticle> mainArtList3 = getNewsListFromUrl(Const.URL_ESA_NEWS_2);
+
+        if (mainArtList != null) {
+            mainArtList.addAll(mainArtList2);
+            mainArtList.addAll(mainArtList3);
+            onPostExecute(mainArtList);
+        }
+    }
+
+    private List<NewsArticle> getNewsListFromUrl(String url) {
+        Rss rss = doInBackground(url);
+        Channel channel = rss != null ? rss.getChannel() : null;
+        return channel != null ? channel.getItems() : null;
     }
 
     private void onPreExecute() {
         progress.show();
     }
 
-    private List<NewsArticle> doInBackground(String... urls) {
+    private Rss doInBackground(String... urls) {
         String feed = urls[0];
 
         URL url;
@@ -63,7 +80,7 @@ public class NewsRssServiceNoAsync {
             xr.setContentHandler(rh);
             xr.parse(new InputSource(url.openStream()));
 
-            return rh.getArticleList();
+            return rh.getRssNews();
         } catch (IOException e) {
             Log.e("RSS Handler IO", e.getMessage() + " >> " + e.toString());
         } catch (SAXException e) {
@@ -75,11 +92,11 @@ public class NewsRssServiceNoAsync {
         return null;
     }
 
-    private void onPostExecute(final List<NewsArticle> articles) {
+    private void onPostExecute(final List<NewsArticle> newsArticles) {
         articleListFrag.getActivity().runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                for (NewsArticle a : articles) {
+                for (NewsArticle a : newsArticles) {
                     NewsDbAdapter dba = new NewsDbAdapter(articleListFrag
                             .getActivity());
                     dba.openToRead();
@@ -97,7 +114,7 @@ public class NewsRssServiceNoAsync {
                     }
                 }
                 final NewsArticleListAdapter adapter = new NewsArticleListAdapter(
-                        articleListFrag.getActivity(), R.layout.view_cell_article, articles);
+                        articleListFrag.getActivity(), R.layout.view_cell_article, newsArticles);
                 adapter.setListener(new OnSlideElementListener() {
                     @Override
                     public void Catch(boolean swipeRight, int position) {

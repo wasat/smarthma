@@ -316,10 +316,14 @@ class FeedDataHandler extends DefaultHandler {
 
     private String buildRawMetadata(String[] strArray, int startLine, int endLine) {
         String[] metadataStrArr = Arrays.copyOfRange(strArray, startLine, endLine);
-        String metadataStart = metadataStrArr[0].replace(">", "");
+        String metadataStart = metadataStrArr[0];
 
+        String feedDef = "";
         int div = inStrArrFeed[1].indexOf(" ");
-        String feedDef = inStrArrFeed[1].substring(div);
+        if (div != -1) {
+            feedDef = inStrArrFeed[1].substring(div);
+            metadataStart = metadataStrArr[0].replace(">", "");
+        }
 
         String metadataFirstLine = metadataStart + feedDef;
         metadataStrArr[0] = validateNamespace(metadataFirstLine);

@@ -14,7 +14,7 @@ import java.util.List;
 
 import pl.wasat.smarthma.R;
 import pl.wasat.smarthma.interfaces.OnSlideElementListener;
-import pl.wasat.smarthma.model.NewsArticle;
+import pl.wasat.smarthma.model.news.NewsArticle;
 
 public class NewsArticleListAdapter extends ArrayAdapter<NewsArticle> {
 

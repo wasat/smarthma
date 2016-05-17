@@ -5,7 +5,7 @@
          Customize dimensions originally defined in res/values/dimens.xml (such as
          screen margins) for sw720dp devices (e.g. 10" tablets) in landscape here.
     -->
-    <dimen name="activity_horizontal_margin">128dp</dimen>
+    <!--    <dimen name="activity_horizontal_margin">128dp</dimen>-->
 
     <!-- MENU LAND -->
     <dimen name="menu_logo_center_width_land">260dp</dimen>

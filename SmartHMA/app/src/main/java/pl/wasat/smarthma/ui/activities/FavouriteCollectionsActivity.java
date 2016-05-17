@@ -143,4 +143,6 @@ public class FavouriteCollectionsActivity extends ExtendedBaseCollectionsActivit
     public void onMapFragmentPointAndRadiusSend(LatLngExt center, float radius) {
 
     }
+
+
 }

@@ -245,7 +245,7 @@ public class FacebookDialogFragment extends DialogFragment implements Target {
                 && (exception instanceof FacebookOperationCanceledException || exception instanceof FacebookAuthorizationException)) {
             new AlertDialog.Builder(getActivity()).setTitle(R.string.cancelled)
                     .setMessage(R.string.permission_not_granted)
-                    .setPositiveButton(R.string.ok, null).show();
+                    .setPositiveButton(android.R.string.ok, null).show();
             pendingAction = PendingAction.NONE;
         } else if (state == SessionState.OPENED_TOKEN_UPDATED) {
             handlePendingAction();
@@ -326,7 +326,7 @@ public class FacebookDialogFragment extends DialogFragment implements Target {
         new AlertDialog.Builder(getActivity())
                 .setTitle(title)
                 .setMessage(alertMessage)
-                .setPositiveButton(R.string.ok,
+                .setPositiveButton(android.R.string.ok,
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface arg0, int arg1) {
                                 if (isFinished) {

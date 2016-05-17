@@ -16,7 +16,8 @@ import pl.wasat.smarthma.helper.DataSorter;
 import pl.wasat.smarthma.model.FedeoRequestParams;
 import pl.wasat.smarthma.model.feed.Feed;
 import pl.wasat.smarthma.model.iso.EntryISO;
-import pl.wasat.smarthma.utils.rss.FedeoSearchRequest;
+import pl.wasat.smarthma.utils.request.FedeoSearchRequest;
+
 
 /**
  * A simple {@link android.support.v4.app.Fragment} subclass. Activities that
@@ -93,6 +94,10 @@ public class SearchListFragment extends SearchListFragmentBase {
         if (fedeoRequestParams != null) {
             getActivity().setProgressBarIndeterminateVisibility(true);
             FedeoSearchRequest fedeoSearchRequest = new FedeoSearchRequest(getActivity(), fedeoRequestParams, 1);
+            //fedeoSearchRequest.setRetryPolicy(new CustomRetryPolicy());
+
+            //String lastRequestCacheKey = fedeoSearchRequest.createCacheKey();
+            //getSpiceManager().execute(fedeoSearchRequest, lastRequestCacheKey, DurationInMillis.ALWAYS_EXPIRED, this);
             getSpiceManager().execute(fedeoSearchRequest, this);
         }
     }
@@ -142,4 +147,6 @@ public class SearchListFragment extends SearchListFragmentBase {
 
         showDataSeriesIntro(searchFeeds);
     }
+
+
 }

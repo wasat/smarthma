@@ -7,17 +7,41 @@ import org.xml.sax.helpers.DefaultHandler;
 import java.util.ArrayList;
 import java.util.List;
 
-import pl.wasat.smarthma.model.NewsArticle;
+import pl.wasat.smarthma.model.feed.Link;
+import pl.wasat.smarthma.model.news.Channel;
+import pl.wasat.smarthma.model.news.NewsArticle;
+import pl.wasat.smarthma.model.news.Rss;
 
 public class NewsRssHandler extends DefaultHandler {
 
-    // Number of articles to download
-    private static final int ARTICLES_LIMIT = 15;
     private final List<NewsArticle> articleList = new ArrayList<>();
+
+    private Rss rss;
+    private Channel channel;
+    private String category;
+    private String language;
+    private String ttl;
+    private String copyright;
+    private String managingEditor;
+    private String title;
+    private String description;
+    private Link link;
+    private String pubDate;
+    private String lastBuildDate;
+    private String docs;
+    private boolean isInItem;
+    private List<NewsArticle> items;
+    private NewsArticle newsArticle;
+    private String titleNewsItem;
+    private String descriptionNewsItem;
+    private Link linkNewsItem;
+    private String pubDateNewsItem;
+    private String guid;
+
     // Feed and Article objects to use for temporary storage
-    private NewsArticle currentArticle = new NewsArticle();
+    //private NewsArticle currentArticle = new NewsArticle();
     // Number of articles added so far
-    private int articlesAdded = 0;
+    //private int articlesAdded = 0;
     // Current characters being accumulated
     private StringBuffer chars = new StringBuffer();
 
@@ -32,8 +56,32 @@ public class NewsRssHandler extends DefaultHandler {
      * java.lang.String, java.lang.String, org.xml.sax.Attributes)
      */
     public void startElement(String uri, String localName, String qName,
-                             Attributes atts) {
+                             Attributes atts) throws SAXException {
+        super.startElement(uri, localName, qName, atts);
         chars = new StringBuffer();
+
+        if (localName.equalsIgnoreCase("rss")) {
+            rss = new Rss();
+        } else if (localName.equalsIgnoreCase("channel")) {
+            channel = new Channel();
+            items = new ArrayList<>();
+        } else if (localName.equalsIgnoreCase("link")) {
+            link = new Link();
+            link.setHref(atts.getValue("href"));
+            link.setRel(atts.getValue("rel"));
+            link.setTitle(atts.getValue("title"));
+            link.setType(atts.getValue("type"));
+            if (isInItem) {
+                linkNewsItem = new Link();
+                linkNewsItem.setHref(atts.getValue("href"));
+                linkNewsItem.setRel(atts.getValue("rel"));
+                linkNewsItem.setTitle(atts.getValue("title"));
+                linkNewsItem.setType(atts.getValue("type"));
+            }
+        } else if (localName.equalsIgnoreCase("item")) {
+            newsArticle = new NewsArticle();
+            isInItem = true;
+        }
     }
 
     /*
@@ -56,25 +104,75 @@ public class NewsRssHandler extends DefaultHandler {
     public void endElement(String uri, String localName, String qName)
             throws SAXException {
 
-        if (localName.equalsIgnoreCase("title")) {
-            currentArticle.setTitle(chars.toString());
-        } else if (localName.equalsIgnoreCase("pubDate")) {
-            currentArticle.setPubDate(chars.toString());
-        } else if (localName.equalsIgnoreCase("guid")) {
-            currentArticle.setGuid(chars.toString());
-        } else if (localName.equalsIgnoreCase("link")) {
-            currentArticle.setAuthor(chars.toString());
+        if (localName.equalsIgnoreCase("rss")) {
+            rss.setChannel(channel);
+        } else if (localName.equalsIgnoreCase("channel")) {
+            channel.setCategory(category);
+            channel.setCopyright(copyright);
+            channel.setDescription(description);
+            channel.setDocs(docs);
+            channel.setLanguage(language);
+            channel.setLastBuildDate(lastBuildDate);
+            channel.setManagingEditor(managingEditor);
+            channel.setPubDate(pubDate);
+            channel.setTitle(title);
+            channel.setTtl(ttl);
+            channel.setLink(link);
+            channel.setItems(items);
+        } else if (localName.equalsIgnoreCase("category")) {
+            category = chars.toString();
+        } else if (localName.equalsIgnoreCase("language")) {
+            language = chars.toString();
+        } else if (localName.equalsIgnoreCase("ttl")) {
+            ttl = chars.toString();
+        } else if (localName.equalsIgnoreCase("copyright")) {
+            copyright = chars.toString();
+        } else if (localName.equalsIgnoreCase("managingeditor")) {
+            managingEditor = chars.toString();
+        } else if (localName.equalsIgnoreCase("title")) {
+            title = chars.toString();
         } else if (localName.equalsIgnoreCase("description")) {
-            currentArticle.setEncodedContent(chars.toString());
+            description = chars.toString();
+        } else if (localName.equalsIgnoreCase("link")) {
+            link.setHref(chars.toString());
+        } else if (localName.equalsIgnoreCase("pubdate")) {
+            pubDate = chars.toString();
+        } else if (localName.equalsIgnoreCase("lastbuilddate")) {
+            lastBuildDate = chars.toString();
+        } else if (localName.equalsIgnoreCase("docs")) {
+            docs = chars.toString();
         }
 
-        // Check if looking for article, and if article is complete
+        if (isInItem) {
+            if (localName.equalsIgnoreCase("item")) {
+                newsArticle.setTitle(titleNewsItem);
+                newsArticle.setDescription(descriptionNewsItem);
+                newsArticle.setEncodedContent(descriptionNewsItem);
+                newsArticle.setLink(linkNewsItem);
+                newsArticle.setGuid(guid);
+                newsArticle.setPubDate(pubDateNewsItem);
+                items.add(newsArticle);
+                isInItem = false;
+            } else if (localName.equalsIgnoreCase("title")) {
+                titleNewsItem = chars.toString();
+            } else if (localName.equalsIgnoreCase("description")) {
+                descriptionNewsItem = chars.toString();
+            } else if (localName.equalsIgnoreCase("link")) {
+                linkNewsItem.setHref(chars.toString());
+            } else if (localName.equalsIgnoreCase("guid")) {
+                guid = chars.toString();
+            } else if (localName.equalsIgnoreCase("pubdate")) {
+                pubDateNewsItem = chars.toString();
+            }
+        }
+
+/*        // Check if looking for article, and if article is complete
         if (localName.equalsIgnoreCase("item")) {
             articleList.add(currentArticle);
             currentArticle = new NewsArticle();
             // Lets check if we've hit our limit on number of articles
             articlesAdded++;
-        }
+        }*/
     }
 
     /*
@@ -91,7 +189,7 @@ public class NewsRssHandler extends DefaultHandler {
         chars.append(new String(ch, start, length).trim());
     }
 
-    public List<NewsArticle> getArticleList() {
-        return articleList;
+    public Rss getRssNews() {
+        return this.rss;
     }
 }

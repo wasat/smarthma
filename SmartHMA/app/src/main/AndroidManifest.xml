@@ -56,7 +56,8 @@
         <activity
             android:name=".ui.activities.ProductsBrowserActivity"
             android:label="@string/activity_name_products_browser"
-            android:screenOrientation="sensorLandscape"/>
+            android:screenOrientation="sensorLandscape">
+        </activity>
         <activity
             android:name=".ui.activities.SearchActivity"
             android:label="@string/activity_name_search_eo_data"
@@ -75,7 +76,6 @@
             <intent-filter>
                 <action android:name="android.intent.action.SEARCH"/>
             </intent-filter>
-
             <meta-data
                 android:name="android.app.searchable"
                 android:resource="@xml/searchable"/>

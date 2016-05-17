@@ -36,7 +36,8 @@ public class FeedSummaryBrowseCollectionsFragment extends BaseFeedSummaryFragmen
      */
     @Override
     public void loadNavSearch(String linkHref) {
-        FedeoRequestParams request = new FedeoRequestParams();
+        super.loadNavSearch(linkHref);
+        FedeoRequestParams request = new FedeoRequestParams(null);
         request.setUrl(linkHref);
 
         DataSeriesListFragment dataseriesListFragment = DataSeriesListFragment
@@ -46,6 +47,5 @@ public class FeedSummaryBrowseCollectionsFragment extends BaseFeedSummaryFragmen
                 .beginTransaction()
                 .replace(R.id.activity_base_list_container, dataseriesListFragment)
                 .commit();
-        super.loadNavSearch(linkHref);
     }
 }

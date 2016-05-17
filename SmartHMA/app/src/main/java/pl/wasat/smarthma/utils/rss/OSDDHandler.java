@@ -14,7 +14,7 @@ import pl.wasat.smarthma.model.osdd.Query;
 import pl.wasat.smarthma.model.osdd.Url;
 
 
-class OSDDHandler extends DefaultHandler {
+public class OSDDHandler extends DefaultHandler {
 
     // Current characters being accumulated
     private StringBuffer chars = new StringBuffer();

@@ -12,7 +12,6 @@ import android.widget.CheckBox;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.google.api.client.http.GenericUrl;
 import com.octo.android.robospice.persistence.exception.SpiceException;
 import com.octo.android.robospice.request.listener.RequestListener;
 import com.wunderlist.slidinglayer.SlidingLayer;
@@ -28,7 +27,7 @@ import pl.wasat.smarthma.model.osdd.OpenSearchDescription;
 import pl.wasat.smarthma.model.osdd.Parameter;
 import pl.wasat.smarthma.model.osdd.Url;
 import pl.wasat.smarthma.preferences.SharedPrefs;
-import pl.wasat.smarthma.utils.rss.FedeoOSDDRequest;
+import pl.wasat.smarthma.utils.request.FedeoOSDDRequest;
 import pl.wasat.smarthma.utils.time.DateUtils;
 
 /**
@@ -232,9 +231,9 @@ public class BaseViewAndBasicSettingsDetailFragment extends BaseDateTimeAreaCont
 
     public void startAsyncLoadOsddData(String osddUrl) {
         if (!osddUrl.isEmpty()) {
-            GenericUrl fedeoDescUrl = new GenericUrl(osddUrl);
+            //GenericUrl fedeoDescUrl = new GenericUrl(osddUrl);
             getActivity().setProgressBarIndeterminateVisibility(true);
-            getSpiceManager().execute(new FedeoOSDDRequest(fedeoDescUrl),
+            getSpiceManager().execute(new FedeoOSDDRequest(osddUrl),
                     this);
         }
     }

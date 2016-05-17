@@ -94,6 +94,7 @@ public class CollectionEmptyDetailsFragment extends
             public void onClick(View v) {
                 if (mListener != null) {
                     mSlidingLayer.closeLayer(true);
+                    if (fedeoRequestParams == null) fedeoRequestParams = new FedeoRequestParams();
                     fedeoRequestParams.setParentIdentifier(collectionName);
                     chooseSearchType();
                 }

@@ -13,5 +13,5 @@ public class SmartHmaHttpSpiceService extends GoogleHttpClientSpiceService {
             throws CacheCreationException {
         return new CacheManager();
     }
-
 }
+

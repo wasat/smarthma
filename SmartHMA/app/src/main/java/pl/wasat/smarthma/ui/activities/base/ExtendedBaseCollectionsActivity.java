@@ -2,6 +2,8 @@ package pl.wasat.smarthma.ui.activities.base;
 
 import android.support.v4.app.FragmentManager;
 
+import java.util.Calendar;
+
 import pl.wasat.smarthma.kindle.AmznAreaPickerMapFragment.OnAmznAreaPickerMapFragmentListener;
 import pl.wasat.smarthma.model.FedeoRequestParams;
 import pl.wasat.smarthma.model.iso.EntryISO;
@@ -9,6 +11,8 @@ import pl.wasat.smarthma.ui.frags.browse.DataSeriesListFragment;
 import pl.wasat.smarthma.ui.frags.common.AreaPickerMapFragment.OnAreaPickerMapFragmentListener;
 import pl.wasat.smarthma.ui.frags.common.CollectionDetailsFragment;
 import pl.wasat.smarthma.ui.frags.common.CollectionDetailsFragment.OnCollectionDetailsFragmentListener;
+import pl.wasat.smarthma.ui.frags.common.DatePickerFragment;
+import pl.wasat.smarthma.ui.frags.common.TimePickerFragment;
 import pl.wasat.smarthma.ui.frags.search.SearchListFragmentBase;
 import pl.wasat.smarthma.utils.obj.LatLngBoundsExt;
 import pl.wasat.smarthma.utils.obj.LatLngExt;
@@ -18,8 +22,10 @@ import pl.wasat.smarthma.utils.obj.LatLngExt;
  */
 public abstract class ExtendedBaseCollectionsActivity extends BaseCollectionsActivity implements
         DataSeriesListFragment.OnDataSeriesListFragmentListener,
-        OnAreaPickerMapFragmentListener, OnAmznAreaPickerMapFragmentListener, SearchListFragmentBase.OnSearchListFragmentListener,
-        OnCollectionDetailsFragmentListener {
+        OnAreaPickerMapFragmentListener, OnAmznAreaPickerMapFragmentListener,
+        SearchListFragmentBase.OnSearchListFragmentListener,
+        OnCollectionDetailsFragmentListener, DatePickerFragment.OnDatePickerFragmentListener,
+        TimePickerFragment.OnTimePickerFragmentListener {
 
     /*
      * (non-Javadoc)
@@ -124,12 +130,21 @@ public abstract class ExtendedBaseCollectionsActivity extends BaseCollectionsAct
         }
     }
 
-
     private void updatePointAndRadiusValues(LatLngExt center, float radius) {
         CollectionDetailsFragment collectionDetailsFragment = (CollectionDetailsFragment) getSupportFragmentManager()
                 .findFragmentByTag(CollectionDetailsFragment.class.getSimpleName());
         if (collectionDetailsFragment != null) {
             collectionDetailsFragment.updateAreaPtAndRadius(center, radius);
         }
+    }
+
+    @Override
+    public void onDatePickerFragmentDateChoose(Calendar calendar, String viewTag) {
+
+    }
+
+    @Override
+    public void onTimePickerFragmentTimeChoose(Calendar calendar, String viewTag) {
+
     }
 }

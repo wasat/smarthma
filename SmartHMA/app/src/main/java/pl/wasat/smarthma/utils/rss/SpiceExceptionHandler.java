@@ -78,6 +78,10 @@ public class SpiceExceptionHandler {
             exTextMessage = fedHr.getFedeoException().getExceptionReport()
                     .getException().getExceptionText().getText();
 
+        } else if (spiceException.getCause() == null) {
+            exTextMessage = context.getString(R.string.wide_area_or_timespan);
+            exRawMessage = spiceException.getMessage();
+            exRawCause = context.getString(R.string.none);
         } else {
             exTextMessage = context.getString(R.string.wide_area_or_timespan);
             exRawMessage = spiceException.getMessage();

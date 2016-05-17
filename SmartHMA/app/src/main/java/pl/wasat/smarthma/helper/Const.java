@@ -7,21 +7,29 @@ public class Const {
     public static final String SMARTHMA_PATH_TEMP = android.os.Environment.getExternalStorageDirectory().getAbsolutePath() + "/SMARTHMA/TEMP/";
 
     public static final String IMG_URL = "http://89.250.194.14/smarthma/img/";
-    public static final String HTTP_SPACEBEL_BASE_URL = "http://geo.spacebel.be/opensearch/request/";
-    private static final String HTTP_SMAAD_BASE_URL = "http://smaad.spacebel.be/opensearch/request/";
-    private static final String HTTP_ESA_BASE_URL = "http://fedeo.esa.int/opensearch/request/";
-    public static final String EU_BBOX_WEST = "-25.116961";
-    public static final String EU_BBOX_SOUTH = "35.538673";
-    public static final String EU_BBOX_EAST = "51.479717";
-    public static final String EU_BBOX_NORTH = "68.482834";
+    private static final String HTTP_ESA_BASE_URL = "http://fedeo.esa.int/opensearch";
+    private static final String HTTP_SPACEBEL_BASE_URL = "http://geo.spacebel.be/opensearch";
+    private static final String HTTP_SMAAD_BASE_URL = "http://smaad.spacebel.be/opensearch";
+    private static final String HTTP_OBEOS_BASE_URL = "http://obeos.spacebel.be/opensearch";
 
-    public static String HTTP_BASE_URL = HTTP_ESA_BASE_URL;
+    private static String HTTP_BASE_URL = HTTP_ESA_BASE_URL;
 
-    public static final String OSDD_BASE_URL = "http://fedeo.esa.int:80/opensearch/description.xml?";
+    public static String FEDEO_SEARCH_BASE_URL = HTTP_BASE_URL + "/request/";
+    public static String OSDD_BASE_URL = HTTP_BASE_URL + "/description.xml?";
 
     public static final String URL_ESA_NEWS_1 = "http://www.esa.int/rssfeed/EOB";
     public static final String URL_ESA_NEWS_2 = "https://earth.esa.int/eodisp-portlets/eodisp-rss?tags=news";
-    //public static final String URL_ESA_NEWS_2 = "http://www.esa.int/rssfeed/TopNews";
+    public static final String URL_ESA_NEWS_3 = "http://www.esa.int/rssfeed/TopNews";
+    public static final String URL_ESA_NEWS_ENVISAT = "https://earth.esa.int/eodisp-portlets/eodisp-rss?tags=news,envisat";
+    public static final String URL_ESA_NEWS_ERS = "https://earth.esa.int/eodisp-portlets/eodisp-rss?tags=news,ers";
+    public static final String URL_ESA_NEWS_GOCE = "https://earth.esa.int/eodisp-portlets/eodisp-rss?tags=news,goce";
+    public static final String URL_ESA_NEWS_SMOS = "https://earth.esa.int/eodisp-portlets/eodisp-rss?tags=news,smos";
+    public static final String URL_ESA_NEWS_CRYOSAT = "https://earth.esa.int/eodisp-portlets/eodisp-rss?tags=news,cryosat";
+    public static final String URL_ESA_NEWS_CRYOSAT_OP = "https://earth.esa.int/eodisp-portlets/eodisp-rss?tags=cryosat-operational-news";
+    public static final String URL_ESA_NEWS_PROBA_V = "https://earth.esa.int/eodisp-portlets/eodisp-rss?tags=news,proba-v";
+    public static final String URL_ESA_NEWS_SWARM = "https://earth.esa.int/eodisp-portlets/eodisp-rss?tags=news,swarm";
+    public static final String URL_ESA_NEWS_USER_SRV = "https://earth.esa.int/eodisp-portlets/eodisp-rss?tags=news,mission,operational";
+    public static final String URL_ESA_NEWS_SSE = "https://earth.esa.int/eodisp-portlets/eodisp-rss?tags=news,rssn";
 
     public static final String KEY_DATE_PICKER_DT_VIEW_TAG = "pl.wasat.smarthma.KEY_DATE_PICKER_DT_VIEW_TAG";
     public static final String KEY_DATE_TIME_PICKER_CALENDAR = "pl.wasat.smarthma.KEY_DATE_TIME_PICKER_CALENDAR";
@@ -76,21 +84,43 @@ public class Const {
 
     public static final String DATE_NULL = "0000-00-00T00:00:00Z";
 
+    public static final String EU_BBOX_WEST = "-25.116961";
+    public static final String EU_BBOX_SOUTH = "35.538673";
+    public static final String EU_BBOX_EAST = "51.479717";
+    public static final String EU_BBOX_NORTH = "68.482834";
+
     public static final int MAX_SEARCH_HISTORY_ENTRIES = 5;
     public static final int MAX_WIDGET_ENTRIES = 10;
 
     public static boolean IS_KINDLE = false;
 
+/*    public static String getOsddBaseUrl() {
+        return OSDD_BASE_URL;
+    }*/
+
     public static void setHttpEsaBaseUrl() {
         HTTP_BASE_URL = HTTP_ESA_BASE_URL;
+        setHttpBaseUrls();
     }
 
     public static void setHttpSpacebelBaseUrl() {
         HTTP_BASE_URL = HTTP_SPACEBEL_BASE_URL;
+        setHttpBaseUrls();
     }
 
     public static void setHttpSmaadBaseUrl() {
         HTTP_BASE_URL = HTTP_SMAAD_BASE_URL;
+        setHttpBaseUrls();
+    }
+
+    public static void setHttpObeosBaseUrl() {
+        HTTP_BASE_URL = HTTP_OBEOS_BASE_URL;
+        setHttpBaseUrls();
+    }
+
+    private static void setHttpBaseUrls() {
+        OSDD_BASE_URL = HTTP_BASE_URL + "/description.xml?";
+        FEDEO_SEARCH_BASE_URL = HTTP_BASE_URL + "/request/";
     }
 
 }

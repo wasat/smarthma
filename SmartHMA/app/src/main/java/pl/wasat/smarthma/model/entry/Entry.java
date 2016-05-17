@@ -237,7 +237,6 @@ public class Entry implements Serializable {
         this.earthObservation = earthObservation;
     }
 
-
     public String getGuid() {
         return guid;
     }

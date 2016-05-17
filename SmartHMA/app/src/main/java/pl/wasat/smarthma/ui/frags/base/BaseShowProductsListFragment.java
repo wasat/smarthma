@@ -26,7 +26,8 @@ import pl.wasat.smarthma.model.FedeoRequestParams;
 import pl.wasat.smarthma.model.entry.Entry;
 import pl.wasat.smarthma.model.feed.Feed;
 import pl.wasat.smarthma.model.om.Footprint;
-import pl.wasat.smarthma.utils.rss.FedeoSearchRequest;
+import pl.wasat.smarthma.utils.request.FedeoSearchRequest;
+
 
 /**
  * A simple {@link android.support.v4.app.Fragment} subclass. Use the

@@ -29,7 +29,8 @@ import pl.wasat.smarthma.model.iso.EntryISO;
 import pl.wasat.smarthma.ui.activities.CollectionsBrowserActivity;
 import pl.wasat.smarthma.ui.frags.base.BaseSpiceFragment;
 import pl.wasat.smarthma.ui.frags.common.CollectionDetailsFragment;
-import pl.wasat.smarthma.utils.rss.FedeoSearchRequest;
+import pl.wasat.smarthma.utils.request.FedeoSearchRequest;
+
 
 /**
  * A simple {@link android.support.v4.app.Fragment} subclass. Activities that
