@@ -1,11 +1,15 @@
 package pl.wasat.smarthma.kindle;
 
+import android.Manifest;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
 import android.location.Location;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
@@ -49,6 +53,7 @@ import pl.wasat.smarthma.utils.obj.LatLngExt;
 public class AmznAreaPickerMapFragment extends Fragment implements
         OnMapReadyCallback {
 
+    private static final int PERMISSIONS_REQUEST_FINE_LOC = 0x11;
     private OnAmznAreaPickerMapFragmentListener mListener;
 
     private ImageButton imgBtnArea;
@@ -190,7 +195,13 @@ public class AmznAreaPickerMapFragment extends Fragment implements
     }
 
     private void setUpMap() {
-        mMap.setMyLocationEnabled(true);
+        checkLocationPermission();
+        if (ActivityCompat.checkSelfPermission(getActivity(),
+                Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
+                && ActivityCompat.checkSelfPermission(getActivity(),
+                Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+            mMap.setMyLocationEnabled(true);
+        }
         mMap.getUiSettings().setZoomControlsEnabled(true);
         mMap.getUiSettings().setZoomGesturesEnabled(true);
         mMap.getUiSettings().setRotateGesturesEnabled(true);
@@ -298,11 +309,11 @@ public class AmznAreaPickerMapFragment extends Fragment implements
         }
     }
 
-    private void animateToCurrentPosition(com.google.android.gms.maps.model.LatLng latLng) {
+/*    private void animateToCurrentPosition(com.google.android.gms.maps.model.LatLng latLng) {
         if (latLng != null) {
             animateToCurrentPosition(latLng.latitude, latLng.longitude);
         }
-    }
+    }*/
 
     private void animateToCurrentPosition(double lat, double lon) {
         int mapZoom;
@@ -435,6 +446,30 @@ public class AmznAreaPickerMapFragment extends Fragment implements
             areaBounds = areaBoundsBuilder.build();
             LatLngBoundsExt areaBoundsExt = new LatLngBoundsExt(areaBounds);
             mListener.onAmznMapFragmentBoundsChange(areaBoundsExt);
+        }
+    }
+
+    private void checkLocationPermission() {
+        // Here, thisActivity is the current activity
+        if (ContextCompat.checkSelfPermission(getActivity(),
+                Manifest.permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED) {
+            requestPermissions(
+                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                    PERMISSIONS_REQUEST_FINE_LOC);
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        switch (requestCode) {
+            case PERMISSIONS_REQUEST_FINE_LOC: {
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    mMap.setMyLocationEnabled(true);
+                }
+            }
         }
     }
 

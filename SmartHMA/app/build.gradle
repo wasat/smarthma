@@ -76,5 +76,6 @@ dependencies {
     compile 'com.wunderlist:sliding-layer:1.1.1'
     compile 'com.google.code.gson:gson:2.4'
     compile 'ch.acra:acra:4.8.5'
+    //compile('com.amazon.android:amazon-maps-api:2.0')
 }
 apply plugin: 'com.google.gms.google-services'
