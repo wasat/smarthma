@@ -53,6 +53,8 @@ public class ProductDetailsFragment extends Fragment implements Target {
     private CloudSavingManager cloudSavingManager;
     private EODataDownloadManager eoDataDownloadManager;
 
+    private WebView detailWebView;
+
     public ProductDetailsFragment() {
     }
 
@@ -119,9 +121,10 @@ public class ProductDetailsFragment extends Fragment implements Target {
                     .setText(title);
             ((TextView) rootView.findViewById(R.id.product_frag_detail_dates))
                     .setText(pubDate);
-            WebView detailWebView = (WebView) rootView
+            detailWebView = (WebView) rootView
                     .findViewById(R.id.product_frag_detail_content);
             detailWebView.loadData(content, "text/html", "UTF-8");
+            //detailWebView.loadUrl("https://eo-virtual-archive4.esa.int/supersites/ASA_IMP_1PNDPA20080914_092429_000000152072_00079_34201_8081.N1");
 
             Button quicklookButton = (Button) rootView
                     .findViewById(R.id.product_frag_detail_button_quicklook);
@@ -241,7 +244,12 @@ public class ProductDetailsFragment extends Fragment implements Target {
     private void startEoDataDownloading() {
         String url = displayedEntry.getSimpleMetadata().getBinaryUrl();
         String productName = displayedEntry.getTitle();
-        eoDataDownloadManager.startDownload(productName, url);
+        if (url.startsWith("https://eo-virtual-archive4.esa.int/")) {
+            Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+            startActivity(browserIntent);
+        } else {
+            eoDataDownloadManager.startDownload(productName, url);
+        }
     }
 
     /**

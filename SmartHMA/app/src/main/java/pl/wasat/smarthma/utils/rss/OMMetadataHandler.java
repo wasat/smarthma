@@ -159,6 +159,9 @@ class OMMetadataHandler extends DefaultHandler {
     private LinearRing linearRing;
     private PosString posString;
     private List<Pos> posList;
+    private Location location;
+    private MultiGeometry multiGeometry;
+    private GeometryMembers geometryMembers;
 
     public OMMetadataHandler() {
     }
@@ -439,6 +442,12 @@ class OMMetadataHandler extends DefaultHandler {
             observedProperty = new ObservedProperty();
         } else if (localName.equalsIgnoreCase("FeatureOfInterest")) {
             featureOfInterest = new FeatureOfInterest();
+        } else if (localName.equalsIgnoreCase("Location")) {
+            location = new Location();
+        } else if (localName.equalsIgnoreCase("MultiGeometry")) {
+            multiGeometry = new MultiGeometry();
+        } else if (localName.equalsIgnoreCase("geometryMembers")) {
+            geometryMembers = new GeometryMembers();
         } else if (localName.equalsIgnoreCase("Result")) {
             result = new Result();
         }
@@ -714,6 +723,7 @@ class OMMetadataHandler extends DefaultHandler {
             footprint.setLocationName(locationName);
             footprint.setMaximumAltitude(maximumAltitude);
             footprint.setMinimumAltitude(minimumAltitude);
+            footprint.setLocation(location);
             footprint.setMultiExtentOf(multiExtentOf);
             footprint.setNominalTrack(nominalTrack);
             footprint.setOccultationPoints(occultationPoints);
@@ -754,7 +764,7 @@ class OMMetadataHandler extends DefaultHandler {
             }
             curveMemberLevel = curveMemberLevel + 1;
         } else if (localName.equalsIgnoreCase("lineString")) {
-            lineString.set_srsName(chars.toString());
+            lineString.setPosList(chars.toString());
             lineString.setCoordinates(coordinates);
         } else if (localName.equalsIgnoreCase("occultationPoints")) {
             occultationPoints.setMultiPoint(multiPoint);
@@ -782,6 +792,12 @@ class OMMetadataHandler extends DefaultHandler {
             observedProperty.set_nilReason(chars.toString());
         } else if (localName.equalsIgnoreCase("FeatureOfInterest")) {
             featureOfInterest.setFootprint(footprint);
+        } else if (localName.equalsIgnoreCase("Location")) {
+            location.setMultiGeometry(multiGeometry);
+        } else if (localName.equalsIgnoreCase("MultiGeometry")) {
+            multiGeometry.setGeometryMembers(geometryMembers);
+        } else if (localName.equalsIgnoreCase("geometryMembers")) {
+            geometryMembers.setLineString(lineString);
         }
 
         // Results markups

@@ -40,7 +40,7 @@ public class SmartHMApplication extends MultiDexApplication {
     public void onCreate() {
         super.onCreate();
         context = getApplicationContext();
-        ACRA.init(this);
+        //ACRA.init(this);
         appSingleton = this;
         deviceCheck();
     }
@@ -52,6 +52,7 @@ public class SmartHMApplication extends MultiDexApplication {
     protected void attachBaseContext(Context base) {
         super.attachBaseContext(base);
         MultiDex.install(this);
+        ACRA.init(this);
     }
 
     public static Context getAppContext() {

@@ -238,5 +238,7 @@ public class CollectionsListFragment extends BaseSpiceFragment {
             }
             loadEntryToDetailsFrag(feed);
         }
+
+
     }
 }

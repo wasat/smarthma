@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="pref_entries_map_list">
+        <item name="0">BRAK</item>
+        <item name="1">OSM</item>
+        <item name="2">SATELITA</item>
+        <item name="3">HYBRYDOWA</item>
+        <item name="4">TEREN</item>
+    </string-array>
+
+    <string-array name="pref_entries_list_mission_sync">
+        <item name="0">każdorazowo</item>
+        <item name="1">co godzinę</item>
+        <item name="2">co dziennie</item>
+        <item name="3">co 2 dni</item>
+        <item name="4">co 3 dni</item>
+        <item name="5">co tydzień</item>
+        <item name="6">co 2 tygodnie</item>
+        <item name="7">co miesiąc</item>
+        <item name="8">nigdy</item>
+    </string-array>
+    <string-array name="sorting_modes">
+        <item>Po tytule - rosnąco</item>
+        <item>Po tytule - malejąco</item>
+        <item>Po dacie - rosnąco</item>
+        <item>Po dacie - malejąco</item>
+    </string-array>
+    <string-array name="search_modes">
+        <item>Zapisz frazę…</item>
+        <item>zapisz katalog…</item>
+        <item>Zapisz obszar…</item>
+        <item>Zapisz datę początkową…</item>
+        <item>Zapisz datę końcową…</item>
+        <item>Usuń historę</item>
+    </string-array>
+</resources>

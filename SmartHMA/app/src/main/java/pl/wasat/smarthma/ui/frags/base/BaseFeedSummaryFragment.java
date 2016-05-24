@@ -178,6 +178,7 @@ public class BaseFeedSummaryFragment extends Fragment {
         }
     }
 
+
     private void setUpStaticMap() {
         if (Const.IS_KINDLE) setUpStaticAmazonMap();
         else setUpStaticGoogleMap();
@@ -257,7 +258,7 @@ public class BaseFeedSummaryFragment extends Fragment {
         googleMap.getUiSettings().setAllGesturesEnabled(false);
         googleMap.getUiSettings().setZoomControlsEnabled(false);
 
-        SharedPrefs sharedPrefs = new SharedPrefs(getActivity());
+        SharedPrefs sharedPrefs = new SharedPrefs(getContext());
         if (sharedPrefs.getAreaUse()) {
             //Centre of EU
             LatLngBoundsExt latLngBoundsExt = obtainBoundsFromShared();

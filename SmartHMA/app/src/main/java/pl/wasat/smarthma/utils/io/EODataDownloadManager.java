@@ -9,6 +9,7 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.Environment;
 import android.support.annotation.NonNull;
+import android.util.Log;
 import android.widget.Toast;
 
 import pl.wasat.smarthma.R;
@@ -47,6 +48,7 @@ public class EODataDownloadManager {
             request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
             request.setAllowedNetworkTypes(DownloadManager.Request.NETWORK_WIFI);
             myDownloadReference = downloadManager.enqueue(request);
+            Log.i("DOWNLOAD", String.valueOf(myDownloadReference));
         } catch (Exception e) {
             e.printStackTrace();
         }

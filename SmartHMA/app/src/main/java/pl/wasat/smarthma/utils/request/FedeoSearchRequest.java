@@ -75,7 +75,7 @@ public class FedeoSearchRequest extends GoogleHttpClientSpiceRequest<Feed> {
 
     @Override
     public Class<Feed> getResultType() {
-        super.getResultType();
+        //super.getResultType();
         return Feed.class;
     }
 
@@ -93,10 +93,10 @@ public class FedeoSearchRequest extends GoogleHttpClientSpiceRequest<Feed> {
         request.setConnectTimeout(0);
         request.setReadTimeout(0);
         request.setNumberOfRetries(4);
-        Log.i("REQUEST", request.getRequestMethod() + " - " +
+/*        Log.i("REQUEST", request.getRequestMethod() + " - " +
                 request.getConnectTimeout() + " - " +
                 request.getReadTimeout() + " - " +
-                request.getNumberOfRetries());
+                request.getNumberOfRetries());*/
         HttpResponse response = request.execute();
 
         InputStream inStreamFeed;

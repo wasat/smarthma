@@ -65,6 +65,7 @@ public class FedeoRequestParams extends OSDDMatcher implements Serializable {
         this.params.put(PARAM_KEY_MAX_RECORDS, "30");
         this.params.put(PARAM_KEY_START_PAGE, "1");
         this.params.put(PARAM_KEY_RECORD_SCHEMA, PARAM_VALUE_SERVER_CHOICE);
+        //this.params.put(PARAM_KEY_RECORD_SCHEMA, PARAM_VALUE_ISO);
     }
 
     private void buildFromShared() {

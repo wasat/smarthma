@@ -39,6 +39,10 @@ public class Feed implements Serializable {
 
 
     public TotalResults getTotalResults() {
+        if (totalResults == null) {
+            totalResults = new TotalResults();
+            totalResults.setText("0");
+        }
         return totalResults;
     }
 
@@ -183,8 +187,6 @@ public class Feed implements Serializable {
     public void setEntryDC(List<EntryDC> entriesDC) {
         this.entriesDC = entriesDC;
     }
-
-
 
 
     @Override

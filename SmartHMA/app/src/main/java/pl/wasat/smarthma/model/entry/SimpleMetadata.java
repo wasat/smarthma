@@ -196,21 +196,25 @@ public class SimpleMetadata implements Serializable {
     }
 
     private void obtainUrlsFromOMMetadata(Entry entry) {
-        List<Browse> browseList = entry.getEarthObservation().getResult().getEarthObservationResult().getBrowseList();
-        for (Browse browse : browseList) {
-            if (browse.getBrowseInformation().getType().get_text()
-                    .equalsIgnoreCase("QUICKLOOK")) {
-                this.quickLookUrl = browse.getBrowseInformation().getFileName()
-                        .getServiceReference().get_xlink_href();
-            } else if (browse.getBrowseInformation().getType().get_text()
-                    .equalsIgnoreCase("THUMBNAIL")) {
-                this.thumbnailUrl = browse.getBrowseInformation().getFileName()
-                        .getServiceReference().get_xlink_href();
-            } else if (browse.getBrowseInformation().getType().get_text()
-                    .equalsIgnoreCase("CLOUD")) {
-                this.cloudUrl = browse.getBrowseInformation().getFileName()
-                        .getServiceReference().get_xlink_href();
+        try {
+            List<Browse> browseList = entry.getEarthObservation().getResult().getEarthObservationResult().getBrowseList();
+            for (Browse browse : browseList) {
+                if (browse.getBrowseInformation().getType().get_text()
+                        .equalsIgnoreCase("QUICKLOOK")) {
+                    this.quickLookUrl = browse.getBrowseInformation().getFileName()
+                            .getServiceReference().get_xlink_href();
+                } else if (browse.getBrowseInformation().getType().get_text()
+                        .equalsIgnoreCase("THUMBNAIL")) {
+                    this.thumbnailUrl = browse.getBrowseInformation().getFileName()
+                            .getServiceReference().get_xlink_href();
+                } else if (browse.getBrowseInformation().getType().get_text()
+                        .equalsIgnoreCase("CLOUD")) {
+                    this.cloudUrl = browse.getBrowseInformation().getFileName()
+                            .getServiceReference().get_xlink_href();
+                }
             }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
@@ -258,9 +262,15 @@ public class SimpleMetadata implements Serializable {
     private void obtainPolygonFromOMMetadata(Entry entry) {
         Footprint footprintRaw = entry.getEarthObservation()
                 .getFeatureOfInterest().getFootprint();
-        List<Pos> footprintPosList = footprintRaw.getMultiExtentOf()
-                .getMultiSurface().getSurfaceMembers().getPolygon()
-                .getExterior().getLinearRing().getPosList();
+        List<Pos> footprintPosList = new ArrayList<>();
+        if (footprintRaw.getMultiExtentOf().getMultiSurface() != null) {
+            footprintPosList = footprintRaw.getMultiExtentOf()
+                    .getMultiSurface().getSurfaceMembers().getPolygon()
+                    .getExterior().getLinearRing().getPosList();
+        } else {
+            footprintPosList = footprintRaw.getLocation().getMultiGeometry().getGeometryMembers().getLineString().getPosList();
+        }
+
         if (footprintPosList.isEmpty()) {
             String posStr = footprintRaw.getMultiExtentOf().getMultiSurface()
                     .getSurfaceMembers().getPolygon().getExterior()

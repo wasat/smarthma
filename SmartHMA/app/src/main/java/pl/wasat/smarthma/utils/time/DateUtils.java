@@ -53,10 +53,12 @@ public class DateUtils {
         String date = "";
         try {
             if (entry.getDate() != null) {
-                if (entry.getDate().getCIDate() != null) {
+                if (entry.getDate().getCIDate() != null && entry.getDate().getCIDate().getDateInCIDate().getDateGco() != null) {
                     date = entry.getDate().getCIDate().getDateInCIDate().getDateGco().getText();
-                } else {
+                } else if (entry.getDate().getCIDate() == null) {
                     date = entry.getDate().toString();
+                } else {
+                    date = "1970-01-01";
                 }
             } else if (entry.getMDMetadata() != null) {
                 date = entry.getMDMetadata().getDateStamp().getDateGco().getText();

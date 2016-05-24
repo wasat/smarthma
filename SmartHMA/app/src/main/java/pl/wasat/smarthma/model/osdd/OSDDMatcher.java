@@ -73,6 +73,7 @@ public class OSDDMatcher {
 
     public static final String PARAM_VALUE_COLLECTION = "collection";
     public static final String PARAM_VALUE_SERVER_CHOICE = "server-choice";
+    public static final String PARAM_VALUE_ISO = "iso";
     public static final String PARAM_VALUE_DATASET = "dataset";
 
 

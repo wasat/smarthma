@@ -70,6 +70,8 @@ class OMDataHandler extends DefaultHandler {
     private Procedure procedure;
     private ObservedProperty observedProperty;
     private FeatureOfInterest featureOfInterest;
+    private MultiGeometry multiGeometry;
+    private GeometryMembers geometryMembers;
     private Result result;
     private MetaDataProperty metaDataProperty;
     private TimePeriod timePeriod;
@@ -116,6 +118,7 @@ class OMDataHandler extends DefaultHandler {
     private LocationName locationName;
     private MaximumAltitude maximumAltitude;
     private MinimumAltitude minimumAltitude;
+    private Location location;
     private MultiExtentOf multiExtentOf;
     private MultiSurface multiSurface;
     private SurfaceMembers surfaceMembers;
@@ -195,6 +198,7 @@ class OMDataHandler extends DefaultHandler {
     private ProductType productType;
     private Status status;
     private StatusSubType statusSubType;
+
 
     /*
      * This method is called everytime a start element is found (an opening XML
@@ -563,6 +567,12 @@ class OMDataHandler extends DefaultHandler {
             observedProperty = new ObservedProperty();
         } else if (localName.equalsIgnoreCase("FeatureOfInterest")) {
             featureOfInterest = new FeatureOfInterest();
+        } else if (localName.equalsIgnoreCase("Location")) {
+            location = new Location();
+        } else if (localName.equalsIgnoreCase("MultiGeometry")) {
+            multiGeometry = new MultiGeometry();
+        } else if (localName.equalsIgnoreCase("geometryMembers")) {
+            geometryMembers = new GeometryMembers();
         } else if (localName.equalsIgnoreCase("Result")) {
             result = new Result();
         }
@@ -913,6 +923,7 @@ class OMDataHandler extends DefaultHandler {
                     footprint.setMaximumAltitude(maximumAltitude);
                     footprint.setMinimumAltitude(minimumAltitude);
                     footprint.setMultiExtentOf(multiExtentOf);
+                    footprint.setLocation(location);
                     footprint.setNominalTrack(nominalTrack);
                     footprint.setOccultationPoints(occultationPoints);
 
@@ -951,7 +962,7 @@ class OMDataHandler extends DefaultHandler {
                     }
                     curveMemberLevel = curveMemberLevel + 1;
                 } else if (localName.equalsIgnoreCase("lineString")) {
-                    lineString.set_srsName(chars.toString());
+                    lineString.setPosList(chars.toString());
                     lineString.setCoordinates(coordinates);
                 } else if (localName.equalsIgnoreCase("occultationPoints")) {
                     occultationPoints.setMultiPoint(multiPoint);
@@ -979,6 +990,12 @@ class OMDataHandler extends DefaultHandler {
                     observedProperty.set_nilReason(chars.toString());
                 } else if (localName.equalsIgnoreCase("FeatureOfInterest")) {
                     featureOfInterest.setFootprint(footprint);
+                } else if (localName.equalsIgnoreCase("Location")) {
+                    location.setMultiGeometry(multiGeometry);
+                } else if (localName.equalsIgnoreCase("MultiGeometry")) {
+                    multiGeometry.setGeometryMembers(geometryMembers);
+                } else if (localName.equalsIgnoreCase("geometryMembers")) {
+                    geometryMembers.setLineString(lineString);
                 }
 
                 // Results markups

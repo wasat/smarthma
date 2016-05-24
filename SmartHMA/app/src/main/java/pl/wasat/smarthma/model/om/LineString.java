@@ -6,7 +6,10 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
+import pl.wasat.smarthma.utils.obj.LatLngExt;
 import pl.wasat.smarthma.utils.text.SmartHMAStringStyle;
 
 public class LineString implements Serializable {
@@ -16,7 +19,9 @@ public class LineString implements Serializable {
     private String _prefix;
     private Coordinates coordinates;
     private String _gml_id;
-    private String _srsName;
+    private String srsName;
+    private PosString posString;
+    private List<Pos> posList = new ArrayList<>();
 
 
     public String get_prefix() {
@@ -43,12 +48,54 @@ public class LineString implements Serializable {
         this._gml_id = _gml_id;
     }
 
-    public String get_srsName() {
-        return _srsName;
+    public String getSrsName() {
+        return srsName;
     }
 
-    public void set_srsName(String _srsName) {
-        this._srsName = _srsName;
+    public void setSrsName(String srsName) {
+        this.srsName = srsName;
+    }
+
+    public PosString getPosString() {
+        return posString;
+    }
+
+    public void setPosString(PosString posString) {
+        if (posString == null) {
+            posString = new PosString();
+            posString.setPointsString("");
+        }
+        this.posString = posString;
+
+        if (!posString.getPointsString().isEmpty()
+                && posString.getPointsString().length() < 200) {
+            this.posList = setPosList(posString.getPointsString());
+        }
+    }
+
+    public List<Pos> getPosList() {
+        return posList;
+    }
+
+    public void setPosList(List<Pos> posList) {
+        if (!posList.isEmpty()) {
+            this.posList = posList;
+        }
+    }
+
+    public List<Pos> setPosList(String pointsString) {
+        String[] coorStr = pointsString.replaceAll("  ", " ").split(" ");
+        List<Pos> latLngPosList = new ArrayList<>();
+
+        for (int j = 0; j < coorStr.length - 1; j = j + 2) {
+            LatLngExt ftPt = new LatLngExt(Double.valueOf(coorStr[j]),
+                    Double.valueOf(coorStr[j + 1]));
+            Pos pos = new Pos();
+            pos.setLatLng(ftPt);
+            latLngPosList.add(pos);
+        }
+        this.setPosList(latLngPosList);
+        return latLngPosList;
     }
 
     @Override

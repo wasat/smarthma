@@ -21,6 +21,7 @@ public class Footprint implements Serializable {
     private OccultationPoints occultationPoints;
     private CenterOf centerOf;
     private LocationName locationName;
+    private Location location;
     private String _gml_id;
 
 
@@ -67,7 +68,6 @@ public class Footprint implements Serializable {
         this.nominalTrack = nominalTrack;
     }
 
-
     public OccultationPoints getOccultationPoints() {
         return occultationPoints;
     }
@@ -75,7 +75,6 @@ public class Footprint implements Serializable {
     public void setOccultationPoints(OccultationPoints occultationPoints) {
         this.occultationPoints = occultationPoints;
     }
-
 
     public CenterOf getCenterOf() {
         return centerOf;
@@ -85,13 +84,20 @@ public class Footprint implements Serializable {
         this.centerOf = centerOf;
     }
 
-
     public LocationName getLocationName() {
         return locationName;
     }
 
     public void setLocationName(LocationName locationName) {
         this.locationName = locationName;
+    }
+
+    public Location getLocation() {
+        return location;
+    }
+
+    public void setLocation(Location location) {
+        this.location = location;
     }
 
     public String get_gml_id() {

@@ -70,5 +70,11 @@ public class FedeoOSDDRequest extends GoogleHttpClientSpiceRequest<OpenSearchDes
     private GenericUrl buildOsddUrl(String parentID) {
         return new GenericUrl(Const.OSDD_BASE_URL + "parentIdentifier=" + parentID);
     }
+
+    @Override
+    public Class<OpenSearchDescription> getResultType() {
+        //return super.getResultType();
+        return OpenSearchDescription.class;
+    }
 }
 
