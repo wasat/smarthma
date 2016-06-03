@@ -12,10 +12,10 @@ import pl.wasat.smarthma.utils.obj.LatLngExt;
  */
 
 public class FootprintGeometry {
-    private LatLngExt footprintCenter;
-    private ArrayList<LatLngExt> footprintPoints;
+    private final LatLngExt footprintCenter;
+    private final ArrayList<LatLngExt> footprintPoints;
     //private ArrayList<Float> bearingsList = new ArrayList<>();
-    private ArrayList<LatLngExt> corners = new ArrayList<>();
+    private final ArrayList<LatLngExt> corners = new ArrayList<>();
 
     private LatLngExt center;
     private float[] bearingsArray;
@@ -74,7 +74,7 @@ public class FootprintGeometry {
         }
     }
 
-    public void validateCenter(LatLngExt footprintCenter) {
+    private void validateCenter(LatLngExt footprintCenter) {
         if (footprintCenter != null && (footprintCenter.latitude != 0 && footprintCenter.longitude != 0)) {
             center = footprintCenter;
         } else {
@@ -88,7 +88,7 @@ public class FootprintGeometry {
         }
     }
 
-    public void generateBearings() {
+    private void generateBearings() {
         double oneLat = corners.get(0).latitude;
         double oneLng = corners.get(0).longitude;
         double twoLat = corners.get(1).latitude;

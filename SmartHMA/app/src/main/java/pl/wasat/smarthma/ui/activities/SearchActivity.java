@@ -9,8 +9,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.SubMenu;
 
-import com.google.api.client.http.GenericUrl;
-
 import java.util.Calendar;
 
 import pl.wasat.smarthma.R;
@@ -36,7 +34,7 @@ import roboguice.util.temp.Ln;
 
 public class SearchActivity extends BaseSmartHMActivity implements OnBaseSearchSideParametersFragmentListener,
         OnSearchFragmentListener, OnDatePickerFragmentListener, OnTimePickerFragmentListener,
-        OnAreaPickerMapFragmentListener, OnAmznAreaPickerMapFragmentListener, SearchAdvancedParametersFragment.EndpointsListDialogFragment.OnEndpointsListDialogFragListener {
+        OnAreaPickerMapFragmentListener, OnAmznAreaPickerMapFragmentListener {
 
     private static final int MENU_QUERY_IDS = 1000;
     private static final int MENU_CATALOGUE_IDS = 1100;
@@ -308,10 +306,10 @@ public class SearchActivity extends BaseSmartHMActivity implements OnBaseSearchS
         this.fedeoRequestParams = fedeoRequestParams;
     }
 
-    @Override
+/*    @Override
     public void OnEndpointsListDialogFragClose() {
         sideParamsPanel.startAsyncLoadOsddData(new GenericUrl(Const.OSDD_BASE_URL));
-    }
+    }*/
 
     public MenuHandler getMenuHandler() {
         return commonMenuHandler;

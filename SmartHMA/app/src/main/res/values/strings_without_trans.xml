@@ -9,7 +9,6 @@
     <string name="zero" translatable="false">0.000000</string>
     <string name="to">/</string> 
     <string name="app_id" translatable="false">825236790862337</string>
-    <string name="fedeo_esa_int" translatable="false">fedeo.esa.int</string>
     <string name="copyright" translatable="false">Copyright © 2015 SmartHMA</string>
     <string name="title_activity_download" translatable="false">DownloadActivity</string>
     <string name="lorem_ipsum_dolor" translatable="false">Lorem ipsum dolor</string>

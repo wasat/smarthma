@@ -13,7 +13,7 @@ public class Body {
 
     @SerializedName("outline")
     @Expose
-    private List<Outline> outline = new ArrayList<Outline>();
+    private List<Outline> outline = new ArrayList<>();
 
     /**
      * @return The outline

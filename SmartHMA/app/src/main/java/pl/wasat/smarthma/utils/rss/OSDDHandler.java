@@ -81,6 +81,9 @@ public class OSDDHandler extends DefaultHandler {
             parameter = new Parameter();
             parameter.setName(atts.getValue("name"));
             parameter.setValue(atts.getValue("value"));
+            parameter.setMinInclusive(atts.getValue("minInclusive"));
+            parameter.setMaxInclusive(atts.getValue("maxInclusive"));
+            parameter.setPattern(atts.getValue("pattern"));
             options = new ArrayList<>();
         } else if (localName.equalsIgnoreCase("Option")) {
             option = new Option();

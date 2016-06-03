@@ -20,7 +20,7 @@ import pl.wasat.smarthma.utils.request.FedeoOSDDRequest;
  */
 public class ProductsListFragment extends ProductsListFragmentBase {
     private static final String KEY_OSDD_URL = "pl.wasat.smarthma.KEY_OSDD_URL";
-    String osddUrl;
+    private String osddUrl;
 
     public ProductsListFragment() {
         // Required empty public constructor

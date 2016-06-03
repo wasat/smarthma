@@ -17,7 +17,10 @@
             android:layout_height="wrap_content"
             android:background="@color/background_white"
             android:paddingBottom="@dimen/search_eo_data_padding_small"
+            android:paddingEnd="@dimen/search_eo_data_padding"
             android:paddingLeft="@dimen/search_eo_data_padding"
+            android:paddingRight="@dimen/search_eo_data_padding"
+            android:paddingStart="@dimen/search_eo_data_padding"
             android:text="@string/catalogue"
             android:textColor="@color/text_blue"
             android:textSize="@dimen/search_eo_data_text_medium"/>
@@ -58,7 +61,10 @@
                     android:layout_height="wrap_content"
                     android:background="@color/background_white"
                     android:paddingBottom="@dimen/search_eo_data_padding"
+                    android:paddingEnd="@dimen/search_eo_data_padding"
                     android:paddingLeft="@dimen/search_eo_data_padding"
+                    android:paddingRight="@dimen/search_eo_data_padding"
+                    android:paddingStart="@dimen/search_eo_data_padding"
                     android:text="@string/search_area"
                     android:textColor="@color/text_blue"
                     android:textSize="@dimen/search_eo_data_text_medium"/>
@@ -152,7 +158,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/background_white"
+                android:paddingEnd="@dimen/search_eo_data_padding"
                 android:paddingLeft="@dimen/search_eo_data_padding"
+                android:paddingRight="@dimen/search_eo_data_padding"
+                android:paddingStart="@dimen/search_eo_data_padding"
                 android:paddingTop="@dimen/search_eo_data_padding_small"
                 android:text="@string/time_period"
                 android:textColor="@color/text_blue"
@@ -240,109 +249,16 @@
         </LinearLayout>
 
         <pl.wasat.smarthma.customviews.TextViewWithFont
-            android:id="@+id/search_frag_side_params_tv_title_header"
-            style="?android:attr/textAppearanceLarge"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/background_white"
-            android:enabled="false"
-            android:paddingBottom="@dimen/search_eo_data_padding_small"
-            android:paddingLeft="@dimen/search_eo_data_padding"
-            android:paddingTop="@dimen/search_eo_data_padding"
-            android:text="@string/title_parameter"
-            android:textColor="@color/text_blue"
-            android:textSize="@dimen/search_eo_data_text_medium"
-            android:visibility="invisible"/>
-
-        <LinearLayout
-            android:id="@+id/search_frag_side_params_layout_title"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:paddingBottom="@dimen/search_eo_data_padding"
-            android:visibility="invisible">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/background_white"
-                android:orientation="horizontal">
-
-                <EditText
-                    android:id="@+id/search_frag_side_params_editv_title"
-                    style="?android:attr/textAppearanceLarge"
-                    android:layout_width="fill_parent"
-                    android:layout_height="@dimen/search_eo_data_params_edit_text_height"
-                    android:layout_marginBottom="16dp"
-                    android:layout_marginLeft="@dimen/search_eo_data_padding"
-                    android:layout_marginRight="16dp"
-                    android:layout_marginTop="2dp"
-                    android:background="@drawable/edit_text"
-                    android:hint="@string/value_osdd_parameter"
-                    android:paddingLeft="@dimen/search_eo_data_padding"
-                    android:selectAllOnFocus="true"
-                    android:textColor="#A9A9A9"
-                    android:textColorHint="#A9A9A9"
-                    android:textSize="@dimen/search_eo_data_text_medium"
-                    android:textStyle="normal"/>
-            </LinearLayout>
-        </LinearLayout>
-
-        <pl.wasat.smarthma.customviews.TextViewWithFont
-            android:id="@+id/search_frag_side_params_tv_org_header"
-            style="?android:attr/textAppearanceLarge"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/background_white"
-            android:paddingBottom="@dimen/search_eo_data_padding_small"
-            android:paddingLeft="@dimen/search_eo_data_padding"
-            android:paddingTop="@dimen/search_eo_data_padding"
-            android:text="@string/organisation_header"
-            android:textColor="@color/text_blue"
-            android:textSize="@dimen/search_eo_data_text_medium"
-            android:visibility="invisible"/>
-
-        <LinearLayout
-            android:id="@+id/search_frag_side_params_layout_org"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:paddingBottom="@dimen/search_eo_data_padding"
-            android:visibility="invisible">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/background_white"
-                android:orientation="horizontal">
-
-                <EditText
-                    android:id="@+id/search_frag_side_params_editv_org"
-                    style="?android:attr/textAppearanceLarge"
-                    android:layout_width="fill_parent"
-                    android:layout_height="@dimen/search_eo_data_params_edit_text_height"
-                    android:layout_marginBottom="16dp"
-                    android:layout_marginLeft="@dimen/search_eo_data_padding"
-                    android:layout_marginRight="16dp"
-                    android:layout_marginTop="2dp"
-                    android:background="@drawable/edit_text"
-                    android:hint="@string/value_osdd_parameter"
-                    android:paddingLeft="@dimen/search_eo_data_padding"
-                    android:textColor="#A9A9A9"
-                    android:textColorHint="#A9A9A9"
-                    android:textSize="@dimen/search_eo_data_text_medium"
-                    android:textStyle="normal"/>
-            </LinearLayout>
-        </LinearLayout>
-
-        <pl.wasat.smarthma.customviews.TextViewWithFont
             android:id="@+id/search_frag_side_params_tv_platform_header"
             style="?android:attr/textAppearanceLarge"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/background_white"
             android:paddingBottom="@dimen/search_eo_data_padding_small"
+            android:paddingEnd="@dimen/search_eo_data_padding"
             android:paddingLeft="@dimen/search_eo_data_padding"
+            android:paddingRight="@dimen/search_eo_data_padding"
+            android:paddingStart="@dimen/search_eo_data_padding"
             android:paddingTop="@dimen/search_eo_data_padding"
             android:text="@string/platform_header"
             android:textColor="@color/text_blue"
@@ -363,18 +279,133 @@
                 android:background="@color/background_white"
                 android:orientation="horizontal">
 
-                <EditText
+                <AutoCompleteTextView
                     android:id="@+id/search_frag_side_params_editv_platform"
                     style="?android:attr/textAppearanceLarge"
                     android:layout_width="fill_parent"
                     android:layout_height="@dimen/search_eo_data_params_edit_text_height"
                     android:layout_marginBottom="16dp"
+                    android:layout_marginEnd="16dp"
                     android:layout_marginLeft="@dimen/search_eo_data_padding"
                     android:layout_marginRight="16dp"
+                    android:layout_marginStart="@dimen/search_eo_data_padding"
                     android:layout_marginTop="2dp"
                     android:background="@drawable/edit_text"
                     android:hint="@string/value_osdd_parameter"
+                    android:paddingEnd="@dimen/search_eo_data_padding"
                     android:paddingLeft="@dimen/search_eo_data_padding"
+                    android:paddingRight="@dimen/search_eo_data_padding"
+                    android:paddingStart="@dimen/search_eo_data_padding"
+                    android:textColor="#A9A9A9"
+                    android:textColorHint="#A9A9A9"
+                    android:textSize="@dimen/search_eo_data_text_medium"
+                    android:textStyle="normal"/>
+            </LinearLayout>
+        </LinearLayout>
+
+        <pl.wasat.smarthma.customviews.TextViewWithFont
+            android:id="@+id/search_frag_side_params_tv_instrument_header"
+            style="?android:attr/textAppearanceLarge"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/background_white"
+            android:paddingBottom="@dimen/search_eo_data_padding_small"
+            android:paddingEnd="@dimen/search_eo_data_padding"
+            android:paddingLeft="@dimen/search_eo_data_padding"
+            android:paddingRight="@dimen/search_eo_data_padding"
+            android:paddingStart="@dimen/search_eo_data_padding"
+            android:paddingTop="@dimen/search_eo_data_padding"
+            android:text="@string/instrument_header"
+            android:textColor="@color/text_blue"
+            android:textSize="@dimen/search_eo_data_text_medium"
+            android:visibility="invisible"/>
+
+        <LinearLayout
+            android:id="@+id/search_frag_side_params_layout_instrument"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingBottom="@dimen/search_eo_data_padding"
+            android:visibility="invisible">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/background_white"
+                android:orientation="horizontal">
+
+                <AutoCompleteTextView
+                    android:id="@+id/search_frag_side_params_editv_instrument"
+                    style="?android:attr/textAppearanceLarge"
+                    android:layout_width="fill_parent"
+                    android:layout_height="@dimen/search_eo_data_params_edit_text_height"
+                    android:layout_marginBottom="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginLeft="@dimen/search_eo_data_padding"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginStart="@dimen/search_eo_data_padding"
+                    android:layout_marginTop="2dp"
+                    android:background="@drawable/edit_text"
+                    android:hint="@string/value_osdd_parameter"
+                    android:paddingEnd="@dimen/search_eo_data_padding"
+                    android:paddingLeft="@dimen/search_eo_data_padding"
+                    android:paddingRight="@dimen/search_eo_data_padding"
+                    android:paddingStart="@dimen/search_eo_data_padding"
+                    android:textColor="#A9A9A9"
+                    android:textColorHint="#A9A9A9"
+                    android:textSize="@dimen/search_eo_data_text_medium"
+                    android:textStyle="normal"/>
+            </LinearLayout>
+        </LinearLayout>
+
+        <pl.wasat.smarthma.customviews.TextViewWithFont
+            android:id="@+id/search_frag_side_params_tv_org_header"
+            style="?android:attr/textAppearanceLarge"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/background_white"
+            android:paddingBottom="@dimen/search_eo_data_padding_small"
+            android:paddingEnd="@dimen/search_eo_data_padding"
+            android:paddingLeft="@dimen/search_eo_data_padding"
+            android:paddingRight="@dimen/search_eo_data_padding"
+            android:paddingStart="@dimen/search_eo_data_padding"
+            android:paddingTop="@dimen/search_eo_data_padding"
+            android:text="@string/organisation_header"
+            android:textColor="@color/text_blue"
+            android:textSize="@dimen/search_eo_data_text_medium"
+            android:visibility="invisible"/>
+
+        <LinearLayout
+            android:id="@+id/search_frag_side_params_layout_org"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingBottom="@dimen/search_eo_data_padding"
+            android:visibility="invisible">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/background_white"
+                android:orientation="horizontal">
+
+                <AutoCompleteTextView
+                    android:id="@+id/search_frag_side_params_editv_org"
+                    style="?android:attr/textAppearanceLarge"
+                    android:layout_width="fill_parent"
+                    android:layout_height="@dimen/search_eo_data_params_edit_text_height"
+                    android:layout_marginBottom="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginLeft="@dimen/search_eo_data_padding"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginStart="@dimen/search_eo_data_padding"
+                    android:layout_marginTop="2dp"
+                    android:background="@drawable/edit_text"
+                    android:hint="@string/value_osdd_parameter"
+                    android:paddingEnd="@dimen/search_eo_data_padding"
+                    android:paddingLeft="@dimen/search_eo_data_padding"
+                    android:paddingRight="@dimen/search_eo_data_padding"
+                    android:paddingStart="@dimen/search_eo_data_padding"
                     android:textColor="#A9A9A9"
                     android:textColorHint="#A9A9A9"
                     android:textSize="@dimen/search_eo_data_text_medium"
@@ -383,35 +414,13 @@
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/search_frag_side_params_layout_endpoint"
+            android:id="@+id/search_frag_side_params_layout_spinners"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/search_eo_data_padding"
             android:orientation="vertical"
-            android:paddingBottom="@dimen/search_eo_data_padding"
             android:visibility="invisible">
-
-            <pl.wasat.smarthma.customviews.TextViewWithFont
-                style="?android:attr/textAppearanceLarge"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/background_white"
-                android:paddingBottom="@dimen/search_eo_data_padding_small"
-                android:paddingLeft="@dimen/search_eo_data_padding"
-                android:text="@string/endpoint"
-                android:textColor="@color/text_blue"
-                android:textSize="@dimen/search_eo_data_text_medium"/>
-
-            <pl.wasat.smarthma.customviews.TextViewWithFont
-                android:id="@+id/search_frag_side_params_tv_endpoint"
-                style="?android:attr/textAppearanceLarge"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/background_white"
-                android:padding="@dimen/search_eo_data_padding"
-                android:paddingBottom="@dimen/search_eo_data_padding_small"
-                android:text="@string/fedeo_esa_int"
-                android:textColor="@color/text_black"
-                android:textSize="@dimen/search_eo_data_text_medium"/>
         </LinearLayout>
+
     </LinearLayout>
 </ScrollView>

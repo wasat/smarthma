@@ -1,5 +1,7 @@
 package pl.wasat.smarthma.utils.io;
 
+import android.net.Uri;
+
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -10,6 +12,10 @@ import java.io.PrintWriter;
 import pl.wasat.smarthma.helper.Const;
 
 public class FilesWriter {
+
+    public File writeToFile(String strToWrite, String fileName) {
+        return writeToFile(strToWrite, fileName, null);
+    }
 
     public File writeToFile(String strToWrite, String fileName, String path) {
 
@@ -58,6 +64,10 @@ public class FilesWriter {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public Uri writeToUri(String strToWrite, String fileName) {
+        return Uri.fromFile(writeToFile(strToWrite, fileName));
     }
 
 }

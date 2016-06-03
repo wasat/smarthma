@@ -18,13 +18,13 @@
         android:required="true"/>
     <uses-feature
         android:name="android.hardware.location"
-        android:required="false"/>
+        android:required="false" />
     <uses-feature
         android:name="android.hardware.location.gps"
-        android:required="false"/>
+        android:required="false" />
     <uses-feature
         android:name="android.hardware.touchscreen"
-        android:required="false"/>
+        android:required="false" />
 
     <application
         android:name=".SmartHMApplication"
@@ -35,7 +35,7 @@
         android:theme="@style/AppNoActionBarTheme">
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyCMZWIkdMS9FlyCt0eb_cMosMTFrt7FZxY"/>
+            android:value="@string/google_maps_key" />
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/app_id"/>
@@ -65,8 +65,7 @@
         <activity
             android:name=".ui.activities.ProductsBrowserActivity"
             android:label="@string/activity_name_products_browser"
-            android:screenOrientation="sensorLandscape">
-        </activity>
+            android:screenOrientation="sensorLandscape" />
         <activity
             android:name=".ui.activities.SearchActivity"
             android:label="@string/activity_name_search_eo_data"

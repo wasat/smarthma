@@ -17,28 +17,28 @@ public class Option {
      * @return The Label
      */
     public String getLabel() {
-        return Label;
+        return Label.trim();
     }
 
     /**
      * @param Label The _label
      */
     public void setLabel(String Label) {
-        this.Label = Label;
+        this.Label = Label.trim();
     }
 
     /**
      * @return The Value
      */
     public String getValue() {
-        return Value;
+        return Value.trim();
     }
 
     /**
      * @param Value The _value
      */
     public void setValue(String Value) {
-        this.Value = Value;
+        this.Value = Value.trim();
     }
 
     /**

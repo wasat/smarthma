@@ -77,7 +77,7 @@ public class LineString implements Serializable {
         return posList;
     }
 
-    public void setPosList(List<Pos> posList) {
+    private void setPosList(List<Pos> posList) {
         if (!posList.isEmpty()) {
             this.posList = posList;
         }

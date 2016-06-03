@@ -62,8 +62,6 @@
     <string name="dropbox_error">Błąd Dropbox-a. Proszę spróbować ponownie</string>
     <string name="empty_list">Lista jest pusta</string>
     <string name="end_date">Data końcowa</string>
-    <string name="endpoint">Serwis bazowy</string>
-    <string name="endpoint_list_title">LISTA SERWISÓW BAZOWYCH</string>
     <string name="eo_catalogue_list_title">Katalogi Danych EO</string>
     <string name="eo_dataset">"Zbiór Danych EO:"</string>
     <string name="eo_equipment">"Urządzenie EO "</string>
@@ -210,7 +208,6 @@
     <string name="this_app_wasnt_auth">Aplikacja nie została poprawnie zarejestrowana</string>
     <string name="time_period">Okres Czasu</string>
     <string name="title_article_list">Czytnik ESA EO Wiadomości - SmartHMA</string>
-    <string name="title_parameter">Tytuł</string>
     <string name="to">/</string>
     <string name="to_">"Do: "</string>
     <string name="tooltip_above">Podpowiedź na górze</string>
@@ -233,4 +230,6 @@
     <string name="wrong_request_status">Prawdopodobnie błędny status wyjątku</string>
     <string name="you_are_logged_as">Jesteś zalogowany jako</string>
     <string name="you_choose_dropbox">Wybrałeś Serwis DropBox aby zapisać plik </string>
+    <string name="value_not_fit_to_pattern">Parameter value do not fit to pattern.\nPlease put proper value</string>
+    <string name="instrument_header">Instrument</string>
 </resources>

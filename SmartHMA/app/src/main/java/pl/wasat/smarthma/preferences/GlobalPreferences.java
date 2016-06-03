@@ -37,6 +37,26 @@ public class GlobalPreferences {
 
     public long getMissionSyncTime() {
         String key = context.getString(R.string.pref_key_list_mission_sync_time);
-        return Long.valueOf(globalSharedPreferences.getString(key, "7"));
+        return Long.valueOf(globalSharedPreferences.getString(key, "720"));
+    }
+
+    public String getFedeoProviderHost() {
+        String key = context.getString(R.string.pref_key_fedeo_provider);
+        return globalSharedPreferences.getString(key, "http://fedeo.esa.int/opensearch");
+    }
+
+    public String getFedeoMaxRecords() {
+        String key = context.getString(R.string.pref_key_edit_max_records);
+        return globalSharedPreferences.getString(key, "30");
+    }
+
+    public String getFedeoStartRecord() {
+        String key = context.getString(R.string.pref_key_edit_start_record);
+        return globalSharedPreferences.getString(key, "1");
+    }
+
+    public String getFedeoStartPage() {
+        String key = context.getString(R.string.pref_key_edit_start_page);
+        return globalSharedPreferences.getString(key, "1");
     }
 }

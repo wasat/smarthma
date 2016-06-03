@@ -11,6 +11,43 @@
     </PreferenceCategory>
 
     <PreferenceCategory android:title="@string/pref_category_title_search_params_settings">
+        <ListPreference
+            android:defaultValue="http://fedeo.esa.int/opensearch"
+            android:entries="@array/pref_entries_list_fedeo_providers"
+            android:entryValues="@array/pref_values_list_fedeo_providers"
+            android:key="@string/pref_key_fedeo_provider"
+            android:summary="@string/pref_summary_fedeo_provider"
+            android:title="@string/pref_title_fedeo_provider" />
+        <EditTextPreference
+            android:capitalize="words"
+            android:defaultValue="@string/pref_default_edit_max_records"
+            android:inputType="numberDecimal"
+            android:key="@string/pref_key_edit_max_records"
+            android:maxLines="1"
+            android:selectAllOnFocus="true"
+            android:singleLine="true"
+            android:summary="@string/pref_summary_edit_max_records"
+            android:title="@string/pref_title_edit_max_records" />
+        <EditTextPreference
+            android:capitalize="words"
+            android:defaultValue="@string/pref_default_edit_start_record"
+            android:inputType="numberDecimal"
+            android:key="@string/pref_key_edit_start_record"
+            android:maxLines="1"
+            android:selectAllOnFocus="true"
+            android:singleLine="true"
+            android:summary="@string/pref_summary_edit_start_record"
+            android:title="@string/pref_title_edit_start_record" />
+        <EditTextPreference
+            android:capitalize="words"
+            android:defaultValue="@string/pref_default_edit_start_page"
+            android:inputType="numberDecimal"
+            android:key="@string/pref_key_edit_start_page"
+            android:maxLines="1"
+            android:selectAllOnFocus="true"
+            android:singleLine="true"
+            android:summary="@string/pref_summary_edit_start_page"
+            android:title="@string/pref_title_edit_start_page" />
         <CheckBoxPreference
             android:defaultValue="true"
             android:key="@string/pref_key_checkbox_search_params_save"

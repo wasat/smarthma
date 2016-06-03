@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="pref_default_edit_max_records">30</string>
+    <string name="pref_key_edit_max_records">pref_key_edtv_max_records</string>
+    <string name="pref_summary_edit_max_records">Maximum records with search results displayed</string>
+    <string name="pref_title_edit_max_records">Max Records Displayed</string>
+    <string name="pref_title_edit_start_record">Start Record of Results</string>
+    <string name="pref_summary_edit_start_record">Record of list results from which displaying is started</string>
+    <string name="pref_key_edit_start_record">pref_key_edtv_start_record</string>
+    <string name="pref_default_edit_start_record">1</string>
+    <string name="pref_title_edit_start_page">Start Page with Results</string>
+    <string name="pref_summary_edit_start_page">No. of page from which results are displayed</string>
+    <string name="pref_default_edit_start_page">1</string>
+    <string name="pref_key_edit_start_page">pref_key_edtv_start_page</string>
+</resources>

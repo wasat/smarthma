@@ -48,7 +48,7 @@ public class Head {
     @Expose
     private String windowRight;
 
-    public void invoke() {
+    private void invoke() {
         this.dateCreated = DateUtils.timestampToDateTimeStr(System.currentTimeMillis());
         this.dateModified = DateUtils.timestampToDateTimeStr(System.currentTimeMillis());
         this.expansionState = "";

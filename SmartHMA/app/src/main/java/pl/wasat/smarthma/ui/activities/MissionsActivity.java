@@ -30,7 +30,6 @@ public class MissionsActivity extends BaseSmartHMActivity implements
     private MissionsExtListFragment missionsExtListFragment;
     private ProgressTask progressTask;
     private Handler myHandler;
-    private int taskCount;
     private String taskMsg;
 
 
@@ -76,7 +75,6 @@ public class MissionsActivity extends BaseSmartHMActivity implements
 
     @Override
     public void onParserItemFinish(int taskCount) {
-        this.taskCount = taskCount;
         progressTask.onProgressUpdate(taskMsg, String.valueOf(taskCount));
     }
 

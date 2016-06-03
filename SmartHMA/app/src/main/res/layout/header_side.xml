@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<pl.wasat.smarthma.customviews.TextViewWithFont
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/search_frag_side_params_tv_spinner"
+    style="?android:attr/textAppearanceLarge"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/background_white"
+    android:paddingEnd="@dimen/search_eo_data_padding"
+    android:paddingLeft="@dimen/search_eo_data_padding"
+    android:paddingRight="@dimen/search_eo_data_padding"
+    android:paddingStart="@dimen/search_eo_data_padding"
+    android:paddingTop="@dimen/search_eo_data_padding"
+    android:text="@string/organisation_header"
+    android:textColor="@color/text_blue"
+    android:textSize="@dimen/search_eo_data_text_medium"
+    android:visibility="invisible"/>

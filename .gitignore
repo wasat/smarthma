@@ -44,3 +44,6 @@ SmartHMA/app/app.iml
 
 SmartHMA/.idea/inspectionProfiles
 SmartHMA/.idea/inspectionProfiles
+
+SmartHMA/app/src/release/res/values/google_maps_api.xml
+SmartHMA/app/src/debug/res/values/google_maps_api.xml

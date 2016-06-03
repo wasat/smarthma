@@ -1,25 +1,29 @@
 package pl.wasat.smarthma.ui.frags.search;
 
-import android.app.Activity;
-import android.app.AlertDialog;
-import android.app.Dialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.v4.app.DialogFragment;
+import android.support.v4.content.ContextCompat;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.LinearLayout;
+import android.widget.Spinner;
+import android.widget.TableLayout;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import pl.wasat.smarthma.R;
-import pl.wasat.smarthma.helper.Const;
 import pl.wasat.smarthma.model.osdd.OSDDMatcher;
+import pl.wasat.smarthma.model.osdd.Option;
+import pl.wasat.smarthma.model.osdd.Parameter;
 import pl.wasat.smarthma.ui.frags.base.BaseSearchSideParametersFragment;
 
 /**
@@ -31,12 +35,10 @@ import pl.wasat.smarthma.ui.frags.base.BaseSearchSideParametersFragment;
  */
 public class SearchAdvancedParametersFragment extends BaseSearchSideParametersFragment {
 
-    private static final int EDIT_TEXT_TITLE = 1;
-    private static final int EDIT_TEXT_ORGANISATION = 2;
-    private static final int EDIT_TEXT_PLATFORM = 3;
-    private static final CharSequence[] endpointsList = {"fedeo.esa.int",
-            "geo.spacebel.be", "smaad.spacebel.be", "obeos.spacebel.be"};
-    private static TextView tvEndpointName;
+    private static final int EDIT_TEXT_PLATFORM = 1;
+    private static final int EDIT_TEXT_INSTRUMENT = 2;
+    private static final int EDIT_TEXT_ORGANISATION = 3;
+    private static final int EDIT_TEXT_TITLE = 4;
 
     public SearchAdvancedParametersFragment() {
     }
@@ -56,114 +58,135 @@ public class SearchAdvancedParametersFragment extends BaseSearchSideParametersFr
                              Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
 
-        tvEndpointName = (TextView) rootView
-                .findViewById(R.id.search_frag_side_params_tv_endpoint);
-        tvEndpointName.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showEndpointsListDialog();
-            }
-        });
+        LinearLayout layoutPlatform = (LinearLayout) rootView.findViewById(R.id.search_frag_side_params_layout_platform);
+        layoutPlatform.setVisibility(View.VISIBLE);
 
-        LinearLayout layoutEndpoint = (LinearLayout) rootView.findViewById(R.id.search_frag_side_params_layout_endpoint);
-        layoutEndpoint.setVisibility(View.VISIBLE);
-
-        LinearLayout layoutTitle = (LinearLayout) rootView.findViewById(R.id.search_frag_side_params_layout_title);
-        layoutTitle.setVisibility(View.VISIBLE);
+        LinearLayout layoutInstrument = (LinearLayout) rootView.findViewById(R.id.search_frag_side_params_layout_instrument);
+        layoutInstrument.setVisibility(View.VISIBLE);
 
         LinearLayout layoutOrg = (LinearLayout) rootView.findViewById(R.id.search_frag_side_params_layout_org);
         layoutOrg.setVisibility(View.VISIBLE);
 
-        LinearLayout layoutPlatform = (LinearLayout) rootView.findViewById(R.id.search_frag_side_params_layout_platform);
-        layoutPlatform.setVisibility(View.VISIBLE);
-
-        TextView tvTitle = (TextView) rootView.findViewById(R.id.search_frag_side_params_tv_title_header);
-        tvTitle.setVisibility(View.VISIBLE);
-
-        TextView tvOrg = (TextView) rootView.findViewById(R.id.search_frag_side_params_tv_org_header);
-        tvOrg.setVisibility(View.VISIBLE);
+/*        LinearLayout layoutTitle = (LinearLayout) rootView.findViewById(R.id.search_frag_side_params_layout_title);
+        layoutTitle.setVisibility(View.VISIBLE);*/
 
         TextView tvPlatform = (TextView) rootView.findViewById(R.id.search_frag_side_params_tv_platform_header);
         tvPlatform.setVisibility(View.VISIBLE);
 
-        EditText edtTitle = (EditText) rootView.findViewById(R.id.search_frag_side_params_editv_title);
-        edtTitle.setVisibility(View.VISIBLE);
-        edtTitle.addTextChangedListener(new EditTextViewInputWatcher(EDIT_TEXT_TITLE));
+        TextView tvInstrument = (TextView) rootView.findViewById(R.id.search_frag_side_params_tv_instrument_header);
+        tvInstrument.setVisibility(View.VISIBLE);
 
-        EditText edtOrganisation = (EditText) rootView.findViewById(R.id.search_frag_side_params_editv_org);
-        edtOrganisation.setVisibility(View.VISIBLE);
-        edtOrganisation.addTextChangedListener(new EditTextViewInputWatcher(EDIT_TEXT_ORGANISATION));
+        TextView tvOrg = (TextView) rootView.findViewById(R.id.search_frag_side_params_tv_org_header);
+        tvOrg.setVisibility(View.VISIBLE);
 
-        EditText edtPlatform = (EditText) rootView.findViewById(R.id.search_frag_side_params_editv_platform);
-        edtPlatform.setVisibility(View.VISIBLE);
-        edtPlatform.addTextChangedListener(new EditTextViewInputWatcher(EDIT_TEXT_PLATFORM));
+/*        TextView tvTitle = (TextView) rootView.findViewById(R.id.search_frag_side_params_tv_title_header);
+        tvTitle.setVisibility(View.VISIBLE);*/
+
+        AutoCompleteTextView autoTvEdtPlatform = (AutoCompleteTextView) rootView.findViewById(R.id.search_frag_side_params_editv_platform);
+        List<String> autoOptListPlatform = OSDDMatcher.generateOptionValuesList(osddParams, OSDDMatcher.PARAM_KEY_PLATFORM);
+        ArrayAdapter<String> adapterPlatform = new ArrayAdapter<>(getActivity(), android.R.layout.simple_dropdown_item_1line, autoOptListPlatform);
+        autoTvEdtPlatform.setAdapter(adapterPlatform);
+        autoTvEdtPlatform.setVisibility(View.VISIBLE);
+        autoTvEdtPlatform.addTextChangedListener(new EditTextViewInputWatcher(EDIT_TEXT_PLATFORM));
+
+        AutoCompleteTextView autoTvEdtInstrument = (AutoCompleteTextView) rootView.findViewById(R.id.search_frag_side_params_editv_instrument);
+        autoTvEdtInstrument.setVisibility(View.VISIBLE);
+        List<String> autoOptListInstrument = OSDDMatcher.generateOptionValuesList(osddParams, OSDDMatcher.PARAM_KEY_INSTRUMENT);
+        ArrayAdapter<String> adapterInstrument = new ArrayAdapter<>(getActivity(), android.R.layout.simple_dropdown_item_1line, autoOptListInstrument);
+        autoTvEdtInstrument.setAdapter(adapterInstrument);
+        autoTvEdtInstrument.addTextChangedListener(new EditTextViewInputWatcher(EDIT_TEXT_INSTRUMENT));
+
+        AutoCompleteTextView autoTvEdtOrganisation = (AutoCompleteTextView) rootView.findViewById(R.id.search_frag_side_params_editv_org);
+        List<String> autoOptListOrg = OSDDMatcher.generateOptionValuesList(osddParams, OSDDMatcher.PARAM_KEY_ORGANISATION);
+        ArrayAdapter<String> adapterOrg = new ArrayAdapter<>(getActivity(), android.R.layout.simple_dropdown_item_1line, autoOptListOrg);
+        autoTvEdtOrganisation.setAdapter(adapterOrg);
+        autoTvEdtOrganisation.setVisibility(View.VISIBLE);
+        autoTvEdtOrganisation.addTextChangedListener(new EditTextViewInputWatcher(EDIT_TEXT_ORGANISATION));
+
+/*        AutoCompleteTextView autoTvEdtTitle = (AutoCompleteTextView) rootView.findViewById(R.id.search_frag_side_params_editv_title);
+        List<String> autoOptListTitle = OSDDMatcher.generateOptionValuesList(osddParams, OSDDMatcher.PARAM_KEY_TITLE);
+        ArrayAdapter<String> adapterTitle = new ArrayAdapter<>(getActivity(), android.R.layout.simple_dropdown_item_1line, autoOptListTitle);
+        autoTvEdtTitle.setAdapter(adapterTitle);
+        autoTvEdtTitle.setVisibility(View.VISIBLE);
+        autoTvEdtTitle.addTextChangedListener(new EditTextViewInputWatcher(EDIT_TEXT_TITLE));*/
+
+        addParameterSpinners();
 
         return rootView;
     }
 
-    private void showEndpointsListDialog() {
-        EndpointsListDialogFragment endpointslistDialFrag = new EndpointsListDialogFragment();
-        endpointslistDialFrag.show(getActivity().getSupportFragmentManager(),
-                EndpointsListDialogFragment.class.getSimpleName());
+    private void addParameterSpinners() {
+        //LinearLayout layoutSpinners = (LinearLayout) rootView.findViewById(R.id.search_frag_side_params_layout_spinners);
+        //LayoutInflater vi = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
+        if (osddParams != null) {
+            for (final Parameter param : osddParams) {
+                switch (param.getName()) {
+                    case OSDDMatcher.PARAM_NAME_RECORD_SCHEMA:
+                        generateSpinner(param, "Record Schema", 0);
+                        break;
+                    case OSDDMatcher.PARAM_NAME_TYPE:
+                        generateSpinner(param, "Type", 2);
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
     }
 
+    private void generateSpinner(Parameter param, String header, int pos) {
+        LinearLayout layoutSpinners = (LinearLayout) rootView.findViewById(R.id.search_frag_side_params_layout_spinners);
+        LayoutInflater vi = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View headerLayoutRecord = vi.inflate(R.layout.header_side, null);
 
-    public static class EndpointsListDialogFragment extends DialogFragment {
+        TextView spinnerTvRecord = (TextView) headerLayoutRecord.findViewById(R.id.search_frag_side_params_tv_spinner);
+        spinnerTvRecord.setText(header);
+        spinnerTvRecord.setVisibility(View.VISIBLE);
 
-        OnEndpointsListDialogFragListener mListener;
+        layoutSpinners.addView(headerLayoutRecord, pos, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+        layoutSpinners.addView(buildSpinnerView(param));
+        layoutSpinners.setVisibility(View.VISIBLE);
+    }
 
-        @Override
-        public void onAttach(Context context) {
-            super.onAttach(context);
+    @NonNull
+    private Spinner buildSpinnerView(final Parameter param) {
+        Spinner spinner = new Spinner(getActivity());
+        TableLayout.LayoutParams spinnerLayoutParams = new TableLayout.LayoutParams(
+                TableLayout.LayoutParams.WRAP_CONTENT, TableLayout.LayoutParams.WRAP_CONTENT, 1f);
+        spinnerLayoutParams.setMargins(0, 0, 0, 20);
+        spinner.setLayoutParams(spinnerLayoutParams);
 
-            Activity activity = context instanceof Activity ? (Activity) context : null;
-            try {
-                mListener = (OnEndpointsListDialogFragListener) activity;
-            } catch (ClassCastException e) {
-                throw new ClassCastException(activity.toString()
-                        + activity.getString(R.string.must_implement)
-                        + OnEndpointsListDialogFragListener.class.getSimpleName());
+        spinner.setPadding(20, 5, 20, 20);
+        spinner.setBackgroundColor(ContextCompat.getColor(getActivity(), R.color.background_white));
+
+        final List<String> optList = new ArrayList<>();
+        optList.add(String.format(getContext().getString(R.string.choose_osdd_param), param.getName()));
+        for (Option opt : param.getOptions()) {
+            optList.add(opt.getLabel());
+        }
+
+        ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<>(getActivity(), R.layout.spinner_item_side, optList);
+        spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(spinnerAdapter);
+
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                String optValue = "";
+                if (l > 0) {
+                    optValue = param.getOptions().get(i - 1).getValue();
+                    //checkParamType(param, optValue);
+                }
+                fedeoRequestParams.addOsddValue(param.getValue(), optValue);
             }
-        }
 
-        @NonNull
-        @Override
-        public Dialog onCreateDialog(Bundle savedInstanceState) {
-            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-            builder.setTitle(R.string.endpoint_list_title).setItems(
-                    endpointsList, new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int which) {
-                            setBaseUrl(which);
-                        }
-                    });
-            return builder.create();
-        }
-
-        private void setBaseUrl(int which) {
-            switch (which) {
-                case 0:
-                    Const.setHttpEsaBaseUrl();
-                    break;
-                case 1:
-                    Const.setHttpSpacebelBaseUrl();
-                    break;
-                case 2:
-                    Const.setHttpSmaadBaseUrl();
-                    break;
-                case 3:
-                    Const.setHttpObeosBaseUrl();
-                    break;
-                default:
-                    break;
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
             }
-            mListener.OnEndpointsListDialogFragClose();
 
-            tvEndpointName.setText(endpointsList[which]);
-        }
-
-        public interface OnEndpointsListDialogFragListener {
-            void OnEndpointsListDialogFragClose();
-        }
+        });
+        return spinner;
     }
 
     private class EditTextViewInputWatcher implements TextWatcher {
@@ -185,14 +208,17 @@ public class SearchAdvancedParametersFragment extends BaseSearchSideParametersFr
         @Override
         public void afterTextChanged(Editable s) {
             switch (choosenEditTv) {
-                case EDIT_TEXT_TITLE:
-                    fedeoRequestParams.addOsddValue(OSDDMatcher.PARAM_KEY_TITLE, s.toString());
+                case EDIT_TEXT_PLATFORM:
+                    fedeoRequestParams.addOsddValue(OSDDMatcher.PARAM_KEY_PLATFORM, s.toString());
+                    break;
+                case EDIT_TEXT_INSTRUMENT:
+                    fedeoRequestParams.addOsddValue(OSDDMatcher.PARAM_KEY_INSTRUMENT, s.toString());
                     break;
                 case EDIT_TEXT_ORGANISATION:
                     fedeoRequestParams.addOsddValue(OSDDMatcher.PARAM_KEY_ORGANISATION, s.toString());
                     break;
-                case EDIT_TEXT_PLATFORM:
-                    fedeoRequestParams.addOsddValue(OSDDMatcher.PARAM_KEY_PLATFORM, s.toString());
+                case EDIT_TEXT_TITLE:
+                    fedeoRequestParams.addOsddValue(OSDDMatcher.PARAM_KEY_TITLE, s.toString());
                     break;
                 default:
                     break;

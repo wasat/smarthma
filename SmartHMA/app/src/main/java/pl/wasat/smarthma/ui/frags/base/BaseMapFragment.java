@@ -6,6 +6,7 @@ import android.content.BroadcastReceiver;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.LocalBroadcastManager;
@@ -42,9 +43,9 @@ public class BaseMapFragment extends SupportMapFragment implements
         GoogleApiClient.OnConnectionFailedListener {
 
     public OnBaseMapFragmentListener mListener;
-    protected GoogleMap mMap;
+    private GoogleMap mMap;
     protected int mapMode;
-    protected LatLngBounds targetBounds;
+    private LatLngBounds targetBounds;
     /**
      * reference to Google Maps object
      */
@@ -233,7 +234,7 @@ public class BaseMapFragment extends SupportMapFragment implements
     }
 
     @Override
-    public void onConnectionFailed(ConnectionResult result) {
+    public void onConnectionFailed(@NonNull ConnectionResult result) {
     }
 
     public TileOverlay setupWMS(String wmsUrl) {

@@ -13,6 +13,7 @@ import pl.wasat.smarthma.helper.Const;
 import pl.wasat.smarthma.helper.enums.Opts;
 import pl.wasat.smarthma.model.feed.Link;
 import pl.wasat.smarthma.model.osdd.OSDDMatcher;
+import pl.wasat.smarthma.preferences.GlobalPreferences;
 import pl.wasat.smarthma.preferences.SharedPrefs;
 import pl.wasat.smarthma.utils.obj.LatLngBoundsExt;
 import pl.wasat.smarthma.utils.obj.LatLngExt;
@@ -43,27 +44,31 @@ public class FedeoRequestParams extends OSDDMatcher implements Serializable {
     public FedeoRequestParams() {
         this.params = new HashMap<>();
         IS_URL_TEMPLATE = true;
+        IS_BUILD_FROM_SHARED = true;
         setDefaultParams();
     }
 
     public FedeoRequestParams(Boolean isUrlTemplate) {
         this.params = new HashMap<>();
         IS_URL_TEMPLATE = isUrlTemplate;
+        IS_BUILD_FROM_SHARED = true;
         setDefaultParams();
     }
 
     public FedeoRequestParams(boolean initAreaTime, boolean isUrlTemplate) {
         this.params = new HashMap<>();
         IS_URL_TEMPLATE = isUrlTemplate;
+        IS_BUILD_FROM_SHARED = true;
         setDefaultParams();
         if (initAreaTime) buildFromShared();
     }
 
     private void setDefaultParams() {
-        IS_BUILD_FROM_SHARED = true;
-        this.params.put(PARAM_KEY_START_RECORD, "1");
-        this.params.put(PARAM_KEY_MAX_RECORDS, "30");
-        this.params.put(PARAM_KEY_START_PAGE, "1");
+        GlobalPreferences globalPreferences = new GlobalPreferences(SmartHMApplication.getAppContext());
+
+        this.params.put(PARAM_KEY_START_RECORD, globalPreferences.getFedeoStartRecord());
+        this.params.put(PARAM_KEY_MAX_RECORDS, globalPreferences.getFedeoMaxRecords());
+        this.params.put(PARAM_KEY_START_PAGE, globalPreferences.getFedeoStartPage());
         this.params.put(PARAM_KEY_RECORD_SCHEMA, PARAM_VALUE_SERVER_CHOICE);
         //this.params.put(PARAM_KEY_RECORD_SCHEMA, PARAM_VALUE_ISO);
     }

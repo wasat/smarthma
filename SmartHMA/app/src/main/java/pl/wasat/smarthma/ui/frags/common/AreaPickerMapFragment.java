@@ -74,7 +74,7 @@ public class AreaPickerMapFragment extends Fragment implements OnMapReadyCallbac
 
     private Polygon areaPolygon;
 
-    protected GoogleMap mMap;
+    private GoogleMap mMap;
     //protected LatLngBounds targetBounds;
 
     private SupportMapFragment supportMapFrag;
@@ -377,7 +377,7 @@ public class AreaPickerMapFragment extends Fragment implements OnMapReadyCallbac
                 .newCameraPosition(cameraPosition));
     }
 
-    public void initCallbacksWhenMapIsReady(final int padding) {
+    private void initCallbacksWhenMapIsReady(final int padding) {
         mMap.setOnMapLoadedCallback(new GoogleMap.OnMapLoadedCallback() {
             @Override
             public void onMapLoaded() {

@@ -36,7 +36,7 @@ public class BaseSmartHMActivity extends FragmentActivity {
     protected MenuHandler commonMenuHandler;
     private FedeoSearchRequestReceiver fedeoSearchRequestReceiver;
 
-    public BaseSmartHMActivity() {
+    protected BaseSmartHMActivity() {
     }
 
     @Override
@@ -59,6 +59,16 @@ public class BaseSmartHMActivity extends FragmentActivity {
     protected void onResume() {
         super.onResume();
         registerReceiver(fedeoSearchRequestReceiver, filter);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == Const.REQUEST_CODE_GLOBAL_SETTINGS) {
+            GlobalPreferences globalPreferences = new GlobalPreferences(this);
+            String fedeoHost = globalPreferences.getFedeoProviderHost();
+            Const.setHttpBaseUrl(fedeoHost);
+        }
     }
 
     @Override

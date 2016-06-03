@@ -70,7 +70,7 @@ public class BaseDateTimeAreaContainerFragment extends BaseParametersPickerFragm
     }
 
 
-    protected void putBoundsToShared(LatLngBoundsExt bounds) {
+    private void putBoundsToShared(LatLngBoundsExt bounds) {
         String bboxWest = String.valueOf(bounds.southwest.longitude);
         String bboxSouth = String.valueOf(bounds.southwest.latitude);
         String bboxEast = String.valueOf(bounds.northeast.longitude);
@@ -89,7 +89,7 @@ public class BaseDateTimeAreaContainerFragment extends BaseParametersPickerFragm
         }
     }
 
-    protected void loadSharedData() {
+    void loadSharedData() {
         loadDateTimePrefs();
         setDateTime();
         loadAreaView();
@@ -198,14 +198,14 @@ public class BaseDateTimeAreaContainerFragment extends BaseParametersPickerFragm
         sharedPrefs.setBboxPrefs(bboxWest, bboxSouth, bboxEast, bboxNorth);
     }
 
-    protected void setTimeViewParameters(LinearLayout timeValuesLayout, boolean enabled) {
+    void setTimeViewParameters(LinearLayout timeValuesLayout, boolean enabled) {
         //boolean checkValue = checkBoxTime.isChecked();
         checkBoxTime.setChecked(enabled);
         enableDisableView(timeValuesLayout, enabled);
         sharedPrefs.setTimeUse(enabled);
     }
 
-    protected void setAreaViewParameters(LinearLayout areaValuesLayout, LinearLayout areaLayout, boolean enabled) {
+    void setAreaViewParameters(LinearLayout areaValuesLayout, LinearLayout areaLayout, boolean enabled) {
         //boolean checkValue = sharedPrefs.getAreaUse();
         checkBoxArea.setChecked(enabled);
         enableDisableView(areaValuesLayout, enabled);

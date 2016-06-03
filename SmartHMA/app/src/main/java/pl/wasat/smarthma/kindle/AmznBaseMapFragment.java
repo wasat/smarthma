@@ -31,8 +31,8 @@ import pl.wasat.smarthma.utils.loc.GoogleLocProviderImpl;
 public class AmznBaseMapFragment extends SupportMapFragment {
 
     public OnBaseMapFragmentListener mListener;
-    AmazonMap mMap;
-    LatLngBounds targetBounds;
+    private AmazonMap mMap;
+    private LatLngBounds targetBounds;
     private SupportMapFragment supportMapFrag;
     private OnBaseMapFragmentPublicListener publicListener;
     private BroadcastReceiver mReceiver;

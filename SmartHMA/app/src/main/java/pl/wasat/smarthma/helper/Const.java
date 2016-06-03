@@ -97,7 +97,7 @@ public class Const {
 /*    public static String getOsddBaseUrl() {
         return OSDD_BASE_URL;
     }*/
-
+/*
     public static void setHttpEsaBaseUrl() {
         HTTP_BASE_URL = HTTP_ESA_BASE_URL;
         setHttpBaseUrls();
@@ -115,6 +115,11 @@ public class Const {
 
     public static void setHttpObeosBaseUrl() {
         HTTP_BASE_URL = HTTP_OBEOS_BASE_URL;
+        setHttpBaseUrls();
+    }*/
+
+    public static void setHttpBaseUrl(String host) {
+        HTTP_BASE_URL = host;
         setHttpBaseUrls();
     }
 

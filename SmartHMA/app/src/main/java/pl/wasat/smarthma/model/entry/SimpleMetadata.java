@@ -262,7 +262,7 @@ public class SimpleMetadata implements Serializable {
     private void obtainPolygonFromOMMetadata(Entry entry) {
         Footprint footprintRaw = entry.getEarthObservation()
                 .getFeatureOfInterest().getFootprint();
-        List<Pos> footprintPosList = new ArrayList<>();
+        List<Pos> footprintPosList;
         if (footprintRaw.getMultiExtentOf().getMultiSurface() != null) {
             footprintPosList = footprintRaw.getMultiExtentOf()
                     .getMultiSurface().getSurfaceMembers().getPolygon()

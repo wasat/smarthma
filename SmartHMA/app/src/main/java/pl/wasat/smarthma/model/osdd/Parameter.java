@@ -15,6 +15,9 @@ public class Parameter {
     private String Name;
     private String Value;
     private String Prefix;
+    private String Pattern;
+    private String MaxInclusive;
+    private String MinInclusive;
 
 
     /**
@@ -71,6 +74,30 @@ public class Parameter {
      */
     public void setPrefix(String Prefix) {
         this.Prefix = Prefix;
+    }
+
+    public String getPattern() {
+        return Pattern;
+    }
+
+    public void setPattern(String pattern) {
+        Pattern = pattern;
+    }
+
+    public String getMaxInclusive() {
+        return MaxInclusive;
+    }
+
+    public void setMaxInclusive(String maxInclusive) {
+        MaxInclusive = maxInclusive;
+    }
+
+    public String getMinInclusive() {
+        return MinInclusive;
+    }
+
+    public void setMinInclusive(String minInclusive) {
+        MinInclusive = minInclusive;
     }
 
     @Override

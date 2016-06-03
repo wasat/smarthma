@@ -7,9 +7,9 @@ import com.octo.android.robospice.retry.DefaultRetryPolicy;
 
 /**
  * Created by Daniel on 2016-04-22.
- * This file is a part of module SmartHMA NavIn project.
+ * This file is a part of module SmartHMA project.
  */
-public class CustomRetryPolicy extends DefaultRetryPolicy {
+class CustomRetryPolicy extends DefaultRetryPolicy {
 
     @Override
     public long getDelayBeforeRetry() {

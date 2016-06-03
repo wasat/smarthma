@@ -217,7 +217,7 @@ public class BaseSearchSideParametersFragment extends BaseDateTimeAreaContainerF
 
     public void setCatalogue(String catalogue) {
         Parameter parameter = OSDDMatcher.findParentIdParam(osddParams);
-        List<Option> cataloguesList = null;
+        List<Option> cataloguesList;
         if (parameter != null) {
             cataloguesList = parameter.getOptions();
             for (int i = 0; i < cataloguesList.size(); i++) {
@@ -276,7 +276,7 @@ public class BaseSearchSideParametersFragment extends BaseDateTimeAreaContainerF
         void onBaseSearchSideParametersFragmentFedeoRequestParamsOsddChange(FedeoRequestParams fedeoRequestParams);
     }
 
-    public void startAsyncLoadOsddData(GenericUrl fedeoDescUrl) {
+    private void startAsyncLoadOsddData(GenericUrl fedeoDescUrl) {
         if (fedeoDescUrl != null) {
             getActivity().setProgressBarIndeterminateVisibility(true);
             getSpiceManager().execute(new FedeoOSDDRequest(fedeoDescUrl.toString()),

@@ -62,7 +62,7 @@ public class AmznAreaPickerMapFragment extends Fragment implements
     private ArrayList<LatLng> markedPtList;
     private LatLngBounds.Builder areaBoundsBuilder;
 
-    protected AmazonMap mMap;
+    private AmazonMap mMap;
     private Polygon areaPolygon;
     private SupportMapFragment supportMapFrag;
     private int areaDrawType;
@@ -338,7 +338,7 @@ public class AmznAreaPickerMapFragment extends Fragment implements
         }
     }
 
-    public void initCallbacksWhenMapIsReady(final int padding) {
+    private void initCallbacksWhenMapIsReady(final int padding) {
         mMap.setOnMapLoadedCallback(new AmazonMap.OnMapLoadedCallback() {
             @Override
             public void onMapLoaded() {

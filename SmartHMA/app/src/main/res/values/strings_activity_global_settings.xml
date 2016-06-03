@@ -13,6 +13,26 @@
     <string name="pref_summary_remember_search_params">Save basic FedEO search parameters and load it at start</string>
     <string name="pref_key_checkbox_search_params_save" translatable="false">pref_key_checkbox_search_params_save</string>
 
+    <string name="pref_title_fedeo_provider">Fedeo Provider Host</string>
+    <string name="pref_summary_fedeo_provider">Choose Fedeo provider host</string>
+    <string name="pref_key_fedeo_provider" translatable="false">pref_key_fedeo_provider</string>
+
+    <string name="pref_title_edit_max_records">Max Records Displayed</string>
+    <string name="pref_summary_edit_max_records">Maximum records with search results displayed</string>
+    <string name="pref_default_edit_max_records">30</string>
+    <string name="pref_key_edit_max_records" translatable="false">pref_key_edit_max_records</string>
+
+    <string name="pref_title_edit_start_record">Start Record of Results</string>
+    <string name="pref_summary_edit_start_record">Record of list results from which displaying is started</string>
+    <string name="pref_default_edit_start_record">1</string>
+    <string name="pref_key_edit_start_record" translatable="false">pref_key_edit_start_record</string>
+
+    <string name="pref_title_edit_start_page">Start Page with Results</string>
+    <string name="pref_summary_edit_start_page">No. of page from which results are displayed</string>
+    <string name="pref_default_edit_start_page">1</string>
+    <string name="pref_key_edit_start_page" translatable="false">pref_key_edit_start_page</string>
+
+
     <string name="pref_category_title_map_settings">MAP SETTINGS</string>
     <string name="pref_title_global_map_list">Default map type</string>
     <string name="pref_summary_global_map_list">Choose map type as a default map background</string>
@@ -22,6 +42,5 @@
     <string name="pref_title_show_debugging_info">Show debugging information</string>
     <string name="pref_summary_show_debugging_info">Turn on this options to show and log additional information</string>
     <string name="pref_key_checkbox_debug_mode" translatable="false">pref_key_checkbox_debug_mode</string>
-
 
 </resources>

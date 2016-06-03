@@ -45,7 +45,7 @@ public class BaseViewAndBasicSettingsDetailFragment extends BaseDateTimeAreaCont
     protected Button btnShowMetadata;
 
     protected SlidingLayer mSlidingLayer;
-    protected LinearLayout layoutSpinners;
+    LinearLayout layoutSpinners;
 
     protected View rootView;
 
@@ -229,7 +229,7 @@ public class BaseViewAndBasicSettingsDetailFragment extends BaseDateTimeAreaCont
         startAsyncLoadOsddData(url);
     }
 
-    public void startAsyncLoadOsddData(String osddUrl) {
+    protected void startAsyncLoadOsddData(String osddUrl) {
         if (!osddUrl.isEmpty()) {
             //GenericUrl fedeoDescUrl = new GenericUrl(osddUrl);
             getActivity().setProgressBarIndeterminateVisibility(true);
@@ -277,7 +277,7 @@ public class BaseViewAndBasicSettingsDetailFragment extends BaseDateTimeAreaCont
         tvParentId.setText(sharedPrefs.getParentIdPrefs());
     }
 
-    public String getOsddSearchLink() {
+    private String getOsddSearchLink() {
         if (displayedISOEntry != null) {
             return displayedISOEntry.getSpecLink(Link.REL_SEARCH, Link.TYPE_OSDD_XML);
         } else {

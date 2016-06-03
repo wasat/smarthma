@@ -21,6 +21,8 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import pl.wasat.smarthma.R;
+import pl.wasat.smarthma.helper.Const;
+import pl.wasat.smarthma.preferences.GlobalPreferences;
 import pl.wasat.smarthma.ui.activities.CollectionsDefinitionActivity;
 import pl.wasat.smarthma.ui.activities.MissionsActivity;
 import pl.wasat.smarthma.ui.activities.NewsActivity;
@@ -54,7 +56,9 @@ public class StartFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (isNotTabletSize()) showTabletWarningDialog();
+        obtainFedeoProvider();
     }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -120,6 +124,11 @@ public class StartFragment extends Fragment {
         return rootView;
     }
 
+    private void obtainFedeoProvider() {
+        GlobalPreferences globalPreferences = new GlobalPreferences(getActivity());
+        Const.setHttpBaseUrl(globalPreferences.getFedeoProviderHost());
+    }
+
     private boolean isConnected() {
         ConnectionDetector detect = new ConnectionDetector(getActivity());
 
@@ -132,7 +141,7 @@ public class StartFragment extends Fragment {
         }
     }
 
-    public boolean isNotTabletSize() {
+    private boolean isNotTabletSize() {
 
         double size = 0;
         try {
@@ -174,7 +183,7 @@ public class StartFragment extends Fragment {
             builder
                     .setIcon(R.mipmap.ic_launcher_circle)
                     .setTitle(R.string.dev_size_warning)
-                            //.setMessage(s)
+                    //.setMessage(s)
                     .setView(tvMessage)
                     .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                         @Override

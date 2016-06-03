@@ -14,6 +14,8 @@ import android.provider.MediaStore.Images;
 import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
+import android.text.Html;
+import android.text.Spanned;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -30,6 +32,8 @@ import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Picasso.LoadedFrom;
 import com.squareup.picasso.Target;
 
+import java.util.ArrayList;
+
 import pl.wasat.smarthma.R;
 import pl.wasat.smarthma.helper.enums.CloudType;
 import pl.wasat.smarthma.model.entry.Entry;
@@ -37,6 +41,7 @@ import pl.wasat.smarthma.model.entry.SimpleMetadata;
 import pl.wasat.smarthma.utils.conn.ConnectionDetector;
 import pl.wasat.smarthma.utils.io.CloudSavingManager;
 import pl.wasat.smarthma.utils.io.EODataDownloadManager;
+import pl.wasat.smarthma.utils.io.FilesWriter;
 
 /**
  * A simple {@link android.support.v4.app.Fragment} subclass. Activities that
@@ -52,8 +57,6 @@ public class ProductDetailsFragment extends Fragment implements Target {
     private OnProductDetailsFragmentListener mListener;
     private CloudSavingManager cloudSavingManager;
     private EODataDownloadManager eoDataDownloadManager;
-
-    private WebView detailWebView;
 
     public ProductDetailsFragment() {
     }
@@ -121,7 +124,7 @@ public class ProductDetailsFragment extends Fragment implements Target {
                     .setText(title);
             ((TextView) rootView.findViewById(R.id.product_frag_detail_dates))
                     .setText(pubDate);
-            detailWebView = (WebView) rootView
+            WebView detailWebView = (WebView) rootView
                     .findViewById(R.id.product_frag_detail_content);
             detailWebView.loadData(content, "text/html", "UTF-8");
             //detailWebView.loadUrl("https://eo-virtual-archive4.esa.int/supersites/ASA_IMP_1PNDPA20080914_092429_000000152072_00079_34201_8081.N1");
@@ -305,15 +308,35 @@ public class ProductDetailsFragment extends Fragment implements Target {
     }
 
     private void sendIntentShareImg(Bitmap bitmapImg) {
+        final Intent shareIntent = new Intent(Intent.ACTION_SEND_MULTIPLE);
+        shareIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
+        //shareIntent.setType("text/plain");
+        shareIntent.setType("message/rfc822");
+        shareIntent.putExtra(Intent.EXTRA_SUBJECT, displayedEntry.getTitle());
+
+        Spanned body = Html.fromHtml("<p><b>EO DATA - Summary:</b></p>" +
+                displayedEntry.getSummary().getCdata() +
+                "<p>.\n</p>" +
+                "<p><b>BINARY EO DATA - Dataset URL:</b></p>" +
+                displayedEntry.getSimpleMetadata().getBinaryUrl() +
+                "<p>.\n</p>" +
+                "<p><b>EO DATA - Metadata URL:</b></p>" +
+                displayedEntry.getId());
+        shareIntent.putExtra(Intent.EXTRA_TEXT, body);
+
+        FilesWriter filesWriter = new FilesWriter();
+        Uri uriFile = filesWriter.writeToUri(displayedEntry.getRawMetadata(), "metadata.txt");
+
         String path = Images.Media.insertImage(getActivity()
                 .getContentResolver(), bitmapImg, "title", null);
-        Uri qlookUri = Uri.parse(path);
+        Uri uriQLook = Uri.parse(path);
 
-        final Intent shareIntent = new Intent(
-                android.content.Intent.ACTION_SEND);
-        shareIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        shareIntent.putExtra(Intent.EXTRA_STREAM, qlookUri);
+        ArrayList<Uri> uris = new ArrayList<>();
+        uris.add(uriFile);
+        uris.add(uriQLook);
         shareIntent.setType("image/*");
+        shareIntent.putParcelableArrayListExtra(Intent.EXTRA_STREAM, uris);
 
         startActivity(Intent.createChooser(shareIntent, getResources().getString(R.string.share_quicklook)));
     }

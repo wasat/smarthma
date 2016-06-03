@@ -55,7 +55,7 @@ public class BaseShowProductsListFragment extends BaseSpiceFragment {
      * @return A new instance of fragment SearchProductsFeedsFragment.
      */
     public static BaseShowProductsListFragment newInstance(
-            FedeoRequestParams fedeoRequestParams, String osddUrl) {
+            FedeoRequestParams fedeoRequestParams) {
         BaseShowProductsListFragment fragment = new BaseShowProductsListFragment();
         Bundle args = new Bundle();
         args.putSerializable(KEY_PARAM_FEDEO_REQUEST, fedeoRequestParams);

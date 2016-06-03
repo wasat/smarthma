@@ -78,7 +78,7 @@ public class Parser {
     //final String potentialMissionUrl = "https://earth.esa.int/web/guest/missions/3rd-party-missions/potential-missions";
     private final String landsatUrl = "https://earth.esa.int/web/guest/missions/3rd-party-missions/current-missions/landsat-oli-tirs";
     private final Context context;
-    private OnParserListener onParserListener;
+    private final OnParserListener onParserListener;
     private int count;
 
     public Parser(Context context) {

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<pl.wasat.smarthma.customviews.TextViewWithFont
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="@dimen/search_eo_data_params_edit_text_height"
+    android:layout_marginBottom="16dp"
+    android:layout_marginEnd="16dp"
+    android:layout_marginLeft="@dimen/search_eo_data_padding"
+    android:layout_marginRight="16dp"
+    android:layout_marginStart="@dimen/search_eo_data_padding"
+    android:layout_marginTop="2dp"
+    android:background="@drawable/edit_text"
+    android:ellipsize="marquee"
+    android:gravity="start|clip_vertical|fill_vertical"
+    android:paddingEnd="@dimen/search_eo_data_padding"
+    android:paddingLeft="@dimen/search_eo_data_padding"
+    android:paddingRight="@dimen/search_eo_data_padding"
+    android:paddingStart="@dimen/search_eo_data_padding"
+    android:paddingBottom="3dp"
+    android:singleLine="true"
+    android:text="@string/lorem"
+    android:textColor="#A9A9A9"
+    android:textColorHint="#A9A9A9"
+    android:textSize="@dimen/search_eo_data_text_medium"
+    android:textStyle="normal"/>
+

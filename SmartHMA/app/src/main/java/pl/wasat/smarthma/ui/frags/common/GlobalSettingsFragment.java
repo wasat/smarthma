@@ -12,10 +12,12 @@ import android.preference.Preference;
 import android.preference.PreferenceCategory;
 import android.preference.PreferenceFragment;
 import android.preference.RingtonePreference;
+import android.text.InputFilter;
 
 import java.util.Set;
 
 import pl.wasat.smarthma.R;
+import pl.wasat.smarthma.utils.text.InputFilterMinMax;
 
 public class GlobalSettingsFragment extends PreferenceFragment implements
         SharedPreferences.OnSharedPreferenceChangeListener {
@@ -25,7 +27,9 @@ public class GlobalSettingsFragment extends PreferenceFragment implements
         super.onCreate(savedInstanceState);
         // Load the preferences from an XML resource
         addPreferencesFromResource(R.xml.preferences);
+        setInputFilter();
     }
+
 
     @Override
     public void onResume() {
@@ -47,8 +51,22 @@ public class GlobalSettingsFragment extends PreferenceFragment implements
     @Override
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences,
                                           String key) {
+        validateEditText(findPreference(key));
         // Update summary
         updatePrefsSummary(sharedPreferences, findPreference(key));
+    }
+
+    private void setInputFilter() {
+        validateEditText(findPreference(getString(R.string.pref_key_edit_max_records)));
+        validateEditText(findPreference(getString(R.string.pref_key_edit_start_record)));
+        validateEditText(findPreference(getString(R.string.pref_key_edit_start_page)));
+    }
+
+    private void validateEditText(Preference pref) {
+        if (pref != null && pref instanceof EditTextPreference) {
+            EditTextPreference editTextPref = (EditTextPreference) pref;
+            editTextPref.getEditText().setFilters(new InputFilter[]{new InputFilterMinMax("0", "50")});
+        }
     }
 
     /**
@@ -118,8 +136,10 @@ public class GlobalSettingsFragment extends PreferenceFragment implements
         for (int i = 0; i < pcsCount; i++) {
             initPrefsSummary(getPreferenceManager().getSharedPreferences(),
                     getPreferenceScreen().getPreference(i));
+            validateEditText(getPreferenceScreen().getPreference(i));
         }
     }
+
 
     private void initPrefsSummary(SharedPreferences sharedPreferences,
                                   Preference p) {

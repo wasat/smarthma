@@ -19,8 +19,8 @@ import pl.wasat.smarthma.model.osdd.Option;
  * This file is a part of module SmartHMA project.
  */
 public class CatalogueArrayAdapter extends ArrayAdapter {
-    private List<Option> options;
-    private Context context;
+    private final List<Option> options;
+    private final Context context;
 
 
     public CatalogueArrayAdapter(Context context, int resource, List<Option> objects) {
@@ -28,8 +28,6 @@ public class CatalogueArrayAdapter extends ArrayAdapter {
         this.options = objects;
         this.context = context;
     }
-
-    ViewHolder holder;
 
     class ViewHolder {
         ImageView icon;
@@ -42,6 +40,7 @@ public class CatalogueArrayAdapter extends ArrayAdapter {
                 .getSystemService(
                         Context.LAYOUT_INFLATER_SERVICE);
 
+        ViewHolder holder;
         if (convertView == null) {
             convertView = inflater.inflate(
                     R.layout.view_cell_cataloque, null);

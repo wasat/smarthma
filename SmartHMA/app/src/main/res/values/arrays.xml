@@ -15,6 +15,19 @@
         <item name="4">4</item>
     </string-array>
 
+    <string-array name="pref_entries_list_fedeo_providers">
+        <item name="0">ESA</item>
+        <item name="1">SPACEBEL</item>
+        <item name="2">OBEOS</item>
+        <item name="3">SMAAD</item>
+    </string-array>
+    <string-array name="pref_values_list_fedeo_providers" translatable="false">
+        <item name="0">http://fedeo.esa.int/opensearch</item>
+        <item name="1">http://geo.spacebel.be/opensearch</item>
+        <item name="2">http://obeos.spacebel.be/opensearch</item>
+        <item name="3">http://smaad.spacebel.be/opensearch</item>
+    </string-array>
+
     <string-array name="pref_entries_list_mission_sync">
         <item name="0">Every time</item>
         <item name="1">1 hour</item>

@@ -1,5 +1,6 @@
 package pl.wasat.smarthma.model.osdd;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -7,26 +8,6 @@ import java.util.List;
  * This file is a part of module SmartHMA project.
  */
 public class OSDDMatcher {
-
-    //http://fedeo.esa.int/opensearch/request/?
-    // httpAccept=application/atom%2Bxml&
-    // parentIdentifier=EOP:SPOT:ALL&
-    // startRecord={startIndex?}&
-    // startPage={startPage?}&
-    // maximumRecords={count?}&
-    // startDate={time:start}&
-    // endDate={time:end}&
-    // bbox={geo:box?}&name={geo:name?}&lat={geo:lat?}&lon={geo:lon?}&radius={geo:radius?}&
-    // uid={geo:uid?}&productType={eo:productType?}&platform={eo:platform?}&platformSerialIdentifier={eo:platformSerialIdentifier?}&
-    // instrument={eo:instrument?}&sensorType={eo:sensorType?}&compositeType={eo:compositeType?}&processingLevel={eo:processingLevel?}&
-    // orbitType={eo:orbitType?}&resolution={eo:resolution?}&productionStatus={eo:productionStatus?}&acquisitionType={eo:acquisitionType?}&
-    // orbitNumber={eo:orbitNumber?}&orbitDirection={eo:orbitDirection?}&track={eo:track?}&frame={eo:frame?}&
-    // swathIdentifier={eo:swathIdentifier?}&cloudCover={eo:cloudCover?}&snowCover={eo:snowCover?}&acquisitionStation={eo:acquisitionStation?}&
-    // productQualityStatus={eo:productQualityStatus?}&processorName={eo:processorName?}&sensorMode={eo:sensorMode?}&
-    // archivingCenter={eo:archivingCenter?}&acquisitionSubType={eo:acquisitionSubType?}&
-    // startTimeFromAscendingNode={eo:startTimeFromAscendingNode?}&completionTimeFromAscendingNode={eo:completionTimeFromAscendingNode?}&
-    // illuminationAzimuthAngle={eo:illuminationAzimuthAngle?}&illuminationElevationAngle={eo:illuminationElevationAngle?}&
-    // recordSchema={sru:recordSchema?}
 
     public static final String PARAM_NAME_PARENT_IDENTIFIER = "parentIdentifier";
     public static final String PARAM_NAME_TYPE = "type";
@@ -45,8 +26,6 @@ public class OSDDMatcher {
     public static final String PARAM_NAME_USERNAME = "username";
     public static final String PARAM_NAME_PASSWORD = "password";
 
-    //public static final String PARAM_NAME_  = "";
-    //public static final String PARAM_NAME_  = "";
     //public static final String PARAM_NAME_  = "";
     //public static final String PARAM_NAME_  = "";
 
@@ -68,6 +47,7 @@ public class OSDDMatcher {
     public static final String PARAM_KEY_TITLE = "{dc:title}";
     public static final String PARAM_KEY_ORGANISATION = "{eo:organisationName}";
     public static final String PARAM_KEY_PLATFORM = "{eo:platform}";
+    public static final String PARAM_KEY_INSTRUMENT = "{eo:instrument}";
     public static final String PARAM_KEY_USERNAME = "{wsse:Username}";
     public static final String PARAM_KEY_PASSWORD = "{wsse:Password}";
 
@@ -86,6 +66,21 @@ public class OSDDMatcher {
         return null;
     }
 
+    public static List<String> generateOptionValuesList(List<Parameter> osddParams, String paramKey) {
+        List<String> optLabels = new ArrayList<>();
+        if (osddParams != null) {
+            for (Parameter param : osddParams) {
+                if (param.getValue().equalsIgnoreCase(paramKey)) {
+                    for (Option opt : param.getOptions()) {
+                        optLabels.add(opt.getValue());
+                    }
+                    return optLabels;
+                }
+            }
+        }
+        return optLabels;
+    }
+
     public static String findOptionValue(List<Option> options, String label) {
         for (Option opt : options) {
             if (opt.getLabel().equalsIgnoreCase(label)) return opt.getValue();
@@ -94,7 +89,7 @@ public class OSDDMatcher {
     }
 
     public static String getParamName(String paramKey) {
-        String paramName = "";
+        String paramName;
         switch (paramKey) {
             case PARAM_KEY_BBOX:
                 paramName = PARAM_NAME_BBOX;

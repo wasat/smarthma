@@ -52,7 +52,7 @@ public class BaseParametersPickerFragment extends BaseSpiceFragment {
         sharedPrefs = new SharedPrefs(getActivity());
     }
 
-    public void enableDisableView(View view, boolean enabled) {
+    void enableDisableView(View view, boolean enabled) {
         view.setEnabled(enabled);
 
         if (view instanceof ViewGroup) {
@@ -200,13 +200,13 @@ public class BaseParametersPickerFragment extends BaseSpiceFragment {
         sharedPrefs.setBboxPrefs(bboxWest, bboxSouth, bboxEast, bboxNorth);
     }
 
-    protected LatLngBoundsExt convertPtAndRadiusToBounds(LatLngExt center, double radius) {
+    LatLngBoundsExt convertPtAndRadiusToBounds(LatLngExt center, double radius) {
         LatLngExt southwest = computeOffset(center, radius * Math.sqrt(2.0), 225);
         LatLngExt northeast = computeOffset(center, radius * Math.sqrt(2.0), 45);
         return new LatLngBoundsExt(southwest, northeast);
     }
 
-    protected LatLngExt computeOffset(LatLngExt from, double distance, double heading) {
+    private LatLngExt computeOffset(LatLngExt from, double distance, double heading) {
         distance /= 6371009.0D;
         heading = Math.toRadians(heading);
         double fromLat = Math.toRadians(from.latitude);

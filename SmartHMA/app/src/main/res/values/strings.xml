@@ -89,12 +89,9 @@
     <string name="action_clear_list">Clear list</string>
     <string name="action_clear_list_confirmation">Are you sure you want to remove all the items from the list?</string>
     <string name="refreshing_list">Refreshing list…</string>
-    <string name="endpoint">Endpoint</string>
 
-    <string name="endpoint_list_title">ENDPOINT LIST</string>
     <string name="widget_empty_list">Unable to download data</string>
     <string name="launch_widget">Launch widget</string>
-    <string name="title_parameter">Title</string>
     <string name="value_osdd_parameter">Search parameter</string>
     <string name="organisation_header">Organisation</string>
     <string name="platform_header">Platform</string>
@@ -232,5 +229,7 @@
     <string name="password">Password</string>
     <string name="sign_in_sso">Sign In SSO</string>
     <string name="none">None</string>
+    <string name="value_not_fit_to_pattern">Parameter value do not fit to pattern.\nPlease put proper value</string>
+    <string name="instrument_header">Instrument</string>
      
 </resources>

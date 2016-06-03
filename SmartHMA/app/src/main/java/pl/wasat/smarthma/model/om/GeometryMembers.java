@@ -11,7 +11,7 @@ import pl.wasat.smarthma.utils.text.SmartHMAStringStyle;
 
 /**
  * Created by Daniel on 2016-05-20.
- * This file is a part of module SmartHMA NavIn project.
+ * This file is a part of module SmartHMA project.
  */
 public class GeometryMembers implements Serializable {
 

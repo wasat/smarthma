@@ -4,27 +4,34 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.text.Editable;
+import android.text.InputType;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TableLayout;
+import android.widget.Toast;
 
 import com.wunderlist.slidinglayer.SlidingLayer;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import pl.wasat.smarthma.R;
 import pl.wasat.smarthma.model.osdd.OSDDMatcher;
 import pl.wasat.smarthma.model.osdd.OpenSearchDescription;
 import pl.wasat.smarthma.model.osdd.Option;
 import pl.wasat.smarthma.model.osdd.Parameter;
+import pl.wasat.smarthma.utils.io.PatternNumberKeyListener;
 
 /**
  * A simple {@link android.support.v4.app.Fragment} subclass. Activities that
@@ -67,7 +74,7 @@ public class BaseCollectionDetailsFragment extends
         changeSearchBtn();
     }
 
-    public void loadParamsSliderView() {
+    protected void loadParamsSliderView() {
         mSlidingLayer.setOnInteractListener(new InteractiveSlidingLayer());
     }
 
@@ -76,8 +83,10 @@ public class BaseCollectionDetailsFragment extends
             for (final Parameter param : osddParamsList) {
                 if (param.getOptions().size() == 0) {
                     if (skipParameter(param)) continue;
-                    EditText editText = buildEditTextView(param);
-                    layoutSpinners.addView(editText);
+                    //EditText editText = buildEditTextView(param);
+                    //layoutSpinners.addView(editText);
+                    AutoCompleteTextView autoText = buildAutoCompleteTextView(param);
+                    layoutSpinners.addView(autoText);
                 } else {
                     Spinner spinner = buildSpinnerView(param);
                     layoutSpinners.addView(spinner);
@@ -104,6 +113,83 @@ public class BaseCollectionDetailsFragment extends
         return editText;
     }
 
+    @NonNull
+    private AutoCompleteTextView buildAutoCompleteTextView(Parameter param) {
+        String[] AUTO_PHRASES = new String[]{
+                "[]", "[,]", "{}", "{,}", "1", "}", "]", ","
+        };
+        AutoCompleteTextView autoTextView = new AutoCompleteTextView(getActivity());
+        TableLayout.LayoutParams layoutParams = new TableLayout.LayoutParams(
+                TableLayout.LayoutParams.WRAP_CONTENT, TableLayout.LayoutParams.WRAP_CONTENT, 1f);
+        layoutParams.setMargins(40, 10, 40, 10);
+        autoTextView.setLayoutParams(layoutParams);
+        autoTextView.setHint(String.format(getActivity().getString(R.string.set_), param.getName()));
+        autoTextView.setHintTextColor(Color.GRAY);
+        autoTextView.setBackgroundColor(Color.WHITE);
+        autoTextView.setTextSize(14);
+
+        autoTextView = resolvePattern(autoTextView, param.getPattern());
+        autoTextView.addTextChangedListener(new EditTextViewInputWatcher(param));
+        autoTextView.setOnTouchListener(new EditTextViewInputWatcher(param));
+        autoTextView.setOnFocusChangeListener(new EditTextViewInputWatcher(param));
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_dropdown_item_1line, AUTO_PHRASES);
+        autoTextView.setAdapter(adapter);
+        return autoTextView;
+    }
+
+    private AutoCompleteTextView resolvePattern(AutoCompleteTextView autoTextView, String pattern) {
+        if (pattern == null) {
+            autoTextView.setInputType(InputType.TYPE_CLASS_TEXT);
+            return autoTextView;
+        } else if (pattern.equalsIgnoreCase("[0-9]+")) {
+            autoTextView.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
+            return autoTextView;
+        } else if (pattern.equalsIgnoreCase
+                ("^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}(\\.[0-9]+)?(Z|[\\+\\-][0-9]{2}:[0-9]{2})$")) {
+            autoTextView.setInputType(InputType.TYPE_CLASS_DATETIME);
+            return autoTextView;
+        } else if (pattern.equalsIgnoreCase
+                ("(\\[|\\])(100|[0-9]\\d?),(100|[0-9]\\d?)(\\[|\\])|(\\[|\\])?(100|[0-9]\\d?)|(100|[0-9]\\d?)(\\[|\\])?|\\{(100|[0-9]\\d?),(100|[0-9]\\d?)\\}")) {
+            //autoTextView.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL | InputType.TYPE_NUMBER_FLAG_SIGNED);
+            autoTextView.setKeyListener(new PatternNumberKeyListener());
+            return autoTextView;
+        } else if (pattern.equalsIgnoreCase
+                ("(\\[|\\])[0-9]+,[0-9]+(\\[|\\])|(\\[|\\])?[0-9]+|[0-9]+(\\[|\\])?|\\{[0-9]+,[0-9]+\\}")) {
+            autoTextView.setKeyListener(new PatternNumberKeyListener());
+            return autoTextView;
+        } else if (pattern.equalsIgnoreCase
+                ("(\\[|\\])[0-9]+(.[0-9]+)?,[0-9]+(.[0-9]+)?(\\[|\\])|(\\[|\\])?[0-9]+(.[0-9]+)?|[0-9]+(.[0-9]+)?(\\[|\\])?|\\{[0-9]+(.[0-9]+)?,[0-9]+(.[0-9]+)?\\}")) {
+            autoTextView.setKeyListener(new PatternNumberKeyListener());
+            return autoTextView;
+        } else if (pattern.equalsIgnoreCase
+                ("(\\[|\\])[0-9]+,[0-9]+(\\[|\\])|(\\[|\\])?[0-9]+|[0-9]+(\\[|\\])?|\\{[0-9]+,[0-9]+\\}")) {
+            autoTextView.setKeyListener(new PatternNumberKeyListener());
+            return autoTextView;
+        }
+        return autoTextView;
+    }
+
+/*    private void validateInput(Parameter parameter){
+        InputFilter filter= new InputFilter() {
+            public CharSequence filter(CharSequence source, int start, int end, Spanned dest, int dstart, int dend) {
+                for (int i = start; i < end; i++) {
+                    String checkMe = String.valueOf(source.charAt(i));
+
+                    Pattern pattern = Pattern.compile("[ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz123456789_]*");
+                    Matcher matcher = pattern.matcher(checkMe);
+                    boolean valid = matcher.matches();
+                    if(!valid){
+                        Log.d("", "invalid");
+                        return "";
+                    }
+                }
+                return null;
+            }
+        };
+        editText.setFilters(new InputFilter[]{filter});
+    }*/
+
     private boolean skipParameter(Parameter parameter) {
         if (sharedPrefs.getAreaUse() && parameter.getName().equalsIgnoreCase(OSDDMatcher.PARAM_NAME_BBOX))
             return true;
@@ -127,7 +213,7 @@ public class BaseCollectionDetailsFragment extends
             optList.add(opt.getLabel());
         }
 
-        ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<>(getActivity(), R.layout.custom_spinner_item, optList);
+        ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<>(getActivity(), R.layout.spinner_item_slider, optList);
         spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(spinnerAdapter);
 
@@ -207,7 +293,7 @@ public class BaseCollectionDetailsFragment extends
     }
 
     private class EditTextViewInputWatcher implements TextWatcher, View.OnTouchListener, View.OnFocusChangeListener {
-        Parameter param;
+        final Parameter param;
 
         EditTextViewInputWatcher(Parameter parameter) {
             this.param = parameter;
@@ -223,6 +309,44 @@ public class BaseCollectionDetailsFragment extends
 
         @Override
         public void afterTextChanged(Editable s) {
+            validatePatternMatcher(s);
+            validateMinMax(s);
+
+
+        }
+
+        private void validateMinMax(Editable s) {
+            try {
+                if (!s.toString().isEmpty()) {
+                    if (param.getMinInclusive() != null && !param.getMinInclusive().isEmpty()) {
+                        if (Float.valueOf(s.toString()) < Float.valueOf(param.getMinInclusive())) {
+                            s.clear();
+                            s.append(param.getMinInclusive());
+                        }
+                    }
+                    if (param.getMaxInclusive() != null && !param.getMaxInclusive().isEmpty()) {
+                        if (Float.valueOf(s.toString()) > Float.valueOf(param.getMaxInclusive())) {
+                            s.clear();
+                            s.append(param.getMaxInclusive());
+                        }
+                    }
+                }
+            } catch (NumberFormatException e) {
+                e.printStackTrace();
+            }
+        }
+
+        private void validatePatternMatcher(Editable s) {
+            if (param.getPattern() != null && !param.getPattern().isEmpty() && !s.toString().isEmpty()) {
+                //Pattern mPattern = Pattern.compile("^([1-9][0-9]{0,2})?(\\.[0-9]?)?$");
+                Pattern mPattern = Pattern.compile(param.getPattern().trim());
+                Matcher matcher = mPattern.matcher(s.toString().trim());
+                if (!matcher.find()) {
+                    Toast.makeText(getActivity(), R.string.value_not_fit_to_pattern, Toast.LENGTH_SHORT).show();
+                    Log.d("PATTERN", param.getName() + " - " + getString(R.string.value_not_fit_to_pattern));
+                    return;
+                }
+            }
             fedeoRequestParams.addOsddValue(param.getValue(), s.toString().trim());
         }
 
