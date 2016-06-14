@@ -1,3 +1,19 @@
+/*
+ * Copyright (c) 2016.  SmartHMA ESA
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package pl.wasat.smarthma.model.iso;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
@@ -9,6 +25,9 @@ import java.io.Serializable;
 
 import pl.wasat.smarthma.utils.text.SmartHMAStringStyle;
 
+/**
+ * The type Dq conformance result.
+ */
 public class DQConformanceResult implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -20,6 +39,8 @@ public class DQConformanceResult implements Serializable {
 
 
     /**
+     * Gets specification.
+     *
      * @return The specification
      */
     public Specification getSpecification() {
@@ -27,6 +48,8 @@ public class DQConformanceResult implements Serializable {
     }
 
     /**
+     * Sets specification.
+     *
      * @param specification The specification
      */
     public void setSpecification(Specification specification) {
@@ -34,6 +57,8 @@ public class DQConformanceResult implements Serializable {
     }
 
     /**
+     * Gets explanation.
+     *
      * @return The explanation
      */
     public Explanation getExplanation() {
@@ -41,6 +66,8 @@ public class DQConformanceResult implements Serializable {
     }
 
     /**
+     * Sets explanation.
+     *
      * @param explanation The explanation
      */
     public void setExplanation(Explanation explanation) {
@@ -48,6 +75,8 @@ public class DQConformanceResult implements Serializable {
     }
 
     /**
+     * Gets pass.
+     *
      * @return The pass
      */
     public Pass getPass() {
@@ -55,6 +84,8 @@ public class DQConformanceResult implements Serializable {
     }
 
     /**
+     * Sets pass.
+     *
      * @param pass The pass
      */
     public void setPass(Pass pass) {
@@ -62,6 +93,8 @@ public class DQConformanceResult implements Serializable {
     }
 
     /**
+     * Gets prefix.
+     *
      * @return The Prefix
      */
     public String getPrefix() {
@@ -69,6 +102,8 @@ public class DQConformanceResult implements Serializable {
     }
 
     /**
+     * Sets prefix.
+     *
      * @param Prefix The _prefix
      */
     public void setPrefix(String Prefix) {

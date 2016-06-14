@@ -1,3 +1,19 @@
+/*
+ * Copyright (c) 2016.  SmartHMA ESA
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package pl.wasat.smarthma.utils.io;
 
 import android.app.DownloadManager;
@@ -29,10 +45,21 @@ public class EODataDownloadManager {
     private BroadcastReceiver receiverNotificationClicked;
     private String productName;
 
+    /**
+     * Instantiates a new Eo data download manager.
+     *
+     * @param context the context
+     */
     public EODataDownloadManager(Context context) {
         this.context = context;
     }
 
+    /**
+     * Start download.
+     *
+     * @param productName the product name
+     * @param url         the url
+     */
     public void startDownload(String productName, String url) {
 
         try {
@@ -78,6 +105,9 @@ public class EODataDownloadManager {
         return subDir + fileName;
     }
 
+    /**
+     * Resume download manager.
+     */
     public void resumeDownloadManager() {
         downloadManager = (DownloadManager) context.getSystemService(Context.DOWNLOAD_SERVICE);
         initReceiverNotificationClicked();
@@ -170,6 +200,9 @@ public class EODataDownloadManager {
         }
     }
 
+    /**
+     * Unregister receivers.
+     */
     public void unregisterReceivers() {
         context.unregisterReceiver(receiverDownloadComplete);
         context.unregisterReceiver(receiverNotificationClicked);

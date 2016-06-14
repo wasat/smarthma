@@ -1,12 +1,11 @@
 /*
- * Copyright (C) 2007 The Android Open Source Project
- * Copyright (C) 2013 Ivan Kovac navratnanos@gmail.com
+ * Copyright (c) 2016.  SmartHMA ESA
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -87,14 +86,32 @@ public class TimePicker extends FrameLayout {
     // callbacks
     private OnTimeChangedListener mOnTimeChangedListener;
 
+    /**
+     * Instantiates a new Time picker.
+     *
+     * @param context the context
+     */
     public TimePicker(Context context) {
         this(context, null);
     }
 
+    /**
+     * Instantiates a new Time picker.
+     *
+     * @param context the context
+     * @param attrs   the attrs
+     */
     public TimePicker(Context context, AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
+    /**
+     * Instantiates a new Time picker.
+     *
+     * @param context  the context
+     * @param attrs    the attrs
+     * @param defStyle the def style
+     */
     public TimePicker(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
 
@@ -239,6 +256,8 @@ public class TimePicker extends FrameLayout {
 
     /**
      * Set the current second (0-59).
+     *
+     * @param currentSecond the current second
      */
     public void setCurrentSecond(Integer currentSecond) {
         this.mCurrentSeconds = currentSecond;
@@ -273,6 +292,8 @@ public class TimePicker extends FrameLayout {
     }
 
     /**
+     * Gets current hour.
+     *
      * @return The current hour (0-23).
      */
     public Integer getCurrentHour() {
@@ -281,6 +302,8 @@ public class TimePicker extends FrameLayout {
 
     /**
      * Set the current hour.
+     *
+     * @param currentHour the current hour
      */
     public void setCurrentHour(Integer currentHour) {
         this.mCurrentHour = currentHour;
@@ -288,6 +311,8 @@ public class TimePicker extends FrameLayout {
     }
 
     /**
+     * Gets current minute.
+     *
      * @return The current minute.
      */
     public Integer getCurrentMinute() {
@@ -296,6 +321,8 @@ public class TimePicker extends FrameLayout {
 
     /**
      * Set the current minute (0-59).
+     *
+     * @param currentMinute the current minute
      */
     public void setCurrentMinute(Integer currentMinute) {
         this.mCurrentMinute = currentMinute;
@@ -303,6 +330,8 @@ public class TimePicker extends FrameLayout {
     }
 
     /**
+     * Gets current seconds.
+     *
      * @return The current minute.
      */
     public Integer getCurrentSeconds() {
@@ -359,6 +388,8 @@ public class TimePicker extends FrameLayout {
     }
 
     /**
+     * Is 24 hour view boolean.
+     *
      * @return true if this is in 24 hour view else false.
      */
     public boolean is24HourView() {
@@ -371,6 +402,8 @@ public class TimePicker extends FrameLayout {
     public interface OnTimeChangedListener {
 
         /**
+         * On time changed.
+         *
          * @param view      The view associated with this listener.
          * @param hourOfDay The current hour.
          * @param minute    The current minute.
@@ -385,6 +418,9 @@ public class TimePicker extends FrameLayout {
      */
     private static class SavedState extends BaseSavedState {
 
+        /**
+         * The constant CREATOR.
+         */
         public static final Parcelable.Creator<SavedState> CREATOR = new Creator<SavedState>() {
             public SavedState createFromParcel(Parcel in) {
                 return new SavedState(in);
@@ -416,10 +452,20 @@ public class TimePicker extends FrameLayout {
             dest.writeInt(mMinute);
         }
 
+        /**
+         * Gets hour.
+         *
+         * @return the hour
+         */
         public int getHour() {
             return mHour;
         }
 
+        /**
+         * Gets minute.
+         *
+         * @return the minute
+         */
         public int getMinute() {
             return mMinute;
         }

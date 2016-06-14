@@ -1,3 +1,19 @@
+/*
+ * Copyright (c) 2016.  SmartHMA ESA
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package pl.wasat.smarthma.database;
 
 import android.content.ContentValues;
@@ -11,6 +27,9 @@ import android.provider.BaseColumns;
 
 import pl.wasat.smarthma.model.entry.Entry;
 
+/**
+ * The type Eo db adapter.
+ */
 public class EoDbAdapter {
 
     private static final String KEY_ROWID = BaseColumns._ID;
@@ -31,24 +50,47 @@ public class EoDbAdapter {
     private SQLiteHelper sqLiteHelper;
     private SQLiteDatabase sqLiteDatabase;
 
+    /**
+     * Instantiates a new Eo db adapter.
+     *
+     * @param c the c
+     */
     public EoDbAdapter(Context c) {
         context = c;
     }
 
+    /**
+     * Open to read.
+     *
+     * @throws SQLException the sql exception
+     */
     public void openToRead() throws android.database.SQLException {
         sqLiteHelper = new SQLiteHelper(context, DATABASE_NAME, null, DATABASE_VERSION);
         sqLiteDatabase = sqLiteHelper.getReadableDatabase();
     }
 
+    /**
+     * Open to write.
+     *
+     * @throws SQLException the sql exception
+     */
     public void openToWrite() throws android.database.SQLException {
         sqLiteHelper = new SQLiteHelper(context, DATABASE_NAME, null, DATABASE_VERSION);
         sqLiteDatabase = sqLiteHelper.getWritableDatabase();
     }
 
+    /**
+     * Close.
+     */
     public void close() {
         sqLiteHelper.close();
     }
 
+    /**
+     * Insert blog listing.
+     *
+     * @param guid the guid
+     */
     public void insertBlogListing(String guid) {
         ContentValues initialValues = new ContentValues();
         initialValues.put(KEY_GUID, guid);
@@ -57,6 +99,13 @@ public class EoDbAdapter {
         sqLiteDatabase.insert(DATABASE_TABLE, null, initialValues);
     }
 
+    /**
+     * Gets blog listing.
+     *
+     * @param guid the guid
+     * @return the blog listing
+     * @throws SQLException the sql exception
+     */
     public Entry getBlogListing(String guid) throws SQLException {
         Cursor mCursor =
                 sqLiteDatabase.query(true, DATABASE_TABLE, new String[]{
@@ -85,25 +134,54 @@ public class EoDbAdapter {
         return null;
     }
 
+    /**
+     * Mark as unread boolean.
+     *
+     * @param guid the guid
+     * @return the boolean
+     */
     public boolean markAsUnread(String guid) {
         ContentValues args = new ContentValues();
         args.put(KEY_READ, false);
         return sqLiteDatabase.update(DATABASE_TABLE, args, KEY_GUID + "='" + guid + "'", null) > 0;
     }
 
+    /**
+     * Mark as read boolean.
+     *
+     * @param guid the guid
+     * @return the boolean
+     */
     public boolean markAsRead(String guid) {
         ContentValues args = new ContentValues();
         args.put(KEY_READ, true);
         return sqLiteDatabase.update(DATABASE_TABLE, args, KEY_GUID + "='" + guid + "'", null) > 0;
     }
 
+    /**
+     * Save for offline boolean.
+     *
+     * @param guid the guid
+     * @return the boolean
+     */
     public boolean saveForOffline(String guid) {
         ContentValues args = new ContentValues();
         args.put(KEY_OFFLINE, true);
         return sqLiteDatabase.update(DATABASE_TABLE, args, KEY_GUID + "='" + guid + "'", null) > 0;
     }
 
+    /**
+     * The type Sq lite helper.
+     */
     public class SQLiteHelper extends SQLiteOpenHelper {
+        /**
+         * Instantiates a new Sq lite helper.
+         *
+         * @param context the context
+         * @param name    the name
+         * @param factory the factory
+         * @param version the version
+         */
         public SQLiteHelper(Context context, String name, CursorFactory factory, int version) {
             super(context, name, factory, version);
         }

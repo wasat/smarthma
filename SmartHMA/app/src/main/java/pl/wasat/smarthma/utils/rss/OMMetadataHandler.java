@@ -1,3 +1,19 @@
+/*
+ * Copyright (c) 2016.  SmartHMA ESA
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package pl.wasat.smarthma.utils.rss;
 
 import org.xml.sax.Attributes;
@@ -163,9 +179,17 @@ class OMMetadataHandler extends DefaultHandler {
     private MultiGeometry multiGeometry;
     private GeometryMembers geometryMembers;
 
+    /**
+     * Instantiates a new Om metadata handler.
+     */
     public OMMetadataHandler() {
     }
 
+    /**
+     * Instantiates a new Om metadata handler.
+     *
+     * @param entry the entry
+     */
     public OMMetadataHandler(Entry entry) {
         this.entry = entry;
     }
@@ -355,14 +379,16 @@ class OMMetadataHandler extends DefaultHandler {
         } else if (localName.equalsIgnoreCase("multiPoint")) {
             multiPoint = new MultiPoint();
             multiPoint.set_gml_id(atts.getValue("gml:id"));
+            pointMembers = new ArrayList<>();
         } else if (localName.equalsIgnoreCase("pointMember")) {
-            pointMemberLevel = pointMemberLevel - 1;
+/*            pointMemberLevel = pointMemberLevel - 1;
             if (pointMemberLevel == 0) {
                 pointMembers = new ArrayList<>();
             }
             if (pointMemberLevel == -1) {
                 pointMember = new PointMember();
-            }
+            }*/
+            pointMember = new PointMember();
         } else if (localName.equalsIgnoreCase("resolution")) {
             resolution = new Resolution();
             resolution.setUom(atts.getValue("uom"));
@@ -772,13 +798,15 @@ class OMMetadataHandler extends DefaultHandler {
             multiPoint.set_srsName(chars.toString());
             multiPoint.setPointMember(pointMembers);
         } else if (localName.equalsIgnoreCase("pointMember")) {
-            if (pointMemberLevel == -1) {
+/*            if (pointMemberLevel == -1) {
                 pointMember.setPoint(point);
             }
             if (pointMemberLevel == 0) {
                 pointMembers.add(pointMember);
             }
-            pointMemberLevel = pointMemberLevel + 1;
+            pointMemberLevel = pointMemberLevel + 1;*/
+            pointMember.setPoint(point);
+            pointMembers.add(pointMember);
         } else if (localName.equalsIgnoreCase("resolution")) {
             resolution.set_text(chars.toString());
         } else if (localName.equalsIgnoreCase("sensorType")) {
@@ -794,6 +822,7 @@ class OMMetadataHandler extends DefaultHandler {
             featureOfInterest.setFootprint(footprint);
         } else if (localName.equalsIgnoreCase("Location")) {
             location.setMultiGeometry(multiGeometry);
+            location.setMultiPoint(multiPoint);
         } else if (localName.equalsIgnoreCase("MultiGeometry")) {
             multiGeometry.setGeometryMembers(geometryMembers);
         } else if (localName.equalsIgnoreCase("geometryMembers")) {
@@ -1006,7 +1035,7 @@ class OMMetadataHandler extends DefaultHandler {
             linearRing.setPosString(posString);
         } else if (localName.equalsIgnoreCase("pos")) {
             pos.set_text(chars.toString());
-            posList.add(pos);
+            if (posList != null) posList.add(pos);
         } else if (localName.equalsIgnoreCase("poslist")) {
             posString.setPointsString(chars.toString());
         }
@@ -1018,10 +1047,20 @@ class OMMetadataHandler extends DefaultHandler {
         chars.append(new String(ch, start, length).trim());
     }
 
+    /**
+     * Gets om metadata.
+     *
+     * @return the om metadata
+     */
     public EarthObservation getOMMetadata() {
         return earthObservation;
     }
 
+    /**
+     * Gets entry.
+     *
+     * @return the entry
+     */
     public Entry getEntry() {
         return entry;
     }

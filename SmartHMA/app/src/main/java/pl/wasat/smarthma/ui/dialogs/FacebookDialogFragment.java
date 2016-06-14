@@ -1,3 +1,19 @@
+/*
+ * Copyright (c) 2016.  SmartHMA ESA
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package pl.wasat.smarthma.ui.dialogs;
 
 import android.app.AlertDialog;
@@ -76,6 +92,9 @@ public class FacebookDialogFragment extends DialogFragment implements Target {
         }
     };
 
+    /**
+     * Instantiates a new Facebook dialog fragment.
+     */
     public FacebookDialogFragment() {
         // Required empty public constructor
     }
@@ -231,6 +250,13 @@ public class FacebookDialogFragment extends DialogFragment implements Target {
     public void onPrepareLoad(Drawable arg0) {
     }
 
+    /**
+     * Post on activity result.
+     *
+     * @param requestCode the request code
+     * @param resultCode  the result code
+     * @param data        the data
+     */
     public void postOnActivityResult(int requestCode, int resultCode,
                                      Intent data) {
         // Session session = Session.getActiveSession();
@@ -365,10 +391,21 @@ public class FacebookDialogFragment extends DialogFragment implements Target {
     }
 
     private enum PendingAction {
-        NONE, POST_PHOTO
+        /**
+         * None pending action.
+         */
+        NONE, /**
+         * Post photo pending action.
+         */
+        POST_PHOTO
     }
 
     private interface GraphObjectWithId extends GraphObject {
+        /**
+         * Gets id.
+         *
+         * @return the id
+         */
         String getId();
     }
 }

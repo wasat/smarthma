@@ -1,7 +1,26 @@
+/*
+ * Copyright (c) 2016.  SmartHMA ESA
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package pl.wasat.smarthma.model.explaindoc;
 
 import java.io.Serializable;
 
+/**
+ * The type Server info.
+ */
 public class ServerInfo implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -11,10 +30,15 @@ public class ServerInfo implements Serializable {
     private int port;
     private String database;
 
+    /**
+     * Instantiates a new Server info.
+     */
     public ServerInfo() {
     }
 
     /**
+     * Gets id.
+     *
      * @return the id
      */
     public int getId() {
@@ -22,6 +46,8 @@ public class ServerInfo implements Serializable {
     }
 
     /**
+     * Sets id.
+     *
      * @param id the id to set
      */
     public void setId(int id) {
@@ -29,6 +55,8 @@ public class ServerInfo implements Serializable {
     }
 
     /**
+     * Gets host.
+     *
      * @return the host
      */
     public String getHost() {
@@ -36,6 +64,8 @@ public class ServerInfo implements Serializable {
     }
 
     /**
+     * Sets host.
+     *
      * @param host the host to set
      */
     public void setHost(String host) {
@@ -43,6 +73,8 @@ public class ServerInfo implements Serializable {
     }
 
     /**
+     * Gets port.
+     *
      * @return the port
      */
     public int getPort() {
@@ -50,6 +82,8 @@ public class ServerInfo implements Serializable {
     }
 
     /**
+     * Sets port.
+     *
      * @param port the port to set
      */
     public void setPort(int port) {
@@ -57,6 +91,8 @@ public class ServerInfo implements Serializable {
     }
 
     /**
+     * Gets database.
+     *
      * @return the database
      */
     public String getDatabase() {
@@ -64,6 +100,8 @@ public class ServerInfo implements Serializable {
     }
 
     /**
+     * Sets database.
+     *
      * @param database the database to set
      */
     public void setDatabase(String database) {

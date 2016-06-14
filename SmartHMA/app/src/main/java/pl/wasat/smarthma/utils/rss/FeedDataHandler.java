@@ -1,4 +1,22 @@
+/*
+ * Copyright (c) 2016.  SmartHMA ESA
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package pl.wasat.smarthma.utils.rss;
+
+import android.util.Log;
 
 import org.apache.commons.lang3.StringUtils;
 import org.xml.sax.Attributes;
@@ -47,6 +65,7 @@ class FeedDataHandler extends DefaultHandler {
     private boolean isInEntry = false;
     private boolean isInCIDate = false;
     private boolean isIdAdded = false;
+    private boolean isInMeta = false;
 
     private Feed feed;
 
@@ -79,6 +98,11 @@ class FeedDataHandler extends DefaultHandler {
 
     private EOPrefixes eoPrefixes;
 
+    /**
+     * Instantiates a new Feed data handler.
+     *
+     * @param inStringFeed the in string feed
+     */
     public FeedDataHandler(String inStringFeed) {
         this.inStrArrFeed = inStringFeed.split("\n");
     }
@@ -164,7 +188,7 @@ class FeedDataHandler extends DefaultHandler {
             summary = new Summary();
             summary.setType(atts.getValue("xml:lang"));
         } else if (localName.equalsIgnoreCase("Polygon")) {
-            polygon = new Polygon();
+            if (!isInMeta) polygon = new Polygon();
         } else if (localName.equalsIgnoreCase("where")) {
             Where where = new Where();
         } else if (localName.equalsIgnoreCase("group")) {
@@ -182,12 +206,16 @@ class FeedDataHandler extends DefaultHandler {
             // MDMetadata declarations
             // MI_Metadata declarations
         } else if (localName.equalsIgnoreCase("MD_Metadata")) {
+            isInMeta = true;
             startRawMetadata();
         } else if (localName.equalsIgnoreCase("MI_Metadata")) {
+            isInMeta = true;
             startRawMetadata();
         } else if (localName.equalsIgnoreCase("EarthObservation")) {
+            isInMeta = true;
             startRawMetadata();
         } else if (localName.equalsIgnoreCase("dc")) {
+            isInMeta = true;
             startRawMetadata();
         }
     }
@@ -269,7 +297,9 @@ class FeedDataHandler extends DefaultHandler {
             } else if (localName.equalsIgnoreCase("updated")) {
                 entry.setUpdated(chars.toString());
             } else if (localName.equalsIgnoreCase("polygon")) {
-                polygon.setText(chars.toString());
+                if (!isInMeta) {
+                    polygon.setText(chars.toString());
+                }
             } else if (localName.equalsIgnoreCase("summary")) {
                 summary.setCdata(chars.toString());
                 entry.setSummary(summary);
@@ -295,15 +325,19 @@ class FeedDataHandler extends DefaultHandler {
             else if (localName.equalsIgnoreCase("MD_Metadata")) {
                 rawMetadata = buildRawMetadata(inStrArrFeed, startLine - 1, locator.getLineNumber());
                 entry.setMetadataType(MetadataType.ISO);
+                isInMeta = false;
             } else if (localName.equalsIgnoreCase("MI_Metadata")) {
                 rawMetadata = buildRawMetadata(inStrArrFeed, startLine - 1, locator.getLineNumber());
                 entry.setMetadataType(MetadataType.ISO);
+                isInMeta = false;
             } else if (localName.equalsIgnoreCase("EarthObservation")) {
                 rawMetadata = buildRawMetadata(inStrArrFeed, startLine - 1, locator.getLineNumber());
                 entry.setMetadataType(MetadataType.OM);
+                isInMeta = false;
             } else if (localName.equalsIgnoreCase("dc")) {
                 rawMetadata = buildRawMetadata(inStrArrFeed, startLine - 1, locator.getLineNumber());
                 entry.setMetadataType(MetadataType.DC);
+                isInMeta = false;
             }
         }
     }
@@ -358,6 +392,11 @@ class FeedDataHandler extends DefaultHandler {
         startLine = locator.getLineNumber();
     }
 
+    /**
+     * Gets feeds.
+     *
+     * @return the feeds
+     */
     public Feed getFeeds() {
         return feed;
     }

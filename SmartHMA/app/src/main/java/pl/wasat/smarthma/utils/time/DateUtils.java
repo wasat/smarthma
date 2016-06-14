@@ -1,3 +1,19 @@
+/*
+ * Copyright (c) 2016.  SmartHMA ESA
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package pl.wasat.smarthma.utils.time;
 
 import java.text.SimpleDateFormat;
@@ -9,8 +25,17 @@ import pl.wasat.smarthma.R;
 import pl.wasat.smarthma.SmartHMApplication;
 import pl.wasat.smarthma.model.iso.EntryISO;
 
+/**
+ * The type Date utils.
+ */
 public class DateUtils {
 
+    /**
+     * Gets date difference.
+     *
+     * @param thenDate the then date
+     * @return the date difference
+     */
     public static String getDateDifference(Date thenDate) {
         Calendar now = Calendar.getInstance();
         Calendar then = Calendar.getInstance();
@@ -49,6 +74,12 @@ public class DateUtils {
         }
     }
 
+    /**
+     * Gets iso pub date.
+     *
+     * @param entry the entry
+     * @return the iso pub date
+     */
     public static String getISOPubDate(EntryISO entry) {
         String date = "";
         try {
@@ -72,6 +103,8 @@ public class DateUtils {
     }
 
     /**
+     * Calendar to date string string.
+     *
      * @param cal - Calendar
      * @return - String with date
      */
@@ -81,6 +114,8 @@ public class DateUtils {
     }
 
     /**
+     * Calendar to time string string.
+     *
      * @param cal - Calendar
      * @return - String of time
      */
@@ -89,12 +124,24 @@ public class DateUtils {
         return dfTime.format(cal.getTime());
     }
 
+    /**
+     * Calendar to iso string.
+     *
+     * @param cal the cal
+     * @return the string
+     */
     public static String calendarToISO(Calendar cal) {
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'",
                 Locale.UK);
         return df.format(cal.getTime());
     }
 
+    /**
+     * Timestamp to date time str string.
+     *
+     * @param timestamp the timestamp
+     * @return the string
+     */
     public static String timestampToDateTimeStr(long timestamp) {
         return new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss", Locale.getDefault()).format(new Date(timestamp));
     }

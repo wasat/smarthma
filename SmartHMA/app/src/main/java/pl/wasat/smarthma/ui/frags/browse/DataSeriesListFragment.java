@@ -1,3 +1,19 @@
+/*
+ * Copyright (c) 2016.  SmartHMA ESA
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package pl.wasat.smarthma.ui.frags.browse;
 
 import android.app.Activity;
@@ -41,6 +57,9 @@ public class DataSeriesListFragment extends BaseSpiceListFragment {
 
     private OnDataSeriesListFragmentListener mListener;
 
+    /**
+     * Instantiates a new Data series list fragment.
+     */
     public DataSeriesListFragment() {
         setHasOptionsMenu(true);
     }
@@ -50,6 +69,7 @@ public class DataSeriesListFragment extends BaseSpiceListFragment {
      * the provided parameters.
      *
      * @param fedeoRequestParams Parameter 1.
+     * @param stopNewSearch      the stop new search
      * @return A new instance of fragment DataSeriesListFragment.
      */
     public static DataSeriesListFragment newInstance(FedeoRequestParams fedeoRequestParams, Boolean stopNewSearch) {
@@ -244,6 +264,11 @@ public class DataSeriesListFragment extends BaseSpiceListFragment {
         mActivatedPosition = position;
     }
 
+    /**
+     * Sets activate on item click.
+     *
+     * @param activateOnItemClick the activate on item click
+     */
     public void setActivateOnItemClick(boolean activateOnItemClick) {
         getListView().setChoiceMode(
                 activateOnItemClick ? ListView.CHOICE_MODE_SINGLE
@@ -259,8 +284,12 @@ public class DataSeriesListFragment extends BaseSpiceListFragment {
      * "http://developer.android.com/training/basics/fragments/communicating.html"
      * >Communicating with Other Fragments</a> for more information.
      */
-
     public interface OnDataSeriesListFragmentListener {
+        /**
+         * On data series fragment item selected.
+         *
+         * @param id the id
+         */
         void onDataSeriesFragmentItemSelected(String id);
     }
 }

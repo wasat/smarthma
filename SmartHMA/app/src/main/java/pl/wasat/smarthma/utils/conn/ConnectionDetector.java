@@ -1,3 +1,19 @@
+/*
+ * Copyright (c) 2016.  SmartHMA ESA
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package pl.wasat.smarthma.utils.conn;
 
 import android.app.Activity;
@@ -10,16 +26,26 @@ import android.widget.Toast;
 
 import pl.wasat.smarthma.R;
 
+/**
+ * The type Connection detector.
+ */
 public class ConnectionDetector {
     private final Context context;
 
+    /**
+     * Instantiates a new Connection detector.
+     *
+     * @param context the context
+     */
     public ConnectionDetector(Context context) {
         this.context = context;
     }
 
     /**
      * Checking for all possible internet providers
-     **/
+     *
+     * @return the boolean
+     */
     public boolean isConnectingToInternet() {
         ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
@@ -47,6 +73,11 @@ public class ConnectionDetector {
         return false;
     }
 
+    /**
+     * Is wifi connected boolean.
+     *
+     * @return the boolean
+     */
     public boolean isWifiConnected() {
         ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Activity.CONNECTIVITY_SERVICE);
         NetworkInfo activeNetwork = cm.getActiveNetworkInfo();

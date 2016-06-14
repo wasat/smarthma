@@ -1,3 +1,19 @@
+/*
+ * Copyright (c) 2016.  SmartHMA ESA
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package pl.wasat.smarthma.model.osdd;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
@@ -8,6 +24,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 
+/**
+ * The type Url.
+ */
 public class Url {
 
     private String Rel;
@@ -19,6 +38,8 @@ public class Url {
 
 
     /**
+     * Gets rel.
+     *
      * @return The Rel
      */
     public String getRel() {
@@ -26,6 +47,8 @@ public class Url {
     }
 
     /**
+     * Sets rel.
+     *
      * @param Rel The _rel
      */
     public void setRel(String Rel) {
@@ -33,6 +56,8 @@ public class Url {
     }
 
     /**
+     * Gets template.
+     *
      * @return The Template
      */
     public String getTemplate() {
@@ -40,6 +65,8 @@ public class Url {
     }
 
     /**
+     * Sets template.
+     *
      * @param Template The _template
      */
     public void setTemplate(String Template) {
@@ -47,6 +74,8 @@ public class Url {
     }
 
     /**
+     * Gets type.
+     *
      * @return The Type
      */
     public String getType() {
@@ -54,35 +83,64 @@ public class Url {
     }
 
     /**
+     * Sets type.
+     *
      * @param Type The _type
      */
     public void setType(String Type) {
         this.Type = Type;
     }
 
+    /**
+     * Gets index offset.
+     *
+     * @return the index offset
+     */
     public String getIndexOffset() {
         return IndexOffset;
     }
 
+    /**
+     * Sets index offset.
+     *
+     * @param indexOffset the index offset
+     */
     public void setIndexOffset(String indexOffset) {
         IndexOffset = indexOffset;
     }
 
+    /**
+     * Gets page offset.
+     *
+     * @return the page offset
+     */
     public String getPageOffset() {
         return PageOffset;
     }
 
+    /**
+     * Sets page offset.
+     *
+     * @param pageOffset the page offset
+     */
     public void setPageOffset(String pageOffset) {
         PageOffset = pageOffset;
     }
 
     /**
+     * Gets parameters.
+     *
      * @return The Parameter
      */
     public List<Parameter> getParameters() {
         return Parameters;
     }
 
+    /**
+     * Sets parameters.
+     *
+     * @param parameters the parameters
+     */
     public void setParameters(List<Parameter> parameters) {
         Parameters = parameters;
     }

@@ -1,3 +1,19 @@
+/*
+ * Copyright (c) 2016.  SmartHMA ESA
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 /**
  *
  */
@@ -20,6 +36,8 @@ import pl.wasat.smarthma.utils.obj.LatLngExt;
 import pl.wasat.smarthma.utils.text.StringExt;
 
 /**
+ * The type Fedeo request params.
+ *
  * @author Daniel Zinkiewicz Wasat Sp. z o.o 18-07-2014
  */
 @SuppressWarnings("WeakerAccess")
@@ -27,6 +45,9 @@ public class FedeoRequestParams extends OSDDMatcher implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
+    /**
+     * The constant IS_BUILD_FROM_SHARED.
+     */
     public static boolean IS_BUILD_FROM_SHARED;
     private static Boolean IS_URL_TEMPLATE;
     private HashMap<String, String> params;
@@ -39,7 +60,7 @@ public class FedeoRequestParams extends OSDDMatcher implements Serializable {
     private String templateUrl;
 
     /**
-     *
+     * Instantiates a new Fedeo request params.
      */
     public FedeoRequestParams() {
         this.params = new HashMap<>();
@@ -48,6 +69,11 @@ public class FedeoRequestParams extends OSDDMatcher implements Serializable {
         setDefaultParams();
     }
 
+    /**
+     * Instantiates a new Fedeo request params.
+     *
+     * @param isUrlTemplate the is url template
+     */
     public FedeoRequestParams(Boolean isUrlTemplate) {
         this.params = new HashMap<>();
         IS_URL_TEMPLATE = isUrlTemplate;
@@ -55,6 +81,12 @@ public class FedeoRequestParams extends OSDDMatcher implements Serializable {
         setDefaultParams();
     }
 
+    /**
+     * Instantiates a new Fedeo request params.
+     *
+     * @param initAreaTime  the init area time
+     * @param isUrlTemplate the is url template
+     */
     public FedeoRequestParams(boolean initAreaTime, boolean isUrlTemplate) {
         this.params = new HashMap<>();
         IS_URL_TEMPLATE = isUrlTemplate;
@@ -142,6 +174,11 @@ public class FedeoRequestParams extends OSDDMatcher implements Serializable {
         this.url = this.url.replaceAll(" ", "%2B");
     }
 
+    /**
+     * Gets url.
+     *
+     * @return the url
+     */
     public String getUrl() {
         buildUrl();
         validateUrl();
@@ -149,22 +186,47 @@ public class FedeoRequestParams extends OSDDMatcher implements Serializable {
         return url;
     }
 
+    /**
+     * Sets url.
+     *
+     * @param url the url
+     */
     public void setUrl(String url) {
         this.url = url;
     }
 
+    /**
+     * Gets template url.
+     *
+     * @return the template url
+     */
     public String getTemplateUrl() {
         return templateUrl;
     }
 
+    /**
+     * Sets template url.
+     *
+     * @param templateUrl the template url
+     */
     public void setTemplateUrl(String templateUrl) {
         this.templateUrl = templateUrl;
     }
 
+    /**
+     * Gets params.
+     *
+     * @return the params
+     */
     public HashMap<String, String> getParams() {
         return params;
     }
 
+    /**
+     * Sets params.
+     *
+     * @param params the params
+     */
     public void setParams(HashMap<String, String> params) {
         if (this.params == null) this.params = params;
         else {
@@ -174,12 +236,20 @@ public class FedeoRequestParams extends OSDDMatcher implements Serializable {
         }
     }
 
+    /**
+     * Add osdd value.
+     *
+     * @param key   the key
+     * @param value the value
+     */
     public void addOsddValue(String key, String value) {
         if (this.params == null) this.params = new HashMap<>();
         this.params.put(key, value);
     }
 
     /**
+     * Gets start date.
+     *
      * @return the startDate
      */
     public String getStartDate() {
@@ -187,6 +257,8 @@ public class FedeoRequestParams extends OSDDMatcher implements Serializable {
     }
 
     /**
+     * Sets start date.
+     *
      * @param startDate the startDate to set
      */
     public void setStartDate(String startDate) {
@@ -195,6 +267,8 @@ public class FedeoRequestParams extends OSDDMatcher implements Serializable {
     }
 
     /**
+     * Gets end date.
+     *
      * @return the endDate
      */
     public String getEndDate() {
@@ -202,6 +276,8 @@ public class FedeoRequestParams extends OSDDMatcher implements Serializable {
     }
 
     /**
+     * Sets end date.
+     *
      * @param endDate the endDate to set
      */
     public void setEndDate(String endDate) {
@@ -210,6 +286,8 @@ public class FedeoRequestParams extends OSDDMatcher implements Serializable {
     }
 
     /**
+     * Gets parent identifier.
+     *
      * @return the parentIdentifier
      */
     public String getParentIdentifier() {
@@ -217,6 +295,8 @@ public class FedeoRequestParams extends OSDDMatcher implements Serializable {
     }
 
     /**
+     * Sets parent identifier.
+     *
      * @param parentIdentifier the parentIdentifier to set
      */
     public void setParentIdentifier(String parentIdentifier) {
@@ -231,6 +311,8 @@ public class FedeoRequestParams extends OSDDMatcher implements Serializable {
     }
 
     /**
+     * Gets bbox.
+     *
      * @return the box
      */
     public String getBbox() {
@@ -266,6 +348,8 @@ public class FedeoRequestParams extends OSDDMatcher implements Serializable {
     }
 
     /**
+     * Sets bbox.
+     *
      * @param bbox - Bounding Box
      */
     public void setBbox(LatLngBoundsExt bbox) {

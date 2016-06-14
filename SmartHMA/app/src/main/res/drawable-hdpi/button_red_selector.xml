@@ -1,13 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?><!--
-  ~ sidebar_shadow_right.xml
-  ~ 
-  ~ Copyright (C) 2013 6 Wunderkinder GmbH
-  ~
-  ~ Author: Jose L Ugia - @Jl_Ugia
-  ~ Author: Antonio Consuegra - @aconsuegra
-  ~ Designer: Benedikt Lehnert - @blehnert
-  ~ Designer: Timothy Achumba - @iam_timm
-  ~ Version: 1.0
+  ~ Copyright (c) 2016.  SmartHMA ESA
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
   ~ you may not use this file except in compliance with the License.
@@ -20,7 +12,7 @@
   ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   ~ See the License for the specific language governing permissions and
   ~ limitations under the License.
--->
+  -->
 
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
 

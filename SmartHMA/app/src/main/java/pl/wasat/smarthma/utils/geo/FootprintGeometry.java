@@ -1,3 +1,19 @@
+/*
+ * Copyright (c) 2016.  SmartHMA ESA
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package pl.wasat.smarthma.utils.geo;
 
 import android.location.Location;
@@ -10,7 +26,6 @@ import pl.wasat.smarthma.utils.obj.LatLngExt;
  * Created by Daniel on 2016-03-09.
  * This file is a part of module SmartHMA project.
  */
-
 public class FootprintGeometry {
     private final LatLngExt footprintCenter;
     private final ArrayList<LatLngExt> footprintPoints;
@@ -23,11 +38,22 @@ public class FootprintGeometry {
     private float width;
     private float height;
 
+    /**
+     * Instantiates a new Footprint geometry.
+     *
+     * @param footprintPoints the footprint points
+     * @param footprintCenter the footprint center
+     */
     public FootprintGeometry(ArrayList<LatLngExt> footprintPoints, LatLngExt footprintCenter) {
         this.footprintPoints = footprintPoints;
         this.footprintCenter = footprintCenter;
     }
 
+    /**
+     * Invoke footprint geometry.
+     *
+     * @return the footprint geometry
+     */
     public FootprintGeometry invoke() {
         validateGeometry();
         validateCenter(footprintCenter);
@@ -35,23 +61,48 @@ public class FootprintGeometry {
         return this;
     }
 
+    /**
+     * Gets center.
+     *
+     * @return the center
+     */
     public LatLngExt getCenter() {
         return center;
     }
 
+    /**
+     * Get bearings array float [ ].
+     *
+     * @return the float [ ]
+     */
     public float[] getBearingsArray() {
         if (bearingsArray == null) generateBearings();
         return bearingsArray;
     }
 
+    /**
+     * Gets init bearing.
+     *
+     * @return the init bearing
+     */
     public float getInitBearing() {
         return initBearing;
     }
 
+    /**
+     * Gets width.
+     *
+     * @return the width
+     */
     public float getWidth() {
         return width;
     }
 
+    /**
+     * Gets height.
+     *
+     * @return the height
+     */
     public float getHeight() {
         return height;
     }

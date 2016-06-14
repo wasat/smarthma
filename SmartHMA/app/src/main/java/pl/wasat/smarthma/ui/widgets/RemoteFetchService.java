@@ -1,3 +1,19 @@
+/*
+ * Copyright (c) 2016.  SmartHMA ESA
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package pl.wasat.smarthma.ui.widgets;
 
 import android.app.Service;
@@ -11,8 +27,14 @@ import java.util.List;
 import pl.wasat.smarthma.helper.Const;
 import pl.wasat.smarthma.model.news.NewsArticle;
 
+/**
+ * The type Remote fetch service.
+ */
 public class RemoteFetchService extends Service {
 
+    /**
+     * The List item list.
+     */
     public static ArrayList<ListItem> listItemList;
     private int appWidgetId = AppWidgetManager.INVALID_APPWIDGET_ID;
 
@@ -47,6 +69,11 @@ public class RemoteFetchService extends Service {
         task.execute(Const.URL_ESA_NEWS_1, this);
     }
 
+    /**
+     * Refresh list.
+     *
+     * @param articles the articles
+     */
     public void refreshList(List<NewsArticle> articles) {
         listItemList = new ArrayList<>();
         for (NewsArticle article : articles) {

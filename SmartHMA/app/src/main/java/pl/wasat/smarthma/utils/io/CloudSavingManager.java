@@ -1,3 +1,19 @@
+/*
+ * Copyright (c) 2016.  SmartHMA ESA
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package pl.wasat.smarthma.utils.io;
 
 import android.accounts.AccountManager;
@@ -50,17 +66,34 @@ public class CloudSavingManager {
     private boolean mLoggedIn;
     private DropboxAPI<AndroidAuthSession> mApi;
 
+    /**
+     * Instantiates a new Cloud saving manager.
+     *
+     * @param context the context
+     */
     public CloudSavingManager(Context context) {
         this.context = context;
         downloadDropbox = false;
     }
 
+    /**
+     * Sets cloud save parameters.
+     *
+     * @param name     the name
+     * @param url      the url
+     * @param metadata the metadata
+     */
     public void setCloudSaveParameters(String name, String url, String metadata) {
         this.urlData = url;
         this.rawMetadata = metadata;
         this.productName = name;
     }
 
+    /**
+     * Choose cloud provider.
+     *
+     * @param type the type
+     */
     public void chooseCloudProvider(CloudType type) {
         switch (type) {
             case GOOGLE_DRIVE:
@@ -200,6 +233,13 @@ public class CloudSavingManager {
         }
     }
 
+    /**
+     * Post activity result.
+     *
+     * @param requestCode the request code
+     * @param resultCode  the result code
+     * @param data        the data
+     */
     public void postActivityResult(int requestCode, int resultCode, Intent data) {
         switch (requestCode) {
             case REQUEST_GOOGLE_PLAY_SERVICES:
@@ -254,6 +294,9 @@ public class CloudSavingManager {
         dialog.show();
     }
 
+    /**
+     * Resume dropbox service.
+     */
     public void resumeDropboxService() {
         if (downloadDropbox && mApi != null && mApi.getSession().authenticationSuccessful()) {
             startDownloadDropbox();

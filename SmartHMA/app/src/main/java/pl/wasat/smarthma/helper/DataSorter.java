@@ -1,3 +1,19 @@
+/*
+ * Copyright (c) 2016.  SmartHMA ESA
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package pl.wasat.smarthma.helper;
 
 import java.util.Collections;
@@ -13,7 +29,7 @@ import pl.wasat.smarthma.model.mission.MissionItemData;
 import pl.wasat.smarthma.utils.time.SimpleDate;
 
 /**
- *  Used for sorting collections containing metadata downloaded from ESA servers.
+ * Used for sorting collections containing metadata downloaded from ESA servers.
  */
 public class DataSorter {
 
@@ -21,7 +37,7 @@ public class DataSorter {
      * Sorts lists and collections. In case of ISO and OM entries, the given list will be sorted
      * using the most recently picked sorting type specified in the SmartHMApplication class.
      *
-     * @param list  a collection of objects compatible with this class
+     * @param list a collection of objects compatible with this class
      */
     public void sort(List list) {
         if (!list.isEmpty()) {
@@ -269,7 +285,8 @@ public class DataSorter {
 
     /**
      * Sorts lists of SmartHMA EntryISO objects by their date in ascending order.
-     * @param list  a list of entries
+     *
+     * @param list a list of entries
      */
     void sortISOEntriesByDateAscending(List<EntryISO> list) {
         Comparator comparator = new Comparator<EntryISO>() {
@@ -284,7 +301,8 @@ public class DataSorter {
 
     /**
      * Sorts lists of SmartHMA EntryISO objects by their date in descending order.
-     * @param list  a list of entries
+     *
+     * @param list a list of entries
      */
     void sortISOEntriesByDateDescending(List<EntryISO> list) {
         Comparator comparator = new Comparator<EntryISO>() {

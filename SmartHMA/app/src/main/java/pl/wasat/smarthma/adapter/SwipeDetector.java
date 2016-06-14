@@ -1,3 +1,19 @@
+/*
+ * Copyright (c) 2016.  SmartHMA ESA
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package pl.wasat.smarthma.adapter;
 
 import android.view.MotionEvent;
@@ -11,6 +27,9 @@ import pl.wasat.smarthma.helper.SwipeListEventThrower;
 import pl.wasat.smarthma.interfaces.OnSlideElementListener;
 
 
+/**
+ * The type Swipe detector.
+ */
 public class SwipeDetector implements View.OnTouchListener {
 
     private static final int MIN_DISTANCE = 70;
@@ -23,7 +42,13 @@ public class SwipeDetector implements View.OnTouchListener {
     private int position;
     private boolean isExpandable;
 
-    //set position -1 if list is expandable
+    /**
+     * Instantiates a new Swipe detector.
+     *
+     * @param v        the v
+     * @param position the position
+     */
+//set position -1 if list is expandable
     public SwipeDetector(View v, int position) {
         deleteView = (RelativeLayout) v.findViewById(R.id.swipe_list_deleteview);
         mainView = (LinearLayout) v.findViewById(R.id.swipe_list_mainview);
@@ -32,6 +57,11 @@ public class SwipeDetector implements View.OnTouchListener {
         thrower = new SwipeListEventThrower();
     }
 
+    /**
+     * Instantiates a new Swipe detector.
+     *
+     * @param v the v
+     */
     public SwipeDetector(View v) {
         deleteView = (RelativeLayout) v.findViewById(R.id.swipe_list_deleteview);
         mainView = (LinearLayout) v.findViewById(R.id.swipe_list_mainview);
@@ -119,6 +149,11 @@ public class SwipeDetector implements View.OnTouchListener {
         animationView.setLayoutParams(params);
     }
 
+    /**
+     * Sets on click listener.
+     *
+     * @param listener the listener
+     */
     public void setOnClickListener(OnSlideElementListener listener) {
         thrower.addThrowListener(listener);
     }

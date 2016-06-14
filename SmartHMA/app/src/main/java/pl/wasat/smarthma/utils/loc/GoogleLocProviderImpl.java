@@ -1,3 +1,19 @@
+/*
+ * Copyright (c) 2016.  SmartHMA ESA
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package pl.wasat.smarthma.utils.loc;
 
 import android.content.BroadcastReceiver;
@@ -14,10 +30,25 @@ import pl.wasat.smarthma.R;
  * This file is a part of SmartHMA project.
  */
 public abstract class GoogleLocProviderImpl extends BroadcastReceiver implements GoogleLocProvider {
+    /**
+     * The constant GOOGLE_FUSED.
+     */
     public static final String GOOGLE_FUSED = "GOOGLE_FUSED";
+    /**
+     * The constant GOOGLE_ANDROID.
+     */
     public static final String GOOGLE_ANDROID = "GOOGLE_ANDROID";
+    /**
+     * The constant GOOGLE_PROVIDER_TYPE.
+     */
     public static final String GOOGLE_PROVIDER_TYPE = "GOOGLE_PROVIDER_TYPE";
+    /**
+     * The constant IS_SUCCESS.
+     */
     public static final String IS_SUCCESS = "IS_SUCCESS";
+    /**
+     * The constant GOOGLE_LOC_BROADCAST_SENT.
+     */
     public static final String GOOGLE_LOC_BROADCAST_SENT = "pl.wasat.smarthma.GOOGLE_LOC_BROADCAST_SENT";
     private static final Double DEFAULT_LAT = 50.117286; //Centre of EU
     private static final Double DEFAULT_LON = 9.247769;  //Centre of EU
@@ -28,6 +59,11 @@ public abstract class GoogleLocProviderImpl extends BroadcastReceiver implements
     private Location calculatedPosition;
     private Boolean isStarted;
 
+    /**
+     * Instantiates a new Google loc provider.
+     *
+     * @param context the context
+     */
     public GoogleLocProviderImpl(Context context) {
         this.context = context;
     }

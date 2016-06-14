@@ -1,4 +1,20 @@
 
+/*
+ * Copyright (c) 2016.  SmartHMA ESA
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package pl.wasat.smarthma.model.osdd;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
@@ -6,6 +22,9 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
 
+/**
+ * The type Image.
+ */
 public class Image {
 
     private String Height;
@@ -15,6 +34,8 @@ public class Image {
 
 
     /**
+     * Gets height.
+     *
      * @return The Height
      */
     public String getHeight() {
@@ -22,6 +43,8 @@ public class Image {
     }
 
     /**
+     * Sets height.
+     *
      * @param Height The _height
      */
     public void setHeight(String Height) {
@@ -29,6 +52,8 @@ public class Image {
     }
 
     /**
+     * Gets type.
+     *
      * @return The Type
      */
     public String getType() {
@@ -36,6 +61,8 @@ public class Image {
     }
 
     /**
+     * Sets type.
+     *
      * @param Type The _type
      */
     public void setType(String Type) {
@@ -43,6 +70,8 @@ public class Image {
     }
 
     /**
+     * Gets width.
+     *
      * @return The Width
      */
     public String getWidth() {
@@ -50,6 +79,8 @@ public class Image {
     }
 
     /**
+     * Sets width.
+     *
      * @param Width The _width
      */
     public void setWidth(String Width) {
@@ -57,6 +88,8 @@ public class Image {
     }
 
     /**
+     * Gets text.
+     *
      * @return The Text
      */
     public String getText() {
@@ -64,6 +97,8 @@ public class Image {
     }
 
     /**
+     * Sets text.
+     *
      * @param Text The __text
      */
     public void setText(String Text) {

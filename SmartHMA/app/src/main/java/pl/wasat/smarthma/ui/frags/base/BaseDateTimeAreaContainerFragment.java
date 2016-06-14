@@ -1,3 +1,19 @@
+/*
+ * Copyright (c) 2016.  SmartHMA ESA
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package pl.wasat.smarthma.ui.frags.base;
 
 import android.widget.LinearLayout;
@@ -22,6 +38,11 @@ import static pl.wasat.smarthma.helper.enums.Opts.AREA_PT_RADIUS;
  */
 public class BaseDateTimeAreaContainerFragment extends BaseParametersPickerFragment {
 
+    /**
+     * Sets bounds.
+     *
+     * @param boundingBox the bounding box
+     */
     public void setBounds(String boundingBox) {
         String[] bbox = boundingBox.split(",");
         if (bbox.length >= 4) {
@@ -30,6 +51,8 @@ public class BaseDateTimeAreaContainerFragment extends BaseParametersPickerFragm
     }
 
     /**
+     * Update area bounds.
+     *
      * @param bounds - Bounding Box
      */
     public void updateAreaBounds(LatLngBoundsExt bounds) {
@@ -51,6 +74,12 @@ public class BaseDateTimeAreaContainerFragment extends BaseParametersPickerFragm
         sharedPrefs.setBboxPrefs(bboxWest, bboxSouth, bboxEast, bboxNorth);
     }
 
+    /**
+     * Update area pt and radius.
+     *
+     * @param center the center
+     * @param radius the radius
+     */
     public void updateAreaPtAndRadius(LatLngExt center, float radius) {
 
         String centerLat = StringExt.formatLatLng(center.latitude);
@@ -79,6 +108,9 @@ public class BaseDateTimeAreaContainerFragment extends BaseParametersPickerFragm
         sharedPrefs.setBboxPrefs(bboxWest, bboxSouth, bboxEast, bboxNorth);
     }
 
+    /**
+     * Obtain global settings.
+     */
     protected void obtainGlobalSettings() {
         GlobalPreferences globalPreferences = new GlobalPreferences(getActivity());
         if (globalPreferences.getIsParamsSaved()) {
@@ -89,6 +121,9 @@ public class BaseDateTimeAreaContainerFragment extends BaseParametersPickerFragm
         }
     }
 
+    /**
+     * Load shared data.
+     */
     void loadSharedData() {
         loadDateTimePrefs();
         setDateTime();
@@ -122,6 +157,11 @@ public class BaseDateTimeAreaContainerFragment extends BaseParametersPickerFragm
         loadProperAreaView(sharedPrefs.getAreaType());
     }
 
+    /**
+     * Load proper area view.
+     *
+     * @param areaType the area type
+     */
     public void loadProperAreaView(int areaType) {
         switch (areaType) {
             case Opts.AREA_POLYGON:
@@ -157,7 +197,12 @@ public class BaseDateTimeAreaContainerFragment extends BaseParametersPickerFragm
         updateAreaPtAndRadius(new LatLngExt(center[0], center[1]), radius);
     }
 
-    //Date and Time Container
+    /**
+     * Sets start calendar.
+     *
+     * @param startDate the start date
+     */
+//Date and Time Container
     public void setStartCalendar(String startDate) {
         calStart = Calendar.getInstance();
         try {
@@ -169,6 +214,11 @@ public class BaseDateTimeAreaContainerFragment extends BaseParametersPickerFragm
         }
     }
 
+    /**
+     * Sets end calendar.
+     *
+     * @param endDate the end date
+     */
     public void setEndCalendar(String endDate) {
         calEnd = Calendar.getInstance();
         try {
@@ -198,6 +248,12 @@ public class BaseDateTimeAreaContainerFragment extends BaseParametersPickerFragm
         sharedPrefs.setBboxPrefs(bboxWest, bboxSouth, bboxEast, bboxNorth);
     }
 
+    /**
+     * Sets time view parameters.
+     *
+     * @param timeValuesLayout the time values layout
+     * @param enabled          the enabled
+     */
     void setTimeViewParameters(LinearLayout timeValuesLayout, boolean enabled) {
         //boolean checkValue = checkBoxTime.isChecked();
         checkBoxTime.setChecked(enabled);
@@ -205,6 +261,13 @@ public class BaseDateTimeAreaContainerFragment extends BaseParametersPickerFragm
         sharedPrefs.setTimeUse(enabled);
     }
 
+    /**
+     * Sets area view parameters.
+     *
+     * @param areaValuesLayout the area values layout
+     * @param areaLayout       the area layout
+     * @param enabled          the enabled
+     */
     void setAreaViewParameters(LinearLayout areaValuesLayout, LinearLayout areaLayout, boolean enabled) {
         //boolean checkValue = sharedPrefs.getAreaUse();
         checkBoxArea.setChecked(enabled);

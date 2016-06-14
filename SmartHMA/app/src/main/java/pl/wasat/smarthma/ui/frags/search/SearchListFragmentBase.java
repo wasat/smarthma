@@ -1,3 +1,19 @@
+/*
+ * Copyright (c) 2016.  SmartHMA ESA
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package pl.wasat.smarthma.ui.frags.search;
 
 import android.os.Bundle;
@@ -16,14 +32,32 @@ import pl.wasat.smarthma.model.iso.EntryISO;
 import pl.wasat.smarthma.ui.frags.base.BaseSpiceListFragment;
 import pl.wasat.smarthma.ui.frags.common.FailureFragment;
 
+/**
+ * The type Search list fragment base.
+ */
 public abstract class SearchListFragmentBase extends BaseSpiceListFragment {
     private static final String STATE_ACTIVATED_POSITION = "activated_position";
+    /**
+     * The Search request.
+     */
     FedeoRequestParams searchRequest;
+    /**
+     * The Entries.
+     */
     List<EntryISO> entries;
+    /**
+     * The Feed summary search collection fragment.
+     */
     FeedSummarySearchCollectionFragment feedSummarySearchCollectionFragment;
+    /**
+     * The M listener.
+     */
     OnSearchListFragmentListener mListener;
     private int mActivatedPosition = ListView.INVALID_POSITION;
 
+    /**
+     * Instantiates a new Search list fragment base.
+     */
     public SearchListFragmentBase() {
         setHasOptionsMenu(true);
     }
@@ -52,11 +86,19 @@ public abstract class SearchListFragmentBase extends BaseSpiceListFragment {
     public void onRequestSuccess(Feed searchFeeds) {
     }
 
+    /**
+     * Gets entries.
+     *
+     * @return the entries
+     */
     public List<EntryISO> getEntries() {
         return entries;
     }
 
 
+    /**
+     * Show failure fragment.
+     */
     void showFailureFragment() {
         String searchFail = getActivity().getString(
                 R.string.nothing_to_display_please_search_again_);
@@ -70,6 +112,11 @@ public abstract class SearchListFragmentBase extends BaseSpiceListFragment {
                         failureFragment).commit();
     }
 
+    /**
+     * Attach list adapter.
+     *
+     * @param searchFeedList the search feed list
+     */
     void attachListAdapter(final List<EntryISO> searchFeedList) {
         SearchListAdapter adapter = new SearchListAdapter(getActivity(),
                 searchFeedList);
@@ -94,6 +141,8 @@ public abstract class SearchListFragmentBase extends BaseSpiceListFragment {
     }
 
     /**
+     * Show data series intro.
+     *
      * @param searchResultFeed - Dataseries Feed
      */
     void showDataSeriesIntro(Feed searchResultFeed) {
@@ -111,10 +160,25 @@ public abstract class SearchListFragmentBase extends BaseSpiceListFragment {
      * >Communicating with Other Fragments</a> for more information.
      */
     public interface OnSearchListFragmentListener {
+        /**
+         * On search list fragment item selected.
+         *
+         * @param id the id
+         */
         void onSearchListFragmentItemSelected(String id);
 
+        /**
+         * On search list fragment right swipe item.
+         *
+         * @param selectedEntry the selected entry
+         */
         void onSearchListFragmentRightSwipeItem(EntryISO selectedEntry);
 
+        /**
+         * On search list fragment left swipe item.
+         *
+         * @param selectedEntry the selected entry
+         */
         void onSearchListFragmentLeftSwipeItem(EntryISO selectedEntry);
     }
 }

@@ -1,3 +1,19 @@
+/*
+ * Copyright (c) 2016.  SmartHMA ESA
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package pl.wasat.smarthma.model.om;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
@@ -12,6 +28,9 @@ import java.util.List;
 import pl.wasat.smarthma.utils.obj.LatLngExt;
 import pl.wasat.smarthma.utils.text.SmartHMAStringStyle;
 
+/**
+ * The type Linear ring.
+ */
 public class LinearRing implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -21,18 +40,38 @@ public class LinearRing implements Serializable {
     private List<Pos> posList = new ArrayList<>();
 
 
+    /**
+     * Gets prefix.
+     *
+     * @return the prefix
+     */
     public String get_prefix() {
         return _prefix;
     }
 
+    /**
+     * Sets prefix.
+     *
+     * @param _prefix the prefix
+     */
     public void set_prefix(String _prefix) {
         this._prefix = _prefix;
     }
 
+    /**
+     * Gets pos string.
+     *
+     * @return the pos string
+     */
     public PosString getPosString() {
         return posString;
     }
 
+    /**
+     * Sets pos string.
+     *
+     * @param posString the pos string
+     */
     public void setPosString(PosString posString) {
         if (posString == null) {
             posString = new PosString();
@@ -47,10 +86,20 @@ public class LinearRing implements Serializable {
     }
 
 
+    /**
+     * Gets pos list.
+     *
+     * @return the pos list
+     */
     public List<Pos> getPosList() {
         return posList;
     }
 
+    /**
+     * Sets pos list.
+     *
+     * @param posList the pos list
+     */
     public void setPosList(List<Pos> posList) {
         if (!posList.isEmpty()) {
             this.posList = posList;
@@ -58,6 +107,12 @@ public class LinearRing implements Serializable {
         // toPosLatLngList();
     }
 
+    /**
+     * Sets pos list.
+     *
+     * @param pointsString the points string
+     * @return the pos list
+     */
     public List<Pos> setPosList(String pointsString) {
         String[] coorStr = pointsString.replaceAll("  ", " ").split(" ");
         List<Pos> latLngPosList = new ArrayList<>();

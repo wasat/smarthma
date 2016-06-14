@@ -1,7 +1,26 @@
+/*
+ * Copyright (c) 2016.  SmartHMA ESA
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package pl.wasat.smarthma.model.explaindoc;
 
 import java.io.Serializable;
 
+/**
+ * The type Explain data.
+ */
 public class ExplainData implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -15,10 +34,15 @@ public class ExplainData implements Serializable {
     private ConfigInfo configInfo;
     private ResponseFormat responseFormat;
 
+    /**
+     * Instantiates a new Explain data.
+     */
     public ExplainData() {
     }
 
     /**
+     * Gets id.
+     *
      * @return the id
      */
     public int getId() {
@@ -26,6 +50,8 @@ public class ExplainData implements Serializable {
     }
 
     /**
+     * Sets id.
+     *
      * @param id the id to set
      */
     public void setId(int id) {
@@ -33,6 +59,8 @@ public class ExplainData implements Serializable {
     }
 
     /**
+     * Gets server info.
+     *
      * @return the serverInfo
      */
     public ServerInfo getServerInfo() {
@@ -40,6 +68,8 @@ public class ExplainData implements Serializable {
     }
 
     /**
+     * Sets server info.
+     *
      * @param serverInfo the serverInfo to set
      */
     public void setServerInfo(ServerInfo serverInfo) {
@@ -47,6 +77,8 @@ public class ExplainData implements Serializable {
     }
 
     /**
+     * Gets database info.
+     *
      * @return the databaseInfo
      */
     public DatabaseInfo getDatabaseInfo() {
@@ -54,6 +86,8 @@ public class ExplainData implements Serializable {
     }
 
     /**
+     * Sets database info.
+     *
      * @param databaseInfo the databaseInfo to set
      */
     public void setDatabaseInfo(DatabaseInfo databaseInfo) {
@@ -61,6 +95,8 @@ public class ExplainData implements Serializable {
     }
 
     /**
+     * Gets meta info.
+     *
      * @return the metaInfo
      */
     public MetaInfo getMetaInfo() {
@@ -68,6 +104,8 @@ public class ExplainData implements Serializable {
     }
 
     /**
+     * Sets meta info.
+     *
      * @param metaInfo the metaInfo to set
      */
     public void setMetaInfo(MetaInfo metaInfo) {
@@ -75,6 +113,8 @@ public class ExplainData implements Serializable {
     }
 
     /**
+     * Gets index info.
+     *
      * @return the indexInfo
      */
     public IndexInfo getIndexInfo() {
@@ -82,6 +122,8 @@ public class ExplainData implements Serializable {
     }
 
     /**
+     * Sets index info.
+     *
      * @param indexInfo the indexInfo to set
      */
     public void setIndexInfo(IndexInfo indexInfo) {
@@ -89,6 +131,8 @@ public class ExplainData implements Serializable {
     }
 
     /**
+     * Gets schema info.
+     *
      * @return the schemaInfo
      */
     public SchemaInfo getSchemaInfo() {
@@ -96,6 +140,8 @@ public class ExplainData implements Serializable {
     }
 
     /**
+     * Sets schema info.
+     *
      * @param schemaInfo the schemaInfo to set
      */
     public void setSchemaInfo(SchemaInfo schemaInfo) {
@@ -103,6 +149,8 @@ public class ExplainData implements Serializable {
     }
 
     /**
+     * Gets config info.
+     *
      * @return the configInfo
      */
     public ConfigInfo getConfigInfo() {
@@ -110,6 +158,8 @@ public class ExplainData implements Serializable {
     }
 
     /**
+     * Sets config info.
+     *
      * @param configInfo the configInfo to set
      */
     public void setConfigInfo(ConfigInfo configInfo) {
@@ -117,6 +167,8 @@ public class ExplainData implements Serializable {
     }
 
     /**
+     * Gets response format.
+     *
      * @return the responseFormat
      */
     public ResponseFormat getResponseFormat() {
@@ -124,6 +176,8 @@ public class ExplainData implements Serializable {
     }
 
     /**
+     * Sets response format.
+     *
      * @param responseFormat the responseFormat to set
      */
     public void setResponseFormat(ResponseFormat responseFormat) {

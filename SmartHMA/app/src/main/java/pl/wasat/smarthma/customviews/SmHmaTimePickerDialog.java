@@ -1,11 +1,11 @@
 /*
- * Copyright (C) 2007 The Android Open Source Project
- * Copyright (C) 2013 Ivan Kovac  navratnanos@gmail.com
+ * Copyright (c) 2016.  SmartHMA ESA
+ *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -49,11 +49,15 @@ public class SmHmaTimePickerDialog extends Dialog implements
     private final OnTimeSetListener mCallback;
     private final Calendar mCalendar;
     private final java.text.DateFormat mDateFormat;
+
     /**
+     * Instantiates a new Sm hma time picker dialog.
+     *
      * @param context      Parent.
      * @param callBack     How parent is notified.
      * @param hourOfDay    The initial hour.
      * @param minute       The initial minute.
+     * @param seconds      the seconds
      * @param is24HourView Whether this is a 24 hour view, or AM/PM.
      */
     public SmHmaTimePickerDialog(Context context, OnTimeSetListener callBack,
@@ -166,6 +170,13 @@ public class SmHmaTimePickerDialog extends Dialog implements
         updateTitle(hour, minute, seconds);
     }
 
+    /**
+     * Update time.
+     *
+     * @param hourOfDay     the hour of day
+     * @param minutesOfHour the minutes of hour
+     * @param seconds       the seconds
+     */
     public void updateTime(int hourOfDay, int minutesOfHour, int seconds) {
         mTimePicker.setCurrentHour(hourOfDay);
         mTimePicker.setCurrentMinute(minutesOfHour);
@@ -179,9 +190,12 @@ public class SmHmaTimePickerDialog extends Dialog implements
     public interface OnTimeSetListener {
 
         /**
+         * On time set.
+         *
          * @param view      The view associated with this listener.
          * @param hourOfDay The hour that was set.
          * @param minute    The minute that was set.
+         * @param seconds   the seconds
          */
         void onTimeSet(TimePicker view, int hourOfDay, int minute, int seconds);
     }

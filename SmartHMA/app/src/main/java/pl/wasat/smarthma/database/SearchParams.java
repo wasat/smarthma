@@ -1,3 +1,19 @@
+/*
+ * Copyright (c) 2016.  SmartHMA ESA
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package pl.wasat.smarthma.database;
 
 import pl.wasat.smarthma.R;
@@ -15,6 +31,11 @@ public class SearchParams {
     private final String startDate;
     private final String endDate;
 
+    /**
+     * Instantiates a new Search params.
+     *
+     * @param request the request
+     */
     public SearchParams(FedeoRequestParams request) {
         searchPhrase = request.getParams().get(OSDDMatcher.PARAM_KEY_QUERY);
         catalogue = request.getParams().get("parentIdentifier");
@@ -23,6 +44,15 @@ public class SearchParams {
         endDate = request.getEndDate();
     }
 
+    /**
+     * Instantiates a new Search params.
+     *
+     * @param searchPhrase the search phrase
+     * @param catalogue    the catalogue
+     * @param bbox         the bbox
+     * @param startDate    the start date
+     * @param endDate      the end date
+     */
     public SearchParams(String searchPhrase, String catalogue, String bbox, String startDate, String endDate) {
         this.searchPhrase = searchPhrase;
         this.catalogue = catalogue;

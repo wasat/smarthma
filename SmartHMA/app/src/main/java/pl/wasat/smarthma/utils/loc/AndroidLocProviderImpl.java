@@ -1,3 +1,19 @@
+/*
+ * Copyright (c) 2016.  SmartHMA ESA
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package pl.wasat.smarthma.utils.loc;
 
 import android.content.Context;
@@ -25,6 +41,11 @@ class AndroidLocProviderImpl implements LocationListener {
     private long updateStartTime;
 
 
+    /**
+     * Instantiates a new Android loc provider.
+     *
+     * @param context the context
+     */
     public AndroidLocProviderImpl(Context context) {
         this.context = context;
         locationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
@@ -105,6 +126,9 @@ class AndroidLocProviderImpl implements LocationListener {
     public void onProviderDisabled(String s) {
     }
 
+    /**
+     * Start.
+     */
     public void start() {
         initAndroidProvider();
     }
@@ -159,6 +183,9 @@ class AndroidLocProviderImpl implements LocationListener {
         context.sendBroadcast(intent);
     }
 
+    /**
+     * Stop.
+     */
     public void stop() {
         stopLocationUpdates();
     }
@@ -172,6 +199,11 @@ class AndroidLocProviderImpl implements LocationListener {
         locationManager.removeUpdates(this);
     }
 
+    /**
+     * Gets calculated position.
+     *
+     * @return the calculated position
+     */
     public Location getCalculatedPosition() {
         if (cachedLastLocation != null) {
             Location location = new Location("Android_Location");

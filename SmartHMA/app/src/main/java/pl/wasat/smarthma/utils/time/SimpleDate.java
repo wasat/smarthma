@@ -1,3 +1,19 @@
+/*
+ * Copyright (c) 2016.  SmartHMA ESA
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package pl.wasat.smarthma.utils.time;
 
 /*
@@ -6,6 +22,9 @@ package pl.wasat.smarthma.utils.time;
 
 import java.util.Calendar;
 
+/**
+ * The type Simple date.
+ */
 public class SimpleDate {
     private final int year;
     private final int month;
@@ -14,6 +33,11 @@ public class SimpleDate {
     private final int minutes;
     private final int seconds;
 
+    /**
+     * Instantiates a new Simple date.
+     *
+     * @param date the date
+     */
     public SimpleDate(String date) {
         String[] values = date.split("-");
         this.year = Integer.parseInt(values[0]);
@@ -32,36 +56,77 @@ public class SimpleDate {
         }
     }
 
+    /**
+     * Gets calendar.
+     *
+     * @return the calendar
+     */
     public Calendar getCalendar() {
         Calendar calendar = Calendar.getInstance();
         calendar.set(year, month - 1, day, hours, minutes, seconds);
         return calendar;
     }
 
+    /**
+     * Gets year.
+     *
+     * @return the year
+     */
     public int getYear() {
         return year;
     }
 
+    /**
+     * Gets month.
+     *
+     * @return the month
+     */
     public int getMonth() {
         return month;
     }
 
+    /**
+     * Gets day.
+     *
+     * @return the day
+     */
     public int getDay() {
         return day;
     }
 
+    /**
+     * Gets hours.
+     *
+     * @return the hours
+     */
     public int getHours() {
         return hours;
     }
 
+    /**
+     * Gets minutes.
+     *
+     * @return the minutes
+     */
     public int getMinutes() {
         return minutes;
     }
 
+    /**
+     * Gets seconds.
+     *
+     * @return the seconds
+     */
     public int getSeconds() {
         return seconds;
     }
 
+    /**
+     * Compare to int.
+     *
+     * @param another the another
+     * @return the int
+     */
     public int compareTo(SimpleDate another) {
         if (year != another.year) {
             return year - another.year;

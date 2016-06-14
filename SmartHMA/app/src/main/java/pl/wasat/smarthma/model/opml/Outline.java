@@ -1,4 +1,20 @@
 
+/*
+ * Copyright (c) 2016.  SmartHMA ESA
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package pl.wasat.smarthma.model.opml;
 
 import com.google.gson.annotations.Expose;
@@ -6,6 +22,9 @@ import com.google.gson.annotations.SerializedName;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 
+/**
+ * The type Outline.
+ */
 public class Outline {
 
     @SerializedName("text")
@@ -34,6 +53,8 @@ public class Outline {
     private String xmlUrl;
 
     /**
+     * Gets text.
+     *
      * @return The text
      */
     public String getText() {
@@ -41,6 +62,8 @@ public class Outline {
     }
 
     /**
+     * Sets text.
+     *
      * @param text The text
      */
     public void setText(String text) {
@@ -48,6 +71,8 @@ public class Outline {
     }
 
     /**
+     * Gets description.
+     *
      * @return The description
      */
     public String getDescription() {
@@ -55,6 +80,8 @@ public class Outline {
     }
 
     /**
+     * Sets description.
+     *
      * @param description The description
      */
     public void setDescription(String description) {
@@ -62,6 +89,8 @@ public class Outline {
     }
 
     /**
+     * Gets html url.
+     *
      * @return The htmlUrl
      */
     public String getHtmlUrl() {
@@ -69,6 +98,8 @@ public class Outline {
     }
 
     /**
+     * Sets html url.
+     *
      * @param htmlUrl The htmlUrl
      */
     public void setHtmlUrl(String htmlUrl) {
@@ -76,6 +107,8 @@ public class Outline {
     }
 
     /**
+     * Gets language.
+     *
      * @return The language
      */
     public String getLanguage() {
@@ -83,6 +116,8 @@ public class Outline {
     }
 
     /**
+     * Sets language.
+     *
      * @param language The language
      */
     public void setLanguage(String language) {
@@ -90,6 +125,8 @@ public class Outline {
     }
 
     /**
+     * Gets title.
+     *
      * @return The title
      */
     public String getTitle() {
@@ -97,6 +134,8 @@ public class Outline {
     }
 
     /**
+     * Sets title.
+     *
      * @param title The title
      */
     public void setTitle(String title) {
@@ -104,6 +143,8 @@ public class Outline {
     }
 
     /**
+     * Gets type.
+     *
      * @return The type
      */
     public String getType() {
@@ -111,6 +152,8 @@ public class Outline {
     }
 
     /**
+     * Sets type.
+     *
      * @param type The type
      */
     public void setType(String type) {
@@ -118,6 +161,8 @@ public class Outline {
     }
 
     /**
+     * Gets version.
+     *
      * @return The version
      */
     public String getVersion() {
@@ -125,6 +170,8 @@ public class Outline {
     }
 
     /**
+     * Sets version.
+     *
      * @param version The version
      */
     public void setVersion(String version) {
@@ -132,6 +179,8 @@ public class Outline {
     }
 
     /**
+     * Gets xml url.
+     *
      * @return The xmlUrl
      */
     public String getXmlUrl() {
@@ -139,6 +188,8 @@ public class Outline {
     }
 
     /**
+     * Sets xml url.
+     *
      * @param xmlUrl The xmlUrl
      */
     public void setXmlUrl(String xmlUrl) {

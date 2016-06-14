@@ -1,3 +1,19 @@
+/*
+ * Copyright (c) 2016.  SmartHMA ESA
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package pl.wasat.smarthma.ui.frags.base;
 
 import android.Manifest;
@@ -42,8 +58,14 @@ public class BaseMapFragment extends SupportMapFragment implements
         GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener {
 
+    /**
+     * The M listener.
+     */
     public OnBaseMapFragmentListener mListener;
     private GoogleMap mMap;
+    /**
+     * The Map mode.
+     */
     protected int mapMode;
     private LatLngBounds targetBounds;
     /**
@@ -57,9 +79,18 @@ public class BaseMapFragment extends SupportMapFragment implements
     private BroadcastReceiver mReceiver;
     private OnBaseMapFragmentPublicListener publicListener;
 
+    /**
+     * Instantiates a new Base map fragment.
+     */
     public BaseMapFragment() {
     }
 
+    /**
+     * New instance base map fragment.
+     *
+     * @param listener the listener
+     * @return the base map fragment
+     */
     public static BaseMapFragment newInstance(
             OnBaseMapFragmentPublicListener listener) {
         BaseMapFragment baseMapFragment = new BaseMapFragment();
@@ -237,6 +268,12 @@ public class BaseMapFragment extends SupportMapFragment implements
     public void onConnectionFailed(@NonNull ConnectionResult result) {
     }
 
+    /**
+     * Sets wms.
+     *
+     * @param wmsUrl the wms url
+     * @return the wms
+     */
     public TileOverlay setupWMS(String wmsUrl) {
         TileOverlay wmsTileOverlay = null;
         if (wmsUrl != null) {
@@ -252,6 +289,11 @@ public class BaseMapFragment extends SupportMapFragment implements
         return wmsTileOverlay;
     }
 
+    /**
+     * Animate when map is ready.
+     *
+     * @param padding the padding
+     */
     public void animateWhenMapIsReady(final int padding) {
         mMap.setOnMapLoadedCallback(new GoogleMap.OnMapLoadedCallback() {
             @Override
@@ -268,6 +310,11 @@ public class BaseMapFragment extends SupportMapFragment implements
         }
     }
 
+    /**
+     * Sets target bounds.
+     *
+     * @param bounds the bounds
+     */
     public void setTargetBounds(LatLngBounds bounds) {
         targetBounds = bounds;
     }
@@ -277,6 +324,9 @@ public class BaseMapFragment extends SupportMapFragment implements
      */
     public interface OnBaseMapFragmentListener {
 
+        /**
+         * On base support map ready.
+         */
         void onBaseSupportMapReady();
     }
 }

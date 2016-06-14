@@ -1,3 +1,19 @@
+/*
+ * Copyright (c) 2016.  SmartHMA ESA
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package pl.wasat.smarthma.ui.menus;
 
 import android.content.Context;
@@ -22,13 +38,34 @@ import pl.wasat.smarthma.ui.activities.GlobalSettingsActivity;
  * Used for handling ActionBar type menus.
  */
 public abstract class MenuHandler {
+    /**
+     * The Activity.
+     */
     final FragmentActivity activity;
+    /**
+     * The Clickable views.
+     */
     final ArrayList<View> clickableViews;
     private final View menu;
+    /**
+     * The Popup window.
+     */
     PopupWindow popupWindow;
+    /**
+     * The Layout inflater.
+     */
     LayoutInflater layoutInflater;
+    /**
+     * The Layout.
+     */
     View layout;
 
+    /**
+     * Instantiates a new Menu handler.
+     *
+     * @param activity     the activity
+     * @param menuButtonID the menu button id
+     */
     MenuHandler(FragmentActivity activity, int menuButtonID) {
         this.activity = activity;
         clickableViews = new ArrayList<>();
@@ -116,6 +153,13 @@ public abstract class MenuHandler {
     void addListeners() {
     }
 
+    /**
+     * Instantiates a new Menu handler.
+     *
+     * @param rootView     the root view
+     * @param activity     the activity
+     * @param menuButtonID the menu button id
+     */
     MenuHandler(View rootView, FragmentActivity activity, int menuButtonID) {
         this.activity = activity;
         clickableViews = new ArrayList<>();
@@ -143,18 +187,36 @@ public abstract class MenuHandler {
         return popupWindow != null && popupWindow.isShowing();
     }
 
+    /**
+     * Gets popup window.
+     *
+     * @return the popup window
+     */
     public PopupWindow getPopupWindow() {
         return popupWindow;
     }
 
+    /**
+     * Gets menu.
+     *
+     * @return the menu
+     */
     public View getMenu() {
         return menu;
     }
 
+    /**
+     * Gets clickable views.
+     *
+     * @return the clickable views
+     */
     public ArrayList<View> getClickableViews() {
         return clickableViews;
     }
 
+    /**
+     * Add common listeners.
+     */
     void addCommonListeners() {
         LinearLayout settingsLayout = (LinearLayout) layout.findViewById(R.id.popup_menu_item_settings);
         clickableViews.add(settingsLayout);

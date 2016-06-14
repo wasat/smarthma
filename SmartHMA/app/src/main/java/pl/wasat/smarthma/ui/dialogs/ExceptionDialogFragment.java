@@ -1,3 +1,19 @@
+/*
+ * Copyright (c) 2016.  SmartHMA ESA
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package pl.wasat.smarthma.ui.dialogs;
 
 import android.app.AlertDialog;
@@ -22,6 +38,14 @@ public class ExceptionDialogFragment extends DialogFragment {
     private static final String RAW_MESSAGE = "RAW_MESSAGE";
     private static final String RAW_CAUSE = "RAW_CAUSE";
 
+    /**
+     * New instance exception dialog fragment.
+     *
+     * @param message      the message
+     * @param exRawMessage the ex raw message
+     * @param exRawCause   the ex raw cause
+     * @return the exception dialog fragment
+     */
     public static ExceptionDialogFragment newInstance(String message, String exRawMessage, String exRawCause) {
         ExceptionDialogFragment frag = new ExceptionDialogFragment();
         Bundle args = new Bundle();

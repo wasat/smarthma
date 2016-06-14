@@ -1,3 +1,19 @@
+/*
+ * Copyright (c) 2016.  SmartHMA ESA
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package pl.wasat.smarthma.ui.frags.news;
 
 import android.app.Activity;
@@ -17,12 +33,18 @@ import pl.wasat.smarthma.ui.frags.base.BaseSpiceListFragment;
 import pl.wasat.smarthma.utils.request.FedeoSearchRequest;
 
 
+/**
+ * The type News list fragment.
+ */
 public class NewsListFragment extends BaseSpiceListFragment {
 
     private static final String STATE_ACTIVATED_POSITION = "activated_position";
     private static OnNewsListFragListener mListener;
     private int mActivatedPosition = ListView.INVALID_POSITION;
 
+    /**
+     * Instantiates a new News list fragment.
+     */
     public NewsListFragment() {
         setHasOptionsMenu(true);    //this enables us to set actionbar from fragment
     }
@@ -106,6 +128,11 @@ public class NewsListFragment extends BaseSpiceListFragment {
         mActivatedPosition = position;
     }
 
+    /**
+     * Sets activate on item click.
+     *
+     * @param activateOnItemClick the activate on item click
+     */
     public void setActivateOnItemClick(boolean activateOnItemClick) {
         getListView().setChoiceMode(activateOnItemClick
                 ? ListView.CHOICE_MODE_SINGLE
@@ -124,7 +151,15 @@ public class NewsListFragment extends BaseSpiceListFragment {
         }
     }
 
+    /**
+     * The interface On news list frag listener.
+     */
     public interface OnNewsListFragListener {
+        /**
+         * On item selected.
+         *
+         * @param id the id
+         */
         void onItemSelected(String id);
     }
 }

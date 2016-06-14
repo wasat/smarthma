@@ -1,3 +1,19 @@
+/*
+ * Copyright (c) 2016.  SmartHMA ESA
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package pl.wasat.smarthma.ui.frags.base;
 
 import android.graphics.Color;
@@ -17,8 +33,17 @@ import pl.wasat.smarthma.customviews.TextViewWithFont;
  * Part of the project  SmartHMA
  */
 public class BaseMetadataFragment extends Fragment {
+    /**
+     * The Linear layout.
+     */
     protected LinearLayout linearLayout;
 
+    /**
+     * Sets meta data views.
+     *
+     * @param headerText       the header text
+     * @param eOMetaDataObject the e o meta data object
+     */
     protected void setMetaDataViews(String headerText, Object eOMetaDataObject) {
 
         TextViewWithFont tvMetaHeader = defMetadataHeader(headerText);
@@ -101,6 +126,12 @@ public class BaseMetadataFragment extends Fragment {
         return itemTvTitle;
     }
 
+    /**
+     * Def value item view text view with font.
+     *
+     * @param value the value
+     * @return the text view with font
+     */
     @NonNull
     protected TextViewWithFont defValueItemView(String value) {
         TextViewWithFont itemTvValue = new TextViewWithFont(getActivity(), null, R.style.textMetaItemValue);

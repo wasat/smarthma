@@ -1,3 +1,19 @@
+/*
+ * Copyright (c) 2016.  SmartHMA ESA
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package pl.wasat.smarthma.ui.frags.search;
 
 import android.app.Activity;
@@ -26,6 +42,9 @@ import pl.wasat.smarthma.model.iso.EntryISO;
  */
 public class SearchListFragmentOffline extends SearchListFragmentBase {
 
+    /**
+     * Instantiates a new Search list fragment offline.
+     */
     public SearchListFragmentOffline() {
         setHasOptionsMenu(true);
     }
@@ -34,6 +53,7 @@ public class SearchListFragmentOffline extends SearchListFragmentBase {
      * Use this factory method to create a new instance of this fragment using
      * the provided parameters.
      *
+     * @param stopNewSearch the stop new search
      * @return A new instance of fragment SearchListFragment.
      */
     public static SearchListFragmentOffline newInstance(Boolean stopNewSearch) {
@@ -121,6 +141,9 @@ public class SearchListFragmentOffline extends SearchListFragmentBase {
         mListener.onSearchListFragmentItemSelected(String.valueOf(position));
     }
 
+    /**
+     * Clear entries.
+     */
     public void clearEntries() {
         this.entries.clear();
     }

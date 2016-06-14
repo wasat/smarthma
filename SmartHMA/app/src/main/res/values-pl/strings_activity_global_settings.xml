@@ -1,15 +1,48 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Copyright (c) 2016.  SmartHMA ESA
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~     http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
 <resources>
-    <string name="pref_default_edit_max_records">30</string>
-    <string name="pref_key_edit_max_records">pref_key_edtv_max_records</string>
-    <string name="pref_summary_edit_max_records">Maximum records with search results displayed</string>
+    <string name="global_settings">SmartHMA - Ustawienia Główne</string>
+
+    <string name="pref_category_title_general_settings">USTAWIENIA GŁÓWNE SMARTHMA </string>
+    <string name="pref_title_mission_sync_time">Czas synchronizacji Misji EO</string>
+    <string name="pref_summary_mission_sync_time">Jak często synchronizacja powinna być przeprowadzana</string>
+
+    <string name="pref_category_title_search_params_settings">USTAWIENIA PARAMETRÓW FEDEO</string>
+    <string name="pref_title_remember_search_params">Zapamiętaj parametry wyszukiwania</string>
+    <string name="pref_summary_remember_search_params">Zachowaj podstawowe parametry wyszukiwania oraz załaduj je wraz ze startem aplikacji</string>
+
+    <string name="pref_title_fedeo_provider">Fedeo Provider Host</string>
+    <string name="pref_summary_fedeo_provider">Choose Fedeo provider host</string>
+
     <string name="pref_title_edit_max_records">Max Records Displayed</string>
+    <string name="pref_summary_edit_max_records">Maximum records with search results displayed</string>
+
     <string name="pref_title_edit_start_record">Start Record of Results</string>
     <string name="pref_summary_edit_start_record">Record of list results from which displaying is started</string>
-    <string name="pref_key_edit_start_record">pref_key_edtv_start_record</string>
-    <string name="pref_default_edit_start_record">1</string>
+
     <string name="pref_title_edit_start_page">Start Page with Results</string>
     <string name="pref_summary_edit_start_page">No. of page from which results are displayed</string>
-    <string name="pref_default_edit_start_page">1</string>
-    <string name="pref_key_edit_start_page">pref_key_edtv_start_page</string>
+
+    <string name="pref_category_title_map_settings">OPCJE MAPY</string>
+    <string name="pref_title_global_map_list">Domyślny typ mapy</string>
+    <string name="pref_summary_global_map_list">Wybierz typ mapy jako domyślnie wyświetlaną</string>
+
+    <string name="pref_category_title_debug_mode">TRYB DEGUBOWANIA</string>
+    <string name="pref_title_show_debugging_info">Pokaż informacje podczas debugowania</string>
+    <string name="pref_summary_show_debugging_info">Włącz tę opcję aby wyświetlać dodatkowe informacje</string>
+
 </resources>

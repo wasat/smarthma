@@ -1,4 +1,20 @@
 
+/*
+ * Copyright (c) 2016.  SmartHMA ESA
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package pl.wasat.smarthma.model.opml;
 
 import com.google.gson.annotations.Expose;
@@ -8,8 +24,14 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 
 import pl.wasat.smarthma.utils.time.DateUtils;
 
+/**
+ * The type Head.
+ */
 public class Head {
 
+    /**
+     * Instantiates a new Head.
+     */
     public Head() {
         invoke();
     }
@@ -63,6 +85,8 @@ public class Head {
     }
 
     /**
+     * Gets title.
+     *
      * @return The title
      */
     public String getTitle() {
@@ -70,6 +94,8 @@ public class Head {
     }
 
     /**
+     * Sets title.
+     *
      * @param title The title
      */
     public void setTitle(String title) {
@@ -77,6 +103,8 @@ public class Head {
     }
 
     /**
+     * Gets date created.
+     *
      * @return The dateCreated
      */
     public String getDateCreated() {
@@ -84,6 +112,8 @@ public class Head {
     }
 
     /**
+     * Sets date created.
+     *
      * @param dateCreated The dateCreated
      */
     public void setDateCreated(String dateCreated) {
@@ -91,6 +121,8 @@ public class Head {
     }
 
     /**
+     * Gets date modified.
+     *
      * @return The dateModified
      */
     public String getDateModified() {
@@ -98,6 +130,8 @@ public class Head {
     }
 
     /**
+     * Sets date modified.
+     *
      * @param dateModified The dateModified
      */
     public void setDateModified(String dateModified) {
@@ -105,6 +139,8 @@ public class Head {
     }
 
     /**
+     * Gets owner name.
+     *
      * @return The ownerName
      */
     public String getOwnerName() {
@@ -112,6 +148,8 @@ public class Head {
     }
 
     /**
+     * Sets owner name.
+     *
      * @param ownerName The ownerName
      */
     public void setOwnerName(String ownerName) {
@@ -119,6 +157,8 @@ public class Head {
     }
 
     /**
+     * Gets owner email.
+     *
      * @return The ownerEmail
      */
     public String getOwnerEmail() {
@@ -126,6 +166,8 @@ public class Head {
     }
 
     /**
+     * Sets owner email.
+     *
      * @param ownerEmail The ownerEmail
      */
     public void setOwnerEmail(String ownerEmail) {
@@ -133,6 +175,8 @@ public class Head {
     }
 
     /**
+     * Gets expansion state.
+     *
      * @return The expansionState
      */
     public String getExpansionState() {
@@ -140,6 +184,8 @@ public class Head {
     }
 
     /**
+     * Sets expansion state.
+     *
      * @param expansionState The expansionState
      */
     public void setExpansionState(String expansionState) {
@@ -147,6 +193,8 @@ public class Head {
     }
 
     /**
+     * Gets vert scroll state.
+     *
      * @return The vertScrollState
      */
     public String getVertScrollState() {
@@ -154,6 +202,8 @@ public class Head {
     }
 
     /**
+     * Sets vert scroll state.
+     *
      * @param vertScrollState The vertScrollState
      */
     public void setVertScrollState(String vertScrollState) {
@@ -161,6 +211,8 @@ public class Head {
     }
 
     /**
+     * Gets window top.
+     *
      * @return The windowTop
      */
     public String getWindowTop() {
@@ -168,6 +220,8 @@ public class Head {
     }
 
     /**
+     * Sets window top.
+     *
      * @param windowTop The windowTop
      */
     public void setWindowTop(String windowTop) {
@@ -175,6 +229,8 @@ public class Head {
     }
 
     /**
+     * Gets window left.
+     *
      * @return The windowLeft
      */
     public String getWindowLeft() {
@@ -182,6 +238,8 @@ public class Head {
     }
 
     /**
+     * Sets window left.
+     *
      * @param windowLeft The windowLeft
      */
     public void setWindowLeft(String windowLeft) {
@@ -189,6 +247,8 @@ public class Head {
     }
 
     /**
+     * Gets window bottom.
+     *
      * @return The windowBottom
      */
     public String getWindowBottom() {
@@ -196,6 +256,8 @@ public class Head {
     }
 
     /**
+     * Sets window bottom.
+     *
      * @param windowBottom The windowBottom
      */
     public void setWindowBottom(String windowBottom) {
@@ -203,6 +265,8 @@ public class Head {
     }
 
     /**
+     * Gets window right.
+     *
      * @return The windowRight
      */
     public String getWindowRight() {
@@ -210,6 +274,8 @@ public class Head {
     }
 
     /**
+     * Sets window right.
+     *
      * @param windowRight The windowRight
      */
     public void setWindowRight(String windowRight) {

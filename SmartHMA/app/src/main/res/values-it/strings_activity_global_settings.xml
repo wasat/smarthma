@@ -1,0 +1,49 @@
+<!--
+  ~ Copyright (c) 2016.  SmartHMA ESA
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~     http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<resources>
+    <!-- Global settings for strings -->
+    <string name="global_settings">Impostazioni globali SmartHMA</string>
+
+    <string name="pref_category_title_general_settings">IMPOSTAZIONI GENERALI SMARTHMA</string>
+    <string name="pref_title_mission_sync_time">Tempo di sincronizzazione della missione EO</string>
+    <string name="pref_summary_mission_sync_time">Frequenza di sincronizzazione</string>
+
+    <string name="pref_category_title_search_params_settings">IMPOSTAZIONI DEI PARAMETRI FEDEO</string>
+    <string name="pref_title_remember_search_params">Memorizza i parametri di ricerca</string>
+    <string name="pref_summary_remember_search_params">Salva i parametri principali di ricerca FedEO e caricali all’avvio</string>
+
+    <string name="pref_title_fedeo_provider">Fedeo Provider Host</string>
+    <string name="pref_summary_fedeo_provider">Choose Fedeo provider host</string>
+
+    <string name="pref_title_edit_max_records">Max Records Displayed</string>
+    <string name="pref_summary_edit_max_records">Maximum records with search results displayed</string>
+
+    <string name="pref_title_edit_start_record">Start Record of Results</string>
+    <string name="pref_summary_edit_start_record">Record of list results from which displaying is started</string>
+
+    <string name="pref_title_edit_start_page">Start Page with Results</string>
+    <string name="pref_summary_edit_start_page">No. of page from which results are displayed</string>
+
+    <string name="pref_category_title_map_settings">IMPOSTAZIONI MAPPA</string>
+    <string name="pref_title_global_map_list">Tipo di mappa predefinito</string>
+    <string name="pref_summary_global_map_list">Scegliere il tipo di mappa come sfondo predefinito</string>
+
+    <string name="pref_category_title_debug_mode">MODALITÀ DEBUG</string>
+    <string name="pref_title_show_debugging_info">Visualizza le informazioni di debug</string>
+    <string name="pref_summary_show_debugging_info">Attiva questa opzione per visualizzare e registrare informazioni aggiuntive</string>
+
+</resources>

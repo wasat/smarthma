@@ -1,3 +1,19 @@
+/*
+ * Copyright (c) 2016.  SmartHMA ESA
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package pl.wasat.smarthma.ui.frags.base;
 
 import android.os.Bundle;
@@ -33,8 +49,14 @@ import pl.wasat.smarthma.utils.obj.LatLngExt;
  * A simple {@link android.support.v4.app.Fragment} subclass.
  */
 public class BaseFeedSummaryFragment extends Fragment {
+    /**
+     * The constant KEY_FEED_SUMMARY.
+     */
     protected static final String KEY_FEED_SUMMARY = "pl.wasat.smarthma.KEY_FEED_SUMMARY";
 
+    /**
+     * The Result feed.
+     */
     protected Feed resultFeed;
     private TextView tvTitle;
     private TextView tvItemsFrom;
@@ -47,6 +69,9 @@ public class BaseFeedSummaryFragment extends Fragment {
     private View btnNext;
     private View btnLast;
 
+    /**
+     * Instantiates a new Base feed summary fragment.
+     */
     public BaseFeedSummaryFragment() {
     }
 
@@ -192,6 +217,11 @@ public class BaseFeedSummaryFragment extends Fragment {
         return resInt;
     }
 
+    /**
+     * Load nav search.
+     *
+     * @param linkHref the link href
+     */
     protected void loadNavSearch(String linkHref) {
     }
 
@@ -236,6 +266,11 @@ public class BaseFeedSummaryFragment extends Fragment {
         });
     }
 
+    /**
+     * Sets amazon map objects.
+     *
+     * @param amazonMap the amazon map
+     */
     protected void setupAmazonMapObjects(AmazonMap amazonMap) {
         amazonMap.getUiSettings().setAllGesturesEnabled(false);
         amazonMap.getUiSettings().setZoomControlsEnabled(false);
@@ -254,6 +289,11 @@ public class BaseFeedSummaryFragment extends Fragment {
         }
     }
 
+    /**
+     * Sets google map objects.
+     *
+     * @param googleMap the google map
+     */
     protected void setupGoogleMapObjects(GoogleMap googleMap) {
         googleMap.getUiSettings().setAllGesturesEnabled(false);
         googleMap.getUiSettings().setZoomControlsEnabled(false);

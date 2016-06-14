@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Copyright (c) 2016.  SmartHMA ESA
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~     http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<resources>
+
+
+    <string-array name="pref_entries_map_list">
+        <item name="0">NESSUNO</item>
+        <item name="1">OSM</item>
+        <item name="2">SATELLITARE</item>
+        <item name="3">IBRIDO</item>
+        <item name="4">TERRENO</item>
+    </string-array>
+
+    <string-array name="pref_entries_list_mission_sync">
+        <item name="0">Sempre</item>
+        <item name="1">1 ora</item>
+        <item name="2">1 giorno</item>
+        <item name="3">2 giorni</item>
+        <item name="4">3 giorni</item>
+        <item name="5">1 settimana</item>
+        <item name="6">2 settimane</item>
+        <item name="7">1 mese</item>
+        <item name="8">Mai</item>
+    </string-array>
+    <string-array name="sorting_modes">
+        <item>Titolo crescente</item>
+        <item>Titolo decrescente</item>
+        <item>Data crescente</item>
+        <item>Date decrescente</item>
+    </string-array>
+    <string-array name="search_modes">
+        <item>Seleziona richiesta…</item>
+        <item>Seleziona catalogo…</item>
+        <item>Seleziona rettangolo di selezione…</item>
+        <item>Seleziona data di inizio…</item>
+        <item>Seleziona data di fine…</item>
+        <item>Cancella cronologia</item>
+    </string-array>
+
+</resources>

@@ -1,3 +1,19 @@
+/*
+ * Copyright (c) 2016.  SmartHMA ESA
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package pl.wasat.smarthma.model.iso;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
@@ -11,6 +27,9 @@ import java.util.List;
 
 import pl.wasat.smarthma.utils.text.SmartHMAStringStyle;
 
+/**
+ * The type Md data identification.
+ */
 public class MDDataIdentification implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -27,6 +46,8 @@ public class MDDataIdentification implements Serializable {
 
 
     /**
+     * Gets citation.
+     *
      * @return The citation
      */
     public Citation getCitation() {
@@ -34,6 +55,8 @@ public class MDDataIdentification implements Serializable {
     }
 
     /**
+     * Sets citation.
+     *
      * @param citation The citation
      */
     public void setCitation(Citation citation) {
@@ -41,6 +64,8 @@ public class MDDataIdentification implements Serializable {
     }
 
     /**
+     * Gets abstract.
+     *
      * @return The _abstract
      */
     public Abstract getAbstract() {
@@ -48,6 +73,8 @@ public class MDDataIdentification implements Serializable {
     }
 
     /**
+     * Sets abstract.
+     *
      * @param _abstract The abstract
      */
     public void setAbstract(Abstract _abstract) {
@@ -55,6 +82,8 @@ public class MDDataIdentification implements Serializable {
     }
 
     /**
+     * Gets point of contact.
+     *
      * @return The pointOfContact
      */
     public PointOfContact getPointOfContact() {
@@ -62,6 +91,8 @@ public class MDDataIdentification implements Serializable {
     }
 
     /**
+     * Sets point of contact.
+     *
      * @param pointOfContact The pointOfContact
      */
     public void setPointOfContact(PointOfContact pointOfContact) {
@@ -69,6 +100,8 @@ public class MDDataIdentification implements Serializable {
     }
 
     /**
+     * Gets descriptive keywords.
+     *
      * @return The descriptiveKeywords
      */
     public List<DescriptiveKeyword> getDescriptiveKeywords() {
@@ -76,6 +109,8 @@ public class MDDataIdentification implements Serializable {
     }
 
     /**
+     * Sets descriptive keywords.
+     *
      * @param descriptiveKeywords The descriptiveKeywords
      */
     public void setDescriptiveKeywords(
@@ -84,6 +119,8 @@ public class MDDataIdentification implements Serializable {
     }
 
     /**
+     * Gets resource constraints.
+     *
      * @return The resourceConstraints
      */
     public List<ResourceConstraint> getResourceConstraints() {
@@ -91,6 +128,8 @@ public class MDDataIdentification implements Serializable {
     }
 
     /**
+     * Sets resource constraints.
+     *
      * @param resourceConstraints The resourceConstraints
      */
     public void setResourceConstraints(
@@ -99,6 +138,8 @@ public class MDDataIdentification implements Serializable {
     }
 
     /**
+     * Gets language.
+     *
      * @return The language
      */
     public Language getLanguage() {
@@ -106,6 +147,8 @@ public class MDDataIdentification implements Serializable {
     }
 
     /**
+     * Sets language.
+     *
      * @param language The language
      */
     public void setLanguage(Language language) {
@@ -113,6 +156,8 @@ public class MDDataIdentification implements Serializable {
     }
 
     /**
+     * Gets topic category.
+     *
      * @return The topicCategory
      */
     public TopicCategory getTopicCategory() {
@@ -120,6 +165,8 @@ public class MDDataIdentification implements Serializable {
     }
 
     /**
+     * Sets topic category.
+     *
      * @param topicCategory The topicCategory
      */
     public void setTopicCategory(TopicCategory topicCategory) {
@@ -127,6 +174,8 @@ public class MDDataIdentification implements Serializable {
     }
 
     /**
+     * Gets extents.
+     *
      * @return The extent
      */
     public List<Extent> getExtents() {
@@ -134,6 +183,8 @@ public class MDDataIdentification implements Serializable {
     }
 
     /**
+     * Sets extents.
+     *
      * @param extents The extent
      */
     public void setExtents(List<Extent> extents) {
@@ -141,6 +192,8 @@ public class MDDataIdentification implements Serializable {
     }
 
     /**
+     * Gets prefix.
+     *
      * @return The Prefix
      */
     public String getPrefix() {
@@ -148,6 +201,8 @@ public class MDDataIdentification implements Serializable {
     }
 
     /**
+     * Sets prefix.
+     *
      * @param Prefix The _prefix
      */
     public void setPrefix(String Prefix) {

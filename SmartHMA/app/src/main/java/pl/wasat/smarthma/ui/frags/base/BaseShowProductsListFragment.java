@@ -1,3 +1,19 @@
+/*
+ * Copyright (c) 2016.  SmartHMA ESA
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package pl.wasat.smarthma.ui.frags.base;
 
 import android.os.Bundle;
@@ -35,15 +51,36 @@ import pl.wasat.smarthma.utils.request.FedeoSearchRequest;
  * instance of this fragment.
  */
 public class BaseShowProductsListFragment extends BaseSpiceFragment {
+    /**
+     * The constant KEY_PARAM_FEDEO_REQUEST.
+     */
     protected static final String KEY_PARAM_FEDEO_REQUEST = "pl.wasat.smarthma.KEY_PARAM_FEDEO_REQUEST";
     private static final String STATE_ACTIVATED_POSITION = "activated_position";
+    /**
+     * The Entry images list view.
+     */
     protected ListView entryImagesListView;
+    /**
+     * The Loading view.
+     */
     protected View loadingView;
+    /**
+     * The Entry images list adapter.
+     */
     protected EntryImagesListAdapter entryImagesListAdapter;
+    /**
+     * The Entry list.
+     */
     protected List<Entry> entryList;
+    /**
+     * The Fedeo request params.
+     */
     protected FedeoRequestParams fedeoRequestParams;
     private int mActivatedPosition = ListView.INVALID_POSITION;
 
+    /**
+     * Instantiates a new Base show products list fragment.
+     */
     public BaseShowProductsListFragment() {
     }
 
@@ -121,7 +158,9 @@ public class BaseShowProductsListFragment extends BaseSpiceFragment {
     }
 
     /**
+     * Start fedeo product search request.
      *
+     * @param fedeoRequestParams the fedeo request params
      */
     protected void startFedeoProductSearchRequest(FedeoRequestParams fedeoRequestParams) {
         if (fedeoRequestParams != null) {
@@ -132,16 +171,29 @@ public class BaseShowProductsListFragment extends BaseSpiceFragment {
         }
     }
 
+    /**
+     * Sets activate on item click.
+     *
+     * @param activateOnItemClick the activate on item click
+     */
     public void setActivateOnItemClick(boolean activateOnItemClick) {
         entryImagesListView
                 .setChoiceMode(activateOnItemClick ? ListView.CHOICE_MODE_SINGLE
                         : ListView.CHOICE_MODE_NONE);
     }
 
+    /**
+     * Gets entry images list adapter.
+     *
+     * @return the entry images list adapter
+     */
     public EntryImagesListAdapter getEntryImagesListAdapter() {
         return entryImagesListAdapter;
     }
 
+    /**
+     * Clear list.
+     */
     public void clearList() {
         FavouritesDbAdapter dba = new FavouritesDbAdapter(getActivity());
         dba.openToWrite();
@@ -155,12 +207,20 @@ public class BaseShowProductsListFragment extends BaseSpiceFragment {
         this.entryList.clear();
     }
 
+    /**
+     * Refresh list.
+     */
     public void refreshList() {
         if (entryImagesListAdapter != null) {
             entryImagesListAdapter.notifyDataSetChanged();
         }
     }
 
+    /**
+     * Gets entry list.
+     *
+     * @return the entry list
+     */
     public List<Entry> getEntryList() {
         return entryList;
     }
@@ -240,15 +300,25 @@ public class BaseShowProductsListFragment extends BaseSpiceFragment {
     }
 
     /**
+     * Load search result products intro details frag.
+     *
      * @param searchProductFeeds searched Feed
      */
     protected void loadSearchResultProductsIntroDetailsFrag(
             Feed searchProductFeeds) {
     }
 
+    /**
+     * Load failure frag.
+     */
     protected void loadFailureFrag() {
     }
 
+    /**
+     * Load product item details.
+     *
+     * @param entry the entry
+     */
     protected void loadProductItemDetails(Entry entry) {
     }
 

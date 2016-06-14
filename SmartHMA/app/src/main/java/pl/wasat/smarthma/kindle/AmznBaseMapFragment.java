@@ -1,3 +1,19 @@
+/*
+ * Copyright (c) 2016.  SmartHMA ESA
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package pl.wasat.smarthma.kindle;
 
 import android.app.Dialog;
@@ -30,6 +46,9 @@ import pl.wasat.smarthma.utils.loc.GoogleLocProviderImpl;
  */
 public class AmznBaseMapFragment extends SupportMapFragment {
 
+    /**
+     * The M listener.
+     */
     public OnBaseMapFragmentListener mListener;
     private AmazonMap mMap;
     private LatLngBounds targetBounds;
@@ -37,9 +56,18 @@ public class AmznBaseMapFragment extends SupportMapFragment {
     private OnBaseMapFragmentPublicListener publicListener;
     private BroadcastReceiver mReceiver;
 
+    /**
+     * Instantiates a new Amzn base map fragment.
+     */
     public AmznBaseMapFragment() {
     }
 
+    /**
+     * New instance amzn base map fragment.
+     *
+     * @param listener the listener
+     * @return the amzn base map fragment
+     */
     public static AmznBaseMapFragment newInstance(
             OnBaseMapFragmentPublicListener listener) {
         AmznBaseMapFragment baseMapFragment = new AmznBaseMapFragment();
@@ -178,6 +206,11 @@ public class AmznBaseMapFragment extends SupportMapFragment {
         }
     }
 
+    /**
+     * Animate when map is ready.
+     *
+     * @param padding the padding
+     */
     public void animateWhenMapIsReady(final int padding) {
         mMap.setOnMapLoadedCallback(new AmazonMap.OnMapLoadedCallback() {
             @Override
@@ -194,6 +227,11 @@ public class AmznBaseMapFragment extends SupportMapFragment {
         }
     }
 
+    /**
+     * Sets target bounds.
+     *
+     * @param bounds the bounds
+     */
     public void setTargetBounds(LatLngBounds bounds) {
         targetBounds = bounds;
     }
@@ -202,6 +240,9 @@ public class AmznBaseMapFragment extends SupportMapFragment {
      * Listener interface to tell when the map is ready
      */
     public interface OnBaseMapFragmentListener {
+        /**
+         * On base support map ready.
+         */
         void onBaseSupportMapReady();
     }
 

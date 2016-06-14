@@ -1,4 +1,20 @@
 
+/*
+ * Copyright (c) 2016.  SmartHMA ESA
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package pl.wasat.smarthma.model.dc;
 
 
@@ -12,6 +28,9 @@ import java.io.Serializable;
 import pl.wasat.smarthma.utils.text.SmartHMAStringStyle;
 
 
+/**
+ * The type Dc.
+ */
 public class Dc implements Serializable {
 
     private Title title;
@@ -35,6 +54,8 @@ public class Dc implements Serializable {
     private String Prefix;
 
     /**
+     * Gets title.
+     *
      * @return The title
      */
     public Title getTitle() {
@@ -42,6 +63,8 @@ public class Dc implements Serializable {
     }
 
     /**
+     * Sets title.
+     *
      * @param title The title
      */
     public void setTitle(Title title) {
@@ -49,6 +72,8 @@ public class Dc implements Serializable {
     }
 
     /**
+     * Gets creator.
+     *
      * @return The creator
      */
     public Creator getCreator() {
@@ -56,6 +81,8 @@ public class Dc implements Serializable {
     }
 
     /**
+     * Sets creator.
+     *
      * @param creator The creator
      */
     public void setCreator(Creator creator) {
@@ -63,6 +90,8 @@ public class Dc implements Serializable {
     }
 
     /**
+     * Gets subject.
+     *
      * @return The subject
      */
     public Subject getSubject() {
@@ -70,6 +99,8 @@ public class Dc implements Serializable {
     }
 
     /**
+     * Sets subject.
+     *
      * @param subject The subject
      */
     public void setSubject(Subject subject) {
@@ -77,6 +108,8 @@ public class Dc implements Serializable {
     }
 
     /**
+     * Gets description.
+     *
      * @return The description
      */
     public Description getDescription() {
@@ -84,6 +117,8 @@ public class Dc implements Serializable {
     }
 
     /**
+     * Sets description.
+     *
      * @param description The description
      */
     public void setDescription(Description description) {
@@ -91,6 +126,8 @@ public class Dc implements Serializable {
     }
 
     /**
+     * Gets publisher.
+     *
      * @return The publisher
      */
     public Publisher getPublisher() {
@@ -98,6 +135,8 @@ public class Dc implements Serializable {
     }
 
     /**
+     * Sets publisher.
+     *
      * @param publisher The publisher
      */
     public void setPublisher(Publisher publisher) {
@@ -105,6 +144,8 @@ public class Dc implements Serializable {
     }
 
     /**
+     * Gets contributor.
+     *
      * @return The contributor
      */
     public Contributor getContributor() {
@@ -112,6 +153,8 @@ public class Dc implements Serializable {
     }
 
     /**
+     * Sets contributor.
+     *
      * @param contributor The contributor
      */
     public void setContributor(Contributor contributor) {
@@ -119,6 +162,8 @@ public class Dc implements Serializable {
     }
 
     /**
+     * Gets date.
+     *
      * @return The date
      */
     public Date getDate() {
@@ -126,6 +171,8 @@ public class Dc implements Serializable {
     }
 
     /**
+     * Sets date.
+     *
      * @param date The date
      */
     public void setDate(Date date) {
@@ -133,6 +180,8 @@ public class Dc implements Serializable {
     }
 
     /**
+     * Gets type.
+     *
      * @return The type
      */
     public Type getType() {
@@ -140,6 +189,8 @@ public class Dc implements Serializable {
     }
 
     /**
+     * Sets type.
+     *
      * @param type The type
      */
     public void setType(Type type) {
@@ -147,6 +198,8 @@ public class Dc implements Serializable {
     }
 
     /**
+     * Gets format.
+     *
      * @return The format
      */
     public Format getFormat() {
@@ -154,6 +207,8 @@ public class Dc implements Serializable {
     }
 
     /**
+     * Sets format.
+     *
      * @param format The format
      */
     public void setFormat(Format format) {
@@ -161,6 +216,8 @@ public class Dc implements Serializable {
     }
 
     /**
+     * Gets identifier.
+     *
      * @return The identifier
      */
     public Identifier getIdentifier() {
@@ -168,6 +225,8 @@ public class Dc implements Serializable {
     }
 
     /**
+     * Sets identifier.
+     *
      * @param identifier The identifier
      */
     public void setIdentifier(Identifier identifier) {
@@ -175,6 +234,8 @@ public class Dc implements Serializable {
     }
 
     /**
+     * Gets source.
+     *
      * @return The source
      */
     public Source getSource() {
@@ -182,6 +243,8 @@ public class Dc implements Serializable {
     }
 
     /**
+     * Sets source.
+     *
      * @param source The source
      */
     public void setSource(Source source) {
@@ -189,6 +252,8 @@ public class Dc implements Serializable {
     }
 
     /**
+     * Gets language.
+     *
      * @return The language
      */
     public Language getLanguage() {
@@ -196,6 +261,8 @@ public class Dc implements Serializable {
     }
 
     /**
+     * Sets language.
+     *
      * @param language The language
      */
     public void setLanguage(Language language) {
@@ -203,6 +270,8 @@ public class Dc implements Serializable {
     }
 
     /**
+     * Gets relation.
+     *
      * @return The relation
      */
     public Relation getRelation() {
@@ -210,6 +279,8 @@ public class Dc implements Serializable {
     }
 
     /**
+     * Sets relation.
+     *
      * @param relation The relation
      */
     public void setRelation(Relation relation) {
@@ -217,6 +288,8 @@ public class Dc implements Serializable {
     }
 
     /**
+     * Gets coverage.
+     *
      * @return The coverage
      */
     public Coverage getCoverage() {
@@ -224,6 +297,8 @@ public class Dc implements Serializable {
     }
 
     /**
+     * Sets coverage.
+     *
      * @param coverage The coverage
      */
     public void setCoverage(Coverage coverage) {
@@ -231,6 +306,8 @@ public class Dc implements Serializable {
     }
 
     /**
+     * Gets rights.
+     *
      * @return The rights
      */
     public Rights getRights() {
@@ -238,6 +315,8 @@ public class Dc implements Serializable {
     }
 
     /**
+     * Sets rights.
+     *
      * @param rights The rights
      */
     public void setRights(Rights rights) {
@@ -245,6 +324,8 @@ public class Dc implements Serializable {
     }
 
     /**
+     * Gets xmlns srw dc.
+     *
      * @return The XmlnsSrwDc
      */
     public String getXmlnsSrwDc() {
@@ -252,6 +333,8 @@ public class Dc implements Serializable {
     }
 
     /**
+     * Sets xmlns srw dc.
+     *
      * @param XmlnsSrwDc The _xmlns:srw_dc
      */
     public void setXmlnsSrwDc(String XmlnsSrwDc) {
@@ -259,6 +342,8 @@ public class Dc implements Serializable {
     }
 
     /**
+     * Gets xmlns xsi.
+     *
      * @return The XmlnsXsi
      */
     public String getXmlnsXsi() {
@@ -266,6 +351,8 @@ public class Dc implements Serializable {
     }
 
     /**
+     * Sets xmlns xsi.
+     *
      * @param XmlnsXsi The _xmlns:xsi
      */
     public void setXmlnsXsi(String XmlnsXsi) {
@@ -273,6 +360,8 @@ public class Dc implements Serializable {
     }
 
     /**
+     * Gets xsi schema location.
+     *
      * @return The XsiSchemaLocation
      */
     public String getXsiSchemaLocation() {
@@ -280,6 +369,8 @@ public class Dc implements Serializable {
     }
 
     /**
+     * Sets xsi schema location.
+     *
      * @param XsiSchemaLocation The _xsi:schemaLocation
      */
     public void setXsiSchemaLocation(String XsiSchemaLocation) {
@@ -287,6 +378,8 @@ public class Dc implements Serializable {
     }
 
     /**
+     * Gets prefix.
+     *
      * @return The Prefix
      */
     public String getPrefix() {
@@ -294,6 +387,8 @@ public class Dc implements Serializable {
     }
 
     /**
+     * Sets prefix.
+     *
      * @param Prefix The __prefix
      */
     public void setPrefix(String Prefix) {

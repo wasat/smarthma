@@ -1,0 +1,50 @@
+<!--
+  ~ Copyright (c) 2016.  SmartHMA ESA
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~     http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<resources>
+    <!-- Global settings for strings -->
+
+    <string name="global_settings">SmartHMA Globale Einstellungen</string>
+
+    <string name="pref_category_title_general_settings">SMARTHMA ALLGEMEINE EINSTELLUNGEN</string>
+    <string name="pref_title_mission_sync_time"> EB-Mission Synchronisation der Zeit</string>
+    <string name="pref_summary_mission_sync_time"> Wie oft die Synchronisation durchgeführt werden soll</string>
+
+    <string name="pref_category_title_search_params_settings">FEDEO PARAMETER-EINSTELLUNGEN</string>
+    <string name="pref_title_remember_search_params">Suchparameter merken</string>
+    <string name="pref_summary_remember_search_params"> Speichern Sie die grundsätzlichen FedEB-Suchparameter und laden Sie sie beim Starten</string>
+
+    <string name="pref_category_title_map_settings">KARTENEINSTELLUNGEN</string>
+    <string name="pref_title_global_map_list">Standard-Kartentyp</string>
+    <string name="pref_summary_global_map_list">Kartentyp als Standard-Kartenhintergrund auswählen</string>
+
+    <string name="pref_category_title_debug_mode">DEBUG-MODUS</string>
+    <string name="pref_title_show_debugging_info">Debugging-Information anzeigen</string>
+    <string name="pref_summary_show_debugging_info"> Schalten Sie diese Option ein, um weitere Informationen anzuzeigen und aufzuzeichnen</string>
+
+    <string name="pref_title_fedeo_provider">Fedeo Provider Host</string>
+    <string name="pref_summary_fedeo_provider">Choose Fedeo provider host</string>
+
+    <string name="pref_title_edit_max_records">Max Records Displayed</string>
+    <string name="pref_summary_edit_max_records">Maximum records with search results displayed</string>
+
+    <string name="pref_title_edit_start_record">Start Record of Results</string>
+    <string name="pref_summary_edit_start_record">Record of list results from which displaying is started</string>
+
+    <string name="pref_title_edit_start_page">Start Page with Results</string>
+    <string name="pref_summary_edit_start_page">No. of page from which results are displayed</string>
+
+</resources>

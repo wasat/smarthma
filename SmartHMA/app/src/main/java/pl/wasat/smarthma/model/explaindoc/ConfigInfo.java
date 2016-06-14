@@ -1,8 +1,27 @@
+/*
+ * Copyright (c) 2016.  SmartHMA ESA
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package pl.wasat.smarthma.model.explaindoc;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 
+/**
+ * The type Config info.
+ */
 public class ConfigInfo implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -12,10 +31,15 @@ public class ConfigInfo implements Serializable {
     private ArrayList<String> supports;
     private String setting;
 
+    /**
+     * Instantiates a new Config info.
+     */
     public ConfigInfo() {
     }
 
     /**
+     * Gets id.
+     *
      * @return the id
      */
     public int getId() {
@@ -23,6 +47,8 @@ public class ConfigInfo implements Serializable {
     }
 
     /**
+     * Sets id.
+     *
      * @param id the id to set
      */
     public void setId(int id) {
@@ -30,6 +56,8 @@ public class ConfigInfo implements Serializable {
     }
 
     /**
+     * Gets default type.
+     *
      * @return the default_type
      */
     public String getDefault_type() {
@@ -37,6 +65,8 @@ public class ConfigInfo implements Serializable {
     }
 
     /**
+     * Sets default type.
+     *
      * @param default_type the default_type to set
      */
     public void setDefault_type(String default_type) {
@@ -44,6 +74,8 @@ public class ConfigInfo implements Serializable {
     }
 
     /**
+     * Gets supports.
+     *
      * @return the supports
      */
     public ArrayList<String> getSupports() {
@@ -51,6 +83,8 @@ public class ConfigInfo implements Serializable {
     }
 
     /**
+     * Sets supports.
+     *
      * @param supports the supports to set
      */
     public void setSupports(ArrayList<String> supports) {
@@ -58,6 +92,8 @@ public class ConfigInfo implements Serializable {
     }
 
     /**
+     * Gets setting.
+     *
      * @return the setting
      */
     public String getSetting() {
@@ -65,6 +101,8 @@ public class ConfigInfo implements Serializable {
     }
 
     /**
+     * Sets setting.
+     *
      * @param setting the setting to set
      */
     public void setSetting(String setting) {

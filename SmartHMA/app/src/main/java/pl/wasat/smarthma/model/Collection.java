@@ -1,3 +1,19 @@
+/*
+ * Copyright (c) 2016.  SmartHMA ESA
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package pl.wasat.smarthma.model;
 
 import android.os.Parcel;
@@ -5,8 +21,14 @@ import android.os.Parcelable;
 
 import java.util.Comparator;
 
+/**
+ * The type Collection.
+ */
 public class Collection implements Parcelable, Comparator<Object> {
 
+    /**
+     * The constant CREATOR.
+     */
     public static Creator<Collection> CREATOR = new Creator<Collection>() {
         @Override
         public Collection createFromParcel(Parcel source) {
@@ -23,6 +45,9 @@ public class Collection implements Parcelable, Comparator<Object> {
     private String name;
     private boolean read;
 
+    /**
+     * Instantiates a new Collection.
+     */
     public Collection() {
     }
 
@@ -33,6 +58,8 @@ public class Collection implements Parcelable, Comparator<Object> {
     }
 
     /**
+     * Gets id.
+     *
      * @return the id
      */
     public int getId() {
@@ -40,6 +67,8 @@ public class Collection implements Parcelable, Comparator<Object> {
     }
 
     /**
+     * Sets id.
+     *
      * @param id the id to set
      */
     public void setId(int id) {
@@ -47,6 +76,8 @@ public class Collection implements Parcelable, Comparator<Object> {
     }
 
     /**
+     * Gets name.
+     *
      * @return the name
      */
     public String getName() {
@@ -54,6 +85,8 @@ public class Collection implements Parcelable, Comparator<Object> {
     }
 
     /**
+     * Sets name.
+     *
      * @param name the name to set
      */
     public void setName(String name) {
@@ -61,11 +94,19 @@ public class Collection implements Parcelable, Comparator<Object> {
     }
 
 
+    /**
+     * Is read boolean.
+     *
+     * @return the boolean
+     */
     public boolean isRead() {
         return read;
     }
 
 
+    /**
+     * Sets read.
+     */
     public void setRead() {
         this.read = true;
     }

@@ -1,3 +1,19 @@
+/*
+ * Copyright (c) 2016.  SmartHMA ESA
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package pl.wasat.smarthma.utils.rss;
 
 import org.xml.sax.Attributes;
@@ -113,6 +129,9 @@ import pl.wasat.smarthma.model.iso.UseLimitation;
 import pl.wasat.smarthma.model.iso.Voice;
 import pl.wasat.smarthma.model.iso.WestBoundLongitude;
 
+/**
+ * The type Iso data handler.
+ */
 class ISODataHandler extends DefaultHandler {
 
     // Current characters being accumulated
@@ -960,6 +979,11 @@ class ISODataHandler extends DefaultHandler {
         chars.append(new String(ch, start, length).trim());
     }
 
+    /**
+     * Gets feeds.
+     *
+     * @return the feeds
+     */
     public Feed getFeeds() {
         return feed;
     }

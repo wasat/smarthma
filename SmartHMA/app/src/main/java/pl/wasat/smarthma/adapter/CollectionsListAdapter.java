@@ -1,3 +1,19 @@
+/*
+ * Copyright (c) 2016.  SmartHMA ESA
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 /**
  *
  */
@@ -21,6 +37,8 @@ import pl.wasat.smarthma.interfaces.OnSlideElementListener;
 import pl.wasat.smarthma.model.Collection;
 
 /**
+ * The type Collections list adapter.
+ *
  * @author Wasat Sp. z o.o
  */
 public class CollectionsListAdapter extends ArrayAdapter<Collection> {
@@ -32,6 +50,13 @@ public class CollectionsListAdapter extends ArrayAdapter<Collection> {
     private OnSlideElementListener listener;
 
 
+    /**
+     * Instantiates a new Collections list adapter.
+     *
+     * @param activ  the activ
+     * @param data   the data
+     * @param grName the gr name
+     */
     public CollectionsListAdapter(Activity activ, ArrayList<Collection> data,
                                   String grName) {
         super(activ, R.layout.view_cell_collection, data);
@@ -77,15 +102,35 @@ public class CollectionsListAdapter extends ArrayAdapter<Collection> {
         return convertView;
     }
 
+    /**
+     * Sets listener.
+     *
+     * @param listener the listener
+     */
     public void setListener(OnSlideElementListener listener) {
         this.listener = listener;
     }
 
     private static class ViewHolder {
+        /**
+         * The Title.
+         */
         public TextView title;
+        /**
+         * The Artist.
+         */
         public TextView artist;
+        /**
+         * The Thumb image.
+         */
         public ImageView thumb_image;
+        /**
+         * The Row.
+         */
         public View row;
+        /**
+         * The Button.
+         */
         public ImageView button;
     }
 }

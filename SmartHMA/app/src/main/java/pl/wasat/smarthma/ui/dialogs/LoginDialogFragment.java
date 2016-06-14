@@ -1,3 +1,19 @@
+/*
+ * Copyright (c) 2016.  SmartHMA ESA
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package pl.wasat.smarthma.ui.dialogs;
 
 /**
@@ -19,6 +35,9 @@ import android.widget.EditText;
 import pl.wasat.smarthma.R;
 import pl.wasat.smarthma.preferences.SharedPrefs;
 
+/**
+ * The type Login dialog fragment.
+ */
 public class LoginDialogFragment extends DialogFragment {
 
     private OnLoginDialogFragmentListener mListener;
@@ -26,10 +45,18 @@ public class LoginDialogFragment extends DialogFragment {
     private SharedPrefs sharedPrefs;
 
 
+    /**
+     * New instance login dialog fragment.
+     *
+     * @return the login dialog fragment
+     */
     public static LoginDialogFragment newInstance() {
         return new LoginDialogFragment();
     }
 
+    /**
+     * Instantiates a new Login dialog fragment.
+     */
     public LoginDialogFragment() {
     }
 
@@ -95,7 +122,16 @@ public class LoginDialogFragment extends DialogFragment {
         dismiss();
     }
 
+    /**
+     * The interface On login dialog fragment listener.
+     */
     public interface OnLoginDialogFragmentListener {
+        /**
+         * On login dialog sign in.
+         *
+         * @param login    the login
+         * @param password the password
+         */
         void onLoginDialogSignIn(String login, String password);
     }
 }

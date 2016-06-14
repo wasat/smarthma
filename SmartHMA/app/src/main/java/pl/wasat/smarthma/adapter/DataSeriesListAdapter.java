@@ -1,3 +1,19 @@
+/*
+ * Copyright (c) 2016.  SmartHMA ESA
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package pl.wasat.smarthma.adapter;
 
 import android.app.Activity;
@@ -15,10 +31,19 @@ import pl.wasat.smarthma.interfaces.OnSlideElementListener;
 import pl.wasat.smarthma.model.iso.EntryISO;
 import pl.wasat.smarthma.utils.time.DateUtils;
 
+/**
+ * The type Data series list adapter.
+ */
 public class DataSeriesListAdapter extends ArrayAdapter<EntryISO> {
 
     private OnSlideElementListener listener;
 
+    /**
+     * Instantiates a new Data series list adapter.
+     *
+     * @param activity       the activity
+     * @param dataSeriesList the data series list
+     */
     public DataSeriesListAdapter(Activity activity, List<EntryISO> dataSeriesList) {
         super(activity, 0, dataSeriesList);
     }
@@ -62,12 +87,23 @@ public class DataSeriesListAdapter extends ArrayAdapter<EntryISO> {
         return convertView;
     }
 
+    /**
+     * Sets listener.
+     *
+     * @param listener the listener
+     */
     public void setListener(OnSlideElementListener listener) {
         this.listener = listener;
     }
 
     private static class ViewHolder {
+        /**
+         * The Text view.
+         */
         public TextView textView;
+        /**
+         * The Date view.
+         */
         public TextView dateView;
     }
 }

@@ -1,3 +1,19 @@
+/*
+ * Copyright (c) 2016.  SmartHMA ESA
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package pl.wasat.smarthma.kindle;
 
 import android.graphics.Color;
@@ -19,6 +35,12 @@ import java.util.ArrayList;
  */
 public class AmznMapDrawings {
 
+    /**
+     * Draw area polygon options.
+     *
+     * @param bbox the bbox
+     * @return the polygon options
+     */
     public PolygonOptions drawArea(float[] bbox) {
         ArrayList<LatLng> polygonPtsList = new ArrayList<>();
         polygonPtsList.add(new LatLng(bbox[1], bbox[0]));
@@ -29,10 +51,23 @@ public class AmznMapDrawings {
         return drawArea(polygonPtsList);
     }
 
+    /**
+     * Draw area polygon options.
+     *
+     * @param markedPtList the marked pt list
+     * @return the polygon options
+     */
     public PolygonOptions drawArea(ArrayList markedPtList) {
         return drawArea(markedPtList, Color.RED);
     }
 
+    /**
+     * Draw area polygon options.
+     *
+     * @param markedPtList the marked pt list
+     * @param color        the color
+     * @return the polygon options
+     */
     @SuppressWarnings("unchecked")
     public PolygonOptions drawArea(ArrayList markedPtList, int color) {
         PolygonOptions rectOptions = new PolygonOptions();
@@ -46,6 +81,13 @@ public class AmznMapDrawings {
         return rectOptions;
     }
 
+    /**
+     * Draw points amazon map.
+     *
+     * @param markedPtList the marked pt list
+     * @param mMap         the m map
+     * @return the amazon map
+     */
     public AmazonMap drawPoints(ArrayList<LatLng> markedPtList, AmazonMap mMap) {
         if (markedPtList != null) {
             for (LatLng point : markedPtList) {
@@ -55,6 +97,12 @@ public class AmznMapDrawings {
         return mMap;
     }
 
+    /**
+     * Draw point circle options.
+     *
+     * @param point the point
+     * @return the circle options
+     */
     public CircleOptions drawPoint(LatLng point) {
         CircleOptions circle = new CircleOptions();
         circle.center(point);
@@ -66,6 +114,12 @@ public class AmznMapDrawings {
         return circle;
     }
 
+    /**
+     * Draw point and radius area circle options.
+     *
+     * @param markedPtList the marked pt list
+     * @return the circle options
+     */
     public CircleOptions drawPointAndRadiusArea(ArrayList<LatLng> markedPtList) {
         LatLng center = markedPtList.get(0);
         LatLng secPt = markedPtList.get(1);
@@ -75,6 +129,13 @@ public class AmznMapDrawings {
         return drawPointAndRadiusArea(center, radiusInMeters);
     }
 
+    /**
+     * Draw point and radius area circle options.
+     *
+     * @param center         the center
+     * @param radiusInMeters the radius in meters
+     * @return the circle options
+     */
     @NonNull
     public CircleOptions drawPointAndRadiusArea(LatLng center, double radiusInMeters) {
         int strokeColor = 0xFF0000FF; //red outline
@@ -89,6 +150,11 @@ public class AmznMapDrawings {
                 .zIndex(4);
     }
 
+    /**
+     * Remove circles.
+     *
+     * @param circleList the circle list
+     */
     public void removeCircles(ArrayList<Circle> circleList) {
         if (circleList != null) {
             for (Circle circle : circleList) {
@@ -97,6 +163,11 @@ public class AmznMapDrawings {
         }
     }
 
+    /**
+     * Remove polygon.
+     *
+     * @param areaPolygon the area polygon
+     */
     public void removePolygon(Polygon areaPolygon) {
         if (areaPolygon != null) areaPolygon.remove();
     }

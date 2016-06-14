@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Copyright (c) 2016.  SmartHMA ESA
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~     http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<resources>
+    <string name="action_settings">Einstellungen</string>
+    <string name="action_download">Herunterladen</string>
+    <string name="action_exit">Beenden</string>
+    <string name="specific_collection_does_not_exist">Spezifische Sammlung existiert nicht. Bitte versuchen Sie es später noch einmal.</string>
+    <string name="loading_please_wait">Daten werden geladen \nBitte warten … </string>
+    <string name="content_picture">Bildinhalt</string>
+    <string name="search_hint">EB-Daten suchen</string>
+    <string name="action_search">Suchen</string>
+    <string name="failure_fragment_text">Ausnahme</string>
+    <string name="first_line_desc">First Line-Beschreibung</string>
+    <string name="second_line_desc">Second Line-Beschreibung</string>
+    <string name="desc">Beschreibung</string>
+    <string name="btn_offline_reading">Speichern für spätere Benutzung</string>
+    <string name="btn_mark_unread">Als ungelesen markieren</string>
+    <string name="btn_refresh">Aktualisieren</string>
+    <string name="nothing_to_display_please_search_again_">Nichts zum Anzeigen. Bitte erneut suchen.</string>
+    <string name="show_metadata">Metadaten</string>
+    <string name="show_map">Karte zeigen</string>
+    <string name="Share">Freigeben</string>
+
+    <string name="collections_search_results">Sammlungen Suchergebnisse</string>
+    <string name="quicklook">Schnellansicht</string>
+    <string name="browse_eo_data">Produkte durchsuchen</string>
+    <string name="esa_missions">ESA-Missionen</string>
+
+    <string name="esa_news">ESA Online-Nachrichten</string>
+    <string name="title_article_list">ESA EB-Nachrichten SmartHMA- Leser</string>
+    <string name="more">Mehr</string>
+    <string name="search_history_empty">(Suche Verlauf ist leer)</string>
+    <string name="query">Anfrage</string>
+    <string name="basic_settings">Basis-Einstellungen</string>
+    <string name="advanced_settings">Erweiterte Einstellungen</string>
+    <string name="search_area">Suchbereich</string>
+    <string name="time_period">Zeitraum</string>
+    <string name="from_">"Von: "</string>
+    <string name="to_">"An:  "</string>
+    <string name="date_time">Datum/Zeit</string>
+    <string name="catalogue">Verzeichnis</string>
+    <string name="eo_catalogue_list_title">EB-Verzeichnisse</string>
+
+    <string name="alert_dialog_response_error">Fehler bei Antwort</string>
+    <string name="please_correct_your_query_">\n\nBitte gehen Sie zurück und korrigieren Sie Ihre Anfrage.</string>
+    <string name="_first">erster</string>
+    <string name="_prev">voriger</string>
+    <string name="reload">wieder laden</string>
+    <string name="next_">nächster</string>
+    <string name="last_">letzter</string>
+    <string name="items_from">Objekte von</string>
+
+    <string name="collection_id">ID der Sammlung: </string>
+    <string name="show_products">Produkte zeigen</string>
+    <string name="activity_name_collections_definition">Definition von Sammlungen</string>
+    <string name="activity_name_collections_browser">Browser von Sammlungen</string>
+    <string name="activity_name_products_browser">Browser von Produkten</string>
+    <string name="activity_name_search_eo_data">EB-Daten suchen</string>
+    <string name="activity_name_search_collections_results">Gesuchte Sammlungen</string>
+    <string name="activity_name_favourite_collections_results">Beliebteste Sammlungen</string>
+    <string name="activity_name_favourite_products_results">Beliebteste Produkte</string>
+    <string name="actionbar_share">Freigeben</string>
+
+    <string name="cancelled">Abgebrochen</string>
+    <string name="permission_not_granted">Gewählter Vorgang kann nicht ausgeführt werden, weil keine Genehmigungen erteilt wurden.</string>
+    <string name="success">Erfolgreich</string>
+    <string name="successfully_posted_post">Erfolgreich auf Facebook gepostet \'%1$s\'.\nmit fb ID: %2$s</string>
+    <string name="error">Fehler</string>
+    <string name="hello_user">Sie sind eingeloggt als\n%1$s</string>
+    <string name="share_quicklook">Schnellansicht freigeben</string>
+    <string name="quicklook_img_desc">Bild von Schnellansicht</string>
+    <string name="search_eo_data">EB-Daten suchen</string>
+    <string name="esa_mission_item">OBJEKT VON ESA-MISSION</string>
+    <string name="parameters">Parameter</string>
+    <string name="bbox">Rahmen</string>
+    <string name="start_date">Startdatum</string>
+    <string name="end_date">Enddatum</string>
+    <string name="search_history_item">Suche Verlauf…</string>
+    <string name="search_history_pick_query">Anfrage auswählen…</string>
+    <string name="search_history_pick_catalogue">Verzeichnis auswählen…</string>
+    <string name="search_history_pick_bbox">Rahmen auswählen…</string>
+    <string name="search_history_pick_start_date">Startdatum auswählen…</string>
+    <string name="search_history_pick_end_date">Enddatum auswählen…</string>
+    <string name="search_history_clear">Suchverlauf entfernen</string>
+    <string name="action_sort">Sortieren…</string>
+    <string name="action_sort_by_title_asc">Nach Titel aufsteigend</string>
+    <string name="action_sort_by_title_desc">Nach Titel absteigend</string>
+    <string name="action_sort_by_date_asc">Nach Datum aufsteigend</string>
+    <string name="action_sort_by_date_desc">Nach Datum absteigend</string>
+    <string name="action_clear_list">Liste entfernen</string>
+    <string name="action_clear_list_confirmation">Sind Sie sicher, dass Sie alle Objekte von der Liste entfernen möchten?</string>
+    <string name="refreshing_list">Liste aktualisieren…</string>
+
+    <string name="widget_empty_list">Daten können nicht heruntergeladen werden</string>
+    <string name="launch_widget">Widget starten</string>
+    <string name="value_osdd_parameter">Parameter suchen</string>
+    <string name="organisation_header">Organisation</string>
+    <string name="platform_header">Plattform</string>
+    <string name="favourites">Favoriten…</string>
+    <string name="saved_collections">Gespeicherte Sammlungen</string>
+    <string name="saved_products">Gespeicherte Produkte</string>
+    <string name="collection_added_to_favourites">Sammlung zu Favoriten hinzugefügt</string>
+    <string name="product_added_to_favourites">Produkt zu Favoriten hinzugefügt</string>
+    <string name="empty_list">Liste ist leer.</string>
+    <string name="not_enough_memory">Nicht genügend Speicherplatz, um die Datei herunterzuladen</string>
+    <string name="download_completed">Herunterladen fertig</string>
+    <string name="connect_to_wifi">Herunterladen möglich, wenn mit WLAN verbunden</string>
+    <string name="upload_to_google_drive_completed">Hochladen auf Google-Driver fertig</string>
+    <string name="upload_to_google_drive_in_progress">Hochladen auf Google-Driver läuft</string>
+    <string name="error_downloading">Fehler beim Herunterladen. Bitte versuchen Sie es erneut</string>
+
+    <string name="action_bar_home">Startseite</string>
+    <string name="menu_sort">Sortieren</string>
+    <string name="menu_refresh">Aktualisieren</string>
+    <string name="menu_favourite">Favoriten</string>
+    <string name="show_collections">Sammlungen anzeigen</string>
+
+    <string name="mission_activity_objective">Das Ziel liegt darin,durch Satellitenbilder und –daten gelieferte fortlaufende Ansichten unseres Planeten Wissenschaftler und Entscheidungsträger mit Informationen zu  versorgen, die sie benötigen, um unsere Umwelt zu verstehen und zu schützen. Unter den zahlreichen Anwendungen gibt es die Beobachtung von Luft, See und Land; somit wird die Basis für genaue Wettervorhersagen geliefert, und nationale und internationale Hilfsorganisationen erhalten Daten darüber, wann Katastrophen einbrechen</string>
+    <string name="menu_settings">Einstellungen</string>
+    <string name="of_total">des Gesamten</string>
+    <string name="go">Gehen</string>
+    <string name="share_options">Optionen freigeben</string>
+    <string name="alert_dialog_details">Einzelheiten</string>
+    <string name="wide_area_or_timespan">"Auszeit in der Verbindung! \ nWahrscheinlich haben Sie einen zu weiten Bereich oder eine zu lange Zeitspanne ausgewählt. "</string>
+    <string name="date_of_publication">"Datum der Publikation: "</string>
+    <string name="eo_metadata">"Metadaten zur ErdBeobachtung (EB) "</string>
+    <string name="eo_observed_property">"Bei der Erdbeobachtung bemerkte Eigenschaft "</string>
+    <string name="eo_footprint">Basisfläche der Erdbeobachtung</string>
+    <string name="eo_equipment">"Ausrüstung für die Erdbeobachtung "</string>
+    <string name="eo_result">"Ergebnis der Erdbeobachtung "</string>
+    <string name="eo_phenomenon_time">"Zeit des Phänomens der Erdbeobachtung "</string>
+    <string name="eo_result_time">"Zeit des Ergebnisses der Erdbeobachtung "</string>
+    <string name="metadata_file_id">"Datei-ID der Metadaten "</string>
+    <string name="metadata_language">"Sprache der Metadaten "</string>
+    <string name="metadata_hierarchy_level">"Hierarchieebene der Metadaten "</string>
+    <string name="eo_provider_contact">"Kontakt des Providers der Erdbeobachtung "</string>
+    <string name="eo_image_date">"Datum des Bildes der Erdbeobachtung "</string>
+    <string name="metadata_standards">"Standards der Metadaten "</string>
+    <string name="metadata_identification">"Identifikation der Metadaten "</string>
+    <string name="metadata_quality">"Qualität der Metadaten "</string>
+    <string name="metadata_dc_title">Metadaten zum Dublin Core</string>
+
+    <string name="download">Herunterladen</string>
+    <string name="save_to_cloud">In der Cloud speichern</string>
+    <string name="choose_save_cloud_service">Zum Hochladen Cloud-Service auswählen</string>
+    <string name="these_data_published">"Diese Daten wurden publiziert: "</string>
+    <string name="these_data_updated">" und aktualisiert: "</string>
+    <string name="metadata_saved_offline">Diese Metadaten wurden  Offline gespeichert.</string>
+    <string name="you_choose_dropbox">Sie wählen DropBox zum Speichern der Datei</string>
+    <string name="couldnt_authenticate">Authentifizierung mit Dropbox geht nicht:</string>
+    <string name="you_must_apply_for_key"> Sie müssen einen Anwendungsschlüssel und ein Passwort beantragen? Von den Entwicklern.dropbox.com, und diese zur  DBRoulette Anwendung hinzufügen, bevor Sie es versuchen.</string>
+    <string name="url_scheme_in_your_apps">"URL Schema im Ladeverzeichnis Ihrer Anwendung ist nicht richtig eingestellt. Sie sollten ein com.dropbox.client2.android haben. AuthActivity mit dem Schema: "</string>
+    <string name="eo_dataset">"EB-Datensatz: "</string>
+    <string name="file_is_downloading">Datei wird %1$s heruntergeladen</string>
+    <string name="successful">"Herunterladen der Datei ist %1$s erfolgreich fertig"</string>
+    <string name="failed">"FEHLER: "</string>
+    <string name="paused">"PAUSE: "</string>
+    <string name="pending">NOCH NICHT FERTIG!</string>
+    <string name="running">LÄUFT!</string>
+
+    <string name="choose_the_time">Zeit auswählen</string>
+    <string name="choose">Auswählen </string>
+
+    <string name="facebook_quicklook_share">Facebook-Schnellansicht freigeben</string>
+    <string name="you_are_logged_as">Sie sind eingeloggt als</string>
+    <string name="tooltip_above">Kurzinfo oberhalb</string>
+    <string name="tooltip_below">Kurzinfo unterhalb</string>
+    <string name="tooltip_right">Kurzinfo rechts</string>
+    <string name="heading">Überschrift</string>
+    <string name="content">Inhalt</string>
+    <string name="pub_date_and_updated"> Datum: %1$s, aktualisiert: %2$s </string>
+    <string name="these_data_are_published_and_updated"> Diese Daten wurden publiziert: %1$s und aktualisiert: %2$s</string>
+    <string name="must_implement">" muss durchgeführt werden "</string>
+    <string name="download_in_progress">Herunterladen läuft noch</string>
+    <string name="this_app_wasnt_auth"> Diese Anwendung wurde nicht richtig authentifiziert.</string>
+    <string name="file_is_too_big"> Diese Datei ist zu groß zum Hochladen</string>
+    <string name="upload_canceled">Hochladen abgebrochen</string>
+    <string name="network_error">Netzwerkfehler. Versuchen Sie es erneut.</string>
+    <string name="dropbox_error">DropBox-Fehler. Versuchen Sie es erneut.</string>
+    <string name="unknown_error">Unbekannter Fehler. Versuchen Sie es erneut.</string>
+    <string name="upload_file_to_dropbox">"Datei in die DropBox hochladen - "</string>
+    <string name="upload_to_dropbox_in_progress">"Hochladen in die DropBox läuft noch. Datei: "</string>
+    <string name="upload_file_to_dropbox_completed"> Hochladen der Datei in die Dropbox %s fertig</string>
+    <string name="upload">Hochladen</string>
+    <string name="file_uploaded">"Datei hochgeladen: "</string>
+    <string name="loading">Ladevorgang…</string>
+    <string name="swipe_right">Swipe rechts</string>
+    <string name="swipe_left">Swipe links</string>
+    <string name="searched_collections">Gesuchte Sammlungen</string>
+    <string name="start_search_of">"Suche starten von: "</string>
+    <string name="loading_esa_eo_missions">Laden von ESA-MISSIONEN der Erdbeobachtung, bitte warten …</string>
+    <string name="loading_esa_future_missions">Laden von ZUKÜNFTIGEN ESA-MISSIONEN, bitte warten…</string>
+    <string name="loading_third_party_missions">Laden von MISSIONEN DRITTER, bitte warten…</string>
+    <string name="loading_historical_missions">Laden von VERGANGENEN MISSIONEN, bitte warten…</string>
+    <string name="loading_potential_missions">Laden von POTENZIELLEN MISSIONEN, bitte warten…</string>
+    <string name="loading_other_missions">Laden von ANDEREN MISSIONEN, bitte warten…</string>
+    <string name="impossible_to_get_the_list">Objektliste kann nicht erreicht werden</string>
+    <string name="choose_osdd_param">Wählen %s…</string>
+    <string name="minute_ago">" vor einer Minute"</string>
+    <string name="minutes_ago">" vor mehreren Minuten"</string>
+    <string name="hour_ago">" vor einer Stunde"</string>
+    <string name="hours_ago">" vor mehreren Stunden"</string>
+    <string name="days_ago">" vor mehreren Tagen"</string>
+    <string name="day_ago">" vor einem Tag"</string>
+    <string name="long_time_ago">vor längerer Zeit..</string>
+    <string name="unknown_exception">Unbekannte Ausnahme. Bitte Einzelheiten zur Ausnahme ansehen.</string>
+    <string name="wrong_body">Ausnahme mit falschem Körper</string>
+    <string name="wrong_request_status">Wahrscheinlich Status von Ausnahme für falsche Anfrage</string>
+
+    <string name="exception">" AUSNAHME: "</string>
+    <string name="start_pos_is_not_possible_to_calc">Startposition kann nicht berechnet werden. Startposition ist auf das Zentrum der EU eingestellt</string>
+    <string name="saved_to_offline_reading">Dieses Objekt wurde unter Offline-Lesen gespeichert.</string>
+    <string name="esa_eo_missions">ESA EB-Missionen</string>
+    <string name="esa_future_missions_sentinels">ESA Zukünftige Missionen - Markierungen</string>
+    <string name="esa_future_missions_explorers">ESA Zukünftige Missionen – Zukünftige Erderforsche</string>
+    <string name="third_party_missions_current">Missionen Dritter - Laufende Missionen Dritter</string>
+    <string name="third_party_missions_historical">Missionen Dritter – Vergangene Missionen Dritter</string>
+    <string name="third_party_missions_potential">Missionen Dritter – Potenzielle Missionen Dritter</string>
+    <string name="choose_the_date">Datum auswählen</string>
+    <string name="set_">Einstellen %s</string>
+    <string name="dev_size_warning">Bildschirmwarnung zum Gerät</string>
+    <string name="dev_size_warning_message"> Ihr Gerät hat nicht die Größe eines Tablets. Die SmartHMA-Anwendung ist für Geräte mit großem Bildschirm konzipiert.\n\nBitte benutzen Sie einen Online FedEB-Service für die Suche nach EB-Daten:\nhttps://eoportal.org/web/eoportal/fedeo\n</string>
+    <string name="action_export_ompl">Export als OMPL</string>
+    <string name="export_opml_favourites">Eingabe von Export OPML  Favoriten wird auf internem Speicher gespeichert</string>
+
+    <string name="center">Mitte: </string>
+    <string name="radius">Radius: </string>
+    <string name="signin">Eintragen In</string>
+    <string name="username">Benutzername</string>
+    <string name="password">Passwort</string>
+    <string name="sign_in_sso">SSO Eintragen</string>
+    <string name="none">Keine</string>
+    <string name="instrument_header">Gerät</string>
+    <string name="value_not_fit_to_pattern">Parameter value do not fit to pattern.\nPlease put proper value</string>
+
+</resources>

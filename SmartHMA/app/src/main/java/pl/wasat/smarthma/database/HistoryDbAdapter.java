@@ -1,3 +1,19 @@
+/*
+ * Copyright (c) 2016.  SmartHMA ESA
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package pl.wasat.smarthma.database;
 
 import android.content.ContentValues;
@@ -11,6 +27,9 @@ import android.provider.BaseColumns;
 
 import java.util.ArrayList;
 
+/**
+ * The type History db adapter.
+ */
 public class HistoryDbAdapter {
 
     private static final String KEY_ROWID = BaseColumns._ID;
@@ -35,26 +54,52 @@ public class HistoryDbAdapter {
     private SQLiteHelper sqLiteHelper;
     private SQLiteDatabase sqLiteDatabase;
 
+    /**
+     * Instantiates a new History db adapter.
+     *
+     * @param c the c
+     */
     public HistoryDbAdapter(Context c) {
         context = c;
     }
 
+    /**
+     * Open to read history db adapter.
+     *
+     * @return the history db adapter
+     * @throws SQLException the sql exception
+     */
     public HistoryDbAdapter openToRead() throws SQLException {
         sqLiteHelper = new SQLiteHelper(context, DATABASE_NAME, null, DATABASE_VERSION);
         sqLiteDatabase = sqLiteHelper.getReadableDatabase();
         return this;
     }
 
+    /**
+     * Open to write history db adapter.
+     *
+     * @return the history db adapter
+     * @throws SQLException the sql exception
+     */
     public HistoryDbAdapter openToWrite() throws SQLException {
         sqLiteHelper = new SQLiteHelper(context, DATABASE_NAME, null, DATABASE_VERSION);
         sqLiteDatabase = sqLiteHelper.getWritableDatabase();
         return this;
     }
 
+    /**
+     * Close.
+     */
     public void close() {
         sqLiteHelper.close();
     }
 
+    /**
+     * Insert entry long.
+     *
+     * @param parameters the parameters
+     * @return the long
+     */
     public long insertEntry(SearchParams parameters) {
         ContentValues initialValues = new ContentValues();
         initialValues.put(KEY_QUERY, validValue(parameters.getSearchPhrase()));
@@ -70,6 +115,11 @@ public class HistoryDbAdapter {
         return parameter;
     }
 
+    /**
+     * Reduce number of entries.
+     *
+     * @param newNumberOfEntries the new number of entries
+     */
     public void reduceNumberOfEntries(int newNumberOfEntries) {
         int numberOfEntries = getAll().size();
         while (numberOfEntries > newNumberOfEntries) {
@@ -80,6 +130,11 @@ public class HistoryDbAdapter {
         }
     }
 
+    /**
+     * Gets all.
+     *
+     * @return the all
+     */
     public ArrayList<String[]> getAll() {
         ArrayList<String[]> result = new ArrayList();
         Cursor res = sqLiteDatabase.rawQuery("select * from " + DATABASE_TABLE, null);
@@ -98,6 +153,9 @@ public class HistoryDbAdapter {
         return result;
     }
 
+    /**
+     * Recreate table.
+     */
     public void recreateTable() {
         Cursor res = sqLiteDatabase.rawQuery("select * from " + DATABASE_TABLE, null);
         res.moveToLast();
@@ -107,7 +165,18 @@ public class HistoryDbAdapter {
         }
     }
 
+    /**
+     * The type Sq lite helper.
+     */
     public class SQLiteHelper extends SQLiteOpenHelper {
+        /**
+         * Instantiates a new Sq lite helper.
+         *
+         * @param context the context
+         * @param name    the name
+         * @param factory the factory
+         * @param version the version
+         */
         public SQLiteHelper(Context context, String name, CursorFactory factory, int version) {
             super(context, name, factory, version);
         }

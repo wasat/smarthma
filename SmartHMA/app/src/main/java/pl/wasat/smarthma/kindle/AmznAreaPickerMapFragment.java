@@ -1,3 +1,19 @@
+/*
+ * Copyright (c) 2016.  SmartHMA ESA
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package pl.wasat.smarthma.kindle;
 
 import android.Manifest;
@@ -68,6 +84,9 @@ public class AmznAreaPickerMapFragment extends Fragment implements
     private int areaDrawType;
     private ArrayList<Circle> circleList;
 
+    /**
+     * Instantiates a new Amzn area picker map fragment.
+     */
     public AmznAreaPickerMapFragment() {
     }
 
@@ -483,10 +502,26 @@ public class AmznAreaPickerMapFragment extends Fragment implements
      * >Communicating with Other Fragments</a> for more information.
      */
     public interface OnAmznAreaPickerMapFragmentListener {
+        /**
+         * On amzn map fragment bounds change.
+         *
+         * @param bounds the bounds
+         */
         void onAmznMapFragmentBoundsChange(LatLngBoundsExt bounds);
 
+        /**
+         * On amzn map fragment area input change.
+         *
+         * @param areaType the area type
+         */
         void onAmznMapFragmentAreaInputChange(int areaType);
 
+        /**
+         * On amzn map fragment point and radius send.
+         *
+         * @param center the center
+         * @param radius the radius
+         */
         void onAmznMapFragmentPointAndRadiusSend(LatLngExt center, float radius);
 
     }

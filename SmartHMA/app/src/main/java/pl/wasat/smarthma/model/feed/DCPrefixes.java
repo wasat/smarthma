@@ -1,3 +1,19 @@
+/*
+ * Copyright (c) 2016.  SmartHMA ESA
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package pl.wasat.smarthma.model.feed;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
@@ -26,6 +42,8 @@ public class DCPrefixes implements Serializable {
     private String XmlnsTime;
 
     /**
+     * Gets xmlns.
+     *
      * @return The Xmlns
      */
     public String getXmlns() {
@@ -33,6 +51,8 @@ public class DCPrefixes implements Serializable {
     }
 
     /**
+     * Sets xmlns.
+     *
      * @param Xmlns The _xmlns
      */
     public void setXmlns(String Xmlns) {
@@ -40,6 +60,8 @@ public class DCPrefixes implements Serializable {
     }
 
     /**
+     * Gets xmlns csw.
+     *
      * @return The XmlnsCsw
      */
     public String getXmlnsCsw() {
@@ -47,6 +69,8 @@ public class DCPrefixes implements Serializable {
     }
 
     /**
+     * Sets xmlns csw.
+     *
      * @param XmlnsCsw The _xmlns:csw
      */
     public void setXmlnsCsw(String XmlnsCsw) {
@@ -54,6 +78,8 @@ public class DCPrefixes implements Serializable {
     }
 
     /**
+     * Gets xmlns dc.
+     *
      * @return The XmlnsDc
      */
     public String getXmlnsDc() {
@@ -61,6 +87,8 @@ public class DCPrefixes implements Serializable {
     }
 
     /**
+     * Sets xmlns dc.
+     *
      * @param XmlnsDc The _xmlns:dc
      */
     public void setXmlnsDc(String XmlnsDc) {
@@ -68,6 +96,8 @@ public class DCPrefixes implements Serializable {
     }
 
     /**
+     * Gets xmlns dct.
+     *
      * @return The XmlnsDct
      */
     public String getXmlnsDct() {
@@ -75,6 +105,8 @@ public class DCPrefixes implements Serializable {
     }
 
     /**
+     * Sets xmlns dct.
+     *
      * @param XmlnsDct The _xmlns:dct
      */
     public void setXmlnsDct(String XmlnsDct) {
@@ -82,6 +114,8 @@ public class DCPrefixes implements Serializable {
     }
 
     /**
+     * Gets xmlns eo.
+     *
      * @return The XmlnsEo
      */
     public String getXmlnsEo() {
@@ -89,6 +123,8 @@ public class DCPrefixes implements Serializable {
     }
 
     /**
+     * Sets xmlns eo.
+     *
      * @param XmlnsEo The _xmlns:eo
      */
     public void setXmlnsEo(String XmlnsEo) {
@@ -96,6 +132,8 @@ public class DCPrefixes implements Serializable {
     }
 
     /**
+     * Gets xmlns geo.
+     *
      * @return The XmlnsGeo
      */
     public String getXmlnsGeo() {
@@ -103,6 +141,8 @@ public class DCPrefixes implements Serializable {
     }
 
     /**
+     * Sets xmlns geo.
+     *
      * @param XmlnsGeo The _xmlns:geo
      */
     public void setXmlnsGeo(String XmlnsGeo) {
@@ -110,6 +150,8 @@ public class DCPrefixes implements Serializable {
     }
 
     /**
+     * Gets xmlns georss.
+     *
      * @return The XmlnsGeorss
      */
     public String getXmlnsGeorss() {
@@ -117,6 +159,8 @@ public class DCPrefixes implements Serializable {
     }
 
     /**
+     * Sets xmlns georss.
+     *
      * @param XmlnsGeorss The _xmlns:georss
      */
     public void setXmlnsGeorss(String XmlnsGeorss) {
@@ -124,6 +168,8 @@ public class DCPrefixes implements Serializable {
     }
 
     /**
+     * Gets xmlns gml.
+     *
      * @return The XmlnsGml
      */
     public String getXmlnsGml() {
@@ -131,6 +177,8 @@ public class DCPrefixes implements Serializable {
     }
 
     /**
+     * Sets xmlns gml.
+     *
      * @param XmlnsGml The _xmlns:gml
      */
     public void setXmlnsGml(String XmlnsGml) {
@@ -138,6 +186,8 @@ public class DCPrefixes implements Serializable {
     }
 
     /**
+     * Gets xmlns media.
+     *
      * @return The XmlnsMedia
      */
     public String getXmlnsMedia() {
@@ -145,6 +195,8 @@ public class DCPrefixes implements Serializable {
     }
 
     /**
+     * Sets xmlns media.
+     *
      * @param XmlnsMedia The _xmlns:media
      */
     public void setXmlnsMedia(String XmlnsMedia) {
@@ -152,6 +204,8 @@ public class DCPrefixes implements Serializable {
     }
 
     /**
+     * Gets xmlns os.
+     *
      * @return The XmlnsOs
      */
     public String getXmlnsOs() {
@@ -159,6 +213,8 @@ public class DCPrefixes implements Serializable {
     }
 
     /**
+     * Sets xmlns os.
+     *
      * @param XmlnsOs The _xmlns:os
      */
     public void setXmlnsOs(String XmlnsOs) {
@@ -166,6 +222,8 @@ public class DCPrefixes implements Serializable {
     }
 
     /**
+     * Gets xmlns ows.
+     *
      * @return The XmlnsOws
      */
     public String getXmlnsOws() {
@@ -173,6 +231,8 @@ public class DCPrefixes implements Serializable {
     }
 
     /**
+     * Sets xmlns ows.
+     *
      * @param XmlnsOws The _xmlns:ows
      */
     public void setXmlnsOws(String XmlnsOws) {
@@ -180,6 +240,8 @@ public class DCPrefixes implements Serializable {
     }
 
     /**
+     * Gets xmlns sru.
+     *
      * @return The XmlnsSru
      */
     public String getXmlnsSru() {
@@ -187,6 +249,8 @@ public class DCPrefixes implements Serializable {
     }
 
     /**
+     * Sets xmlns sru.
+     *
      * @param XmlnsSru The _xmlns:sru
      */
     public void setXmlnsSru(String XmlnsSru) {
@@ -194,6 +258,8 @@ public class DCPrefixes implements Serializable {
     }
 
     /**
+     * Gets xmlns time.
+     *
      * @return The XmlnsTime
      */
     public String getXmlnsTime() {
@@ -201,6 +267,8 @@ public class DCPrefixes implements Serializable {
     }
 
     /**
+     * Sets xmlns time.
+     *
      * @param XmlnsTime The _xmlns:time
      */
     public void setXmlnsTime(String XmlnsTime) {

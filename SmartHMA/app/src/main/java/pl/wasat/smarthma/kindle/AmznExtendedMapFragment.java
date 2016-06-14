@@ -1,3 +1,19 @@
+/*
+ * Copyright (c) 2016.  SmartHMA ESA
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package pl.wasat.smarthma.kindle;
 
 import android.app.Activity;
@@ -69,6 +85,9 @@ public class AmznExtendedMapFragment extends Fragment implements
     private float[] qlookBearingsArray;
     private int qlookBearingIdx = 0;
 
+    /**
+     * Instantiates a new Amzn extended map fragment.
+     */
     public AmznExtendedMapFragment() {
     }
 
@@ -78,7 +97,7 @@ public class AmznExtendedMapFragment extends Fragment implements
      *
      * @return A new instance of fragment MapExtendedFragment.
      */
-    // TODO: Rename and change types and number of parameters
+// TODO: Rename and change types and number of parameters
     public static AmznExtendedMapFragment newInstance() {
         return new AmznExtendedMapFragment();
     }
@@ -243,6 +262,11 @@ public class AmznExtendedMapFragment extends Fragment implements
             imgBtnFit.setBackgroundResource(R.drawable.ic_qlook_fit_top);
     }
 
+    /**
+     * Show foot prints.
+     *
+     * @param footprint the footprint
+     */
     public void showFootPrints(ArrayList<LatLngExt> footprint) {
         ArrayList<LatLng> footprintPoints = extractLatLngFootprint(footprint);
         buildFootprintBounds(footprintPoints);
@@ -296,6 +320,11 @@ public class AmznExtendedMapFragment extends Fragment implements
         }
     }
 
+    /**
+     * Show quicklook on map.
+     *
+     * @param simpleMetadata the simple metadata
+     */
     public void showQuicklookOnMap(SimpleMetadata simpleMetadata) {
 
         ArrayList<LatLng> footprintPoints = castToAmznLatLonArray(simpleMetadata.getFootprint());
@@ -404,6 +433,9 @@ public class AmznExtendedMapFragment extends Fragment implements
      * >Communicating with Other Fragments</a> for more information.
      */
     public interface OnAmznExtendedMapFragmentListener {
+        /**
+         * On amzn map ready.
+         */
         void onAmznMapReady();
     }
 }

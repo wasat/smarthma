@@ -1,3 +1,19 @@
+/*
+ * Copyright (c) 2016.  SmartHMA ESA
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package pl.wasat.smarthma.model.osdd;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
@@ -7,6 +23,9 @@ import org.apache.commons.lang3.builder.ToStringBuilder;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The type Open search description.
+ */
 public class OpenSearchDescription {
 
     private String ShortName;
@@ -34,6 +53,8 @@ public class OpenSearchDescription {
 
 
     /**
+     * Gets short name.
+     *
      * @return The ShortName
      */
     public String getShortName() {
@@ -41,6 +62,8 @@ public class OpenSearchDescription {
     }
 
     /**
+     * Sets short name.
+     *
      * @param ShortName The ShortName
      */
     public void setShortName(String ShortName) {
@@ -48,6 +71,8 @@ public class OpenSearchDescription {
     }
 
     /**
+     * Gets long name.
+     *
      * @return The LongName
      */
     public String getLongName() {
@@ -55,6 +80,8 @@ public class OpenSearchDescription {
     }
 
     /**
+     * Sets long name.
+     *
      * @param LongName The LongName
      */
     public void setLongName(String LongName) {
@@ -62,6 +89,8 @@ public class OpenSearchDescription {
     }
 
     /**
+     * Gets description.
+     *
      * @return The Description
      */
     public String getDescription() {
@@ -69,6 +98,8 @@ public class OpenSearchDescription {
     }
 
     /**
+     * Sets description.
+     *
      * @param Description The Description
      */
     public void setDescription(String Description) {
@@ -76,6 +107,8 @@ public class OpenSearchDescription {
     }
 
     /**
+     * Gets url.
+     *
      * @return The Url
      */
     public List<pl.wasat.smarthma.model.osdd.Url> getUrl() {
@@ -83,6 +116,8 @@ public class OpenSearchDescription {
     }
 
     /**
+     * Sets url.
+     *
      * @param Url The Url
      */
     public void setUrl(List<pl.wasat.smarthma.model.osdd.Url> Url) {
@@ -104,6 +139,8 @@ public class OpenSearchDescription {
     }*/
 
     /**
+     * Gets query.
+     *
      * @return The Query
      */
     public List<pl.wasat.smarthma.model.osdd.Query> getQuery() {
@@ -111,6 +148,8 @@ public class OpenSearchDescription {
     }
 
     /**
+     * Sets query.
+     *
      * @param Query The Query
      */
     public void setQuery(List<pl.wasat.smarthma.model.osdd.Query> Query) {
@@ -118,6 +157,8 @@ public class OpenSearchDescription {
     }
 
     /**
+     * Gets tags.
+     *
      * @return The Tags
      */
     public String getTags() {
@@ -125,6 +166,8 @@ public class OpenSearchDescription {
     }
 
     /**
+     * Sets tags.
+     *
      * @param Tags The Tags
      */
     public void setTags(String Tags) {
@@ -132,6 +175,8 @@ public class OpenSearchDescription {
     }
 
     /**
+     * Gets image.
+     *
      * @return The Image
      */
     public List<pl.wasat.smarthma.model.osdd.Image> getImage() {
@@ -139,6 +184,8 @@ public class OpenSearchDescription {
     }
 
     /**
+     * Sets image.
+     *
      * @param Image The Image
      */
     public void setImage(List<pl.wasat.smarthma.model.osdd.Image> Image) {
@@ -146,6 +193,8 @@ public class OpenSearchDescription {
     }
 
     /**
+     * Gets developer.
+     *
      * @return The Developer
      */
     public String getDeveloper() {
@@ -153,6 +202,8 @@ public class OpenSearchDescription {
     }
 
     /**
+     * Sets developer.
+     *
      * @param Developer The Developer
      */
     public void setDeveloper(String Developer) {
@@ -160,6 +211,8 @@ public class OpenSearchDescription {
     }
 
     /**
+     * Gets attribution.
+     *
      * @return The Attribution
      */
     public String getAttribution() {
@@ -167,6 +220,8 @@ public class OpenSearchDescription {
     }
 
     /**
+     * Sets attribution.
+     *
      * @param Attribution The Attribution
      */
     public void setAttribution(String Attribution) {
@@ -174,6 +229,8 @@ public class OpenSearchDescription {
     }
 
     /**
+     * Gets syndication right.
+     *
      * @return The SyndicationRight
      */
     public String getSyndicationRight() {
@@ -181,6 +238,8 @@ public class OpenSearchDescription {
     }
 
     /**
+     * Sets syndication right.
+     *
      * @param SyndicationRight The SyndicationRight
      */
     public void setSyndicationRight(String SyndicationRight) {
@@ -188,6 +247,8 @@ public class OpenSearchDescription {
     }
 
     /**
+     * Gets adult content.
+     *
      * @return The AdultContent
      */
     public String getAdultContent() {
@@ -195,6 +256,8 @@ public class OpenSearchDescription {
     }
 
     /**
+     * Sets adult content.
+     *
      * @param AdultContent The AdultContent
      */
     public void setAdultContent(String AdultContent) {
@@ -202,6 +265,8 @@ public class OpenSearchDescription {
     }
 
     /**
+     * Gets language.
+     *
      * @return The Language
      */
     public String getLanguage() {
@@ -209,6 +274,8 @@ public class OpenSearchDescription {
     }
 
     /**
+     * Sets language.
+     *
      * @param Language The Language
      */
     public void setLanguage(String Language) {
@@ -216,6 +283,8 @@ public class OpenSearchDescription {
     }
 
     /**
+     * Gets output encoding.
+     *
      * @return The OutputEncoding
      */
     public String getOutputEncoding() {
@@ -223,6 +292,8 @@ public class OpenSearchDescription {
     }
 
     /**
+     * Sets output encoding.
+     *
      * @param OutputEncoding The OutputEncoding
      */
     public void setOutputEncoding(String OutputEncoding) {
@@ -230,6 +301,8 @@ public class OpenSearchDescription {
     }
 
     /**
+     * Gets input encoding.
+     *
      * @return The InputEncoding
      */
     public String getInputEncoding() {
@@ -237,6 +310,8 @@ public class OpenSearchDescription {
     }
 
     /**
+     * Sets input encoding.
+     *
      * @param InputEncoding The InputEncoding
      */
     public void setInputEncoding(String InputEncoding) {
@@ -244,6 +319,8 @@ public class OpenSearchDescription {
     }
 
     /**
+     * Gets xmlns.
+     *
      * @return The Xmlns
      */
     public String getXmlns() {
@@ -251,6 +328,8 @@ public class OpenSearchDescription {
     }
 
     /**
+     * Sets xmlns.
+     *
      * @param Xmlns The _xmlns
      */
     public void setXmlns(String Xmlns) {
@@ -258,6 +337,8 @@ public class OpenSearchDescription {
     }
 
     /**
+     * Gets xmlns dc.
+     *
      * @return The XmlnsDc
      */
     public String getXmlnsDc() {
@@ -265,6 +346,8 @@ public class OpenSearchDescription {
     }
 
     /**
+     * Sets xmlns dc.
+     *
      * @param XmlnsDc The _xmlns:dc
      */
     public void setXmlnsDc(String XmlnsDc) {
@@ -272,6 +355,8 @@ public class OpenSearchDescription {
     }
 
     /**
+     * Gets xmlns eo.
+     *
      * @return The XmlnsEo
      */
     public String getXmlnsEo() {
@@ -279,6 +364,8 @@ public class OpenSearchDescription {
     }
 
     /**
+     * Sets xmlns eo.
+     *
      * @param XmlnsEo The _xmlns:eo
      */
     public void setXmlnsEo(String XmlnsEo) {
@@ -286,6 +373,8 @@ public class OpenSearchDescription {
     }
 
     /**
+     * Gets xmlns geo.
+     *
      * @return The XmlnsGeo
      */
     public String getXmlnsGeo() {
@@ -293,6 +382,8 @@ public class OpenSearchDescription {
     }
 
     /**
+     * Sets xmlns geo.
+     *
      * @param XmlnsGeo The _xmlns:geo
      */
     public void setXmlnsGeo(String XmlnsGeo) {
@@ -300,6 +391,8 @@ public class OpenSearchDescription {
     }
 
     /**
+     * Gets xmlns param.
+     *
      * @return The XmlnsParam
      */
     public String getXmlnsParam() {
@@ -307,6 +400,8 @@ public class OpenSearchDescription {
     }
 
     /**
+     * Sets xmlns param.
+     *
      * @param XmlnsParam The _xmlns:param
      */
     public void setXmlnsParam(String XmlnsParam) {
@@ -314,6 +409,8 @@ public class OpenSearchDescription {
     }
 
     /**
+     * Gets xmlns sru.
+     *
      * @return The XmlnsSru
      */
     public String getXmlnsSru() {
@@ -321,6 +418,8 @@ public class OpenSearchDescription {
     }
 
     /**
+     * Sets xmlns sru.
+     *
      * @param XmlnsSru The _xmlns:sru
      */
     public void setXmlnsSru(String XmlnsSru) {
@@ -328,6 +427,8 @@ public class OpenSearchDescription {
     }
 
     /**
+     * Gets xmlns time.
+     *
      * @return The XmlnsTime
      */
     public String getXmlnsTime() {
@@ -335,6 +436,8 @@ public class OpenSearchDescription {
     }
 
     /**
+     * Sets xmlns time.
+     *
      * @param XmlnsTime The _xmlns:time
      */
     public void setXmlnsTime(String XmlnsTime) {

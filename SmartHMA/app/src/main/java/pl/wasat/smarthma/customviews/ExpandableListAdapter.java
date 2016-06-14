@@ -1,3 +1,19 @@
+/*
+ * Copyright (c) 2016.  SmartHMA ESA
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package pl.wasat.smarthma.customviews;
 
 import android.annotation.SuppressLint;
@@ -21,6 +37,9 @@ import pl.wasat.smarthma.interfaces.OnSlideElementListener;
 import pl.wasat.smarthma.model.mission.MissionHeaderData;
 import pl.wasat.smarthma.model.mission.MissionItemData;
 
+/**
+ * The type Expandable list adapter.
+ */
 @SuppressLint("InflateParams")
 public class ExpandableListAdapter extends BaseExpandableListAdapter {
 
@@ -30,6 +49,13 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
     // child data in format of header title, child title
     private final HashMap<String, List<MissionItemData>> _listDataChild;
 
+    /**
+     * Instantiates a new Expandable list adapter.
+     *
+     * @param context        the context
+     * @param listDataHeader the list data header
+     * @param listDataChild  the list data child
+     */
     public ExpandableListAdapter(Context context, List<MissionHeaderData> listDataHeader,
                                  HashMap<String, List<MissionItemData>> listDataChild) {
         this._context = context;
@@ -148,7 +174,16 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
     }
 
 
+    /**
+     * The interface On swipe list item listener.
+     */
     public interface OnSwipeListItemListener {
+        /**
+         * On swipe child item.
+         *
+         * @param swipeRight  the swipe right
+         * @param missionName the mission name
+         */
         void onSwipeChildItem(boolean swipeRight, String missionName);
     }
 

@@ -1,3 +1,19 @@
+/*
+ * Copyright (c) 2016.  SmartHMA ESA
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package pl.wasat.smarthma.ui.widgets;
 
 import android.app.PendingIntent;
@@ -12,13 +28,25 @@ import android.widget.RemoteViews;
 import pl.wasat.smarthma.R;
 import pl.wasat.smarthma.ui.activities.NewsActivity;
 
+/**
+ * The type Rss widget provider.
+ */
 public class RSSWidgetProvider extends AppWidgetProvider {
 
-    // String to be sent on Broadcast as soon as Data is Fetched
+    /**
+     * The constant DATA_FETCHED.
+     */
+// String to be sent on Broadcast as soon as Data is Fetched
     // should be included on RSSWidgetProvider manifest intent action
     // to be recognized by this RSSWidgetProvider to receive broadcast
     public static final String DATA_FETCHED = "pl.wasat.smarthma";
+    /**
+     * The constant EXTRA_ITEM.
+     */
     public static final String EXTRA_ITEM = "pl.wasat.smarthma.EXTRA_ITEM";
+    /**
+     * The constant ARTICLE_AUTHOR.
+     */
     public static final String ARTICLE_AUTHOR = "pl.wasat.smarthma.ARTICLE_AUTHOR";
     private static final String TOAST_ACTION = "pl.wasat.smarthma.TOAST_ACTION";
 

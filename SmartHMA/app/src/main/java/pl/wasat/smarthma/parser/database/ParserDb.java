@@ -1,3 +1,19 @@
+/*
+ * Copyright (c) 2016.  SmartHMA ESA
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package pl.wasat.smarthma.parser.database;
 
 /**
@@ -21,6 +37,9 @@ import pl.wasat.smarthma.parser.model.Mission;
 import pl.wasat.smarthma.parser.model.Page;
 
 
+/**
+ * The type Parser db.
+ */
 public class ParserDb {
     private static final String DEBUG_TAG = "SqLite Db";
     private static final int DB_VERSION = 1;
@@ -105,12 +124,22 @@ public class ParserDb {
     private SQLiteDatabase db;
     private DatabaseHelper dbHelper;
 
-    // KONSTRUKTOR KLASY DB
+    /**
+     * Instantiates a new Parser db.
+     *
+     * @param context the context
+     */
+// KONSTRUKTOR KLASY DB
     public ParserDb(Context context) {
         this.context = context;
     }
 
-    // METODA OTWIERAJACA BAZE
+    /**
+     * Open parser db.
+     *
+     * @return the parser db
+     */
+// METODA OTWIERAJACA BAZE
     public ParserDb open() {
         dbHelper = DatabaseHelper.getInstance(context);
         try {
@@ -121,12 +150,21 @@ public class ParserDb {
         return this;
     }
 
-    // METODA ZAMYKAJACA BAZE
+    /**
+     * Close.
+     */
+// METODA ZAMYKAJACA BAZE
     public void close() {
         dbHelper.close();
     }
 
-    // METODY DO MODYFKACJI DANYCH W TABELACH
+    /**
+     * Add category boolean.
+     *
+     * @param category the category
+     * @return the boolean
+     */
+// METODY DO MODYFKACJI DANYCH W TABELACH
     public boolean addCategory(Category category) {
         ContentValues values = new ContentValues();
         values.put(KEY_ID, category.getId());
@@ -136,6 +174,12 @@ public class ParserDb {
         return db.insert(CATEGORIES_TABLE, null, values) > 0;
     }
 
+    /**
+     * Add mission boolean.
+     *
+     * @param mission the mission
+     * @return the boolean
+     */
     public boolean addMission(Mission mission) {
         ContentValues values = new ContentValues();
         values.put(KEY_ID, mission.getId());
@@ -146,6 +190,12 @@ public class ParserDb {
         return db.insert(MISSIONS_TABLE, null, values) > 0;
     }
 
+    /**
+     * Add page boolean.
+     *
+     * @param page the page
+     * @return the boolean
+     */
     public boolean addPage(Page page) {
         ContentValues values = new ContentValues();
         values.put(KEY_PAGES_NAME, page.getName());
@@ -156,12 +206,21 @@ public class ParserDb {
         return db.insert(PAGES_TABLE, null, values) > 0;
     }
 
+    /**
+     * Truncate tables.
+     */
     public void truncateTables() {
         db.execSQL(TRUNCATE_TABLE_CATEGORIES);
         db.execSQL(TRUNCATE_TABLE_MISSIONS);
         db.execSQL(TRUNCATE_TABLE_PAGES);
     }
 
+    /**
+     * Gets mission.
+     *
+     * @param missionId the mission id
+     * @return the mission
+     */
     public Mission getMission(int missionId) {
 
         Mission mission = new Mission();
@@ -182,6 +241,12 @@ public class ParserDb {
         return mission;
     }
 
+    /**
+     * Gets missions list.
+     *
+     * @param category the category
+     * @return the missions list
+     */
     public ArrayList<Mission> getMissionsList(Category category) {
         ArrayList<Mission> list = new ArrayList<>();
         String[] columns = {KEY_ID, KEY_MISSIONS_NAME, KEY_MISSIONS_DATA, KEY_MISSIONS_CATEGORY_ID};
@@ -242,6 +307,12 @@ public class ParserDb {
 
     }
 
+    /**
+     * Gets mission.
+     *
+     * @param missionName the mission name
+     * @return the mission
+     */
     public Mission getMission(String missionName) {
 
         Mission mission = new Mission();
@@ -264,6 +335,12 @@ public class ParserDb {
         return mission;
     }
 
+    /**
+     * Gets page list.
+     *
+     * @param mission the mission
+     * @return the page list
+     */
     public ArrayList<Page> getPageList(Mission mission) {
         ArrayList<Page> list = new ArrayList<>();
         String[] columns = {KEY_ID, KEY_PAGES_NAME, KEY_PAGES_DATA, KEY_PAGES_CATEGORY_ID, KEY_PAGES_MISSION_ID};
@@ -283,6 +360,12 @@ public class ParserDb {
         return list;
     }
 
+    /**
+     * Gets main page content list.
+     *
+     * @param mission the mission
+     * @return the main page content list
+     */
     public ArrayList<Page> getMainPageContentList(Mission mission) {
         ArrayList<Page> list = new ArrayList<>();
         String[] columns = {KEY_ID, KEY_PAGES_NAME, KEY_PAGES_DATA, KEY_PAGES_CATEGORY_ID, KEY_PAGES_MISSION_ID};
@@ -302,6 +385,11 @@ public class ParserDb {
         return list;
     }
 
+    /**
+     * Gets mission count.
+     *
+     * @return the mission count
+     */
     public int getMissionCount() {
         Cursor mCount = db.rawQuery("select count(*) from missions", null);
         mCount.moveToFirst();
@@ -314,6 +402,12 @@ public class ParserDb {
 
         private static DatabaseHelper mInstance = null;
 
+        /**
+         * Gets instance.
+         *
+         * @param context the context
+         * @return the instance
+         */
         public static DatabaseHelper getInstance(Context context) {
 
             // Use the application context, which will ensure that you

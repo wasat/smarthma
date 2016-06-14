@@ -1,3 +1,19 @@
+/*
+ * Copyright (c) 2016.  SmartHMA ESA
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package pl.wasat.smarthma.ui.frags.news;
 
 import android.content.Intent;
@@ -22,13 +38,22 @@ import pl.wasat.smarthma.adapter.NewsArticleListAdapter;
 import pl.wasat.smarthma.database.EoDbAdapter;
 import pl.wasat.smarthma.model.news.NewsArticle;
 
+/**
+ * The type News detail fragment.
+ */
 public class NewsDetailFragment extends Fragment {
 
+    /**
+     * The constant ARG_ITEM_ID.
+     */
     public static final String ARG_ITEM_ID = "item_id";
 
     private NewsArticle displayedArticle;
     private EoDbAdapter db;
 
+    /**
+     * Instantiates a new News detail fragment.
+     */
     public NewsDetailFragment() {
         setHasOptionsMenu(true); // this enables us to set actionbar from
         // fragment

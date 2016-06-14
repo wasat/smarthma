@@ -1,3 +1,19 @@
+/*
+ * Copyright (c) 2016.  SmartHMA ESA
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package pl.wasat.smarthma.model.entry;
 
 import java.io.Serializable;
@@ -9,6 +25,7 @@ import pl.wasat.smarthma.model.feed.Link;
 import pl.wasat.smarthma.model.om.Browse;
 import pl.wasat.smarthma.model.om.Content;
 import pl.wasat.smarthma.model.om.Footprint;
+import pl.wasat.smarthma.model.om.PointMember;
 import pl.wasat.smarthma.model.om.Pos;
 import pl.wasat.smarthma.preferences.GlobalPreferences;
 import pl.wasat.smarthma.utils.obj.LatLngExt;
@@ -30,6 +47,11 @@ public class SimpleMetadata implements Serializable {
     private String binaryUrl;
     private final Entry entry;
 
+    /**
+     * Instantiates a new Simple metadata.
+     *
+     * @param entry the entry
+     */
     public SimpleMetadata(Entry entry) {
         this.entry = entry;
         processGroupMedia(entry);
@@ -38,51 +60,111 @@ public class SimpleMetadata implements Serializable {
     }
 
 
+    /**
+     * Gets footprint.
+     *
+     * @return the footprint
+     */
     public ArrayList<LatLngExt> getFootprint() {
         return footprint;
     }
 
+    /**
+     * Sets footprint.
+     *
+     * @param footprint the footprint
+     */
     public void setFootprint(ArrayList<LatLngExt> footprint) {
         this.footprint = footprint;
     }
 
+    /**
+     * Gets footprint center.
+     *
+     * @return the footprint center
+     */
     public LatLngExt getFootprintCenter() {
         processFootprintCenter(entry);
         return footprintCenter;
     }
 
+    /**
+     * Sets footprint center.
+     *
+     * @param footprintCenter the footprint center
+     */
     public void setFootprintCenter(LatLngExt footprintCenter) {
         this.footprintCenter = footprintCenter;
     }
 
+    /**
+     * Gets quick look url.
+     *
+     * @return the quick look url
+     */
     public String getQuickLookUrl() {
         return quickLookUrl;
     }
 
+    /**
+     * Sets quick look url.
+     *
+     * @param quickLookUrl the quick look url
+     */
     public void setQuickLookUrl(String quickLookUrl) {
         this.quickLookUrl = quickLookUrl;
     }
 
+    /**
+     * Gets thumbnail url.
+     *
+     * @return the thumbnail url
+     */
     public String getThumbnailUrl() {
         return thumbnailUrl;
     }
 
+    /**
+     * Sets thumbnail url.
+     *
+     * @param thumbnailUrl the thumbnail url
+     */
     public void setThumbnailUrl(String thumbnailUrl) {
         this.thumbnailUrl = thumbnailUrl;
     }
 
+    /**
+     * Gets cloud url.
+     *
+     * @return the cloud url
+     */
     public String getCloudUrl() {
         return cloudUrl;
     }
 
+    /**
+     * Sets cloud url.
+     *
+     * @param cloudUrl the cloud url
+     */
     public void setCloudUrl(String cloudUrl) {
         this.cloudUrl = cloudUrl;
     }
 
+    /**
+     * Gets binary url.
+     *
+     * @return the binary url
+     */
     public String getBinaryUrl() {
         return binaryUrl;
     }
 
+    /**
+     * Sets binary url.
+     *
+     * @param binaryUrl the binary url
+     */
     public void setBinaryUrl(String binaryUrl) {
         this.binaryUrl = binaryUrl;
     }
@@ -196,6 +278,7 @@ public class SimpleMetadata implements Serializable {
     }
 
     private void obtainUrlsFromOMMetadata(Entry entry) {
+        if (entry.getEarthObservation().getResult().getEarthObservationResult() == null) return;
         try {
             List<Browse> browseList = entry.getEarthObservation().getResult().getEarthObservationResult().getBrowseList();
             for (Browse browse : browseList) {
@@ -262,12 +345,16 @@ public class SimpleMetadata implements Serializable {
     private void obtainPolygonFromOMMetadata(Entry entry) {
         Footprint footprintRaw = entry.getEarthObservation()
                 .getFeatureOfInterest().getFootprint();
-        List<Pos> footprintPosList;
+        List<Pos> footprintPosList = new ArrayList<>();
         if (footprintRaw.getMultiExtentOf().getMultiSurface() != null) {
             footprintPosList = footprintRaw.getMultiExtentOf()
                     .getMultiSurface().getSurfaceMembers().getPolygon()
                     .getExterior().getLinearRing().getPosList();
-        } else {
+        } else if (footprintRaw.getLocation().getMultiPoint() != null) {
+            for (PointMember member : footprintRaw.getLocation().getMultiPoint().getPointMember()) {
+                footprintPosList.add(member.getPoint().getPos());
+            }
+        } else if (footprintRaw.getLocation().getMultiGeometry() != null) {
             footprintPosList = footprintRaw.getLocation().getMultiGeometry().getGeometryMembers().getLineString().getPosList();
         }
 
@@ -287,19 +374,32 @@ public class SimpleMetadata implements Serializable {
     private void obtainPolygonFromEntry(Entry entry) {
         String polygonStr = entry.getPolygon().getText().replaceAll("  ", " ");
         String[] corrStrArr = polygonStr.split(" ");
-        double lat = 0;
-        double lon;
-        for (int i = 0; i < corrStrArr.length; i++) {
-            try {
-                if (i % 2 == 0) {
+
+        try {
+            double firstCorr = Double.parseDouble(corrStrArr[0]);
+            double secCorr = Double.parseDouble(corrStrArr[1]);
+            boolean isFirstLat = true;
+            if (firstCorr > 90.0 || firstCorr < -90.0) {
+                isFirstLat = false;
+            } else if (secCorr > 90.0 || secCorr < -90.0) {
+                isFirstLat = true;
+            }
+
+            double lat = 0;
+            double lon;
+            for (int i = 0; i < corrStrArr.length - 1; i = i + 2) {
+                if (isFirstLat) {
                     lat = Double.parseDouble(corrStrArr[i]);
+                    lon = Double.parseDouble(corrStrArr[i + 1]);
+
                 } else {
                     lon = Double.parseDouble(corrStrArr[i]);
-                    this.footprint.add(new LatLngExt(lat, lon));
+                    lat = Double.parseDouble(corrStrArr[i + 1]);
                 }
-            } catch (NumberFormatException e) {
-                e.printStackTrace();
+                this.footprint.add(new LatLngExt(lat, lon));
             }
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
         }
     }
 

@@ -1,3 +1,19 @@
+/*
+ * Copyright (c) 2016.  SmartHMA ESA
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package pl.wasat.smarthma.ui.frags.common;
 
 import android.app.Activity;
@@ -16,6 +32,7 @@ import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.text.Html;
 import android.text.Spanned;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -58,6 +75,9 @@ public class ProductDetailsFragment extends Fragment implements Target {
     private CloudSavingManager cloudSavingManager;
     private EODataDownloadManager eoDataDownloadManager;
 
+    /**
+     * Instantiates a new Product details fragment.
+     */
     public ProductDetailsFragment() {
     }
 
@@ -234,7 +254,11 @@ public class ProductDetailsFragment extends Fragment implements Target {
                 .downloader(new OkHttpDownloader(client))
                 .build();*/
 
-        Picasso.with(getActivity()).load(getQuicklookUrl())
+        String qlUrl = getQuicklookUrl();
+        if (qlUrl == null || qlUrl.isEmpty()) {
+            qlUrl = "https://webworldwind.files.wordpress.com/2015/05/ecmwf1.png?w=640";
+        }
+        Picasso.with(getActivity()).load(qlUrl)
                 .into(quicklookTarget);
     }
 
@@ -247,9 +271,13 @@ public class ProductDetailsFragment extends Fragment implements Target {
     private void startEoDataDownloading() {
         String url = displayedEntry.getSimpleMetadata().getBinaryUrl();
         String productName = displayedEntry.getTitle();
-        if (url.startsWith("https://eo-virtual-archive4.esa.int/")) {
+        //if (url.startsWith("https://eo-virtual-archive4.esa.int/")) {
+        //if (url.startsWith("https://")) {
+        Log.i("DOWNLOAD URL", url);
+        if (url.contains("esa.int")) {
             Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
             startActivity(browserIntent);
+            //TODO tutaj dodać fake url z danymi
         } else {
             eoDataDownloadManager.startDownload(productName, url);
         }
@@ -389,14 +417,32 @@ public class ProductDetailsFragment extends Fragment implements Target {
      */
     public interface OnProductDetailsFragmentListener {
 
+        /**
+         * On product details fragment extended map show.
+         *
+         * @param simpleMetadata the simple metadata
+         */
         void onProductDetailsFragmentExtendedMapShow(SimpleMetadata simpleMetadata);
 
+        /**
+         * On product details fragment quicklook show.
+         *
+         * @param url the url
+         */
         void onProductDetailsFragmentQuicklookShow(String url);
 
+        /**
+         * On product details fragment share dialog show.
+         *
+         * @param url the url
+         */
         void onProductDetailsFragmentShareDialogShow(String url);
 
     }
 
+    /**
+     * The type Share list dialog fragment.
+     */
     public static class ShareListDialogFragment extends DialogFragment {
         @NonNull
         @Override
@@ -414,6 +460,9 @@ public class ProductDetailsFragment extends Fragment implements Target {
         }
     }
 
+    /**
+     * The type Cloud save list dialog fragment.
+     */
     public static class CloudSaveListDialogFragment extends DialogFragment {
         @NonNull
         @Override

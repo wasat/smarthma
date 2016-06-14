@@ -1,3 +1,19 @@
+/*
+ * Copyright (c) 2016.  SmartHMA ESA
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package pl.wasat.smarthma.parser.Parser;
 
 import android.content.Context;
@@ -81,6 +97,11 @@ public class Parser {
     private final OnParserListener onParserListener;
     private int count;
 
+    /**
+     * Instantiates a new Parser.
+     *
+     * @param context the context
+     */
     public Parser(Context context) {
         this.context = context;
         onParserListener = (OnParserListener) context;
@@ -91,6 +112,9 @@ public class Parser {
         parserDb.close();
     }
 
+    /**
+     * Cat 0.
+     */
     public void cat0() {
         try {
             //onParserListener.onParserItemFinish(count++);
@@ -230,7 +254,10 @@ public class Parser {
         }
     }
 
-    //CAT 1
+    /**
+     * Cat 1.
+     */
+//CAT 1
     public void cat1() {
         try {
             //onParserListener.onParserItemFinish(count++);
@@ -300,7 +327,10 @@ public class Parser {
         }
     }
 
-    //CAT 2
+    /**
+     * Cat 2.
+     */
+//CAT 2
     public void cat2() {
         try {
             //onParserListener.onParserItemFinish(count++);
@@ -545,7 +575,10 @@ public class Parser {
         }
     }
 
-    //CAT 3
+    /**
+     * Cat 3.
+     */
+//CAT 3
     public void cat3() {
         try {
             //onParserListener.onParserItemFinish(count++);
@@ -637,7 +670,10 @@ public class Parser {
         }
     }
 
-    //CAT 4
+    /**
+     * Cat 4.
+     */
+//CAT 4
     public void cat4() {
 
         try {
@@ -695,7 +731,10 @@ public class Parser {
         }
     }
 
-    //CAT 5
+    /**
+     * Cat 5.
+     */
+//CAT 5
     public void cat5() {
         try {
             //onParserListener.onParserItemFinish(count++);
@@ -725,7 +764,15 @@ public class Parser {
         }
     }
 
+    /**
+     * The interface On parser listener.
+     */
     public interface OnParserListener {
+        /**
+         * On parser item finish.
+         *
+         * @param taskCount the task count
+         */
         void onParserItemFinish(int taskCount);
     }
 }

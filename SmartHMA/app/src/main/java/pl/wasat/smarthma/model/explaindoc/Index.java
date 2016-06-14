@@ -1,8 +1,27 @@
+/*
+ * Copyright (c) 2016.  SmartHMA ESA
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package pl.wasat.smarthma.model.explaindoc;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 
+/**
+ * The type Index.
+ */
 public class Index implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -12,10 +31,15 @@ public class Index implements Serializable {
     private ArrayList<String> map;
     private ConfigInfo configInfo;
 
+    /**
+     * Instantiates a new Index.
+     */
     public Index() {
     }
 
     /**
+     * Gets id.
+     *
      * @return the id
      */
     public int getId() {
@@ -23,6 +47,8 @@ public class Index implements Serializable {
     }
 
     /**
+     * Sets id.
+     *
      * @param id the id to set
      */
     public void setId(int id) {
@@ -30,6 +56,8 @@ public class Index implements Serializable {
     }
 
     /**
+     * Gets title.
+     *
      * @return the title
      */
     public String getTitle() {
@@ -37,6 +65,8 @@ public class Index implements Serializable {
     }
 
     /**
+     * Sets title.
+     *
      * @param title the title to set
      */
     public void setTitle(String title) {
@@ -44,6 +74,8 @@ public class Index implements Serializable {
     }
 
     /**
+     * Gets map.
+     *
      * @return the map
      */
     public ArrayList<String> getMap() {
@@ -51,6 +83,8 @@ public class Index implements Serializable {
     }
 
     /**
+     * Sets map.
+     *
      * @param map the map to set
      */
     public void setMap(ArrayList<String> map) {
@@ -58,6 +92,8 @@ public class Index implements Serializable {
     }
 
     /**
+     * Gets config info.
+     *
      * @return the configInfo
      */
     public ConfigInfo getConfigInfo() {
@@ -65,6 +101,8 @@ public class Index implements Serializable {
     }
 
     /**
+     * Sets config info.
+     *
      * @param configInfo the configInfo to set
      */
     public void setConfigInfo(ConfigInfo configInfo) {

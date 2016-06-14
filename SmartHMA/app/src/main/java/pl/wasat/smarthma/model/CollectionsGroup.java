@@ -1,8 +1,27 @@
+/*
+ * Copyright (c) 2016.  SmartHMA ESA
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package pl.wasat.smarthma.model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 
+/**
+ * The type Collections group.
+ */
 public class CollectionsGroup implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -12,11 +31,16 @@ public class CollectionsGroup implements Serializable {
     private String standard;
     private ArrayList<Collection> collections;
 
+    /**
+     * Instantiates a new Collections group.
+     */
     public CollectionsGroup() {
         collections = new ArrayList<>();
     }
 
     /**
+     * Gets id.
+     *
      * @return the id
      */
     public int getId() {
@@ -24,6 +48,8 @@ public class CollectionsGroup implements Serializable {
     }
 
     /**
+     * Sets id.
+     *
      * @param id the id to set
      */
     public void setId(int id) {
@@ -31,6 +57,8 @@ public class CollectionsGroup implements Serializable {
     }
 
     /**
+     * Gets group name.
+     *
      * @return the groupName
      */
     public String getGroupName() {
@@ -38,6 +66,8 @@ public class CollectionsGroup implements Serializable {
     }
 
     /**
+     * Sets group name.
+     *
      * @param groupName the groupName to set
      */
     public void setGroupName(String groupName) {
@@ -45,6 +75,8 @@ public class CollectionsGroup implements Serializable {
     }
 
     /**
+     * Gets collections.
+     *
      * @return the collections
      */
     public ArrayList<Collection> getCollections() {
@@ -52,6 +84,8 @@ public class CollectionsGroup implements Serializable {
     }
 
     /**
+     * Sets collections.
+     *
      * @param collections the collections to set
      */
     public void setCollections(ArrayList<Collection> collections) {
@@ -59,6 +93,8 @@ public class CollectionsGroup implements Serializable {
     }
 
     /**
+     * Gets standard.
+     *
      * @return the standard
      */
     public String getStandard() {
@@ -66,12 +102,19 @@ public class CollectionsGroup implements Serializable {
     }
 
     /**
+     * Sets standard.
+     *
      * @param standard the standard to set
      */
     public void setStandard(String standard) {
         this.standard = standard;
     }
 
+    /**
+     * Add item.
+     *
+     * @param coll the coll
+     */
     public void addItem(Collection coll) {
         collections.add(coll);
     }
@@ -140,12 +183,17 @@ public class CollectionsGroup implements Serializable {
                 + standard + ", collections=" + collections + "]";
     }
 
+    /**
+     * The type List.
+     */
     public static class List {
         private static final long serialVersionUID = 6836514467436078182L;
 
         private ArrayList<CollectionsGroup> collectionsGroupList = new ArrayList<>();
 
         /**
+         * Gets collections group list.
+         *
          * @return the collectionGroupList
          */
         public ArrayList<CollectionsGroup> getCollectionsGroupList() {
@@ -153,6 +201,8 @@ public class CollectionsGroup implements Serializable {
         }
 
         /**
+         * Sets collection group list.
+         *
          * @param collectionsGroupList the collectionGroupList to set
          */
         public void setCollectionGroupList(
@@ -160,10 +210,20 @@ public class CollectionsGroup implements Serializable {
             this.collectionsGroupList = collectionsGroupList;
         }
 
+        /**
+         * Add item.
+         *
+         * @param collGroup the coll group
+         */
         public void addItem(CollectionsGroup collGroup) {
             this.collectionsGroupList.add(collGroup);
         }
 
+        /**
+         * Gets serialversionuid.
+         *
+         * @return the serialversionuid
+         */
         public static long getSerialversionuid() {
             return serialVersionUID;
         }

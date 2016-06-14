@@ -1,3 +1,19 @@
+/*
+ * Copyright (c) 2016.  SmartHMA ESA
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package pl.wasat.smarthma.ui.frags.base;
 
 import android.graphics.Color;
@@ -37,24 +53,60 @@ import pl.wasat.smarthma.utils.time.DateUtils;
  */
 public class BaseViewAndBasicSettingsDetailFragment extends BaseDateTimeAreaContainerFragment implements RequestListener<OpenSearchDescription> {
 
+    /**
+     * The constant KEY_COLLECTION_ENTRY.
+     */
     protected static final String KEY_COLLECTION_ENTRY = "pl.wasat.smarthma.KEY_COLLECTION_ENTRY";
 
+    /**
+     * The constant tvParentId.
+     */
     protected static TextView tvParentId;
 
+    /**
+     * The Btn show products.
+     */
     protected Button btnShowProducts;
+    /**
+     * The Btn show metadata.
+     */
     protected Button btnShowMetadata;
 
+    /**
+     * The M sliding layer.
+     */
     protected SlidingLayer mSlidingLayer;
+    /**
+     * The Layout spinners.
+     */
     LinearLayout layoutSpinners;
 
+    /**
+     * The Root view.
+     */
     protected View rootView;
 
+    /**
+     * The Displayed iso entry.
+     */
     protected EntryISO displayedISOEntry;
+    /**
+     * The Collection name.
+     */
     protected String collectionName;
 
+    /**
+     * The Osdd params list.
+     */
     protected List<Parameter> osddParamsList;
+    /**
+     * The Fedeo request params.
+     */
     protected FedeoRequestParams fedeoRequestParams;
 
+    /**
+     * Instantiates a new Base view and basic settings detail fragment.
+     */
     public BaseViewAndBasicSettingsDetailFragment() {
     }
 
@@ -63,8 +115,7 @@ public class BaseViewAndBasicSettingsDetailFragment extends BaseDateTimeAreaCont
      * the provided parameters.
      *
      * @param collectionEntry Parameter 1.
-     * @return A new instance of fragment
-     * BaseViewAndBasicSettingsDetailFragment.
+     * @return A new instance of fragment BaseViewAndBasicSettingsDetailFragment.
      */
     public static BaseViewAndBasicSettingsDetailFragment newInstance(
             EntryISO collectionEntry) {
@@ -224,11 +275,19 @@ public class BaseViewAndBasicSettingsDetailFragment extends BaseDateTimeAreaCont
     }
 
 
+    /**
+     * Start async load osdd data.
+     */
     protected void startAsyncLoadOsddData() {
         String url = getOsddSearchLink();
         startAsyncLoadOsddData(url);
     }
 
+    /**
+     * Start async load osdd data.
+     *
+     * @param osddUrl the osdd url
+     */
     protected void startAsyncLoadOsddData(String osddUrl) {
         if (!osddUrl.isEmpty()) {
             //GenericUrl fedeoDescUrl = new GenericUrl(osddUrl);
@@ -256,6 +315,12 @@ public class BaseViewAndBasicSettingsDetailFragment extends BaseDateTimeAreaCont
         }
     }
 
+    /**
+     * Load osdd parameters.
+     *
+     * @param osdd       the osdd
+     * @param relResults the rel results
+     */
     protected void loadOsddParameters(OpenSearchDescription osdd, String relResults) {
         osddParamsList = new ArrayList<>();
         fedeoRequestParams = new FedeoRequestParams();

@@ -1,3 +1,19 @@
+/*
+ * Copyright (c) 2016.  SmartHMA ESA
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package pl.wasat.smarthma.ui.frags.base;
 
 import android.app.Activity;
@@ -46,11 +62,23 @@ import pl.wasat.smarthma.utils.request.FedeoOSDDRequest;
  */
 public class BaseSearchSideParametersFragment extends BaseDateTimeAreaContainerFragment implements RequestListener<OpenSearchDescription> {
     private static TextView tvCatalogName;
+    /**
+     * The Root view.
+     */
     protected View rootView;
+    /**
+     * The Osdd params.
+     */
     protected static List<Parameter> osddParams;
+    /**
+     * The constant fedeoRequestParams.
+     */
     protected static FedeoRequestParams fedeoRequestParams;
     private OnBaseSearchSideParametersFragmentListener mListener;
 
+    /**
+     * Instantiates a new Base search side parameters fragment.
+     */
     public BaseSearchSideParametersFragment() {
     }
 
@@ -215,6 +243,11 @@ public class BaseSearchSideParametersFragment extends BaseDateTimeAreaContainerF
                 CatalogueListDialogFragment.class.getSimpleName());
     }
 
+    /**
+     * Sets catalogue.
+     *
+     * @param catalogue the catalogue
+     */
     public void setCatalogue(String catalogue) {
         Parameter parameter = OSDDMatcher.findParentIdParam(osddParams);
         List<Option> cataloguesList;
@@ -235,6 +268,9 @@ public class BaseSearchSideParametersFragment extends BaseDateTimeAreaContainerF
         sharedPrefs.setCataloguePrefs(choosenOpt.getLabel());
     }
 
+    /**
+     * The type Catalogue list dialog fragment.
+     */
     public static class CatalogueListDialogFragment extends DialogFragment {
         @NonNull
         @Override
@@ -273,6 +309,11 @@ public class BaseSearchSideParametersFragment extends BaseDateTimeAreaContainerF
      * >Communicating with Other Fragments</a> for more information.
      */
     public interface OnBaseSearchSideParametersFragmentListener {
+        /**
+         * On base search side parameters fragment fedeo request params osdd change.
+         *
+         * @param fedeoRequestParams the fedeo request params
+         */
         void onBaseSearchSideParametersFragmentFedeoRequestParamsOsddChange(FedeoRequestParams fedeoRequestParams);
     }
 

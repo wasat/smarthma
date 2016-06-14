@@ -1,6 +1,20 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Copyright (c) 2016.  SmartHMA ESA
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~     http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
 <resources>
-    <string name="app_name">SmartHMA</string>
     <string name="Share">Udostępnij</string>
     <string name="_first">początek</string>
     <string name="_prev">poprzedni</string>
@@ -92,7 +106,6 @@
     <string name="file_uploaded">"Plik został wysłany: "</string>
     <string name="first_line_desc">Pierwsza linia opisu</string>
     <string name="from_">"Od: "</string>
-    <string name="global_settings">SmartHMA - Ustawienia Główne</string>
     <string name="go">Idź</string>
     <string name="heading">Nagłówek</string>
     <string name="hello_user">Jesteś zalogowany jako\n%1$s</string>
@@ -143,18 +156,7 @@
     <string name="platform_header">Platforma</string>
     <string name="please_correct_your_query_">\n\nProszę wrócić do wyszukiwania i zmienić parametry</string>
 
-    <string name="pref_category_title_debug_mode">TRYB DEGUBOWANIA</string>
-    <string name="pref_category_title_general_settings">USTAWIENIA GŁÓWNE SMARTHMA </string>
-    <string name="pref_category_title_map_settings">OPCJE MAPY</string>
-    <string name="pref_category_title_search_params_settings">USTAWIENIA PARAMETRÓW FEDEO</string>
-    <string name="pref_summary_global_map_list">Wybierz typ mapy jako domyślnie wyświetlaną</string>
-    <string name="pref_summary_mission_sync_time">Jak często synchronizacja powinna być przeprowadzana</string>
-    <string name="pref_summary_remember_search_params">Zachowaj podstawowe parametry wyszukiwania oraz załaduj je wraz ze startem aplikacji</string>
-    <string name="pref_summary_show_debugging_info">Włącz tę opcję aby wyświetlać dodatkowe informacje</string>
-    <string name="pref_title_global_map_list">Domyślny typ mapy</string>
-    <string name="pref_title_mission_sync_time">Czas synchronizacji Misji EO</string>
-    <string name="pref_title_remember_search_params">Zapamiętaj parametry wyszukiwania</string>
-    <string name="pref_title_show_debugging_info">Pokaż informacje podczas debugowania</string>
+
     <string name="product_added_to_favourites">Produkt dodany do ulubionych</string>
     <string name="pub_date_and_updated">Data: %1$s, wysłano: %2$s</string>
     <string name="query">Zapytanie</string>
@@ -208,7 +210,6 @@
     <string name="this_app_wasnt_auth">Aplikacja nie została poprawnie zarejestrowana</string>
     <string name="time_period">Okres Czasu</string>
     <string name="title_article_list">Czytnik ESA EO Wiadomości - SmartHMA</string>
-    <string name="to">/</string>
     <string name="to_">"Do: "</string>
     <string name="tooltip_above">Podpowiedź na górze</string>
     <string name="tooltip_below">Podpowiedź na dole</string>
@@ -232,4 +233,6 @@
     <string name="you_choose_dropbox">Wybrałeś Serwis DropBox aby zapisać plik </string>
     <string name="value_not_fit_to_pattern">Parameter value do not fit to pattern.\nPlease put proper value</string>
     <string name="instrument_header">Instrument</string>
+    <string name="url_scheme_in_your_apps">"Schemat URL w manifescie aplikacji nie sa ustawione poprawnie. Powinieneś zaimplementować com.dropbox.client2.android.AuthActivity wraz z schematem"</string>
+    <string name="you_must_apply_for_key">Musisz pozyskać klucz licencyjny i hasło z developers.dropbox.com oraz dodać je do applikacji DBRoulette i sprawdzić działanie</string>
 </resources>

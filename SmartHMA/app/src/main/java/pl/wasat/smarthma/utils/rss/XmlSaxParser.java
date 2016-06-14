@@ -1,3 +1,19 @@
+/*
+ * Copyright (c) 2016.  SmartHMA ESA
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package pl.wasat.smarthma.utils.rss;
 
 import android.util.Log;
@@ -28,6 +44,13 @@ import pl.wasat.smarthma.model.om.EarthObservation;
  */
 public class XmlSaxParser {
 
+    /**
+     * Parse feed feed.
+     *
+     * @param inputStreamFeed the input stream feed
+     * @return the feed
+     * @throws IOException the io exception
+     */
     public Feed parseFeed(InputStream inputStreamFeed) throws IOException {
         long startTime = System.currentTimeMillis();
         FeedDataHandler feedDataHandler = null;
@@ -64,6 +87,12 @@ public class XmlSaxParser {
         return spFeed.getXMLReader();
     }
 
+    /**
+     * Parse om feed feed.
+     *
+     * @param inputStreamFeed the input stream feed
+     * @return the feed
+     */
     public Feed parseOMFeed(InputStream inputStreamFeed) {
         OMDataHandler omDataHandler = new OMDataHandler();
         omDataHandler = (OMDataHandler) processFeedHandler(inputStreamFeed, omDataHandler);
@@ -91,12 +120,23 @@ public class XmlSaxParser {
         return feedHandler;
     }
 
+    /**
+     * Parse iso feed feed.
+     *
+     * @param inputStreamFeed the input stream feed
+     * @return the feed
+     */
     public Feed parseISOFeed(InputStream inputStreamFeed) {
         ISODataHandler isoDataHandler = new ISODataHandler();
         isoDataHandler = (ISODataHandler) processFeedHandler(inputStreamFeed, isoDataHandler);
         return isoDataHandler.getFeeds();
     }
 
+    /**
+     * Parse om metadata.
+     *
+     * @param entry the entry
+     */
     public void parseOMMetadata(Entry entry) {
         EarthObservation eo = parseOMMetadata(entry.getRawMetadata());
         entry.setEarthObservation(eo);
@@ -130,6 +170,11 @@ public class XmlSaxParser {
         return metadataHandler;
     }
 
+    /**
+     * Parse iso metadata.
+     *
+     * @param entry the entry
+     */
     public void parseISOMetadata(Entry entry) {
         MDMetadata mdMetadata = parseISOMetadata(entry.getRawMetadata());
         entry.setMDMetadata(mdMetadata);
@@ -142,6 +187,11 @@ public class XmlSaxParser {
         return isoMetadataHandler.getMdMetadata();
     }
 
+    /**
+     * Parse dc metadata.
+     *
+     * @param entry the entry
+     */
     public void parseDCMetadata(Entry entry) {
         Dc dcMetadata = parseDCMetadata(entry.getRawMetadata());
         entry.setDc(dcMetadata);

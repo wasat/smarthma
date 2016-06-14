@@ -1,3 +1,19 @@
+/*
+ * Copyright (c) 2016.  SmartHMA ESA
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package pl.wasat.smarthma.model.iso;
 
 import org.apache.commons.lang3.builder.EqualsBuilder;
@@ -9,6 +25,9 @@ import java.io.Serializable;
 
 import pl.wasat.smarthma.utils.text.SmartHMAStringStyle;
 
+/**
+ * The type Md metadata.
+ */
 public class MDMetadata implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -38,6 +57,8 @@ public class MDMetadata implements Serializable {
 
 
     /**
+     * Gets file identifier.
+     *
      * @return The fileIdentifier
      */
     public FileIdentifier getFileIdentifier() {
@@ -45,6 +66,8 @@ public class MDMetadata implements Serializable {
     }
 
     /**
+     * Sets file identifier.
+     *
      * @param fileIdentifier The fileIdentifier
      */
     public void setFileIdentifier(FileIdentifier fileIdentifier) {
@@ -52,6 +75,8 @@ public class MDMetadata implements Serializable {
     }
 
     /**
+     * Gets language.
+     *
      * @return The language
      */
     public Language getLanguage() {
@@ -59,6 +84,8 @@ public class MDMetadata implements Serializable {
     }
 
     /**
+     * Sets language.
+     *
      * @param language The language
      */
     public void setLanguage(Language language) {
@@ -66,6 +93,8 @@ public class MDMetadata implements Serializable {
     }
 
     /**
+     * Gets hierarchy level.
+     *
      * @return The hierarchyLevel
      */
     public HierarchyLevel getHierarchyLevel() {
@@ -73,6 +102,8 @@ public class MDMetadata implements Serializable {
     }
 
     /**
+     * Sets hierarchy level.
+     *
      * @param hierarchyLevel The hierarchyLevel
      */
     public void setHierarchyLevel(HierarchyLevel hierarchyLevel) {
@@ -80,6 +111,8 @@ public class MDMetadata implements Serializable {
     }
 
     /**
+     * Gets contact.
+     *
      * @return The contact
      */
     public Contact getContact() {
@@ -87,6 +120,8 @@ public class MDMetadata implements Serializable {
     }
 
     /**
+     * Sets contact.
+     *
      * @param contact The contact
      */
     public void setContact(Contact contact) {
@@ -94,6 +129,8 @@ public class MDMetadata implements Serializable {
     }
 
     /**
+     * Gets date stamp.
+     *
      * @return The dateStamp
      */
     public DateStamp getDateStamp() {
@@ -101,6 +138,8 @@ public class MDMetadata implements Serializable {
     }
 
     /**
+     * Sets date stamp.
+     *
      * @param dateStamp The dateStamp
      */
     public void setDateStamp(DateStamp dateStamp) {
@@ -108,6 +147,8 @@ public class MDMetadata implements Serializable {
     }
 
     /**
+     * Gets metadata standard name.
+     *
      * @return The metadataStandardName
      */
     public MetadataStandardName getMetadataStandardName() {
@@ -115,6 +156,8 @@ public class MDMetadata implements Serializable {
     }
 
     /**
+     * Sets metadata standard name.
+     *
      * @param metadataStandardName The metadataStandardName
      */
     public void setMetadataStandardName(
@@ -123,6 +166,8 @@ public class MDMetadata implements Serializable {
     }
 
     /**
+     * Gets metadata standard version.
+     *
      * @return The metadataStandardVersion
      */
     public MetadataStandardVersion getMetadataStandardVersion() {
@@ -130,6 +175,8 @@ public class MDMetadata implements Serializable {
     }
 
     /**
+     * Sets metadata standard version.
+     *
      * @param metadataStandardVersion The metadataStandardVersion
      */
     public void setMetadataStandardVersion(
@@ -138,6 +185,8 @@ public class MDMetadata implements Serializable {
     }
 
     /**
+     * Gets identification info.
+     *
      * @return The identificationInfo
      */
     public IdentificationInfo getIdentificationInfo() {
@@ -145,6 +194,8 @@ public class MDMetadata implements Serializable {
     }
 
     /**
+     * Sets identification info.
+     *
      * @param identificationInfo The identificationInfo
      */
     public void setIdentificationInfo(IdentificationInfo identificationInfo) {
@@ -152,6 +203,8 @@ public class MDMetadata implements Serializable {
     }
 
     /**
+     * Gets data quality info.
+     *
      * @return The dataQualityInfo
      */
     public DataQualityInfo getDataQualityInfo() {
@@ -159,6 +212,8 @@ public class MDMetadata implements Serializable {
     }
 
     /**
+     * Sets data quality info.
+     *
      * @param dataQualityInfo The dataQualityInfo
      */
     public void setDataQualityInfo(DataQualityInfo dataQualityInfo) {
@@ -166,6 +221,8 @@ public class MDMetadata implements Serializable {
     }
 
     /**
+     * Gets xmlns gmd.
+     *
      * @return The XmlnsGmd
      */
     public String getXmlnsGmd() {
@@ -173,6 +230,8 @@ public class MDMetadata implements Serializable {
     }
 
     /**
+     * Sets xmlns gmd.
+     *
      * @param XmlnsGmd The _xmlns:gmd
      */
     public void setXmlnsGmd(String XmlnsGmd) {
@@ -180,6 +239,8 @@ public class MDMetadata implements Serializable {
     }
 
     /**
+     * Gets xmlns.
+     *
      * @return The Xmlns
      */
     public String getXmlns() {
@@ -187,6 +248,8 @@ public class MDMetadata implements Serializable {
     }
 
     /**
+     * Sets xmlns.
+     *
      * @param Xmlns The _xmlns
      */
     public void setXmlns(String Xmlns) {
@@ -194,6 +257,8 @@ public class MDMetadata implements Serializable {
     }
 
     /**
+     * Gets xmlns gco.
+     *
      * @return The XmlnsGco
      */
     public String getXmlnsGco() {
@@ -201,6 +266,8 @@ public class MDMetadata implements Serializable {
     }
 
     /**
+     * Sets xmlns gco.
+     *
      * @param XmlnsGco The _xmlns:gco
      */
     public void setXmlnsGco(String XmlnsGco) {
@@ -208,6 +275,8 @@ public class MDMetadata implements Serializable {
     }
 
     /**
+     * Gets xmlns gmx.
+     *
      * @return The XmlnsGmx
      */
     public String getXmlnsGmx() {
@@ -215,6 +284,8 @@ public class MDMetadata implements Serializable {
     }
 
     /**
+     * Sets xmlns gmx.
+     *
      * @param XmlnsGmx The _xmlns:gmx
      */
     public void setXmlnsGmx(String XmlnsGmx) {
@@ -222,6 +293,8 @@ public class MDMetadata implements Serializable {
     }
 
     /**
+     * Gets xmlns gsr.
+     *
      * @return The XmlnsGsr
      */
     public String getXmlnsGsr() {
@@ -229,6 +302,8 @@ public class MDMetadata implements Serializable {
     }
 
     /**
+     * Sets xmlns gsr.
+     *
      * @param XmlnsGsr The _xmlns:gsr
      */
     public void setXmlnsGsr(String XmlnsGsr) {
@@ -236,6 +311,8 @@ public class MDMetadata implements Serializable {
     }
 
     /**
+     * Gets xmlns gss.
+     *
      * @return The XmlnsGss
      */
     public String getXmlnsGss() {
@@ -243,6 +320,8 @@ public class MDMetadata implements Serializable {
     }
 
     /**
+     * Sets xmlns gss.
+     *
      * @param XmlnsGss The _xmlns:gss
      */
     public void setXmlnsGss(String XmlnsGss) {
@@ -250,6 +329,8 @@ public class MDMetadata implements Serializable {
     }
 
     /**
+     * Gets xmlns gts.
+     *
      * @return The XmlnsGts
      */
     public String getXmlnsGts() {
@@ -257,6 +338,8 @@ public class MDMetadata implements Serializable {
     }
 
     /**
+     * Sets xmlns gts.
+     *
      * @param XmlnsGts The _xmlns:gts
      */
     public void setXmlnsGts(String XmlnsGts) {
@@ -264,6 +347,8 @@ public class MDMetadata implements Serializable {
     }
 
     /**
+     * Gets xmlns xsi.
+     *
      * @return The XmlnsXsi
      */
     public String getXmlnsXsi() {
@@ -271,6 +356,8 @@ public class MDMetadata implements Serializable {
     }
 
     /**
+     * Sets xmlns xsi.
+     *
      * @param XmlnsXsi The _xmlns:xsi
      */
     public void setXmlnsXsi(String XmlnsXsi) {
@@ -278,6 +365,8 @@ public class MDMetadata implements Serializable {
     }
 
     /**
+     * Gets xmlns gml.
+     *
      * @return The XmlnsGml
      */
     public String getXmlnsGml() {
@@ -285,6 +374,8 @@ public class MDMetadata implements Serializable {
     }
 
     /**
+     * Sets xmlns gml.
+     *
      * @param XmlnsGml The _xmlns:gml
      */
     public void setXmlnsGml(String XmlnsGml) {
@@ -292,6 +383,8 @@ public class MDMetadata implements Serializable {
     }
 
     /**
+     * Gets xmlns xlink.
+     *
      * @return The XmlnsXlink
      */
     public String getXmlnsXlink() {
@@ -299,6 +392,8 @@ public class MDMetadata implements Serializable {
     }
 
     /**
+     * Sets xmlns xlink.
+     *
      * @param XmlnsXlink The _xmlns:xlink
      */
     public void setXmlnsXlink(String XmlnsXlink) {
@@ -306,6 +401,8 @@ public class MDMetadata implements Serializable {
     }
 
     /**
+     * Gets id.
+     *
      * @return The Id
      */
     public String getId() {
@@ -313,6 +410,8 @@ public class MDMetadata implements Serializable {
     }
 
     /**
+     * Sets id.
+     *
      * @param Id The _id
      */
     public void setId(String Id) {
@@ -320,6 +419,8 @@ public class MDMetadata implements Serializable {
     }
 
     /**
+     * Gets xsi schema location.
+     *
      * @return The XsiSchemaLocation
      */
     public String getXsiSchemaLocation() {
@@ -327,6 +428,8 @@ public class MDMetadata implements Serializable {
     }
 
     /**
+     * Sets xsi schema location.
+     *
      * @param XsiSchemaLocation The _xsi:schemaLocation
      */
     public void setXsiSchemaLocation(String XsiSchemaLocation) {
@@ -334,6 +437,8 @@ public class MDMetadata implements Serializable {
     }
 
     /**
+     * Gets prefix.
+     *
      * @return The Prefix
      */
     public String getPrefix() {
@@ -341,6 +446,8 @@ public class MDMetadata implements Serializable {
     }
 
     /**
+     * Sets prefix.
+     *
      * @param Prefix The _prefix
      */
     public void setPrefix(String Prefix) {

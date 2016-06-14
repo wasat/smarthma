@@ -1,3 +1,19 @@
+/*
+ * Copyright (c) 2016.  SmartHMA ESA
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package pl.wasat.smarthma.ui.activities;
 
 import android.content.Intent;
@@ -32,6 +48,9 @@ import pl.wasat.smarthma.utils.obj.LatLngBoundsExt;
 import pl.wasat.smarthma.utils.obj.LatLngExt;
 import roboguice.util.temp.Ln;
 
+/**
+ * The type Search activity.
+ */
 public class SearchActivity extends BaseSmartHMActivity implements OnBaseSearchSideParametersFragmentListener,
         OnSearchFragmentListener, OnDatePickerFragmentListener, OnTimePickerFragmentListener,
         OnAreaPickerMapFragmentListener, OnAmznAreaPickerMapFragmentListener {
@@ -116,30 +135,55 @@ public class SearchActivity extends BaseSmartHMActivity implements OnBaseSearchS
         return true;
     }
 
+    /**
+     * Sets query.
+     *
+     * @param query the query
+     */
     public void setQuery(String query) {
         if (searchMainPanel != null) {
             searchMainPanel.setQuery(query);
         }
     }
 
+    /**
+     * Sets catalogue.
+     *
+     * @param catalogue the catalogue
+     */
     public void setCatalogue(String catalogue) {
         if (sideParamsPanel != null) {
             sideParamsPanel.setCatalogue(catalogue);
         }
     }
 
+    /**
+     * Sets bbox.
+     *
+     * @param boundingBox the bounding box
+     */
     public void setBbox(String boundingBox) {
         if (sideParamsPanel != null) {
             sideParamsPanel.setBounds(boundingBox);
         }
     }
 
+    /**
+     * Sets start date.
+     *
+     * @param startDate the start date
+     */
     public void setStartDate(String startDate) {
         if (sideParamsPanel != null) {
             sideParamsPanel.setStartCalendar(startDate);
         }
     }
 
+    /**
+     * Sets end date.
+     *
+     * @param endDate the end date
+     */
     public void setEndDate(String endDate) {
         if (sideParamsPanel != null) {
             sideParamsPanel.setEndCalendar(endDate);
@@ -311,6 +355,11 @@ public class SearchActivity extends BaseSmartHMActivity implements OnBaseSearchS
         sideParamsPanel.startAsyncLoadOsddData(new GenericUrl(Const.OSDD_BASE_URL));
     }*/
 
+    /**
+     * Gets menu handler.
+     *
+     * @return the menu handler
+     */
     public MenuHandler getMenuHandler() {
         return commonMenuHandler;
     }

@@ -1,8 +1,27 @@
+/*
+ * Copyright (c) 2016.  SmartHMA ESA
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package pl.wasat.smarthma.model.explaindoc;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 
+/**
+ * The type Database info.
+ */
 public class DatabaseInfo implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -14,10 +33,15 @@ public class DatabaseInfo implements Serializable {
     private String author;
     private ArrayList<String> links;
 
+    /**
+     * Instantiates a new Database info.
+     */
     public DatabaseInfo() {
     }
 
     /**
+     * Gets id.
+     *
      * @return the id
      */
     public int getId() {
@@ -25,6 +49,8 @@ public class DatabaseInfo implements Serializable {
     }
 
     /**
+     * Sets id.
+     *
      * @param id the id to set
      */
     public void setId(int id) {
@@ -32,6 +58,8 @@ public class DatabaseInfo implements Serializable {
     }
 
     /**
+     * Gets title.
+     *
      * @return the title
      */
     public String getTitle() {
@@ -39,6 +67,8 @@ public class DatabaseInfo implements Serializable {
     }
 
     /**
+     * Sets title.
+     *
      * @param title the title to set
      */
     public void setTitle(String title) {
@@ -46,6 +76,8 @@ public class DatabaseInfo implements Serializable {
     }
 
     /**
+     * Gets desc.
+     *
      * @return the desc
      */
     public String getDesc() {
@@ -53,6 +85,8 @@ public class DatabaseInfo implements Serializable {
     }
 
     /**
+     * Sets desc.
+     *
      * @param desc the desc to set
      */
     public void setDesc(String desc) {
@@ -60,6 +94,8 @@ public class DatabaseInfo implements Serializable {
     }
 
     /**
+     * Gets history.
+     *
      * @return the history
      */
     public String getHistory() {
@@ -67,6 +103,8 @@ public class DatabaseInfo implements Serializable {
     }
 
     /**
+     * Sets history.
+     *
      * @param history the history to set
      */
     public void setHistory(String history) {
@@ -74,6 +112,8 @@ public class DatabaseInfo implements Serializable {
     }
 
     /**
+     * Gets author.
+     *
      * @return the author
      */
     public String getAuthor() {
@@ -81,6 +121,8 @@ public class DatabaseInfo implements Serializable {
     }
 
     /**
+     * Sets author.
+     *
      * @param author the author to set
      */
     public void setAuthor(String author) {
@@ -88,6 +130,8 @@ public class DatabaseInfo implements Serializable {
     }
 
     /**
+     * Gets links.
+     *
      * @return the links
      */
     public ArrayList<String> getLinks() {
@@ -95,6 +139,8 @@ public class DatabaseInfo implements Serializable {
     }
 
     /**
+     * Sets links.
+     *
      * @param links the links to set
      */
     public void setLinks(ArrayList<String> links) {
