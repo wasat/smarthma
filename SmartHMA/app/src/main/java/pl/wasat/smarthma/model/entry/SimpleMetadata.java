@@ -263,18 +263,22 @@ public class SimpleMetadata implements Serializable {
     private void validateFootprintCenter() {
         if (footprintCenter == null) {
             if (footprint.size() > 0) {
-                double lat = 0;
-                double lng = 0;
-                for (int i = 0; i < 4; i++) {
-                    lat = lat + footprint.get(i).latitude;
-                    lng = lng + footprint.get(i).longitude;
+                double minLat = 90;
+                double minLng = 180;
+                double maxLat = -90;
+                double maxLng = -180;
+
+                for (LatLngExt pt : footprint) {
+                    if (pt.latitude < minLat) minLat = pt.latitude;
+                    if (pt.latitude > maxLat) maxLat = pt.latitude;
+                    if (pt.longitude < minLng) minLng = pt.longitude;
+                    if (pt.longitude > maxLng) maxLng = pt.longitude;
                 }
-                footprintCenter = new LatLngExt(lat / 4, lng / 4);
+                footprintCenter = new LatLngExt((minLat + maxLat) / 2, (minLng + maxLng) / 2);
             } else {
                 this.footprintCenter = new LatLngExt(0, 0);
             }
         }
-
     }
 
     private void obtainUrlsFromOMMetadata(Entry entry) {
