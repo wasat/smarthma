@@ -11,7 +11,7 @@ SmartHMA web page
 http://wasat.github.io/smarthma/
 
 SmartHMA User Manual can be downloaded from here:
-https://github.com/wasat/smarthma/files/323344/SmartHMA_user_manual.pdf
+https://github.com/wasat/smarthma/releases/download/1.3.0/SmartHMA_user_manual.pdf
 
 Youtube channel with most important functionalities presented in online videos:
 https://goo.gl/bvP5yz
